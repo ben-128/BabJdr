@@ -1,0 +1,22 @@
+{
+  "name": "jdr-bab-refacto",
+  "version": "1.0.0",
+  "description": "JDR-BAB refactored modular version",
+  "main": "index.html",
+  "scripts": {
+    "dev": "live-server --port=3000 --open=/index.html --quiet --no-css-inject --entry-file=index.html",
+    "build": "node build/build-simple.js",
+    "serve": "live-server --port=3000 --no-browser --quiet --no-css-inject",
+    "dev-clean": "node server.js"
+  },
+  "keywords": ["jdr", "rpg", "webapp", "modular"],
+  "author": "JDR-BAB Team",
+  "license": "ISC",
+  "devDependencies": {
+    "live-server": "^1.2.2",
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
