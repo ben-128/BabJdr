@@ -8,7 +8,7 @@ echo   JDR-BAB - NETTOYAGE DES SAUVEGARDES
 echo ========================================
 echo.
 
-set "PROJECT_PATH=%~dp0"
+set "PROJECT_PATH=%~dp0.."
 cd /d "%PROJECT_PATH%"
 
 :: Vérifier que nous sommes dans le bon répertoire
@@ -20,14 +20,24 @@ if not exist "package.json" (
     exit /b 1
 )
 
-echo [INFO] Recherche des dossiers de sauvegarde...
+echo [INFO] Recherche des dossiers de sauvegarde dans Backups...
 echo.
+
+:: Vérifier si le dossier Backups existe
+if not exist "Backups" (
+    echo [INFO] Aucun dossier Backups trouvé
+    echo.
+    pause
+    exit /b 0
+)
+
+cd Backups
 
 :: Compter les dossiers de sauvegarde
 set "BACKUP_COUNT=0"
 for /d %%D in (backup-*) do (
     set /a BACKUP_COUNT+=1
-    echo [TROUVÉ] %%D
+    echo [TROUVÉ] Backups\%%D
 )
 
 if %BACKUP_COUNT%==0 (

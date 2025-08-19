@@ -13,7 +13,7 @@ function buildStandalone() {
   console.log('🔨 Building standalone version from modular files...');
   
   const rootDir = path.resolve(__dirname, '..');
-  const outputDir = path.join(rootDir, 'build', 'standalone');
+  const outputDir = path.join(rootDir, 'build');
   
   // Create output directory
   if (!fs.existsSync(outputDir)) {

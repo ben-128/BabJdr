@@ -5,9 +5,9 @@
   "main": "index.html",
   "scripts": {
     "dev": "live-server --port=3000 --open=/index.html --quiet --no-css-inject --entry-file=index.html",
-    "build": "node build/build-simple.js",
+    "build": "node scripts/build-simple.js",
     "serve": "live-server --port=3000 --no-browser --quiet --no-css-inject",
-    "dev-clean": "node server.js"
+    "dev-clean": "node scripts/server.js"
   },
   "keywords": ["jdr", "rpg", "webapp", "modular"],
   "author": "JDR-BAB Team",

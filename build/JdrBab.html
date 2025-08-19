@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-08-19T20:30:05.828Z by JdrBab Build System -->
+<!-- Generated on 2025-08-19T21:04:27.492Z by JdrBab Build System -->
 <title>JDR‑BAB — Livret de règles</title>
 <meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -215,7 +215,8 @@ footer{padding:24px;text-align:center;color:var(--paper-muted)}
 .illus img.enlarged{transition:none !important}
 .illus .thumb{width:500px;height:300px;object-fit:contain}
 
-/* Images de classes, sous-classes et sorts - avec cadre */
+/* Images avec cadres - système unifié */
+.illus-spell, .illus-class, .illus-subclass, .illus-don,
 article[data-page="guerrier"] .illus,
 article[data-page="mage"] .illus,
 article[data-page="pretre"] .illus,
@@ -224,10 +225,14 @@ article[data-page="enchanteur"] .illus,
 .illus[data-illus-key^="class:"],
 .illus[data-illus-key^="subclass:"],
 .illus[data-illus-key^="spell:"],
-.illus[data-illus-key^="spellcategory:"] {
+.illus[data-illus-key^="sort:"],
+.illus[data-illus-key^="spellcategory:"],
+.illus[data-illus-key^="don:"] {
   display:flex !important; flex-direction:column !important; align-items:center !important;
   justify-content:center !important; margin:1rem auto !important;
 }
+
+.illus-spell img, .illus-class img, .illus-subclass img, .illus-don img,
 article[data-page="guerrier"] .illus img,
 article[data-page="mage"] .illus img,
 article[data-page="pretre"] .illus img,
@@ -236,7 +241,9 @@ article[data-page="enchanteur"] .illus img,
 .illus[data-illus-key^="class:"] img,
 .illus[data-illus-key^="subclass:"] img,
 .illus[data-illus-key^="spell:"] img,
-.illus[data-illus-key^="spellcategory:"] img {
+.illus[data-illus-key^="sort:"] img,
+.illus[data-illus-key^="spellcategory:"] img,
+.illus[data-illus-key^="don:"] img {
   border:var(--image-border) !important; 
   box-shadow:var(--image-shadow) !important;
   padding:4px !important; 
@@ -246,6 +253,8 @@ article[data-page="enchanteur"] .illus img,
   width:auto !important;
   cursor:pointer !important;
 }
+
+.illus-spell img:hover, .illus-class img:hover, .illus-subclass img:hover, .illus-don img:hover,
 article[data-page="guerrier"] .illus img:hover,
 article[data-page="mage"] .illus img:hover,
 article[data-page="pretre"] .illus img:hover,
@@ -254,9 +263,21 @@ article[data-page="enchanteur"] .illus img:hover,
 .illus[data-illus-key^="class:"] img:hover,
 .illus[data-illus-key^="subclass:"] img:hover,
 .illus[data-illus-key^="spell:"] img:hover,
-.illus[data-illus-key^="spellcategory:"] img:hover {
+.illus[data-illus-key^="sort:"] img:hover,
+.illus[data-illus-key^="spellcategory:"] img:hover,
+.illus[data-illus-key^="don:"] img:hover {
   transform:scale(1.03) !important; 
   box-shadow:var(--image-shadow), 0 8px 25px rgba(139,69,19,.25) !important;
+}
+
+/* Variantes de taille d'images */
+.illus-small img { max-width: 150px !important; }
+.illus-large img { max-width: 400px !important; }
+
+/* Style spécial pour les sorts - cadre doré */
+.illus-spell img {
+  border: 3px solid var(--gold) !important;
+  box-shadow: var(--image-shadow), 0 0 10px rgba(212,175,55,.3) !important;
 }
 /* Editor and Dev Mode styles */
 
@@ -376,12 +397,13 @@ body.dev-off button[title*="Bas"] {
 /* Système d'agrandissement d'images */
 .illus img.enlarged {
   position:fixed !important; top:50% !important; left:50% !important; 
-  transform:translate(-50%, -50%) scale(1.5) !important; z-index:9999 !important;
-  max-width:90vw !important; max-height:90vh !important; width:auto !important; height:auto !important;
+  transform:translate(-50%, -50%) !important; z-index:9999 !important;
+  max-width:85vw !important; max-height:85vh !important; width:auto !important; height:auto !important;
   box-shadow:0 20px 60px rgba(0,0,0,.5), inset 0 4px 12px rgba(212,175,55,.8) !important;
   cursor:zoom-out !important; 
   transition:none !important;
   pointer-events:auto !important;
+  object-fit:contain !important;
 }
 
 /* Forcer l'état stable sur hover pour les images agrandies */
@@ -396,7 +418,7 @@ article[data-page="sorts-mage"] .illus img.enlarged:hover,
 article[data-page="sorts-pretre"] .illus img.enlarged:hover,
 article[data-page="sorts-enchanteur"] .illus img.enlarged:hover,
 .illus[data-illus-key^="spellcategory:"] img.enlarged:hover {
-  transform:translate(-50%, -50%) scale(1.5) !important;
+  transform:translate(-50%, -50%) !important;
   transition:none !important;
 }
 
@@ -702,6 +724,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         "portee": "🎯 <strong>Portée:</strong> 20m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "⚡ <strong>Coût mana:</strong> 3",
+        "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> Esquive.",
         "effetNormal": "<strong>Effet:</strong> Inflige 5 dégats de <span style=\"color: #e25822; font-weight: bold;\">Feu</span> à la cible.<br>&nbsp;Tous les 5 points d'intelligence, augmente les dégats de 1.",
         "effetCritique": "<strong>Coup Critique:&nbsp;</strong>&nbsp;Double les dégâts et enflamme la cible, infligeant 2 dégats de Feu au prochain tour du lanceur.",
@@ -715,6 +738,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         "portee": "🎯 <strong>Portée:</strong> 20m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "⚡ <strong>Coût mana:</strong> 5",
+        "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> Aucune",
         "effetNormal": "<strong>Effet:</strong> &nbsp;Inflige 6 dégats d'<span style=\"color: #22c55e; font-weight: bold;\">Air</span> à la cible.<br>&nbsp;Tous les 5 points d'intelligence, augmente les dégats de 1.",
         "effetCritique": "<strong>Coup Critique:&nbsp;</strong>Double les dégâts et inflige les dégats à un enemy à moins de 5m de la cible.",
@@ -748,8 +772,9 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         "portee": "🎯 <strong>Portée:</strong> 20m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "⚡ <strong>Coût mana:</strong> 3",
+        "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> &nbsp;<br>- Non mort-vivant <br>- Esquive.",
-        "effetNormal": "<strong>Effet:</strong> Inflige *Intelligence* dégâts <span style=\"color: #e5e7eb; font-weight: bold;\">Divin</span> à la cible.",
+        "effetNormal": "<strong>Effet:</strong> Inflige *Intelligence* dégâts <span style=\"color: #ffd700; font-weight: bold;\">Divin</span> à la cible.",
         "effetCritique": "<strong>Coup Critique:&nbsp;</strong>Double dégâts.",
         "effetEchec": "<strong>Échec Critique:&nbsp;</strong>Sans effet."
       },
@@ -947,7 +972,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         "progression": "<strong>📈 Progression par niveau:</strong> +2 Intelligence 🧠, +2 Volonté ⚡, + 1 Chance 🍀",
         "capacites": [
           "<em>Maître des soins</em>: Augmente les chances de critiques pour les sorts de soins de 1.",
-          "<em>Bien né</em>: Réduit les dégats <span style=\"color: #e5e7eb; font-weight: bold;\">Divin</span> reçu de 50%. Si son élément d'affiliation est <span style=\"color: #e5e7eb; font-weight: bold;\">Divin</span>, il devient insensible aux dégats <span style=\"color: #e5e7eb; font-weight: bold;\">Divin</span>."
+          "<em>Bien né</em>: Réduit les dégats <span style=\"color: #ffd700; font-weight: bold;\">Divin</span> reçu de 50%. Si son élément d'affiliation est <span style=\"color: #ffd700; font-weight: bold;\">Divin</span>, il devient insensible aux dégats <span style=\"color: #ffd700; font-weight: bold;\">Divin</span>."
         ]
       }
     ]
@@ -1108,7 +1133,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       },
       {
         "nom": "Resistance magique 1",
-        "description": "Le héros gagne 5 d'armure élémentaire de <span style=\"color: #fbbf24; font-weight: bold;\">Lumière</span>, <span style=\"color: #0f172a; font-weight: bold;\">Nuit</span>, <span style=\"color: #e5e7eb; font-weight: bold; text-shadow: 1px 1px 0 #333, -1px -1px 0 #333, 1px -1px 0 #333, -1px 1px 0 #333;\">Divin</span>, <span style=\"color: #a855f7; font-weight: bold;\">Maléfique</span>.",
+        "description": "Le héros gagne 5 d'armure élémentaire de <span style=\"color: #fbbf24; font-weight: bold;\">Lumière</span>, <span style=\"color: #0f172a; font-weight: bold;\">Nuit</span>, <span style=\"color: #ffd700; font-weight: bold;\">Divin</span>, <span style=\"color: #a855f7; font-weight: bold;\">Maléfique</span>.",
         "prerequis": "Non cumulable.",
         "cout": "1 point de don"
       },
@@ -1247,14 +1272,14 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
     "subclass:Rôdeur:Chasseur": "https://i.ibb.co/70wP75z/53de7da9e55c.jpg",
     "subclass:Enchanteur:Esprit de la grande Fée": "https://i.ibb.co/Cswfsyzz/9920a4e75242.jpg",
     "subclass:Enchanteur:Lutin": "https://i.ibb.co/Fbspq9hP/dd5e7b366e0f.jpg",
-    "sort:Sorts de Mage:Vague déferlante": "https://i.ibb.co/0jTq1K7t/a83a22af974d.jpg",
-    "sort:Sorts de Prêtre:Châtiment": "https://i.ibb.co/d00pc12f/83a742ec6139.jpg",
-    "sort:Sorts de Prêtre:Soin mineur": "https://i.ibb.co/27YMzBnD/822e6f0ec40c.jpg",
-    "sort:Sorts d'Enchanteur:Accroche terrestre": "https://i.ibb.co/YBPG0Swk/838be576dbd4.jpg",
-    "sort:Sorts d'Enchanteur:Accélération": "https://i.ibb.co/x82p4MD2/a0a813baa673.jpg",
-    "sort:Sorts d'Enchanteur:Sommeil": "https://i.ibb.co/kg8hVCHK/5e3b9e59ecef.jpg",
     "sort:Sorts de Mage:Boule de Feu": "https://i.ibb.co/vCWmgrQ5/Boule-De-Feu.png",
-    "sort:Sorts de Mage:Éclair": "https://i.ibb.co/h194qhvd/Eclair.png"
+    "sort:Sorts de Mage:Éclair": "https://i.ibb.co/h194qhvd/Eclair.png",
+    "sort:Sorts de Mage:Vague déferlante": "https://i.ibb.co/BSHtL8K/Vague.png",
+    "sort:Sorts de Prêtre:Châtiment": "https://i.ibb.co/JRPyXx1L/Chatiment-Sacr.png",
+    "sort:Sorts de Prêtre:Soin mineur": "https://i.ibb.co/YBC2HSnK/Soin-Mineur.png",
+    "sort:Sorts d'Enchanteur:Accroche terrestre": "https://i.ibb.co/27W4NtSQ/Accroche-Terre.png",
+    "sort:Sorts d'Enchanteur:Accélération": "https://i.ibb.co/Vc072qQB/Acceleration.png",
+    "sort:Sorts d'Enchanteur:Sommeil": "https://i.ibb.co/rKyTh27C/Sleep.png"
   },
   "meta": {
     "total_images": 18,
@@ -1359,8 +1384,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
           {
             "element1": {
               "name": "Divin",
-              "color": "#e5e7eb",
-              "textShadow": "1px 1px 0 #333, -1px -1px 0 #333, 1px -1px 0 #333, -1px 1px 0 #333"
+              "color": "#ffd700"
             },
             "element2": {
               "name": "Maléfique",
@@ -3124,13 +3148,22 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
             </div>
             ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-field-btn" title="Éditer le coût mana">✏️</button>' : ''}
           </div>
-          
-          <div class="editable-section" data-section-type="spell-duree">
-            <div class="editable editable-field" data-edit-type="spell-duree" data-edit-section="${sort.nom}">
+
+          <div class="editable-section" data-section-type="spell-temps-incantation">
+            <div class="editable editable-field" data-edit-type="spell-temps-incantation" data-edit-section="${sort.nom}">
               ${sort.tempsIncantation}
             </div>
             ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-field-btn" title="Éditer le temps d\'incantation">✏️</button>' : ''}
           </div>
+          
+          ${sort.duree ? `
+          <div class="editable-section" data-section-type="spell-duree">
+            <div class="editable editable-field" data-edit-type="spell-duree" data-edit-section="${sort.nom}">
+              ${sort.duree}
+            </div>
+            ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-field-btn" title="Éditer la durée">✏️</button>' : ''}
+          </div>
+          ` : ''}
           
           <hr style="margin: 0.5rem 0; border: none; border-top: 1px solid var(--rule);">
           
@@ -3475,7 +3508,15 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       devToolbox.innerHTML = toolboxHTML;
     },
 
-    createIllustration(illusKey, altText = '') {
+    // General image renderer with style options
+    renderImage(illusKey, options = {}) {
+      const {
+        altText = '',
+        styleType = 'default', // 'spell', 'class', 'subclass', 'don', 'default'
+        size = 'medium', // 'small', 'medium', 'large'
+        frame = true
+      } = options;
+
       // Check if image is available in images module
       let imageUrl = '';
       let imageStyle = 'display: none;';
@@ -3484,35 +3525,97 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       if (JdrApp.modules.images && JdrApp.modules.images.getImageUrl) {
         imageUrl = JdrApp.modules.images.getImageUrl(illusKey);
         if (imageUrl) {
-          // Process URL for mobile compatibility
           imageUrl = JdrApp.modules.images.processImageUrl(imageUrl);
           imageStyle = 'display: inline-block;';
           removeStyle = 'display: inline-flex;';
         }
       }
+
+      // Build CSS classes based on style type
+      let containerClasses = 'illus';
+      let imageClasses = 'thumb';
       
-      // In standalone version, don't render editing buttons at all
+      if (frame && ['spell', 'class', 'subclass', 'don'].includes(styleType)) {
+        containerClasses += ` illus-${styleType}`;
+      }
+      
+      if (size !== 'medium') {
+        containerClasses += ` illus-${size}`;
+      }
+
+      // In standalone version, don't render editing buttons
       if (window.STANDALONE_VERSION) {
         return `
-          <div class="illus" data-illus-key="${illusKey}" data-bound="1">
-            <img alt="Illustration ${altText}" class="thumb" style="${imageStyle}"${imageUrl ? ` src="${imageUrl}"` : ''}>
+          <div class="${containerClasses}" data-illus-key="${illusKey}" data-style-type="${styleType}" data-bound="1">
+            <img alt="Illustration ${altText}" class="${imageClasses}" style="${imageStyle}"${imageUrl ? ` src="${imageUrl}"` : ''}>
           </div>
         `;
       }
       
       return `
-        <div class="illus" data-illus-key="${illusKey}" data-bound="1">
-          <img alt="Illustration ${altText}" class="thumb" style="${imageStyle}"${imageUrl ? ` src="${imageUrl}"` : ''}>
+        <div class="${containerClasses}" data-illus-key="${illusKey}" data-style-type="${styleType}" data-bound="1">
+          <img alt="Illustration ${altText}" class="${imageClasses}" style="${imageStyle}"${imageUrl ? ` src="${imageUrl}"` : ''}>
           <label class="up">📷 Ajouter<input accept="image/*" hidden="" type="file"></label>
           <button class="rm" type="button" style="${removeStyle}">🗑 Retirer</button>
         </div>
       `;
     },
 
-    // Dynamic rendering methods
+    // Simplified wrapper for backward compatibility
+    createIllustration(illusKey, altText = '') {
+      // Determine style type from illus key
+      let styleType = 'default';
+      if (illusKey.startsWith('spell:') || illusKey.startsWith('sort:')) styleType = 'spell';
+      else if (illusKey.startsWith('class:')) styleType = 'class';
+      else if (illusKey.startsWith('subclass:')) styleType = 'subclass';
+      else if (illusKey.startsWith('don:')) styleType = 'don';
+      
+      return this.renderImage(illusKey, { altText, styleType });
+    },
+
+    // Simplified dynamic rendering
     renderSortCategory(page) {
-      // Implementation for dynamic sort category rendering
-      console.log('Rendering sort category:', page);
+      const categoryId = page.replace('sorts-', '');
+      const category = window.SORTS?.find(cat => 
+        JdrApp.utils.data.sanitizeId(cat.nom) === categoryId
+      );
+      
+      if (!category) {
+        console.error('Category not found for:', categoryId);
+        return;
+      }
+      
+      const article = document.querySelector(`article[data-page="${page}"]`);
+      if (!article) {
+        console.error('Article not found for page:', page);
+        return;
+      }
+      
+      // Generate content directly
+      const content = `
+        <section>
+          <header>
+            <h1>${category.nom}</h1>
+            <div class="hero-illus">
+              ${this.createIllustration(`spellcategory:${category.nom}`)}
+            </div>
+            
+            <div class="editable-section" data-section-type="spell-category-description">
+              <p class="lead editable editable-paragraph" data-edit-type="spell-category-description" data-edit-section="${category.nom}">${category.description}</p>
+              ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-paragraph-btn" title="Éditer la description de la catégorie">✏️</button>' : ''}
+            </div>
+            
+            ${this.shouldRenderEditButtons() ? `<button class="spell-add" data-category-name="${category.nom}" type="button">➕ Ajouter un sort</button>` : ''}
+          </header>
+          
+          <div class="grid cols-2">
+            ${category.sorts.map((sort, index) => this.generateSpellCard(category, sort, index)).join('')}
+          </div>
+        </section>
+      `;
+      
+      article.innerHTML = content;
+      console.log('Sort category re-rendered:', category.nom);
     },
 
     renderDonCategory(page) {
@@ -5152,9 +5255,12 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
     },
 
     setupContentCreation() {
+      console.log('🔧 Setting up content creation handlers');
       // Add spell handlers
       JdrApp.utils.events.register('click', '.spell-add', (e) => {
+        console.log('🎯 Spell add button clicked!', e.target);
         const categoryName = e.target.dataset.categoryName;
+        console.log('📂 Category name from dataset:', categoryName);
         this.addNewSpell(categoryName);
       });
 
@@ -5201,8 +5307,13 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
     },
 
     addNewSpell(categoryName) {
+      console.log('🔮 addNewSpell called with:', categoryName);
       const category = JdrApp.utils.data.getSpellCategory(categoryName);
-      if (!category) return;
+      if (!category) {
+        console.error('❌ Category not found:', categoryName);
+        return;
+      }
+      console.log('✅ Category found:', category.nom);
 
       const newSpell = {
         nom: "Nouveau Sort",
@@ -5212,6 +5323,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         portee: "🎯 <strong>Portée:</strong> 20m",
         tempsIncantation: "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         coutMana: "⚡ <strong>Coût mana:</strong> 3",
+        duree: "⏳ <strong>Durée:</strong> Instantané",
         resistance: "<strong>Sans effet si:</strong> Esquive.",
         effetNormal: "<strong>Effet:</strong> Inflige 5 dégats de <span style=\"color: #e25822; font-weight: bold;\">Feu</span> à la cible.<br>&nbsp;Tous les 5 points d'intelligence, augmente les dégats de 1.",
         effetCritique: "<strong>Coup Critique:&nbsp;</strong>&nbsp;Double les dégâts et enflamme la cible, infligeant 2 dégats de Feu au prochain tour du lanceur.",
@@ -5219,9 +5331,12 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       };
 
       category.sorts.push(newSpell);
+      console.log('✅ Spell added to category. Total spells:', category.sorts.length);
       
       // Re-render the category page
-      JdrApp.modules.renderer.renderSortCategory(`sorts-${JdrApp.utils.data.sanitizeId(categoryName)}`);
+      const pageId = `sorts-${JdrApp.utils.data.sanitizeId(categoryName)}`;
+      console.log('🔄 Re-rendering page:', pageId);
+      JdrApp.modules.renderer.renderSortCategory(pageId);
       
       this.showNotification('🔮 Nouveau sort ajouté');
     },

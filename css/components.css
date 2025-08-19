@@ -97,8 +97,49 @@ article[data-page="enchanteur"] .illus img:hover,
 .illus-small img { max-width: 150px !important; }
 .illus-large img { max-width: 400px !important; }
 
-/* Style spécial pour les sorts - cadre doré */
-.illus-spell img {
+/* Style spécial pour les sorts - cadre doré et taille augmentée */
+.illus-spell img,
+.card .illus img {
   border: 3px solid var(--gold) !important;
   box-shadow: var(--image-shadow), 0 0 10px rgba(212,175,55,.3) !important;
+  max-width: 350px !important;
+  max-height: 250px !important;
+  object-fit: contain !important;
+}
+
+/* Style spécial pour les sous-classes - 2 images centrées et collées */
+.subclass-images {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  margin: 0.6rem 0;
+}
+
+.subclass-images .illus {
+  margin: 0;
+  flex: 0 0 auto;
+}
+
+.subclass-images .illus img {
+  max-width: 400px !important;
+  max-height: 300px !important;
+  object-fit: contain !important;
+  border-radius: 12px 0 0 12px !important;
+}
+
+.subclass-images .illus:last-child img {
+  border-radius: 0 12px 12px 0 !important;
+}
+
+/* Style spécial pour les titres de sous-classes */
+.subclass-title {
+  font-size: 1.8rem !important;
+  font-weight: 600 !important;
+  text-align: center !important;
+  margin: 0 0 1.5rem 0 !important;
+  color: var(--accent-ink) !important;
+  font-family: 'Cinzel', serif !important;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1) !important;
+  letter-spacing: 0.5px !important;
 }

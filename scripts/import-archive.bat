@@ -10,7 +10,7 @@ echo.
 
 :: Configuration - Modifiez ce chemin si nécessaire
 set "DOWNLOAD_PATH=C:\Users\Ben\Downloads"
-set "PROJECT_PATH=%~dp0"
+set "PROJECT_PATH=%~dp0.."
 
 cd /d "%PROJECT_PATH%"
 
@@ -109,7 +109,9 @@ echo.
 
 :: Sauvegarder les fichiers actuels (optionnel)
 echo [INFO] Sauvegarde des fichiers actuels...
-set "BACKUP_DIR=%PROJECT_PATH%backup-%date:~-4,4%%date:~-10,2%%date:~-7,2%-%time:~0,2%%time:~3,2%%time:~6,2%"
+:: Créer le dossier Backups s'il n'existe pas (dans le répertoire du projet)
+if not exist "%PROJECT_PATH%\Backups" mkdir "%PROJECT_PATH%\Backups"
+set "BACKUP_DIR=%PROJECT_PATH%\Backups\backup-%date:~-4,4%%date:~-10,2%%date:~-7,2%-%time:~0,2%%time:~3,2%%time:~6,2%"
 set "BACKUP_DIR=%BACKUP_DIR: =0%"
 
 :: Créer le dossier de sauvegarde avec permissions normales

@@ -5,13 +5,13 @@
 (() => {
   "use strict";
 
+
   // ========================================
   // UI INTERACTIONS MODULE
   // ========================================
   JdrApp.modules.ui = {
     
     init() {
-      console.log('🎨 Initializing UI...');
       
       // Set up search functionality
       this.setupSearch();
@@ -237,8 +237,7 @@
         prerequis: "📋 <strong>Prérequis:</strong> Niveau 1",
         portee: "🎯 <strong>Portée:</strong> 20m",
         tempsIncantation: "⏰ <strong>Temps d'incantation:</strong> 1 tour",
-        coutMana: "⚡ <strong>Coût mana:</strong> 3",
-        duree: "⏳ <strong>Durée:</strong> Instantané",
+        coutMana: "🔵 <strong>Coût mana:</strong> 3",
         resistance: "<strong>Sans effet si:</strong> Esquive.",
         effetNormal: "<strong>Effet:</strong> Inflige 5 dégats de <span style=\"color: #e25822; font-weight: bold;\">Feu</span> à la cible.<br>&nbsp;Tous les 5 points d'intelligence, augmente les dégats de 1.",
         effetCritique: "<strong>Coup Critique:&nbsp;</strong>&nbsp;Double les dégâts et enflamme la cible, infligeant 2 dégats de Feu au prochain tour du lanceur.",

@@ -1150,7 +1150,8 @@
       
       // SPELLS
       if (element.dataset.editSpell) {
-        this.saveToSpell(element.dataset.editSpell, editType.replace('spell-', ''), content);
+        let property = editType.replace('spell-', '');
+        this.saveToSpell(element.dataset.editSpell, property, content);
         return;
       }
       
@@ -1178,19 +1179,30 @@
     // Simple save methods - just store text as-is
     saveToSpell(spellName, property, content) {
       if (!window.SORTS) return;
+      
       for (const category of window.SORTS) {
         const spell = category.sorts.find(s => s.nom === spellName);
         if (spell) {
           const propertyMap = {
-            'name': 'nom', 'description': 'description', 'prerequis': 'prerequis',
-            'portee': 'portee', 'mana': 'coutMana', 'duree': 'tempsIncantation',
-            'resistance': 'resistance', 'effect-normal': 'effetNormal',
-            'effect-critical': 'effetCritique', 'effect-failure': 'effetEchec'
+            'name': 'nom', 
+            'description': 'description', 
+            'prerequis': 'prerequis',
+            'portee': 'portee', 
+            'mana': 'coutMana', 
+            'temps-incantation': 'tempsIncantation',
+            'duree': 'duree',
+            'resistance': 'resistance', 
+            'effect-normal': 'effetNormal',
+            'effect-critical': 'effetCritique', 
+            'effect-failure': 'effetEchec'
           };
-          spell[propertyMap[property] || property] = content;
-          break;
+          const targetProperty = propertyMap[property] || property;
+          spell[targetProperty] = content;
+          return true;
         }
       }
+      
+      return false;
     },
 
     saveToDon(donName, property, content) {
@@ -1408,17 +1420,12 @@
     // Save changes to localStorage immediately when edits are made
     saveChangesToStorage() {
       try {
-        // Save edited data overlay
+        // Save only edited data overlay (not full data)
         localStorage.setItem('jdr-bab-edits', JSON.stringify(this.editedData));
         
-        // Save current data state including STATIC_PAGES
-        localStorage.setItem('jdr-bab-data', JSON.stringify({
-          SORTS: window.SORTS,
-          CLASSES: window.CLASSES,
-          DONS: window.DONS,
-          STATIC_PAGES: window.STATIC_PAGES,
-          STATIC_PAGES_CONFIG: window.STATIC_PAGES_CONFIG
-        }));
+        // Save timestamp of last modification
+        localStorage.setItem('jdr-bab-last-modified', Date.now().toString());
+        
         
       } catch (error) {
         console.error('❌ Failed to save changes to localStorage:', error);

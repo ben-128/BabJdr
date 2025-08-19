@@ -116,12 +116,13 @@ body.dev-off button[title*="Bas"] {
 /* Système d'agrandissement d'images */
 .illus img.enlarged {
   position:fixed !important; top:50% !important; left:50% !important; 
-  transform:translate(-50%, -50%) scale(1.5) !important; z-index:9999 !important;
-  max-width:90vw !important; max-height:90vh !important; width:auto !important; height:auto !important;
+  transform:translate(-50%, -50%) !important; z-index:9999 !important;
+  max-width:85vw !important; max-height:85vh !important; width:auto !important; height:auto !important;
   box-shadow:0 20px 60px rgba(0,0,0,.5), inset 0 4px 12px rgba(212,175,55,.8) !important;
   cursor:zoom-out !important; 
   transition:none !important;
   pointer-events:auto !important;
+  object-fit:contain !important;
 }
 
 /* Forcer l'état stable sur hover pour les images agrandies */
@@ -136,7 +137,7 @@ article[data-page="sorts-mage"] .illus img.enlarged:hover,
 article[data-page="sorts-pretre"] .illus img.enlarged:hover,
 article[data-page="sorts-enchanteur"] .illus img.enlarged:hover,
 .illus[data-illus-key^="spellcategory:"] img.enlarged:hover {
-  transform:translate(-50%, -50%) scale(1.5) !important;
+  transform:translate(-50%, -50%) !important;
   transition:none !important;
 }
 

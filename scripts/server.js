@@ -3,6 +3,9 @@ const fs = require('fs');
 const path = require('path');
 const { exec } = require('child_process');
 
+// Change to parent directory for serving files
+process.chdir(path.join(__dirname, '..'));
+
 const server = http.createServer((req, res) => {
   let filePath = '.' + req.url;
   if (filePath === './') filePath = './index.html';

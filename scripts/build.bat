@@ -8,7 +8,7 @@ echo   JDR-BAB - BUILD STANDALONE
 echo ========================================
 echo.
 
-cd /d "%~dp0"
+cd /d "%~dp0.."
 
 :: Vérifier que nous sommes dans le bon répertoire
 if not exist "package.json" (
@@ -37,11 +37,11 @@ if errorlevel 1 (
     echo.
     
     :: Vérifier que le fichier a été créé
-    if exist "build\standalone\JdrBab.html" (
-        echo [OK] Fichier généré : build\standalone\JdrBab.html
+    if exist "build\JdrBab.html" (
+        echo [OK] Fichier généré : build\JdrBab.html
         
         :: Afficher la taille du fichier
-        for %%A in ("build\standalone\JdrBab.html") do (
+        for %%A in ("build\JdrBab.html") do (
             set /a sizeKB=%%~zA/1024
         )
         
@@ -50,7 +50,7 @@ if errorlevel 1 (
         echo ========================================
         echo   CHEMIN COMPLET DU FICHIER :
         echo ========================================
-        echo %CD%\build\standalone\JdrBab.html
+        echo %CD%\build\JdrBab.html
         echo ========================================
         echo.
         echo Le fichier JdrBab.html est prêt à être partagé !
@@ -60,11 +60,11 @@ if errorlevel 1 (
         :: Proposer d'ouvrir le fichier
         choice /c ON /m "Ouvrir le fichier maintenant ? [O]ui / [N]on"
         if !errorlevel! == 1 (
-            start "" "build\standalone\JdrBab.html"
+            start "" "build\JdrBab.html"
         )
     ) else (
-        echo [ERREUR] Le fichier JdrBab.html n'a pas été trouvé dans build\standalone\
-        echo Chemin attendu : %CD%\build\standalone\JdrBab.html
+        echo [ERREUR] Le fichier JdrBab.html n'a pas été trouvé dans build\
+        echo Chemin attendu : %CD%\build\JdrBab.html
     )
 )
 

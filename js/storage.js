@@ -18,6 +18,10 @@
       // Set up save handlers
       JdrApp.utils.events.register('click', '#saveAndExport', () => this.saveAndExportZip());
       
+      // Set up force reload handler
+      JdrApp.utils.events.register('click', '#forceReload', () => JdrApp.forceReloadData());
+      
+      
       // Auto-save functionality
       this.setupAutoSave();
     },
@@ -32,15 +36,9 @@
         // Force collect all pending edits
         const editedData = JdrApp.modules.editor.forceCollectAllEdits();
         
-        // For now, just save to localStorage as backup
+        // Save only current edits (not full data to avoid overwriting JSON changes)
         localStorage.setItem('jdr-bab-edits', JSON.stringify(editedData));
-        localStorage.setItem('jdr-bab-data', JSON.stringify({
-          SORTS: window.SORTS,
-          CLASSES: window.CLASSES,
-          DONS: window.DONS,
-          STATIC_PAGES: window.STATIC_PAGES,
-          STATIC_PAGES_CONFIG: window.STATIC_PAGES_CONFIG
-        }));
+        localStorage.setItem('jdr-bab-last-modified', Date.now().toString());
         
         if (!silent) {
           this.showNotification('💾 Modifications sauvegardées localement', 'success');
@@ -115,14 +113,7 @@
           }
         }
         
-        // Add other data files
-        const otherDataFiles = ['elements.json', 'stats.json', 'competences-tests.json', 'etats.json', 'creation.json'];
-        for (const dataFile of otherDataFiles) {
-          const dataContent = await this.fetchFileContent(`data/${dataFile}`);
-          if (dataContent) {
-            zip.file(`data/${dataFile}`, dataContent);
-          }
-        }
+        // Note: All static pages are now handled via window.STATIC_PAGES above
         
         // Add current images (including newly uploaded ones)
         if (JdrApp.modules.images && JdrApp.modules.images.getAllImages) {
@@ -303,26 +294,106 @@
     loadStoredEdits() {
       try {
         const storedEdits = localStorage.getItem('jdr-bab-edits');
-        const storedData = localStorage.getItem('jdr-bab-data');
         
         if (storedEdits) {
           JdrApp.modules.editor.editedData = JSON.parse(storedEdits);
+          console.log('📝 Éditions temporaires restaurées');
         }
         
-        if (storedData) {
-          const data = JSON.parse(storedData);
-          // Merge with current data if needed
-          if (data.SORTS) window.SORTS = data.SORTS;
-          if (data.CLASSES) window.CLASSES = data.CLASSES;
-          if (data.DONS) window.DONS = data.DONS;
-          if (data.STATIC_PAGES) window.STATIC_PAGES = data.STATIC_PAGES;
-          if (data.STATIC_PAGES_CONFIG) window.STATIC_PAGES_CONFIG = data.STATIC_PAGES_CONFIG;
-        }
+        // Ne plus charger jdr-bab-data - laisser les JSON être la source de vérité
         
       } catch (error) {
         console.error('❌ Failed to load stored edits:', error);
       }
     },
+
+    // Handle ZIP file import
+    async handleZipImport(event) {
+      const file = event.target.files[0];
+      if (!file || file.type !== 'application/zip') {
+        this.showNotification('❌ Veuillez sélectionner un fichier ZIP', 'error');
+        return;
+      }
+
+      try {
+        this.showNotification('📥 Import en cours...', 'info');
+
+        // Check if JSZip is available
+        if (typeof JSZip === 'undefined') {
+          await this.loadJSZip();
+        }
+
+        const zip = new JSZip();
+        const contents = await zip.loadAsync(file);
+
+        // Import data files
+        const dataFiles = ['sorts.json', 'classes.json', 'dons.json'];
+        for (const dataFile of dataFiles) {
+          const zipFile = contents.file(`data/${dataFile}`);
+          if (zipFile) {
+            const content = await zipFile.async('text');
+            const data = JSON.parse(content);
+            
+            if (dataFile === 'sorts.json') {
+              window.SORTS = data;
+            } else if (dataFile === 'classes.json') {
+              window.CLASSES = data;
+            } else if (dataFile === 'dons.json') {
+              window.DONS = data;
+            }
+          }
+        }
+
+        // Import static pages config
+        const configFile = contents.file('data/static-pages-config.json');
+        if (configFile) {
+          const configContent = await configFile.async('text');
+          window.STATIC_PAGES_CONFIG = JSON.parse(configContent);
+        }
+
+        // Import static pages data
+        if (window.STATIC_PAGES_CONFIG && window.STATIC_PAGES_CONFIG.pages) {
+          window.STATIC_PAGES = {};
+          for (const pageConfig of window.STATIC_PAGES_CONFIG.pages) {
+            if (pageConfig.active) {
+              const pageFile = contents.file(`data/${pageConfig.file}`);
+              if (pageFile) {
+                const pageContent = await pageFile.async('text');
+                window.STATIC_PAGES[pageConfig.id] = JSON.parse(pageContent);
+              }
+            }
+          }
+        }
+
+        // Import images
+        const imagesFile = contents.file('data/images.json');
+        if (imagesFile && JdrApp.modules.images && JdrApp.modules.images.importImages) {
+          const imagesContent = await imagesFile.async('text');
+          const imagesData = JSON.parse(imagesContent);
+          if (imagesData.images) {
+            JdrApp.modules.images.importImages(imagesData.images);
+          }
+        }
+
+        // Save imported data to localStorage
+        this.saveChanges(true);
+
+        this.showNotification('✅ Import réussi! Rechargement...', 'success');
+
+        // Reload page to show imported data
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+
+      } catch (error) {
+        console.error('❌ Failed to import ZIP:', error);
+        this.showNotification('❌ Erreur lors de l\'import', 'error');
+      }
+
+      // Reset file input
+      event.target.value = '';
+    },
+
 
     // Sync don categories (maintain compatibility)
     syncDonCategories() {

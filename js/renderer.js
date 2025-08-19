@@ -116,11 +116,11 @@
       return `
         <div class="card editable-section" data-section-type="subclass" data-class-name="${className}" data-subclass-name="${sousClasse.nom}">
           <div class="editable-section" data-section-type="subclass-name">
-            <h4 class="editable editable-title" data-edit-type="subclass-name" data-edit-section="${className}-${sousClasse.nom}">${sousClasse.nom}</h4>
+            <h4 class="editable editable-title subclass-title" data-edit-type="subclass-name" data-edit-section="${className}-${sousClasse.nom}">${sousClasse.nom}</h4>
             ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-title-btn" title="Éditer le nom de la sous-classe">✏️</button>' : ''}
           </div>
           
-          ${this.createIllustration(`subclass:${className}:${sousClasse.nom}`, sousClasse.nom)}
+          ${this.createSubclassIllustrations(className, sousClasse.nom)}
           
           <div class="editable-section" data-section-type="subclass-stats">
             <div class="editable editable-stats" data-edit-type="subclass-stats" data-edit-section="${className}-${sousClasse.nom}">
@@ -193,40 +193,40 @@
       return `
         <div class="card editable-section" data-section-type="spell" data-spell-name="${sort.nom}" data-category-name="${category.nom}">
           <div class="editable-section" data-section-type="spell-name">
-            <h4 style="margin: 0 0 1rem 0; text-align: center;" class="editable editable-title" data-edit-type="spell-name" data-edit-section="${sort.nom}">${sort.nom}</h4>
+            <h4 style="margin: 0 0 1rem 0; text-align: center;" class="editable editable-title" data-edit-type="spell-name" data-edit-spell="${sort.nom}" data-edit-section="${sort.nom}">${sort.nom}</h4>
             ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-title-btn" title="Éditer le nom du sort">✏️</button>' : ''}
           </div>
           
           ${this.createIllustration(`sort:${category.nom}:${sort.nom}`, sort.nom)}
           
           <div class="editable-section" data-section-type="spell-description">
-            <p class="muted editable editable-paragraph" data-edit-type="spell-description" data-edit-section="${sort.nom}" style="margin: 0 0 1rem 0; text-align: center;">${sort.description}</p>
+            <p class="muted editable editable-paragraph" data-edit-type="spell-description" data-edit-spell="${sort.nom}" data-edit-section="${sort.nom}" style="margin: 0 0 1rem 0; text-align: center;">${sort.description}</p>
             ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-paragraph-btn" title="Éditer la description">✏️</button>' : ''}
           </div>
           
           <div class="editable-section" data-section-type="spell-prerequis">
-            <div class="editable editable-field" data-edit-type="spell-prerequis" data-edit-section="${sort.nom}">
+            <div class="editable editable-field" data-edit-type="spell-prerequis" data-edit-spell="${sort.nom}" data-edit-section="${sort.nom}">
               ${sort.prerequis}
             </div>
             ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-field-btn" title="Éditer les prérequis">✏️</button>' : ''}
           </div>
           
           <div class="editable-section" data-section-type="spell-portee">
-            <div class="editable editable-field" data-edit-type="spell-portee" data-edit-section="${sort.nom}">
+            <div class="editable editable-field" data-edit-type="spell-portee" data-edit-spell="${sort.nom}" data-edit-section="${sort.nom}">
               ${sort.portee}
             </div>
             ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-field-btn" title="Éditer la portée">✏️</button>' : ''}
           </div>
           
           <div class="editable-section" data-section-type="spell-mana">
-            <div class="editable editable-field" data-edit-type="spell-mana" data-edit-section="${sort.nom}">
+            <div class="editable editable-field" data-edit-type="spell-mana" data-edit-spell="${sort.nom}" data-edit-section="${sort.nom}">
               ${sort.coutMana}
             </div>
             ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-field-btn" title="Éditer le coût mana">✏️</button>' : ''}
           </div>
-          
-          <div class="editable-section" data-section-type="spell-duree">
-            <div class="editable editable-field" data-edit-type="spell-duree" data-edit-section="${sort.nom}">
+
+          <div class="editable-section" data-section-type="spell-temps-incantation">
+            <div class="editable editable-field" data-edit-type="spell-temps-incantation" data-edit-spell="${sort.nom}" data-edit-section="${sort.nom}">
               ${sort.tempsIncantation}
             </div>
             ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-field-btn" title="Éditer le temps d\'incantation">✏️</button>' : ''}
@@ -235,14 +235,14 @@
           <hr style="margin: 0.5rem 0; border: none; border-top: 1px solid var(--rule);">
           
           <div class="editable-section" data-section-type="spell-resistance">
-            <div class="editable editable-field" data-edit-type="spell-resistance" data-edit-section="${sort.nom}">
+            <div class="editable editable-field" data-edit-type="spell-resistance" data-edit-spell="${sort.nom}" data-edit-section="${sort.nom}">
               ${sort.resistance}
             </div>
             ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-field-btn" title="Éditer la résistance">✏️</button>' : ''}
           </div>
           
           <div class="editable-section" data-section-type="spell-effect-normal">
-            <div class="editable editable-effect" data-edit-type="spell-effect-normal" data-edit-section="${sort.nom}" style="margin: 1rem 0;">
+            <div class="editable editable-effect" data-edit-type="spell-effect-normal" data-edit-spell="${sort.nom}" data-edit-section="${sort.nom}" style="margin: 1rem 0;">
               ${sort.effetNormal}
             </div>
             ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-effect-btn" title="Éditer l\'effet normal">✏️</button>' : ''}
@@ -252,7 +252,7 @@
           
           ${sort.effetCritique ? `
             <div class="editable-section" data-section-type="spell-effect-critical">
-              <div class="editable editable-effect" data-edit-type="spell-effect-critical" data-edit-section="${sort.nom}" style="margin: 1rem 0;">
+              <div class="editable editable-effect" data-edit-type="spell-effect-critical" data-edit-spell="${sort.nom}" data-edit-section="${sort.nom}" style="margin: 1rem 0;">
                 ${sort.effetCritique}
               </div>
               ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-effect-btn" title="Éditer l\'effet critique">✏️</button>' : ''}
@@ -261,7 +261,7 @@
           
           ${sort.effetEchec ? `
             <div class="editable-section" data-section-type="spell-effect-failure">
-              <div class="editable editable-effect" data-edit-type="spell-effect-failure" data-edit-section="${sort.nom}" style="margin: 1rem 0;">
+              <div class="editable editable-effect" data-edit-type="spell-effect-failure" data-edit-spell="${sort.nom}" data-edit-section="${sort.nom}" style="margin: 1rem 0;">
                 ${sort.effetEchec}
               </div>
               ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-effect-btn" title="Éditer l\'effet d\'échec">✏️</button>' : ''}
@@ -548,7 +548,8 @@
         <div style="margin-bottom: 12px;">
           <div style="font-size: 12px; color: var(--paper-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">✏️ Édition</div>
           <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-            <button class="btn small" id="saveAndExport" title="Sauvegarder et exporter tout en ZIP">💾 Sauvegarder & Export ZIP</button>
+            <button class="btn small" id="saveAndExport" title="Sauvegarder et exporter tout en ZIP">💾 Export ZIP</button>
+            <button class="btn small" id="forceReload" title="Recharger les données JSON (efface le cache)">🔄 Recharger JSON</button>
           </div>
         </div>
         
@@ -640,6 +641,18 @@
       return this.renderImage(illusKey, { altText, styleType });
     },
 
+    createSubclassIllustrations(className, subclassName) {
+      const illusKey1 = `subclass:${className}:${subclassName}:1`;
+      const illusKey2 = `subclass:${className}:${subclassName}:2`;
+      
+      return `
+        <div class="subclass-images">
+          ${this.renderImage(illusKey1, { altText: `${subclassName} (Image 1)`, styleType: 'subclass' })}
+          ${this.renderImage(illusKey2, { altText: `${subclassName} (Image 2)`, styleType: 'subclass' })}
+        </div>
+      `;
+    },
+
     // Simplified dynamic rendering
     renderSortCategory(page) {
       const categoryId = page.replace('sorts-', '');
@@ -682,7 +695,6 @@
       `;
       
       article.innerHTML = content;
-      console.log('Sort category re-rendered:', category.nom);
     },
 
     renderDonCategory(page) {

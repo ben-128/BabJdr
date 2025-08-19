@@ -47,9 +47,6 @@
 
     async loadData() {
       try {
-        // Load stored edits first (before loading any data)
-        this.loadStoredEditsEarly();
-        
         // Check if we're in standalone mode (data already injected)
         if (window.SORTS && window.CLASSES && window.DONS && window.STATIC_PAGES) {
           const sorts = window.SORTS;
@@ -69,6 +66,9 @@
           window.DONS = dons;
           window.STATIC_PAGES = staticPagesData;
           window.STATIC_PAGES_CONFIG = staticPagesConfig;
+          
+          // Load stored edits AFTER setting up the data structure
+          this.loadStoredEditsEarly();
           return;
         }
         
@@ -104,23 +104,8 @@
         window.STATIC_PAGES = this.data.STATIC_PAGES;
         window.STATIC_PAGES_CONFIG = this.data.STATIC_PAGES_CONFIG;
         
-        // Apply cached stored data if available (from development mode)
-        if (this._storedDataCache) {
-          if (this._storedDataCache.SORTS) window.SORTS = this._storedDataCache.SORTS;
-          if (this._storedDataCache.CLASSES) window.CLASSES = this._storedDataCache.CLASSES;
-          if (this._storedDataCache.DONS) window.DONS = this._storedDataCache.DONS;
-          if (this._storedDataCache.STATIC_PAGES) window.STATIC_PAGES = this._storedDataCache.STATIC_PAGES;
-          if (this._storedDataCache.STATIC_PAGES_CONFIG) window.STATIC_PAGES_CONFIG = this._storedDataCache.STATIC_PAGES_CONFIG;
-          
-          // Update local data references too
-          if (this._storedDataCache.SORTS) this.data.SORTS = this._storedDataCache.SORTS;
-          if (this._storedDataCache.CLASSES) this.data.CLASSES = this._storedDataCache.CLASSES;
-          if (this._storedDataCache.DONS) this.data.DONS = this._storedDataCache.DONS;
-          if (this._storedDataCache.STATIC_PAGES) this.data.STATIC_PAGES = this._storedDataCache.STATIC_PAGES;
-          if (this._storedDataCache.STATIC_PAGES_CONFIG) this.data.STATIC_PAGES_CONFIG = this._storedDataCache.STATIC_PAGES_CONFIG;
-          
-          delete this._storedDataCache; // Clean up
-        }
+        // Load stored edits in development mode (after data is loaded)
+        this.loadStoredEditsEarly();
       } catch (error) {
         console.error('Failed to load data:', error);
         throw error;
@@ -184,28 +169,9 @@
 
     // Load stored edits early in the loading process (before rendering)
     loadStoredEditsEarly() {
-      try {
-        const storedData = localStorage.getItem('jdr-bab-data');
-        
-        if (storedData) {
-          const data = JSON.parse(storedData);
-          
-          // Only override if we're in standalone mode and data already exists
-          // In development mode, let the normal loading process handle it
-          if (window.SORTS && window.CLASSES && window.DONS && window.STATIC_PAGES) {
-            if (data.SORTS) window.SORTS = data.SORTS;
-            if (data.CLASSES) window.CLASSES = data.CLASSES;
-            if (data.DONS) window.DONS = data.DONS;
-            if (data.STATIC_PAGES) window.STATIC_PAGES = data.STATIC_PAGES;
-            if (data.STATIC_PAGES_CONFIG) window.STATIC_PAGES_CONFIG = data.STATIC_PAGES_CONFIG;
-          } else {
-            // In development mode, store the data for later use
-            this._storedDataCache = data;
-          }
-        }
-      } catch (error) {
-        console.error('❌ Failed to load stored data early:', error);
-      }
+      // Ne plus charger automatiquement le localStorage
+      // Laisser les JSON files être la source de vérité
+      console.log('📁 Chargement des données depuis les fichiers JSON');
     },
 
     initializeModules() {
@@ -216,6 +182,16 @@
       if (this.modules.router.init) this.modules.router.init();
       if (this.modules.editor.init) this.modules.editor.init();
       if (this.modules.storage.init) this.modules.storage.init();
+      if (this.modules.ui.init) this.modules.ui.init();
+    },
+
+    // Force reload JSON data (clear localStorage cache)
+    forceReloadData() {
+      // Effacer seulement les éditions temporaires
+      localStorage.removeItem('jdr-bab-edits');
+      localStorage.removeItem('jdr-bab-last-modified');
+      console.log('🔄 Éditions temporaires effacées - rechargement des JSON...');
+      window.location.reload();
     }
   };
 

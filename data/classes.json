@@ -59,7 +59,7 @@
           "Volonté": 3,
           "Chance": 1
         },
-        "progression": "<strong>📈 Progression par niveau:</strong> +3 Intelligence 🧠, +2 Volonté 🔮",
+        "progression": "<strong>📈 Progression par niveau:</strong> +3 Intelligence 🧠, +2 Volonté ⚡",
         "capacites": [
           "<em>Instruit</em>: Gagne la compétence Réflexion rang 1.",
           "<em>Apprentissage accéléré</em>: Le niveau de l'érudit est considéré comme deux fois plus grand pour les prérequis d'apprentissage de sorts."
@@ -75,7 +75,7 @@
           "Volonté": 2,
           "Chance": 1
         },
-        "progression": "<strong>📈 Progression par niveau:</strong> +1 Force 💪, +1 Agilité 🏃, +1 Endurance 🛡️, +1 Intelligence 🧠, +1 Volonté 🔮",
+        "progression": "<strong>📈 Progression par niveau:</strong> +1 Force 💪, +1 Agilité 🏃, +1 Endurance 🛡️, +1 Intelligence 🧠, +1 Volonté ⚡",
         "capacites": [
           "<em>Instinct elfique</em>: Gagne la compétence Coordination rang 1.",
           "<em>Équipement d'elfe</em>: Epées à une main, armures légères.",
@@ -189,7 +189,7 @@
           "Volonté": 2,
           "Chance": 1
         },
-        "progression": "<strong>📈 Progression par niveau:</strong> +1 Agilité 🏃, +2 Intelligence 🧠, +1 Volonté 🔮, +1 Chance 🍀",
+        "progression": "<strong>📈 Progression par niveau:</strong> +1 Agilité 🏃, +2 Intelligence 🧠, +1 Volonté ⚡, +1 Chance 🍀",
         "capacites": [
           "<em>Tatillon</em>: Gagne la compétence Finesse rang 1.",
           "<em>Lévitation</em>: ignore dégâts/ralentissements venant du sol.",
@@ -206,7 +206,7 @@
           "Volonté": 2,
           "Chance": 5
         },
-        "progression": "<strong>📈 Progression par niveau:</strong> +2 Intelligence 🧠, +1 Volonté 🔮, +2 Chance 🍀",
+        "progression": "<strong>📈 Progression par niveau:</strong> +2 Intelligence 🧠, +1 Volonté ⚡, +2 Chance 🍀",
         "capacites": [
           "<em>Secrets bien gardés</em>: Gagne la compétence Reflexion rang 1.",
           "<em>Expert des baguettes</em>: sur critique à la baguette, la charge n'est pas consommée.",

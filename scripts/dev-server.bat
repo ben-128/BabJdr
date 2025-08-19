@@ -8,7 +8,7 @@ echo   JDR-BAB - SERVEUR PROPRE
 echo ========================================
 echo.
 
-cd /d "%~dp0"
+cd /d "%~dp0.."
 
 :: Vérifier que nous sommes dans le bon répertoire
 if not exist "package.json" (
