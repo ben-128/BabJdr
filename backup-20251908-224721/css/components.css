@@ -38,8 +38,7 @@
 .illus img.enlarged{transition:none !important}
 .illus .thumb{width:500px;height:300px;object-fit:contain}
 
-/* Images avec cadres - système unifié */
-.illus-spell, .illus-class, .illus-subclass, .illus-don,
+/* Images de classes, sous-classes et sorts - avec cadre */
 article[data-page="guerrier"] .illus,
 article[data-page="mage"] .illus,
 article[data-page="pretre"] .illus,
@@ -48,14 +47,10 @@ article[data-page="enchanteur"] .illus,
 .illus[data-illus-key^="class:"],
 .illus[data-illus-key^="subclass:"],
 .illus[data-illus-key^="spell:"],
-.illus[data-illus-key^="sort:"],
-.illus[data-illus-key^="spellcategory:"],
-.illus[data-illus-key^="don:"] {
+.illus[data-illus-key^="spellcategory:"] {
   display:flex !important; flex-direction:column !important; align-items:center !important;
   justify-content:center !important; margin:1rem auto !important;
 }
-
-.illus-spell img, .illus-class img, .illus-subclass img, .illus-don img,
 article[data-page="guerrier"] .illus img,
 article[data-page="mage"] .illus img,
 article[data-page="pretre"] .illus img,
@@ -64,9 +59,7 @@ article[data-page="enchanteur"] .illus img,
 .illus[data-illus-key^="class:"] img,
 .illus[data-illus-key^="subclass:"] img,
 .illus[data-illus-key^="spell:"] img,
-.illus[data-illus-key^="sort:"] img,
-.illus[data-illus-key^="spellcategory:"] img,
-.illus[data-illus-key^="don:"] img {
+.illus[data-illus-key^="spellcategory:"] img {
   border:var(--image-border) !important; 
   box-shadow:var(--image-shadow) !important;
   padding:4px !important; 
@@ -76,8 +69,6 @@ article[data-page="enchanteur"] .illus img,
   width:auto !important;
   cursor:pointer !important;
 }
-
-.illus-spell img:hover, .illus-class img:hover, .illus-subclass img:hover, .illus-don img:hover,
 article[data-page="guerrier"] .illus img:hover,
 article[data-page="mage"] .illus img:hover,
 article[data-page="pretre"] .illus img:hover,
@@ -86,19 +77,7 @@ article[data-page="enchanteur"] .illus img:hover,
 .illus[data-illus-key^="class:"] img:hover,
 .illus[data-illus-key^="subclass:"] img:hover,
 .illus[data-illus-key^="spell:"] img:hover,
-.illus[data-illus-key^="sort:"] img:hover,
-.illus[data-illus-key^="spellcategory:"] img:hover,
-.illus[data-illus-key^="don:"] img:hover {
+.illus[data-illus-key^="spellcategory:"] img:hover {
   transform:scale(1.03) !important; 
   box-shadow:var(--image-shadow), 0 8px 25px rgba(139,69,19,.25) !important;
-}
-
-/* Variantes de taille d'images */
-.illus-small img { max-width: 150px !important; }
-.illus-large img { max-width: 400px !important; }
-
-/* Style spécial pour les sorts - cadre doré */
-.illus-spell img {
-  border: 3px solid var(--gold) !important;
-  box-shadow: var(--image-shadow), 0 0 10px rgba(212,175,55,.3) !important;
 }

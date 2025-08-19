@@ -1,0 +1,28 @@
+{
+  "page": "creation",
+  "title": "Création d'un personnage",
+  "static": true,
+  "sections": [
+    {
+      "type": "intro",
+      "content": "Guide pour créer un personnage dans le JDR BAB."
+    },
+    {
+      "type": "card",
+      "title": "Étapes de création",
+      "content": {
+        "type": "ordered_list",
+        "editType": "creation",
+        "items": [
+          "Choisir une <strong>classe</strong> puis une <strong>sous‑classe</strong>.",
+          "Choisir un <strong>élément</strong>.",
+          "Choisir les <strong>dons</strong>.",
+          "Choisir l'<strong>équipement</strong> de départ.",
+          "Choisir un <strong>métier</strong>.",
+          "Remplir sa feuille de personnage (Efforts, Argent...).",
+          "Définir le <strong>nom</strong>, l'<strong>histoire</strong> et l'<strong>apparence</strong>."
+        ]
+      }
+    }
+  ]
+}

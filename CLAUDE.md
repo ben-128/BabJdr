@@ -2,6 +2,12 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Repository Information
+
+**GitHub Repository**: https://github.com/ben-128/BabJdr.git
+- Use for periodic saves: `git push origin master`
+- Current branch: master
+
 ## Development Commands
 
 ### Primary Development Workflow

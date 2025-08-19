@@ -575,15 +575,7 @@
       devToolbox.innerHTML = toolboxHTML;
     },
 
-    // General image renderer with style options
-    renderImage(illusKey, options = {}) {
-      const {
-        altText = '',
-        styleType = 'default', // 'spell', 'class', 'subclass', 'don', 'default'
-        size = 'medium', // 'small', 'medium', 'large'
-        frame = true
-      } = options;
-
+    createIllustration(illusKey, altText = '') {
       // Check if image is available in images module
       let imageUrl = '';
       let imageStyle = 'display: none;';
@@ -592,97 +584,35 @@
       if (JdrApp.modules.images && JdrApp.modules.images.getImageUrl) {
         imageUrl = JdrApp.modules.images.getImageUrl(illusKey);
         if (imageUrl) {
+          // Process URL for mobile compatibility
           imageUrl = JdrApp.modules.images.processImageUrl(imageUrl);
           imageStyle = 'display: inline-block;';
           removeStyle = 'display: inline-flex;';
         }
       }
-
-      // Build CSS classes based on style type
-      let containerClasses = 'illus';
-      let imageClasses = 'thumb';
       
-      if (frame && ['spell', 'class', 'subclass', 'don'].includes(styleType)) {
-        containerClasses += ` illus-${styleType}`;
-      }
-      
-      if (size !== 'medium') {
-        containerClasses += ` illus-${size}`;
-      }
-
-      // In standalone version, don't render editing buttons
+      // In standalone version, don't render editing buttons at all
       if (window.STANDALONE_VERSION) {
         return `
-          <div class="${containerClasses}" data-illus-key="${illusKey}" data-style-type="${styleType}" data-bound="1">
-            <img alt="Illustration ${altText}" class="${imageClasses}" style="${imageStyle}"${imageUrl ? ` src="${imageUrl}"` : ''}>
+          <div class="illus" data-illus-key="${illusKey}" data-bound="1">
+            <img alt="Illustration ${altText}" class="thumb" style="${imageStyle}"${imageUrl ? ` src="${imageUrl}"` : ''}>
           </div>
         `;
       }
       
       return `
-        <div class="${containerClasses}" data-illus-key="${illusKey}" data-style-type="${styleType}" data-bound="1">
-          <img alt="Illustration ${altText}" class="${imageClasses}" style="${imageStyle}"${imageUrl ? ` src="${imageUrl}"` : ''}>
+        <div class="illus" data-illus-key="${illusKey}" data-bound="1">
+          <img alt="Illustration ${altText}" class="thumb" style="${imageStyle}"${imageUrl ? ` src="${imageUrl}"` : ''}>
           <label class="up">📷 Ajouter<input accept="image/*" hidden="" type="file"></label>
           <button class="rm" type="button" style="${removeStyle}">🗑 Retirer</button>
         </div>
       `;
     },
 
-    // Simplified wrapper for backward compatibility
-    createIllustration(illusKey, altText = '') {
-      // Determine style type from illus key
-      let styleType = 'default';
-      if (illusKey.startsWith('spell:') || illusKey.startsWith('sort:')) styleType = 'spell';
-      else if (illusKey.startsWith('class:')) styleType = 'class';
-      else if (illusKey.startsWith('subclass:')) styleType = 'subclass';
-      else if (illusKey.startsWith('don:')) styleType = 'don';
-      
-      return this.renderImage(illusKey, { altText, styleType });
-    },
-
-    // Simplified dynamic rendering
+    // Dynamic rendering methods
     renderSortCategory(page) {
-      const categoryId = page.replace('sorts-', '');
-      const category = window.SORTS?.find(cat => 
-        JdrApp.utils.data.sanitizeId(cat.nom) === categoryId
-      );
-      
-      if (!category) {
-        console.error('Category not found for:', categoryId);
-        return;
-      }
-      
-      const article = document.querySelector(`article[data-page="${page}"]`);
-      if (!article) {
-        console.error('Article not found for page:', page);
-        return;
-      }
-      
-      // Generate content directly
-      const content = `
-        <section>
-          <header>
-            <h1>${category.nom}</h1>
-            <div class="hero-illus">
-              ${this.createIllustration(`spellcategory:${category.nom}`)}
-            </div>
-            
-            <div class="editable-section" data-section-type="spell-category-description">
-              <p class="lead editable editable-paragraph" data-edit-type="spell-category-description" data-edit-section="${category.nom}">${category.description}</p>
-              ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-paragraph-btn" title="Éditer la description de la catégorie">✏️</button>' : ''}
-            </div>
-            
-            ${this.shouldRenderEditButtons() ? `<button class="spell-add" data-category-name="${category.nom}" type="button">➕ Ajouter un sort</button>` : ''}
-          </header>
-          
-          <div class="grid cols-2">
-            ${category.sorts.map((sort, index) => this.generateSpellCard(category, sort, index)).join('')}
-          </div>
-        </section>
-      `;
-      
-      article.innerHTML = content;
-      console.log('Sort category re-rendered:', category.nom);
+      // Implementation for dynamic sort category rendering
+      console.log('Rendering sort category:', page);
     },
 
     renderDonCategory(page) {

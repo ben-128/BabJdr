@@ -1,0 +1,105 @@
+{
+  "page": "stats",
+  "title": "Statistiques",
+  "static": true,
+  "sections": [
+    {
+      "type": "intro",
+      "content": "Les six statistiques principales des personnages et leurs effets."
+    },
+    {
+      "type": "card",
+      "title": "Statistiques de base",
+      "content": {
+        "type": "grid",
+        "cols": 2,
+        "items": [
+          {
+            "type": "card",
+            "title": "💪 Force",
+            "content": [
+              {
+                "type": "paragraph",
+                "editType": "stat",
+                "editSection": "force",
+                "content": "Améliore les dégâts physiques."
+              }
+            ],
+            "deletable": true,
+            "sectionName": "Force"
+          },
+          {
+            "type": "card",
+            "title": "🛡️ Endurance",
+            "content": [
+              {
+                "type": "paragraph",
+                "editType": "stat",
+                "editSection": "endurance",
+                "content": "-Les points de vie maximum sont de :<br><strong>(10 + 2 x Endurance)</strong><br>- Un repos régénère des points de vie égaux à l'endurance<br>"
+              }
+            ],
+            "deletable": true,
+            "sectionName": "Endurance"
+          },
+          {
+            "type": "card",
+            "title": "🏃 Agilité",
+            "content": [
+              {
+                "type": "paragraph",
+                "editType": "stat",
+                "editSection": "agilite",
+                "content": "Chaque 5 points ajoutent <strong>+1</strong> aux jets d'esquive et de critique physique."
+              }
+            ],
+            "deletable": true,
+            "sectionName": "Agilité"
+          },
+          {
+            "type": "card",
+            "title": "🧠 Intelligence",
+            "content": [
+              {
+                "type": "paragraph",
+                "editType": "stat",
+                "editSection": "intelligence",
+                "content": "Détermine la puissance des sorts."
+              }
+            ],
+            "deletable": true,
+            "sectionName": "Intelligence"
+          },
+          {
+            "type": "card",
+            "title": "⚡ Volonté",
+            "content": [
+              {
+                "type": "paragraph",
+                "editType": "stat",
+                "editSection": "volonte",
+                "content": "- Le mana maximum est de : <strong>(20 + 2 x Volonté)</strong><br>- Réduit les chances de subir des altérations magiques."
+              }
+            ],
+            "deletable": true,
+            "sectionName": "Volonté"
+          },
+          {
+            "type": "card",
+            "title": "🍀 Chance",
+            "content": [
+              {
+                "type": "paragraph",
+                "editType": "stat",
+                "editSection": "chance",
+                "content": "- Améliore le butin des coffres et les événements aléatoires.<br>- Chaque 5 points ajoutent <strong>+1</strong> aux chances de coup critique avec les sorts et les baguettes."
+              }
+            ],
+            "deletable": true,
+            "sectionName": "Chance"
+          }
+        ]
+      }
+    }
+  ]
+}

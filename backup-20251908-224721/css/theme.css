@@ -1,0 +1,69 @@
+/* —— Thème Heroic Fantasy —— */
+:root{
+  --paper:#f4f0e6;        /* parchemin ancien */
+  --paper-ink:#2c1810;    /* encre noire profonde */
+  --paper-muted:#8b6f47;  /* bronze ancien */
+  --accent-ink:#4a2c17;   /* titres sombres */
+  --rule:#d4c4a8;         /* bordures dorées */
+  --card:#faf6ee;         /* cartes parchemin */
+  --link:#8b4513;         /* liens cuivre */
+  --gold:#d4af37;         /* or */
+  --bronze:#cd7f32;       /* bronze */
+  --shadow:0 8px 32px rgba(0,0,0,.15), 0 2px 8px rgba(139,69,19,.1);
+  --card-shadow:0 6px 20px rgba(0,0,0,.1), 0 2px 6px rgba(139,69,19,.08);
+  --image-border:3px solid #8b4513;
+  --image-shadow:0 4px 12px rgba(0,0,0,.2), inset 0 1px 2px rgba(212,175,55,.3);
+  
+  /* Element colors system */
+  --feu:#ff6b35; --feu-bg:rgba(255,107,53,.1); --feu-border:rgba(255,107,53,.3);
+  --air:#87ceeb; --air-bg:rgba(135,206,235,.1); --air-border:rgba(135,206,235,.3);
+  --eau:#4682b4; --eau-bg:rgba(70,130,180,.1); --eau-border:rgba(70,130,180,.3);
+  --terre:#8b7355; --terre-bg:rgba(139,115,85,.1); --terre-border:rgba(139,115,85,.3);
+  --divin:#ffd700; --divin-bg:rgba(255,215,0,.1); --divin-border:rgba(255,215,0,.3);
+  --malefique:#8b008b; --malefique-bg:rgba(139,0,139,.1); --malefique-border:rgba(139,0,139,.3);
+  
+  /* Spacing system */
+  --space-xs:4px; --space-sm:6px; --space-md:8px; --space-lg:12px; --space-xl:16px; --space-2xl:24px;
+  
+  /* Common transitions */
+  --transition-fast:.2s ease; --transition-normal:.3s ease; --transition-slow:.5s ease;
+}
+
+@media (prefers-color-scheme: dark){ 
+  :root{ 
+    --paper:#e9e0cc; 
+    --card:#f3ead4; 
+    --paper-ink:#1c170f; 
+  } 
+}
+
+/* Base styles */
+html,body{height:100%}
+body{
+  margin:0;
+  background:
+    radial-gradient(1600px 800px at 50% -10%, rgba(212,175,55,.08), transparent 45%),
+    radial-gradient(1400px 700px at 120% 10%, rgba(139,69,19,.06), transparent 40%),
+    radial-gradient(800px 400px at 20% 80%, rgba(205,127,50,.04), transparent 30%),
+    repeating-linear-gradient(90deg, rgba(74,44,23,.02) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(0deg, rgba(139,69,19,.015) 0 1px, transparent 1px 4px),
+    var(--paper);
+  color:var(--paper-ink); 
+  font:17px/1.65 "Source Serif Pro", "Cinzel", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif; 
+  -webkit-font-smoothing:antialiased; 
+  text-rendering:optimizeLegibility;
+}
+
+/* Typography */
+a{color:var(--link);text-decoration:none} 
+a:hover{text-decoration:underline}
+strong, b{font-weight:700; font-family: "Source Serif Pro", serif; color:var(--accent-ink)}
+em, i{font-style:italic; font-weight:400}
+h1,h2,h3{font-family: "Cinzel", "Trajan Pro", ui-serif, Georgia, Cambria, Times, serif; color:var(--accent-ink); text-shadow: 1px 1px 2px rgba(0,0,0,.1)}
+h1{font-size:clamp(32px,4.5vw,44px);letter-spacing:.03em;margin:.2rem 0 .4rem; font-weight:600;
+   background:linear-gradient(135deg, var(--gold), var(--bronze)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text}
+h2{font-size:clamp(24px,3.2vw,30px);margin:.2rem 0 .2rem; font-weight:500; color:var(--bronze)}
+h3{font-size:clamp(19px,2.4vw,24px);margin:.8rem 0 .2rem; font-weight:500; color:var(--accent-ink)}
+.muted{color:var(--paper-muted)}
+.lead{font-size:18px}
+.rule{height:1px;background:linear-gradient(90deg, transparent, var(--rule), transparent);margin:10px 0}
