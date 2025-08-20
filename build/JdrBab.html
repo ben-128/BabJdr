@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-08-19T21:04:27.492Z by JdrBab Build System -->
+<!-- Generated on 2025-08-20T09:23:45.654Z by JdrBab Build System -->
 <title>JDR‑BAB — Livret de règles</title>
 <meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -274,10 +274,51 @@ article[data-page="enchanteur"] .illus img:hover,
 .illus-small img { max-width: 150px !important; }
 .illus-large img { max-width: 400px !important; }
 
-/* Style spécial pour les sorts - cadre doré */
-.illus-spell img {
+/* Style spécial pour les sorts - cadre doré et taille augmentée */
+.illus-spell img,
+.card .illus img {
   border: 3px solid var(--gold) !important;
   box-shadow: var(--image-shadow), 0 0 10px rgba(212,175,55,.3) !important;
+  max-width: 350px !important;
+  max-height: 250px !important;
+  object-fit: contain !important;
+}
+
+/* Style spécial pour les sous-classes - 2 images centrées et collées */
+.subclass-images {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  margin: 0.6rem 0;
+}
+
+.subclass-images .illus {
+  margin: 0;
+  flex: 0 0 auto;
+}
+
+.subclass-images .illus img {
+  max-width: 400px !important;
+  max-height: 300px !important;
+  object-fit: contain !important;
+  border-radius: 12px 0 0 12px !important;
+}
+
+.subclass-images .illus:last-child img {
+  border-radius: 0 12px 12px 0 !important;
+}
+
+/* Style spécial pour les titres de sous-classes */
+.subclass-title {
+  font-size: 1.8rem !important;
+  font-weight: 600 !important;
+  text-align: center !important;
+  margin: 0 0 1.5rem 0 !important;
+  color: var(--accent-ink) !important;
+  font-family: 'Cinzel', serif !important;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1) !important;
+  letter-spacing: 0.5px !important;
 }
 /* Editor and Dev Mode styles */
 
@@ -723,7 +764,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 1",
         "portee": "🎯 <strong>Portée:</strong> 20m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
-        "coutMana": "⚡ <strong>Coût mana:</strong> 3",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 3",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> Esquive.",
         "effetNormal": "<strong>Effet:</strong> Inflige 5 dégats de <span style=\"color: #e25822; font-weight: bold;\">Feu</span> à la cible.<br>&nbsp;Tous les 5 points d'intelligence, augmente les dégats de 1.",
@@ -737,7 +778,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 2",
         "portee": "🎯 <strong>Portée:</strong> 20m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
-        "coutMana": "⚡ <strong>Coût mana:</strong> 5",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 5",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> Aucune",
         "effetNormal": "<strong>Effet:</strong> &nbsp;Inflige 6 dégats d'<span style=\"color: #22c55e; font-weight: bold;\">Air</span> à la cible.<br>&nbsp;Tous les 5 points d'intelligence, augmente les dégats de 1.",
@@ -750,7 +791,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         "categorie": "Sorts de Mage",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 3",
         "portee": "🎯 <strong>Portée:</strong> 5m",
-        "coutMana": "⚡ <strong>Coût mana:</strong> 6",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 6",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> Volant.",
@@ -771,7 +812,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 1",
         "portee": "🎯 <strong>Portée:</strong> 20m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
-        "coutMana": "⚡ <strong>Coût mana:</strong> 3",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 3",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> &nbsp;<br>- Non mort-vivant <br>- Esquive.",
         "effetNormal": "<strong>Effet:</strong> Inflige *Intelligence* dégâts <span style=\"color: #ffd700; font-weight: bold;\">Divin</span> à la cible.",
@@ -784,13 +825,27 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         "categorie": "Sorts de Prêtre",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 1",
         "portee": "🎯 <strong>Portée:</strong> 10m",
-        "coutMana": "⚡ <strong>Coût mana:</strong> 5",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 5",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> &nbsp;mort-vivant.",
         "effetNormal": "<strong>Effet:</strong> Soigne la cible de 5 points de vie. Tous les 5 points d'intelligence, augmente le soin de 1.",
         "effetCritique": "<strong>Coup Critique:&nbsp;</strong>Double le soin.",
         "effetEchec": "<strong>Échec Critique:&nbsp;</strong>Sans effet."
+      },
+      {
+        "nom": "Protection",
+        "description": "Protège le lanceur ou un allié.",
+        "categorie": "Sorts de Prêtre",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 2",
+        "portee": "🎯 <strong>Portée:</strong> 3m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 5",
+        "duree": "⏳ <strong>Durée:</strong> Instantané",
+        "resistance": "<strong>Sans effet si:</strong> -",
+        "effetNormal": "<strong>Effet:</strong> Augmente l'armure de 3 pendant 5 tours.<br> Tous les 5 d'Intelligence, augmente l'armure de 1 supplémentaire.",
+        "effetCritique": "<strong>Coup Critique:&nbsp;</strong> Double l'armure prodiguée.",
+        "effetEchec": "<strong>Échec Critique:&nbsp;</strong> Sans effet."
       }
     ]
   },
@@ -804,7 +859,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         "categorie": "Sorts d'Enchanteur",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 1",
         "portee": "🎯 <strong>Portée:</strong> 30m",
-        "coutMana": "⚡ <strong>Coût mana:</strong> 3",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 3",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> <br>- Volonté &gt; Intelligence du lanceur<br>- Element <span style=\"color: #8b5e34; font-weight: bold;\">Terre</span><br>- Lévitation ou Volant.",
@@ -818,7 +873,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         "categorie": "Sorts d'Enchanteur",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 1",
         "portee": "🎯 <strong>Portée:</strong> 5m",
-        "coutMana": "⚡ <strong>Coût mana:</strong> 4",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 4",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> Aucune",
@@ -832,7 +887,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         "categorie": "Sorts d'Enchanteur",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 2",
         "portee": "🎯 <strong>Portée:</strong> 5m",
-        "coutMana": "⚡ <strong>Coût mana:</strong> 8",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 8",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> <br>- Volonté &gt; Intelligence du lanceur<br>- Element <span style=\"color: #0f172a; font-weight: bold;\">Nuit</span>",
@@ -909,7 +964,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
           "Volonté": 3,
           "Chance": 1
         },
-        "progression": "<strong>📈 Progression par niveau:</strong> +3 Intelligence 🧠, +2 Volonté 🔮",
+        "progression": "<strong>📈 Progression par niveau:</strong> +3 Intelligence 🧠, +2 Volonté ⚡",
         "capacites": [
           "<em>Instruit</em>: Gagne la compétence Réflexion rang 1.",
           "<em>Apprentissage accéléré</em>: Le niveau de l'érudit est considéré comme deux fois plus grand pour les prérequis d'apprentissage de sorts."
@@ -925,7 +980,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
           "Volonté": 2,
           "Chance": 1
         },
-        "progression": "<strong>📈 Progression par niveau:</strong> +1 Force 💪, +1 Agilité 🏃, +1 Endurance 🛡️, +1 Intelligence 🧠, +1 Volonté 🔮",
+        "progression": "<strong>📈 Progression par niveau:</strong> +1 Force 💪, +1 Agilité 🏃, +1 Endurance 🛡️, +1 Intelligence 🧠, +1 Volonté ⚡",
         "capacites": [
           "<em>Instinct elfique</em>: Gagne la compétence Coordination rang 1.",
           "<em>Équipement d'elfe</em>: Epées à une main, armures légères.",
@@ -1039,7 +1094,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
           "Volonté": 2,
           "Chance": 1
         },
-        "progression": "<strong>📈 Progression par niveau:</strong> +1 Agilité 🏃, +2 Intelligence 🧠, +1 Volonté 🔮, +1 Chance 🍀",
+        "progression": "<strong>📈 Progression par niveau:</strong> +1 Agilité 🏃, +2 Intelligence 🧠, +1 Volonté ⚡, +1 Chance 🍀",
         "capacites": [
           "<em>Tatillon</em>: Gagne la compétence Finesse rang 1.",
           "<em>Lévitation</em>: ignore dégâts/ralentissements venant du sol.",
@@ -1056,7 +1111,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
           "Volonté": 2,
           "Chance": 5
         },
-        "progression": "<strong>📈 Progression par niveau:</strong> +2 Intelligence 🧠, +1 Volonté 🔮, +2 Chance 🍀",
+        "progression": "<strong>📈 Progression par niveau:</strong> +2 Intelligence 🧠, +1 Volonté ⚡, +2 Chance 🍀",
         "capacites": [
           "<em>Secrets bien gardés</em>: Gagne la compétence Reflexion rang 1.",
           "<em>Expert des baguettes</em>: sur critique à la baguette, la charge n'est pas consommée.",
@@ -1279,10 +1334,32 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
     "sort:Sorts de Prêtre:Soin mineur": "https://i.ibb.co/YBC2HSnK/Soin-Mineur.png",
     "sort:Sorts d'Enchanteur:Accroche terrestre": "https://i.ibb.co/27W4NtSQ/Accroche-Terre.png",
     "sort:Sorts d'Enchanteur:Accélération": "https://i.ibb.co/Vc072qQB/Acceleration.png",
-    "sort:Sorts d'Enchanteur:Sommeil": "https://i.ibb.co/rKyTh27C/Sleep.png"
+    "sort:Sorts d'Enchanteur:Sommeil": "https://i.ibb.co/rKyTh27C/Sleep.png",
+    "sort:Sorts de Prêtre:Nouveau Sort": "https://i.ibb.co/QvK52kxH/Protection.png",
+    "sort:Sorts de Prêtre:Protection": "https://i.ibb.co/QvK52kxH/Protection.png",
+    "subclass:Guerrier:Nain des montagnes:1": "https://i.ibb.co/FL9m5HJn/Nain.png",
+    "subclass:Guerrier:Nain des montagnes:2": "https://i.ibb.co/wNnJxSbj/NaineF.png",
+    "subclass:Guerrier:Berserker:1": "https://i.ibb.co/YBWFbTKv/berseker.png",
+    "subclass:Guerrier:Berserker:2": "https://i.ibb.co/20b74x2R/Berseker-F.png",
+    "subclass:Mage:Érudit:1": "https://i.ibb.co/N8qT2Hf/Mage.png",
+    "subclass:Mage:Érudit:2": "https://i.ibb.co/LdcPDSJQ/MageF.png",
+    "subclass:Mage:Elfe:2": "https://i.ibb.co/7xvD2mdt/ElfeF.png",
+    "subclass:Mage:Elfe:1": "https://i.ibb.co/gFVKrTcV/Elfe.png",
+    "subclass:Prêtre:Inquisiteur:1": "https://i.ibb.co/tMcsCB8s/Inquisiteur.png",
+    "subclass:Prêtre:Clerc Divin:1": "https://i.ibb.co/209W4ZHW/Pr-tre.png",
+    "subclass:Rôdeur:Voleur:1": "https://i.ibb.co/NghMq11n/Voleur-min.png",
+    "subclass:Rôdeur:Voleur:2": "https://i.ibb.co/h1BtkGMX/VoleurF.png",
+    "subclass:Rôdeur:Chasseur:1": "https://i.ibb.co/yF8jrJYr/Chasseur-min.png",
+    "subclass:Rôdeur:Chasseur:2": "https://i.ibb.co/3mQjLJbp/Chasseur-F.png",
+    "subclass:Enchanteur:Esprit de la grande Fée:1": "https://i.ibb.co/9k9ywvnP/F-eM.png",
+    "subclass:Enchanteur:Esprit de la grande Fée:2": "https://i.ibb.co/pjxDfXBC/F-e.png",
+    "subclass:Enchanteur:Lutin:1": "https://i.ibb.co/6cxkMW1d/Lutin.png",
+    "subclass:Enchanteur:Lutin:2": "https://i.ibb.co/qLbjJhxw/LutinF.png",
+    "subclass:Prêtre:Inquisiteur:2": "https://i.ibb.co/LXwmWYR3/Inquisiteur-F.png",
+    "subclass:Prêtre:Clerc Divin:2": "https://i.ibb.co/HfBVNLM3/PretreF.png"
   },
   "meta": {
-    "total_images": 18,
+    "total_images": 40,
     "exported_date": "2025-08-19",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
@@ -1308,8 +1385,8 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         "items": [
           "Choisir une <strong>classe</strong> puis une <strong>sous‑classe</strong>.",
           "Choisir un <strong>élément</strong>.",
-          "Choisir les <strong>dons</strong>.",
-          "Choisir l'<strong>équipement</strong> de départ.",
+          "Choisir les <strong>dons</strong> (avec 2 points de dons).",
+          "Choisir l'<strong>équipement</strong> de départ (avec 100 éclats).",
           "Choisir un <strong>métier</strong>.",
           "Remplir sa feuille de personnage (Efforts, Argent...).",
           "Définir le <strong>nom</strong>, l'<strong>histoire</strong> et l'<strong>apparence</strong>."
@@ -1705,9 +1782,6 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
 
     async loadData() {
       try {
-        // Load stored edits first (before loading any data)
-        this.loadStoredEditsEarly();
-        
         // Check if we're in standalone mode (data already injected)
         if (window.SORTS && window.CLASSES && window.DONS && window.STATIC_PAGES) {
           const sorts = window.SORTS;
@@ -1727,6 +1801,9 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
           window.DONS = dons;
           window.STATIC_PAGES = staticPagesData;
           window.STATIC_PAGES_CONFIG = staticPagesConfig;
+          
+          // Load stored edits AFTER setting up the data structure
+          this.loadStoredEditsEarly();
           return;
         }
         
@@ -1762,23 +1839,8 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         window.STATIC_PAGES = this.data.STATIC_PAGES;
         window.STATIC_PAGES_CONFIG = this.data.STATIC_PAGES_CONFIG;
         
-        // Apply cached stored data if available (from development mode)
-        if (this._storedDataCache) {
-          if (this._storedDataCache.SORTS) window.SORTS = this._storedDataCache.SORTS;
-          if (this._storedDataCache.CLASSES) window.CLASSES = this._storedDataCache.CLASSES;
-          if (this._storedDataCache.DONS) window.DONS = this._storedDataCache.DONS;
-          if (this._storedDataCache.STATIC_PAGES) window.STATIC_PAGES = this._storedDataCache.STATIC_PAGES;
-          if (this._storedDataCache.STATIC_PAGES_CONFIG) window.STATIC_PAGES_CONFIG = this._storedDataCache.STATIC_PAGES_CONFIG;
-          
-          // Update local data references too
-          if (this._storedDataCache.SORTS) this.data.SORTS = this._storedDataCache.SORTS;
-          if (this._storedDataCache.CLASSES) this.data.CLASSES = this._storedDataCache.CLASSES;
-          if (this._storedDataCache.DONS) this.data.DONS = this._storedDataCache.DONS;
-          if (this._storedDataCache.STATIC_PAGES) this.data.STATIC_PAGES = this._storedDataCache.STATIC_PAGES;
-          if (this._storedDataCache.STATIC_PAGES_CONFIG) this.data.STATIC_PAGES_CONFIG = this._storedDataCache.STATIC_PAGES_CONFIG;
-          
-          delete this._storedDataCache; // Clean up
-        }
+        // Load stored edits in development mode (after data is loaded)
+        this.loadStoredEditsEarly();
       } catch (error) {
         console.error('Failed to load data:', error);
         throw error;
@@ -1842,28 +1904,8 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
 
     // Load stored edits early in the loading process (before rendering)
     loadStoredEditsEarly() {
-      try {
-        const storedData = localStorage.getItem('jdr-bab-data');
-        
-        if (storedData) {
-          const data = JSON.parse(storedData);
-          
-          // Only override if we're in standalone mode and data already exists
-          // In development mode, let the normal loading process handle it
-          if (window.SORTS && window.CLASSES && window.DONS && window.STATIC_PAGES) {
-            if (data.SORTS) window.SORTS = data.SORTS;
-            if (data.CLASSES) window.CLASSES = data.CLASSES;
-            if (data.DONS) window.DONS = data.DONS;
-            if (data.STATIC_PAGES) window.STATIC_PAGES = data.STATIC_PAGES;
-            if (data.STATIC_PAGES_CONFIG) window.STATIC_PAGES_CONFIG = data.STATIC_PAGES_CONFIG;
-          } else {
-            // In development mode, store the data for later use
-            this._storedDataCache = data;
-          }
-        }
-      } catch (error) {
-        console.error('❌ Failed to load stored data early:', error);
-      }
+      // Ne plus charger automatiquement le localStorage
+      // Laisser les JSON files être la source de vérité
     },
 
     initializeModules() {
@@ -1874,6 +1916,15 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       if (this.modules.router.init) this.modules.router.init();
       if (this.modules.editor.init) this.modules.editor.init();
       if (this.modules.storage.init) this.modules.storage.init();
+      if (this.modules.ui.init) this.modules.ui.init();
+    },
+
+    // Force reload JSON data (clear localStorage cache)
+    forceReloadData() {
+      // Effacer seulement les éditions temporaires
+      localStorage.removeItem('jdr-bab-edits');
+      localStorage.removeItem('jdr-bab-last-modified');
+      window.location.reload();
     }
   };
 
@@ -1968,52 +2019,6 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       return el;
     },
     
-    // Card creation pattern
-    createCard(className = '', content = '') {
-      return this.create('div', `card ${className}`, content);
-    },
-    
-    // Chip creation pattern
-    createChip(content, className = '') {
-      return this.create('div', `chip ${className}`, content);
-    },
-    
-    // Button creation pattern
-    createButton(text, className = 'btn', attributes = {}) {
-      return this.create('button', className, text, attributes);
-    },
-    
-    // Create element from HTML string
-    createElementFromHTML(htmlString) {
-      const div = document.createElement('div');
-      div.innerHTML = htmlString.trim();
-      return div.firstChild;
-    },
-    
-    // Container creation pattern
-    createContainer(className = '', children = []) {
-      const container = this.create('div', className);
-      children.forEach(child => {
-        if (typeof child === 'string') {
-          container.innerHTML += child;
-        } else {
-          container.appendChild(child);
-        }
-      });
-      return container;
-    },
-    
-    // Common patterns for app
-    createIllustration(illusKey, altText = '') {
-      return this.create('div', 'illus', `
-        <img class="thumb" alt="${altText}" style="display: none;">
-        <label class="up">📷 Ajouter<input type="file" accept="image/*" hidden=""></label>
-        <button class="rm" type="button" style="display: none;">🗑 Retirer</button>
-      `, {
-        'data-illus-key': illusKey,
-        'data-bound': '1'
-      });
-    },
     
     // Safe innerHTML replacement
     safeSetHTML(element, html) {
@@ -2128,7 +2133,6 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
   // Compress image function
   JdrApp.utils.compressImage = function(file, maxWidth = 800, quality = 0.85) {
     return new Promise((resolve, reject) => {
-      console.log(`🖼️ Compressing image: ${file.name}, original size: ${Math.round(file.size/1024)}KB`);
       
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
@@ -2137,7 +2141,6 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       img.onload = function() {
         // Calculate new dimensions
         let { width, height } = img;
-        console.log(`🖼️ Original dimensions: ${width}x${height}`);
         
         if (width > maxWidth) {
           height = (height * maxWidth) / width;
@@ -2153,24 +2156,20 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         
         if (isPNG) {
           // For PNG, don't compress at all to preserve quality
-          console.log('🖼️ PNG detected, using original file without compression');
           resolve(file);
         } else {
           // For JPEG/other formats, use white background
-          console.log('🖼️ JPEG format, using white background');
           ctx.fillStyle = '#FFFFFF';
           ctx.fillRect(0, 0, width, height);
           ctx.drawImage(img, 0, 0, width, height);
           
           canvas.toBlob((blob) => {
-            console.log(`🖼️ JPEG compressed: ${Math.round(blob.size/1024)}KB, ${width}x${height}, quality: ${quality}`);
             resolve(blob);
           }, 'image/jpeg', quality);
         }
       };
       
       img.onerror = (error) => {
-        console.error('❌ Error loading image for compression:', error);
         reject(error);
       };
       
@@ -2192,23 +2191,17 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         body: formData
       })
       .then(response => {
-        console.log('📤 ImgBB response status:', response.status);
         return response.json();
       })
       .then(data => {
-        console.log('📤 ImgBB response:', data);
         if (data.success) {
-          console.log('✅ Image uploaded to imgbb:', data.data.url);
-          console.log('🖼️ Image info:', `${data.data.width}x${data.data.height}, ${Math.round(data.data.size/1024)}KB`);
           resolve(data.data.url);
         } else {
           throw new Error('Upload failed: ' + (data.error ? data.error.message : 'Unknown error'));
         }
       })
       .catch(error => {
-        console.error('❌ ImageBB upload failed:', error);
         // Fallback to local storage
-        console.warn('⚠️ Falling back to local storage');
         const reader = new FileReader();
         reader.onload = (e) => resolve(e.target.result);
         reader.onerror = reject;
@@ -2354,8 +2347,6 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         
         
       } catch (error) {
-        console.error('❌ Image upload failed:', error);
-        
         // Reset loading state
         const img = illusElement.querySelector('img.thumb');
         if (img) {
@@ -2435,6 +2426,10 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       // Set up save handlers
       JdrApp.utils.events.register('click', '#saveAndExport', () => this.saveAndExportZip());
       
+      // Set up force reload handler
+      JdrApp.utils.events.register('click', '#forceReload', () => JdrApp.forceReloadData());
+      
+      
       // Auto-save functionality
       this.setupAutoSave();
     },
@@ -2449,15 +2444,9 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         // Force collect all pending edits
         const editedData = JdrApp.modules.editor.forceCollectAllEdits();
         
-        // For now, just save to localStorage as backup
+        // Save only current edits (not full data to avoid overwriting JSON changes)
         localStorage.setItem('jdr-bab-edits', JSON.stringify(editedData));
-        localStorage.setItem('jdr-bab-data', JSON.stringify({
-          SORTS: window.SORTS,
-          CLASSES: window.CLASSES,
-          DONS: window.DONS,
-          STATIC_PAGES: window.STATIC_PAGES,
-          STATIC_PAGES_CONFIG: window.STATIC_PAGES_CONFIG
-        }));
+        localStorage.setItem('jdr-bab-last-modified', Date.now().toString());
         
         if (!silent) {
           this.showNotification('💾 Modifications sauvegardées localement', 'success');
@@ -2532,14 +2521,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
           }
         }
         
-        // Add other data files
-        const otherDataFiles = ['elements.json', 'stats.json', 'competences-tests.json', 'etats.json', 'creation.json'];
-        for (const dataFile of otherDataFiles) {
-          const dataContent = await this.fetchFileContent(`data/${dataFile}`);
-          if (dataContent) {
-            zip.file(`data/${dataFile}`, dataContent);
-          }
-        }
+        // Note: All static pages are now handled via window.STATIC_PAGES above
         
         // Add current images (including newly uploaded ones)
         if (JdrApp.modules.images && JdrApp.modules.images.getAllImages) {
@@ -2593,10 +2575,10 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         if (response.ok) {
           return await response.text();
         }
-        console.warn(`❌ Could not fetch ${filePath}:`, response.status);
+        // Could not fetch file
         return null;
       } catch (error) {
-        console.warn(`❌ Error fetching ${filePath}:`, error);
+        // Error fetching file
         return null;
       }
     },
@@ -2609,7 +2591,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
           return await response.text();
         }
       } catch (error) {
-        console.warn('Could not fetch index.html, generating from current state');
+        // Could not fetch index.html, generating from current state
       }
       
       // Fallback: generate HTML from current document state
@@ -2651,12 +2633,6 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
 </html>`;
     },
 
-    buildStandaloneHTML() {
-      // This function is disabled in the combined build to avoid template literal conflicts
-      // The standalone build is now handled by the build system
-      console.warn('buildStandaloneHTML() is disabled in standalone version');
-      return '';
-    },
 
     downloadJSON(filename, data) {
       const json = JSON.stringify(data, null, 2);
@@ -2720,51 +2696,106 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
     loadStoredEdits() {
       try {
         const storedEdits = localStorage.getItem('jdr-bab-edits');
-        const storedData = localStorage.getItem('jdr-bab-data');
         
         if (storedEdits) {
           JdrApp.modules.editor.editedData = JSON.parse(storedEdits);
         }
         
-        if (storedData) {
-          const data = JSON.parse(storedData);
-          // Merge with current data if needed
-          if (data.SORTS) window.SORTS = data.SORTS;
-          if (data.CLASSES) window.CLASSES = data.CLASSES;
-          if (data.DONS) window.DONS = data.DONS;
-          if (data.STATIC_PAGES) window.STATIC_PAGES = data.STATIC_PAGES;
-          if (data.STATIC_PAGES_CONFIG) window.STATIC_PAGES_CONFIG = data.STATIC_PAGES_CONFIG;
-        }
+        // Ne plus charger jdr-bab-data - laisser les JSON être la source de vérité
         
       } catch (error) {
-        console.error('❌ Failed to load stored edits:', error);
+        // Failed to load stored edits
       }
     },
 
-    // Sync don categories (maintain compatibility)
-    syncDonCategories() {
-      if (!window.DONS) return;
-      
-      // Find all don categories in HTML
-      const htmlCategories = Array.from(JdrApp.utils.dom.$('[data-edit-type="don-category-description"]'))
-        .map(el => el.dataset.editCategory);
-      
-      // Check if categories exist in HTML but not in DONS
-      htmlCategories.forEach(categoryName => {
-        if (categoryName && !window.DONS.find(c => c.nom === categoryName)) {
-          const newCategory = {
-            nom: categoryName,
-            description: `Dons accessibles seulement aux ${categoryName.toLowerCase()}.`,
-            dons: []
-          };
-          window.DONS.push(newCategory);
-        }
-      });
-    }
-  };
+    // Handle ZIP file import
+    async handleZipImport(event) {
+      const file = event.target.files[0];
+      if (!file || file.type !== 'application/zip') {
+        this.showNotification('❌ Veuillez sélectionner un fichier ZIP', 'error');
+        return;
+      }
 
-  // Expose for backward compatibility
-  window.syncDonCategories = () => JdrApp.modules.storage.syncDonCategories();
+      try {
+        this.showNotification('📥 Import en cours...', 'info');
+
+        // Check if JSZip is available
+        if (typeof JSZip === 'undefined') {
+          await this.loadJSZip();
+        }
+
+        const zip = new JSZip();
+        const contents = await zip.loadAsync(file);
+
+        // Import data files
+        const dataFiles = ['sorts.json', 'classes.json', 'dons.json'];
+        for (const dataFile of dataFiles) {
+          const zipFile = contents.file(`data/${dataFile}`);
+          if (zipFile) {
+            const content = await zipFile.async('text');
+            const data = JSON.parse(content);
+            
+            if (dataFile === 'sorts.json') {
+              window.SORTS = data;
+            } else if (dataFile === 'classes.json') {
+              window.CLASSES = data;
+            } else if (dataFile === 'dons.json') {
+              window.DONS = data;
+            }
+          }
+        }
+
+        // Import static pages config
+        const configFile = contents.file('data/static-pages-config.json');
+        if (configFile) {
+          const configContent = await configFile.async('text');
+          window.STATIC_PAGES_CONFIG = JSON.parse(configContent);
+        }
+
+        // Import static pages data
+        if (window.STATIC_PAGES_CONFIG && window.STATIC_PAGES_CONFIG.pages) {
+          window.STATIC_PAGES = {};
+          for (const pageConfig of window.STATIC_PAGES_CONFIG.pages) {
+            if (pageConfig.active) {
+              const pageFile = contents.file(`data/${pageConfig.file}`);
+              if (pageFile) {
+                const pageContent = await pageFile.async('text');
+                window.STATIC_PAGES[pageConfig.id] = JSON.parse(pageContent);
+              }
+            }
+          }
+        }
+
+        // Import images
+        const imagesFile = contents.file('data/images.json');
+        if (imagesFile && JdrApp.modules.images && JdrApp.modules.images.importImages) {
+          const imagesContent = await imagesFile.async('text');
+          const imagesData = JSON.parse(imagesContent);
+          if (imagesData.images) {
+            JdrApp.modules.images.importImages(imagesData.images);
+          }
+        }
+
+        // Save imported data to localStorage
+        this.saveChanges(true);
+
+        this.showNotification('✅ Import réussi! Rechargement...', 'success');
+
+        // Reload page to show imported data
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+
+      } catch (error) {
+        this.showNotification('❌ Erreur lors de l\'import', 'error');
+      }
+
+      // Reset file input
+      event.target.value = '';
+    },
+
+
+  };
 
 })();
 // ============================================================================
@@ -2815,10 +2846,6 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       // Handle category routing
       if (page.startsWith('sorts-') && exists) {
         JdrApp.modules.renderer.renderSortCategory(page);
-      } else if (page.startsWith('dons-') && exists) {
-        JdrApp.modules.renderer.renderDonCategory(page);
-      } else if (['guerrier','mage','pretre','rodeur','enchanteur'].includes(page)) {
-        JdrApp.modules.renderer.renderSingleClass(page);
       }
       
       this.show(exists ? page : 'creation');
@@ -3040,11 +3067,11 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       return `
         <div class="card editable-section" data-section-type="subclass" data-class-name="${className}" data-subclass-name="${sousClasse.nom}">
           <div class="editable-section" data-section-type="subclass-name">
-            <h4 class="editable editable-title" data-edit-type="subclass-name" data-edit-section="${className}-${sousClasse.nom}">${sousClasse.nom}</h4>
+            <h4 class="editable editable-title subclass-title" data-edit-type="subclass-name" data-edit-section="${className}-${sousClasse.nom}">${sousClasse.nom}</h4>
             ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-title-btn" title="Éditer le nom de la sous-classe">✏️</button>' : ''}
           </div>
           
-          ${this.createIllustration(`subclass:${className}:${sousClasse.nom}`, sousClasse.nom)}
+          ${this.createSubclassIllustrations(className, sousClasse.nom)}
           
           <div class="editable-section" data-section-type="subclass-stats">
             <div class="editable editable-stats" data-edit-type="subclass-stats" data-edit-section="${className}-${sousClasse.nom}">
@@ -3117,65 +3144,56 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       return `
         <div class="card editable-section" data-section-type="spell" data-spell-name="${sort.nom}" data-category-name="${category.nom}">
           <div class="editable-section" data-section-type="spell-name">
-            <h4 style="margin: 0 0 1rem 0; text-align: center;" class="editable editable-title" data-edit-type="spell-name" data-edit-section="${sort.nom}">${sort.nom}</h4>
+            <h4 style="margin: 0 0 1rem 0; text-align: center;" class="editable editable-title" data-edit-type="spell-name" data-edit-spell="${sort.nom}" data-edit-section="${sort.nom}">${sort.nom}</h4>
             ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-title-btn" title="Éditer le nom du sort">✏️</button>' : ''}
           </div>
           
           ${this.createIllustration(`sort:${category.nom}:${sort.nom}`, sort.nom)}
           
           <div class="editable-section" data-section-type="spell-description">
-            <p class="muted editable editable-paragraph" data-edit-type="spell-description" data-edit-section="${sort.nom}" style="margin: 0 0 1rem 0; text-align: center;">${sort.description}</p>
+            <p class="muted editable editable-paragraph" data-edit-type="spell-description" data-edit-spell="${sort.nom}" data-edit-section="${sort.nom}" style="margin: 0 0 1rem 0; text-align: center;">${sort.description}</p>
             ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-paragraph-btn" title="Éditer la description">✏️</button>' : ''}
           </div>
           
           <div class="editable-section" data-section-type="spell-prerequis">
-            <div class="editable editable-field" data-edit-type="spell-prerequis" data-edit-section="${sort.nom}">
+            <div class="editable editable-field" data-edit-type="spell-prerequis" data-edit-spell="${sort.nom}" data-edit-section="${sort.nom}">
               ${sort.prerequis}
             </div>
             ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-field-btn" title="Éditer les prérequis">✏️</button>' : ''}
           </div>
           
           <div class="editable-section" data-section-type="spell-portee">
-            <div class="editable editable-field" data-edit-type="spell-portee" data-edit-section="${sort.nom}">
+            <div class="editable editable-field" data-edit-type="spell-portee" data-edit-spell="${sort.nom}" data-edit-section="${sort.nom}">
               ${sort.portee}
             </div>
             ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-field-btn" title="Éditer la portée">✏️</button>' : ''}
           </div>
           
           <div class="editable-section" data-section-type="spell-mana">
-            <div class="editable editable-field" data-edit-type="spell-mana" data-edit-section="${sort.nom}">
+            <div class="editable editable-field" data-edit-type="spell-mana" data-edit-spell="${sort.nom}" data-edit-section="${sort.nom}">
               ${sort.coutMana}
             </div>
             ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-field-btn" title="Éditer le coût mana">✏️</button>' : ''}
           </div>
 
           <div class="editable-section" data-section-type="spell-temps-incantation">
-            <div class="editable editable-field" data-edit-type="spell-temps-incantation" data-edit-section="${sort.nom}">
+            <div class="editable editable-field" data-edit-type="spell-temps-incantation" data-edit-spell="${sort.nom}" data-edit-section="${sort.nom}">
               ${sort.tempsIncantation}
             </div>
             ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-field-btn" title="Éditer le temps d\'incantation">✏️</button>' : ''}
           </div>
           
-          ${sort.duree ? `
-          <div class="editable-section" data-section-type="spell-duree">
-            <div class="editable editable-field" data-edit-type="spell-duree" data-edit-section="${sort.nom}">
-              ${sort.duree}
-            </div>
-            ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-field-btn" title="Éditer la durée">✏️</button>' : ''}
-          </div>
-          ` : ''}
-          
           <hr style="margin: 0.5rem 0; border: none; border-top: 1px solid var(--rule);">
           
           <div class="editable-section" data-section-type="spell-resistance">
-            <div class="editable editable-field" data-edit-type="spell-resistance" data-edit-section="${sort.nom}">
+            <div class="editable editable-field" data-edit-type="spell-resistance" data-edit-spell="${sort.nom}" data-edit-section="${sort.nom}">
               ${sort.resistance}
             </div>
             ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-field-btn" title="Éditer la résistance">✏️</button>' : ''}
           </div>
           
           <div class="editable-section" data-section-type="spell-effect-normal">
-            <div class="editable editable-effect" data-edit-type="spell-effect-normal" data-edit-section="${sort.nom}" style="margin: 1rem 0;">
+            <div class="editable editable-effect" data-edit-type="spell-effect-normal" data-edit-spell="${sort.nom}" data-edit-section="${sort.nom}" style="margin: 1rem 0;">
               ${sort.effetNormal}
             </div>
             ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-effect-btn" title="Éditer l\'effet normal">✏️</button>' : ''}
@@ -3185,7 +3203,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
           
           ${sort.effetCritique ? `
             <div class="editable-section" data-section-type="spell-effect-critical">
-              <div class="editable editable-effect" data-edit-type="spell-effect-critical" data-edit-section="${sort.nom}" style="margin: 1rem 0;">
+              <div class="editable editable-effect" data-edit-type="spell-effect-critical" data-edit-spell="${sort.nom}" data-edit-section="${sort.nom}" style="margin: 1rem 0;">
                 ${sort.effetCritique}
               </div>
               ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-effect-btn" title="Éditer l\'effet critique">✏️</button>' : ''}
@@ -3194,7 +3212,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
           
           ${sort.effetEchec ? `
             <div class="editable-section" data-section-type="spell-effect-failure">
-              <div class="editable editable-effect" data-edit-type="spell-effect-failure" data-edit-section="${sort.nom}" style="margin: 1rem 0;">
+              <div class="editable editable-effect" data-edit-type="spell-effect-failure" data-edit-spell="${sort.nom}" data-edit-section="${sort.nom}" style="margin: 1rem 0;">
                 ${sort.effetEchec}
               </div>
               ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-effect-btn" title="Éditer l\'effet d\'échec">✏️</button>' : ''}
@@ -3276,7 +3294,6 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
     // Generic method to generate static pages from JSON data
     generateStaticPage(pageId) {
       if (!window.STATIC_PAGES || !window.STATIC_PAGES[pageId]) {
-        console.warn(`Static page data not found for: ${pageId}`);
         return '';
       }
 
@@ -3481,7 +3498,8 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         <div style="margin-bottom: 12px;">
           <div style="font-size: 12px; color: var(--paper-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">✏️ Édition</div>
           <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-            <button class="btn small" id="saveAndExport" title="Sauvegarder et exporter tout en ZIP">💾 Sauvegarder & Export ZIP</button>
+            <button class="btn small" id="saveAndExport" title="Sauvegarder et exporter tout en ZIP">💾 Export ZIP</button>
+            <button class="btn small" id="forceReload" title="Recharger les données JSON (efface le cache)">🔄 Recharger JSON</button>
           </div>
         </div>
         
@@ -3573,6 +3591,18 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       return this.renderImage(illusKey, { altText, styleType });
     },
 
+    createSubclassIllustrations(className, subclassName) {
+      const illusKey1 = `subclass:${className}:${subclassName}:1`;
+      const illusKey2 = `subclass:${className}:${subclassName}:2`;
+      
+      return `
+        <div class="subclass-images">
+          ${this.renderImage(illusKey1, { altText: `${subclassName} (Image 1)`, styleType: 'subclass' })}
+          ${this.renderImage(illusKey2, { altText: `${subclassName} (Image 2)`, styleType: 'subclass' })}
+        </div>
+      `;
+    },
+
     // Simplified dynamic rendering
     renderSortCategory(page) {
       const categoryId = page.replace('sorts-', '');
@@ -3581,13 +3611,11 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       );
       
       if (!category) {
-        console.error('Category not found for:', categoryId);
         return;
       }
       
       const article = document.querySelector(`article[data-page="${page}"]`);
       if (!article) {
-        console.error('Article not found for page:', page);
         return;
       }
       
@@ -3615,34 +3643,20 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       `;
       
       article.innerHTML = content;
-      console.log('Sort category re-rendered:', category.nom);
     },
 
-    renderDonCategory(page) {
-      // Implementation for dynamic don category rendering
-      console.log('Rendering don category:', page);
-    },
 
-    renderSingleClass(page) {
-      // Implementation for dynamic class rendering
-    },
 
 
     // Auto-load images for all illustration slots
     autoLoadImages() {
-      // Use images module if available, otherwise fallback to simple method
+      // Use images module if available
       if (JdrApp.modules.images) {
         return JdrApp.modules.images.autoLoadImages();
-      } else {
-        // Fallback: simple localStorage-based loading
-        return this.fallbackLoadImages();
       }
+      return 0;
     },
 
-    // No fallback needed - all images come from ImgBB via images module
-    fallbackLoadImages() {
-      return 0;
-    }
   };
 
 })();
@@ -3682,7 +3696,6 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
     toggleDevMode() {
       // In standalone version, prevent dev mode toggle
       if (window.STANDALONE_VERSION) {
-        console.log('Dev mode disabled in standalone version');
         return;
       }
       
@@ -3777,7 +3790,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
             element.setAttribute('aria-hidden', 'true');
           });
         } catch (error) {
-          console.warn(`⚠️ Error hiding elements for selector ${selector}:`, error);
+          // Silently handle selector errors
         }
       });
     },
@@ -3830,7 +3843,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
             element.removeAttribute('aria-hidden');
           });
         } catch (error) {
-          console.warn(`⚠️ Error showing elements for selector ${selector}:`, error);
+          // Silently handle selector errors
         }
       });
     },
@@ -3842,7 +3855,6 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         e.stopPropagation();
         
         if (!this.isDevMode) {
-          console.log('⚠️ Dev mode is OFF, editing disabled');
           return;
         }
         
@@ -3860,7 +3872,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
           return;
         }
         
-        console.warn('⚠️ No editable element found for button:', e.target);
+        // No editable element found
       });
 
       // Completely disable any double-click editing by blocking ALL events on .editable elements
@@ -3909,7 +3921,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       while (current && current !== document.body) {
         if (current.classList && current.classList.contains('editable') && 
             current.dataset.editType && current.dataset.editSection !== undefined) {
-          console.log('🔍 Found parent editable:', current.tagName, current.dataset.editType, current.dataset.editSection);
+          // Found parent editable element
           return current;
         }
         current = current.parentElement;
@@ -3917,35 +3929,28 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       
       // Fallback: return the original clicked element if it's at least .editable
       if (clickedElement.classList && clickedElement.classList.contains('editable')) {
-        console.log('⚠️ Using fallback editable element');
+        // Using fallback editable element
         return clickedElement;
       }
       
-      console.warn('⚠️ No suitable editable element found');
+      // No suitable editable element found
       return null;
     },
 
     makeEditableSection(section) {
       
       if (section.dataset.editing === 'true') {
-        console.log('⚠️ Section already being edited');
         return;
       }
       
       // Find the editable element inside the section
       const editableElement = section.querySelector('.editable');
       if (!editableElement) {
-        console.error('❌ No .editable element found in section');
         return;
       }
       
       // STRICT VALIDATION: Ensure editableElement has required data attributes
       if (!editableElement.dataset.editType || !editableElement.dataset.editSection) {
-        console.error('❌ Editable element missing required data attributes:', {
-          editType: editableElement.dataset.editType,
-          editSection: editableElement.dataset.editSection,
-          element: editableElement
-        });
         return;
       }
       
@@ -3977,17 +3982,14 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
     },
 
     makeEditableItem(listItem) {
-      console.log('🔍 makeEditableItem called on:', listItem);
       
       if (listItem.dataset.editing === 'true') {
-        console.log('⚠️ Element already being edited');
         return;
       }
       
       // Find the content div inside the list item
       const contentDiv = listItem.querySelector('.editable-content');
       if (!contentDiv) {
-        console.error('❌ No .editable-content found in list item');
         return;
       }
       
@@ -3995,12 +3997,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       listItem.dataset.originalContent = contentDiv.innerHTML;
       listItem.dataset.editing = 'true';
       
-      console.log('🔍 List item made editable:', {
-        editType: listItem.dataset.editType,
-        editSection: listItem.dataset.editSection,
-        editIndex: listItem.dataset.editIndex,
-        originalContent: listItem.dataset.originalContent.substring(0, 100) + '...'
-      });
+      // List item made editable
       
       // Make the content div editable
       contentDiv.contentEditable = true;
@@ -4019,10 +4016,8 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
     },
 
     makeEditable(element) {
-      console.log('🔍 makeEditable called on:', element, 'isDevMode:', this.isDevMode);
       
       if (element.dataset.editing === 'true') {
-        console.log('⚠️ Element already being edited');
         return;
       }
       
@@ -4030,11 +4025,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       element.dataset.originalContent = element.innerHTML;
       element.dataset.editing = 'true';
       
-      console.log('🔍 Element made editable:', {
-        editType: element.dataset.editType,
-        editSection: element.dataset.editSection,
-        originalContent: element.dataset.originalContent.substring(0, 100) + '...'
-      });
+      // Element made editable
       
       // Make contenteditable
       element.contentEditable = true;
@@ -4098,7 +4089,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
           });
           
         } else {
-          console.warn('⚠️ Skipping element with invalid editType:', editType, 'for element:', element);
+          // Skipping element with invalid editType
         }
         
         // For editable sections, update the visual content immediately
@@ -4124,7 +4115,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         // IMMEDIATELY save changes to localStorage to persist edits
         this.saveChangesToStorage();
       } else {
-        console.log('⚠️ No content change detected');
+        // No content change detected
       }
       
       // Reset editing state
@@ -4132,7 +4123,6 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
     },
 
     cancelEdit(element) {
-      console.log('🔍 cancelEdit called on:', element);
       
       // Restore original content
       if (element.classList.contains('editable-section')) {
@@ -4199,7 +4189,6 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         if (this.hasValidEditData(element)) {
           this.saveEdit(element);
         } else {
-          console.warn('⚠️ Skipping save for element without valid edit data:', element);
           this.resetEditingState(element);
         }
       });
@@ -4232,7 +4221,6 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       
       // Validate editType before proceeding
       if (!editType || typeof editType !== 'string') {
-        console.error('❌ Cannot store edit - invalid editType:', editType, 'for element:', element);
         return;
       }
       
@@ -4368,24 +4356,13 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
     },
 
     updateSectionContent(sections, editSection, content, element) {
-      console.log('🔍 updateSectionContent called:', {
-        sectionsCount: sections.length,
-        editSection,
-        contentPreview: content.substring(0, 50) + '...'
-      });
       
       for (let i = 0; i < sections.length; i++) {
         const section = sections[i];
-        console.log(`🔍 Checking section ${i}:`, {
-          type: section.type,
-          sectionType: section.sectionType,
-          hasContent: !!section.content,
-          contentType: section.content ? section.content.type : null
-        });
+        // Checking section
         
         // Check if this is the section we're looking for
         if (section.type === 'intro' && editSection === 'intro') {
-          console.log('✅ Found intro section match');
           section.content = content;
           return true;
         }
@@ -4395,16 +4372,13 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
           // Check if this is a card title edit
           if (editSection.endsWith('-title') && section.sectionType) {
             const sectionId = editSection.replace('-title', '');
-            console.log('🔍 Checking card title:', {editSection, sectionId, sectionType: section.sectionType});
             if (section.sectionType === sectionId) {
-              console.log('✅ Found card title match');
               section.title = content;
               return true;
             }
           }
           
           if (section.content.type === 'ordered_list' && section.content.editType === editSection) {
-            console.log('✅ Found ordered list match');
             const tempDiv = document.createElement('div');
             tempDiv.innerHTML = content;
             const listItems = tempDiv.querySelectorAll('li');
@@ -4414,15 +4388,9 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
           
           // Handle array content in cards
           if (Array.isArray(section.content)) {
-            console.log('🔍 Checking array content in card:', section.content.length, 'items');
             for (let j = 0; j < section.content.length; j++) {
               const contentItem = section.content[j];
-              console.log(`🔍 Content item ${j}:`, {
-                editSection: contentItem.editSection,
-                targetEditSection: editSection
-              });
               if (contentItem.editSection === editSection) {
-                console.log('✅ Found array content match');
                 contentItem.content = content;
                 return true;
               }
@@ -4432,7 +4400,6 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         
         // Handle grid content
         if (section.type === 'grid' && section.content) {
-          console.log('🔍 Checking grid content:', section.content.length, 'items');
           for (let j = 0; j < section.content.length; j++) {
             const gridItem = section.content[j];
             if (gridItem.content && Array.isArray(gridItem.content)) {
@@ -4649,23 +4616,18 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         // Save to images module if available
         if (JdrApp.modules.images && JdrApp.modules.images.setImageUrl) {
           JdrApp.modules.images.setImageUrl(illusKey, e.target.result);
-          console.log(`💾 Image saved for key: ${illusKey}`);
         } else {
           // Fallback: save to localStorage with quota management
           try {
             localStorage.setItem(`illustration:${illusKey}`, e.target.result);
-            console.log(`💾 Image saved to localStorage for key: ${illusKey}`);
           } catch (error) {
             if (error.name === 'QuotaExceededError') {
-              console.warn('⚠️ localStorage quota exceeded. Clearing old images...');
               this.clearOldImages();
               
               // Try again after clearing
               try {
                 localStorage.setItem(`illustration:${illusKey}`, e.target.result);
-                console.log(`💾 Image saved after cleanup for key: ${illusKey}`);
               } catch (secondError) {
-                console.error('❌ Still not enough space after cleanup');
                 alert('Espace de stockage insuffisant. Veuillez supprimer quelques images pour continuer.');
                 // Reset image display
                 img.src = '';
@@ -4674,7 +4636,6 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
                 return;
               }
             } else {
-              console.error('❌ Error saving image:', error);
               throw error;
             }
           }
@@ -4682,7 +4643,6 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       };
       
       reader.onerror = (e) => {
-        console.error('❌ Error reading file:', e);
         alert('Erreur lors de la lecture du fichier image');
       };
       
@@ -4703,11 +4663,9 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       // Remove from images module if available
       if (JdrApp.modules.images && JdrApp.modules.images.removeImage) {
         JdrApp.modules.images.removeImage(illusKey);
-        console.log(`🗑️ Image removed for key: ${illusKey}`);
       } else {
         // Fallback: remove from localStorage
         localStorage.removeItem(`illustration:${illusKey}`);
-        console.log(`🗑️ Image removed from localStorage for key: ${illusKey}`);
       }
     },
 
@@ -4766,10 +4724,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       const toRemove = Math.ceil(illustrationKeys.length / 2);
       for (let i = 0; i < toRemove; i++) {
         localStorage.removeItem(illustrationKeys[i]);
-        console.log(`🗑️ Removed old image: ${illustrationKeys[i]}`);
       }
-      
-      console.log(`🧹 Cleared ${toRemove} old images from localStorage`);
     },
 
     forceCollectAllEdits() {
@@ -4798,7 +4753,8 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       
       // SPELLS
       if (element.dataset.editSpell) {
-        this.saveToSpell(element.dataset.editSpell, editType.replace('spell-', ''), content);
+        let property = editType.replace('spell-', '');
+        this.saveToSpell(element.dataset.editSpell, property, content);
         return;
       }
       
@@ -4826,19 +4782,30 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
     // Simple save methods - just store text as-is
     saveToSpell(spellName, property, content) {
       if (!window.SORTS) return;
+      
       for (const category of window.SORTS) {
         const spell = category.sorts.find(s => s.nom === spellName);
         if (spell) {
           const propertyMap = {
-            'name': 'nom', 'description': 'description', 'prerequis': 'prerequis',
-            'portee': 'portee', 'mana': 'coutMana', 'duree': 'tempsIncantation',
-            'resistance': 'resistance', 'effect-normal': 'effetNormal',
-            'effect-critical': 'effetCritique', 'effect-failure': 'effetEchec'
+            'name': 'nom', 
+            'description': 'description', 
+            'prerequis': 'prerequis',
+            'portee': 'portee', 
+            'mana': 'coutMana', 
+            'temps-incantation': 'tempsIncantation',
+            'duree': 'duree',
+            'resistance': 'resistance', 
+            'effect-normal': 'effetNormal',
+            'effect-critical': 'effetCritique', 
+            'effect-failure': 'effetEchec'
           };
-          spell[propertyMap[property] || property] = content;
-          break;
+          const targetProperty = propertyMap[property] || property;
+          spell[targetProperty] = content;
+          return true;
         }
       }
+      
+      return false;
     },
 
     saveToDon(donName, property, content) {
@@ -4921,16 +4888,12 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       const editSection = element.dataset.editSection;
       const editIndex = parseInt(element.dataset.editIndex);
       
-      console.log('🔍 updateListItem:', {editSection, editIndex, content: content.substring(0, 50) + '...'});
-      
       if (!window.STATIC_PAGES) {
-        console.error('❌ window.STATIC_PAGES not found');
         return false;
       }
       
       const article = element.closest('article[data-static-page="true"]');
       if (!article) {
-        console.error('❌ No static page article found');
         return false;
       }
       
@@ -4938,7 +4901,6 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       const pageData = window.STATIC_PAGES[pageId];
       
       if (!pageData || !pageData.sections) {
-        console.error('❌ No page data or sections found');
         return false;
       }
       
@@ -4948,20 +4910,18 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         
         if (section.type === 'card' && section.content) {
           if (section.content.type === 'ordered_list' && section.content.editType === editSection) {
-            console.log('✅ Found ordered list, updating item', editIndex);
             section.content.items[editIndex] = content;
             return true;
           }
           
           if (section.content.type === 'list' && section.content.editType === editSection) {
-            console.log('✅ Found unordered list, updating item', editIndex);
             section.content.items[editIndex] = content;
             return true;
           }
         }
       }
       
-      console.warn('⚠️ List not found for editSection:', editSection);
+      // List not found
       return false;
     },
 
@@ -5056,17 +5016,12 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
     // Save changes to localStorage immediately when edits are made
     saveChangesToStorage() {
       try {
-        // Save edited data overlay
+        // Save only edited data overlay (not full data)
         localStorage.setItem('jdr-bab-edits', JSON.stringify(this.editedData));
         
-        // Save current data state including STATIC_PAGES
-        localStorage.setItem('jdr-bab-data', JSON.stringify({
-          SORTS: window.SORTS,
-          CLASSES: window.CLASSES,
-          DONS: window.DONS,
-          STATIC_PAGES: window.STATIC_PAGES,
-          STATIC_PAGES_CONFIG: window.STATIC_PAGES_CONFIG
-        }));
+        // Save timestamp of last modification
+        localStorage.setItem('jdr-bab-last-modified', Date.now().toString());
+        
         
       } catch (error) {
         console.error('❌ Failed to save changes to localStorage:', error);
@@ -5082,13 +5037,13 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
 (() => {
   "use strict";
 
+
   // ========================================
   // UI INTERACTIONS MODULE
   // ========================================
   JdrApp.modules.ui = {
     
     init() {
-      console.log('🎨 Initializing UI...');
       
       // Set up search functionality
       this.setupSearch();
@@ -5255,12 +5210,9 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
     },
 
     setupContentCreation() {
-      console.log('🔧 Setting up content creation handlers');
       // Add spell handlers
       JdrApp.utils.events.register('click', '.spell-add', (e) => {
-        console.log('🎯 Spell add button clicked!', e.target);
         const categoryName = e.target.dataset.categoryName;
-        console.log('📂 Category name from dataset:', categoryName);
         this.addNewSpell(categoryName);
       });
 
@@ -5307,13 +5259,8 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
     },
 
     addNewSpell(categoryName) {
-      console.log('🔮 addNewSpell called with:', categoryName);
       const category = JdrApp.utils.data.getSpellCategory(categoryName);
-      if (!category) {
-        console.error('❌ Category not found:', categoryName);
-        return;
-      }
-      console.log('✅ Category found:', category.nom);
+      if (!category) return;
 
       const newSpell = {
         nom: "Nouveau Sort",
@@ -5322,8 +5269,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         prerequis: "📋 <strong>Prérequis:</strong> Niveau 1",
         portee: "🎯 <strong>Portée:</strong> 20m",
         tempsIncantation: "⏰ <strong>Temps d'incantation:</strong> 1 tour",
-        coutMana: "⚡ <strong>Coût mana:</strong> 3",
-        duree: "⏳ <strong>Durée:</strong> Instantané",
+        coutMana: "🔵 <strong>Coût mana:</strong> 3",
         resistance: "<strong>Sans effet si:</strong> Esquive.",
         effetNormal: "<strong>Effet:</strong> Inflige 5 dégats de <span style=\"color: #e25822; font-weight: bold;\">Feu</span> à la cible.<br>&nbsp;Tous les 5 points d'intelligence, augmente les dégats de 1.",
         effetCritique: "<strong>Coup Critique:&nbsp;</strong>&nbsp;Double les dégâts et enflamme la cible, infligeant 2 dégats de Feu au prochain tour du lanceur.",
@@ -5331,12 +5277,9 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       };
 
       category.sorts.push(newSpell);
-      console.log('✅ Spell added to category. Total spells:', category.sorts.length);
       
       // Re-render the category page
-      const pageId = `sorts-${JdrApp.utils.data.sanitizeId(categoryName)}`;
-      console.log('🔄 Re-rendering page:', pageId);
-      JdrApp.modules.renderer.renderSortCategory(pageId);
+      JdrApp.modules.renderer.renderSortCategory(`sorts-${JdrApp.utils.data.sanitizeId(categoryName)}`);
       
       this.showNotification('🔮 Nouveau sort ajouté');
     },
@@ -5548,7 +5491,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       if (JdrApp.modules.storage.showNotification) {
         JdrApp.modules.storage.showNotification(message, type);
       } else {
-        console.log(`[${type.toUpperCase()}] ${message}`);
+        // Fallback: simple console log
       }
     }
   };

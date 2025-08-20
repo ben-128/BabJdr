@@ -1,0 +1,31 @@
+/* === UTILITY CLASSES === */
+
+/* Spacing utilities */
+.m-0{margin:0} .m-1{margin:var(--space-xs)} .m-2{margin:var(--space-md)} .m-3{margin:var(--space-lg)} .m-4{margin:var(--space-xl)}
+.mt-0{margin-top:0} .mt-1{margin-top:var(--space-xs)} .mt-2{margin-top:var(--space-md)} .mt-3{margin-top:var(--space-lg)}
+.mb-0{margin-bottom:0} .mb-1{margin-bottom:var(--space-xs)} .mb-2{margin-bottom:var(--space-md)} .mb-3{margin-bottom:var(--space-lg)}
+.p-0{padding:0} .p-1{padding:var(--space-xs)} .p-2{padding:var(--space-md)} .p-3{padding:var(--space-lg)} .p-4{padding:var(--space-xl)}
+
+/* Flex utilities */
+.flex{display:flex} .flex-col{flex-direction:column} .flex-wrap{flex-wrap:wrap}
+.items-center{align-items:center} .items-start{align-items:flex-start} .items-end{align-items:flex-end}
+.justify-center{justify-content:center} .justify-start{justify-content:flex-start} .justify-end{justify-content:flex-end}
+.gap-1{gap:var(--space-xs)} .gap-2{gap:var(--space-md)} .gap-3{gap:var(--space-lg)}
+
+/* Element color utilities */
+.text-feu{color:var(--feu)} .text-air{color:var(--air)} .text-eau{color:var(--eau)} .text-terre{color:var(--terre)} .text-divin{color:var(--divin)} .text-malefique{color:var(--malefique)}
+.bg-feu{background:var(--feu-bg);border-color:var(--feu-border)} .bg-air{background:var(--air-bg);border-color:var(--air-border)}
+.bg-eau{background:var(--eau-bg);border-color:var(--eau-border)} .bg-terre{background:var(--terre-bg);border-color:var(--terre-border)}
+.bg-divin{background:var(--divin-bg);border-color:var(--divin-border)} .bg-malefique{background:var(--malefique-bg);border-color:var(--malefique-border)}
+
+/* Grid utilities */
+.grid{display:grid;gap:var(--space-lg)}
+.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width: 900px){ .cols-3{grid-template-columns:1fr} }
+@media (max-width: 768px){ .cols-2{grid-template-columns:1fr !important} }
+
+/* Misc utilities */
+.subclass-stack{display:flex;flex-direction:column;gap:var(--space-lg)}
+.chip{font-size:12px;border:1px solid var(--rule);border-radius:999px;padding:4px 8px;background:rgba(155,107,47,.08)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}

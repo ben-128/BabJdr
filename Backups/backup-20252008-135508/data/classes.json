@@ -1,0 +1,167 @@
+[
+  {
+    "nom": "Guerrier",
+    "resume": "Héros sans égal au combat au corp à corp.",
+    "capacites": "<ul><li><em>Expert de l'équipement</em>: Toutes les armes, armures (légères/lourdes), bouclier.</li><li><em>Hardiesse</em>: Gagne la compétence Hardiesse rang 1.</li></ul>",
+    "sousClasses": [
+      {
+        "nom": "Nain des montagnes",
+        "base": {
+          "Force": 5,
+          "Agilité": 2,
+          "Endurance": 7,
+          "Intelligence": 1,
+          "Volonté": 5,
+          "Chance": 1
+        },
+        "progression": "<strong>📈 Progression par niveau:</strong> +2 Force 💪, +3 Endurance 🛡️, +1 Volonté⚡",
+        "capacites": "<ul><li><em>Brise rocher</em>: Gagne 1 de compétence sur les tests de compétence Hardiesse pour une destruction d'objet.</li><li><em>Volonté inflexible</em>: Les nains possèdent une volonté inflexible qui les rendent résistants aux sortilèges (caractéristique Volonté élevée).</li></ul>"
+      },
+      {
+        "nom": "Berserker",
+        "base": {
+          "Force": 5,
+          "Agilité": 4,
+          "Endurance": 5,
+          "Intelligence": 1,
+          "Volonté": 1,
+          "Chance": 1
+        },
+        "progression": "<strong>📈 Progression par niveau:</strong> +2 Force 💪, +1 Agilité 🏃, +2 Endurance 🛡️",
+        "capacites": "<ul><li><em>Frappe en chaîne</em>: Sur un critique au corps à corps, touche aussi un adversaire à moins de 2m.</li><li><em>Risque sauvage</em>: +1 chance de critique physique s'il ne porte pas de bouclier.</li></ul>"
+      }
+    ]
+  },
+  {
+    "nom": "Mage",
+    "resume": "Spécialiste de la magie destructrice.",
+    "capacites": "<ul><li><em>Équipement de mage</em>: bâtons, robes.</li><li><em>Sorts de mage</em>: Apprend et lance des sorts de mage.</li></ul>",
+    "sousClasses": [
+      {
+        "nom": "Érudit",
+        "base": {
+          "Force": 1,
+          "Agilité": 1,
+          "Endurance": 2,
+          "Intelligence": 5,
+          "Volonté": 3,
+          "Chance": 1
+        },
+        "progression": "<strong>📈 Progression par niveau:</strong> +3 Intelligence 🧠, +2 Volonté ⚡",
+        "capacites": "<ul><li><em>Instruit</em>: Gagne la compétence Réflexion rang 1.</li><li><em>Apprentissage accéléré</em>: Le niveau de l'érudit est considéré comme deux fois plus grand pour les prérequis d'apprentissage de sorts.</li></ul>"
+      },
+      {
+        "nom": "Elfe",
+        "base": {
+          "Force": 2,
+          "Agilité": 2,
+          "Endurance": 3,
+          "Intelligence": 3,
+          "Volonté": 2,
+          "Chance": 1
+        },
+        "progression": "<strong>📈 Progression par niveau:</strong> +1 Force 💪, +1 Agilité 🏃, +1 Endurance 🛡️, +1 Intelligence 🧠, +1 Volonté ⚡",
+        "capacites": "<ul><li><em>Instinct elfique</em>: Gagne la compétence Coordination rang 1.</li><li><em>Équipement d'elfe</em>: Epées à une main, armures légères.</li><li><em>Briseur de sceaux</em>: Gagne 1 de compétence sur les tests de compétence pour comprendre ou ouvrir une porte scellée magiquement</li></ul>"
+      }
+    ]
+  },
+  {
+    "nom": "Prêtre",
+    "resume": "Spécialiste de la magie de soutien et anti morts-vivants.",
+    "capacites": "<ul><li><em>Équipement de prêtre</em>: bâtons, robes.</li><li><em>Sorts de prêtre</em>: Apprend et lance des sorts de Prêtre.</li><li><em>Eloquence</em>: Gagne la compétence Eloquence rang 1.</li></ul>",
+    "sousClasses": [
+      {
+        "nom": "Inquisiteur",
+        "base": {
+          "Force": 3,
+          "Agilité": 1,
+          "Endurance": 4,
+          "Intelligence": 3,
+          "Volonté": 5,
+          "Chance": 1
+        },
+        "progression": "<strong>📈 Progression par niveau:</strong> +1 Force 💪, +2 Intelligence 🧠, +1 Volonté ⚡, +1 Endurance 🛡️",
+        "capacites": "<ul><li><em>Magie purificatrice</em>: Les sorts visant les morts-vivants ne ratent jamais.</li><li><em>Port du bouclier</em>: Peut s'équiper d'un bouclier.</li></ul>"
+      },
+      {
+        "nom": "Clerc Divin",
+        "base": {
+          "Force": 1,
+          "Agilité": 1,
+          "Endurance": 2,
+          "Intelligence": 3,
+          "Volonté": 5,
+          "Chance": 5
+        },
+        "progression": "<strong>📈 Progression par niveau:</strong> +2 Intelligence 🧠, +2 Volonté ⚡, + 1 Chance 🍀",
+        "capacites": "<ul><li><em>Maître des soins</em>: Augmente les chances de critiques pour les sorts de soins de 1.</li><li><em>Bien né</em>: Réduit les dégats <span style=\"color: #ffd700; font-weight: bold;\">Divin</span> reçu de 50%. Si son élément d'affiliation est <span style=\"color: #ffd700; font-weight: bold;\">Divin</span>, il devient insensible aux dégats <span style=\"color: #ffd700; font-weight: bold;\">Divin</span>.</li></ul>"
+      }
+    ]
+  },
+  {
+    "nom": "Rôdeur",
+    "resume": "Héros très agile.",
+    "capacites": "<ul><li><em>Équipement de rôdeur</em>: armures légères, dagues.</li><li><em>Coordination</em>: Gagne la compétence Coordination rang 1.</li></ul>",
+    "sousClasses": [
+      {
+        "nom": "Voleur",
+        "base": {
+          "Force": 3,
+          "Agilité": 5,
+          "Endurance": 2,
+          "Intelligence": 2,
+          "Volonté": 2,
+          "Chance": 5
+        },
+        "progression": "<strong>📈 Progression par niveau:</strong> +3 Agilité 🏃, +1 Force 💪, +1 Endurance 🛡️",
+        "capacites": "<ul><li><em>Mains expertes</em>: Gagne la compétence Finesse rang 1.</li><li><em>Sprint</em>: Peut utiliser une Action secondaire pour doubler sa vitesse.</li><li><em>Vicieux</em>: Un coup critique dans le dos triple les dégats au lieu de les doubler.</li></ul>"
+      },
+      {
+        "nom": "Chasseur",
+        "base": {
+          "Force": 3,
+          "Agilité": 5,
+          "Endurance": 2,
+          "Intelligence": 4,
+          "Volonté": 2,
+          "Chance": 1
+        },
+        "progression": "<strong>📈 Progression par niveau:</strong> +2 Agilité 🏃, +1 Force 💪, +1 Endurance 🛡️, +1 Intelligence 🧠",
+        "capacites": "<ul><li><em>Maîtrise des plantes</em>: Peut utiliser des plantes médicinales. Leur utilisation nécessite un niveau d'Intelligence.</li><li><em>Armes du Chasseur</em>: Peut utiliser les épées courtes et les arcs.</li><li><em>Connaissance de la nature</em>: Gagne 1 de compétence sur les tests de Réflexion lié à animal ou une plante.</li></ul>"
+      }
+    ]
+  },
+  {
+    "nom": "Enchanteur",
+    "resume": "Détenteur d'une magie singulière, qui fait de lui un allié précieux.",
+    "capacites": "<ul><li><em>Équipement d'enchanteur</em>: robes, bâtons, baguettes.</li><li><em>Sorts d'enchanteur</em>: Apprend et lance des sorts d'Enchanteur.</li></ul>",
+    "sousClasses": [
+      {
+        "nom": "Esprit de la grande Fée",
+        "base": {
+          "Force": 1,
+          "Agilité": 5,
+          "Endurance": 1,
+          "Intelligence": 5,
+          "Volonté": 2,
+          "Chance": 1
+        },
+        "progression": "<strong>📈 Progression par niveau:</strong> +1 Agilité 🏃, +2 Intelligence 🧠, +1 Volonté ⚡, +1 Chance 🍀",
+        "capacites": "<ul><li><em>Tatillon</em>: Gagne la compétence Finesse rang 1.</li><li><em>Lévitation</em>: ignore dégâts/ralentissements venant du sol.</li><li><em>Rayon de l'Amitié</em>: les sorts bénéfiques ciblent 1 allié supplémentaire.</li></ul>"
+      },
+      {
+        "nom": "Lutin",
+        "base": {
+          "Force": 1,
+          "Agilité": 1,
+          "Endurance": 1,
+          "Intelligence": 5,
+          "Volonté": 2,
+          "Chance": 5
+        },
+        "progression": "<strong>📈 Progression par niveau:</strong> +2 Intelligence 🧠, +1 Volonté ⚡, +2 Chance 🍀",
+        "capacites": "<ul><li><em>Secrets bien gardés</em>: Gagne la compétence Reflexion rang 1.</li><li><em>Expert des baguettes</em>: sur critique à la baguette, la charge n'est pas consommée.</li><li><em>Sourire malicieux</em>: les sorts à effets négatifs peuvent cibler 1 adversaire supplémentaire.</li></ul>"
+      }
+    ]
+  }
+]

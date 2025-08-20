@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Test Recherche Simple</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .search-input { width: 300px; padding: 10px; margin-bottom: 20px; }
+        .result { border: 1px solid #ccc; padding: 10px; margin: 5px 0; }
+    </style>
+</head>
+<body>
+    <h1>Test Recherche Simple</h1>
+    
+    <input type="text" id="test-search" class="search-input" placeholder="Tapez au moins 3 caractères...">
+    <div id="results"></div>
+
+    <script>
+        // Mock data
+        window.SORTS = [
+            {
+                nom: "Sorts de Combat",
+                sorts: [
+                    { nom: "Boule de Feu", description: "Lance une boule de feu", prerequis: "Niveau 1" },
+                    { nom: "Éclair", description: "Lance un éclair électrique", prerequis: "Niveau 2" }
+                ]
+            }
+        ];
+
+        window.DONS = [
+            {
+                nom: "Dons de Guerrier", 
+                dons: [
+                    { nom: "Attaque Puissante", description: "Attaque qui fait des dégâts", prerequis: "Force 5" }
+                ]
+            }
+        ];
+
+        // Simple search function
+        function searchInData(query) {
+            const results = [];
+            
+            // Search in SORTS
+            if (window.SORTS) {
+                window.SORTS.forEach(category => {
+                    if (category.sorts) {
+                        category.sorts.forEach(sort => {
+                            const searchText = [sort.nom, sort.description, sort.prerequis].join(' ').toLowerCase();
+                            if (searchText.includes(query)) {
+                                results.push({
+                                    type: 'spell',
+                                    name: sort.nom,
+                                    description: sort.description
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+
+            // Search in DONS
+            if (window.DONS) {
+                window.DONS.forEach(category => {
+                    if (category.dons) {
+                        category.dons.forEach(don => {
+                            const searchText = [don.nom, don.description, don.prerequis].join(' ').toLowerCase();
+                            if (searchText.includes(query)) {
+                                results.push({
+                                    type: 'don',
+                                    name: don.nom,
+                                    description: don.description
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+
+            return results;
+        }
+
+        // Simple display function
+        function displayResults(results, query) {
+            const container = document.getElementById('results');
+            
+            if (results.length === 0) {
+                container.innerHTML = `<div class="result">Aucun résultat pour "${query}"</div>`;
+                return;
+            }
+
+            const html = results.map(result => `
+                <div class="result">
+                    <strong>${result.type}: ${result.name}</strong><br>
+                    ${result.description}
+                </div>
+            `).join('');
+
+            container.innerHTML = `
+                <h3>${results.length} résultat(s) pour "${query}":</h3>
+                ${html}
+            `;
+        }
+
+        // Setup search
+        document.getElementById('test-search').addEventListener('input', (e) => {
+            const query = e.target.value.trim().toLowerCase();
+            
+            if (query.length < 3) {
+                document.getElementById('results').innerHTML = '';
+                return;
+            }
+
+            console.log('🔍 Searching for:', query);
+            const results = searchInData(query);
+            console.log('📋 Found:', results);
+            displayResults(results, query);
+        });
+    </script>
+</body>
+</html>
