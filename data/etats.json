@@ -9,31 +9,27 @@
     },
     {
       "type": "card",
+      "id": "a-terre",
       "title": "A terre",
+      "content": "<p>Ne peut plus faire d'actions.</p><p>Ne peut plus esquiver, et les attaques à l'encontre de la créature sont équivalentes à des attaques dans le dos.</p><p>Doit dépenser une action secondaire pour se relever.</p>",
       "deletable": true,
-      "sectionType": "section1755517689257",
-      "content": [
-        {
-          "type": "paragraph",
-          "editType": "custom",
-          "editSection": "section1755517689257-content",
-          "content": "Ne peut plus faire d'action.<br>Ne peut plus esquiver, et les attaques à l'encontre de la créature sont équivalentes à des attaques dans le dos.<br>Doit dépenser une action secondaire pour se relever."
-        }
-      ]
+      "sectionName": "A terre"
     },
     {
       "type": "card",
+      "id": "endormi-effraye",
       "title": "Endormi/assomé/Effrayé",
+      "content": "<p>Ne peut plus faire d'actions.</p><p>Ne peut plus esquiver, et les attaques à l'encontre de la créature sont équivalentes à des attaques dans le dos.</p><p>Une attaque sur la créature la sort de son état.</p>",
       "deletable": true,
-      "sectionType": "section1755543246768",
-      "content": [
-        {
-          "type": "paragraph",
-          "editType": "custom",
-          "editSection": "section1755543246768-content",
-          "content": "Ne peut plus faire d'action.<br>Ne peut plus esquiver, et les attaques à l'encontre de la créature sont équivalentes à des attaques dans le dos.<br>Une attaque sur la créature la sort de son état."
-        }
-      ]
+      "sectionName": "Endormi/assomé/Effrayé"
+    },
+    {
+      "type": "card",
+      "id": "etats-new-4-1755725440741",
+      "title": "Ralenti",
+      "content": "Vitesse de déplacement réduite de moitié.<br>Impossible de sauter ou d'esquiver.",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
     }
   ]
 }

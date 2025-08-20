@@ -18,7 +18,9 @@
       "Bash(start:*)",
       "Bash(findstr:*)",
       "Bash(find:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(taskkill:*)",
+      "Bash(git rm:*)"
     ],
     "deny": []
   }

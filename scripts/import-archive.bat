@@ -194,6 +194,7 @@ if exist "%TEMP_EXTRACT%\package.json" (
     )
 )
 
+
 :cleanup
 echo.
 echo [INFO] Nettoyage des fichiers temporaires...
@@ -226,6 +227,9 @@ echo ========================================
 echo.
 echo Les fichiers ont été importés et remplacent les anciens.
 echo Une sauvegarde a été créée dans : %BACKUP_DIR%
+echo.
+echo [INFO] Les nouvelles sections sont maintenant disponibles !
+echo Le localStorage est automatiquement vidé à chaque rechargement.
 echo.
 echo Vous pouvez maintenant lancer le projet avec :
 echo   npm run dev

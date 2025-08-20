@@ -102,7 +102,21 @@ This codebase has been completely refactored from a 7,469-line monolith into a p
 - `data/classes.json` - Character classes and subclasses  
 - `data/dons.json` - Feat categories and individual feats
 - `data/static-pages-config.json` - Configuration for static content pages
+- `data/images.json` - Image references and metadata (42+ images as of 2025-08-20)
 - Additional JSON files for elements, stats, states, etc.
+
+### Assets Structure
+- `data/images/Classes/` - Character class portraits (20 images)
+- `data/images/Sorts/` - Spell icons (9 images) 
+- `data/images/Equipements/` - **NEW** Equipment imagery
+  - `Armes/` - Weapon images (6+ items)
+  - `Armures/` - Armor images (3+ items) 
+  - `Consumables/` - Consumable items with subcategories:
+    - `Herbs/` - Herb items (8+ images)
+    - `Pots/` - Potion items (2+ images)
+    - `SpellCasting/` - Magical implements (8+ images)
+- `data/images/Monstres/` - **NEW** Monster imagery
+  - `foret/` - Forest monsters (4+ creatures)
 
 ### Styling
 Modular CSS architecture:
@@ -300,3 +314,49 @@ This ensures:
 - No special cases or type-specific code
 - All content renders consistently
 - Simple save/load mechanism to JSON
+
+### **🛠️ Content Editing Implementation Rules**
+
+**CRITICAL**: All content restoration after editing MUST use the unified system to prevent HTML tags being displayed as visible text.
+
+#### **✅ CORRECT: Unified Content Restoration**
+
+When implementing ANY content editing functionality:
+
+```javascript
+// In js/core/UnifiedEditor.js - USE THIS METHOD FOR ALL CONTENT TYPES
+restoreElementContent(session, content) {
+  // ALWAYS use innerHTML to render HTML content properly
+  // This prevents HTML tags from being displayed as visible text
+  session.element.innerHTML = content;
+}
+```
+
+#### **❌ WRONG: Direct Assignment**
+```javascript
+// NEVER do this in editing contexts:
+session.element.innerHTML = content;        // ❌ WRONG - bypasses unified system
+session.element.textContent = content;      // ❌ WRONG - shows HTML tags as text
+element.innerHTML = editedContent;          // ❌ WRONG - inconsistent behavior
+```
+
+#### **🔧 Implementation Guidelines**
+
+1. **For ANY new editable content type:**
+   - Use `data-edit-type="generic"` in the HTML
+   - Content will automatically go through `restoreElementContent()`
+   - No special handling needed
+
+2. **When modifying UnifiedEditor.js:**
+   - ALWAYS call `restoreElementContent()` instead of direct `innerHTML` assignment
+   - This applies to `saveCurrentEdit()`, `cancelCurrentEdit()`, and any new methods
+
+3. **When adding new editing features:**
+   - Follow the existing pattern in UnifiedEditor.js
+   - All content types (static pages, spells, classes, dons) use the same restoration method
+   - No type-specific content restoration logic
+
+#### **🎯 Universal Rule**
+> **ALL edited content MUST be restored through `restoreElementContent()` to ensure HTML is rendered properly and tags are never visible to users.**
+
+This prevents the recurring issue where HTML tags like `<p>`, `<strong>`, `<em>` appear as visible text after editing instead of being rendered as formatted HTML.

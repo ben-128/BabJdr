@@ -21,16 +21,23 @@
       const config = window.ContentTypes[type];
       const pageId = `${config.container}-${this.sanitizeId(category.nom)}`;
       const itemsProperty = this.getItemsProperty(type);
+      
+      // Get items and sort them for spells
+      let items = category[itemsProperty] || [];
+      if (type === 'spell') {
+        items = this.sortSpellsByLevel([...items]);
+      }
 
       return `
         <article class="" data-page="${pageId}">
           <section>
             ${this.buildCategoryHeader(category, type)}
+            ${type === 'spell' ? this.buildSpellLevelFilter() : ''}
             ${this.buildAddButton(type, category.nom)}
-            <div class="grid cols-2">
-              ${category[itemsProperty] ? category[itemsProperty].map((item, index) => 
+            <div class="grid cols-2" id="spells-container-${this.sanitizeId(category.nom)}">
+              ${items.map((item, index) => 
                 CardBuilder.create(type, item, category.nom).build()
-              ).join('') : ''}
+              ).join('')}
             </div>
           </section>
         </article>
@@ -97,7 +104,10 @@
     buildStaticPageHeader(pageData) {
       return `
         <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
-          ${this.buildEditableTitle(pageData.title, 'page-title', pageData.page)}
+          <div style="display:flex;align-items:center;gap:8px;">
+            <h2 class="editable editable-title" data-edit-type="generic" data-edit-section="page-title">${pageData.title}</h2>
+            ${this.buildEditButton('title')}
+          </div>
           ${this.buildIllustration(`page:${pageData.page}`)}
         </div>
       `;
@@ -105,7 +115,7 @@
 
     buildEditableTitle(content, editType, editSection = null) {
       return `
-        <h2 class="editable editable-title" data-edit-type="${editType}" data-edit-section="${editSection || content}">${content}</h2>
+        <h2 class="editable editable-title" data-edit-type="generic" data-edit-section="${editSection || content}">${content}</h2>
         ${this.buildEditButton('title')}
       `;
     }
@@ -115,7 +125,7 @@
       
       return `
         <div class="editable-section" data-section-type="${editType}">
-          <p class="${className}" data-edit-type="${editType}" data-edit-section="${editSection}">${content}</p>
+          <p class="${className}" data-edit-type="generic" data-edit-section="${editSection}">${content}</p>
           ${this.buildEditButton(sectionType)}
         </div>
       `;
@@ -139,7 +149,7 @@
       
       return `
         <div class="editable-section" data-section-type="html">
-          <div class="editable" data-edit-type="html" data-edit-section="${editSection}">
+          <div class="editable" data-edit-type="generic" data-edit-section="${editSection}">
             ${htmlContent}
           </div>
           ${this.buildEditButton('section')}
@@ -155,8 +165,7 @@
           case 'card':
             return this.buildCardSection(section, sectionIndex);
           case 'grid':
-            // Grid is now just HTML content
-            return this.buildComplexContent(section);
+            return this.buildGridSection(section, sectionIndex);
           default:
             return `<div><!-- Unknown section type: ${section.type} --></div>`;
         }
@@ -166,7 +175,7 @@
     buildIntroSection(section, sectionIndex) {
       return `
         <div class="editable-section" data-section-type="intro" data-section-index="${sectionIndex}">
-          <p class="editable editable-intro" data-edit-type="intro" data-edit-section="intro">${section.content}</p>
+          <p class="editable editable-intro" data-edit-type="generic" data-edit-section="intro">${section.content}</p>
           ${this.buildEditButton('section')}
         </div>
         ${this.buildAddParagraphButton('intro')}
@@ -179,7 +188,7 @@
       if (cardData.deletable && cardData.sectionType) {
         cardHTML += `
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-            <h3 class="editable editable-card-title" data-edit-type="card-title" data-edit-section="${cardData.sectionType}-title">${cardData.title}</h3>
+            <h3 class="editable editable-card-title" data-edit-type="generic" data-edit-section="${cardData.id}-title">${cardData.title}</h3>
             ${this.buildEditButton('title')}
             ${this.buildRemoveSectionButton(cardData.sectionType)}
           </div>
@@ -187,27 +196,35 @@
       } else {
         cardHTML += `
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-            <h3 class="editable editable-card-title" data-edit-type="card-title" data-edit-section="card-${sectionIndex}">${cardData.title}</h3>
+            <h3 class="editable editable-card-title" data-edit-type="generic" data-edit-section="${cardData.id}-title">${cardData.title}</h3>
             ${this.buildEditButton('title')}
           </div>
         `;
       }
 
-      // Everything should be HTML string format only
+      // Handle different content formats
+      let htmlContent = '';
+      let editSection = cardData.id || 'card-' + sectionIndex;
+      
       if (typeof cardData.content === 'string') {
-        cardHTML += `<div>${cardData.content}</div>`;
-      } else if (typeof cardData.content === 'object' && cardData.content.content) {
-        // Object with content property (like {type: "html", content: "..."})
-        cardHTML += this.buildComplexContent(cardData.content);
-      } else {
-        // Fallback for legacy formats - warn and convert
-        console.warn('Found non-string content in card, converting:', cardData.content);
-        if (Array.isArray(cardData.content)) {
-          cardHTML += cardData.content.map(item => this.buildContentItem(item)).join('');
-        } else {
-          cardHTML += `<div>${cardData.content || ''}</div>`;
+        // Direct HTML string
+        htmlContent = cardData.content;
+      } else if (typeof cardData.content === 'object' && cardData.content?.content) {
+        // Object with nested content property
+        htmlContent = cardData.content.content;
+        if (cardData.content.editSection) {
+          editSection = cardData.content.editSection;
         }
+      } else {
+        htmlContent = cardData.content || '';
       }
+      
+      cardHTML += `
+        <div style="position:relative;">
+          <div class="editable" data-edit-type="generic" data-edit-section="${editSection}">${htmlContent}</div>
+          ${this.buildEditButton('section')}
+        </div>
+      `;
 
       if (cardData.deletable && cardData.sectionName && this.shouldShowEditButtons) {
         cardHTML += `
@@ -226,7 +243,7 @@
       if (item.type === 'paragraph') {
         const content = `
           <div class="editable-section" data-section-type="paragraph">
-            <p class="editable editable-paragraph" data-edit-type="paragraph" data-edit-section="${item.editSection}">${item.content}</p>
+            <p class="editable editable-paragraph" data-edit-type="generic" data-edit-section="${item.editSection}">${item.content}</p>
             ${this.buildEditButton('paragraph')}
           </div>
         `;
@@ -236,19 +253,26 @@
       return `<div>${item.content}</div>`;
     }
 
-    buildComplexContent(content) {
-      // Everything is just HTML now - content should already be HTML
-      const editType = content.editType || 'content';
-      const htmlContent = content.content || '';
+    buildGridSection(gridSection, sectionIndex) {
+      const items = gridSection.content || gridSection.items || [];
+      if (!Array.isArray(items)) {
+        return '<div><!-- Grid items is not an array --></div>';
+      }
+
+      const cols = gridSection.cols || 2;
+      let gridHTML = `<div class="grid" style="display: grid; grid-template-columns: repeat(${cols}, 1fr); gap: 1rem;">`;
       
-      return `
-        <div class="editable-section" data-section-type="html">
-          <div class="editable" data-edit-type="html" data-edit-section="${editType}">
-            ${htmlContent}
-          </div>
-          ${this.buildEditButton('section')}
-        </div>
-      `;
+      items.forEach((item, itemIndex) => {
+        gridHTML += this.buildCardSection(item, `${sectionIndex}-${itemIndex}`);
+      });
+      
+      gridHTML += '</div>';
+      return gridHTML;
+    }
+
+    buildComplexContent(content) {
+      // Generic HTML content - no special processing
+      return content || '';
     }
 
 
@@ -333,6 +357,55 @@
         case 'class': return 'sousClasses';
         default: return 'items';
       }
+    }
+
+    // Extract level number from prerequis text
+    extractLevelFromPrerequisite(prerequis) {
+      if (!prerequis) return 0;
+      const match = prerequis.match(/Niveau (\d+)/i);
+      return match ? parseInt(match[1], 10) : 0;
+    }
+
+    // Sort spells by level (prerequisite level)
+    sortSpellsByLevel(spells) {
+      return spells.sort((a, b) => {
+        const levelA = this.extractLevelFromPrerequisite(a.prerequis);
+        const levelB = this.extractLevelFromPrerequisite(b.prerequis);
+        return levelA - levelB;
+      });
+    }
+
+    // Build spell level filter UI
+    buildSpellLevelFilter() {
+      if (window.STANDALONE_VERSION) return '';
+      
+      return `
+        <div class="spell-level-filter" style="margin: 1rem 0; padding: 1rem; background: var(--card); border: 2px solid var(--rule); border-radius: 12px;">
+          <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+            <label style="font-weight: 600; color: var(--accent-ink);">
+              🎯 Filtrer par niveau maximum :
+            </label>
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <input 
+                type="number" 
+                id="spell-level-filter" 
+                min="0" 
+                max="20" 
+                value="20"
+                style="width: 80px; padding: 0.5rem; border: 1px solid var(--rule); border-radius: 6px; text-align: center; font-weight: 600;"
+              >
+              <button 
+                id="reset-spell-filter" 
+                class="btn small" 
+                style="background: var(--bronze); color: white; padding: 0.5rem 1rem;"
+                title="Réinitialiser le filtre"
+              >
+                🔄 Tout afficher
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
     }
 
     sanitizeId(str) {

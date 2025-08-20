@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-08-20T09:23:45.654Z by JdrBab Build System -->
+<!-- Generated on 2025-08-20T19:43:40.830Z by JdrBab Build System -->
 <title>JDR‑BAB — Livret de règles</title>
 <meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -208,6 +208,233 @@ footer{padding:24px;text-align:center;color:var(--paper-muted)}
 .searchbar{display:flex;gap:var(--space-md);align-items:center}
 .searchbar input{flex:1 1 auto;max-width:100%;height:38px;font-size:15px;padding:var(--space-md) 10px;border-radius:10px;border:1px solid var(--rule);background:#fff6e8;color:inherit}
 .searchbar button{height:38px}
+
+/* Search results */
+.search-results-container {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.search-results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: var(--gold);
+  color: #4a4a4a;
+  font-weight: 500;
+  border-bottom: 1px solid var(--bronze);
+}
+
+.search-close {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.search-close:hover {
+  background: rgba(0,0,0,0.1);
+}
+
+.search-results-list {
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.search-result-item {
+  padding: 10px 12px;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.search-result-item:hover {
+  background: #f8f4e8;
+}
+
+.search-result-item:last-child {
+  border-bottom: none;
+}
+
+.search-result-summary {
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 2px;
+}
+
+.search-result-category {
+  font-size: 12px;
+  color: #666;
+  opacity: 0.8;
+}
+
+.search-no-results {
+  padding: 20px;
+  text-align: center;
+  color: #666;
+}
+
+.search-no-results p {
+  margin: 0;
+  font-style: italic;
+}
+
+/* Search results page */
+.search-page {
+  padding: var(--space-lg);
+}
+
+.search-page-header {
+  margin-bottom: var(--space-xl);
+  text-align: center;
+  border-bottom: 2px solid var(--rule);
+  padding-bottom: var(--space-lg);
+}
+
+.search-page-header h1 {
+  color: var(--gold);
+  margin-bottom: var(--space-md);
+  font-family: var(--font-title);
+}
+
+.search-results-count {
+  color: #666;
+  margin-bottom: var(--space-lg);
+  font-style: italic;
+}
+
+.search-results-grid {
+  display: grid;
+  gap: var(--space-lg);
+  max-width: 800px;
+  margin: 0 auto;
+  grid-template-columns: 1fr;
+}
+
+.search-result-card {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 2px solid var(--rule);
+  background: var(--card);
+  padding: var(--space-lg);
+  border-radius: 14px;
+  box-shadow: var(--card-shadow);
+  /* Force visibility */
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  min-height: 150px;
+}
+
+.search-result-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  border-color: var(--bronze);
+}
+
+.search-result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--space-md);
+}
+
+.search-result-header h3 {
+  margin: 0;
+  color: var(--bronze);
+  font-size: 1.2em;
+}
+
+.search-result-type {
+  background: var(--gold);
+  color: #4a4a4a;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.8em;
+  font-weight: 500;
+}
+
+.search-result-content {
+  margin-bottom: var(--space-lg);
+}
+
+.search-result-summary {
+  font-weight: 500;
+  margin-bottom: var(--space-md);
+  color: #333;
+  font-size: 1.05em;
+  padding: var(--space-sm);
+  background: linear-gradient(90deg, var(--gold), transparent);
+  border-radius: 4px;
+  opacity: 0.9;
+}
+
+.search-result-category {
+  font-size: 0.9em;
+  color: #666;
+  margin-bottom: var(--space-md);
+}
+
+.search-result-preview {
+  background: #f8f4e8;
+  padding: var(--space-md);
+  border-radius: 8px;
+  border-left: 3px solid var(--bronze);
+}
+
+.preview-field {
+  margin-bottom: var(--space-sm);
+  line-height: 1.4;
+  font-size: 0.9em;
+  padding: var(--space-sm);
+  background: rgba(0,0,0,0.02);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 4px 4px 0;
+}
+
+.preview-field:last-child {
+  margin-bottom: 0;
+}
+
+.preview-field strong {
+  color: var(--bronze);
+  font-weight: 600;
+}
+
+.search-result-footer {
+  text-align: right;
+  padding-top: var(--space-md);
+  border-top: 1px solid #eee;
+}
+
+.search-result-btn {
+  background: var(--bronze);
+  color: white;
+  border-color: var(--bronze);
+}
+
+.search-result-btn:hover {
+  background: #b8860b;
+  border-color: #b8860b;
+}
+
+/* Force search results visibility */
+.search-page .search-results-grid .search-result-card {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  height: auto !important;
+  min-height: 150px !important;
+  background: var(--card) !important;
+  border: 2px solid var(--bronze) !important;
+  margin-bottom: var(--space-lg) !important;
+}
+
+/* Clean up card styling */
 
 /* Illustrations */
 .illus{display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap;margin:.6rem 0}
@@ -628,10 +855,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
   margin: 8px 0;
 }
 
-.editable-section .edit-btn {
-  position: absolute;
-  right: 8px;
-  top: 8px;
+.edit-btn {
   background: var(--bronze);
   color: white;
   border: none;
@@ -639,10 +863,31 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
   padding: 4px 8px;
   cursor: pointer;
   font-size: 12px;
-  opacity: 0.6;
+  opacity: 0.7;
   transition: all 0.2s ease;
-  z-index: 10;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.edit-btn:hover {
+  opacity: 1;
+  transform: scale(1.05);
+  background: var(--gold);
+}
+
+/* Inline edit buttons (titles, etc.) */
+.edit-btn.edit-title-btn,
+.edit-btn.edit-paragraph-btn {
+  position: relative;
+  margin-left: 8px;
+}
+
+/* Section edit buttons (absolute positioning) */
+.editable-section .edit-btn.edit-section-btn,
+[style*="position:relative"] .edit-btn.edit-section-btn {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  z-index: 10;
 }
 
 .editable-section:hover .edit-btn {
@@ -907,26 +1152,20 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
   {
     "nom": "Guerrier",
     "resume": "Héros sans égal au combat au corp à corp.",
-    "capacites": [
-      "<em>Expert de l'équipement</em>: Toutes les armes, armures (légères/lourdes), bouclier.",
-      "<em>Hardiesse</em>: Gagne la compétence Hardiesse rang 1."
-    ],
+    "capacites": "<ul><li><em>Expert de l'équipement</em>: Toutes les armes, armures (légères/lourdes), bouclier.</li><li><em>Hardiesse</em>: Gagne la compétence Hardiesse rang 1.</li></ul>\n          AAA",
     "sousClasses": [
       {
         "nom": "Nain des montagnes",
         "base": {
-          "Force": "5",
-          "Agilité": "2",
-          "Endurance": "7",
-          "Intelligence": "1",
-          "Volonté": "5",
-          "Chance": "1"
+          "Force": 5,
+          "Agilité": 2,
+          "Endurance": 7,
+          "Intelligence": 1,
+          "Volonté": 5,
+          "Chance": 1
         },
         "progression": "<strong>📈 Progression par niveau:</strong> +2 Force 💪, +3 Endurance 🛡️, +1 Volonté⚡",
-        "capacites": [
-          "<em>Brise rocher</em>: Gagne 1 de compétence sur les tests de compétence Hardiesse pour une destruction d'objet.",
-          "<em>Volonté inflexible</em>: Les nains possèdent une volonté inflexible qui les rendent résistants aux sortilèges (caractéristique Volonté élevée)."
-        ]
+        "capacites": "<ul><li><em>Brise rocher</em>: Gagne 1 de compétence sur les tests de compétence Hardiesse pour une destruction d'objet.</li><li><em>Volonté inflexible</em>: Les nains possèdent une volonté inflexible qui les rendent résistants aux sortilèges (caractéristique Volonté élevée).</li></ul>\n          AAA"
       },
       {
         "nom": "Berserker",
@@ -939,20 +1178,14 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
           "Chance": 1
         },
         "progression": "<strong>📈 Progression par niveau:</strong> +2 Force 💪, +1 Agilité 🏃, +2 Endurance 🛡️",
-        "capacites": [
-          "<em>Frappe en chaîne</em>: Sur un critique au corps à corps, touche aussi un adversaire à moins de 2m.",
-          "<em>Risque sauvage</em>: +1 chance de critique physique s'il ne porte pas de bouclier."
-        ]
+        "capacites": "<ul><li><em>Frappe en chaîne</em>: Sur un critique au corps à corps, touche aussi un adversaire à moins de 2m.</li><li><em>Risque sauvage</em>: +1 chance de critique physique s'il ne porte pas de bouclier.</li></ul>"
       }
     ]
   },
   {
     "nom": "Mage",
     "resume": "Spécialiste de la magie destructrice.",
-    "capacites": [
-      "<em>Équipement de mage</em>: bâtons, robes.",
-      "<em>Sorts de mage</em>: Apprend et lance des sorts de mage."
-    ],
+    "capacites": "<ul><li><em>Équipement de mage</em>: bâtons, robes.</li><li><em>Sorts de mage</em>: Apprend et lance des sorts de mage.</li></ul>",
     "sousClasses": [
       {
         "nom": "Érudit",
@@ -965,10 +1198,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
           "Chance": 1
         },
         "progression": "<strong>📈 Progression par niveau:</strong> +3 Intelligence 🧠, +2 Volonté ⚡",
-        "capacites": [
-          "<em>Instruit</em>: Gagne la compétence Réflexion rang 1.",
-          "<em>Apprentissage accéléré</em>: Le niveau de l'érudit est considéré comme deux fois plus grand pour les prérequis d'apprentissage de sorts."
-        ]
+        "capacites": "<ul><li><em>Instruit</em>: Gagne la compétence Réflexion rang 1.</li><li><em>Apprentissage accéléré</em>: Le niveau de l'érudit est considéré comme deux fois plus grand pour les prérequis d'apprentissage de sorts.</li></ul>"
       },
       {
         "nom": "Elfe",
@@ -981,22 +1211,14 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
           "Chance": 1
         },
         "progression": "<strong>📈 Progression par niveau:</strong> +1 Force 💪, +1 Agilité 🏃, +1 Endurance 🛡️, +1 Intelligence 🧠, +1 Volonté ⚡",
-        "capacites": [
-          "<em>Instinct elfique</em>: Gagne la compétence Coordination rang 1.",
-          "<em>Équipement d'elfe</em>: Epées à une main, armures légères.",
-          "<em>Briseur de sceaux</em>: Gagne 1 de compétence sur les tests de compétence pour comprendre ou ouvrir une porte scellée magiquement"
-        ]
+        "capacites": "<ul><li><em>Instinct elfique</em>: Gagne la compétence Coordination rang 1.</li><li><em>Équipement d'elfe</em>: Epées à une main, armures légères.</li><li><em>Briseur de sceaux</em>: Gagne 1 de compétence sur les tests de compétence pour comprendre ou ouvrir une porte scellée magiquement</li></ul>"
       }
     ]
   },
   {
     "nom": "Prêtre",
     "resume": "Spécialiste de la magie de soutien et anti morts-vivants.",
-    "capacites": [
-      "<em>Équipement de prêtre</em>: bâtons, robes.",
-      "<em>Sorts de prêtre</em>: Apprend et lance des sorts de Prêtre.",
-      "<em>Eloquence</em>: Gagne la compétence Eloquence rang 1."
-    ],
+    "capacites": "<ul><li><em>Équipement de prêtre</em>: bâtons, robes.</li><li><em>Sorts de prêtre</em>: Apprend et lance des sorts de Prêtre.</li><li><em>Eloquence</em>: Gagne la compétence Eloquence rang 1.</li></ul>",
     "sousClasses": [
       {
         "nom": "Inquisiteur",
@@ -1009,10 +1231,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
           "Chance": 1
         },
         "progression": "<strong>📈 Progression par niveau:</strong> +1 Force 💪, +2 Intelligence 🧠, +1 Volonté ⚡, +1 Endurance 🛡️",
-        "capacites": [
-          "<em>Magie purificatrice</em>: Les sorts visant les morts-vivants ne ratent jamais.",
-          "<em>Port du bouclier</em>: Peut s'équiper d'un bouclier."
-        ]
+        "capacites": "<ul><li><em>Magie purificatrice</em>: Les sorts visant les morts-vivants ne ratent jamais.</li><li><em>Port du bouclier</em>: Peut s'équiper d'un bouclier.</li></ul>"
       },
       {
         "nom": "Clerc Divin",
@@ -1025,20 +1244,14 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
           "Chance": 5
         },
         "progression": "<strong>📈 Progression par niveau:</strong> +2 Intelligence 🧠, +2 Volonté ⚡, + 1 Chance 🍀",
-        "capacites": [
-          "<em>Maître des soins</em>: Augmente les chances de critiques pour les sorts de soins de 1.",
-          "<em>Bien né</em>: Réduit les dégats <span style=\"color: #ffd700; font-weight: bold;\">Divin</span> reçu de 50%. Si son élément d'affiliation est <span style=\"color: #ffd700; font-weight: bold;\">Divin</span>, il devient insensible aux dégats <span style=\"color: #ffd700; font-weight: bold;\">Divin</span>."
-        ]
+        "capacites": "<ul><li><em>Maître des soins</em>: Augmente les chances de critiques pour les sorts de soins de 1.</li><li><em>Bien né</em>: Réduit les dégats <span style=\"color: #ffd700; font-weight: bold;\">Divin</span> reçu de 50%. Si son élément d'affiliation est <span style=\"color: #ffd700; font-weight: bold;\">Divin</span>, il devient insensible aux dégats <span style=\"color: #ffd700; font-weight: bold;\">Divin</span>.</li></ul>"
       }
     ]
   },
   {
     "nom": "Rôdeur",
     "resume": "Héros très agile.",
-    "capacites": [
-      "<em>Équipement de rôdeur</em>: armures légères, dagues.",
-      "<em>Coordination</em>: Gagne la compétence Coordination rang 1."
-    ],
+    "capacites": "<ul><li><em>Équipement de rôdeur</em>: armures légères, dagues.</li><li><em>Coordination</em>: Gagne la compétence Coordination rang 1.</li></ul>",
     "sousClasses": [
       {
         "nom": "Voleur",
@@ -1051,11 +1264,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
           "Chance": 5
         },
         "progression": "<strong>📈 Progression par niveau:</strong> +3 Agilité 🏃, +1 Force 💪, +1 Endurance 🛡️",
-        "capacites": [
-          "<em>Mains expertes</em>: Gagne la compétence Finesse rang 1.",
-          "<em>Sprint</em>: Peut utiliser une Action secondaire pour doubler sa vitesse.",
-          "<em>Vicieux</em>: Un coup critique dans le dos triple les dégats au lieu de les doubler."
-        ]
+        "capacites": "<ul><li><em>Mains expertes</em>: Gagne la compétence Finesse rang 1.</li><li><em>Sprint</em>: Peut utiliser une Action secondaire pour doubler sa vitesse.</li><li><em>Vicieux</em>: Un coup critique dans le dos triple les dégats au lieu de les doubler.</li></ul>"
       },
       {
         "nom": "Chasseur",
@@ -1068,21 +1277,14 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
           "Chance": 1
         },
         "progression": "<strong>📈 Progression par niveau:</strong> +2 Agilité 🏃, +1 Force 💪, +1 Endurance 🛡️, +1 Intelligence 🧠",
-        "capacites": [
-          "<em>Maîtrise des plantes</em>: Peut utiliser des plantes médicinales. Leur utilisation nécessite un niveau d'Intelligence.",
-          "<em>Armes du Chasseur</em>: Peut utiliser les épées courtes et les arcs.",
-          "<em>Connaissance de la nature</em>: Gagne 1 de compétence sur les tests de Réflexion lié à animal ou une plante."
-        ]
+        "capacites": "<ul><li><em>Maîtrise des plantes</em>: Peut utiliser des plantes médicinales. Leur utilisation nécessite un niveau d'Intelligence.</li><li><em>Armes du Chasseur</em>: Peut utiliser les épées courtes et les arcs.</li><li><em>Connaissance de la nature</em>: Gagne 1 de compétence sur les tests de Réflexion lié à animal ou une plante.</li></ul>"
       }
     ]
   },
   {
     "nom": "Enchanteur",
     "resume": "Détenteur d'une magie singulière, qui fait de lui un allié précieux.",
-    "capacites": [
-      "<em>Équipement d'enchanteur</em>: robes, bâtons, baguettes.",
-      "<em>Sorts d'enchanteur</em>: Apprend et lance des sorts d'Enchanteur."
-    ],
+    "capacites": "<ul><li><em>Équipement d'enchanteur</em>: robes, bâtons, baguettes.</li><li><em>Sorts d'enchanteur</em>: Apprend et lance des sorts d'Enchanteur.</li></ul>",
     "sousClasses": [
       {
         "nom": "Esprit de la grande Fée",
@@ -1095,11 +1297,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
           "Chance": 1
         },
         "progression": "<strong>📈 Progression par niveau:</strong> +1 Agilité 🏃, +2 Intelligence 🧠, +1 Volonté ⚡, +1 Chance 🍀",
-        "capacites": [
-          "<em>Tatillon</em>: Gagne la compétence Finesse rang 1.",
-          "<em>Lévitation</em>: ignore dégâts/ralentissements venant du sol.",
-          "<em>Rayon de l'Amitié</em>: les sorts bénéfiques ciblent 1 allié supplémentaire."
-        ]
+        "capacites": "<ul><li><em>Tatillon</em>: Gagne la compétence Finesse rang 1.</li><li><em>Lévitation</em>: ignore dégâts/ralentissements venant du sol.</li><li><em>Rayon de l'Amitié</em>: les sorts bénéfiques ciblent 1 allié supplémentaire.</li></ul>"
       },
       {
         "nom": "Lutin",
@@ -1112,11 +1310,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
           "Chance": 5
         },
         "progression": "<strong>📈 Progression par niveau:</strong> +2 Intelligence 🧠, +1 Volonté ⚡, +2 Chance 🍀",
-        "capacites": [
-          "<em>Secrets bien gardés</em>: Gagne la compétence Reflexion rang 1.",
-          "<em>Expert des baguettes</em>: sur critique à la baguette, la charge n'est pas consommée.",
-          "<em>Sourire malicieux</em>: les sorts à effets négatifs peuvent cibler 1 adversaire supplémentaire."
-        ]
+        "capacites": "<ul><li><em>Secrets bien gardés</em>: Gagne la compétence Reflexion rang 1.</li><li><em>Expert des baguettes</em>: sur critique à la baguette, la charge n'est pas consommée.</li><li><em>Sourire malicieux</em>: les sorts à effets négatifs peuvent cibler 1 adversaire supplémentaire.</li></ul>"
       }
     ]
   }
@@ -1360,7 +1554,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
   },
   "meta": {
     "total_images": 40,
-    "exported_date": "2025-08-19",
+    "exported_date": "2025-08-20",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
 };
@@ -1374,24 +1568,56 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
   "sections": [
     {
       "type": "intro",
-      "content": "Guide pour créer un personnage dans le JDR BAB."
+      "content": "Guide pour créer un personnage dans le JDR BAB.",
+      "id": "section-0"
     },
     {
       "type": "card",
+      "id": "etapes-creation",
       "title": "Étapes de création",
-      "content": {
-        "type": "ordered_list",
-        "editType": "creation",
-        "items": [
-          "Choisir une <strong>classe</strong> puis une <strong>sous‑classe</strong>.",
-          "Choisir un <strong>élément</strong>.",
-          "Choisir les <strong>dons</strong> (avec 2 points de dons).",
-          "Choisir l'<strong>équipement</strong> de départ (avec 100 éclats).",
-          "Choisir un <strong>métier</strong>.",
-          "Remplir sa feuille de personnage (Efforts, Argent...).",
-          "Définir le <strong>nom</strong>, l'<strong>histoire</strong> et l'<strong>apparence</strong>."
-        ]
-      }
+      "content": "<ol><li>Choisir une <strong>classe</strong> puis une <strong>sous‑classe</strong>.</li><li>Choisir un <strong>élément</strong> d'affiliation.</li><li>Choisir les <strong>dons</strong> (avec 2 points de dons).</li><li>Choisir l'<strong>équipement</strong> de départ (avec 100 éclats).</li><li>Choisir un <strong>métier</strong>.</li><li>Définir le <strong>nom</strong>, l'<strong>histoire</strong> et l'<strong>apparence</strong>.</li><li>Remplir sa feuille de personnage.</li></ol>",
+      "deletable": true,
+      "sectionName": "Étapes de création"
+    },
+    {
+      "type": "card",
+      "id": "paragraph-1755718127179",
+      "title": "Nouveau paragraphe",
+      "content": "<p>Contenu du nouveau paragraphe.</p>",
+      "deletable": true,
+      "sectionName": "Nouveau paragraphe"
+    },
+    {
+      "type": "card",
+      "id": "new-section-1755718138409",
+      "title": "Nouvelle section",
+      "content": "<p>Contenu de la nouvelle section.</p>",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
+    },
+    {
+      "type": "card",
+      "id": "new-section-1755718255020",
+      "title": "Nouvelle section",
+      "content": "<p>Contenu de la nouvelle section.</p>",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
+    },
+    {
+      "type": "card",
+      "id": "creation-new-6-1755718451311",
+      "title": "Nouvelle section",
+      "content": "<p>Contenu de la nouvelle section.</p>",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
+    },
+    {
+      "type": "card",
+      "id": "creation-new-7-1755718643534",
+      "title": "Nouvelle section",
+      "content": "<p>Contenu de la nouvelle section.</p>",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
     }
   ]
 },
@@ -1406,70 +1632,15 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
     },
     {
       "type": "card",
+      "id": "elements-system",
       "title": "Système d'éléments",
-      "content": [
-        {
-          "type": "paragraph",
-          "editType": "elements",
-          "editSection": "general",
-          "content": "Il existe huit éléments, chacun ayant un opposé. Chaqué Héros où monstre possède un élément d'affiliation. Une créature affiliée à un élément reçoit deux fois moins de dégats venant de cette élément, et deux fois plus venant de l'élément opposé.&nbsp;<br>"
-        },
-        {
-          "type": "paragraph",
-          "editType": "elements",
-          "editSection": "example",
-          "content": "Par exemple, une créature d'élément <span style=\"color: #2b6cb0; font-weight: bold;\">Eau</span>&nbsp;subissant une attaque de 10 dégats <span style=\"color: #2b6cb0; font-weight: bold;\">Eau</span> ne recevra que 5 dégats au final. Si elle subit une attaque de 10 dégats de <span style=\"color: #e25822; font-weight: bold;\">Feu</span> , elle en subira 20 au final. Et si elle subit une attaque de 10 dégats d'<span style=\"color: #22c55e; font-weight: bold;\">Air</span>, elle en subira 10 au final."
-        }
-      ]
+      "content": "<p>Il existe huit éléments, chacun ayant un opposé. Chaqué Héros où monstre possède un élément d'affiliation. Une créature affiliée à un élément reçoit deux fois moins de dégats venant de cette élément, et deux fois plus venant de l'élément opposé.</p><p>Par exemple, une créature d'élément <span style=\"color: #2b6cb0; font-weight: bold;\">Eau</span> subissant une attaque de 10 dégats <span style=\"color: #2b6cb0; font-weight: bold;\">Eau</span> ne recevra que 5 dégats au final. Si elle subit une attaque de 10 dégats de <span style=\"color: #e25822; font-weight: bold;\">Feu</span>, elle en subira 20 au final. Et si elle subit une attaque de 10 dégats d'<span style=\"color: #22c55e; font-weight: bold;\">Air</span>, elle en subira 10 au final.</p>"
     },
     {
       "type": "card",
+      "id": "element-pairs",
       "title": "Paires opposées",
-      "content": {
-        "type": "element_pairs",
-        "pairs": [
-          {
-            "element1": {
-              "name": "Feu",
-              "color": "#e25822"
-            },
-            "element2": {
-              "name": "Eau",
-              "color": "#2b6cb0"
-            }
-          },
-          {
-            "element1": {
-              "name": "Terre",
-              "color": "#8b5e34"
-            },
-            "element2": {
-              "name": "Air",
-              "color": "#22c55e"
-            }
-          },
-          {
-            "element1": {
-              "name": "Lumière",
-              "color": "#fbbf24"
-            },
-            "element2": {
-              "name": "Nuit",
-              "color": "#0f172a"
-            }
-          },
-          {
-            "element1": {
-              "name": "Divin",
-              "color": "#ffd700"
-            },
-            "element2": {
-              "name": "Maléfique",
-              "color": "#a855f7"
-            }
-          }
-        ]
-      }
+      "content": "<div class=\"element-pairs\"><div class=\"pair\"><span style=\"color: #e25822; font-weight: bold;\">Feu</span> ⟷ <span style=\"color: #2b6cb0; font-weight: bold;\">Eau</span></div><div class=\"pair\"><span style=\"color: #8b5e34; font-weight: bold;\">Terre</span> ⟷ <span style=\"color: #22c55e; font-weight: bold;\">Air</span></div><div class=\"pair\"><span style=\"color: #fbbf24; font-weight: bold;\">Lumière</span> ⟷ <span style=\"color: #0f172a; font-weight: bold; background: white; padding: 2px;\">Nuit</span></div><div class=\"pair\"><span style=\"color: #ffd700; font-weight: bold;\">Divin</span> ⟷ <span style=\"color: #a855f7; font-weight: bold;\">Maléfique</span></div></div>"
     },
     {
       "type": "grid",
@@ -1477,29 +1648,17 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       "content": [
         {
           "type": "card",
+          "id": "element-defense",
           "title": "Défense",
-          "content": [
-            {
-              "type": "paragraph",
-              "editType": "elements",
-              "editSection": "defense",
-              "content": "Certaines armures/objets/bonus peuvent procurer une armure spécifique à un élément.  Il faudra alors déduire au resultat final. le calcul de dégats se fait dans cette ordre : <br><div> Dégats -> x 2 si critique -> x 0.5 ou x 2 si affilisation élément -> reduction de l'armure</div>"
-            }
-          ],
+          "content": "<p>Certaines armures/objets/bonus peuvent procurer une armure spécifique à un élément. Il faudra alors déduire au resultat final. Le calcul de dégats se fait dans cet ordre :</p><div><strong>Dégats → ×2 si critique → ×0.5 ou ×2 si affiliation élément → réduction de l'armure</strong></div>",
           "deletable": true,
           "sectionName": "Défense"
         },
         {
           "type": "card",
+          "id": "element-attack",
           "title": "Attaque",
-          "content": [
-            {
-              "type": "paragraph",
-              "editType": "elements",
-              "editSection": "attack",
-              "content": "Une attaque ne peut avoir qu'un seul élément. Si plusieurs objets/équipements/bonus donne un élément à l'attaque, le héros qui choisi devra choisir quel est l'élément utilisé."
-            }
-          ],
+          "content": "<p>Une attaque ne peut avoir qu'un seul élément. Si plusieurs objets/équipements/bonus donnent un élément à l'attaque, le héros devra choisir quel est l'élément utilisé.</p>",
           "deletable": true,
           "sectionName": "Attaque"
         }
@@ -1518,97 +1677,11 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
     },
     {
       "type": "card",
+      "id": "stats-base",
       "title": "Statistiques de base",
-      "content": {
-        "type": "grid",
-        "cols": 2,
-        "items": [
-          {
-            "type": "card",
-            "title": "💪 Force",
-            "content": [
-              {
-                "type": "paragraph",
-                "editType": "stat",
-                "editSection": "force",
-                "content": "Améliore les dégâts physiques."
-              }
-            ],
-            "deletable": true,
-            "sectionName": "Force"
-          },
-          {
-            "type": "card",
-            "title": "🛡️ Endurance",
-            "content": [
-              {
-                "type": "paragraph",
-                "editType": "stat",
-                "editSection": "endurance",
-                "content": "-Les points de vie maximum sont de :<br><strong>(10 + 2 x Endurance)</strong><br>- Un repos régénère des points de vie égaux à l'endurance<br>"
-              }
-            ],
-            "deletable": true,
-            "sectionName": "Endurance"
-          },
-          {
-            "type": "card",
-            "title": "🏃 Agilité",
-            "content": [
-              {
-                "type": "paragraph",
-                "editType": "stat",
-                "editSection": "agilite",
-                "content": "Chaque 5 points ajoutent <strong>+1</strong> aux jets d'esquive et de critique physique."
-              }
-            ],
-            "deletable": true,
-            "sectionName": "Agilité"
-          },
-          {
-            "type": "card",
-            "title": "🧠 Intelligence",
-            "content": [
-              {
-                "type": "paragraph",
-                "editType": "stat",
-                "editSection": "intelligence",
-                "content": "Détermine la puissance des sorts."
-              }
-            ],
-            "deletable": true,
-            "sectionName": "Intelligence"
-          },
-          {
-            "type": "card",
-            "title": "⚡ Volonté",
-            "content": [
-              {
-                "type": "paragraph",
-                "editType": "stat",
-                "editSection": "volonte",
-                "content": "- Le mana maximum est de : <strong>(20 + 2 x Volonté)</strong><br>- Réduit les chances de subir des altérations magiques."
-              }
-            ],
-            "deletable": true,
-            "sectionName": "Volonté"
-          },
-          {
-            "type": "card",
-            "title": "🍀 Chance",
-            "content": [
-              {
-                "type": "paragraph",
-                "editType": "stat",
-                "editSection": "chance",
-                "content": "- Améliore le butin des coffres et les événements aléatoires.<br>- Chaque 5 points ajoutent <strong>+1</strong> aux chances de coup critique avec les sorts et les baguettes."
-              }
-            ],
-            "deletable": true,
-            "sectionName": "Chance"
-          }
-        ]
-      }
+      "content": "<div class=\"stats-grid\"><div class=\"stat-card\"><h4>💪 Force</h4><p>Améliore les dégâts physiques.</p></div><div class=\"stat-card\"><h4>🛡️ Endurance</h4><p>Les points de vie maximum sont de : <strong>(10 + 2 x Endurance)</strong></p><p>Un repos régénère des points de vie égaux à l'endurance</p></div><div class=\"stat-card\"><h4>🏃 Agilité</h4><p>Chaque 5 points ajoutent <strong>+1</strong> aux jets d'esquive et de critique physique.</p></div><div class=\"stat-card\"><h4>🧠 Intelligence</h4><p>Détermine la puissance des sorts.</p></div><div class=\"stat-card\"><h4>⚡ Volonté</h4><p>Le mana maximum est de : <strong>(20 + 2 x Volonté)</strong></p><p>Réduit les chances de subir des altérations magiques.</p></div><div class=\"stat-card\"><h4>🍀 Chance</h4><p>Améliore le butin des coffres et les événements aléatoires.</p><p>Chaque 5 points ajoutent <strong>+1</strong> aux chances de coup critique avec les sorts et les baguettes.</p></div></div>",
+      "deletable": true,
+      "sectionName": "Statistiques de base"
     }
   ]
 },
@@ -1624,54 +1697,32 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
     {
       "type": "grid",
       "cols": 2,
-      "items": [
+      "content": [
         {
           "type": "card",
+          "id": "efforts",
           "title": "Efforts",
-          "content": {
-            "type": "list",
-            "editType": "efforts",
-            "items": [
-              "<em>Chaque héros dispose de 5 Efforts maximum.</em>",
-              "<em>Repos</em>: +1 Effort • Sommeil&nbsp;: +3 Efforts.",
-              "<em>Les Efforts peuvent être dépensés pour améliorer un test de compétence.</em>"
-            ]
-          }
+          "content": "<ul><li><em>Chaque héros dispose de 5 Efforts maximum.</em></li><li><em>Repos</em>: +1 Effort • Sommeil : +3 Efforts.</li><li><em>Les Efforts peuvent être dépensés pour améliorer un test de compétence.</em></li></ul>",
+          "deletable": true,
+          "sectionName": "Efforts"
         },
         {
           "type": "card",
+          "id": "competences-list",
           "title": "Compétences",
-          "content": {
-            "type": "list",
-            "editType": "competences",
-            "items": [
-              "<em>Hardiesse</em>: Pousser, casser, sauter…",
-              "<em>Finesse</em>: Crocheter, fabriquer, être discret…",
-              "<em>Coordination</em>: Percevoir, équilibre, piloter…",
-              "<em>Réflexion</em>: Savoir, comprendre, deviner…",
-              "<em>Éloquence</em>: Persuader, mentir, intimider…"
-            ]
-          }
+          "content": "<ul><li><em>Hardiesse</em>: Pousser, casser, sauter…</li><li><em>Finesse</em>: Crocheter, fabriquer, être discret…</li><li><em>Coordination</em>: Percevoir, équilibre, piloter…</li><li><em>Réflexion</em>: Savoir, comprendre, deviner…</li><li><em>Éloquence</em>: Persuader, mentir, intimider…</li></ul>",
+          "deletable": true,
+          "sectionName": "Compétences"
         }
       ]
     },
     {
       "type": "card",
+      "id": "tests",
       "title": "Tests de compétences",
-      "content": [
-        {
-          "type": "paragraph",
-          "editType": "tests",
-          "editSection": "regles",
-          "content": "Quand un Mj annonce un test de compétence, un héros peut choisir de dépenser des efforts pour booster sa compétence. La difficulté d'un test est cachée et est entre 1 et 4 (facile, normale, difficile, expert)."
-        },
-        {
-          "type": "paragraph",
-          "editType": "tests",
-          "editSection": "resolution",
-          "content": "Une fois le test résolu, le Maître de Jeu annonce le résultat. Si le joueur a dépensé plus d'Efforts que nécessaire, l'excédent est perdu."
-        }
-      ]
+      "content": "<p>Quand un MJ annonce un test de compétence, un héros peut choisir de dépenser des efforts pour booster sa compétence. La difficulté d'un test est cachée et est entre 1 et 4 (facile, normale, difficile, expert).</p><p>Une fois le test résolu, le Maître de Jeu annonce le résultat. Si le joueur a dépensé plus d'Efforts que nécessaire, l'excédent est perdu.</p>",
+      "deletable": true,
+      "sectionName": "Tests de compétences"
     }
   ]
 },
@@ -1686,31 +1737,19 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
     },
     {
       "type": "card",
+      "id": "a-terre",
       "title": "A terre",
+      "content": "<p>Ne peut plus faire d'action.</p><p>Ne peut plus esquiver, et les attaques à l'encontre de la créature sont équivalentes à des attaques dans le dos.</p><p>Doit dépenser une action secondaire pour se relever.</p>",
       "deletable": true,
-      "sectionType": "section1755517689257",
-      "content": [
-        {
-          "type": "paragraph",
-          "editType": "custom",
-          "editSection": "section1755517689257-content",
-          "content": "Ne peut plus faire d'action.<br>Ne peut plus esquiver, et les attaques à l'encontre de la créature sont équivalentes à des attaques dans le dos.<br>Doit dépenser une action secondaire pour se relever."
-        }
-      ]
+      "sectionName": "A terre"
     },
     {
       "type": "card",
+      "id": "endormi-effraye",
       "title": "Endormi/assomé/Effrayé",
+      "content": "<p>Ne peut plus faire d'action.</p><p>Ne peut plus esquiver, et les attaques à l'encontre de la créature sont équivalentes à des attaques dans le dos.</p><p>Une attaque sur la créature la sort de son état.</p>",
       "deletable": true,
-      "sectionType": "section1755543246768",
-      "content": [
-        {
-          "type": "paragraph",
-          "editType": "custom",
-          "editSection": "section1755543246768-content",
-          "content": "Ne peut plus faire d'action.<br>Ne peut plus esquiver, et les attaques à l'encontre de la créature sont équivalentes à des attaques dans le dos.<br>Une attaque sur la créature la sort de son état."
-        }
-      ]
+      "sectionName": "Endormi/assomé/Effrayé"
     }
   ]
 }
@@ -2442,10 +2481,21 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
     saveChanges(silent = false) {
       try {
         // Force collect all pending edits
-        const editedData = JdrApp.modules.editor.forceCollectAllEdits();
+        const editedData = JdrApp.modules.editor ? JdrApp.modules.editor.forceCollectAllEdits() : {};
         
-        // Save only current edits (not full data to avoid overwriting JSON changes)
+        // Also save all static pages data (includes dynamically created sections)
+        const staticPagesData = window.STATIC_PAGES ? {...window.STATIC_PAGES} : {};
+        
+        // Combined data structure
+        const allChanges = {
+          edits: editedData,
+          staticPages: staticPagesData,
+          timestamp: Date.now()
+        };
+        
+        // Save combined data
         localStorage.setItem('jdr-bab-edits', JSON.stringify(editedData));
+        localStorage.setItem('jdr-bab-static-pages', JSON.stringify(staticPagesData));
         localStorage.setItem('jdr-bab-last-modified', Date.now().toString());
         
         if (!silent) {
@@ -2697,14 +2747,29 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       try {
         const storedEdits = localStorage.getItem('jdr-bab-edits');
         
-        if (storedEdits) {
+        if (storedEdits && JdrApp.modules.editor) {
           JdrApp.modules.editor.editedData = JSON.parse(storedEdits);
+        }
+        
+        // Load stored static pages data (includes dynamically created sections)
+        const storedStaticPages = localStorage.getItem('jdr-bab-static-pages');
+        if (storedStaticPages) {
+          const staticPagesData = JSON.parse(storedStaticPages);
+          
+          // Merge with existing STATIC_PAGES data
+          if (window.STATIC_PAGES) {
+            Object.assign(window.STATIC_PAGES, staticPagesData);
+          } else {
+            window.STATIC_PAGES = staticPagesData;
+          }
+          
+          console.log('Restored static pages data from localStorage:', Object.keys(staticPagesData));
         }
         
         // Ne plus charger jdr-bab-data - laisser les JSON être la source de vérité
         
       } catch (error) {
-        // Failed to load stored edits
+        console.warn('Failed to load stored edits:', error);
       }
     },
 
@@ -2843,10 +2908,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       
       this.currentRoute = page;
       
-      // Handle category routing
-      if (page.startsWith('sorts-') && exists) {
-        JdrApp.modules.renderer.renderSortCategory(page);
-      }
+      // Category routing is handled by the existing system
       
       this.show(exists ? page : 'creation');
     },
@@ -2859,6 +2921,17 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       document.querySelectorAll('.toc a').forEach(a => a.classList.remove('active'));
       const activeLink = document.querySelector(`a[href="#/${page}"]`);
       if (activeLink) activeLink.classList.add('active');
+      
+      // Apply dev mode state after page change
+      setTimeout(() => {
+        if (JdrApp.modules.editor) {
+          if (JdrApp.modules.editor.isDevMode) {
+            JdrApp.modules.editor.forceShowAllEditButtons();
+          } else {
+            JdrApp.modules.editor.forceHideAllEditButtons();
+          }
+        }
+      }, 100);
     },
     
     navigate(route) {
@@ -2960,17 +3033,24 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
   // CONTENT RENDERER MODULE
   // ========================================
   JdrApp.modules.renderer = {
-    // Current search and filter state
     currentSearch: '',
-    
-    // Helper to check if we should render editing buttons
-    shouldRenderEditButtons() {
-      return !window.STANDALONE_VERSION;
-    },
     
     init() {
       this.generateContent();
       this.autoLoadImages();
+      this.setupEventListeners();
+    },
+
+    setupEventListeners() {
+      EventBus.on(Events.PAGE_RENDER, (payload) => {
+        if (payload.type === 'category') {
+          this.renderCategoryPage(payload.categoryType, payload.category);
+        }
+      });
+
+      EventBus.on(Events.CONTENT_ADD, () => {
+        setTimeout(() => this.autoLoadImages(), 100);
+      });
     },
 
     generateContent() {
@@ -2978,7 +3058,6 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       this.generateArticles();
       this.generateDevToolbox();
       
-      // Show/hide edit buttons based on dev mode state
       if (JdrApp.modules.editor) {
         setTimeout(() => {
           if (JdrApp.modules.editor.isDevMode) {
@@ -2995,506 +3074,102 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       if (!viewsContainer) return;
 
       let articlesHTML = '';
-      articlesHTML += this.generateCreationPage();
-      
-      articlesHTML += this.generateElementsPage();
-      articlesHTML += this.generateStatsPage();
-      articlesHTML += this.generateCompetencesPage();
-      articlesHTML += this.generateEtatsPage();
+      articlesHTML += this.generateStaticPages();
+      articlesHTML += this.generateClassPages();
+      articlesHTML += this.generateCategoryPages();
 
-      if (window.CLASSES) {
-        window.CLASSES.forEach(classe => {
-          articlesHTML += this.generateClassPage(classe);
+      viewsContainer.innerHTML = articlesHTML;
+      setTimeout(() => {
+        this.autoLoadImages();
+        // Reapply dev mode state to new elements
+        this.applyDevModeToNewContent();
+      }, 100);
+    },
+
+    applyDevModeToNewContent() {
+      if (JdrApp.modules.editor) {
+        if (JdrApp.modules.editor.isDevMode) {
+          JdrApp.modules.editor.forceShowAllEditButtons();
+        } else {
+          JdrApp.modules.editor.forceHideAllEditButtons();
+        }
+      }
+    },
+
+    generateStaticPages() {
+      let html = '';
+      if (window.STATIC_PAGES) {
+        Object.entries(window.STATIC_PAGES).forEach(([pageId, pageData]) => {
+          html += PageBuilder.buildStaticPage(pageId, pageData);
         });
       }
+      return html;
+    },
 
+    generateClassPages() {
+      if (!window.CLASSES) return '';
+      
+      return window.CLASSES.map(classe => 
+        PageBuilder.buildClassPage(classe)
+      ).join('');
+    },
+
+    generateCategoryPages() {
+      let html = '';
+      
       if (window.SORTS) {
-        window.SORTS.forEach(category => {
-          articlesHTML += this.generateSortCategoryPage(category);
-        });
+        html += window.SORTS.map(category => 
+          PageBuilder.buildCategoryPage('spell', category)
+        ).join('');
       }
 
       if (window.DONS) {
-        window.DONS.forEach(category => {
-          articlesHTML += this.generateDonCategoryPage(category);
-        });
+        html += window.DONS.map(category => 
+          PageBuilder.buildCategoryPage('don', category)
+        ).join('');
       }
 
-      viewsContainer.innerHTML = articlesHTML;
-      setTimeout(() => this.autoLoadImages(), 100);
+      return html;
     },
 
-    generateCreationPage() {
-      return this.generateStaticPage('creation');
-    },
-
-    generateClassPage(classe) {
-      const pageId = JdrApp.utils.data.sanitizeId(classe.nom);
+    renderCategoryPage(type, category) {
+      const config = window.ContentTypes[type];
+      const pageId = `${config.container}-${JdrApp.utils.data.sanitizeId(category.nom)}`;
+      const article = document.querySelector(`article[data-page="${pageId}"]`);
+      if (!article) return;
       
-      return `
-        <article class="" data-page="${pageId}" data-page-title="${classe.nom}">
-          <section>
-            <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
-              <h2 class="editable editable-title" data-edit-type="class-name" data-edit-section="${classe.nom}">${classe.nom}</h2>
-              ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-title-btn" title="Éditer le nom de la classe">✏️</button>' : ''}
-              ${this.createIllustration(`class:${classe.nom}`)}
-            </div>
-            
-            <div class="editable-section" data-section-type="class-resume">
-              <p class="lead editable editable-paragraph" data-edit-type="class-resume" data-edit-section="${classe.nom}">${classe.resume}</p>
-              ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-paragraph-btn" title="Éditer la description de la classe">✏️</button>' : ''}
-            </div>
-            
-            <h3>Capacités de classe</h3>
-            <div class="editable-section editable-list-container" data-section-type="class-capacites">
-              <ul class="editable editable-list" data-edit-type="class-capacites" data-edit-section="${classe.nom}">
-                ${classe.capacites.map(cap => `<li>${cap}</li>`).join('')}
-              </ul>
-              ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-list-btn" title="Éditer les capacités de classe">✏️</button>' : ''}
-            </div>
-            
-            <h3>Sous-classes</h3>
-            <div class="subclass-stack">
-              ${classe.sousClasses.map(sousClasse => this.generateSubClassCard(classe.nom, sousClasse)).join('')}
-            </div>
-            ${this.shouldRenderEditButtons() ? '<div class="add-subclass-btn">➕ Ajouter une sous-classe</div>' : ''}
-          </section>
-        </article>
-      `;
-    },
-
-    generateSubClassCard(className, sousClasse) {
-      return `
-        <div class="card editable-section" data-section-type="subclass" data-class-name="${className}" data-subclass-name="${sousClasse.nom}">
-          <div class="editable-section" data-section-type="subclass-name">
-            <h4 class="editable editable-title subclass-title" data-edit-type="subclass-name" data-edit-section="${className}-${sousClasse.nom}">${sousClasse.nom}</h4>
-            ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-title-btn" title="Éditer le nom de la sous-classe">✏️</button>' : ''}
-          </div>
-          
-          ${this.createSubclassIllustrations(className, sousClasse.nom)}
-          
-          <div class="editable-section" data-section-type="subclass-stats">
-            <div class="editable editable-stats" data-edit-type="subclass-stats" data-edit-section="${className}-${sousClasse.nom}">
-              <div class="chips">
-                ${Object.entries(sousClasse.base).map(([stat, value]) => {
-                  const statIcons = {
-                    'Force': '💪',
-                    'Agilité': '🏃',
-                    'Endurance': '🛡️',
-                    'Intelligence': '🧠',
-                    'Volonté': '⚡',
-                    'Chance': '🍀'
-                  };
-                  const icon = statIcons[stat] || '⚡';
-                  return `<span class="chip">${icon} ${stat}: <strong>${value}</strong></span>`;
-                }).join('')}
-              </div>
-            </div>
-            ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-stats-btn" title="Éditer les statistiques de base">✏️</button>' : ''}
-          </div>
-          
-          <div class="editable-section" data-section-type="subclass-progression">
-            <div class="editable editable-field" data-edit-type="subclass-progression" data-edit-section="${className}-${sousClasse.nom}">
-              ${sousClasse.progression}
-            </div>
-            ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-field-btn" title="Éditer la progression par niveau">✏️</button>' : ''}
-          </div>
-          
-          <h5>Capacités</h5>
-          <div class="editable-section editable-list-container" data-section-type="subclass-capacites">
-            <ul class="editable editable-list" data-edit-type="subclass-capacites" data-edit-section="${className}-${sousClasse.nom}">
-              ${sousClasse.capacites.map(cap => `<li>${cap}</li>`).join('')}
-            </ul>
-            ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-list-btn" title="Éditer les capacités">✏️</button>' : ''}
-          </div>
-          
-          ${this.shouldRenderEditButtons() ? '<button class="delete-subclass-btn" title="Supprimer cette sous-classe" data-class-name="' + className + '" data-subclass-name="' + sousClasse.nom + '">🗑️ Supprimer</button>' : ''}
-        </div>
-      `;
-    },
-
-    generateSortCategoryPage(category) {
-      const pageId = `sorts-${JdrApp.utils.data.sanitizeId(category.nom)}`;
+      const newContent = PageBuilder.buildCategoryPage(type, category);
+      const parser = new DOMParser();
+      const newDoc = parser.parseFromString(newContent, 'text/html');
+      const newArticle = newDoc.querySelector('article');
       
-      return `
-        <article class="" data-page="${pageId}">
-          <section>
-            <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
-              <h2 class="editable editable-title" data-edit-type="spell-category-name" data-edit-section="${category.nom}">${category.nom}</h2>
-              ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-title-btn" title="Éditer le nom de la catégorie">✏️</button>' : ''}
-              ${this.createIllustration(`spellcategory:${category.nom}`)}
-            </div>
-            
-            <div class="editable-section" data-section-type="spell-category-description">
-              <p class="lead editable editable-paragraph" data-edit-type="spell-category-description" data-edit-section="${category.nom}">${category.description}</p>
-              ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-paragraph-btn" title="Éditer la description de la catégorie">✏️</button>' : ''}
-            </div>
-            
-            ${this.shouldRenderEditButtons() ? `<button class="spell-add" data-category-name="${category.nom}" type="button">➕ Ajouter un sort</button>` : ''}
-            
-            <div class="grid cols-2">
-              ${category.sorts.map((sort, index) => this.generateSpellCard(category, sort, index)).join('')}
-            </div>
-          </section>
-        </article>
-      `;
+      if (newArticle) {
+        article.innerHTML = newArticle.innerHTML;
+        setTimeout(() => this.autoLoadImages(), 100);
+      }
     },
 
-    generateSpellCard(category, sort, index) {
-      return `
-        <div class="card editable-section" data-section-type="spell" data-spell-name="${sort.nom}" data-category-name="${category.nom}">
-          <div class="editable-section" data-section-type="spell-name">
-            <h4 style="margin: 0 0 1rem 0; text-align: center;" class="editable editable-title" data-edit-type="spell-name" data-edit-spell="${sort.nom}" data-edit-section="${sort.nom}">${sort.nom}</h4>
-            ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-title-btn" title="Éditer le nom du sort">✏️</button>' : ''}
-          </div>
-          
-          ${this.createIllustration(`sort:${category.nom}:${sort.nom}`, sort.nom)}
-          
-          <div class="editable-section" data-section-type="spell-description">
-            <p class="muted editable editable-paragraph" data-edit-type="spell-description" data-edit-spell="${sort.nom}" data-edit-section="${sort.nom}" style="margin: 0 0 1rem 0; text-align: center;">${sort.description}</p>
-            ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-paragraph-btn" title="Éditer la description">✏️</button>' : ''}
-          </div>
-          
-          <div class="editable-section" data-section-type="spell-prerequis">
-            <div class="editable editable-field" data-edit-type="spell-prerequis" data-edit-spell="${sort.nom}" data-edit-section="${sort.nom}">
-              ${sort.prerequis}
-            </div>
-            ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-field-btn" title="Éditer les prérequis">✏️</button>' : ''}
-          </div>
-          
-          <div class="editable-section" data-section-type="spell-portee">
-            <div class="editable editable-field" data-edit-type="spell-portee" data-edit-spell="${sort.nom}" data-edit-section="${sort.nom}">
-              ${sort.portee}
-            </div>
-            ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-field-btn" title="Éditer la portée">✏️</button>' : ''}
-          </div>
-          
-          <div class="editable-section" data-section-type="spell-mana">
-            <div class="editable editable-field" data-edit-type="spell-mana" data-edit-spell="${sort.nom}" data-edit-section="${sort.nom}">
-              ${sort.coutMana}
-            </div>
-            ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-field-btn" title="Éditer le coût mana">✏️</button>' : ''}
-          </div>
-
-          <div class="editable-section" data-section-type="spell-temps-incantation">
-            <div class="editable editable-field" data-edit-type="spell-temps-incantation" data-edit-spell="${sort.nom}" data-edit-section="${sort.nom}">
-              ${sort.tempsIncantation}
-            </div>
-            ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-field-btn" title="Éditer le temps d\'incantation">✏️</button>' : ''}
-          </div>
-          
-          <hr style="margin: 0.5rem 0; border: none; border-top: 1px solid var(--rule);">
-          
-          <div class="editable-section" data-section-type="spell-resistance">
-            <div class="editable editable-field" data-edit-type="spell-resistance" data-edit-spell="${sort.nom}" data-edit-section="${sort.nom}">
-              ${sort.resistance}
-            </div>
-            ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-field-btn" title="Éditer la résistance">✏️</button>' : ''}
-          </div>
-          
-          <div class="editable-section" data-section-type="spell-effect-normal">
-            <div class="editable editable-effect" data-edit-type="spell-effect-normal" data-edit-spell="${sort.nom}" data-edit-section="${sort.nom}" style="margin: 1rem 0;">
-              ${sort.effetNormal}
-            </div>
-            ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-effect-btn" title="Éditer l\'effet normal">✏️</button>' : ''}
-          </div>
-          
-          <hr style="margin: 1rem 0; border: none; border-top: 1px solid var(--rule);">
-          
-          ${sort.effetCritique ? `
-            <div class="editable-section" data-section-type="spell-effect-critical">
-              <div class="editable editable-effect" data-edit-type="spell-effect-critical" data-edit-spell="${sort.nom}" data-edit-section="${sort.nom}" style="margin: 1rem 0;">
-                ${sort.effetCritique}
-              </div>
-              ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-effect-btn" title="Éditer l\'effet critique">✏️</button>' : ''}
-            </div>
-          ` : ''}
-          
-          ${sort.effetEchec ? `
-            <div class="editable-section" data-section-type="spell-effect-failure">
-              <div class="editable editable-effect" data-edit-type="spell-effect-failure" data-edit-spell="${sort.nom}" data-edit-section="${sort.nom}" style="margin: 1rem 0;">
-                ${sort.effetEchec}
-              </div>
-              ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-effect-btn" title="Éditer l\'effet d\'échec">✏️</button>' : ''}
-            </div>
-          ` : ''}
-          
-          ${this.shouldRenderEditButtons() ? `<button class="spell-delete btn small" data-category-name="${category.nom}" data-spell-name="${sort.nom}" type="button" style="background: #ff6b6b; color: white; margin-top: 8px;">🗑 Supprimer</button>` : ''}
-        </div>
-      `;
-    },
-
-    generateDonCategoryPage(category) {
-      const pageId = `dons-${JdrApp.utils.data.sanitizeId(category.nom)}`;
+    renderSortCategory(page) {
+      const categoryId = page.replace('sorts-', '');
+      const category = window.SORTS?.find(cat => 
+        JdrApp.utils.data.sanitizeId(cat.nom) === categoryId
+      );
       
-      return `
-        <article class="" data-page="${pageId}">
-          <section>
-            <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
-              <h2 class="editable editable-title" data-edit-type="don-category-name" data-edit-section="${category.nom}">${category.nom}</h2>
-              ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-title-btn" title="Éditer le nom de la catégorie">✏️</button>' : ''}
-              ${this.createIllustration(`doncategory:${category.nom}`)}
-            </div>
-            
-            <div class="editable-section" data-section-type="don-category-description">
-              <p class="lead editable editable-paragraph" data-edit-type="don-category-description" data-edit-section="${category.nom}">${category.description}</p>
-              ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-paragraph-btn" title="Éditer la description de la catégorie">✏️</button>' : ''}
-            </div>
-            
-            ${this.shouldRenderEditButtons() ? `<button class="don-add" data-category-name="${category.nom}" type="button">➕ Ajouter un don</button>` : ''}
-            
-            <div class="grid cols-2">
-              ${category.dons.map((don, index) => this.generateDonCard(category, don, index)).join('')}
-            </div>
-          </section>
-        </article>
-      `;
-    },
-
-    generateDonCard(category, don, index) {
-      return `
-        <div class="card editable-section" data-section-type="don" data-don-name="${don.nom}" data-category-name="${category.nom}">
-          <div class="editable-section" data-section-type="don-name">
-            <h4 style="margin: 0 0 1rem 0; text-align: center;" class="editable editable-title" data-edit-type="don-name" data-edit-section="${don.nom}">${don.nom}</h4>
-            ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-title-btn" title="Éditer le nom du don">✏️</button>' : ''}
-          </div>
-          
-          ${this.createIllustration(`don:${don.nom}`, don.nom)}
-          
-          <div class="editable-section" data-section-type="don-description">
-            <p class="editable editable-paragraph" data-edit-type="don-description" data-edit-section="${don.nom}">${don.description}</p>
-            ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-paragraph-btn" title="Éditer la description">✏️</button>' : ''}
-          </div>
-          
-          <div class="editable-section" data-section-type="don-prerequis">
-            <div class="editable editable-field" data-edit-type="don-prerequis" data-edit-section="${don.nom}">
-              ${don.prerequis}
-            </div>
-            ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-field-btn" title="Éditer les prérequis">✏️</button>' : ''}
-          </div>
-          
-          <div class="editable-section" data-section-type="don-cout">
-            <div class="editable editable-field" data-edit-type="don-cout" data-edit-section="${don.nom}" style="color: var(--bronze); font-weight: 600;">
-              ${don.cout}
-            </div>
-            ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-field-btn" title="Éditer le coût">✏️</button>' : ''}
-          </div>
-          
-          ${this.shouldRenderEditButtons() ? `
-          <div style="display: flex; gap: 4px; margin-top: 8px; flex-wrap: wrap;">
-            <button class="don-delete btn small" data-category-name="${category.nom}" data-don-name="${don.nom}" style="background: #ff6b6b; color: white;">🗑 Supprimer</button>
-            <button class="don-move-up btn small" data-category-name="${category.nom}" data-don-name="${don.nom}" data-don-index="${index}" style="background: var(--bronze); color: white;" ${index === 0 ? 'disabled' : ''}>⬆️ Haut</button>
-            <button class="don-move-down btn small" data-category-name="${category.nom}" data-don-name="${don.nom}" data-don-index="${index}" style="background: var(--bronze); color: white;" ${index === category.dons.length - 1 ? 'disabled' : ''}>⬇️ Bas</button>
-          </div>
-          ` : ''}
-        </div>
-      `;
-    },
-
-    // Generic method to generate static pages from JSON data
-    generateStaticPage(pageId) {
-      if (!window.STATIC_PAGES || !window.STATIC_PAGES[pageId]) {
-        return '';
-      }
-
-      const pageData = window.STATIC_PAGES[pageId];
-      const isActive = pageId === 'creation' ? 'active' : '';
-      
-      return `
-        <article class="${isActive}" data-page="${pageData.page}" data-static-page="true" data-page-title="${pageData.title}">
-          <section>
-            <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
-              <h2 class="editable editable-title" data-edit-type="page-title" data-edit-section="${pageData.page}">${pageData.title}</h2>
-              ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-title-btn" title="Éditer le titre de la page">✏️</button>' : ''}
-              ${this.createIllustration(`page:${pageData.page}`)}
-            </div>
-            ${this.renderSections(pageData.sections)}
-            ${this.shouldRenderEditButtons() ? '<div class="add-paragraph-btn" data-target="section">➕ Ajouter une nouvelle section</div>' : ''}
-          </section>
-        </article>
-      `;
-    },
-
-    // Helper method to render sections from JSON data
-    renderSections(sections) {
-      return sections.map((section, sectionIndex) => {
-        switch (section.type) {
-          case 'intro':
-            return `
-              <div class="editable-section" data-section-type="intro" data-section-index="${sectionIndex}">
-                <p class="editable editable-intro" data-edit-type="intro" data-edit-section="intro">${section.content}</p>
-                ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-section-btn" title="Éditer cette introduction">✏️</button>' : ''}
-              </div>
-              ${this.shouldRenderEditButtons() ? '<div class="add-paragraph-btn" data-target="intro">➕ Ajouter un paragraphe ici</div>' : ''}
-            `;
-          
-          case 'card':
-            return this.renderCard(section, sectionIndex);
-          
-          case 'grid':
-            return this.renderGrid(section, sectionIndex);
-          
-          default:
-            return `<div><!-- Unknown section type: ${section.type} --></div>`;
-        }
-      }).join('');
-    },
-
-    // Helper method to render a card section
-    renderCard(cardData, sectionIndex) {
-      let cardHTML = `<div class="card editable-section" data-section-type="card" data-section-index="${sectionIndex}">`;
-      
-      if (cardData.deletable && cardData.sectionType) {
-        cardHTML += `
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-            <h3 class="editable editable-card-title" data-edit-type="card-title" data-edit-section="${cardData.sectionType}-title">${cardData.title}</h3>
-            ${this.shouldRenderEditButtons() ? `<button class="edit-btn edit-title-btn" title="Éditer le titre">✏️</button>` : ''}
-            ${this.shouldRenderEditButtons() ? `<button class="remove-section-btn" data-section-type="${cardData.sectionType}" type="button" style="background: #dc2626; color: white; border: none; border-radius: 4px; padding: 4px 8px; cursor: pointer; font-size: 12px;">🗑 Supprimer section</button>` : ''}
-          </div>
-        `;
-      } else {
-        cardHTML += `
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-            <h3 class="editable editable-card-title" data-edit-type="card-title" data-edit-section="card-${sectionIndex}">${cardData.title}</h3>
-            ${this.shouldRenderEditButtons() ? `<button class="edit-btn edit-title-btn" title="Éditer le titre">✏️</button>` : ''}
-          </div>
-        `;
-      }
-
-      // Handle different content types
-      if (Array.isArray(cardData.content)) {
-        cardHTML += cardData.content.map(item => this.renderContentItem(item)).join('');
-      } else if (typeof cardData.content === 'object') {
-        cardHTML += this.renderComplexContent(cardData.content);
-      } else {
-        cardHTML += `<div>${cardData.content}</div>`;
-      }
-
-      if (cardData.deletable && cardData.sectionName && this.shouldRenderEditButtons()) {
-        cardHTML += `
-          <div style="margin-top: 1rem; text-align: center;">
-            <button class="section-delete btn small" data-section-name="${cardData.sectionName}" type="button" style="background: #ff6b6b; color: white;">🗑 Supprimer section</button>
-          </div>
-        `;
-      }
-      
-      cardHTML += `</div>`; // Close the card div!
-      return cardHTML;
-    },
-
-    // Helper method to render content items
-    renderContentItem(item) {
-      if (item.type === 'paragraph') {
-        const content = `
-          <div class="editable-section" data-section-type="paragraph">
-            <p class="editable editable-paragraph" data-edit-type="paragraph" data-edit-section="${item.editSection}">${item.content}</p>
-            ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-paragraph-btn" title="Éditer ce paragraphe">✏️</button>' : ''}
-          </div>
-        `;
-        const addBtn = this.shouldRenderEditButtons() ? `<div class="add-paragraph-btn" data-target="${item.editSection}">➕ Ajouter un paragraphe</div>` : '';
-        return content + addBtn;
-      }
-      return `<div>${item.content}</div>`;
-    },
-
-    // Helper method to render complex content (lists, grids, etc.)
-    renderComplexContent(content) {
-      switch (content.type) {
-        case 'ordered_list':
-          return `
-            <div class="editable-section editable-list-container" data-section-type="ordered_list">
-              <ol class="editable editable-list" data-edit-type="ordered-list" data-edit-section="${content.editType}">
-                ${content.items.map(item => `<li>${item}</li>`).join('')}
-              </ol>
-              ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-list-btn" title="Éditer cette liste complète">✏️</button>' : ''}
-            </div>
-            ${this.shouldRenderEditButtons() ? '<div class="add-paragraph-btn" data-target="creation-steps">➕ Ajouter un paragraphe</div>' : ''}
-          `;
-        
-        case 'list':
-          return `
-            <div class="editable-section editable-list-container" data-section-type="list">
-              <ul class="editable editable-list" data-edit-type="list" data-edit-section="${content.editType}">
-                ${content.items.map(item => `<li>${item}</li>`).join('')}
-              </ul>
-              ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-list-btn" title="Éditer cette liste complète">✏️</button>' : ''}
-            </div>
-            ${this.shouldRenderEditButtons() ? `<div class="add-paragraph-btn" data-target="${content.editType}">➕ Ajouter un paragraphe</div>` : ''}
-          `;
-        
-        case 'element_pairs':
-          return this.renderElementPairs(content.pairs);
-        
-        case 'grid':
-          return this.renderGrid(content);
-        
-        default:
-          return `<div><!-- Unknown content type: ${content.type} --></div>`;
+      if (category) {
+        this.renderCategoryPage('spell', category);
       }
     },
-
-    // Helper method to render element pairs
-    renderElementPairs(pairs) {
-      return `
-        <div class="pairs">
-          ${pairs.map(pair => `
-            <div class="cell">
-              <svg aria-hidden="true" class="eico" viewBox="0 0 24 24">
-                <circle cx="12" cy="12" fill="${pair.element1.color}" r="9"></circle>
-              </svg>
-              <span><span style="color: ${pair.element1.color}; font-weight: bold;${pair.element1.textShadow ? ` text-shadow: ${pair.element1.textShadow};` : ''}">${pair.element1.name}</span></span>
-            </div>
-            <div class="vs">⇆</div>
-            <div class="cell right">
-              <svg aria-hidden="true" class="eico" viewBox="0 0 24 24">
-                <circle cx="12" cy="12" fill="${pair.element2.color}" r="9"></circle>
-              </svg>
-              <span><span style="color: ${pair.element2.color}; font-weight: bold;${pair.element2.textShadow ? ` text-shadow: ${pair.element2.textShadow};` : ''}">${pair.element2.name}</span></span>
-            </div>
-          `).join('')}
-        </div>
-      `;
-    },
-
-    // Helper method to render grids
-    renderGrid(gridData) {
-      return `
-        <div class="grid cols-${gridData.cols}">
-          ${gridData.content ? gridData.content.map(item => this.renderCard(item)).join('') : 
-            gridData.items ? gridData.items.map(item => this.renderCard(item)).join('') : ''}
-        </div>
-      `;
-    },
-
-    generateElementsPage() {
-      return this.generateStaticPage('elements');
-    },
-
-    generateStatsPage() {
-      return this.generateStaticPage('stats');
-    },
-
-    generateCompetencesPage() {
-      return this.generateStaticPage('competences-tests');
-    },
-
-    generateEtatsPage() {
-      return this.generateStaticPage('etats');
-    },
-
 
     generateDevToolbox() {
       const devToolbox = JdrApp.utils.dom.$('#devToolbox');
       if (!devToolbox) return;
 
       const toolboxHTML = `
-        <!-- En-tête de la toolbox -->
         <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--rule);">
           <span style="font-size: 18px;">🛠</span>
           <strong style="color: var(--accent-ink); font-family: 'Cinzel', serif;">Outils de développement</strong>
         </div>
         
-        <!-- Groupe : Édition et sauvegarde -->
         <div style="margin-bottom: 12px;">
           <div style="font-size: 12px; color: var(--paper-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">✏️ Édition</div>
           <div style="display: flex; gap: 8px; flex-wrap: wrap;">
@@ -3503,7 +3178,6 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
           </div>
         </div>
         
-        <!-- Groupe : Création de contenu -->
         <div style="margin-bottom: 12px;">
           <div style="font-size: 12px; color: var(--paper-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">📝 Création</div>
           <div style="display: flex; gap: 8px; flex-wrap: wrap;">
@@ -3513,7 +3187,6 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
           </div>
         </div>
         
-        <!-- Groupe : Ressources -->
         <div>
           <div style="font-size: 12px; color: var(--paper-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">🎭 Ressources</div>
           <div style="display: flex; gap: 8px; flex-wrap: wrap;">
@@ -3526,185 +3199,55 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       devToolbox.innerHTML = toolboxHTML;
     },
 
-    // General image renderer with style options
-    renderImage(illusKey, options = {}) {
-      const {
-        altText = '',
-        styleType = 'default', // 'spell', 'class', 'subclass', 'don', 'default'
-        size = 'medium', // 'small', 'medium', 'large'
-        frame = true
-      } = options;
-
-      // Check if image is available in images module
-      let imageUrl = '';
-      let imageStyle = 'display: none;';
-      let removeStyle = 'display: none;';
-      
-      if (JdrApp.modules.images && JdrApp.modules.images.getImageUrl) {
-        imageUrl = JdrApp.modules.images.getImageUrl(illusKey);
-        if (imageUrl) {
-          imageUrl = JdrApp.modules.images.processImageUrl(imageUrl);
-          imageStyle = 'display: inline-block;';
-          removeStyle = 'display: inline-flex;';
-        }
-      }
-
-      // Build CSS classes based on style type
-      let containerClasses = 'illus';
-      let imageClasses = 'thumb';
-      
-      if (frame && ['spell', 'class', 'subclass', 'don'].includes(styleType)) {
-        containerClasses += ` illus-${styleType}`;
-      }
-      
-      if (size !== 'medium') {
-        containerClasses += ` illus-${size}`;
-      }
-
-      // In standalone version, don't render editing buttons
-      if (window.STANDALONE_VERSION) {
-        return `
-          <div class="${containerClasses}" data-illus-key="${illusKey}" data-style-type="${styleType}" data-bound="1">
-            <img alt="Illustration ${altText}" class="${imageClasses}" style="${imageStyle}"${imageUrl ? ` src="${imageUrl}"` : ''}>
-          </div>
-        `;
-      }
-      
-      return `
-        <div class="${containerClasses}" data-illus-key="${illusKey}" data-style-type="${styleType}" data-bound="1">
-          <img alt="Illustration ${altText}" class="${imageClasses}" style="${imageStyle}"${imageUrl ? ` src="${imageUrl}"` : ''}>
-          <label class="up">📷 Ajouter<input accept="image/*" hidden="" type="file"></label>
-          <button class="rm" type="button" style="${removeStyle}">🗑 Retirer</button>
-        </div>
-      `;
-    },
-
-    // Simplified wrapper for backward compatibility
-    createIllustration(illusKey, altText = '') {
-      // Determine style type from illus key
-      let styleType = 'default';
-      if (illusKey.startsWith('spell:') || illusKey.startsWith('sort:')) styleType = 'spell';
-      else if (illusKey.startsWith('class:')) styleType = 'class';
-      else if (illusKey.startsWith('subclass:')) styleType = 'subclass';
-      else if (illusKey.startsWith('don:')) styleType = 'don';
-      
-      return this.renderImage(illusKey, { altText, styleType });
-    },
-
-    createSubclassIllustrations(className, subclassName) {
-      const illusKey1 = `subclass:${className}:${subclassName}:1`;
-      const illusKey2 = `subclass:${className}:${subclassName}:2`;
-      
-      return `
-        <div class="subclass-images">
-          ${this.renderImage(illusKey1, { altText: `${subclassName} (Image 1)`, styleType: 'subclass' })}
-          ${this.renderImage(illusKey2, { altText: `${subclassName} (Image 2)`, styleType: 'subclass' })}
-        </div>
-      `;
-    },
-
-    // Simplified dynamic rendering
-    renderSortCategory(page) {
-      const categoryId = page.replace('sorts-', '');
-      const category = window.SORTS?.find(cat => 
-        JdrApp.utils.data.sanitizeId(cat.nom) === categoryId
-      );
-      
-      if (!category) {
-        return;
-      }
-      
-      const article = document.querySelector(`article[data-page="${page}"]`);
-      if (!article) {
-        return;
-      }
-      
-      // Generate content directly
-      const content = `
-        <section>
-          <header>
-            <h1>${category.nom}</h1>
-            <div class="hero-illus">
-              ${this.createIllustration(`spellcategory:${category.nom}`)}
-            </div>
-            
-            <div class="editable-section" data-section-type="spell-category-description">
-              <p class="lead editable editable-paragraph" data-edit-type="spell-category-description" data-edit-section="${category.nom}">${category.description}</p>
-              ${this.shouldRenderEditButtons() ? '<button class="edit-btn edit-paragraph-btn" title="Éditer la description de la catégorie">✏️</button>' : ''}
-            </div>
-            
-            ${this.shouldRenderEditButtons() ? `<button class="spell-add" data-category-name="${category.nom}" type="button">➕ Ajouter un sort</button>` : ''}
-          </header>
-          
-          <div class="grid cols-2">
-            ${category.sorts.map((sort, index) => this.generateSpellCard(category, sort, index)).join('')}
-          </div>
-        </section>
-      `;
-      
-      article.innerHTML = content;
-    },
-
-
-
-
-    // Auto-load images for all illustration slots
     autoLoadImages() {
-      // Use images module if available
       if (JdrApp.modules.images) {
         return JdrApp.modules.images.autoLoadImages();
       }
       return 0;
-    },
-
+    }
   };
 
 })();
 // ============================================================================
-// JDR-BAB APPLICATION - EDITOR MODULE
+// JDR-BAB APPLICATION - EDITOR MODULE (REFACTORED)
 // ============================================================================
 
 (() => {
   "use strict";
 
   // ========================================
-  // EDITOR MODULE
+  // EDITOR MODULE - Now uses UnifiedEditor
   // ========================================
   JdrApp.modules.editor = {
     editedData: {},
-    modifiedElements: new Map(), // Track what was actually modified
-    isDevMode: false, // Always false by default, no localStorage read
+    isDevMode: false,
 
     init() {
-      
-      // Set up dev mode toggle
-      JdrApp.utils.events.register('click', '#devToggle', () => this.toggleDevMode());
-      
-      // Set up editable element handlers
+      this.setupEventListeners();
       this.setupEditableHandlers();
-      
-      // Set up creation handlers for new elements
       this.setupCreationHandlers();
-      
-      // Set up image upload handlers
       this.setupImageHandlers();
-      
-      // Initialize dev mode state - enable automatically in development
       this.updateDevModeState();
     },
 
+    setupEventListeners() {
+      JdrApp.utils.events.register('click', '#devToggle', () => this.toggleDevMode());
+
+      EventBus.on(Events.EDITOR_TOGGLE, (payload) => {
+        this.isDevMode = payload.enabled;
+        this.updateDevModeState();
+      });
+
+      EventBus.on(Events.CONTENT_UPDATE, () => {
+        this.saveChangesToStorage();
+      });
+    },
+
     toggleDevMode() {
-      // In standalone version, prevent dev mode toggle
-      if (window.STANDALONE_VERSION) {
-        return;
-      }
+      if (window.STANDALONE_VERSION) return;
       
       this.isDevMode = !this.isDevMode;
-      document.body.classList.toggle('dev-on', this.isDevMode);
-      document.body.classList.toggle('dev-off', !this.isDevMode);
-      
-      // Note: No localStorage save - dev mode resets on page reload
-      this.updateDevModeState();
+      EventBus.emit(Events.EDITOR_TOGGLE, { enabled: this.isDevMode });
     },
 
     updateDevModeState() {
@@ -3714,7 +3257,6 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         return;
       }
       
-      // Apply correct body classes
       document.body.classList.toggle('dev-on', this.isDevMode);
       document.body.classList.toggle('dev-off', !this.isDevMode);
       
@@ -3729,813 +3271,159 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         devToolbox.style.display = this.isDevMode ? 'block' : 'none';
       }
       
-      // Show/hide edit buttons based on dev mode state
       if (this.isDevMode) {
         this.forceShowAllEditButtons();
       } else {
         this.forceHideAllEditButtons();
       }
     },
-    
+
     forceHideAllEditButtons() {
-      // Only hide buttons if dev mode is actually OFF
-      if (this.isDevMode || window.STANDALONE_VERSION === false) {
-        return; // Don't hide buttons in dev mode ON
-      }
+      if (this.isDevMode || window.STANDALONE_VERSION === false) return;
       
-      // Aggressively hide ALL edit buttons using JavaScript when dev mode is OFF
-      const editButtonSelectors = [
-        '.edit-btn',
-        '.edit-title-btn', 
-        '.edit-paragraph-btn',
-        '.edit-list-btn',
-        '.edit-field-btn',
-        '.edit-effect-btn',
-        '.edit-stats-btn',
-        '.edit-section-btn',
-        'button[class*="edit"]',
-        'button[title*="✏️"]',
-        'button[title*="diter"]',
-        'button[title*="Edit"]',
-        '.spell-add',
-        '.don-add',
-        '.spell-delete',
-        '.don-delete',
-        '.don-move-up',
-        '.don-move-down',
-        '.section-delete',
-        '.remove-section-btn',
-        '.add-paragraph-btn',
-        '.add-subclass-btn',
-        '.delete-subclass-btn',
-        'button[data-category-name]',
-        'button[data-spell-name]',
-        'button[data-don-name]',
-        'button[data-section-name]',
-        'button[data-section-type]',
-        '.illus .up',
-        '.illus .rm',
-        '.illus label',
-        '.illus input[type="file"]'
+      const selectors = [
+        '.edit-btn', '[class$="-add"]', '[class$="-delete"]', '[class*="-move-"]',
+        '.section-delete', '.remove-section-btn', '.add-paragraph-btn', 
+        '.add-subclass-btn', '.delete-subclass-btn',
+        '.illus .up', '.illus .rm', '.illus label', '.illus input[type="file"]'
       ];
       
-      editButtonSelectors.forEach(selector => {
-        try {
-          const elements = document.querySelectorAll(selector);
-          elements.forEach(element => {
-            element.style.display = 'none';
-            element.style.visibility = 'hidden';
-            element.style.opacity = '0';
-            element.style.pointerEvents = 'none';
-            element.setAttribute('aria-hidden', 'true');
-          });
-        } catch (error) {
-          // Silently handle selector errors
-        }
+      selectors.forEach(selector => {
+        document.querySelectorAll(selector).forEach(element => {
+          element.style.display = 'none';
+          element.style.visibility = 'hidden';
+          element.setAttribute('aria-hidden', 'true');
+        });
       });
     },
     
     forceShowAllEditButtons() {
-      // Show edit buttons when dev mode is ON
-      const editButtonSelectors = [
-        '.edit-btn',
-        '.edit-title-btn', 
-        '.edit-paragraph-btn',
-        '.edit-list-btn',
-        '.edit-field-btn',
-        '.edit-effect-btn',
-        '.edit-stats-btn',
-        '.edit-section-btn',
-        'button[class*="edit"]',
-        'button[title*="✏️"]',
-        'button[title*="diter"]',
-        'button[title*="Edit"]',
-        '.spell-add',
-        '.don-add',
-        '.spell-delete',
-        '.don-delete',
-        '.don-move-up',
-        '.don-move-down',
-        '.section-delete',
-        '.remove-section-btn',
-        '.add-paragraph-btn',
-        '.add-subclass-btn',
-        '.delete-subclass-btn',
-        'button[data-category-name]',
-        'button[data-spell-name]',
-        'button[data-don-name]',
-        'button[data-section-name]',
-        'button[data-section-type]',
-        '.illus .up',
-        '.illus .rm',
-        '.illus label',
-        '.illus input[type="file"]'
+      const selectors = [
+        '.edit-btn', '[class$="-add"]', '[class$="-delete"]', '[class*="-move-"]',
+        '.section-delete', '.remove-section-btn', '.add-paragraph-btn',
+        '.add-subclass-btn', '.delete-subclass-btn',
+        '.illus .up', '.illus .rm', '.illus label', '.illus input[type="file"]'
       ];
       
-      editButtonSelectors.forEach(selector => {
-        try {
-          const elements = document.querySelectorAll(selector);
-          elements.forEach(element => {
-            element.style.display = '';
-            element.style.visibility = '';
-            element.style.opacity = '';
-            element.style.pointerEvents = '';
-            element.removeAttribute('aria-hidden');
-          });
-        } catch (error) {
-          // Silently handle selector errors
-        }
+      selectors.forEach(selector => {
+        document.querySelectorAll(selector).forEach(element => {
+          element.style.display = '';
+          element.style.visibility = '';
+          element.removeAttribute('aria-hidden');
+        });
       });
     },
 
     setupEditableHandlers() {
-      // Edit button click
+      // Unified edit button handler
       JdrApp.utils.events.register('click', '.edit-btn', (e) => {
         e.preventDefault();
         e.stopPropagation();
         
-        if (!this.isDevMode) {
-          return;
+        if (!this.isDevMode) return;
+        
+        // Find the editable element near the button
+        let editableElement = e.target.previousElementSibling;
+        
+        // If not found as previous sibling, look in parent
+        if (!editableElement || !editableElement.classList.contains('editable')) {
+          const parent = e.target.parentElement;
+          editableElement = parent.querySelector('.editable');
         }
         
-        // Find the parent editable section
-        const editableSection = e.target.closest('.editable-section');
-        if (editableSection) {
-          this.makeEditableSection(editableSection);
-          return;
+        // Fallback: look for closest editable element
+        if (!editableElement || !editableElement.classList.contains('editable')) {
+          editableElement = e.target.closest('.editable-section')?.querySelector('.editable') ||
+                           e.target.closest('.card')?.querySelector('.editable');
         }
         
-        // Fallback: Find the parent list item (legacy support)
-        const listItem = e.target.closest('.editable-item');
-        if (listItem) {
-          this.makeEditableItem(listItem);
-          return;
+        if (editableElement && editableElement.classList.contains('editable')) {
+          console.log('Starting edit for element:', editableElement);
+          UnifiedEditor.startEdit(editableElement);
+        } else {
+          console.warn('No editable element found for edit button');
         }
-        
-        // No editable element found
       });
 
-      // Completely disable any double-click editing by blocking ALL events on .editable elements
+      // Click outside to save
+      JdrApp.utils.events.register('click', 'body', (e) => {
+        if (!e.target.closest('.editable') && !e.target.matches('.edit-btn')) {
+          UnifiedEditor.saveAllEdits();
+        }
+      });
+
+      // Keyboard shortcuts
+      JdrApp.utils.events.register('keydown', '.editable', (e) => {
+        if ((e.key === 'Enter' && !e.shiftKey) || e.key === 'Escape') {
+          e.preventDefault();
+          UnifiedEditor.saveCurrentEdit();
+        }
+      });
+
+      // Prevent double-click editing (force button-only editing)
       JdrApp.utils.events.register('dblclick', '.editable', (e) => {
         e.preventDefault();
         e.stopPropagation();
         return false;
       });
-
-      JdrApp.utils.events.register('click', '.editable', (e) => {
-        // Only allow clicks for keyboard navigation, no editing triggers
-      });
-
-      // Click outside to save
-      JdrApp.utils.events.register('click', 'body', (e) => {
-        if (!e.target.closest('.editable') && !e.target.matches('.editable') && !e.target.matches('.edit-btn')) {
-          this.saveAllEdits();
-        }
-      });
-
-      // Enter to save, Escape to save and exit
-      JdrApp.utils.events.register('keydown', '.editable', (e) => {
-        if (e.key === 'Enter' && !e.shiftKey && !e.ctrlKey) {
-            e.preventDefault();
-          // Find the parent editable section or item
-          const editableContainer = e.target.closest('.editable-section, .editable-item') || e.target;
-          this.saveEdit(editableContainer);
-        } else if (e.key === 'Escape') {
-            e.preventDefault();
-          // Find the parent editable section or item
-          const editableContainer = e.target.closest('.editable-section, .editable-item') || e.target;
-          this.saveEdit(editableContainer);
-        }
-      });
-    },
-
-    // Find the best editable target element
-    findEditableTarget(clickedElement) {
-      // If the clicked element itself has edit attributes, use it
-      if (clickedElement.dataset.editType && clickedElement.dataset.editSection !== undefined) {
-        return clickedElement;
-      }
-      
-      // Otherwise, look for the closest parent with edit attributes
-      let current = clickedElement;
-      while (current && current !== document.body) {
-        if (current.classList && current.classList.contains('editable') && 
-            current.dataset.editType && current.dataset.editSection !== undefined) {
-          // Found parent editable element
-          return current;
-        }
-        current = current.parentElement;
-      }
-      
-      // Fallback: return the original clicked element if it's at least .editable
-      if (clickedElement.classList && clickedElement.classList.contains('editable')) {
-        // Using fallback editable element
-        return clickedElement;
-      }
-      
-      // No suitable editable element found
-      return null;
-    },
-
-    makeEditableSection(section) {
-      
-      if (section.dataset.editing === 'true') {
-        return;
-      }
-      
-      // Find the editable element inside the section
-      const editableElement = section.querySelector('.editable');
-      if (!editableElement) {
-        return;
-      }
-      
-      // STRICT VALIDATION: Ensure editableElement has required data attributes
-      if (!editableElement.dataset.editType || !editableElement.dataset.editSection) {
-        return;
-      }
-      
-      // Store original content on the section itself (which has the data attributes)
-      section.dataset.originalContent = editableElement.innerHTML;
-      section.dataset.editing = 'true';
-      
-      
-      // Show HTML source for editing
-      const htmlSource = editableElement.innerHTML;
-      editableElement.textContent = htmlSource; // Show HTML as text
-      
-      // Make the editable element editable
-      editableElement.contentEditable = true;
-      editableElement.style.backgroundColor = 'rgba(255, 255, 0, 0.1)';
-      editableElement.style.border = '1px dashed var(--bronze)';
-      editableElement.style.borderRadius = '4px';
-      editableElement.style.padding = '4px';
-      editableElement.style.fontFamily = 'monospace'; // Monospace font for HTML editing
-      editableElement.style.whiteSpace = 'pre-wrap'; // Preserve whitespace
-      editableElement.focus();
-      
-      // Select all text
-      const range = document.createRange();
-      range.selectNodeContents(editableElement);
-      const selection = window.getSelection();
-      selection.removeAllRanges();
-      selection.addRange(range);
-    },
-
-    makeEditableItem(listItem) {
-      
-      if (listItem.dataset.editing === 'true') {
-        return;
-      }
-      
-      // Find the content div inside the list item
-      const contentDiv = listItem.querySelector('.editable-content');
-      if (!contentDiv) {
-        return;
-      }
-      
-      // Store original content on the list item itself (which has the data attributes)
-      listItem.dataset.originalContent = contentDiv.innerHTML;
-      listItem.dataset.editing = 'true';
-      
-      // List item made editable
-      
-      // Make the content div editable
-      contentDiv.contentEditable = true;
-      contentDiv.style.backgroundColor = 'rgba(255, 255, 0, 0.1)';
-      contentDiv.style.border = '1px dashed var(--bronze)';
-      contentDiv.style.borderRadius = '4px';
-      contentDiv.style.padding = '4px';
-      contentDiv.focus();
-      
-      // Select all text
-      const range = document.createRange();
-      range.selectNodeContents(contentDiv);
-      const selection = window.getSelection();
-      selection.removeAllRanges();
-      selection.addRange(range);
-    },
-
-    makeEditable(element) {
-      
-      if (element.dataset.editing === 'true') {
-        return;
-      }
-      
-      // Store original content
-      element.dataset.originalContent = element.innerHTML;
-      element.dataset.editing = 'true';
-      
-      // Element made editable
-      
-      // Make contenteditable
-      element.contentEditable = true;
-      element.style.backgroundColor = 'rgba(255, 255, 0, 0.1)';
-      element.style.border = '1px dashed var(--bronze)';
-      element.focus();
-      
-      // Select all text
-      const range = document.createRange();
-      range.selectNodeContents(element);
-      const selection = window.getSelection();
-      selection.removeAllRanges();
-      selection.addRange(range);
-    },
-
-    saveEdit(element) {
-      // For editable sections, get the edit type from the .editable element inside
-      let editType = element.dataset.editType;
-      let editSection = element.dataset.editSection;
-      
-      // For list items, get content from the .editable-content div
-      let newContent;
-      if (element.classList.contains('editable-item')) {
-        const contentDiv = element.querySelector('.editable-content');
-        newContent = contentDiv ? contentDiv.innerHTML.trim() : element.innerHTML.trim();
-      } else if (element.classList.contains('editable-section')) {
-        // For editable sections, get content from the .editable element inside
-        const editableElement = element.querySelector('.editable');
-        if (editableElement) {
-          // Get the text content (HTML source) and use it as the new HTML
-          newContent = editableElement.textContent.trim();
-          editType = editableElement.dataset.editType;
-          editSection = editableElement.dataset.editSection;
-        } else {
-          newContent = element.innerHTML.trim();
-        }
-      } else {
-        newContent = element.innerHTML.trim();
-      }
-      
-      const originalContent = element.dataset.originalContent;
-      
-      // Normalize HTML content to ensure consistency
-      newContent = this.normalizeHTMLContent(newContent);
-      
-      
-      if (newContent !== originalContent) {
-        
-        // Store edit in editedData
-        this.storeEdit(element, newContent);
-        
-        // Track this element as modified (only if editType is valid)
-        if (editType && typeof editType === 'string') {
-          const elementId = this.getElementId(element);
-          
-          this.modifiedElements.set(elementId, {
-            element: element,
-            content: newContent,
-            editType: editType,
-            timestamp: Date.now()
-          });
-          
-        } else {
-          // Skipping element with invalid editType
-        }
-        
-        // For editable sections, update the visual content immediately
-        if (element.classList.contains('editable-section')) {
-          const editableElement = element.querySelector('.editable');
-          if (editableElement) {
-            // Update the visible content with the new HTML
-            editableElement.innerHTML = newContent;
-          }
-        } else if (element.classList.contains('editable-item')) {
-          const contentDiv = element.querySelector('.editable-content');
-          if (contentDiv) {
-            // Update the visible content for list items
-            contentDiv.innerHTML = newContent;
-          }
-        } else {
-          // For direct editable elements, the content is already updated
-        }
-        
-        // Apply element coloring if needed
-        this.applyElementColoring(element);
-        
-        // IMMEDIATELY save changes to localStorage to persist edits
-        this.saveChangesToStorage();
-      } else {
-        // No content change detected
-      }
-      
-      // Reset editing state
-      this.resetEditingState(element);
-    },
-
-    cancelEdit(element) {
-      
-      // Restore original content
-      if (element.classList.contains('editable-section')) {
-        const editableElement = element.querySelector('.editable');
-        if (editableElement && element.dataset.originalContent) {
-          editableElement.innerHTML = element.dataset.originalContent;
-        }
-      } else if (element.classList.contains('editable-item')) {
-        const contentDiv = element.querySelector('.editable-content');
-        if (contentDiv && element.dataset.originalContent) {
-          contentDiv.innerHTML = element.dataset.originalContent;
-        }
-      } else {
-        if (element.dataset.originalContent) {
-          element.innerHTML = element.dataset.originalContent;
-        }
-      }
-      
-      this.resetEditingState(element);
-    },
-
-    resetEditingState(element) {
-      // For list items, reset the .editable-content div
-      if (element.classList.contains('editable-item')) {
-        const contentDiv = element.querySelector('.editable-content');
-        if (contentDiv) {
-          contentDiv.contentEditable = false;
-          contentDiv.style.backgroundColor = '';
-          contentDiv.style.border = '';
-          contentDiv.style.borderRadius = '';
-          contentDiv.style.padding = '';
-          // Note: We don't restore original content here - the new content should stay
-        }
-      } else if (element.classList.contains('editable-section')) {
-        // For editable sections, reset the .editable element inside
-        const editableElement = element.querySelector('.editable');
-        if (editableElement) {
-          editableElement.contentEditable = false;
-          editableElement.style.backgroundColor = '';
-          editableElement.style.border = '';
-          editableElement.style.borderRadius = '';
-          editableElement.style.padding = '';
-          editableElement.style.fontFamily = ''; // Reset font
-          editableElement.style.whiteSpace = ''; // Reset whitespace
-          
-          // Note: We don't restore original content here - the updated content should stay
-          // The content has already been updated in the saveEdit method
-        }
-      } else {
-        element.contentEditable = false;
-        element.style.backgroundColor = '';
-        element.style.border = '';
-        // Note: We don't restore original content here - the new content should stay
-      }
-      
-      element.dataset.editing = 'false';
-      delete element.dataset.originalContent;
-    },
-
-    saveAllEdits() {
-      // Save both old-style editable elements and new-style editable sections
-      JdrApp.utils.dom.$('.editable[data-editing="true"], .editable-section[data-editing="true"], .editable-item[data-editing="true"]').forEach(element => {
-        // STRICT VALIDATION: Only save elements with proper data attributes
-        if (this.hasValidEditData(element)) {
-          this.saveEdit(element);
-        } else {
-          this.resetEditingState(element);
-        }
-      });
-    },
-    
-    hasValidEditData(element) {
-      // For editable sections, check the .editable element inside
-      if (element.classList.contains('editable-section')) {
-        const editableElement = element.querySelector('.editable');
-        return editableElement && editableElement.dataset.editType && editableElement.dataset.editSection;
-      }
-      
-      // For editable items and direct editable elements
-      return element.dataset.editType && (element.dataset.editSection || element.dataset.editSpell || element.dataset.editDon || element.dataset.editClass);
-    },
-
-    storeEdit(element, content) {
-      // Find the actual editable element that has the data attributes
-      let editableElement = element;
-      let editType = element.dataset.editType;
-      
-      // If this is an editable section, get the data from the .editable element inside
-      if (element.classList.contains('editable-section')) {
-        const innerEditable = element.querySelector('.editable');
-        if (innerEditable && innerEditable.dataset.editType) {
-          editableElement = innerEditable;
-          editType = innerEditable.dataset.editType;
-        }
-      }
-      
-      // Validate editType before proceeding
-      if (!editType || typeof editType !== 'string') {
-        return;
-      }
-      
-      // Update data directly in global structures based on element attributes
-      this.updateGlobalData(editableElement, content, editType);
-    },
-
-    getEditKey(element) {
-      // Generate a unique key based on element data attributes
-      const editType = element.dataset.editType;
-      
-      if (element.dataset.editSpell) {
-        return element.dataset.editSpell;
-      } else if (element.dataset.editDon) {
-        return element.dataset.editDon;
-      } else if (element.dataset.editClass) {
-        return element.dataset.editClass;
-      } else if (element.dataset.editCategory) {
-        return element.dataset.editCategory;
-      } else if (element.dataset.editSection) {
-        return element.dataset.editSection;
-      }
-      
-      return 'default';
-    },
-
-    getElementId(element) {
-      // Find the actual editable element that has the data attributes
-      let editableElement = element;
-      
-      // If this is an editable section, get the data from the .editable element inside
-      if (element.classList.contains('editable-section')) {
-        const innerEditable = element.querySelector('.editable');
-        if (innerEditable && innerEditable.dataset.editType) {
-          editableElement = innerEditable;
-        }
-      }
-      
-      // Create a unique ID for tracking modifications
-      const editType = editableElement.dataset.editType;
-      const editSpell = editableElement.dataset.editSpell;
-      const editDon = editableElement.dataset.editDon;
-      const editClass = editableElement.dataset.editClass;
-      const editSubclass = editableElement.dataset.editSubclass;
-      const editCategory = editableElement.dataset.editCategory;
-      const editSection = editableElement.dataset.editSection;
-      
-      if (editSpell) return `spell:${editSpell}:${editType}`;
-      if (editDon) return `don:${editDon}:${editType}`;
-      if (editClass && editSubclass) return `subclass:${editClass}:${editSubclass}:${editType}`;
-      if (editClass) return `class:${editClass}:${editType}`;
-      if (editCategory) return `category:${editCategory}:${editType}`;
-      if (editSection) return `section:${editSection}:${editType}`;
-      
-      // Fallback: use element position in DOM
-      const allEditables = Array.from(document.querySelectorAll('.editable'));
-      const index = allEditables.indexOf(editableElement);
-      return `element:${index}:${editType}`;
-    },
-
-
-
-    updateStaticPageData(element, content) {
-      const editSection = element.dataset.editSection;
-      
-      if (!window.STATIC_PAGES) return false;
-      
-      const article = element.closest('article[data-static-page="true"]');
-      if (!article) return false;
-      
-      const pageId = article.dataset.page;
-      const pageData = window.STATIC_PAGES[pageId];
-      
-      if (!pageData || !pageData.sections) return false;
-      
-      return this.updateSectionContent(pageData.sections, editSection, content, element);
-    },
-
-    updateStaticPageDataByEditType(element, content) {
-      const editType = element.dataset.editType;
-      
-      if (!window.STATIC_PAGES) return false;
-      
-      const article = element.closest('article[data-static-page="true"]');
-      if (!article) return false;
-      
-      const pageId = article.dataset.page;
-      const pageData = window.STATIC_PAGES[pageId];
-      
-      if (!pageData || !pageData.sections) return false;
-      
-      return this.updateSectionContentByEditType(pageData.sections, editType, content, element);
-    },
-
-    updateSectionContentByEditType(sections, editType, content, element) {
-      const editSection = element.dataset.editSection;
-      
-      for (let i = 0; i < sections.length; i++) {
-        const section = sections[i];
-        
-        // Handle card content with ordered lists
-        if (section.type === 'card' && section.content) {
-          if (section.content.type === 'ordered_list' && section.content.editType === editSection) {
-            const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = content;
-            const listItems = tempDiv.querySelectorAll('li');
-            section.content.items = Array.from(listItems).map(li => li.innerHTML);
-            return true;
-          }
-          
-          if (section.content.type === 'list' && section.content.editType === editSection) {
-            const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = content;
-            const listItems = tempDiv.querySelectorAll('li');
-            section.content.items = Array.from(listItems).map(li => li.innerHTML);
-            return true;
-          }
-        }
-        
-        // Handle grid content
-        if (section.type === 'grid' && section.content) {
-          for (let j = 0; j < section.content.length; j++) {
-            const gridItem = section.content[j];
-            if (gridItem.content && Array.isArray(gridItem.content)) {
-              const result = this.updateSectionContentByEditType([{content: gridItem.content}], editType, content, element);
-              if (result) return true;
-            }
-          }
-        }
-      }
-      
-      return false;
-    },
-
-    updateSectionContent(sections, editSection, content, element) {
-      
-      for (let i = 0; i < sections.length; i++) {
-        const section = sections[i];
-        // Checking section
-        
-        // Check if this is the section we're looking for
-        if (section.type === 'intro' && editSection === 'intro') {
-          section.content = content;
-          return true;
-        }
-        
-        // Handle card content
-        if (section.type === 'card' && section.content) {
-          // Check if this is a card title edit
-          if (editSection.endsWith('-title') && section.sectionType) {
-            const sectionId = editSection.replace('-title', '');
-            if (section.sectionType === sectionId) {
-              section.title = content;
-              return true;
-            }
-          }
-          
-          if (section.content.type === 'ordered_list' && section.content.editType === editSection) {
-            const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = content;
-            const listItems = tempDiv.querySelectorAll('li');
-            section.content.items = Array.from(listItems).map(li => li.innerHTML);
-            return true;
-          }
-          
-          // Handle array content in cards
-          if (Array.isArray(section.content)) {
-            for (let j = 0; j < section.content.length; j++) {
-              const contentItem = section.content[j];
-              if (contentItem.editSection === editSection) {
-                contentItem.content = content;
-                return true;
-              }
-            }
-          }
-        }
-        
-        // Handle grid content
-        if (section.type === 'grid' && section.content) {
-          for (let j = 0; j < section.content.length; j++) {
-            const gridItem = section.content[j];
-            if (gridItem.content && Array.isArray(gridItem.content)) {
-              const result = this.updateSectionContent([{content: gridItem.content}], editSection, content, element);
-              if (result) return true;
-            }
-          }
-        }
-      }
-      
-      return false;
-    },
-
-    applyElementColoring(element) {
-      // Apply element coloring with delay
-      setTimeout(() => {
-        this.colorizeElements(element);
-      }, 500);
-    },
-
-    colorizeElements(container = document) {
-      const elementMap = {
-        'Feu': { color: '#ff6b35', weight: 'bold' },
-        'Air': { color: '#87ceeb', weight: 'bold' },
-        'Eau': { color: '#4682b4', weight: 'bold' },
-        'Terre': { color: '#8b7355', weight: 'bold' },
-        'Divin': { color: '#ffd700', weight: 'bold' },
-        'Maléfique': { color: '#8b008b', weight: 'bold' }
-      };
-
-      const walker = document.createTreeWalker(
-        container,
-        NodeFilter.SHOW_TEXT,
-        null,
-        false
-      );
-
-      const textNodes = [];
-      let node;
-      while (node = walker.nextNode()) {
-        textNodes.push(node);
-      }
-
-      textNodes.forEach(textNode => {
-        let content = textNode.textContent;
-        let hasChanges = false;
-
-        Object.entries(elementMap).forEach(([element, style]) => {
-          const regex = new RegExp(`\\b${element}\\b`, 'g');
-          if (regex.test(content)) {
-            content = content.replace(regex, `<span style="color: ${style.color}; font-weight: ${style.weight};">${element}</span>`);
-            hasChanges = true;
-          }
-        });
-
-        if (hasChanges) {
-          const wrapper = document.createElement('span');
-          wrapper.innerHTML = content;
-          textNode.parentNode.replaceChild(wrapper, textNode);
-        }
-      });
     },
 
     setupCreationHandlers() {
-      // Add new subclass
+      // Unified subclass management
       JdrApp.utils.events.register('click', '.add-subclass-btn', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        
-        if (!this.isDevMode) {
-          return;
-        }
-        
+        if (!this.isDevMode) return;
         this.addNewSubclass(e.target);
       });
 
-      // Delete subclass
       JdrApp.utils.events.register('click', '.delete-subclass-btn', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        
-        if (!this.isDevMode) {
-          return;
-        }
-        
+        if (!this.isDevMode) return;
         this.deleteSubclass(e.target);
       });
     },
 
     addNewSubclass(button) {
-      // Find the parent class article
       const article = button.closest('article');
       if (!article) return;
       
-      // Try to get class name from article attributes or from URL
-      let className = article.dataset.class;
+      let className = article.dataset.pageTitle;
       if (!className) {
-        const currentHash = window.location.hash;
-        const match = currentHash.match(/#\/([^\/]+)/);
-        if (match) {
-          className = match[1].charAt(0).toUpperCase() + match[1].slice(1);
+        const hash = window.location.hash.match(/#\/([^\/]+)/);
+        if (hash) {
+          className = hash[1].charAt(0).toUpperCase() + hash[1].slice(1);
         }
       }
       
-      if (!className || !window.CLASSES) return;
+      console.log('Adding subclass to class:', className);
+      
+      if (!className || !window.CLASSES) {
+        console.log('Missing className or CLASSES:', { className, hasClasses: !!window.CLASSES });
+        return;
+      }
       
       const classe = window.CLASSES.find(c => c.nom === className);
-      if (!classe) return;
-      
-      // Create new subclass with default values including proper labels
-      const newSubclass = {
-        nom: "Nouvelle sous-classe",
-        base: {
-          Force: 3,
-          Agilité: 3,
-          Endurance: 3,
-          Intelligence: 3,
-          Volonté: 3,
-          Chance: 3
-        },
-        progression: "<strong>📈 Progression par niveau:</strong> +1 Force 💪, +1 Agilité 🏃",
-        capacites: [
-          "<em>Capacité unique</em>: Description de la capacité spéciale de cette sous-classe."
-        ]
-      };
-      
-      // Add to the class
-      if (!classe.sousClasses) {
-        classe.sousClasses = [];
+      if (!classe) {
+        console.log('Class not found:', className);
+        console.log('Available classes:', window.CLASSES.map(c => c.nom));
+        return;
       }
+      
+      const config = window.ContentTypes.subclass;
+      const newSubclass = { ...config.defaultValues };
+      
+      console.log('Creating new subclass:', newSubclass);
+      
+      if (!classe.sousClasses) classe.sousClasses = [];
       classe.sousClasses.push(newSubclass);
       
-      // Save immediately
-      this.saveChangesToStorage();
+      console.log('Class after adding subclass:', classe);
       
-      // Refresh the current page to show the new subclass
+      EventBus.emit(Events.CONTENT_ADD, {
+        type: 'subclass',
+        category: className,
+        item: newSubclass
+      });
+      
+      this.saveChangesToStorage();
       window.location.reload();
     },
 
@@ -4543,55 +3431,36 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       const className = button.dataset.className;
       const subclassName = button.dataset.subclassName;
       
-      if (!className || !subclassName) {
-        console.error('❌ Missing class or subclass name');
-        return;
-      }
+      if (!className || !subclassName) return;
+      if (!confirm(`Êtes-vous sûr de vouloir supprimer la sous-classe "${subclassName}" ?`)) return;
 
-      // Confirm deletion
-      if (!confirm(`Êtes-vous sûr de vouloir supprimer la sous-classe "${subclassName}" ?`)) {
-        return;
-      }
+      const classe = window.CLASSES?.find(c => c.nom === className);
+      if (!classe?.sousClasses) return;
 
-      if (!window.CLASSES) {
-        console.error('❌ No CLASSES data');
-        return;
-      }
+      const index = classe.sousClasses.findIndex(sc => sc.nom === subclassName);
+      if (index === -1) return;
 
-      const classe = window.CLASSES.find(c => c.nom === className);
-      if (!classe || !classe.sousClasses) {
-        console.error('❌ Class or subclasses not found');
-        return;
-      }
-
-      // Find and remove the subclass
-      const subclassIndex = classe.sousClasses.findIndex(sc => sc.nom === subclassName);
-      if (subclassIndex === -1) {
-        console.error('❌ Subclass not found');
-        return;
-      }
-
-      classe.sousClasses.splice(subclassIndex, 1);
-
-      // Save immediately
+      const deletedSubclass = classe.sousClasses.splice(index, 1)[0];
+      
+      EventBus.emit(Events.CONTENT_DELETE, {
+        type: 'subclass',
+        category: className,
+        item: deletedSubclass
+      });
+      
       this.saveChangesToStorage();
-
-      // Refresh the current page
       window.location.reload();
     },
 
     setupImageHandlers() {
-      // Image upload
       JdrApp.utils.events.register('change', '.illus input[type="file"]', (e) => {
         this.handleImageUpload(e);
       });
 
-      // Image removal
       JdrApp.utils.events.register('click', '.illus .rm', (e) => {
         this.handleImageRemoval(e);
       });
 
-      // Image enlargement
       JdrApp.utils.events.register('click', '.illus img', (e) => {
         this.toggleImageEnlargement(e.target);
       });
@@ -4608,42 +3477,18 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         const rmButton = illus.querySelector('.rm');
         const illusKey = illus.dataset.illusKey;
 
-        // Set image source and display
         img.src = e.target.result;
         img.style.display = 'block';
         if (rmButton) rmButton.style.display = 'block';
 
-        // Save to images module if available
-        if (JdrApp.modules.images && JdrApp.modules.images.setImageUrl) {
+        if (JdrApp.modules.images?.setImageUrl) {
           JdrApp.modules.images.setImageUrl(illusKey, e.target.result);
-        } else {
-          // Fallback: save to localStorage with quota management
-          try {
-            localStorage.setItem(`illustration:${illusKey}`, e.target.result);
-          } catch (error) {
-            if (error.name === 'QuotaExceededError') {
-              this.clearOldImages();
-              
-              // Try again after clearing
-              try {
-                localStorage.setItem(`illustration:${illusKey}`, e.target.result);
-              } catch (secondError) {
-                alert('Espace de stockage insuffisant. Veuillez supprimer quelques images pour continuer.');
-                // Reset image display
-                img.src = '';
-                img.style.display = 'none';
-                if (rmButton) rmButton.style.display = 'none';
-                return;
-              }
-            } else {
-              throw error;
-            }
-          }
         }
-      };
-      
-      reader.onerror = (e) => {
-        alert('Erreur lors de la lecture du fichier image');
+
+        EventBus.emit(Events.IMAGE_UPLOAD, { 
+          illusKey, 
+          src: e.target.result 
+        });
       };
       
       reader.readAsDataURL(file);
@@ -4655,18 +3500,15 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       const rmButton = illus.querySelector('.rm');
       const illusKey = illus.dataset.illusKey;
 
-      // Remove image display
       img.src = '';
       img.style.display = 'none';
       if (rmButton) rmButton.style.display = 'none';
 
-      // Remove from images module if available
-      if (JdrApp.modules.images && JdrApp.modules.images.removeImage) {
+      if (JdrApp.modules.images?.removeImage) {
         JdrApp.modules.images.removeImage(illusKey);
-      } else {
-        // Fallback: remove from localStorage
-        localStorage.removeItem(`illustration:${illusKey}`);
       }
+
+      EventBus.emit(Events.IMAGE_DELETE, { illusKey });
     },
 
     toggleImageEnlargement(img) {
@@ -4688,10 +3530,8 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       }
       
       backdrop.classList.add('visible');
-      
-      // Click to close
       backdrop.onclick = () => {
-        JdrApp.utils.dom.$('img.enlarged').forEach(img => {
+        document.querySelectorAll('img.enlarged').forEach(img => {
           img.classList.remove('enlarged');
         });
         this.removeImageBackdrop();
@@ -4705,327 +3545,28 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       }
     },
 
-    // Clear old images from localStorage to free space
-    clearOldImages() {
-      const illustrationKeys = [];
-      
-      // Find all illustration keys in localStorage
-      for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i);
-        if (key && key.startsWith('illustration:')) {
-          illustrationKeys.push(key);
-        }
-      }
-      
-      // Sort by key (oldest first, roughly)
-      illustrationKeys.sort();
-      
-      // Remove the oldest half
-      const toRemove = Math.ceil(illustrationKeys.length / 2);
-      for (let i = 0; i < toRemove; i++) {
-        localStorage.removeItem(illustrationKeys[i]);
+    saveChangesToStorage() {
+      try {
+        localStorage.setItem('jdr-bab-edits', JSON.stringify(this.editedData));
+        localStorage.setItem('jdr-bab-last-modified', Date.now().toString());
+        EventBus.emit(Events.STORAGE_SAVE);
+      } catch (error) {
+        console.error('Failed to save changes:', error);
       }
     },
 
     forceCollectAllEdits() {
-      this.saveAllEdits();
-      
-      // All data is already updated in global structures during editing
-      // No need to process modifiedElements again since updateGlobalData
-      // is called immediately when each edit is saved
-      
+      UnifiedEditor.saveAllEdits();
       return this.editedData;
     },
 
-    // Ultra-simple generic method - just save text as-is
-    updateGlobalData(element, content, editType) {
-      try {
-        // Find the target in global data and update it directly with the raw content
-        this.updateDataByPath(element, content);
-      } catch (error) {
-        // Silently handle errors
-      }
+    // Legacy methods for backward compatibility
+    makeEditableSection(element) {
+      return UnifiedEditor.startEdit(element);
     },
 
-    // Ultra-simple method to save any text content to the right place
-    updateDataByPath(element, content) {
-      const editType = element.dataset.editType;
-      
-      // SPELLS
-      if (element.dataset.editSpell) {
-        let property = editType.replace('spell-', '');
-        this.saveToSpell(element.dataset.editSpell, property, content);
-        return;
-      }
-      
-      // DONS
-      if (element.dataset.editDon) {
-        this.saveToDon(element.dataset.editDon, editType.replace('don-', ''), content);
-        return;
-      }
-      
-      // CLASSES/SUBCLASSES
-      if (element.dataset.editSection && (element.dataset.editSection.includes('-') || editType.startsWith('subclass-'))) {
-        this.saveToSubclass(element.dataset.editSection, editType, content);
-        return;
-      }
-      
-      if (element.dataset.editClass) {
-        this.saveToClass(element.dataset.editClass, editType, content);
-        return;
-      }
-      
-      // STATIC PAGES
-      this.updateStaticPageDataByEditType(element, content);
-    },
-
-    // Simple save methods - just store text as-is
-    saveToSpell(spellName, property, content) {
-      if (!window.SORTS) return;
-      
-      for (const category of window.SORTS) {
-        const spell = category.sorts.find(s => s.nom === spellName);
-        if (spell) {
-          const propertyMap = {
-            'name': 'nom', 
-            'description': 'description', 
-            'prerequis': 'prerequis',
-            'portee': 'portee', 
-            'mana': 'coutMana', 
-            'temps-incantation': 'tempsIncantation',
-            'duree': 'duree',
-            'resistance': 'resistance', 
-            'effect-normal': 'effetNormal',
-            'effect-critical': 'effetCritique', 
-            'effect-failure': 'effetEchec'
-          };
-          const targetProperty = propertyMap[property] || property;
-          spell[targetProperty] = content;
-          return true;
-        }
-      }
-      
-      return false;
-    },
-
-    saveToDon(donName, property, content) {
-      if (!window.DONS) return;
-      for (const category of window.DONS) {
-        const don = category.dons.find(d => d.nom === donName);
-        if (don) {
-          const propertyMap = { 'name': 'nom', 'description': 'description', 'prerequis': 'prerequis', 'cout': 'cout' };
-          don[propertyMap[property] || property] = content;
-          break;
-        }
-      }
-    },
-
-    saveToClass(className, editType, content) {
-      if (!window.CLASSES) return;
-      const classe = window.CLASSES.find(c => c.nom === className);
-      if (!classe) return;
-      
-      if (editType === 'resume') {
-        classe.resume = content;
-      } else if (editType === 'capacites') {
-        classe.capacites = this.parseListContent(content);
-      }
-    },
-
-    saveToSubclass(editSection, editType, content) {
-      if (!editSection || !window.CLASSES) return;
-      
-      const parts = editSection.split('-');
-      if (parts.length < 2) return;
-      
-      const className = parts[0];
-      const subClassName = parts.slice(1).join('-');
-      
-      const classe = window.CLASSES.find(c => c.nom === className);
-      if (!classe || !classe.sousClasses) return;
-      
-      const sousClasse = classe.sousClasses.find(sc => sc.nom === subClassName);
-      if (!sousClasse) return;
-      
-      if (editType === 'subclass-progression') {
-        sousClasse.progression = content;
-      } else if (editType === 'subclass-capacites') {
-        sousClasse.capacites = this.parseListContent(content);
-      } else if (editType === 'subclass-stats') {
-        sousClasse.base = this.parseStatsContent(content);
-      }
-    },
-
-    // Helper methods for parsing content (only when needed)
-    parseListContent(content) {
-      const tempDiv = document.createElement('div');
-      tempDiv.innerHTML = content;
-      const listItems = tempDiv.querySelectorAll('li');
-      return Array.from(listItems).map(li => li.innerHTML);
-    },
-
-    parseStatsContent(content) {
-      const tempDiv = document.createElement('div');
-      tempDiv.innerHTML = content;
-      const chips = tempDiv.querySelectorAll('.chip');
-      const stats = {};
-      
-      chips.forEach(chip => {
-        const text = chip.textContent.trim();
-        const match = text.match(/(.+?):\s*(.+)/);
-        if (match) {
-          const statName = match[1].replace(/^[^\w]+/, '').trim(); // Remove emoji
-          const statValue = match[2].trim();
-          stats[statName] = statValue;
-        }
-      });
-      
-      return stats;
-    },
-
-    // Update individual list item in static pages
-    updateListItem(element, content) {
-      const editSection = element.dataset.editSection;
-      const editIndex = parseInt(element.dataset.editIndex);
-      
-      if (!window.STATIC_PAGES) {
-        return false;
-      }
-      
-      const article = element.closest('article[data-static-page="true"]');
-      if (!article) {
-        return false;
-      }
-      
-      const pageId = article.dataset.page;
-      const pageData = window.STATIC_PAGES[pageId];
-      
-      if (!pageData || !pageData.sections) {
-        return false;
-      }
-      
-      // Find the list in the page data
-      for (let i = 0; i < pageData.sections.length; i++) {
-        const section = pageData.sections[i];
-        
-        if (section.type === 'card' && section.content) {
-          if (section.content.type === 'ordered_list' && section.content.editType === editSection) {
-            section.content.items[editIndex] = content;
-            return true;
-          }
-          
-          if (section.content.type === 'list' && section.content.editType === editSection) {
-            section.content.items[editIndex] = content;
-            return true;
-          }
-        }
-      }
-      
-      // List not found
-      return false;
-    },
-
-    // Normalize HTML content to ensure consistency across browsers and editing
-    normalizeHTMLContent(html) {
-      // Create a temporary div to parse and normalize the HTML
-      const tempDiv = document.createElement('div');
-      tempDiv.innerHTML = html;
-      
-      // Remove any contenteditable artifacts
-      this.removeContentEditableArtifacts(tempDiv);
-      
-      // Normalize whitespace and formatting
-      let normalized = tempDiv.innerHTML;
-      
-      // Preserve important HTML entities and structure
-      normalized = this.preserveHTMLStructure(normalized);
-      
-      return normalized.trim();
-    },
-
-    // Remove contenteditable artifacts that browsers might add
-    removeContentEditableArtifacts(container) {
-      // Remove any empty text nodes or unnecessary spans
-      const walker = document.createTreeWalker(
-        container,
-        NodeFilter.SHOW_ALL,
-        null,
-        false
-      );
-
-      const nodesToRemove = [];
-      let node;
-      
-      while (node = walker.nextNode()) {
-        // Remove empty text nodes with only whitespace
-        if (node.nodeType === Node.TEXT_NODE && node.textContent.trim() === '') {
-          // But preserve intentional &nbsp; and single spaces in specific contexts
-          if (node.textContent !== '\u00a0' && node.parentNode.tagName !== 'SPAN') {
-            nodesToRemove.push(node);
-          }
-        }
-        
-        // Remove empty spans without attributes or with only style="font-weight: normal" etc.
-        if (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'SPAN') {
-          if (!node.hasAttributes() && node.textContent.trim() === '') {
-            nodesToRemove.push(node);
-          }
-        }
-        
-        // Remove Firefox/Chrome artifacts like <div><br></div>
-        if (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'DIV') {
-          if (node.innerHTML === '<br>' || node.innerHTML === '<br/>') {
-            // Replace with just <br>
-            const br = document.createElement('br');
-            node.parentNode.replaceChild(br, node);
-          }
-        }
-      }
-      
-      // Remove identified nodes
-      nodesToRemove.forEach(node => {
-        if (node.parentNode) {
-          node.parentNode.removeChild(node);
-        }
-      });
-    },
-
-    // Preserve important HTML structure and entities
-    preserveHTMLStructure(html) {
-      // Ensure consistent formatting for common patterns
-      
-      // Normalize <br> tags (some browsers use <br/>, others <br>)
-      html = html.replace(/<br\s*\/?>/gi, '<br>');
-      
-      // Preserve color styling (ensure it's properly formatted)
-      html = html.replace(/style\s*=\s*["']([^"']*color\s*:\s*[^;"']+[^"']*)["']/gi, (match, styleContent) => {
-        // Clean up the style content
-        const cleanStyle = styleContent.trim().replace(/\s+/g, ' ');
-        return `style="${cleanStyle}"`;
-      });
-      
-      // Preserve &nbsp; entities
-      html = html.replace(/\u00a0/g, '&nbsp;');
-      
-      // Ensure consistent quote usage in attributes
-      html = html.replace(/(\w+)\s*=\s*'([^']*)'/g, '$1="$2"');
-      
-      return html;
-    },
-
-    // Save changes to localStorage immediately when edits are made
-    saveChangesToStorage() {
-      try {
-        // Save only edited data overlay (not full data)
-        localStorage.setItem('jdr-bab-edits', JSON.stringify(this.editedData));
-        
-        // Save timestamp of last modification
-        localStorage.setItem('jdr-bab-last-modified', Date.now().toString());
-        
-        
-      } catch (error) {
-        console.error('❌ Failed to save changes to localStorage:', error);
-      }
+    saveAllEdits() {
+      return UnifiedEditor.saveAllEdits();
     }
   };
 
@@ -5037,44 +3578,304 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
 (() => {
   "use strict";
 
-
   // ========================================
   // UI INTERACTIONS MODULE
   // ========================================
   JdrApp.modules.ui = {
     
     init() {
-      
-      // Set up search functionality
+      this.setupEventListeners();
       this.setupSearch();
-      
-      // Set up modal handlers
       this.setupModals();
-      
-      // Set up content creation handlers
-      this.setupContentCreation();
-      
-      // Set up resource tools
-      this.setupResourceTools();
-      
-      // Set up responsive handlers
       this.setupResponsive();
+    },
+
+    setupEventListeners() {
+      // Content management via EventBus
+      EventBus.on(Events.CONTENT_ADD, (payload) => {
+        this.handleContentAdd(payload.type, payload.category, payload.item);
+      });
+
+      EventBus.on(Events.CONTENT_DELETE, (payload) => {
+        this.handleContentDelete(payload.type, payload.category, payload.item);
+      });
+
+      EventBus.on(Events.CONTENT_MOVE, (payload) => {
+        this.handleContentMove(payload.type, payload.category, payload.itemName, payload.direction);
+      });
+
+      // UI event handlers
+      this.setupContentHandlers();
+    },
+
+    setupContentHandlers() {
+      // Generic content addition
+      JdrApp.utils.events.register('click', '[class$="-add"]', (e) => {
+        const type = this.extractTypeFromClass(e.target.className);
+        const categoryName = e.target.dataset.categoryName;
+        
+        if (type && categoryName) {
+          this.addContent(type, categoryName);
+        }
+      });
+
+      // Generic content deletion
+      JdrApp.utils.events.register('click', '[class$="-delete"]', (e) => {
+        const type = this.extractTypeFromClass(e.target.className);
+        const categoryName = e.target.dataset.categoryName;
+        const itemName = e.target.dataset[`${type}Name`];
+        
+        if (type && categoryName && itemName) {
+          this.deleteContent(type, categoryName, itemName);
+        }
+      });
+
+      // Generic content movement
+      JdrApp.utils.events.register('click', '[class*="-move-"]', (e) => {
+        const type = this.extractTypeFromClass(e.target.className);
+        const categoryName = e.target.dataset.categoryName;
+        const itemName = e.target.dataset[`${type}Name`];
+        const direction = e.target.className.includes('move-up') ? -1 : 1;
+        
+        if (type && categoryName && itemName) {
+          this.moveContent(type, categoryName, itemName, direction);
+        }
+      });
+
+      // Paragraph addition
+      JdrApp.utils.events.register('click', '.add-paragraph-btn', (e) => {
+        const target = e.target.dataset.target;
+        this.addParagraph(target, e.target);
+      });
+
+      // Section deletion for static pages
+      JdrApp.utils.events.register('click', '.section-delete', (e) => {
+        const sectionName = e.target.dataset.sectionName;
+        if (sectionName && confirm(`Supprimer la section "${sectionName}" ?`)) {
+          this.deleteSection(sectionName, e.target);
+        }
+      });
+    },
+
+    extractTypeFromClass(className) {
+      if (className.includes('spell')) return 'spell';
+      if (className.includes('don')) return 'don';
+      if (className.includes('class')) return 'class';
+      return null;
+    },
+
+    addContent(type, categoryName) {
+      const config = window.ContentTypes[type];
+      if (!config) return;
+
+      const defaultItem = ContentFactory.createDefaultItem(type);
+      const success = ContentFactory.addItem(type, categoryName, defaultItem);
+      
+      if (success) {
+        EventBus.emit(Events.PAGE_RENDER, {
+          type: 'category',
+          categoryType: type,
+          category: ContentFactory.getEntity(type).findCategory(categoryName)
+        });
+        
+        this.showNotification(`${config.icons.item} Nouvel élément ajouté`);
+      }
+    },
+
+    deleteContent(type, categoryName, itemName) {
+      if (!confirm(`Supprimer "${itemName}" ?`)) return;
+
+      const success = ContentFactory.deleteItem(type, categoryName, itemName);
+      
+      if (success) {
+        EventBus.emit(Events.PAGE_RENDER, {
+          type: 'category',
+          categoryType: type,
+          category: ContentFactory.getEntity(type).findCategory(categoryName)
+        });
+        
+        this.showNotification('🗑 Élément supprimé');
+      }
+    },
+
+    moveContent(type, categoryName, itemName, direction) {
+      const success = ContentFactory.moveItem(type, categoryName, itemName, direction);
+      
+      if (success) {
+        EventBus.emit(Events.PAGE_RENDER, {
+          type: 'category',
+          categoryType: type,
+          category: ContentFactory.getEntity(type).findCategory(categoryName)
+        });
+        
+        const directionText = direction > 0 ? 'descendu' : 'monté';
+        this.showNotification(`🔄 Élément ${directionText}`);
+      }
+    },
+
+    addParagraph(target, button) {
+      // Handle different types of additions based on target
+      if (target === 'section') {
+        this.addNewSection(button);
+      } else {
+        this.addParagraphToSection(target, button);
+      }
+    },
+
+    addNewSection(button) {
+      // Generate a unique but readable ID
+      const pageId = this.getCurrentPageId();
+      const sectionCount = this.countExistingSections();
+      const sectionId = `${pageId}-new-${sectionCount + 1}-${Date.now()}`;
+      
+      const newSection = document.createElement('div');
+      newSection.className = 'card editable-section';
+      newSection.dataset.sectionType = 'card';
+      newSection.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <h3 class="editable editable-card-title" data-edit-type="generic" data-edit-section="${sectionId}-title">Nouvelle section</h3>
+            <button class="edit-btn edit-title-btn" title="Éditer le titre">✏️</button>
+          </div>
+        </div>
+        <div style="position:relative;">
+          <div class="editable" data-edit-type="generic" data-edit-section="${sectionId}">
+            <p>Contenu de la nouvelle section.</p>
+          </div>
+          <button class="edit-btn edit-section-btn" title="Éditer cette section">✏️</button>
+        </div>
+        <div style="margin-top: 1rem; text-align: center;">
+          <button class="section-delete btn small" data-section-name="Nouvelle section" type="button" style="background: #ff6b6b; color: white;">🗑 Supprimer section</button>
+        </div>
+      `;
+      
+      button.parentNode.insertBefore(newSection, button);
+      
+      // Immediately save the new section to JSON
+      this.saveNewSectionToJSON(sectionId, "Nouvelle section", "<p>Contenu de la nouvelle section.</p>");
+      
+      // No need to recalculate indices - unique IDs prevent conflicts
+      // this.recalculateSectionIndices();
+      
+      // Trigger persistent storage save
+      this.triggerDataSave();
+      
+      this.showNotification('➕ Nouvelle section ajoutée et sauvegardée');
+    },
+
+    addParagraphToSection(target, button) {
+      // Generate a unique but readable ID
+      const pageId = this.getCurrentPageId();
+      const sectionCount = this.countExistingSections();
+      const paragraphId = `${pageId}-para-${sectionCount + 1}-${Date.now()}`;
+      
+      const container = document.createElement('div');
+      container.className = 'editable-paragraph card';
+      container.dataset.sectionType = 'card';
+      container.style.position = 'relative';
+      container.style.marginTop = '1rem';
+      
+      container.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <h3 class="editable editable-card-title" data-edit-type="generic" data-edit-section="${paragraphId}-title">Nouveau paragraphe</h3>
+            <button class="edit-btn edit-title-btn" title="Éditer le titre">✏️</button>
+          </div>
+        </div>
+        <div style="position:relative;">
+          <div class="editable" data-edit-type="generic" data-edit-section="${paragraphId}">
+            <p>Contenu du nouveau paragraphe.</p>
+          </div>
+          <button class="edit-btn edit-section-btn" title="Éditer cette section">✏️</button>
+        </div>
+        <div style="margin-top: 1rem; text-align: center;">
+          <button class="section-delete btn small" data-section-name="Nouveau paragraphe" type="button" style="background: #ff6b6b; color: white;">🗑 Supprimer section</button>
+        </div>
+      `;
+      
+      button.parentNode.insertBefore(container, button);
+      
+      // Immediately save the new paragraph as a section to JSON
+      this.saveNewSectionToJSON(paragraphId, "Nouveau paragraphe", "<p>Contenu du nouveau paragraphe.</p>");
+      
+      // No need to recalculate indices - unique IDs prevent conflicts
+      // this.recalculateSectionIndices();
+      
+      // Trigger persistent storage save
+      this.triggerDataSave();
+      
+      this.showNotification('➕ Paragraphe ajouté et sauvegardé');
+    },
+
+    deleteSection(sectionName, button) {
+      // Find and remove the section
+      const section = button.closest('.card');
+      if (section) {
+        // Extract the section ID from the editable elements
+        const editableElement = section.querySelector('[data-edit-section]');
+        let sectionId = null;
+        if (editableElement) {
+          sectionId = editableElement.dataset.editSection;
+          // Remove "-title" suffix if present to get base ID
+          if (sectionId.endsWith('-title')) {
+            sectionId = sectionId.replace('-title', '');
+          }
+        }
+        
+        section.remove();
+        
+        // Save the deletion to JSON
+        if (sectionId) {
+          this.deleteSectionFromJSON(sectionId);
+        }
+        
+        // Recalculate all section indices after deletion
+        this.recalculateSectionIndices();
+        
+        // Trigger persistent storage save
+        this.triggerDataSave();
+        
+        this.showNotification(`🗑️ Section "${sectionName}" supprimée et mise à jour JSON`);
+      }
+    },
+
+    handleContentAdd(type, category, item) {
+      // Additional handling after content is added
+      setTimeout(() => {
+        if (JdrApp.modules.renderer?.autoLoadImages) {
+          JdrApp.modules.renderer.autoLoadImages();
+        }
+      }, 100);
+    },
+
+    handleContentDelete(type, category, item) {
+      // Cleanup after content deletion
+    },
+
+    handleContentMove(type, category, itemName, direction) {
+      // Additional handling after content is moved
     },
 
     setupSearch() {
       const searchInput = JdrApp.utils.dom.$('#search');
       const clearButton = JdrApp.utils.dom.$('#clear');
+      let searchTimeout;
       
       if (searchInput) {
-        // Search as you type
-        JdrApp.utils.events.register('input', '#search', (e) => {
-          this.performSearch(e.target.value);
-        });
-        
-        // Enter key
+        // Only search on Enter key press
         JdrApp.utils.events.register('keydown', '#search', (e) => {
           if (e.key === 'Enter') {
-            this.performSearch(e.target.value);
+            e.preventDefault();
+            const query = e.target.value.trim();
+            if (query.length > 0) {
+              this.performSearch(query);
+            } else {
+              this.clearMainSearchResults();
+            }
+          } else if (e.key === 'Escape') {
+            this.clearMainSearchResults();
+            e.target.value = '';
+            e.target.blur();
           }
         });
       }
@@ -5083,30 +3884,564 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         JdrApp.utils.events.register('click', '#clear', () => {
           if (searchInput) {
             searchInput.value = '';
-            this.performSearch('');
+            this.clearMainSearchResults();
           }
         });
       }
+
+      // Remove click outside handler since we're not using dropdown anymore
+      // JdrApp.utils.events.register('click', 'body', (e) => {
+      //   if (!e.target.closest('.searchbar') && !e.target.closest('#search-results')) {
+      //     this.hideSearchResults();
+      //   }
+      // });
+
+      // Remove EventBus listener that may cause issues
+      // EventBus.on(Events.SEARCH_PERFORM, (payload) => {
+      //   this.performSearch(payload.query);
+      // });
     },
 
     performSearch(query) {
       const normalizedQuery = query.toLowerCase().trim();
       
       if (!normalizedQuery) {
-        // Show all content
-        JdrApp.utils.dom.$('article, .toc a').forEach(el => {
-          el.style.display = '';
-        });
+        this.showAllContent();
+        this.clearMainSearchResults();
         return;
       }
 
-      // Search in TOC
+      // Search without minimum character limit since user has to press Enter
+      const results = this.searchInData(normalizedQuery);
+      this.displaySearchResultsInMain(results, normalizedQuery);
+      
+      // Keep existing TOC search for compatibility
+      this.searchInTOC(normalizedQuery);
+    },
+
+    searchInData(query) {
+      const results = [];
+      
+      // Search in SORTS
+      if (window.SORTS) {
+        window.SORTS.forEach(category => {
+          if (category.sorts) {
+            category.sorts.forEach(sort => {
+              if (this.matchesSearch(sort, query)) {
+                const url = `#/sorts-${JdrApp.utils.data.sanitizeId(category.nom)}`;
+                
+                results.push({
+                  type: 'spell',
+                  category: category.nom,
+                  item: sort,
+                  url: url,
+                  summary: this.generateSpellSummary(sort)
+                });
+              }
+            });
+          }
+        });
+      }
+
+      // Search in DONS
+      if (window.DONS) {
+        window.DONS.forEach(category => {
+          if (category.dons) {
+            category.dons.forEach(don => {
+              if (this.matchesSearch(don, query)) {
+                results.push({
+                  type: 'don',
+                  category: category.nom,
+                  item: don,
+                  url: `#/dons-${JdrApp.utils.data.sanitizeId(category.nom)}`,
+                  summary: this.generateDonSummary(don)
+                });
+              }
+            });
+          }
+        });
+      }
+
+      // Search in CLASSES
+      if (window.CLASSES) {
+        window.CLASSES.forEach(classe => {
+          if (this.matchesSearch(classe, query)) {
+            results.push({
+              type: 'class',
+              category: null,
+              item: classe,
+              url: `#/${JdrApp.utils.data.sanitizeId(classe.nom)}`,
+              summary: this.generateClassSummary(classe)
+            });
+          }
+          
+          // Search in subclasses
+          if (classe.sousClasses) {
+            classe.sousClasses.forEach(sousClasse => {
+              if (this.matchesSearch(sousClasse, query)) {
+                results.push({
+                  type: 'subclass',
+                  category: classe.nom,
+                  item: sousClasse,
+                  url: `#/${JdrApp.utils.data.sanitizeId(classe.nom)}`,
+                  summary: this.generateSubclassSummary(sousClasse, classe.nom)
+                });
+              }
+            });
+          }
+        });
+      }
+
+      // Search in static pages
+      this.searchInStaticPages(query, results);
+      
+      return results.slice(0, 10); // Limit to 10 results
+    },
+
+    searchInStaticPages(query, results) {
+      // Search in static pages data
+      if (window.STATIC_PAGES) {
+        Object.keys(window.STATIC_PAGES).forEach(pageId => {
+          const pageData = window.STATIC_PAGES[pageId];
+          if (this.matchesStaticPage(pageData, query)) {
+            results.push({
+              type: 'staticPage',
+              category: null,
+              item: pageData,
+              url: `#/${pageId}`,
+              summary: this.generateStaticPageSummary(pageData)
+            });
+          }
+        });
+      }
+
+      // Also search in static page config if available
+      if (window.STATIC_PAGE_CONFIG?.pages) {
+        window.STATIC_PAGE_CONFIG.pages.forEach(pageConfig => {
+          if (pageConfig.active && this.matchesPageConfig(pageConfig, query)) {
+            // Only add if we haven't already found this page
+            const alreadyExists = results.some(r => 
+              r.type === 'staticPage' && r.url === `#/${pageConfig.id}`
+            );
+            
+            if (!alreadyExists) {
+              results.push({
+                type: 'staticPage',
+                category: null,
+                item: { 
+                  title: pageConfig.title, 
+                  page: pageConfig.id,
+                  description: `Page sur ${pageConfig.title.toLowerCase()}`
+                },
+                url: `#/${pageConfig.id}`,
+                summary: this.generatePageConfigSummary(pageConfig)
+              });
+            }
+          }
+        });
+      }
+    },
+
+    matchesStaticPage(pageData, query) {
+      const searchText = [
+        pageData.title || '',
+        pageData.page || '',
+        this.extractStaticPageContent(pageData.sections || [])
+      ].join(' ').toLowerCase();
+      
+      return searchText.includes(query);
+    },
+
+    matchesPageConfig(pageConfig, query) {
+      const searchText = [
+        pageConfig.title || '',
+        pageConfig.id || ''
+      ].join(' ').toLowerCase();
+      
+      return searchText.includes(query);
+    },
+
+    extractStaticPageContent(sections) {
+      return sections.map(section => {
+        let content = '';
+        if (section.content) {
+          if (typeof section.content === 'string') {
+            content += section.content;
+          } else if (section.content.content) {
+            // New HTML format: extract text from HTML
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = section.content.content;
+            content += tempDiv.textContent || tempDiv.innerText || '';
+          } else if (section.content.items && Array.isArray(section.content.items)) {
+            // Legacy format
+            content += section.content.items.join(' ');
+          }
+        }
+        return content;
+      }).join(' ');
+    },
+
+    matchesSearch(item, query) {
+      const searchText = [
+        item.nom || '',
+        item.description || '',
+        item.prerequis || '',
+        item.resume || '',
+        Array.isArray(item.capacites) ? item.capacites.join(' ') : ''
+      ].join(' ').toLowerCase();
+      
+      return searchText.includes(query);
+    },
+
+    generateSpellSummary(spell) {
+      // Strip HTML tags from fields to avoid breaking template
+      const stripHtml = (text) => {
+        if (!text) return '';
+        return String(text).replace(/<[^>]*>/g, '').trim();
+      };
+      
+      return `🔮 ${stripHtml(spell.nom)} - ${stripHtml(spell.prerequis || 'Aucun prérequis')} | ${stripHtml(spell.coutMana || 'Coût inconnu')}`;
+    },
+
+    generateDonSummary(don) {
+      const stripHtml = (text) => {
+        if (!text) return '';
+        return String(text).replace(/<[^>]*>/g, '').trim();
+      };
+      
+      return `🏆 ${stripHtml(don.nom)} - ${stripHtml(don.prerequis || 'Aucun prérequis')} | ${stripHtml(don.cout || 'Coût inconnu')}`;
+    },
+
+    generateClassSummary(classe) {
+      const stripHtml = (text) => {
+        if (!text) return '';
+        return String(text).replace(/<[^>]*>/g, '').trim();
+      };
+      
+      return `⚔️ ${stripHtml(classe.nom)} - ${stripHtml(classe.resume || 'Classe de combat')}`;
+    },
+
+    generateSubclassSummary(sousClasse, parentClass) {
+      const stripHtml = (text) => {
+        if (!text) return '';
+        return String(text).replace(/<[^>]*>/g, '').trim();
+      };
+      
+      return `⚡ ${stripHtml(sousClasse.nom)} (${stripHtml(parentClass)}) - Sous-classe spécialisée`;
+    },
+
+    generateStaticPageSummary(pageData) {
+      const stripHtml = (text) => {
+        if (!text) return '';
+        return String(text).replace(/<[^>]*>/g, '').trim();
+      };
+      
+      return `📄 ${stripHtml(pageData.title)} - ${stripHtml(pageData.description || 'Page d\'information du jeu')}`;
+    },
+
+    generatePageConfigSummary(pageConfig) {
+      const stripHtml = (text) => {
+        if (!text) return '';
+        return String(text).replace(/<[^>]*>/g, '').trim();
+      };
+      
+      return `📄 ${stripHtml(pageConfig.title)} - Guide et informations sur ${stripHtml(pageConfig.title.toLowerCase())}`;
+    },
+
+    slugify(text) {
+      return text.toLowerCase()
+        .replace(/[àáâãäå]/g, 'a')
+        .replace(/[èéêë]/g, 'e')
+        .replace(/[ìíîï]/g, 'i')
+        .replace(/[òóôõö]/g, 'o')
+        .replace(/[ùúûü]/g, 'u')
+        .replace(/[ç]/g, 'c')
+        .replace(/[^a-z0-9]/g, '-')
+        .replace(/-+/g, '-')
+        .replace(/^-|-$/g, '');
+    },
+
+    showAllContent() {
+      JdrApp.utils.dom.$('article, .toc a').forEach(el => {
+        el.style.display = '';
+      });
+    },
+
+    displaySearchResultsInMain(results, query) {
+      const main = document.querySelector('main');
+      if (!main) return;
+
+      // Create search results page content
+      const searchPageHTML = this.generateSearchResultsPage(results, query);
+      
+      // Replace main content with search results
+      main.innerHTML = searchPageHTML;
+      
+      // Quick debug to see card dimensions
+      setTimeout(() => {
+        const cards = main.querySelectorAll('.search-result-card');
+        console.log('Cards found:', cards.length);
+        cards.forEach((card, i) => {
+          console.log(`Card ${i+1} dimensions:`, {
+            height: card.offsetHeight,
+            width: card.offsetWidth,
+            display: getComputedStyle(card).display,
+            visibility: getComputedStyle(card).visibility
+          });
+        });
+      }, 100);
+      
+      // Setup click handlers for results
+      this.setupMainSearchHandlers();
+      
+      // Also setup direct handlers as fallback
+      this.setupDirectHandlers();
+    },
+
+    generateSearchResultsPage(results, query) {
+      if (results.length === 0) {
+        return `
+          <div class="search-page">
+            <div class="search-page-header">
+              <h1>🔍 Recherche: "${query}"</h1>
+              <p class="search-no-results">Aucun résultat trouvé</p>
+              <button class="btn small" onclick="JdrApp.modules.ui.clearMainSearchResults()">
+                ← Retour au sommaire
+              </button>
+            </div>
+          </div>
+        `;
+      }
+      
+      let resultsHTML = '';
+      
+      try {
+        resultsHTML = results.map((result, index) => {
+          const itemName = result.item.nom || result.item.title || 'Sans nom';
+          
+          
+          // Generate preview safely
+          let preview;
+          try {
+            preview = this.generatePreview(result.item, result.type);
+          } catch (previewError) {
+            console.error('Preview error:', previewError);
+            preview = '<div class="preview-field">Erreur dans l\'aperçu</div>';
+          }
+          
+          // Escape potentially problematic text
+          const escapeAttr = (text) => {
+            if (!text) return '';
+            return String(text).replace(/"/g, '&quot;');
+          };
+          
+          const escapeText = (text) => {
+            if (!text) return '';
+            return String(text)
+              .replace(/&/g, '&amp;')
+              .replace(/</g, '&lt;')
+              .replace(/>/g, '&gt;');
+          };
+
+          const cardHTML = `
+            <article class="search-result-card" data-url="${result.url}">
+              <div class="search-result-header">
+                <h3>${this.getTypeIcon(result.type)} ${itemName}</h3>
+                <div class="search-result-type">${this.getTypeName(result.type)}</div>
+              </div>
+              <div class="search-result-content">
+                <div class="search-result-summary">${escapeText(result.summary || 'Pas de résumé')}</div>
+                ${result.category ? `<div class="search-result-category">📂 Catégorie: ${escapeText(result.category)}</div>` : ''}
+                <div class="search-result-preview">
+                  ${preview}
+                </div>
+              </div>
+              <div class="search-result-footer">
+                <button class="btn small search-result-btn" data-url="${result.url}">
+                  Voir la page →
+                </button>
+              </div>
+            </article>
+          `;
+          
+          return cardHTML;
+        }).join('');
+      } catch (error) {
+        console.error('Error generating results HTML:', error);
+        resultsHTML = '<div class="error">Erreur lors de la génération des résultats</div>';
+      }
+
+      const finalHTML = `
+        <div class="search-page">
+          <div class="search-page-header">
+            <h1>🔍 Recherche: "${query}"</h1>
+            <p class="search-results-count">${results.length} résultat${results.length > 1 ? 's' : ''} trouvé${results.length > 1 ? 's' : ''}</p>
+            <button class="btn small" onclick="JdrApp.modules.ui.clearMainSearchResults()">
+              ← Retour au sommaire
+            </button>
+          </div>
+          <div class="search-results-grid">
+            ${resultsHTML}
+          </div>
+        </div>
+      `;
+      
+      return finalHTML;
+    },
+
+    getTypeIcon(type) {
+      const icons = {
+        'spell': '🔮',
+        'don': '🏆', 
+        'class': '⚔️',
+        'subclass': '⚡',
+        'staticPage': '📄'
+      };
+      return icons[type] || '📄';
+    },
+
+    getTypeName(type) {
+      const names = {
+        'spell': 'Sort',
+        'don': 'Don',
+        'class': 'Classe',
+        'subclass': 'Sous-classe',
+        'staticPage': 'Page'
+      };
+      return names[type] || 'Contenu';
+    },
+
+    generatePreview(item, type) {
+      // Strip all HTML and clean text completely
+      const cleanText = (text) => {
+        if (!text) return '';
+        return String(text)
+          .replace(/<[^>]*>/g, '') // Remove HTML tags
+          .replace(/&[^;]+;/g, ' ') // Remove HTML entities
+          .replace(/\s+/g, ' ') // Normalize whitespace
+          .trim()
+          .substring(0, 100); // Limit length
+      };
+
+      switch (type) {
+        case 'spell':
+          const desc = cleanText(item.description || 'Non spécifiée');
+          const portee = cleanText(item.portee || 'Non spécifiée');
+          return `<div class="preview-field">Description: ${desc}</div><div class="preview-field">Portée: ${portee}</div>`;
+          
+        case 'don':
+          const donDesc = cleanText(item.description || 'Non spécifiée');
+          return `<div class="preview-field">Description: ${donDesc}</div>`;
+          
+        case 'class':
+          const resume = cleanText(item.resume || 'Non spécifié');
+          return `<div class="preview-field">Résumé: ${resume}</div>`;
+          
+        case 'subclass':
+          const progression = cleanText(item.progression || 'Non spécifiée');
+          return `<div class="preview-field">Progression: ${progression}</div>`;
+          
+        case 'staticPage':
+          const content = this.extractStaticPageContent(item.sections || []);
+          const preview = cleanText(content || 'Page d\'information');
+          return `<div class="preview-field">Contenu: ${preview}</div>`;
+          
+        default:
+          return '<div class="preview-field">Aperçu non disponible</div>';
+      }
+    },
+
+    setupMainSearchHandlers() {
+      // Handle click on entire card
+      JdrApp.utils.events.register('click', '.search-result-card', (e) => {
+        console.log('Card clicked, currentTarget:', e.currentTarget);
+        if (e.target.closest('.search-result-btn')) return; // Let button handle it
+        
+        const url = e.currentTarget ? e.currentTarget.dataset.url : null;
+        console.log('Card URL:', url);
+        
+        if (url && url !== '#test') {
+          console.log('Navigating to:', url);
+          window.location.hash = url;
+          // Force page reload to trigger router
+          window.location.reload();
+        } else {
+          console.warn('No valid URL found on card');
+        }
+      });
+
+      // Handle button clicks
+      JdrApp.utils.events.register('click', '.search-result-btn', (e) => {
+        console.log('Button clicked, target:', e.target);
+        e.stopPropagation();
+        
+        const url = e.target ? e.target.dataset.url : null;
+        console.log('Button URL:', url);
+        
+        if (url && url !== '#test') {
+          console.log('Navigating to:', url);
+          window.location.hash = url;
+          // Force page reload to trigger router
+          window.location.reload();
+        } else {
+          console.warn('No valid URL found on button');
+        }
+      });
+    },
+
+    setupDirectHandlers() {
+      // Direct event listeners on the elements themselves
+      setTimeout(() => {
+        const cards = document.querySelectorAll('.search-result-card');
+        const buttons = document.querySelectorAll('.search-result-btn');
+        
+        console.log('Setting up direct handlers for', cards.length, 'cards and', buttons.length, 'buttons');
+        
+        cards.forEach((card, index) => {
+          const url = card.dataset.url;
+          console.log(`Card ${index + 1} URL:`, url);
+          
+          card.addEventListener('click', (e) => {
+            if (e.target.closest('.search-result-btn')) return;
+            console.log('Direct card click, URL:', url);
+            if (url && url !== '#test') {
+              window.location.hash = url;
+              window.location.reload();
+            }
+          });
+        });
+        
+        buttons.forEach((button, index) => {
+          const url = button.dataset.url;
+          console.log(`Button ${index + 1} URL:`, url);
+          
+          button.addEventListener('click', (e) => {
+            e.stopPropagation();
+            console.log('Direct button click, URL:', url);
+            if (url && url !== '#test') {
+              window.location.hash = url;
+              window.location.reload();
+            }
+          });
+        });
+      }, 200);
+    },
+
+    clearMainSearchResults() {
+      // Reload the current page or go back to homepage
+      if (window.location.hash && window.location.hash !== '#/') {
+        window.location.reload();
+      } else {
+        window.location.hash = '#/creation';
+      }
+    },
+
+    searchInTOC(query) {
       JdrApp.utils.dom.$('.toc a').forEach(link => {
         const text = link.textContent.toLowerCase();
-        const isMatch = text.includes(normalizedQuery);
+        const isMatch = text.includes(query);
         link.style.display = isMatch ? '' : 'none';
         
-        // Expand parent category if child matches
         if (isMatch) {
           const category = link.closest('.toc-category');
           if (category) {
@@ -5114,21 +4449,20 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
           }
         }
       });
+    },
 
-      // Search in article content
+    searchInContent(query) {
       JdrApp.utils.dom.$('article').forEach(article => {
         const text = article.textContent.toLowerCase();
-        const isMatch = text.includes(normalizedQuery);
+        const isMatch = text.includes(query);
         
         if (isMatch) {
-          // Highlight search terms
-          this.highlightSearchTerms(article, normalizedQuery);
+          this.highlightSearchTerms(article, query);
         }
       });
     },
 
     highlightSearchTerms(container, query) {
-      // Simple highlighting implementation
       const walker = document.createTreeWalker(
         container,
         NodeFilter.SHOW_TEXT,
@@ -5158,7 +4492,6 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
     },
 
     setupModals() {
-      // Generic modal close handler
       JdrApp.utils.events.register('click', '.modal-overlay, .modal-close', (e) => {
         const modal = e.target.closest('.modal') || document.querySelector('.modal.visible');
         if (modal) {
@@ -5166,18 +4499,36 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         }
       });
 
-      // Prevent modal close when clicking inside modal content
       JdrApp.utils.events.register('click', '.modal-content', (e) => {
         e.stopPropagation();
       });
 
-      // Escape key to close modals
       JdrApp.utils.events.register('keydown', 'body', (e) => {
         if (e.key === 'Escape') {
           const openModal = document.querySelector('.modal.visible');
           if (openModal) {
             this.closeModal(openModal);
           }
+        }
+      });
+
+      // Resource tools
+      JdrApp.utils.events.register('click', '#elementsBtn', () => {
+        this.showElementsModal();
+      });
+
+      JdrApp.utils.events.register('click', '#showIcons', () => {
+        this.showIconsModal();
+      });
+
+      EventBus.on(Events.MODAL_OPEN, (payload) => {
+        this.openModal(payload.modalId);
+      });
+
+      EventBus.on(Events.MODAL_CLOSE, (payload) => {
+        const modal = payload.modal || document.querySelector('.modal.visible');
+        if (modal) {
+          this.closeModal(modal);
         }
       });
     },
@@ -5188,7 +4539,6 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         modal.classList.add('visible');
         modal.style.display = 'flex';
         
-        // Focus first input if available
         const firstInput = modal.querySelector('input, textarea, select');
         if (firstInput) {
           firstInput.focus();
@@ -5201,7 +4551,6 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         modal.classList.remove('visible');
         modal.style.display = 'none';
         
-        // Clear form if present
         const form = modal.querySelector('form');
         if (form) {
           form.reset();
@@ -5209,180 +4558,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       }
     },
 
-    setupContentCreation() {
-      // Add spell handlers
-      JdrApp.utils.events.register('click', '.spell-add', (e) => {
-        const categoryName = e.target.dataset.categoryName;
-        this.addNewSpell(categoryName);
-      });
-
-      // Delete spell handlers
-      JdrApp.utils.events.register('click', '.spell-delete', (e) => {
-        const categoryName = e.target.dataset.categoryName;
-        const spellName = e.target.dataset.spellName;
-        this.deleteSpell(categoryName, spellName);
-      });
-
-      // Add don handlers
-      JdrApp.utils.events.register('click', '.don-add', (e) => {
-        const categoryName = e.target.dataset.categoryName;
-        this.addNewDon(categoryName);
-      });
-
-      // Delete don handlers
-      JdrApp.utils.events.register('click', '.don-delete', (e) => {
-        const categoryName = e.target.dataset.categoryName;
-        const donName = e.target.dataset.donName;
-        this.deleteDon(categoryName, donName);
-      });
-
-      // Move don handlers
-      JdrApp.utils.events.register('click', '.don-move-up', (e) => {
-        const categoryName = e.target.dataset.categoryName;
-        const donName = e.target.dataset.donName;
-        const index = parseInt(e.target.dataset.donIndex);
-        this.moveDon(categoryName, donName, index, -1);
-      });
-
-      JdrApp.utils.events.register('click', '.don-move-down', (e) => {
-        const categoryName = e.target.dataset.categoryName;
-        const donName = e.target.dataset.donName;
-        const index = parseInt(e.target.dataset.donIndex);
-        this.moveDon(categoryName, donName, index, 1);
-      });
-
-      // Add paragraph handlers
-      JdrApp.utils.events.register('click', '.add-paragraph-btn', (e) => {
-        const target = e.target.dataset.target;
-        this.addParagraph(target, e.target);
-      });
-    },
-
-    addNewSpell(categoryName) {
-      const category = JdrApp.utils.data.getSpellCategory(categoryName);
-      if (!category) return;
-
-      const newSpell = {
-        nom: "Nouveau Sort",
-        description: "Lance une boule de Feu sur un adversaire.",
-        categorie: categoryName,
-        prerequis: "📋 <strong>Prérequis:</strong> Niveau 1",
-        portee: "🎯 <strong>Portée:</strong> 20m",
-        tempsIncantation: "⏰ <strong>Temps d'incantation:</strong> 1 tour",
-        coutMana: "🔵 <strong>Coût mana:</strong> 3",
-        resistance: "<strong>Sans effet si:</strong> Esquive.",
-        effetNormal: "<strong>Effet:</strong> Inflige 5 dégats de <span style=\"color: #e25822; font-weight: bold;\">Feu</span> à la cible.<br>&nbsp;Tous les 5 points d'intelligence, augmente les dégats de 1.",
-        effetCritique: "<strong>Coup Critique:&nbsp;</strong>&nbsp;Double les dégâts et enflamme la cible, infligeant 2 dégats de Feu au prochain tour du lanceur.",
-        effetEchec: "<strong>Échec Critique:&nbsp;</strong>Le sort inflige ses dégats à un allié dans la trajectoire."
-      };
-
-      category.sorts.push(newSpell);
-      
-      // Re-render the category page
-      JdrApp.modules.renderer.renderSortCategory(`sorts-${JdrApp.utils.data.sanitizeId(categoryName)}`);
-      
-      this.showNotification('🔮 Nouveau sort ajouté');
-    },
-
-    deleteSpell(categoryName, spellName) {
-      if (!confirm(`Supprimer le sort "${spellName}" ?`)) return;
-
-      const category = JdrApp.utils.data.getSpellCategory(categoryName);
-      if (!category) return;
-
-      const index = category.sorts.findIndex(s => s.nom === spellName);
-      if (index !== -1) {
-        category.sorts.splice(index, 1);
-        
-        // Re-render the category page
-        JdrApp.modules.renderer.renderSortCategory(`sorts-${JdrApp.utils.data.sanitizeId(categoryName)}`);
-        
-        this.showNotification('🗑 Sort supprimé');
-      }
-    },
-
-    addNewDon(categoryName) {
-      const category = JdrApp.utils.data.getDonCategory(categoryName);
-      if (!category) return;
-
-      const newDon = {
-        nom: "Nouveau Don",
-        description: "Description du don.",
-        prerequis: "Aucun prérequis",
-        cout: "1 point de don"
-      };
-
-      category.dons.push(newDon);
-      
-      // Re-render the category page
-      JdrApp.modules.renderer.renderDonCategory(`dons-${JdrApp.utils.data.sanitizeId(categoryName)}`);
-      
-      this.showNotification('🎖️ Nouveau don ajouté');
-    },
-
-    deleteDon(categoryName, donName) {
-      if (!confirm(`Supprimer le don "${donName}" ?`)) return;
-
-      const category = JdrApp.utils.data.getDonCategory(categoryName);
-      if (!category) return;
-
-      const index = category.dons.findIndex(d => d.nom === donName);
-      if (index !== -1) {
-        category.dons.splice(index, 1);
-        
-        // Re-render the category page
-        JdrApp.modules.renderer.renderDonCategory(`dons-${JdrApp.utils.data.sanitizeId(categoryName)}`);
-        
-        this.showNotification('🗑 Don supprimé');
-      }
-    },
-
-    moveDon(categoryName, donName, currentIndex, direction) {
-      const category = JdrApp.utils.data.getDonCategory(categoryName);
-      if (!category) return;
-
-      const newIndex = currentIndex + direction;
-      if (newIndex < 0 || newIndex >= category.dons.length) return;
-
-      // Swap positions
-      const temp = category.dons[currentIndex];
-      category.dons[currentIndex] = category.dons[newIndex];
-      category.dons[newIndex] = temp;
-      
-      // Re-render the category page
-      JdrApp.modules.renderer.renderDonCategory(`dons-${JdrApp.utils.data.sanitizeId(categoryName)}`);
-      
-      this.showNotification(`🔄 Don ${direction > 0 ? 'descendu' : 'monté'}`);
-    },
-
-    addParagraph(target, button) {
-      const newParagraph = JdrApp.utils.dom.create('p', 'editable', 'Nouveau paragraphe.', {
-        'data-edit-type': 'custom',
-        'data-edit-section': target
-      });
-      
-      button.parentNode.insertBefore(newParagraph, button);
-      
-      // Make it immediately editable
-      if (JdrApp.modules.editor.isDevMode) {
-        JdrApp.modules.editor.makeEditable(newParagraph);
-      }
-    },
-
-    setupResourceTools() {
-      // Elements button
-      JdrApp.utils.events.register('click', '#elementsBtn', () => {
-        this.showElementsModal();
-      });
-
-      // Icons button
-      JdrApp.utils.events.register('click', '#showIcons', () => {
-        this.showIconsModal();
-      });
-    },
-
     showElementsModal() {
-      // Create elements modal if it doesn't exist
       let modal = JdrApp.utils.dom.$('#elementsModal');
       if (!modal) {
         modal = this.createElementsModal();
@@ -5393,14 +4569,11 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
     },
 
     createElementsModal() {
-      const elements = [
-        { name: 'Feu', color: '#ff6b35', icon: '🔥' },
-        { name: 'Air', color: '#87ceeb', icon: '💨' },
-        { name: 'Eau', color: '#4682b4', icon: '💧' },
-        { name: 'Terre', color: '#8b7355', icon: '🌍' },
-        { name: 'Divin', color: '#ffd700', icon: '✨' },
-        { name: 'Maléfique', color: '#8b008b', icon: '💀' }
-      ];
+      const elements = Object.entries(window.ElementColors).map(([name, config]) => ({
+        name,
+        color: config.color,
+        icon: this.getElementIcon(name)
+      }));
 
       const elementsHTML = elements.map(element => `
         <div class="element-item" data-element="${element.name}" data-color="${element.color}">
@@ -5421,7 +4594,6 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         </div>
       `, { id: 'elementsModal' });
 
-      // Add click handlers for elements
       modal.addEventListener('click', (e) => {
         const elementItem = e.target.closest('.element-item');
         if (elementItem) {
@@ -5431,7 +4603,6 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
           
           this.copyToClipboard(html);
           
-          // Show copied indicator
           elementItem.classList.add('copied');
           setTimeout(() => {
             elementItem.classList.remove('copied');
@@ -5442,6 +4613,18 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       return modal;
     },
 
+    getElementIcon(elementName) {
+      const icons = {
+        'Feu': '🔥',
+        'Air': '💨',
+        'Eau': '💧',
+        'Terre': '🌍',
+        'Divin': '✨',
+        'Maléfique': '💀'
+      };
+      return icons[elementName] || '⚡';
+    },
+
     showIconsModal() {
       this.showNotification('🔥 Fonctionnalité des icônes à implémenter', 'info');
     },
@@ -5450,7 +4633,6 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       navigator.clipboard.writeText(text).then(() => {
         this.showNotification('📋 Copié dans le presse-papiers', 'success');
       }).catch(() => {
-        // Fallback for older browsers
         const textArea = document.createElement('textarea');
         textArea.value = text;
         document.body.appendChild(textArea);
@@ -5463,7 +4645,6 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
     },
 
     setupResponsive() {
-      // Menu toggle for mobile
       JdrApp.utils.events.register('click', '#menuToggle', () => {
         const sidebar = JdrApp.utils.dom.$('#sidebar');
         const backdrop = JdrApp.utils.dom.$('#backdrop');
@@ -5474,7 +4655,6 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         }
       });
 
-      // Close sidebar when clicking backdrop
       JdrApp.utils.events.register('click', '#backdrop', () => {
         const sidebar = JdrApp.utils.dom.$('#sidebar');
         const backdrop = JdrApp.utils.dom.$('#backdrop');
@@ -5487,11 +4667,276 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
     },
 
     showNotification(message, type = 'info') {
-      // Reuse the storage module's notification system
-      if (JdrApp.modules.storage.showNotification) {
-        JdrApp.modules.storage.showNotification(message, type);
+      EventBus.emit(Events.NOTIFICATION_SHOW, { message, type });
+      
+      // Fallback notification if storage module is not available
+      if (!JdrApp.modules.storage?.showNotification) {
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          background: ${type === 'success' ? '#10B981' : type === 'error' ? '#EF4444' : '#3B82F6'};
+          color: white;
+          padding: 12px 16px;
+          border-radius: 8px;
+          font-weight: 500;
+          z-index: 10000;
+          animation: slideIn 0.3s ease;
+        `;
+        
+        notification.textContent = message;
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+          if (notification.parentNode) {
+            notification.parentNode.removeChild(notification);
+          }
+        }, 3000);
       } else {
-        // Fallback: simple console log
+        JdrApp.modules.storage.showNotification(message, type);
+      }
+    },
+
+    // Get current page ID from DOM
+    getCurrentPageId() {
+      const article = document.querySelector('article[data-static-page="true"]');
+      return article ? article.dataset.page : null;
+    },
+
+    // Count existing sections for unique ID generation
+    countExistingSections() {
+      const pageId = this.getCurrentPageId();
+      if (!pageId || !window.STATIC_PAGES || !window.STATIC_PAGES[pageId]) {
+        return 0;
+      }
+      const pageData = window.STATIC_PAGES[pageId];
+      return pageData.sections ? pageData.sections.length : 0;
+    },
+
+    // Save new section to JSON data
+    saveNewSectionToJSON(sectionId, title, content) {
+      const pageId = this.getCurrentPageId();
+      if (!pageId || !window.STATIC_PAGES || !window.STATIC_PAGES[pageId]) {
+        console.warn('Cannot save new section - page not found:', pageId);
+        return false;
+      }
+
+      const pageData = window.STATIC_PAGES[pageId];
+      
+      // Create new section object
+      const newSection = {
+        type: "card",
+        id: sectionId,
+        title: title,
+        content: content,
+        deletable: true,
+        sectionName: title
+      };
+
+      // Add to sections array
+      if (!pageData.sections) {
+        pageData.sections = [];
+      }
+      
+      pageData.sections.push(newSection);
+      
+      console.log(`✅ AJOUT JSON: Section "${title}" (${sectionId}) ajoutée à ${pageId}.json`);
+      console.log('📊 État JSON après ajout:', {
+        pageId,
+        totalSections: pageData.sections.length,
+        newSectionIndex: pageData.sections.length - 1,
+        sectionIds: pageData.sections.map(s => s.id)
+      });
+      
+      // Validate the addition
+      const found = pageData.sections.find(s => s.id === sectionId);
+      if (!found) {
+        console.error('❌ ERREUR: Section non trouvée après ajout!');
+        return false;
+      }
+      
+      return true;
+    },
+
+    // Delete section from JSON data
+    deleteSectionFromJSON(sectionId) {
+      const pageId = this.getCurrentPageId();
+      if (!pageId || !window.STATIC_PAGES || !window.STATIC_PAGES[pageId]) {
+        console.warn('Cannot delete section - page not found:', pageId);
+        return false;
+      }
+
+      const pageData = window.STATIC_PAGES[pageId];
+      if (!pageData.sections) {
+        console.warn('No sections found in page data');
+        return false;
+      }
+
+      console.log(`🗑️ SUPPRESSION JSON: Tentative de suppression "${sectionId}" de ${pageId}.json`);
+      console.log('📊 État JSON avant suppression:', {
+        pageId,
+        totalSections: pageData.sections.length,
+        sectionIds: pageData.sections.map(s => s.id)
+      });
+
+      // Remove section by ID
+      const initialLength = pageData.sections.length;
+      pageData.sections = pageData.sections.filter(section => section.id !== sectionId);
+      
+      // Check if section was found and removed
+      const removed = pageData.sections.length < initialLength;
+      if (removed) {
+        console.log(`✅ SUPPRESSION JSON: Section "${sectionId}" supprimée de ${pageId}.json`);
+        console.log('📊 État JSON après suppression:', {
+          pageId,
+          totalSections: pageData.sections.length,
+          sectionIds: pageData.sections.map(s => s.id)
+        });
+        return true;
+      } else {
+        // Try to find in nested grid content
+        for (let section of pageData.sections) {
+          if (section.type === 'grid' && section.content) {
+            const gridInitialLength = section.content.length;
+            section.content = section.content.filter(item => item.id !== sectionId);
+            if (section.content.length < gridInitialLength) {
+              console.log(`✅ SUPPRESSION JSON: Section "${sectionId}" supprimée de grille dans ${pageId}.json`);
+              return true;
+            }
+          }
+        }
+        
+        console.error(`❌ ERREUR: Section "${sectionId}" introuvable pour suppression`);
+        console.log('🔍 Sections disponibles:', pageData.sections.map(s => ({id: s.id, title: s.title})));
+        return false;
+      }
+    },
+
+    // Recalculate all section indices in the current page to prevent conflicts
+    recalculateSectionIndices() {
+      // Disable index recalculation for now - it causes ID mismatches
+      // The current approach of using timestamp-based unique IDs is more stable
+      console.log('Index recalculation disabled - using stable unique IDs');
+      return true;
+    },
+
+    // OLD VERSION - kept for reference but disabled
+    _recalculateSectionIndicesOld() {
+      const pageId = this.getCurrentPageId();
+      if (!pageId) {
+        console.warn('Cannot recalculate indices - no current page');
+        return false;
+      }
+
+      // Update DOM data-edit-section attributes to match JSON structure
+      const article = document.querySelector('article[data-static-page="true"]');
+      if (!article) {
+        console.warn('No static page article found');
+        return false;
+      }
+
+      // Get the JSON data for this page
+      const pageData = window.STATIC_PAGES?.[pageId];
+      if (!pageData?.sections) {
+        console.warn('No page data found for recalculation');
+        return false;
+      }
+
+      // Build a mapping of DOM sections to JSON sections
+      const sections = article.querySelectorAll('.editable-section, .card');
+      let sectionIndex = 0;
+
+      sections.forEach((domSection, domIndex) => {
+        // Skip sections that don't have editable content
+        const editableElements = domSection.querySelectorAll('[data-edit-section]');
+        if (editableElements.length === 0) return;
+
+        // Find corresponding JSON section
+        let jsonSection = null;
+        let jsonIndex = sectionIndex;
+
+        // Try to match by existing ID first
+        const firstEditable = editableElements[0];
+        let currentId = firstEditable.dataset.editSection;
+        if (currentId.endsWith('-title')) {
+          currentId = currentId.replace('-title', '');
+        }
+
+        // Look for matching JSON section
+        for (let i = 0; i < pageData.sections.length; i++) {
+          const section = pageData.sections[i];
+          if (section.id === currentId || section.type === 'intro') {
+            jsonSection = section;
+            jsonIndex = i;
+            break;
+          }
+        }
+
+        // If no match found, assign next available index
+        if (!jsonSection && sectionIndex < pageData.sections.length) {
+          jsonSection = pageData.sections[sectionIndex];
+          jsonIndex = sectionIndex;
+        }
+
+        if (jsonSection) {
+          // Update DOM attributes to match JSON structure
+          editableElements.forEach(editable => {
+            const currentEditSection = editable.dataset.editSection;
+            
+            // Determine the new ID based on JSON section
+            let newEditSection;
+            if (currentEditSection.endsWith('-title')) {
+              newEditSection = `${jsonSection.id}-title`;
+            } else {
+              newEditSection = jsonSection.id;
+            }
+
+            // Update the data attribute
+            editable.dataset.editSection = newEditSection;
+            
+            console.log(`Updated section ${domIndex}: ${currentEditSection} → ${newEditSection}`);
+          });
+
+          sectionIndex++;
+        }
+      });
+
+      // Also update section indices in JSON to ensure consistency
+      pageData.sections.forEach((section, index) => {
+        // Ensure each section has a proper ID
+        if (!section.id || section.id.startsWith('section-')) {
+          // Generate a stable ID based on title or position
+          const baseId = section.title ? 
+            section.title.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '') :
+            `section-${index}`;
+          section.id = baseId;
+        }
+      });
+
+      console.log(`Recalculated indices for ${sectionIndex} sections in page ${pageId}`);
+      return true;
+    },
+
+    // Trigger data save to localStorage/persistent storage
+    triggerDataSave() {
+      try {
+        // Use the storage module to save changes if available
+        if (JdrApp.modules.storage && JdrApp.modules.storage.saveChanges) {
+          JdrApp.modules.storage.saveChanges(true); // Silent save
+          console.log('💾 SAUVEGARDE: Données sauvegardées dans localStorage');
+          
+          // Additional validation - check that static pages data was saved
+          const savedStaticPages = localStorage.getItem('jdr-bab-static-pages');
+          if (savedStaticPages) {
+            const parsedData = JSON.parse(savedStaticPages);
+            console.log('✅ VALIDATION: Pages statiques sauvegardées:', Object.keys(parsedData));
+          }
+        } else {
+          console.warn('⚠️ ATTENTION: Module storage non disponible pour la sauvegarde persistante');
+        }
+      } catch (error) {
+        console.error('❌ ERREUR: Échec de la sauvegarde persistante:', error);
       }
     }
   };

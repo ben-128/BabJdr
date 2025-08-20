@@ -1,0 +1,27 @@
+{
+  "page": "etats",
+  "title": "Etats",
+  "static": true,
+  "sections": [
+    {
+      "type": "intro",
+      "content": "Différents états possibles d'une créature ou d'un héros."
+    },
+    {
+      "type": "card",
+      "id": "a-terre",
+      "title": "A terre",
+      "content": "<p>Ne peut plus faire d'action.</p><p>Ne peut plus esquiver, et les attaques à l'encontre de la créature sont équivalentes à des attaques dans le dos.</p><p>Doit dépenser une action secondaire pour se relever.</p>",
+      "deletable": true,
+      "sectionName": "A terre"
+    },
+    {
+      "type": "card",
+      "id": "endormi-effraye",
+      "title": "Endormi/assomé/Effrayé",
+      "content": "<p>Ne peut plus faire d'action.</p><p>Ne peut plus esquiver, et les attaques à l'encontre de la créature sont équivalentes à des attaques dans le dos.</p><p>Une attaque sur la créature la sort de son état.</p>",
+      "deletable": true,
+      "sectionName": "Endormi/assomé/Effrayé"
+    }
+  ]
+}

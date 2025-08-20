@@ -61,9 +61,9 @@
         "coutMana": "🔵 <strong>Coût mana:</strong> 3",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> &nbsp;<br>- Non mort-vivant <br>- Esquive.",
-        "effetNormal": "<strong>Effet:</strong> Inflige *Intelligence* dégâts <span style=\"color: #ffd700; font-weight: bold;\">Divin</span> à la cible.",
+        "effetNormal": "<strong>Effet:</strong> Inflige *Intelligence* dégâts <span style=\"color: #d0d0d0; font-weight: bold; background: rgba(0, 0, 0, 0.4); padding: 2px 4px; border-radius: 3px;\">Divin</span> à la cible.",
         "effetCritique": "<strong>Coup Critique:&nbsp;</strong>Double dégâts.",
-        "effetEchec": "<strong>Échec Critique:&nbsp;</strong>Sans effet."
+        "effetEchec": "<strong>Échec Critique:&nbsp;</strong> -"
       },
       {
         "nom": "Soin mineur",
@@ -77,7 +77,7 @@
         "resistance": "<strong>Sans effet si:</strong> &nbsp;mort-vivant.",
         "effetNormal": "<strong>Effet:</strong> Soigne la cible de 5 points de vie. Tous les 5 points d'intelligence, augmente le soin de 1.",
         "effetCritique": "<strong>Coup Critique:&nbsp;</strong>Double le soin.",
-        "effetEchec": "<strong>Échec Critique:&nbsp;</strong>Sans effet."
+        "effetEchec": "<strong>Échec Critique:&nbsp;</strong> -"
       },
       {
         "nom": "Protection",
@@ -91,7 +91,7 @@
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Augmente l'armure de 3 pendant 5 tours.<br> Tous les 5 d'Intelligence, augmente l'armure de 1 supplémentaire.",
         "effetCritique": "<strong>Coup Critique:&nbsp;</strong> Double l'armure prodiguée.",
-        "effetEchec": "<strong>Échec Critique:&nbsp;</strong> Sans effet."
+        "effetEchec": "<strong>Échec Critique:&nbsp;</strong> -"
       }
     ]
   },
@@ -109,9 +109,9 @@
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> <br>- Volonté &gt; Intelligence du lanceur<br>- Element <span style=\"color: #8b5e34; font-weight: bold;\">Terre</span><br>- Lévitation ou Volant.",
-        "effetNormal": "<strong>Effet:</strong>&nbsp;La cible voit sa vitesse de déplacement réduite de moitiée et ne peut plus esquiver ou sauter.",
-        "effetCritique": "<strong>&nbsp;</strong>&nbsp;La cible est immobilisée pendant la durée du sort.",
-        "effetEchec": "<strong>&nbsp;</strong>&nbsp;Aucun effet."
+        "effetNormal": "<strong>Effet:</strong>&nbsp;La cible contracte l'état ralenti pendant 5 tours.",
+        "effetCritique": "<strong>Coup Critique:&nbsp;</strong>La cible ne peut plus effectuer de déplacement pendant la durée du sort.",
+        "effetEchec": "<strong>Échec Critique:&nbsp;</strong> -"
       },
       {
         "nom": "Accélération",
@@ -124,8 +124,8 @@
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> Aucune",
         "effetNormal": "<strong>Effet:</strong> &nbsp;La vitesse de déplacement de la cible est augmentée de 50% pendant 5 tours.<br>Non Cumulable. Si le sort est lancé à nouveau, les anciennes cibles perdent l'amélioration.&nbsp;",
-        "effetCritique": "La vitesse est augmentée de 100%.",
-        "effetEchec": "Aucun effet."
+        "effetCritique": "<strong>Coup Critique:&nbsp;</strong> La vitesse est augmentée de 100%.",
+        "effetEchec": "<strong>Échec Critique:&nbsp;</strong> -"
       },
       {
         "nom": "Sommeil",
@@ -138,8 +138,8 @@
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> <br>- Volonté &gt; Intelligence du lanceur<br>- Element <span style=\"color: #0f172a; font-weight: bold;\">Nuit</span>",
         "effetNormal": "<strong>Effet:</strong> La cible devient inactive pendant ses 2 prochains tours. Si la cible subit des dégats, elle est reveillée.",
-        "effetCritique": "L'effet dure 4 tours.",
-        "effetEchec": "Le lanceur est endormi à son prochain tour."
+        "effetCritique": "<strong>Coup Critique:&nbsp;</strong> L'effet dure 4 tours.",
+        "effetEchec": "<strong>Échec Critique:&nbsp;</strong> Le lanceur est endormi à son prochain tour."
       }
     ]
   },
