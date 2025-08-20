@@ -9,7 +9,7 @@ echo ========================================
 echo.
 
 :: Configuration - Modifiez ce chemin si nécessaire
-set "DOWNLOAD_PATH=C:\Users\Ben\Downloads"
+set "DOWNLOAD_PATH=%USERPROFILE%\Downloads"
 set "PROJECT_PATH=%~dp0.."
 
 cd /d "%PROJECT_PATH%"
