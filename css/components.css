@@ -874,6 +874,59 @@ article[data-page="enchanteur"] .illus img:hover,
   border-radius: 0 12px 12px 0 !important;
 }
 
+/* Mobile: Stack subclass images vertically */
+@media (max-width: 980px) {
+  .subclass-images {
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+  
+  .subclass-images .illus img {
+    border-radius: 12px !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  
+  /* Réduire l'espace des cadres d'images sur mobile */
+  .illus-spell img, .illus-class img, .illus-subclass img, .illus-don img,
+  article[data-page="guerrier"] .illus img,
+  article[data-page="mage"] .illus img,
+  article[data-page="pretre"] .illus img,
+  article[data-page="rodeur"] .illus img,
+  article[data-page="enchanteur"] .illus img,
+  .illus[data-illus-key^="class:"] img,
+  .illus[data-illus-key^="subclass:"] img,
+  .illus[data-illus-key^="spell:"] img,
+  .illus[data-illus-key^="sort:"] img,
+  .illus[data-illus-key^="spellcategory:"] img,
+  .illus[data-illus-key^="don:"] img {
+    padding: 2px !important; /* Réduire le padding de 4px à 2px */
+    border-width: 2px !important; /* Réduire l'épaisseur des bordures */
+    max-width: 100% !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important;
+  }
+  
+  /* Réduire l'espace entre les images de classe et sous-classe */
+  .illus {
+    gap: 4px !important; /* Réduire de 12px à 4px */
+    margin: 0.3rem 0 !important; /* Réduire les marges */
+  }
+  
+  /* Images de sorts plus compactes sur mobile */
+  .illus-spell img,
+  .card .illus img {
+    max-width: 100% !important;
+    max-height: 180px !important; /* Réduire de 250px à 180px */
+    border-width: 2px !important; /* Bordure plus fine */
+  }
+  
+  .subclass-images .illus:last-child img {
+    border-radius: 12px !important;
+  }
+}
+
 /* Style spécial pour les titres de sous-classes */
 .subclass-title {
   font-size: 2.2rem !important;

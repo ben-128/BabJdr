@@ -161,7 +161,7 @@
       const mjBtn = document.getElementById('mjToggleBtn');
       if (!mjBtn) return;
 
-      mjBtn.addEventListener('click', () => {
+      const handleMJToggle = () => {
         if (window.JdrApp.state.isMJ) {
           // Déjà en mode MJ, désactiver
           window.JdrApp.state.isMJ = false;
@@ -177,6 +177,13 @@
             this.generateTOC(); // Régénérer le TOC pour afficher les sections MJ
           });
         }
+      };
+
+      // Ajouter support tactile pour mobile
+      mjBtn.addEventListener('click', handleMJToggle);
+      mjBtn.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        handleMJToggle();
       });
     },
 

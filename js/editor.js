@@ -337,10 +337,16 @@
         }
       });
 
-      // Attacher aux images pour agrandissement
-      document.querySelectorAll('.illus img').forEach(img => {
-        if (!img.hasAttribute('data-events-attached')) {
+      // Attacher aux images pour agrandissement - toutes les images, pas seulement celles dans .illus
+      document.querySelectorAll('img').forEach(img => {
+        // Éviter les images dans les éditeurs ou les inputs
+        if (!img.closest('.editor-content') && !img.hasAttribute('data-events-attached')) {
+          // Ajouter support tactile pour mobile
           img.addEventListener('click', (e) => this.toggleImageEnlargement(e.target));
+          img.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            this.toggleImageEnlargement(e.target);
+          });
           img.setAttribute('data-events-attached', 'true');
           img.style.cursor = 'zoom-in';
         }
@@ -439,8 +445,14 @@
       modal.appendChild(enlargedImg);
       document.body.appendChild(modal);
       
-      // Fermer au clic
+      // Fermer au clic et au touch pour mobile
       modal.onclick = () => this.closeEnlargedImage();
+      modal.addEventListener('touchend', (e) => {
+        if (e.target === modal) {
+          e.preventDefault();
+          this.closeEnlargedImage();
+        }
+      });
       
       // Fermer avec Échap
       const escapeHandler = (e) => {

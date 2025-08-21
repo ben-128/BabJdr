@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-08-21T19:52:09.732Z by JdrBab Build System -->
+<!-- Generated on 2025-08-21T21:27:01.756Z by JdrBab Build System -->
 <title>JDR‑BAB — Livret de règles</title>
 <meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -455,11 +455,11 @@ h5, h6 {
 @media (max-width: 980px) { 
   .sidebar {
     position: fixed;
-    top: 0;
+    top: 0 !important; /* Force top position */
     left: 0;
-    width: 100%;
-    height: auto;
-    max-height: 80vh;
+    width: 100vw !important; /* Full viewport width */
+    height: 100vh !important; /* Full viewport height */
+    max-height: 100vh;
     background: 
       linear-gradient(135deg, var(--card), rgba(244,240,230,0.98)),
       radial-gradient(circle at 50% 30%, rgba(212,175,55,0.05), transparent 70%);
@@ -473,6 +473,8 @@ h5, h6 {
     transition: transform var(--transition-normal);
     z-index: 200;
     overflow-y: auto;
+    margin: 0; /* Remove any margin that might offset positioning */
+    padding-top: 0; /* Ensure starts at absolute top */
   }
   
   .sidebar.mobile-open {
@@ -482,6 +484,101 @@ h5, h6 {
   /* Adjust page layout for mobile */
   .page {
     padding: 80px 12px 12px 12px; /* Top padding for mobile nav button */
+    margin-left: 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  /* Force full width and proper spacing on mobile */
+  #views {
+    padding: 0 var(--space-sm);
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  
+  /* Grid layouts should stack vertically on mobile */
+  .grid {
+    display: block !important;
+  }
+  
+  .grid > * {
+    margin-bottom: 1rem;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+  }
+  
+  /* Cards should take full width on mobile */
+  .card, .card-base {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0.5rem 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+  
+  /* Force all content to fit in screen */
+  article, section, div, main, .page {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+  }
+  
+  /* Images should not overflow */
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+    width: auto !important;
+  }
+  
+  /* Text should wrap and not overflow */
+  p, h1, h2, h3, h4, h5, h6, div, span, li, strong, em {
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    word-break: break-word !important;
+    max-width: 100% !important;
+  }
+  
+  /* Tables should be responsive */
+  table {
+    width: 100% !important;
+    max-width: 100% !important;
+    table-layout: fixed !important;
+  }
+  
+  /* Prevent any element from causing horizontal scroll */
+  * {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  
+  /* Specific fix for class pages and content that overflows */
+  .illus, .class-content, .spell-content, .don-content {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+  
+  /* Stats grids should stack on mobile */
+  .stats-grid {
+    display: block !important;
+    width: 100% !important;
+  }
+  
+  .stats-grid > * {
+    display: block !important;
+    width: 100% !important;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Adjust search bar to avoid collision with mobile menu button */
+  .searchbar {
+    margin-left: 140px; /* Space for mobile nav button */
+    margin-right: 20px;
+  }
+  
+  .searchbar input {
+    font-size: 16px; /* Prevents zoom on iOS */
   }
   
   .sidebar::before {
@@ -1815,6 +1912,59 @@ article[data-page="enchanteur"] .illus img:hover,
   border-radius: 0 12px 12px 0 !important;
 }
 
+/* Mobile: Stack subclass images vertically */
+@media (max-width: 980px) {
+  .subclass-images {
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+  
+  .subclass-images .illus img {
+    border-radius: 12px !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  
+  /* Réduire l'espace des cadres d'images sur mobile */
+  .illus-spell img, .illus-class img, .illus-subclass img, .illus-don img,
+  article[data-page="guerrier"] .illus img,
+  article[data-page="mage"] .illus img,
+  article[data-page="pretre"] .illus img,
+  article[data-page="rodeur"] .illus img,
+  article[data-page="enchanteur"] .illus img,
+  .illus[data-illus-key^="class:"] img,
+  .illus[data-illus-key^="subclass:"] img,
+  .illus[data-illus-key^="spell:"] img,
+  .illus[data-illus-key^="sort:"] img,
+  .illus[data-illus-key^="spellcategory:"] img,
+  .illus[data-illus-key^="don:"] img {
+    padding: 2px !important; /* Réduire le padding de 4px à 2px */
+    border-width: 2px !important; /* Réduire l'épaisseur des bordures */
+    max-width: 100% !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important;
+  }
+  
+  /* Réduire l'espace entre les images de classe et sous-classe */
+  .illus {
+    gap: 4px !important; /* Réduire de 12px à 4px */
+    margin: 0.3rem 0 !important; /* Réduire les marges */
+  }
+  
+  /* Images de sorts plus compactes sur mobile */
+  .illus-spell img,
+  .card .illus img {
+    max-width: 100% !important;
+    max-height: 180px !important; /* Réduire de 250px à 180px */
+    border-width: 2px !important; /* Bordure plus fine */
+  }
+  
+  .subclass-images .illus:last-child img {
+    border-radius: 12px !important;
+  }
+}
+
 /* Style spécial pour les titres de sous-classes */
 .subclass-title {
   font-size: 2.2rem !important;
@@ -2806,7 +2956,6 @@ article span[title]:hover::after {
   </main>
   
   <footer>
-    <p>JDR‑BAB — Règles et contenus sous licence libre</p>
   </footer>
 </div>
 
@@ -6657,7 +6806,7 @@ article span[title]:hover::after {
       const mjBtn = document.getElementById('mjToggleBtn');
       if (!mjBtn) return;
 
-      mjBtn.addEventListener('click', () => {
+      const handleMJToggle = () => {
         if (window.JdrApp.state.isMJ) {
           // Déjà en mode MJ, désactiver
           window.JdrApp.state.isMJ = false;
@@ -6673,6 +6822,13 @@ article span[title]:hover::after {
             this.generateTOC(); // Régénérer le TOC pour afficher les sections MJ
           });
         }
+      };
+
+      // Ajouter support tactile pour mobile
+      mjBtn.addEventListener('click', handleMJToggle);
+      mjBtn.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        handleMJToggle();
       });
     },
 
@@ -8300,10 +8456,16 @@ article span[title]:hover::after {
         }
       });
 
-      // Attacher aux images pour agrandissement
-      document.querySelectorAll('.illus img').forEach(img => {
-        if (!img.hasAttribute('data-events-attached')) {
+      // Attacher aux images pour agrandissement - toutes les images, pas seulement celles dans .illus
+      document.querySelectorAll('img').forEach(img => {
+        // Éviter les images dans les éditeurs ou les inputs
+        if (!img.closest('.editor-content') && !img.hasAttribute('data-events-attached')) {
+          // Ajouter support tactile pour mobile
           img.addEventListener('click', (e) => this.toggleImageEnlargement(e.target));
+          img.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            this.toggleImageEnlargement(e.target);
+          });
           img.setAttribute('data-events-attached', 'true');
           img.style.cursor = 'zoom-in';
         }
@@ -8402,8 +8564,14 @@ article span[title]:hover::after {
       modal.appendChild(enlargedImg);
       document.body.appendChild(modal);
       
-      // Fermer au clic
+      // Fermer au clic et au touch pour mobile
       modal.onclick = () => this.closeEnlargedImage();
+      modal.addEventListener('touchend', (e) => {
+        if (e.target === modal) {
+          e.preventDefault();
+          this.closeEnlargedImage();
+        }
+      });
       
       // Fermer avec Échap
       const escapeHandler = (e) => {
@@ -8571,7 +8739,6 @@ article span[title]:hover::after {
         }
       });
 
-      console.log(`SpellFilter: Showing ${visibleCount}/${spellCards.length} spells`);
       
       // Update filter display with count
       this.updateFilterDisplay(maxLevel, visibleCount, spellCards.length);
@@ -8660,6 +8827,10 @@ article span[title]:hover::after {
 
 (() => {
   "use strict";
+
+  // Global state for mobile menu (to avoid 'this' context issues)
+  let mobileMenuIsOpen = false;
+
 
   // ========================================
   // UI INTERACTIONS MODULE
@@ -9059,12 +9230,23 @@ article span[title]:hover::after {
         return;
       }
 
+      // Save the current main content before doing anything else
+      this.saveCurrentMainContent();
+
       // Search without minimum character limit since user has to press Enter
       const results = this.searchInData(normalizedQuery);
       this.displaySearchResultsInMain(results, normalizedQuery);
       
       // Keep existing TOC search for compatibility
       this.searchInTOC(normalizedQuery);
+    },
+    
+    saveCurrentMainContent() {
+      const main = document.querySelector('main');
+      if (main && !this.originalMainContent) {
+        this.originalMainContent = main.innerHTML;
+        console.log('📦 Saved current main content for search');
+      }
     },
 
     searchInData(query) {
@@ -9482,7 +9664,7 @@ article span[title]:hover::after {
           <div class="search-page-header">
             <h1>🔍 Recherche: "${query}"</h1>
             <p class="search-results-count">${results.length} résultat${results.length > 1 ? 's' : ''} trouvé${results.length > 1 ? 's' : ''}</p>
-            <button class="btn small" onclick="JdrApp.modules.ui.clearMainSearchResults()">
+            <button class="btn small search-back-btn" type="button">
               ← Retour au sommaire
             </button>
           </div>
@@ -9558,87 +9740,127 @@ article span[title]:hover::after {
     },
 
     setupMainSearchHandlers() {
-      // Handle click on entire card
-      JdrApp.utils.events.register('click', '.search-result-card', (e) => {
-        console.log('Card clicked, currentTarget:', e.currentTarget);
-        if (e.target.closest('.search-result-btn')) return; // Let button handle it
-        
-        const url = e.currentTarget ? e.currentTarget.dataset.url : null;
-        console.log('Card URL:', url);
-        
-        if (url && url !== '#test') {
-          console.log('Navigating to:', url);
-          window.location.hash = url;
-          // Force page reload to trigger router
-          window.location.reload();
-        } else {
-          console.warn('No valid URL found on card');
-        }
-      });
-
-      // Handle button clicks
-      JdrApp.utils.events.register('click', '.search-result-btn', (e) => {
-        console.log('Button clicked, target:', e.target);
-        e.stopPropagation();
-        
-        const url = e.target ? e.target.dataset.url : null;
-        console.log('Button URL:', url);
-        
-        if (url && url !== '#test') {
-          console.log('Navigating to:', url);
-          window.location.hash = url;
-          // Force page reload to trigger router
-          window.location.reload();
-        } else {
-          console.warn('No valid URL found on button');
-        }
-      });
+      // Setup direct handlers after DOM is ready to ensure click events work
+      setTimeout(() => {
+        this.setupDirectHandlers();
+      }, 100);
     },
 
     setupDirectHandlers() {
-      // Direct event listeners on the elements themselves
-      setTimeout(() => {
-        const cards = document.querySelectorAll('.search-result-card');
-        const buttons = document.querySelectorAll('.search-result-btn');
-        
-        console.log('Setting up direct handlers for', cards.length, 'cards and', buttons.length, 'buttons');
-        
-        cards.forEach((card, index) => {
-          const url = card.dataset.url;
-          console.log(`Card ${index + 1} URL:`, url);
-          
-          card.addEventListener('click', (e) => {
-            if (e.target.closest('.search-result-btn')) return;
-            console.log('Direct card click, URL:', url);
-            if (url && url !== '#test') {
-              window.location.hash = url;
-              window.location.reload();
-            }
-          });
+      // Clear any existing handlers first
+      const cards = document.querySelectorAll('.search-result-card');
+      const buttons = document.querySelectorAll('.search-result-btn');
+      const backButton = document.querySelector('.search-page-header .btn');
+      
+      console.log('Setting up direct handlers for', cards.length, 'cards,', buttons.length, 'buttons');
+      
+      // Handle back button in search results
+      const searchBackButton = document.querySelector('.search-back-btn');
+      if (searchBackButton) {
+        searchBackButton.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          console.log('Search back button clicked');
+          this.clearMainSearchResults();
         });
+      }
+      
+      // Handle search result cards
+      cards.forEach((card, index) => {
+        const url = card.dataset.url;
+        console.log(`Card ${index + 1} URL:`, url);
         
-        buttons.forEach((button, index) => {
-          const url = button.dataset.url;
-          console.log(`Button ${index + 1} URL:`, url);
-          
-          button.addEventListener('click', (e) => {
-            e.stopPropagation();
-            console.log('Direct button click, URL:', url);
-            if (url && url !== '#test') {
-              window.location.hash = url;
-              window.location.reload();
-            }
-          });
+        // Remove any existing listeners
+        const newCard = card.cloneNode(true);
+        card.parentNode.replaceChild(newCard, card);
+        
+        newCard.addEventListener('click', (e) => {
+          if (e.target.closest('.search-result-btn')) return;
+          console.log('Card click, navigating to:', url);
+          if (url && url !== '#test') {
+            this.navigateFromSearch(url);
+          }
         });
-      }, 200);
+      });
+      
+      // Handle search result buttons  
+      const refreshedButtons = document.querySelectorAll('.search-result-btn');
+      refreshedButtons.forEach((button, index) => {
+        const url = button.dataset.url;
+        console.log(`Button ${index + 1} URL:`, url);
+        
+        button.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          console.log('Button click, navigating to:', url);
+          if (url && url !== '#test') {
+            this.navigateFromSearch(url);
+          }
+        });
+      });
+    },
+    
+    navigateFromSearch(url) {
+      console.log('Navigating from search to:', url);
+      
+      // Restore original content if we have it
+      const main = document.querySelector('main');
+      if (this.originalMainContent && main) {
+        console.log('🔄 Restoring content before navigation');
+        main.innerHTML = this.originalMainContent;
+        this.originalMainContent = null;
+        
+        // Reattach foldout events after content restoration
+        this.reattachFoldoutEvents();
+      }
+      
+      // Clear search input
+      const searchInput = document.querySelector('#search');
+      if (searchInput) {
+        searchInput.value = '';
+      }
+      
+      // Navigate directly to the target
+      if (JdrApp.modules.router && JdrApp.modules.router.navigate) {
+        const route = url.replace('#/', '');
+        JdrApp.modules.router.navigate(route);
+      } else {
+        window.location.hash = url;
+      }
     },
 
     clearMainSearchResults() {
-      // Reload the current page or go back to homepage
-      if (window.location.hash && window.location.hash !== '#/') {
-        window.location.reload();
+      const main = document.querySelector('main');
+      
+      // First try to restore the original content if we have it
+      if (this.originalMainContent && main) {
+        console.log('🔄 Restoring original main content');
+        main.innerHTML = this.originalMainContent;
+        this.originalMainContent = null; // Clear the saved content
+        
+        // Reattach foldout events after content restoration
+        this.reattachFoldoutEvents();
+        
+        // Trigger router to ensure proper state
+        if (JdrApp.modules.router && JdrApp.modules.router.navigate) {
+          setTimeout(() => {
+            JdrApp.modules.router.navigate('creation');
+          }, 100);
+        }
       } else {
-        window.location.hash = '#/creation';
+        // Fallback: use router navigation
+        console.log('🔄 Using router navigation fallback');
+        if (JdrApp.modules.router && JdrApp.modules.router.navigate) {
+          JdrApp.modules.router.navigate('creation');
+        } else {
+          window.location.hash = '#/creation';
+        }
+      }
+      
+      // Clear search input
+      const searchInput = document.querySelector('#search');
+      if (searchInput) {
+        searchInput.value = '';
       }
     },
 
@@ -9952,12 +10174,21 @@ article span[title]:hover::after {
     },
 
     setupMobileNavigation() {
+      // Force initial state
+      mobileMenuIsOpen = false;
+      
+      // Setup mobile navigation
+      if (window.innerWidth <= 980) {
+        console.log('📱 Mobile navigation setup');
+      }
+      
       // Create mobile navigation toggle button immediately and on resize
       this.createMobileNavToggle();
       
       // Handle mobile nav toggle with delegation
       document.addEventListener('click', (e) => {
-        if (e.target.closest('.mobile-nav-toggle')) {
+        const mobileToggle = e.target.closest('.mobile-nav-toggle');
+        if (mobileToggle) {
           e.preventDefault();
           this.toggleMobileNav();
         }
@@ -9989,10 +10220,19 @@ article span[title]:hover::after {
           this.createMobileNavToggle();
         });
       }
+      
+      // Fallback: Force creation after a delay for mobile
+      setTimeout(() => {
+        if (window.innerWidth <= 980 && !document.querySelector('.mobile-nav-toggle')) {
+          this.createMobileNavToggle();
+        }
+      }, 1000);
     },
 
     createMobileNavToggle() {
       // Only create if it doesn't exist and we're on mobile
+      // Create mobile nav toggle if needed
+      
       if (window.innerWidth <= 980 && !document.querySelector('.mobile-nav-toggle')) {
         const toggleButton = document.createElement('button');
         toggleButton.className = 'mobile-nav-toggle';
@@ -10007,6 +10247,24 @@ article span[title]:hover::after {
         // Insert at the beginning of body
         if (document.body) {
           document.body.insertBefore(toggleButton, document.body.firstChild);
+          // Attach direct event listener to the button as well
+          toggleButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            this.toggleMobileNav();
+          });
+          
+          // Force initial hide state for sidebar
+          const sidebar = document.querySelector('.sidebar');
+          if (sidebar) {
+            sidebar.classList.remove('mobile-open');
+            sidebar.style.transform = 'translateY(-100%)';
+            
+            console.log('🎯 Sidebar initialized for mobile:', {
+              transform: sidebar.style.transform,
+              width: window.innerWidth
+            });
+          }
         }
       }
     },
@@ -10016,7 +10274,10 @@ article span[title]:hover::after {
       const toggleButton = document.querySelector('.mobile-nav-toggle');
       
       if (sidebar && toggleButton) {
-        const isOpen = sidebar.classList.contains('mobile-open');
+        // Check multiple state indicators to determine if menu is open
+        const isOpen = mobileMenuIsOpen || 
+                      sidebar.classList.contains('mobile-open') ||
+                      (sidebar.style.transform && sidebar.style.transform.includes('translateY(0)'));
         
         if (isOpen) {
           this.closeMobileNav();
@@ -10031,8 +10292,25 @@ article span[title]:hover::after {
       const toggleButton = document.querySelector('.mobile-nav-toggle');
       
       if (sidebar && toggleButton) {
+        mobileMenuIsOpen = true;
+        
         sidebar.classList.add('mobile-open');
         toggleButton.classList.add('open');
+        
+        // Force styles inline for mobile
+        if (window.innerWidth <= 980) {
+          sidebar.style.transform = 'translateY(0)';
+          sidebar.style.position = 'fixed';
+          sidebar.style.top = '0';
+          sidebar.style.left = '0';
+          sidebar.style.width = '100%';
+          sidebar.style.height = '100vh';
+          sidebar.style.zIndex = '200';
+          sidebar.style.background = 'rgba(244,240,230,0.98)';
+          sidebar.style.maxHeight = '100vh';
+          sidebar.style.overflowY = 'auto';
+          
+        }
         
         const textSpan = toggleButton.querySelector('.text');
         if (textSpan) {
@@ -10051,8 +10329,16 @@ article span[title]:hover::after {
       const toggleButton = document.querySelector('.mobile-nav-toggle');
       
       if (sidebar && toggleButton) {
+        mobileMenuIsOpen = false;
+        
         sidebar.classList.remove('mobile-open');
         toggleButton.classList.remove('open');
+        
+        // Force styles inline for mobile
+        if (window.innerWidth <= 980) {
+          sidebar.style.transform = 'translateY(-100%)';
+          
+        }
         
         const textSpan = toggleButton.querySelector('.text');
         if (textSpan) {
@@ -10932,7 +11218,20 @@ article span[title]:hover::after {
         return section ? section.title : sectionId;
       }
       return sectionId;
-    }
+    },
+
+    // ========================================
+    // FOLDOUT EVENT REATTACHMENT
+    // ========================================
+    
+    reattachFoldoutEvents() {
+      // Delegate to router's attachFoldoutEvents method
+      if (JdrApp.modules.router && JdrApp.modules.router.attachFoldoutEvents) {
+        console.log('🔗 Reattaching foldout events after content restoration');
+        JdrApp.modules.router.attachFoldoutEvents();
+      }
+    },
+
   };
 
 })();
