@@ -31,6 +31,7 @@
       EventBus.on(Events.CONTENT_UPDATE, () => {
         this.saveChangesToStorage();
       });
+
     },
 
     toggleDevMode() {
@@ -67,12 +68,13 @@
         this.forceHideAllEditButtons();
       }
       
-      // Force regeneration of pages so element selectors appear/disappear
       this.regenerateCurrentPage();
     },
 
     forceHideAllEditButtons() {
-      if (this.isDevMode) return;
+      if (this.isDevMode) {
+        return;
+      }
       
       const selectors = [
         '.edit-btn', '[class$="-add"]', '[class$="-delete"]', '[class*="-move-"]',
@@ -92,19 +94,38 @@
     },
     
     forceShowAllEditButtons() {
+      if (!this.isDevMode) return;
+      
+      // Ensure body has the correct classes
+      document.body.classList.add('dev-on');
+      document.body.classList.remove('dev-off');
+      
+      // Force reset all CSS properties that might be causing 0x0 dimensions
       const selectors = [
         '.edit-btn', '[class$="-add"]', '[class$="-delete"]', '[class*="-move-"]',
-        '.section-delete', '.remove-section-btn', '.add-paragraph-btn',
+        '.section-delete', '.remove-section-btn', '.add-paragraph-btn', 
         '.add-subclass-btn', '.delete-subclass-btn',
-        '.spell-delete', '.don-delete', // Explicit delete buttons
+        '.spell-delete', '.don-delete', '.objet-delete',
+        '.spell-add', '.don-add', '.objet-add',
         '.illus .up', '.illus .rm', '.illus label', '.illus input[type="file"]'
       ];
       
       selectors.forEach(selector => {
         document.querySelectorAll(selector).forEach(element => {
+          // Force reset all dimension properties
+          element.style.removeProperty('display');
+          element.style.removeProperty('visibility');
+          element.style.removeProperty('opacity');
+          element.style.removeProperty('width');
+          element.style.removeProperty('height');
+          element.style.removeProperty('min-width');
+          element.style.removeProperty('min-height');
+          element.style.removeProperty('pointer-events');
+          element.removeAttribute('aria-hidden');
+          
+          // Let CSS handle the styling
           element.style.display = '';
           element.style.visibility = '';
-          element.removeAttribute('aria-hidden');
         });
       });
     },
@@ -276,10 +297,13 @@
           if (JdrApp.modules.renderer?.autoLoadImages) {
             JdrApp.modules.renderer.autoLoadImages();
           }
+          // Apply dev mode state properly
           if (this.isDevMode) {
             this.forceShowAllEditButtons();
+          } else {
+            this.forceHideAllEditButtons();
           }
-        }, 100);
+        }, 50);
       }
     },
 
@@ -344,36 +368,93 @@
 
     toggleImageEnlargement(img) {
       if (img.classList.contains('enlarged')) {
-        img.classList.remove('enlarged');
-        this.removeImageBackdrop();
+        this.closeEnlargedImage();
       } else {
-        img.classList.add('enlarged');
-        this.createImageBackdrop();
+        this.showEnlargedImage(img);
+      }
+    },
+
+    showEnlargedImage(img) {
+      // Fermer toute image déjà ouverte
+      this.closeEnlargedImage();
+      
+      // Créer un conteneur modal complet
+      const modal = document.createElement('div');
+      modal.id = 'image-enlargement-modal';
+      modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: transparent;
+        z-index: 2147483647;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: zoom-out;
+      `;
+      
+      // Créer une copie de l'image
+      const enlargedImg = img.cloneNode(true);
+      enlargedImg.style.cssText = `
+        max-width: 90vw;
+        max-height: 90vh;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        border: 3px solid var(--gold);
+        border-radius: 8px;
+        background: white;
+        box-shadow: 0 20px 60px rgba(0,0,0,.8), 0 0 20px rgba(212,175,55,.3);
+        cursor: zoom-out;
+      `;
+      
+      modal.appendChild(enlargedImg);
+      document.body.appendChild(modal);
+      
+      // Fermer au clic
+      modal.onclick = () => this.closeEnlargedImage();
+      
+      // Fermer avec Échap
+      const escapeHandler = (e) => {
+        if (e.key === 'Escape') {
+          this.closeEnlargedImage();
+          document.removeEventListener('keydown', escapeHandler);
+        }
+      };
+      document.addEventListener('keydown', escapeHandler);
+      
+      // Marquer l'image originale comme agrandie
+      img.classList.add('enlarged');
+    },
+
+    closeEnlargedImage() {
+      const modal = document.getElementById('image-enlargement-modal');
+      if (modal) {
+        modal.remove();
+      }
+      
+      // Retirer la classe de toutes les images
+      document.querySelectorAll('img.enlarged').forEach(img => {
+        img.classList.remove('enlarged');
+      });
+      
+      // Nettoyer les anciens backdrops
+      const oldBackdrop = document.querySelector('.image-backdrop');
+      if (oldBackdrop) {
+        oldBackdrop.remove();
       }
     },
 
     createImageBackdrop() {
-      let backdrop = document.querySelector('.image-backdrop');
-      if (!backdrop) {
-        backdrop = document.createElement('div');
-        backdrop.className = 'image-backdrop';
-        document.body.appendChild(backdrop);
-      }
-      
-      backdrop.classList.add('visible');
-      backdrop.onclick = () => {
-        document.querySelectorAll('img.enlarged').forEach(img => {
-          img.classList.remove('enlarged');
-        });
-        this.removeImageBackdrop();
-      };
+      // Méthode obsolète - redirigée vers la nouvelle approche
+      console.warn('createImageBackdrop is deprecated, use showEnlargedImage instead');
     },
 
     removeImageBackdrop() {
-      const backdrop = document.querySelector('.image-backdrop');
-      if (backdrop) {
-        backdrop.classList.remove('visible');
-      }
+      // Méthode obsolète - redirigée vers la nouvelle approche
+      this.closeEnlargedImage();
     },
 
     saveChangesToStorage() {

@@ -20,7 +20,10 @@
       "Bash(find:*)",
       "Bash(grep:*)",
       "Bash(taskkill:*)",
-      "Bash(git rm:*)"
+      "Bash(git rm:*)",
+      "Bash(node:*)",
+      "Bash(sed:*)",
+      "Bash(curl:*)"
     ],
     "deny": []
   }

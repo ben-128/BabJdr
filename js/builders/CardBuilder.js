@@ -81,8 +81,11 @@
         <div class="card editable-section" data-section-type="subclass" data-class-name="${this.categoryName}" data-subclass-name="${this.data.nom}">
           ${this.buildEditableTitle(this.data.nom, 'subclass-name')}
           ${this.buildSubclassImages()}
-          ${this.buildStatsSection()}
+          <div style="margin-bottom: 1rem;">
+            ${this.buildStatsSection()}
+          </div>
           ${this.buildEditableField(this.data.progression, 'subclass-progression', 'Progression')}
+          <div class="rule" style="margin: 1.5rem auto; height: 2px; background: linear-gradient(90deg, transparent, var(--bronze), transparent); opacity: 0.6;"></div>
           ${this.buildEditableList(this.data.capacites, 'subclass-capacites', 'Capacités')}
           ${this.buildDeleteButton('subclass')}
         </div>
@@ -298,8 +301,6 @@
     }
 
     buildEditButton(type) {
-      if (!this.shouldShowEditButtons) return '';
-      
       const titles = {
         title: 'Éditer le titre',
         field: 'Éditer ce champ',
@@ -308,12 +309,11 @@
         stats: 'Éditer les statistiques'
       };
 
+      // Always generate the button - CSS will control visibility based on body.dev-on/dev-off
       return `<button class="edit-btn edit-${type}-btn" title="${titles[type] || 'Éditer'}">✏️</button>`;
     }
 
     buildDeleteButton(type) {
-      if (!this.shouldShowEditButtons) return '';
-
       const config = {
         spell: {
           class: 'spell-delete btn small',
@@ -344,12 +344,12 @@
       const buttonConfig = config[type];
       if (!buttonConfig) return '';
 
+      // Always generate the button - CSS will control visibility based on body.dev-on/dev-off
       return `<button class="${buttonConfig.class}" ${buttonConfig.attrs} type="button" style="${buttonConfig.style}">${buttonConfig.text}</button>`;
     }
 
     buildMoveButtons(type, index, totalItems) {
-      if (!this.shouldShowEditButtons) return '';
-
+      // Always generate the buttons - CSS will control visibility based on body.dev-on/dev-off
       return `
         <div style="display: flex; gap: 4px; margin-top: 8px; flex-wrap: wrap;">
           ${this.buildDeleteButton(type)}
@@ -371,8 +371,11 @@
       if (colors.padding) style += ` padding: ${colors.padding};`;
       if (colors.borderRadius) style += ` border-radius: ${colors.borderRadius};`;
       
-      if (this.shouldShowEditButtons) {
-        // Dev mode: dropdown selector
+      // Vérifier le mode dev au moment de la génération
+      const isDevMode = JdrApp.utils.isDevMode();
+      
+      if (isDevMode) {
+        // Mode développement : afficher le sélecteur
         const options = Object.keys(window.ElementIcons || {});
         const optionsHTML = options.map(elem => 
           `<option value="${elem}" ${elem === element ? 'selected' : ''}>${window.ElementIcons[elem]} ${elem}</option>`
@@ -380,16 +383,20 @@
         
         return `
           <div style="text-align: center; margin: 0.5rem 0;">
-            <select class="spell-element-selector" data-spell-name="${this.data.nom}" data-category-name="${this.categoryName}" style="padding: 4px 8px; border: 1px solid var(--rule); border-radius: 6px; background: var(--card); font-size: 0.9em;">
-              ${optionsHTML}
-            </select>
+            <div class="spell-element-selector" style="font-size: 1.1em;">
+              <select data-spell-name="${this.data.nom}" data-category-name="${this.categoryName}" style="padding: 4px 8px; border: 1px solid var(--rule); border-radius: 6px; background: var(--card); font-size: 0.9em;">
+                ${optionsHTML}
+              </select>
+            </div>
           </div>
         `;
       } else {
-        // Normal mode: just display the icon and element
+        // Mode normal : afficher seulement l'icône
         return `
-          <div style="text-align: center; margin: 0.5rem 0; font-size: 1.1em;">
-            <span style="${style}">${icon} ${element}</span>
+          <div style="text-align: center; margin: 0.5rem 0;">
+            <div class="spell-element-display" style="font-size: 1.1em;">
+              <span style="${style}">${icon} ${element}</span>
+            </div>
           </div>
         `;
       }

@@ -27,5 +27,5 @@
 
 /* Misc utilities */
 .subclass-stack{display:flex;flex-direction:column;gap:var(--space-lg)}
-.chip{font-size:12px;border:1px solid var(--rule);border-radius:999px;padding:4px 8px;background:rgba(155,107,47,.08)}
-.chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.chip{font-size:14px;border:2px solid var(--rule);border-radius:999px;padding:6px 12px;background:rgba(155,107,47,.12);font-weight:600;box-shadow:0 2px 6px rgba(0,0,0,.1)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}

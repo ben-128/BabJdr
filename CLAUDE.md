@@ -19,6 +19,12 @@ npm run serve       # Start server without opening browser
 
 **IMPORTANT**: Claude should NOT run `npm run dev` or similar dev server commands as they block the terminal and prevent further interaction. Use existing running servers instead.
 
+**MOBILE STANDALONE PRIORITY**: The standalone version (`build/standalone/JdrBab.html`) is the primary way users access the application on mobile devices and tablets. Mobile users do NOT use dev mode - only the standalone version matters for mobile/tablet compatibility. Ensure:
+- Images display properly on mobile/tablet
+- Navigation is fully functional on touch devices  
+- Layout is responsive and readable on small screens
+- All content remains accessible without dev mode
+
 ### Windows Batch Alternatives
 - `dev-server.bat` - Development mode with dev tools and live reload
 - `build.bat` - Build standalone version with Windows-specific output handling

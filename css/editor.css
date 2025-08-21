@@ -95,20 +95,118 @@ body.dev-off .btn.small[data-spell-name],
 body.dev-off .btn.small[data-don-name],
 body.dev-off .btn.small[data-section-name],
 body.dev-off .btn.small[data-don-index],
-/* Element selectors for spells */
-body.dev-off .spell-element-selector {
+/* Element selectors for spells - Solution ultra-forcée */
+.spell-element-selector,
+.spell-element-selector *,
+div.spell-element-selector,
+.card .spell-element-selector {
   display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  position: absolute !important;
+  left: -9999px !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
 }
-/* Show display version in dev-off, hide selector */
+
+/* SEULEMENT visible en mode dev */
+body.dev-on .spell-element-selector,
+body.dev-on .spell-element-selector *,
+body.dev-on div.spell-element-selector,
+body.dev-on .card .spell-element-selector {
+  display: inline-block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: static !important;
+  left: auto !important;
+  width: auto !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+
 body.dev-off .spell-element-display {
   display: block !important;
 }
+
 body.dev-on .spell-element-display {
   display: none !important;
 }
-/* Make sure spell element selector is visible in dev mode */
-body.dev-on .spell-element-selector {
+
+/* COMPREHENSIVE SHOW RULES FOR DEV MODE - High specificity to override dev-off hiding */
+body.dev-on .edit-btn,
+body.dev-on button.edit-btn,
+body.dev-on button[class*="edit"],
+body.dev-on button[class*="add"]:not(.menu-toggle),
+body.dev-on button[class*="delete"],
+body.dev-on button[class*="remove"],
+body.dev-on button[class*="move"],
+body.dev-on .section-delete,
+body.dev-on .spell-delete,
+body.dev-on .don-delete,
+body.dev-on .add-subclass-btn,
+body.dev-on .delete-subclass-btn,
+body.dev-on .add-paragraph-btn,
+body.dev-on .remove-section-btn,
+body.dev-on .illus .up,
+body.dev-on .illus .rm,
+body.dev-on .illus label,
+body.dev-on .illus input[type="file"],
+body.dev-on button[data-category-name],
+body.dev-on button[data-spell-name],
+body.dev-on button[data-don-name],
+body.dev-on button[data-section-name],
+body.dev-on button[data-section-type],
+/* Extra specific selectors to match the hiding rules exactly */
+body.dev-on .spell-add,
+body.dev-on .don-add,
+body.dev-on .objet-add,
+body.dev-on .category-add,
+body.dev-on .spell-category-delete,
+body.dev-on .don-category-delete,
+body.dev-on .objet-category-delete,
+body.dev-on .don-move-up,
+body.dev-on .don-move-down,
+body.dev-on button[title*="Éditer"],
+body.dev-on button[title*="Edit"],
+body.dev-on button[title*="Supprimer"],
+body.dev-on button[title*="Ajouter"] {
   display: inline-block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  position: relative !important;
+}
+
+/* ULTIMATE SOLUTION: Force dimensions to prevent 0x0 collapse */
+html body.dev-on .edit-btn,
+html body.dev-on button[class*="edit"],
+html body.dev-on button[class*="add"],
+html body.dev-on button[class*="delete"],
+html body.dev-on .section-delete,
+html body.dev-on .add-paragraph-btn {
+  display: inline-block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 28px !important;
+  height: 28px !important;
+  min-width: 28px !important;
+  min-height: 28px !important;
+  background: rgba(139,69,19,0.1) !important;
+  border: 1px solid var(--bronze) !important;
+  border-radius: 6px !important;
+  color: var(--bronze) !important;
+  font-size: 14px !important;
+  padding: 4px !important;
+  margin-left: 8px !important;
+  box-sizing: border-box !important;
+  line-height: 1 !important;
+  cursor: pointer !important;
+  position: relative !important;
+  top: 0 !important;
+  left: 0 !important;
+  transform: none !important;
+  z-index: 10 !important;
 }
 /* Target specific button classes from renderer */
 body.dev-off .spell-add,
@@ -157,16 +255,9 @@ body.dev-off button.objet-category-delete.btn {
   pointer-events: none !important;
 }
 
-/* Système d'agrandissement d'images */
+/* Ancien système d'agrandissement - désactivé */
 .illus img.enlarged {
-  position:fixed !important; top:50% !important; left:50% !important; 
-  transform:translate(-50%, -50%) !important; z-index:9999 !important;
-  max-width:85vw !important; max-height:85vh !important; width:auto !important; height:auto !important;
-  box-shadow:0 20px 60px rgba(0,0,0,.5), inset 0 4px 12px rgba(212,175,55,.8) !important;
-  cursor:zoom-out !important; 
-  transition:none !important;
-  pointer-events:auto !important;
-  object-fit:contain !important;
+  /* Plus de style ici - géré par JavaScript modal */
 }
 
 /* Forcer l'état stable sur hover pour les images agrandies */
@@ -185,12 +276,9 @@ article[data-page="sorts-enchanteur"] .illus img.enlarged:hover,
   transition:none !important;
 }
 
+/* Ancien backdrop - plus utilisé */
 .image-backdrop {
-  position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,.7);
-  z-index:9998; opacity:0; transition:opacity .3s ease; pointer-events:none;
-}
-.image-backdrop.visible {
-  opacity:1; pointer-events:auto;
+  display: none !important;
 }
 
 /* Interactive buttons */
