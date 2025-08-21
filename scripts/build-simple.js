@@ -126,7 +126,8 @@ function buildStandalone() {
   const dataFiles = [
     'sorts.json', 'classes.json', 'competences-tests.json', 
     'creation.json', 'dons.json', 'objets.json', 'elements.json', 'etats.json',
-    'images.json', 'static-pages-config.json', 'stats.json'
+    'images.json', 'static-pages-config.json', 'stats.json', 'toc-structure.json',
+    'monstres.json'
   ];
   
   let dataObject = {};
@@ -164,7 +165,11 @@ function buildStandalone() {
     window.CLASSES = ${JSON.stringify(dataObject.classes || {}, null, 2)};
     window.DONS = ${JSON.stringify(dataObject.dons || {}, null, 2)};
     window.OBJETS = ${JSON.stringify(dataObject.objets || {}, null, 2)};
+    window.MONSTRES = ${JSON.stringify(dataObject.monstres || [], null, 2)};
     window.IMAGES = ${JSON.stringify(dataObject.images || {}, null, 2)};
+    
+    // TOC Structure for advanced navigation
+    window.TOC_STRUCTURE = ${JSON.stringify(dataObject.toc_structure || {}, null, 2)};
     
     // Build STATIC_PAGES correctly by combining individual page data
     window.STATIC_PAGES = {

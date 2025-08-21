@@ -17,36 +17,43 @@
       JdrApp.utils.events.onHashChange(() => this.parseRoute());
       JdrApp.utils.events.onDOMReady(() => this.parseRoute());
       
-      // Set up category collapse/expand (must be BEFORE general TOC handler)
-      JdrApp.utils.events.register('click', '.toc-category > a', (e) => {
-        e.preventDefault();
-        e.stopPropagation(); // Prevent other handlers from firing
-        const category = e.target.closest('.toc-category');
-        if (category) {
-          category.classList.toggle('collapsed');
-        }
-      });
-
-      // Set up TOC click handlers (exclude category headers)
-      JdrApp.utils.events.register('click', '.toc a:not(.toc-category > a)', (e) => {
-        e.preventDefault();
-        const route = e.target.getAttribute('data-route');
-        if (route) {
-          this.navigate(route);
-        }
-      });
-
-      // Set up section foldout handlers
-      JdrApp.utils.events.register('click', '.toc-section-header', (e) => {
-        e.preventDefault();
-        e.stopPropagation(); // Prevent other handlers from firing
-        const section = e.target.closest('.toc-section');
-        if (section) {
-          section.classList.toggle('collapsed');
-          const toggle = section.querySelector('.toc-section-toggle');
-          if (toggle) {
-            toggle.textContent = section.classList.contains('collapsed') ? '▶' : '▼';
+      // Set up all TOC event handlers with native event delegation for standalone compatibility
+      document.addEventListener('click', (e) => {
+        // Handle section foldout headers first
+        if (e.target.closest('.toc-section-header')) {
+          e.preventDefault();
+          e.stopPropagation();
+          const section = e.target.closest('.toc-section');
+          if (section) {
+            section.classList.toggle('collapsed');
+            const toggle = section.querySelector('.toc-section-toggle');
+            if (toggle) {
+              toggle.textContent = section.classList.contains('collapsed') ? '▶' : '▼';
+            }
           }
+          return;
+        }
+        
+        // Handle category collapse/expand (categories with subcategories)
+        if (e.target.closest('.toc-category > a')) {
+          e.preventDefault();
+          e.stopPropagation();
+          const category = e.target.closest('.toc-category');
+          if (category) {
+            category.classList.toggle('collapsed');
+          }
+          return;
+        }
+        
+        // Handle regular TOC navigation links
+        const tocLink = e.target.closest('.toc a');
+        if (tocLink && !tocLink.matches('.toc-category > a')) {
+          e.preventDefault();
+          const route = tocLink.getAttribute('data-route');
+          if (route) {
+            this.navigate(route);
+          }
+          return;
         }
       });
     },
@@ -171,10 +178,104 @@
 
       const tocHTML = `
         <h4>Sommaire</h4>
-        ${window.TOC_STRUCTURE.sections.map(section => this.generateTOCSection(section)).join('')}
+        ${window.TOC_STRUCTURE.sections
+          .filter(section => !section.requiresMJ || window.JdrApp.state.isMJ)
+          .map(section => this.generateTOCSection(section)).join('')}
+        <div class="mj-toggle-container" style="margin: 1rem 0; text-align: center; border-top: 2px solid var(--rule); padding-top: 1rem;">
+          <button id="mjToggleBtn" class="btn-base btn-small" style="background: var(--bronze); color: white; border-color: var(--bronze);">
+            🎭 Maître de jeu
+          </button>
+        </div>
       `;
       
       tocContainer.innerHTML = tocHTML;
+      
+      // Ajouter l'event listener pour le bouton MJ
+      this.setupMJToggle();
+    },
+
+    setupMJToggle() {
+      const mjBtn = document.getElementById('mjToggleBtn');
+      if (!mjBtn) return;
+
+      mjBtn.addEventListener('click', () => {
+        if (window.JdrApp.state.isMJ) {
+          // Déjà en mode MJ, désactiver
+          window.JdrApp.state.isMJ = false;
+          mjBtn.style.background = 'var(--bronze)';
+          mjBtn.innerHTML = '🎭 Maître de jeu';
+          this.generateTOC(); // Régénérer le TOC pour cacher les sections MJ
+        } else {
+          // Demander confirmation avant d'activer le mode MJ
+          this.showMJConfirmation(() => {
+            window.JdrApp.state.isMJ = true;
+            mjBtn.style.background = 'var(--gold)';
+            mjBtn.innerHTML = '🎭 Mode MJ activé';
+            this.generateTOC(); // Régénérer le TOC pour afficher les sections MJ
+          });
+        }
+      });
+    },
+
+    showMJConfirmation(onConfirm) {
+      const modal = document.createElement('div');
+      modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0,0,0,0.7);
+        z-index: 10000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      `;
+      
+      modal.innerHTML = `
+        <div style="
+          background: var(--card);
+          border: 3px solid var(--bronze);
+          border-radius: 16px;
+          padding: 2rem;
+          max-width: 500px;
+          margin: 1rem;
+          text-align: center;
+          box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        ">
+          <h3 style="color: var(--bronze); margin-top: 0;">⚠️ Mode Maître de jeu</h3>
+          <p style="margin: 1.5rem 0; line-height: 1.6;">
+            Êtes-vous sûr de vouloir activer le mode Maître de jeu?<br><br>
+            <strong style="color: var(--bronze);">Si vous êtes juste un joueur, vous risquez d'être spoilé!</strong>
+          </p>
+          <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
+            <button id="mjConfirmYes" class="btn-base" style="background: var(--bronze); color: white; border-color: var(--bronze);">
+              Oui, je suis MJ
+            </button>
+            <button id="mjConfirmNo" class="btn-base" style="background: var(--rule); color: var(--accent-ink); border-color: var(--rule);">
+              Non, annuler
+            </button>
+          </div>
+        </div>
+      `;
+      
+      document.body.appendChild(modal);
+      
+      modal.querySelector('#mjConfirmYes').addEventListener('click', () => {
+        document.body.removeChild(modal);
+        onConfirm();
+      });
+      
+      modal.querySelector('#mjConfirmNo').addEventListener('click', () => {
+        document.body.removeChild(modal);
+      });
+      
+      // Fermer en cliquant sur le fond
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          document.body.removeChild(modal);
+        }
+      });
     },
 
     generateTOCSection(section) {
@@ -236,6 +337,17 @@
               ${dataSource.map(category => 
                 `<a data-route="dons-${JdrApp.utils.data.sanitizeId(category.nom)}" href="#/dons-${JdrApp.utils.data.sanitizeId(category.nom)}" class="">${this.getDonCategoryIcon(category.nom)} ${category.nom}</a>`
               ).join('')}
+            </div>
+          </div>
+        `;
+      } else if (item.id === 'monstres') {
+        return `
+          <div class="toc-category">
+            <a data-route="monstres" href="#/monstres" class="">${item.icon} ${item.title}</a>
+            <div class="toc-sub">
+              ${dataSource && dataSource.length > 0 ? dataSource.map(category => 
+                `<a data-route="monstres-${JdrApp.utils.data.sanitizeId(category.nom)}" href="#/monstres-${JdrApp.utils.data.sanitizeId(category.nom)}" class="">${this.getMonstreCategoryIcon(category.nom)} ${category.nom}</a>`
+              ).join('') : '<span style="font-style: italic; color: #666; padding-left: 20px;">Aucun monstre défini</span>'}
             </div>
           </div>
         `;
@@ -341,6 +453,22 @@
         'Generaux': '🎖️'  // Sans accent comme dans les données
       };
       return icons[categoryName] || '🎖️';
+    },
+
+    getMonstreCategoryIcon(categoryName) {
+      const icons = {
+        'Forêt': '🌲',
+        'Foret': '🌲',  // Sans accent
+        'Donjon': '🏰',
+        'Dragons': '🐉',
+        'Mort-vivants': '💀',
+        'Démons': '👹',
+        'Demons': '👹',  // Sans accent
+        'Animaux': '🦁',
+        'Humanoïdes': '🧌',
+        'Humanoïdes': '🧌'  // Sans accent
+      };
+      return icons[categoryName] || '👹';
     },
     
     getObjetCategoryIcon(categoryName) {

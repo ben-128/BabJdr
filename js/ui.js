@@ -15,6 +15,7 @@
       this.setupSearch();
       this.setupModals();
       this.setupResponsive();
+      this.setupNewPageHandler();
     },
 
     setupEventListeners() {
@@ -573,15 +574,74 @@
     },
 
     matchesSearch(item, query) {
-      const searchText = [
-        item.nom || '',
-        item.description || '',
-        item.prerequis || '',
-        item.resume || '',
-        Array.isArray(item.capacites) ? item.capacites.join(' ') : ''
-      ].join(' ').toLowerCase();
+      // Fonction pour nettoyer le HTML et extraire le texte
+      const stripHtml = (text) => {
+        if (!text) return '';
+        if (typeof text !== 'string') text = String(text);
+        return text.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+      };
+
+      // Fonction pour traiter les listes/arrays
+      const processArray = (arr) => {
+        if (!arr) return '';
+        if (Array.isArray(arr)) {
+          return arr.map(item => stripHtml(item)).join(' ');
+        }
+        return stripHtml(arr);
+      };
+
+      // Collecter TOUS les champs textuels possibles
+      const searchFields = [
+        // Champs communs
+        item.nom,
+        item.description,
+        item.prerequis,
+        item.resume,
+        
+        // Champs spécifiques aux sorts
+        item.element,
+        item.portee,
+        item.tempsIncantation,
+        item.coutMana,
+        item.resistance,
+        item.effetNormal,
+        item.effetCritique,
+        item.effetEchec,
+        
+        // Champs spécifiques aux dons
+        item.cout,
+        
+        // Champs spécifiques aux classes/sous-classes
+        item.progression,
+        processArray(item.capacites),
+        
+        // Champs spécifiques aux objets
+        item.effet,
+        item.prix,
+        item.poids,
+        item.tags ? item.tags.join(' ') : '',
+        
+        // Champs de statistiques (si c'est un objet)
+        item.base ? Object.entries(item.base || {}).map(([key, value]) => `${key} ${value}`).join(' ') : '',
+        
+        // Autres champs possibles
+        item.title,
+        item.content,
+        item.type
+      ];
+
+      // Joindre tous les champs et nettoyer
+      const searchText = searchFields
+        .filter(field => field !== null && field !== undefined)
+        .map(field => stripHtml(field))
+        .join(' ')
+        .toLowerCase();
       
-      return searchText.includes(query);
+      // Chercher chaque mot de la requête
+      const queryWords = query.toLowerCase().split(/\s+/).filter(word => word.length > 0);
+      
+      // Tous les mots doivent être trouvés (recherche ET logique)
+      return queryWords.every(word => searchText.includes(word));
     },
 
     generateSpellSummary(spell) {
@@ -1008,6 +1068,10 @@
         this.showElementsModal();
       });
 
+      JdrApp.utils.events.register('click', '#etatsBtn', () => {
+        this.showEtatsModal();
+      });
+
 
       EventBus.on(Events.MODAL_OPEN, (payload) => {
         this.openModal(payload.modalId);
@@ -1127,6 +1191,90 @@
       return icons[elementName] || '⚡';
     },
 
+    showEtatsModal() {
+      // TOUJOURS recréer la modal pour avoir les données à jour
+      let modal = JdrApp.utils.dom.$('#etatsModal');
+      if (modal) {
+        document.body.removeChild(modal);
+      }
+      
+      modal = this.createEtatsModal();
+      document.body.appendChild(modal);
+      
+      this.openModal('etatsModal');
+    },
+
+    createEtatsModal() {
+      // Récupérer les données d'états depuis window.STATIC_PAGES.etats
+      const etatsData = window.STATIC_PAGES?.etats;
+      const etats = [];
+      
+      if (etatsData?.sections) {
+        etatsData.sections.forEach(section => {
+          if (section.type === 'card' && section.title && section.content) {
+            // Convertir le HTML en texte en préservant les sauts de ligne
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = section.content;
+            
+            // Remplacer les balises de saut de ligne par des \n avant d'extraire le texte
+            tempDiv.innerHTML = tempDiv.innerHTML
+              .replace(/<\/p>/gi, '\n')
+              .replace(/<br\s*\/?>/gi, '\n')
+              .replace(/<\/li>/gi, '\n')
+              .replace(/<\/div>/gi, '\n');
+            
+            const description = (tempDiv.textContent || tempDiv.innerText || section.content)
+              .replace(/\n\s*\n/g, '\n') // Supprimer les doubles sauts de ligne
+              .trim();
+            
+            etats.push({
+              name: section.title,
+              description: description
+            });
+          }
+        });
+      }
+
+      const etatsHTML = etats.map(etat => `
+        <div class="etat-item" data-etat-name="${etat.name}" data-etat-description="${etat.description}">
+          <div class="etat-icon">⚡</div>
+          <div class="etat-content">
+            <div class="etat-name">${etat.name}</div>
+            <div class="etat-description">${etat.description.length > 60 ? etat.description.substring(0, 60) + '...' : etat.description}</div>
+          </div>
+          <div class="copy-indicator">Copié!</div>
+        </div>
+      `).join('');
+
+      const modal = JdrApp.utils.dom.create('div', 'modal etats-modal', `
+        <div class="modal-content etats-modal-content">
+          <h3>⚡ États</h3>
+          <p>Cliquez sur un état pour copier sa balise HTML avec tooltip.</p>
+          <div class="etats-list">
+            ${etatsHTML || '<div style="text-align: center; color: #666; padding: 2rem;">Aucun état trouvé</div>'}
+          </div>
+          <button class="modal-close btn">Fermer</button>
+        </div>
+      `, { id: 'etatsModal' });
+
+      modal.addEventListener('click', (e) => {
+        const etatItem = e.target.closest('.etat-item');
+        if (etatItem) {
+          const etatName = etatItem.dataset.etatName;
+          const etatDescription = etatItem.dataset.etatDescription;
+          
+          const html = `<span title="${etatDescription}">${etatName}</span>`;
+          this.copyToClipboard(html);
+          
+          etatItem.classList.add('copied');
+          setTimeout(() => {
+            etatItem.classList.remove('copied');
+          }, 1000);
+        }
+      });
+
+      return modal;
+    },
 
     copyToClipboard(text) {
       navigator.clipboard.writeText(text).then(() => {
@@ -1937,6 +2085,198 @@
       // Show success notification
       const elementIcon = window.ElementIcons ? window.ElementIcons[newElement] : '🔥';
       this.showNotification(`${elementIcon} Élément du sort "${spellName}" mis à jour : ${newElement}`, 'success');
+    },
+
+    // ========================================
+    // NEW PAGE CREATION WITH SECTION SELECTION
+    // ========================================
+    setupNewPageHandler() {
+      // Set up event listener for "Nouvelle page" button
+      document.addEventListener('click', (e) => {
+        if (e.target && e.target.id === 'addCategory') {
+          e.preventDefault();
+          this.showSectionSelectionModal();
+        }
+      });
+    },
+
+    showSectionSelectionModal() {
+      const modal = this.createSectionSelectionModal();
+      document.body.appendChild(modal);
+      this.openModal('sectionSelectionModal');
+    },
+
+    createSectionSelectionModal() {
+      // Get available sections from TOC structure
+      const sections = window.TOC_STRUCTURE?.sections || [
+        { id: 'heros', title: '🦸 Héros', icon: '🦸' },
+        { id: 'arsenal', title: '⚔️ Arsenal', icon: '⚔️' },
+        { id: 'regles', title: '📚 Règles', icon: '📚' }
+      ];
+
+      // Filter sections based on MJ access if needed
+      const availableSections = sections.filter(section => 
+        !section.requiresMJ || window.JdrApp?.state?.isMJ
+      );
+
+      const sectionsHTML = availableSections.map(section => `
+        <div class="section-option" data-section-id="${section.id}">
+          <div class="section-icon">${section.icon}</div>
+          <div class="section-info">
+            <div class="section-title">${section.title}</div>
+            <div class="section-description">${section.description || 'Section de contenu'}</div>
+          </div>
+        </div>
+      `).join('');
+
+      const modal = document.createElement('div');
+      modal.className = 'modal section-selection-modal';
+      modal.id = 'sectionSelectionModal';
+      modal.innerHTML = `
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+          <h3>📄 Nouvelle page</h3>
+          <p>Dans quelle section souhaitez-vous créer la nouvelle page ?</p>
+          
+          <div class="sections-list">
+            ${sectionsHTML}
+          </div>
+          
+          <div class="page-details" style="display: none;">
+            <div class="form-group">
+              <label for="pageTitle">Titre de la page :</label>
+              <input type="text" id="pageTitle" placeholder="Nom de la nouvelle page" required>
+            </div>
+            <div class="form-group">
+              <label for="pageIcon">Icône (optionnel) :</label>
+              <input type="text" id="pageIcon" placeholder="📄" maxlength="2">
+            </div>
+          </div>
+          
+          <div class="modal-actions">
+            <button type="button" class="btn modal-close">Annuler</button>
+            <button type="button" class="btn btn-primary" id="createPageBtn" style="display: none;">Créer la page</button>
+          </div>
+        </div>
+      `;
+
+      // Set up event handlers
+      this.setupSectionSelectionHandlers(modal);
+
+      return modal;
+    },
+
+    setupSectionSelectionHandlers(modal) {
+      let selectedSectionId = null;
+
+      // Section selection
+      modal.addEventListener('click', (e) => {
+        const sectionOption = e.target.closest('.section-option');
+        if (sectionOption) {
+          // Remove previous selection
+          modal.querySelectorAll('.section-option').forEach(opt => opt.classList.remove('selected'));
+          
+          // Select this section
+          sectionOption.classList.add('selected');
+          selectedSectionId = sectionOption.dataset.sectionId;
+          
+          // Show page details form
+          const pageDetails = modal.querySelector('.page-details');
+          const createBtn = modal.querySelector('#createPageBtn');
+          pageDetails.style.display = 'block';
+          createBtn.style.display = 'inline-block';
+          
+          // Focus on title input
+          modal.querySelector('#pageTitle').focus();
+        }
+      });
+
+      // Create page button
+      modal.querySelector('#createPageBtn').addEventListener('click', () => {
+        const titleInput = modal.querySelector('#pageTitle');
+        const iconInput = modal.querySelector('#pageIcon');
+        
+        const pageTitle = titleInput.value.trim();
+        const pageIcon = iconInput.value.trim() || '📄';
+        
+        if (!pageTitle) {
+          this.showNotification('Veuillez saisir un titre pour la page', 'error');
+          titleInput.focus();
+          return;
+        }
+
+        if (!selectedSectionId) {
+          this.showNotification('Veuillez sélectionner une section', 'error');
+          return;
+        }
+
+        this.createNewPage(selectedSectionId, pageTitle, pageIcon);
+        this.closeModal(modal);
+      });
+
+      // Handle Enter key in form
+      modal.querySelector('#pageTitle').addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && selectedSectionId) {
+          modal.querySelector('#createPageBtn').click();
+        }
+      });
+    },
+
+    createNewPage(sectionId, pageTitle, pageIcon) {
+      // Generate page ID from title
+      const pageId = this.slugify(pageTitle);
+      
+      // Create new page object
+      const newPage = {
+        type: 'page',
+        id: pageId,
+        title: pageTitle,
+        icon: pageIcon
+      };
+
+      // Add to TOC structure
+      if (window.TOC_STRUCTURE) {
+        const section = window.TOC_STRUCTURE.sections.find(s => s.id === sectionId);
+        if (section) {
+          section.items.push(newPage);
+          
+          // Create default page data
+          const defaultPageData = {
+            page: pageId,
+            title: pageTitle,
+            sections: [
+              {
+                type: 'intro',
+                content: `Contenu de la page ${pageTitle}. Vous pouvez éditer ce texte en mode développement.`
+              }
+            ]
+          };
+
+          // Add to static pages
+          if (!window.STATIC_PAGES) {
+            window.STATIC_PAGES = {};
+          }
+          window.STATIC_PAGES[pageId] = defaultPageData;
+
+          // Regenerate TOC to include new page
+          if (JdrApp.modules.router) {
+            JdrApp.modules.router.generateTOC();
+          }
+
+          // Navigate to new page
+          window.location.hash = `#/${pageId}`;
+
+          this.showNotification(`📄 Page "${pageTitle}" créée avec succès dans la section ${this.getSectionTitle(sectionId)}`, 'success');
+        }
+      }
+    },
+
+    getSectionTitle(sectionId) {
+      if (window.TOC_STRUCTURE) {
+        const section = window.TOC_STRUCTURE.sections.find(s => s.id === sectionId);
+        return section ? section.title : sectionId;
+      }
+      return sectionId;
     }
   };
 

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-08-21T16:34:44.196Z by JdrBab Build System -->
+<!-- Generated on 2025-08-21T18:25:58.214Z by JdrBab Build System -->
 <title>JDR‑BAB — Livret de règles</title>
 <meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1817,14 +1817,25 @@ article[data-page="enchanteur"] .illus img:hover,
 
 /* Style spécial pour les titres de sous-classes */
 .subclass-title {
-  font-size: 1.8rem !important;
-  font-weight: 600 !important;
+  font-size: 2.2rem !important;
+  font-weight: 800 !important;
   text-align: center !important;
   margin: 0 0 1.5rem 0 !important;
   color: var(--accent-ink) !important;
   font-family: 'Cinzel', serif !important;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.1) !important;
-  letter-spacing: 0.5px !important;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.2) !important;
+  letter-spacing: 0.8px !important;
+}
+
+/* Style spécial pour les descriptions de sous-classes */
+.card[data-section-type="subclass"] .editable[data-edit-section*="description"] {
+  text-align: center !important;
+  color: var(--paper-ink) !important;
+}
+
+.card[data-section-type="subclass"] .editable[data-edit-section*="description"] em,
+.card[data-section-type="subclass"] .editable[data-edit-section*="description"] i {
+  color: var(--paper-ink) !important;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════════════════
@@ -1923,6 +1934,168 @@ article[data-page="enchanteur"] .illus img:hover,
     font-size: 16px; /* Prevents zoom on iOS */
     padding: 12px;
     border-radius: 8px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════════════
+   📄 SECTION SELECTION MODAL
+   ═══════════════════════════════════════════════════════════════════════════════════════ */
+
+.section-selection-modal .modal-content {
+  max-width: 500px;
+  padding: 2rem;
+}
+
+.sections-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.section-option {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border: 2px solid var(--rule);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  background: var(--card);
+}
+
+.section-option:hover {
+  border-color: var(--bronze);
+  background: linear-gradient(135deg, 
+    rgba(212,175,55,0.1) 0%, 
+    rgba(139,69,19,0.05) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(139,69,19,0.15);
+}
+
+.section-option.selected {
+  border-color: var(--gold);
+  background: linear-gradient(135deg, 
+    rgba(212,175,55,0.2) 0%, 
+    rgba(139,69,19,0.1) 100%);
+  box-shadow: 
+    0 0 0 2px rgba(212,175,55,0.3),
+    0 4px 16px rgba(139,69,19,0.2);
+}
+
+.section-icon {
+  font-size: 2rem;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--bronze), var(--gold));
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+.section-info {
+  flex: 1;
+}
+
+.section-title {
+  font-weight: 600;
+  font-size: 1.1em;
+  color: var(--accent-ink);
+  margin-bottom: 0.25rem;
+  font-family: 'Cinzel', serif;
+}
+
+.section-description {
+  color: var(--paper-muted);
+  font-size: 0.9em;
+  line-height: 1.4;
+}
+
+.page-details {
+  padding: 1.5rem;
+  background: var(--paper-soft);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  margin: 1rem 0;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group:last-child {
+  margin-bottom: 0;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--accent-ink);
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  font-size: 1em;
+  background: var(--card);
+  color: var(--paper-ink);
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--bronze);
+  box-shadow: 0 0 0 2px rgba(212,175,55,0.2);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.btn-primary {
+  background: var(--bronze) !important;
+  color: white !important;
+  border-color: var(--bronze) !important;
+}
+
+.btn-primary:hover {
+  background: var(--gold) !important;
+  border-color: var(--gold) !important;
+}
+
+/* Mobile optimization for section selection modal */
+@media (max-width: 480px) {
+  .section-selection-modal .modal-content {
+    padding: 1rem;
+    margin: 1rem;
+  }
+  
+  .section-option {
+    padding: 0.75rem;
+    gap: 0.75rem;
+  }
+  
+  .section-icon {
+    width: 48px;
+    height: 48px;
+    font-size: 1.5rem;
+  }
+  
+  .modal-actions {
+    flex-direction: column;
+  }
+  
+  .modal-actions .btn {
+    width: 100%;
   }
 }
 /* Editor and Dev Mode styles */
@@ -2359,6 +2532,139 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
   opacity:1;
 }
 
+/* États modal styles */
+.etats-modal {
+  position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,.7);
+  z-index:99999; display:none; align-items:center; justify-content:center;
+}
+.etats-modal.visible {
+  display:flex;
+}
+.etats-modal-content {
+  background:var(--card); border:2px solid var(--rule); border-radius:16px;
+  padding:var(--space-2xl); max-width:500px; width:90%; 
+  box-shadow:var(--shadow); position:relative; max-height:80vh; overflow-y:auto;
+}
+.etats-list {
+  display:flex; flex-direction:column; gap:var(--space-md); margin:var(--space-xl) 0;
+}
+.etat-item {
+  display:flex; align-items:flex-start; gap:var(--space-md); padding:var(--space-md);
+  border:2px solid var(--rule); border-radius:var(--space-md); cursor:pointer;
+  transition:var(--transition-fast); background:var(--card); position:relative;
+}
+.etat-content {
+  flex:1; display:flex; flex-direction:column;
+}
+.etat-item:hover {
+  background:var(--paper); border-color:var(--bronze); transform:translateY(-2px);
+  box-shadow:0 4px 12px rgba(0,0,0,.1);
+}
+.etat-item:active {
+  transform:translateY(0) scale(0.98);
+}
+.etat-icon {
+  width:24px; height:24px; border-radius:50%; flex-shrink:0;
+  background:var(--bronze); color:white; display:flex; align-items:center;
+  justify-content:center; font-size:14px;
+}
+.etat-name {
+  font-weight:600; color:var(--accent-ink); margin-bottom:4px;
+}
+.etat-description {
+  font-size:12px; color:var(--paper-muted); line-height:1.4;
+}
+.etat-item .copy-indicator {
+  position:absolute; top:50%; right:var(--space-md); transform:translateY(-50%);
+  font-size:12px; color:var(--bronze); opacity:0; font-weight:600;
+  transition:opacity 0.3s ease;
+}
+.etat-item.copied .copy-indicator {
+  opacity:1;
+}
+
+/* Styles pour les tooltips d'états */
+span[title] {
+  cursor: help;
+  border-bottom: 2px solid var(--bronze);
+  position: relative;
+  display: inline-block;
+  background: linear-gradient(135deg, rgba(205,127,50,0.1), rgba(212,175,55,0.05));
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-weight: 700;
+}
+
+span[title]:hover {
+  border-bottom-color: var(--gold);
+  border-bottom-width: 3px;
+  background: linear-gradient(135deg, rgba(212,175,55,0.2), rgba(205,127,50,0.1));
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Tooltip personnalisé pour une meilleure visibilité */
+span[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent-ink);
+  color: white;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-size: 13px;
+  white-space: pre-line;
+  z-index: 999999;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  pointer-events: none;
+  min-width: 200px;
+  max-width: 320px;
+  text-align: center;
+  line-height: 1.5;
+  animation: tooltipFadeIn 0.3s ease;
+  border: 2px solid var(--gold);
+  word-wrap: break-word;
+}
+
+span[title]:hover::before {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + 2px);
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: var(--accent-ink);
+  z-index: 999999;
+  pointer-events: none;
+}
+
+/* Forcer l'overflow visible pour les tooltips */
+.card:has(span[title]:hover),
+.editable:has(span[title]:hover),
+article:has(span[title]:hover) {
+  overflow: visible !important;
+}
+
+/* Fallback pour navigateurs sans :has() */
+.card,
+.editable,
+article {
+  position: relative;
+}
+
+.card span[title]:hover::after,
+.editable span[title]:hover::after,
+article span[title]:hover::after {
+  z-index: 99999 !important;
+}
+
+@keyframes tooltipFadeIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(5px); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
 /* === UNIFIED EDIT BUTTONS FOR ALL SECTIONS === */
 .editable-section {
   position: relative;
@@ -2628,7 +2934,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> <br>- Résistance altérations &gt; Intelligence du lanceur<br>- Lévitation ou Volant.",
-        "effetNormal": "<strong>Effet:</strong>&nbsp;La cible contracte l'état ralenti pendant 5 tours.",
+        "effetNormal": "<strong>Effet:</strong>&nbsp;La cible contracte l'état <span title=\"Vitesse de déplacement réduite de moitié.\n Impossible de sauter ou d'esquiver.\">Ralenti</span> pendant 5 tours.",
         "effetCritique": "<strong>Coup Critique:&nbsp;</strong>La cible ne peut plus effectuer de déplacement pendant la durée du sort.",
         "effetEchec": "<strong>Échec Critique:&nbsp;</strong> -"
       },
@@ -2643,7 +2949,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> Aucune",
-        "effetNormal": "<strong>Effet:</strong> &nbsp;La vitesse de déplacement de la cible est augmentée de 50% pendant 5 tours.<br>Non Cumulable. Si le sort est lancé à nouveau, les anciennes cibles perdent l'amélioration.&nbsp;",
+        "effetNormal": "<strong>Effet:</strong> &nbsp;La vitesse de déplacement de la cible est augmentée de 50% pendant 5 tours. Non Cumulable.",
         "effetCritique": "<strong>Coup Critique:&nbsp;</strong> La vitesse est augmentée de 100%.",
         "effetEchec": "<strong>Échec Critique:&nbsp;</strong> -"
       },
@@ -2658,7 +2964,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> <br>- Résistance altérations &gt; Intelligence du lanceur<br>- Element <span style=\"color: #0f172a; font-weight: bold;\">Nuit</span>",
-        "effetNormal": "<strong>Effet:</strong> La cible devient endormie pendant ses 2 prochains tours. Si la cible subit des dégats, elle est reveillée.",
+        "effetNormal": "<strong>Effet:</strong> La cible passe dans l'état <span title=\"Ne peut plus faire d'actions.\n Ne peut plus esquiver.\n Des dégats infligés à la créature la sort de son état.\">endormi</span> pendant ses 2 prochains tours.",
         "effetCritique": "<strong>Coup Critique:&nbsp;</strong> L'effet dure 4 tours.",
         "effetEchec": "<strong>Échec Critique:&nbsp;</strong> Le lanceur est endormi à son prochain tour."
       }
@@ -2674,13 +2980,14 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
   {
     "nom": "Guerrier",
     "resume": "Héros sans égal au combat au corp à corp.",
-    "capacites": "<ul><li><em>Expert de l'équipement</em>: Toutes les armes, armures (légères/lourdes), bouclier.</li><li><em>Hardiesse</em>: Gagne la compétence Hardiesse rang 1.</li></ul>",
+    "capacites": "<ul><li><em>Expert de l'équipement</em> : Toutes les armes, armures (légères/lourdes), bouclier.</li><li><em>Hardiesse</em> : Gagne la compétence Hardiesse rang 1.</li></ul>",
     "sousClasses": [
       {
         "nom": "Nain des montagnes",
         "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>5</strong></span><span class=\"chip\">🏃 Agilité: <strong>2</strong></span><span class=\"chip\">🛡️ Endurance: <strong>7</strong></span><span class=\"chip\">🧠 Intelligence: <strong>1</strong></span><span class=\"chip\">⚡ Volonté: <strong>5</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +2 Force 💪, +3 Endurance 🛡️, +1 Volonté⚡   <strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Brise rocher</em>: Gagne 1 de compétence sur les tests de compétence Hardiesse pour une destruction d'objet.</li><li><em>Volonté inflexible</em>: Les nains possèdent une volonté inflexible qui les rendent résistants aux sortilèges (caractéristique Volonté élevée).</li></ul>"
+        "capacites": "<ul><li><em>Brise rocher</em>: Gagne 1 de compétence sur les tests de compétence Hardiesse pour une destruction d'objet.</li><li><em>Volonté inflexible</em>: Les nains possèdent une volonté inflexible qui les rendent résistants aux sortilèges (caractéristique Volonté élevée).</li></ul>",
+        "description": "<i>Race robuste et inflexible, dotée d’une endurance exceptionnelle. Forgés par la roche et les sommets, ils résistent aux épreuves et possèdent une force colossale capable de briser murs, armures et créatures cuirassées.</i>"
       },
       {
         "nom": "Berserker",
@@ -2693,20 +3000,22 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
           "Chance": 1
         },
         "progression": "<strong>📈 Progression par niveau:</strong> +2 Force 💪, +1 Agilité 🏃, +2 Endurance 🛡️<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Frappe en chaîne</em>: Sur un critique au corps à corps, touche aussi un adversaire à moins de 2m.</li><li><em>Risque sauvage</em>: +1 chance de critique physique s'il ne porte pas de bouclier.</li></ul>"
+        "capacites": "<ul><li><em>Frappe en chaîne</em>: Sur un critique au corps à corps, touche aussi un adversaire à moins de 2m.</li><li><em>Risque sauvage</em>: +1 chance de critique physique s'il ne porte pas de bouclier.</li></ul>",
+        "description": "<i>Combattant sauvage, maître des armes à deux mains. Sa rage décuple sa force, lui permettant d’abattre ses ennemis dans un déchaînement de puissance brute et de coups imparables.</i>"
       }
     ]
   },
   {
     "nom": "Mage",
     "resume": "Spécialiste de la magie destructrice.",
-    "capacites": "<ul><li><em>Équipement de mage</em>: bâtons, robes.</li><li><em>Sorts de mage</em>: Apprend et lance des sorts de mage.</li></ul>",
+    "capacites": "<ul><li><em>Équipement de mage</em> : bâtons, robes.</li><li><em>Sorts de mage</em> : Apprend et lance des sorts de mage.</li></ul>",
     "sousClasses": [
       {
         "nom": "Érudit",
-        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>1</strong></span><span class=\"chip\">🏃 Agilité: <strong>1</strong></span><span class=\"chip\">🛡️ Endurance: <strong>2</strong></span><span class=\"chip\">🧠 Intelligence: <strong>5</strong></span><span class=\"chip\">⚡ Volonté: <strong>3</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
+        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>1</strong></span><span class=\"chip\">🏃 Agilité: <strong>1</strong></span><span class=\"chip\">🛡️ Endurance: <strong>1</strong></span><span class=\"chip\">🧠 Intelligence: <strong>6</strong></span><span class=\"chip\">⚡ Volonté: <strong>3</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +3 Intelligence 🧠, +2 Volonté ⚡<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Instruit</em>: Gagne la compétence Réflexion rang 1.</li><li><em>Apprentissage accéléré</em>: Le niveau de l'érudit est considéré comme deux fois plus élevé pour les prérequis d'apprentissage de sorts.</li></ul>"
+        "capacites": "<ul><li><em>Instruit</em> : Gagne la compétence Réflexion rang 1.</li><li><em>Apprentissage accéléré</em> : Le niveau de l'érudit est considéré comme deux fois plus élevé pour les prérequis d'apprentissage de sorts.</li></ul>",
+        "description": "<i>Mage avide de savoir, doté d’une mémoire prodigieuse. Il assimile les arcanes avec une rapidité fulgurante et maîtrise de nouveaux sorts bien plus vite que ses pairs.</i>"
       },
       {
         "nom": "Elfe",
@@ -2719,20 +3028,22 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
           "Chance": 1
         },
         "progression": "<strong>📈 Progression par niveau:</strong> +1 Force 💪, +1 Agilité 🏃, +1 Endurance 🛡️, +1 Intelligence 🧠, +1 Volonté ⚡<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Instinct elfique</em>: Gagne la compétence Coordination rang 1.</li><li><em>Équipement d'elfe</em>: Epées à une main, armures légères.</li><li><em>Briseur de sceaux</em>: Gagne 1 de compétence sur les tests de compétence pour comprendre ou ouvrir une porte scellée magiquement</li></ul>"
+        "capacites": "<ul><li><em>Instinct elfique</em> : Gagne la compétence Coordination rang 1.</li><li><em>Équipement d'elfe</em> : Epées à une main, armures légères.</li><li><em>Briseur de sceaux</em> : Gagne 1 de compétence sur les tests de compétence pour comprendre ou ouvrir une porte scellée magiquement</li></ul>",
+        "description": "<i>Guerrier-mage polyvalent, aussi agile qu’élégant. Maître des arcanes comme du combat rapproché, il allie puissance magique et adresse martiale avec une grâce inégalée.</i>"
       }
     ]
   },
   {
     "nom": "Prêtre",
     "resume": "Spécialiste de la magie de soutien et anti morts-vivants.",
-    "capacites": "<ul><li><em>Équipement de prêtre</em>: bâtons, robes.</li><li><em>Sorts de prêtre</em>: Apprend et lance des sorts de Prêtre.</li><li><em>Eloquence</em>: Gagne la compétence Eloquence rang 1.</li></ul>",
+    "capacites": "<ul><li><em>Équipement de prêtre</em> : bâtons, robes.</li><li><em>Sorts de prêtre</em> : Apprend et lance des sorts de Prêtre.</li><li><em>Eloquence</em> : Gagne la compétence Eloquence rang 1.</li></ul>",
     "sousClasses": [
       {
         "nom": "Inquisiteur",
         "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>3</strong></span><span class=\"chip\">🏃 Agilité: <strong>1</strong></span><span class=\"chip\">🛡️ Endurance: <strong>4</strong></span><span class=\"chip\">🧠 Intelligence: <strong>3</strong></span><span class=\"chip\">⚡ Volonté: <strong>5</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +1 Force 💪, +1 Intelligence 🧠, +2 Volonté ⚡, +1 Endurance 🛡️<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Magie purificatrice</em>: Les sorts visant les morts-vivants ne ratent jamais.</li><li><em>Port du bouclier</em>: Peut s'équiper d'un bouclier.</li></ul>"
+        "capacites": "<ul><li><em>Port du bouclier</em> : Peut s'équiper d'un bouclier.</li><li><em>Fléau des morts-vivants</em> : Les sorts visant les morts-vivants ne ratent jamais.</li><li><em>Lumière purificatrice</em> : Double l'effet de l'intelligence sur les dégats des sorts d'élément <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span> ou <span style=\"color: #f5f5f5; font-weight: bold; background: rgba(100, 100, 100, 0.3); padding: 2px 4px; border-radius: 3px;\">Divin</span>.</li></ul>",
+        "description": "<i>Champion de la foi, il renforce ses alliés par la magie sacrée et traque sans relâche les morts-vivants. Quand la lumière seule ne suffit plus, il n’hésite pas à prendre les armes et combattre en première ligne.</i>"
       },
       {
         "nom": "Clerc Divin",
@@ -2745,20 +3056,22 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
           "Chance": 5
         },
         "progression": "<strong>📈 Progression par niveau:</strong> +2 Intelligence 🧠, +2 Volonté ⚡, +1 Chance 🍀<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Maître des soins</em>: Augmente les chances de critiques pour les sorts de soins de 1.</li><li><em>Bien né</em>: Réduit les dégats <span style=\"color: #d0d0d0; font-weight: bold; background: rgba(0, 0, 0, 0.4); padding: 2px 4px; border-radius: 3px;\">Divin</span> reçu de 50%. Si son élément d'affiliation est <span style=\"color: #d0d0d0; font-weight: bold; background: rgba(0, 0, 0, 0.4); padding: 2px 4px; border-radius: 3px;\">Divin</span>, les dégats sont alors réduits de 100%.</li></ul>"
+        "capacites": "<ul><li><em>Maître des soins</em> : Double l'effet de l'intelligence sur les sorts de soins.</li><li><em> Pieu </em>:  Gagne 1 de compétence sur les tests de compétence Reflexion sur un dieu ou une religion.</li><li><em> Protection divine </em>:  Dispose d'une armure élementaire <span style=\"color: #f5f5f5; font-weight: bold; background: rgba(100, 100, 100, 0.3); padding: 2px 4px; border-radius: 3px;\">Divin</span> de 10.</li></ul>",
+        "description": "<i>Serviteur sacré, maître des arts de guérison. Sa puissante magie de soins protège ses alliés et les relève même aux portes de la mort.</i>"
       }
     ]
   },
   {
     "nom": "Rôdeur",
     "resume": "Héros très agile.",
-    "capacites": "<ul><li><em>Équipement de rôdeur</em>: armures légères, dagues.</li><li><em>Coordination</em>: Gagne la compétence Coordination rang 1.</li></ul>",
+    "capacites": "<ul><li><em>Équipement de rôdeur</em> : armures légères, dagues.</li><li><em>Coordination</em> : Gagne la compétence Coordination rang 1.</li></ul>",
     "sousClasses": [
       {
         "nom": "Voleur",
         "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>3</strong></span><span class=\"chip\">🏃 Agilité: <strong>5</strong></span><span class=\"chip\">🛡️ Endurance: <strong>2</strong></span><span class=\"chip\">🧠 Intelligence: <strong>2</strong></span><span class=\"chip\">⚡ Volonté: <strong>2</strong></span><span class=\"chip\">🍀 Chance: <strong>5</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +2 Agilité 🏃, +2 Force 💪, +1 Endurance 🛡️<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Mains expertes</em>: Gagne la compétence Finesse rang 1.</li><li><em>Sprint</em>: Peut utiliser une action secondaire pour doubler sa vitesse.</li><li><em>Vicieux</em>: Une fois par tour, permet d'effectuer une action secondaire supplémentaire aprés un coup critique d'une attaque physique au corps à corps.</li></ul>"
+        "capacites": "<ul><li><em>Mains expertes</em> : Gagne la compétence Finesse rang 1.</li><li><em>Sprint</em> : Peut utiliser une action secondaire pour doubler sa vitesse.</li><li><em>Vicieux</em> : Une fois par tour, permet d'effectuer une action secondaire supplémentaire aprés un coup critique d'une attaque physique au corps à corps.</li></ul>",
+        "description": "<i>Maître de la finesse et de l’agilité, il se déplace avec rapidité fulgurante et frappe là où ça fait le plus mal. </i>"
       },
       {
         "nom": "Chasseur",
@@ -2771,20 +3084,22 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
           "Chance": 1
         },
         "progression": "<strong>📈 Progression par niveau:</strong> +2 Agilité 🏃, +1 Force 💪, +1 Endurance 🛡️, +1 Intelligence 🧠<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Armes du Chasseur</em>: Peut utiliser les arcs.</li><li><em>Cueillette</em>: Une fois par jour, lors d’un repos, le personnage peut récolter 5 plantes locales (au choix du MJ). Leur efficacité dépend de l’Intelligence de l’utilisateur.</li><li><em>Connaissance de la faune</em>: Gagne 1 de compétence sur les tests de Réflexion lié à animal ou un Monstre.</li></ul>"
+        "capacites": "<ul><li><em>Armes du Chasseur</em> : Peut utiliser les arcs.</li><li><em>Cueillette</em> : Une fois par jour, lors d’un repos, le personnage peut récolter 5 plantes locales (au choix du MJ). Leur efficacité dépend de l’Intelligence de l’utilisateur.</li><li><em>Connaissance de la faune et la flore</em> : Gagne 1 de compétence sur les tests de Réflexion lié à animal, un monstre ou une plante.</li></ul>",
+        "description": "<i>Précis et agile, il complète son art de l’arc par la science des herbes anciennes.</i>"
       }
     ]
   },
   {
     "nom": "Enchanteur",
     "resume": "Détenteur d'une magie singulière, qui fait de lui un allié précieux.",
-    "capacites": "<ul><li><em>Équipement d'enchanteur</em>: robes, bâtons, baguettes.</li><li><em>Sorts d'enchanteur</em>: Apprend et lance des sorts d'Enchanteur.</li></ul>",
+    "capacites": "<ul><li><em>Équipement d'enchanteur</em> : robes, bâtons, baguettes.</li><li><em>Sorts d'enchanteur</em> : Apprend et lance des sorts d'Enchanteur.</li></ul>",
     "sousClasses": [
       {
         "nom": "Esprit de la grande Fée",
         "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>1</strong></span><span class=\"chip\">🏃 Agilité: <strong>5</strong></span><span class=\"chip\">🛡️ Endurance: <strong>2</strong></span><span class=\"chip\">🧠 Intelligence: <strong>5</strong></span><span class=\"chip\">⚡ Volonté: <strong>2</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +1 Agilité 🏃, +1 Intelligence 🧠, +1 Endurance 🛡️, +1 Volonté ⚡, +1 Chance 🍀<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Tatillon</em>: Gagne la compétence Finesse rang 1.</li><li><em>Lévitation</em>: ignore dégâts/ralentissements venant du sol.</li><li><em>Rayon de l'Amitié</em>: les sorts bénéfiques ciblent 1 allié supplémentaire.</li></ul>"
+        "capacites": "<ul><li><em>Tatillon</em> : Gagne la compétence Finesse rang 1.</li><li><em>Lévitation</em> : ignore dégâts/ralentissements venant du sol.</li><li><em>Rayon de l'Amitié</em> : Par une action secondaire, peut répéter sur une autre cible à portée un sort bénéfique qui a ciblé un allié se tour ci, sans coût en mana supplémentaire.</li></ul>",
+        "description": "<i>Être mystique qui flotte au-dessus du sol, il invoque des sorts imprévisibles pour soutenir ses alliés.</i>"
       },
       {
         "nom": "Lutin",
@@ -2797,7 +3112,8 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
           "Chance": 5
         },
         "progression": "<strong>📈 Progression par niveau:</strong> +1 Intelligence 🧠, +2 Volonté ⚡, +2 Chance 🍀<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Secrets bien gardés</em>: Gagne la compétence Reflexion rang 1.</li><li><em>Expert des baguettes</em>: sur critique à la baguette, la charge n'est pas consommée.</li><li><em>Sourire malicieux</em>: les sorts à effets négatifs peuvent cibler 1 adversaire supplémentaire.</li></ul>"
+        "capacites": "<ul><li><em>Secrets bien gardés</em> : Gagne la compétence Reflexion rang 1.</li><li><em>Expert des baguettes</em> : Sur un critique à la baguette, la charge n'est pas consommée.</li><li><em>Rire malicieux</em> : Par une action secondaire, peut répéter sur une autre cible à portée un sort d'altération qui a ciblé un enemi ce tour ci, sans coût en mana supplémentaire.</li></ul>",
+        "description": "<i>Esprit espiègle et rusé, passé maître dans l’art des altérations magiques. </i>"
       }
     ]
   }
@@ -2881,7 +3197,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
     "dons": [
       {
         "nom": "Croche-patte",
-        "description": "Peut utiliser une action secondaire pour mettre un adversaire au corp à corp, de moins de 2m, et qui se trouve au sol, à <span style=\"color: #8b5e34; font-weight: bold;\">Terre</span>.",
+        "description": "Peut utiliser une action secondaire pour mettre un adversaire au corp à corp, de moins de 2m, dans l'état <span title=\"Ne peut plus faire d'actions.\n Ne peut plus esquiver.\n Doit dépenser une action secondaire pour se relever.\">à terre</span>.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -3046,6 +3362,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
     ]
   }
 };
+    window.MONSTRES = [];
     window.IMAGES = {
   "images": {
     "subclass:Guerrier:Nain des montagnes": "https://i.ibb.co/Zpv02X9p/e8c10c36dc90.jpg",
@@ -3074,7 +3391,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
     "subclass:Guerrier:Berserker:2": "https://i.ibb.co/20b74x2R/Berseker-F.png",
     "subclass:Mage:Érudit:1": "https://i.ibb.co/N8qT2Hf/Mage.png",
     "subclass:Mage:Érudit:2": "https://i.ibb.co/LdcPDSJQ/MageF.png",
-    "subclass:Mage:Elfe:2": "https://i.ibb.co/7xvD2mdt/ElfeF.png",
+    "subclass:Mage:Elfe:2": "https://i.ibb.co/VWDTjY8H/ElfeF.png",
     "subclass:Mage:Elfe:1": "https://i.ibb.co/gFVKrTcV/Elfe.png",
     "subclass:Prêtre:Inquisiteur:1": "https://i.ibb.co/tMcsCB8s/Inquisiteur.png",
     "subclass:Prêtre:Clerc Divin:1": "https://i.ibb.co/209W4ZHW/Pr-tre.png",
@@ -3082,7 +3399,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
     "subclass:Rôdeur:Voleur:2": "https://i.ibb.co/h1BtkGMX/VoleurF.png",
     "subclass:Rôdeur:Chasseur:1": "https://i.ibb.co/yF8jrJYr/Chasseur-min.png",
     "subclass:Rôdeur:Chasseur:2": "https://i.ibb.co/3mQjLJbp/Chasseur-F.png",
-    "subclass:Enchanteur:Esprit de la grande Fée:1": "https://i.ibb.co/9k9ywvnP/F-eM.png",
+    "subclass:Enchanteur:Esprit de la grande Fée:1": "https://i.ibb.co/VY9cQHNh/F-eM.png",
     "subclass:Enchanteur:Esprit de la grande Fée:2": "https://i.ibb.co/pjxDfXBC/F-e.png",
     "subclass:Enchanteur:Lutin:1": "https://i.ibb.co/6cxkMW1d/Lutin.png",
     "subclass:Enchanteur:Lutin:2": "https://i.ibb.co/qLbjJhxw/LutinF.png",
@@ -3094,6 +3411,113 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
     "exported_date": "2025-08-21",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
+};
+    
+    // TOC Structure for advanced navigation
+    window.TOC_STRUCTURE = {
+  "sections": [
+    {
+      "id": "heros",
+      "title": "🦸 Héros",
+      "icon": "🦸",
+      "description": "Création et développement des personnages",
+      "collapsed": false,
+      "items": [
+        {
+          "type": "page",
+          "id": "creation",
+          "title": "Création d'un personnage",
+          "icon": "🎭"
+        },
+        {
+          "type": "category",
+          "id": "classes",
+          "title": "Classes",
+          "icon": "⚔️",
+          "items": "CLASSES"
+        },
+        {
+          "type": "category",
+          "id": "dons",
+          "title": "Dons",
+          "icon": "🎖️",
+          "items": "DONS"
+        }
+      ]
+    },
+    {
+      "id": "arsenal",
+      "title": "⚔️ Arsenal",
+      "icon": "⚔️",
+      "description": "Sorts, objets et équipements",
+      "collapsed": false,
+      "items": [
+        {
+          "type": "category",
+          "id": "sorts",
+          "title": "Sorts",
+          "icon": "🔮",
+          "items": "SORTS"
+        },
+        {
+          "type": "page",
+          "id": "objets",
+          "title": "Objets",
+          "icon": "📦"
+        }
+      ]
+    },
+    {
+      "id": "regles",
+      "title": "📚 Règles",
+      "icon": "📚",
+      "description": "Mécaniques de jeu et références",
+      "collapsed": false,
+      "items": [
+        {
+          "type": "page",
+          "id": "elements",
+          "title": "Éléments",
+          "icon": "🌟"
+        },
+        {
+          "type": "page",
+          "id": "stats",
+          "title": "Statistiques",
+          "icon": "📊"
+        },
+        {
+          "type": "page",
+          "id": "competences-tests",
+          "title": "Compétences & Tests",
+          "icon": "🎯"
+        },
+        {
+          "type": "page",
+          "id": "etats",
+          "title": "États",
+          "icon": "⚡"
+        }
+      ]
+    },
+    {
+      "id": "maitre-de-jeu",
+      "title": "🎭 Maître de jeu",
+      "icon": "🎭",
+      "description": "Outils et ressources pour le Maître de jeu",
+      "collapsed": false,
+      "requiresMJ": true,
+      "items": [
+        {
+          "type": "category",
+          "id": "monstres",
+          "title": "Monstres",
+          "icon": "👹",
+          "items": "MONSTRES"
+        }
+      ]
+    }
+  ]
 };
     
     // Build STATIC_PAGES correctly by combining individual page data
@@ -3244,7 +3668,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       "type": "card",
       "id": "a-terre",
       "title": "A terre",
-      "content": "<p>Ne peut plus faire d'actions.</p><p>Ne peut plus esquiver.</p><p>Doit dépenser une action secondaire pour se relever.</p>",
+      "content": "<p>Ne peut plus faire d'actions.</p><p> Ne peut plus esquiver.</p><p> Doit dépenser une action secondaire pour se relever.</p>",
       "deletable": true,
       "sectionName": "A terre"
     },
@@ -3252,7 +3676,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       "type": "card",
       "id": "endormi-effraye",
       "title": "Endormi/assomé/Effrayé",
-      "content": "<p>Ne peut plus faire d'actions.</p><p>Ne peut plus esquiver.</p><p>Des dégats infligés à la créature la sort de son état.</p>",
+      "content": "<p>Ne peut plus faire d'actions.</p><p> Ne peut plus esquiver.</p><p> Des dégats infligés à la créature la sort de son état.</p>",
       "deletable": true,
       "sectionName": "Endormi/assomé/Effrayé"
     },
@@ -3260,7 +3684,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       "type": "card",
       "id": "etats-new-4-1755725440741",
       "title": "Ralenti",
-      "content": "Vitesse de déplacement réduite de moitié.<br>Impossible de sauter ou d'esquiver.",
+      "content": "Vitesse de déplacement réduite de moitié.<br> Impossible de sauter ou d'esquiver.",
       "deletable": true,
       "sectionName": "Nouvelle section"
     },
@@ -3276,7 +3700,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       "type": "card",
       "id": "etats-new-6-1755762796465",
       "title": "Entravé/Entoilé/Embourbé",
-      "content": "<p>Ne peut plus faire d'actions.</p><p>Ne peut plus esquiver, et les attaques à l'encontre de la créature sont équivalentes à des attaques dans le dos.</p> Le héros ou un allié peut sortir le héros de l'état via un test de compétence hardiesse.",
+      "content": "<p>Ne peut plus faire d'actions.</p><p>Ne peut plus esquiver.</p> Le héros ou un allié peut sortir le héros de l'état via un test de compétence hardiesse.",
       "deletable": true,
       "sectionName": "Nouvelle section"
     },
@@ -3332,8 +3756,14 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       CLASSES: null,
       DONS: null,
       OBJETS: null,
+      MONSTRES: null,
       STATIC_PAGES: {},
       editedData: {}
+    },
+    
+    // Application state
+    state: {
+      isMJ: false // Boolean pour contrôler l'accès MJ
     },
     
     // Core modules
@@ -3371,6 +3801,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
           const classes = window.CLASSES;
           const dons = window.DONS;
           const objets = window.OBJETS;
+          const monstres = window.MONSTRES || [];
           const staticPagesData = window.STATIC_PAGES;
           const staticPagesConfig = window.STATIC_PAGES_CONFIG || {};
           
@@ -3378,6 +3809,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
           this.data.CLASSES = classes;
           this.data.DONS = dons;
           this.data.OBJETS = objets;
+          this.data.MONSTRES = monstres;
           this.data.STATIC_PAGES = staticPagesData;
           this.data.STATIC_PAGES_CONFIG = staticPagesConfig;
           
@@ -3385,6 +3817,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
           window.CLASSES = classes;
           window.DONS = dons;
           window.OBJETS = objets;
+          window.MONSTRES = monstres;
           window.STATIC_PAGES = staticPagesData;
           window.STATIC_PAGES_CONFIG = staticPagesConfig;
           
@@ -3394,11 +3827,12 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         }
         
         // Development mode - fetch files
-        const [sorts, classes, dons, objets, staticPagesConfig, tocStructure] = await Promise.all([
+        const [sorts, classes, dons, objets, monstres, staticPagesConfig, tocStructure] = await Promise.all([
           fetch('data/sorts.json').then(r => r.json()),
           fetch('data/classes.json').then(r => r.json()),
           fetch('data/dons.json').then(r => r.json()),
           fetch('data/objets.json').then(r => r.json()),
+          fetch('data/monstres.json').then(r => r.json()),
           fetch('data/static-pages-config.json').then(r => r.json()),
           fetch('data/toc-structure.json').then(r => r.json())
         ]);
@@ -3419,6 +3853,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         this.data.CLASSES = classes;
         this.data.DONS = dons;
         this.data.OBJETS = objets;
+        this.data.MONSTRES = monstres;
         this.data.STATIC_PAGES = staticPagesData;
         this.data.STATIC_PAGES_CONFIG = staticPagesConfig;
         this.data.TOC_STRUCTURE = tocStructure;
@@ -3427,6 +3862,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         window.CLASSES = classes;
         window.DONS = dons;
         window.OBJETS = objets;
+        window.MONSTRES = monstres;
         window.STATIC_PAGES = this.data.STATIC_PAGES;
         window.STATIC_PAGES_CONFIG = this.data.STATIC_PAGES_CONFIG;
         window.TOC_STRUCTURE = this.data.TOC_STRUCTURE;
@@ -3654,12 +4090,14 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
     subclass: {
       fields: {
         nom: { type: 'text', label: 'Nom', required: true },
+        description: { type: 'textarea', label: 'Description', required: true },
         base: { type: 'stats', label: 'Statistiques de base', required: true },
         progression: { type: 'richtext', label: 'Progression', required: true },
         capacites: { type: 'list', label: 'Capacités', required: true }
       },
       editMapping: {
         'subclass-name': 'nom',
+        'subclass-description': 'description',
         'subclass-stats': 'base',
         'subclass-progression': 'progression',
         'subclass-capacites': 'capacites'
@@ -3677,6 +4115,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       },
       defaultValues: {
         nom: "Nouvelle sous-classe",
+        description: "Description de la sous-classe",
         base: {
           Force: 3,
           Agilité: 3,
@@ -4301,6 +4740,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       return `
         <div class="card editable-section" data-section-type="subclass" data-class-name="${this.categoryName}" data-subclass-name="${this.data.nom}">
           ${this.buildEditableTitle(this.data.nom, 'subclass-name')}
+          ${this.buildEditableField(this.data.description || 'Description de la sous-classe', 'subclass-description', 'Description', { style: 'text-align: center; color: inherit;' })}
           ${this.buildSubclassImages()}
           <div style="margin-bottom: 1rem;">
             ${this.buildStatsSection()}
@@ -4351,13 +4791,14 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
     buildEditableTitle(content, editType, centerAlign = true) {
       const style = centerAlign ? 'margin: 0 0 1rem 0; text-align: center;' : '';
       const spellTitleClass = this.type === 'spell' ? ' spell-title' : '';
+      const subclassTitleClass = this.type === 'subclass' ? ' subclass-title' : '';
       
       // Create unique edit section identifier using editType
       const editSection = `${this.data.nom}-${editType}`;
       
       return `
         <div class="editable-section" data-section-type="html">
-          <h4 style="${style}" class="editable editable-title${spellTitleClass}" data-edit-type="generic" data-edit-section="${editSection}">${content}</h4>
+          <h4 style="${style}" class="editable editable-title${spellTitleClass}${subclassTitleClass}" data-edit-type="generic" data-edit-section="${editSection}">${content}</h4>
           ${this.buildEditButton('title')}
         </div>
       `;
@@ -5072,8 +5513,6 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
 
     // Build spell level filter UI
     buildSpellLevelFilter() {
-      if (!JdrApp.utils.isDevMode()) return '';
-      
       return `
         <div class="spell-level-filter" style="margin: 1rem 0; padding: 1rem; background: var(--card); border: 2px solid var(--rule); border-radius: 12px;">
           <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
@@ -6073,36 +6512,43 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       JdrApp.utils.events.onHashChange(() => this.parseRoute());
       JdrApp.utils.events.onDOMReady(() => this.parseRoute());
       
-      // Set up category collapse/expand (must be BEFORE general TOC handler)
-      JdrApp.utils.events.register('click', '.toc-category > a', (e) => {
-        e.preventDefault();
-        e.stopPropagation(); // Prevent other handlers from firing
-        const category = e.target.closest('.toc-category');
-        if (category) {
-          category.classList.toggle('collapsed');
-        }
-      });
-
-      // Set up TOC click handlers (exclude category headers)
-      JdrApp.utils.events.register('click', '.toc a:not(.toc-category > a)', (e) => {
-        e.preventDefault();
-        const route = e.target.getAttribute('data-route');
-        if (route) {
-          this.navigate(route);
-        }
-      });
-
-      // Set up section foldout handlers
-      JdrApp.utils.events.register('click', '.toc-section-header', (e) => {
-        e.preventDefault();
-        e.stopPropagation(); // Prevent other handlers from firing
-        const section = e.target.closest('.toc-section');
-        if (section) {
-          section.classList.toggle('collapsed');
-          const toggle = section.querySelector('.toc-section-toggle');
-          if (toggle) {
-            toggle.textContent = section.classList.contains('collapsed') ? '▶' : '▼';
+      // Set up all TOC event handlers with native event delegation for standalone compatibility
+      document.addEventListener('click', (e) => {
+        // Handle section foldout headers first
+        if (e.target.closest('.toc-section-header')) {
+          e.preventDefault();
+          e.stopPropagation();
+          const section = e.target.closest('.toc-section');
+          if (section) {
+            section.classList.toggle('collapsed');
+            const toggle = section.querySelector('.toc-section-toggle');
+            if (toggle) {
+              toggle.textContent = section.classList.contains('collapsed') ? '▶' : '▼';
+            }
           }
+          return;
+        }
+        
+        // Handle category collapse/expand (categories with subcategories)
+        if (e.target.closest('.toc-category > a')) {
+          e.preventDefault();
+          e.stopPropagation();
+          const category = e.target.closest('.toc-category');
+          if (category) {
+            category.classList.toggle('collapsed');
+          }
+          return;
+        }
+        
+        // Handle regular TOC navigation links
+        const tocLink = e.target.closest('.toc a');
+        if (tocLink && !tocLink.matches('.toc-category > a')) {
+          e.preventDefault();
+          const route = tocLink.getAttribute('data-route');
+          if (route) {
+            this.navigate(route);
+          }
+          return;
         }
       });
     },
@@ -6227,10 +6673,104 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
 
       const tocHTML = `
         <h4>Sommaire</h4>
-        ${window.TOC_STRUCTURE.sections.map(section => this.generateTOCSection(section)).join('')}
+        ${window.TOC_STRUCTURE.sections
+          .filter(section => !section.requiresMJ || window.JdrApp.state.isMJ)
+          .map(section => this.generateTOCSection(section)).join('')}
+        <div class="mj-toggle-container" style="margin: 1rem 0; text-align: center; border-top: 2px solid var(--rule); padding-top: 1rem;">
+          <button id="mjToggleBtn" class="btn-base btn-small" style="background: var(--bronze); color: white; border-color: var(--bronze);">
+            🎭 Maître de jeu
+          </button>
+        </div>
       `;
       
       tocContainer.innerHTML = tocHTML;
+      
+      // Ajouter l'event listener pour le bouton MJ
+      this.setupMJToggle();
+    },
+
+    setupMJToggle() {
+      const mjBtn = document.getElementById('mjToggleBtn');
+      if (!mjBtn) return;
+
+      mjBtn.addEventListener('click', () => {
+        if (window.JdrApp.state.isMJ) {
+          // Déjà en mode MJ, désactiver
+          window.JdrApp.state.isMJ = false;
+          mjBtn.style.background = 'var(--bronze)';
+          mjBtn.innerHTML = '🎭 Maître de jeu';
+          this.generateTOC(); // Régénérer le TOC pour cacher les sections MJ
+        } else {
+          // Demander confirmation avant d'activer le mode MJ
+          this.showMJConfirmation(() => {
+            window.JdrApp.state.isMJ = true;
+            mjBtn.style.background = 'var(--gold)';
+            mjBtn.innerHTML = '🎭 Mode MJ activé';
+            this.generateTOC(); // Régénérer le TOC pour afficher les sections MJ
+          });
+        }
+      });
+    },
+
+    showMJConfirmation(onConfirm) {
+      const modal = document.createElement('div');
+      modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0,0,0,0.7);
+        z-index: 10000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      `;
+      
+      modal.innerHTML = `
+        <div style="
+          background: var(--card);
+          border: 3px solid var(--bronze);
+          border-radius: 16px;
+          padding: 2rem;
+          max-width: 500px;
+          margin: 1rem;
+          text-align: center;
+          box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        ">
+          <h3 style="color: var(--bronze); margin-top: 0;">⚠️ Mode Maître de jeu</h3>
+          <p style="margin: 1.5rem 0; line-height: 1.6;">
+            Êtes-vous sûr de vouloir activer le mode Maître de jeu?<br><br>
+            <strong style="color: var(--bronze);">Si vous êtes juste un joueur, vous risquez d'être spoilé!</strong>
+          </p>
+          <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
+            <button id="mjConfirmYes" class="btn-base" style="background: var(--bronze); color: white; border-color: var(--bronze);">
+              Oui, je suis MJ
+            </button>
+            <button id="mjConfirmNo" class="btn-base" style="background: var(--rule); color: var(--accent-ink); border-color: var(--rule);">
+              Non, annuler
+            </button>
+          </div>
+        </div>
+      `;
+      
+      document.body.appendChild(modal);
+      
+      modal.querySelector('#mjConfirmYes').addEventListener('click', () => {
+        document.body.removeChild(modal);
+        onConfirm();
+      });
+      
+      modal.querySelector('#mjConfirmNo').addEventListener('click', () => {
+        document.body.removeChild(modal);
+      });
+      
+      // Fermer en cliquant sur le fond
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          document.body.removeChild(modal);
+        }
+      });
     },
 
     generateTOCSection(section) {
@@ -6292,6 +6832,17 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
               ${dataSource.map(category => 
                 `<a data-route="dons-${JdrApp.utils.data.sanitizeId(category.nom)}" href="#/dons-${JdrApp.utils.data.sanitizeId(category.nom)}" class="">${this.getDonCategoryIcon(category.nom)} ${category.nom}</a>`
               ).join('')}
+            </div>
+          </div>
+        `;
+      } else if (item.id === 'monstres') {
+        return `
+          <div class="toc-category">
+            <a data-route="monstres" href="#/monstres" class="">${item.icon} ${item.title}</a>
+            <div class="toc-sub">
+              ${dataSource && dataSource.length > 0 ? dataSource.map(category => 
+                `<a data-route="monstres-${JdrApp.utils.data.sanitizeId(category.nom)}" href="#/monstres-${JdrApp.utils.data.sanitizeId(category.nom)}" class="">${this.getMonstreCategoryIcon(category.nom)} ${category.nom}</a>`
+              ).join('') : '<span style="font-style: italic; color: #666; padding-left: 20px;">Aucun monstre défini</span>'}
             </div>
           </div>
         `;
@@ -6397,6 +6948,22 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         'Generaux': '🎖️'  // Sans accent comme dans les données
       };
       return icons[categoryName] || '🎖️';
+    },
+
+    getMonstreCategoryIcon(categoryName) {
+      const icons = {
+        'Forêt': '🌲',
+        'Foret': '🌲',  // Sans accent
+        'Donjon': '🏰',
+        'Dragons': '🐉',
+        'Mort-vivants': '💀',
+        'Démons': '👹',
+        'Demons': '👹',  // Sans accent
+        'Animaux': '🦁',
+        'Humanoïdes': '🧌',
+        'Humanoïdes': '🧌'  // Sans accent
+      };
+      return icons[categoryName] || '👹';
     },
     
     getObjetCategoryIcon(categoryName) {
@@ -6620,6 +7187,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
           <div style="font-size: 12px; color: var(--paper-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">🎭 Ressources</div>
           <div style="display: flex; gap: 8px; flex-wrap: wrap;">
             <button class="btn small" id="elementsBtn" title="Choisir un élément pour copier sa balise HTML colorée">🎨 Éléments</button>
+            <button class="btn small" id="etatsBtn" title="Choisir un état pour copier sa balise HTML avec tooltip">⚡ États</button>
           </div>
         </div>
       `;
@@ -6847,14 +7415,16 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
             const currentIndex = allEditables.indexOf(editableElement);
             
             // Map index to property based on subclass structure  
-            // UPDATED ORDER: Index 0 = nom (title), Index 1 = base (stats), Index 2 = progression, Index 3+ = capacites
-            if (element.closest('.stats-grid') || currentIndex === 1) {
+            // UPDATED ORDER: Index 0 = nom (title), Index 1 = description, Index 2 = base (stats), Index 3 = progression, Index 4+ = capacites
+            if (element.closest('.stats-grid') || currentIndex === 2) {
               subclassEditSection = 'base';
             } else if (currentIndex === 0) {
               subclassEditSection = 'nom';
-            } else if (currentIndex === 2) {
+            } else if (currentIndex === 1) {
+              subclassEditSection = 'description';
+            } else if (currentIndex === 3) {
               subclassEditSection = 'progression';  
-            } else if (currentIndex >= 3) {
+            } else if (currentIndex >= 4) {
               subclassEditSection = 'capacites';
             }
           }
@@ -7854,55 +8424,64 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
     },
 
     setupEventListeners() {
-      // Setup event listeners with delegation to handle dynamically added elements
-      JdrApp.utils.events.register('input', '#spell-level-filter', (e) => {
-        this.filterSpellsByLevel(parseInt(e.target.value, 10));
+      // Use direct event delegation on document to catch dynamically added elements
+      document.addEventListener('input', (e) => {
+        if (e.target && e.target.id === 'spell-level-filter') {
+          this.filterSpellsByLevel(parseInt(e.target.value, 10));
+        }
       });
 
-      JdrApp.utils.events.register('click', '#reset-spell-filter', (e) => {
-        this.resetFilter();
+      document.addEventListener('click', (e) => {
+        if (e.target && e.target.id === 'reset-spell-filter') {
+          e.preventDefault();
+          this.resetFilter();
+        }
       });
 
       // Setup when page changes (router events)
-      EventBus.on(Events.PAGE_RENDER, (payload) => {
-        if (payload.type === 'category' && payload.categoryType === 'spell') {
-          // Re-setup filter after page render
-          setTimeout(() => this.initializeFilter(), 100);
-        }
+      if (window.EventBus && window.Events) {
+        EventBus.on(Events.PAGE_RENDER, (payload) => {
+          if (payload.type === 'category' && payload.categoryType === 'spell') {
+            // Re-setup filter after page render
+            setTimeout(() => this.initializeFilter(), 200);
+          }
+        });
+      }
+
+      // Also listen to hash changes for direct navigation
+      window.addEventListener('hashchange', () => {
+        setTimeout(() => this.initializeFilter(), 200);
       });
     },
 
     initializeFilter() {
       const filterInput = document.querySelector('#spell-level-filter');
-      const resetButton = document.querySelector('#reset-spell-filter');
+      if (!filterInput) return;
       
-      if (filterInput && resetButton) {
-        // Set initial value and apply filter
-        const initialValue = parseInt(filterInput.value, 10);
-        this.filterSpellsByLevel(initialValue);
-      }
+      console.log('SpellFilter: Initializing filter with value', filterInput.value);
+      
+      // Set initial value and apply filter
+      const initialValue = parseInt(filterInput.value, 10) || 20;
+      this.filterSpellsByLevel(initialValue);
     },
 
     filterSpellsByLevel(maxLevel) {
+      console.log('SpellFilter: Filtering spells with maxLevel', maxLevel);
+      
       // Get current page from URL hash
       const currentHash = window.location.hash.replace('#/', '');
       
       if (!currentHash.startsWith('sorts-')) {
+        console.log('SpellFilter: Not on a spells page, hash is', currentHash);
         return;
       }
       
-      // Find the article for this specific page
-      const currentArticle = document.querySelector(`article[data-page="${currentHash}"]`);
-      if (!currentArticle) {
-        return;
-      }
+      // Find all spell cards in the current page
+      const spellCards = document.querySelectorAll('.card[data-spell-name]');
+      console.log('SpellFilter: Found', spellCards.length, 'spell cards');
       
-      // Extract category ID from the hash
-      const containerId = `spells-container-${currentHash.replace('sorts-', '')}`;
-      const spellsContainer = document.querySelector(`#${containerId}`);
-      if (!spellsContainer) return;
+      if (spellCards.length === 0) return;
 
-      const spellCards = spellsContainer.querySelectorAll('.card[data-spell-name]');
       let visibleCount = 0;
 
       spellCards.forEach((card) => {
@@ -7920,6 +8499,8 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         }
       });
 
+      console.log(`SpellFilter: Showing ${visibleCount}/${spellCards.length} spells`);
+      
       // Update filter display with count
       this.updateFilterDisplay(maxLevel, visibleCount, spellCards.length);
     },
@@ -7970,21 +8551,33 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
   };
 
   // Initialize the spell filter when the app is ready
-  if (window.JdrApp) {
-    if (JdrApp.modules) {
-      JdrApp.modules.spellFilter = SpellFilter;
+  function initializeSpellFilter() {
+    console.log('SpellFilter: Initializing module...');
+    
+    if (window.JdrApp) {
+      if (JdrApp.modules) {
+        JdrApp.modules.spellFilter = SpellFilter;
+      }
     }
     
-    // Initialize immediately if app is already loaded
-    if (JdrApp.isInitialized) {
-      SpellFilter.init();
-    }
+    // Initialize the filter
+    SpellFilter.init();
+    
+    // Try to initialize the filter after a delay to ensure DOM is ready
+    setTimeout(() => {
+      if (window.location.hash.includes('sorts-')) {
+        SpellFilter.initializeFilter();
+      }
+    }, 500);
   }
 
-  // Also initialize on DOM ready as fallback
-  document.addEventListener('DOMContentLoaded', () => {
-    SpellFilter.init();
-  });
+  // Initialize on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeSpellFilter);
+  } else {
+    // DOM is already ready
+    initializeSpellFilter();
+  }
 
   window.SpellFilter = SpellFilter;
 
@@ -8006,6 +8599,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       this.setupSearch();
       this.setupModals();
       this.setupResponsive();
+      this.setupNewPageHandler();
     },
 
     setupEventListeners() {
@@ -8564,15 +9158,74 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
     },
 
     matchesSearch(item, query) {
-      const searchText = [
-        item.nom || '',
-        item.description || '',
-        item.prerequis || '',
-        item.resume || '',
-        Array.isArray(item.capacites) ? item.capacites.join(' ') : ''
-      ].join(' ').toLowerCase();
+      // Fonction pour nettoyer le HTML et extraire le texte
+      const stripHtml = (text) => {
+        if (!text) return '';
+        if (typeof text !== 'string') text = String(text);
+        return text.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+      };
+
+      // Fonction pour traiter les listes/arrays
+      const processArray = (arr) => {
+        if (!arr) return '';
+        if (Array.isArray(arr)) {
+          return arr.map(item => stripHtml(item)).join(' ');
+        }
+        return stripHtml(arr);
+      };
+
+      // Collecter TOUS les champs textuels possibles
+      const searchFields = [
+        // Champs communs
+        item.nom,
+        item.description,
+        item.prerequis,
+        item.resume,
+        
+        // Champs spécifiques aux sorts
+        item.element,
+        item.portee,
+        item.tempsIncantation,
+        item.coutMana,
+        item.resistance,
+        item.effetNormal,
+        item.effetCritique,
+        item.effetEchec,
+        
+        // Champs spécifiques aux dons
+        item.cout,
+        
+        // Champs spécifiques aux classes/sous-classes
+        item.progression,
+        processArray(item.capacites),
+        
+        // Champs spécifiques aux objets
+        item.effet,
+        item.prix,
+        item.poids,
+        item.tags ? item.tags.join(' ') : '',
+        
+        // Champs de statistiques (si c'est un objet)
+        item.base ? Object.entries(item.base || {}).map(([key, value]) => `${key} ${value}`).join(' ') : '',
+        
+        // Autres champs possibles
+        item.title,
+        item.content,
+        item.type
+      ];
+
+      // Joindre tous les champs et nettoyer
+      const searchText = searchFields
+        .filter(field => field !== null && field !== undefined)
+        .map(field => stripHtml(field))
+        .join(' ')
+        .toLowerCase();
       
-      return searchText.includes(query);
+      // Chercher chaque mot de la requête
+      const queryWords = query.toLowerCase().split(/\s+/).filter(word => word.length > 0);
+      
+      // Tous les mots doivent être trouvés (recherche ET logique)
+      return queryWords.every(word => searchText.includes(word));
     },
 
     generateSpellSummary(spell) {
@@ -8999,6 +9652,10 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
         this.showElementsModal();
       });
 
+      JdrApp.utils.events.register('click', '#etatsBtn', () => {
+        this.showEtatsModal();
+      });
+
 
       EventBus.on(Events.MODAL_OPEN, (payload) => {
         this.openModal(payload.modalId);
@@ -9118,6 +9775,90 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       return icons[elementName] || '⚡';
     },
 
+    showEtatsModal() {
+      // TOUJOURS recréer la modal pour avoir les données à jour
+      let modal = JdrApp.utils.dom.$('#etatsModal');
+      if (modal) {
+        document.body.removeChild(modal);
+      }
+      
+      modal = this.createEtatsModal();
+      document.body.appendChild(modal);
+      
+      this.openModal('etatsModal');
+    },
+
+    createEtatsModal() {
+      // Récupérer les données d'états depuis window.STATIC_PAGES.etats
+      const etatsData = window.STATIC_PAGES?.etats;
+      const etats = [];
+      
+      if (etatsData?.sections) {
+        etatsData.sections.forEach(section => {
+          if (section.type === 'card' && section.title && section.content) {
+            // Convertir le HTML en texte en préservant les sauts de ligne
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = section.content;
+            
+            // Remplacer les balises de saut de ligne par des \n avant d'extraire le texte
+            tempDiv.innerHTML = tempDiv.innerHTML
+              .replace(/<\/p>/gi, '\n')
+              .replace(/<br\s*\/?>/gi, '\n')
+              .replace(/<\/li>/gi, '\n')
+              .replace(/<\/div>/gi, '\n');
+            
+            const description = (tempDiv.textContent || tempDiv.innerText || section.content)
+              .replace(/\n\s*\n/g, '\n') // Supprimer les doubles sauts de ligne
+              .trim();
+            
+            etats.push({
+              name: section.title,
+              description: description
+            });
+          }
+        });
+      }
+
+      const etatsHTML = etats.map(etat => `
+        <div class="etat-item" data-etat-name="${etat.name}" data-etat-description="${etat.description}">
+          <div class="etat-icon">⚡</div>
+          <div class="etat-content">
+            <div class="etat-name">${etat.name}</div>
+            <div class="etat-description">${etat.description.length > 60 ? etat.description.substring(0, 60) + '...' : etat.description}</div>
+          </div>
+          <div class="copy-indicator">Copié!</div>
+        </div>
+      `).join('');
+
+      const modal = JdrApp.utils.dom.create('div', 'modal etats-modal', `
+        <div class="modal-content etats-modal-content">
+          <h3>⚡ États</h3>
+          <p>Cliquez sur un état pour copier sa balise HTML avec tooltip.</p>
+          <div class="etats-list">
+            ${etatsHTML || '<div style="text-align: center; color: #666; padding: 2rem;">Aucun état trouvé</div>'}
+          </div>
+          <button class="modal-close btn">Fermer</button>
+        </div>
+      `, { id: 'etatsModal' });
+
+      modal.addEventListener('click', (e) => {
+        const etatItem = e.target.closest('.etat-item');
+        if (etatItem) {
+          const etatName = etatItem.dataset.etatName;
+          const etatDescription = etatItem.dataset.etatDescription;
+          
+          const html = `<span title="${etatDescription}">${etatName}</span>`;
+          this.copyToClipboard(html);
+          
+          etatItem.classList.add('copied');
+          setTimeout(() => {
+            etatItem.classList.remove('copied');
+          }, 1000);
+        }
+      });
+
+      return modal;
+    },
 
     copyToClipboard(text) {
       navigator.clipboard.writeText(text).then(() => {
@@ -9928,6 +10669,198 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
       // Show success notification
       const elementIcon = window.ElementIcons ? window.ElementIcons[newElement] : '🔥';
       this.showNotification(`${elementIcon} Élément du sort "${spellName}" mis à jour : ${newElement}`, 'success');
+    },
+
+    // ========================================
+    // NEW PAGE CREATION WITH SECTION SELECTION
+    // ========================================
+    setupNewPageHandler() {
+      // Set up event listener for "Nouvelle page" button
+      document.addEventListener('click', (e) => {
+        if (e.target && e.target.id === 'addCategory') {
+          e.preventDefault();
+          this.showSectionSelectionModal();
+        }
+      });
+    },
+
+    showSectionSelectionModal() {
+      const modal = this.createSectionSelectionModal();
+      document.body.appendChild(modal);
+      this.openModal('sectionSelectionModal');
+    },
+
+    createSectionSelectionModal() {
+      // Get available sections from TOC structure
+      const sections = window.TOC_STRUCTURE?.sections || [
+        { id: 'heros', title: '🦸 Héros', icon: '🦸' },
+        { id: 'arsenal', title: '⚔️ Arsenal', icon: '⚔️' },
+        { id: 'regles', title: '📚 Règles', icon: '📚' }
+      ];
+
+      // Filter sections based on MJ access if needed
+      const availableSections = sections.filter(section => 
+        !section.requiresMJ || window.JdrApp?.state?.isMJ
+      );
+
+      const sectionsHTML = availableSections.map(section => `
+        <div class="section-option" data-section-id="${section.id}">
+          <div class="section-icon">${section.icon}</div>
+          <div class="section-info">
+            <div class="section-title">${section.title}</div>
+            <div class="section-description">${section.description || 'Section de contenu'}</div>
+          </div>
+        </div>
+      `).join('');
+
+      const modal = document.createElement('div');
+      modal.className = 'modal section-selection-modal';
+      modal.id = 'sectionSelectionModal';
+      modal.innerHTML = `
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+          <h3>📄 Nouvelle page</h3>
+          <p>Dans quelle section souhaitez-vous créer la nouvelle page ?</p>
+          
+          <div class="sections-list">
+            ${sectionsHTML}
+          </div>
+          
+          <div class="page-details" style="display: none;">
+            <div class="form-group">
+              <label for="pageTitle">Titre de la page :</label>
+              <input type="text" id="pageTitle" placeholder="Nom de la nouvelle page" required>
+            </div>
+            <div class="form-group">
+              <label for="pageIcon">Icône (optionnel) :</label>
+              <input type="text" id="pageIcon" placeholder="📄" maxlength="2">
+            </div>
+          </div>
+          
+          <div class="modal-actions">
+            <button type="button" class="btn modal-close">Annuler</button>
+            <button type="button" class="btn btn-primary" id="createPageBtn" style="display: none;">Créer la page</button>
+          </div>
+        </div>
+      `;
+
+      // Set up event handlers
+      this.setupSectionSelectionHandlers(modal);
+
+      return modal;
+    },
+
+    setupSectionSelectionHandlers(modal) {
+      let selectedSectionId = null;
+
+      // Section selection
+      modal.addEventListener('click', (e) => {
+        const sectionOption = e.target.closest('.section-option');
+        if (sectionOption) {
+          // Remove previous selection
+          modal.querySelectorAll('.section-option').forEach(opt => opt.classList.remove('selected'));
+          
+          // Select this section
+          sectionOption.classList.add('selected');
+          selectedSectionId = sectionOption.dataset.sectionId;
+          
+          // Show page details form
+          const pageDetails = modal.querySelector('.page-details');
+          const createBtn = modal.querySelector('#createPageBtn');
+          pageDetails.style.display = 'block';
+          createBtn.style.display = 'inline-block';
+          
+          // Focus on title input
+          modal.querySelector('#pageTitle').focus();
+        }
+      });
+
+      // Create page button
+      modal.querySelector('#createPageBtn').addEventListener('click', () => {
+        const titleInput = modal.querySelector('#pageTitle');
+        const iconInput = modal.querySelector('#pageIcon');
+        
+        const pageTitle = titleInput.value.trim();
+        const pageIcon = iconInput.value.trim() || '📄';
+        
+        if (!pageTitle) {
+          this.showNotification('Veuillez saisir un titre pour la page', 'error');
+          titleInput.focus();
+          return;
+        }
+
+        if (!selectedSectionId) {
+          this.showNotification('Veuillez sélectionner une section', 'error');
+          return;
+        }
+
+        this.createNewPage(selectedSectionId, pageTitle, pageIcon);
+        this.closeModal(modal);
+      });
+
+      // Handle Enter key in form
+      modal.querySelector('#pageTitle').addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && selectedSectionId) {
+          modal.querySelector('#createPageBtn').click();
+        }
+      });
+    },
+
+    createNewPage(sectionId, pageTitle, pageIcon) {
+      // Generate page ID from title
+      const pageId = this.slugify(pageTitle);
+      
+      // Create new page object
+      const newPage = {
+        type: 'page',
+        id: pageId,
+        title: pageTitle,
+        icon: pageIcon
+      };
+
+      // Add to TOC structure
+      if (window.TOC_STRUCTURE) {
+        const section = window.TOC_STRUCTURE.sections.find(s => s.id === sectionId);
+        if (section) {
+          section.items.push(newPage);
+          
+          // Create default page data
+          const defaultPageData = {
+            page: pageId,
+            title: pageTitle,
+            sections: [
+              {
+                type: 'intro',
+                content: `Contenu de la page ${pageTitle}. Vous pouvez éditer ce texte en mode développement.`
+              }
+            ]
+          };
+
+          // Add to static pages
+          if (!window.STATIC_PAGES) {
+            window.STATIC_PAGES = {};
+          }
+          window.STATIC_PAGES[pageId] = defaultPageData;
+
+          // Regenerate TOC to include new page
+          if (JdrApp.modules.router) {
+            JdrApp.modules.router.generateTOC();
+          }
+
+          // Navigate to new page
+          window.location.hash = `#/${pageId}`;
+
+          this.showNotification(`📄 Page "${pageTitle}" créée avec succès dans la section ${this.getSectionTitle(sectionId)}`, 'success');
+        }
+      }
+    },
+
+    getSectionTitle(sectionId) {
+      if (window.TOC_STRUCTURE) {
+        const section = window.TOC_STRUCTURE.sections.find(s => s.id === sectionId);
+        return section ? section.title : sectionId;
+      }
+      return sectionId;
     }
   };
 
