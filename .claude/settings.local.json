@@ -23,7 +23,8 @@
       "Bash(git rm:*)",
       "Bash(node:*)",
       "Bash(sed:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(rm:*)"
     ],
     "deny": []
   }

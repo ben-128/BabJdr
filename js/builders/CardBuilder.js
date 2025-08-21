@@ -6,15 +6,16 @@
   "use strict";
 
   class CardBuilder {
-    constructor(type, data, categoryName = null) {
+    constructor(type, data, categoryName = null, index = null) {
       this.type = type;
       this.data = data;
       this.categoryName = categoryName;
+      this.index = index;
       this.config = window.ContentTypes[type];
     }
 
-    static create(type, data, categoryName = null) {
-      return new CardBuilder(type, data, categoryName);
+    static create(type, data, categoryName = null, index = null) {
+      return new CardBuilder(type, data, categoryName, index);
     }
 
     // Simple unified dev mode check
@@ -39,7 +40,7 @@
 
     buildSpellCard() {
       return `
-        <div class="card editable-section" data-section-type="spell" data-spell-name="${this.data.nom}" data-category-name="${this.categoryName}">
+        <div class="card editable-section" data-section-type="spell" data-spell-name="${this.data.nom}" data-spell-index="${this.index}" data-category-name="${this.categoryName}">
           ${this.buildEditableTitle(this.data.nom, 'spell-name')}
           ${this.buildSpellElement()}
           ${this.buildIllustration(`sort:${this.categoryName}:${this.data.nom}`, this.data.nom)}
@@ -54,18 +55,17 @@
           ${this.buildEditableEffect(this.data.effetNormal, 'spell-effect-normal', 'Effet normal')}
           <hr style="margin: 1rem 0; border: none; border-top: 1px solid var(--rule);">
           ${this.data.effetCritique ? this.buildEditableEffect(this.data.effetCritique, 'spell-effect-critical', 'Effet critique') : ''}
-          ${this.data.effetEchec ? this.buildEditableEffect(this.data.effetEchec, 'spell-effect-failure', 'Effet d\'échec') : ''}
           ${this.buildDeleteButton('spell')}
         </div>
       `;
     }
 
     buildDonCard() {
-      const index = this.categoryName ? this.getCategoryData().dons?.indexOf(this.data) || 0 : 0;
+      const index = this.index !== null ? this.index : (this.categoryName ? this.getCategoryData().dons?.indexOf(this.data) || 0 : 0);
       const totalItems = this.categoryName ? this.getCategoryData().dons?.length || 1 : 1;
 
       return `
-        <div class="card editable-section" data-section-type="don" data-don-name="${this.data.nom}" data-category-name="${this.categoryName}">
+        <div class="card editable-section" data-section-type="don" data-don-name="${this.data.nom}" data-don-index="${this.index}" data-category-name="${this.categoryName}">
           ${this.buildEditableTitle(this.data.nom, 'don-name')}
           ${this.buildIllustration(`don:${this.data.nom}`, this.data.nom)}
           ${this.buildEditableField(this.data.description, 'don-description', 'Description')}
@@ -321,13 +321,13 @@
           class: 'spell-delete btn small',
           style: 'background: #ff6b6b; color: white; margin-top: 8px;',
           text: '🗑 Supprimer',
-          attrs: `data-category-name="${this.categoryName}" data-spell-name="${this.data.nom}"`
+          attrs: `data-category-name="${this.categoryName}" data-spell-name="${this.data.nom}" data-spell-index="${this.index}"`
         },
         don: {
           class: 'don-delete btn small',
           style: 'background: #ff6b6b; color: white;',
           text: '🗑 Supprimer',
-          attrs: `data-category-name="${this.categoryName}" data-don-name="${this.data.nom}"`
+          attrs: `data-category-name="${this.categoryName}" data-don-name="${this.data.nom}" data-don-index="${this.index}"`
         },
         subclass: {
           class: 'delete-subclass-btn',
@@ -386,7 +386,7 @@
         return `
           <div style="text-align: center; margin: 0.5rem 0;">
             <div class="spell-element-selector" style="font-size: 1.1em;">
-              <select data-spell-name="${this.data.nom}" data-category-name="${this.categoryName}" style="padding: 4px 8px; border: 1px solid var(--rule); border-radius: 6px; background: var(--card); font-size: 0.9em;">
+              <select data-spell-name="${this.data.nom}" data-spell-index="${this.index}" data-category-name="${this.categoryName}" style="padding: 4px 8px; border: 1px solid var(--rule); border-radius: 6px; background: var(--card); font-size: 0.9em;">
                 ${optionsHTML}
               </select>
             </div>

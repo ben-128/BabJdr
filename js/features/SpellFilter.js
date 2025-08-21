@@ -90,7 +90,6 @@
         }
       });
 
-      console.log(`SpellFilter: Showing ${visibleCount}/${spellCards.length} spells`);
       
       // Update filter display with count
       this.updateFilterDisplay(maxLevel, visibleCount, spellCards.length);

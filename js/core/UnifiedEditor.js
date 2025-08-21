@@ -60,6 +60,7 @@
       const spellCard = element.closest('.card[data-spell-name]');
       if (spellCard) {
         const spellName = spellCard.dataset.spellName;
+        const spellIndex = spellCard.dataset.spellIndex;
         const categoryName = spellCard.dataset.categoryName;
         
         // Use index-based detection for spell sections
@@ -68,13 +69,14 @@
         const currentIndex = allEditables.indexOf(editableElement);
         
         // Map index to spell property based on CardBuilder order
-        // 0=nom, 1=description, 2=prerequis, 3=portee, 4=coutMana, 5=tempsIncantation, 6=resistance, 7=effetNormal, 8=effetCritique, 9=effetEchec
-        const spellSections = ['nom', 'description', 'prerequis', 'portee', 'coutMana', 'tempsIncantation', 'resistance', 'effetNormal', 'effetCritique', 'effetEchec'];
+        // 0=nom, 1=description, 2=prerequis, 3=portee, 4=coutMana, 5=tempsIncantation, 6=resistance, 7=effetNormal, 8=effetCritique
+        const spellSections = ['nom', 'description', 'prerequis', 'portee', 'coutMana', 'tempsIncantation', 'resistance', 'effetNormal', 'effetCritique'];
         const spellEditSection = spellSections[currentIndex] || 'description';
         
         return {
           contentType: 'spell',
           itemIdentifier: spellName,
+          itemIndex: spellIndex,
           categoryName: categoryName,
           property: 'html',
           editType: 'html',
@@ -89,6 +91,7 @@
       const donCard = element.closest('.card[data-don-name]');
       if (donCard) {
         const donName = donCard.dataset.donName;
+        const donIndex = donCard.dataset.donIndex;
         const categoryName = donCard.dataset.categoryName;
         
         // Use index-based detection for don sections
@@ -104,6 +107,7 @@
         return {
           contentType: 'don',
           itemIdentifier: donName,
+          itemIndex: donIndex,
           categoryName: categoryName,
           property: 'html',
           editType: 'html',
@@ -428,7 +432,13 @@
         for (const category of jsonData) {
           if (category.nom === session.categoryName) {
             const itemsKey = session.contentType === 'spell' ? 'sorts' : 'dons';
-            targetObject = category[itemsKey]?.find(item => item.nom === session.itemIdentifier);
+            // Use index-based identification if available, fallback to name-based
+            if (session.itemIndex !== undefined && session.itemIndex !== null) {
+              const index = parseInt(session.itemIndex, 10);
+              targetObject = category[itemsKey]?.[index];
+            } else {
+              targetObject = category[itemsKey]?.find(item => item.nom === session.itemIdentifier);
+            }
             break;
           }
         }

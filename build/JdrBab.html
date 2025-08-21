@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-08-21T18:25:58.214Z by JdrBab Build System -->
+<!-- Generated on 2025-08-21T19:52:09.732Z by JdrBab Build System -->
 <title>JDR‑BAB — Livret de règles</title>
 <meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -699,7 +699,7 @@ h5, h6 {
 
 .toc-section-content {
   padding: 6px;
-  max-height: none;
+  max-height: 500px;
   overflow: visible;
   transition: max-height var(--transition-normal), opacity var(--transition-normal);
 }
@@ -711,8 +711,8 @@ h5, h6 {
 }
 
 .toc-section.collapsed .toc-section-content {
-  max-height: 0;
-  opacity: 0;
+  max-height: 0 !important;
+  opacity: 0 !important;
   padding-top: 0;
   padding-bottom: 0;
   overflow: hidden;
@@ -2824,7 +2824,7 @@ article span[title]:hover::after {
       {
         "nom": "Boule de Feu",
         "element": "Feu",
-        "description": "Lance une boule de Feu sur un adversaire.",
+        "description": "Lance une boule de feu sur un adversaire, qui peut s'enflammer.",
         "categorie": "Mage",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 1",
         "portee": "🎯 <strong>Portée:</strong> 20m",
@@ -2833,28 +2833,26 @@ article span[title]:hover::after {
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> Esquive.",
         "effetNormal": "<strong>Effet:</strong> Inflige 5 dégats de <span style=\"color: #e25822; font-weight: bold;\">Feu</span> à la cible.<br>&nbsp;Tous les 5 points d'intelligence, augmente les dégats de 1.",
-        "effetCritique": "<strong>Coup Critique:&nbsp;</strong>&nbsp;Double les dégâts et enflamme la cible, infligeant 2 dégats de Feu au prochain tour du lanceur.",
-        "effetEchec": "<strong>Échec Critique:&nbsp;</strong>Le sort inflige ses dégats à un allié dans la trajectoire."
+        "effetCritique": "<strong>Coup Critique:&nbsp;</strong>&nbsp;Les dégats passent à 7 et la cible s'enflamme, infligeant 5 dégats de feu au prochain tour du lanceur."
       },
       {
         "nom": "Éclair",
         "element": "Air",
-        "description": "Frappe une cible avec un éclair électrique.",
+        "description": "Frappe instantannément une cible avec un éclair électrique, ne laissant aucune chance à l'esquive.",
         "categorie": "Mage",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 2",
-        "portee": "🎯 <strong>Portée:</strong> 20m",
+        "portee": "🎯 <strong>Portée:</strong> 10m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 5",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
-        "resistance": "<strong>Sans effet si:</strong> Aucune",
+        "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> &nbsp;Inflige 6 dégats d'<span style=\"color: #22c55e; font-weight: bold;\">Air</span> à la cible.<br>&nbsp;Tous les 5 points d'intelligence, augmente les dégats de 1.",
-        "effetCritique": "<strong>Coup Critique:&nbsp;</strong>Double les dégâts et inflige les dégats à un enemy à moins de 5m de la cible.",
-        "effetEchec": "<strong>Échec Critique:&nbsp;</strong>Le sort inflige ses dégats à un allié dans la trajectoire."
+        "effetCritique": "<strong>Coup Critique:&nbsp;</strong> Les dégâts passent à 10 et ils sont aussi infligé à un ennemi à moins de 5m de la cible."
       },
       {
         "nom": "Vague déferlante",
         "element": "Eau",
-        "description": "Une puissante vague d'eau s'abat sur vos ennemis.",
+        "description": "Une puissante vague d'eau s'abat sur vos ennemis et les repousse.",
         "categorie": "Sorts de Mage",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 3",
         "portee": "🎯 <strong>Portée:</strong> 5m",
@@ -2862,9 +2860,8 @@ article span[title]:hover::after {
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> Volant.",
-        "effetNormal": "<strong>Effet:</strong> &nbsp;Inflige 6 dégats d'<span style=\"color: #2b6cb0; font-weight: bold;\">Eau</span> aux créature devant le lanceur (largeur 1.5m distance 5m) et les repousse jusqu'à 5m.<br>&nbsp;Tous les 5 points d'intelligence, augmente les dégats de 1.",
-        "effetCritique": "<strong>Coup Critique:&nbsp;</strong>Double dégats et portée.",
-        "effetEchec": "<strong>Échec Critique:&nbsp;</strong>Sans effet."
+        "effetNormal": "<strong>Effet:</strong> &nbsp;Inflige 6 dégats d'<span style=\"color: #2b6cb0; font-weight: bold;\">Eau</span> aux créature devant le lanceur (largeur 2m distance 5m) et les repousse jusqu'à 5m.<br>&nbsp;Tous les 5 points d'intelligence, augmente les dégats de 1.",
+        "effetCritique": "<strong>Coup Critique:&nbsp;</strong> les dégats passent à 10 et les enemis sont touchés/repoussés à 10m."
       }
     ]
   },
@@ -2877,15 +2874,14 @@ article span[title]:hover::after {
         "element": "Divin",
         "description": "Invoque un magie divine qui blesse les morts-vivants",
         "categorie": "Anti-mort-vivant",
-        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 1",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 3",
         "portee": "🎯 <strong>Portée:</strong> 20m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 3",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> &nbsp;<br>- Non mort-vivant <br>- Esquive.",
         "effetNormal": "<strong>Effet:</strong> Inflige *Intelligence* dégâts <span style=\"color: #d0d0d0; font-weight: bold; background: rgba(0, 0, 0, 0.4); padding: 2px 4px; border-radius: 3px;\">Divin</span> à la cible.",
-        "effetCritique": "<strong>Coup Critique:&nbsp;</strong>Double dégâts.",
-        "effetEchec": "<strong>Échec Critique:&nbsp;</strong> -"
+        "effetCritique": "<strong>Coup Critique:&nbsp;</strong>Double dégâts."
       },
       {
         "nom": "Soin mineur",
@@ -2899,8 +2895,7 @@ article span[title]:hover::after {
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> &nbsp;mort-vivant.",
         "effetNormal": "<strong>Effet:</strong> Soigne la cible de 5 points de vie. Tous les 5 points d'intelligence, augmente le soin de 1.",
-        "effetCritique": "<strong>Coup Critique:&nbsp;</strong>Double le soin.",
-        "effetEchec": "<strong>Échec Critique:&nbsp;</strong> -"
+        "effetCritique": "<strong>Coup Critique:&nbsp;</strong>Double le soin."
       },
       {
         "nom": "Protection",
@@ -2913,9 +2908,20 @@ article span[title]:hover::after {
         "coutMana": "🔵 <strong>Coût mana:</strong> 5",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> -",
-        "effetNormal": "<strong>Effet:</strong> Augmente l'armure de 3 pendant 5 tours.<br> Tous les 5 d'Intelligence, augmente l'armure de 1 supplémentaire.",
-        "effetCritique": "<strong>Coup Critique:&nbsp;</strong> Double l'armure prodiguée.",
-        "effetEchec": "<strong>Échec Critique:&nbsp;</strong> -"
+        "effetNormal": "<strong>Effet:</strong> Augmente l'armure de 2 pendant 5 tours.<br> Tous les 5 d'Intelligence, augmente l'armure de 1 supplémentaire.",
+        "effetCritique": "<strong>Coup Critique:&nbsp;</strong> L'armure est augmentée de 4."
+      },
+      {
+        "nom": "Arme de lumière",
+        "element": "Lumière",
+        "description": "Une lumière destructrice s'imprègne de l'arme du prêtre.",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 1",
+        "portee": "🎯 <strong>Portée:</strong> -",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 5",
+        "resistance": "<strong>Sans effet si:</strong> -",
+        "effetNormal": "<strong>Effet:</strong> L'arme du prêtre infligera 2 dégats de lumière à chaque coup, pendant 4 tours.<br> Tous les 5 d'intelligence, augmente les dégats de 1.",
+        "effetCritique": "<strong>Coup Critique:&nbsp;</strong>&nbsp;Les dégats passent à 4."
       }
     ]
   },
@@ -2935,8 +2941,7 @@ article span[title]:hover::after {
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> <br>- Résistance altérations &gt; Intelligence du lanceur<br>- Lévitation ou Volant.",
         "effetNormal": "<strong>Effet:</strong>&nbsp;La cible contracte l'état <span title=\"Vitesse de déplacement réduite de moitié.\n Impossible de sauter ou d'esquiver.\">Ralenti</span> pendant 5 tours.",
-        "effetCritique": "<strong>Coup Critique:&nbsp;</strong>La cible ne peut plus effectuer de déplacement pendant la durée du sort.",
-        "effetEchec": "<strong>Échec Critique:&nbsp;</strong> -"
+        "effetCritique": "<strong>Coup Critique:&nbsp;</strong>La cible ne peut plus effectuer de déplacement pendant la durée du sort."
       },
       {
         "nom": "Accélération",
@@ -2950,8 +2955,7 @@ article span[title]:hover::after {
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> Aucune",
         "effetNormal": "<strong>Effet:</strong> &nbsp;La vitesse de déplacement de la cible est augmentée de 50% pendant 5 tours. Non Cumulable.",
-        "effetCritique": "<strong>Coup Critique:&nbsp;</strong> La vitesse est augmentée de 100%.",
-        "effetEchec": "<strong>Échec Critique:&nbsp;</strong> -"
+        "effetCritique": "<strong>Coup Critique:&nbsp;</strong> La vitesse est augmentée de 100%."
       },
       {
         "nom": "Sommeil",
@@ -2965,8 +2969,7 @@ article span[title]:hover::after {
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> <br>- Résistance altérations &gt; Intelligence du lanceur<br>- Element <span style=\"color: #0f172a; font-weight: bold;\">Nuit</span>",
         "effetNormal": "<strong>Effet:</strong> La cible passe dans l'état <span title=\"Ne peut plus faire d'actions.\n Ne peut plus esquiver.\n Des dégats infligés à la créature la sort de son état.\">endormi</span> pendant ses 2 prochains tours.",
-        "effetCritique": "<strong>Coup Critique:&nbsp;</strong> L'effet dure 4 tours.",
-        "effetEchec": "<strong>Échec Critique:&nbsp;</strong> Le lanceur est endormi à son prochain tour."
+        "effetCritique": "<strong>Coup Critique:&nbsp;</strong> L'effet dure 4 tours."
       }
     ]
   },
@@ -3383,7 +3386,7 @@ article span[title]:hover::after {
     "sort:Sorts d'Enchanteur:Accroche terrestre": "https://i.ibb.co/27W4NtSQ/Accroche-Terre.png",
     "sort:Sorts d'Enchanteur:Accélération": "https://i.ibb.co/Vc072qQB/Acceleration.png",
     "sort:Sorts d'Enchanteur:Sommeil": "https://i.ibb.co/rKyTh27C/Sleep.png",
-    "sort:Sorts de Prêtre:Nouveau Sort": "https://i.ibb.co/QvK52kxH/Protection.png",
+    "sort:Sorts de Prêtre:Nouveau Sort": "https://i.ibb.co/cXh57Pdn/ArmeLum.png",
     "sort:Sorts de Prêtre:Protection": "https://i.ibb.co/QvK52kxH/Protection.png",
     "subclass:Guerrier:Nain des montagnes:1": "https://i.ibb.co/FL9m5HJn/Nain.png",
     "subclass:Guerrier:Nain des montagnes:2": "https://i.ibb.co/wNnJxSbj/NaineF.png",
@@ -3404,10 +3407,11 @@ article span[title]:hover::after {
     "subclass:Enchanteur:Lutin:1": "https://i.ibb.co/6cxkMW1d/Lutin.png",
     "subclass:Enchanteur:Lutin:2": "https://i.ibb.co/qLbjJhxw/LutinF.png",
     "subclass:Prêtre:Inquisiteur:2": "https://i.ibb.co/LXwmWYR3/Inquisiteur-F.png",
-    "subclass:Prêtre:Clerc Divin:2": "https://i.ibb.co/HfBVNLM3/PretreF.png"
+    "subclass:Prêtre:Clerc Divin:2": "https://i.ibb.co/HfBVNLM3/PretreF.png",
+    "sort:Sorts de Prêtre:Arme de lumière": "https://i.ibb.co/cXh57Pdn/ArmeLum.png"
   },
   "meta": {
-    "total_images": 40,
+    "total_images": 41,
     "exported_date": "2025-08-21",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
@@ -3555,7 +3559,7 @@ article span[title]:hover::after {
       "type": "card",
       "id": "elements-system",
       "title": "Système d'éléments",
-      "content": "<p>Il existe huit éléments, chacun ayant un opposé. Chaqué Héros où monstre possède un élément d'affiliation.<br><br> Une créature affiliée à un élément :<br> - Reçoit <strong>deux fois moins </strong>de dégats venant des sorts et attaques de cet élément, et ne peuvent pas recevoir d'effet critique d'une alteration magique de cet élément.<br>- Recevra systématiquement des <strong>effets critiques</strong> venant des sorts et altérations de l'élément opposé.</p>"
+      "content": "<p>Il existe huit éléments, chacun ayant un opposé. Chaqué Héros où monstre possède un élément d'affiliation.<br><br> Une créature affiliée à un élément :<br> - Reçoit <strong>deux fois moins </strong>de dégats venant des sorts et attaques de cet élément, et ne peut pas recevoir d'effet critique d'une alteration magique de cet élément.<br>- Recevra systématiquement des <strong>effets critiques</strong> venant des sorts et altérations de l'élément opposé.</p>"
     },
     {
       "type": "card",
@@ -3571,7 +3575,7 @@ article span[title]:hover::after {
           "type": "card",
           "id": "element-defense",
           "title": "Défense",
-          "content": "<p>Certaines armures/objets/bonus peuvent procurer une armure spécifique à un élément. Il faudra alors déduire au resultat final. Le calcul de dégats se fait dans cet ordre :</p><div><strong>Dégats → ×2 si critique → ×0.5 si affiliation élément → réduction de l'armure</strong></div>",
+          "content": "<p>Certaines armures/objets/bonus peuvent procurer une armure spécifique à un élément. Il faudra alors déduire au resultat final. Le calcul de dégats se fait dans cet ordre :</p><div><strong>Dégats → critique → ×0.5 si affiliation élément → réduction de l'armure</strong></div>",
           "deletable": true,
           "sectionName": "Défense"
         },
@@ -3579,7 +3583,7 @@ article span[title]:hover::after {
           "type": "card",
           "id": "element-attack",
           "title": "Attaque",
-          "content": "<p>Une attaque ne peut avoir qu'un seul élément. Si plusieurs objets/équipements/bonus donnent un élément à l'attaque, le héros devra choisir quel est l'élément utilisé.</p>",
+          "content": "<p>Une attaque ne peut avoir qu'<strong>un seul élément</strong> (en plus d'éventuels dégats physiques). Si plusieurs sorts/équipements/bonus donnent un élément à l'attaque, le héros devra choisir quel est l'élément utilisé.</p> <br> Plusieurs bonus d'un même élément peuvent se cumuler.",
           "deletable": true,
           "sectionName": "Attaque"
         }
@@ -3983,8 +3987,7 @@ article span[title]:hover::after {
         coutMana: { type: 'richtext', label: 'Coût mana', required: true },
         resistance: { type: 'richtext', label: 'Résistance', required: true },
         effetNormal: { type: 'richtext', label: 'Effet normal', required: true },
-        effetCritique: { type: 'richtext', label: 'Effet critique', required: false },
-        effetEchec: { type: 'richtext', label: 'Effet d\'échec', required: false }
+        effetCritique: { type: 'richtext', label: 'Effet critique', required: false }
       },
       editMapping: {
         'spell-name': 'nom',
@@ -3996,8 +3999,7 @@ article span[title]:hover::after {
         'spell-temps-incantation': 'tempsIncantation',
         'spell-resistance': 'resistance',
         'spell-effect-normal': 'effetNormal',
-        'spell-effect-critical': 'effetCritique',
-        'spell-effect-failure': 'effetEchec'
+        'spell-effect-critical': 'effetCritique'
       },
       identifiers: {
         name: 'nom',
@@ -4022,8 +4024,7 @@ article span[title]:hover::after {
         coutMana: "🔵 <strong>Coût mana:</strong> 3",
         resistance: "<strong>Sans effet si:</strong> Esquive.",
         effetNormal: "<strong>Effet:</strong> Inflige 5 dégats de <span style=\"color: #e25822; font-weight: bold;\">Feu</span> à la cible.<br>&nbsp;Tous les 5 points d'intelligence, augmente les dégats de 1.",
-        effetCritique: "<strong>Coup Critique:&nbsp;</strong>&nbsp;Double les dégâts et enflamme la cible.",
-        effetEchec: "<strong>Échec Critique:&nbsp;</strong>Le sort inflige ses dégats à un allié."
+        effetCritique: "<strong>Coup Critique:&nbsp;</strong>&nbsp;Double les dégâts et enflamme la cible."
       }
     },
 
@@ -4666,15 +4667,16 @@ article span[title]:hover::after {
   "use strict";
 
   class CardBuilder {
-    constructor(type, data, categoryName = null) {
+    constructor(type, data, categoryName = null, index = null) {
       this.type = type;
       this.data = data;
       this.categoryName = categoryName;
+      this.index = index;
       this.config = window.ContentTypes[type];
     }
 
-    static create(type, data, categoryName = null) {
-      return new CardBuilder(type, data, categoryName);
+    static create(type, data, categoryName = null, index = null) {
+      return new CardBuilder(type, data, categoryName, index);
     }
 
     // Simple unified dev mode check
@@ -4699,7 +4701,7 @@ article span[title]:hover::after {
 
     buildSpellCard() {
       return `
-        <div class="card editable-section" data-section-type="spell" data-spell-name="${this.data.nom}" data-category-name="${this.categoryName}">
+        <div class="card editable-section" data-section-type="spell" data-spell-name="${this.data.nom}" data-spell-index="${this.index}" data-category-name="${this.categoryName}">
           ${this.buildEditableTitle(this.data.nom, 'spell-name')}
           ${this.buildSpellElement()}
           ${this.buildIllustration(`sort:${this.categoryName}:${this.data.nom}`, this.data.nom)}
@@ -4714,18 +4716,17 @@ article span[title]:hover::after {
           ${this.buildEditableEffect(this.data.effetNormal, 'spell-effect-normal', 'Effet normal')}
           <hr style="margin: 1rem 0; border: none; border-top: 1px solid var(--rule);">
           ${this.data.effetCritique ? this.buildEditableEffect(this.data.effetCritique, 'spell-effect-critical', 'Effet critique') : ''}
-          ${this.data.effetEchec ? this.buildEditableEffect(this.data.effetEchec, 'spell-effect-failure', 'Effet d\'échec') : ''}
           ${this.buildDeleteButton('spell')}
         </div>
       `;
     }
 
     buildDonCard() {
-      const index = this.categoryName ? this.getCategoryData().dons?.indexOf(this.data) || 0 : 0;
+      const index = this.index !== null ? this.index : (this.categoryName ? this.getCategoryData().dons?.indexOf(this.data) || 0 : 0);
       const totalItems = this.categoryName ? this.getCategoryData().dons?.length || 1 : 1;
 
       return `
-        <div class="card editable-section" data-section-type="don" data-don-name="${this.data.nom}" data-category-name="${this.categoryName}">
+        <div class="card editable-section" data-section-type="don" data-don-name="${this.data.nom}" data-don-index="${this.index}" data-category-name="${this.categoryName}">
           ${this.buildEditableTitle(this.data.nom, 'don-name')}
           ${this.buildIllustration(`don:${this.data.nom}`, this.data.nom)}
           ${this.buildEditableField(this.data.description, 'don-description', 'Description')}
@@ -4981,13 +4982,13 @@ article span[title]:hover::after {
           class: 'spell-delete btn small',
           style: 'background: #ff6b6b; color: white; margin-top: 8px;',
           text: '🗑 Supprimer',
-          attrs: `data-category-name="${this.categoryName}" data-spell-name="${this.data.nom}"`
+          attrs: `data-category-name="${this.categoryName}" data-spell-name="${this.data.nom}" data-spell-index="${this.index}"`
         },
         don: {
           class: 'don-delete btn small',
           style: 'background: #ff6b6b; color: white;',
           text: '🗑 Supprimer',
-          attrs: `data-category-name="${this.categoryName}" data-don-name="${this.data.nom}"`
+          attrs: `data-category-name="${this.categoryName}" data-don-name="${this.data.nom}" data-don-index="${this.index}"`
         },
         subclass: {
           class: 'delete-subclass-btn',
@@ -5046,7 +5047,7 @@ article span[title]:hover::after {
         return `
           <div style="text-align: center; margin: 0.5rem 0;">
             <div class="spell-element-selector" style="font-size: 1.1em;">
-              <select data-spell-name="${this.data.nom}" data-category-name="${this.categoryName}" style="padding: 4px 8px; border: 1px solid var(--rule); border-radius: 6px; background: var(--card); font-size: 0.9em;">
+              <select data-spell-name="${this.data.nom}" data-spell-index="${this.index}" data-category-name="${this.categoryName}" style="padding: 4px 8px; border: 1px solid var(--rule); border-radius: 6px; background: var(--card); font-size: 0.9em;">
                 ${optionsHTML}
               </select>
             </div>
@@ -5124,7 +5125,7 @@ article span[title]:hover::after {
             </div>
             <div class="grid cols-2" id="${config.container}-container-${this.sanitizeId(category.nom)}">
               ${items.map((item, index) => 
-                CardBuilder.create(type, item, category.nom).build()
+                CardBuilder.create(type, item, category.nom, index).build()
               ).join('')}
             </div>
           </section>
@@ -5160,7 +5161,7 @@ article span[title]:hover::after {
             
             <div class="grid cols-2" id="objets-container">
               ${filteredObjects.map((item, index) => 
-                CardBuilder.create('objet', item, 'objets').build()
+                CardBuilder.create('objet', item, 'objets', index).build()
               ).join('')}
             </div>
             
@@ -6511,46 +6512,6 @@ article span[title]:hover::after {
       // Set up route change listeners
       JdrApp.utils.events.onHashChange(() => this.parseRoute());
       JdrApp.utils.events.onDOMReady(() => this.parseRoute());
-      
-      // Set up all TOC event handlers with native event delegation for standalone compatibility
-      document.addEventListener('click', (e) => {
-        // Handle section foldout headers first
-        if (e.target.closest('.toc-section-header')) {
-          e.preventDefault();
-          e.stopPropagation();
-          const section = e.target.closest('.toc-section');
-          if (section) {
-            section.classList.toggle('collapsed');
-            const toggle = section.querySelector('.toc-section-toggle');
-            if (toggle) {
-              toggle.textContent = section.classList.contains('collapsed') ? '▶' : '▼';
-            }
-          }
-          return;
-        }
-        
-        // Handle category collapse/expand (categories with subcategories)
-        if (e.target.closest('.toc-category > a')) {
-          e.preventDefault();
-          e.stopPropagation();
-          const category = e.target.closest('.toc-category');
-          if (category) {
-            category.classList.toggle('collapsed');
-          }
-          return;
-        }
-        
-        // Handle regular TOC navigation links
-        const tocLink = e.target.closest('.toc a');
-        if (tocLink && !tocLink.matches('.toc-category > a')) {
-          e.preventDefault();
-          const route = tocLink.getAttribute('data-route');
-          if (route) {
-            this.navigate(route);
-          }
-          return;
-        }
-      });
     },
     
     parseRoute() {
@@ -6685,6 +6646,9 @@ article span[title]:hover::after {
       
       tocContainer.innerHTML = tocHTML;
       
+      // Attacher les événements directement aux éléments après création
+      this.attachFoldoutEvents();
+      
       // Ajouter l'event listener pour le bouton MJ
       this.setupMJToggle();
     },
@@ -6709,6 +6673,68 @@ article span[title]:hover::after {
             this.generateTOC(); // Régénérer le TOC pour afficher les sections MJ
           });
         }
+      });
+    },
+
+    attachFoldoutEvents() {
+      // Attacher les événements directement aux headers de section
+      document.querySelectorAll('.toc-section-header').forEach(header => {
+        header.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const section = header.closest('.toc-section');
+          if (section) {
+            const wasCollapsed = section.classList.contains('collapsed');
+            section.classList.toggle('collapsed');
+            const isCollapsed = section.classList.contains('collapsed');
+            
+            const toggle = section.querySelector('.toc-section-toggle');
+            if (toggle) {
+              toggle.textContent = isCollapsed ? '▶' : '▼';
+            }
+            
+            const content = section.querySelector('.toc-section-content');
+            if (content) {
+              // Force les styles directement en JavaScript pour compatibilité standalone
+              if (isCollapsed) {
+                content.style.maxHeight = '0px';
+                content.style.opacity = '0';
+                content.style.paddingTop = '0';
+                content.style.paddingBottom = '0';
+                content.style.overflow = 'hidden';
+              } else {
+                content.style.maxHeight = '500px';
+                content.style.opacity = '1';
+                content.style.paddingTop = '';
+                content.style.paddingBottom = '';
+                content.style.overflow = 'visible';
+              }
+            }
+          }
+        });
+      });
+
+      // Attacher les événements aux liens de catégorie
+      document.querySelectorAll('.toc-category > a').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const category = link.closest('.toc-category');
+          if (category) {
+            category.classList.toggle('collapsed');
+          }
+        });
+      });
+
+      // Attacher les événements aux liens de navigation normaux
+      document.querySelectorAll('.toc a:not(.toc-category > a)').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const route = link.getAttribute('data-route');
+          if (route) {
+            JdrApp.modules.router.navigate(route);
+          }
+        });
       });
     },
 
@@ -6775,12 +6801,13 @@ article span[title]:hover::after {
 
     generateTOCSection(section) {
       const sectionClass = section.collapsed ? 'toc-section collapsed' : 'toc-section';
+      const toggleIcon = section.collapsed ? '▶' : '▼';
       
       return `
         <div class="${sectionClass}" data-section="${section.id}">
           <div class="toc-section-header">
             <span class="toc-section-title">${section.title}</span>
-            <span class="toc-section-toggle">▼</span>
+            <span class="toc-section-toggle">${toggleIcon}</span>
           </div>
           <div class="toc-section-content">
             ${section.items.map(item => this.generateTOCItem(item)).join('')}
@@ -7015,7 +7042,7 @@ article span[title]:hover::after {
     },
 
     generateContent() {
-      JdrApp.modules.router.generateTOC();
+      JdrApp.modules.router.generateTOC.call(JdrApp.modules.router);
       this.generateArticles();
       this.generateDevToolbox();
       
@@ -7044,6 +7071,10 @@ article span[title]:hover::after {
         this.autoLoadImages();
         // Reapply dev mode state to new elements
         this.applyDevModeToNewContent();
+        // Attach image events for standalone compatibility
+        if (JdrApp.modules.editor && JdrApp.modules.editor.attachImageEvents) {
+          JdrApp.modules.editor.attachImageEvents();
+        }
         // Create proxy buttons for new content
         if (JdrApp.modules.editor && JdrApp.modules.editor.isDevMode) {
           setTimeout(() => JdrApp.modules.editor.createProxyButtons(), 100);
@@ -7132,6 +7163,11 @@ article span[title]:hover::after {
         
         // Plus simple et plus fiable
         this.autoLoadImages();
+        
+        // Attach image events for standalone compatibility
+        if (JdrApp.modules.editor && JdrApp.modules.editor.attachImageEvents) {
+          JdrApp.modules.editor.attachImageEvents();
+        }
         
         // Ensure dev mode state is applied after content change
         setTimeout(() => {
@@ -7338,6 +7374,7 @@ article span[title]:hover::after {
       const spellCard = element.closest('.card[data-spell-name]');
       if (spellCard) {
         const spellName = spellCard.dataset.spellName;
+        const spellIndex = spellCard.dataset.spellIndex;
         const categoryName = spellCard.dataset.categoryName;
         
         // Use index-based detection for spell sections
@@ -7346,13 +7383,14 @@ article span[title]:hover::after {
         const currentIndex = allEditables.indexOf(editableElement);
         
         // Map index to spell property based on CardBuilder order
-        // 0=nom, 1=description, 2=prerequis, 3=portee, 4=coutMana, 5=tempsIncantation, 6=resistance, 7=effetNormal, 8=effetCritique, 9=effetEchec
-        const spellSections = ['nom', 'description', 'prerequis', 'portee', 'coutMana', 'tempsIncantation', 'resistance', 'effetNormal', 'effetCritique', 'effetEchec'];
+        // 0=nom, 1=description, 2=prerequis, 3=portee, 4=coutMana, 5=tempsIncantation, 6=resistance, 7=effetNormal, 8=effetCritique
+        const spellSections = ['nom', 'description', 'prerequis', 'portee', 'coutMana', 'tempsIncantation', 'resistance', 'effetNormal', 'effetCritique'];
         const spellEditSection = spellSections[currentIndex] || 'description';
         
         return {
           contentType: 'spell',
           itemIdentifier: spellName,
+          itemIndex: spellIndex,
           categoryName: categoryName,
           property: 'html',
           editType: 'html',
@@ -7367,6 +7405,7 @@ article span[title]:hover::after {
       const donCard = element.closest('.card[data-don-name]');
       if (donCard) {
         const donName = donCard.dataset.donName;
+        const donIndex = donCard.dataset.donIndex;
         const categoryName = donCard.dataset.categoryName;
         
         // Use index-based detection for don sections
@@ -7382,6 +7421,7 @@ article span[title]:hover::after {
         return {
           contentType: 'don',
           itemIdentifier: donName,
+          itemIndex: donIndex,
           categoryName: categoryName,
           property: 'html',
           editType: 'html',
@@ -7706,7 +7746,13 @@ article span[title]:hover::after {
         for (const category of jsonData) {
           if (category.nom === session.categoryName) {
             const itemsKey = session.contentType === 'spell' ? 'sorts' : 'dons';
-            targetObject = category[itemsKey]?.find(item => item.nom === session.itemIdentifier);
+            // Use index-based identification if available, fallback to name-based
+            if (session.itemIndex !== undefined && session.itemIndex !== null) {
+              const index = parseInt(session.itemIndex, 10);
+              targetObject = category[itemsKey]?.[index];
+            } else {
+              targetObject = category[itemsKey]?.find(item => item.nom === session.itemIdentifier);
+            }
             break;
           }
         }
@@ -8225,16 +8271,42 @@ article span[title]:hover::after {
     },
 
     setupImageHandlers() {
-      JdrApp.utils.events.register('change', '.illus input[type="file"]', (e) => {
-        this.handleImageUpload(e);
+      // Fonction pour attacher les événements aux images existantes
+      this.attachImageEvents();
+      
+      // Observer pour attacher les événements aux nouvelles images créées dynamiquement
+      if (typeof MutationObserver !== 'undefined') {
+        const observer = new MutationObserver(() => {
+          this.attachImageEvents();
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+      }
+    },
+
+    attachImageEvents() {
+      // Attacher aux inputs de fichier
+      document.querySelectorAll('.illus input[type="file"]').forEach(input => {
+        if (!input.hasAttribute('data-events-attached')) {
+          input.addEventListener('change', (e) => this.handleImageUpload(e));
+          input.setAttribute('data-events-attached', 'true');
+        }
       });
 
-      JdrApp.utils.events.register('click', '.illus .rm', (e) => {
-        this.handleImageRemoval(e);
+      // Attacher aux boutons de suppression
+      document.querySelectorAll('.illus .rm').forEach(button => {
+        if (!button.hasAttribute('data-events-attached')) {
+          button.addEventListener('click', (e) => this.handleImageRemoval(e));
+          button.setAttribute('data-events-attached', 'true');
+        }
       });
 
-      JdrApp.utils.events.register('click', '.illus img', (e) => {
-        this.toggleImageEnlargement(e.target);
+      // Attacher aux images pour agrandissement
+      document.querySelectorAll('.illus img').forEach(img => {
+        if (!img.hasAttribute('data-events-attached')) {
+          img.addEventListener('click', (e) => this.toggleImageEnlargement(e.target));
+          img.setAttribute('data-events-attached', 'true');
+          img.style.cursor = 'zoom-in';
+        }
       });
     },
 
@@ -8304,7 +8376,7 @@ article span[title]:hover::after {
         left: 0;
         width: 100vw;
         height: 100vh;
-        background: transparent;
+        background: rgba(0,0,0,0.8);
         z-index: 2147483647;
         display: flex;
         align-items: center;
@@ -9190,7 +9262,6 @@ article span[title]:hover::after {
         item.resistance,
         item.effetNormal,
         item.effetCritique,
-        item.effetEchec,
         
         // Champs spécifiques aux dons
         item.cout,

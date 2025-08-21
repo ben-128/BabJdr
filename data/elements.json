@@ -11,7 +11,7 @@
       "type": "card",
       "id": "elements-system",
       "title": "Système d'éléments",
-      "content": "<p>Il existe huit éléments, chacun ayant un opposé. Chaqué Héros où monstre possède un élément d'affiliation.<br><br> Une créature affiliée à un élément :<br> - Reçoit <strong>deux fois moins </strong>de dégats venant des sorts et attaques de cet élément, et ne peuvent pas recevoir d'effet critique d'une alteration magique de cet élément.<br>- Recevra systématiquement des <strong>effets critiques</strong> venant des sorts et altérations de l'élément opposé.</p>"
+      "content": "<p>Il existe huit éléments, chacun ayant un opposé. Chaqué Héros où monstre possède un élément d'affiliation.<br><br> Une créature affiliée à un élément :<br> - Reçoit <strong>deux fois moins </strong>de dégats venant des sorts et attaques de cet élément, et ne peut pas recevoir d'effet critique d'une alteration magique de cet élément.<br>- Recevra systématiquement des <strong>effets critiques</strong> venant des sorts et altérations de l'élément opposé.</p>"
     },
     {
       "type": "card",
@@ -27,7 +27,7 @@
           "type": "card",
           "id": "element-defense",
           "title": "Défense",
-          "content": "<p>Certaines armures/objets/bonus peuvent procurer une armure spécifique à un élément. Il faudra alors déduire au resultat final. Le calcul de dégats se fait dans cet ordre :</p><div><strong>Dégats → ×2 si critique → ×0.5 si affiliation élément → réduction de l'armure</strong></div>",
+          "content": "<p>Certaines armures/objets/bonus peuvent procurer une armure spécifique à un élément. Il faudra alors déduire au resultat final. Le calcul de dégats se fait dans cet ordre :</p><div><strong>Dégats → critique → ×0.5 si affiliation élément → réduction de l'armure</strong></div>",
           "deletable": true,
           "sectionName": "Défense"
         },
@@ -35,7 +35,7 @@
           "type": "card",
           "id": "element-attack",
           "title": "Attaque",
-          "content": "<p>Une attaque ne peut avoir qu'un seul élément. Si plusieurs objets/équipements/bonus donnent un élément à l'attaque, le héros devra choisir quel est l'élément utilisé.</p>",
+          "content": "<p>Une attaque ne peut avoir qu'<strong>un seul élément</strong> (en plus d'éventuels dégats physiques). Si plusieurs sorts/équipements/bonus donnent un élément à l'attaque, le héros devra choisir quel est l'élément utilisé.</p> <br> Plusieurs bonus d'un même élément peuvent se cumuler.",
           "deletable": true,
           "sectionName": "Attaque"
         }

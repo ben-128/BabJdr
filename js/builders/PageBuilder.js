@@ -50,7 +50,7 @@
             </div>
             <div class="grid cols-2" id="${config.container}-container-${this.sanitizeId(category.nom)}">
               ${items.map((item, index) => 
-                CardBuilder.create(type, item, category.nom).build()
+                CardBuilder.create(type, item, category.nom, index).build()
               ).join('')}
             </div>
           </section>
@@ -86,7 +86,7 @@
             
             <div class="grid cols-2" id="objets-container">
               ${filteredObjects.map((item, index) => 
-                CardBuilder.create('objet', item, 'objets').build()
+                CardBuilder.create('objet', item, 'objets', index).build()
               ).join('')}
             </div>
             
