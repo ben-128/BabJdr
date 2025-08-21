@@ -72,7 +72,6 @@
       }
     },
 
-
     generateStaticPages() {
       let html = '';
       if (window.STATIC_PAGES) {
@@ -143,11 +142,8 @@
         
         setTimeout(() => {
           this.autoLoadImages();
-          // Force editor to reapply dev mode to all elements  
-          if (JdrApp.modules.editor) {
-            JdrApp.modules.editor.updateDevModeState();
-          }
-        }, 50);
+          this.applyDevModeToNewContent();
+        }, 100);
       }
     },
 

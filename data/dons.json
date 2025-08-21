@@ -78,13 +78,13 @@
       {
         "nom": "Croche-patte",
         "description": "Peut utiliser une action secondaire pour mettre un adversaire au corp à corp, de moins de 2m, et qui se trouve au sol, à <span style=\"color: #8b5e34; font-weight: bold;\">Terre</span>.",
-        "prerequis": "-",
+        "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
       {
         "nom": "Chasse et pêche",
         "description": "Le héros n'as plus besoin de sa ratio de nourriture quotidienne.",
-        "prerequis": "-",
+        "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       }
     ]
@@ -96,37 +96,37 @@
       {
         "nom": "Gemme de mana",
         "description": "Une fois par jour, le héros peut récupérer l'intégralité de son Mana en utilisant une action secondaire.",
-        "prerequis": "-",
+        "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
       {
         "nom": "Resistance élémentaire 1",
         "description": "Le héros gagne 5 d'armure élémentaire de <span style=\"color: #e25822; font-weight: bold;\">Feu</span>, <span style=\"color: #2b6cb0; font-weight: bold;\">Eau</span>, <span style=\"color: #8b5e34; font-weight: bold;\">Terre</span>, <span style=\"color: #22c55e; font-weight: bold;\">Air</span>.",
-        "prerequis": "Non cumulable.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
       {
         "nom": "Resistance magique 1",
-        "description": "Le héros gagne 5 d'armure élémentaire de <span style=\"color: #fbbf24; font-weight: bold;\">Lumière</span>, <span style=\"color: #0f172a; font-weight: bold;\">Nuit</span>, <span style=\"color: #ffd700; font-weight: bold;\">Divin</span>, <span style=\"color: #a855f7; font-weight: bold;\">Maléfique</span>.",
-        "prerequis": "Non cumulable.",
+        "description": "Le héros gagne 5 d'armure élémentaire de <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span>, <span style=\"color: #0f172a; font-weight: bold;\">Nuit</span>, <span style=\"color: #d0d0d0; font-weight: bold; background: rgba(0, 0, 0, 0.4); padding: 2px 4px; border-radius: 3px;\">Divin</span>, <span style=\"color: #a855f7; font-weight: bold;\">Maléfique</span>.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
       {
         "nom": "Spécialisation élémentaire 1",
         "description": "Le héros peut choisir un élément et augmenter de 5 les dégats infligés avec les sorts de cet élément.",
-        "prerequis": "Non cumulable",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
       {
         "nom": "Infusion élémentaire",
-        "description": "Le héros peut, en utilisant une action secondaire, choisir un de ses sorts et dépenser son coût en mana. Son arme est alors imprégnée de l'élement du sort, et infligera à sa prochaine attaque des dégats de cet l'élément à la place des dégats physiques.",
-        "prerequis": "-",
+        "description": "Aprés avoir lancé un sort, le héros peut, en utilisant une action secondaire, imprégner son arme de l'élément du sort. Elle infligera à sa prochaine attaque des dégats de cet élément équivalents au niveau du sort.",
+        "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
       {
         "nom": "Polyglotte",
         "description": "Peut lire et parler toutes les langues.",
-        "prerequis": "Reflexion rang 2.",
+        "prerequis": "<strong> Prérequis :</strong> Reflexion rang 2.",
         "cout": "1 point de don"
       }
     ]
@@ -138,55 +138,55 @@
       {
         "nom": "Mécréants",
         "description": "Les dégats physiques infligés aux créatures de l'élément <span style=\"color: #0f172a; font-weight: bold;\">Nuit</span> ou <span style=\"color: #a855f7; font-weight: bold;\">Maléfique</span> sont doublés.",
-        "prerequis": "-",
+        "prerequis": "<strong> Prérequis :</strong>-",
         "cout": "1 point de don"
       },
       {
         "nom": "Au milieu du combat",
         "description": "Permet de porter une armure légère.",
-        "prerequis": "💪Force 3",
-        "cout": "1 point de don"
+        "prerequis": "<strong> Prérequis :</strong>💪Force 5",
+        "cout": "2 point de don"
       },
       {
         "nom": "Jugement éclair",
         "description": "Si le Prêtre a effectué un sort ce tour ci, il peut effectuer une attaque au corp à corp avec une action secondaire.",
-        "prerequis": "💪Force 3",
+        "prerequis": "<strong> Prérequis :</strong>💪Force 3",
         "cout": "1 point de don"
       },
       {
         "nom": "Musique",
         "description": "Permet d'apprendre un instrument de musique (ou de savoir chanter) au choix, gagnant 2 de compétences sur les tests de compétence éloquence le nécéssitant.",
-        "prerequis": "-",
+        "prerequis": "<strong> Prérequis :</strong>-",
         "cout": "1 point de don"
       }
     ]
   },
   {
     "nom": "Enchanteur",
-    "description": "Description de cette catégorie de dons.",
+    "description": "Dons accessibles aux enchanteurs.",
     "dons": [
       {
         "nom": "Réparateur de baguettes",
         "description": "Permet de regagner une charge de baguette, une fois par jour.",
-        "prerequis": "-",
+        "prerequis": "<strong> Prérequis :</strong>-",
         "cout": "1 point de don"
       },
       {
         "nom": "Magie aléatoire destructrice",
         "description": "Permet de choisir et d'apprendre un sort de mage et de pouvoir le lancer à volonté. Le sort ne peut pas être changé par la suite.",
-        "prerequis": "Non cumulable.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
       {
-        "nom": "Magie aléatoire de prêtre",
+        "nom": "Magie aléatoire de soutien",
         "description": "Permet de choisir et d'apprendre un sort de prêtre et de pouvoir le lancer à volonté. Le sort ne peut pas être changé par la suite.",
-        "prerequis": "Non cumulable",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
       {
         "nom": "Alteration risquée",
-        "description": "Lorsque un sort d'alteration magique est effectué alors que la cible est au corps à corps, il ne peut plus être resisté par la Volonté de la cible.",
-        "prerequis": "-",
+        "description": "Lorsque un sort d'alteration magique est effectué alors que la cible est au corps à corps, ses chances de critiques sont doublées.",
+        "prerequis": "<strong> Prérequis :</strong>-",
         "cout": "1 point de don"
       }
     ]

@@ -92,14 +92,25 @@ function buildStandalone() {
   
   // Read all JS files in correct loading order
   const jsFiles = [
-    'js/core.js',        // Must be first - creates JdrApp namespace
-    'js/utils.js',       // Utilities
-    'js/modules/images.js', // Image module
-    'js/storage.js',     // Storage functions
-    'js/router.js',      // Router module
-    'js/renderer.js',    // Renderer module
-    'js/editor.js',      // Editor module
-    'js/ui.js'          // UI module - last
+    // Core framework files first - JdrApp namespace must be very first
+    'js/core.js',                // Core JdrApp namespace - MUST BE FIRST
+    'js/config/contentTypes.js',  // Configuration 
+    'js/core/EventBus.js',        // Event system
+    'js/core/BaseEntity.js',      // Entity base class
+    'js/factories/ContentFactory.js', // Factory pattern
+    'js/builders/CardBuilder.js',  // Card builder
+    'js/builders/PageBuilder.js',  // Page builder
+    'js/utils.js',               // Utilities
+    
+    // Feature modules
+    'js/modules/images.js',       // Image module
+    'js/storage.js',              // Storage functions
+    'js/router.js',               // Router module
+    'js/renderer.js',             // Renderer module
+    'js/core/UnifiedEditor.js',   // Unified editor
+    'js/editor.js',               // Editor module
+    'js/features/SpellFilter.js', // Spell filter feature
+    'js/ui.js'                    // UI module - last
   ];
   
   let allJS = '';
@@ -114,7 +125,7 @@ function buildStandalone() {
   // Read all JSON data files
   const dataFiles = [
     'sorts.json', 'classes.json', 'competences-tests.json', 
-    'creation.json', 'dons.json', 'elements.json', 'etats.json',
+    'creation.json', 'dons.json', 'objets.json', 'elements.json', 'etats.json',
     'images.json', 'static-pages-config.json', 'stats.json'
   ];
   
@@ -145,10 +156,14 @@ function buildStandalone() {
   
   // Inject data and JavaScript - create complete standalone app
   const dataScript = `
+    // Ensure window object exists
+    window = window || {};
+    
     // Global data from modular files
     window.SORTS = ${JSON.stringify(dataObject.sorts || {}, null, 2)};
     window.CLASSES = ${JSON.stringify(dataObject.classes || {}, null, 2)};
     window.DONS = ${JSON.stringify(dataObject.dons || {}, null, 2)};
+    window.OBJETS = ${JSON.stringify(dataObject.objets || {}, null, 2)};
     window.IMAGES = ${JSON.stringify(dataObject.images || {}, null, 2)};
     
     // Build STATIC_PAGES correctly by combining individual page data
@@ -171,10 +186,16 @@ function buildStandalone() {
       // Ensure dev mode is off
       document.body.className = 'dev-off';
       
-      // Initialize JdrApp if it exists
-      if (window.JdrApp && window.JdrApp.init) {
-        window.JdrApp.init();
-      }
+      // Wait a bit to ensure all modules are loaded
+      setTimeout(function() {
+        // Initialize JdrApp if it exists
+        if (window.JdrApp && window.JdrApp.init) {
+          console.log('Initializing JdrApp...');
+          window.JdrApp.init();
+        } else {
+          console.error('JdrApp not found!', window.JdrApp);
+        }
+      }, 100);
     });
   `;
   
@@ -182,6 +203,9 @@ function buildStandalone() {
     '</body>',
     `<script>\n${dataScript}\n${allJS}\n</script>\n</body>`
   );
+  
+  // Remove any external script tags that might have been added somehow
+  htmlContent = htmlContent.replace(/<script src="[^"]*"><\/script>\s*/g, '');
   
   console.log('🔒 Dev mode disabled in standalone version');
   

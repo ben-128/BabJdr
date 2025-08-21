@@ -9,8 +9,6 @@ body.dev-off button[title*="✏️"],
 body.dev-off *[class*="edit"],
 body.dev-off *[class*="Edit"],
 
-/* NUCLEAR OPTION - Hide all buttons with editing text content */
-body.dev-off button:is([class*="add"], [class*="delete"], [class*="remove"], [class*="move"], [class*="upload"], [class*="edit"]),
 body.dev-off button[data-category-name],
 body.dev-off button[data-spell-name], 
 body.dev-off button[data-don-name],
@@ -21,6 +19,10 @@ body.dev-off .add-paragraph-btn,
 body.dev-off .section-delete,
 body.dev-off .spell-delete,
 body.dev-off .don-delete,
+body.dev-off .objet-delete,
+body.dev-off .spell-category-delete,
+body.dev-off .don-category-delete,
+body.dev-off .objet-category-delete,
 body.dev-off .don-move-up,
 body.dev-off .don-move-down,
 body.dev-off .remove-section-btn,
@@ -37,6 +39,7 @@ body.dev-off button[class*="move"],
 body.dev-off button[class*="edit"],
 body.dev-off .spell-add,
 body.dev-off .don-add,
+body.dev-off .objet-add,
 body.dev-off .category-add,
 body.dev-off .add-*,
 body.dev-off [data-bound] .up,
@@ -85,17 +88,38 @@ body.dev-off .add-*-btn,
 body.dev-off button[style*="background: #ff6b6b"],
 body.dev-off button[style*="background: var(--bronze)"],
 body.dev-off button[style*="background: #dc2626"],
+body.dev-off button[style*="background: var(--accent)"],
 /* Target buttons by text content patterns */
 body.dev-off .btn.small[data-category-name],
 body.dev-off .btn.small[data-spell-name],  
 body.dev-off .btn.small[data-don-name],
 body.dev-off .btn.small[data-section-name],
 body.dev-off .btn.small[data-don-index],
+/* Element selectors for spells */
+body.dev-off .spell-element-selector {
+  display: none !important;
+}
+/* Show display version in dev-off, hide selector */
+body.dev-off .spell-element-display {
+  display: block !important;
+}
+body.dev-on .spell-element-display {
+  display: none !important;
+}
+/* Make sure spell element selector is visible in dev mode */
+body.dev-on .spell-element-selector {
+  display: inline-block !important;
+}
 /* Target specific button classes from renderer */
 body.dev-off .spell-add,
 body.dev-off .don-add,
+body.dev-off .objet-add,
 body.dev-off .spell-delete,
 body.dev-off .don-delete,
+body.dev-off .objet-delete,
+body.dev-off .spell-category-delete,
+body.dev-off .don-category-delete,
+body.dev-off .objet-category-delete,
 body.dev-off .don-move-up,
 body.dev-off .don-move-down,
 body.dev-off .section-delete,
@@ -106,7 +130,27 @@ body.dev-off button[title*="Edit"],
 body.dev-off button[title*="Supprimer"],
 body.dev-off button[title*="Ajouter"],
 body.dev-off button[title*="Haut"],
-body.dev-off button[title*="Bas"] {
+body.dev-off button[title*="Bas"],
+/* AJOUT: Sélecteurs pour les boutons add/delete */
+body.dev-off button[class*="add"],
+body.dev-off button[class*="delete"],
+body.dev-off button[class*="remove"],
+body.dev-off button[class*="move"],
+body.dev-off button[class*="upload"],
+body.dev-off button[class*="edit"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* SPÉCIFIQUE: Règles avec spécificité maximale pour forcer le masquage */
+body.dev-off button.spell-add.btn,
+body.dev-off button.don-add.btn,
+body.dev-off button.objet-add.btn,
+body.dev-off button.spell-category-delete.btn,
+body.dev-off button.don-category-delete.btn,
+body.dev-off button.objet-category-delete.btn {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
