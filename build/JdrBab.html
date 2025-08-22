@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-08-22T10:51:07.938Z by JdrBab Build System -->
+<!-- Generated on 2025-08-22T21:48:27.347Z by JdrBab Build System -->
 <title>JDR‑BAB — Livret de règles</title>
 <meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1716,10 +1716,10 @@ article.active {
 /* Clean up card styling */
 
 /* Illustrations */
-.illus{display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap;margin:.6rem 0}
+.illus{display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap;margin:.6rem 0}
 .illus img{max-width:100%;height:auto;border-radius:12px; transition:all .3s ease}
 .illus img.enlarged{transition:none !important}
-.illus .thumb{width:500px;height:300px;object-fit:contain}
+.illus .thumb{max-width:500px;max-height:300px;width:auto;height:auto;object-fit:contain}
 
 /* Images avec cadres - système unifié */
 .illus-spell, .illus-class, .illus-subclass, .illus-don,
@@ -3148,7 +3148,7 @@ article span[title]:hover::after {
   {
     "nom": "Enchanteur",
     "resume": "Détenteur d'une magie singulière, qui fait de lui un allié précieux.",
-    "capacites": "<ul><li><em>Équipement d'enchanteur</em> : robes, bâtons, baguettes.</li><li><em>Sorts d'enchanteur</em> : Apprend et lance des sorts d'Enchanteur.</li></ul>",
+    "capacites": "<ul><li><em>Équipement d'enchanteur</em> : Robes, bâtons, dagues.</li><li><em>Sorts d'enchanteur</em> : Apprend et lance des sorts d'Enchanteur.</li></ul>",
     "sousClasses": [
       {
         "nom": "Esprit de la grande Fée",
@@ -3371,50 +3371,161 @@ article span[title]:hover::after {
     window.OBJETS = {
   "objets": [
     {
-      "nom": "Épée Longue",
+      "nom": "Espadon",
       "numero": 1,
       "image": "",
-      "description": "Une épée longue classique, arme de prédilection des guerriers.",
+      "description": "<i>Longue épée à deux mains, lourde mais puissante.</i>",
       "tags": [
+        "Départ",
         "Arme",
-        "Mêlée"
+        "Épée",
+        "Deux mains"
       ],
-      "effet": "<strong>Dégâts:</strong> 1d8 + Force<br><strong>Type:</strong> Tranchant",
-      "prix": "💰 <strong>Prix:</strong> 50 po",
-      "poids": "⚖️ <strong>Poids:</strong> 1,5 kg"
+      "effet": "<strong>Dégâts: </strong> Inflige (5  + Force) points de dégats physiques.",
+      "prix": "🔷 <strong>Prix:</strong> 35",
+      "poids": "⚖️ <strong>Poids:</strong> 2"
     },
     {
-      "nom": "Armure de Cuir",
+      "nom": "Simple épée",
       "numero": 2,
       "image": "",
-      "description": "Une armure légère en cuir souple, offrant protection et mobilité.",
+      "description": "<i>Arme droite et équilibrée, conçue pour être maniée d’une seule main</i>",
       "tags": [
-        "Armure",
-        "Légère"
+        "Départ",
+        "Arme",
+        "Épée",
+        "Une main"
       ],
-      "effet": "<strong>CA:</strong> 11 + Dex<br><strong>Furtivité:</strong> Pas de désavantage",
-      "prix": "💰 <strong>Prix:</strong> 25 po",
-      "poids": "⚖️ <strong>Poids:</strong> 5 kg"
+      "effet": "<span style=\"font-weight: 700; font-family: \" source=\"\" serif=\"\" pro\",=\"\" serif;=\"\" color:=\"\" rgb(74,=\"\" 44,=\"\" 23);=\"\" text-shadow:=\"\" rgba(0,=\"\" 0,=\"\" 0.05)=\"\" 0px=\"\" 1px=\"\" 2px;\"=\"\">Dégâts: </span> Inflige (2  + Force) points de dégats physiques.",
+      "prix": "🔷 <strong>Prix:</strong> 20",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
-      "nom": "Potion de Soin",
+      "nom": "Dague en fer",
       "numero": 3,
       "image": "",
-      "description": "Une fiole contenant un liquide rouge qui soigne les blessures.",
+      "description": "<i>Petite lame simple, légère et maniable.</i>",
       "tags": [
-        "Consommable",
-        "Magique"
+        "Départ",
+        "Arme",
+        "Une main",
+        "Dague"
       ],
-      "effet": "<strong>Effet:</strong> Restaure 2d4+2 points de vie",
-      "prix": "💰 <strong>Prix:</strong> 100 po",
-      "poids": "⚖️ <strong>Poids:</strong> 0,2 kg"
+      "effet": "<strong>Dégâts: </strong> Inflige (1  + Force) points de dégats physiques.",
+      "prix": "🔷 <strong>Prix:</strong> 10",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Bâton en bois",
+      "numero": 4,
+      "image": "",
+      "description": "<i>Long bâton solide, utilisé comme arme et appui.</i>",
+      "tags": [
+        "Départ",
+        "Arme",
+        "Deux mains",
+        "Baton"
+      ],
+      "effet": "<strong>Dégâts: </strong> Inflige (2  + Force) points de dégats physiques.",
+      "prix": "🔷 <strong>Prix:</strong> 5",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Gourdin",
+      "numero": 5,
+      "image": "",
+      "description": "<i>Arme rudimentaire faite de bois dur. </i>",
+      "tags": [
+        "Départ",
+        "Arme",
+        "Une main",
+        "Baton"
+      ],
+      "effet": "<strong>Dégâts: </strong> Inflige (1  + Force) points de dégats physiques.",
+      "prix": "🔷 <strong>Prix:</strong> 10",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Arc simple",
+      "numero": 6,
+      "image": "",
+      "description": "<i>Arc basique en bois, sans ornement.</i>",
+      "tags": [
+        "Départ",
+        "Arme",
+        "Deux mains",
+        "Arc"
+      ],
+      "effet": "<strong>Portée: </strong> 15m.<br>\n<strong>Dégâts: </strong> Inflige (Force) points de dégats physiques.",
+      "prix": "🔷 <strong>Prix:</strong> 30",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Bouclier en bois",
+      "numero": 7,
+      "image": "",
+      "description": "<i>Un bouclier grossier taillé dans des planches épaisses, marqué de cicatrices de bataille.</i>",
+      "tags": [
+        "Départ",
+        "Bouclier"
+      ],
+      "effet": "<strong>Effet:</strong> Augmente l'armure physique de 2.",
+      "prix": "🔷 <strong>Prix:</strong> 15",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Robe simple",
+      "numero": 8,
+      "image": "",
+      "description": "<i>Une robe de toile modeste, aux plis fatigués mais encore emplis de dignité.</i>",
+      "tags": [
+        "Départ",
+        "Armure",
+        "Robe"
+      ],
+      "effet": "<strong>Effet:</strong> Augmente la Volonté de 1.",
+      "prix": "🔷 <strong>Prix:</strong> 20",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Armure de cuir",
+      "numero": 9,
+      "image": "",
+      "description": "<i>Une armure souple en cuir tanné, taillée pour offrir une protection rudimentaire.</i>",
+      "tags": [
+        "Départ",
+        "Armure",
+        "Armure légère"
+      ],
+      "effet": "<strong>Effet:</strong> Augmente l'armure physique de 1.",
+      "prix": "🔷 <strong>Prix:</strong> 30",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Armure en maille",
+      "numero": 10,
+      "image": "",
+      "description": "<i>Une cotte de mailles dont chaque anneau forgé promet résistance et endurance au combat.</i>",
+      "tags": [
+        "Départ",
+        "Armure",
+        "Armure lourde"
+      ],
+      "effet": "<strong>Effet:</strong> Augmente l'armure physique de 3.",
+      "prix": "🔷 <strong>Prix:</strong> 65",
+      "poids": "⚖️ <strong>Poids:</strong> 2"
     }
   ],
   "filterSettings": {
     "visibleTags": [
+      "Arme"
+    ],
+    "displayedFilterButtons": [
+      "Départ",
       "Arme",
       "Armure",
-      "Consommable"
+      "Consommable",
+      "Bouclier"
     ]
   }
 };
@@ -3461,11 +3572,22 @@ article span[title]:hover::after {
     "subclass:Enchanteur:Lutin:2": "https://i.ibb.co/qLbjJhxw/LutinF.png",
     "subclass:Prêtre:Inquisiteur:2": "https://i.ibb.co/LXwmWYR3/Inquisiteur-F.png",
     "subclass:Prêtre:Clerc Divin:2": "https://i.ibb.co/HfBVNLM3/PretreF.png",
-    "sort:Sorts de Prêtre:Arme de lumière": "https://i.ibb.co/cXh57Pdn/ArmeLum.png"
+    "sort:Sorts de Prêtre:Arme de lumière": "https://i.ibb.co/cXh57Pdn/ArmeLum.png",
+    "objet:Épée Longue": "https://i.ibb.co/35rpP6ZS/Epee2M1.png",
+    "objet:Espadon": "https://i.ibb.co/35rpP6ZS/Epee2M1.png",
+    "objet:Simple épée": "https://i.ibb.co/PsSXvSXx/Epee1.png",
+    "objet:Dague en fer": "https://i.ibb.co/1fCwy6cR/Dague1.png",
+    "objet:Bâton en bois": "https://i.ibb.co/PsyCNw86/Baton1.png",
+    "objet:Gourdin": "https://i.ibb.co/whZCKww0/Baton2.png",
+    "objet:Arc simple": "https://i.ibb.co/cKb1JKZQ/Arc1.png",
+    "objet:Bouclier en bois": "https://i.ibb.co/67bK4Bw8/Bouclier1.png",
+    "objet:Robe simple": "https://i.ibb.co/VYFpnz8h/Robe1.png",
+    "objet:Armure de cuir": "https://i.ibb.co/9Hkw2VFb/Armure-Cuir1.png",
+    "objet:Armure en maille": "https://i.ibb.co/cXtwzw5b/Armure-Lourde1.png"
   },
   "meta": {
-    "total_images": 41,
-    "exported_date": "2025-08-21",
+    "total_images": 52,
+    "exported_date": "2025-08-22",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
 };
@@ -3719,7 +3841,7 @@ article span[title]:hover::after {
   "sections": [
     {
       "type": "intro",
-      "content": ""
+      "content": "Lorsque un joueur subit un état, vous pouvez prendre une carte ou note pour avoir un rappel de l'effet. De plus, si c'est un état à durée limité, vous pouvez prendre un dé et le placer face au nombre de tour restant (en oubliant pas de changer sa valeur chaque début de tour).<br> Quand vous infligez des effets/alterations à un monstre, vous pouvez également utiliser un dé pour rappel (potentiellement d'une autre couleur, pour aider).\n<br>"
     },
     {
       "type": "card",
@@ -3768,6 +3890,14 @@ article span[title]:hover::after {
       "content": "Les dégats physiques effectués sont réduits de moitiés. Les tests de hardiesse ont une difficulté de 2 plus élevés.",
       "deletable": true,
       "sectionName": "Nouvelle section"
+    },
+    {
+      "type": "card",
+      "id": "etats-para-8-1755891140510",
+      "title": "Nouveau paragraphe",
+      "content": "<p>Contenu du nouveau paragraphe.</p>",
+      "deletable": true,
+      "sectionName": "Nouveau paragraphe"
     }
   ]
 }
@@ -3880,6 +4010,9 @@ article span[title]:hover::after {
           
           // Load stored edits AFTER setting up the data structure
           this.loadStoredEditsEarly();
+          
+          // Initialize default filters for objects
+          this.initializeDefaultFilters();
           return;
         }
         
@@ -3926,6 +4059,9 @@ article span[title]:hover::after {
         
         // Load stored edits in development mode (after data is loaded)
         this.loadStoredEditsEarly();
+        
+        // Initialize default filters for objects
+        this.initializeDefaultFilters();
       } catch (error) {
         console.error('Failed to load data:', error);
         throw error;
@@ -4010,6 +4146,32 @@ article span[title]:hover::after {
       localStorage.removeItem('jdr-bab-edits');
       localStorage.removeItem('jdr-bab-last-modified');
       window.location.reload();
+    },
+
+    // Initialize default filters for objects on page load
+    initializeDefaultFilters() {
+      try {
+        // Only initialize if OBJETS exists and ContentTypes is available
+        if (window.OBJETS && window.ContentTypes?.objet?.filterConfig) {
+          const defaultTags = window.ContentTypes.objet.filterConfig.defaultVisibleTags || [];
+          
+          // Initialize filterSettings only if it doesn't exist or is empty
+          if (!window.OBJETS.filterSettings || !window.OBJETS.filterSettings.visibleTags) {
+            window.OBJETS.filterSettings = {
+              visibleTags: [...defaultTags], // Active filters (defaults only)
+              displayedFilterButtons: [...defaultTags] // Displayed filter buttons (defaults initially)
+            };
+          }
+          
+          // Ensure displayedFilterButtons exists even if visibleTags already existed
+          if (!window.OBJETS.filterSettings.displayedFilterButtons) {
+            window.OBJETS.filterSettings.displayedFilterButtons = [...defaultTags];
+          }
+          
+        }
+      } catch (error) {
+        console.error('Error initializing default filters:', error);
+      }
     }
   };
 
@@ -4220,19 +4382,28 @@ article span[title]:hover::after {
         add: '➕',
         delete: '🗑️'
       },
-      // Configuration des filtres disponibles
+      // Configuration des filtres disponibles (MISE À JOUR AUTOMATIQUE)
       filterConfig: {
         availableTags: [
-          'Arme',
-          'Armure', 
-          'Consommable',
-          'Magique',
-          'Précieux',
-          'Outil',
-          'Composant',
-          'Divers'
-        ],
-        defaultVisibleTags: ['Arme', 'Armure', 'Consommable'] // Filtres affichés par défaut
+          "Départ",
+          "Arme",
+          "Armure",
+          "Consommable",
+          "Bouclier",
+          "Épée",
+          "Arme exotique",
+          "Une main",
+          "Deux mains",
+          "Baton",
+          "Dague",
+          "Arc",
+          "Armure lourde",
+          "Armure légère",
+          "Robe"
+],
+        defaultVisibleTags: [
+          "Départ"
+] // Filtres affichés par défaut
       },
       defaultValues: {
         nom: "Nouvel Objet",
@@ -4241,7 +4412,7 @@ article span[title]:hover::after {
         description: "Description de l'objet.",
         tags: ["Divers"],
         effet: "<strong>Effet:</strong> Description de l'effet de l'objet.",
-        prix: "💰 <strong>Prix:</strong> 10 pièces d'or",
+        prix: "🔷 <strong>Prix:</strong> 10 pièces d'or",
         poids: "⚖️ <strong>Poids:</strong> 1 kg"
       }
     },
@@ -4837,7 +5008,6 @@ article span[title]:hover::after {
             <div style="flex: 1;">${this.buildEditableField(this.data.prix, 'objet-prix', 'Prix')}</div>
             <div style="flex: 1;">${this.buildEditableField(this.data.poids, 'objet-poids', 'Poids')}</div>
           </div>
-          ${this.buildMoveButtons('objet', index, totalItems)}
         </div>
       `;
     }
@@ -5121,6 +5291,34 @@ article span[title]:hover::after {
     getCategoryData() {
       return window.ContentFactory.getEntity(this.type)?.findCategory(this.categoryName);
     }
+
+    buildMoveButtons(type, index, totalItems) {
+      if (!this.shouldShowEditButtons || totalItems <= 1) {
+        return '';
+      }
+
+      const canMoveUp = index > 0;
+      const canMoveDown = index < totalItems - 1;
+      
+      return `
+        <div class="move-buttons" style="display: flex; gap: 0.5rem; justify-content: center; margin: 1rem 0;">
+          <button class="${type}-move-up btn small" 
+                  data-category-name="${this.categoryName}" 
+                  data-${type}-name="${this.data.nom}"
+                  ${!canMoveUp ? 'disabled' : ''}
+                  style="background: var(--bronze); color: white;">
+            ↑ Haut
+          </button>
+          <button class="${type}-move-down btn small" 
+                  data-category-name="${this.categoryName}" 
+                  data-${type}-name="${this.data.nom}"
+                  ${!canMoveDown ? 'disabled' : ''}
+                  style="background: var(--bronze); color: white;">
+            ↓ Bas
+          </button>
+        </div>
+      `;
+    }
   }
 
   window.CardBuilder = CardBuilder;
@@ -5158,7 +5356,7 @@ article span[title]:hover::after {
         return this.buildSingleObjectPage(category);
       }
       
-      const pageId = `${config.container}-${this.sanitizeId(category.nom)}`;
+      const pageId = `${config.container}-${this.sanitizeId(category.nom || 'unknown')}`;
       const itemsProperty = this.getItemsProperty(type);
       
       // Get items and sort them for spells
@@ -5192,10 +5390,21 @@ article span[title]:hover::after {
       const filterSettings = objectData.filterSettings || {};
       const visibleTags = filterSettings.visibleTags || config.filterConfig.defaultVisibleTags;
       
-      // Filtrer les objets selon les tags visibles
-      const filteredObjects = allObjects.filter(obj => 
-        obj.tags && obj.tags.some(tag => visibleTags.includes(tag))
-      );
+      // CRITICAL: Ensure window.OBJETS.filterSettings is properly initialized with the same visibleTags
+      // This fixes the sync issue between visual state and data state in standalone mode
+      if (!window.OBJETS.filterSettings) {
+        window.OBJETS.filterSettings = { visibleTags: [...visibleTags] };
+        console.log('🔧 PageBuilder: Initialized filterSettings in window.OBJETS:', window.OBJETS.filterSettings);
+      }
+      
+      // Filtrer les objets selon les tags visibles, sauf si une recherche par ID est active
+      const filteredObjects = window.activeIdSearch 
+        ? allObjects // Afficher tous les objets quand une recherche par ID est active
+        : visibleTags.length === 0 
+          ? [] // Si aucun tag n'est visible, ne rien afficher
+          : allObjects.filter(obj => 
+              obj.tags && obj.tags.some(tag => visibleTags.includes(tag))
+            );
       
       return `
         <article class="" data-page="objets">
@@ -5205,11 +5414,13 @@ article span[title]:hover::after {
               ${this.buildIllustration('page:objets')}
             </div>
             
-            ${this.buildTagFilters(visibleTags, config.filterConfig.availableTags)}
+            ${this.buildIdSearchFilter()}
+            ${this.buildTagFilters(visibleTags, filterSettings.displayedFilterButtons || config.filterConfig.availableTags)}
             
             <div style="display: flex; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap;">
               ${this.buildAddButton('objet', 'objets')}
               ${this.buildFilterManagerButton()}
+              ${this.buildTagsManagerButton()}
             </div>
             
             <div class="grid cols-2" id="objets-container">
@@ -5218,7 +5429,7 @@ article span[title]:hover::after {
               ).join('')}
             </div>
             
-            ${filteredObjects.length === 0 ? '<p style="text-align: center; color: #666; margin: 2rem 0;">Aucun objet ne correspond aux filtres sélectionnés.</p>' : ''}
+            ${filteredObjects.length === 0 && !window.activeIdSearch ? '<p style="text-align: center; color: #666; margin: 2rem 0;">Aucun objet ne correspond aux filtres sélectionnés.</p>' : ''}
           </section>
         </article>
       `;
@@ -5596,20 +5807,91 @@ article span[title]:hover::after {
       `;
     }
 
-    buildTagFilters(visibleTags, availableTags) {
-      const filterChips = visibleTags.map(tag => 
-        `<span class="filter-chip active" data-tag="${tag}">${tag}</span>`
-      ).join('');
+    buildIdSearchFilter() {
+      const isIdSearchActive = window.activeIdSearch || false;
+      const searchBorderColor = isIdSearchActive ? '#16a34a' : 'var(--rule)';
+      const searchBoxShadow = isIdSearchActive ? 'box-shadow: 0 0 8px rgba(22, 163, 74, 0.3);' : '';
+      const searchIndicator = isIdSearchActive ? '🎯 ' : '🔍 ';
+      const buttonText = isIdSearchActive ? '🔄 Affichage normal' : '🔄 Tout afficher';
+      const buttonTitle = isIdSearchActive ? 'Retourner à l\'affichage normal avec filtres' : 'Effacer la recherche et afficher tous les objets';
       
       return `
-        <div class="tag-filters" style="margin: 1rem 0; padding: 1rem; background: var(--card); border: 2px solid var(--rule); border-radius: 12px;">
-          <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
-            <label style="font-weight: 600; color: var(--accent-ink);">
-              🏷️ Filtres actifs :
+        <div class="id-search-filter" style="margin: 0.5rem 0; background: var(--card); border: 2px solid ${searchBorderColor}; border-radius: 12px; display: flex; flex-direction: column; ${searchBoxShadow}">
+          <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; padding: 0.375rem; min-height: 2.5rem;">
+            <label for="id-search-input" style="font-weight: 600; color: var(--accent-ink); white-space: nowrap; display: flex; align-items: center; height: 100%;">
+              ${searchIndicator}Recherche par ID :
             </label>
-            <div class="filter-chips" style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-              ${filterChips}
+            <div style="display: flex; align-items: center; gap: 0.5rem; height: 100%;">
+              <input 
+                type="number" 
+                id="id-search-input" 
+                min="1" 
+                placeholder="Numéro d'objet (ex: 42)"
+                style="padding: 0.2rem; border: 1px solid ${searchBorderColor}; border-radius: 6px; font-size: 0.95em; width: 150px; height: 2rem; display: flex; align-items: center;"
+              >
+              <button 
+                id="clear-id-search" 
+                class="btn small" 
+                style="background: var(--bronze); color: white; padding: 0.2rem 0.4rem; white-space: nowrap; font-size: 0.9em; display: flex; align-items: center; height: 2rem; justify-content: center;"
+                title="${buttonTitle}"
+              >
+                ${buttonText}
+              </button>
             </div>
+          </div>
+          <div id="id-search-result" style="padding: 0 0.375rem 0.375rem; font-size: 0.85em; color: var(--paper-muted); min-height: 0.5em; line-height: 1.2; text-align: center;">
+            <!-- Résultat de la recherche affiché ici -->
+          </div>
+        </div>
+      `;
+    }
+
+    buildTagFilters(visibleTags, availableTags) {
+      const isIdSearchActive = window.activeIdSearch || false;
+      const containerOpacity = isIdSearchActive ? '0.4' : '1';
+      const containerFilter = isIdSearchActive ? 'grayscale(1)' : 'none';
+      const pointerEvents = isIdSearchActive ? 'none' : 'auto';
+      
+      // Créer des chips pour tous les tags disponibles avec indicateur actif/inactif
+      const allFilterChips = availableTags.map(tag => {
+        const isActive = visibleTags.includes(tag);
+        const bgColor = isActive ? '#16a34a' : '#6b7280'; // Vert pour actif, gris pour inactif
+        const textColor = 'white';
+        const opacity = isActive ? '1' : '0.6';
+        
+        return `<span class="filter-chip ${isActive ? 'active' : 'inactive'}" 
+                      data-tag="${tag}" 
+                      style="background: ${bgColor}; color: ${textColor}; opacity: ${opacity}; 
+                             padding: 6px 12px; border-radius: 20px; font-size: 0.9em; font-weight: 500;
+                             cursor: pointer; transition: all 0.2s ease; border: 2px solid transparent;
+                             ${isActive ? 'box-shadow: 0 2px 4px rgba(22, 163, 74, 0.3);' : ''}"
+                      title="${isActive ? 'Actif - Cliquer pour désactiver' : 'Inactif - Cliquer pour activer'}">
+                  ${isActive ? '✓ ' : ''}${tag}
+                </span>`;
+      }).join('');
+      
+      return `
+        <div class="objects-tag-display" style="margin: 1rem 0; padding: 1rem; background: var(--card); border: 2px solid var(--rule); border-radius: 12px; opacity: ${containerOpacity}; filter: ${containerFilter}; pointer-events: ${pointerEvents}; transition: all 0.3s ease;">
+          <div style="display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 1rem;">
+            <button 
+              id="select-all-tags" 
+              class="btn small" 
+              style="background: #3b82f6; color: white; padding: 4px 8px; font-size: 0.8em; border-radius: 12px;"
+              title="Activer tous les tags"
+            >
+              ✓ Tous
+            </button>
+            <button 
+              id="select-no-tags" 
+              class="btn small" 
+              style="background: #6b7280; color: white; padding: 4px 8px; font-size: 0.8em; border-radius: 12px;"
+              title="Désactiver tous les tags"
+            >
+              ✗ Aucun
+            </button>
+          </div>
+          <div class="filter-chips" style="display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center;">
+            ${allFilterChips}
           </div>
         </div>
       `;
@@ -5621,6 +5903,14 @@ article span[title]:hover::after {
         return '';
       }
       return `<button class="filter-manager-btn btn" type="button" style="background: var(--bronze); color: white;">⚙️ Gérer les filtres</button>`;
+    }
+
+    buildTagsManagerButton() {
+      // Only show in dev mode
+      if (!this.shouldShowEditButtons) {
+        return '';
+      }
+      return `<button class="tags-manager-btn btn" type="button" style="background: #dc2626; color: white; border: 2px solid #b91c1c;">🏷️ Gérer les tags</button>`;
     }
 
     sanitizeId(str) {
@@ -6254,6 +6544,12 @@ article span[title]:hover::after {
         zip.file('data/dons.json', JSON.stringify(window.DONS, null, 2));
         zip.file('data/objets.json', JSON.stringify(window.OBJETS, null, 2));
         
+        // Add ContentTypes configuration (includes availableTags modifications)
+        if (window.ContentTypes) {
+          const updatedContentTypesJS = this.generateContentTypesJS(window.ContentTypes);
+          zip.file('js/config/contentTypes.js', updatedContentTypesJS);
+        }
+        
         // Add static pages config and data
         if (window.STATIC_PAGES_CONFIG) {
           zip.file('data/static-pages-config.json', JSON.stringify(window.STATIC_PAGES_CONFIG, null, 2));
@@ -6301,6 +6597,274 @@ article span[title]:hover::after {
         console.error('❌ Failed to create ZIP:', error);
         this.showNotification('❌ Erreur lors de la création du ZIP', 'error');
       }
+    },
+
+    generateContentTypesJS(contentTypes) {
+      // Generate the updated contentTypes.js file with current availableTags
+      const availableTags = contentTypes.objet?.filterConfig?.availableTags || [];
+      const defaultVisibleTags = contentTypes.objet?.filterConfig?.defaultVisibleTags || [];
+      
+      return `// ============================================================================
+// JDR-BAB APPLICATION - CONTENT TYPES CONFIGURATION
+// ============================================================================
+
+(() => {
+  "use strict";
+
+  window.ContentTypes = {
+    spell: {
+      fields: {
+        nom: { type: 'text', label: 'Nom', required: true },
+        element: { type: 'select', label: 'Élément', required: true, options: ['Feu', 'Eau', 'Terre', 'Air', 'Lumière', 'Nuit', 'Divin', 'Maléfique'] },
+        description: { type: 'textarea', label: 'Description', required: true },
+        prerequis: { type: 'richtext', label: 'Prérequis', required: true },
+        portee: { type: 'richtext', label: 'Portée', required: true },
+        tempsIncantation: { type: 'richtext', label: 'Temps d\\'incantation', required: true },
+        coutMana: { type: 'richtext', label: 'Coût mana', required: true },
+        resistance: { type: 'richtext', label: 'Résistance', required: true },
+        effetNormal: { type: 'richtext', label: 'Effet normal', required: true },
+        effetCritique: { type: 'richtext', label: 'Effet critique', required: false }
+      },
+      editMapping: {
+        'spell-name': 'nom',
+        'spell-element': 'element',
+        'spell-description': 'description',
+        'spell-prerequis': 'prerequis',
+        'spell-portee': 'portee',
+        'spell-mana': 'coutMana',
+        'spell-temps-incantation': 'tempsIncantation',
+        'spell-resistance': 'resistance',
+        'spell-effect-normal': 'effetNormal',
+        'spell-effect-critical': 'effetCritique'
+      },
+      identifiers: {
+        name: 'nom',
+        category: 'sorts'
+      },
+      template: 'spell-card',
+      container: 'sorts',
+      dataKey: 'SORTS',
+      icons: { 
+        category: '🔮', 
+        item: '✨',
+        add: '➕',
+        delete: '🗑️'
+      },
+      defaultValues: {
+        nom: "Nouveau Sort",
+        element: "Feu",
+        description: "Lance une boule de Feu sur un adversaire.",
+        prerequis: "📋 <strong>Prérequis:</strong> Niveau 1",
+        portee: "🎯 <strong>Portée:</strong> 20m",
+        tempsIncantation: "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        coutMana: "🔵 <strong>Coût mana:</strong> 3",
+        resistance: "<strong>Sans effet si:</strong> Esquive.",
+        effetNormal: "<strong>Effet:</strong> Inflige 5 dégats de <span style=\\"color: #e25822; font-weight: bold;\\">Feu</span> à la cible.<br>&nbsp;Tous les 5 points d'intelligence, augmente les dégats de 1.",
+        effetCritique: "<strong>Coup Critique:&nbsp;</strong>&nbsp;Double les dégâts et enflamme la cible."
+      }
+    },
+
+    don: {
+      fields: {
+        nom: { type: 'text', label: 'Nom', required: true },
+        description: { type: 'textarea', label: 'Description', required: true },
+        prerequis: { type: 'richtext', label: 'Prérequis', required: true },
+        cout: { type: 'richtext', label: 'Coût', required: true }
+      },
+      editMapping: {
+        'don-name': 'nom',
+        'don-description': 'description',
+        'don-prerequis': 'prerequis',
+        'don-cout': 'cout'
+      },
+      identifiers: {
+        name: 'nom',
+        category: 'dons'
+      },
+      template: 'don-card',
+      container: 'dons',
+      dataKey: 'DONS',
+      icons: { 
+        category: '🎖️', 
+        item: '🏆',
+        add: '➕',
+        delete: '🗑️'
+      },
+      defaultValues: {
+        nom: "Nouveau Don",
+        description: "Description du don.",
+        prerequis: "Aucun prérequis",
+        cout: "1 point de don"
+      }
+    },
+
+    class: {
+      fields: {
+        nom: { type: 'text', label: 'Nom', required: true },
+        resume: { type: 'textarea', label: 'Résumé', required: true },
+        capacites: { type: 'list', label: 'Capacités', required: true }
+      },
+      editMapping: {
+        'class-name': 'nom',
+        'class-resume': 'resume',
+        'class-capacites': 'capacites'
+      },
+      identifiers: {
+        name: 'nom',
+        category: null
+      },
+      template: 'class-page',
+      container: 'classes',
+      dataKey: 'CLASSES',
+      icons: { 
+        category: '⚔️', 
+        item: '🛡️',
+        add: '➕',
+        delete: '🗑️'
+      }
+    },
+
+    subclass: {
+      fields: {
+        nom: { type: 'text', label: 'Nom', required: true },
+        description: { type: 'textarea', label: 'Description', required: true },
+        base: { type: 'stats', label: 'Statistiques de base', required: true },
+        progression: { type: 'richtext', label: 'Progression', required: true },
+        capacites: { type: 'list', label: 'Capacités', required: true }
+      },
+      editMapping: {
+        'subclass-name': 'nom',
+        'subclass-description': 'description',
+        'subclass-stats': 'base',
+        'subclass-progression': 'progression',
+        'subclass-capacites': 'capacites'
+      },
+      identifiers: {
+        name: 'nom',
+        category: 'sousClasses',
+        parent: 'class'
+      },
+      template: 'subclass-card',
+      icons: { 
+        item: '⚡',
+        add: '➕',
+        delete: '🗑️'
+      },
+      defaultValues: {
+        nom: "Nouvelle sous-classe",
+        description: "Description de la sous-classe",
+        base: {
+          Force: 3,
+          Agilité: 3,
+          Endurance: 3,
+          Intelligence: 3,
+          Volonté: 3,
+          Chance: 3
+        },
+        progression: "<strong>📈 Progression par niveau:</strong> +1 Force 💪, +1 Agilité 🏃",
+        capacites: [
+          "<em>Capacité unique</em>: Description de la capacité spéciale de cette sous-classe."
+        ]
+      }
+    },
+
+    objet: {
+      fields: {
+        nom: { type: 'text', label: 'Nom', required: true },
+        numero: { type: 'number', label: 'Numéro', required: true },
+        image: { type: 'text', label: 'Image', required: false },
+        description: { type: 'textarea', label: 'Description', required: true },
+        tags: { type: 'tags', label: 'Tags', required: true },
+        effet: { type: 'richtext', label: 'Effet', required: true },
+        prix: { type: 'richtext', label: 'Prix', required: true },
+        poids: { type: 'richtext', label: 'Poids', required: true }
+      },
+      editMapping: {
+        'objet-name': 'nom',
+        'objet-numero': 'numero',
+        'objet-image': 'image',
+        'objet-description': 'description',
+        'objet-tags': 'tags',
+        'objet-effet': 'effet',
+        'objet-prix': 'prix',
+        'objet-poids': 'poids'
+      },
+      identifiers: {
+        name: 'nom',
+        category: 'objets'
+      },
+      template: 'objet-card',
+      container: 'objets',
+      dataKey: 'OBJETS',
+      pageType: 'single', // Page unique avec filtres
+      icons: { 
+        category: '📦', 
+        item: '🎒',
+        add: '➕',
+        delete: '🗑️'
+      },
+      // Configuration des filtres disponibles (MISE À JOUR AUTOMATIQUE)
+      filterConfig: {
+        availableTags: ${JSON.stringify(availableTags, null, 10)},
+        defaultVisibleTags: ${JSON.stringify(defaultVisibleTags, null, 10)} // Filtres affichés par défaut
+      },
+      defaultValues: {
+        nom: "Nouvel Objet",
+        numero: 1,
+        image: "",
+        description: "Description de l'objet.",
+        tags: ["Divers"],
+        effet: "<strong>Effet:</strong> Description de l'effet de l'objet.",
+        prix: "🔷 <strong>Prix:</strong> 10 pièces d'or",
+        poids: "⚖️ <strong>Poids:</strong> 1 kg"
+      }
+    },
+
+    staticPage: {
+      fields: {
+        title: { type: 'text', label: 'Titre', required: true },
+        sections: { type: 'sections', label: 'Sections', required: true }
+      },
+      template: 'static-page',
+      icons: { 
+        category: '📄', 
+        item: '📝'
+      }
+    }
+  };
+
+  window.StatIcons = {
+    'Force': '💪',
+    'Agilité': '🏃',
+    'Endurance': '🛡️',
+    'Intelligence': '🧠',
+    'Volonté': '⚡',
+    'Chance': '🍀'
+  };
+
+  window.ElementColors = {
+    'Feu': { color: '#ff6b35', weight: 'bold' },
+    'Eau': { color: '#4682b4', weight: 'bold' },
+    'Terre': { color: '#8b4513', weight: 'bold' },
+    'Air': { color: '#22c55e', weight: 'bold' },
+    'Lumière': { color: '#ffd700', weight: 'bold' },
+    'Nuit': { color: '#1a1a1a', weight: 'bold' },
+    'Divin': { color: '#f5f5f5', weight: 'bold', background: 'rgba(100, 100, 100, 0.3)', padding: '2px 4px', borderRadius: '3px' },
+    'Maléfique': { color: '#8b5cf6', weight: 'bold' }
+  };
+
+  window.ElementIcons = {
+    'Feu': '🔥',
+    'Eau': '💧',
+    'Terre': '🤎',
+    'Air': '🟢',
+    'Lumière': '☀️',
+    'Nuit': '⚫',
+    'Divin': '⚪',
+    'Maléfique': '🟣'
+  };
+
+})();`;
     },
 
     async loadJSZip() {
@@ -7190,7 +7754,15 @@ article span[title]:hover::after {
 
     renderCategoryPage(type, category) {
       const config = window.ContentTypes[type];
-      const pageId = `${config.container}-${JdrApp.utils.data.sanitizeId(category.nom)}`;
+      
+      // Handle special case for objects (single page, no category name)
+      let pageId;
+      if (type === 'objet') {
+        pageId = 'objets'; // Objects use fixed page ID
+      } else {
+        pageId = `${config.container}-${JdrApp.utils.data.sanitizeId(category.nom)}`;
+      }
+      
       let article = document.querySelector(`article[data-page="${pageId}"]`);
       
       // Create article if it doesn't exist (for dynamically created categories)
@@ -7421,11 +7993,16 @@ article span[title]:hover::after {
 
     // Parse edit context from DOM element
     parseEditContext(element) {
+      // Force reset any stuck elements FIRST
+      this.forceResetAllEditingElements();
+      
       const editableElement = element.classList.contains('editable-section') 
         ? element.querySelector('.editable') 
         : element;
 
-      if (!editableElement) return null;
+      if (!editableElement) {
+        return null;
+      }
 
       const editType = editableElement.dataset.editType;
       const editSection = editableElement.dataset.editSection;
@@ -7512,6 +8089,35 @@ article span[title]:hover::after {
           editType: 'html',
           editSection: donEditSection,
           config: window.ContentTypes.don,
+          element: editableElement,
+          container: element
+        };
+      }
+      
+      // Check if we're in an objet card
+      const objetCard = element.closest('.card[data-objet-name]');
+      if (objetCard) {
+        const objetName = objetCard.dataset.objetName;
+        const categoryName = objetCard.dataset.categoryName;
+        
+        // Use index-based detection for objet sections
+        const allEditables = Array.from(objetCard.querySelectorAll('.editable'));
+        const editableElement = element.classList.contains('editable') ? element : element.querySelector('.editable');
+        const currentIndex = allEditables.indexOf(editableElement);
+        
+        // Map index to objet property based on CardBuilder order
+        // 0=nom, 1=numero, 2=tags, 3=description, 4=effet, 5=prix, 6=poids
+        const objetSections = ['nom', 'numero', 'tags', 'description', 'effet', 'prix', 'poids'];
+        const objetEditSection = objetSections[currentIndex] || 'description';
+        
+        return {
+          contentType: 'objet',
+          itemIdentifier: objetName,
+          categoryName: categoryName,
+          property: 'html',
+          editType: 'html',
+          editSection: objetEditSection,
+          config: window.ContentTypes.objet,
           element: editableElement,
           container: element
         };
@@ -7714,31 +8320,6 @@ article span[title]:hover::after {
       return null;
     }
 
-    // Start editing session
-    startEdit(element) {
-      const context = this.parseEditContext(element);
-      if (!context) return false;
-
-      if (this.currentEditSession) {
-        this.saveCurrentEdit();
-      }
-
-      this.currentEditSession = {
-        ...context,
-        originalContent: context.element.innerHTML,
-        startTime: Date.now()
-      };
-
-      // Special handling for tags editing
-      if (context.editType === 'tags') {
-        console.log('🔍 DEBUG: Detected tags editing, calling makeTagsEditable');
-        this.makeTagsEditable(context.element, context.container);
-      } else {
-        console.log('🔍 DEBUG: Standard editing, calling makeElementEditable');
-        this.makeElementEditable(context.element, context.container);
-      }
-      return true;
-    }
 
     makeElementEditable(editableElement, container) {
       const originalHtml = editableElement.innerHTML;
@@ -7747,7 +8328,7 @@ article span[title]:hover::after {
 
       // Decode any encoded HTML before showing for editing
       const decodedHtml = this.decodeHtmlEntities(originalHtml);
-      editableElement.textContent = decodedHtml;
+      editableElement.innerHTML = decodedHtml;
       editableElement.contentEditable = true;
       editableElement.style.cssText += `
         background-color: rgba(255, 255, 0, 0.1);
@@ -8010,8 +8591,8 @@ article span[title]:hover::after {
       if (!this.currentEditSession) return false;
 
       const session = this.currentEditSession;
-      // Get the edited HTML source from textContent (user edited the raw HTML)
-      const newContent = session.element.textContent.trim();
+      // Get the edited HTML content from innerHTML (user edited the rendered content)
+      const newContent = session.element.innerHTML.trim();
       const normalizedContent = this.normalizeHTMLContent(newContent);
 
       // Reset editing state first to avoid interfering with content restoration
@@ -8040,6 +8621,157 @@ article span[title]:hover::after {
 
       this.currentEditSession = null;
       return true;
+    }
+
+    // Update content in data structure - unified method for all content types
+    updateContentInDataStructure(session, content) {
+      try {
+        switch (session.contentType) {
+          case 'spell':
+            return this.updateSpellData(session, content);
+          case 'don':
+            return this.updateDonData(session, content);
+          case 'objet':
+            return this.updateObjetData(session, content);
+          case 'subclass':
+            return this.updateSubclassData(session, content);
+          case 'class':
+            return this.updateClassData(session, content);
+          case 'staticPage':
+            return this.updateStaticPageData(session, content);
+          default:
+            console.error('Unknown content type for update:', session.contentType);
+            return false;
+        }
+      } catch (error) {
+        console.error('Error updating content:', error, session);
+        return false;
+      }
+    }
+
+    // Update spell data
+    updateSpellData(session, content) {
+      const category = window.SORTS?.find(cat => cat.nom === session.categoryName);
+      if (!category) return false;
+      
+      const spell = category.sorts?.find(s => s.nom === session.itemIdentifier);
+      if (!spell) return false;
+      
+      spell[session.editSection] = content;
+      return true;
+    }
+
+    // Update don data
+    updateDonData(session, content) {
+      const category = window.DONS?.find(cat => cat.nom === session.categoryName);
+      if (!category) return false;
+      
+      const don = category.dons?.find(d => d.nom === session.itemIdentifier);
+      if (!don) return false;
+      
+      don[session.editSection] = content;
+      return true;
+    }
+
+    // Update objet data
+    updateObjetData(session, content) {
+      const objet = window.OBJETS?.objets?.find(o => o.nom === session.itemIdentifier);
+      if (!objet) return false;
+      
+      // Use editMapping if available, otherwise use editSection directly
+      const config = session.config || window.ContentTypes.objet;
+      const propertyName = config.editMapping?.[session.editSection] || session.editSection;
+      
+      objet[propertyName] = content;
+      return true;
+    }
+
+    // Update subclass data
+    updateSubclassData(session, content) {
+      const classe = window.CLASSES?.find(c => c.nom === session.categoryName);
+      if (!classe) return false;
+      
+      const subclass = classe.sousClasses?.find(sc => sc.nom === session.itemIdentifier);
+      if (!subclass) return false;
+      
+      subclass[session.editSection] = content;
+      return true;
+    }
+
+    // Update class data
+    updateClassData(session, content) {
+      const classe = window.CLASSES?.find(c => c.nom === session.itemIdentifier);
+      if (!classe) return false;
+      
+      classe[session.editSection] = content;
+      return true;
+    }
+
+    // Update static page data
+    updateStaticPageData(session, content) {
+      const pageKey = session.itemIdentifier;
+      const pageData = window.STATIC_PAGES?.[pageKey];
+      
+      if (!pageData) return false;
+      
+      // Handle page title
+      if (session.editSection === 'page-title') {
+        pageData.title = content;
+        return true;
+      }
+      
+      // Handle sections
+      return this.updateStaticPageSection(pageData, session, content);
+    }
+
+    // Update specific section in static page data
+    updateStaticPageSection(pageData, session, content) {
+      if (!pageData.sections) return false;
+      
+      const sections = pageData.sections;
+      
+      // Find section by ID or type
+      for (let i = 0; i < sections.length; i++) {
+        const section = sections[i];
+        
+        // Direct ID match
+        if (section.id === session.editSection) {
+          section.content = content;
+          return true;
+        }
+        
+        // Handle title updates (ID + "-title")
+        if (session.editSection.endsWith('-title')) {
+          const sectionId = session.editSection.replace('-title', '');
+          if (section.id === sectionId) {
+            section.title = content;
+            return true;
+          }
+        }
+        
+        // Handle intro sections
+        if (section.type === 'intro' && session.editSection.includes('intro')) {
+          section.content = content;
+          return true;
+        }
+        
+        // Handle card sections
+        if (section.type === 'card' && section.id === session.editSection) {
+          section.content = content;
+          return true;
+        }
+      }
+      
+      // If no existing section found, check if we need to create one for intro
+      if (session.editSection === 'intro' || session.editSection.includes('intro')) {
+        const introSection = sections.find(s => s.type === 'intro');
+        if (introSection) {
+          introSection.content = content;
+          return true;
+        }
+      }
+      
+      return false;
     }
 
     // Save content using unified system
@@ -8233,8 +8965,15 @@ article span[title]:hover::after {
         .replace(/font-family[^;]*;?/g, '')
         .replace(/white-space[^;]*;?/g, '');
       
+      // Reset both container and editable element attributes
       container.dataset.editing = 'false';
       delete container.dataset.originalContent;
+      
+      // Also reset on the editable element itself in case it's the same
+      if (editableElement !== container) {
+        editableElement.dataset.editing = 'false';
+        delete editableElement.dataset.originalContent;
+      }
     }
 
 
@@ -8314,6 +9053,407 @@ article span[title]:hover::after {
     isValidForEdit(element) {
       const context = this.parseEditContext(element);
       return context !== null;
+    }
+
+    // Handle tags editing context
+    parseTagsEditContext(element, editSection) {
+      // Check if we're in an objet card
+      const objetCard = element.closest('.card[data-objet-name]');
+      if (objetCard) {
+        const objetName = objetCard.dataset.objetName;
+        const categoryName = objetCard.dataset.categoryName;
+        
+        return {
+          contentType: 'objet',
+          itemIdentifier: objetName,
+          categoryName: categoryName,
+          property: 'tags',
+          editType: 'tags',
+          editSection: 'tags',
+          config: window.ContentTypes.objet,
+          element: element.classList.contains('editable-tags') ? element : element.querySelector('.editable-tags'),
+          container: element
+        };
+      }
+      
+      return null;
+    }
+
+    // Force reset of all elements that might be stuck in editing mode
+    forceResetAllEditingElements() {
+      // Reset any elements with contenteditable=true
+      const editableElements = document.querySelectorAll('[contenteditable="true"]');
+      editableElements.forEach(element => {
+        element.contentEditable = false;
+        element.style.background = '';
+        element.style.border = '';
+        element.style.padding = '';
+        element.style.borderRadius = '';
+        element.style.fontFamily = '';
+        element.style.whiteSpace = '';
+      });
+      
+      // Reset any containers with data-editing=true
+      const editingContainers = document.querySelectorAll('[data-editing="true"]');
+      editingContainers.forEach(container => {
+        container.dataset.editing = 'false';
+        delete container.dataset.originalContent;
+      });
+      
+      // Clear any current edit session
+      this.currentEditSession = null;
+    }
+
+    // Main entry point for starting edit
+    startEdit(element) {
+      // Force reset of any stuck editing elements first
+      this.forceResetAllEditingElements();
+      
+      // Cancel any existing edit first
+      if (this.currentEditSession) {
+        this.saveCurrentEdit();
+      }
+
+      const context = this.parseEditContext(element);
+      if (!context) {
+        console.warn('Unable to parse edit context for element:', element);
+        return false;
+      }
+
+      // Handle tags editing differently - show modal instead of inline editing
+      if (context.editType === 'tags') {
+        this.startTagsEdit(context);
+        return true;
+      }
+
+      // Start normal inline editing
+      return this.startInlineEdit(context);
+    }
+
+    // Start inline editing (for non-tags content)
+    startInlineEdit(context) {
+      const element = context.element;
+      const container = context.container;
+
+      // Store original content
+      const originalContent = element.innerHTML;
+      
+      // Create edit session
+      this.currentEditSession = {
+        ...context,
+        originalContent: originalContent
+      };
+
+      // Set up editing state
+      container.dataset.editing = 'true';
+      container.dataset.originalContent = originalContent;
+      
+      // Decode any encoded HTML before showing for editing
+      const decodedHtml = this.decodeHtmlEntities(originalContent);
+      element.innerHTML = decodedHtml;
+      
+      // Instead of contentEditable, show rendered content for editing
+      // The user should see the formatted text, not the HTML tags
+      
+      // Create a temporary textarea for HTML editing if needed
+      const useTextareaForHTML = decodedHtml.includes('<') && decodedHtml.includes('>');
+      
+      if (useTextareaForHTML) {
+        // For HTML content, show a modal with textarea
+        this.showHTMLEditModal(element, decodedHtml);
+      } else {
+        // For simple text, use contentEditable
+        element.contentEditable = true;
+        element.style.background = 'rgba(255, 255, 0, 0.1)';
+        element.style.border = '2px solid var(--accent)';
+        element.style.padding = '8px';
+        element.style.borderRadius = '4px';
+        element.style.fontFamily = 'inherit';
+        element.style.whiteSpace = 'pre-wrap';
+        
+        // Focus and select all content
+        element.focus();
+      }
+      
+      // Select all text
+      const range = document.createRange();
+      range.selectNodeContents(element);
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+
+      return true;
+    }
+
+    // Save current edit
+    saveCurrentEdit() {
+      if (!this.currentEditSession) return false;
+
+      const session = this.currentEditSession;
+      const element = session.element;
+      const newContent = element.innerHTML.trim();
+      
+      // Normalize and clean HTML content
+      const processedContent = this.normalizeHTMLContent(newContent);
+      
+      // Apply changes to data structure
+      const success = this.updateContentInDataStructure(session, processedContent);
+      
+      if (success) {
+        // Update display
+        this.restoreElementContent(session, processedContent);
+        
+        // Emit storage save event
+        EventBus.emit(Events.STORAGE_SAVE);
+        
+        // Show success notification
+        if (JdrApp.modules.ui?.showNotification) {
+          JdrApp.modules.ui.showNotification('💾 Modification sauvegardée', 'success');
+        }
+      } else {
+        console.error('Failed to save edit:', session);
+      }
+      
+      // Reset editing state
+      this.resetEditingState(session.container);
+      this.currentEditSession = null;
+      
+      return success;
+    }
+
+    // Show modal for editing HTML content
+    showHTMLEditModal(element, htmlContent) {
+      // Store the current edit session for later use
+      const editSession = this.currentEditSession;
+      
+      const modal = document.createElement('dialog');
+      modal.style.cssText = `
+        padding: 0;
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        max-width: 80vw;
+        max-height: 80vh;
+        backdrop-filter: blur(4px);
+      `;
+
+      modal.innerHTML = `
+        <div style="background: var(--paper); border-radius: 12px; padding: 1.5rem; border: 2px solid var(--rule);">
+          <h3 style="margin: 0 0 1rem 0; color: var(--accent-ink);">Édition du contenu</h3>
+          
+          <div style="margin-bottom: 1rem;">
+            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Aperçu du rendu:</label>
+            <div id="preview" style="border: 1px solid var(--rule); padding: 1rem; border-radius: 6px; background: var(--card); min-height: 60px;">
+              ${htmlContent}
+            </div>
+          </div>
+          
+          <div style="margin-bottom: 1rem;">
+            <label for="htmlEditor" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Code HTML:</label>
+            <textarea 
+              id="htmlEditor" 
+              style="width: 100%; height: 200px; padding: 1rem; border: 1px solid var(--rule); border-radius: 6px; font-family: monospace; font-size: 14px; resize: vertical;"
+              placeholder="Entrez le HTML ici..."
+            >${htmlContent}</textarea>
+          </div>
+          
+          <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+            <button id="cancelEdit" class="btn" style="background: #6b7280; color: white;">Annuler</button>
+            <button id="saveEdit" class="btn" style="background: var(--accent); color: white;">💾 Sauvegarder</button>
+          </div>
+        </div>
+      `;
+
+      document.body.appendChild(modal);
+      modal.showModal();
+
+      const textarea = modal.querySelector('#htmlEditor');
+      const preview = modal.querySelector('#preview');
+      const saveBtn = modal.querySelector('#saveEdit');
+      const cancelBtn = modal.querySelector('#cancelEdit');
+
+      // Live preview update
+      textarea.addEventListener('input', () => {
+        try {
+          preview.innerHTML = textarea.value;
+        } catch (e) {
+          preview.textContent = 'Aperçu invalide: ' + e.message;
+        }
+      });
+
+      // Save handler
+      saveBtn.addEventListener('click', () => {
+        const newContent = textarea.value.trim();
+        const normalizedContent = this.normalizeHTMLContent(newContent);
+        
+        // Update the element content
+        element.innerHTML = normalizedContent;
+        
+        // Update in data structure using stored session
+        const success = this.updateContentInDataStructure(editSession, normalizedContent);
+        
+        if (success) {
+          EventBus.emit(Events.STORAGE_SAVE);
+          if (JdrApp.modules.ui?.showNotification) {
+            JdrApp.modules.ui.showNotification('💾 Modification sauvegardée', 'success');
+          }
+        }
+        
+        // Clean up
+        this.resetEditingState(editSession.container);
+        this.currentEditSession = null;
+        modal.close();
+        modal.remove();
+      });
+
+      // Cancel handler
+      cancelBtn.addEventListener('click', () => {
+        this.resetEditingState(editSession.container);
+        this.currentEditSession = null;
+        modal.close();
+        modal.remove();
+      });
+
+      // Focus textarea
+      textarea.focus();
+      textarea.select();
+    }
+
+    // Handle tags editing by showing modal
+    startTagsEdit(context) {
+      // For tags, we don't do inline editing, we show a modal
+      this.showTagsModal(context);
+    }
+
+    // Show tags editing modal
+    showTagsModal(context) {
+      // Find the object
+      const allObjects = window.OBJETS?.objets || [];
+      const obj = allObjects.find(o => o.nom === context.itemIdentifier);
+      
+      if (!obj) {
+        console.error('Object not found for tags editing:', context.itemIdentifier);
+        return;
+      }
+
+      // Get available tags
+      const availableTags = window.ContentTypes.objet.filterConfig.availableTags || [];
+      const objectTags = obj.tags || [];
+
+      // Remove existing modal if any
+      const existingModal = document.querySelector('#tagsEditModal');
+      if (existingModal) {
+        existingModal.remove();
+      }
+
+      // Create modal
+      const modal = document.createElement('dialog');
+      modal.id = 'tagsEditModal';
+      modal.style.cssText = `
+        max-width: 500px;
+        width: 90%;
+        padding: 0;
+        border: none;
+        border-radius: 12px;
+        background: transparent;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      `;
+      
+      const tagsCheckboxes = availableTags.map(tag => {
+        const isSelected = objectTags.includes(tag);
+        return `
+          <div style="display: flex; align-items: center; gap: 0.5rem; margin: 0.5rem 0; padding: 0.5rem; background: var(--card); border-radius: 8px;">
+            <input 
+              type="checkbox" 
+              id="tag-${tag}" 
+              value="${tag}" 
+              ${isSelected ? 'checked' : ''}
+              style="margin: 0;"
+            >
+            <label for="tag-${tag}" style="flex: 1; cursor: pointer; font-weight: 500;">
+              <span class="tag-chip" style="background: var(--bronze); color: white; padding: 2px 6px; border-radius: 8px; font-size: 0.8em; margin-right: 0.5rem;">${tag}</span>
+              ${tag}
+            </label>
+          </div>
+        `;
+      }).join('');
+
+      modal.innerHTML = `
+        <div style="background: var(--paper); border-radius: 12px; padding: 1.5rem; border: 2px solid var(--rule);">
+          <h3 style="margin: 0 0 1rem 0; color: var(--accent-ink);">Édition des tags - ${obj.nom}</h3>
+          <p style="margin: 0 0 1rem 0; color: var(--paper-muted);">Sélectionnez les tags pour cet objet :</p>
+          <div id="tagsCheckboxes" style="margin: 1rem 0; max-height: 300px; overflow-y: auto;">
+            ${tagsCheckboxes}
+          </div>
+          <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 1.5rem;">
+            <button class="btn" id="saveTagsBtn" style="background: var(--accent); color: white;">
+              💾 Sauvegarder
+            </button>
+            <button class="btn modal-close" style="background: #666; color: white;">
+              ❌ Annuler
+            </button>
+          </div>
+        </div>
+      `;
+
+      // Add event listeners
+      modal.addEventListener('click', (e) => {
+        if (e.target.id === 'saveTagsBtn') {
+          this.saveTagsFromModal(modal, obj, context);
+        } else if (e.target.classList.contains('modal-close')) {
+          modal.close();
+          modal.remove();
+        }
+      });
+
+      // Handle dialog close events
+      modal.addEventListener('cancel', () => {
+        modal.close();
+        modal.remove();
+      });
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.close();
+          modal.remove();
+        }
+      });
+
+      document.body.appendChild(modal);
+      modal.showModal();
+    }
+
+    // Save tags from modal
+    saveTagsFromModal(modal, obj, context) {
+      // Get selected tags
+      const checkboxes = modal.querySelectorAll('input[type="checkbox"]:checked');
+      const selectedTags = Array.from(checkboxes).map(cb => cb.value);
+
+      if (selectedTags.length === 0) {
+        JdrApp.modules.ui.showNotification('❌ Veuillez sélectionner au moins un tag', 'error');
+        return;
+      }
+
+      // Update object tags
+      obj.tags = selectedTags;
+
+      // Update the display immediately
+      const tagDisplay = context.element;
+      if (tagDisplay) {
+        const tagsDisplayHTML = selectedTags.map(tag => 
+          `<span class="tag-chip" style="background: var(--bronze); color: white; padding: 2px 6px; border-radius: 8px; font-size: 0.8em; margin-right: 4px;">${tag}</span>`
+        ).join('');
+        tagDisplay.innerHTML = tagsDisplayHTML;
+      }
+
+      // Trigger save to storage
+      EventBus.emit(Events.STORAGE_SAVE);
+      
+      // Close modal
+      modal.close();
+      modal.remove();
+      
+      JdrApp.modules.ui.showNotification(`💾 Tags sauvegardés pour "${obj.nom}"`, 'success');
     }
   }
 
@@ -8901,7 +10041,6 @@ article span[title]:hover::after {
       const filterInput = document.querySelector('#spell-level-filter');
       if (!filterInput) return;
       
-      console.log('SpellFilter: Initializing filter with value', filterInput.value);
       
       // Set initial value and apply filter
       const initialValue = parseInt(filterInput.value, 10) || 20;
@@ -8909,19 +10048,16 @@ article span[title]:hover::after {
     },
 
     filterSpellsByLevel(maxLevel) {
-      console.log('SpellFilter: Filtering spells with maxLevel', maxLevel);
       
       // Get current page from URL hash
       const currentHash = window.location.hash.replace('#/', '');
       
       if (!currentHash.startsWith('sorts-')) {
-        console.log('SpellFilter: Not on a spells page, hash is', currentHash);
         return;
       }
       
       // Find all spell cards in the current page
       const spellCards = document.querySelectorAll('.card[data-spell-name]');
-      console.log('SpellFilter: Found', spellCards.length, 'spell cards');
       
       if (spellCards.length === 0) return;
 
@@ -8994,7 +10130,6 @@ article span[title]:hover::after {
 
   // Initialize the spell filter when the app is ready
   function initializeSpellFilter() {
-    console.log('SpellFilter: Initializing module...');
     
     if (window.JdrApp) {
       if (JdrApp.modules) {
@@ -9035,13 +10170,22 @@ article span[title]:hover::after {
   // UI INTERACTIONS MODULE
   // ========================================
   JdrApp.modules.ui = {
+    _initialized: false,
     
     init() {
+      // Prevent multiple initialization to avoid duplicate event listeners
+      if (this._initialized) {
+        console.log('🚫 UI module already initialized, skipping');
+        return;
+      }
+      
       this.setupEventListeners();
       this.setupSearch();
       this.setupModals();
       this.setupResponsive();
       this.setupNewPageHandler();
+      this._initialized = true;
+      console.log('✅ UI module initialized');
     },
 
     setupEventListeners() {
@@ -9108,8 +10252,6 @@ article span[title]:hover::after {
           itemName = e.target.dataset.spellName;
         } else if (type === 'don') {
           itemName = e.target.dataset.donName;
-        } else if (type === 'objet') {
-          itemName = e.target.dataset.objetName;
         } else if (type === 'class') {
           itemName = e.target.dataset.className || e.target.dataset.subclassName;
         } else {
@@ -9128,9 +10270,41 @@ article span[title]:hover::after {
         this.showFilterManagementModal();
       });
 
+      // Tags manager button for objects
+      JdrApp.utils.events.register('click', '.tags-manager-btn', () => {
+        this.showTagsManagementModal();
+      });
+
       // Filter chip toggle for objects
       JdrApp.utils.events.register('click', '.filter-chip', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         this.toggleFilter(e.target);
+      });
+
+      // Select all tags button
+      JdrApp.utils.events.register('click', '#select-all-tags', () => {
+        this.selectAllTags();
+      });
+
+      // Select no tags button
+      JdrApp.utils.events.register('click', '#select-no-tags', () => {
+        this.selectNoTags();
+      });
+
+      // ID search functionality (only on Enter key or button click)
+      JdrApp.utils.events.register('keydown', '#id-search-input', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          this.performIdSearch(e.target.value);
+        } else if (e.key === 'Escape') {
+          e.target.value = '';
+          this.clearIdSearch();
+        }
+      });
+
+      JdrApp.utils.events.register('click', '#clear-id-search', () => {
+        this.clearIdSearch();
       });
 
       // Spell element change
@@ -9176,12 +10350,7 @@ article span[title]:hover::after {
         this.showFilterManagementModal();
       });
 
-      // Filter chip toggling (if dev mode allows interactive filters)
-      JdrApp.utils.events.register('click', '.filter-chip', (e) => {
-        if (document.body.classList.contains('dev-on')) {
-          this.toggleFilter(e.target);
-        }
-      });
+      // Filter chip toggling (REMOVED - duplicate listener that was causing double toggle)
 
       // Element selector for spells (dev mode)
       JdrApp.utils.events.register('change', '.spell-element-selector', (e) => {
@@ -9195,24 +10364,6 @@ article span[title]:hover::after {
       if (className.includes('class')) return 'class';
       if (className.includes('objet')) return 'objet';
       return null;
-    },
-
-    addContent(type, categoryName) {
-      const config = window.ContentTypes[type];
-      if (!config) return;
-
-      const defaultItem = ContentFactory.createDefaultItem(type);
-      const success = ContentFactory.addItem(type, categoryName, defaultItem);
-      
-      if (success) {
-        EventBus.emit(Events.PAGE_RENDER, {
-          type: 'category',
-          categoryType: type,
-          category: ContentFactory.getEntity(type).findCategory(categoryName)
-        });
-        
-        this.showNotification(`${config.icons.item} Nouvel élément ajouté`);
-      }
     },
 
     deleteContent(type, categoryName, itemName) {
@@ -10263,8 +11414,12 @@ article span[title]:hover::after {
     openModal(modalId) {
       const modal = JdrApp.utils.dom.$(`#${modalId}`);
       if (modal) {
-        modal.classList.add('visible');
-        modal.style.display = 'flex';
+        if (modal.tagName === 'DIALOG') {
+          modal.showModal();
+        } else {
+          modal.classList.add('visible');
+          modal.style.display = 'flex';
+        }
         
         const firstInput = modal.querySelector('input, textarea, select');
         if (firstInput) {
@@ -11037,25 +12192,38 @@ article span[title]:hover::after {
       const config = window.ContentTypes.objet.filterConfig;
       const currentSettings = window.OBJETS.filterSettings || { visibleTags: config.defaultVisibleTags };
       
-      let modal = document.querySelector('#filterModal');
-      if (!modal) {
-        modal = this.createFilterModal();
-        document.body.appendChild(modal);
+      // Remove existing modal if any
+      const existingModal = document.querySelector('#filterModal');
+      if (existingModal) {
+        existingModal.remove();
       }
+      
+      const modal = this.createFilterModal();
+      document.body.appendChild(modal);
       
       // Update modal content with current settings
       this.updateFilterModalContent(modal, config, currentSettings);
-      this.openModal('filterModal');
+      
+      // Use native dialog showModal for proper z-index
+      modal.showModal();
     },
 
     createFilterModal() {
-      const modal = document.createElement('div');
-      modal.className = 'modal';
+      const modal = document.createElement('dialog');
       modal.id = 'filterModal';
+      modal.style.cssText = `
+        max-width: 500px;
+        width: 90%;
+        padding: 0;
+        border: none;
+        border-radius: 12px;
+        background: transparent;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      `;
       modal.innerHTML = `
-        <div class="modal-content" style="max-width: 500px;">
-          <h3>⚙️ Gestion des filtres d'objets</h3>
-          <p>Choisissez quels tags d'objets afficher sur la page :</p>
+        <div style="background: var(--paper); border-radius: 12px; padding: 1.5rem; border: 2px solid var(--rule);">
+          <h3 style="margin: 0 0 1rem 0; color: var(--accent-ink);">Gestion des filtres d'objets</h3>
+          <p style="margin: 0 0 1rem 0; color: var(--paper-muted);">Choisissez quels tags d'objets afficher sur la page :</p>
           <div id="filterCheckboxes" style="margin: 1rem 0;">
             <!-- Content will be populated by updateFilterModalContent -->
           </div>
@@ -11079,6 +12247,26 @@ article span[title]:hover::after {
           this.saveFilterSettings(modal);
         } else if (e.target.id === 'resetFiltersBtn') {
           this.resetFilterSettings(modal);
+        } else if (e.target.classList.contains('modal-close')) {
+          modal.close();
+          modal.remove();
+        } else if (e.target.classList.contains('move-tag-up')) {
+          this.moveTagInModal(modal, e.target.dataset.tag, -1);
+        } else if (e.target.classList.contains('move-tag-down')) {
+          this.moveTagInModal(modal, e.target.dataset.tag, 1);
+        }
+      });
+
+      // Handle dialog close events
+      modal.addEventListener('cancel', () => {
+        modal.close();
+        modal.remove();
+      });
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.close();
+          modal.remove();
         }
       });
 
@@ -11090,9 +12278,11 @@ article span[title]:hover::after {
       if (!checkboxContainer) return;
 
       const checkboxHTML = config.availableTags.map(tag => {
-        const isVisible = currentSettings.visibleTags.includes(tag);
+        const isVisible = currentSettings.displayedFilterButtons ? currentSettings.displayedFilterButtons.includes(tag) : currentSettings.visibleTags.includes(tag);
+        const isDefault = config.defaultVisibleTags.includes(tag);
+        
         return `
-          <div style="display: flex; align-items: center; gap: 0.5rem; margin: 0.5rem 0; padding: 0.5rem; background: var(--card); border-radius: 8px;">
+          <div class="tag-row" data-tag="${tag}" style="display: flex; align-items: center; gap: 0.5rem; margin: 0.5rem 0; padding: 0.5rem; background: var(--card); border-radius: 8px;">
             <input 
               type="checkbox" 
               id="filter-${tag}" 
@@ -11104,36 +12294,81 @@ article span[title]:hover::after {
               <span class="tag-chip" style="margin-right: 0.5rem;">${tag}</span>
               ${tag}
             </label>
+            <input 
+              type="checkbox" 
+              id="default-${tag}" 
+              value="${tag}" 
+              ${isDefault ? 'checked' : ''}
+              style="margin: 0;"
+              title="Filtre par défaut au chargement du site"
+            >
+            <div style="display: flex; flex-direction: column; gap: 2px;">
+              <button type="button" class="move-tag-up" data-tag="${tag}" style="background: #ff8c00; color: white; border: none; border-radius: 3px; padding: 2px 6px; font-size: 12px; cursor: pointer;" title="Monter dans l'ordre">↑</button>
+              <button type="button" class="move-tag-down" data-tag="${tag}" style="background: #ff8c00; color: white; border: none; border-radius: 3px; padding: 2px 6px; font-size: 12px; cursor: pointer;" title="Descendre dans l'ordre">↓</button>
+            </div>
           </div>
         `;
       }).join('');
 
-      checkboxContainer.innerHTML = checkboxHTML;
+      checkboxContainer.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--rule);">
+          <span style="font-weight: 600; color: var(--accent-ink);">Tag visible</span>
+          <span style="font-weight: 600; color: var(--accent-ink);">Défaut</span>
+        </div>
+        <div id="sortable-tags-list">
+          ${checkboxHTML}
+        </div>
+        <div style="margin-top: 1rem; padding-top: 0.5rem; border-top: 1px solid var(--rule); font-size: 0.85em; color: var(--paper-muted);">
+          ℹ️ <strong>Visible</strong> : Tags affichés actuellement<br>
+          🏠 <strong>Par défaut</strong> : Tags automatiquement activés au chargement du site<br>
+          ↕️ <strong>Ordre</strong> : Utilisez les flèches pour réorganiser l'affichage
+        </div>
+      `;
     },
 
     saveFilterSettings(modal) {
-      const checkboxes = modal.querySelectorAll('input[type="checkbox"]');
-      const visibleTags = Array.from(checkboxes)
-        .filter(cb => cb.checked)
-        .map(cb => cb.value);
+      // Get visible tags (currently active)
+      const visibleCheckboxes = modal.querySelectorAll('input[id^="filter-"]:checked');
+      const visibleTags = Array.from(visibleCheckboxes).map(cb => cb.value);
+
+      // Get default tags (active by default on site load)
+      const defaultCheckboxes = modal.querySelectorAll('input[id^="default-"]:checked');
+      const defaultTags = Array.from(defaultCheckboxes).map(cb => cb.value);
 
       if (visibleTags.length === 0) {
-        this.showNotification('❌ Veuillez sélectionner au moins un tag', 'error');
+        this.showNotification('❌ Veuillez sélectionner au moins un tag visible', 'error');
         return;
       }
 
-      // Update the data structure
+      if (defaultTags.length === 0) {
+        this.showNotification('❌ Veuillez sélectionner au moins un tag par défaut', 'error');
+        return;
+      }
+
+      // Update displayed filter buttons and current visible tags in OBJETS
       if (!window.OBJETS.filterSettings) {
         window.OBJETS.filterSettings = {};
       }
-      window.OBJETS.filterSettings.visibleTags = visibleTags;
+      window.OBJETS.filterSettings.displayedFilterButtons = visibleTags;
+      // Set active filters to default tags only (not all displayed buttons)
+      window.OBJETS.filterSettings.visibleTags = [...defaultTags];
+
+      // Update default tags in ContentTypes configuration
+      // Note: availableTags order has already been updated by moveTagInModal()
+      if (window.ContentTypes.objet?.filterConfig) {
+        window.ContentTypes.objet.filterConfig.defaultVisibleTags = defaultTags;
+      }
 
       // Trigger page re-render
       this.refreshObjectsPage();
       
+      // Save to storage (will include the updated order and defaultVisibleTags in export)
+      EventBus.emit(Events.STORAGE_SAVE);
+      
       // Close modal and show notification
-      this.closeModal(modal);
-      this.showNotification(`🏷️ Filtres mis à jour : ${visibleTags.join(', ')}`, 'success');
+      modal.close();
+      modal.remove();
+      this.showNotification(`🏷️ Filtres mis à jour : ${visibleTags.length} visible(s), ${defaultTags.length} par défaut`, 'success');
     },
 
     resetFilterSettings(modal) {
@@ -11144,41 +12379,30 @@ article span[title]:hover::after {
       this.showNotification('🔄 Filtres réinitialisés aux valeurs par défaut', 'info');
     },
 
-    toggleFilter(chipElement) {
-      const tag = chipElement.dataset.tag;
-      if (!tag || !window.OBJETS) return;
-
-      const currentSettings = window.OBJETS.filterSettings || { 
-        visibleTags: window.ContentTypes.objet.filterConfig.defaultVisibleTags 
-      };
-
-      const isActive = chipElement.classList.contains('active');
+    moveTagInModal(modal, tagName, direction) {
+      // Get current configuration
+      const config = window.ContentTypes.objet.filterConfig;
+      const currentIndex = config.availableTags.indexOf(tagName);
       
-      if (isActive) {
-        // Remove from visible tags if not the last one
-        if (currentSettings.visibleTags.length > 1) {
-          currentSettings.visibleTags = currentSettings.visibleTags.filter(t => t !== tag);
-          chipElement.classList.remove('active');
-          this.showNotification(`🏷️ Tag "${tag}" masqué`, 'info');
-        } else {
-          this.showNotification('❌ Impossible de masquer le dernier tag actif', 'error');
-          return;
-        }
-      } else {
-        // Add to visible tags
-        if (!currentSettings.visibleTags.includes(tag)) {
-          currentSettings.visibleTags.push(tag);
-          chipElement.classList.add('active');
-          this.showNotification(`🏷️ Tag "${tag}" affiché`, 'info');
-        }
-      }
-
-      // Update the data structure
-      window.OBJETS.filterSettings = currentSettings;
+      if (currentIndex === -1) return; // Tag not found
       
-      // Refresh the page
-      this.refreshObjectsPage();
+      const newIndex = currentIndex + direction;
+      
+      // Check bounds
+      if (newIndex < 0 || newIndex >= config.availableTags.length) return;
+      
+      // Swap tags in the array
+      const temp = config.availableTags[currentIndex];
+      config.availableTags[currentIndex] = config.availableTags[newIndex];
+      config.availableTags[newIndex] = temp;
+      
+      // Refresh the modal display
+      const currentSettings = window.OBJETS?.filterSettings || { visibleTags: config.defaultVisibleTags };
+      this.updateFilterModalContent(modal, config, currentSettings);
+      
+      this.showNotification(`📊 "${tagName}" ${direction > 0 ? 'descendu' : 'monté'} dans l'ordre`, 'info');
     },
+
 
     refreshObjectsPage() {
       // Check if we're currently on the objects page
@@ -11452,6 +12676,599 @@ article span[title]:hover::after {
         return section ? section.title : sectionId;
       }
       return sectionId;
+    },
+
+    // ==== GLOBAL TAGS MANAGEMENT ====
+
+    showTagsManagementModal() {
+      if (!window.ContentTypes.objet?.filterConfig) {
+        this.showNotification('❌ Configuration des tags non trouvée', 'error');
+        return;
+      }
+
+      // Remove any existing modal
+      const existingModal = document.querySelector('#tagsManagementModal');
+      if (existingModal) {
+        existingModal.remove();
+      }
+
+      const config = window.ContentTypes.objet.filterConfig;
+      const modal = this.createTagsManagementModal(config);
+      document.body.appendChild(modal);
+      
+      // Use native dialog showModal for proper z-index
+      modal.showModal();
+    },
+
+    createTagsManagementModal(config) {
+      const modal = document.createElement('dialog');
+      modal.id = 'tagsManagementModal';
+      modal.style.cssText = `
+        max-width: 600px;
+        width: 90%;
+        padding: 0;
+        border: none;
+        border-radius: 12px;
+        background: transparent;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      `;
+
+      const tagsListHTML = config.availableTags.map((tag, index) => `
+        <div class="tag-item" data-tag-index="${index}" data-tag-name="${tag}">
+          <span class="tag-chip" style="background: var(--bronze); color: white; padding: 4px 8px; border-radius: 8px; margin-right: 0.5rem;">${tag}</span>
+          <input type="text" value="${tag}" class="tag-input" style="flex: 1; padding: 0.5rem; border: 1px solid var(--rule); border-radius: 4px; margin-right: 0.5rem;">
+          <button type="button" class="btn small delete-tag-btn" data-tag-name="${tag}" style="background: #dc2626; color: white; padding: 0.25rem 0.5rem;">
+            🗑️
+          </button>
+        </div>
+      `).join('');
+
+      modal.innerHTML = `
+        <div style="background: var(--paper); border-radius: 12px; padding: 1.5rem; border: 2px solid var(--rule);">
+          <h3 style="margin: 0 0 1rem 0; color: var(--accent-ink);">🏷️ Gestion des tags globaux</h3>
+          <p style="margin: 0 0 1rem 0; color: var(--paper-muted);">Gérez la liste principale des tags disponibles pour les objets.</p>
+          
+          <div style="margin: 1rem 0;">
+            <h4 style="margin: 0 0 0.5rem 0; color: var(--accent-ink);">Tags existants :</h4>
+            <div id="tagsManagementList" style="max-height: 300px; overflow-y: auto;">
+              ${tagsListHTML}
+            </div>
+          </div>
+          
+          <div style="margin: 1rem 0; padding: 1rem; background: var(--card); border-radius: 8px;">
+            <h4 style="margin: 0 0 0.5rem 0; color: var(--accent-ink);">Ajouter un nouveau tag :</h4>
+            <div style="display: flex; gap: 0.5rem; align-items: center;">
+              <input type="text" id="newTagInput" placeholder="Nom du nouveau tag" style="flex: 1; padding: 0.5rem; border: 1px solid var(--rule); border-radius: 4px;">
+              <button type="button" id="addTagBtn" class="btn" style="background: var(--accent); color: white;">
+                ➕ Ajouter
+              </button>
+            </div>
+          </div>
+          
+          <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 1.5rem;">
+            <button type="button" class="btn modal-close" style="background: #666; color: white;">
+              ❌ Annuler
+            </button>
+            <button type="button" id="saveTagsManagementBtn" class="btn" style="background: var(--accent); color: white;">
+              💾 Sauvegarder
+            </button>
+          </div>
+        </div>
+      `;
+
+      this.setupTagsManagementHandlers(modal, config);
+      return modal;
+    },
+
+    setupTagsManagementHandlers(modal, config) {
+      // Add new tag
+      modal.querySelector('#addTagBtn').addEventListener('click', () => {
+        const input = modal.querySelector('#newTagInput');
+        const newTag = input.value.trim();
+        
+        if (!newTag) {
+          this.showNotification('❌ Veuillez saisir un nom de tag', 'error');
+          return;
+        }
+        
+        if (config.availableTags.includes(newTag)) {
+          this.showNotification(`❌ Le tag "${newTag}" existe déjà`, 'error');
+          return;
+        }
+        
+        // Add to temporary config (will be saved when user clicks save)
+        config.availableTags.push(newTag);
+        
+        // Update the modal display
+        this.refreshTagsManagementModal(modal, config);
+        
+        // Clear input
+        input.value = '';
+        this.showNotification(`➕ Tag "${newTag}" ajouté à la liste`, 'success');
+      });
+
+      // Handle Enter key in new tag input
+      modal.querySelector('#newTagInput').addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          modal.querySelector('#addTagBtn').click();
+        }
+      });
+
+      // Delete tag
+      modal.addEventListener('click', (e) => {
+        if (e.target.classList.contains('delete-tag-btn')) {
+          const tagName = e.target.dataset.tagName;
+          
+          if (config.availableTags.length <= 1) {
+            this.showNotification('❌ Impossible de supprimer le dernier tag', 'error');
+            return;
+          }
+          
+          if (confirm(`Supprimer le tag "${tagName}" ?\nAttention: il sera retiré de tous les objets qui l'utilisent.`)) {
+            // Remove from config
+            config.availableTags = config.availableTags.filter(tag => tag !== tagName);
+            
+            // Remove from all objects that use this tag
+            if (window.OBJETS?.objets) {
+              window.OBJETS.objets.forEach(obj => {
+                if (obj.tags && obj.tags.includes(tagName)) {
+                  obj.tags = obj.tags.filter(tag => tag !== tagName);
+                  // Ensure object has at least one tag if possible
+                  if (obj.tags.length === 0 && config.availableTags.length > 0) {
+                    obj.tags = [config.availableTags[0]];
+                  }
+                }
+              });
+            }
+            
+            // Update filter settings to remove deleted tag
+            if (window.OBJETS?.filterSettings?.visibleTags) {
+              window.OBJETS.filterSettings.visibleTags = window.OBJETS.filterSettings.visibleTags.filter(tag => tag !== tagName);
+              // Ensure at least one visible tag remains
+              if (window.OBJETS.filterSettings.visibleTags.length === 0 && config.availableTags.length > 0) {
+                window.OBJETS.filterSettings.visibleTags = [config.availableTags[0]];
+              }
+            }
+            
+            // Update modal display
+            this.refreshTagsManagementModal(modal, config);
+            this.showNotification(`🗑️ Tag "${tagName}" supprimé`, 'success');
+          }
+        }
+      });
+
+      // Save all changes
+      modal.querySelector('#saveTagsManagementBtn').addEventListener('click', () => {
+        // Collect all tag renames
+        const tagItems = modal.querySelectorAll('.tag-item');
+        const renames = [];
+        
+        tagItems.forEach(item => {
+          const originalName = item.dataset.tagName;
+          const newName = item.querySelector('.tag-input').value.trim();
+          
+          if (newName && newName !== originalName) {
+            renames.push({ old: originalName, new: newName });
+          }
+        });
+        
+        // Apply renames to config
+        renames.forEach(rename => {
+          const index = config.availableTags.indexOf(rename.old);
+          if (index >= 0) {
+            config.availableTags[index] = rename.new;
+            
+            // Update all objects that use this tag
+            if (window.OBJETS?.objets) {
+              window.OBJETS.objets.forEach(obj => {
+                if (obj.tags && obj.tags.includes(rename.old)) {
+                  const tagIndex = obj.tags.indexOf(rename.old);
+                  obj.tags[tagIndex] = rename.new;
+                }
+              });
+            }
+            
+            // Update filter settings
+            if (window.OBJETS?.filterSettings?.visibleTags) {
+              const visibleIndex = window.OBJETS.filterSettings.visibleTags.indexOf(rename.old);
+              if (visibleIndex >= 0) {
+                window.OBJETS.filterSettings.visibleTags[visibleIndex] = rename.new;
+              }
+            }
+          }
+        });
+        
+        // Save to storage
+        EventBus.emit(Events.STORAGE_SAVE);
+        
+        // Refresh objects page if currently visible
+        this.refreshObjectsPage();
+        
+        // Close modal
+        modal.close();
+        modal.remove();
+        
+        const changesCount = renames.length;
+        if (changesCount > 0) {
+          this.showNotification(`💾 ${changesCount} modification(s) sauvegardée(s)`, 'success');
+        } else {
+          this.showNotification('💾 Tags sauvegardés', 'success');
+        }
+      });
+
+      // Close modal events
+      modal.querySelector('.modal-close').addEventListener('click', () => {
+        modal.close();
+        modal.remove();
+      });
+
+      modal.addEventListener('cancel', () => {
+        modal.close();
+        modal.remove();
+      });
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.close();
+          modal.remove();
+        }
+      });
+    },
+
+    refreshTagsManagementModal(modal, config) {
+      const container = modal.querySelector('#tagsManagementList');
+      if (!container) return;
+
+      const tagsListHTML = config.availableTags.map((tag, index) => `
+        <div class="tag-item" data-tag-index="${index}" data-tag-name="${tag}">
+          <span class="tag-chip" style="background: var(--bronze); color: white; padding: 4px 8px; border-radius: 8px; margin-right: 0.5rem;">${tag}</span>
+          <input type="text" value="${tag}" class="tag-input" style="flex: 1; padding: 0.5rem; border: 1px solid var(--rule); border-radius: 4px; margin-right: 0.5rem;">
+          <button type="button" class="btn small delete-tag-btn" data-tag-name="${tag}" style="background: #dc2626; color: white; padding: 0.25rem 0.5rem;">
+            🗑️
+          </button>
+        </div>
+      `).join('');
+
+      container.innerHTML = tagsListHTML;
+    },
+
+    // ==== ID SEARCH FUNCTIONALITY ====
+
+    performIdSearch(searchValue) {
+      const searchId = searchValue.trim();
+      const resultDiv = document.querySelector('#id-search-result');
+      
+      if (!searchId) {
+        this.clearIdSearch();
+        return;
+      }
+
+      const searchNumber = parseInt(searchId, 10);
+      if (isNaN(searchNumber)) {
+        if (resultDiv) {
+          resultDiv.innerHTML = '❌ Veuillez saisir un numéro valide';
+          resultDiv.style.color = '#dc2626';
+        }
+        return;
+      }
+
+      // Find object by number
+      const allObjects = window.OBJETS?.objets || [];
+      const foundObject = allObjects.find(obj => obj.numero === searchNumber);
+
+      if (!foundObject) {
+        if (resultDiv) {
+          resultDiv.innerHTML = `❌ Aucun objet trouvé avec l'ID ${searchNumber}`;
+          resultDiv.style.color = '#dc2626';
+        }
+        // Hide all objects
+        this.hideAllObjects();
+        return;
+      }
+
+      // Set global flag BEFORE regenerating page
+      window.activeIdSearch = true;
+
+      // Force regenerate page with all objects AND visual feedback
+      if (JdrApp.modules.renderer?.regenerateCurrentPage) {
+        JdrApp.modules.renderer.regenerateCurrentPage();
+      }
+
+      // Show success message
+      if (resultDiv) {
+        resultDiv.innerHTML = `✅ Objet trouvé : "${foundObject.nom}" (ID: ${searchNumber})`;
+        resultDiv.style.color = '#16a34a';
+      }
+
+      // Show only the found object (after page regeneration)
+      setTimeout(() => {
+        this.showOnlyObjectById(searchNumber);
+        
+        // Restore the search value in the input field
+        const searchInput = document.querySelector('#id-search-input');
+        if (searchInput) {
+          searchInput.value = searchNumber;
+        }
+      }, 100);
+    },
+
+    clearIdSearch() {
+      const input = document.querySelector('#id-search-input');
+      const resultDiv = document.querySelector('#id-search-result');
+      
+      if (input) {
+        input.value = '';
+      }
+      
+      if (resultDiv) {
+        resultDiv.innerHTML = '';
+        resultDiv.style.color = '';
+      }
+
+      // Clear global flag for active ID search
+      window.activeIdSearch = false;
+
+      // Regenerate page to update visual feedback and return to normal display
+      if (JdrApp.modules.renderer?.regenerateCurrentPage) {
+        JdrApp.modules.renderer.regenerateCurrentPage();
+      }
+    },
+
+    hideAllObjects() {
+      const container = document.querySelector('#objets-container');
+      if (container) {
+        const allCards = container.querySelectorAll('.card');
+        allCards.forEach(card => {
+          card.style.display = 'none';
+        });
+      }
+    },
+
+    showOnlyObjectById(objectId) {
+      console.log('🔍 showOnlyObjectById called with ID:', objectId);
+      const container = document.querySelector('#objets-container');
+      if (!container) {
+        console.log('🔍 No objets-container found');
+        return;
+      }
+
+      const allCards = container.querySelectorAll('.card');
+      console.log('🔍 Found', allCards.length, 'cards in container');
+      let foundCard = null;
+
+      allCards.forEach((card, index) => {
+        const objetName = card.dataset.objetName;
+        console.log(`🔍 Card ${index}: objetName = "${objetName}"`);
+        if (objetName) {
+          // Find the object by name to get its number
+          const obj = window.OBJETS?.objets?.find(o => o.nom === objetName);
+          console.log(`🔍 Found object:`, obj);
+          if (obj && obj.numero === objectId) {
+            console.log('🔍 MATCH! Showing card for:', objetName);
+            card.style.display = '';
+            foundCard = card;
+          } else {
+            card.style.display = 'none';
+          }
+        }
+      });
+
+      console.log('🔍 foundCard:', foundCard);
+
+      // Scroll to the found card if it exists
+      if (foundCard) {
+        setTimeout(() => {
+          foundCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          // Brief highlight effect
+          foundCard.style.transition = 'all 0.3s ease';
+          foundCard.style.boxShadow = '0 0 20px rgba(22, 163, 74, 0.5)';
+          foundCard.style.transform = 'scale(1.02)';
+          
+          setTimeout(() => {
+            foundCard.style.boxShadow = '';
+            foundCard.style.transform = '';
+          }, 1500);
+        }, 100);
+      }
+    },
+
+    showAllObjectsWithTagFilters() {
+      // Restore normal tag filtering behavior
+      const currentSettings = window.OBJETS?.filterSettings || { 
+        visibleTags: window.ContentTypes.objet.filterConfig.defaultVisibleTags 
+      };
+      
+      const container = document.querySelector('#objets-container');
+      if (!container) return;
+
+      const allCards = container.querySelectorAll('.card');
+      allCards.forEach(card => {
+        const objetName = card.dataset.objetName;
+        if (objetName) {
+          // Find the object and check if it has visible tags
+          const obj = window.OBJETS?.objets?.find(o => o.nom === objetName);
+          if (obj && obj.tags) {
+            const hasVisibleTag = obj.tags.some(tag => currentSettings.visibleTags.includes(tag));
+            card.style.display = hasVisibleTag ? '' : 'none';
+          } else {
+            card.style.display = 'none';
+          }
+        }
+      });
+    },
+
+    // Toggle individual filter tag
+    toggleFilter(chipElement) {
+      const tag = chipElement.dataset.tag;
+      if (!tag) return;
+
+      // GUARD: Prevent rapid double clicks (debounce)
+      if (this._toggleInProgress) {
+        console.log('🚫 Toggle already in progress, ignoring');
+        return;
+      }
+      this._toggleInProgress = true;
+      
+      // Release the lock after a short delay
+      setTimeout(() => {
+        this._toggleInProgress = false;
+      }, 100);
+
+      // Initialize filter settings if needed
+      if (!window.OBJETS.filterSettings) {
+        window.OBJETS.filterSettings = { visibleTags: [...window.ContentTypes.objet.filterConfig.defaultVisibleTags] };
+      }
+
+      const visibleTags = window.OBJETS.filterSettings.visibleTags;
+      
+      // SIMPLE LOGIC: Check visual state directly and toggle
+      const isVisuallyActive = chipElement.classList.contains('active');
+      
+      console.log('🔍 SIMPLE TOGGLE:', {
+        tag: tag,
+        isVisuallyActive: isVisuallyActive,
+        action: isVisuallyActive ? 'DEACTIVATE' : 'ACTIVATE'
+      });
+
+      if (isVisuallyActive) {
+        // DEACTIVATE - remove from visible tags
+        const tagIndex = visibleTags.indexOf(tag);
+        if (tagIndex > -1) {
+          visibleTags.splice(tagIndex, 1);
+        }
+        chipElement.classList.remove('active');
+        chipElement.classList.add('inactive');
+        chipElement.style.background = '#6b7280';
+        chipElement.style.opacity = '0.6';
+        chipElement.style.boxShadow = '';
+        this.showNotification(`🏷️ Tag "${tag}" masqué`, 'info');
+      } else {
+        // ACTIVATE - add to visible tags
+        if (!visibleTags.includes(tag)) {
+          visibleTags.push(tag);
+        }
+        chipElement.classList.add('active');
+        chipElement.classList.remove('inactive');
+        chipElement.style.background = '#16a34a';
+        chipElement.style.opacity = '1';
+        chipElement.style.boxShadow = '0 2px 4px rgba(22, 163, 74, 0.3)';
+        this.showNotification(`🏷️ Tag "${tag}" affiché`, 'info');
+      }
+
+      console.log('✅ AFTER TOGGLE:', {
+        visibleTags: [...visibleTags],
+        chipClasses: Array.from(chipElement.classList)
+      });
+
+      // Update object visibility without full page regeneration
+      this.updateObjectVisibility();
+
+      // Save changes to storage
+      EventBus.emit(Events.STORAGE_SAVE);
+    },
+
+    // Update object visibility based on current filter settings
+    updateObjectVisibility() {
+      const allObjects = document.querySelectorAll('.card[data-objet-name]');
+      const visibleTags = window.OBJETS.filterSettings?.visibleTags || [];
+      
+      allObjects.forEach(card => {
+        const objetName = card.dataset.objetName;
+        const objet = window.OBJETS.objets?.find(o => o.nom === objetName);
+        
+        if (objet && objet.tags) {
+          // Show object if it has at least one visible tag
+          const hasVisibleTag = objet.tags.some(tag => visibleTags.includes(tag));
+          
+          if (hasVisibleTag && visibleTags.length > 0) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        }
+      });
+      
+      // Update filter count display if it exists
+      const filterCount = document.querySelector('.filter-count');
+      if (filterCount) {
+        const visibleCount = Array.from(allObjects).filter(card => card.style.display !== 'none').length;
+        filterCount.textContent = `${visibleCount} objet(s) affiché(s)`;
+      }
+    },
+
+    // Select all tags
+    selectAllTags() {
+      if (!window.OBJETS.filterSettings) {
+        window.OBJETS.filterSettings = { visibleTags: [] };
+      }
+
+      // Get all available tags and set them as visible
+      const availableTags = window.ContentTypes.objet.filterConfig.availableTags || [];
+      window.OBJETS.filterSettings.visibleTags = [...availableTags];
+
+      // Save changes to storage
+      EventBus.emit(Events.STORAGE_SAVE);
+      
+      // Regenerate the objects page to reflect changes
+      this.refreshObjectsPage();
+    },
+
+    // Select no tags (allow having no tags active)
+    selectNoTags() {
+      if (!window.OBJETS.filterSettings) {
+        window.OBJETS.filterSettings = { visibleTags: [] };
+      }
+
+      // Clear all visible tags
+      window.OBJETS.filterSettings.visibleTags = [];
+
+      // Save changes to storage
+      EventBus.emit(Events.STORAGE_SAVE);
+      
+      // Regenerate the objects page to reflect changes
+      this.refreshObjectsPage();
+    },
+
+    // Refresh the objects page after filter changes
+    refreshObjectsPage() {
+      // Clean up active tags that are not in displayed buttons
+      this.cleanupActiveFilters();
+      
+      // Don't regenerate if an ID search is active
+      if (window.activeIdSearch) {
+        // Just show notification, keep current display
+        const tagCount = window.OBJETS.filterSettings?.visibleTags?.length || 0;
+        this.showNotification(`🏷️ Filtres mis à jour (${tagCount} tag${tagCount > 1 ? 's' : ''} actif${tagCount > 1 ? 's' : ''}) - Recherche par ID active`, 'success');
+        return;
+      }
+
+      // Regenerate and update the objects page
+      if (JdrApp.modules.renderer?.regenerateCurrentPage) {
+        JdrApp.modules.renderer.regenerateCurrentPage();
+      }
+      
+      // Show notification
+      const tagCount = window.OBJETS.filterSettings?.visibleTags?.length || 0;
+      this.showNotification(`🏷️ Filtres mis à jour (${tagCount} tag${tagCount > 1 ? 's' : ''} actif${tagCount > 1 ? 's' : ''})`, 'success');
+    },
+
+    // Clean up active filters to ensure only displayed buttons can be active
+    cleanupActiveFilters() {
+      if (!window.OBJETS?.filterSettings) return;
+      
+      const displayedButtons = window.OBJETS.filterSettings.displayedFilterButtons || [];
+      const activeFilters = window.OBJETS.filterSettings.visibleTags || [];
+      
+      // Remove any active filters that are not in displayed buttons
+      const cleanedActiveFilters = activeFilters.filter(tag => displayedButtons.includes(tag));
+      
+      // Update if something was cleaned
+      if (cleanedActiveFilters.length !== activeFilters.length) {
+        window.OBJETS.filterSettings.visibleTags = cleanedActiveFilters;
+        const removedCount = activeFilters.length - cleanedActiveFilters.length;
+        console.log(`🧹 Cleaned ${removedCount} hidden active filter(s):`, 
+          activeFilters.filter(tag => !displayedButtons.includes(tag)));
+      }
     }
   };
 

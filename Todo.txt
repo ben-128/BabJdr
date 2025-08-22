@@ -1,2 +1,7 @@
+- rajouter dans les dons de classe, un boutton pour aussi mettre les dons généraux
+
+- boutton anti spoil pour objets
 
 - faire des tables de loots, et des tags caché par level
+
+- monstres

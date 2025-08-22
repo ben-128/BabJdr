@@ -1,4 +1,5 @@
 @echo off
+setlocal enabledelayedexpansion
 title JDR-BAB - Build Standalone
 color 0A
 
@@ -22,8 +23,8 @@ if not exist "package.json" (
 echo [INFO] Génération de la version standalone...
 echo.
 
-:: Lancer le build
-call npm run build
+:: Lancer le build (suppression du bruit npm)
+call npm run build >nul 2>&1
 
 if errorlevel 1 (
     echo.
@@ -60,7 +61,8 @@ if errorlevel 1 (
         :: Proposer d'ouvrir le fichier
         choice /c ON /m "Ouvrir le fichier maintenant ? [O]ui / [N]on"
         if !errorlevel! == 1 (
-            start "" "build\JdrBab.html"
+            echo [INFO] Ouverture du fichier...
+            start "" "%CD%\build\JdrBab.html"
         )
     ) else (
         echo [ERREUR] Le fichier JdrBab.html n'a pas été trouvé dans build\
@@ -69,5 +71,6 @@ if errorlevel 1 (
 )
 
 echo.
-echo Appuyez sur une touche pour fermer cette fenêtre...
+echo Appuyez sur une touche pour retourner au menu...
 pause
+exit /b 0

@@ -210,7 +210,11 @@
           "Deux mains",
           "Baton",
           "Dague",
-          "Arc"
+          "Arc",
+          "Armure lourde",
+          "Armure légère",
+          "Robe",
+          "Bouclier"
 ],
         defaultVisibleTags: [
           "Départ"

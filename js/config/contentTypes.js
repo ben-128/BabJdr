@@ -204,13 +204,17 @@
           "Arme",
           "Armure",
           "Consommable",
+          "Bouclier",
           "Épée",
           "Arme exotique",
           "Une main",
           "Deux mains",
           "Baton",
           "Dague",
-          "Arc"
+          "Arc",
+          "Armure lourde",
+          "Armure légère",
+          "Robe"
 ],
         defaultVisibleTags: [
           "Départ"

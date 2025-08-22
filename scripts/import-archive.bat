@@ -61,13 +61,7 @@ echo [OK] Archive trouvée : %LATEST_ARCHIVE%
 echo [INFO] Chemin complet : %ARCHIVE_FULL_PATH%
 echo.
 
-:: Demander confirmation
-choice /c ON /m "Importer cette archive ? [O]ui / [N]on"
-if !errorlevel! == 2 (
-    echo [INFO] Import annulé par l'utilisateur
-    pause
-    exit /b 0
-)
+:: Import automatique sans confirmation
 
 :: Copier l'archive dans le projet
 echo [INFO] Copie de l'archive dans le projet...
@@ -96,9 +90,9 @@ if exist "%TEMP_EXTRACT%" (
 
 mkdir "%TEMP_EXTRACT%"
 
-:: Extraire l'archive avec PowerShell
+:: Extraire l'archive avec PowerShell (suppression du bruit)
 echo [INFO] Extraction de l'archive...
-powershell -Command "Expand-Archive -Path '%PROJECT_PATH%temp-import.zip' -DestinationPath '%TEMP_EXTRACT%' -Force"
+powershell -Command "Expand-Archive -Path '%PROJECT_PATH%temp-import.zip' -DestinationPath '%TEMP_EXTRACT%' -Force" >nul 2>&1
 if errorlevel 1 (
     echo [ERREUR] Échec de l'extraction de l'archive !
     goto :cleanup

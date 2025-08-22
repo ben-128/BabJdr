@@ -134,3 +134,4 @@ echo   NETTOYAGE TERMINÉ
 echo ========================================
 echo.
 pause
+exit /b 0

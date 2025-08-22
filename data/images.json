@@ -45,12 +45,16 @@
     "objet:Espadon": "https://i.ibb.co/35rpP6ZS/Epee2M1.png",
     "objet:Simple épée": "https://i.ibb.co/PsSXvSXx/Epee1.png",
     "objet:Dague en fer": "https://i.ibb.co/1fCwy6cR/Dague1.png",
-    "objet:Bâton en bois": "https://i.ibb.co/TMF07Tzf/Baton1.png",
+    "objet:Bâton en bois": "https://i.ibb.co/PsyCNw86/Baton1.png",
     "objet:Gourdin": "https://i.ibb.co/whZCKww0/Baton2.png",
-    "objet:Arc simple": "https://i.ibb.co/cKb1JKZQ/Arc1.png"
+    "objet:Arc simple": "https://i.ibb.co/cKb1JKZQ/Arc1.png",
+    "objet:Bouclier en bois": "https://i.ibb.co/67bK4Bw8/Bouclier1.png",
+    "objet:Robe simple": "https://i.ibb.co/VYFpnz8h/Robe1.png",
+    "objet:Armure de cuir": "https://i.ibb.co/9Hkw2VFb/Armure-Cuir1.png",
+    "objet:Armure en maille": "https://i.ibb.co/cXtwzw5b/Armure-Lourde1.png"
   },
   "meta": {
-    "total_images": 48,
+    "total_images": 52,
     "exported_date": "2025-08-22",
     "note": "Ces images incluent les nouvelles images uploadées"
   }

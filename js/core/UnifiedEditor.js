@@ -712,7 +712,11 @@
       const objet = window.OBJETS?.objets?.find(o => o.nom === session.itemIdentifier);
       if (!objet) return false;
       
-      objet[session.editSection] = content;
+      // Use editMapping if available, otherwise use editSection directly
+      const config = session.config || window.ContentTypes.objet;
+      const propertyName = config.editMapping?.[session.editSection] || session.editSection;
+      
+      objet[propertyName] = content;
       return true;
     }
 

@@ -89,6 +89,61 @@
       "effet": "<strong>Portée: </strong> 15m.<br>\n<strong>Dégâts: </strong> Inflige (Force) points de dégats physiques.",
       "prix": "🔷 <strong>Prix:</strong> 30",
       "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Bouclier en bois",
+      "numero": 7,
+      "image": "",
+      "description": "<i>Un bouclier grossier taillé dans des planches épaisses, marqué de cicatrices de bataille.</i>",
+      "tags": [
+        "Départ",
+        "Bouclier"
+      ],
+      "effet": "<strong>Effet:</strong> Augmente l'armure physique de 2.",
+      "prix": "🔷 <strong>Prix:</strong> 15",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Robe simple",
+      "numero": 8,
+      "image": "",
+      "description": "<i>Une robe de toile modeste, aux plis fatigués mais encore emplis de dignité.</i>",
+      "tags": [
+        "Départ",
+        "Armure",
+        "Robe"
+      ],
+      "effet": "<strong>Effet:</strong> Augmente la Volonté de 1.",
+      "prix": "🔷 <strong>Prix:</strong> 20",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Armure de cuir",
+      "numero": 9,
+      "image": "",
+      "description": "<i>Une armure souple en cuir tanné, taillée pour offrir une protection rudimentaire.</i>",
+      "tags": [
+        "Départ",
+        "Armure",
+        "Armure légère"
+      ],
+      "effet": "<strong>Effet:</strong> Augmente l'armure physique de 1.",
+      "prix": "🔷 <strong>Prix:</strong> 30",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Armure en maille",
+      "numero": 10,
+      "image": "",
+      "description": "<i>Une cotte de mailles dont chaque anneau forgé promet résistance et endurance au combat.</i>",
+      "tags": [
+        "Départ",
+        "Armure",
+        "Armure lourde"
+      ],
+      "effet": "<strong>Effet:</strong> Augmente l'armure physique de 3.",
+      "prix": "🔷 <strong>Prix:</strong> 65",
+      "poids": "⚖️ <strong>Poids:</strong> 2"
     }
   ],
   "filterSettings": {
@@ -96,14 +151,7 @@
       "Départ",
       "Arme",
       "Armure",
-      "Consommable",
-      "Épée",
-      "Arme exotique",
-      "Une main",
-      "Deux mains",
-      "Baton",
-      "Dague",
-      "Arc"
+      "Consommable"
     ],
     "displayedFilterButtons": [
       "Départ",

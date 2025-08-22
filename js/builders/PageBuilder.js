@@ -64,6 +64,13 @@
       const filterSettings = objectData.filterSettings || {};
       const visibleTags = filterSettings.visibleTags || config.filterConfig.defaultVisibleTags;
       
+      // CRITICAL: Ensure window.OBJETS.filterSettings is properly initialized with the same visibleTags
+      // This fixes the sync issue between visual state and data state in standalone mode
+      if (!window.OBJETS.filterSettings) {
+        window.OBJETS.filterSettings = { visibleTags: [...visibleTags] };
+        console.log('🔧 PageBuilder: Initialized filterSettings in window.OBJETS:', window.OBJETS.filterSettings);
+      }
+      
       // Filtrer les objets selon les tags visibles, sauf si une recherche par ID est active
       const filteredObjects = window.activeIdSearch 
         ? allObjects // Afficher tous les objets quand une recherche par ID est active

@@ -35,8 +35,8 @@ echo Appuyez sur Ctrl+C pour arrêter le serveur
 echo ========================================
 echo.
 
-:: Lancer le serveur propre
-call npm run dev-clean
+:: Lancer le serveur propre (suppression du bruit npm)
+call npm run dev-clean 2>nul
 
 echo.
 echo [INFO] Serveur arrêté
