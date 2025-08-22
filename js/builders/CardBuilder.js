@@ -123,7 +123,6 @@
             <div style="flex: 1;">${this.buildEditableField(this.data.prix, 'objet-prix', 'Prix')}</div>
             <div style="flex: 1;">${this.buildEditableField(this.data.poids, 'objet-poids', 'Poids')}</div>
           </div>
-          ${this.buildMoveButtons('objet', index, totalItems)}
         </div>
       `;
     }
@@ -406,6 +405,34 @@
 
     getCategoryData() {
       return window.ContentFactory.getEntity(this.type)?.findCategory(this.categoryName);
+    }
+
+    buildMoveButtons(type, index, totalItems) {
+      if (!this.shouldShowEditButtons || totalItems <= 1) {
+        return '';
+      }
+
+      const canMoveUp = index > 0;
+      const canMoveDown = index < totalItems - 1;
+      
+      return `
+        <div class="move-buttons" style="display: flex; gap: 0.5rem; justify-content: center; margin: 1rem 0;">
+          <button class="${type}-move-up btn small" 
+                  data-category-name="${this.categoryName}" 
+                  data-${type}-name="${this.data.nom}"
+                  ${!canMoveUp ? 'disabled' : ''}
+                  style="background: var(--bronze); color: white;">
+            ↑ Haut
+          </button>
+          <button class="${type}-move-down btn small" 
+                  data-category-name="${this.categoryName}" 
+                  data-${type}-name="${this.data.nom}"
+                  ${!canMoveDown ? 'disabled' : ''}
+                  style="background: var(--bronze); color: white;">
+            ↓ Bas
+          </button>
+        </div>
+      `;
     }
   }
 

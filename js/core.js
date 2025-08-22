@@ -82,6 +82,9 @@
           
           // Load stored edits AFTER setting up the data structure
           this.loadStoredEditsEarly();
+          
+          // Initialize default filters for objects
+          this.initializeDefaultFilters();
           return;
         }
         
@@ -128,6 +131,9 @@
         
         // Load stored edits in development mode (after data is loaded)
         this.loadStoredEditsEarly();
+        
+        // Initialize default filters for objects
+        this.initializeDefaultFilters();
       } catch (error) {
         console.error('Failed to load data:', error);
         throw error;
@@ -212,6 +218,24 @@
       localStorage.removeItem('jdr-bab-edits');
       localStorage.removeItem('jdr-bab-last-modified');
       window.location.reload();
+    },
+
+    // Initialize default filters for objects on page load
+    initializeDefaultFilters() {
+      try {
+        // Only initialize if OBJETS exists and ContentTypes is available
+        if (window.OBJETS && window.ContentTypes?.objet?.filterConfig) {
+          const defaultTags = window.ContentTypes.objet.filterConfig.defaultVisibleTags || [];
+          
+          // ALWAYS reset to defaults on each page load (force fresh state)
+          window.OBJETS.filterSettings = {
+            visibleTags: [...defaultTags] // Make a copy to avoid reference issues
+          };
+          
+        }
+      } catch (error) {
+        console.error('Error initializing default filters:', error);
+      }
     }
   };
 

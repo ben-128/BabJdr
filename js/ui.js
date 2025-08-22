@@ -82,8 +82,6 @@
           itemName = e.target.dataset.spellName;
         } else if (type === 'don') {
           itemName = e.target.dataset.donName;
-        } else if (type === 'objet') {
-          itemName = e.target.dataset.objetName;
         } else if (type === 'class') {
           itemName = e.target.dataset.className || e.target.dataset.subclassName;
         } else {
@@ -95,6 +93,51 @@
         if (type && categoryName && itemName) {
           this.moveContent(type, categoryName, itemName, direction);
         }
+      });
+
+      // Filter manager button for objects
+      JdrApp.utils.events.register('click', '.filter-manager-btn', () => {
+        this.showFilterManagementModal();
+      });
+
+      // Tags manager button for objects
+      JdrApp.utils.events.register('click', '.tags-manager-btn', () => {
+        this.showTagsManagementModal();
+      });
+
+      // Filter chip toggle for objects
+      JdrApp.utils.events.register('click', '.filter-chip', (e) => {
+        this.toggleFilter(e.target);
+      });
+
+      // Select all tags button
+      JdrApp.utils.events.register('click', '#select-all-tags', () => {
+        this.selectAllTags();
+      });
+
+      // Select no tags button
+      JdrApp.utils.events.register('click', '#select-no-tags', () => {
+        this.selectNoTags();
+      });
+
+      // ID search functionality (only on Enter key or button click)
+      JdrApp.utils.events.register('keydown', '#id-search-input', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          this.performIdSearch(e.target.value);
+        } else if (e.key === 'Escape') {
+          e.target.value = '';
+          this.clearIdSearch();
+        }
+      });
+
+      JdrApp.utils.events.register('click', '#clear-id-search', () => {
+        this.clearIdSearch();
+      });
+
+      // Spell element change
+      JdrApp.utils.events.register('change', '.spell-element-selector select', (e) => {
+        this.updateSpellElement(e.target);
       });
 
       // Paragraph addition
@@ -329,6 +372,141 @@
         
         this.showNotification(`🗑️ Section "${sectionName}" supprimée et mise à jour JSON`);
       }
+    },
+
+    // ========================================
+    // CONTENT MANIPULATION METHODS 
+    // ========================================
+    
+    addContent(type, categoryName) {
+      const config = window.ContentTypes[type];
+      if (!config) {
+        this.showNotification(`❌ Configuration manquante pour le type ${type}`, 'error');
+        return;
+      }
+
+      // Create new item with default values
+      const defaultItem = ContentFactory.createDefaultItem(type);
+      
+      // Special handling for objects (add to single array)
+      if (type === 'objet') {
+        if (!window.OBJETS.objets) {
+          window.OBJETS.objets = [];
+        }
+        
+        // Get next number
+        const existingNumbers = window.OBJETS.objets.map(obj => obj.numero || 0);
+        const nextNumber = existingNumbers.length > 0 ? Math.max(...existingNumbers) + 1 : 1;
+        defaultItem.numero = nextNumber;
+        
+        window.OBJETS.objets.push(defaultItem);
+        this.refreshObjectsPage();
+      } else {
+        // Standard category-based addition
+        const success = ContentFactory.addItem(type, categoryName, defaultItem);
+        if (success) {
+          EventBus.emit(Events.CONTENT_ADD, {
+            type: type,
+            category: categoryName,
+            item: defaultItem
+          });
+          
+          EventBus.emit(Events.PAGE_RENDER, {
+            type: 'category',
+            categoryType: type,
+            category: ContentFactory.getEntity(type).findCategory(categoryName)
+          });
+        }
+      }
+      
+      EventBus.emit(Events.STORAGE_SAVE);
+      this.showNotification(`${config.icons.add} Nouvel élément ajouté`, 'success');
+    },
+
+    deleteContent(type, categoryName, itemName) {
+      const config = window.ContentTypes[type];
+      if (!config) {
+        this.showNotification(`❌ Configuration manquante pour le type ${type}`, 'error');
+        return;
+      }
+
+      if (!confirm(`Supprimer "${itemName}" ?`)) {
+        return;
+      }
+
+      // Special handling for objects
+      if (type === 'objet') {
+        if (window.OBJETS?.objets) {
+          const itemIndex = window.OBJETS.objets.findIndex(obj => obj.nom === itemName);
+          if (itemIndex >= 0) {
+            window.OBJETS.objets.splice(itemIndex, 1);
+            this.refreshObjectsPage();
+          }
+        }
+      } else {
+        // Standard category-based deletion
+        const success = ContentFactory.deleteItem(type, categoryName, itemName);
+        if (success) {
+          EventBus.emit(Events.CONTENT_DELETE, {
+            type: type,
+            category: categoryName,
+            item: itemName
+          });
+          
+          EventBus.emit(Events.PAGE_RENDER, {
+            type: 'category',
+            categoryType: type,
+            category: ContentFactory.getEntity(type).findCategory(categoryName)
+          });
+        }
+      }
+      
+      EventBus.emit(Events.STORAGE_SAVE);
+      this.showNotification(`${config.icons.delete} "${itemName}" supprimé`, 'success');
+    },
+
+    moveContent(type, categoryName, itemName, direction) {
+      const config = window.ContentTypes[type];
+      if (!config) {
+        this.showNotification(`❌ Configuration manquante pour le type ${type}`, 'error');
+        return;
+      }
+
+      // Special handling for objects
+      if (type === 'objet') {
+        if (window.OBJETS?.objets) {
+          const itemIndex = window.OBJETS.objets.findIndex(obj => obj.nom === itemName);
+          if (itemIndex >= 0) {
+            const newIndex = itemIndex + direction;
+            if (newIndex >= 0 && newIndex < window.OBJETS.objets.length) {
+              const item = window.OBJETS.objets.splice(itemIndex, 1)[0];
+              window.OBJETS.objets.splice(newIndex, 0, item);
+              this.refreshObjectsPage();
+            }
+          }
+        }
+      } else {
+        // Standard category-based movement
+        const success = ContentFactory.moveItem(type, categoryName, itemName, direction);
+        if (success) {
+          EventBus.emit(Events.CONTENT_MOVE, {
+            type: type,
+            category: categoryName,
+            itemName: itemName,
+            direction: direction
+          });
+          
+          EventBus.emit(Events.PAGE_RENDER, {
+            type: 'category',
+            categoryType: type,
+            category: ContentFactory.getEntity(type).findCategory(categoryName)
+          });
+        }
+      }
+      
+      EventBus.emit(Events.STORAGE_SAVE);
+      const directionText = direction > 0 ? 'descendu' : 'monté';
+      this.showNotification(`🔄 "${itemName}" ${directionText}`, 'success');
     },
 
     handleContentAdd(type, category, item) {
@@ -1087,8 +1265,12 @@
     openModal(modalId) {
       const modal = JdrApp.utils.dom.$(`#${modalId}`);
       if (modal) {
-        modal.classList.add('visible');
-        modal.style.display = 'flex';
+        if (modal.tagName === 'DIALOG') {
+          modal.showModal();
+        } else {
+          modal.classList.add('visible');
+          modal.style.display = 'flex';
+        }
         
         const firstInput = modal.querySelector('input, textarea, select');
         if (firstInput) {
@@ -1861,25 +2043,38 @@
       const config = window.ContentTypes.objet.filterConfig;
       const currentSettings = window.OBJETS.filterSettings || { visibleTags: config.defaultVisibleTags };
       
-      let modal = document.querySelector('#filterModal');
-      if (!modal) {
-        modal = this.createFilterModal();
-        document.body.appendChild(modal);
+      // Remove existing modal if any
+      const existingModal = document.querySelector('#filterModal');
+      if (existingModal) {
+        existingModal.remove();
       }
+      
+      const modal = this.createFilterModal();
+      document.body.appendChild(modal);
       
       // Update modal content with current settings
       this.updateFilterModalContent(modal, config, currentSettings);
-      this.openModal('filterModal');
+      
+      // Use native dialog showModal for proper z-index
+      modal.showModal();
     },
 
     createFilterModal() {
-      const modal = document.createElement('div');
-      modal.className = 'modal';
+      const modal = document.createElement('dialog');
       modal.id = 'filterModal';
+      modal.style.cssText = `
+        max-width: 500px;
+        width: 90%;
+        padding: 0;
+        border: none;
+        border-radius: 12px;
+        background: transparent;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      `;
       modal.innerHTML = `
-        <div class="modal-content" style="max-width: 500px;">
-          <h3>⚙️ Gestion des filtres d'objets</h3>
-          <p>Choisissez quels tags d'objets afficher sur la page :</p>
+        <div style="background: var(--paper); border-radius: 12px; padding: 1.5rem; border: 2px solid var(--rule);">
+          <h3 style="margin: 0 0 1rem 0; color: var(--accent-ink);">Gestion des filtres d'objets</h3>
+          <p style="margin: 0 0 1rem 0; color: var(--paper-muted);">Choisissez quels tags d'objets afficher sur la page :</p>
           <div id="filterCheckboxes" style="margin: 1rem 0;">
             <!-- Content will be populated by updateFilterModalContent -->
           </div>
@@ -1903,6 +2098,26 @@
           this.saveFilterSettings(modal);
         } else if (e.target.id === 'resetFiltersBtn') {
           this.resetFilterSettings(modal);
+        } else if (e.target.classList.contains('modal-close')) {
+          modal.close();
+          modal.remove();
+        } else if (e.target.classList.contains('move-tag-up')) {
+          this.moveTagInModal(modal, e.target.dataset.tag, -1);
+        } else if (e.target.classList.contains('move-tag-down')) {
+          this.moveTagInModal(modal, e.target.dataset.tag, 1);
+        }
+      });
+
+      // Handle dialog close events
+      modal.addEventListener('cancel', () => {
+        modal.close();
+        modal.remove();
+      });
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.close();
+          modal.remove();
         }
       });
 
@@ -1915,8 +2130,10 @@
 
       const checkboxHTML = config.availableTags.map(tag => {
         const isVisible = currentSettings.visibleTags.includes(tag);
+        const isDefault = config.defaultVisibleTags.includes(tag);
+        
         return `
-          <div style="display: flex; align-items: center; gap: 0.5rem; margin: 0.5rem 0; padding: 0.5rem; background: var(--card); border-radius: 8px;">
+          <div class="tag-row" data-tag="${tag}" style="display: flex; align-items: center; gap: 0.5rem; margin: 0.5rem 0; padding: 0.5rem; background: var(--card); border-radius: 8px;">
             <input 
               type="checkbox" 
               id="filter-${tag}" 
@@ -1928,36 +2145,83 @@
               <span class="tag-chip" style="margin-right: 0.5rem;">${tag}</span>
               ${tag}
             </label>
+            <input 
+              type="checkbox" 
+              id="default-${tag}" 
+              value="${tag}" 
+              ${isDefault ? 'checked' : ''}
+              style="margin: 0;"
+              title="Filtre par défaut au chargement du site"
+            >
+            <div style="display: flex; flex-direction: column; gap: 2px;">
+              <button type="button" class="move-tag-up" data-tag="${tag}" style="background: var(--accent); color: white; border: none; border-radius: 3px; padding: 2px 6px; font-size: 12px; cursor: pointer;" title="Monter dans l'ordre">↑</button>
+              <button type="button" class="move-tag-down" data-tag="${tag}" style="background: var(--accent); color: white; border: none; border-radius: 3px; padding: 2px 6px; font-size: 12px; cursor: pointer;" title="Descendre dans l'ordre">↓</button>
+            </div>
           </div>
         `;
       }).join('');
 
-      checkboxContainer.innerHTML = checkboxHTML;
+      checkboxContainer.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--rule);">
+          <span style="font-weight: 600; color: var(--accent-ink);">Tag</span>
+          <div style="display: flex; gap: 1rem; font-size: 0.9em; font-weight: 600; color: var(--accent-ink);">
+            <span>Visible</span>
+            <span>Défaut</span>
+            <span>Ordre</span>
+          </div>
+        </div>
+        <div id="sortable-tags-list">
+          ${checkboxHTML}
+        </div>
+        <div style="margin-top: 1rem; padding-top: 0.5rem; border-top: 1px solid var(--rule); font-size: 0.85em; color: var(--paper-muted);">
+          ℹ️ <strong>Visible</strong> : Tags affichés actuellement<br>
+          🏠 <strong>Par défaut</strong> : Tags automatiquement activés au chargement du site<br>
+          ↕️ <strong>Ordre</strong> : Utilisez les flèches pour réorganiser l'affichage
+        </div>
+      `;
     },
 
     saveFilterSettings(modal) {
-      const checkboxes = modal.querySelectorAll('input[type="checkbox"]');
-      const visibleTags = Array.from(checkboxes)
-        .filter(cb => cb.checked)
-        .map(cb => cb.value);
+      // Get visible tags (currently active)
+      const visibleCheckboxes = modal.querySelectorAll('input[id^="filter-"]:checked');
+      const visibleTags = Array.from(visibleCheckboxes).map(cb => cb.value);
+
+      // Get default tags (active by default on site load)
+      const defaultCheckboxes = modal.querySelectorAll('input[id^="default-"]:checked');
+      const defaultTags = Array.from(defaultCheckboxes).map(cb => cb.value);
 
       if (visibleTags.length === 0) {
-        this.showNotification('❌ Veuillez sélectionner au moins un tag', 'error');
+        this.showNotification('❌ Veuillez sélectionner au moins un tag visible', 'error');
         return;
       }
 
-      // Update the data structure
+      if (defaultTags.length === 0) {
+        this.showNotification('❌ Veuillez sélectionner au moins un tag par défaut', 'error');
+        return;
+      }
+
+      // Update current visible tags in OBJETS
       if (!window.OBJETS.filterSettings) {
         window.OBJETS.filterSettings = {};
       }
       window.OBJETS.filterSettings.visibleTags = visibleTags;
 
+      // Update default tags in ContentTypes configuration
+      // Note: availableTags order has already been updated by moveTagInModal()
+      if (window.ContentTypes.objet?.filterConfig) {
+        window.ContentTypes.objet.filterConfig.defaultVisibleTags = defaultTags;
+      }
+
       // Trigger page re-render
       this.refreshObjectsPage();
       
+      // Save to storage (will include the updated order and defaultVisibleTags in export)
+      EventBus.emit(Events.STORAGE_SAVE);
+      
       // Close modal and show notification
-      this.closeModal(modal);
-      this.showNotification(`🏷️ Filtres mis à jour : ${visibleTags.join(', ')}`, 'success');
+      modal.close();
+      modal.remove();
+      this.showNotification(`🏷️ Filtres mis à jour : ${visibleTags.length} visible(s), ${defaultTags.length} par défaut`, 'success');
     },
 
     resetFilterSettings(modal) {
@@ -1966,6 +2230,30 @@
       
       this.updateFilterModalContent(modal, config, defaultSettings);
       this.showNotification('🔄 Filtres réinitialisés aux valeurs par défaut', 'info');
+    },
+
+    moveTagInModal(modal, tagName, direction) {
+      // Get current configuration
+      const config = window.ContentTypes.objet.filterConfig;
+      const currentIndex = config.availableTags.indexOf(tagName);
+      
+      if (currentIndex === -1) return; // Tag not found
+      
+      const newIndex = currentIndex + direction;
+      
+      // Check bounds
+      if (newIndex < 0 || newIndex >= config.availableTags.length) return;
+      
+      // Swap tags in the array
+      const temp = config.availableTags[currentIndex];
+      config.availableTags[currentIndex] = config.availableTags[newIndex];
+      config.availableTags[newIndex] = temp;
+      
+      // Refresh the modal display
+      const currentSettings = window.OBJETS?.filterSettings || { visibleTags: config.defaultVisibleTags };
+      this.updateFilterModalContent(modal, config, currentSettings);
+      
+      this.showNotification(`📊 "${tagName}" ${direction > 0 ? 'descendu' : 'monté'} dans l'ordre`, 'info');
     },
 
     toggleFilter(chipElement) {
@@ -2276,6 +2564,497 @@
         return section ? section.title : sectionId;
       }
       return sectionId;
+    },
+
+    // ==== GLOBAL TAGS MANAGEMENT ====
+
+    showTagsManagementModal() {
+      if (!window.ContentTypes.objet?.filterConfig) {
+        this.showNotification('❌ Configuration des tags non trouvée', 'error');
+        return;
+      }
+
+      // Remove any existing modal
+      const existingModal = document.querySelector('#tagsManagementModal');
+      if (existingModal) {
+        existingModal.remove();
+      }
+
+      const config = window.ContentTypes.objet.filterConfig;
+      const modal = this.createTagsManagementModal(config);
+      document.body.appendChild(modal);
+      
+      // Use native dialog showModal for proper z-index
+      modal.showModal();
+    },
+
+    createTagsManagementModal(config) {
+      const modal = document.createElement('dialog');
+      modal.id = 'tagsManagementModal';
+      modal.style.cssText = `
+        max-width: 600px;
+        width: 90%;
+        padding: 0;
+        border: none;
+        border-radius: 12px;
+        background: transparent;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      `;
+
+      const tagsListHTML = config.availableTags.map((tag, index) => `
+        <div class="tag-item" data-tag-index="${index}" data-tag-name="${tag}">
+          <span class="tag-chip" style="background: var(--bronze); color: white; padding: 4px 8px; border-radius: 8px; margin-right: 0.5rem;">${tag}</span>
+          <input type="text" value="${tag}" class="tag-input" style="flex: 1; padding: 0.5rem; border: 1px solid var(--rule); border-radius: 4px; margin-right: 0.5rem;">
+          <button type="button" class="btn small delete-tag-btn" data-tag-name="${tag}" style="background: #dc2626; color: white; padding: 0.25rem 0.5rem;">
+            🗑️
+          </button>
+        </div>
+      `).join('');
+
+      modal.innerHTML = `
+        <div style="background: var(--paper); border-radius: 12px; padding: 1.5rem; border: 2px solid var(--rule);">
+          <h3 style="margin: 0 0 1rem 0; color: var(--accent-ink);">🏷️ Gestion des tags globaux</h3>
+          <p style="margin: 0 0 1rem 0; color: var(--paper-muted);">Gérez la liste principale des tags disponibles pour les objets.</p>
+          
+          <div style="margin: 1rem 0;">
+            <h4 style="margin: 0 0 0.5rem 0; color: var(--accent-ink);">Tags existants :</h4>
+            <div id="tagsManagementList" style="max-height: 300px; overflow-y: auto;">
+              ${tagsListHTML}
+            </div>
+          </div>
+          
+          <div style="margin: 1rem 0; padding: 1rem; background: var(--card); border-radius: 8px;">
+            <h4 style="margin: 0 0 0.5rem 0; color: var(--accent-ink);">Ajouter un nouveau tag :</h4>
+            <div style="display: flex; gap: 0.5rem; align-items: center;">
+              <input type="text" id="newTagInput" placeholder="Nom du nouveau tag" style="flex: 1; padding: 0.5rem; border: 1px solid var(--rule); border-radius: 4px;">
+              <button type="button" id="addTagBtn" class="btn" style="background: var(--accent); color: white;">
+                ➕ Ajouter
+              </button>
+            </div>
+          </div>
+          
+          <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 1.5rem;">
+            <button type="button" class="btn modal-close" style="background: #666; color: white;">
+              ❌ Annuler
+            </button>
+            <button type="button" id="saveTagsManagementBtn" class="btn" style="background: var(--accent); color: white;">
+              💾 Sauvegarder
+            </button>
+          </div>
+        </div>
+      `;
+
+      this.setupTagsManagementHandlers(modal, config);
+      return modal;
+    },
+
+    setupTagsManagementHandlers(modal, config) {
+      // Add new tag
+      modal.querySelector('#addTagBtn').addEventListener('click', () => {
+        const input = modal.querySelector('#newTagInput');
+        const newTag = input.value.trim();
+        
+        if (!newTag) {
+          this.showNotification('❌ Veuillez saisir un nom de tag', 'error');
+          return;
+        }
+        
+        if (config.availableTags.includes(newTag)) {
+          this.showNotification(`❌ Le tag "${newTag}" existe déjà`, 'error');
+          return;
+        }
+        
+        // Add to temporary config (will be saved when user clicks save)
+        config.availableTags.push(newTag);
+        
+        // Update the modal display
+        this.refreshTagsManagementModal(modal, config);
+        
+        // Clear input
+        input.value = '';
+        this.showNotification(`➕ Tag "${newTag}" ajouté à la liste`, 'success');
+      });
+
+      // Handle Enter key in new tag input
+      modal.querySelector('#newTagInput').addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          modal.querySelector('#addTagBtn').click();
+        }
+      });
+
+      // Delete tag
+      modal.addEventListener('click', (e) => {
+        if (e.target.classList.contains('delete-tag-btn')) {
+          const tagName = e.target.dataset.tagName;
+          
+          if (config.availableTags.length <= 1) {
+            this.showNotification('❌ Impossible de supprimer le dernier tag', 'error');
+            return;
+          }
+          
+          if (confirm(`Supprimer le tag "${tagName}" ?\nAttention: il sera retiré de tous les objets qui l'utilisent.`)) {
+            // Remove from config
+            config.availableTags = config.availableTags.filter(tag => tag !== tagName);
+            
+            // Remove from all objects that use this tag
+            if (window.OBJETS?.objets) {
+              window.OBJETS.objets.forEach(obj => {
+                if (obj.tags && obj.tags.includes(tagName)) {
+                  obj.tags = obj.tags.filter(tag => tag !== tagName);
+                  // Ensure object has at least one tag if possible
+                  if (obj.tags.length === 0 && config.availableTags.length > 0) {
+                    obj.tags = [config.availableTags[0]];
+                  }
+                }
+              });
+            }
+            
+            // Update filter settings to remove deleted tag
+            if (window.OBJETS?.filterSettings?.visibleTags) {
+              window.OBJETS.filterSettings.visibleTags = window.OBJETS.filterSettings.visibleTags.filter(tag => tag !== tagName);
+              // Ensure at least one visible tag remains
+              if (window.OBJETS.filterSettings.visibleTags.length === 0 && config.availableTags.length > 0) {
+                window.OBJETS.filterSettings.visibleTags = [config.availableTags[0]];
+              }
+            }
+            
+            // Update modal display
+            this.refreshTagsManagementModal(modal, config);
+            this.showNotification(`🗑️ Tag "${tagName}" supprimé`, 'success');
+          }
+        }
+      });
+
+      // Save all changes
+      modal.querySelector('#saveTagsManagementBtn').addEventListener('click', () => {
+        // Collect all tag renames
+        const tagItems = modal.querySelectorAll('.tag-item');
+        const renames = [];
+        
+        tagItems.forEach(item => {
+          const originalName = item.dataset.tagName;
+          const newName = item.querySelector('.tag-input').value.trim();
+          
+          if (newName && newName !== originalName) {
+            renames.push({ old: originalName, new: newName });
+          }
+        });
+        
+        // Apply renames to config
+        renames.forEach(rename => {
+          const index = config.availableTags.indexOf(rename.old);
+          if (index >= 0) {
+            config.availableTags[index] = rename.new;
+            
+            // Update all objects that use this tag
+            if (window.OBJETS?.objets) {
+              window.OBJETS.objets.forEach(obj => {
+                if (obj.tags && obj.tags.includes(rename.old)) {
+                  const tagIndex = obj.tags.indexOf(rename.old);
+                  obj.tags[tagIndex] = rename.new;
+                }
+              });
+            }
+            
+            // Update filter settings
+            if (window.OBJETS?.filterSettings?.visibleTags) {
+              const visibleIndex = window.OBJETS.filterSettings.visibleTags.indexOf(rename.old);
+              if (visibleIndex >= 0) {
+                window.OBJETS.filterSettings.visibleTags[visibleIndex] = rename.new;
+              }
+            }
+          }
+        });
+        
+        // Save to storage
+        EventBus.emit(Events.STORAGE_SAVE);
+        
+        // Refresh objects page if currently visible
+        this.refreshObjectsPage();
+        
+        // Close modal
+        modal.close();
+        modal.remove();
+        
+        const changesCount = renames.length;
+        if (changesCount > 0) {
+          this.showNotification(`💾 ${changesCount} modification(s) sauvegardée(s)`, 'success');
+        } else {
+          this.showNotification('💾 Tags sauvegardés', 'success');
+        }
+      });
+
+      // Close modal events
+      modal.querySelector('.modal-close').addEventListener('click', () => {
+        modal.close();
+        modal.remove();
+      });
+
+      modal.addEventListener('cancel', () => {
+        modal.close();
+        modal.remove();
+      });
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.close();
+          modal.remove();
+        }
+      });
+    },
+
+    refreshTagsManagementModal(modal, config) {
+      const container = modal.querySelector('#tagsManagementList');
+      if (!container) return;
+
+      const tagsListHTML = config.availableTags.map((tag, index) => `
+        <div class="tag-item" data-tag-index="${index}" data-tag-name="${tag}">
+          <span class="tag-chip" style="background: var(--bronze); color: white; padding: 4px 8px; border-radius: 8px; margin-right: 0.5rem;">${tag}</span>
+          <input type="text" value="${tag}" class="tag-input" style="flex: 1; padding: 0.5rem; border: 1px solid var(--rule); border-radius: 4px; margin-right: 0.5rem;">
+          <button type="button" class="btn small delete-tag-btn" data-tag-name="${tag}" style="background: #dc2626; color: white; padding: 0.25rem 0.5rem;">
+            🗑️
+          </button>
+        </div>
+      `).join('');
+
+      container.innerHTML = tagsListHTML;
+    },
+
+    // ==== ID SEARCH FUNCTIONALITY ====
+
+    performIdSearch(searchValue) {
+      const searchId = searchValue.trim();
+      const resultDiv = document.querySelector('#id-search-result');
+      
+      if (!searchId) {
+        this.clearIdSearch();
+        return;
+      }
+
+      const searchNumber = parseInt(searchId, 10);
+      if (isNaN(searchNumber)) {
+        if (resultDiv) {
+          resultDiv.innerHTML = '❌ Veuillez saisir un numéro valide';
+          resultDiv.style.color = '#dc2626';
+        }
+        return;
+      }
+
+      // Find object by number
+      const allObjects = window.OBJETS?.objets || [];
+      const foundObject = allObjects.find(obj => obj.numero === searchNumber);
+
+      if (!foundObject) {
+        if (resultDiv) {
+          resultDiv.innerHTML = `❌ Aucun objet trouvé avec l'ID ${searchNumber}`;
+          resultDiv.style.color = '#dc2626';
+        }
+        // Hide all objects
+        this.hideAllObjects();
+        return;
+      }
+
+      // Set global flag BEFORE regenerating page
+      window.activeIdSearch = true;
+
+      // Force regenerate page with all objects AND visual feedback
+      if (JdrApp.modules.renderer?.regenerateCurrentPage) {
+        JdrApp.modules.renderer.regenerateCurrentPage();
+      }
+
+      // Show success message
+      if (resultDiv) {
+        resultDiv.innerHTML = `✅ Objet trouvé : "${foundObject.nom}" (ID: ${searchNumber})`;
+        resultDiv.style.color = '#16a34a';
+      }
+
+      // Show only the found object (after page regeneration)
+      setTimeout(() => {
+        this.showOnlyObjectById(searchNumber);
+        
+        // Restore the search value in the input field
+        const searchInput = document.querySelector('#id-search-input');
+        if (searchInput) {
+          searchInput.value = searchNumber;
+        }
+      }, 100);
+    },
+
+    clearIdSearch() {
+      const input = document.querySelector('#id-search-input');
+      const resultDiv = document.querySelector('#id-search-result');
+      
+      if (input) {
+        input.value = '';
+      }
+      
+      if (resultDiv) {
+        resultDiv.innerHTML = '';
+        resultDiv.style.color = '';
+      }
+
+      // Clear global flag for active ID search
+      window.activeIdSearch = false;
+
+      // Regenerate page to update visual feedback and return to normal display
+      if (JdrApp.modules.renderer?.regenerateCurrentPage) {
+        JdrApp.modules.renderer.regenerateCurrentPage();
+      }
+    },
+
+    hideAllObjects() {
+      const container = document.querySelector('#objets-container');
+      if (container) {
+        const allCards = container.querySelectorAll('.card');
+        allCards.forEach(card => {
+          card.style.display = 'none';
+        });
+      }
+    },
+
+    showOnlyObjectById(objectId) {
+      console.log('🔍 showOnlyObjectById called with ID:', objectId);
+      const container = document.querySelector('#objets-container');
+      if (!container) {
+        console.log('🔍 No objets-container found');
+        return;
+      }
+
+      const allCards = container.querySelectorAll('.card');
+      console.log('🔍 Found', allCards.length, 'cards in container');
+      let foundCard = null;
+
+      allCards.forEach((card, index) => {
+        const objetName = card.dataset.objetName;
+        console.log(`🔍 Card ${index}: objetName = "${objetName}"`);
+        if (objetName) {
+          // Find the object by name to get its number
+          const obj = window.OBJETS?.objets?.find(o => o.nom === objetName);
+          console.log(`🔍 Found object:`, obj);
+          if (obj && obj.numero === objectId) {
+            console.log('🔍 MATCH! Showing card for:', objetName);
+            card.style.display = '';
+            foundCard = card;
+          } else {
+            card.style.display = 'none';
+          }
+        }
+      });
+
+      console.log('🔍 foundCard:', foundCard);
+
+      // Scroll to the found card if it exists
+      if (foundCard) {
+        setTimeout(() => {
+          foundCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          // Brief highlight effect
+          foundCard.style.transition = 'all 0.3s ease';
+          foundCard.style.boxShadow = '0 0 20px rgba(22, 163, 74, 0.5)';
+          foundCard.style.transform = 'scale(1.02)';
+          
+          setTimeout(() => {
+            foundCard.style.boxShadow = '';
+            foundCard.style.transform = '';
+          }, 1500);
+        }, 100);
+      }
+    },
+
+    showAllObjectsWithTagFilters() {
+      // Restore normal tag filtering behavior
+      const currentSettings = window.OBJETS?.filterSettings || { 
+        visibleTags: window.ContentTypes.objet.filterConfig.defaultVisibleTags 
+      };
+      
+      const container = document.querySelector('#objets-container');
+      if (!container) return;
+
+      const allCards = container.querySelectorAll('.card');
+      allCards.forEach(card => {
+        const objetName = card.dataset.objetName;
+        if (objetName) {
+          // Find the object and check if it has visible tags
+          const obj = window.OBJETS?.objets?.find(o => o.nom === objetName);
+          if (obj && obj.tags) {
+            const hasVisibleTag = obj.tags.some(tag => currentSettings.visibleTags.includes(tag));
+            card.style.display = hasVisibleTag ? '' : 'none';
+          } else {
+            card.style.display = 'none';
+          }
+        }
+      });
+    },
+
+    // Toggle individual filter tag
+    toggleFilter(chipElement) {
+      const tag = chipElement.dataset.tag;
+      if (!tag) return;
+
+      // Update filter settings
+      if (!window.OBJETS.filterSettings) {
+        window.OBJETS.filterSettings = { visibleTags: [] };
+      }
+
+      const visibleTags = window.OBJETS.filterSettings.visibleTags;
+      const tagIndex = visibleTags.indexOf(tag);
+
+      if (tagIndex === -1) {
+        // Add tag
+        visibleTags.push(tag);
+      } else {
+        // Remove tag
+        visibleTags.splice(tagIndex, 1);
+      }
+
+      // Regenerate the objects page to reflect changes
+      this.refreshObjectsPage();
+    },
+
+    // Select all tags
+    selectAllTags() {
+      if (!window.OBJETS.filterSettings) {
+        window.OBJETS.filterSettings = { visibleTags: [] };
+      }
+
+      // Get all available tags and set them as visible
+      const availableTags = window.ContentTypes.objet.filterConfig.availableTags || [];
+      window.OBJETS.filterSettings.visibleTags = [...availableTags];
+
+      // Regenerate the objects page to reflect changes
+      this.refreshObjectsPage();
+    },
+
+    // Select no tags (allow having no tags active)
+    selectNoTags() {
+      if (!window.OBJETS.filterSettings) {
+        window.OBJETS.filterSettings = { visibleTags: [] };
+      }
+
+      // Clear all visible tags
+      window.OBJETS.filterSettings.visibleTags = [];
+
+      // Regenerate the objects page to reflect changes
+      this.refreshObjectsPage();
+    },
+
+    // Refresh the objects page after filter changes
+    refreshObjectsPage() {
+      // Don't regenerate if an ID search is active
+      if (window.activeIdSearch) {
+        // Just show notification, keep current display
+        const tagCount = window.OBJETS.filterSettings?.visibleTags?.length || 0;
+        this.showNotification(`🏷️ Filtres mis à jour (${tagCount} tag${tagCount > 1 ? 's' : ''} actif${tagCount > 1 ? 's' : ''}) - Recherche par ID active`, 'success');
+        return;
+      }
+
+      // Regenerate and update the objects page
+      if (JdrApp.modules.renderer?.regenerateCurrentPage) {
+        JdrApp.modules.renderer.regenerateCurrentPage();
+      }
+      
+      // Show notification
+      const tagCount = window.OBJETS.filterSettings?.visibleTags?.length || 0;
+      this.showNotification(`🏷️ Filtres mis à jour (${tagCount} tag${tagCount > 1 ? 's' : ''} actif${tagCount > 1 ? 's' : ''})`, 'success');
     }
   };
 

@@ -6,8 +6,7 @@
       "image": "",
       "description": "Une épée longue classique, arme de prédilection des guerriers.",
       "tags": [
-        "Arme",
-        "Mêlée"
+        "Arme"
       ],
       "effet": "<strong>Dégâts:</strong> 1d8 + Force<br><strong>Type:</strong> Tranchant",
       "prix": "💰 <strong>Prix:</strong> 50 po",
@@ -19,8 +18,7 @@
       "image": "",
       "description": "Une armure légère en cuir souple, offrant protection et mobilité.",
       "tags": [
-        "Armure",
-        "Légère"
+        "Armure"
       ],
       "effet": "<strong>CA:</strong> 11 + Dex<br><strong>Furtivité:</strong> Pas de désavantage",
       "prix": "💰 <strong>Prix:</strong> 25 po",
@@ -32,8 +30,7 @@
       "image": "",
       "description": "Une fiole contenant un liquide rouge qui soigne les blessures.",
       "tags": [
-        "Consommable",
-        "Magique"
+        "Consommable"
       ],
       "effet": "<strong>Effet:</strong> Restaure 2d4+2 points de vie",
       "prix": "💰 <strong>Prix:</strong> 100 po",
@@ -42,6 +39,7 @@
   ],
   "filterSettings": {
     "visibleTags": [
+      "Départ",
       "Arme",
       "Armure",
       "Consommable"

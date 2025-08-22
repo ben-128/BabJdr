@@ -30,7 +30,7 @@
         return this.buildSingleObjectPage(category);
       }
       
-      const pageId = `${config.container}-${this.sanitizeId(category.nom)}`;
+      const pageId = `${config.container}-${this.sanitizeId(category.nom || 'unknown')}`;
       const itemsProperty = this.getItemsProperty(type);
       
       // Get items and sort them for spells
@@ -59,15 +59,22 @@
     }
     
     buildSingleObjectPage(objectData) {
+      console.log('🔍 buildSingleObjectPage called, activeIdSearch:', window.activeIdSearch);
       const config = window.ContentTypes['objet'];
       const allObjects = objectData.objets || [];
       const filterSettings = objectData.filterSettings || {};
       const visibleTags = filterSettings.visibleTags || config.filterConfig.defaultVisibleTags;
+      console.log('🔍 allObjects.length:', allObjects.length, 'visibleTags:', visibleTags);
       
-      // Filtrer les objets selon les tags visibles
-      const filteredObjects = allObjects.filter(obj => 
-        obj.tags && obj.tags.some(tag => visibleTags.includes(tag))
-      );
+      
+      // Filtrer les objets selon les tags visibles, sauf si une recherche par ID est active
+      const filteredObjects = window.activeIdSearch 
+        ? allObjects // Afficher tous les objets quand une recherche par ID est active
+        : allObjects.filter(obj => 
+            obj.tags && obj.tags.some(tag => visibleTags.includes(tag))
+          );
+      
+      console.log('🔍 filteredObjects.length:', filteredObjects.length);
       
       return `
         <article class="" data-page="objets">
@@ -77,11 +84,13 @@
               ${this.buildIllustration('page:objets')}
             </div>
             
+            ${this.buildIdSearchFilter()}
             ${this.buildTagFilters(visibleTags, config.filterConfig.availableTags)}
             
             <div style="display: flex; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap;">
               ${this.buildAddButton('objet', 'objets')}
               ${this.buildFilterManagerButton()}
+              ${this.buildTagsManagerButton()}
             </div>
             
             <div class="grid cols-2" id="objets-container">
@@ -90,7 +99,7 @@
               ).join('')}
             </div>
             
-            ${filteredObjects.length === 0 ? '<p style="text-align: center; color: #666; margin: 2rem 0;">Aucun objet ne correspond aux filtres sélectionnés.</p>' : ''}
+            ${filteredObjects.length === 0 && !window.activeIdSearch ? '<p style="text-align: center; color: #666; margin: 2rem 0;">Aucun objet ne correspond aux filtres sélectionnés.</p>' : ''}
           </section>
         </article>
       `;
@@ -468,28 +477,110 @@
       `;
     }
 
-    buildTagFilters(visibleTags, availableTags) {
-      const filterChips = visibleTags.map(tag => 
-        `<span class="filter-chip active" data-tag="${tag}">${tag}</span>`
-      ).join('');
+    buildIdSearchFilter() {
+      const isIdSearchActive = window.activeIdSearch || false;
+      const searchBorderColor = isIdSearchActive ? '#16a34a' : 'var(--rule)';
+      const searchBoxShadow = isIdSearchActive ? 'box-shadow: 0 0 8px rgba(22, 163, 74, 0.3);' : '';
+      const searchIndicator = isIdSearchActive ? '🎯 ' : '🔍 ';
+      const buttonText = isIdSearchActive ? '🔄 Affichage normal' : '🔄 Tout afficher';
+      const buttonTitle = isIdSearchActive ? 'Retourner à l\'affichage normal avec filtres' : 'Effacer la recherche et afficher tous les objets';
       
       return `
-        <div class="tag-filters" style="margin: 1rem 0; padding: 1rem; background: var(--card); border: 2px solid var(--rule); border-radius: 12px;">
-          <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
-            <label style="font-weight: 600; color: var(--accent-ink);">
-              🏷️ Filtres actifs :
+        <div class="id-search-filter" style="margin: 0.5rem 0; background: var(--card); border: 2px solid ${searchBorderColor}; border-radius: 12px; display: flex; flex-direction: column; ${searchBoxShadow}">
+          <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; padding: 0.375rem; min-height: 2.5rem;">
+            <label for="id-search-input" style="font-weight: 600; color: var(--accent-ink); white-space: nowrap; display: flex; align-items: center; height: 100%;">
+              ${searchIndicator}Recherche par ID :
             </label>
-            <div class="filter-chips" style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-              ${filterChips}
+            <div style="display: flex; align-items: center; gap: 0.5rem; height: 100%;">
+              <input 
+                type="number" 
+                id="id-search-input" 
+                min="1" 
+                placeholder="Numéro d'objet (ex: 42)"
+                style="padding: 0.2rem; border: 1px solid ${searchBorderColor}; border-radius: 6px; font-size: 0.95em; width: 150px; height: 2rem; display: flex; align-items: center;"
+              >
+              <button 
+                id="clear-id-search" 
+                class="btn small" 
+                style="background: var(--bronze); color: white; padding: 0.2rem 0.4rem; white-space: nowrap; font-size: 0.9em; display: flex; align-items: center; height: 2rem; justify-content: center;"
+                title="${buttonTitle}"
+              >
+                ${buttonText}
+              </button>
             </div>
+          </div>
+          <div id="id-search-result" style="padding: 0 0.375rem 0.375rem; font-size: 0.85em; color: var(--paper-muted); min-height: 0.5em; line-height: 1.2; text-align: center;">
+            <!-- Résultat de la recherche affiché ici -->
+          </div>
+        </div>
+      `;
+    }
+
+    buildTagFilters(visibleTags, availableTags) {
+      const isIdSearchActive = window.activeIdSearch || false;
+      const containerOpacity = isIdSearchActive ? '0.4' : '1';
+      const containerFilter = isIdSearchActive ? 'grayscale(1)' : 'none';
+      const pointerEvents = isIdSearchActive ? 'none' : 'auto';
+      
+      // Créer des chips pour tous les tags disponibles avec indicateur actif/inactif
+      const allFilterChips = availableTags.map(tag => {
+        const isActive = visibleTags.includes(tag);
+        const bgColor = isActive ? '#16a34a' : '#6b7280'; // Vert pour actif, gris pour inactif
+        const textColor = 'white';
+        const opacity = isActive ? '1' : '0.6';
+        
+        return `<span class="filter-chip ${isActive ? 'active' : 'inactive'}" 
+                      data-tag="${tag}" 
+                      style="background: ${bgColor}; color: ${textColor}; opacity: ${opacity}; 
+                             padding: 6px 12px; border-radius: 20px; font-size: 0.9em; font-weight: 500;
+                             cursor: pointer; transition: all 0.2s ease; border: 2px solid transparent;
+                             ${isActive ? 'box-shadow: 0 2px 4px rgba(22, 163, 74, 0.3);' : ''}"
+                      title="${isActive ? 'Actif - Cliquer pour désactiver' : 'Inactif - Cliquer pour activer'}">
+                  ${isActive ? '✓ ' : ''}${tag}
+                </span>`;
+      }).join('');
+      
+      return `
+        <div class="objects-tag-display" style="margin: 1rem 0; padding: 1rem; background: var(--card); border: 2px solid var(--rule); border-radius: 12px; opacity: ${containerOpacity}; filter: ${containerFilter}; pointer-events: ${pointerEvents}; transition: all 0.3s ease;">
+          <div style="display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 1rem;">
+            <button 
+              id="select-all-tags" 
+              class="btn small" 
+              style="background: #3b82f6; color: white; padding: 4px 8px; font-size: 0.8em; border-radius: 12px;"
+              title="Activer tous les tags"
+            >
+              ✓ Tous
+            </button>
+            <button 
+              id="select-no-tags" 
+              class="btn small" 
+              style="background: #6b7280; color: white; padding: 4px 8px; font-size: 0.8em; border-radius: 12px;"
+              title="Désactiver tous les tags"
+            >
+              ✗ Aucun
+            </button>
+          </div>
+          <div class="filter-chips" style="display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center;">
+            ${allFilterChips}
           </div>
         </div>
       `;
     }
     
     buildFilterManagerButton() {
-      // Always generate the button - CSS will control visibility based on body.dev-on/dev-off
+      // Only show in dev mode
+      if (!this.shouldShowEditButtons) {
+        return '';
+      }
       return `<button class="filter-manager-btn btn" type="button" style="background: var(--bronze); color: white;">⚙️ Gérer les filtres</button>`;
+    }
+
+    buildTagsManagerButton() {
+      // Only show in dev mode
+      if (!this.shouldShowEditButtons) {
+        return '';
+      }
+      return `<button class="tags-manager-btn btn" type="button" style="background: #dc2626; color: white; border: 2px solid #b91c1c;">🏷️ Gérer les tags</button>`;
     }
 
     sanitizeId(str) {

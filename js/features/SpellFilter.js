@@ -49,7 +49,6 @@
       const filterInput = document.querySelector('#spell-level-filter');
       if (!filterInput) return;
       
-      console.log('SpellFilter: Initializing filter with value', filterInput.value);
       
       // Set initial value and apply filter
       const initialValue = parseInt(filterInput.value, 10) || 20;
@@ -57,19 +56,16 @@
     },
 
     filterSpellsByLevel(maxLevel) {
-      console.log('SpellFilter: Filtering spells with maxLevel', maxLevel);
       
       // Get current page from URL hash
       const currentHash = window.location.hash.replace('#/', '');
       
       if (!currentHash.startsWith('sorts-')) {
-        console.log('SpellFilter: Not on a spells page, hash is', currentHash);
         return;
       }
       
       // Find all spell cards in the current page
       const spellCards = document.querySelectorAll('.card[data-spell-name]');
-      console.log('SpellFilter: Found', spellCards.length, 'spell cards');
       
       if (spellCards.length === 0) return;
 
@@ -142,7 +138,6 @@
 
   // Initialize the spell filter when the app is ready
   function initializeSpellFilter() {
-    console.log('SpellFilter: Initializing module...');
     
     if (window.JdrApp) {
       if (JdrApp.modules) {

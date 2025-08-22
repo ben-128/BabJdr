@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-08-21T21:27:01.756Z by JdrBab Build System -->
+<!-- Generated on 2025-08-22T10:51:07.938Z by JdrBab Build System -->
 <title>JDR‑BAB — Livret de règles</title>
 <meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -455,11 +455,11 @@ h5, h6 {
 @media (max-width: 980px) { 
   .sidebar {
     position: fixed;
-    top: 0 !important; /* Force top position */
+    top: 0;
     left: 0;
-    width: 100vw !important; /* Full viewport width */
-    height: 100vh !important; /* Full viewport height */
-    max-height: 100vh;
+    width: 100%;
+    height: auto;
+    max-height: 80vh;
     background: 
       linear-gradient(135deg, var(--card), rgba(244,240,230,0.98)),
       radial-gradient(circle at 50% 30%, rgba(212,175,55,0.05), transparent 70%);
@@ -473,8 +473,6 @@ h5, h6 {
     transition: transform var(--transition-normal);
     z-index: 200;
     overflow-y: auto;
-    margin: 0; /* Remove any margin that might offset positioning */
-    padding-top: 0; /* Ensure starts at absolute top */
   }
   
   .sidebar.mobile-open {
@@ -484,101 +482,6 @@ h5, h6 {
   /* Adjust page layout for mobile */
   .page {
     padding: 80px 12px 12px 12px; /* Top padding for mobile nav button */
-    margin-left: 0;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  
-  /* Force full width and proper spacing on mobile */
-  #views {
-    padding: 0 var(--space-sm);
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
-  }
-  
-  /* Grid layouts should stack vertically on mobile */
-  .grid {
-    display: block !important;
-  }
-  
-  .grid > * {
-    margin-bottom: 1rem;
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box;
-  }
-  
-  /* Cards should take full width on mobile */
-  .card, .card-base {
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0.5rem 0;
-    box-sizing: border-box;
-    overflow-x: hidden;
-  }
-  
-  /* Force all content to fit in screen */
-  article, section, div, main, .page {
-    max-width: 100% !important;
-    overflow-x: hidden !important;
-    box-sizing: border-box !important;
-  }
-  
-  /* Images should not overflow */
-  img {
-    max-width: 100% !important;
-    height: auto !important;
-    width: auto !important;
-  }
-  
-  /* Text should wrap and not overflow */
-  p, h1, h2, h3, h4, h5, h6, div, span, li, strong, em {
-    word-wrap: break-word !important;
-    overflow-wrap: break-word !important;
-    word-break: break-word !important;
-    max-width: 100% !important;
-  }
-  
-  /* Tables should be responsive */
-  table {
-    width: 100% !important;
-    max-width: 100% !important;
-    table-layout: fixed !important;
-  }
-  
-  /* Prevent any element from causing horizontal scroll */
-  * {
-    max-width: 100%;
-    box-sizing: border-box;
-  }
-  
-  /* Specific fix for class pages and content that overflows */
-  .illus, .class-content, .spell-content, .don-content {
-    max-width: 100% !important;
-    overflow-x: hidden !important;
-  }
-  
-  /* Stats grids should stack on mobile */
-  .stats-grid {
-    display: block !important;
-    width: 100% !important;
-  }
-  
-  .stats-grid > * {
-    display: block !important;
-    width: 100% !important;
-    margin-bottom: 0.5rem;
-  }
-  
-  /* Adjust search bar to avoid collision with mobile menu button */
-  .searchbar {
-    margin-left: 140px; /* Space for mobile nav button */
-    margin-right: 20px;
-  }
-  
-  .searchbar input {
-    font-size: 16px; /* Prevents zoom on iOS */
   }
   
   .sidebar::before {
@@ -2956,6 +2859,7 @@ article span[title]:hover::after {
   </main>
   
   <footer>
+    <p>JDR‑BAB — Règles et contenus sous licence libre</p>
   </footer>
 </div>
 
@@ -5712,7 +5616,10 @@ article span[title]:hover::after {
     }
     
     buildFilterManagerButton() {
-      // Always generate the button - CSS will control visibility based on body.dev-on/dev-off
+      // Only show in dev mode
+      if (!this.shouldShowEditButtons) {
+        return '';
+      }
       return `<button class="filter-manager-btn btn" type="button" style="background: var(--bronze); color: white;">⚙️ Gérer les filtres</button>`;
     }
 
@@ -7083,17 +6990,8 @@ article span[title]:hover::after {
     renderObjectsPage() {
       if (!window.OBJETS) return false;
       
-      // Use PageBuilder to create the single objects page
-      const pageHTML = window.PageBuilder.buildSingleObjectPage(window.OBJETS);
-      
-      // Update main content
-      const mainContent = document.querySelector('#content');
-      if (mainContent) {
-        mainContent.innerHTML = pageHTML;
-      }
-      
-      // Update active states
-      this.updateActiveStates('objets');
+      // Use the existing show() method for consistency
+      this.show('objets');
       
       return true;
     },
@@ -7282,6 +7180,11 @@ article span[title]:hover::after {
         ).join('');
       }
 
+      // Generate single objects page (different from category pages)
+      if (window.OBJETS) {
+        html += PageBuilder.buildSingleObjectPage(window.OBJETS);
+      }
+
       return html;
     },
 
@@ -7419,9 +7322,21 @@ article span[title]:hover::after {
         if (category) {
           this.renderCategoryPage('don', category);
         }
-      } else if (pageId === 'objets' || pageId === 'objet') {
-        if (window.OBJETS) {
-          this.renderCategoryPage('objet', window.OBJETS);
+      } else if (pageId === 'objets') {
+        // Regenerate objects page using the generic approach
+        const newHTML = this.generatePageContent(pageId);
+        if (newHTML) {
+          activeArticle.innerHTML = newHTML;
+          this.autoLoadImages();
+          
+          // Apply dev mode state immediately
+          if (!window.STANDALONE_VERSION && JdrApp.modules.editor) {
+            if (JdrApp.modules.editor.isDevMode) {
+              JdrApp.modules.editor.forceShowAllEditButtons();
+            } else {
+              JdrApp.modules.editor.forceHideAllEditButtons();
+            }
+          }
         }
       } else {
         // For class pages, static pages, etc. - regenerate the specific content
@@ -7457,6 +7372,15 @@ article span[title]:hover::after {
 
       if (window.STATIC_PAGES && window.STATIC_PAGES[pageId]) {
         const content = PageBuilder.buildStaticPage(pageId, window.STATIC_PAGES[pageId]);
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(content, 'text/html');
+        const article = doc.querySelector('article');
+        return article ? article.innerHTML : null;
+      }
+
+      // Handle objects page
+      if (pageId === 'objets' && window.OBJETS) {
+        const content = PageBuilder.buildSingleObjectPage(window.OBJETS);
         const parser = new DOMParser();
         const doc = parser.parseFromString(content, 'text/html');
         const article = doc.querySelector('article');
@@ -7515,6 +7439,11 @@ article span[title]:hover::after {
       if (editType === 'generic') {
         // Use the full parsing logic and keep the detected contentType
         return this.parseHtmlEditContext(element, editSection);
+      }
+
+      // Tags editing for objects
+      if (editType === 'tags') {
+        return this.parseTagsEditContext(element, editSection);
       }
 
       // All legacy edit types have been migrated to 'generic'
@@ -7762,7 +7691,28 @@ article span[title]:hover::after {
       };
     }
 
-
+    parseTagsEditContext(element, editSection) {
+      // Check if we're in an object card
+      const objetCard = element.closest('.card[data-objet-name]');
+      if (objetCard) {
+        const objetName = objetCard.dataset.objetName;
+        const categoryName = objetCard.dataset.categoryName;
+        
+        return {
+          contentType: 'objet',
+          itemIdentifier: objetName,
+          categoryName: categoryName,
+          property: 'tags',
+          editType: 'tags',
+          editSection: editSection,
+          config: window.ContentTypes.objet,
+          element: element.classList.contains('editable') ? element : element.querySelector('.editable'),
+          container: element
+        };
+      }
+      
+      return null;
+    }
 
     // Start editing session
     startEdit(element) {
@@ -7779,7 +7729,14 @@ article span[title]:hover::after {
         startTime: Date.now()
       };
 
-      this.makeElementEditable(context.element, context.container);
+      // Special handling for tags editing
+      if (context.editType === 'tags') {
+        console.log('🔍 DEBUG: Detected tags editing, calling makeTagsEditable');
+        this.makeTagsEditable(context.element, context.container);
+      } else {
+        console.log('🔍 DEBUG: Standard editing, calling makeElementEditable');
+        this.makeElementEditable(context.element, context.container);
+      }
       return true;
     }
 
@@ -7807,6 +7764,245 @@ article span[title]:hover::after {
       const selection = window.getSelection();
       selection.removeAllRanges();
       selection.addRange(range);
+    }
+
+    makeTagsEditable(editableElement, container) {
+      console.log('🔍 DEBUG: makeTagsEditable called');
+      console.log('🔍 DEBUG: editableElement:', editableElement);
+      console.log('🔍 DEBUG: container:', container);
+      console.log('🔍 DEBUG: currentEditSession:', this.currentEditSession);
+      
+      const originalHtml = editableElement.innerHTML;
+      container.dataset.originalContent = originalHtml;
+      container.dataset.editing = 'true';
+
+      // Get current tags from the object
+      const objetName = this.currentEditSession.itemIdentifier;
+      console.log('🔍 DEBUG: objetName:', objetName);
+      
+      const objet = window.OBJETS?.objets?.find(obj => obj.nom === objetName);
+      console.log('🔍 DEBUG: found objet:', objet);
+      
+      const currentTags = objet?.tags || [];
+      const availableTags = window.ContentTypes.objet.filterConfig.availableTags;
+      console.log('🔍 DEBUG: currentTags:', currentTags);
+      console.log('🔍 DEBUG: availableTags:', availableTags);
+
+      // Create and show modal instead of inline editor
+      this.showTagsModal(objetName, currentTags, availableTags);
+    }
+
+    showTagsModal(objetName, currentTags, availableTags) {
+      console.log('🔍 DEBUG: showTagsModal called for object:', objetName);
+      console.log('🔍 DEBUG: currentTags:', currentTags);
+      console.log('🔍 DEBUG: availableTags:', availableTags);
+      
+      // Remove any existing tags modal
+      const existingModal = document.querySelector('#tagsEditModal');
+      if (existingModal) {
+        console.log('🔍 DEBUG: Removing existing modal');
+        existingModal.remove();
+      }
+
+      // Log DOM structure before creating modal
+      console.log('🔍 DEBUG: Current body children count:', document.body.children.length);
+      console.log('🔍 DEBUG: Body z-index elements:', Array.from(document.body.children).map(el => ({
+        tagName: el.tagName,
+        className: el.className,
+        zIndex: window.getComputedStyle(el).zIndex,
+        position: window.getComputedStyle(el).position
+      })));
+
+      // Use native HTML5 dialog element for proper z-index handling
+      const modal = document.createElement('dialog');
+      modal.id = 'tagsEditModal';
+      modal.style.cssText = `
+        max-width: 500px !important;
+        width: 90% !important;
+        padding: 0 !important;
+        border: none !important;
+        border-radius: 12px !important;
+        background: transparent !important;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
+      `;
+      
+      console.log('🔍 DEBUG: Created dialog element:', modal);
+
+      const checkboxesHTML = availableTags.map(tag => `
+        <div style="display: flex; align-items: center; gap: 0.5rem; margin: 0.5rem 0; padding: 0.5rem; background: #f5f5f5; border-radius: 8px;">
+          <input 
+            type="checkbox" 
+            id="modal-tag-${tag}" 
+            value="${tag}" 
+            ${currentTags.includes(tag) ? 'checked' : ''}
+            style="margin: 0;"
+          >
+          <label for="modal-tag-${tag}" style="flex: 1; cursor: pointer; font-weight: 500;">
+            <span style="background: #8B4513; color: white; padding: 2px 6px; border-radius: 8px; font-size: 0.8em; margin-right: 0.5rem;">${tag}</span>
+            ${tag}
+          </label>
+        </div>
+      `).join('');
+
+      modal.innerHTML = `
+        <div style="
+          background: white; 
+          border-radius: 12px; 
+          padding: 1.5rem; 
+          border: 3px solid #8B4513;
+          font-family: inherit;
+          font-size: 16px;
+          color: #333;
+        ">
+          <h3 style="margin: 0 0 1rem 0; color: #8B4513; font-size: 1.2em;">🏷️ Éditer les tags de "${objetName}"</h3>
+          <p style="margin: 0 0 1rem 0; color: #666; font-size: 0.9em;">Sélectionnez les tags à assigner à cet objet :</p>
+          
+          <div id="tagsCheckboxes" style="margin: 1rem 0;">
+            ${checkboxesHTML}
+          </div>
+          
+          <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 1.5rem;">
+            <button type="button" class="btn-cancel-tags-modal" style="
+              background: #666; 
+              color: white; 
+              border: none; 
+              padding: 8px 16px; 
+              border-radius: 6px; 
+              cursor: pointer;
+              font-weight: 500;
+              font-size: 14px;
+            ">
+              ❌ Annuler
+            </button>
+            <button type="button" class="btn-save-tags-modal" style="
+              background: #8B4513; 
+              color: white; 
+              border: none; 
+              padding: 8px 16px; 
+              border-radius: 6px; 
+              cursor: pointer;
+              font-weight: 500;
+              font-size: 14px;
+            ">
+              💾 Sauvegarder
+            </button>
+          </div>
+        </div>
+      `;
+
+      // Append to body and show modal using native dialog API
+      console.log('🔍 DEBUG: Adding modal to body');
+      document.body.appendChild(modal);
+      
+      console.log('🔍 DEBUG: Modal added to DOM, calling showModal()');
+      console.log('🔍 DEBUG: Modal computed styles before showModal:', {
+        display: window.getComputedStyle(modal).display,
+        position: window.getComputedStyle(modal).position,
+        zIndex: window.getComputedStyle(modal).zIndex,
+        visibility: window.getComputedStyle(modal).visibility
+      });
+      
+      // Use showModal() for proper top-level display
+      try {
+        modal.showModal();
+        console.log('🔍 DEBUG: showModal() called successfully');
+        
+        console.log('🔍 DEBUG: Modal computed styles after showModal:', {
+          display: window.getComputedStyle(modal).display,
+          position: window.getComputedStyle(modal).position,
+          zIndex: window.getComputedStyle(modal).zIndex,
+          visibility: window.getComputedStyle(modal).visibility
+        });
+        
+        console.log('🔍 DEBUG: Modal bounding rect:', modal.getBoundingClientRect());
+        
+        // Log all body children with their z-index after modal is shown
+        console.log('🔍 DEBUG: All body children after modal shown:', Array.from(document.body.children).map(el => ({
+          tagName: el.tagName,
+          id: el.id,
+          className: el.className,
+          zIndex: window.getComputedStyle(el).zIndex,
+          position: window.getComputedStyle(el).position,
+          display: window.getComputedStyle(el).display
+        })));
+        
+      } catch (error) {
+        console.error('🔍 DEBUG: Error calling showModal():', error);
+      }
+
+      // Set up event handlers
+      modal.querySelector('.btn-save-tags-modal').addEventListener('click', () => {
+        this.saveTagsFromModal(modal);
+      });
+
+      modal.querySelector('.btn-cancel-tags-modal').addEventListener('click', () => {
+        this.cancelTagsModal(modal);
+      });
+
+      // Native dialog handles backdrop clicks and ESC automatically
+      modal.addEventListener('cancel', (e) => {
+        this.cancelTagsModal(modal);
+      });
+
+      // Close on backdrop click (for dialog elements)
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          this.cancelTagsModal(modal);
+        }
+      });
+    }
+
+    saveTagsFromModal(modal) {
+      if (!this.currentEditSession) return false;
+
+      const checkboxes = modal.querySelectorAll('input[type="checkbox"]:checked');
+      const selectedTags = Array.from(checkboxes).map(cb => cb.value);
+
+      if (selectedTags.length === 0) {
+        alert('Veuillez sélectionner au moins un tag');
+        return false;
+      }
+
+      // Update the object data
+      const objetName = this.currentEditSession.itemIdentifier;
+      const objet = window.OBJETS?.objets?.find(obj => obj.nom === objetName);
+      
+      if (objet) {
+        objet.tags = selectedTags;
+        
+        // Update the display
+        const tagsDisplay = selectedTags.map(tag => 
+          `<span class="tag-chip" style="background: var(--bronze); color: white; padding: 2px 6px; border-radius: 8px; font-size: 0.8em; margin-right: 4px;">${tag}</span>`
+        ).join('');
+        
+        // Restore the element and update its content
+        this.resetEditingState(this.currentEditSession.container);
+        this.restoreElementContent(this.currentEditSession, tagsDisplay);
+        
+        // Save to storage
+        EventBus.emit(Events.STORAGE_SAVE);
+        
+        // Close modal and clear edit session
+        modal.close();
+        modal.remove();
+        this.currentEditSession = null;
+        
+        // Show success notification
+        JdrApp.modules.ui.showNotification(`🏷️ Tags mis à jour : ${selectedTags.join(', ')}`, 'success');
+        
+        return true;
+      }
+      
+      return false;
+    }
+
+    cancelTagsModal(modal) {
+      // Close modal without saving
+      modal.close();
+      modal.remove();
+      
+      // Cancel the edit session
+      this.cancelCurrentEdit();
     }
 
     // Save current editing session
@@ -7869,6 +8065,9 @@ article span[title]:hover::after {
             // Category descriptions can be in SORTS or DONS, determine from categoryType
             jsonCategory = session.categoryType === 'don' ? 'DONS' : 'SORTS';
             break;
+          case 'objet':
+            jsonCategory = 'OBJETS';
+            break;
           case 'staticPage':
           case 'generic':
             jsonCategory = 'STATIC_PAGES';
@@ -7921,6 +8120,9 @@ article span[title]:hover::after {
         if (parentClass?.sousClasses) {
           targetObject = parentClass.sousClasses.find(sc => sc.nom === session.itemIdentifier);
         }
+      } else if (session.contentType === 'objet') {
+        // Find object directly in the objets array
+        targetObject = jsonData.objets?.find(obj => obj.nom === session.itemIdentifier);
       } else if (session.contentType === 'category') {
         // Find category by name and update its description
         targetObject = jsonData.find(category => category.nom === session.categoryName);
@@ -8022,6 +8224,7 @@ article span[title]:hover::after {
     resetEditingState(container) {
       const editableElement = container.querySelector('.editable') || container;
       
+      // Standard editing cleanup (modal is handled separately)
       editableElement.contentEditable = false;
       editableElement.style.cssText = editableElement.style.cssText
         .replace(/background-color[^;]*;?/g, '')
@@ -8828,10 +9031,6 @@ article span[title]:hover::after {
 (() => {
   "use strict";
 
-  // Global state for mobile menu (to avoid 'this' context issues)
-  let mobileMenuIsOpen = false;
-
-
   // ========================================
   // UI INTERACTIONS MODULE
   // ========================================
@@ -8922,6 +9121,21 @@ article span[title]:hover::after {
         if (type && categoryName && itemName) {
           this.moveContent(type, categoryName, itemName, direction);
         }
+      });
+
+      // Filter manager button for objects
+      JdrApp.utils.events.register('click', '.filter-manager-btn', () => {
+        this.showFilterManagementModal();
+      });
+
+      // Filter chip toggle for objects
+      JdrApp.utils.events.register('click', '.filter-chip', (e) => {
+        this.toggleFilter(e.target);
+      });
+
+      // Spell element change
+      JdrApp.utils.events.register('change', '.spell-element-selector select', (e) => {
+        this.updateSpellElement(e.target);
       });
 
       // Paragraph addition
@@ -9158,6 +9372,141 @@ article span[title]:hover::after {
       }
     },
 
+    // ========================================
+    // CONTENT MANIPULATION METHODS 
+    // ========================================
+    
+    addContent(type, categoryName) {
+      const config = window.ContentTypes[type];
+      if (!config) {
+        this.showNotification(`❌ Configuration manquante pour le type ${type}`, 'error');
+        return;
+      }
+
+      // Create new item with default values
+      const defaultItem = ContentFactory.createDefaultItem(type);
+      
+      // Special handling for objects (add to single array)
+      if (type === 'objet') {
+        if (!window.OBJETS.objets) {
+          window.OBJETS.objets = [];
+        }
+        
+        // Get next number
+        const existingNumbers = window.OBJETS.objets.map(obj => obj.numero || 0);
+        const nextNumber = existingNumbers.length > 0 ? Math.max(...existingNumbers) + 1 : 1;
+        defaultItem.numero = nextNumber;
+        
+        window.OBJETS.objets.push(defaultItem);
+        this.refreshObjectsPage();
+      } else {
+        // Standard category-based addition
+        const success = ContentFactory.addItem(type, categoryName, defaultItem);
+        if (success) {
+          EventBus.emit(Events.CONTENT_ADD, {
+            type: type,
+            category: categoryName,
+            item: defaultItem
+          });
+          
+          EventBus.emit(Events.PAGE_RENDER, {
+            type: 'category',
+            categoryType: type,
+            category: ContentFactory.getEntity(type).findCategory(categoryName)
+          });
+        }
+      }
+      
+      EventBus.emit(Events.STORAGE_SAVE);
+      this.showNotification(`${config.icons.add} Nouvel élément ajouté`, 'success');
+    },
+
+    deleteContent(type, categoryName, itemName) {
+      const config = window.ContentTypes[type];
+      if (!config) {
+        this.showNotification(`❌ Configuration manquante pour le type ${type}`, 'error');
+        return;
+      }
+
+      if (!confirm(`Supprimer "${itemName}" ?`)) {
+        return;
+      }
+
+      // Special handling for objects
+      if (type === 'objet') {
+        if (window.OBJETS?.objets) {
+          const itemIndex = window.OBJETS.objets.findIndex(obj => obj.nom === itemName);
+          if (itemIndex >= 0) {
+            window.OBJETS.objets.splice(itemIndex, 1);
+            this.refreshObjectsPage();
+          }
+        }
+      } else {
+        // Standard category-based deletion
+        const success = ContentFactory.deleteItem(type, categoryName, itemName);
+        if (success) {
+          EventBus.emit(Events.CONTENT_DELETE, {
+            type: type,
+            category: categoryName,
+            item: itemName
+          });
+          
+          EventBus.emit(Events.PAGE_RENDER, {
+            type: 'category',
+            categoryType: type,
+            category: ContentFactory.getEntity(type).findCategory(categoryName)
+          });
+        }
+      }
+      
+      EventBus.emit(Events.STORAGE_SAVE);
+      this.showNotification(`${config.icons.delete} "${itemName}" supprimé`, 'success');
+    },
+
+    moveContent(type, categoryName, itemName, direction) {
+      const config = window.ContentTypes[type];
+      if (!config) {
+        this.showNotification(`❌ Configuration manquante pour le type ${type}`, 'error');
+        return;
+      }
+
+      // Special handling for objects
+      if (type === 'objet') {
+        if (window.OBJETS?.objets) {
+          const itemIndex = window.OBJETS.objets.findIndex(obj => obj.nom === itemName);
+          if (itemIndex >= 0) {
+            const newIndex = itemIndex + direction;
+            if (newIndex >= 0 && newIndex < window.OBJETS.objets.length) {
+              const item = window.OBJETS.objets.splice(itemIndex, 1)[0];
+              window.OBJETS.objets.splice(newIndex, 0, item);
+              this.refreshObjectsPage();
+            }
+          }
+        }
+      } else {
+        // Standard category-based movement
+        const success = ContentFactory.moveItem(type, categoryName, itemName, direction);
+        if (success) {
+          EventBus.emit(Events.CONTENT_MOVE, {
+            type: type,
+            category: categoryName,
+            itemName: itemName,
+            direction: direction
+          });
+          
+          EventBus.emit(Events.PAGE_RENDER, {
+            type: 'category',
+            categoryType: type,
+            category: ContentFactory.getEntity(type).findCategory(categoryName)
+          });
+        }
+      }
+      
+      EventBus.emit(Events.STORAGE_SAVE);
+      const directionText = direction > 0 ? 'descendu' : 'monté';
+      this.showNotification(`🔄 "${itemName}" ${directionText}`, 'success');
+    },
+
     handleContentAdd(type, category, item) {
       // Additional handling after content is added
       setTimeout(() => {
@@ -9230,23 +9579,12 @@ article span[title]:hover::after {
         return;
       }
 
-      // Save the current main content before doing anything else
-      this.saveCurrentMainContent();
-
       // Search without minimum character limit since user has to press Enter
       const results = this.searchInData(normalizedQuery);
       this.displaySearchResultsInMain(results, normalizedQuery);
       
       // Keep existing TOC search for compatibility
       this.searchInTOC(normalizedQuery);
-    },
-    
-    saveCurrentMainContent() {
-      const main = document.querySelector('main');
-      if (main && !this.originalMainContent) {
-        this.originalMainContent = main.innerHTML;
-        console.log('📦 Saved current main content for search');
-      }
     },
 
     searchInData(query) {
@@ -9664,7 +10002,7 @@ article span[title]:hover::after {
           <div class="search-page-header">
             <h1>🔍 Recherche: "${query}"</h1>
             <p class="search-results-count">${results.length} résultat${results.length > 1 ? 's' : ''} trouvé${results.length > 1 ? 's' : ''}</p>
-            <button class="btn small search-back-btn" type="button">
+            <button class="btn small" onclick="JdrApp.modules.ui.clearMainSearchResults()">
               ← Retour au sommaire
             </button>
           </div>
@@ -9740,127 +10078,87 @@ article span[title]:hover::after {
     },
 
     setupMainSearchHandlers() {
-      // Setup direct handlers after DOM is ready to ensure click events work
-      setTimeout(() => {
-        this.setupDirectHandlers();
-      }, 100);
+      // Handle click on entire card
+      JdrApp.utils.events.register('click', '.search-result-card', (e) => {
+        console.log('Card clicked, currentTarget:', e.currentTarget);
+        if (e.target.closest('.search-result-btn')) return; // Let button handle it
+        
+        const url = e.currentTarget ? e.currentTarget.dataset.url : null;
+        console.log('Card URL:', url);
+        
+        if (url && url !== '#test') {
+          console.log('Navigating to:', url);
+          window.location.hash = url;
+          // Force page reload to trigger router
+          window.location.reload();
+        } else {
+          console.warn('No valid URL found on card');
+        }
+      });
+
+      // Handle button clicks
+      JdrApp.utils.events.register('click', '.search-result-btn', (e) => {
+        console.log('Button clicked, target:', e.target);
+        e.stopPropagation();
+        
+        const url = e.target ? e.target.dataset.url : null;
+        console.log('Button URL:', url);
+        
+        if (url && url !== '#test') {
+          console.log('Navigating to:', url);
+          window.location.hash = url;
+          // Force page reload to trigger router
+          window.location.reload();
+        } else {
+          console.warn('No valid URL found on button');
+        }
+      });
     },
 
     setupDirectHandlers() {
-      // Clear any existing handlers first
-      const cards = document.querySelectorAll('.search-result-card');
-      const buttons = document.querySelectorAll('.search-result-btn');
-      const backButton = document.querySelector('.search-page-header .btn');
-      
-      console.log('Setting up direct handlers for', cards.length, 'cards,', buttons.length, 'buttons');
-      
-      // Handle back button in search results
-      const searchBackButton = document.querySelector('.search-back-btn');
-      if (searchBackButton) {
-        searchBackButton.addEventListener('click', (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          console.log('Search back button clicked');
-          this.clearMainSearchResults();
+      // Direct event listeners on the elements themselves
+      setTimeout(() => {
+        const cards = document.querySelectorAll('.search-result-card');
+        const buttons = document.querySelectorAll('.search-result-btn');
+        
+        console.log('Setting up direct handlers for', cards.length, 'cards and', buttons.length, 'buttons');
+        
+        cards.forEach((card, index) => {
+          const url = card.dataset.url;
+          console.log(`Card ${index + 1} URL:`, url);
+          
+          card.addEventListener('click', (e) => {
+            if (e.target.closest('.search-result-btn')) return;
+            console.log('Direct card click, URL:', url);
+            if (url && url !== '#test') {
+              window.location.hash = url;
+              window.location.reload();
+            }
+          });
         });
-      }
-      
-      // Handle search result cards
-      cards.forEach((card, index) => {
-        const url = card.dataset.url;
-        console.log(`Card ${index + 1} URL:`, url);
         
-        // Remove any existing listeners
-        const newCard = card.cloneNode(true);
-        card.parentNode.replaceChild(newCard, card);
-        
-        newCard.addEventListener('click', (e) => {
-          if (e.target.closest('.search-result-btn')) return;
-          console.log('Card click, navigating to:', url);
-          if (url && url !== '#test') {
-            this.navigateFromSearch(url);
-          }
+        buttons.forEach((button, index) => {
+          const url = button.dataset.url;
+          console.log(`Button ${index + 1} URL:`, url);
+          
+          button.addEventListener('click', (e) => {
+            e.stopPropagation();
+            console.log('Direct button click, URL:', url);
+            if (url && url !== '#test') {
+              window.location.hash = url;
+              window.location.reload();
+            }
+          });
         });
-      });
-      
-      // Handle search result buttons  
-      const refreshedButtons = document.querySelectorAll('.search-result-btn');
-      refreshedButtons.forEach((button, index) => {
-        const url = button.dataset.url;
-        console.log(`Button ${index + 1} URL:`, url);
-        
-        button.addEventListener('click', (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          console.log('Button click, navigating to:', url);
-          if (url && url !== '#test') {
-            this.navigateFromSearch(url);
-          }
-        });
-      });
-    },
-    
-    navigateFromSearch(url) {
-      console.log('Navigating from search to:', url);
-      
-      // Restore original content if we have it
-      const main = document.querySelector('main');
-      if (this.originalMainContent && main) {
-        console.log('🔄 Restoring content before navigation');
-        main.innerHTML = this.originalMainContent;
-        this.originalMainContent = null;
-        
-        // Reattach foldout events after content restoration
-        this.reattachFoldoutEvents();
-      }
-      
-      // Clear search input
-      const searchInput = document.querySelector('#search');
-      if (searchInput) {
-        searchInput.value = '';
-      }
-      
-      // Navigate directly to the target
-      if (JdrApp.modules.router && JdrApp.modules.router.navigate) {
-        const route = url.replace('#/', '');
-        JdrApp.modules.router.navigate(route);
-      } else {
-        window.location.hash = url;
-      }
+      }, 200);
     },
 
     clearMainSearchResults() {
-      const main = document.querySelector('main');
-      
-      // First try to restore the original content if we have it
-      if (this.originalMainContent && main) {
-        console.log('🔄 Restoring original main content');
-        main.innerHTML = this.originalMainContent;
-        this.originalMainContent = null; // Clear the saved content
-        
-        // Reattach foldout events after content restoration
-        this.reattachFoldoutEvents();
-        
-        // Trigger router to ensure proper state
-        if (JdrApp.modules.router && JdrApp.modules.router.navigate) {
-          setTimeout(() => {
-            JdrApp.modules.router.navigate('creation');
-          }, 100);
-        }
+      // Reload the current page or go back to homepage
+      if (window.location.hash && window.location.hash !== '#/') {
+        window.location.reload();
       } else {
-        // Fallback: use router navigation
-        console.log('🔄 Using router navigation fallback');
-        if (JdrApp.modules.router && JdrApp.modules.router.navigate) {
-          JdrApp.modules.router.navigate('creation');
-        } else {
-          window.location.hash = '#/creation';
-        }
-      }
-      
-      // Clear search input
-      const searchInput = document.querySelector('#search');
-      if (searchInput) {
-        searchInput.value = '';
+        window.location.hash = '#/creation';
       }
     },
 
@@ -10174,21 +10472,12 @@ article span[title]:hover::after {
     },
 
     setupMobileNavigation() {
-      // Force initial state
-      mobileMenuIsOpen = false;
-      
-      // Setup mobile navigation
-      if (window.innerWidth <= 980) {
-        console.log('📱 Mobile navigation setup');
-      }
-      
       // Create mobile navigation toggle button immediately and on resize
       this.createMobileNavToggle();
       
       // Handle mobile nav toggle with delegation
       document.addEventListener('click', (e) => {
-        const mobileToggle = e.target.closest('.mobile-nav-toggle');
-        if (mobileToggle) {
+        if (e.target.closest('.mobile-nav-toggle')) {
           e.preventDefault();
           this.toggleMobileNav();
         }
@@ -10220,19 +10509,10 @@ article span[title]:hover::after {
           this.createMobileNavToggle();
         });
       }
-      
-      // Fallback: Force creation after a delay for mobile
-      setTimeout(() => {
-        if (window.innerWidth <= 980 && !document.querySelector('.mobile-nav-toggle')) {
-          this.createMobileNavToggle();
-        }
-      }, 1000);
     },
 
     createMobileNavToggle() {
       // Only create if it doesn't exist and we're on mobile
-      // Create mobile nav toggle if needed
-      
       if (window.innerWidth <= 980 && !document.querySelector('.mobile-nav-toggle')) {
         const toggleButton = document.createElement('button');
         toggleButton.className = 'mobile-nav-toggle';
@@ -10247,24 +10527,6 @@ article span[title]:hover::after {
         // Insert at the beginning of body
         if (document.body) {
           document.body.insertBefore(toggleButton, document.body.firstChild);
-          // Attach direct event listener to the button as well
-          toggleButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            this.toggleMobileNav();
-          });
-          
-          // Force initial hide state for sidebar
-          const sidebar = document.querySelector('.sidebar');
-          if (sidebar) {
-            sidebar.classList.remove('mobile-open');
-            sidebar.style.transform = 'translateY(-100%)';
-            
-            console.log('🎯 Sidebar initialized for mobile:', {
-              transform: sidebar.style.transform,
-              width: window.innerWidth
-            });
-          }
         }
       }
     },
@@ -10274,10 +10536,7 @@ article span[title]:hover::after {
       const toggleButton = document.querySelector('.mobile-nav-toggle');
       
       if (sidebar && toggleButton) {
-        // Check multiple state indicators to determine if menu is open
-        const isOpen = mobileMenuIsOpen || 
-                      sidebar.classList.contains('mobile-open') ||
-                      (sidebar.style.transform && sidebar.style.transform.includes('translateY(0)'));
+        const isOpen = sidebar.classList.contains('mobile-open');
         
         if (isOpen) {
           this.closeMobileNav();
@@ -10292,25 +10551,8 @@ article span[title]:hover::after {
       const toggleButton = document.querySelector('.mobile-nav-toggle');
       
       if (sidebar && toggleButton) {
-        mobileMenuIsOpen = true;
-        
         sidebar.classList.add('mobile-open');
         toggleButton.classList.add('open');
-        
-        // Force styles inline for mobile
-        if (window.innerWidth <= 980) {
-          sidebar.style.transform = 'translateY(0)';
-          sidebar.style.position = 'fixed';
-          sidebar.style.top = '0';
-          sidebar.style.left = '0';
-          sidebar.style.width = '100%';
-          sidebar.style.height = '100vh';
-          sidebar.style.zIndex = '200';
-          sidebar.style.background = 'rgba(244,240,230,0.98)';
-          sidebar.style.maxHeight = '100vh';
-          sidebar.style.overflowY = 'auto';
-          
-        }
         
         const textSpan = toggleButton.querySelector('.text');
         if (textSpan) {
@@ -10329,16 +10571,8 @@ article span[title]:hover::after {
       const toggleButton = document.querySelector('.mobile-nav-toggle');
       
       if (sidebar && toggleButton) {
-        mobileMenuIsOpen = false;
-        
         sidebar.classList.remove('mobile-open');
         toggleButton.classList.remove('open');
-        
-        // Force styles inline for mobile
-        if (window.innerWidth <= 980) {
-          sidebar.style.transform = 'translateY(-100%)';
-          
-        }
         
         const textSpan = toggleButton.querySelector('.text');
         if (textSpan) {
@@ -11218,20 +11452,7 @@ article span[title]:hover::after {
         return section ? section.title : sectionId;
       }
       return sectionId;
-    },
-
-    // ========================================
-    // FOLDOUT EVENT REATTACHMENT
-    // ========================================
-    
-    reattachFoldoutEvents() {
-      // Delegate to router's attachFoldoutEvents method
-      if (JdrApp.modules.router && JdrApp.modules.router.attachFoldoutEvents) {
-        console.log('🔗 Reattaching foldout events after content restoration');
-        JdrApp.modules.router.attachFoldoutEvents();
-      }
-    },
-
+    }
   };
 
 })();
