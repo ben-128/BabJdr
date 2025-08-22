@@ -12,7 +12,7 @@
         "Deux mains"
       ],
       "effet": "<strong>Dégâts: </strong> Inflige (5  + Force) points de dégats physiques.",
-      "prix": "🔷 <strong>Prix:</strong> 30",
+      "prix": "🔷 <strong>Prix:</strong> 35",
       "poids": "⚖️ <strong>Poids:</strong> 2"
     },
     {
@@ -144,20 +144,32 @@
       "effet": "<strong>Effet:</strong> Augmente l'armure physique de 3.",
       "prix": "🔷 <strong>Prix:</strong> 65",
       "poids": "⚖️ <strong>Poids:</strong> 2"
+    },
+    {
+      "nom": "Armure de plaque",
+      "numero": 11,
+      "image": "",
+      "description": "<i>Une imposante armure de métal poli, dont les plaques luisantes forment une carapace presque impénétrable.</i>",
+      "tags": [
+        "Armure",
+        "Armure lourde"
+      ],
+      "effet": "<strong>Effet:</strong> Augmente l'armure physique de 5.",
+      "prix": "🔷 <strong>Prix:</strong> 200",
+      "poids": "⚖️ <strong>Poids:</strong> 2"
     }
   ],
   "filterSettings": {
     "visibleTags": [
-      "Départ",
-      "Arme",
-      "Armure",
-      "Consommable"
+      "Arme"
     ],
     "displayedFilterButtons": [
-      "Départ",
       "Arme",
       "Armure",
-      "Consommable"
+      "Consommable",
+      "Bouclier"
     ]
-  }
+  },
+  "categoryDescription": "Équipements, armes, armures et objets divers que peuvent posséder les personnages.",
+  "description": "Pour éviter le <strong>spoil</strong>, seuls les objets de départs sont visibles sans le <strong>mode maître de jeu</strong> d'actif. <br>Vous pouvez par contre rechercher un <strong>objet par ID</strong> quand le MJ vous indique que voter héros à trouvé un nouvel objet."
 }

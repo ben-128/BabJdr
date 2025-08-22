@@ -376,10 +376,10 @@
         numero: 1,
         image: "",
         description: "Description de l'objet.",
-        tags: ["Divers"],
+        tags: ["Départ"],
         effet: "<strong>Effet:</strong> Description de l'effet de l'objet.",
-        prix: "🔷 <strong>Prix:</strong> 10 pièces d'or",
-        poids: "⚖️ <strong>Poids:</strong> 1 kg"
+        prix: "🔷 <strong>Prix:</strong> 10",
+        poids: "⚖️ <strong>Poids:</strong> 1"
       }
     },
 

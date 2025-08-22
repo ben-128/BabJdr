@@ -9,13 +9,21 @@
   // UI INTERACTIONS MODULE
   // ========================================
   JdrApp.modules.ui = {
+    _initialized: false,
     
     init() {
+      // Prevent multiple initialization to avoid duplicate event listeners
+      if (this._initialized) {
+        console.log('🚫 UI module already initialized, skipping');
+        return;
+      }
+      
       this.setupEventListeners();
       this.setupSearch();
       this.setupModals();
       this.setupResponsive();
       this.setupNewPageHandler();
+      this._initialized = true;
     },
 
     setupEventListeners() {
@@ -107,6 +115,8 @@
 
       // Filter chip toggle for objects
       JdrApp.utils.events.register('click', '.filter-chip', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         this.toggleFilter(e.target);
       });
 
@@ -178,12 +188,7 @@
         this.showFilterManagementModal();
       });
 
-      // Filter chip toggling (if dev mode allows interactive filters)
-      JdrApp.utils.events.register('click', '.filter-chip', (e) => {
-        if (document.body.classList.contains('dev-on')) {
-          this.toggleFilter(e.target);
-        }
-      });
+      // Filter chip toggling (REMOVED - duplicate listener that was causing double toggle)
 
       // Element selector for spells (dev mode)
       JdrApp.utils.events.register('change', '.spell-element-selector', (e) => {
@@ -2236,41 +2241,6 @@
       this.showNotification(`📊 "${tagName}" ${direction > 0 ? 'descendu' : 'monté'} dans l'ordre`, 'info');
     },
 
-    toggleFilter(chipElement) {
-      const tag = chipElement.dataset.tag;
-      if (!tag || !window.OBJETS) return;
-
-      const currentSettings = window.OBJETS.filterSettings || { 
-        visibleTags: window.ContentTypes.objet.filterConfig.defaultVisibleTags 
-      };
-
-      const isActive = chipElement.classList.contains('active');
-      
-      if (isActive) {
-        // Remove from visible tags if not the last one
-        if (currentSettings.visibleTags.length > 1) {
-          currentSettings.visibleTags = currentSettings.visibleTags.filter(t => t !== tag);
-          chipElement.classList.remove('active');
-          this.showNotification(`🏷️ Tag "${tag}" masqué`, 'info');
-        } else {
-          this.showNotification('❌ Impossible de masquer le dernier tag actif', 'error');
-          return;
-        }
-      } else {
-        // Add to visible tags
-        if (!currentSettings.visibleTags.includes(tag)) {
-          currentSettings.visibleTags.push(tag);
-          chipElement.classList.add('active');
-          this.showNotification(`🏷️ Tag "${tag}" affiché`, 'info');
-        }
-      }
-
-      // Update the data structure
-      window.OBJETS.filterSettings = currentSettings;
-      
-      // Refresh the page
-      this.refreshObjectsPage();
-    },
 
     refreshObjectsPage() {
       // Check if we're currently on the objects page
@@ -2970,27 +2940,128 @@
       const tag = chipElement.dataset.tag;
       if (!tag) return;
 
-      // Update filter settings
+      // GUARD: Prevent rapid double clicks (debounce)
+      if (this._toggleInProgress) {
+        return;
+      }
+      this._toggleInProgress = true;
+      
+      // Release the lock after a short delay
+      setTimeout(() => {
+        this._toggleInProgress = false;
+      }, 100);
+
+      // Initialize filter settings if needed
       if (!window.OBJETS.filterSettings) {
-        window.OBJETS.filterSettings = { visibleTags: [] };
+        window.OBJETS.filterSettings = { visibleTags: [...window.ContentTypes.objet.filterConfig.defaultVisibleTags] };
       }
 
       const visibleTags = window.OBJETS.filterSettings.visibleTags;
-      const tagIndex = visibleTags.indexOf(tag);
+      
+      // IMPORTANT: Track state BEFORE modification to know if we need full regeneration
+      const wasEmpty = visibleTags.length === 0;
+      
+      // SIMPLE LOGIC: Check visual state directly and toggle
+      const isVisuallyActive = chipElement.classList.contains('active');
+      
 
-      if (tagIndex === -1) {
-        // Add tag
-        visibleTags.push(tag);
+      if (isVisuallyActive) {
+        // DEACTIVATE - remove from visible tags
+        const tagIndex = visibleTags.indexOf(tag);
+        if (tagIndex > -1) {
+          visibleTags.splice(tagIndex, 1);
+        }
+        chipElement.classList.remove('active');
+        chipElement.classList.add('inactive');
+        chipElement.style.background = '#6b7280';
+        chipElement.style.opacity = '0.6';
+        chipElement.style.boxShadow = '';
+        this.showNotification(`🏷️ Tag "${tag}" masqué`, 'info');
       } else {
-        // Remove tag
-        visibleTags.splice(tagIndex, 1);
+        // ACTIVATE - add to visible tags
+        if (!visibleTags.includes(tag)) {
+          visibleTags.push(tag);
+        }
+        chipElement.classList.add('active');
+        chipElement.classList.remove('inactive');
+        chipElement.style.background = '#16a34a';
+        chipElement.style.opacity = '1';
+        chipElement.style.boxShadow = '0 2px 4px rgba(22, 163, 74, 0.3)';
+        this.showNotification(`🏷️ Tag "${tag}" affiché`, 'info');
+      }
+
+
+      // Check if we need a full page regeneration vs just visibility update
+      const nowHasTags = visibleTags.length > 0;
+      
+      if (wasEmpty && nowHasTags) {
+        // If we went from no tags to having tags, we need full regeneration
+        // because buildSingleObjectPage returns [] when visibleTags.length === 0
+        this._needsRegenerationAfterEmpty = true;
+        this.refreshObjectsPage();
+      } else if (this._needsRegenerationAfterEmpty && !isVisuallyActive) {
+        // If we're adding more tags after having started from empty, keep regenerating
+        this.refreshObjectsPage();
+      } else if (!isVisuallyActive) {
+        // CRITICAL FIX: When activating a new tag, always regenerate the page
+        // This ensures objects with the new tag appear in the DOM, not just get unhidden
+        // The issue was that updateObjectVisibility() can only show/hide existing DOM elements,
+        // but objects filtered out during initial page generation don't exist in DOM at all
+        this.refreshObjectsPage();
+      } else {
+        // Reset the flag if we're deactivating a tag (we have a complete DOM now)
+        this._needsRegenerationAfterEmpty = false;
+        // When deactivating, we can just hide existing elements
+        this.updateObjectVisibility();
       }
 
       // Save changes to storage
       EventBus.emit(Events.STORAGE_SAVE);
+    },
+
+    // Update object visibility based on current filter settings
+    updateObjectVisibility() {
+      const allObjects = document.querySelectorAll('.card[data-objet-name]');
+      const visibleTags = window.OBJETS.filterSettings?.visibleTags || [];
       
-      // Regenerate the objects page to reflect changes
-      this.refreshObjectsPage();
+      allObjects.forEach(card => {
+        const objetName = card.dataset.objetName;
+        const objet = window.OBJETS.objets?.find(o => o.nom === objetName);
+        
+        if (objet && objet.tags) {
+          // Check if object should be visible based on current filter settings
+          const hasVisibleTag = objet.tags.some(tag => visibleTags.includes(tag));
+          
+          // Apply same logic as PageBuilder for "Départ" tag requirement
+          const isMJMode = window.JdrApp?.state?.isMJ || false;
+          const isDevMode = window.JdrApp?.utils?.isDevMode?.() || false;
+          const bypassDepartRequirement = isMJMode || isDevMode || window.activeIdSearch;
+          
+          let shouldShow = hasVisibleTag && visibleTags.length > 0;
+          
+          // CONDITION OBLIGATOIRE : L'objet doit avoir le tag "Départ" pour être visible
+          // SAUF si mode MJ activé, dev mode activé, ou recherche par ID active
+          if (shouldShow && !bypassDepartRequirement) {
+            const hasDepartTag = objet.tags.includes('Départ');
+            if (!hasDepartTag) {
+              shouldShow = false;
+            }
+          }
+          
+          if (shouldShow) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        }
+      });
+      
+      // Update filter count display if it exists
+      const filterCount = document.querySelector('.filter-count');
+      if (filterCount) {
+        const visibleCount = Array.from(allObjects).filter(card => card.style.display !== 'none').length;
+        filterCount.textContent = `${visibleCount} objet(s) affiché(s)`;
+      }
     },
 
     // Select all tags
@@ -3002,6 +3073,9 @@
       // Get all available tags and set them as visible
       const availableTags = window.ContentTypes.objet.filterConfig.availableTags || [];
       window.OBJETS.filterSettings.visibleTags = [...availableTags];
+
+      // Reset regeneration flag since we're doing a full reset
+      this._needsRegenerationAfterEmpty = false;
 
       // Save changes to storage
       EventBus.emit(Events.STORAGE_SAVE);
@@ -3018,6 +3092,9 @@
 
       // Clear all visible tags
       window.OBJETS.filterSettings.visibleTags = [];
+
+      // Reset regeneration flag since we're starting fresh
+      this._needsRegenerationAfterEmpty = false;
 
       // Save changes to storage
       EventBus.emit(Events.STORAGE_SAVE);
@@ -3063,8 +3140,6 @@
       if (cleanedActiveFilters.length !== activeFilters.length) {
         window.OBJETS.filterSettings.visibleTags = cleanedActiveFilters;
         const removedCount = activeFilters.length - cleanedActiveFilters.length;
-        console.log(`🧹 Cleaned ${removedCount} hidden active filter(s):`, 
-          activeFilters.filter(tag => !displayedButtons.includes(tag)));
       }
     }
   };

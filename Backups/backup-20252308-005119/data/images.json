@@ -51,10 +51,11 @@
     "objet:Bouclier en bois": "https://i.ibb.co/67bK4Bw8/Bouclier1.png",
     "objet:Robe simple": "https://i.ibb.co/VYFpnz8h/Robe1.png",
     "objet:Armure de cuir": "https://i.ibb.co/9Hkw2VFb/Armure-Cuir1.png",
-    "objet:Armure en maille": "https://i.ibb.co/cXtwzw5b/Armure-Lourde1.png"
+    "objet:Armure en maille": "https://i.ibb.co/cXtwzw5b/Armure-Lourde1.png",
+    "objet:Armure de plaque": "https://i.ibb.co/fVg5Fp6h/Armure-Lourde2.png"
   },
   "meta": {
-    "total_images": 52,
+    "total_images": 53,
     "exported_date": "2025-08-22",
     "note": "Ces images incluent les nouvelles images uploadées"
   }

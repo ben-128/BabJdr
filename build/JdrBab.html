@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-08-22T21:48:27.347Z by JdrBab Build System -->
+<!-- Generated on 2025-08-22T22:51:36.242Z by JdrBab Build System -->
 <title>JDR‑BAB — Livret de règles</title>
 <meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -3514,6 +3514,19 @@ article span[title]:hover::after {
       "effet": "<strong>Effet:</strong> Augmente l'armure physique de 3.",
       "prix": "🔷 <strong>Prix:</strong> 65",
       "poids": "⚖️ <strong>Poids:</strong> 2"
+    },
+    {
+      "nom": "Armure de plaque",
+      "numero": 11,
+      "image": "",
+      "description": "<i>Une imposante armure de métal poli, dont les plaques luisantes forment une carapace presque impénétrable.</i>",
+      "tags": [
+        "Armure",
+        "Armure lourde"
+      ],
+      "effet": "<strong>Effet:</strong> Augmente l'armure physique de 5.",
+      "prix": "🔷 <strong>Prix:</strong> 200",
+      "poids": "⚖️ <strong>Poids:</strong> 2"
     }
   ],
   "filterSettings": {
@@ -3521,13 +3534,14 @@ article span[title]:hover::after {
       "Arme"
     ],
     "displayedFilterButtons": [
-      "Départ",
       "Arme",
       "Armure",
       "Consommable",
       "Bouclier"
     ]
-  }
+  },
+  "categoryDescription": "Équipements, armes, armures et objets divers que peuvent posséder les personnages.",
+  "description": "Pour éviter le <strong>spoil</strong>, seuls les objets de départs sont visibles sans le <strong>mode maître de jeu</strong> d'actif. <br>Vous pouvez par contre rechercher un <strong>objet par ID</strong> quand le MJ vous indique que votre héros a trouvé un nouvel objet."
 };
     window.MONSTRES = [];
     window.IMAGES = {
@@ -3583,10 +3597,11 @@ article span[title]:hover::after {
     "objet:Bouclier en bois": "https://i.ibb.co/67bK4Bw8/Bouclier1.png",
     "objet:Robe simple": "https://i.ibb.co/VYFpnz8h/Robe1.png",
     "objet:Armure de cuir": "https://i.ibb.co/9Hkw2VFb/Armure-Cuir1.png",
-    "objet:Armure en maille": "https://i.ibb.co/cXtwzw5b/Armure-Lourde1.png"
+    "objet:Armure en maille": "https://i.ibb.co/cXtwzw5b/Armure-Lourde1.png",
+    "objet:Armure de plaque": "https://i.ibb.co/fVg5Fp6h/Armure-Lourde2.png"
   },
   "meta": {
-    "total_images": 52,
+    "total_images": 53,
     "exported_date": "2025-08-22",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
@@ -4402,7 +4417,7 @@ article span[title]:hover::after {
           "Robe"
 ],
         defaultVisibleTags: [
-          "Départ"
+          "Arme"
 ] // Filtres affichés par défaut
       },
       defaultValues: {
@@ -4410,10 +4425,10 @@ article span[title]:hover::after {
         numero: 1,
         image: "",
         description: "Description de l'objet.",
-        tags: ["Divers"],
+        tags: ["Départ"],
         effet: "<strong>Effet:</strong> Description de l'effet de l'objet.",
-        prix: "🔷 <strong>Prix:</strong> 10 pièces d'or",
-        poids: "⚖️ <strong>Poids:</strong> 1 kg"
+        prix: "🔷 <strong>Prix:</strong> 10",
+        poids: "⚖️ <strong>Poids:</strong> 1"
       }
     },
 
@@ -5393,8 +5408,15 @@ article span[title]:hover::after {
       // CRITICAL: Ensure window.OBJETS.filterSettings is properly initialized with the same visibleTags
       // This fixes the sync issue between visual state and data state in standalone mode
       if (!window.OBJETS.filterSettings) {
-        window.OBJETS.filterSettings = { visibleTags: [...visibleTags] };
-        console.log('🔧 PageBuilder: Initialized filterSettings in window.OBJETS:', window.OBJETS.filterSettings);
+        window.OBJETS.filterSettings = { 
+          visibleTags: [...visibleTags],
+          displayedFilterButtons: [...config.filterConfig.availableTags]
+        };
+      }
+      
+      // Ensure displayedFilterButtons is always initialized
+      if (!window.OBJETS.filterSettings.displayedFilterButtons) {
+        window.OBJETS.filterSettings.displayedFilterButtons = [...config.filterConfig.availableTags];
       }
       
       // Filtrer les objets selon les tags visibles, sauf si une recherche par ID est active
@@ -5402,9 +5424,27 @@ article span[title]:hover::after {
         ? allObjects // Afficher tous les objets quand une recherche par ID est active
         : visibleTags.length === 0 
           ? [] // Si aucun tag n'est visible, ne rien afficher
-          : allObjects.filter(obj => 
-              obj.tags && obj.tags.some(tag => visibleTags.includes(tag))
-            );
+          : allObjects.filter(obj => {
+              // Vérifier que l'objet a les tags requis pour être visible
+              if (!obj.tags) return false;
+              
+              // L'objet doit avoir au moins un tag visible
+              const hasVisibleTag = obj.tags.some(tag => visibleTags.includes(tag));
+              if (!hasVisibleTag) return false;
+              
+              // CONDITION OBLIGATOIRE : L'objet doit avoir le tag "Départ" pour être visible
+              // SAUF si mode MJ activé, dev mode activé, ou recherche par ID active
+              const isMJMode = window.JdrApp?.state?.isMJ || false;
+              const isDevMode = window.JdrApp?.utils?.isDevMode?.() || false;
+              const bypassDepartRequirement = isMJMode || isDevMode || window.activeIdSearch;
+              
+              if (!bypassDepartRequirement) {
+                const hasDepartTag = obj.tags.includes('Départ');
+                if (!hasDepartTag) return false;
+              }
+              
+              return true;
+            });
       
       return `
         <article class="" data-page="objets">
@@ -5413,6 +5453,8 @@ article span[title]:hover::after {
               <h2>📦 Objets</h2>
               ${this.buildIllustration('page:objets')}
             </div>
+            
+            ${this.buildObjectsCategoryDescription()}
             
             ${this.buildIdSearchFilter()}
             ${this.buildTagFilters(visibleTags, filterSettings.displayedFilterButtons || config.filterConfig.availableTags)}
@@ -5841,6 +5883,22 @@ article span[title]:hover::after {
           </div>
           <div id="id-search-result" style="padding: 0 0.375rem 0.375rem; font-size: 0.85em; color: var(--paper-muted); min-height: 0.5em; line-height: 1.2; text-align: center;">
             <!-- Résultat de la recherche affiché ici -->
+          </div>
+        </div>
+      `;
+    }
+
+    buildObjectsCategoryDescription() {
+      // Initialize description if it doesn't exist  
+      if (!window.OBJETS.description) {
+        window.OBJETS.description = "Équipements, armes, armures et objets divers que peuvent posséder les personnages.";
+      }
+      
+      return `
+        <div class="objects-category-description" style="margin: 1rem 0; padding: 1rem; background: var(--card); border-radius: 8px; border-left: 4px solid var(--bronze);">
+          <div class="editable-section" data-section-type="objet-category-description">
+            <p class="lead editable editable-paragraph" data-edit-type="generic" data-edit-section="description">${window.OBJETS.description}</p>
+            ${this.buildEditButton('section')}
           </div>
         </div>
       `;
@@ -6813,10 +6871,10 @@ article span[title]:hover::after {
         numero: 1,
         image: "",
         description: "Description de l'objet.",
-        tags: ["Divers"],
+        tags: ["Départ"],
         effet: "<strong>Effet:</strong> Description de l'effet de l'objet.",
-        prix: "🔷 <strong>Prix:</strong> 10 pièces d'or",
-        poids: "⚖️ <strong>Poids:</strong> 1 kg"
+        prix: "🔷 <strong>Prix:</strong> 10",
+        poids: "⚖️ <strong>Poids:</strong> 1"
       }
     },
 
@@ -7258,8 +7316,9 @@ article span[title]:hover::after {
           .filter(section => !section.requiresMJ || window.JdrApp.state.isMJ)
           .map(section => this.generateTOCSection(section)).join('')}
         <div class="mj-toggle-container" style="margin: 1rem 0; text-align: center; border-top: 2px solid var(--rule); padding-top: 1rem;">
-          <button id="mjToggleBtn" class="btn-base btn-small" style="background: var(--bronze); color: white; border-color: var(--bronze);">
+          <button id="mjToggleBtn" class="btn-base btn-small" style="background: var(--bronze); color: white; border-color: var(--bronze); position: relative;">
             🎭 Maître de jeu
+            <span id="mjStatusIndicator" style="position: absolute; top: -5px; right: -5px; width: 12px; height: 12px; border-radius: 50%; background: #dc2626; border: 2px solid white; display: none;"></span>
           </button>
         </div>
       `;
@@ -7277,20 +7336,27 @@ article span[title]:hover::after {
       const mjBtn = document.getElementById('mjToggleBtn');
       if (!mjBtn) return;
 
+      // Initialize visual state based on current MJ status
+      this.updateMJButtonVisual();
+
       const handleMJToggle = () => {
         if (window.JdrApp.state.isMJ) {
           // Déjà en mode MJ, désactiver
           window.JdrApp.state.isMJ = false;
-          mjBtn.style.background = 'var(--bronze)';
-          mjBtn.innerHTML = '🎭 Maître de jeu';
+          this.updateMJButtonVisual();
           this.generateTOC(); // Régénérer le TOC pour cacher les sections MJ
+          
+          // Refresh objects display if currently on objects page
+          this.refreshObjectsPageIfActive();
         } else {
           // Demander confirmation avant d'activer le mode MJ
           this.showMJConfirmation(() => {
             window.JdrApp.state.isMJ = true;
-            mjBtn.style.background = 'var(--gold)';
-            mjBtn.innerHTML = '🎭 Mode MJ activé';
+            this.updateMJButtonVisual();
             this.generateTOC(); // Régénérer le TOC pour afficher les sections MJ
+            
+            // Refresh objects display if currently on objects page
+            this.refreshObjectsPageIfActive();
           });
         }
       };
@@ -7359,10 +7425,34 @@ article span[title]:hover::after {
           e.preventDefault();
           const route = link.getAttribute('data-route');
           if (route) {
+            // Special handling for objects page - force refresh when navigating to it
+            if (route === 'objets') {
+              // Set a flag to force refresh objects page after navigation
+              JdrApp.modules.router._forceObjectsRefresh = true;
+            }
             JdrApp.modules.router.navigate(route);
           }
         });
       });
+    },
+
+    updateMJButtonVisual() {
+      const mjBtn = document.getElementById('mjToggleBtn');
+      const mjIndicator = document.getElementById('mjStatusIndicator');
+      
+      if (!mjBtn) return;
+      
+      if (window.JdrApp.state.isMJ) {
+        // Mode MJ activé - bouton doré avec indicateur vert
+        mjBtn.style.background = 'var(--gold)';
+        mjBtn.style.borderColor = 'var(--gold)';
+        mjBtn.innerHTML = '🎭 Mode MJ activé <span id="mjStatusIndicator" style="position: absolute; top: -5px; right: -5px; width: 12px; height: 12px; border-radius: 50%; background: #16a34a; border: 2px solid white; display: inline-block;"></span>';
+      } else {
+        // Mode normal - bouton bronze sans indicateur
+        mjBtn.style.background = 'var(--bronze)';
+        mjBtn.style.borderColor = 'var(--bronze)';
+        mjBtn.innerHTML = '🎭 Maître de jeu <span id="mjStatusIndicator" style="position: absolute; top: -5px; right: -5px; width: 12px; height: 12px; border-radius: 50%; background: #dc2626; border: 2px solid white; display: none;"></span>';
+      }
     },
 
     showMJConfirmation(onConfirm) {
@@ -7554,10 +7644,34 @@ article span[title]:hover::after {
     renderObjectsPage() {
       if (!window.OBJETS) return false;
       
-      // Use the existing show() method for consistency
+      // Ensure the page is shown as active first
       this.show('objets');
       
+      // Force complete regeneration if coming from navigation or MJ mode change
+      const shouldForceRefresh = this._forceObjectsRefresh || false;
+      this._forceObjectsRefresh = false; // Reset the flag
+      
+      // Force complete regeneration of the objects page content
+      // This ensures that objects filtered out by MJ restrictions are now properly generated in the DOM
+      setTimeout(() => {
+        if (JdrApp.modules.renderer && JdrApp.modules.renderer.regenerateCurrentPage) {
+          JdrApp.modules.renderer.regenerateCurrentPage();
+        }
+      }, shouldForceRefresh ? 100 : 50); // Slightly longer delay when forced refresh
+      
       return true;
+    },
+
+    // Helper method to refresh objects page if currently active
+    refreshObjectsPageIfActive() {
+      const currentHash = window.location.hash;
+      if (currentHash === '#/objets' || currentHash === '#objets') {
+        setTimeout(() => {
+          // Force full page regeneration to ensure objects filtered by MJ mode are now visible
+          // This calls renderObjectsPage() which will regenerate the entire page with current filters
+          this.renderObjectsPage();
+        }, 150); // Slightly longer delay to ensure MJ state is updated
+      }
     },
     
     getClassIcon(className) {
@@ -8633,6 +8747,8 @@ article span[title]:hover::after {
             return this.updateDonData(session, content);
           case 'objet':
             return this.updateObjetData(session, content);
+          case 'category':
+            return this.updateCategoryData(session, content);
           case 'subclass':
             return this.updateSubclassData(session, content);
           case 'class':
@@ -8684,6 +8800,33 @@ article span[title]:hover::after {
       
       objet[propertyName] = content;
       return true;
+    }
+
+    // Update category data (generic for all category types)
+    updateCategoryData(session, content) {
+      // Handle different category types generically
+      if (session.categoryType === 'don') {
+        const category = window.DONS?.find(cat => cat.nom === session.categoryName);
+        if (category && session.editSection === 'description') {
+          category.description = content;
+          return true;
+        }
+      } else if (session.categoryType === 'spell') {
+        const category = window.SORTS?.find(cat => cat.nom === session.categoryName);
+        if (category && session.editSection === 'description') {
+          category.description = content;
+          return true;
+        }
+      }
+      
+      // Simple fallback - if we're editing description and nothing else matched, 
+      // and we have OBJETS, assume it's the objects category
+      if (session.editSection === 'description' && window.OBJETS) {
+        window.OBJETS.description = content;
+        return true;
+      }
+      
+      return false;
     }
 
     // Update subclass data
@@ -8794,8 +8937,15 @@ article span[title]:hover::after {
             jsonCategory = 'CLASSES';  // Subclasses are stored within CLASSES
             break;
           case 'category':
-            // Category descriptions can be in SORTS or DONS, determine from categoryType
-            jsonCategory = session.categoryType === 'don' ? 'DONS' : 'SORTS';
+            // Category descriptions can be in SORTS, DONS, or OBJETS
+            if (session.categoryType === 'don') {
+              jsonCategory = 'DONS';
+            } else if (session.categoryType === 'spell') {
+              jsonCategory = 'SORTS';
+            } else {
+              // Default to OBJETS for other category descriptions
+              jsonCategory = 'OBJETS';
+            }
             break;
           case 'objet':
             jsonCategory = 'OBJETS';
@@ -10185,7 +10335,6 @@ article span[title]:hover::after {
       this.setupResponsive();
       this.setupNewPageHandler();
       this._initialized = true;
-      console.log('✅ UI module initialized');
     },
 
     setupEventListeners() {
@@ -13104,7 +13253,6 @@ article span[title]:hover::after {
 
       // GUARD: Prevent rapid double clicks (debounce)
       if (this._toggleInProgress) {
-        console.log('🚫 Toggle already in progress, ignoring');
         return;
       }
       this._toggleInProgress = true;
@@ -13121,14 +13269,12 @@ article span[title]:hover::after {
 
       const visibleTags = window.OBJETS.filterSettings.visibleTags;
       
+      // IMPORTANT: Track state BEFORE modification to know if we need full regeneration
+      const wasEmpty = visibleTags.length === 0;
+      
       // SIMPLE LOGIC: Check visual state directly and toggle
       const isVisuallyActive = chipElement.classList.contains('active');
       
-      console.log('🔍 SIMPLE TOGGLE:', {
-        tag: tag,
-        isVisuallyActive: isVisuallyActive,
-        action: isVisuallyActive ? 'DEACTIVATE' : 'ACTIVATE'
-      });
 
       if (isVisuallyActive) {
         // DEACTIVATE - remove from visible tags
@@ -13155,13 +13301,30 @@ article span[title]:hover::after {
         this.showNotification(`🏷️ Tag "${tag}" affiché`, 'info');
       }
 
-      console.log('✅ AFTER TOGGLE:', {
-        visibleTags: [...visibleTags],
-        chipClasses: Array.from(chipElement.classList)
-      });
 
-      // Update object visibility without full page regeneration
-      this.updateObjectVisibility();
+      // Check if we need a full page regeneration vs just visibility update
+      const nowHasTags = visibleTags.length > 0;
+      
+      if (wasEmpty && nowHasTags) {
+        // If we went from no tags to having tags, we need full regeneration
+        // because buildSingleObjectPage returns [] when visibleTags.length === 0
+        this._needsRegenerationAfterEmpty = true;
+        this.refreshObjectsPage();
+      } else if (this._needsRegenerationAfterEmpty && !isVisuallyActive) {
+        // If we're adding more tags after having started from empty, keep regenerating
+        this.refreshObjectsPage();
+      } else if (!isVisuallyActive) {
+        // CRITICAL FIX: When activating a new tag, always regenerate the page
+        // This ensures objects with the new tag appear in the DOM, not just get unhidden
+        // The issue was that updateObjectVisibility() can only show/hide existing DOM elements,
+        // but objects filtered out during initial page generation don't exist in DOM at all
+        this.refreshObjectsPage();
+      } else {
+        // Reset the flag if we're deactivating a tag (we have a complete DOM now)
+        this._needsRegenerationAfterEmpty = false;
+        // When deactivating, we can just hide existing elements
+        this.updateObjectVisibility();
+      }
 
       // Save changes to storage
       EventBus.emit(Events.STORAGE_SAVE);
@@ -13177,10 +13340,26 @@ article span[title]:hover::after {
         const objet = window.OBJETS.objets?.find(o => o.nom === objetName);
         
         if (objet && objet.tags) {
-          // Show object if it has at least one visible tag
+          // Check if object should be visible based on current filter settings
           const hasVisibleTag = objet.tags.some(tag => visibleTags.includes(tag));
           
-          if (hasVisibleTag && visibleTags.length > 0) {
+          // Apply same logic as PageBuilder for "Départ" tag requirement
+          const isMJMode = window.JdrApp?.state?.isMJ || false;
+          const isDevMode = window.JdrApp?.utils?.isDevMode?.() || false;
+          const bypassDepartRequirement = isMJMode || isDevMode || window.activeIdSearch;
+          
+          let shouldShow = hasVisibleTag && visibleTags.length > 0;
+          
+          // CONDITION OBLIGATOIRE : L'objet doit avoir le tag "Départ" pour être visible
+          // SAUF si mode MJ activé, dev mode activé, ou recherche par ID active
+          if (shouldShow && !bypassDepartRequirement) {
+            const hasDepartTag = objet.tags.includes('Départ');
+            if (!hasDepartTag) {
+              shouldShow = false;
+            }
+          }
+          
+          if (shouldShow) {
             card.style.display = '';
           } else {
             card.style.display = 'none';
@@ -13206,6 +13385,9 @@ article span[title]:hover::after {
       const availableTags = window.ContentTypes.objet.filterConfig.availableTags || [];
       window.OBJETS.filterSettings.visibleTags = [...availableTags];
 
+      // Reset regeneration flag since we're doing a full reset
+      this._needsRegenerationAfterEmpty = false;
+
       // Save changes to storage
       EventBus.emit(Events.STORAGE_SAVE);
       
@@ -13221,6 +13403,9 @@ article span[title]:hover::after {
 
       // Clear all visible tags
       window.OBJETS.filterSettings.visibleTags = [];
+
+      // Reset regeneration flag since we're starting fresh
+      this._needsRegenerationAfterEmpty = false;
 
       // Save changes to storage
       EventBus.emit(Events.STORAGE_SAVE);
@@ -13266,8 +13451,6 @@ article span[title]:hover::after {
       if (cleanedActiveFilters.length !== activeFilters.length) {
         window.OBJETS.filterSettings.visibleTags = cleanedActiveFilters;
         const removedCount = activeFilters.length - cleanedActiveFilters.length;
-        console.log(`🧹 Cleaned ${removedCount} hidden active filter(s):`, 
-          activeFilters.filter(tag => !displayedButtons.includes(tag)));
       }
     }
   };

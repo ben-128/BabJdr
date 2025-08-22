@@ -24,7 +24,6 @@
       this.setupResponsive();
       this.setupNewPageHandler();
       this._initialized = true;
-      console.log('✅ UI module initialized');
     },
 
     setupEventListeners() {
@@ -2943,7 +2942,6 @@
 
       // GUARD: Prevent rapid double clicks (debounce)
       if (this._toggleInProgress) {
-        console.log('🚫 Toggle already in progress, ignoring');
         return;
       }
       this._toggleInProgress = true;
@@ -2966,12 +2964,6 @@
       // SIMPLE LOGIC: Check visual state directly and toggle
       const isVisuallyActive = chipElement.classList.contains('active');
       
-      console.log('🔍 SIMPLE TOGGLE:', {
-        tag: tag,
-        isVisuallyActive: isVisuallyActive,
-        action: isVisuallyActive ? 'DEACTIVATE' : 'ACTIVATE',
-        wasEmpty: wasEmpty
-      });
 
       if (isVisuallyActive) {
         // DEACTIVATE - remove from visible tags
@@ -2998,10 +2990,6 @@
         this.showNotification(`🏷️ Tag "${tag}" affiché`, 'info');
       }
 
-      console.log('✅ AFTER TOGGLE:', {
-        visibleTags: [...visibleTags],
-        chipClasses: Array.from(chipElement.classList)
-      });
 
       // Check if we need a full page regeneration vs just visibility update
       const nowHasTags = visibleTags.length > 0;
@@ -3009,22 +2997,21 @@
       if (wasEmpty && nowHasTags) {
         // If we went from no tags to having tags, we need full regeneration
         // because buildSingleObjectPage returns [] when visibleTags.length === 0
-        console.log('🔄 Full page regeneration needed: went from 0 to 1+ tags');
-        
-        // IMPORTANT: Mark that we need to keep regenerating until user changes the filter state
-        // This ensures that when you add a 2nd, 3rd tag after starting from 0, it regenerates each time
         this._needsRegenerationAfterEmpty = true;
         this.refreshObjectsPage();
       } else if (this._needsRegenerationAfterEmpty && !isVisuallyActive) {
         // If we're adding more tags after having started from empty, keep regenerating
-        console.log('🔄 Continuing regeneration: adding more tags after empty state');
+        this.refreshObjectsPage();
+      } else if (!isVisuallyActive) {
+        // CRITICAL FIX: When activating a new tag, always regenerate the page
+        // This ensures objects with the new tag appear in the DOM, not just get unhidden
+        // The issue was that updateObjectVisibility() can only show/hide existing DOM elements,
+        // but objects filtered out during initial page generation don't exist in DOM at all
         this.refreshObjectsPage();
       } else {
         // Reset the flag if we're deactivating a tag (we have a complete DOM now)
-        if (isVisuallyActive) {
-          this._needsRegenerationAfterEmpty = false;
-        }
-        // Otherwise just update visibility of existing DOM elements
+        this._needsRegenerationAfterEmpty = false;
+        // When deactivating, we can just hide existing elements
         this.updateObjectVisibility();
       }
 
@@ -3042,10 +3029,26 @@
         const objet = window.OBJETS.objets?.find(o => o.nom === objetName);
         
         if (objet && objet.tags) {
-          // Show object if it has at least one visible tag
+          // Check if object should be visible based on current filter settings
           const hasVisibleTag = objet.tags.some(tag => visibleTags.includes(tag));
           
-          if (hasVisibleTag && visibleTags.length > 0) {
+          // Apply same logic as PageBuilder for "Départ" tag requirement
+          const isMJMode = window.JdrApp?.state?.isMJ || false;
+          const isDevMode = window.JdrApp?.utils?.isDevMode?.() || false;
+          const bypassDepartRequirement = isMJMode || isDevMode || window.activeIdSearch;
+          
+          let shouldShow = hasVisibleTag && visibleTags.length > 0;
+          
+          // CONDITION OBLIGATOIRE : L'objet doit avoir le tag "Départ" pour être visible
+          // SAUF si mode MJ activé, dev mode activé, ou recherche par ID active
+          if (shouldShow && !bypassDepartRequirement) {
+            const hasDepartTag = objet.tags.includes('Départ');
+            if (!hasDepartTag) {
+              shouldShow = false;
+            }
+          }
+          
+          if (shouldShow) {
             card.style.display = '';
           } else {
             card.style.display = 'none';
@@ -3137,8 +3140,6 @@
       if (cleanedActiveFilters.length !== activeFilters.length) {
         window.OBJETS.filterSettings.visibleTags = cleanedActiveFilters;
         const removedCount = activeFilters.length - cleanedActiveFilters.length;
-        console.log(`🧹 Cleaned ${removedCount} hidden active filter(s):`, 
-          activeFilters.filter(tag => !displayedButtons.includes(tag)));
       }
     }
   };

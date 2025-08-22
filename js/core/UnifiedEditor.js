@@ -667,6 +667,8 @@
             return this.updateDonData(session, content);
           case 'objet':
             return this.updateObjetData(session, content);
+          case 'category':
+            return this.updateCategoryData(session, content);
           case 'subclass':
             return this.updateSubclassData(session, content);
           case 'class':
@@ -718,6 +720,33 @@
       
       objet[propertyName] = content;
       return true;
+    }
+
+    // Update category data (generic for all category types)
+    updateCategoryData(session, content) {
+      // Handle different category types generically
+      if (session.categoryType === 'don') {
+        const category = window.DONS?.find(cat => cat.nom === session.categoryName);
+        if (category && session.editSection === 'description') {
+          category.description = content;
+          return true;
+        }
+      } else if (session.categoryType === 'spell') {
+        const category = window.SORTS?.find(cat => cat.nom === session.categoryName);
+        if (category && session.editSection === 'description') {
+          category.description = content;
+          return true;
+        }
+      }
+      
+      // Simple fallback - if we're editing description and nothing else matched, 
+      // and we have OBJETS, assume it's the objects category
+      if (session.editSection === 'description' && window.OBJETS) {
+        window.OBJETS.description = content;
+        return true;
+      }
+      
+      return false;
     }
 
     // Update subclass data
@@ -828,8 +857,15 @@
             jsonCategory = 'CLASSES';  // Subclasses are stored within CLASSES
             break;
           case 'category':
-            // Category descriptions can be in SORTS or DONS, determine from categoryType
-            jsonCategory = session.categoryType === 'don' ? 'DONS' : 'SORTS';
+            // Category descriptions can be in SORTS, DONS, or OBJETS
+            if (session.categoryType === 'don') {
+              jsonCategory = 'DONS';
+            } else if (session.categoryType === 'spell') {
+              jsonCategory = 'SORTS';
+            } else {
+              // Default to OBJETS for other category descriptions
+              jsonCategory = 'OBJETS';
+            }
             break;
           case 'objet':
             jsonCategory = 'OBJETS';

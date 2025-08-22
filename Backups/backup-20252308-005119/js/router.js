@@ -142,8 +142,9 @@
           .filter(section => !section.requiresMJ || window.JdrApp.state.isMJ)
           .map(section => this.generateTOCSection(section)).join('')}
         <div class="mj-toggle-container" style="margin: 1rem 0; text-align: center; border-top: 2px solid var(--rule); padding-top: 1rem;">
-          <button id="mjToggleBtn" class="btn-base btn-small" style="background: var(--bronze); color: white; border-color: var(--bronze);">
+          <button id="mjToggleBtn" class="btn-base btn-small" style="background: var(--bronze); color: white; border-color: var(--bronze); position: relative;">
             🎭 Maître de jeu
+            <span id="mjStatusIndicator" style="position: absolute; top: -5px; right: -5px; width: 12px; height: 12px; border-radius: 50%; background: #dc2626; border: 2px solid white; display: none;"></span>
           </button>
         </div>
       `;
@@ -161,20 +162,27 @@
       const mjBtn = document.getElementById('mjToggleBtn');
       if (!mjBtn) return;
 
+      // Initialize visual state based on current MJ status
+      this.updateMJButtonVisual();
+
       const handleMJToggle = () => {
         if (window.JdrApp.state.isMJ) {
           // Déjà en mode MJ, désactiver
           window.JdrApp.state.isMJ = false;
-          mjBtn.style.background = 'var(--bronze)';
-          mjBtn.innerHTML = '🎭 Maître de jeu';
+          this.updateMJButtonVisual();
           this.generateTOC(); // Régénérer le TOC pour cacher les sections MJ
+          
+          // Refresh objects display if currently on objects page
+          this.refreshObjectsPageIfActive();
         } else {
           // Demander confirmation avant d'activer le mode MJ
           this.showMJConfirmation(() => {
             window.JdrApp.state.isMJ = true;
-            mjBtn.style.background = 'var(--gold)';
-            mjBtn.innerHTML = '🎭 Mode MJ activé';
+            this.updateMJButtonVisual();
             this.generateTOC(); // Régénérer le TOC pour afficher les sections MJ
+            
+            // Refresh objects display if currently on objects page
+            this.refreshObjectsPageIfActive();
           });
         }
       };
@@ -243,10 +251,34 @@
           e.preventDefault();
           const route = link.getAttribute('data-route');
           if (route) {
+            // Special handling for objects page - force refresh when navigating to it
+            if (route === 'objets') {
+              // Set a flag to force refresh objects page after navigation
+              JdrApp.modules.router._forceObjectsRefresh = true;
+            }
             JdrApp.modules.router.navigate(route);
           }
         });
       });
+    },
+
+    updateMJButtonVisual() {
+      const mjBtn = document.getElementById('mjToggleBtn');
+      const mjIndicator = document.getElementById('mjStatusIndicator');
+      
+      if (!mjBtn) return;
+      
+      if (window.JdrApp.state.isMJ) {
+        // Mode MJ activé - bouton doré avec indicateur vert
+        mjBtn.style.background = 'var(--gold)';
+        mjBtn.style.borderColor = 'var(--gold)';
+        mjBtn.innerHTML = '🎭 Mode MJ activé <span id="mjStatusIndicator" style="position: absolute; top: -5px; right: -5px; width: 12px; height: 12px; border-radius: 50%; background: #16a34a; border: 2px solid white; display: inline-block;"></span>';
+      } else {
+        // Mode normal - bouton bronze sans indicateur
+        mjBtn.style.background = 'var(--bronze)';
+        mjBtn.style.borderColor = 'var(--bronze)';
+        mjBtn.innerHTML = '🎭 Maître de jeu <span id="mjStatusIndicator" style="position: absolute; top: -5px; right: -5px; width: 12px; height: 12px; border-radius: 50%; background: #dc2626; border: 2px solid white; display: none;"></span>';
+      }
     },
 
     showMJConfirmation(onConfirm) {
@@ -438,10 +470,34 @@
     renderObjectsPage() {
       if (!window.OBJETS) return false;
       
-      // Use the existing show() method for consistency
+      // Ensure the page is shown as active first
       this.show('objets');
       
+      // Force complete regeneration if coming from navigation or MJ mode change
+      const shouldForceRefresh = this._forceObjectsRefresh || false;
+      this._forceObjectsRefresh = false; // Reset the flag
+      
+      // Force complete regeneration of the objects page content
+      // This ensures that objects filtered out by MJ restrictions are now properly generated in the DOM
+      setTimeout(() => {
+        if (JdrApp.modules.renderer && JdrApp.modules.renderer.regenerateCurrentPage) {
+          JdrApp.modules.renderer.regenerateCurrentPage();
+        }
+      }, shouldForceRefresh ? 100 : 50); // Slightly longer delay when forced refresh
+      
       return true;
+    },
+
+    // Helper method to refresh objects page if currently active
+    refreshObjectsPageIfActive() {
+      const currentHash = window.location.hash;
+      if (currentHash === '#/objets' || currentHash === '#objets') {
+        setTimeout(() => {
+          // Force full page regeneration to ensure objects filtered by MJ mode are now visible
+          // This calls renderObjectsPage() which will regenerate the entire page with current filters
+          this.renderObjectsPage();
+        }, 150); // Slightly longer delay to ensure MJ state is updated
+      }
     },
     
     getClassIcon(className) {

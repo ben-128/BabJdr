@@ -64,14 +64,46 @@
       const filterSettings = objectData.filterSettings || {};
       const visibleTags = filterSettings.visibleTags || config.filterConfig.defaultVisibleTags;
       
+      // CRITICAL: Ensure window.OBJETS.filterSettings is properly initialized with the same visibleTags
+      // This fixes the sync issue between visual state and data state in standalone mode
+      if (!window.OBJETS.filterSettings) {
+        window.OBJETS.filterSettings = { 
+          visibleTags: [...visibleTags],
+          displayedFilterButtons: [...config.filterConfig.availableTags]
+        };
+      }
+      
+      // Ensure displayedFilterButtons is always initialized
+      if (!window.OBJETS.filterSettings.displayedFilterButtons) {
+        window.OBJETS.filterSettings.displayedFilterButtons = [...config.filterConfig.availableTags];
+      }
+      
       // Filtrer les objets selon les tags visibles, sauf si une recherche par ID est active
       const filteredObjects = window.activeIdSearch 
         ? allObjects // Afficher tous les objets quand une recherche par ID est active
         : visibleTags.length === 0 
           ? [] // Si aucun tag n'est visible, ne rien afficher
-          : allObjects.filter(obj => 
-              obj.tags && obj.tags.some(tag => visibleTags.includes(tag))
-            );
+          : allObjects.filter(obj => {
+              // Vérifier que l'objet a les tags requis pour être visible
+              if (!obj.tags) return false;
+              
+              // L'objet doit avoir au moins un tag visible
+              const hasVisibleTag = obj.tags.some(tag => visibleTags.includes(tag));
+              if (!hasVisibleTag) return false;
+              
+              // CONDITION OBLIGATOIRE : L'objet doit avoir le tag "Départ" pour être visible
+              // SAUF si mode MJ activé, dev mode activé, ou recherche par ID active
+              const isMJMode = window.JdrApp?.state?.isMJ || false;
+              const isDevMode = window.JdrApp?.utils?.isDevMode?.() || false;
+              const bypassDepartRequirement = isMJMode || isDevMode || window.activeIdSearch;
+              
+              if (!bypassDepartRequirement) {
+                const hasDepartTag = obj.tags.includes('Départ');
+                if (!hasDepartTag) return false;
+              }
+              
+              return true;
+            });
       
       return `
         <article class="" data-page="objets">
@@ -80,6 +112,8 @@
               <h2>📦 Objets</h2>
               ${this.buildIllustration('page:objets')}
             </div>
+            
+            ${this.buildObjectsCategoryDescription()}
             
             ${this.buildIdSearchFilter()}
             ${this.buildTagFilters(visibleTags, filterSettings.displayedFilterButtons || config.filterConfig.availableTags)}
@@ -508,6 +542,22 @@
           </div>
           <div id="id-search-result" style="padding: 0 0.375rem 0.375rem; font-size: 0.85em; color: var(--paper-muted); min-height: 0.5em; line-height: 1.2; text-align: center;">
             <!-- Résultat de la recherche affiché ici -->
+          </div>
+        </div>
+      `;
+    }
+
+    buildObjectsCategoryDescription() {
+      // Initialize description if it doesn't exist  
+      if (!window.OBJETS.description) {
+        window.OBJETS.description = "Équipements, armes, armures et objets divers que peuvent posséder les personnages.";
+      }
+      
+      return `
+        <div class="objects-category-description" style="margin: 1rem 0; padding: 1rem; background: var(--card); border-radius: 8px; border-left: 4px solid var(--bronze);">
+          <div class="editable-section" data-section-type="objet-category-description">
+            <p class="lead editable editable-paragraph" data-edit-type="generic" data-edit-section="description">${window.OBJETS.description}</p>
+            ${this.buildEditButton('section')}
           </div>
         </div>
       `;
