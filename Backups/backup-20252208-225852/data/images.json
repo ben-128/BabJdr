@@ -43,14 +43,10 @@
     "sort:Sorts de Prêtre:Arme de lumière": "https://i.ibb.co/cXh57Pdn/ArmeLum.png",
     "objet:Épée Longue": "https://i.ibb.co/35rpP6ZS/Epee2M1.png",
     "objet:Espadon": "https://i.ibb.co/35rpP6ZS/Epee2M1.png",
-    "objet:Simple épée": "https://i.ibb.co/PsSXvSXx/Epee1.png",
-    "objet:Dague en fer": "https://i.ibb.co/1fCwy6cR/Dague1.png",
-    "objet:Bâton en bois": "https://i.ibb.co/TMF07Tzf/Baton1.png",
-    "objet:Gourdin": "https://i.ibb.co/whZCKww0/Baton2.png",
-    "objet:Arc simple": "https://i.ibb.co/cKb1JKZQ/Arc1.png"
+    "objet:Simple épée": "https://i.ibb.co/PsSXvSXx/Epee1.png"
   },
   "meta": {
-    "total_images": 48,
+    "total_images": 44,
     "exported_date": "2025-08-22",
     "note": "Ces images incluent les nouvelles images uploadées"
   }

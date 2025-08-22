@@ -24,7 +24,8 @@
       "Bash(node:*)",
       "Bash(sed:*)",
       "Bash(curl:*)",
-      "Bash(rm:*)"
+      "Bash(rm:*)",
+      "Bash(npm run dev:*)"
     ],
     "deny": []
   }

@@ -3028,9 +3028,6 @@
 
     // Refresh the objects page after filter changes
     refreshObjectsPage() {
-      // Clean up active tags that are not in displayed buttons
-      this.cleanupActiveFilters();
-      
       // Don't regenerate if an ID search is active
       if (window.activeIdSearch) {
         // Just show notification, keep current display
@@ -3047,25 +3044,6 @@
       // Show notification
       const tagCount = window.OBJETS.filterSettings?.visibleTags?.length || 0;
       this.showNotification(`🏷️ Filtres mis à jour (${tagCount} tag${tagCount > 1 ? 's' : ''} actif${tagCount > 1 ? 's' : ''})`, 'success');
-    },
-
-    // Clean up active filters to ensure only displayed buttons can be active
-    cleanupActiveFilters() {
-      if (!window.OBJETS?.filterSettings) return;
-      
-      const displayedButtons = window.OBJETS.filterSettings.displayedFilterButtons || [];
-      const activeFilters = window.OBJETS.filterSettings.visibleTags || [];
-      
-      // Remove any active filters that are not in displayed buttons
-      const cleanedActiveFilters = activeFilters.filter(tag => displayedButtons.includes(tag));
-      
-      // Update if something was cleaned
-      if (cleanedActiveFilters.length !== activeFilters.length) {
-        window.OBJETS.filterSettings.visibleTags = cleanedActiveFilters;
-        const removedCount = activeFilters.length - cleanedActiveFilters.length;
-        console.log(`🧹 Cleaned ${removedCount} hidden active filter(s):`, 
-          activeFilters.filter(tag => !displayedButtons.includes(tag)));
-      }
     }
   };
 

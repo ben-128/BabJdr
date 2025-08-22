@@ -96,7 +96,14 @@
       "Départ",
       "Arme",
       "Armure",
-      "Consommable"
+      "Consommable",
+      "Épée",
+      "Arme exotique",
+      "Une main",
+      "Deux mains",
+      "Baton",
+      "Dague",
+      "Arc"
     ],
     "displayedFilterButtons": [
       "Départ",
