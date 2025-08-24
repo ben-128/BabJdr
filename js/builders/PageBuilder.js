@@ -409,10 +409,7 @@
     }
 
     buildFiltersSection(section, sectionIndex) {
-      console.log('buildFiltersSection called with:', section, sectionIndex);
-      
       const contentType = section.contentType || 'monster';
-      console.log('contentType:', contentType);
       
       // Ensure ContentTypes is loaded
       if (!window.ContentTypes) {
@@ -422,11 +419,9 @@
       
       let config = window.ContentTypes[contentType];
       const filterMode = section.filterMode || 'OR';
-      console.log('config found:', !!config, 'filterMode:', filterMode);
       
       // Fallback configuration for monster if not loaded
       if (!config && contentType === 'monster') {
-        console.warn('Monster config missing, using fallback');
         config = {
           filterConfig: {
             availableTags: ["Foret", "Animal", "Humanoid", "Dragon", "Faible", "Puissant", "Boss", "Feu", "Eau", "Terre", "Air", "Rapide", "Poison"],
@@ -436,7 +431,6 @@
       }
       
       if (!config || !config.filterConfig) {
-        console.warn('No config or filterConfig for:', contentType, config);
         return '';
       }
       
@@ -474,15 +468,11 @@
     buildDevModeButtons(contentType) {
       // Ensure ContentTypes is loaded for proper button generation
       if (!window.ContentTypes) {
-        console.warn('ContentTypes not loaded, skipping dev buttons for:', contentType);
         return '';
       }
       
       // For monster type, generate buttons even if config is missing (they'll work with fallback)
-      if (contentType === 'monster' && !window.ContentTypes[contentType]) {
-        console.warn('Monster ContentTypes missing, but generating buttons anyway');
-      } else if (!window.ContentTypes[contentType]) {
-        console.warn('ContentTypes not loaded, skipping dev buttons for:', contentType);
+      if (contentType !== 'monster' && !window.ContentTypes[contentType]) {
         return '';
       }
       

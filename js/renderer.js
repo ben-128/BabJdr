@@ -91,12 +91,9 @@
     generateStaticPages() {
       let html = '';
       if (window.STATIC_PAGES) {
-        console.log('Generating static pages:', Object.keys(window.STATIC_PAGES));
         Object.entries(window.STATIC_PAGES).forEach(([pageId, pageData]) => {
-          console.log('Generating static page:', pageId, pageData);
           html += PageBuilder.buildStaticPage(pageId, pageData);
         });
-        console.log('Static pages HTML length:', html.length);
       }
       return html;
     },

@@ -23,13 +23,10 @@
       const page = hash || 'creation';
       const exists = JdrApp.utils.dom.$(`article[data-page="${page}"]`);
       
-      console.log('parseRoute called - page:', page, 'exists:', !!exists);
-      
       this.currentRoute = page;
       
       // Handle dynamic category routing
       if (!exists) {
-        console.log('Page does not exist, checking dynamic routes for:', page);
         if (this.handleDynamicRoute(page)) {
           return; // Route was handled dynamically
         }
@@ -100,14 +97,9 @@
     },
     
     show(page) {
-      console.log('show() called for page:', page);
       document.querySelectorAll('article').forEach(a => a.classList.remove('active'));
       const target = document.querySelector(`article[data-page="${page}"]`);
-      console.log('Target article found:', !!target);
-      if (target) {
-        target.classList.add('active');
-        console.log('Activated article for page:', page);
-      }
+      if (target) target.classList.add('active');
       
       document.querySelectorAll('.toc a').forEach(a => a.classList.remove('active'));
       const activeLink = document.querySelector(`a[href="#/${page}"]`);
@@ -127,9 +119,11 @@
     },
     
     navigate(route) {
-      console.log('navigate() called with route:', route);
       location.hash = `#/${route}`;
-      console.log('Hash changed to:', location.hash);
+      // Force parseRoute() in case hashchange event doesn't fire
+      setTimeout(() => {
+        this.parseRoute();
+      }, 10);
     },
     
     getCurrentRoute() {
@@ -282,17 +276,11 @@
         link.addEventListener('click', (e) => {
           e.preventDefault();
           const route = link.getAttribute('data-route');
-          console.log('TOC Link clicked:', route, 'Element:', link);
           if (route) {
             // Special handling for objects page - force refresh when navigating to it
             if (route === 'objets') {
               // Set a flag to force refresh objects page after navigation
               JdrApp.modules.router._forceObjectsRefresh = true;
-            }
-            // Special logging for monstres page
-            if (route === 'monstres') {
-              console.log('Navigating to monstres page, checking static pages:', window.STATIC_PAGES);
-              console.log('Monstres page exists:', !!window.STATIC_PAGES?.monstres);
             }
             JdrApp.modules.router.navigate(route);
           }
