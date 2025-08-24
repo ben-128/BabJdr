@@ -6,7 +6,7 @@
     "sousClasses": [
       {
         "nom": "Nain des montagnes",
-        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>5</strong></span><span class=\"chip\">🏃 Agilité: <strong>2</strong></span><span class=\"chip\">🛡️ Endurance: <strong>7</strong></span><span class=\"chip\">🧠 Intelligence: <strong>1</strong></span><span class=\"chip\">⚡ Volonté: <strong>5</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
+        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>5</strong></span><span class=\"chip\">🏃 Agilité: <strong>1</strong></span><span class=\"chip\">🛡️ Endurance: <strong>7</strong></span><span class=\"chip\">🧠 Intelligence: <strong>1</strong></span><span class=\"chip\">⚡ Volonté: <strong>5</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +2 Force 💪, +3 Endurance 🛡️, +1 Volonté⚡   <strong> +2 Au choix</strong>",
         "capacites": "<ul><li><em>Brise rocher</em>: Gagne 1 de compétence sur les tests de compétence Hardiesse pour une destruction d'objet.</li><li><em>Volonté inflexible</em>: Les nains possèdent une volonté inflexible qui les rendent résistants aux sortilèges (caractéristique Volonté élevée).</li></ul>",
         "description": "<i>Race robuste et inflexible, dotée d’une endurance exceptionnelle. Forgés par la roche et les sommets, ils résistent aux épreuves et possèdent une force colossale capable de briser murs, armures et créatures cuirassées.</i>"
@@ -22,8 +22,15 @@
           "Chance": 1
         },
         "progression": "<strong>📈 Progression par niveau:</strong> +2 Force 💪, +1 Agilité 🏃, +2 Endurance 🛡️<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Frappe en chaîne</em>: Sur un critique au corps à corps, touche aussi un adversaire à moins de 2m.</li><li><em>Risque sauvage</em>: +1 chance de critique physique s'il ne porte pas de bouclier.</li></ul>",
+        "capacites": "<ul><li><em>Tourbillon de rage</em>: Sur un critique au corps à corps, touche aussi tous les adversaires à moins de 2m.</li><li><em>Risque sauvage</em>: +1 chance de critique physique s'il ne porte pas de bouclier.</li></ul>",
         "description": "<i>Combattant sauvage, maître des armes à deux mains. Sa rage décuple sa force, lui permettant d’abattre ses ennemis dans un déchaînement de puissance brute et de coups imparables.</i>"
+      },
+      {
+        "nom": "Aventurier",
+        "description": "Héros polyvalent et ingénieux, il affronte l’inconnu avec courage, et manie tous les outils à sa portée pour triompher.",
+        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>5</strong></span><span class=\"chip\">🏃 Agilité: <strong>2</strong></span><span class=\"chip\">🛡️ Endurance: <strong>5</strong></span><span class=\"chip\">🧠 Intelligence: <strong>1</strong></span><span class=\"chip\">⚡ Volonté: <strong>1</strong></span><span class=\"chip\">🍀 Chance: <strong>5</strong></span></div>",
+        "progression": "<strong>📈 Progression par niveau:</strong> +2 Force 💪, +2 Endurance 🛡️, +1 Chance 🍀, <strong> +2 Au choix</strong>",
+        "capacites": "<ul><em>Passé glorieux</em> : Gagne la compétence Eloquence rang 1.<br><em>Habile</em> : Dispose d'une action bonus supplémentaire par tour pour utiliser un consomable ou changer d'arme.<br><em>Épaules d’acier</em> : Peut porter jusqu’à cinq consommables de plus que la limite habituelle.</ul>"
       }
     ]
   },
@@ -64,7 +71,7 @@
         "nom": "Inquisiteur",
         "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>3</strong></span><span class=\"chip\">🏃 Agilité: <strong>1</strong></span><span class=\"chip\">🛡️ Endurance: <strong>4</strong></span><span class=\"chip\">🧠 Intelligence: <strong>3</strong></span><span class=\"chip\">⚡ Volonté: <strong>5</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +1 Force 💪, +1 Intelligence 🧠, +2 Volonté ⚡, +1 Endurance 🛡️<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Port du bouclier</em> : Peut s'équiper d'un bouclier.</li><li><em>Fléau des morts-vivants</em> : Les sorts visant les morts-vivants ne ratent jamais.</li><li><em>Lumière purificatrice</em> : Double l'effet de l'intelligence sur les dégats des sorts d'élément <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span> ou <span style=\"color: #f5f5f5; font-weight: bold; background: rgba(100, 100, 100, 0.3); padding: 2px 4px; border-radius: 3px;\">Divin</span>.</li></ul>",
+        "capacites": "<ul><li><em>Equipement d'inquisiteur</em> : Peut s'équiper d'armures légères et de boucliers.</li><li><em>Fléau des morts-vivants</em> : Les sorts visant les morts-vivants ne ratent jamais.</li><li><em>Lumière purificatrice</em> : Double l'effet de l'intelligence sur les dégats des sorts d'élément <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span> ou <span style=\"color: #f5f5f5; font-weight: bold; background: rgba(100, 100, 100, 0.3); padding: 2px 4px; border-radius: 3px;\">Divin</span>.</li></ul>",
         "description": "<i>Champion de la foi, il renforce ses alliés par la magie sacrée et traque sans relâche les morts-vivants. Quand la lumière seule ne suffit plus, il n’hésite pas à prendre les armes et combattre en première ligne.</i>"
       },
       {
@@ -97,14 +104,7 @@
       },
       {
         "nom": "Chasseur",
-        "base": {
-          "Force": 3,
-          "Agilité": 5,
-          "Endurance": 2,
-          "Intelligence": 4,
-          "Volonté": 2,
-          "Chance": 1
-        },
+        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>3</strong></span><span class=\"chip\">🏃 Agilité: <strong>5</strong></span><span class=\"chip\">🛡️ Endurance: <strong>2</strong></span><span class=\"chip\">🧠 Intelligence: <strong>4</strong></span><span class=\"chip\">⚡ Volonté: <strong>2</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +2 Agilité 🏃, +1 Force 💪, +1 Endurance 🛡️, +1 Intelligence 🧠<strong> +2 Au choix</strong>",
         "capacites": "<ul><li><em>Armes du Chasseur</em> : Peut utiliser les arcs.</li><li><em>Cueillette</em> : Une fois par jour, lors d’un repos, le personnage peut récolter 5 plantes locales (au choix du MJ). Leur efficacité dépend de l’Intelligence de l’utilisateur.</li><li><em>Connaissance de la faune et la flore</em> : Gagne 1 de compétence sur les tests de Réflexion lié à animal, un monstre ou une plante.</li></ul>",
         "description": "<i>Précis et agile, il complète son art de l’arc par la science des herbes anciennes.</i>"
@@ -120,7 +120,7 @@
         "nom": "Esprit de la grande Fée",
         "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>1</strong></span><span class=\"chip\">🏃 Agilité: <strong>5</strong></span><span class=\"chip\">🛡️ Endurance: <strong>2</strong></span><span class=\"chip\">🧠 Intelligence: <strong>5</strong></span><span class=\"chip\">⚡ Volonté: <strong>2</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +1 Agilité 🏃, +1 Intelligence 🧠, +1 Endurance 🛡️, +1 Volonté ⚡, +1 Chance 🍀<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Tatillon</em> : Gagne la compétence Finesse rang 1.</li><li><em>Lévitation</em> : ignore dégâts/ralentissements venant du sol.</li><li><em>Rayon de l'Amitié</em> : Par une action secondaire, peut répéter sur une autre cible à portée un sort bénéfique qui a ciblé un allié se tour ci, sans coût en mana supplémentaire.</li></ul>",
+        "capacites": "<ul><li><em>Tatillon</em> : Gagne la compétence Finesse rang 1.</li><li><em>Lévitation</em> : Ignore dégâts/ralentissements venant du sol.</li><li><em>Rayon de l'Amitié</em> : Par une action secondaire, peut répéter sur une autre cible à portée un sort bénéfique qui a ciblé un allié se tour ci, sans coût en mana supplémentaire.</li></ul>",
         "description": "<i>Être mystique qui flotte au-dessus du sol, il invoque des sorts imprévisibles pour soutenir ses alliés.</i>"
       },
       {

@@ -154,14 +154,144 @@
         "Armure",
         "Armure lourde"
       ],
-      "effet": "<strong>Effet:</strong> Augmente l'armure physique de 5.",
+      "effet": "<strong>Effet:</strong> Augmente l'armure physique de 6.",
       "prix": "🔷 <strong>Prix:</strong> 200",
       "poids": "⚖️ <strong>Poids:</strong> 2"
+    },
+    {
+      "nom": "Petite potion de vie",
+      "numero": 12,
+      "image": "",
+      "description": "<i>Une fiole écarlate dont le liquide vif régénère les blessures et ranime les forces vitales.</i>",
+      "tags": [
+        "Départ",
+        "Consommable"
+      ],
+      "effet": "<strong>Effet:</strong> Rend 15 (critique : 25) points de vie au héros.",
+      "prix": "🔷 <strong>Prix:</strong> 10",
+      "poids": ""
+    },
+    {
+      "nom": "Petite potion de mana",
+      "numero": "13",
+      "image": "",
+      "description": "<i>Une essence azur miroitante qui restaure l’énergie magique et ravive le flux des arcanes.</i>",
+      "tags": [
+        "Départ",
+        "Consommable"
+      ],
+      "effet": "<strong>Effet:</strong> Rend 20 (critique : 35) points de mana au héros.",
+      "prix": "🔷 <strong>Prix:</strong> 10",
+      "poids": ""
+    },
+    {
+      "nom": "Baguette de boule de feu",
+      "numero": 14,
+      "image": "",
+      "description": "<i>Une fine tige runique qui libère des flammes brûlantes au commandement de son porteur.</i>",
+      "tags": [
+        "Départ",
+        "Consommable",
+        "Catalyseur"
+      ],
+      "effet": "<strong>Effet:</strong> Remplace votre prochaine action principale par le sort de mage \"Boule de feu\". <br><i>Les prérequis pour le sort ne sont pas requis mais le mana et l'intelligence du héros sont utilisés.</i>\n    <br><br><strong>Charges :</strong> 3",
+      "prix": "🔷 <strong>Prix:</strong> 25",
+      "poids": ""
+    },
+    {
+      "nom": "Feuilleclaire",
+      "numero": 15,
+      "image": "",
+      "description": "<i>Herbe des forêts profondes, aux feuilles luisantes et aux petites fleurs rosées. Appliquée directement sur la peau, elle referme les plaies et apaise la douleur presque instantanément.</i>",
+      "tags": [
+        "Départ",
+        "Consommable",
+        "Plante"
+      ],
+      "effet": "<strong>Effet:</strong> Rend 10 (critique : 20) points de vie au héros ou à une cible proche.\n<br>Tous les 5 points d'intelligence, augmente les soins de 1.",
+      "prix": "🔷 <strong>Prix:</strong> 10",
+      "poids": ""
+    },
+    {
+      "nom": "Nocteline",
+      "numero": 16,
+      "image": "",
+      "description": "<i>une plante sombre aux fleurs violettes dont l’essence neutralise les venins et purifie le sang.</i>",
+      "tags": [
+        "Départ",
+        "Consommable",
+        "Plante"
+      ],
+      "effet": "<strong>Prérequis:</strong> Intelligence 5.<br>\n<strong>Effet:</strong> Soigne le héros ou une cible proche du poison.",
+      "prix": "🔷 <strong>Prix:</strong> 10",
+      "poids": ""
+    },
+    {
+      "nom": "Baguette de Sommeil",
+      "numero": 17,
+      "image": "",
+      "description": "Description de l'objet.",
+      "tags": [
+        "Départ"
+      ],
+      "effet": "<strong>Effet:</strong> Description de l'effet de l'objet.",
+      "prix": "🔷 <strong>Prix:</strong> 10",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Baguette de sommeil",
+      "numero": 18,
+      "image": "",
+      "description": "<i>Une tige sombre incrustée de gemmes lunaires, qui libère une aura ténébreuse plongeant ses cibles dans un profond sommeil enchanté.</i>",
+      "tags": [
+        "Départ",
+        "Consommable",
+        "Catalyseur"
+      ],
+      "effet": "<strong>Effet:</strong> Remplace votre prochaine action principale par le sort d'enchanteur \"Sommeil\". <br><i>Les prérequis pour le sort ne sont pas requis mais le mana et l'intelligence du héros sont utilisés.</i>\n    <br><br><strong>Charges :</strong> 3",
+      "prix": "🔷 <strong>Prix:</strong> 30",
+      "poids": ""
+    },
+    {
+      "nom": "Nouvel Objet",
+      "numero": 19,
+      "image": "",
+      "description": "Description de l'objet.",
+      "tags": [
+        "Départ"
+      ],
+      "effet": "<strong>Effet:</strong> Description de l'effet de l'objet.",
+      "prix": "🔷 <strong>Prix:</strong> 10",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Nouvel Objet",
+      "numero": 20,
+      "image": "",
+      "description": "Description de l'objet.",
+      "tags": [
+        "Départ"
+      ],
+      "effet": "<strong>Effet:</strong> Description de l'effet de l'objet.",
+      "prix": "🔷 <strong>Prix:</strong> 10",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Nouvel Objet",
+      "numero": 21,
+      "image": "",
+      "description": "Description de l'objet.",
+      "tags": [
+        "Arme"
+      ],
+      "effet": "<strong>Effet:</strong> Description de l'effet de l'objet.",
+      "prix": "🔷 <strong>Prix:</strong> 10",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     }
   ],
   "filterSettings": {
     "visibleTags": [
-      "Arme"
+      "Consommable"
     ],
     "displayedFilterButtons": [
       "Arme",

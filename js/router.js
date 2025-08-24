@@ -154,8 +154,23 @@
       // Attacher les événements directement aux éléments après création
       this.attachFoldoutEvents();
       
+      // Initialiser les hauteurs dynamiques pour toutes les sections ouvertes
+      this.initializeDynamicHeights();
+      
       // Ajouter l'event listener pour le bouton MJ
       this.setupMJToggle();
+    },
+
+    initializeDynamicHeights() {
+      // Calculer et appliquer les hauteurs dynamiques pour toutes les sections non-collapsées
+      document.querySelectorAll('.toc-section:not(.collapsed) .toc-section-content').forEach(content => {
+        const childCount = content.querySelectorAll('a, .toc-category').length;
+        const itemHeight = 50; // Hauteur approximative par élément
+        const baseHeight = 100; // Hauteur de base pour le padding
+        const dynamicHeight = Math.max(500, (childCount * itemHeight) + baseHeight);
+        
+        content.style.maxHeight = `${dynamicHeight}px`;
+      });
     },
 
     setupMJToggle() {
@@ -222,7 +237,13 @@
                 content.style.paddingBottom = '0';
                 content.style.overflow = 'hidden';
               } else {
-                content.style.maxHeight = '500px';
+                // Calculer dynamiquement la hauteur nécessaire en fonction du contenu
+                const childCount = content.querySelectorAll('a, .toc-category').length;
+                const itemHeight = 50; // Hauteur approximative par élément (incluant padding et marge)
+                const baseHeight = 100; // Hauteur de base pour le padding
+                const dynamicHeight = Math.max(500, (childCount * itemHeight) + baseHeight);
+                
+                content.style.maxHeight = `${dynamicHeight}px`;
                 content.style.opacity = '1';
                 content.style.paddingTop = '';
                 content.style.paddingBottom = '';

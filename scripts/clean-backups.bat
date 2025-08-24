@@ -16,7 +16,7 @@ if not exist "package.json" (
     echo [ERREUR] package.json non trouvé !
     echo Assurez-vous d'être dans le dossier du projet
     echo.
-    pause
+    set /p "temp=Appuyez sur Entree pour continuer..." <nul
     exit /b 1
 )
 
@@ -27,7 +27,7 @@ echo.
 if not exist "Backups" (
     echo [INFO] Aucun dossier Backups trouvé
     echo.
-    pause
+    set /p "temp=Appuyez sur Entree pour continuer..." <nul
     exit /b 0
 )
 
@@ -43,7 +43,7 @@ for /d %%D in (backup-*) do (
 if %BACKUP_COUNT%==0 (
     echo [INFO] Aucun dossier de sauvegarde trouvé
     echo.
-    pause
+    set /p "temp=Appuyez sur Entree pour continuer..." <nul
     exit /b 0
 )
 
@@ -52,7 +52,7 @@ echo [INFO] %BACKUP_COUNT% dossier(s) de sauvegarde trouvé(s)
 echo.
 
 :: Demander confirmation
-choice /c AONS /m "Action à effectuer ? [A]ll (tout supprimer) / [O]ld (garder le plus récent) / [N]on / [S]electif"
+choice /c AONS /n /m "Action a effectuer ? [A]ll (tout supprimer) / [O]ld (garder le plus recent) / [N]on / [S]electif "
 
 if errorlevel 4 goto :selective
 if errorlevel 3 goto :cancel
@@ -104,7 +104,7 @@ echo.
 echo [INFO] Mode sélectif - choisissez les dossiers à supprimer
 echo.
 for /d %%D in (backup-*) do (
-    choice /c ON /m "Supprimer %%D ? [O]ui / [N]on"
+    choice /c ON /n /m "Supprimer %%D ? [O]ui / [N]on "
     if !errorlevel! == 1 (
         echo [SUPPRESSION] %%D
         attrib -R -S -H "%%D\*.*" /S >nul 2>&1
@@ -133,5 +133,5 @@ echo ========================================
 echo   NETTOYAGE TERMINÉ
 echo ========================================
 echo.
-pause
+set /p "temp=Appuyez sur Entree pour continuer..." <nul
 exit /b 0

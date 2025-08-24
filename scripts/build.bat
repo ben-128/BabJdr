@@ -16,7 +16,7 @@ if not exist "package.json" (
     echo [ERREUR] package.json non trouvé !
     echo Assurez-vous d'être dans le dossier du projet
     echo.
-    pause
+    set /p "temp=Appuyez sur Entree pour continuer..." <nul
     exit /b 1
 )
 
@@ -59,7 +59,7 @@ if errorlevel 1 (
         echo.
         
         :: Proposer d'ouvrir le fichier
-        choice /c ON /m "Ouvrir le fichier maintenant ? [O]ui / [N]on"
+        choice /c ON /n /m "Ouvrir le fichier maintenant ? [O]ui / [N]on "
         if !errorlevel! == 1 (
             echo [INFO] Ouverture du fichier...
             start "" "%CD%\build\JdrBab.html"
@@ -72,5 +72,5 @@ if errorlevel 1 (
 
 echo.
 echo Appuyez sur une touche pour retourner au menu...
-pause
+set /p "temp=Appuyez sur Entree pour continuer..." <nul
 exit /b 0

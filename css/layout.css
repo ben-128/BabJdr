@@ -328,7 +328,7 @@
 
 .toc-section-content {
   padding: 6px;
-  max-height: 500px;
+  max-height: none; /* Permettre l'expansion automatique par défaut */
   overflow: visible;
   transition: max-height var(--transition-normal), opacity var(--transition-normal);
 }

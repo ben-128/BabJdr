@@ -19,7 +19,7 @@ if not exist "package.json" (
     echo [ERREUR] package.json non trouvé !
     echo Assurez-vous d'être dans le dossier du projet
     echo.
-    pause
+    set /p "temp=Appuyez sur Entree pour continuer..." <nul
     exit /b 1
 )
 
@@ -32,7 +32,7 @@ if not exist "%DOWNLOAD_PATH%" (
     echo [ERREUR] Le dossier de téléchargement n'existe pas !
     echo Vérifiez le chemin : %DOWNLOAD_PATH%
     echo.
-    pause
+    set /p "temp=Appuyez sur Entree pour continuer..." <nul
     exit /b 1
 )
 
@@ -52,7 +52,7 @@ for /f "delims=" %%F in ('dir "%DOWNLOAD_PATH%\JdrBab-*.zip" /b /o-d 2^>nul') do
 if not defined LATEST_ARCHIVE (
     echo [ERREUR] Aucune archive JdrBab-*.zip trouvée dans %DOWNLOAD_PATH%
     echo.
-    pause
+    set /p "temp=Appuyez sur Entree pour continuer..." <nul
     exit /b 1
 )
 
@@ -68,7 +68,7 @@ echo [INFO] Copie de l'archive dans le projet...
 copy "%ARCHIVE_FULL_PATH%" "%PROJECT_PATH%temp-import.zip" >nul
 if errorlevel 1 (
     echo [ERREUR] Échec de la copie de l'archive !
-    pause
+    set /p "temp=Appuyez sur Entree pour continuer..." <nul
     exit /b 1
 )
 
@@ -77,7 +77,7 @@ powershell -Command "Get-Command Expand-Archive" >nul 2>&1
 if errorlevel 1 (
     echo [ERREUR] PowerShell ou Expand-Archive non disponible !
     echo Veuillez extraire manuellement l'archive temp-import.zip
-    pause
+    set /p "temp=Appuyez sur Entree pour continuer..." <nul
     exit /b 1
 )
 
@@ -229,4 +229,4 @@ echo Vous pouvez maintenant lancer le projet avec :
 echo   npm run dev
 echo.
 
-pause
+set /p "temp=Appuyez sur Entree pour continuer..." <nul

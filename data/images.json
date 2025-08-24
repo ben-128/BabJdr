@@ -52,11 +52,20 @@
     "objet:Robe simple": "https://i.ibb.co/VYFpnz8h/Robe1.png",
     "objet:Armure de cuir": "https://i.ibb.co/9Hkw2VFb/Armure-Cuir1.png",
     "objet:Armure en maille": "https://i.ibb.co/cXtwzw5b/Armure-Lourde1.png",
-    "objet:Armure de plaque": "https://i.ibb.co/fVg5Fp6h/Armure-Lourde2.png"
+    "objet:Armure de plaque": "https://i.ibb.co/fVg5Fp6h/Armure-Lourde2.png",
+    "subclass:Guerrier:Aventurier:1": "https://i.ibb.co/9HcQkbb2/Aventurier.png",
+    "subclass:Guerrier:Aventurier:2": "https://i.ibb.co/nH8Yj3h/Aventurier-F.png",
+    "objet:Petite potion de vie": "https://i.ibb.co/Mw2Qb8Y/LifePot1.png",
+    "objet:Petite potion de mana": "https://i.ibb.co/MkwzbQ3S/Potion-Mana1.png",
+    "objet:Baguette de boule de feu": "https://i.ibb.co/JwXs3k2V/Baguette-Feu.png",
+    "objet:Feuilleclaire": "https://i.ibb.co/bMDstDVV/Herb1.png",
+    "objet:Nocteline": "https://i.ibb.co/7JpQ7Kr7/Herb2.png",
+    "objet:Nouvel Objet": "https://i.ibb.co/bMXNS4gy/Baguette-Nuit.png",
+    "objet:Baguette de sommeil": "https://i.ibb.co/bMXNS4gy/Baguette-Nuit.png"
   },
   "meta": {
-    "total_images": 53,
-    "exported_date": "2025-08-22",
+    "total_images": 62,
+    "exported_date": "2025-08-24",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
 }

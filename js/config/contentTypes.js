@@ -214,7 +214,9 @@
           "Arc",
           "Armure lourde",
           "Armure légère",
-          "Robe"
+          "Robe",
+          "Plante",
+          "Catalyseur"
 ],
         defaultVisibleTags: [
           "Arme"
@@ -225,7 +227,7 @@
         numero: 1,
         image: "",
         description: "Description de l'objet.",
-        tags: ["Départ"],
+        tags: ["Arme"],
         effet: "<strong>Effet:</strong> Description de l'effet de l'objet.",
         prix: "🔷 <strong>Prix:</strong> 10",
         poids: "⚖️ <strong>Poids:</strong> 1"

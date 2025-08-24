@@ -17,7 +17,7 @@ echo [5] Quitter
 echo.
 echo ========================================
 
-choice /c 12345 /m "Choisissez une option [1-5]"
+choice /c 12345 /n /m "Choisissez une option [1-5] "
 
 if errorlevel 5 goto :quit
 if errorlevel 4 goto :clean
