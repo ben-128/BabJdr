@@ -1,0 +1,16 @@
+{
+  "page": "monstres",
+  "title": "Monstres",
+  "static": true,
+  "sections": [
+    {
+      "type": "filters",
+      "contentType": "monster",
+      "filterMode": "AND"
+    },
+    {
+      "type": "monster-list",
+      "contentType": "monster"
+    }
+  ]
+}

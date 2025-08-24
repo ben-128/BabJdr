@@ -1,0 +1,10 @@
+{
+  "page": "combat",
+  "title": "Combat",
+  "sections": [
+    {
+      "type": "intro",
+      "content": "Contenu de la page Combat. Vous pouvez éditer ce texte en mode développement."
+    }
+  ]
+}

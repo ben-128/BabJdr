@@ -12,8 +12,11 @@
     currentSearch: '',
     
     init() {
-      this.generateContent();
-      this.autoLoadImages();
+      // Delay content generation to ensure all configurations are loaded
+      setTimeout(() => {
+        this.generateContent();
+        this.autoLoadImages();
+      }, 10);
       this.setupEventListeners();
     },
 
@@ -67,6 +70,10 @@
         if (JdrApp.modules.editor && JdrApp.modules.editor.isDevMode) {
           setTimeout(() => JdrApp.modules.editor.createProxyButtons(), 100);
         }
+        // Auto-populate monsters page if it exists
+        if (document.getElementById('monsters-container')) {
+          setTimeout(() => this.populateMonstersPage(), 50);
+        }
       }, 100);
     },
 
@@ -84,11 +91,45 @@
     generateStaticPages() {
       let html = '';
       if (window.STATIC_PAGES) {
+        console.log('Generating static pages:', Object.keys(window.STATIC_PAGES));
         Object.entries(window.STATIC_PAGES).forEach(([pageId, pageData]) => {
+          console.log('Generating static page:', pageId, pageData);
           html += PageBuilder.buildStaticPage(pageId, pageData);
         });
+        console.log('Static pages HTML length:', html.length);
       }
       return html;
+    },
+
+    populateMonstersPage() {
+      const monstersContainer = document.getElementById('monsters-container');
+      if (!monstersContainer) return;
+
+      // Defensive check - ensure MONSTRES is an array
+      if (!window.MONSTRES || !Array.isArray(window.MONSTRES)) {
+        console.warn('window.MONSTRES is not an array:', window.MONSTRES);
+        monstersContainer.innerHTML = '<p>Aucun monstre disponible. Vérifiez les données.</p>';
+        return;
+      }
+
+      // Clear existing content
+      monstersContainer.innerHTML = '';
+
+      try {
+        // Generate monster cards
+        const monstersHTML = window.MONSTRES.map(monster => 
+          CardBuilder.create('monster', monster).build()
+        ).join('');
+
+        monstersContainer.innerHTML = monstersHTML;
+
+        // Apply dev mode styling
+        this.applyDevModeToNewContent();
+      } catch (error) {
+        console.error('Error generating monster cards:', error);
+        monstersContainer.innerHTML = '<p>Erreur lors du chargement des monstres.</p>';
+      }
+      this.autoLoadImages();
     },
 
     generateClassPages() {

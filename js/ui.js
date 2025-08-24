@@ -42,6 +42,7 @@
 
       // UI event handlers
       this.setupContentHandlers();
+      this.setupTagsManagement();
     },
 
     setupContentHandlers() {
@@ -193,6 +194,173 @@
       // Element selector for spells (dev mode)
       JdrApp.utils.events.register('change', '.spell-element-selector', (e) => {
         this.updateSpellElement(e.target);
+      });
+    },
+
+    setupTagsManagement() {
+      // Handle manage tags button clicks
+      JdrApp.utils.events.register('click', '.manage-tags-btn', (e) => {
+        const contentType = e.target.dataset.contentType;
+        if (contentType === 'monster') {
+          this.showMonsterTagsManagement();
+        }
+      });
+    },
+
+    showMonsterTagsManagement() {
+      const config = window.ContentTypes.monster;
+      if (!config || !config.filterConfig) {
+        this.showNotification('Configuration des tags monstres non trouvée', 'error');
+        return;
+      }
+
+      // Remove existing modal if any
+      const existingModal = document.querySelector('#monsterTagsModal');
+      if (existingModal) {
+        existingModal.remove();
+      }
+
+      const availableTags = config.filterConfig.availableTags || [];
+      const modal = this.createMonsterTagsModal(availableTags);
+      document.body.appendChild(modal);
+      
+      // Use native dialog showModal for proper z-index
+      modal.showModal();
+    },
+
+    createMonsterTagsModal(availableTags) {
+      const modal = document.createElement('dialog');
+      modal.id = 'monsterTagsModal';
+      modal.style.cssText = `
+        max-width: 500px;
+        width: 90%;
+        padding: 0;
+        border: none;
+        border-radius: 12px;
+        background: transparent;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      `;
+      
+      modal.innerHTML = `
+        <div style="background: var(--paper); padding: 24px; border-radius: 12px; border: 3px solid var(--bronze);">
+          <h3 style="margin: 0 0 16px 0; color: var(--bronze); display: flex; align-items: center; gap: 8px;">
+            🏷️ Gérer les tags - Monstres
+          </h3>
+          <p style="margin: 0 0 20px 0; color: var(--text-muted);">
+            Ajoutez, modifiez ou supprimez les tags disponibles pour le filtrage des monstres.
+          </p>
+          
+          <div class="current-tags" style="margin-bottom: 20px;">
+            <h4 style="margin: 0 0 12px 0; color: var(--bronze);">Tags actuels:</h4>
+            <div class="tags-list" style="display: flex; flex-wrap: wrap; gap: 12px;">
+              ${availableTags.map(tag => `
+                <div class="tag-item" style="display: flex; align-items: center; background: #f5f5f5; border: 2px solid #ddd; border-radius: 8px; padding: 8px 12px;">
+                  <span class="tag-name" style="margin-right: 12px; font-weight: 600; color: #333;">${tag}</span>
+                  <button 
+                    class="delete-monster-tag-btn" 
+                    data-tag="${tag}" 
+                    type="button"
+                    style="background: #dc2626; color: white; border: none; padding: 6px 10px; font-size: 14px; border-radius: 4px; cursor: pointer;"
+                    title="Supprimer ${tag}"
+                  >🗑️</button>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <div class="add-tag-section" style="margin-bottom: 20px;">
+            <h4 style="margin: 0 0 12px 0; color: var(--bronze);">Ajouter un nouveau tag:</h4>
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <input type="text" id="new-monster-tag-input" placeholder="Nom du nouveau tag" style="flex: 1; padding: 8px 12px; border: 2px solid var(--rule); border-radius: 6px; font-size: 14px;">
+              <button class="btn btn-primary" id="add-monster-tag-btn" style="padding: 8px 16px; background: var(--bronze); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 500;">➕ Ajouter</button>
+            </div>
+          </div>
+          
+          <div style="text-align: right; padding-top: 20px; border-top: 2px solid var(--rule);">
+            <button type="button" class="btn modal-close" style="padding: 8px 16px; background: var(--paper-light); border: 2px solid var(--rule); border-radius: 6px; cursor: pointer;">Fermer</button>
+          </div>
+        </div>
+      `;
+
+      // Setup event handlers for this modal
+      this.setupMonsterTagsModalEvents(modal, availableTags);
+
+      return modal;
+    },
+
+    setupMonsterTagsModalEvents(modal, availableTags) {
+      // Close modal
+      modal.querySelector('.modal-close').addEventListener('click', () => {
+        modal.close();
+      });
+
+      // Add new tag
+      const addBtn = modal.querySelector('#add-monster-tag-btn');
+      const newTagInput = modal.querySelector('#new-monster-tag-input');
+      
+      const addTag = () => {
+        const newTag = newTagInput.value.trim();
+        if (newTag && !availableTags.includes(newTag)) {
+          window.ContentTypes.monster.filterConfig.availableTags.push(newTag);
+          modal.close();
+          this.showMonsterTagsManagement(); // Refresh modal
+          this.showNotification(`Tag "${newTag}" ajouté avec succès`, 'success');
+        } else if (newTag && availableTags.includes(newTag)) {
+          this.showNotification('Ce tag existe déjà', 'error');
+        }
+      };
+
+      addBtn.addEventListener('click', addTag);
+      newTagInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          addTag();
+        }
+      });
+
+      // Delete tag buttons using event delegation
+      modal.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        if (e.target && e.target.classList.contains('delete-monster-tag-btn')) {
+          const tagToDelete = e.target.dataset.tag;
+          
+          const config = window.ContentTypes.monster;
+          const index = config.filterConfig.availableTags.indexOf(tagToDelete);
+          
+          if (index > -1) {
+            // Confirm deletion
+            if (confirm(`Êtes-vous sûr de vouloir supprimer le tag "${tagToDelete}" ?\n\nCela supprimera aussi ce tag de tous les monstres qui l'utilisent.`)) {
+              config.filterConfig.availableTags.splice(index, 1);
+              
+              // Remove the tag from all monsters
+              if (window.MONSTRES) {
+                window.MONSTRES.forEach(monster => {
+                  if (monster.tags && monster.tags.includes(tagToDelete)) {
+                    monster.tags = monster.tags.filter(tag => tag !== tagToDelete);
+                  }
+                });
+              }
+              
+              // Refresh modal and monsters page
+              modal.close();
+              this.showMonsterTagsManagement();
+              
+              // Force complete page reload for monsters page to update filters
+              const currentPage = window.location.hash.replace('#/', '');
+              if (currentPage === 'monstres') {
+                // Trigger router to completely rebuild the page
+                setTimeout(() => {
+                  if (JdrApp.modules.router && JdrApp.modules.router.show) {
+                    JdrApp.modules.router.show('monstres');
+                  }
+                }, 100);
+              }
+              
+              this.showNotification(`Tag "${tagToDelete}" supprimé avec succès`, 'success');
+            }
+          }
+        }
       });
     },
 
@@ -2386,7 +2554,28 @@
             </div>
             <div class="form-group">
               <label for="pageIcon">Icône (optionnel) :</label>
-              <input type="text" id="pageIcon" placeholder="📄" maxlength="2">
+              <select id="pageIcon">
+                <option value="📄">📄 Page</option>
+                <option value="⚔️">⚔️ Combat</option>
+                <option value="🔮">🔮 Magie</option>
+                <option value="🏛️">🏛️ Lieu</option>
+                <option value="👥">👥 Personnages</option>
+                <option value="📚">📚 Règles</option>
+                <option value="🗡️">🗡️ Armes</option>
+                <option value="🛡️">🛡️ Armures</option>
+                <option value="💰">💰 Économie</option>
+                <option value="🌟">🌟 Éléments</option>
+                <option value="📊">📊 Statistiques</option>
+                <option value="🎯">🎯 Compétences</option>
+                <option value="⚡">⚡ États</option>
+                <option value="📜">📜 Histoire</option>
+                <option value="🗺️">🗺️ Géographie</option>
+                <option value="👹">👹 Monstres</option>
+                <option value="🎭">🎭 Culture</option>
+                <option value="🏰">🏰 Royaumes</option>
+                <option value="⭐">⭐ Important</option>
+                <option value="💎">💎 Trésors</option>
+              </select>
             </div>
           </div>
           
@@ -2434,7 +2623,7 @@
         const iconInput = modal.querySelector('#pageIcon');
         
         const pageTitle = titleInput.value.trim();
-        const pageIcon = iconInput.value.trim() || '📄';
+        const pageIcon = iconInput.value || '📄';
         
         if (!pageTitle) {
           this.showNotification('Veuillez saisir un titre pour la page', 'error');
@@ -2495,15 +2684,58 @@
           }
           window.STATIC_PAGES[pageId] = defaultPageData;
 
+          // Add to static pages config
+          if (!window.STATIC_PAGES_CONFIG) {
+            window.STATIC_PAGES_CONFIG = { pages: [] };
+          }
+          const newPageConfig = {
+            id: pageId,
+            title: pageTitle,
+            file: `${pageId}.json`,
+            active: true,
+            order: window.STATIC_PAGES_CONFIG.pages.length + 1
+          };
+          window.STATIC_PAGES_CONFIG.pages.push(newPageConfig);
+
+          // Create the article element for the new page
+          this.createPageArticle(pageId, pageTitle, defaultPageData);
+
           // Regenerate TOC to include new page
           if (JdrApp.modules.router) {
             JdrApp.modules.router.generateTOC();
+          }
+
+          // Save changes
+          if (JdrApp.modules.storage) {
+            JdrApp.modules.storage.saveChanges(true);
           }
 
           // Navigate to new page
           window.location.hash = `#/${pageId}`;
 
           this.showNotification(`📄 Page "${pageTitle}" créée avec succès dans la section ${this.getSectionTitle(sectionId)}`, 'success');
+        }
+      }
+    },
+
+    createPageArticle(pageId, pageTitle, pageData) {
+      // Force the renderer to generate the page content immediately
+      if (JdrApp.modules.renderer && JdrApp.modules.renderer.generatePageContent) {
+        const content = JdrApp.modules.renderer.generatePageContent(pageId);
+        if (content) {
+          // Create the article if it doesn't exist
+          let article = document.querySelector(`article[data-page="${pageId}"]`);
+          if (!article) {
+            article = document.createElement('article');
+            article.setAttribute('data-page', pageId);
+            article.style.display = 'none';
+            const viewsContainer = document.getElementById('views');
+            if (viewsContainer) {
+              viewsContainer.appendChild(article);
+            }
+          }
+          // Set the content
+          article.innerHTML = content;
         }
       }
     },

@@ -1,9 +1,7 @@
-- boutton anti spoil pour objets : ou rendre tag "début" invisible et remplacer par un bouton general (de base actif) pour dire qu'il y a forcement ce tag (spoil)
-- terminer objets depart
-
-- rajouter dans les dons de classe, un boutton pour aussi mettre les dons généraux
 
 - monstres
-
 - faire des tables de loots, et des tags caché par level
+-  regles :
+	- combats :  mort, actions
+        - Gestion des ressource : loot fortune, mana , repos et pv, inventaire
 

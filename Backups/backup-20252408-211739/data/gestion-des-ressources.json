@@ -1,0 +1,10 @@
+{
+  "page": "gestion-des-ressources",
+  "title": "Gestion des ressources",
+  "sections": [
+    {
+      "type": "intro",
+      "content": "Contenu de la page Gestion des ressources. Vous pouvez éditer ce texte en mode développement."
+    }
+  ]
+}

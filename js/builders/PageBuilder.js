@@ -53,6 +53,7 @@
                 CardBuilder.create(type, item, category.nom, index).build()
               ).join('')}
             </div>
+            ${this.buildGeneralDonsSection(type, category.nom)}
           </section>
         </article>
       `;
@@ -260,6 +261,10 @@
             return this.buildCardSection(section, sectionIndex);
           case 'grid':
             return this.buildGridSection(section, sectionIndex);
+          case 'filters':
+            return this.buildFiltersSection(section, sectionIndex);
+          case 'monster-list':
+            return this.buildMonsterListSection(section, sectionIndex);
           default:
             return `<div><!-- Unknown section type: ${section.type} --></div>`;
         }
@@ -267,9 +272,10 @@
     }
 
     buildIntroSection(section, sectionIndex) {
+      const editSection = `intro-${sectionIndex}`;
       return `
         <div class="editable-section" data-section-type="intro" data-section-index="${sectionIndex}">
-          <p class="editable editable-intro" data-edit-type="generic" data-edit-section="intro">${section.content}</p>
+          <p class="editable editable-intro" data-edit-type="generic" data-edit-section="${editSection}">${section.content}</p>
           ${this.buildEditButton('section')}
         </div>
         ${this.buildAddParagraphButton('intro')}
@@ -398,6 +404,96 @@
       return `
         <div class="illus" data-illus-key="${illusKey}" data-bound="1">
           <img alt="Illustration ${altText}" class="thumb" style="${imageStyle}"${imageUrl ? ` src="${imageUrl}"` : ''}>
+        </div>
+      `;
+    }
+
+    buildFiltersSection(section, sectionIndex) {
+      console.log('buildFiltersSection called with:', section, sectionIndex);
+      
+      const contentType = section.contentType || 'monster';
+      console.log('contentType:', contentType);
+      
+      // Ensure ContentTypes is loaded
+      if (!window.ContentTypes) {
+        console.warn('ContentTypes not loaded yet, skipping filters');
+        return '';
+      }
+      
+      let config = window.ContentTypes[contentType];
+      const filterMode = section.filterMode || 'OR';
+      console.log('config found:', !!config, 'filterMode:', filterMode);
+      
+      // Fallback configuration for monster if not loaded
+      if (!config && contentType === 'monster') {
+        console.warn('Monster config missing, using fallback');
+        config = {
+          filterConfig: {
+            availableTags: ["Foret", "Animal", "Humanoid", "Dragon", "Faible", "Puissant", "Boss", "Feu", "Eau", "Terre", "Air", "Rapide", "Poison"],
+            defaultVisibleTags: ["Foret", "Animal", "Humanoid"]
+          }
+        };
+      }
+      
+      if (!config || !config.filterConfig) {
+        console.warn('No config or filterConfig for:', contentType, config);
+        return '';
+      }
+      
+      const availableTags = config.filterConfig.availableTags || [];
+      const defaultTags = config.filterConfig.defaultVisibleTags || [];
+      
+      return `
+        <div class="filter-section" data-content-type="${contentType}" data-filter-mode="${filterMode}">
+          <h3>🔍 Filtres (${filterMode === 'AND' ? 'ET' : 'OU'})</h3>
+          <div class="filter-tags" data-default-tags='${JSON.stringify(defaultTags)}'>
+            ${availableTags.map(tag => `
+              <label class="filter-tag ${defaultTags.includes(tag) ? 'active' : ''}">
+                <input type="checkbox" value="${tag}" ${defaultTags.includes(tag) ? 'checked' : ''}>
+                <span>${tag}</span>
+              </label>
+            `).join('')}
+          </div>
+          ${this.buildDevModeButtons(contentType)}
+        </div>
+      `;
+    }
+
+    buildMonsterListSection(section, sectionIndex) {
+      const contentType = section.contentType || 'monster';
+      
+      return `
+        <div class="monster-list-section" data-content-type="${contentType}">
+          <div class="monsters-grid" id="monsters-container">
+            <!-- Les monstres seront générés par JavaScript -->
+          </div>
+        </div>
+      `;
+    }
+
+    buildDevModeButtons(contentType) {
+      // Ensure ContentTypes is loaded for proper button generation
+      if (!window.ContentTypes) {
+        console.warn('ContentTypes not loaded, skipping dev buttons for:', contentType);
+        return '';
+      }
+      
+      // For monster type, generate buttons even if config is missing (they'll work with fallback)
+      if (contentType === 'monster' && !window.ContentTypes[contentType]) {
+        console.warn('Monster ContentTypes missing, but generating buttons anyway');
+      } else if (!window.ContentTypes[contentType]) {
+        console.warn('ContentTypes not loaded, skipping dev buttons for:', contentType);
+        return '';
+      }
+      
+      // Use the same approach as modal buttons - conditional rendering based on dev mode
+      const isDevMode = JdrApp.utils.isDevMode();
+      const displayStyle = isDevMode ? 'block' : 'none';
+      
+      return `
+        <div class="dev-mode-buttons" style="margin-top: 1rem; display: ${displayStyle};" data-dev-only="true">
+          <button class="btn btn-small add-${contentType}-btn">➕ Ajouter ${contentType === 'monster' ? 'un monstre' : 'un élément'}</button>
+          <button class="btn btn-small manage-tags-btn" data-content-type="${contentType}">🏷️ Gérer les tags</button>
         </div>
       `;
     }
@@ -628,6 +724,38 @@
         return '';
       }
       return `<button class="tags-manager-btn btn" type="button" style="background: #dc2626; color: white; border: 2px solid #b91c1c;">🏷️ Gérer les tags</button>`;
+    }
+
+    buildGeneralDonsSection(type, categoryName) {
+      // Only add General Dons section for 'don' type pages, and not for the 'Generaux' category itself
+      if (type !== 'don' || categoryName === 'Generaux') {
+        return '';
+      }
+
+      // Find the "Generaux" category in the DONS data
+      const generalCategory = window.DONS?.find(cat => cat.nom === 'Generaux');
+      if (!generalCategory || !generalCategory.dons || generalCategory.dons.length === 0) {
+        return '';
+      }
+
+      // Generate cards for all general dons
+      const generalDonsCards = generalCategory.dons.map((don, index) => 
+        CardBuilder.create('don', don, 'Generaux', index).build()
+      ).join('');
+
+      return `
+        <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 2px solid var(--rule);">
+          <h3 style="color: var(--bronze); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+            🎖️ Dons Généraux
+          </h3>
+          <p style="margin-bottom: 1.5rem; font-style: italic; color: var(--accent-ink); opacity: 0.8;">
+            Ces dons sont accessibles à toutes les classes et peuvent compléter votre build.
+          </p>
+          <div class="grid cols-2">
+            ${generalDonsCards}
+          </div>
+        </div>
+      `;
     }
 
     sanitizeId(str) {

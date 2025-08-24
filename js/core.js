@@ -60,7 +60,15 @@
           const classes = window.CLASSES;
           const dons = window.DONS;
           const objets = window.OBJETS;
-          const monstres = window.MONSTRES || [];
+          let monstres = window.MONSTRES || [];
+          
+          // Safety check - if MONSTRES is not an array, it might be page config
+          if (!Array.isArray(monstres)) {
+            console.warn('window.MONSTRES is not an array, clearing corrupted data:', monstres);
+            this.clearCorruptedMonsterData();
+            monstres = [];
+          }
+          
           const staticPagesData = window.STATIC_PAGES;
           const staticPagesConfig = window.STATIC_PAGES_CONFIG || {};
           
@@ -218,6 +226,32 @@
       localStorage.removeItem('jdr-bab-edits');
       localStorage.removeItem('jdr-bab-last-modified');
       window.location.reload();
+    },
+
+    // Clear corrupted localStorage data specifically for monsters
+    clearCorruptedMonsterData() {
+      console.log('Clearing corrupted monster data from localStorage');
+      const edits = JSON.parse(localStorage.getItem('jdr-bab-edits') || '{}');
+      
+      // Remove any MONSTRES data that might be corrupted
+      if (edits.MONSTRES) {
+        delete edits.MONSTRES;
+        localStorage.setItem('jdr-bab-edits', JSON.stringify(edits));
+        console.log('Removed corrupted MONSTRES from localStorage');
+      }
+      
+      // Also clear any other monster-related storage
+      if (edits.monster) {
+        delete edits.monster;
+        localStorage.setItem('jdr-bab-edits', JSON.stringify(edits));
+        console.log('Removed corrupted monster data from localStorage');
+      }
+    },
+
+    // Public method to manually clear storage via console
+    clearMonsterStorage() {
+      this.clearCorruptedMonsterData();
+      this.forceReloadData();
     },
 
     // Initialize default filters for objects on page load

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-08-22T22:51:36.242Z by JdrBab Build System -->
+<!-- Generated on 2025-08-24T20:38:12.929Z by JdrBab Build System -->
 <title>JDR‑BAB — Livret de règles</title>
 <meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -699,7 +699,7 @@ h5, h6 {
 
 .toc-section-content {
   padding: 6px;
-  max-height: 500px;
+  max-height: none; /* Permettre l'expansion automatique par défaut */
   overflow: visible;
   transition: max-height var(--transition-normal), opacity var(--transition-normal);
 }
@@ -1229,6 +1229,7 @@ footer{padding:24px;text-align:center;color:var(--paper-muted)}
   background: var(--accent) !important;
 }
 
+.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:999999;display:flex;align-items:center;justify-content:center}
 .modal-base{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:99999;display:none;align-items:center;justify-content:center}
 .modal-base.visible{display:flex}
 .modal-content-base{background:var(--card);border:2px solid var(--rule);border-radius:16px;padding:var(--space-2xl);box-shadow:var(--shadow);position:relative}
@@ -1994,6 +1995,10 @@ article[data-page="enchanteur"] .illus img:hover,
    📄 SECTION SELECTION MODAL
    ═══════════════════════════════════════════════════════════════════════════════════════ */
 
+.section-selection-modal {
+  z-index: 999999 !important;
+}
+
 .section-selection-modal .modal-content {
   max-width: 500px;
   padding: 2rem;
@@ -2199,6 +2204,15 @@ body.dev-off [data-bound] .up,
 body.dev-off [data-bound] .rm,
 body.dev-off [data-bound] label,
 body.dev-off [data-bound] button,
+body.dev-off [data-dev-only],
+body.dev-off div[data-dev-only],
+body.dev-off .dev-mode-buttons,
+body.dev-off .manage-tags-btn,
+body.dev-off .add-monster-btn,
+body.dev-off button[data-content-type],
+body.dev-off .tags-manager-btn,
+body.dev-off button[class*="tags"],
+body.dev-off button[class*="manage"],
 /* Specific button selectors */
 body.dev-off button[data-category-name],
 body.dev-off button[data-spell-name],
@@ -2248,6 +2262,30 @@ body.dev-off .btn.small[data-spell-name],
 body.dev-off .btn.small[data-don-name],
 body.dev-off .btn.small[data-section-name],
 body.dev-off .btn.small[data-don-index],
+/* ULTRA FORCÉ - Cacher TOUS les boutons de gestion des tags */
+body.dev-off button.manage-tags-btn,
+body.dev-off button.tags-manager-btn,
+body.dev-off button[data-content-type="monster"],
+body.dev-off .dev-mode-buttons button,
+body.dev-off div[data-dev-only] button,
+body.dev-off .btn.manage-tags-btn,
+body.dev-off .btn.btn-small.manage-tags-btn,
+body.dev-off button.btn.btn-small.manage-tags-btn,
+body.dev-off .dev-mode-buttons .manage-tags-btn,
+body.dev-off [data-dev-only] .manage-tags-btn,
+body.dev-off .add-monster-btn,
+body.dev-off .btn.add-monster-btn {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  position: absolute !important;
+  left: -9999px !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+}
+
 /* Element selectors for spells - Solution ultra-forcée */
 .spell-element-selector,
 .spell-element-selector *,
@@ -2261,6 +2299,21 @@ div.spell-element-selector,
   width: 0 !important;
   height: 0 !important;
   overflow: hidden !important;
+}
+
+/* Modal buttons should always be visible */
+dialog .delete-monster-tag-btn,
+dialog .btn,
+dialog button {
+  display: inline-flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  position: static !important;
+  left: auto !important;
+  width: auto !important;
+  height: auto !important;
+  overflow: visible !important;
 }
 
 /* SEULEMENT visible en mode dev */
@@ -2323,7 +2376,12 @@ body.dev-on .don-move-down,
 body.dev-on button[title*="Éditer"],
 body.dev-on button[title*="Edit"],
 body.dev-on button[title*="Supprimer"],
-body.dev-on button[title*="Ajouter"] {
+body.dev-on button[title*="Ajouter"],
+body.dev-on [data-dev-only],
+body.dev-on .dev-mode-buttons,
+body.dev-on .manage-tags-btn,
+body.dev-on .add-monster-btn,
+body.dev-on .tags-manager-btn {
   display: inline-block !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -3040,7 +3098,7 @@ article span[title]:hover::after {
     "sousClasses": [
       {
         "nom": "Nain des montagnes",
-        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>5</strong></span><span class=\"chip\">🏃 Agilité: <strong>2</strong></span><span class=\"chip\">🛡️ Endurance: <strong>7</strong></span><span class=\"chip\">🧠 Intelligence: <strong>1</strong></span><span class=\"chip\">⚡ Volonté: <strong>5</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
+        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>5</strong></span><span class=\"chip\">🏃 Agilité: <strong>1</strong></span><span class=\"chip\">🛡️ Endurance: <strong>7</strong></span><span class=\"chip\">🧠 Intelligence: <strong>1</strong></span><span class=\"chip\">⚡ Volonté: <strong>5</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +2 Force 💪, +3 Endurance 🛡️, +1 Volonté⚡   <strong> +2 Au choix</strong>",
         "capacites": "<ul><li><em>Brise rocher</em>: Gagne 1 de compétence sur les tests de compétence Hardiesse pour une destruction d'objet.</li><li><em>Volonté inflexible</em>: Les nains possèdent une volonté inflexible qui les rendent résistants aux sortilèges (caractéristique Volonté élevée).</li></ul>",
         "description": "<i>Race robuste et inflexible, dotée d’une endurance exceptionnelle. Forgés par la roche et les sommets, ils résistent aux épreuves et possèdent une force colossale capable de briser murs, armures et créatures cuirassées.</i>"
@@ -3056,8 +3114,15 @@ article span[title]:hover::after {
           "Chance": 1
         },
         "progression": "<strong>📈 Progression par niveau:</strong> +2 Force 💪, +1 Agilité 🏃, +2 Endurance 🛡️<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Frappe en chaîne</em>: Sur un critique au corps à corps, touche aussi un adversaire à moins de 2m.</li><li><em>Risque sauvage</em>: +1 chance de critique physique s'il ne porte pas de bouclier.</li></ul>",
+        "capacites": "<ul><li><em>Tourbillon de rage</em>: Sur un critique au corps à corps, touche aussi tous les adversaires à moins de 2m.</li><li><em>Risque sauvage</em>: +1 chance de critique physique s'il ne porte pas de bouclier.</li></ul>",
         "description": "<i>Combattant sauvage, maître des armes à deux mains. Sa rage décuple sa force, lui permettant d’abattre ses ennemis dans un déchaînement de puissance brute et de coups imparables.</i>"
+      },
+      {
+        "nom": "Aventurier",
+        "description": "Héros polyvalent et ingénieux, il affronte l’inconnu avec courage, et manie tous les outils à sa portée pour triompher.",
+        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>5</strong></span><span class=\"chip\">🏃 Agilité: <strong>2</strong></span><span class=\"chip\">🛡️ Endurance: <strong>5</strong></span><span class=\"chip\">🧠 Intelligence: <strong>1</strong></span><span class=\"chip\">⚡ Volonté: <strong>1</strong></span><span class=\"chip\">🍀 Chance: <strong>5</strong></span></div>",
+        "progression": "<strong>📈 Progression par niveau:</strong> +2 Force 💪, +2 Endurance 🛡️, +1 Chance 🍀, <strong> +2 Au choix</strong>",
+        "capacites": "<ul><em>Passé glorieux</em> : Gagne la compétence Eloquence rang 1.<br><em>Sans failles</em> : Dispose d'un Effort supplémentaire maximum.<br><em>Épaules d’acier</em> : Peut porter jusqu’à cinq consommables de plus que la limite habituelle.</ul>"
       }
     ]
   },
@@ -3098,7 +3163,7 @@ article span[title]:hover::after {
         "nom": "Inquisiteur",
         "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>3</strong></span><span class=\"chip\">🏃 Agilité: <strong>1</strong></span><span class=\"chip\">🛡️ Endurance: <strong>4</strong></span><span class=\"chip\">🧠 Intelligence: <strong>3</strong></span><span class=\"chip\">⚡ Volonté: <strong>5</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +1 Force 💪, +1 Intelligence 🧠, +2 Volonté ⚡, +1 Endurance 🛡️<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Port du bouclier</em> : Peut s'équiper d'un bouclier.</li><li><em>Fléau des morts-vivants</em> : Les sorts visant les morts-vivants ne ratent jamais.</li><li><em>Lumière purificatrice</em> : Double l'effet de l'intelligence sur les dégats des sorts d'élément <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span> ou <span style=\"color: #f5f5f5; font-weight: bold; background: rgba(100, 100, 100, 0.3); padding: 2px 4px; border-radius: 3px;\">Divin</span>.</li></ul>",
+        "capacites": "<ul><li><em>Equipement d'inquisiteur</em> : Peut s'équiper d'armures légères et de boucliers.</li><li><em>Fléau des morts-vivants</em> : Les sorts visant les morts-vivants ne ratent jamais.</li><li><em>Lumière purificatrice</em> : Double l'effet de l'intelligence sur les dégats des sorts d'élément <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span> ou <span style=\"color: #f5f5f5; font-weight: bold; background: rgba(100, 100, 100, 0.3); padding: 2px 4px; border-radius: 3px;\">Divin</span>.</li></ul>",
         "description": "<i>Champion de la foi, il renforce ses alliés par la magie sacrée et traque sans relâche les morts-vivants. Quand la lumière seule ne suffit plus, il n’hésite pas à prendre les armes et combattre en première ligne.</i>"
       },
       {
@@ -3131,14 +3196,7 @@ article span[title]:hover::after {
       },
       {
         "nom": "Chasseur",
-        "base": {
-          "Force": 3,
-          "Agilité": 5,
-          "Endurance": 2,
-          "Intelligence": 4,
-          "Volonté": 2,
-          "Chance": 1
-        },
+        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>3</strong></span><span class=\"chip\">🏃 Agilité: <strong>5</strong></span><span class=\"chip\">🛡️ Endurance: <strong>2</strong></span><span class=\"chip\">🧠 Intelligence: <strong>4</strong></span><span class=\"chip\">⚡ Volonté: <strong>2</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +2 Agilité 🏃, +1 Force 💪, +1 Endurance 🛡️, +1 Intelligence 🧠<strong> +2 Au choix</strong>",
         "capacites": "<ul><li><em>Armes du Chasseur</em> : Peut utiliser les arcs.</li><li><em>Cueillette</em> : Une fois par jour, lors d’un repos, le personnage peut récolter 5 plantes locales (au choix du MJ). Leur efficacité dépend de l’Intelligence de l’utilisateur.</li><li><em>Connaissance de la faune et la flore</em> : Gagne 1 de compétence sur les tests de Réflexion lié à animal, un monstre ou une plante.</li></ul>",
         "description": "<i>Précis et agile, il complète son art de l’arc par la science des herbes anciennes.</i>"
@@ -3154,7 +3212,7 @@ article span[title]:hover::after {
         "nom": "Esprit de la grande Fée",
         "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>1</strong></span><span class=\"chip\">🏃 Agilité: <strong>5</strong></span><span class=\"chip\">🛡️ Endurance: <strong>2</strong></span><span class=\"chip\">🧠 Intelligence: <strong>5</strong></span><span class=\"chip\">⚡ Volonté: <strong>2</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +1 Agilité 🏃, +1 Intelligence 🧠, +1 Endurance 🛡️, +1 Volonté ⚡, +1 Chance 🍀<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Tatillon</em> : Gagne la compétence Finesse rang 1.</li><li><em>Lévitation</em> : ignore dégâts/ralentissements venant du sol.</li><li><em>Rayon de l'Amitié</em> : Par une action secondaire, peut répéter sur une autre cible à portée un sort bénéfique qui a ciblé un allié se tour ci, sans coût en mana supplémentaire.</li></ul>",
+        "capacites": "<ul><li><em>Tatillon</em> : Gagne la compétence Finesse rang 1.</li><li><em>Lévitation</em> : Ignore dégâts/ralentissements venant du sol.</li><li><em>Rayon de l'Amitié</em> : Par une action secondaire, peut répéter sur une autre cible à portée un sort bénéfique qui a ciblé un allié se tour ci, sans coût en mana supplémentaire.</li></ul>",
         "description": "<i>Être mystique qui flotte au-dessus du sol, il invoque des sorts imprévisibles pour soutenir ses alliés.</i>"
       },
       {
@@ -3244,12 +3302,18 @@ article span[title]:hover::after {
         "description": "Si le héros a un bouclier équipé, lorsque le héros subit des dégats aux corps à corps, il peut choisir d'utiliser une action secondaire pour infliger à l'attaquant des dégats équivalents à l'armure du bouclier.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
+      },
+      {
+        "nom": "Coup de pommeau",
+        "description": "Description du don.",
+        "prerequis": "Aucun prérequis",
+        "cout": "1 point de don"
       }
     ]
   },
   {
     "nom": "Rôdeur",
-    "description": "Description de cette catégorie de dons.",
+    "description": "Dons accessibles aux rodeurs.",
     "dons": [
       {
         "nom": "Croche-patte",
@@ -3261,6 +3325,18 @@ article span[title]:hover::after {
         "nom": "Chasse et pêche",
         "description": "Le héros n'as plus besoin de sa ratio de nourriture quotidienne.",
         "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Attaque d'opportunité",
+        "description": "Description du don.",
+        "prerequis": "Aucun prérequis",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "D",
+        "description": "Description du don.",
+        "prerequis": "Aucun prérequis",
         "cout": "1 point de don"
       }
     ]
@@ -3524,14 +3600,108 @@ article span[title]:hover::after {
         "Armure",
         "Armure lourde"
       ],
-      "effet": "<strong>Effet:</strong> Augmente l'armure physique de 5.",
+      "effet": "<strong>Effet:</strong> Augmente l'armure physique de 6.",
       "prix": "🔷 <strong>Prix:</strong> 200",
       "poids": "⚖️ <strong>Poids:</strong> 2"
+    },
+    {
+      "nom": "Petite potion de vie",
+      "numero": 12,
+      "image": "",
+      "description": "<i>Une fiole écarlate dont le liquide vif régénère les blessures et ranime les forces vitales.</i>",
+      "tags": [
+        "Départ",
+        "Consommable"
+      ],
+      "effet": "<strong>Effet:</strong> Rend 15 (critique : 25) points de vie au héros.",
+      "prix": "🔷 <strong>Prix:</strong> 10",
+      "poids": ""
+    },
+    {
+      "nom": "Petite potion de mana",
+      "numero": "13",
+      "image": "",
+      "description": "<i>Une essence azur miroitante qui restaure l’énergie magique et ravive le flux des arcanes.</i>",
+      "tags": [
+        "Départ",
+        "Consommable"
+      ],
+      "effet": "<strong>Effet:</strong> Rend 20 (critique : 35) points de mana au héros.",
+      "prix": "🔷 <strong>Prix:</strong> 10",
+      "poids": ""
+    },
+    {
+      "nom": "Baguette de boule de feu",
+      "numero": 14,
+      "image": "",
+      "description": "<i>Une fine tige runique qui libère des flammes brûlantes au commandement de son porteur.</i>",
+      "tags": [
+        "Départ",
+        "Consommable",
+        "Catalyseur"
+      ],
+      "effet": "<strong>Effet:</strong> Remplace votre prochaine action principale par le sort de mage \"Boule de feu\". <br><i>Les prérequis pour le sort ne sont pas requis mais le mana et l'intelligence du héros sont utilisés.</i>\n    <br><br><strong>Charges :</strong> 3",
+      "prix": "🔷 <strong>Prix:</strong> 25",
+      "poids": ""
+    },
+    {
+      "nom": "Feuilleclaire",
+      "numero": 15,
+      "image": "",
+      "description": "<i>Herbe des forêts profondes, aux feuilles luisantes et aux petites fleurs rosées. Appliquée directement sur la peau, elle referme les plaies et apaise la douleur presque instantanément.</i>",
+      "tags": [
+        "Départ",
+        "Consommable",
+        "Plante"
+      ],
+      "effet": "<strong>Effet:</strong> Rend 10 (critique : 20) points de vie au héros ou à une cible proche.\n<br>Tous les 5 points d'intelligence, augmente les soins de 1.",
+      "prix": "🔷 <strong>Prix:</strong> 10",
+      "poids": ""
+    },
+    {
+      "nom": "Nocteline",
+      "numero": 16,
+      "image": "",
+      "description": "<i>une plante sombre aux fleurs violettes dont l’essence neutralise les venins et purifie le sang.</i>",
+      "tags": [
+        "Départ",
+        "Consommable",
+        "Plante"
+      ],
+      "effet": "<strong>Prérequis:</strong> Intelligence 5.<br>\n<strong>Effet:</strong> Soigne le héros ou une cible proche du poison.",
+      "prix": "🔷 <strong>Prix:</strong> 10",
+      "poids": ""
+    },
+    {
+      "nom": "Baguette de Sommeil",
+      "numero": 17,
+      "image": "",
+      "description": "Description de l'objet.",
+      "tags": [
+        "Départ"
+      ],
+      "effet": "<strong>Effet:</strong> Description de l'effet de l'objet.",
+      "prix": "🔷 <strong>Prix:</strong> 10",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Baguette de sommeil",
+      "numero": 18,
+      "image": "",
+      "description": "<i>Une tige sombre incrustée de gemmes lunaires, qui libère une aura ténébreuse plongeant ses cibles dans un profond sommeil enchanté.</i>",
+      "tags": [
+        "Départ",
+        "Consommable",
+        "Catalyseur"
+      ],
+      "effet": "<strong>Effet:</strong> Remplace votre prochaine action principale par le sort d'enchanteur \"Sommeil\". <br><i>Les prérequis pour le sort ne sont pas requis mais le mana et l'intelligence du héros sont utilisés.</i>\n    <br><br><strong>Charges :</strong> 3",
+      "prix": "🔷 <strong>Prix:</strong> 30",
+      "poids": ""
     }
   ],
   "filterSettings": {
     "visibleTags": [
-      "Arme"
+      "Consommable"
     ],
     "displayedFilterButtons": [
       "Arme",
@@ -3543,7 +3713,109 @@ article span[title]:hover::after {
   "categoryDescription": "Équipements, armes, armures et objets divers que peuvent posséder les personnages.",
   "description": "Pour éviter le <strong>spoil</strong>, seuls les objets de départs sont visibles sans le <strong>mode maître de jeu</strong> d'actif. <br>Vous pouvez par contre rechercher un <strong>objet par ID</strong> quand le MJ vous indique que votre héros a trouvé un nouvel objet."
 };
-    window.MONSTRES = [];
+    window.MONSTRES = [
+  {
+    "nom": "Gobelin",
+    "image": "data/images/Monstres/foret/Monstre_Forêt_Groink.png",
+    "tags": [
+      "Foret",
+      "Faible",
+      "Humanoid"
+    ],
+    "pointsDeVie": "15",
+    "armurePhysique": "2",
+    "esquive": "3",
+    "coupCritique": "18",
+    "coupCritiqueSorts": "19",
+    "resistanceAlterations": "1",
+    "armureFeu": "0",
+    "armureEau": "0",
+    "armureTerre": "1",
+    "armureAir": "0",
+    "armureLumiere": "0",
+    "armureNuit": "0",
+    "armureDivin": "0",
+    "armureMalefique": "-1",
+    "abilites": "<ul><li><strong>Attaque sournoise:</strong> +2 dégâts si attaque par derrière</li><li><strong>Fuite rapide:</strong> Peut fuir sans provoquer d'attaque d'opportunité</li></ul>",
+    "butin": "<ul><li>1d4 pièces de cuivre</li><li>Dague rouillée (20% chance)</li></ul>"
+  },
+  {
+    "nom": "Loup",
+    "image": "data/images/Monstres/foret/Monstre_Forêt_Ours.png",
+    "tags": [
+      "Foret",
+      "Animal",
+      "Rapide"
+    ],
+    "pointsDeVie": "22",
+    "armurePhysique": "1",
+    "esquive": "5",
+    "coupCritique": "19",
+    "coupCritiqueSorts": "20",
+    "resistanceAlterations": "2",
+    "armureFeu": "0",
+    "armureEau": "0",
+    "armureTerre": "0",
+    "armureAir": "1",
+    "armureLumiere": "0",
+    "armureNuit": "1",
+    "armureDivin": "0",
+    "armureMalefique": "0",
+    "abilites": "<ul><li><strong>Morsure:</strong> 1d6+2 dégâts perforants</li><li><strong>Odorat fin:</strong> Peut traquer les ennemis blessés</li><li><strong>Meute:</strong> +1 attaque si un autre loup est adjacent</li></ul>",
+    "butin": "<ul><li>Peau de loup (valeur: 5 po)</li><li>Crocs (composant alchimique)</li></ul>"
+  },
+  {
+    "nom": "Dragon Rouge Jeune",
+    "image": "data/images/Monstres/foret/Monstre_Forêt_Boss.png",
+    "tags": [
+      "Boss",
+      "Dragon",
+      "Feu",
+      "Puissant"
+    ],
+    "pointsDeVie": "180",
+    "armurePhysique": "8",
+    "esquive": "2",
+    "coupCritique": "17",
+    "coupCritiqueSorts": "18",
+    "resistanceAlterations": "8",
+    "armureFeu": "10",
+    "armureEau": "-2",
+    "armureTerre": "3",
+    "armureAir": "1",
+    "armureLumiere": "2",
+    "armureNuit": "1",
+    "armureDivin": "0",
+    "armureMalefique": "5",
+    "abilites": "<ul><li><strong>Souffle de feu:</strong> Cône 9m, 3d6 dégâts de feu, JdS Réflexes 16</li><li><strong>Vol:</strong> Peut voler et effectuer des attaques en piqué</li><li><strong>Présence terrifiante:</strong> Les ennemis de niveau < 5 fuient</li><li><strong>Griffes:</strong> 2 attaques par round, 1d8+5 dégâts</li></ul>",
+    "butin": "<ul><li>2d6 x 10 pièces d'or</li><li>Écaille de dragon rouge (composant magique rare)</li><li>Gemme de feu (50% chance)</li></ul>"
+  },
+  {
+    "nom": "Araignée Géante",
+    "image": "data/images/Monstres/foret/Monstre_Forêt_Araignée.png",
+    "tags": [
+      "Foret",
+      "Animal",
+      "Poison"
+    ],
+    "pointsDeVie": "28",
+    "armurePhysique": "3",
+    "esquive": "4",
+    "coupCritique": "18",
+    "coupCritiqueSorts": "20",
+    "resistanceAlterations": "3",
+    "armureFeu": "-1",
+    "armureEau": "0",
+    "armureTerre": "1",
+    "armureAir": "0",
+    "armureLumiere": "0",
+    "armureNuit": "2",
+    "armureDivin": "0",
+    "armureMalefique": "1",
+    "abilites": "<ul><li><strong>Morsure venimeuse:</strong> 1d4+1 dégâts + poison (JdS Constitution 14)</li><li><strong>Toile:</strong> Peut immobiliser une cible (JdS Force 12)</li><li><strong>Escalade:</strong> Peut marcher sur les murs et plafonds</li></ul>",
+    "butin": "<ul><li>Soie d'araignée (composant)</li><li>Glande à venin (50% chance)</li></ul>"
+  }
+];
     window.IMAGES = {
   "images": {
     "subclass:Guerrier:Nain des montagnes": "https://i.ibb.co/Zpv02X9p/e8c10c36dc90.jpg",
@@ -3598,11 +3870,20 @@ article span[title]:hover::after {
     "objet:Robe simple": "https://i.ibb.co/VYFpnz8h/Robe1.png",
     "objet:Armure de cuir": "https://i.ibb.co/9Hkw2VFb/Armure-Cuir1.png",
     "objet:Armure en maille": "https://i.ibb.co/cXtwzw5b/Armure-Lourde1.png",
-    "objet:Armure de plaque": "https://i.ibb.co/fVg5Fp6h/Armure-Lourde2.png"
+    "objet:Armure de plaque": "https://i.ibb.co/fVg5Fp6h/Armure-Lourde2.png",
+    "subclass:Guerrier:Aventurier:1": "https://i.ibb.co/9HcQkbb2/Aventurier.png",
+    "subclass:Guerrier:Aventurier:2": "https://i.ibb.co/nH8Yj3h/Aventurier-F.png",
+    "objet:Petite potion de vie": "https://i.ibb.co/Mw2Qb8Y/LifePot1.png",
+    "objet:Petite potion de mana": "https://i.ibb.co/MkwzbQ3S/Potion-Mana1.png",
+    "objet:Baguette de boule de feu": "https://i.ibb.co/JwXs3k2V/Baguette-Feu.png",
+    "objet:Feuilleclaire": "https://i.ibb.co/bMDstDVV/Herb1.png",
+    "objet:Nocteline": "https://i.ibb.co/7JpQ7Kr7/Herb2.png",
+    "objet:Nouvel Objet": "https://i.ibb.co/bMXNS4gy/Baguette-Nuit.png",
+    "objet:Baguette de sommeil": "https://i.ibb.co/bMXNS4gy/Baguette-Nuit.png"
   },
   "meta": {
-    "total_images": 53,
-    "exported_date": "2025-08-22",
+    "total_images": 62,
+    "exported_date": "2025-08-24",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
 };
@@ -3691,6 +3972,18 @@ article span[title]:hover::after {
           "id": "etats",
           "title": "États",
           "icon": "⚡"
+        },
+        {
+          "type": "page",
+          "id": "combat",
+          "title": "Combat",
+          "icon": "⚔️"
+        },
+        {
+          "type": "page",
+          "id": "gestion-des-ressources",
+          "title": "Gestion des ressources",
+          "icon": "💎"
         }
       ]
     },
@@ -3703,11 +3996,37 @@ article span[title]:hover::after {
       "requiresMJ": true,
       "items": [
         {
-          "type": "category",
+          "type": "page",
           "id": "monstres",
           "title": "Monstres",
-          "icon": "👹",
-          "items": "MONSTRES"
+          "icon": "👹"
+        }
+      ]
+    },
+    {
+      "id": "monde",
+      "title": "🌍 Monde",
+      "icon": "🌍",
+      "description": "Univers et connaissances du monde",
+      "collapsed": false,
+      "items": [
+        {
+          "type": "page",
+          "id": "histoire",
+          "title": "Histoire",
+          "icon": "📜"
+        },
+        {
+          "type": "page",
+          "id": "dieux",
+          "title": "Dieux",
+          "icon": "🏛️"
+        },
+        {
+          "type": "page",
+          "id": "geographie",
+          "title": "Geographie",
+          "icon": "📜"
         }
       ]
     }
@@ -3794,7 +4113,7 @@ article span[title]:hover::after {
       "type": "card",
       "id": "stats-base",
       "title": "Statistiques de base",
-      "content": "<hr><div class=\"stats-grid\"><div class=\"stat-card\"><h4>💪 Force</h4><p>Améliore les dégâts physiques.</p></div><hr><div class=\"stat-card\"><h4>🛡️ Endurance</h4><p>Les points de vie maximum sont de : <strong>(10 + 2 x Endurance)</strong></p><p>Un repos régénère des points de vie égaux à l'endurance</p></div><hr><div class=\"stat-card\"><h4>🏃 Agilité</h4><p>Chaque 5 points ajoutent <strong>+1</strong> aux jets d'esquive et de critique physique.</p></div><hr><div class=\"stat-card\"><h4>🧠 Intelligence</h4><p>Détermine la puissance des sorts.</p></div><hr><div class=\"stat-card\"><h4>⚡ Volonté</h4><p>Le mana maximum est de : <strong>(20 + 2 x Volonté)</strong></p><p>Augmente la Résistance altérations.</p></div><hr><div class=\"stat-card\"><h4>🍀 Chance</h4><p>Améliore le butin des coffres et les événements aléatoires.</p><p>Chaque 5 points ajoutent <strong>+1</strong> aux chances de coup critique avec les sorts et les baguettes.</p></div></div>",
+      "content": "<hr><div class=\"stats-grid\"><div class=\"stat-card\"><h4>💪 Force</h4><p>Améliore les dégâts physiques.</p></div><hr><div class=\"stat-card\"><h4>🛡️ Endurance</h4><p>Les points de vie maximum sont de : <strong>(10 + 2 x Endurance)</strong></p><p>Un repos régénère des points de vie égaux à l'endurance</p></div><hr><div class=\"stat-card\"><h4>🏃 Agilité</h4><p>Chaque 5 points ajoutent <strong>+1</strong> aux jets d'esquive et de critique physique.</p></div><hr><div class=\"stat-card\"><h4>🧠 Intelligence</h4><p>Détermine la puissance des sorts.</p></div><hr><div class=\"stat-card\"><h4>⚡ Volonté</h4><p>Le mana maximum est de : <strong>(20 + 2 x Volonté)</strong></p><p>Augmente la Résistance altérations.</p></div><hr><div class=\"stat-card\"><h4>🍀 Chance</h4><p>Améliore la Fortune d'autant.</p><p>De plus, chaque 5 points ajoutent <strong>+1</strong> aux chances de coup critique avec les sorts et les consommables.</p></div></div>",
       "deletable": true,
       "sectionName": "Statistiques de base"
     },
@@ -3802,7 +4121,7 @@ article span[title]:hover::after {
       "type": "card",
       "id": "stats-new-3-1755784997112",
       "title": "Statistiques secondaires",
-      "content": "<hr><br><br><strong>Chance de coup critique </strong> : blabla.<br><hr><br><strong>Esquive </strong> : blablabla.<br><hr><br><strong>Résistance altérations </strong> : blablabla.<br><hr><br><strong>Armure physique </strong> : blablabla.<br><hr><br><strong>Armure élémentaire </strong> : blablabla.<br><hr><br><strong>Mana </strong> : blablabla.<br><hr><br><strong>Vie </strong> : blablabla.<br><hr><br>",
+      "content": "<hr><br><br><strong>Chance de coup critique </strong> : blabla.<br><hr><br><strong>Esquive </strong> : blablabla.<br><hr><br><strong>Résistance altérations </strong> : blablabla.<br><hr><br><strong>Armure physique </strong> : blablabla.<br><hr><br><strong>Armure élémentaire </strong> : blablabla.<br><hr><br><strong>Mana </strong> : blablabla.<br><hr><br><strong>Vie </strong> : blablabla.<br><hr><br><strong>Fortune</strong> : blablabla.<br><hr><br>",
       "deletable": true,
       "sectionName": "Nouvelle section"
     }
@@ -4003,7 +4322,15 @@ article span[title]:hover::after {
           const classes = window.CLASSES;
           const dons = window.DONS;
           const objets = window.OBJETS;
-          const monstres = window.MONSTRES || [];
+          let monstres = window.MONSTRES || [];
+          
+          // Safety check - if MONSTRES is not an array, it might be page config
+          if (!Array.isArray(monstres)) {
+            console.warn('window.MONSTRES is not an array, clearing corrupted data:', monstres);
+            this.clearCorruptedMonsterData();
+            monstres = [];
+          }
+          
           const staticPagesData = window.STATIC_PAGES;
           const staticPagesConfig = window.STATIC_PAGES_CONFIG || {};
           
@@ -4161,6 +4488,32 @@ article span[title]:hover::after {
       localStorage.removeItem('jdr-bab-edits');
       localStorage.removeItem('jdr-bab-last-modified');
       window.location.reload();
+    },
+
+    // Clear corrupted localStorage data specifically for monsters
+    clearCorruptedMonsterData() {
+      console.log('Clearing corrupted monster data from localStorage');
+      const edits = JSON.parse(localStorage.getItem('jdr-bab-edits') || '{}');
+      
+      // Remove any MONSTRES data that might be corrupted
+      if (edits.MONSTRES) {
+        delete edits.MONSTRES;
+        localStorage.setItem('jdr-bab-edits', JSON.stringify(edits));
+        console.log('Removed corrupted MONSTRES from localStorage');
+      }
+      
+      // Also clear any other monster-related storage
+      if (edits.monster) {
+        delete edits.monster;
+        localStorage.setItem('jdr-bab-edits', JSON.stringify(edits));
+        console.log('Removed corrupted monster data from localStorage');
+      }
+    },
+
+    // Public method to manually clear storage via console
+    clearMonsterStorage() {
+      this.clearCorruptedMonsterData();
+      this.forceReloadData();
     },
 
     // Initialize default filters for objects on page load
@@ -4414,7 +4767,9 @@ article span[title]:hover::after {
           "Arc",
           "Armure lourde",
           "Armure légère",
-          "Robe"
+          "Robe",
+          "Plante",
+          "Catalyseur"
 ],
         defaultVisibleTags: [
           "Arme"
@@ -4425,7 +4780,7 @@ article span[title]:hover::after {
         numero: 1,
         image: "",
         description: "Description de l'objet.",
-        tags: ["Départ"],
+        tags: ["Arme"],
         effet: "<strong>Effet:</strong> Description de l'effet de l'objet.",
         prix: "🔷 <strong>Prix:</strong> 10",
         poids: "⚖️ <strong>Poids:</strong> 1"
@@ -4463,6 +4818,89 @@ article span[title]:hover::after {
     'Nuit': { color: '#1a1a1a', weight: 'bold' },
     'Divin': { color: '#f5f5f5', weight: 'bold', background: 'rgba(100, 100, 100, 0.3)', padding: '2px 4px', borderRadius: '3px' },
     'Maléfique': { color: '#8b5cf6', weight: 'bold' }
+  };
+
+  // Monster configuration
+  window.ContentTypes.monster = {
+    fields: {
+      nom: { type: 'text', label: 'Nom', required: true },
+      image: { type: 'text', label: 'Image', required: false },
+      tags: { type: 'tags', label: 'Tags', required: false },
+      pointsDeVie: { type: 'text', label: 'Points de vie', required: true },
+      armurePhysique: { type: 'text', label: 'Armure physique', required: true },
+      esquive: { type: 'text', label: 'Esquive', required: true },
+      coupCritique: { type: 'text', label: 'Coup critique', required: true },
+      coupCritiqueSorts: { type: 'text', label: 'Coup critique sorts', required: true },
+      resistanceAlterations: { type: 'text', label: 'Résistance altérations', required: true },
+      armureFeu: { type: 'text', label: 'Armure Feu', required: true },
+      armureEau: { type: 'text', label: 'Armure Eau', required: true },
+      armureTerre: { type: 'text', label: 'Armure Terre', required: true },
+      armureAir: { type: 'text', label: 'Armure Air', required: true },
+      armureLumiere: { type: 'text', label: 'Armure Lumière', required: true },
+      armureNuit: { type: 'text', label: 'Armure Nuit', required: true },
+      armureDivin: { type: 'text', label: 'Armure Divin', required: true },
+      armureMalefique: { type: 'text', label: 'Armure Maléfique', required: true },
+      abilites: { type: 'richtext', label: 'Abilités', required: true },
+      butin: { type: 'richtext', label: 'Butin', required: true }
+    },
+    editMapping: {
+      'monster-name': 'nom',
+      'monster-image': 'image', 
+      'monster-tags': 'tags',
+      'monster-pv': 'pointsDeVie',
+      'monster-armor': 'armurePhysique',
+      'monster-dodge': 'esquive',
+      'monster-crit': 'coupCritique',
+      'monster-spell-crit': 'coupCritiqueSorts',
+      'monster-resist': 'resistanceAlterations',
+      'monster-armor-fire': 'armureFeu',
+      'monster-armor-water': 'armureEau',
+      'monster-armor-earth': 'armureTerre',
+      'monster-armor-air': 'armureAir',
+      'monster-armor-light': 'armureLumiere',
+      'monster-armor-night': 'armureNuit',
+      'monster-armor-divine': 'armureDivin',
+      'monster-armor-evil': 'armureMalefique',
+      'monster-abilities': 'abilites',
+      'monster-loot': 'butin'
+    },
+    identifiers: {
+      name: 'nom'
+    },
+    template: 'monster-card',
+    container: 'monstres',
+    dataKey: 'MONSTRES',
+    icons: {
+      category: '👹',
+      item: '🐲',
+      add: '➕',
+      delete: '🗑️'
+    },
+    defaultValues: {
+      nom: "Nouveau Monstre",
+      image: "",
+      tags: ["Foret"],
+      pointsDeVie: "20",
+      armurePhysique: "1",
+      esquive: "3",
+      coupCritique: "19",
+      coupCritiqueSorts: "20", 
+      resistanceAlterations: "1",
+      armureFeu: "0",
+      armureEau: "0",
+      armureTerre: "0",
+      armureAir: "0",
+      armureLumiere: "0",
+      armureNuit: "0",
+      armureDivin: "0",
+      armureMalefique: "0",
+      abilites: "<ul><li><strong>Attaque:</strong> 1d6 dégâts</li></ul>",
+      butin: "<ul><li>Quelques pièces</li></ul>"
+    },
+    filterConfig: {
+      availableTags: ["Foret", "Animal", "Humanoid", "Dragon", "Faible", "Puissant", "Boss", "Feu", "Eau", "Terre", "Air", "Rapide", "Poison"],
+      defaultVisibleTags: ["Foret", "Animal", "Humanoid"]
+    }
   };
 
   window.ElementIcons = {
@@ -4791,6 +5229,9 @@ article span[title]:hover::after {
       if (window.OBJETS) {
         this.entities.set('objet', new BaseEntity('objet', window.OBJETS));
       }
+      if (window.MONSTRES) {
+        this.entities.set('monster', new BaseEntity('monster', window.MONSTRES));
+      }
     }
 
     getEntity(type) {
@@ -4823,6 +5264,11 @@ article span[title]:hover::after {
             this.entities.set('objet', new BaseEntity('objet', window.OBJETS));
           }
           break;
+        case 'monster':
+          if (window.MONSTRES) {
+            this.entities.set('monster', new BaseEntity('monster', window.MONSTRES));
+          }
+          break;
       }
     }
 
@@ -4840,6 +5286,10 @@ article span[title]:hover::after {
 
     getObjets() {
       return this.getEntity('objet');
+    }
+
+    getMonsters() {
+      return this.getEntity('monster');
     }
 
     findItem(type, itemName, categoryName = null) {
@@ -4933,6 +5383,8 @@ article span[title]:hover::after {
           return this.buildSubclassCard();
         case 'objet':
           return this.buildObjetCard();
+        case 'monster':
+          return this.buildMonsterCard();
         default:
           return this.buildGenericCard();
       }
@@ -5201,6 +5653,63 @@ article span[title]:hover::after {
       `;
     }
 
+    buildMonsterCard() {
+      const allMonsters = window.MONSTRES || [];
+      const index = allMonsters.indexOf(this.data) || 0;
+      const totalItems = allMonsters.length;
+      
+      // Construire l'affichage des tags
+      const tagsDisplay = this.data.tags && this.data.tags.length > 0 
+        ? this.data.tags.map(tag => `<span class="tag-chip" style="background: var(--bronze); color: white; padding: 2px 6px; border-radius: 8px; font-size: 0.8em; margin-right: 4px;">${tag}</span>`).join('')
+        : '<span style="font-style: italic; color: #666;">Aucun tag</span>';
+
+      return `
+        <div class="card editable-section" data-section-type="monster" data-monster-name="${this.data.nom}">
+          ${this.buildEditableTitle(this.data.nom, 'monster-name')}
+          ${this.buildIllustration(`monster:${this.data.nom}`, this.data.nom)}
+          
+          <div style="margin: 0.5rem 0;">
+            ${this.buildEditableTagsField(tagsDisplay, 'monster-tags', 'Tags')}
+          </div>
+          
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin: 1rem 0; font-size: 0.9em;">
+            <div><strong>❤️ PV:</strong> <span class="editable" data-edit-type="generic" data-edit-section="${this.data.nom}-pointsdevie">${this.data.pointsDeVie}</span></div>
+            <div><strong>🛡️ Armure:</strong> <span class="editable" data-edit-type="generic" data-edit-section="${this.data.nom}-armurephysique">${this.data.armurePhysique}</span></div>
+            <div><strong>🏃 Esquive:</strong> <span class="editable" data-edit-type="generic" data-edit-section="${this.data.nom}-esquive">${this.data.esquive}</span></div>
+            <div><strong>⚡ Critique:</strong> <span class="editable" data-edit-type="generic" data-edit-section="${this.data.nom}-coupcritique">${this.data.coupCritique}</span></div>
+            <div><strong>🔮 Crit. Sorts:</strong> <span class="editable" data-edit-type="generic" data-edit-section="${this.data.nom}-coupcritiquesorts">${this.data.coupCritiqueSorts}</span></div>
+            <div><strong>🛡️ Rés. Alt.:</strong> <span class="editable" data-edit-type="generic" data-edit-section="${this.data.nom}-resistancealterations">${this.data.resistanceAlterations}</span></div>
+          </div>
+
+          <div style="margin: 1rem 0;">
+            <strong>🌟 Armures Élémentaires:</strong>
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.25rem; font-size: 0.8em; margin-top: 0.5rem;">
+              <div>🔥 <span class="editable" data-edit-type="generic" data-edit-section="${this.data.nom}-armurefeu">${this.data.armureFeu}</span></div>
+              <div>💧 <span class="editable" data-edit-type="generic" data-edit-section="${this.data.nom}-armureeau">${this.data.armureEau}</span></div>
+              <div>🌍 <span class="editable" data-edit-type="generic" data-edit-section="${this.data.nom}-armureterre">${this.data.armureTerre}</span></div>
+              <div>💨 <span class="editable" data-edit-type="generic" data-edit-section="${this.data.nom}-armureair">${this.data.armureAir}</span></div>
+              <div>✨ <span class="editable" data-edit-type="generic" data-edit-section="${this.data.nom}-armurelumiere">${this.data.armureLumiere}</span></div>
+              <div>🌑 <span class="editable" data-edit-type="generic" data-edit-section="${this.data.nom}-armureobscurite">${this.data.armureObscurite}</span></div>
+            </div>
+          </div>
+
+          ${this.data.abilites ? `
+            <hr style="margin: 1rem 0; border: none; border-top: 1px solid var(--rule);">
+            <div><strong>⚔️ Abilités:</strong></div>
+            <div class="editable" data-edit-type="generic" data-edit-section="${this.data.nom}-abilites">${this.data.abilites}</div>
+          ` : ''}
+
+          ${this.data.butin ? `
+            <hr style="margin: 1rem 0; border: none; border-top: 1px solid var(--rule);">
+            <div><strong>💰 Butin:</strong></div>
+            <div class="editable" data-edit-type="generic" data-edit-section="${this.data.nom}-butin">${this.data.butin}</div>
+          ` : ''}
+
+          ${this.buildDeleteButton('monster')}
+        </div>
+      `;
+    }
+
     buildEditButton(type) {
       const titles = {
         title: 'Éditer le titre',
@@ -5394,6 +5903,7 @@ article span[title]:hover::after {
                 CardBuilder.create(type, item, category.nom, index).build()
               ).join('')}
             </div>
+            ${this.buildGeneralDonsSection(type, category.nom)}
           </section>
         </article>
       `;
@@ -5601,6 +6111,10 @@ article span[title]:hover::after {
             return this.buildCardSection(section, sectionIndex);
           case 'grid':
             return this.buildGridSection(section, sectionIndex);
+          case 'filters':
+            return this.buildFiltersSection(section, sectionIndex);
+          case 'monster-list':
+            return this.buildMonsterListSection(section, sectionIndex);
           default:
             return `<div><!-- Unknown section type: ${section.type} --></div>`;
         }
@@ -5608,9 +6122,10 @@ article span[title]:hover::after {
     }
 
     buildIntroSection(section, sectionIndex) {
+      const editSection = `intro-${sectionIndex}`;
       return `
         <div class="editable-section" data-section-type="intro" data-section-index="${sectionIndex}">
-          <p class="editable editable-intro" data-edit-type="generic" data-edit-section="intro">${section.content}</p>
+          <p class="editable editable-intro" data-edit-type="generic" data-edit-section="${editSection}">${section.content}</p>
           ${this.buildEditButton('section')}
         </div>
         ${this.buildAddParagraphButton('intro')}
@@ -5739,6 +6254,96 @@ article span[title]:hover::after {
       return `
         <div class="illus" data-illus-key="${illusKey}" data-bound="1">
           <img alt="Illustration ${altText}" class="thumb" style="${imageStyle}"${imageUrl ? ` src="${imageUrl}"` : ''}>
+        </div>
+      `;
+    }
+
+    buildFiltersSection(section, sectionIndex) {
+      console.log('buildFiltersSection called with:', section, sectionIndex);
+      
+      const contentType = section.contentType || 'monster';
+      console.log('contentType:', contentType);
+      
+      // Ensure ContentTypes is loaded
+      if (!window.ContentTypes) {
+        console.warn('ContentTypes not loaded yet, skipping filters');
+        return '';
+      }
+      
+      let config = window.ContentTypes[contentType];
+      const filterMode = section.filterMode || 'OR';
+      console.log('config found:', !!config, 'filterMode:', filterMode);
+      
+      // Fallback configuration for monster if not loaded
+      if (!config && contentType === 'monster') {
+        console.warn('Monster config missing, using fallback');
+        config = {
+          filterConfig: {
+            availableTags: ["Foret", "Animal", "Humanoid", "Dragon", "Faible", "Puissant", "Boss", "Feu", "Eau", "Terre", "Air", "Rapide", "Poison"],
+            defaultVisibleTags: ["Foret", "Animal", "Humanoid"]
+          }
+        };
+      }
+      
+      if (!config || !config.filterConfig) {
+        console.warn('No config or filterConfig for:', contentType, config);
+        return '';
+      }
+      
+      const availableTags = config.filterConfig.availableTags || [];
+      const defaultTags = config.filterConfig.defaultVisibleTags || [];
+      
+      return `
+        <div class="filter-section" data-content-type="${contentType}" data-filter-mode="${filterMode}">
+          <h3>🔍 Filtres (${filterMode === 'AND' ? 'ET' : 'OU'})</h3>
+          <div class="filter-tags" data-default-tags='${JSON.stringify(defaultTags)}'>
+            ${availableTags.map(tag => `
+              <label class="filter-tag ${defaultTags.includes(tag) ? 'active' : ''}">
+                <input type="checkbox" value="${tag}" ${defaultTags.includes(tag) ? 'checked' : ''}>
+                <span>${tag}</span>
+              </label>
+            `).join('')}
+          </div>
+          ${this.buildDevModeButtons(contentType)}
+        </div>
+      `;
+    }
+
+    buildMonsterListSection(section, sectionIndex) {
+      const contentType = section.contentType || 'monster';
+      
+      return `
+        <div class="monster-list-section" data-content-type="${contentType}">
+          <div class="monsters-grid" id="monsters-container">
+            <!-- Les monstres seront générés par JavaScript -->
+          </div>
+        </div>
+      `;
+    }
+
+    buildDevModeButtons(contentType) {
+      // Ensure ContentTypes is loaded for proper button generation
+      if (!window.ContentTypes) {
+        console.warn('ContentTypes not loaded, skipping dev buttons for:', contentType);
+        return '';
+      }
+      
+      // For monster type, generate buttons even if config is missing (they'll work with fallback)
+      if (contentType === 'monster' && !window.ContentTypes[contentType]) {
+        console.warn('Monster ContentTypes missing, but generating buttons anyway');
+      } else if (!window.ContentTypes[contentType]) {
+        console.warn('ContentTypes not loaded, skipping dev buttons for:', contentType);
+        return '';
+      }
+      
+      // Use the same approach as modal buttons - conditional rendering based on dev mode
+      const isDevMode = JdrApp.utils.isDevMode();
+      const displayStyle = isDevMode ? 'block' : 'none';
+      
+      return `
+        <div class="dev-mode-buttons" style="margin-top: 1rem; display: ${displayStyle};" data-dev-only="true">
+          <button class="btn btn-small add-${contentType}-btn">➕ Ajouter ${contentType === 'monster' ? 'un monstre' : 'un élément'}</button>
+          <button class="btn btn-small manage-tags-btn" data-content-type="${contentType}">🏷️ Gérer les tags</button>
         </div>
       `;
     }
@@ -5969,6 +6574,38 @@ article span[title]:hover::after {
         return '';
       }
       return `<button class="tags-manager-btn btn" type="button" style="background: #dc2626; color: white; border: 2px solid #b91c1c;">🏷️ Gérer les tags</button>`;
+    }
+
+    buildGeneralDonsSection(type, categoryName) {
+      // Only add General Dons section for 'don' type pages, and not for the 'Generaux' category itself
+      if (type !== 'don' || categoryName === 'Generaux') {
+        return '';
+      }
+
+      // Find the "Generaux" category in the DONS data
+      const generalCategory = window.DONS?.find(cat => cat.nom === 'Generaux');
+      if (!generalCategory || !generalCategory.dons || generalCategory.dons.length === 0) {
+        return '';
+      }
+
+      // Generate cards for all general dons
+      const generalDonsCards = generalCategory.dons.map((don, index) => 
+        CardBuilder.create('don', don, 'Generaux', index).build()
+      ).join('');
+
+      return `
+        <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 2px solid var(--rule);">
+          <h3 style="color: var(--bronze); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+            🎖️ Dons Généraux
+          </h3>
+          <p style="margin-bottom: 1.5rem; font-style: italic; color: var(--accent-ink); opacity: 0.8;">
+            Ces dons sont accessibles à toutes les classes et peuvent compléter votre build.
+          </p>
+          <div class="grid cols-2">
+            ${generalDonsCards}
+          </div>
+        </div>
+      `;
     }
 
     sanitizeId(str) {
@@ -6602,6 +7239,11 @@ article span[title]:hover::after {
         zip.file('data/dons.json', JSON.stringify(window.DONS, null, 2));
         zip.file('data/objets.json', JSON.stringify(window.OBJETS, null, 2));
         
+        // Add TOC structure with new pages
+        if (window.TOC_STRUCTURE) {
+          zip.file('data/toc-structure.json', JSON.stringify(window.TOC_STRUCTURE, null, 2));
+        }
+        
         // Add ContentTypes configuration (includes availableTags modifications)
         if (window.ContentTypes) {
           const updatedContentTypesJS = this.generateContentTypesJS(window.ContentTypes);
@@ -6871,7 +7513,7 @@ article span[title]:hover::after {
         numero: 1,
         image: "",
         description: "Description de l'objet.",
-        tags: ["Départ"],
+        tags: ["Arme"],
         effet: "<strong>Effet:</strong> Description de l'effet de l'objet.",
         prix: "🔷 <strong>Prix:</strong> 10",
         poids: "⚖️ <strong>Poids:</strong> 1"
@@ -7278,6 +7920,13 @@ article span[title]:hover::after {
       document.querySelectorAll('.toc a').forEach(a => a.classList.remove('active'));
       const activeLink = document.querySelector(`a[href="#/${page}"]`);
       if (activeLink) activeLink.classList.add('active');
+
+      // Special handling for monsters page
+      if (page === 'monstres' && JdrApp.modules.renderer && JdrApp.modules.renderer.populateMonstersPage) {
+        setTimeout(() => {
+          JdrApp.modules.renderer.populateMonstersPage();
+        }, 100);
+      }
       
       // Ensure edit buttons state is properly applied after navigation
       if (!window.STANDALONE_VERSION && JdrApp.modules.editor) {
@@ -7328,8 +7977,23 @@ article span[title]:hover::after {
       // Attacher les événements directement aux éléments après création
       this.attachFoldoutEvents();
       
+      // Initialiser les hauteurs dynamiques pour toutes les sections ouvertes
+      this.initializeDynamicHeights();
+      
       // Ajouter l'event listener pour le bouton MJ
       this.setupMJToggle();
+    },
+
+    initializeDynamicHeights() {
+      // Calculer et appliquer les hauteurs dynamiques pour toutes les sections non-collapsées
+      document.querySelectorAll('.toc-section:not(.collapsed) .toc-section-content').forEach(content => {
+        const childCount = content.querySelectorAll('a, .toc-category').length;
+        const itemHeight = 50; // Hauteur approximative par élément
+        const baseHeight = 100; // Hauteur de base pour le padding
+        const dynamicHeight = Math.max(500, (childCount * itemHeight) + baseHeight);
+        
+        content.style.maxHeight = `${dynamicHeight}px`;
+      });
     },
 
     setupMJToggle() {
@@ -7396,7 +8060,13 @@ article span[title]:hover::after {
                 content.style.paddingBottom = '0';
                 content.style.overflow = 'hidden';
               } else {
-                content.style.maxHeight = '500px';
+                // Calculer dynamiquement la hauteur nécessaire en fonction du contenu
+                const childCount = content.querySelectorAll('a, .toc-category').length;
+                const itemHeight = 50; // Hauteur approximative par élément (incluant padding et marge)
+                const baseHeight = 100; // Hauteur de base pour le padding
+                const dynamicHeight = Math.max(500, (childCount * itemHeight) + baseHeight);
+                
+                content.style.maxHeight = `${dynamicHeight}px`;
                 content.style.opacity = '1';
                 content.style.paddingTop = '';
                 content.style.paddingBottom = '';
@@ -7756,8 +8426,11 @@ article span[title]:hover::after {
     currentSearch: '',
     
     init() {
-      this.generateContent();
-      this.autoLoadImages();
+      // Delay content generation to ensure all configurations are loaded
+      setTimeout(() => {
+        this.generateContent();
+        this.autoLoadImages();
+      }, 10);
       this.setupEventListeners();
     },
 
@@ -7833,6 +8506,37 @@ article span[title]:hover::after {
         });
       }
       return html;
+    },
+
+    populateMonstersPage() {
+      const monstersContainer = document.getElementById('monsters-container');
+      if (!monstersContainer) return;
+
+      // Defensive check - ensure MONSTRES is an array
+      if (!window.MONSTRES || !Array.isArray(window.MONSTRES)) {
+        console.warn('window.MONSTRES is not an array:', window.MONSTRES);
+        monstersContainer.innerHTML = '<p>Aucun monstre disponible. Vérifiez les données.</p>';
+        return;
+      }
+
+      // Clear existing content
+      monstersContainer.innerHTML = '';
+
+      try {
+        // Generate monster cards
+        const monstersHTML = window.MONSTRES.map(monster => 
+          CardBuilder.create('monster', monster).build()
+        ).join('');
+
+        monstersContainer.innerHTML = monstersHTML;
+
+        // Apply dev mode styling
+        this.applyDevModeToNewContent();
+      } catch (error) {
+        console.error('Error generating monster cards:', error);
+        monstersContainer.innerHTML = '<p>Erreur lors du chargement des monstres.</p>';
+      }
+      this.autoLoadImages();
     },
 
     generateClassPages() {
@@ -9674,13 +10378,25 @@ article span[title]:hover::after {
         devToolbox.style.display = this.isDevMode ? 'block' : 'none';
       }
       
+      // Update dev-only containers visibility - same approach as modal buttons
+      const devOnlyElements = document.querySelectorAll('[data-dev-only]');
+      devOnlyElements.forEach(element => {
+        element.style.display = this.isDevMode ? 'block' : 'none';
+      });
+      
       if (this.isDevMode) {
         this.forceShowAllEditButtons();
       } else {
         this.forceHideAllEditButtons();
       }
-      
-      this.regenerateCurrentPage();
+
+      // Regenerate monsters page if currently viewing it
+      const currentPage = window.location.hash.replace('#/', '');
+      if (currentPage === 'monstres' && JdrApp.modules.renderer && JdrApp.modules.renderer.populateMonstersPage) {
+        setTimeout(() => {
+          JdrApp.modules.renderer.populateMonstersPage();
+        }, 100);
+      }
     },
 
     forceHideAllEditButtons() {
@@ -10353,6 +11069,7 @@ article span[title]:hover::after {
 
       // UI event handlers
       this.setupContentHandlers();
+      this.setupTagsManagement();
     },
 
     setupContentHandlers() {
@@ -10504,6 +11221,173 @@ article span[title]:hover::after {
       // Element selector for spells (dev mode)
       JdrApp.utils.events.register('change', '.spell-element-selector', (e) => {
         this.updateSpellElement(e.target);
+      });
+    },
+
+    setupTagsManagement() {
+      // Handle manage tags button clicks
+      JdrApp.utils.events.register('click', '.manage-tags-btn', (e) => {
+        const contentType = e.target.dataset.contentType;
+        if (contentType === 'monster') {
+          this.showMonsterTagsManagement();
+        }
+      });
+    },
+
+    showMonsterTagsManagement() {
+      const config = window.ContentTypes.monster;
+      if (!config || !config.filterConfig) {
+        this.showNotification('Configuration des tags monstres non trouvée', 'error');
+        return;
+      }
+
+      // Remove existing modal if any
+      const existingModal = document.querySelector('#monsterTagsModal');
+      if (existingModal) {
+        existingModal.remove();
+      }
+
+      const availableTags = config.filterConfig.availableTags || [];
+      const modal = this.createMonsterTagsModal(availableTags);
+      document.body.appendChild(modal);
+      
+      // Use native dialog showModal for proper z-index
+      modal.showModal();
+    },
+
+    createMonsterTagsModal(availableTags) {
+      const modal = document.createElement('dialog');
+      modal.id = 'monsterTagsModal';
+      modal.style.cssText = `
+        max-width: 500px;
+        width: 90%;
+        padding: 0;
+        border: none;
+        border-radius: 12px;
+        background: transparent;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      `;
+      
+      modal.innerHTML = `
+        <div style="background: var(--paper); padding: 24px; border-radius: 12px; border: 3px solid var(--bronze);">
+          <h3 style="margin: 0 0 16px 0; color: var(--bronze); display: flex; align-items: center; gap: 8px;">
+            🏷️ Gérer les tags - Monstres
+          </h3>
+          <p style="margin: 0 0 20px 0; color: var(--text-muted);">
+            Ajoutez, modifiez ou supprimez les tags disponibles pour le filtrage des monstres.
+          </p>
+          
+          <div class="current-tags" style="margin-bottom: 20px;">
+            <h4 style="margin: 0 0 12px 0; color: var(--bronze);">Tags actuels:</h4>
+            <div class="tags-list" style="display: flex; flex-wrap: wrap; gap: 12px;">
+              ${availableTags.map(tag => `
+                <div class="tag-item" style="display: flex; align-items: center; background: #f5f5f5; border: 2px solid #ddd; border-radius: 8px; padding: 8px 12px;">
+                  <span class="tag-name" style="margin-right: 12px; font-weight: 600; color: #333;">${tag}</span>
+                  <button 
+                    class="delete-monster-tag-btn" 
+                    data-tag="${tag}" 
+                    type="button"
+                    style="background: #dc2626; color: white; border: none; padding: 6px 10px; font-size: 14px; border-radius: 4px; cursor: pointer;"
+                    title="Supprimer ${tag}"
+                  >🗑️</button>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <div class="add-tag-section" style="margin-bottom: 20px;">
+            <h4 style="margin: 0 0 12px 0; color: var(--bronze);">Ajouter un nouveau tag:</h4>
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <input type="text" id="new-monster-tag-input" placeholder="Nom du nouveau tag" style="flex: 1; padding: 8px 12px; border: 2px solid var(--rule); border-radius: 6px; font-size: 14px;">
+              <button class="btn btn-primary" id="add-monster-tag-btn" style="padding: 8px 16px; background: var(--bronze); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 500;">➕ Ajouter</button>
+            </div>
+          </div>
+          
+          <div style="text-align: right; padding-top: 20px; border-top: 2px solid var(--rule);">
+            <button type="button" class="btn modal-close" style="padding: 8px 16px; background: var(--paper-light); border: 2px solid var(--rule); border-radius: 6px; cursor: pointer;">Fermer</button>
+          </div>
+        </div>
+      `;
+
+      // Setup event handlers for this modal
+      this.setupMonsterTagsModalEvents(modal, availableTags);
+
+      return modal;
+    },
+
+    setupMonsterTagsModalEvents(modal, availableTags) {
+      // Close modal
+      modal.querySelector('.modal-close').addEventListener('click', () => {
+        modal.close();
+      });
+
+      // Add new tag
+      const addBtn = modal.querySelector('#add-monster-tag-btn');
+      const newTagInput = modal.querySelector('#new-monster-tag-input');
+      
+      const addTag = () => {
+        const newTag = newTagInput.value.trim();
+        if (newTag && !availableTags.includes(newTag)) {
+          window.ContentTypes.monster.filterConfig.availableTags.push(newTag);
+          modal.close();
+          this.showMonsterTagsManagement(); // Refresh modal
+          this.showNotification(`Tag "${newTag}" ajouté avec succès`, 'success');
+        } else if (newTag && availableTags.includes(newTag)) {
+          this.showNotification('Ce tag existe déjà', 'error');
+        }
+      };
+
+      addBtn.addEventListener('click', addTag);
+      newTagInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          addTag();
+        }
+      });
+
+      // Delete tag buttons using event delegation
+      modal.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        if (e.target && e.target.classList.contains('delete-monster-tag-btn')) {
+          const tagToDelete = e.target.dataset.tag;
+          
+          const config = window.ContentTypes.monster;
+          const index = config.filterConfig.availableTags.indexOf(tagToDelete);
+          
+          if (index > -1) {
+            // Confirm deletion
+            if (confirm(`Êtes-vous sûr de vouloir supprimer le tag "${tagToDelete}" ?\n\nCela supprimera aussi ce tag de tous les monstres qui l'utilisent.`)) {
+              config.filterConfig.availableTags.splice(index, 1);
+              
+              // Remove the tag from all monsters
+              if (window.MONSTRES) {
+                window.MONSTRES.forEach(monster => {
+                  if (monster.tags && monster.tags.includes(tagToDelete)) {
+                    monster.tags = monster.tags.filter(tag => tag !== tagToDelete);
+                  }
+                });
+              }
+              
+              // Refresh modal and monsters page
+              modal.close();
+              this.showMonsterTagsManagement();
+              
+              // Force complete page reload for monsters page to update filters
+              const currentPage = window.location.hash.replace('#/', '');
+              if (currentPage === 'monstres') {
+                // Trigger router to completely rebuild the page
+                setTimeout(() => {
+                  if (JdrApp.modules.router && JdrApp.modules.router.show) {
+                    JdrApp.modules.router.show('monstres');
+                  }
+                }, 100);
+              }
+              
+              this.showNotification(`Tag "${tagToDelete}" supprimé avec succès`, 'success');
+            }
+          }
+        }
       });
     },
 
@@ -12697,7 +13581,28 @@ article span[title]:hover::after {
             </div>
             <div class="form-group">
               <label for="pageIcon">Icône (optionnel) :</label>
-              <input type="text" id="pageIcon" placeholder="📄" maxlength="2">
+              <select id="pageIcon">
+                <option value="📄">📄 Page</option>
+                <option value="⚔️">⚔️ Combat</option>
+                <option value="🔮">🔮 Magie</option>
+                <option value="🏛️">🏛️ Lieu</option>
+                <option value="👥">👥 Personnages</option>
+                <option value="📚">📚 Règles</option>
+                <option value="🗡️">🗡️ Armes</option>
+                <option value="🛡️">🛡️ Armures</option>
+                <option value="💰">💰 Économie</option>
+                <option value="🌟">🌟 Éléments</option>
+                <option value="📊">📊 Statistiques</option>
+                <option value="🎯">🎯 Compétences</option>
+                <option value="⚡">⚡ États</option>
+                <option value="📜">📜 Histoire</option>
+                <option value="🗺️">🗺️ Géographie</option>
+                <option value="👹">👹 Monstres</option>
+                <option value="🎭">🎭 Culture</option>
+                <option value="🏰">🏰 Royaumes</option>
+                <option value="⭐">⭐ Important</option>
+                <option value="💎">💎 Trésors</option>
+              </select>
             </div>
           </div>
           
@@ -12745,7 +13650,7 @@ article span[title]:hover::after {
         const iconInput = modal.querySelector('#pageIcon');
         
         const pageTitle = titleInput.value.trim();
-        const pageIcon = iconInput.value.trim() || '📄';
+        const pageIcon = iconInput.value || '📄';
         
         if (!pageTitle) {
           this.showNotification('Veuillez saisir un titre pour la page', 'error');
@@ -12806,15 +13711,58 @@ article span[title]:hover::after {
           }
           window.STATIC_PAGES[pageId] = defaultPageData;
 
+          // Add to static pages config
+          if (!window.STATIC_PAGES_CONFIG) {
+            window.STATIC_PAGES_CONFIG = { pages: [] };
+          }
+          const newPageConfig = {
+            id: pageId,
+            title: pageTitle,
+            file: `${pageId}.json`,
+            active: true,
+            order: window.STATIC_PAGES_CONFIG.pages.length + 1
+          };
+          window.STATIC_PAGES_CONFIG.pages.push(newPageConfig);
+
+          // Create the article element for the new page
+          this.createPageArticle(pageId, pageTitle, defaultPageData);
+
           // Regenerate TOC to include new page
           if (JdrApp.modules.router) {
             JdrApp.modules.router.generateTOC();
+          }
+
+          // Save changes
+          if (JdrApp.modules.storage) {
+            JdrApp.modules.storage.saveChanges(true);
           }
 
           // Navigate to new page
           window.location.hash = `#/${pageId}`;
 
           this.showNotification(`📄 Page "${pageTitle}" créée avec succès dans la section ${this.getSectionTitle(sectionId)}`, 'success');
+        }
+      }
+    },
+
+    createPageArticle(pageId, pageTitle, pageData) {
+      // Force the renderer to generate the page content immediately
+      if (JdrApp.modules.renderer && JdrApp.modules.renderer.generatePageContent) {
+        const content = JdrApp.modules.renderer.generatePageContent(pageId);
+        if (content) {
+          // Create the article if it doesn't exist
+          let article = document.querySelector(`article[data-page="${pageId}"]`);
+          if (!article) {
+            article = document.createElement('article');
+            article.setAttribute('data-page', pageId);
+            article.style.display = 'none';
+            const viewsContainer = document.getElementById('views');
+            if (viewsContainer) {
+              viewsContainer.appendChild(article);
+            }
+          }
+          // Set the content
+          article.innerHTML = content;
         }
       }
     },

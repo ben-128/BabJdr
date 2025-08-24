@@ -1,0 +1,64 @@
+{
+  "pages": [
+    {
+      "id": "creation",
+      "title": "Création d'un personnage",
+      "file": "creation.json",
+      "active": true,
+      "order": 1
+    },
+    {
+      "id": "elements",
+      "title": "Elements",
+      "file": "elements.json",
+      "active": true,
+      "order": 2
+    },
+    {
+      "id": "stats",
+      "title": "Statistiques",
+      "file": "stats.json",
+      "active": true,
+      "order": 3
+    },
+    {
+      "id": "competences-tests",
+      "title": "Compétences & Tests",
+      "file": "competences-tests.json",
+      "active": true,
+      "order": 4
+    },
+    {
+      "id": "etats",
+      "title": "Etats",
+      "file": "etats.json",
+      "active": true,
+      "order": 5
+    },
+    {
+      "id": "histoire",
+      "title": "Histoire",
+      "file": "histoire.json",
+      "active": true,
+      "order": 6
+    },
+    {
+      "id": "combat",
+      "title": "Combat",
+      "file": "combat.json",
+      "active": true,
+      "order": 7
+    }
+  ],
+  "template": {
+    "page": "new-page",
+    "title": "Nouvelle page",
+    "static": true,
+    "sections": [
+      {
+        "type": "intro",
+        "content": "Contenu de la nouvelle page."
+      }
+    ]
+  }
+}
