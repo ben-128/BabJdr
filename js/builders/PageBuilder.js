@@ -137,6 +137,67 @@
       `;
     }
 
+    buildSingleMonsterPage(monsterData) {
+      let config = window.ContentTypes?.['monster'];
+      const allMonsters = monsterData || [];
+      const instance = PageBuilder.getInstance(); // Créer une instance pour accéder aux méthodes
+      
+      // Defensive check for config with fallback
+      if (!config || !config.filterConfig) {
+        console.warn('Monster config not loaded, using fallback defaults');
+        console.log('ContentTypes available:', window.ContentTypes ? Object.keys(window.ContentTypes) : 'undefined');
+        config = {
+          filterConfig: {
+            defaultVisibleTags: ['Forêt'],
+            availableTags: ['Forêt', 'Boss', 'Minion', 'Volant', 'Aquatique', 'Terrestre']
+          }
+        };
+      }
+      
+      // Utiliser le state du filtre s'il existe, sinon les tags par défaut
+      const visibleTags = window.MONSTRES_FILTER_STATE?.visibleTags || config.filterConfig.defaultVisibleTags;
+      
+      // Filter monsters according to visible tags (AND mode)
+      const filteredMonsters = visibleTags.length === 0 
+        ? [] // If no tags are visible, show nothing
+        : allMonsters.filter(monster => {
+            // Check that the monster has the required tags to be visible
+            if (!monster.tags) return false;
+            
+            // In AND mode: monster must have ALL visible tags
+            const hasAllVisibleTags = visibleTags.every(tag => monster.tags.includes(tag));
+            if (!hasAllVisibleTags) return false;
+            
+            return true;
+          });
+      
+      return `
+        <article class="" data-page="monstres">
+          <section>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
+              <h2>🐲 Monstres</h2>
+              ${instance.buildIllustration('page:monstres')}
+            </div>
+            
+            ${instance.buildTagFilters(visibleTags, config.filterConfig.availableTags, 'monster')}
+            
+            <div style="display: flex; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap;">
+              ${instance.buildAddButton('monster', 'monstres')}
+              ${instance.buildTagsManagerButton()}
+            </div>
+            
+            <div class="grid cols-2" id="monstres-container">
+              ${filteredMonsters.map((item, index) => 
+                CardBuilder.create('monster', item, 'monstres', index).build()
+              ).join('')}
+            </div>
+            
+            ${filteredMonsters.length === 0 ? '<p style="text-align: center; color: #666; margin: 2rem 0;">Aucun monstre ne correspond aux filtres sélectionnés.</p>' : ''}
+          </section>
+        </article>
+      `;
+    }
+
     buildClassPage(classData) {
       const pageId = this.sanitizeId(classData.nom);
       
@@ -649,7 +710,25 @@
       `;
     }
 
-    buildTagFilters(visibleTags, availableTags) {
+    buildMonstersCategoryDescription() {
+      // Create a description object for monsters if it doesn't exist
+      if (!window.MONSTRES_PAGE_DESC) {
+        window.MONSTRES_PAGE_DESC = {
+          description: "Créatures, ennemis et adversaires que peuvent affronter les héros dans leurs aventures."
+        };
+      }
+      
+      return `
+        <div class="monsters-category-description" style="margin: 1rem 0; padding: 1rem; background: var(--card); border-radius: 8px; border-left: 4px solid var(--bronze);">
+          <div class="editable-section" data-section-type="monster-category-description">
+            <p class="lead editable editable-paragraph" data-edit-type="generic" data-edit-section="description">${window.MONSTRES_PAGE_DESC.description}</p>
+            ${this.buildEditButton('section')}
+          </div>
+        </div>
+      `;
+    }
+
+    buildTagFilters(visibleTags, availableTags, context = 'objet') {
       const isIdSearchActive = window.activeIdSearch || false;
       const containerOpacity = isIdSearchActive ? '0.4' : '1';
       const containerFilter = isIdSearchActive ? 'grayscale(1)' : 'none';
@@ -673,26 +752,31 @@
                 </span>`;
       }).join('');
       
+      // Only show "Tous" and "Aucun" buttons for objects, not for monsters
+      const showSelectAllButtons = context !== 'monster';
+      
       return `
         <div class="objects-tag-display" style="margin: 1rem 0; padding: 1rem; background: var(--card); border: 2px solid var(--rule); border-radius: 12px; opacity: ${containerOpacity}; filter: ${containerFilter}; pointer-events: ${pointerEvents}; transition: all 0.3s ease;">
-          <div style="display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 1rem;">
-            <button 
-              id="select-all-tags" 
-              class="btn small" 
-              style="background: #3b82f6; color: white; padding: 4px 8px; font-size: 0.8em; border-radius: 12px;"
-              title="Activer tous les tags"
-            >
-              ✓ Tous
-            </button>
-            <button 
-              id="select-no-tags" 
-              class="btn small" 
-              style="background: #6b7280; color: white; padding: 4px 8px; font-size: 0.8em; border-radius: 12px;"
-              title="Désactiver tous les tags"
-            >
-              ✗ Aucun
-            </button>
-          </div>
+          ${showSelectAllButtons ? `
+            <div style="display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 1rem;">
+              <button 
+                id="select-all-tags" 
+                class="btn small" 
+                style="background: #3b82f6; color: white; padding: 4px 8px; font-size: 0.8em; border-radius: 12px;"
+                title="Activer tous les tags"
+              >
+                ✓ Tous
+              </button>
+              <button 
+                id="select-no-tags" 
+                class="btn small" 
+                style="background: #6b7280; color: white; padding: 4px 8px; font-size: 0.8em; border-radius: 12px;"
+                title="Désactiver tous les tags"
+              >
+                ✗ Aucun
+              </button>
+            </div>
+          ` : ''}
           <div class="filter-chips" style="display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center;">
             ${allFilterChips}
           </div>
@@ -709,8 +793,8 @@
     }
 
     buildTagsManagerButton() {
-      // Only show in dev mode
-      if (!this.shouldShowEditButtons) {
+      // Only show in dev mode - use direct utils check
+      if (!JdrApp.utils.isDevMode()) {
         return '';
       }
       return `<button class="tags-manager-btn btn" type="button" style="background: #dc2626; color: white; border: 2px solid #b91c1c;">🏷️ Gérer les tags</button>`;
@@ -746,6 +830,16 @@
           </div>
         </div>
       `;
+    }
+
+    buildFilterManagerButton() {
+      // ALWAYS generate the button - CSS will control visibility based on body.dev-on/dev-off
+      return `<button class="filter-manager-btn btn" type="button" style="background: #16a34a; color: white; border: 2px solid #15803d;">🔧 Gérer les filtres</button>`;
+    }
+    
+    buildTagsManagerButton() {
+      // ALWAYS generate the button - CSS will control visibility based on body.dev-on/dev-off
+      return `<button class="tags-manager-btn btn" type="button" style="background: #dc2626; color: white; border: 2px solid #b91c1c;">🏷️ Gérer les tags</button>`;
     }
 
     sanitizeId(str) {

@@ -93,7 +93,8 @@
         '.section-delete', '.remove-section-btn', '.add-paragraph-btn', 
         '.add-subclass-btn', '.delete-subclass-btn',
         '.spell-delete', '.don-delete', // Explicit delete buttons
-        '.illus .up', '.illus .rm', '.illus label', '.illus input[type="file"]'
+        '.illus .up', '.illus .rm', '.illus label', '.illus input[type="file"]',
+        '.tags-manager-btn', '.filter-manager-btn' // Tags and filter manager buttons
       ];
       
       selectors.forEach(selector => {
@@ -119,7 +120,8 @@
         '.add-subclass-btn', '.delete-subclass-btn',
         '.spell-delete', '.don-delete', '.objet-delete',
         '.spell-add', '.don-add', '.objet-add',
-        '.illus .up', '.illus .rm', '.illus label', '.illus input[type="file"]'
+        '.illus .up', '.illus .rm', '.illus label', '.illus input[type="file"]',
+        '.tags-manager-btn', '.filter-manager-btn' // Tags and filter manager buttons
       ];
       
       selectors.forEach(selector => {

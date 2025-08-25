@@ -53,6 +53,7 @@ body.dev-off .manage-tags-btn,
 body.dev-off .add-monster-btn,
 body.dev-off button[data-content-type],
 body.dev-off .tags-manager-btn,
+body.dev-off .filter-manager-btn,
 body.dev-off button[class*="tags"],
 body.dev-off button[class*="manage"],
 /* Specific button selectors */
@@ -105,18 +106,35 @@ body.dev-off .btn.small[data-don-name],
 body.dev-off .btn.small[data-section-name],
 body.dev-off .btn.small[data-don-index],
 /* ULTRA FORCÉ - Cacher TOUS les boutons de gestion des tags */
+/* ULTRA-SPECIFIC RULES FOR TAG MANAGER BUTTONS */
 body.dev-off button.manage-tags-btn,
 body.dev-off button.tags-manager-btn,
+body.dev-off .btn.manage-tags-btn,
+body.dev-off .btn.tags-manager-btn,
 body.dev-off button[data-content-type="monster"],
+body.dev-off button[data-content-type="objet"],
 body.dev-off .dev-mode-buttons button,
 body.dev-off div[data-dev-only] button,
-body.dev-off .btn.manage-tags-btn,
 body.dev-off .btn.btn-small.manage-tags-btn,
 body.dev-off button.btn.btn-small.manage-tags-btn,
 body.dev-off .dev-mode-buttons .manage-tags-btn,
 body.dev-off [data-dev-only] .manage-tags-btn,
 body.dev-off .add-monster-btn,
-body.dev-off .btn.add-monster-btn {
+body.dev-off .btn.add-monster-btn,
+body.dev-off .tags-manager-btn,
+body.dev-off .filter-manager-btn,
+body.dev-off button[title*="Gérer les tags"],
+body.dev-off button[title*="gérer les tags"],
+body.dev-off button[onclick*="showTagsManagementModal"],
+body.dev-off button[onclick*="showMonsterTagsManagement"],
+/* Additional super specific selectors for any possible generated button */
+html body.dev-off button.manage-tags-btn,
+html body.dev-off button.tags-manager-btn,
+html body.dev-off .btn.manage-tags-btn,
+html body.dev-off .btn.tags-manager-btn,
+/* Text content matching */
+body.dev-off button:contains("🏷️ Gérer les tags"),
+body.dev-off button:contains("Gérer les tags") {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
@@ -301,7 +319,14 @@ body.dev-off button.don-add.btn,
 body.dev-off button.objet-add.btn,
 body.dev-off button.spell-category-delete.btn,
 body.dev-off button.don-category-delete.btn,
-body.dev-off button.objet-category-delete.btn {
+body.dev-off button.objet-category-delete.btn,
+/* ULTRA-SPÉCIFIQUE: Tags manager buttons */
+body.dev-off button.tags-manager-btn.btn,
+body.dev-off button.filter-manager-btn.btn,
+html body.dev-off .tags-manager-btn,
+html body.dev-off .filter-manager-btn,
+html body.dev-off button.tags-manager-btn,
+html body.dev-off button.filter-manager-btn {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;

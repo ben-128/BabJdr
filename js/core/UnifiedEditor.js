@@ -157,6 +157,33 @@
         };
       }
       
+      // Check if we're in a monster card
+      const monsterCard = element.closest('.card[data-monster-name]');
+      if (monsterCard) {
+        const monsterName = monsterCard.dataset.monsterName;
+        const categoryName = monsterCard.dataset.categoryName;
+        
+        const editableElement = element.classList.contains('editable') ? element : element.querySelector('.editable');
+        
+        // Use data-item-identifier if available, otherwise fall back to monsterName
+        const itemIdentifier = editableElement?.dataset?.itemIdentifier || monsterName;
+        
+        // Use editSection directly (new format: "monster-fieldName")
+        const editSection = editableElement?.dataset?.editSection || 'abilites';
+        
+        return {
+          contentType: 'monster',
+          itemIdentifier: itemIdentifier,
+          categoryName: categoryName || 'monstres',
+          property: 'html',
+          editType: 'html', 
+          editSection: editSection,
+          config: window.ContentTypes.monster,
+          element: editableElement,
+          container: element
+        };
+      }
+      
       // Check if we're in a class page (before static pages!)
       // IMPORTANT: Exclude static pages even if they have data-page-title
       const classArticle = element.closest('article[data-page-title]:not([data-static-page="true"])');
@@ -346,6 +373,25 @@
           editType: 'tags',
           editSection: editSection,
           config: window.ContentTypes.objet,
+          element: element.classList.contains('editable') ? element : element.querySelector('.editable'),
+          container: element
+        };
+      }
+      
+      // Check if we're in a monster card
+      const monsterCard = element.closest('.card[data-monster-name]');
+      if (monsterCard) {
+        const monsterName = monsterCard.dataset.monsterName;
+        const categoryName = monsterCard.dataset.categoryName;
+        
+        return {
+          contentType: 'monster',
+          itemIdentifier: monsterName,
+          categoryName: categoryName || 'monstres',
+          property: 'tags',
+          editType: 'tags',
+          editSection: editSection,
+          config: window.ContentTypes.monster,
           element: element.classList.contains('editable') ? element : element.querySelector('.editable'),
           container: element
         };
@@ -578,12 +624,20 @@
         return false;
       }
 
-      // Update the object data
-      const objetName = this.currentEditSession.itemIdentifier;
-      const objet = window.OBJETS?.objets?.find(obj => obj.nom === objetName);
+      // Update data based on content type
+      const itemName = this.currentEditSession.itemIdentifier;
+      let targetItem = null;
       
-      if (objet) {
-        objet.tags = selectedTags;
+      if (this.currentEditSession.contentType === 'objet') {
+        // Update the object data
+        targetItem = window.OBJETS?.objets?.find(obj => obj.nom === itemName);
+      } else if (this.currentEditSession.contentType === 'monster') {
+        // Update the monster data
+        targetItem = window.MONSTRES?.find(monster => monster.nom === itemName);
+      }
+      
+      if (targetItem) {
+        targetItem.tags = selectedTags;
         
         // Update the display
         const tagsDisplay = selectedTags.map(tag => 
@@ -667,6 +721,8 @@
             return this.updateDonData(session, content);
           case 'objet':
             return this.updateObjetData(session, content);
+          case 'monster':
+            return this.updateMonsterData(session, content);
           case 'category':
             return this.updateCategoryData(session, content);
           case 'subclass':
@@ -719,6 +775,22 @@
       const propertyName = config.editMapping?.[session.editSection] || session.editSection;
       
       objet[propertyName] = content;
+      return true;
+    }
+
+    // Update monster data
+    updateMonsterData(session, content) {
+      const monster = window.MONSTRES?.find(m => m.nom === session.itemIdentifier);
+      if (!monster) {
+        console.error('Monster not found:', session.itemIdentifier, 'Available monsters:', window.MONSTRES?.map(m => m.nom));
+        return false;
+      }
+      
+      // Use editMapping if available, otherwise use editSection directly
+      const config = session.config || window.ContentTypes.monster;
+      const propertyName = config.editMapping?.[session.editSection] || session.editSection;
+      
+      monster[propertyName] = content;
       return true;
     }
 
@@ -870,6 +942,9 @@
           case 'objet':
             jsonCategory = 'OBJETS';
             break;
+          case 'monster':
+            jsonCategory = 'MONSTRES';
+            break;
           case 'staticPage':
           case 'generic':
             jsonCategory = 'STATIC_PAGES';
@@ -925,6 +1000,9 @@
       } else if (session.contentType === 'objet') {
         // Find object directly in the objets array
         targetObject = jsonData.objets?.find(obj => obj.nom === session.itemIdentifier);
+      } else if (session.contentType === 'monster') {
+        // Find monster directly in the array
+        targetObject = jsonData?.find(monster => monster.nom === session.itemIdentifier);
       } else if (session.contentType === 'category') {
         // Find category by name and update its description
         targetObject = jsonData.find(category => category.nom === session.categoryName);
@@ -1142,6 +1220,30 @@
           editSection: 'tags',
           config: window.ContentTypes.objet,
           element: element.classList.contains('editable-tags') ? element : element.querySelector('.editable-tags'),
+          container: element
+        };
+      }
+      
+      // Check if we're in a monster card
+      const monsterCard = element.closest('.card[data-monster-name]');
+      if (monsterCard) {
+        const monsterName = monsterCard.dataset.monsterName;
+        const categoryName = monsterCard.dataset.categoryName;
+        
+        const editableElement = element.classList.contains('editable-tags') ? element : element.querySelector('.editable-tags');
+        
+        // Use data-item-identifier if available, otherwise fall back to monsterName
+        const itemIdentifier = editableElement?.dataset?.itemIdentifier || monsterName;
+        
+        return {
+          contentType: 'monster',
+          itemIdentifier: itemIdentifier,
+          categoryName: categoryName || 'monstres',
+          property: 'tags',
+          editType: 'tags',
+          editSection: 'tags',
+          config: window.ContentTypes.monster,
+          element: editableElement,
           container: element
         };
       }
@@ -1397,18 +1499,26 @@
 
     // Show tags editing modal
     showTagsModal(context) {
-      // Find the object
-      const allObjects = window.OBJETS?.objets || [];
-      const obj = allObjects.find(o => o.nom === context.itemIdentifier);
+      // Find the target item (object or monster)
+      let targetItem = null;
+      let availableTags = [];
       
-      if (!obj) {
-        console.error('Object not found for tags editing:', context.itemIdentifier);
+      if (context.contentType === 'objet') {
+        const allObjects = window.OBJETS?.objets || [];
+        targetItem = allObjects.find(o => o.nom === context.itemIdentifier);
+        availableTags = window.ContentTypes.objet.filterConfig.availableTags || [];
+      } else if (context.contentType === 'monster') {
+        const allMonsters = window.MONSTRES || [];
+        targetItem = allMonsters.find(m => m.nom === context.itemIdentifier);
+        availableTags = window.ContentTypes.monster.filterConfig.availableTags || [];
+      }
+      
+      if (!targetItem) {
+        console.error('Item not found for tags editing:', context.itemIdentifier, 'Type:', context.contentType);
         return;
       }
 
-      // Get available tags
-      const availableTags = window.ContentTypes.objet.filterConfig.availableTags || [];
-      const objectTags = obj.tags || [];
+      const itemTags = targetItem.tags || [];
 
       // Remove existing modal if any
       const existingModal = document.querySelector('#tagsEditModal');
@@ -1430,7 +1540,7 @@
       `;
       
       const tagsCheckboxes = availableTags.map(tag => {
-        const isSelected = objectTags.includes(tag);
+        const isSelected = itemTags.includes(tag);
         return `
           <div style="display: flex; align-items: center; gap: 0.5rem; margin: 0.5rem 0; padding: 0.5rem; background: var(--card); border-radius: 8px;">
             <input 
@@ -1450,7 +1560,7 @@
 
       modal.innerHTML = `
         <div style="background: var(--paper); border-radius: 12px; padding: 1.5rem; border: 2px solid var(--rule);">
-          <h3 style="margin: 0 0 1rem 0; color: var(--accent-ink);">Édition des tags - ${obj.nom}</h3>
+          <h3 style="margin: 0 0 1rem 0; color: var(--accent-ink);">Édition des tags - ${targetItem.nom}</h3>
           <p style="margin: 0 0 1rem 0; color: var(--paper-muted);">Sélectionnez les tags pour cet objet :</p>
           <div id="tagsCheckboxes" style="margin: 1rem 0; max-height: 300px; overflow-y: auto;">
             ${tagsCheckboxes}
@@ -1469,7 +1579,7 @@
       // Add event listeners
       modal.addEventListener('click', (e) => {
         if (e.target.id === 'saveTagsBtn') {
-          this.saveTagsFromModal(modal, obj, context);
+          this.saveTagsFromModal(modal, targetItem, context);
         } else if (e.target.classList.contains('modal-close')) {
           modal.close();
           modal.remove();
@@ -1504,8 +1614,8 @@
         return;
       }
 
-      // Update object tags
-      obj.tags = selectedTags;
+      // Update tags for the target item (works for both objects and monsters)
+      targetItem.tags = selectedTags;
 
       // Update the display immediately
       const tagDisplay = context.element;
@@ -1523,7 +1633,7 @@
       modal.close();
       modal.remove();
       
-      JdrApp.modules.ui.showNotification(`💾 Tags sauvegardés pour "${obj.nom}"`, 'success');
+      JdrApp.modules.ui.showNotification(`💾 Tags sauvegardés pour "${targetItem.nom}"`, 'success');
     }
   }
 

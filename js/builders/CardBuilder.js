@@ -129,17 +129,77 @@
       `;
     }
 
+    buildMonsterCard() {
+      const allMonsters = window.MONSTRES || [];
+      const index = allMonsters.indexOf(this.data) || 0;
+      const totalItems = allMonsters.length;
+      
+      // Construire l'affichage des tags
+      const tagsDisplay = this.data.tags && this.data.tags.length > 0 
+        ? this.data.tags.map(tag => `<span class="tag-chip" style="background: var(--bronze); color: white; padding: 2px 6px; border-radius: 8px; font-size: 0.8em; margin-right: 4px;">${tag}</span>`).join('')
+        : '<span style="font-style: italic; color: #666;">Aucun tag</span>';
+
+      return `
+        <div class="card editable-section" data-section-type="monster" data-monster-name="${this.data.nom}">
+          ${this.buildEditableTitle(this.data.nom, 'monster-name')}
+          ${this.buildIllustration(`monster:${this.data.nom}`, this.data.nom)}
+          
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin: 0.5rem 0; gap: 1rem;">
+            <div style="flex: 1;">
+              ${this.buildEditableTagsField(tagsDisplay, 'monster-tags', 'Tags')}
+            </div>
+            <div style="flex-shrink: 0;">
+              ${this.buildMonsterElement()}
+            </div>
+          </div>
+          
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin: 1rem 0; font-size: 0.9em;">
+            <div>${this.buildEditableField(`<strong>❤️ PV:</strong> ${this.data.pointsDeVie}`, 'monster-pointsdevie', 'Points de vie')}</div>
+            <div>${this.buildEditableField(`<strong>🛡️ Armure:</strong> ${this.data.armurePhysique}`, 'monster-armurephysique', 'Armure physique')}</div>
+            <div>${this.buildEditableField(`<strong>🏃 Esquive:</strong> ${this.data.esquive}`, 'monster-esquive', 'Esquive')}</div>
+            <div>${this.buildEditableField(`<strong>⚡ Critique:</strong> ${this.data.coupCritique}`, 'monster-coupcritique', 'Coup critique')}</div>
+            <div>${this.buildEditableField(`<strong>🔮 Crit. Sorts:</strong> ${this.data.coupCritiqueSorts}`, 'monster-coupcritiquesorts', 'Critique sorts')}</div>
+            <div>${this.buildEditableField(`<strong>🛡️ Rés. Alt.:</strong> ${this.data.resistanceAlterations}`, 'monster-resistancealterations', 'Résistance altérations')}</div>
+          </div>
+
+          <div style="margin: 1rem 0;">
+            <strong>🌟 Armures Élémentaires:</strong>
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 0.25rem; font-size: 0.8em; margin-top: 0.5rem;">
+              <div>${this.buildEditableField(`${this.getElementIcon('Feu')} ${this.data.armureFeu}`, 'monster-armurefeu', 'Armure Feu')}</div>
+              <div>${this.buildEditableField(`${this.getElementIcon('Eau')} ${this.data.armureEau}`, 'monster-armureeau', 'Armure Eau')}</div>
+              <div>${this.buildEditableField(`${this.getElementIcon('Terre')} ${this.data.armureTerre}`, 'monster-armureterre', 'Armure Terre')}</div>
+              <div>${this.buildEditableField(`${this.getElementIcon('Air')} ${this.data.armureAir}`, 'monster-armureair', 'Armure Air')}</div>
+              <div>${this.buildEditableField(`${this.getElementIcon('Lumière')} ${this.data.armureLumiere}`, 'monster-armurelumiere', 'Armure Lumière')}</div>
+              <div>${this.buildEditableField(`${this.getElementIcon('Nuit')} ${this.data.armureObscurite}`, 'monster-armureobscurite', 'Armure Obscurité')}</div>
+              <div>${this.buildEditableField(`${this.getElementIcon('Divin')} ${this.data.armureDivin}`, 'monster-armuredivin', 'Armure Divin')}</div>
+              <div>${this.buildEditableField(`${this.getElementIcon('Maléfique')} ${this.data.armureMalefique}`, 'monster-armuremalefique', 'Armure Maléfique')}</div>
+            </div>
+          </div>
+
+          ${this.data.abilites ? `
+            <hr style="margin: 1rem 0; border: none; border-top: 1px solid var(--rule);">
+            ${this.buildEditableField(this.data.abilites, 'monster-abilites', 'Abilités', { style: 'margin-top: 0.5rem;' })}
+          ` : ''}
+
+          ${this.data.butin ? `
+            <hr style="margin: 1rem 0; border: none; border-top: 1px solid var(--rule);">
+            ${this.buildEditableField(this.data.butin, 'monster-butin', 'Butin', { style: 'margin-top: 0.5rem;' })}
+          ` : ''}
+
+          ${this.buildDeleteButton('monster')}
+        </div>
+      `;
+    }
+
     buildEditableTitle(content, editType, centerAlign = true) {
       const style = centerAlign ? 'margin: 0 0 1rem 0; text-align: center;' : '';
       const spellTitleClass = this.type === 'spell' ? ' spell-title' : '';
       const subclassTitleClass = this.type === 'subclass' ? ' subclass-title' : '';
       
-      // Create unique edit section identifier using editType
-      const editSection = `${this.data.nom}-${editType}`;
-      
+      // Use the editType directly instead of creating compound identifier
       return `
         <div class="editable-section" data-section-type="html">
-          <h4 style="${style}" class="editable editable-title${spellTitleClass}${subclassTitleClass}" data-edit-type="generic" data-edit-section="${editSection}">${content}</h4>
+          <h4 style="${style}" class="editable editable-title${spellTitleClass}${subclassTitleClass}" data-edit-type="generic" data-edit-section="${editType}" data-item-identifier="${this.data.nom}">${content}</h4>
           ${this.buildEditButton('title')}
         </div>
       `;
@@ -149,12 +209,10 @@
       const style = options.style ? `style="${options.style}"` : '';
       const className = options.className || 'editable-field';
       
-      // Create unique edit section identifier using editType
-      const editSection = `${this.data.nom}-${editType}`;
-      
+      // Use the editType directly instead of creating compound identifier
       return `
         <div class="editable-section" data-section-type="html">
-          <div class="editable ${className}" data-edit-type="generic" data-edit-section="${editSection}" ${style}>
+          <div class="editable ${className}" data-edit-type="generic" data-edit-section="${editType}" data-item-identifier="${this.data.nom}" ${style}>
             ${content}
           </div>
           ${this.buildEditButton('field')}
@@ -165,12 +223,10 @@
     buildEditableTagsField(content, editType, label, options = {}) {
       const style = options.style ? `style="${options.style}"` : '';
       
-      // Create unique edit section identifier using editType
-      const editSection = `${this.data.nom}-${editType}`;
-      
+      // Use the editType directly instead of creating compound identifier
       return `
         <div class="editable-section" data-section-type="html">
-          <div class="editable editable-tags" data-edit-type="tags" data-edit-section="${editSection}" ${style}>
+          <div class="editable editable-tags" data-edit-type="tags" data-edit-section="${editType}" data-item-identifier="${this.data.nom}" ${style}>
             ${content}
           </div>
           ${this.buildEditButton('field')}
@@ -179,12 +235,10 @@
     }
 
     buildEditableEffect(content, editType, label) {
-      // Create unique edit section identifier using editType
-      const editSection = `${this.data.nom}-${editType}`;
-      
+      // Use the editType directly instead of creating compound identifier
       return `
         <div class="editable-section" data-section-type="html">
-          <div class="editable editable-effect" data-edit-type="generic" data-edit-section="${editSection}" style="margin: 1rem 0;">
+          <div class="editable editable-effect" data-edit-type="generic" data-edit-section="${editType}" data-item-identifier="${this.data.nom}" style="margin: 1rem 0;">
             ${content}
           </div>
           ${this.buildEditButton('effect')}
@@ -200,7 +254,6 @@
         listHTML = items;
       } else {
         // Fallback if somehow still array format - convert once
-// console.warn('Found array format for capacites, converting to HTML:', items);
         if (Array.isArray(items)) {
           listHTML = '<ul>' + items.map(item => '<li>' + item + '</li>').join('') + '</ul>';
         } else {
@@ -208,13 +261,11 @@
         }
       }
       
-      // Create unique edit section identifier using editType
-      const editSection = `${this.data.nom}-${editType}`;
-      
+      // Use the editType directly instead of creating compound identifier
       return `
         <h5>${label}</h5>
         <div class="editable-section" data-section-type="html">
-          <div class="editable" data-edit-type="generic" data-edit-section="${editSection}">
+          <div class="editable" data-edit-type="generic" data-edit-section="${editType}" data-item-identifier="${this.data.nom}">
             ${listHTML}
           </div>
           ${this.buildEditButton('list')}
@@ -242,12 +293,10 @@
         statsHTML = '<div>Aucune statistique définie</div>';
       }
       
-      // Create unique edit section identifier for stats
-      const editSection = `${this.data.nom}-stats`;
-      
+      // Use subclass-stats directly
       return `
         <div class="editable-section" data-section-type="html">
-          <div class="editable editable-stats" data-edit-type="generic" data-edit-section="${editSection}">
+          <div class="editable editable-stats" data-edit-type="generic" data-edit-section="subclass-stats" data-item-identifier="${this.data.nom}">
             ${statsHTML}
           </div>
           ${this.buildEditButton('stats')}
@@ -282,216 +331,139 @@
       }
 
       let containerClasses = 'illus';
-      if (['spell', 'class', 'subclass', 'don', 'objet'].includes(styleType)) {
+      if (['spell', 'class', 'subclass', 'don', 'objet', 'monster'].includes(styleType)) {
         containerClasses += ` illus-${styleType}`;
       }
 
-      if (JdrApp.utils.isDevMode()) {
-        return `
-          <div class="${containerClasses}" data-illus-key="${illusKey}" data-style-type="${styleType}" data-bound="1">
-            <img alt="Illustration ${altText}" class="thumb" style="${imageStyle}"${imageUrl ? ` src="${imageUrl}"` : ''}>
-            <label class="up">📷 Ajouter<input accept="image/*" hidden="" type="file"></label>
-            <button class="rm" type="button" style="${removeStyle}">🗑 Retirer</button>
-          </div>
-        `;
-      }
-      
+      // ALWAYS generate editing controls - CSS will control visibility based on body.dev-on/dev-off
       return `
         <div class="${containerClasses}" data-illus-key="${illusKey}" data-style-type="${styleType}" data-bound="1">
           <img alt="Illustration ${altText}" class="thumb" style="${imageStyle}"${imageUrl ? ` src="${imageUrl}"` : ''}>
-        </div>
-      `;
-    }
-
-    buildMonsterCard() {
-      const allMonsters = window.MONSTRES || [];
-      const index = allMonsters.indexOf(this.data) || 0;
-      const totalItems = allMonsters.length;
-      
-      // Construire l'affichage des tags
-      const tagsDisplay = this.data.tags && this.data.tags.length > 0 
-        ? this.data.tags.map(tag => `<span class="tag-chip" style="background: var(--bronze); color: white; padding: 2px 6px; border-radius: 8px; font-size: 0.8em; margin-right: 4px;">${tag}</span>`).join('')
-        : '<span style="font-style: italic; color: #666;">Aucun tag</span>';
-
-      return `
-        <div class="card editable-section" data-section-type="monster" data-monster-name="${this.data.nom}">
-          ${this.buildEditableTitle(this.data.nom, 'monster-name')}
-          ${this.buildIllustration(`monster:${this.data.nom}`, this.data.nom)}
-          
-          <div style="margin: 0.5rem 0;">
-            ${this.buildEditableTagsField(tagsDisplay, 'monster-tags', 'Tags')}
-          </div>
-          
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin: 1rem 0; font-size: 0.9em;">
-            <div><strong>❤️ PV:</strong> <span class="editable" data-edit-type="generic" data-edit-section="${this.data.nom}-pointsdevie">${this.data.pointsDeVie}</span></div>
-            <div><strong>🛡️ Armure:</strong> <span class="editable" data-edit-type="generic" data-edit-section="${this.data.nom}-armurephysique">${this.data.armurePhysique}</span></div>
-            <div><strong>🏃 Esquive:</strong> <span class="editable" data-edit-type="generic" data-edit-section="${this.data.nom}-esquive">${this.data.esquive}</span></div>
-            <div><strong>⚡ Critique:</strong> <span class="editable" data-edit-type="generic" data-edit-section="${this.data.nom}-coupcritique">${this.data.coupCritique}</span></div>
-            <div><strong>🔮 Crit. Sorts:</strong> <span class="editable" data-edit-type="generic" data-edit-section="${this.data.nom}-coupcritiquesorts">${this.data.coupCritiqueSorts}</span></div>
-            <div><strong>🛡️ Rés. Alt.:</strong> <span class="editable" data-edit-type="generic" data-edit-section="${this.data.nom}-resistancealterations">${this.data.resistanceAlterations}</span></div>
-          </div>
-
-          <div style="margin: 1rem 0;">
-            <strong>🌟 Armures Élémentaires:</strong>
-            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.25rem; font-size: 0.8em; margin-top: 0.5rem;">
-              <div>🔥 <span class="editable" data-edit-type="generic" data-edit-section="${this.data.nom}-armurefeu">${this.data.armureFeu}</span></div>
-              <div>💧 <span class="editable" data-edit-type="generic" data-edit-section="${this.data.nom}-armureeau">${this.data.armureEau}</span></div>
-              <div>🌍 <span class="editable" data-edit-type="generic" data-edit-section="${this.data.nom}-armureterre">${this.data.armureTerre}</span></div>
-              <div>💨 <span class="editable" data-edit-type="generic" data-edit-section="${this.data.nom}-armureair">${this.data.armureAir}</span></div>
-              <div>✨ <span class="editable" data-edit-type="generic" data-edit-section="${this.data.nom}-armurelumiere">${this.data.armureLumiere}</span></div>
-              <div>🌑 <span class="editable" data-edit-type="generic" data-edit-section="${this.data.nom}-armureobscurite">${this.data.armureObscurite}</span></div>
-            </div>
-          </div>
-
-          ${this.data.abilites ? `
-            <hr style="margin: 1rem 0; border: none; border-top: 1px solid var(--rule);">
-            <div><strong>⚔️ Abilités:</strong></div>
-            <div class="editable" data-edit-type="generic" data-edit-section="${this.data.nom}-abilites">${this.data.abilites}</div>
-          ` : ''}
-
-          ${this.data.butin ? `
-            <hr style="margin: 1rem 0; border: none; border-top: 1px solid var(--rule);">
-            <div><strong>💰 Butin:</strong></div>
-            <div class="editable" data-edit-type="generic" data-edit-section="${this.data.nom}-butin">${this.data.butin}</div>
-          ` : ''}
-
-          ${this.buildDeleteButton('monster')}
-        </div>
-      `;
-    }
-
-    buildEditButton(type) {
-      const titles = {
-        title: 'Éditer le titre',
-        field: 'Éditer ce champ',
-        effect: 'Éditer cet effet',
-        list: 'Éditer cette liste',
-        stats: 'Éditer les statistiques'
-      };
-
-      // Always generate the button - CSS will control visibility based on body.dev-on/dev-off
-      return `<button class="edit-btn edit-${type}-btn" title="${titles[type] || 'Éditer'}">✏️</button>`;
-    }
-
-    buildDeleteButton(type) {
-      const config = {
-        spell: {
-          class: 'spell-delete btn small',
-          style: 'background: #ff6b6b; color: white; margin-top: 8px;',
-          text: '🗑 Supprimer',
-          attrs: `data-category-name="${this.categoryName}" data-spell-name="${this.data.nom}" data-spell-index="${this.index}"`
-        },
-        don: {
-          class: 'don-delete btn small',
-          style: 'background: #ff6b6b; color: white;',
-          text: '🗑 Supprimer',
-          attrs: `data-category-name="${this.categoryName}" data-don-name="${this.data.nom}" data-don-index="${this.index}"`
-        },
-        subclass: {
-          class: 'delete-subclass-btn',
-          style: '',
-          text: '🗑️ Supprimer',
-          attrs: `data-class-name="${this.categoryName}" data-subclass-name="${this.data.nom}"`
-        },
-        objet: {
-          class: 'objet-delete btn small',
-          style: 'background: #ff6b6b; color: white;',
-          text: '🗑 Supprimer',
-          attrs: `data-category-name="${this.categoryName}" data-objet-name="${this.data.nom}"`
-        }
-      };
-
-      const buttonConfig = config[type];
-      if (!buttonConfig) return '';
-
-      // Always generate the button - CSS will control visibility based on body.dev-on/dev-off
-      return `<button class="${buttonConfig.class}" ${buttonConfig.attrs} type="button" style="${buttonConfig.style}">${buttonConfig.text}</button>`;
-    }
-
-    buildMoveButtons(type, index, totalItems) {
-      // Always generate the buttons - CSS will control visibility based on body.dev-on/dev-off
-      return `
-        <div style="display: flex; gap: 4px; margin-top: 8px; flex-wrap: wrap;">
-          ${this.buildDeleteButton(type)}
-          <button class="${type}-move-up btn small" data-category-name="${this.categoryName}" data-${type}-name="${this.data.nom}" data-${type}-index="${index}" style="background: var(--bronze); color: white;" ${index === 0 ? 'disabled' : ''}>⬆️ Haut</button>
-          <button class="${type}-move-down btn small" data-category-name="${this.categoryName}" data-${type}-name="${this.data.nom}" data-${type}-index="${index}" style="background: var(--bronze); color: white;" ${index === totalItems - 1 ? 'disabled' : ''}>⬇️ Bas</button>
+          <label class="up">📷 Ajouter<input accept="image/*" hidden="" type="file"></label>
+          <button class="rm" type="button" style="${removeStyle}">🗑 Retirer</button>
         </div>
       `;
     }
 
     buildSpellElement() {
-      // Get the element (default to 'Feu' if not set)
-      const element = this.data.element || 'Feu';
-      const icon = window.ElementIcons ? window.ElementIcons[element] : '🔥';
-      const colors = window.ElementColors ? window.ElementColors[element] : { color: '#ff6b35', weight: 'bold' };
-      
-      // Build style string
-      let style = `color: ${colors.color}; font-weight: ${colors.weight};`;
-      if (colors.background) style += ` background: ${colors.background};`;
-      if (colors.padding) style += ` padding: ${colors.padding};`;
-      if (colors.borderRadius) style += ` border-radius: ${colors.borderRadius};`;
-      
-      // Vérifier le mode dev au moment de la génération
-      const isDevMode = JdrApp.utils.isDevMode();
-      
-      if (isDevMode) {
-        // Mode développement : afficher le sélecteur
-        const options = Object.keys(window.ElementIcons || {});
-        const optionsHTML = options.map(elem => 
-          `<option value="${elem}" ${elem === element ? 'selected' : ''}>${window.ElementIcons[elem]} ${elem}</option>`
-        ).join('');
-        
-        return `
-          <div style="text-align: center; margin: 0.5rem 0;">
-            <div class="spell-element-selector" style="font-size: 1.1em;">
-              <select data-spell-name="${this.data.nom}" data-spell-index="${this.index}" data-category-name="${this.categoryName}" style="padding: 4px 8px; border: 1px solid var(--rule); border-radius: 6px; background: var(--card); font-size: 0.9em;">
-                ${optionsHTML}
-              </select>
-            </div>
+      return `
+        <div class="spell-element-section">
+          <div class="spell-element-display" style="text-align: center; margin: 0.5rem 0;">
+            <span class="element-badge" style="display: inline-block; padding: 4px 12px; background: var(--accent); color: white; border-radius: 16px; font-size: 0.9em; font-weight: 600;">
+              ${this.getElementIcon(this.data.element)} ${this.data.element}
+            </span>
           </div>
-        `;
-      } else {
-        // Mode normal : afficher seulement l'icône
-        return `
-          <div style="text-align: center; margin: 0.5rem 0;">
-            <div class="spell-element-display" style="font-size: 1.1em;">
-              <span style="${style}">${icon} ${element}</span>
-            </div>
+          <div class="spell-element-selector" style="text-align: center; margin: 0.5rem 0; display: none;">
+            <label for="spell-element-${this.data.nom}" style="display: block; margin-bottom: 0.25rem; font-weight: 600;">Élément:</label>
+            <select id="spell-element-${this.data.nom}" class="editable" data-edit-type="select" data-edit-section="spell-element" data-item-identifier="${this.data.nom}">
+              <option value="Feu" ${this.data.element === 'Feu' ? 'selected' : ''}>${this.getElementIcon('Feu')} Feu</option>
+              <option value="Eau" ${this.data.element === 'Eau' ? 'selected' : ''}>${this.getElementIcon('Eau')} Eau</option>
+              <option value="Terre" ${this.data.element === 'Terre' ? 'selected' : ''}>${this.getElementIcon('Terre')} Terre</option>
+              <option value="Air" ${this.data.element === 'Air' ? 'selected' : ''}>${this.getElementIcon('Air')} Air</option>
+              <option value="Lumière" ${this.data.element === 'Lumière' ? 'selected' : ''}>${this.getElementIcon('Lumière')} Lumière</option>
+              <option value="Nuit" ${this.data.element === 'Nuit' ? 'selected' : ''}>${this.getElementIcon('Nuit')} Nuit</option>
+              <option value="Divin" ${this.data.element === 'Divin' ? 'selected' : ''}>${this.getElementIcon('Divin')} Divin</option>
+              <option value="Maléfique" ${this.data.element === 'Maléfique' ? 'selected' : ''}>${this.getElementIcon('Maléfique')} Maléfique</option>
+            </select>
           </div>
-        `;
-      }
+        </div>
+      `;
     }
 
-    getCategoryData() {
-      return window.ContentFactory.getEntity(this.type)?.findCategory(this.categoryName);
+    buildMonsterElement() {
+      const elementColor = this.getElementColor(this.data.element);
+      
+      return `
+        <div class="monster-element-section">
+          <div class="monster-element-display">
+            <span class="element-badge" style="
+              display: inline-flex; 
+              align-items: center; 
+              padding: 4px 8px; 
+              background: rgba(${parseInt(elementColor.slice(1,3), 16)}, ${parseInt(elementColor.slice(3,5), 16)}, ${parseInt(elementColor.slice(5,7), 16)}, 0.1); 
+              border-radius: 6px; 
+              border: 1px solid ${elementColor};
+              font-size: 0.8em;
+              font-weight: 600;
+            ">
+              <span style="margin-right: 4px;">${this.getElementIcon(this.data.element)}</span>
+              <span style="color: ${elementColor};">${this.data.element}</span>
+            </span>
+          </div>
+          <div class="monster-element-selector" style="margin-top: 0.5rem; display: none;">
+            <select class="editable" data-edit-type="select" data-edit-section="monster-element" data-item-identifier="${this.data.nom}" style="width: 100%; padding: 4px; border: 1px solid ${elementColor}; border-radius: 4px; font-size: 0.8em;">
+              <option value="Feu" ${this.data.element === 'Feu' ? 'selected' : ''}>${this.getElementIcon('Feu')} Feu</option>
+              <option value="Eau" ${this.data.element === 'Eau' ? 'selected' : ''}>${this.getElementIcon('Eau')} Eau</option>
+              <option value="Terre" ${this.data.element === 'Terre' ? 'selected' : ''}>${this.getElementIcon('Terre')} Terre</option>
+              <option value="Air" ${this.data.element === 'Air' ? 'selected' : ''}>${this.getElementIcon('Air')} Air</option>
+              <option value="Lumière" ${this.data.element === 'Lumière' ? 'selected' : ''}>${this.getElementIcon('Lumière')} Lumière</option>
+              <option value="Nuit" ${this.data.element === 'Nuit' ? 'selected' : ''}>${this.getElementIcon('Nuit')} Nuit</option>
+              <option value="Divin" ${this.data.element === 'Divin' ? 'selected' : ''}>${this.getElementIcon('Divin')} Divin</option>
+              <option value="Maléfique" ${this.data.element === 'Maléfique' ? 'selected' : ''}>${this.getElementIcon('Maléfique')} Maléfique</option>
+            </select>
+          </div>
+          ${this.buildEditButton('element')}
+        </div>
+      `;
+    }
+
+    getElementIcon(element) {
+      return window.ElementIcons?.[element] || '⚡';
+    }
+
+    getElementColor(element) {
+      return window.ElementColors?.[element]?.color || '#666';
+    }
+
+    buildGenericCard() {
+      return `
+        <div class="card">
+          <h4>${this.data.nom || 'Unknown'}</h4>
+          <p>Generic card for type: ${this.type}</p>
+        </div>
+      `;
+    }
+
+    buildEditButton(buttonType) {
+      return `<button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="${buttonType}">✏️</button>`;
+    }
+
+    buildDeleteButton(type) {
+      const config = this.config;
+      const deleteIcon = config?.icons?.delete || '🗑️';
+      
+      return `
+        <div class="delete-button-container" style="margin-top: 1rem; text-align: center;">
+          <button class="${type}-delete btn" data-${type}-name="${this.data.nom}" ${this.categoryName ? `data-category-name="${this.categoryName}"` : ''} type="button" style="background: #dc2626; color: white; border: 2px solid #b91c1c;">
+            ${deleteIcon} Supprimer ${type}
+          </button>
+        </div>
+      `;
     }
 
     buildMoveButtons(type, index, totalItems) {
-      if (!this.shouldShowEditButtons || totalItems <= 1) {
+      if (totalItems <= 1) {
         return '';
       }
 
-      const canMoveUp = index > 0;
-      const canMoveDown = index < totalItems - 1;
-      
       return `
-        <div class="move-buttons" style="display: flex; gap: 0.5rem; justify-content: center; margin: 1rem 0;">
-          <button class="${type}-move-up btn small" 
-                  data-category-name="${this.categoryName}" 
-                  data-${type}-name="${this.data.nom}"
-                  ${!canMoveUp ? 'disabled' : ''}
-                  style="background: var(--bronze); color: white;">
+        <div class="move-buttons" style="display: flex; gap: 0.5rem; justify-content: center; margin-top: 1rem;">
+          <button class="${type}-move-up btn small" data-${type}-name="${this.data.nom}" data-category-name="${this.categoryName}" type="button" style="background: #3b82f6; color: white; padding: 4px 8px; font-size: 0.8em;" ${index === 0 ? 'disabled' : ''}>
             ↑ Haut
           </button>
-          <button class="${type}-move-down btn small" 
-                  data-category-name="${this.categoryName}" 
-                  data-${type}-name="${this.data.nom}"
-                  ${!canMoveDown ? 'disabled' : ''}
-                  style="background: var(--bronze); color: white;">
+          <button class="${type}-move-down btn small" data-${type}-name="${this.data.nom}" data-category-name="${this.categoryName}" type="button" style="background: #3b82f6; color: white; padding: 4px 8px; font-size: 0.8em;" ${index >= totalItems - 1 ? 'disabled' : ''}>
             ↓ Bas
           </button>
         </div>
       `;
+    }
+
+    getCategoryData() {
+      if (this.type === 'don' && this.categoryName) {
+        const categoryData = window.DONS.find(cat => cat.nom === this.categoryName);
+        return categoryData || { dons: [] };
+      }
+      return { [this.type + 's']: [] };
     }
   }
 

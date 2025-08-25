@@ -318,29 +318,76 @@
       });
 
       // Delete tag buttons using event delegation
-      modal.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        
-        if (e.target && e.target.classList.contains('delete-monster-tag-btn')) {
-          const tagToDelete = e.target.dataset.tag;
+      modal.addEventListener('click', (e) => {        
+        // Check if the clicked element is a delete button
+        if (e.target && (e.target.classList.contains('delete-monster-tag-btn') || 
+            e.target.closest('.delete-monster-tag-btn'))) {
+          
+          e.preventDefault();
+          e.stopPropagation();
+          
+          // Get the button element (might be clicked on emoji inside)
+          const button = e.target.classList.contains('delete-monster-tag-btn') ? 
+                        e.target : e.target.closest('.delete-monster-tag-btn');
+          
+          const tagToDelete = button.dataset.tag;
+          
+          if (!tagToDelete) {
+            console.error('No tag found on delete button:', button);
+            this.showNotification('❌ Erreur: tag non trouvé', 'error');
+            return;
+          }
           
           const config = window.ContentTypes.monster;
+          if (!config || !config.filterConfig || !config.filterConfig.availableTags) {
+            console.error('Monster config not found or invalid');
+            this.showNotification('❌ Configuration des monstres non trouvée', 'error');
+            return;
+          }
+          
           const index = config.filterConfig.availableTags.indexOf(tagToDelete);
           
           if (index > -1) {
             // Confirm deletion
             if (confirm(`Êtes-vous sûr de vouloir supprimer le tag "${tagToDelete}" ?\n\nCela supprimera aussi ce tag de tous les monstres qui l'utilisent.`)) {
+              // Remove from available tags
               config.filterConfig.availableTags.splice(index, 1);
               
               // Remove the tag from all monsters
-              if (window.MONSTRES) {
+              if (window.MONSTRES && Array.isArray(window.MONSTRES)) {
                 window.MONSTRES.forEach(monster => {
                   if (monster.tags && monster.tags.includes(tagToDelete)) {
                     monster.tags = monster.tags.filter(tag => tag !== tagToDelete);
+                    // Ensure monster has at least one tag if possible
+                    if (monster.tags.length === 0 && config.filterConfig.availableTags.length > 0) {
+                      monster.tags = [config.filterConfig.availableTags[0]];
+                    }
                   }
                 });
               }
+              
+              // Update filter state to remove deleted tag
+              if (window.MONSTRES_FILTER_STATE && window.MONSTRES_FILTER_STATE.visibleTags) {
+                window.MONSTRES_FILTER_STATE.visibleTags = 
+                  window.MONSTRES_FILTER_STATE.visibleTags.filter(tag => tag !== tagToDelete);
+                // Ensure at least one visible tag remains
+                if (window.MONSTRES_FILTER_STATE.visibleTags.length === 0 && 
+                    config.filterConfig.availableTags.length > 0) {
+                  window.MONSTRES_FILTER_STATE.visibleTags = [config.filterConfig.availableTags[0]];
+                }
+              }
+              
+              // Save the updated availableTags in the monster data for persistence
+              if (window.MONSTRES && Array.isArray(window.MONSTRES)) {
+                // Store availableTags in the first monster's metadata or create a special entry
+                if (!window.MONSTRES._metadata) {
+                  window.MONSTRES._metadata = {};
+                }
+                window.MONSTRES._metadata.availableTags = [...config.filterConfig.availableTags];
+              }
+              
+              // Save changes to storage
+              EventBus.emit(Events.STORAGE_SAVE);
               
               // Refresh modal and monsters page
               modal.close();
@@ -357,8 +404,11 @@
                 }, 100);
               }
               
-              this.showNotification(`Tag "${tagToDelete}" supprimé avec succès`, 'success');
+              this.showNotification(`✅ Tag "${tagToDelete}" supprimé avec succès`, 'success');
             }
+          } else {
+            console.error(`Tag "${tagToDelete}" not found in available tags`);
+            this.showNotification(`❌ Tag "${tagToDelete}" non trouvé`, 'error');
           }
         }
       });
@@ -2421,6 +2471,16 @@
       }
     },
 
+    refreshMonstersPage() {
+      // Check if we're currently on the monsters page
+      if (window.location.hash === '#/monstres' || window.location.hash === '#/monstre') {
+        // Use the router to refresh the monsters page
+        if (JdrApp.modules.router && JdrApp.modules.router.renderMonstersPage) {
+          JdrApp.modules.router.renderMonstersPage();
+        }
+      }
+    },
+
     // ==== SPELL ELEMENT MANAGEMENT ====
 
     updateSpellElement(selectElement) {
@@ -2751,7 +2811,20 @@
     // ==== GLOBAL TAGS MANAGEMENT ====
 
     showTagsManagementModal() {
-      if (!window.ContentTypes.objet?.filterConfig) {
+      // Déterminer le type de contenu basé sur la page actuelle
+      const currentPage = window.location.hash.replace('#/', '') || 'creation';
+      let contentType = 'objet'; // par défaut
+      let config = null;
+      
+      if (currentPage === 'monstres' && window.ContentTypes.monster?.filterConfig) {
+        contentType = 'monster';
+        config = window.ContentTypes.monster.filterConfig;
+      } else if (window.ContentTypes.objet?.filterConfig) {
+        contentType = 'objet';
+        config = window.ContentTypes.objet.filterConfig;
+      }
+      
+      if (!config) {
         this.showNotification('❌ Configuration des tags non trouvée', 'error');
         return;
       }
@@ -2762,15 +2835,14 @@
         existingModal.remove();
       }
 
-      const config = window.ContentTypes.objet.filterConfig;
-      const modal = this.createTagsManagementModal(config);
+      const modal = this.createTagsManagementModal(config, contentType);
       document.body.appendChild(modal);
       
       // Use native dialog showModal for proper z-index
       modal.showModal();
     },
 
-    createTagsManagementModal(config) {
+    createTagsManagementModal(config, contentType = 'objet') {
       const modal = document.createElement('dialog');
       modal.id = 'tagsManagementModal';
       modal.style.cssText = `
@@ -2787,7 +2859,7 @@
         <div class="tag-item" data-tag-index="${index}" data-tag-name="${tag}">
           <span class="tag-chip" style="background: var(--bronze); color: white; padding: 4px 8px; border-radius: 8px; margin-right: 0.5rem;">${tag}</span>
           <input type="text" value="${tag}" class="tag-input" style="flex: 1; padding: 0.5rem; border: 1px solid var(--rule); border-radius: 4px; margin-right: 0.5rem;">
-          <button type="button" class="btn small delete-tag-btn" data-tag-name="${tag}" style="background: #dc2626; color: white; padding: 0.25rem 0.5rem;">
+          <button type="button" class="btn small delete-tag-btn" data-tag-name="${tag}" style="background: #dc2626 !important; color: white !important; padding: 0.25rem 0.5rem !important; display: inline-block !important; opacity: 1 !important; visibility: visible !important;">
             🗑️
           </button>
         </div>
@@ -2796,7 +2868,7 @@
       modal.innerHTML = `
         <div style="background: var(--paper); border-radius: 12px; padding: 1.5rem; border: 2px solid var(--rule);">
           <h3 style="margin: 0 0 1rem 0; color: var(--accent-ink);">🏷️ Gestion des tags globaux</h3>
-          <p style="margin: 0 0 1rem 0; color: var(--paper-muted);">Gérez la liste principale des tags disponibles pour les objets.</p>
+          <p style="margin: 0 0 1rem 0; color: var(--paper-muted);">Gérez la liste principale des tags disponibles pour les ${contentType === 'monster' ? 'monstres' : 'objets'}.</p>
           
           <div style="margin: 1rem 0;">
             <h4 style="margin: 0 0 0.5rem 0; color: var(--accent-ink);">Tags existants :</h4>
@@ -2826,11 +2898,11 @@
         </div>
       `;
 
-      this.setupTagsManagementHandlers(modal, config);
+      this.setupTagsManagementHandlers(modal, config, contentType);
       return modal;
     },
 
-    setupTagsManagementHandlers(modal, config) {
+    setupTagsManagementHandlers(modal, config, contentType = 'objet') {
       // Add new tag
       modal.querySelector('#addTagBtn').addEventListener('click', () => {
         const input = modal.querySelector('#newTagInput');
@@ -2878,8 +2950,27 @@
             // Remove from config
             config.availableTags = config.availableTags.filter(tag => tag !== tagName);
             
-            // Remove from all objects that use this tag
-            if (window.OBJETS?.objets) {
+            // Remove from all items that use this tag
+            if (contentType === 'monster' && Array.isArray(window.MONSTRES)) {
+              window.MONSTRES.forEach(monster => {
+                if (monster.tags && monster.tags.includes(tagName)) {
+                  monster.tags = monster.tags.filter(tag => tag !== tagName);
+                  // Ensure monster has at least one tag if possible
+                  if (monster.tags.length === 0 && config.availableTags.length > 0) {
+                    monster.tags = [config.availableTags[0]];
+                  }
+                }
+              });
+              
+              // Update filter settings to remove deleted tag for monsters
+              if (window.MONSTRES_FILTER_STATE?.visibleTags) {
+                window.MONSTRES_FILTER_STATE.visibleTags = window.MONSTRES_FILTER_STATE.visibleTags.filter(tag => tag !== tagName);
+                // Ensure at least one visible tag remains
+                if (window.MONSTRES_FILTER_STATE.visibleTags.length === 0 && config.availableTags.length > 0) {
+                  window.MONSTRES_FILTER_STATE.visibleTags = [config.availableTags[0]];
+                }
+              }
+            } else if (contentType === 'objet' && window.OBJETS?.objets) {
               window.OBJETS.objets.forEach(obj => {
                 if (obj.tags && obj.tags.includes(tagName)) {
                   obj.tags = obj.tags.filter(tag => tag !== tagName);
@@ -2889,14 +2980,14 @@
                   }
                 }
               });
-            }
-            
-            // Update filter settings to remove deleted tag
-            if (window.OBJETS?.filterSettings?.visibleTags) {
-              window.OBJETS.filterSettings.visibleTags = window.OBJETS.filterSettings.visibleTags.filter(tag => tag !== tagName);
-              // Ensure at least one visible tag remains
-              if (window.OBJETS.filterSettings.visibleTags.length === 0 && config.availableTags.length > 0) {
-                window.OBJETS.filterSettings.visibleTags = [config.availableTags[0]];
+              
+              // Update filter settings to remove deleted tag for objects
+              if (window.OBJETS?.filterSettings?.visibleTags) {
+                window.OBJETS.filterSettings.visibleTags = window.OBJETS.filterSettings.visibleTags.filter(tag => tag !== tagName);
+                // Ensure at least one visible tag remains
+                if (window.OBJETS.filterSettings.visibleTags.length === 0 && config.availableTags.length > 0) {
+                  window.OBJETS.filterSettings.visibleTags = [config.availableTags[0]];
+                }
               }
             }
             
@@ -2928,21 +3019,28 @@
           if (index >= 0) {
             config.availableTags[index] = rename.new;
             
-            // Update all objects that use this tag
-            if (window.OBJETS?.objets) {
+            // Update all items that use this tag
+            if (contentType === 'monster' && Array.isArray(window.MONSTRES)) {
+              window.MONSTRES.forEach(monster => {
+                if (monster.tags && monster.tags.includes(rename.old)) {
+                  const tagIndex = monster.tags.indexOf(rename.old);
+                  monster.tags[tagIndex] = rename.new;
+                }
+              });
+            } else if (contentType === 'objet' && window.OBJETS?.objets) {
               window.OBJETS.objets.forEach(obj => {
                 if (obj.tags && obj.tags.includes(rename.old)) {
                   const tagIndex = obj.tags.indexOf(rename.old);
                   obj.tags[tagIndex] = rename.new;
                 }
               });
-            }
-            
-            // Update filter settings
-            if (window.OBJETS?.filterSettings?.visibleTags) {
-              const visibleIndex = window.OBJETS.filterSettings.visibleTags.indexOf(rename.old);
-              if (visibleIndex >= 0) {
-                window.OBJETS.filterSettings.visibleTags[visibleIndex] = rename.new;
+              
+              // Update filter settings for objects
+              if (window.OBJETS?.filterSettings?.visibleTags) {
+                const visibleIndex = window.OBJETS.filterSettings.visibleTags.indexOf(rename.old);
+                if (visibleIndex >= 0) {
+                  window.OBJETS.filterSettings.visibleTags[visibleIndex] = rename.new;
+                }
               }
             }
           }
@@ -2951,8 +3049,12 @@
         // Save to storage
         EventBus.emit(Events.STORAGE_SAVE);
         
-        // Refresh objects page if currently visible
-        this.refreshObjectsPage();
+        // Refresh current page if it matches the content type
+        if (contentType === 'monster') {
+          this.refreshMonstersPage();
+        } else {
+          this.refreshObjectsPage();
+        }
         
         // Close modal
         modal.close();
@@ -3183,12 +3285,26 @@
         this._toggleInProgress = false;
       }, 100);
 
-      // Initialize filter settings if needed
-      if (!window.OBJETS.filterSettings) {
-        window.OBJETS.filterSettings = { visibleTags: [...window.ContentTypes.objet.filterConfig.defaultVisibleTags] };
+      // Déterminer le type de contenu basé sur la page actuelle
+      const currentPage = window.location.hash.replace('#/', '') || 'creation';
+      let contentType = 'objet'; // par défaut
+      let dataObject = null;
+      let visibleTags = null;
+      
+      if (currentPage === 'monstres') {
+        contentType = 'monster';
+        // Pour les monstres, on utilise une structure simplifiée dans window.MONSTRES_FILTER_STATE
+        if (!window.MONSTRES_FILTER_STATE) {
+          window.MONSTRES_FILTER_STATE = { visibleTags: [...window.ContentTypes.monster.filterConfig.defaultVisibleTags] };
+        }
+        visibleTags = window.MONSTRES_FILTER_STATE.visibleTags;
+      } else {
+        // Pour les objets (comportement existant)
+        if (!window.OBJETS.filterSettings) {
+          window.OBJETS.filterSettings = { visibleTags: [...window.ContentTypes.objet.filterConfig.defaultVisibleTags] };
+        }
+        visibleTags = window.OBJETS.filterSettings.visibleTags;
       }
-
-      const visibleTags = window.OBJETS.filterSettings.visibleTags;
       
       // IMPORTANT: Track state BEFORE modification to know if we need full regeneration
       const wasEmpty = visibleTags.length === 0;
@@ -3226,29 +3342,74 @@
       // Check if we need a full page regeneration vs just visibility update
       const nowHasTags = visibleTags.length > 0;
       
-      if (wasEmpty && nowHasTags) {
-        // If we went from no tags to having tags, we need full regeneration
-        // because buildSingleObjectPage returns [] when visibleTags.length === 0
-        this._needsRegenerationAfterEmpty = true;
-        this.refreshObjectsPage();
-      } else if (this._needsRegenerationAfterEmpty && !isVisuallyActive) {
-        // If we're adding more tags after having started from empty, keep regenerating
-        this.refreshObjectsPage();
-      } else if (!isVisuallyActive) {
-        // CRITICAL FIX: When activating a new tag, always regenerate the page
-        // This ensures objects with the new tag appear in the DOM, not just get unhidden
-        // The issue was that updateObjectVisibility() can only show/hide existing DOM elements,
-        // but objects filtered out during initial page generation don't exist in DOM at all
-        this.refreshObjectsPage();
+      if (contentType === 'monster') {
+        // For monsters, ALWAYS refresh because they use AND logic
+        // Any change in tags can reveal/hide different monsters
+        this.refreshCurrentPage(contentType);
       } else {
-        // Reset the flag if we're deactivating a tag (we have a complete DOM now)
-        this._needsRegenerationAfterEmpty = false;
-        // When deactivating, we can just hide existing elements
-        this.updateObjectVisibility();
+        // Original logic for objects
+        if (wasEmpty && nowHasTags) {
+          // If we went from no tags to having tags, we need full regeneration
+          // because buildSingleObjectPage returns [] when visibleTags.length === 0
+          this._needsRegenerationAfterEmpty = true;
+          this.refreshCurrentPage(contentType);
+        } else if (this._needsRegenerationAfterEmpty && !isVisuallyActive) {
+          // If we're adding more tags after having started from empty, keep regenerating
+          this.refreshCurrentPage(contentType);
+        } else if (!isVisuallyActive) {
+          // CRITICAL FIX: When activating a new tag, always regenerate the page
+          // This ensures objects with the new tag appear in the DOM, not just get unhidden
+          // The issue was that updateObjectVisibility() can only show/hide existing DOM elements,
+          // but objects filtered out during initial page generation don't exist in DOM at all
+          this.refreshCurrentPage(contentType);
+        } else {
+          // Reset the flag if we're deactivating a tag (we have a complete DOM now)
+          this._needsRegenerationAfterEmpty = false;
+          // When deactivating, we can just hide existing elements
+          this.updateContentVisibility(contentType);
+        }
       }
 
       // Save changes to storage
       EventBus.emit(Events.STORAGE_SAVE);
+    },
+
+    refreshCurrentPage(contentType) {
+      if (contentType === 'monster') {
+        this.refreshMonstersPage();
+      } else {
+        this.refreshObjectsPage();
+      }
+    },
+
+    updateContentVisibility(contentType) {
+      if (contentType === 'monster') {
+        this.updateMonstersVisibility();
+      } else {
+        this.updateObjectVisibility();
+      }
+    },
+
+    updateMonstersVisibility() {
+      if (!window.MONSTRES_FILTER_STATE) return;
+      
+      const visibleTags = window.MONSTRES_FILTER_STATE.visibleTags;
+      const allMonsterCards = document.querySelectorAll('#monstres-container .card');
+      
+      allMonsterCards.forEach(card => {
+        const monsterName = card.dataset.monsterName || card.querySelector('[data-edit-section*="nom"]')?.textContent;
+        if (!monsterName) return;
+        
+        // Trouver le monstre correspondant dans les données
+        const monster = window.MONSTRES.find(m => m.nom === monsterName);
+        if (!monster || !monster.tags) return;
+        
+        // En mode "ET" : le monstre doit avoir TOUS les tags visibles
+        const shouldShow = visibleTags.length === 0 || 
+                          visibleTags.every(tag => monster.tags.includes(tag));
+        
+        card.style.display = shouldShow ? '' : 'none';
+      });
     },
 
     // Update object visibility based on current filter settings

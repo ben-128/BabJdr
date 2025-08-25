@@ -234,6 +234,116 @@
       }
     },
 
+    monster: {
+      fields: {
+        nom: { type: 'text', label: 'Nom', required: true },
+        tags: { type: 'tags', label: 'Tags', required: true },
+        image: { type: 'text', label: 'Image', required: false },
+        element: { 
+          type: 'select', 
+          label: 'Élément d\'affiliation', 
+          required: true,
+          options: [
+            { value: 'Feu', label: '🔥 Feu' },
+            { value: 'Eau', label: '💧 Eau' },
+            { value: 'Terre', label: '🤎 Terre' },
+            { value: 'Air', label: '🟢 Air' },
+            { value: 'Lumiere', label: '☀️ Lumière' },
+            { value: 'Nuit', label: '⚫ Nuit' },
+            { value: 'Divin', label: '⚪ Divin' },
+            { value: 'Malefique', label: '🟣 Maléfique' }
+          ]
+        },
+        pointsDeVie: { type: 'number', label: 'Points de vie', required: true },
+        armurePhysique: { type: 'number', label: 'Armure physique', required: true },
+        esquive: { type: 'number', label: 'Esquive', required: true },
+        coupCritique: { type: 'number', label: 'Coup critique', required: true },
+        coupCritiqueSorts: { type: 'number', label: 'Critique sorts', required: true },
+        resistanceAlterations: { type: 'number', label: 'Résistance altérations', required: true },
+        armureFeu: { type: 'number', label: 'Armure Feu', required: true },
+        armureEau: { type: 'number', label: 'Armure Eau', required: true },
+        armureTerre: { type: 'number', label: 'Armure Terre', required: true },
+        armureAir: { type: 'number', label: 'Armure Air', required: true },
+        armureLumiere: { type: 'number', label: 'Armure Lumière', required: true },
+        armureObscurite: { type: 'number', label: 'Armure Obscurité', required: true },
+        armureDivin: { type: 'number', label: 'Armure Divin', required: true },
+        armureMalefique: { type: 'number', label: 'Armure Maléfique', required: true },
+        abilites: { type: 'richtext', label: 'Abilités', required: false },
+        butin: { type: 'richtext', label: 'Butin', required: false }
+      },
+      editMapping: {
+        'monster-name': 'nom',
+        'monster-tags': 'tags',
+        'monster-image': 'image',
+        'monster-element': 'element',
+        // Stats principaux
+        'monster-pointsdevie': 'pointsDeVie',
+        'monster-armurephysique': 'armurePhysique', 
+        'monster-esquive': 'esquive',
+        'monster-coupcritique': 'coupCritique',
+        'monster-coupcritiquesorts': 'coupCritiqueSorts',
+        'monster-resistancealterations': 'resistanceAlterations',
+        // Armures élémentaires
+        'monster-armurefeu': 'armureFeu',
+        'monster-armureeau': 'armureEau',
+        'monster-armureterre': 'armureTerre',
+        'monster-armureair': 'armureAir',
+        'monster-armurelumiere': 'armureLumiere',
+        'monster-armureobscurite': 'armureObscurite',
+        'monster-armuredivin': 'armureDivin',
+        'monster-armuremalefique': 'armureMalefique',
+        // Contenu narratif
+        'monster-abilites': 'abilites',
+        'monster-butin': 'butin'
+      },
+      identifiers: {
+        name: 'nom',
+        category: 'monstres'
+      },
+      template: 'monster-card',
+      container: 'monstres',
+      dataKey: 'MONSTRES',
+      pageType: 'single',
+      filterMode: 'AND',
+      icons: { 
+        category: '🐲', 
+        item: '👾',
+        add: '➕',
+        delete: '🗑️'
+      },
+      filterConfig: {
+        availableTags: [
+          "Forêt",
+          "Boss"
+],
+        defaultVisibleTags: [
+          "Forêt"
+]
+      },
+      defaultValues: {
+        nom: "Nouveau Monstre",
+        tags: ["Forêt"],
+        image: "",
+        element: "Feu",
+        pointsDeVie: 20,
+        armurePhysique: 2,
+        esquive: 5,
+        coupCritique: 10,
+        coupCritiqueSorts: 8,
+        resistanceAlterations: 3,
+        armureFeu: 0,
+        armureEau: 0,
+        armureTerre: 0,
+        armureAir: 0,
+        armureLumiere: 0,
+        armureObscurite: 0,
+        armureDivin: 0,
+        armureMalefique: 0,
+        abilites: "<strong>Attaque basique:</strong> Inflige 5 dégâts physiques.",
+        butin: "<strong>Butin:</strong> 10-50 pièces d'or."
+      }
+    },
+
     staticPage: {
       fields: {
         title: { type: 'text', label: 'Titre', required: true },
@@ -265,89 +375,6 @@
     'Nuit': { color: '#1a1a1a', weight: 'bold' },
     'Divin': { color: '#f5f5f5', weight: 'bold', background: 'rgba(100, 100, 100, 0.3)', padding: '2px 4px', borderRadius: '3px' },
     'Maléfique': { color: '#8b5cf6', weight: 'bold' }
-  };
-
-  // Monster configuration
-  window.ContentTypes.monster = {
-    fields: {
-      nom: { type: 'text', label: 'Nom', required: true },
-      image: { type: 'text', label: 'Image', required: false },
-      tags: { type: 'tags', label: 'Tags', required: false },
-      pointsDeVie: { type: 'text', label: 'Points de vie', required: true },
-      armurePhysique: { type: 'text', label: 'Armure physique', required: true },
-      esquive: { type: 'text', label: 'Esquive', required: true },
-      coupCritique: { type: 'text', label: 'Coup critique', required: true },
-      coupCritiqueSorts: { type: 'text', label: 'Coup critique sorts', required: true },
-      resistanceAlterations: { type: 'text', label: 'Résistance altérations', required: true },
-      armureFeu: { type: 'text', label: 'Armure Feu', required: true },
-      armureEau: { type: 'text', label: 'Armure Eau', required: true },
-      armureTerre: { type: 'text', label: 'Armure Terre', required: true },
-      armureAir: { type: 'text', label: 'Armure Air', required: true },
-      armureLumiere: { type: 'text', label: 'Armure Lumière', required: true },
-      armureNuit: { type: 'text', label: 'Armure Nuit', required: true },
-      armureDivin: { type: 'text', label: 'Armure Divin', required: true },
-      armureMalefique: { type: 'text', label: 'Armure Maléfique', required: true },
-      abilites: { type: 'richtext', label: 'Abilités', required: true },
-      butin: { type: 'richtext', label: 'Butin', required: true }
-    },
-    editMapping: {
-      'monster-name': 'nom',
-      'monster-image': 'image', 
-      'monster-tags': 'tags',
-      'monster-pv': 'pointsDeVie',
-      'monster-armor': 'armurePhysique',
-      'monster-dodge': 'esquive',
-      'monster-crit': 'coupCritique',
-      'monster-spell-crit': 'coupCritiqueSorts',
-      'monster-resist': 'resistanceAlterations',
-      'monster-armor-fire': 'armureFeu',
-      'monster-armor-water': 'armureEau',
-      'monster-armor-earth': 'armureTerre',
-      'monster-armor-air': 'armureAir',
-      'monster-armor-light': 'armureLumiere',
-      'monster-armor-night': 'armureNuit',
-      'monster-armor-divine': 'armureDivin',
-      'monster-armor-evil': 'armureMalefique',
-      'monster-abilities': 'abilites',
-      'monster-loot': 'butin'
-    },
-    identifiers: {
-      name: 'nom'
-    },
-    template: 'monster-card',
-    container: 'monstres',
-    dataKey: 'MONSTRES',
-    icons: {
-      category: '👹',
-      item: '🐲',
-      add: '➕',
-      delete: '🗑️'
-    },
-    defaultValues: {
-      nom: "Nouveau Monstre",
-      image: "",
-      tags: ["Foret"],
-      pointsDeVie: "20",
-      armurePhysique: "1",
-      esquive: "3",
-      coupCritique: "19",
-      coupCritiqueSorts: "20", 
-      resistanceAlterations: "1",
-      armureFeu: "0",
-      armureEau: "0",
-      armureTerre: "0",
-      armureAir: "0",
-      armureLumiere: "0",
-      armureNuit: "0",
-      armureDivin: "0",
-      armureMalefique: "0",
-      abilites: "<ul><li><strong>Attaque:</strong> 1d6 dégâts</li></ul>",
-      butin: "<ul><li>Quelques pièces</li></ul>"
-    },
-    filterConfig: {
-      availableTags: ["Foret", "Animal", "Humanoid", "Dragon", "Faible", "Puissant", "Boss", "Feu", "Eau", "Terre", "Air", "Rapide", "Poison"],
-      defaultVisibleTags: ["Foret", "Animal", "Humanoid"]
-    }
   };
 
   window.ElementIcons = {
