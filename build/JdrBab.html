@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-08-26T20:31:19.079Z by JdrBab Build System -->
+<!-- Generated on 2025-08-26T20:35:19.601Z by JdrBab Build System -->
 <title>JDR‑BAB — Livret de règles</title>
 <meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -3412,7 +3412,7 @@ article span[title]:hover::after {
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> Esquive.",
         "effetNormal": "<strong>Effet:</strong> Inflige 7 dégats de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> aux créatures autour du lanceur (3m). <br>Puis inflige le même montant aux créatures devant le lanceur sur 10m.<br><br>&nbsp;Tous les 5 points d'intelligence, augmente les dégats de 1.",
-        "effetCritique": "<strong>Coup Critique:&nbsp;</strong>&nbsp;Les dégats passent à 12. Les cibles non volantes et de taille moyennes sont <span title=\"Ne peut plus faire d'actions.\n Ne peut plus esquiver.\n Doit dépenser une action secondaire pour se relever.\">A terre</span> pendant 1 tour."
+        "effetCritique": "<strong>Coup Critique:&nbsp;</strong>&nbsp;Les dégats passent à 12. Les cibles non volantes et de taille moyennes sont <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">A terre</span> pendant 1 tour."
       }
     ]
   },
@@ -4632,7 +4632,7 @@ article span[title]:hover::after {
   ]
 };
     
-    // Build STATIC_PAGES correctly by combining individual page data
+    // Build STATIC_PAGES dynamically from all loaded page data
     window.STATIC_PAGES = {
       'creation': {
   "page": "creation",
@@ -4831,6 +4831,78 @@ article span[title]:hover::after {
       "content": "<p>Contenu du nouveau paragraphe.</p>",
       "deletable": true,
       "sectionName": "Nouveau paragraphe"
+    }
+  ]
+},
+      'combat': {
+  "page": "combat",
+  "title": "Combat",
+  "sections": [
+    {
+      "type": "intro",
+      "content": "deplacement, mort, actions primaire secondaire , armures phys et magique , critiques pour tout...\n<br>"
+    }
+  ]
+},
+      'gestion-des-ressources': {},
+      'histoire': {
+  "page": "histoire",
+  "title": "Histoire",
+  "static": true,
+  "sections": [
+    {
+      "type": "intro",
+      "content": "<p>Plongez dans le passé de l'univers, ses légendes et les événements qui ont façonné le monde actuel.</p>"
+    },
+    {
+      "type": "card",
+      "id": "ere-legendaire",
+      "title": "⚡ L'Ère Légendaire",
+      "content": "<p>Les temps mythiques où dieux et héros façonnaient le monde par leurs exploits.</p><p><strong>Événements marquants :</strong></p><ul><li>La Grande Forge des Éléments</li><li>La Première Guerre des Mages</li><li>L'Éveil des Dragons</li></ul><p><em>Développez l'histoire selon votre univers.</em></p>"
+    },
+    {
+      "type": "grid",
+      "cols": 2,
+      "content": [
+        {
+          "type": "card",
+          "id": "ere-ancienne",
+          "title": "🏛️ L'Ère Ancienne",
+          "content": "<p>L'établissement des premiers royaumes et l'organisation de la civilisation.</p><p><strong>Caractéristiques :</strong></p><ul><li>Fondation des grandes cités</li><li>Naissance des guildes</li><li>Codification de la magie</li></ul>"
+        },
+        {
+          "type": "card",
+          "id": "ere-moderne",
+          "title": "⚔️ L'Ère Moderne",
+          "content": "<p>L'époque actuelle où évoluent les héros joueurs.</p><p><strong>Défis contemporains :</strong></p><ul><li>Menaces émergentes</li><li>Conflits politiques</li><li>Découvertes magiques</li></ul>"
+        }
+      ]
+    },
+    {
+      "type": "card",
+      "id": "chronologie",
+      "title": "📅 Chronologie Importante",
+      "content": "<div class=\"timeline\"><div class=\"event\"><strong>An -1000 :</strong> La Grande Forge des Éléments</div><div class=\"event\"><strong>An -500 :</strong> Fondation du Premier Royaume</div><div class=\"event\"><strong>An 0 :</strong> L'Accord des Nations</div><div class=\"event\"><strong>An 200 :</strong> La Guerre des Mages Noirs</div><div class=\"event\"><strong>An 400 :</strong> Époque actuelle</div></div><p><em>Adaptez cette chronologie à votre univers de jeu.</em></p>"
+    }
+  ]
+},
+      'dieux': {
+  "page": "dieux",
+  "title": "Dieux",
+  "sections": [
+    {
+      "type": "intro",
+      "content": "Contenu de la page Dieux. Vous pouvez éditer ce texte en mode développement."
+    }
+  ]
+},
+      'geographie': {
+  "page": "geographie",
+  "title": "Geographie",
+  "sections": [
+    {
+      "type": "intro",
+      "content": "Contenu de la page Geographie. Vous pouvez éditer ce texte en mode développement."
     }
   ]
 }

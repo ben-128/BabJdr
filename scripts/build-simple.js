@@ -127,7 +127,8 @@ function buildStandalone() {
     'sorts.json', 'classes.json', 'competences-tests.json', 
     'creation.json', 'dons.json', 'objets.json', 'elements.json', 'etats.json',
     'images.json', 'static-pages-config.json', 'stats.json', 'toc-structure.json',
-    'monstres.json'
+    'monstres.json', 'combat.json', 'gestion-des-ressources.json', 'histoire.json',
+    'dieux.json', 'geographie.json'
   ];
   
   let dataObject = {};
@@ -171,13 +172,18 @@ function buildStandalone() {
     // TOC Structure for advanced navigation
     window.TOC_STRUCTURE = ${JSON.stringify(dataObject.toc_structure || {}, null, 2)};
     
-    // Build STATIC_PAGES correctly by combining individual page data
+    // Build STATIC_PAGES dynamically from all loaded page data
     window.STATIC_PAGES = {
       'creation': ${JSON.stringify(dataObject.creation || {}, null, 2)},
       'elements': ${JSON.stringify(dataObject.elements || {}, null, 2)},
       'stats': ${JSON.stringify(dataObject.stats || {}, null, 2)},
       'competences-tests': ${JSON.stringify(dataObject.competences_tests || {}, null, 2)},
-      'etats': ${JSON.stringify(dataObject.etats || {}, null, 2)}
+      'etats': ${JSON.stringify(dataObject.etats || {}, null, 2)},
+      'combat': ${JSON.stringify(dataObject.combat || {}, null, 2)},
+      'gestion-des-ressources': ${JSON.stringify(dataObject.gestion_des_ressources || {}, null, 2)},
+      'histoire': ${JSON.stringify(dataObject.histoire || {}, null, 2)},
+      'dieux': ${JSON.stringify(dataObject.dieux || {}, null, 2)},
+      'geographie': ${JSON.stringify(dataObject.geographie || {}, null, 2)}
     };
     
     // Static pages configuration
