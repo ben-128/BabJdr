@@ -452,7 +452,17 @@
         }
       }
 
-      if (JdrApp.utils.isDevMode()) {
+      // Enhanced dev mode check to prevent image buttons from appearing incorrectly
+      // Check multiple conditions to ensure we're truly in dev mode
+      const isStandalone = window.STANDALONE_VERSION === true;
+      const isDevModeActive = JdrApp.utils.isDevMode();
+      const hasDevClass = document.body.classList.contains('dev-on');
+      const editorDevMode = window.JdrApp?.modules?.editor?.isDevMode === true;
+      
+      // Only show image buttons if ALL conditions confirm we're in dev mode
+      const shouldShowImageButtons = !isStandalone && isDevModeActive && (hasDevClass || editorDevMode);
+
+      if (shouldShowImageButtons) {
         return `
           <div class="illus" data-illus-key="${illusKey}" data-bound="1">
             <img alt="Illustration ${altText}" class="thumb" style="${imageStyle}"${imageUrl ? ` src="${imageUrl}"` : ''}>

@@ -57,7 +57,7 @@
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> Esquive.",
         "effetNormal": "<strong>Effet:</strong> Inflige 7 dégats de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> aux créatures autour du lanceur (3m). <br>Puis inflige le même montant aux créatures devant le lanceur sur 10m.<br><br>&nbsp;Tous les 5 points d'intelligence, augmente les dégats de 1.",
-        "effetCritique": "<strong>Coup Critique:&nbsp;</strong>&nbsp;Les dégats passent à 12. Les cibles non volantes et de taille moyennes sont <span title=\"Ne peut plus faire d'actions.\n Ne peut plus esquiver.\n Doit dépenser une action secondaire pour se relever.\">A terre</span> pendant 1 tour."
+        "effetCritique": "<strong>Coup Critique:&nbsp;</strong>&nbsp;Les dégats passent à 12. Les cibles non volantes et de taille moyennes sont <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">A terre</span> pendant 1 tour."
       }
     ]
   },

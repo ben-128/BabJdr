@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-08-26T20:35:19.601Z by JdrBab Build System -->
+<!-- Generated on 2025-08-26T20:38:18.854Z by JdrBab Build System -->
 <title>JDR‑BAB — Livret de règles</title>
 <meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -7046,7 +7046,17 @@ article span[title]:hover::after {
         }
       }
 
-      if (JdrApp.utils.isDevMode()) {
+      // Enhanced dev mode check to prevent image buttons from appearing incorrectly
+      // Check multiple conditions to ensure we're truly in dev mode
+      const isStandalone = window.STANDALONE_VERSION === true;
+      const isDevModeActive = JdrApp.utils.isDevMode();
+      const hasDevClass = document.body.classList.contains('dev-on');
+      const editorDevMode = window.JdrApp?.modules?.editor?.isDevMode === true;
+      
+      // Only show image buttons if ALL conditions confirm we're in dev mode
+      const shouldShowImageButtons = !isStandalone && isDevModeActive && (hasDevClass || editorDevMode);
+
+      if (shouldShowImageButtons) {
         return `
           <div class="illus" data-illus-key="${illusKey}" data-bound="1">
             <img alt="Illustration ${altText}" class="thumb" style="${imageStyle}"${imageUrl ? ` src="${imageUrl}"` : ''}>
