@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-08-26T19:59:17.289Z by JdrBab Build System -->
+<!-- Generated on 2025-08-26T20:31:19.079Z by JdrBab Build System -->
 <title>JDR‑BAB — Livret de règles</title>
 <meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2205,6 +2205,11 @@ body.dev-off [data-bound] .up,
 body.dev-off [data-bound] .rm,
 body.dev-off [data-bound] label,
 body.dev-off [data-bound] button,
+body.dev-off .illus[data-bound] .up,
+body.dev-off .illus[data-bound] .rm,
+body.dev-off .illus[data-bound] label,
+body.dev-off .illus[data-bound] button,
+body.dev-off .illus[data-bound] input[type="file"],
 body.dev-off [data-dev-only],
 body.dev-off div[data-dev-only],
 body.dev-off .dev-mode-buttons,
@@ -2265,6 +2270,19 @@ body.dev-off .btn.small[data-don-name],
 body.dev-off .btn.small[data-section-name],
 body.dev-off .btn.small[data-don-index],
 /* ULTRA FORCÉ - Cacher TOUS les boutons de gestion des tags */
+/* ULTRA-SPECIFIC RULES FOR IMAGE UPLOAD BUTTONS */
+body.dev-off .illus label.up,
+body.dev-off .illus button.rm,
+body.dev-off label:contains("📷"),
+body.dev-off label:contains("Ajouter"),
+body.dev-off button:contains("🗑"),
+body.dev-off button:contains("Retirer"),
+body.dev-off .card .illus .up,
+body.dev-off .card .illus .rm,
+body.dev-off .card .illus label,
+body.dev-off .card .illus button,
+body.dev-off .card [data-bound] .up,
+body.dev-off .card [data-bound] .rm,
 /* ULTRA-SPECIFIC RULES FOR TAG MANAGER BUTTONS */
 body.dev-off button.manage-tags-btn,
 body.dev-off button.tags-manager-btn,
@@ -4213,7 +4231,7 @@ article span[title]:hover::after {
     "armureObscurite": "2",
     "armureDivin": 0,
     "armureMalefique": 0,
-    "abilites": "<strong>Charge brutale:</strong> Fonce et Inflige 5 dégâts.<br><strong>Lance rocher:</strong> Portée 15m,  4 dégats physiques.",
+    "abilites": "<strong>Charge brutale:</strong> Fonce et Inflige 5 dégâts. Critique : <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">A terre</span><br><strong>Lance rocher:</strong> Portée 15m,  4 dégats physiques.",
     "butin": "<strong>Butin:</strong>"
   },
   {
@@ -4261,7 +4279,7 @@ article span[title]:hover::after {
     "armureObscurite": 0,
     "armureDivin": 0,
     "armureMalefique": 0,
-    "abilites": "<strong>Volant</strong>: Necessite de sauter pour attaque au corps à corps.<br><strong>Dard: </strong> Inflige 5 degats physiques + 3 <span style=\"color: #22c55e; font-weight: bold;\">Air</span>.",
+    "abilites": "<strong>Volant</strong>: Necessite de sauter pour attaque au corps à corps.<br><strong>Dard: </strong> Inflige 5 degats physiques + 3 <span style=\"color: #22c55e; font-weight: bold;\">Air</span>. Critique : <span class=\"etat-link\" data-etat=\"Empoisonné\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Empoisonné</span> 1 , 5 tours",
     "butin": "<strong>Butin:</strong>"
   },
   {
@@ -4345,21 +4363,21 @@ article span[title]:hover::after {
     "image": "",
     "element": "Air",
     "pointsDeVie": 20,
-    "armurePhysique": 2,
-    "esquive": 5,
-    "coupCritique": 10,
-    "coupCritiqueSorts": 8,
-    "resistanceAlterations": 3,
+    "armurePhysique": "3",
+    "esquive": "0",
+    "coupCritique": "0",
+    "coupCritiqueSorts": "0",
+    "resistanceAlterations": "5",
     "armureFeu": 0,
     "armureEau": 0,
     "armureTerre": 0,
-    "armureAir": 0,
+    "armureAir": "5",
     "armureLumiere": 0,
-    "armureObscurite": 0,
+    "armureObscurite": "5",
     "armureDivin": 0,
     "armureMalefique": 0,
-    "abilites": "<strong>Attaque basique:</strong> Inflige 5 dégâts physiques.",
-    "butin": "<strong>Butin:</strong> 10-50 pièces d'or."
+    "abilites": "<strong>Volant</strong>: Necessite de sauter pour attaque au corps à corps.<br><strong>Morsure: </strong> inflige 5 physique.",
+    "butin": "<strong>Butin:</strong>"
   },
   {
     "nom": "Boss Forêt",
@@ -4368,22 +4386,22 @@ article span[title]:hover::after {
     ],
     "image": "",
     "element": "Terre",
-    "pointsDeVie": 20,
-    "armurePhysique": 2,
-    "esquive": 5,
-    "coupCritique": 10,
-    "coupCritiqueSorts": 8,
-    "resistanceAlterations": 3,
+    "pointsDeVie": "200",
+    "armurePhysique": "3",
+    "esquive": "0",
+    "coupCritique": "2",
+    "coupCritiqueSorts": "0",
+    "resistanceAlterations": "10",
     "armureFeu": 0,
-    "armureEau": 0,
-    "armureTerre": 0,
+    "armureEau": "0",
+    "armureTerre": "10",
     "armureAir": 0,
     "armureLumiere": 0,
-    "armureObscurite": 0,
+    "armureObscurite": "5",
     "armureDivin": 0,
-    "armureMalefique": 0,
-    "abilites": "<strong>Attaque basique:</strong> Inflige 5 dégâts physiques.",
-    "butin": "<strong>Butin:</strong> 10-50 pièces d'or."
+    "armureMalefique": "5",
+    "abilites": "Double attaque.<br><strong>Attaque basique:</strong> Inflige 10 dégâts physiques. <br><strong>Hurlement:</strong> Tous les adversaires à 15m, avec Resistance altération &lt; 6, sont <span class=\"etat-link\" data-etat=\"Affaibli\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Affaibli</span>.  \n<br><b>Repoussoir</b>: Repousse une une cible à 10m. Inflige 5 dégats.\n<br><b>Appel </b>: Hurle et fait venir 2 Groinkas.",
+    "butin": "<strong>Butin:</strong>"
   }
 ];
     window.IMAGES = {
