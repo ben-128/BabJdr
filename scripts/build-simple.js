@@ -110,6 +110,7 @@ function buildStandalone() {
     'js/core/UnifiedEditor.js',   // Unified editor
     'js/editor.js',               // Editor module
     'js/features/SpellFilter.js', // Spell filter feature
+    'js/features/TablesTresorsManager.js', // Tables de trésors manager
     'js/ui.js'                    // UI module - last
   ];
   
@@ -127,17 +128,37 @@ function buildStandalone() {
     'sorts.json', 'classes.json', 'competences-tests.json', 
     'creation.json', 'dons.json', 'objets.json', 'elements.json', 'etats.json',
     'images.json', 'static-pages-config.json', 'stats.json', 'toc-structure.json',
-    'monstres.json', 'combat.json', 'gestion-des-ressources.json', 'histoire.json',
-    'dieux.json', 'geographie.json'
+    'monstres.json', 'tables-tresors.json', 'combat.json', 'gestion-des-ressources.json', 
+    'histoire.json', 'dieux.json', 'geographie.json'
   ];
   
   let dataObject = {};
   dataFiles.forEach(dataFile => {
     const dataPath = path.join(rootDir, 'data', dataFile);
     if (fs.existsSync(dataPath)) {
-      const key = dataFile.replace('.json', '').replace('-', '_');
-      dataObject[key] = JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
-      console.log(`✓ Loaded ${dataFile}`);
+      try {
+        const key = dataFile.replace('.json', '').replace(/-/g, '_');
+        const rawData = fs.readFileSync(dataPath, 'utf-8');
+        const jsonData = JSON.parse(rawData);
+        dataObject[key] = jsonData;
+        console.log(`✓ Loaded ${dataFile} (key: ${key})`);
+      } catch (error) {
+        console.warn(`⚠️  Failed to parse ${dataFile}:`, error.message);
+        // Create default structure if JSON is malformed
+        const key = dataFile.replace('.json', '').replace(/-/g, '_');
+        dataObject[key] = {
+          page: key.replace('_', '-'),
+          title: key.replace('_', ' '),
+          sections: [
+            {
+              type: 'intro',
+              content: 'Cette page est en cours de développement.'
+            }
+          ]
+        };
+      }
+    } else {
+      console.warn(`⚠️  File not found: ${dataFile}`);
     }
   });
   
@@ -167,6 +188,7 @@ function buildStandalone() {
     window.DONS = ${JSON.stringify(dataObject.dons || {}, null, 2)};
     window.OBJETS = ${JSON.stringify(dataObject.objets || {}, null, 2)};
     window.MONSTRES = ${JSON.stringify(dataObject.monstres || [], null, 2)};
+    window.TABLES_TRESORS = ${JSON.stringify(dataObject.tables_tresors || { tables: [] }, null, 2)};
     window.IMAGES = ${JSON.stringify(dataObject.images || {}, null, 2)};
     
     // TOC Structure for advanced navigation
@@ -201,7 +223,6 @@ function buildStandalone() {
       setTimeout(function() {
         // Initialize JdrApp if it exists
         if (window.JdrApp && window.JdrApp.init) {
-          console.log('Initializing JdrApp...');
           window.JdrApp.init();
         } else {
           console.error('JdrApp not found!', window.JdrApp);

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Tables de Trésors - BabJDR</title>
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/utilities.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/editor.css">
+    <style>
+        body { 
+            padding: 2rem; 
+            background: var(--paper);
+        }
+        .test-section {
+            margin: 2rem 0;
+            padding: 1rem;
+            border: 1px solid var(--rule);
+            border-radius: 8px;
+            background: var(--card);
+        }
+        .debug {
+            font-family: monospace;
+            background: #f5f5f5;
+            padding: 0.5rem;
+            border-radius: 4px;
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body class="dev-on">
+    <h1>🧪 Test Tables de Trésors</h1>
+    
+    <div id="views">
+        <!-- Le contenu sera généré ici -->
+    </div>
+    
+    <div class="test-section">
+        <h2>Debug Info</h2>
+        <div id="debug-info"></div>
+    </div>
+
+    <!-- Include all modules in proper order -->
+    <script src="js/core.js"></script>
+    <script src="js/config/contentTypes.js"></script>
+    <script src="js/core/EventBus.js"></script>
+    <script src="js/core/BaseEntity.js"></script>
+    <script src="js/factories/ContentFactory.js"></script>
+    <script src="js/builders/CardBuilder.js"></script>
+    <script src="js/builders/PageBuilder.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/modules/images.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/router.js"></script>
+    <script src="js/renderer.js"></script>
+    <script src="js/core/UnifiedEditor.js"></script>
+    <script src="js/editor.js"></script>
+    <script src="js/features/SpellFilter.js"></script>
+    <script src="js/features/TablesTresorsManager.js"></script>
+    <script src="js/ui.js"></script>
+
+    <script>
+        // Test script
+        (async function testTablesTresors() {
+            try {
+                console.log('🧪 Testing Tables de Trésors...');
+                
+                // Initialize the app
+                await JdrApp.init();
+                
+                // Debug info
+                const debugInfo = document.getElementById('debug-info');
+                debugInfo.innerHTML = `
+                    <div class="debug">
+                        <strong>Mode Detection:</strong><br>
+                        Standalone: ${window.STANDALONE_VERSION === true ? 'YES' : 'NO'}<br>
+                        MJ Mode Active: ${JdrApp.state?.isMJ ? 'YES' : 'NO'}<br>
+                        Dev Mode Active: ${JdrApp.modules.editor?.isDevMode ? 'YES' : 'NO'}<br>
+                        Router Available: ${JdrApp.modules.router ? 'YES' : 'NO'}
+                    </div>
+                    <div class="debug">
+                        <strong>Window.TABLES_TRESORS:</strong><br>
+                        ${JSON.stringify(window.TABLES_TRESORS, null, 2)}
+                    </div>
+                    <div class="debug">
+                        <strong>ContentTypes.tableTresor:</strong><br>
+                        ${JSON.stringify(window.ContentTypes?.tableTresor, null, 2)}
+                    </div>
+                    <div class="debug">
+                        <strong>ContentFactory has tableTresor entity:</strong><br>
+                        ${ContentFactory.getTablesTresors() ? 'YES' : 'NO'}
+                    </div>
+                `;
+                
+                // Test page generation
+                console.log('📄 Generating tables-tresors page...');
+                JdrApp.modules.renderer.renderUnifiedContentPage('tableTresor', window.TABLES_TRESORS || { tables: [] });
+                
+                // Test navigation
+                console.log('🧭 Testing navigation...');
+                JdrApp.modules.router.show('tables-tresors');
+                
+                console.log('✅ Test completed!');
+                
+            } catch (error) {
+                console.error('❌ Test failed:', error);
+                document.getElementById('debug-info').innerHTML = `
+                    <div class="debug" style="color: red;">
+                        <strong>Error:</strong><br>
+                        ${error.message}<br>
+                        ${error.stack}
+                    </div>
+                `;
+            }
+        })();
+    </script>
+</body>
+</html>

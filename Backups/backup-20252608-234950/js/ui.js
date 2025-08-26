@@ -606,36 +606,23 @@
                 window.ContentTypes.tableTresor.filterConfig.availableTags = [...currentAvailableTags];
               }
               
-              // Clear filter state to force refresh
-              if (window.TABLES_TRESORS_FILTER_STATE && window.TABLES_TRESORS_FILTER_STATE.visibleTags) {
-                // Remove the deleted tag from visible tags if present  
-                const visibleTagIndex = window.TABLES_TRESORS_FILTER_STATE.visibleTags.indexOf(tagToDelete);
-                if (visibleTagIndex > -1) {
-                  window.TABLES_TRESORS_FILTER_STATE.visibleTags.splice(visibleTagIndex, 1);
-                }
-              }
-              
               // Save changes to storage
               EventBus.emit(Events.STORAGE_SAVE);
               
-              // Close modal first 
+              // Refresh modal and tables page
               modal.close();
+              this.showTableTresorTagsManagement();
               
               // Force complete page reload for tables page to update filters
               const currentPage = window.location.hash.replace('#/', '');
               if (currentPage === 'tables-tresors') {
                 // Trigger router to completely rebuild the page
                 setTimeout(() => {
-                  if (JdrApp.modules.router && JdrApp.modules.router.renderTablesTresorsPage) {
-                    JdrApp.modules.router.renderTablesTresorsPage();
+                  if (JdrApp.modules.router && JdrApp.modules.router.show) {
+                    JdrApp.modules.router.show('tables-tresors');
                   }
                 }, 100);
               }
-              
-              // Refresh modal after page update
-              setTimeout(() => {
-                this.showTableTresorTagsManagement();
-              }, 200);
               
               this.showNotification(`✅ Tag "${tagToDelete}" supprimé avec succès`, 'success');
             }
