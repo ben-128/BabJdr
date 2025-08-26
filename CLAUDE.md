@@ -15,11 +15,37 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 npm run dev         # Start development server with live-reload (port 3000)
 npm run build       # Build standalone HTML version
 npm run serve       # Start server without opening browser
+npm run dev-clean   # Clean dev server via scripts/server.js (preferred)
 ```
 
-**IMPORTANT**: Claude should NOT run `npm run dev` or similar dev server commands as they block the terminal and prevent further interaction. Use existing running servers instead.
+### Windows Batch Menu System (Primary Interface)
+```batch
+menu.bat            # Interactive menu for all operations (RECOMMENDED)
+```
+**Menu Options:**
+1. Development server (launches clean dev environment)
+2. Build standalone (generates single HTML file)  
+3. Import archive (auto-finds latest ZIP in Downloads)
+4. Clean backups (removes old backup folders)
+5. Quit
 
-**MOBILE STANDALONE PRIORITY**: The standalone version (`build/standalone/JdrBab.html`) is the primary way users access the application on mobile devices and tablets. Mobile users do NOT use dev mode - only the standalone version matters for mobile/tablet compatibility. Ensure:
+**IMPORTANT**: Claude should NOT run `npm run dev` or dev server commands as they block the terminal. Use existing running servers or direct users to the batch menu system instead.
+
+### Dependencies and Requirements
+```json
+"devDependencies": {
+  "live-server": "^1.2.2",
+  "nodemon": "^3.0.1"
+},
+"engines": {
+  "node": ">=14.0.0"
+}
+```
+- **Node.js**: Version 14.0.0 or higher required
+- **Primary dev server**: live-server (lightweight HTTP server)
+- **Install dependencies**: `npm install` (if needed)
+
+**MOBILE STANDALONE PRIORITY**: The standalone version (`build/JdrBab.html`) is the primary way users access the application on mobile devices and tablets. Mobile users do NOT use dev mode - only the standalone version matters for mobile/tablet compatibility. Ensure:
 - Images display properly on mobile/tablet
 - Navigation is fully functional on touch devices  
 - Layout is responsive and readable on small screens
@@ -31,9 +57,12 @@ npm run serve       # Start server without opening browser
 - `start-server.bat` - Fallback server startup (tries npm, then Python HTTP server)
 
 ### Project Build System
-- Built files are generated in `build/standalone/JdrBab.html`
-- Build process combines modular files into a single standalone HTML file
-- Standalone version embeds all CSS, JS, and JSON data inline
+- **Build output**: `build/JdrBab.html` (single standalone file, NOT `build/standalone/JdrBab.html`)
+- **Build script**: `scripts/build-simple.js` (Node.js-based build system)
+- **Dual-mode architecture**: Development (modular files) vs Production (embedded data)
+- **Data embedding**: JSON files become `window.SORTS`, `window.CLASSES`, etc.
+- **Complete build**: Combines 15+ JS modules, 5 CSS files, and 8+ JSON data files
+- **Size**: ~500-800KB complete application with all content and assets
 
 ## Architecture Overview
 
@@ -103,26 +132,55 @@ This codebase has been completely refactored from a 7,469-line monolith into a p
 - Export functionality (JSON, HTML)  
 - Data persistence across sessions
 
-### Data Structure
-- `data/sorts.json` - Spell categories and spells
-- `data/classes.json` - Character classes and subclasses  
-- `data/dons.json` - Feat categories and individual feats
-- `data/static-pages-config.json` - Configuration for static content pages
-- `data/images.json` - Image references and metadata (42+ images as of 2025-08-20)
-- Additional JSON files for elements, stats, states, etc.
+### Data Structure and Content Types
+```
+data/
+├── sorts.json              # Spell categories with 60+ spells
+├── classes.json            # 8+ character classes and subclasses
+├── dons.json              # Feat categories and abilities
+├── objets.json            # Equipment and items with filtering
+├── monstres.json          # Creature bestiary with full RPG stats  
+├── images.json            # Image URL mappings (42+ images)
+├── static-pages-config.json # Static page configurations
+├── toc-structure.json     # Navigation structure
+├── elements.json          # Elemental types and relationships
+├── stats.json, states.json # Game mechanics data
+└── creation.json          # Character creation rules
+```
 
-### Assets Structure
-- `data/images/Classes/` - Character class portraits (20 images)
-- `data/images/Sorts/` - Spell icons (9 images) 
-- `data/images/Equipements/` - **NEW** Equipment imagery
-  - `Armes/` - Weapon images (6+ items)
-  - `Armures/` - Armor images (3+ items) 
-  - `Consumables/` - Consumable items with subcategories:
-    - `Herbs/` - Herb items (8+ images)
-    - `Pots/` - Potion items (2+ images)
-    - `SpellCasting/` - Magical implements (8+ images)
-- `data/images/Monstres/` - **NEW** Monster imagery
-  - `foret/` - Forest monsters (4+ creatures)
+**Content Type System**: All content types are defined in `js/config/contentTypes.js` with:
+- Field schemas and validation
+- Template identifiers  
+- Icons and default values
+- Edit mappings for UI elements
+
+### Asset Organization (42+ Images)
+```
+data/images/
+├── Classes/               # Character portraits (22 images)  
+│   ├── Aventurier.png, AventurierF.png
+│   ├── Mage.png, MageF.png, Guerrier.png, etc.
+│   └── [Male/Female variants for each class]
+├── Sorts/                 # Spell icons (10 images)
+│   ├── BouleDeFeu.png, Eclair.png, Protection.png
+│   └── [Elemental and utility spell icons]
+├── Equipements/           # Equipment imagery
+│   ├── Armes/            # Weapons (6+ items)
+│   ├── Armures/          # Armor (6+ items including robes)
+│   ├── Bouclier/         # Shields  
+│   └── Consumables/      # Consumable items
+│       ├── Herbs/        # Herbal items (8 images)
+│       ├── Pots/         # Potions (2 images)
+│       └── SpellCasting/ # Magical implements (8 wands)
+└── Monstres/             # Monster imagery
+    └── foret/            # Forest creatures (10+ monsters)
+```
+
+**Image Management System**:
+- **Dual URLs**: External (ibb.co) for dev, local paths for assets
+- **Type-specific naming**: `sort:category:name`, `subclass:class:name:index`
+- **Dual-image support**: Subclasses can have 2 images (`:1`, `:2` suffixes)
+- **Responsive sizing**: CSS `object-fit: contain` for optimal display
 
 ### Styling
 Modular CSS architecture:
@@ -200,15 +258,27 @@ ContentFactory.deleteItem('equipment', categoryName, itemName)        // ✅ RIG
 - **Before writing similar methods**: Check if an existing generic method can be extended
 - **Before duplicating logic**: Use EventBus to communicate between modules
 
-### Initialization Order
-Modules must be initialized in dependency order:
-1. **Configuration** (contentTypes.js, EventBus, BaseEntity, ContentFactory)
-2. **Builders** (CardBuilder, PageBuilder) 
-3. **Utils** (events, DOM helpers)
-4. **Images** module
-5. **Core, Renderer** (before router)
-6. **Router** (after content generation)
-7. **Editor, Storage, UI**
+### Critical Module Loading Order
+Modules must be loaded in exact dependency order:
+```javascript
+1. js/core.js                    // JdrApp namespace - MUST BE FIRST
+2. js/config/contentTypes.js     // Configuration layer
+3. js/core/EventBus.js          // Event system foundation  
+4. js/core/BaseEntity.js        // Entity base class
+5. js/factories/ContentFactory.js // Factory pattern implementation
+6. js/builders/CardBuilder.js    // Card template generation
+7. js/builders/PageBuilder.js    // Page template generation
+8. js/utils.js                  // DOM and utility functions
+9. js/modules/images.js         // Asset management
+10. js/storage.js               // Persistence layer
+11. js/router.js                // Navigation system
+12. js/renderer.js              // Content rendering 
+13. js/core/UnifiedEditor.js    // Editing system core
+14. js/editor.js                // Editor UI and interactions
+15. js/features/SpellFilter.js  // Specialized features
+16. js/ui.js                    // UI interactions - MUST BE LAST
+```
+**Violation of this order will cause runtime errors and module failures.**
 
 ### Data Loading Strategy
 - Development: Fetches individual JSON files
@@ -366,3 +436,76 @@ element.innerHTML = editedContent;          // ❌ WRONG - inconsistent behavior
 > **ALL edited content MUST be restored through `restoreElementContent()` to ensure HTML is rendered properly and tags are never visible to users.**
 
 This prevents the recurring issue where HTML tags like `<p>`, `<strong>`, `<em>` appear as visible text after editing instead of being rendered as formatted HTML.
+
+## 📖 README Navigation Guide
+
+The codebase includes detailed README files in key directories to help analyze specific aspects of the application. Use this guide to find the right documentation for your task:
+
+### 🧠 What You're Looking For → Which README to Read
+
+#### **JavaScript Architecture & Code Analysis**
+**Read**: [`js/README.md`](js/README.md)
+- **When**: Understanding module structure, adding new features, debugging architecture
+- **Contains**: Module dependency order, architecture patterns, code quality rules
+- **Key Info**: Factory/Builder patterns, EventBus communication, configuration-driven development
+
+#### **Data Structure & Content Management**
+**Read**: [`data/README.md`](data/README.md)  
+- **When**: Working with JSON data, adding content types, understanding content format
+- **Contains**: All data files explained, image management system, content type schemas
+- **Key Info**: 60+ spells, 42+ images, universal HTML format rules, asset organization
+
+#### **Styling & Visual Design**
+**Read**: [`css/README.md`](css/README.md)
+- **When**: Modifying appearance, responsive design, theming, component styling
+- **Contains**: CSS architecture, medieval-fantasy design system, responsive breakpoints
+- **Key Info**: Color palette, typography scale, utility classes, mobile-first approach
+
+#### **Build System & Development Tools**
+**Read**: [`scripts/README.md`](scripts/README.md)
+- **When**: Build issues, development server problems, understanding deployment process
+- **Contains**: Build pipeline, Windows batch tools, import/export system
+- **Key Info**: Module loading order, data embedding process, development workflow
+
+### 🎯 Common Task Scenarios
+
+#### **"I need to add a new content type (equipment, NPCs, etc.)"**
+1. **Start with**: [`js/README.md`](js/README.md) → "Configuration Over Code" section
+2. **Then read**: [`data/README.md`](data/README.md) → "Content Type System" section
+3. **Key process**: Define in `contentTypes.js` → System handles the rest automatically
+
+#### **"I'm getting build errors or module loading issues"**
+1. **Start with**: [`scripts/README.md`](scripts/README.md) → "Build System Architecture"
+2. **Then check**: [`js/README.md`](js/README.md) → "Critical Loading Order" section
+3. **Debug approach**: Verify module dependency order, check for syntax errors
+
+#### **"I need to understand the data format or add new content"**
+1. **Start with**: [`data/README.md`](data/README.md) → "Universal Content Format" section
+2. **Key rule**: All content must be HTML strings, never arrays or complex objects
+3. **Reference**: See content type examples and field schemas
+
+#### **"I want to modify the visual design or add responsive features"**
+1. **Start with**: [`css/README.md`](css/README.md) → "Design System" section
+2. **Key info**: CSS custom properties, utility classes, responsive breakpoints
+3. **Approach**: Use existing components and utilities before creating new CSS
+
+#### **"I need to understand how editing and persistence works"**
+1. **Start with**: [`js/README.md`](js/README.md) → "Event-Driven Communication" section
+2. **Then read**: [`data/README.md`](data/README.md) → "Data Validation Rules" section
+3. **Key concepts**: UnifiedEditor system, EventBus, localStorage persistence
+
+#### **"I'm working on mobile compatibility or responsive design"**
+1. **Primary**: [`css/README.md`](css/README.md) → "Responsive Design System" section
+2. **Secondary**: [`scripts/README.md`](scripts/README.md) → "Mobile Compatible" build process
+3. **Remember**: Mobile users only access the standalone build, not dev mode
+
+### 📋 Quick Reference Cheat Sheet
+
+```bash
+# Architecture & Patterns     → js/README.md
+# Data & Content             → data/README.md  
+# Styling & Design           → css/README.md
+# Build & Development        → scripts/README.md
+```
+
+**💡 Pro Tip**: When debugging issues, start with the README that matches your error domain (JavaScript errors → js/, build errors → scripts/, styling issues → css/, data problems → data/).

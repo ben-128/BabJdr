@@ -1,0 +1,10 @@
+{
+  "page": "gestion-des-ressources",
+  "title": "Gestion des ressources",
+  "sections": [
+    {
+      "type": "intro",
+      "content": "loot stats fortune, mana , repos et pv, inventaire\n<br>"
+    }
+  ]
+}

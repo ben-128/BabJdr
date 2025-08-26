@@ -1,7 +1,5 @@
 
 - monstres
 - faire des tables de loots, et des tags caché par level
--  regles :
-	- combats :  mort, actions
-        - Gestion des ressource : loot fortune, mana , repos et pv, inventaire
+
 
