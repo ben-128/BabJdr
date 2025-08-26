@@ -481,7 +481,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
 /* Modal pour les éléments */
 .elements-modal {
   position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,.7);
-  z-index:99999; display:none; align-items:center; justify-content:center;
+  z-index:2147483647; display:none; align-items:center; justify-content:center;
 }
 .elements-modal.visible {
   display:flex;
@@ -523,7 +523,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
 /* États modal styles */
 .etats-modal {
   position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,.7);
-  z-index:99999; display:none; align-items:center; justify-content:center;
+  z-index:2147483647; display:none; align-items:center; justify-content:center;
 }
 .etats-modal.visible {
   display:flex;
@@ -581,6 +581,378 @@ span[title] {
   padding: 2px 4px;
   border-radius: 3px;
   font-weight: 700;
+}
+
+/* Styles pour les liens de sorts */
+.spell-link {
+  color: #ea7332 !important; /* Orange au lieu du jaune */
+  cursor: pointer;
+  text-decoration: underline;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.spell-link:hover {
+  color: var(--bronze) !important;
+}
+
+/* Styles pour les liens d'états */
+.etat-link {
+  color: #ea7332 !important; /* Orange au lieu du jaune */
+  cursor: pointer;
+  text-decoration: underline;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.etat-link:hover {
+  color: var(--bronze) !important;
+}
+
+/* Modal des liens de sorts */
+.spell-links-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 2147483647;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.spell-links-modal.visible {
+  display: flex;
+}
+
+.spell-links-modal-content {
+  background: var(--card);
+  border: 2px solid var(--rule);
+  border-radius: 16px;
+  padding: var(--space-2xl);
+  max-width: 600px;
+  width: 90%;
+  box-shadow: var(--shadow);
+  position: relative;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.spell-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  border: 2px solid var(--rule);
+  border-radius: var(--space-md);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  background: var(--card);
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.spell-item:hover {
+  background: var(--paper);
+  border-color: var(--bronze);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.spell-item:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.spell-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.spell-name {
+  font-weight: 600;
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+
+.spell-meta {
+  font-size: 12px;
+  color: var(--paper-muted);
+  margin-bottom: 6px;
+}
+
+.spell-description {
+  font-size: 14px;
+  color: var(--paper-muted);
+  line-height: 1.4;
+}
+
+.spell-item .copy-indicator {
+  position: absolute;
+  top: 50%;
+  right: var(--space-md);
+  transform: translateY(-50%);
+  font-size: 12px;
+  color: var(--bronze);
+  opacity: 0;
+  font-weight: 600;
+  transition: opacity 0.3s ease;
+}
+
+.spell-item.copied .copy-indicator {
+  opacity: 1;
+}
+
+/* Popup de prévisualisation des sorts */
+.spell-preview-popup {
+  position: fixed;
+  z-index: 10001;
+  background: var(--card);
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+  max-height: 500px;
+  overflow-y: auto;
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.4;
+}
+
+.spell-preview-content {
+  padding: 0;
+}
+
+.spell-preview-header {
+  padding: 16px;
+  background: var(--paper);
+  border-radius: 8px 8px 0 0;
+  position: relative;
+  border-left: 4px solid var(--accent);
+}
+
+.spell-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 4px;
+  font-family: 'Cinzel', serif;
+}
+
+/* Règle générale pour spell-element dans les cartes */
+.card .spell-element {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  /* Pas de couleur par défaut - utilise les couleurs inline des éléments */
+}
+
+/* Couleur de fallback uniquement si aucune couleur inline n'est définie */
+.card .spell-element:not([style*="color"]) {
+  color: var(--paper-muted);
+}
+
+/* Badge d'élément avec texte noir pour lisibilité */
+.element-badge {
+  color: var(--paper-ink) !important;
+  text-shadow: none !important;
+}
+
+/* S'assurer que la toolbox dev reste cliquable même avec modale ouverte */
+#devToggle,
+#devToolbox,
+.tools,
+.dev-toolbox {
+  position: relative;
+  z-index: 999999 !important;
+}
+
+/* Boutons de la toolbox dev toujours cliquables */
+body.dev-on #devToggle,
+body.dev-on #devToolbox *,
+body.dev-on .tools *,
+body.dev-on .dev-toolbox * {
+  z-index: 999999 !important;
+  pointer-events: auto !important;
+}
+
+/* Z-index maximum pour l'interface dev au-dessus des modales et dialogues */
+.tools button,
+.dev-toolbox button,
+#devToggle,
+#devToolbox button {
+  z-index: 9999999 !important;
+  position: relative;
+}
+
+/* Conteneur principal des outils dev */
+.tools,
+.dev-toolbox {
+  z-index: 9999999 !important;
+  position: relative;
+}
+
+/* Forcer les modales toolbox à apparaître devant les dialogues d'édition HTML */
+.elements-modal,
+.etats-modal, 
+.spell-links-modal {
+  z-index: 2147483647 !important; /* Maximum z-index possible */
+}
+
+.elements-modal-content,
+.etats-modal-content,
+.spell-links-modal-content {
+  z-index: 2147483647 !important;
+  position: relative;
+}
+
+/* Règle spécifique pour spell-element dans les popups de prévisualisation */
+.spell-preview-popup .spell-element {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  /* Pas de couleur définie ici - elle sera définie en inline */
+}
+
+/* Force les couleurs des éléments - spécificité maximale */
+.spell-links-modal .spell-meta[style*="color"],
+.spell-preview-popup .spell-element[style*="color"] {
+  color: var(--accent-ink) !important;
+}
+
+/* Règles pour les nouveaux attributs de données */
+[data-element-display],
+[data-spell-meta] {
+  color: inherit !important;
+  font-weight: 600;
+}
+
+/* Alternative: couleurs directes par élément */
+.spell-preview-popup .spell-element[style*="#e25822"] { color: #e25822 !important; }
+.spell-preview-popup .spell-element[style*="#2563eb"] { color: #2563eb !important; }
+.spell-preview-popup .spell-element[style*="#92400e"] { color: #92400e !important; }
+.spell-preview-popup .spell-element[style*="#059669"] { color: #059669 !important; }
+.spell-preview-popup .spell-element[style*="#d97706"] { color: #d97706 !important; }
+.spell-preview-popup .spell-element[style*="#6b21a8"] { color: #6b21a8 !important; }
+.spell-preview-popup .spell-element[style*="#7c2d12"] { color: #7c2d12 !important; }
+.spell-preview-popup .spell-element[style*="#7c3aed"] { color: #7c3aed !important; }
+
+.spell-links-modal .spell-meta[style*="#e25822"] { color: #e25822 !important; }
+.spell-links-modal .spell-meta[style*="#2563eb"] { color: #2563eb !important; }
+.spell-links-modal .spell-meta[style*="#92400e"] { color: #92400e !important; }
+.spell-links-modal .spell-meta[style*="#059669"] { color: #059669 !important; }
+.spell-links-modal .spell-meta[style*="#d97706"] { color: #d97706 !important; }
+.spell-links-modal .spell-meta[style*="#6b21a8"] { color: #6b21a8 !important; }
+.spell-links-modal .spell-meta[style*="#7c2d12"] { color: #7c2d12 !important; }
+.spell-links-modal .spell-meta[style*="#7c3aed"] { color: #7c3aed !important; }
+
+.spell-preview-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: var(--paper-muted);
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.spell-preview-close:hover {
+  background: var(--rule);
+  color: var(--accent-ink);
+}
+
+.spell-preview-body {
+  padding: 16px;
+}
+
+/* États preview popup */
+.etat-preview-popup {
+  position: fixed;
+  z-index: 10001;
+  background: var(--card);
+  border: 2px solid #7c2d12;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  max-width: 300px;
+  padding: 1rem;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--paper-ink);
+  pointer-events: auto;
+}
+
+.etat-preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.etat-title {
+  font-weight: 600;
+  font-size: 16px;
+  color: #7c2d12;
+}
+
+.etat-preview-close {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: var(--paper-muted);
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.etat-preview-close:hover {
+  background: var(--rule);
+  color: var(--accent-ink);
+}
+
+.etat-preview-body {
+  margin-top: 0.5rem;
+}
+
+.etat-description {
+  white-space: pre-line;
+}
+
+.spell-field {
+  margin-bottom: 12px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.spell-field:last-child {
+  margin-bottom: 0;
+}
+
+.spell-description {
+  margin-bottom: 16px;
+  font-style: italic;
+  color: var(--paper-muted);
+  font-size: 14px;
+}
+
+/* Responsive pour mobile */
+@media (max-width: 768px) {
+  .spell-preview-popup {
+    max-width: calc(100vw - 16px);
+    max-height: calc(100vh - 32px);
+    left: 8px !important;
+    top: 16px !important;
+  }
+  
+  .spell-links-modal-content {
+    max-width: calc(100vw - 16px);
+    padding: 16px;
+  }
 }
 
 span[title]:hover {

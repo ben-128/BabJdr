@@ -233,6 +233,7 @@
           <div style="display: flex; gap: 8px; flex-wrap: wrap;">
             <button class="btn small" id="elementsBtn" title="Choisir un élément pour copier sa balise HTML colorée">🎨 Éléments</button>
             <button class="btn small" id="etatsBtn" title="Choisir un état pour copier sa balise HTML avec tooltip">⚡ États</button>
+            <button class="btn small" id="spellLinksBtn" title="Créer un lien vers un sort avec aperçu">🔮 Liens sorts</button>
           </div>
         </div>
       `;

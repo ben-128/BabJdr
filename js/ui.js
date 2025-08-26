@@ -57,7 +57,7 @@
       });
 
       // Generic content deletion - using multiple specific selectors
-      JdrApp.utils.events.register('click', '.spell-delete, .don-delete, .delete-subclass-btn, .objet-delete', (e) => {
+      JdrApp.utils.events.register('click', '.spell-delete, .don-delete, .delete-subclass-btn, .objet-delete, .monster-delete', (e) => {
         const type = this.extractTypeFromClass(e.target.className);
         const categoryName = e.target.dataset.categoryName;
         
@@ -69,6 +69,8 @@
           itemName = e.target.dataset.donName;
         } else if (type === 'objet') {
           itemName = e.target.dataset.objetName;
+        } else if (type === 'monster') {
+          itemName = e.target.dataset.monsterName;
         } else if (type === 'class') {
           itemName = e.target.dataset.className || e.target.dataset.subclassName;
         } else {
@@ -419,6 +421,7 @@
       if (className.includes('don')) return 'don';
       if (className.includes('class')) return 'class';
       if (className.includes('objet')) return 'objet';
+      if (className.includes('monster')) return 'monster';
       return null;
     },
 
@@ -593,7 +596,7 @@
       // Create new item with default values
       const defaultItem = ContentFactory.createDefaultItem(type);
       
-      // Special handling for objects (add to single array)
+      // Special handling for objects and monsters (add to single array)
       if (type === 'objet') {
         if (!window.OBJETS.objets) {
           window.OBJETS.objets = [];
@@ -606,6 +609,13 @@
         
         window.OBJETS.objets.push(defaultItem);
         this.refreshObjectsPage();
+      } else if (type === 'monster') {
+        if (!window.MONSTRES) {
+          window.MONSTRES = [];
+        }
+        
+        window.MONSTRES.push(defaultItem);
+        this.refreshMonstersPage();
       } else {
         // Standard category-based addition
         const success = ContentFactory.addItem(type, categoryName, defaultItem);
@@ -639,13 +649,21 @@
         return;
       }
 
-      // Special handling for objects
+      // Special handling for objects and monsters
       if (type === 'objet') {
         if (window.OBJETS?.objets) {
           const itemIndex = window.OBJETS.objets.findIndex(obj => obj.nom === itemName);
           if (itemIndex >= 0) {
             window.OBJETS.objets.splice(itemIndex, 1);
             this.refreshObjectsPage();
+          }
+        }
+      } else if (type === 'monster') {
+        if (window.MONSTRES) {
+          const itemIndex = window.MONSTRES.findIndex(monster => monster.nom === itemName);
+          if (itemIndex >= 0) {
+            window.MONSTRES.splice(itemIndex, 1);
+            this.refreshMonstersPage();
           }
         }
       } else {
@@ -1454,6 +1472,48 @@
         this.showEtatsModal();
       });
 
+      JdrApp.utils.events.register('click', '#spellLinksBtn', () => {
+        this.showSpellLinksModal();
+      });
+
+      // Gestionnaire pour les liens de sorts dans le contenu
+      JdrApp.utils.events.register('click', '.spell-link', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const spellName = e.target.dataset.spell;
+        const categoryName = e.target.dataset.category;
+        this.showSpellPreview(spellName, categoryName, e.target);
+      });
+
+      // Gestionnaire pour les liens d'états dans le contenu
+      JdrApp.utils.events.register('click', '.etat-link', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const etatName = e.target.dataset.etat;
+        
+        // Récupérer dynamiquement la description depuis les données statiques
+        let etatDescription = '';
+        if (window.STATIC_PAGES?.etats?.sections) {
+          const etatSection = window.STATIC_PAGES.etats.sections.find(section => 
+            section.type === 'card' && section.title === etatName
+          );
+          if (etatSection) {
+            // Convertir le HTML en texte propre
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = etatSection.content;
+            tempDiv.innerHTML = tempDiv.innerHTML
+              .replace(/<\/p>/gi, '\n')
+              .replace(/<br\s*\/?>/gi, '\n')
+              .replace(/<\/li>/gi, '\n')
+              .replace(/<\/div>/gi, '\n');
+            etatDescription = (tempDiv.textContent || tempDiv.innerText || etatSection.content)
+              .replace(/\n\s*\n/g, '\n')
+              .trim();
+          }
+        }
+        
+        this.showEtatPreview(etatName, etatDescription, e.target);
+      });
 
       EventBus.on(Events.MODAL_OPEN, (payload) => {
         this.openModal(payload.modalId);
@@ -1523,7 +1583,10 @@
 
       const modal = JdrApp.utils.dom.create('div', 'modal elements-modal', `
         <div class="modal-content elements-modal-content">
-          <h3>🎨 Éléments</h3>
+          <div style="position: relative;">
+            <button class="modal-close-x" style="position: absolute; top: 0; right: 0; background: none; border: none; font-size: 20px; cursor: pointer; color: var(--paper-muted); padding: 4px 8px; border-radius: 4px; transition: all 0.2s ease;" onmouseover="this.style.background='var(--rule)'; this.style.color='var(--accent-ink)';" onmouseout="this.style.background='none'; this.style.color='var(--paper-muted)';">×</button>
+            <h3>🎨 Éléments</h3>
+          </div>
           <p>Cliquez sur un élément pour copier sa balise HTML colorée.</p>
           <div class="elements-list">
             ${elementsHTML}
@@ -1555,11 +1618,22 @@
           }
           
           elementItem.classList.add('copied');
+          
+          // Fermer la modale après un court délai pour voir l'effet "Copié!"
           setTimeout(() => {
-            elementItem.classList.remove('copied');
-          }, 1000);
+            this.closeModal(modal);
+          }, 500);
         }
       });
+
+      // Gestionnaire pour le bouton X de fermeture
+      const closeBtn = modal.querySelector('.modal-close-x');
+      if (closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          this.closeModal(modal);
+        });
+      }
 
       return modal;
     },
@@ -1634,8 +1708,11 @@
 
       const modal = JdrApp.utils.dom.create('div', 'modal etats-modal', `
         <div class="modal-content etats-modal-content">
-          <h3>⚡ États</h3>
-          <p>Cliquez sur un état pour copier sa balise HTML avec tooltip.</p>
+          <div style="position: relative;">
+            <button class="modal-close-x" style="position: absolute; top: 0; right: 0; background: none; border: none; font-size: 20px; cursor: pointer; color: var(--paper-muted); padding: 4px 8px; border-radius: 4px; transition: all 0.2s ease;" onmouseover="this.style.background='var(--rule)'; this.style.color='var(--accent-ink)';" onmouseout="this.style.background='none'; this.style.color='var(--paper-muted)';">×</button>
+            <h3>⚡ États</h3>
+          </div>
+          <p>Cliquez sur un état pour copier un lien avec prévisualisation dans le presse-papiers.</p>
           <div class="etats-list">
             ${etatsHTML || '<div style="text-align: center; color: #666; padding: 2rem;">Aucun état trouvé</div>'}
           </div>
@@ -1649,17 +1726,375 @@
           const etatName = etatItem.dataset.etatName;
           const etatDescription = etatItem.dataset.etatDescription;
           
-          const html = `<span title="${etatDescription}">${etatName}</span>`;
-          this.copyToClipboard(html);
+          // Créer un lien cliquable simple avec prévisualisation (description récupérée dynamiquement)
+          const etatLink = `<span class="etat-link" data-etat="${etatName}" style="color: #ea7332; cursor: pointer; text-decoration: underline;">${etatName}</span>`;
+          
+          // Toujours copier dans le presse-papiers
+          this.copyToClipboard(etatLink);
           
           etatItem.classList.add('copied');
+          
+          // Fermer la modale après un court délai pour voir l'effet "Copié!"
           setTimeout(() => {
-            etatItem.classList.remove('copied');
-          }, 1000);
+            this.closeModal(modal);
+          }, 500);
         }
       });
 
+      // Gestionnaire pour le bouton X de fermeture
+      const closeBtn = modal.querySelector('.modal-close-x');
+      if (closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          this.closeModal(modal);
+        });
+      }
+
       return modal;
+    },
+
+    showSpellLinksModal() {
+      let modal = JdrApp.utils.dom.$('#spellLinksModal');
+      if (modal) {
+        document.body.removeChild(modal);
+      }
+      
+      modal = this.createSpellLinksModal();
+      document.body.appendChild(modal);
+
+      
+      this.openModal('spellLinksModal');
+    },
+
+    createSpellLinksModal() {
+      // Récupérer tous les sorts depuis window.SORTS
+      const spells = [];
+      
+      if (window.SORTS && Array.isArray(window.SORTS)) {
+        window.SORTS.forEach(category => {
+          if (category.sorts && Array.isArray(category.sorts)) {
+            category.sorts.forEach(spell => {
+              spells.push({
+                name: spell.nom,
+                category: category.nom,
+                element: spell.element,
+                description: spell.description || ''
+              });
+            });
+          }
+        });
+      }
+
+      const spellsHTML = spells.map(spell => `
+        <div class="spell-item" data-spell-name="${spell.name}" data-spell-category="${spell.category}">
+          <div class="spell-info">
+            <div class="spell-name" style="color: ${this.getElementColor(spell.element)}; text-shadow: 0 1px 2px rgba(0,0,0,0.3);">${spell.name}</div>
+            <span data-spell-meta style="color: ${this.getElementColor(spell.element)} !important; font-size: 12px; margin-bottom: 6px; display: block;">${this.getElementIcon(spell.element)} ${spell.element} • ${spell.category}</span>
+            <div class="spell-description">${spell.description.length > 80 ? spell.description.substring(0, 80) + '...' : spell.description}</div>
+          </div>
+          <div class="copy-indicator">Copié!</div>
+        </div>
+      `).join('');
+
+      const modal = JdrApp.utils.dom.create('div', 'modal spell-links-modal', `
+        <div class="modal-content spell-links-modal-content">
+          <div style="position: relative;">
+            <button class="modal-close-x" style="position: absolute; top: 0; right: 0; background: none; border: none; font-size: 20px; cursor: pointer; color: var(--paper-muted); padding: 4px 8px; border-radius: 4px; transition: all 0.2s ease;" onmouseover="this.style.background='var(--rule)'; this.style.color='var(--accent-ink)';" onmouseout="this.style.background='none'; this.style.color='var(--paper-muted)';">×</button>
+            <h3>🔮 Liens vers les sorts</h3>
+          </div>
+          <p>Cliquez sur un sort pour copier un lien avec aperçu interactif.</p>
+          <div class="spells-search">
+            <input type="text" id="spellSearchInput" placeholder="Rechercher un sort..." style="width: 100%; padding: 8px; margin-bottom: 12px; border: 1px solid var(--rule); border-radius: 4px;">
+          </div>
+          <div class="spells-list" style="max-height: 400px; overflow-y: auto;">
+            ${spellsHTML || '<div style="text-align: center; color: #666; padding: 2rem;">Aucun sort trouvé</div>'}
+          </div>
+          <button class="modal-close btn">Fermer</button>
+        </div>
+      `, { id: 'spellLinksModal' });
+
+      // Recherche dans la modal
+      const searchInput = modal.querySelector('#spellSearchInput');
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          const searchTerm = e.target.value.toLowerCase();
+          const spellItems = modal.querySelectorAll('.spell-item');
+          
+          spellItems.forEach(item => {
+            const spellName = item.querySelector('.spell-name').textContent.toLowerCase();
+            const spellCategory = item.querySelector('.spell-meta').textContent.toLowerCase();
+            
+            if (spellName.includes(searchTerm) || spellCategory.includes(searchTerm)) {
+              item.style.display = '';
+            } else {
+              item.style.display = 'none';
+            }
+          });
+        });
+      }
+
+      // Clic sur un sort
+      modal.addEventListener('click', (e) => {
+        const spellItem = e.target.closest('.spell-item');
+        if (spellItem) {
+          const spellName = spellItem.dataset.spellName;
+          const spellCategory = spellItem.dataset.spellCategory;
+          
+          // Créer le lien HTML avec les attributs nécessaires
+          const spellLink = `<span class="spell-link" data-spell="${spellName}" data-category="${spellCategory}" style="color: var(--accent); cursor: pointer; text-decoration: underline;">${spellName}</span>`;
+          
+          this.copyToClipboard(spellLink);
+          
+          spellItem.classList.add('copied');
+          
+          // Fermer la modale après un court délai pour voir l'effet "Copié!"
+          setTimeout(() => {
+            this.closeModal(modal);
+          }, 500);
+        }
+      });
+
+      // Gestionnaire pour le bouton X de fermeture
+      const closeBtn = modal.querySelector('.modal-close-x');
+      if (closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          this.closeModal(modal);
+        });
+      }
+
+      return modal;
+    },
+
+    getElementColor(element) {
+      // Couleurs optimisées pour la lisibilité sur fond clair et foncé
+      const colorMap = {
+        'Feu': '#e25822',        // Rouge-orange vif
+        'Eau': '#2563eb',        // Bleu vif
+        'Terre': '#92400e',      // Marron foncé
+        'Air': '#059669',        // Vert émeraude
+        'Lumière': '#d97706',    // Orange doré (au lieu du jaune pâle)
+        'Nuit': '#6b21a8',       // Violet foncé (au lieu du noir)
+        'Divin': '#7c2d12',      // Marron doré (au lieu du blanc)
+        'Maléfique': '#7c3aed'   // Violet intense
+      };
+      
+      return colorMap[element] || '#666666';
+    },
+
+    getElementIcon(element) {
+      const icons = window.ElementIcons || {};
+      return icons[element] || '⚡';
+    },
+
+    showSpellPreview(spellName, categoryName, triggerElement) {
+      // Trouver le sort dans les données
+      let spellData = null;
+      
+      if (window.SORTS && Array.isArray(window.SORTS)) {
+        for (const category of window.SORTS) {
+          if (category.nom === categoryName && category.sorts) {
+            spellData = category.sorts.find(spell => spell.nom === spellName);
+            if (spellData) break;
+          }
+        }
+      }
+
+      if (!spellData) {
+        this.showNotification(`❌ Sort "${spellName}" non trouvé`, 'error');
+        return;
+      }
+
+      // Fermer toute preview existante
+      const existingPreview = document.querySelector('.spell-preview-popup');
+      if (existingPreview) {
+        existingPreview.remove();
+      }
+
+      // Calculer la position de la popup
+      const rect = triggerElement.getBoundingClientRect();
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+      
+      // Créer la popup de preview
+      const popup = document.createElement('div');
+      popup.className = 'spell-preview-popup';
+      
+      const elementColor = this.getElementColor(spellData.element);
+      
+      popup.innerHTML = `
+        <div class="spell-preview-content">
+          <div class="spell-preview-header" style="border-left: 4px solid ${elementColor};">
+            <div class="spell-title" style="color: ${elementColor}; text-shadow: 0 1px 2px rgba(0,0,0,0.3);">${spellData.nom}</div>
+            <span data-element-display style="color: ${elementColor} !important; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;">${this.getElementIcon(spellData.element)} ${spellData.element} • ${categoryName}</span>
+            <button class="spell-preview-close">✕</button>
+          </div>
+          <div class="spell-preview-body">
+            ${spellData.description ? `<div class="spell-description">${spellData.description}</div>` : ''}
+            ${spellData.prerequis ? `<div class="spell-field">${spellData.prerequis}</div>` : ''}
+            ${spellData.portee ? `<div class="spell-field">${spellData.portee}</div>` : ''}
+            ${spellData.tempsIncantation ? `<div class="spell-field">${spellData.tempsIncantation}</div>` : ''}
+            ${spellData.coutMana ? `<div class="spell-field">${spellData.coutMana}</div>` : ''}
+            ${spellData.resistance ? `<div class="spell-field">${spellData.resistance}</div>` : ''}
+            ${spellData.effetNormal ? `<div class="spell-field">${spellData.effetNormal}</div>` : ''}
+            ${spellData.effetCritique ? `<div class="spell-field">${spellData.effetCritique}</div>` : ''}
+          </div>
+        </div>
+      `;
+
+      // Styles de la popup
+      popup.style.cssText = `
+        position: fixed;
+        z-index: 10000;
+        background: var(--card);
+        border: 2px solid ${elementColor};
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        max-width: 400px;
+        max-height: 500px;
+        overflow-y: auto;
+        font-family: 'Roboto', sans-serif;
+        line-height: 1.4;
+      `;
+
+      document.body.appendChild(popup);
+
+      // FORCE les couleurs avec JavaScript après ajout au DOM
+      setTimeout(() => {
+        const elementDisplay = popup.querySelector('[data-element-display]');
+        if (elementDisplay) {
+          elementDisplay.style.setProperty('color', elementColor, 'important');
+        }
+      }, 10);
+
+      // Positionner la popup
+      const popupRect = popup.getBoundingClientRect();
+      let left = rect.left + rect.width / 2 - popupRect.width / 2;
+      let top = rect.bottom + 8;
+
+      // Ajustements si la popup sort de l'écran
+      if (left < 8) left = 8;
+      if (left + popupRect.width > viewportWidth - 8) left = viewportWidth - popupRect.width - 8;
+      if (top + popupRect.height > viewportHeight - 8) top = rect.top - popupRect.height - 8;
+      if (top < 8) top = 8;
+
+      popup.style.left = `${left}px`;
+      popup.style.top = `${top}px`;
+
+      // Gestionnaires d'événements
+      popup.querySelector('.spell-preview-close').addEventListener('click', () => {
+        popup.remove();
+      });
+
+      // Fermer en cliquant à l'extérieur
+      const handleOutsideClick = (e) => {
+        if (!popup.contains(e.target) && e.target !== triggerElement) {
+          popup.remove();
+          document.removeEventListener('click', handleOutsideClick);
+        }
+      };
+      
+      setTimeout(() => {
+        document.addEventListener('click', handleOutsideClick);
+      }, 100);
+
+      // Fermer avec Escape
+      const handleEscape = (e) => {
+        if (e.key === 'Escape') {
+          popup.remove();
+          document.removeEventListener('keydown', handleEscape);
+        }
+      };
+      document.addEventListener('keydown', handleEscape);
+    },
+
+    showEtatPreview(etatName, etatDescription, triggerElement) {
+      // Fermer toute preview existante
+      const existingPreview = document.querySelector('.etat-preview-popup');
+      if (existingPreview) {
+        existingPreview.remove();
+      }
+
+      // Calculer la position de la popup
+      const rect = triggerElement.getBoundingClientRect();
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+      
+      // Créer la popup de preview
+      const popup = document.createElement('div');
+      popup.className = 'etat-preview-popup';
+      
+      popup.innerHTML = `
+        <div class="etat-preview-content">
+          <div class="etat-preview-header">
+            <div class="etat-title">⚡ ${etatName}</div>
+            <button class="etat-preview-close">✕</button>
+          </div>
+          <div class="etat-preview-body">
+            <div class="etat-description">${etatDescription}</div>
+          </div>
+        </div>
+      `;
+
+      // Styles de la popup
+      popup.style.cssText = `
+        position: fixed;
+        z-index: 10000;
+        background: var(--card);
+        border: 2px solid #7c2d12;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        max-width: 300px;
+        padding: 1rem;
+        font-size: 14px;
+        line-height: 1.4;
+        color: var(--paper-ink);
+        pointer-events: auto;
+      `;
+
+      document.body.appendChild(popup);
+
+      // Positionner la popup
+      setTimeout(() => {
+        const popupRect = popup.getBoundingClientRect();
+        let left = rect.left + rect.width / 2 - popupRect.width / 2;
+        let top = rect.bottom + 8;
+
+        // Ajustements si la popup sort de l'écran
+        if (left < 8) left = 8;
+        if (left + popupRect.width > viewportWidth - 8) left = viewportWidth - popupRect.width - 8;
+        if (top + popupRect.height > viewportHeight - 8) top = rect.top - popupRect.height - 8;
+        if (top < 8) top = 8;
+
+        popup.style.left = `${left}px`;
+        popup.style.top = `${top}px`;
+      }, 10);
+
+      // Gestionnaires d'événements
+      popup.querySelector('.etat-preview-close').addEventListener('click', () => {
+        popup.remove();
+      });
+
+      // Fermer en cliquant à l'extérieur
+      const handleOutsideClick = (e) => {
+        if (!popup.contains(e.target) && e.target !== triggerElement) {
+          popup.remove();
+          document.removeEventListener('click', handleOutsideClick);
+        }
+      };
+      
+      setTimeout(() => {
+        document.addEventListener('click', handleOutsideClick);
+      }, 100);
+
+      // Fermer avec Escape
+      const handleEscape = (e) => {
+        if (e.key === 'Escape') {
+          popup.remove();
+          document.removeEventListener('keydown', handleEscape);
+        }
+      };
+      document.addEventListener('keydown', handleEscape);
     },
 
     copyToClipboard(text) {

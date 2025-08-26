@@ -310,7 +310,7 @@
 
     // Force synchronization of all monster data
     forceSyncMonsterImages() {
-      console.log('🔄 Force syncing monster images...');
+      // console.log('🔄 Force syncing monster images...');
       
       let syncCount = 0;
       
@@ -325,7 +325,7 @@
       
       this.ensureMonsterImageMappings();
       
-      console.log(`✅ Force sync completed. ${syncCount} paths corrected.`);
+      // console.log(`✅ Force sync completed. ${syncCount} paths corrected.`);
       
       // Save changes
       if (JdrApp.modules.storage && JdrApp.modules.storage.saveChanges) {

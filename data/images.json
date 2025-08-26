@@ -62,15 +62,20 @@
     "objet:Nocteline": "https://i.ibb.co/7JpQ7Kr7/Herb2.png",
     "objet:Nouvel Objet": "https://i.ibb.co/bMXNS4gy/Baguette-Nuit.png",
     "objet:Baguette de sommeil": "https://i.ibb.co/bMXNS4gy/Baguette-Nuit.png",
-    "monster:Araignée Géante": "data/images/Monstres/foret/Monstre_Forêt_Araignée.png",
-    "monster:Crabe des Bois": "data/images/Monstres/foret/Monstre_Forêt_Crab.png",
-    "monster:Groink": "data/images/Monstres/foret/Monstre_Forêt_Groink.png",
-    "monster:Groinka": "data/images/Monstres/foret/Monstre_Forêt_Groink_Chaman.png",
-    "monster:Guêpe Géante": "data/images/Monstres/foret/Monstre_Forêt_GuepeGeante.png",
-    "monster:Ours des Bois": "data/images/Monstres/foret/Monstre_Forêt_Ours.png"
+    "monster:Araignée Géante": "https://i.ibb.co/b0XHjQJ/Monstre-For-t-Araign-e.png",
+    "monster:Crabe des Bois": "https://i.ibb.co/7dY3GgJS/Monstre-For-t-Crab.png",
+    "monster:Groink": "https://i.ibb.co/MDngQGcS/Monstre-For-t-Groink.png",
+    "monster:Groinka": "https://i.ibb.co/YThB7Q29/Monstre-For-t-Groink-Chaman.png",
+    "monster:Guêpe Géante": "https://i.ibb.co/bjSq3pPj/Monstre-For-t-Guepe-Geante.png",
+    "monster:Ours des Bois": "https://i.ibb.co/N2NcD6n2/Monstre-For-t-Ours.png",
+    "monster:Pouple de la forêt": "https://i.ibb.co/0jG2WLsv/Monstre-For-t-Poulpe.png",
+    "monster:Serpent de la forêt": "https://i.ibb.co/svhHLvKZ/Monstre-For-t-Serpent.png",
+    "monster:Scarabée géant": "https://i.ibb.co/wF5bRvts/Monstre-For-t-Scarabe-Geant.png",
+    "monster:Boss Forêt": "https://i.ibb.co/1JR11CC7/Monstre-For-t-Boss.png",
+    "sort:Sorts de Mage:Volée de pierres": "https://i.ibb.co/GfPFdZPG/Volee-Pierre.png"
   },
   "meta": {
-    "total_images": 68,
+    "total_images": 73,
     "exported_date": "2025-08-26",
     "note": "Ces images incluent les nouvelles images uploadées"
   }

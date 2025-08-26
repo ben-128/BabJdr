@@ -136,7 +136,7 @@
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> <br>- Résistance altérations &gt; Intelligence du lanceur<br>- Lévitation ou Volant.",
-        "effetNormal": "<strong>Effet:</strong>&nbsp;La cible contracte l'état <span title=\"Vitesse de déplacement réduite de moitié.\n Impossible de sauter ou d'esquiver.\">Ralenti</span> pendant 5 tours.",
+        "effetNormal": "<strong>Effet:</strong>&nbsp;La cible contracte l'état <span class=\"etat-link\" data-etat=\"Ralenti\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Ralenti</span> pendant 5 tours.",
         "effetCritique": "<strong>Coup Critique:&nbsp;</strong>La cible ne peut plus effectuer de déplacement pendant la durée du sort."
       },
       {
@@ -164,7 +164,7 @@
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> <br>- Résistance altérations &gt; Intelligence du lanceur<br>- Element <span style=\"color: #0f172a; font-weight: bold;\">Nuit</span>",
-        "effetNormal": "<strong>Effet:</strong> La cible passe dans l'état <span title=\"Ne peut plus faire d'actions.\n Ne peut plus esquiver.\n Des dégats infligés à la créature la sort de son état.\">endormi</span> pendant ses 2 prochains tours.",
+        "effetNormal": "<strong>Effet:</strong> La cible passe dans l'état <span class=\"etat-link\" data-etat=\"Endormi/assomé/Effrayé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Endormi</span> pendant ses 2 prochains tours.",
         "effetCritique": "<strong>Coup Critique:&nbsp;</strong> L'effet dure 4 tours."
       }
     ]

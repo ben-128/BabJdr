@@ -1504,12 +1504,30 @@
       
       const modal = document.createElement('dialog');
       modal.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         padding: 0;
         border: none;
         border-radius: 12px;
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         max-width: 80vw;
         max-height: 80vh;
+        z-index: 1000000 !important;
+        background: transparent;
+      `;
+
+      // Créer un backdrop manuel
+      const backdrop = document.createElement('div');
+      backdrop.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999999 !important;
         backdrop-filter: blur(4px);
       `;
 
@@ -1533,6 +1551,17 @@
             >${htmlContent}</textarea>
           </div>
           
+          <div style="margin-bottom: 1rem;">
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.5rem;">
+              <button id="elementsBtn" class="btn" style="background: #059669; color: white; font-size: 12px;">🔥 Éléments</button>
+              <button id="etatsBtn" class="btn" style="background: #7c2d12; color: white; font-size: 12px;">⚡ États</button>
+              <button id="spellLinksBtn" class="btn" style="background: #6b21a8; color: white; font-size: 12px;">🔗 Liens Sorts</button>
+            </div>
+            <div style="font-size: 12px; color: var(--paper-muted); line-height: 1.4;">
+              💡 <strong>Astuce:</strong> Utilisez ces boutons pour insérer rapidement des éléments, états et liens vers les sorts dans votre contenu HTML.
+            </div>
+          </div>
+          
           <div style="display: flex; gap: 1rem; justify-content: flex-end;">
             <button id="cancelEdit" class="btn" style="background: #6b7280; color: white;">Annuler</button>
             <button id="saveEdit" class="btn" style="background: var(--accent); color: white;">💾 Sauvegarder</button>
@@ -1540,13 +1569,63 @@
         </div>
       `;
 
+      document.body.appendChild(backdrop);
       document.body.appendChild(modal);
-      modal.showModal();
+      modal.show();
 
       const textarea = modal.querySelector('#htmlEditor');
       const preview = modal.querySelector('#preview');
       const saveBtn = modal.querySelector('#saveEdit');
       const cancelBtn = modal.querySelector('#cancelEdit');
+      const elementsBtn = modal.querySelector('#elementsBtn');
+      const etatsBtn = modal.querySelector('#etatsBtn');
+      const spellLinksBtn = modal.querySelector('#spellLinksBtn');
+
+      // Helper function to insert text at cursor position in textarea
+      const insertTextAtCursor = (text) => {
+        const start = textarea.selectionStart;
+        const end = textarea.selectionEnd;
+        const currentValue = textarea.value;
+        
+        textarea.value = currentValue.substring(0, start) + text + currentValue.substring(end);
+        textarea.selectionStart = textarea.selectionEnd = start + text.length;
+        textarea.focus();
+        
+        // Update preview
+        try {
+          preview.innerHTML = textarea.value;
+        } catch (e) {
+          preview.textContent = 'Aperçu invalide: ' + e.message;
+        }
+      };
+
+      // Store the insertTextAtCursor function globally so modals can access it
+      window.editorInsertTextAtCursor = insertTextAtCursor;
+
+      // Toolbox buttons handlers
+      if (elementsBtn) {
+        elementsBtn.addEventListener('click', () => {
+          if (JdrApp.modules.ui?.showElementsModal) {
+            JdrApp.modules.ui.showElementsModal();
+          }
+        });
+      }
+
+      if (etatsBtn) {
+        etatsBtn.addEventListener('click', () => {
+          if (JdrApp.modules.ui?.showEtatsModal) {
+            JdrApp.modules.ui.showEtatsModal();
+          }
+        });
+      }
+
+      if (spellLinksBtn) {
+        spellLinksBtn.addEventListener('click', () => {
+          if (JdrApp.modules.ui?.showSpellLinksModal) {
+            JdrApp.modules.ui.showSpellLinksModal();
+          }
+        });
+      }
 
       // Live preview update
       textarea.addEventListener('input', () => {
@@ -1578,16 +1657,30 @@
         // Clean up
         this.resetEditingState(editSession.container);
         this.currentEditSession = null;
+        window.editorInsertTextAtCursor = null;
         modal.close();
         modal.remove();
+        backdrop.remove();
       });
 
       // Cancel handler
       cancelBtn.addEventListener('click', () => {
         this.resetEditingState(editSession.container);
         this.currentEditSession = null;
+        window.editorInsertTextAtCursor = null;
         modal.close();
         modal.remove();
+        backdrop.remove();
+      });
+
+      // Close on backdrop click
+      backdrop.addEventListener('click', () => {
+        this.resetEditingState(editSession.container);
+        this.currentEditSession = null;
+        window.editorInsertTextAtCursor = null;
+        modal.close();
+        modal.remove();
+        backdrop.remove();
       });
 
       // Focus textarea

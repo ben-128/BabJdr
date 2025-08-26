@@ -194,7 +194,7 @@
         "Consommable",
         "Catalyseur"
       ],
-      "effet": "<strong>Effet:</strong> Remplace votre prochaine action principale par le sort de mage \"Boule de feu\". <br><i>Les prérequis pour le sort ne sont pas requis mais le mana et l'intelligence du héros sont utilisés.</i>\n    <br><br><strong>Charges :</strong> 3",
+      "effet": "<strong>Effet:</strong> Remplace votre prochaine action principale par le sort de mage <span class=\"spell-link\" data-spell=\"Boule de Feu\" data-category=\"Sorts de Mage\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Boule de Feu</span>. <br><i>Les prérequis pour le sort ne sont pas requis mais le mana et l'intelligence du héros sont utilisés.</i>\n    <br><br><strong>Charges :</strong> 3",
       "prix": "🔷 <strong>Prix:</strong> 25",
       "poids": ""
     },
@@ -248,14 +248,14 @@
         "Consommable",
         "Catalyseur"
       ],
-      "effet": "<strong>Effet:</strong> Remplace votre prochaine action principale par le sort d'enchanteur \"Sommeil\". <br><i>Les prérequis pour le sort ne sont pas requis mais le mana et l'intelligence du héros sont utilisés.</i>\n    <br><br><strong>Charges :</strong> 3",
+      "effet": "<strong>Effet:</strong> Remplace votre prochaine action principale par le sort d'enchanteur <span class=\"spell-link\" data-spell=\"Sommeil\" data-category=\"Sorts d'Enchanteur\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Sommeil</span>. <br><i>Les prérequis pour le sort ne sont pas requis mais le mana et l'intelligence du héros sont utilisés.</i>\n    <br><br><strong>Charges :</strong> 3",
       "prix": "🔷 <strong>Prix:</strong> 30",
       "poids": ""
     }
   ],
   "filterSettings": {
     "visibleTags": [
-      "Consommable"
+      "Arme"
     ],
     "displayedFilterButtons": [
       "Arme",

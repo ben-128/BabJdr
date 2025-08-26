@@ -83,7 +83,7 @@
     "dons": [
       {
         "nom": "Croche-patte",
-        "description": "Peut utiliser une action secondaire pour mettre un adversaire au corp à corp, de moins de 2m, dans l'état <span title=\"Ne peut plus faire d'actions.\n Ne peut plus esquiver.\n Doit dépenser une action secondaire pour se relever.\">à terre</span>.",
+        "description": "Peut utiliser une action secondaire pour mettre un adversaire au corp à corp, de moins de 2m, dans l'état <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">A terre</span>.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },

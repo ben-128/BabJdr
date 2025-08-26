@@ -287,7 +287,7 @@
 
     // Validate data integrity on application startup
     validateDataIntegrity() {
-      console.log('🔍 Validating data integrity on startup...');
+      // console.log('🔍 Validating data integrity on startup...');
       
       try {
         // Validate monster data if available
@@ -296,7 +296,7 @@
           const correctedCount = JdrApp.modules.images.forceSyncMonsterImages();
           
           if (correctedCount > 0) {
-            console.log(`✅ Startup validation: ${correctedCount} monster image paths corrected`);
+            // console.log(`✅ Startup validation: ${correctedCount} monster image paths corrected`);
           }
         }
         
@@ -305,7 +305,7 @@
           JdrApp.modules.editor.validateAndRepairMonsterData();
         }
         
-        console.log('✅ Data integrity validation completed');
+        // console.log('✅ Data integrity validation completed');
         
       } catch (error) {
         console.error('❌ Error during data integrity validation:', error);

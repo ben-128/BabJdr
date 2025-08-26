@@ -567,7 +567,7 @@
       const icon = config?.icons?.add || '➕';
       
       // ALWAYS generate the button - CSS will control visibility based on body.dev-on/dev-off
-      return `<button class="${type}-add btn" data-category-name="${categoryName}" type="button" style="background: var(--accent); color: white;">${icon} Ajouter un ${type === 'spell' ? 'sort' : type === 'don' ? 'don' : 'élément'}</button>`;
+      return `<button class="${type}-add btn" data-category-name="${categoryName}" type="button" style="background: var(--accent); color: white;">${icon} Ajouter un ${type === 'spell' ? 'sort' : type === 'don' ? 'don' : type === 'monster' ? 'monstre' : 'élément'}</button>`;
     }
 
     buildDeleteCategoryButton(type, categoryName) {
