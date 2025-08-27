@@ -29,7 +29,8 @@
       "Bash(ls:*)",
       "Bash(del:*)",
       "Bash(rg:*)",
-      "Bash(git reset:*)"
+      "Bash(git reset:*)",
+      "Bash(timeout:*)"
     ],
     "deny": []
   }

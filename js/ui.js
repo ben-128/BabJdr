@@ -1751,6 +1751,10 @@
         this.showSpellLinksModal();
       });
 
+      JdrApp.utils.events.register('click', '#pageLinksBtn', () => {
+        this.showPageLinksModal();
+      });
+
       // Gestionnaire pour les liens de sorts dans le contenu
       JdrApp.utils.events.register('click', '.spell-link', (e) => {
         e.preventDefault();
@@ -2600,14 +2604,14 @@
       }
       
       const pageId = visibleArticle ? visibleArticle.dataset.page : null;
-      console.log('🔍 DEBUG getCurrentPageId: Found visible article:', !!visibleArticle);
-      console.log('🔍 DEBUG getCurrentPageId: Page ID:', pageId);
+      // console.log('🔍 DEBUG getCurrentPageId: Found visible article:', !!visibleArticle);
+      // console.log('🔍 DEBUG getCurrentPageId: Page ID:', pageId);
       if (visibleArticle) {
-        console.log('🔍 DEBUG getCurrentPageId: Article attributes:', {
-          'data-static-page': visibleArticle.dataset.staticPage,
-          'data-page': visibleArticle.dataset.page,
-          'data-page-title': visibleArticle.dataset.pageTitle
-        });
+        // console.log('🔍 DEBUG getCurrentPageId: Article attributes:', {
+        //   'data-static-page': visibleArticle.dataset.staticPage,
+        //   'data-page': visibleArticle.dataset.page,
+        //   'data-page-title': visibleArticle.dataset.pageTitle
+        // });
       }
       return pageId;
     },
@@ -2625,8 +2629,8 @@
     // Save new section to JSON data
     saveNewSectionToJSON(sectionId, title, content) {
       const pageId = this.getCurrentPageId();
-      console.log('🔍 DEBUG SAVE: getCurrentPageId() returned:', pageId);
-      console.log('🔍 DEBUG SAVE: Available pages in STATIC_PAGES:', Object.keys(window.STATIC_PAGES || {}));
+      // console.log('🔍 DEBUG SAVE: getCurrentPageId() returned:', pageId);
+      // console.log('🔍 DEBUG SAVE: Available pages in STATIC_PAGES:', Object.keys(window.STATIC_PAGES || {}));
       
       if (!pageId || !window.STATIC_PAGES || !window.STATIC_PAGES[pageId]) {
         console.warn('Cannot save new section - page not found:', pageId);
@@ -2706,7 +2710,7 @@
         }
         
         console.error(`❌ ERREUR: Section "${sectionId}" introuvable pour suppression`);
-        console.log('🔍 Sections disponibles:', pageData.sections.map(s => ({id: s.id, title: s.title})));
+        // console.log('🔍 Sections disponibles:', pageData.sections.map(s => ({id: s.id, title: s.title})));
         return false;
       }
     },
@@ -2950,225 +2954,7 @@
       }
     },
 
-    // ==== FILTER MANAGEMENT METHODS ====
-
-    showFilterManagementModal() {
-      if (!window.OBJETS || !window.ContentTypes.objet) return;
-      
-      const config = window.ContentTypes.objet.filterConfig;
-      const currentSettings = window.OBJETS.filterSettings || { visibleTags: config.defaultVisibleTags };
-      
-      // Remove existing modal if any
-      const existingModal = document.querySelector('#filterModal');
-      if (existingModal) {
-        existingModal.remove();
-      }
-      
-      const modal = this.createFilterModal();
-      document.body.appendChild(modal);
-      
-      // Update modal content with current settings
-      this.updateFilterModalContent(modal, config, currentSettings);
-      
-      // Use native dialog showModal for proper z-index
-      modal.showModal();
-    },
-
-    createFilterModal() {
-      const modal = document.createElement('dialog');
-      modal.id = 'filterModal';
-      modal.style.cssText = `
-        max-width: 500px;
-        width: 90%;
-        padding: 0;
-        border: none;
-        border-radius: 12px;
-        background: transparent;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-      `;
-      modal.innerHTML = `
-        <div style="background: var(--paper); border-radius: 12px; padding: 1.5rem; border: 2px solid var(--rule);">
-          <h3 style="margin: 0 0 1rem 0; color: var(--accent-ink);">Gestion des filtres d'objets</h3>
-          <p style="margin: 0 0 1rem 0; color: var(--paper-muted);">Choisissez quels tags d'objets afficher sur la page :</p>
-          <div id="filterCheckboxes" style="margin: 1rem 0;">
-            <!-- Content will be populated by updateFilterModalContent -->
-          </div>
-          <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 1.5rem;">
-            <button class="btn" id="resetFiltersBtn" style="background: var(--bronze); color: white;">
-              🔄 Réinitialiser
-            </button>
-            <button class="btn" id="saveFiltersBtn" style="background: var(--accent); color: white;">
-              💾 Sauvegarder
-            </button>
-            <button class="btn modal-close" style="background: #666; color: white;">
-              ❌ Annuler
-            </button>
-          </div>
-        </div>
-      `;
-
-      // Add event listeners
-      modal.addEventListener('click', (e) => {
-        if (e.target.id === 'saveFiltersBtn') {
-          this.saveFilterSettings(modal);
-        } else if (e.target.id === 'resetFiltersBtn') {
-          this.resetFilterSettings(modal);
-        } else if (e.target.classList.contains('modal-close')) {
-          modal.close();
-          modal.remove();
-        } else if (e.target.classList.contains('move-tag-up')) {
-          this.moveTagInModal(modal, e.target.dataset.tag, -1);
-        } else if (e.target.classList.contains('move-tag-down')) {
-          this.moveTagInModal(modal, e.target.dataset.tag, 1);
-        }
-      });
-
-      // Handle dialog close events
-      modal.addEventListener('cancel', () => {
-        modal.close();
-        modal.remove();
-      });
-
-      modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-          modal.close();
-          modal.remove();
-        }
-      });
-
-      return modal;
-    },
-
-    updateFilterModalContent(modal, config, currentSettings) {
-      const checkboxContainer = modal.querySelector('#filterCheckboxes');
-      if (!checkboxContainer) return;
-
-      const checkboxHTML = config.availableTags.map(tag => {
-        const isVisible = currentSettings.displayedFilterButtons ? currentSettings.displayedFilterButtons.includes(tag) : currentSettings.visibleTags.includes(tag);
-        const isDefault = config.defaultVisibleTags.includes(tag);
-        
-        return `
-          <div class="tag-row" data-tag="${tag}" style="display: flex; align-items: center; gap: 0.5rem; margin: 0.5rem 0; padding: 0.5rem; background: var(--card); border-radius: 8px;">
-            <input 
-              type="checkbox" 
-              id="filter-${tag}" 
-              value="${tag}" 
-              ${isVisible ? 'checked' : ''}
-              style="margin: 0;"
-            >
-            <label for="filter-${tag}" style="flex: 1; cursor: pointer; font-weight: 500;">
-              <span class="tag-chip" style="margin-right: 0.5rem;">${tag}</span>
-              ${tag}
-            </label>
-            <input 
-              type="checkbox" 
-              id="default-${tag}" 
-              value="${tag}" 
-              ${isDefault ? 'checked' : ''}
-              style="margin: 0;"
-              title="Filtre par défaut au chargement du site"
-            >
-            <div style="display: flex; flex-direction: column; gap: 2px;">
-              <button type="button" class="move-tag-up" data-tag="${tag}" style="background: #ff8c00; color: white; border: none; border-radius: 3px; padding: 2px 6px; font-size: 12px; cursor: pointer;" title="Monter dans l'ordre">↑</button>
-              <button type="button" class="move-tag-down" data-tag="${tag}" style="background: #ff8c00; color: white; border: none; border-radius: 3px; padding: 2px 6px; font-size: 12px; cursor: pointer;" title="Descendre dans l'ordre">↓</button>
-            </div>
-          </div>
-        `;
-      }).join('');
-
-      checkboxContainer.innerHTML = `
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--rule);">
-          <span style="font-weight: 600; color: var(--accent-ink);">Tag visible</span>
-          <span style="font-weight: 600; color: var(--accent-ink);">Défaut</span>
-        </div>
-        <div id="sortable-tags-list">
-          ${checkboxHTML}
-        </div>
-        <div style="margin-top: 1rem; padding-top: 0.5rem; border-top: 1px solid var(--rule); font-size: 0.85em; color: var(--paper-muted);">
-          ℹ️ <strong>Visible</strong> : Tags affichés actuellement<br>
-          🏠 <strong>Par défaut</strong> : Tags automatiquement activés au chargement du site<br>
-          ↕️ <strong>Ordre</strong> : Utilisez les flèches pour réorganiser l'affichage
-        </div>
-      `;
-    },
-
-    saveFilterSettings(modal) {
-      // Get visible tags (currently active)
-      const visibleCheckboxes = modal.querySelectorAll('input[id^="filter-"]:checked');
-      const visibleTags = Array.from(visibleCheckboxes).map(cb => cb.value);
-
-      // Get default tags (active by default on site load)
-      const defaultCheckboxes = modal.querySelectorAll('input[id^="default-"]:checked');
-      const defaultTags = Array.from(defaultCheckboxes).map(cb => cb.value);
-
-      if (visibleTags.length === 0) {
-        this.showNotification('❌ Veuillez sélectionner au moins un tag visible', 'error');
-        return;
-      }
-
-      if (defaultTags.length === 0) {
-        this.showNotification('❌ Veuillez sélectionner au moins un tag par défaut', 'error');
-        return;
-      }
-
-      // Update displayed filter buttons and current visible tags in OBJETS
-      if (!window.OBJETS.filterSettings) {
-        window.OBJETS.filterSettings = {};
-      }
-      window.OBJETS.filterSettings.displayedFilterButtons = visibleTags;
-      // Set active filters to default tags only (not all displayed buttons)
-      window.OBJETS.filterSettings.visibleTags = [...defaultTags];
-
-      // Update default tags in ContentTypes configuration
-      // Note: availableTags order has already been updated by moveTagInModal()
-      if (window.ContentTypes.objet?.filterConfig) {
-        window.ContentTypes.objet.filterConfig.defaultVisibleTags = defaultTags;
-      }
-
-      // Trigger page re-render
-      this.refreshObjectsPage();
-      
-      // Save to storage (will include the updated order and defaultVisibleTags in export)
-      EventBus.emit(Events.STORAGE_SAVE);
-      
-      // Close modal and show notification
-      modal.close();
-      modal.remove();
-      this.showNotification(`🏷️ Filtres mis à jour : ${visibleTags.length} visible(s), ${defaultTags.length} par défaut`, 'success');
-    },
-
-    resetFilterSettings(modal) {
-      const config = window.ContentTypes.objet.filterConfig;
-      const defaultSettings = { visibleTags: config.defaultVisibleTags };
-      
-      this.updateFilterModalContent(modal, config, defaultSettings);
-      this.showNotification('🔄 Filtres réinitialisés aux valeurs par défaut', 'info');
-    },
-
-    moveTagInModal(modal, tagName, direction) {
-      // Get current configuration
-      const config = window.ContentTypes.objet.filterConfig;
-      const currentIndex = config.availableTags.indexOf(tagName);
-      
-      if (currentIndex === -1) return; // Tag not found
-      
-      const newIndex = currentIndex + direction;
-      
-      // Check bounds
-      if (newIndex < 0 || newIndex >= config.availableTags.length) return;
-      
-      // Swap tags in the array
-      const temp = config.availableTags[currentIndex];
-      config.availableTags[currentIndex] = config.availableTags[newIndex];
-      config.availableTags[newIndex] = temp;
-      
-      // Refresh the modal display
-      const currentSettings = window.OBJETS?.filterSettings || { visibleTags: config.defaultVisibleTags };
-      this.updateFilterModalContent(modal, config, currentSettings);
-      
-      this.showNotification(`📊 "${tagName}" ${direction > 0 ? 'descendu' : 'monté'} dans l'ordre`, 'info');
-    },
-
+    // SUPPRIMÉ: Toutes les méthodes de gestion des filtres (showFilterManagementModal, createFilterModal, updateFilterModalContent, saveFilterSettings, resetFilterSettings, moveTagInModal)
 
     refreshObjectsPage() {
       // Check if we're currently on the objects page
@@ -3861,27 +3647,43 @@
       // Set global flag BEFORE regenerating page
       window.activeIdSearch = true;
 
-      // Force regenerate page with all objects AND visual feedback
-      if (JdrApp.modules.renderer?.regenerateCurrentPage) {
-        JdrApp.modules.renderer.regenerateCurrentPage();
+      // Immediately hide the container to prevent flash
+      const container = document.querySelector('#objets-container');
+      if (container) {
+        container.style.visibility = 'hidden';
       }
 
-      // Show success message
+      // Show success message immediately
       if (resultDiv) {
         resultDiv.innerHTML = `✅ Objet trouvé : "${foundObject.nom}" (ID: ${searchNumber})`;
         resultDiv.style.color = '#16a34a';
       }
 
-      // Show only the found object (after page regeneration)
-      setTimeout(() => {
-        this.showOnlyObjectById(searchNumber);
-        
-        // Restore the search value in the input field
-        const searchInput = document.querySelector('#id-search-input');
-        if (searchInput) {
-          searchInput.value = searchNumber;
+      // Force regenerate page with all objects AND visual feedback
+      if (JdrApp.modules.renderer?.regenerateCurrentPage) {
+        JdrApp.modules.renderer.regenerateCurrentPage();
+      }
+
+      // After regeneration, configure display and show only target object
+      requestAnimationFrame(() => {
+        const newContainer = document.querySelector('#objets-container');
+        if (newContainer) {
+          // Hide all objects first
+          this.hideAllObjects();
+          
+          // Show only the target object and make container visible again
+          setTimeout(() => {
+            this.showOnlyObjectById(searchNumber);
+            newContainer.style.visibility = 'visible';
+            
+            // Restore the search value in the input field
+            const searchInput = document.querySelector('#id-search-input');
+            if (searchInput) {
+              searchInput.value = searchNumber;
+            }
+          }, 10);
         }
-      }, 100);
+      });
     },
 
     clearIdSearch() {
@@ -3900,6 +3702,26 @@
       // Clear global flag for active ID search
       window.activeIdSearch = false;
 
+      // Reset container styles when clearing search
+      const container = document.querySelector('#objets-container');
+      if (container) {
+        container.style.display = '';
+        container.style.flexDirection = '';
+        container.style.alignItems = '';
+        container.style.justifyContent = '';
+        container.style.minHeight = '';
+        container.style.padding = '';
+        container.style.visibility = ''; // Restore visibility
+        
+        // Reset all card sizes to normal
+        const allCards = container.querySelectorAll('.card');
+        allCards.forEach(card => {
+          card.style.minWidth = '';
+          card.style.maxWidth = '';
+          card.style.width = '';
+        });
+      }
+
       // Regenerate page to update visual feedback and return to normal display
       if (JdrApp.modules.renderer?.regenerateCurrentPage) {
         JdrApp.modules.renderer.regenerateCurrentPage();
@@ -3917,26 +3739,26 @@
     },
 
     showOnlyObjectById(objectId) {
-      console.log('🔍 showOnlyObjectById called with ID:', objectId);
+      // console.log('🔍 showOnlyObjectById called with ID:', objectId);
       const container = document.querySelector('#objets-container');
       if (!container) {
-        console.log('🔍 No objets-container found');
+        // console.log('🔍 No objets-container found');
         return;
       }
 
       const allCards = container.querySelectorAll('.card');
-      console.log('🔍 Found', allCards.length, 'cards in container');
+      // console.log('🔍 Found', allCards.length, 'cards in container');
       let foundCard = null;
 
       allCards.forEach((card, index) => {
         const objetName = card.dataset.objetName;
-        console.log(`🔍 Card ${index}: objetName = "${objetName}"`);
+        // console.log(`🔍 Card ${index}: objetName = "${objetName}"`);
         if (objetName) {
           // Find the object by name to get its number
           const obj = window.OBJETS?.objets?.find(o => o.nom === objetName);
-          console.log(`🔍 Found object:`, obj);
+          // console.log(`🔍 Found object:`, obj);
           if (obj && obj.numero === objectId) {
-            console.log('🔍 MATCH! Showing card for:', objetName);
+            // console.log('🔍 MATCH! Showing card for:', objetName);
             card.style.display = '';
             foundCard = card;
           } else {
@@ -3945,21 +3767,50 @@
         }
       });
 
-      console.log('🔍 foundCard:', foundCard);
+      // console.log('🔍 foundCard:', foundCard);
 
       // Scroll to the found card if it exists
       if (foundCard) {
+        // Center the found object both horizontally and vertically
+        const container = document.querySelector('#objets-container');
+        if (container) {
+          // Apply centering styles to the container when showing single object
+          container.style.display = 'flex';
+          container.style.flexDirection = 'column';
+          container.style.alignItems = 'center';
+          container.style.justifyContent = 'center';
+          container.style.minHeight = '70vh';
+          container.style.padding = '2rem';
+        }
+
+        // Enlarge the found card for better visibility when searched by ID
+        // Check if we're on mobile to adjust sizing accordingly
+        const isMobile = window.innerWidth <= 640;
+        if (isMobile) {
+          // On mobile, use slightly smaller enlargement to fit the screen
+          foundCard.style.minWidth = '320px';
+          foundCard.style.maxWidth = '90vw';
+          foundCard.style.width = '90vw';
+        } else {
+          // On desktop, double the normal size
+          foundCard.style.minWidth = '560px'; // Double the normal min-width (280px * 2)
+          foundCard.style.maxWidth = '700px'; // Double the normal max-width (350px * 2)
+          foundCard.style.width = 'auto';
+        }
+
         setTimeout(() => {
           foundCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          // Brief highlight effect
-          foundCard.style.transition = 'all 0.3s ease';
-          foundCard.style.boxShadow = '0 0 20px rgba(22, 163, 74, 0.5)';
-          foundCard.style.transform = 'scale(1.02)';
+          // Enhanced highlight effect for centered object
+          foundCard.style.transition = 'all 0.4s ease';
+          foundCard.style.boxShadow = '0 0 30px rgba(212, 175, 55, 0.6), 0 0 60px rgba(212, 175, 55, 0.3)';
+          foundCard.style.transform = 'scale(1.05)';
+          foundCard.style.zIndex = '10';
           
           setTimeout(() => {
-            foundCard.style.boxShadow = '';
-            foundCard.style.transform = '';
-          }, 1500);
+            foundCard.style.boxShadow = '0 4px 20px rgba(0,0,0,0.15)';
+            foundCard.style.transform = 'scale(1.02)';
+            foundCard.style.zIndex = '';
+          }, 2000);
         }, 100);
       }
     },
@@ -3973,8 +3824,22 @@
       const container = document.querySelector('#objets-container');
       if (!container) return;
 
+      // Reset container styles to normal grid layout
+      container.style.display = '';
+      container.style.flexDirection = '';
+      container.style.alignItems = '';
+      container.style.justifyContent = '';
+      container.style.minHeight = '';
+      container.style.padding = '';
+      container.style.visibility = ''; // Restore visibility
+
       const allCards = container.querySelectorAll('.card');
       allCards.forEach(card => {
+        // Reset card sizing to normal
+        card.style.minWidth = '';
+        card.style.maxWidth = '';
+        card.style.width = '';
+        
         const objetName = card.dataset.objetName;
         if (objetName) {
           // Find the object and check if it has visible tags
@@ -4028,11 +3893,11 @@
         }
         visibleTags = window.TABLES_TRESORS_FILTER_STATE.visibleTags;
       } else {
-        // Pour les objets (comportement existant)
-        if (!window.OBJETS.filterSettings) {
-          window.OBJETS.filterSettings = { visibleTags: [...window.ContentTypes.objet.filterConfig.defaultVisibleTags] };
+        // Pour les objets - NOUVEAU SYSTÈME SIMPLIFIÉ
+        if (!window.ACTIVE_OBJECT_TAGS) {
+          window.ACTIVE_OBJECT_TAGS = []; // Aucun tag actif par défaut
         }
-        visibleTags = window.OBJETS.filterSettings.visibleTags;
+        visibleTags = window.ACTIVE_OBJECT_TAGS;
       }
       
       // IMPORTANT: Track state BEFORE modification to know if we need full regeneration
@@ -4053,7 +3918,10 @@
         chipElement.style.background = '#6b7280';
         chipElement.style.opacity = '0.6';
         chipElement.style.boxShadow = '';
-        this.showNotification(`🏷️ Tag "${tag}" masqué`, 'info');
+        // Mise à jour du texte du bouton
+        chipElement.innerHTML = tag;
+        chipElement.title = 'Inactif - Cliquer pour activer';
+        this.showNotification(`🏷️ Tag "${tag}" désactivé`, 'info');
       } else {
         // ACTIVATE - add to visible tags
         if (!visibleTags.includes(tag)) {
@@ -4064,7 +3932,10 @@
         chipElement.style.background = '#16a34a';
         chipElement.style.opacity = '1';
         chipElement.style.boxShadow = '0 2px 4px rgba(22, 163, 74, 0.3)';
-        this.showNotification(`🏷️ Tag "${tag}" affiché`, 'info');
+        // Mise à jour du texte du bouton
+        chipElement.innerHTML = '✓ ' + tag;
+        chipElement.title = 'Actif - Cliquer pour désactiver';
+        this.showNotification(`🏷️ Tag "${tag}" activé`, 'info');
       }
 
 
@@ -4076,32 +3947,22 @@
         // Any change in tags can reveal/hide different content and update UI elements
         this.refreshCurrentPage(contentType);
       } else {
-        // Original logic for objects
-        if (wasEmpty && nowHasTags) {
-          // If we went from no tags to having tags, we need full regeneration
-          // because buildSingleObjectPage returns [] when visibleTags.length === 0
-          this._needsRegenerationAfterEmpty = true;
-          this.refreshCurrentPage(contentType);
-        } else if (this._needsRegenerationAfterEmpty && !isVisuallyActive) {
-          // If we're adding more tags after having started from empty, keep regenerating
-          this.refreshCurrentPage(contentType);
-        } else if (!isVisuallyActive) {
-          // CRITICAL FIX: When activating a new tag, always regenerate the page
-          // This ensures objects with the new tag appear in the DOM, not just get unhidden
-          // The issue was that updateObjectVisibility() can only show/hide existing DOM elements,
-          // but objects filtered out during initial page generation don't exist in DOM at all
-          this.refreshCurrentPage(contentType);
-        } else {
-          // Reset the flag if we're deactivating a tag (we have a complete DOM now)
-          this._needsRegenerationAfterEmpty = false;
-          // When deactivating, we can just hide existing elements for objects
-          // But for monsters and tables de trésors, always do full refresh to maintain UI consistency
-          if (contentType === 'monster' || contentType === 'tableTresor') {
-            this.refreshCurrentPage(contentType);
-          } else {
-            this.updateContentVisibility(contentType);
+        // SIMPLIFIÉ: Pour les objets, toujours rafraîchir la page
+        // C'est plus simple et évite les problèmes de synchronisation
+        this.refreshCurrentPage(contentType);
+        
+        // Mettre à jour le texte indicateur du nombre de tags actifs
+        setTimeout(() => {
+          const statusElement = document.querySelector('.objects-tag-display p');
+          if (statusElement) {
+            const activeCount = visibleTags.length;
+            statusElement.innerHTML = activeCount === 0 
+              ? 'Aucun filtre actif - Tous les objets affichés' 
+              : activeCount === 1 
+                ? '1 filtre actif - Objets avec ce tag uniquement'
+                : `${activeCount} filtres actifs - Objets avec TOUS ces tags`;
           }
-        }
+        }, 100);
       }
 
       // Save changes to storage
@@ -4910,6 +4771,157 @@
              (document.body.classList.contains('dev-on')) ||
              (window.location.protocol === 'file:' && !window.STANDALONE_VERSION) ||
              (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+    },
+
+    showPageLinksModal() {
+      let modal = JdrApp.utils.dom.$('#pageLinksModal');
+      if (modal) {
+        document.body.removeChild(modal);
+      }
+      
+      modal = this.createPageLinksModal();
+      document.body.appendChild(modal);
+      
+      this.openModal('pageLinksModal');
+    },
+
+    createPageLinksModal() {
+      // Construire la liste des pages à partir de la structure TOC
+      const pages = [];
+      
+      if (window.TOC_STRUCTURE && window.TOC_STRUCTURE.sections) {
+        window.TOC_STRUCTURE.sections.forEach(section => {
+          if (section.items && Array.isArray(section.items)) {
+            section.items.forEach(item => {
+              if (item.type === 'page') {
+                pages.push({
+                  id: item.id,
+                  title: item.title,
+                  icon: item.icon,
+                  section: section.title
+                });
+              } else if (item.type === 'category') {
+                // Ajouter la page principale de catégorie
+                pages.push({
+                  id: item.id,
+                  title: item.title,
+                  icon: item.icon,
+                  section: section.title
+                });
+                
+                // Ajouter les sous-catégories si elles existent
+                if (item.id === 'sorts' && window.SORTS) {
+                  window.SORTS.forEach(category => {
+                    pages.push({
+                      id: `sorts-${category.nom}`,
+                      title: `${category.nom} (sorts)`,
+                      icon: '🔮',
+                      section: section.title
+                    });
+                  });
+                } else if (item.id === 'dons' && window.DONS) {
+                  window.DONS.forEach(category => {
+                    pages.push({
+                      id: `dons-${category.nom}`,
+                      title: `${category.nom} (dons)`,
+                      icon: '🎖️',
+                      section: section.title
+                    });
+                  });
+                } else if (item.id === 'classes' && window.CLASSES) {
+                  window.CLASSES.forEach(classe => {
+                    pages.push({
+                      id: classe.nom.toLowerCase(),
+                      title: classe.nom,
+                      icon: '⚔️',
+                      section: section.title
+                    });
+                  });
+                }
+              }
+            });
+          }
+        });
+      }
+
+      const pagesHTML = pages.map(page => `
+        <div class="page-item" data-page-id="${page.id}">
+          <div class="page-info">
+            <div class="page-name">${page.icon} ${page.title}</div>
+            <div class="page-section" style="color: var(--paper-muted); font-size: 12px;">${page.section}</div>
+          </div>
+          <div class="copy-indicator">Copié!</div>
+        </div>
+      `).join('');
+
+      const modal = JdrApp.utils.dom.create('div', 'modal page-links-modal', `
+        <div class="modal-content page-links-modal-content">
+          <div style="position: relative;">
+            <button class="modal-close-x" style="position: absolute; top: 0; right: 0; background: none; border: none; font-size: 20px; cursor: pointer; color: var(--paper-muted); padding: 4px 8px; border-radius: 4px; transition: all 0.2s ease;" onmouseover="this.style.background='var(--rule)'; this.style.color='var(--accent-ink)';" onmouseout="this.style.background='none'; this.style.color='var(--paper-muted)';">×</button>
+            <h3>🔗 Liens vers les pages</h3>
+          </div>
+          <p>Cliquez sur une page pour copier un lien vers celle-ci.</p>
+          <div class="pages-search">
+            <input type="text" id="pageSearchInput" placeholder="Rechercher une page..." style="width: 100%; padding: 8px; margin-bottom: 12px; border: 1px solid var(--rule); border-radius: 4px;">
+          </div>
+          <div class="pages-list" style="max-height: 400px; overflow-y: auto;">
+            ${pagesHTML || '<div style="text-align: center; color: #666; padding: 2rem;">Aucune page trouvée</div>'}
+          </div>
+          <button class="modal-close btn">Fermer</button>
+        </div>
+      `, { id: 'pageLinksModal' });
+
+      // Recherche dans la modal
+      const searchInput = modal.querySelector('#pageSearchInput');
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          const searchTerm = e.target.value.toLowerCase();
+          const pageItems = modal.querySelectorAll('.page-item');
+          
+          pageItems.forEach(item => {
+            const pageName = item.querySelector('.page-name').textContent.toLowerCase();
+            const pageSection = item.querySelector('.page-section').textContent.toLowerCase();
+            
+            if (pageName.includes(searchTerm) || pageSection.includes(searchTerm)) {
+              item.style.display = '';
+            } else {
+              item.style.display = 'none';
+            }
+          });
+        });
+      }
+
+      // Clic sur une page
+      modal.addEventListener('click', (e) => {
+        const pageItem = e.target.closest('.page-item');
+        if (pageItem) {
+          const pageId = pageItem.dataset.pageId;
+          const pageTitle = pageItem.querySelector('.page-name').textContent.replace(/^[^\s]+ /, ''); // Enlever l'icône
+          
+          // Créer le lien vers la page
+          const pageLink = `<a href="#/${pageId}" style="color: var(--accent); text-decoration: underline;">${pageTitle}</a>`;
+          
+          this.copyToClipboard(pageLink);
+          
+          pageItem.classList.add('copied');
+          
+          // Fermer la modale après un court délai pour voir l'effet "Copié!"
+          setTimeout(() => {
+            this.closeModal(modal);
+          }, 500);
+        }
+      });
+
+      // Gestionnaire pour le bouton X de fermeture
+      const closeBtn = modal.querySelector('.modal-close-x');
+      if (closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          this.closeModal(modal);
+        });
+      }
+
+      return modal;
     },
 
     // Méthode robuste pour forcer le rafraîchissement de la page (fallback)

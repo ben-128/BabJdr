@@ -31,6 +31,438 @@
   opacity: 0.7;
 }
 
+/* ─────────────────────────── Page Header Components ─────────────────────────── */
+.page-header {
+  text-align: center;
+  margin: 2rem auto;
+  max-width: 1200px;
+  padding: 0 var(--space-lg);
+}
+
+.page-header h1 {
+  color: var(--gold);
+  font-family: "Cinzel", serif;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Content centering for all page types */
+.page-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+/* Fallback centering for collections and similar content without specific containers */
+.editable-section {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ─────────────────────────── Collections Page Components ─────────────────────────── */
+.collections-search {
+  margin: 2rem auto;
+  text-align: center;
+  max-width: 1200px;
+  padding: 0 var(--space-lg);
+}
+
+.search-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.search-input {
+  padding: 12px 16px;
+  font-size: 1.1rem;
+  border: 2px solid var(--bronze);
+  border-radius: 8px;
+  background: var(--card);
+  color: var(--text);
+  min-width: 300px;
+  font-family: "Source Serif Pro", serif;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+}
+
+.search-button {
+  padding: 12px 20px;
+  background: linear-gradient(135deg, var(--gold), var(--bronze));
+  color: var(--dark-text);
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.search-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+}
+
+.collections-grid {
+  display: grid;
+  gap: 1.5rem; /* Balanced gap */
+  margin: 2rem auto;
+  max-width: 1400px; /* More space = more columns possible */
+  justify-content: center;
+  
+  /* Use auto-fit with smaller minmax - collections can be smaller */
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.collection-card {
+  background: var(--card);
+  border: 2px solid var(--bronze);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  width: 100%; /* Take full column width */
+  margin: 0; /* No margin, use grid gap */
+  box-sizing: border-box; /* Include padding and border in width */
+}
+
+.collection-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--gold);
+  box-shadow: 0 8px 20px rgba(212, 175, 55, 0.2);
+}
+
+.collection-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.collection-card h3 {
+  color: var(--gold);
+  font-family: "Cinzel", serif;
+  margin: 0.5rem 0;
+  font-size: 1.3rem;
+}
+
+.collection-card p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.collection-error {
+  background: linear-gradient(135deg, #fee2e2 0%, #fef2f2 100%);
+  border: 2px solid #f87171;
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  margin: 1rem 0;
+  animation: fadeIn 0.5s ease;
+}
+
+.collection-error h2 {
+  color: #dc2626;
+  font-family: "Cinzel", serif;
+  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
+}
+
+.collection-error p {
+  color: #7f1d1d;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0.5rem 0;
+}
+
+.collection-error strong {
+  color: #b91c1c;
+  font-weight: 600;
+}
+
+/* Collection Development Controls */
+.collection-dev-controls {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--bronze);
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.collection-dev-actions {
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.edit-object-btn {
+  background: var(--gold);
+  color: var(--bg);
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.edit-object-btn:hover {
+  background: #c9a96e;
+  transform: translateY(-1px);
+}
+
+.delete-object-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.delete-object-btn:hover {
+  background: #dc2626;
+  transform: translateY(-1px);
+}
+
+.remove-from-collection-btn {
+  background: #f59e0b;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.remove-from-collection-btn:hover {
+  background: #d97706;
+  transform: translateY(-1px);
+}
+
+.add-object-btn {
+  background: #10B981;
+  color: white;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.add-object-btn:hover {
+  background: #059669;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+/* New collection card styling */
+.new-collection-card {
+  border: 2px dashed var(--bronze) !important;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%) !important;
+}
+
+.new-collection-card:hover {
+  border-color: var(--gold) !important;
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%) !important;
+}
+
+.create-collection-btn {
+  background: var(--gold);
+  color: var(--bg);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  margin-top: 0.5rem;
+}
+
+.create-collection-btn:hover {
+  background: #c9a96e;
+  transform: translateY(-1px);
+}
+
+/* Hide dev controls in dev-off mode */
+body.dev-off .collection-dev-controls,
+body.dev-off .collection-dev-actions,
+body.dev-off .new-collection-card {
+  display: none !important;
+}
+
+.collection-results {
+  margin: 2rem 0;
+}
+
+.collection-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: var(--accent-bg);
+  border-radius: 12px;
+  border: 2px solid var(--gold);
+}
+
+.collection-header h2 {
+  color: var(--gold);
+  font-family: "Cinzel", serif;
+  margin: 0 0 0.5rem 0;
+  font-size: 1.8rem;
+}
+
+.back-button {
+  background: var(--secondary-bg);
+  color: var(--text);
+  border: 1px solid var(--bronze);
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  transition: all 0.3s ease;
+}
+
+.back-button:hover {
+  background: var(--bronze);
+  color: white;
+}
+
+.tag-filters {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+.tag-filters h3 {
+  color: var(--text);
+  font-family: "Cinzel", serif;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.tag-buttons {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.tag-filter-btn {
+  padding: 8px 16px;
+  background: var(--secondary-bg);
+  color: var(--text);
+  border: 1px solid var(--bronze);
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.tag-filter-btn:hover,
+.tag-filter-btn.active {
+  background: var(--gold);
+  color: var(--dark-text);
+  border-color: var(--gold);
+}
+
+.collection-items {
+  display: grid;
+  gap: 1.5rem; /* Balanced gap */
+  margin: 2rem auto;
+  max-width: 1400px; /* More space = more columns possible */
+  justify-content: center;
+  
+  /* Use auto-fit with smaller minmax to allow more columns */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+/* Consistent sizing for object cards within collections */
+.collection-items .card {
+  width: 100%; /* Take full column width */
+  margin: 0; /* Remove default margin, use grid gap instead */
+  box-sizing: border-box; /* Include padding and border in width calculation */
+}
+
+/* Objects page container optimization for better space usage */
+#objets-container {
+  display: grid;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: start;
+  padding: 0;
+  margin: 2rem auto;
+  max-width: 1400px; /* Increase max width for better space usage */
+  
+  /* Responsive grid: 1 to 4 objects per row based on screen size */
+  grid-template-columns: 1fr;
+}
+
+/* 2 objects per row on small tablets */
+@media (min-width: 640px) {
+  #objets-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 3 objects per row on tablets/small desktop */
+@media (min-width: 960px) {
+  #objets-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* 4 objects per row on large desktop */
+@media (min-width: 1280px) {
+  #objets-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* 5 objects per row on extra large desktop */
+@media (min-width: 1600px) {
+  #objets-container {
+    grid-template-columns: repeat(5, 1fr);
+    max-width: 1600px;
+  }
+}
+
+/* Object cards sizing optimization */
+#objets-container .card {
+  min-width: 280px;
+  max-width: 350px;
+  width: 100%;
+  margin: 0; /* Remove default margin, use grid gap instead */
+}
+
+/* Mobile optimization for objects page */
+@media (max-width: 640px) {
+  #objets-container {
+    padding: 0 1rem;
+    gap: 1rem;
+  }
+  
+  #objets-container .card {
+    min-width: auto;
+    max-width: none;
+  }
+}
+
 /* ─────────────────────────── Card System Enhanced - Authentic Parchment ─────────────────────────── */
 .card,
 .card-base {

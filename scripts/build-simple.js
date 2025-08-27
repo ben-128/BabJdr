@@ -111,6 +111,7 @@ function buildStandalone() {
     'js/editor.js',               // Editor module
     'js/features/SpellFilter.js', // Spell filter feature
     'js/features/TablesTresorsManager.js', // Tables de trésors manager
+    'js/features/DynamicCentering.js', // Dynamic centering system
     'js/ui.js'                    // UI module - last
   ];
   
@@ -128,7 +129,7 @@ function buildStandalone() {
     'sorts.json', 'classes.json', 'competences-tests.json', 
     'creation.json', 'dons.json', 'objets.json', 'elements.json', 'etats.json',
     'images.json', 'static-pages-config.json', 'stats.json', 'toc-structure.json',
-    'monstres.json', 'tables-tresors.json', 'monstres-page-desc.json', 'tables-tresors-page-desc.json',
+    'monstres.json', 'tables-tresors.json', 'collections.json', 'monstres-page-desc.json', 'tables-tresors-page-desc.json', 'custom-page-descriptions.json',
     'combat.json', 'gestion-des-ressources.json', 'histoire.json', 'dieux.json', 'geographie.json'
   ];
   
@@ -189,6 +190,7 @@ function buildStandalone() {
     window.OBJETS = ${JSON.stringify(dataObject.objets || {}, null, 2)};
     window.MONSTRES = ${JSON.stringify(dataObject.monstres || [], null, 2)};
     window.TABLES_TRESORS = ${JSON.stringify(dataObject.tables_tresors || { tables: [] }, null, 2)};
+    window.COLLECTIONS = ${JSON.stringify(dataObject.collections || { collections: [] }, null, 2)};
     window.IMAGES = ${JSON.stringify(dataObject.images || {}, null, 2)};
     
     // Page descriptions
@@ -197,6 +199,11 @@ function buildStandalone() {
     }, null, 2)};
     window.TABLES_TRESORS_PAGE_DESC = ${JSON.stringify(dataObject.tables_tresors_page_desc || {
       description: "Tables de butin permettant de générer aléatoirement des récompenses selon les fourchettes définies. Lancez un dé 20 et consultez la table correspondante pour déterminer l'objet obtenu."
+    }, null, 2)};
+    
+    // Custom page descriptions for collections and other dynamic pages
+    window.CUSTOM_PAGE_DESCRIPTIONS = ${JSON.stringify(dataObject.custom_page_descriptions || {
+      'collections-objets': 'Recherchez et explorez des collections d\'objets organisées par thème'
     }, null, 2)};
     
     // TOC Structure for advanced navigation
@@ -226,6 +233,8 @@ function buildStandalone() {
     document.addEventListener('DOMContentLoaded', function() {
       // Ensure dev mode is off
       document.body.className = 'dev-off';
+      
+      // Initialize in standalone mode with embedded data
       
       // Wait a bit to ensure all modules are loaded
       setTimeout(function() {

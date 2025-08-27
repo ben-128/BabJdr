@@ -2,3 +2,6 @@
 - faire pour les objets, des recherches d'id, et recherche de magasin (dont celui départ)
 
 
+Recherchez et explorez des collections d'objets.
+<br>Par exemple, tapez <b>Départ</b> pour voir les objets disponnibles lors de la création du personnage.
+<br>Les collections sont cachés de base pour éviter le <b>spoil</b>.

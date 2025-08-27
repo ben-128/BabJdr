@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-08-27T12:01:32.320Z by JdrBab Build System -->
+<!-- Generated on 2025-08-27T21:48:41.057Z by JdrBab Build System -->
 <title>JDR‑BAB — Livret de règles</title>
 <meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -386,7 +386,7 @@ h5, h6 {
 .page {
   position: relative;
   min-height: 100vh;
-  padding: 18px 18px 18px 368px;
+  padding: 18px; /* Equal padding all around */
   transition: padding var(--transition-normal);
   background: 
     var(--parchment-texture),
@@ -394,10 +394,12 @@ h5, h6 {
     var(--paper);
 }
 
-/* Content Container - Enhanced Centering */
+/* Content Container - Dynamic Centering (handled by JavaScript) */
 #views {
-  max-width: 1200px;
-  margin: 0 auto;
+  max-width: 1400px;
+  /* Fallback positioning - will be overridden by DynamicCentering.js */
+  margin-left: 370px; /* Just clear the sidebar */
+  margin-right: 20px;
   padding: 0 var(--space-lg);
   animation: fadeInUp 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
@@ -971,6 +973,438 @@ footer{padding:24px;text-align:center;color:var(--paper-muted)}
   height: 2px;
   background: linear-gradient(90deg, transparent, var(--gold), transparent);
   opacity: 0.7;
+}
+
+/* ─────────────────────────── Page Header Components ─────────────────────────── */
+.page-header {
+  text-align: center;
+  margin: 2rem auto;
+  max-width: 1200px;
+  padding: 0 var(--space-lg);
+}
+
+.page-header h1 {
+  color: var(--gold);
+  font-family: "Cinzel", serif;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Content centering for all page types */
+.page-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+/* Fallback centering for collections and similar content without specific containers */
+.editable-section {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ─────────────────────────── Collections Page Components ─────────────────────────── */
+.collections-search {
+  margin: 2rem auto;
+  text-align: center;
+  max-width: 1200px;
+  padding: 0 var(--space-lg);
+}
+
+.search-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.search-input {
+  padding: 12px 16px;
+  font-size: 1.1rem;
+  border: 2px solid var(--bronze);
+  border-radius: 8px;
+  background: var(--card);
+  color: var(--text);
+  min-width: 300px;
+  font-family: "Source Serif Pro", serif;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+}
+
+.search-button {
+  padding: 12px 20px;
+  background: linear-gradient(135deg, var(--gold), var(--bronze));
+  color: var(--dark-text);
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.search-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+}
+
+.collections-grid {
+  display: grid;
+  gap: 1.5rem; /* Balanced gap */
+  margin: 2rem auto;
+  max-width: 1400px; /* More space = more columns possible */
+  justify-content: center;
+  
+  /* Use auto-fit with smaller minmax - collections can be smaller */
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.collection-card {
+  background: var(--card);
+  border: 2px solid var(--bronze);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  width: 100%; /* Take full column width */
+  margin: 0; /* No margin, use grid gap */
+  box-sizing: border-box; /* Include padding and border in width */
+}
+
+.collection-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--gold);
+  box-shadow: 0 8px 20px rgba(212, 175, 55, 0.2);
+}
+
+.collection-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.collection-card h3 {
+  color: var(--gold);
+  font-family: "Cinzel", serif;
+  margin: 0.5rem 0;
+  font-size: 1.3rem;
+}
+
+.collection-card p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.collection-error {
+  background: linear-gradient(135deg, #fee2e2 0%, #fef2f2 100%);
+  border: 2px solid #f87171;
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  margin: 1rem 0;
+  animation: fadeIn 0.5s ease;
+}
+
+.collection-error h2 {
+  color: #dc2626;
+  font-family: "Cinzel", serif;
+  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
+}
+
+.collection-error p {
+  color: #7f1d1d;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0.5rem 0;
+}
+
+.collection-error strong {
+  color: #b91c1c;
+  font-weight: 600;
+}
+
+/* Collection Development Controls */
+.collection-dev-controls {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--bronze);
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.collection-dev-actions {
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.edit-object-btn {
+  background: var(--gold);
+  color: var(--bg);
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.edit-object-btn:hover {
+  background: #c9a96e;
+  transform: translateY(-1px);
+}
+
+.delete-object-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.delete-object-btn:hover {
+  background: #dc2626;
+  transform: translateY(-1px);
+}
+
+.remove-from-collection-btn {
+  background: #f59e0b;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.remove-from-collection-btn:hover {
+  background: #d97706;
+  transform: translateY(-1px);
+}
+
+.add-object-btn {
+  background: #10B981;
+  color: white;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.add-object-btn:hover {
+  background: #059669;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+/* New collection card styling */
+.new-collection-card {
+  border: 2px dashed var(--bronze) !important;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%) !important;
+}
+
+.new-collection-card:hover {
+  border-color: var(--gold) !important;
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%) !important;
+}
+
+.create-collection-btn {
+  background: var(--gold);
+  color: var(--bg);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  margin-top: 0.5rem;
+}
+
+.create-collection-btn:hover {
+  background: #c9a96e;
+  transform: translateY(-1px);
+}
+
+/* Hide dev controls in dev-off mode */
+body.dev-off .collection-dev-controls,
+body.dev-off .collection-dev-actions,
+body.dev-off .new-collection-card {
+  display: none !important;
+}
+
+.collection-results {
+  margin: 2rem 0;
+}
+
+.collection-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: var(--accent-bg);
+  border-radius: 12px;
+  border: 2px solid var(--gold);
+}
+
+.collection-header h2 {
+  color: var(--gold);
+  font-family: "Cinzel", serif;
+  margin: 0 0 0.5rem 0;
+  font-size: 1.8rem;
+}
+
+.back-button {
+  background: var(--secondary-bg);
+  color: var(--text);
+  border: 1px solid var(--bronze);
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  transition: all 0.3s ease;
+}
+
+.back-button:hover {
+  background: var(--bronze);
+  color: white;
+}
+
+.tag-filters {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+.tag-filters h3 {
+  color: var(--text);
+  font-family: "Cinzel", serif;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.tag-buttons {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.tag-filter-btn {
+  padding: 8px 16px;
+  background: var(--secondary-bg);
+  color: var(--text);
+  border: 1px solid var(--bronze);
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.tag-filter-btn:hover,
+.tag-filter-btn.active {
+  background: var(--gold);
+  color: var(--dark-text);
+  border-color: var(--gold);
+}
+
+.collection-items {
+  display: grid;
+  gap: 1.5rem; /* Balanced gap */
+  margin: 2rem auto;
+  max-width: 1400px; /* More space = more columns possible */
+  justify-content: center;
+  
+  /* Use auto-fit with smaller minmax to allow more columns */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+/* Consistent sizing for object cards within collections */
+.collection-items .card {
+  width: 100%; /* Take full column width */
+  margin: 0; /* Remove default margin, use grid gap instead */
+  box-sizing: border-box; /* Include padding and border in width calculation */
+}
+
+/* Objects page container optimization for better space usage */
+#objets-container {
+  display: grid;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: start;
+  padding: 0;
+  margin: 2rem auto;
+  max-width: 1400px; /* Increase max width for better space usage */
+  
+  /* Responsive grid: 1 to 4 objects per row based on screen size */
+  grid-template-columns: 1fr;
+}
+
+/* 2 objects per row on small tablets */
+@media (min-width: 640px) {
+  #objets-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 3 objects per row on tablets/small desktop */
+@media (min-width: 960px) {
+  #objets-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* 4 objects per row on large desktop */
+@media (min-width: 1280px) {
+  #objets-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* 5 objects per row on extra large desktop */
+@media (min-width: 1600px) {
+  #objets-container {
+    grid-template-columns: repeat(5, 1fr);
+    max-width: 1600px;
+  }
+}
+
+/* Object cards sizing optimization */
+#objets-container .card {
+  min-width: 280px;
+  max-width: 350px;
+  width: 100%;
+  margin: 0; /* Remove default margin, use grid gap instead */
+}
+
+/* Mobile optimization for objects page */
+@media (max-width: 640px) {
+  #objets-container {
+    padding: 0 1rem;
+    gap: 1rem;
+  }
+  
+  #objets-container .card {
+    min-width: auto;
+    max-width: none;
+  }
 }
 
 /* ─────────────────────────── Card System Enhanced - Authentic Parchment ─────────────────────────── */
@@ -2301,6 +2735,15 @@ body.dev-off .card[data-category="objets"] .illus label.up,
 body.dev-off .card[data-category="objets"] .illus button.rm,
 body.dev-off .card[data-category="objets"] .illus label,
 body.dev-off .card[data-category="objets"] .illus button,
+/* Collections d'objets page specific rules */
+body.dev-off article[data-page="collections-objets"] .illus label.up,
+body.dev-off article[data-page="collections-objets"] .illus button.rm,
+body.dev-off article[data-page="collections-objets"] .illus label,
+body.dev-off article[data-page="collections-objets"] .illus button,
+body.dev-off #collection-items .illus label.up,
+body.dev-off #collection-items .illus button.rm,
+body.dev-off #collection-items .illus label,
+body.dev-off #collection-items .illus button,
 /* ULTRA-SPECIFIC RULES FOR TAG MANAGER BUTTONS */
 body.dev-off button.manage-tags-btn,
 body.dev-off button.tags-manager-btn,
@@ -2342,6 +2785,22 @@ body.dev-off button:contains("Gérer les tags") {
   height: 0 !important;
   overflow: hidden !important;
   pointer-events: none !important;
+}
+
+/* Styles for dev buttons container */
+.dev-buttons-container {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Hide dev buttons container completely in dev-off mode */
+body.dev-off .dev-buttons-container,
+body.dev-off div[data-dev-only] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
 }
 
 /* Element selectors for spells and monsters - Solution ultra-forcée */
@@ -3042,6 +3501,105 @@ body.dev-on .dev-toolbox * {
 .spell-links-modal .spell-meta[style*="#6b21a8"] { color: #6b21a8 !important; }
 .spell-links-modal .spell-meta[style*="#7c2d12"] { color: #7c2d12 !important; }
 .spell-links-modal .spell-meta[style*="#7c3aed"] { color: #7c3aed !important; }
+
+/* Page Links Modal */
+.page-links-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 2147483647;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-links-modal.visible {
+  display: flex;
+}
+
+.page-links-modal-content {
+  background: var(--card);
+  border: 2px solid var(--rule);
+  border-radius: 16px;
+  padding: var(--space-2xl);
+  max-width: 600px;
+  width: 90%;
+  box-shadow: var(--shadow);
+  position: relative;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.page-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 12px;
+  margin-bottom: 8px;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  background: var(--surface);
+}
+
+.page-item:hover {
+  background: var(--accent-bg);
+  border-color: var(--accent);
+  transform: translateX(4px);
+}
+
+.page-item.copied {
+  background: rgba(34, 197, 94, 0.1);
+  border-color: #22c55e;
+}
+
+.page-info {
+  flex: 1;
+}
+
+.page-name {
+  font-weight: 600;
+  color: var(--accent-ink);
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+
+.page-section {
+  font-size: 12px;
+  color: var(--paper-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.copy-indicator {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  background: #22c55e;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.page-item.copied .copy-indicator {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .page-links-modal-content {
+    max-width: calc(100vw - 16px);
+    padding: 16px;
+  }
+}
 
 .spell-preview-close {
   position: absolute;
@@ -3913,7 +4471,6 @@ article span[title]:hover::after {
       "image": "",
       "description": "<i>Longue épée à deux mains, lourde mais puissante.</i>",
       "tags": [
-        "Départ",
         "Arme",
         "Épée",
         "Deux mains"
@@ -3928,7 +4485,6 @@ article span[title]:hover::after {
       "image": "",
       "description": "<i>Arme droite et équilibrée, conçue pour être maniée d’une seule main</i>",
       "tags": [
-        "Départ",
         "Arme",
         "Épée",
         "Une main"
@@ -3943,7 +4499,6 @@ article span[title]:hover::after {
       "image": "",
       "description": "<i>Petite lame simple, légère et maniable.</i>",
       "tags": [
-        "Départ",
         "Arme",
         "Une main",
         "Dague"
@@ -3958,7 +4513,6 @@ article span[title]:hover::after {
       "image": "",
       "description": "<i>Long bâton solide, utilisé comme arme et appui.</i>",
       "tags": [
-        "Départ",
         "Arme",
         "Deux mains",
         "Baton"
@@ -3973,7 +4527,6 @@ article span[title]:hover::after {
       "image": "",
       "description": "<i>Arme rudimentaire faite de bois dur. </i>",
       "tags": [
-        "Départ",
         "Arme",
         "Une main",
         "Baton"
@@ -3988,7 +4541,6 @@ article span[title]:hover::after {
       "image": "",
       "description": "<i>Arc basique en bois, sans ornement.</i>",
       "tags": [
-        "Départ",
         "Arme",
         "Deux mains",
         "Arc"
@@ -4003,7 +4555,6 @@ article span[title]:hover::after {
       "image": "",
       "description": "<i>Un bouclier grossier taillé dans des planches épaisses, marqué de cicatrices de bataille.</i>",
       "tags": [
-        "Départ",
         "Bouclier"
       ],
       "effet": "<strong>Effet:</strong> Augmente l'armure physique de 2.",
@@ -4016,7 +4567,6 @@ article span[title]:hover::after {
       "image": "",
       "description": "<i>Une robe de toile modeste, aux plis fatigués mais encore emplis de dignité.</i>",
       "tags": [
-        "Départ",
         "Armure",
         "Robe"
       ],
@@ -4030,7 +4580,6 @@ article span[title]:hover::after {
       "image": "",
       "description": "<i>Une armure souple en cuir tanné, taillée pour offrir une protection rudimentaire.</i>",
       "tags": [
-        "Départ",
         "Armure",
         "Armure légère"
       ],
@@ -4044,7 +4593,6 @@ article span[title]:hover::after {
       "image": "",
       "description": "<i>Une cotte de mailles dont chaque anneau forgé promet résistance et endurance au combat.</i>",
       "tags": [
-        "Départ",
         "Armure",
         "Armure lourde"
       ],
@@ -4071,7 +4619,6 @@ article span[title]:hover::after {
       "image": "",
       "description": "<i>Une fiole écarlate dont le liquide vif régénère les blessures et ranime les forces vitales.</i>",
       "tags": [
-        "Départ",
         "Consommable"
       ],
       "effet": "<strong>Effet:</strong> Rend 15 (critique : 25) points de vie au héros.",
@@ -4080,11 +4627,10 @@ article span[title]:hover::after {
     },
     {
       "nom": "Petite potion de mana",
-      "numero": "13",
+      "numero": 13,
       "image": "",
       "description": "<i>Une essence azur miroitante qui restaure l’énergie magique et ravive le flux des arcanes.</i>",
       "tags": [
-        "Départ",
         "Consommable"
       ],
       "effet": "<strong>Effet:</strong> Rend 20 (critique : 35) points de mana au héros.",
@@ -4097,7 +4643,6 @@ article span[title]:hover::after {
       "image": "",
       "description": "<i>Une fine tige runique qui libère des flammes brûlantes au commandement de son porteur.</i>",
       "tags": [
-        "Départ",
         "Consommable",
         "Catalyseur"
       ],
@@ -4111,7 +4656,6 @@ article span[title]:hover::after {
       "image": "",
       "description": "<i>Herbe des forêts profondes, aux feuilles luisantes et aux petites fleurs rosées. Appliquée directement sur la peau, elle referme les plaies et apaise la douleur presque instantanément.</i>",
       "tags": [
-        "Départ",
         "Consommable",
         "Plante"
       ],
@@ -4125,7 +4669,6 @@ article span[title]:hover::after {
       "image": "",
       "description": "<i>une plante sombre aux fleurs violettes dont l’essence neutralise les venins et purifie le sang.</i>",
       "tags": [
-        "Départ",
         "Consommable",
         "Plante"
       ],
@@ -4152,7 +4695,6 @@ article span[title]:hover::after {
       "image": "",
       "description": "<i>Une tige sombre incrustée de gemmes lunaires, qui libère une aura ténébreuse plongeant ses cibles dans un profond sommeil enchanté.</i>",
       "tags": [
-        "Départ",
         "Consommable",
         "Catalyseur"
       ],
@@ -4449,8 +4991,8 @@ article span[title]:hover::after {
           "max": 10,
           "objet": {
             "type": "reference",
-            "numero": 3,
-            "nom": "Dague en fer"
+            "numero": 16,
+            "nom": "Nocteline"
           }
         },
         {
@@ -4458,8 +5000,8 @@ article span[title]:hover::after {
           "max": 15,
           "objet": {
             "type": "reference",
-            "numero": 46,
-            "nom": "Gemme mineure"
+            "numero": 13,
+            "nom": "Petite potion de mana"
           }
         },
         {
@@ -4467,8 +5009,8 @@ article span[title]:hover::after {
           "max": 20,
           "objet": {
             "type": "reference",
-            "numero": 2,
-            "nom": "Simple épée"
+            "numero": 12,
+            "nom": "Petite potion de vie"
           }
         },
         {
@@ -4476,8 +5018,8 @@ article span[title]:hover::after {
           "max": 25,
           "objet": {
             "type": "reference",
-            "numero": 1,
-            "nom": "Nouvel objet"
+            "numero": 17,
+            "nom": "Baguette de d'accélération"
           }
         }
       ]
@@ -4504,8 +5046,8 @@ article span[title]:hover::after {
           "max": 8,
           "objet": {
             "type": "reference",
-            "numero": 47,
-            "nom": "Armure de plates"
+            "numero": 11,
+            "nom": "Armure de plaque"
           }
         },
         {
@@ -4513,8 +5055,8 @@ article span[title]:hover::after {
           "max": 12,
           "objet": {
             "type": "reference",
-            "numero": 48,
-            "nom": "Potion de soin majeure"
+            "numero": 18,
+            "nom": "Baguette de sommeil"
           }
         },
         {
@@ -4522,8 +5064,8 @@ article span[title]:hover::after {
           "max": 16,
           "objet": {
             "type": "reference",
-            "numero": 49,
-            "nom": "Anneau magique"
+            "numero": 8,
+            "nom": "Robe simple"
           }
         },
         {
@@ -4531,8 +5073,8 @@ article span[title]:hover::after {
           "max": 20,
           "objet": {
             "type": "reference",
-            "numero": 50,
-            "nom": "Artefact légendaire"
+            "numero": 4,
+            "nom": "Bâton en bois"
           }
         }
       ]
@@ -4545,6 +5087,34 @@ article span[title]:hover::after {
       "Coffre"
     ]
   }
+};
+    window.COLLECTIONS = {
+  "collections": [
+    {
+      "id": "d-part",
+      "nom": "Départ",
+      "description": "Objets disponibles à la création du personnage.",
+      "icon": "📦",
+      "objets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        12,
+        16,
+        15,
+        14,
+        18,
+        13
+      ]
+    }
+  ]
 };
     window.IMAGES = {
   "images": {
@@ -4638,6 +5208,11 @@ article span[title]:hover::after {
   "description": "Fortune + d20"
 };
     
+    // Custom page descriptions for collections and other dynamic pages
+    window.CUSTOM_PAGE_DESCRIPTIONS = {
+  "collections-objets": "Recherchez et explorez des collections d'objets.\n<br>Par exemple, tapez <b>Départ</b> pour voir les objets disponnibles lors de la création du personnage.\n<br>Les collections sont cachées de base pour éviter le <b>spoil</b>."
+};
+    
     // TOC Structure for advanced navigation
     window.TOC_STRUCTURE = {
   "sections": [
@@ -4689,6 +5264,12 @@ article span[title]:hover::after {
           "id": "objets",
           "title": "Objets",
           "icon": "📦"
+        },
+        {
+          "type": "page",
+          "id": "collections-objets",
+          "title": "Collections d'Objets",
+          "icon": "📚"
         }
       ]
     },
@@ -4805,7 +5386,7 @@ article span[title]:hover::after {
       "type": "card",
       "id": "etapes-creation",
       "title": "Étapes de création",
-      "content": "<ol><li>Choisir une <strong>classe</strong> puis une <strong>sous‑classe</strong>.</li><li>Choisir un <strong>élément</strong> d'affiliation.</li><li>Choisir les <strong>dons</strong> (avec 2 points de dons).</li><li>Choisir l'<strong>équipement</strong> de départ (avec 100 éclats).</li><li>Définir le <strong>nom</strong>, l'<strong>histoire</strong> et l'<strong>apparence</strong>.</li><li>Remplir sa feuille de personnage.</li></ol>",
+      "content": "<ol><li>Choisir une <strong>classe</strong> puis une <strong>sous‑classe</strong> : <a href=\"#/guerrier\" style=\"color: var(--accent); text-decoration: underline;\">Guerrier</a>.</li><li>Choisir un <strong>élément</strong> d'affiliation : <a href=\"#/elements\" style=\"color: var(--accent); text-decoration: underline;\">Éléments</a>.</li><li>Choisir les <strong>dons</strong> (avec 2 points de dons) : <a href=\"#/dons-generaux\" style=\"color: var(--accent); text-decoration: underline;\">Generaux (dons)</a>.</li><li>Choisir l'<strong>équipement</strong> de départ (avec 100 éclats) : <a href=\"#/collections-objets\" style=\"color: var(--accent); text-decoration: underline;\">Collections d'Objets</a>.</li><li>Définir le <strong>nom</strong>, l'<strong>histoire</strong> et l'<strong>apparence</strong>.</li><li>Remplir sa feuille de personnage.</li></ol>",
       "deletable": true,
       "sectionName": "Étapes de création"
     }
@@ -5163,6 +5744,14 @@ article span[title]:hover::after {
       // Ensure dev mode is off
       document.body.className = 'dev-off';
       
+      // Debug: Check if collections data is loaded
+      console.log('🚀 Standalone mode - Data check:', {
+        COLLECTIONS: !!window.COLLECTIONS,
+        collectionsCount: window.COLLECTIONS?.collections?.length || 0,
+        OBJETS: !!window.OBJETS,
+        objetsCount: window.OBJETS?.objets?.length || 0
+      });
+      
       // Wait a bit to ensure all modules are loaded
       setTimeout(function() {
         // Initialize JdrApp if it exists
@@ -5193,7 +5782,10 @@ article span[title]:hover::after {
       OBJETS: null,
       MONSTRES: null,
       STATIC_PAGES: {},
-      editedData: {}
+      editedData: {},
+      customPageDescriptions: {
+        'collections-objets': 'Recherchez et explorez des collections d\'objets organisées par thème'
+      }
     },
     
     // Application state
@@ -5248,6 +5840,7 @@ article span[title]:hover::after {
           const objets = window.OBJETS;
           let monstres = window.MONSTRES || [];
           let tablesTresors = window.TABLES_TRESORS || { tables: [] };
+          let collections = window.COLLECTIONS || { collections: [] };
           
           // Safety check - if MONSTRES is not an array, it might be page config
           if (!Array.isArray(monstres)) {
@@ -5259,12 +5852,21 @@ article span[title]:hover::after {
           const staticPagesData = window.STATIC_PAGES;
           const staticPagesConfig = window.STATIC_PAGES_CONFIG || {};
           
+          // Ensure custom page descriptions are available in standalone mode
+          // In standalone mode, CUSTOM_PAGE_DESCRIPTIONS might be injected, sync with JdrApp.data
+          if (window.CUSTOM_PAGE_DESCRIPTIONS) {
+            this.data.customPageDescriptions = { ...this.data.customPageDescriptions, ...window.CUSTOM_PAGE_DESCRIPTIONS };
+          } else {
+            window.CUSTOM_PAGE_DESCRIPTIONS = { ...this.data.customPageDescriptions };
+          }
+          
           this.data.SORTS = sorts;
           this.data.CLASSES = classes;
           this.data.DONS = dons;
           this.data.OBJETS = objets;
           this.data.MONSTRES = monstres;
           this.data.TABLES_TRESORS = tablesTresors;
+          this.data.COLLECTIONS = collections;
           this.data.STATIC_PAGES = staticPagesData;
           this.data.STATIC_PAGES_CONFIG = staticPagesConfig;
           
@@ -5274,6 +5876,7 @@ article span[title]:hover::after {
           window.OBJETS = objets;
           window.MONSTRES = monstres;
           window.TABLES_TRESORS = tablesTresors;
+          window.COLLECTIONS = collections;
           window.STATIC_PAGES = staticPagesData;
           window.STATIC_PAGES_CONFIG = staticPagesConfig;
           
@@ -5286,13 +5889,14 @@ article span[title]:hover::after {
         }
         
         // Development mode - fetch files
-        const [sorts, classes, dons, objets, monstres, tablesTresors, staticPagesConfig, tocStructure] = await Promise.all([
+        const [sorts, classes, dons, objets, monstres, tablesTresors, collections, staticPagesConfig, tocStructure] = await Promise.all([
           fetch('data/sorts.json').then(r => r.json()),
           fetch('data/classes.json').then(r => r.json()),
           fetch('data/dons.json').then(r => r.json()),
           fetch('data/objets.json').then(r => r.json()),
           fetch('data/monstres.json').then(r => r.json()),
           fetch('data/tables-tresors.json').then(r => r.json()),
+          fetch('data/collections.json').then(r => r.json()),
           fetch('data/static-pages-config.json').then(r => r.json()),
           fetch('data/toc-structure.json').then(r => r.json())
         ]);
@@ -5316,6 +5920,18 @@ article span[title]:hover::after {
           };
         }
 
+        // Load custom page descriptions (collections, etc.)
+        try {
+          const customDescriptions = await fetch('data/custom-page-descriptions.json').then(r => r.json());
+          this.data.customPageDescriptions = { ...this.data.customPageDescriptions, ...customDescriptions };
+          // Make it available globally for ContentFactory (keep in sync)
+          window.CUSTOM_PAGE_DESCRIPTIONS = { ...this.data.customPageDescriptions };
+        } catch (error) {
+          // Keep default values if file doesn't exist
+          console.log('Custom page descriptions file not found, using defaults');
+          window.CUSTOM_PAGE_DESCRIPTIONS = { ...this.data.customPageDescriptions };
+        }
+
         const staticPagesData = {};
         const activePages = staticPagesConfig.pages.filter(page => page.active);
         
@@ -5334,6 +5950,7 @@ article span[title]:hover::after {
         this.data.OBJETS = objets;
         this.data.MONSTRES = monstres;
         this.data.TABLES_TRESORS = tablesTresors;
+        this.data.COLLECTIONS = collections;
         this.data.STATIC_PAGES = staticPagesData;
         this.data.STATIC_PAGES_CONFIG = staticPagesConfig;
         this.data.TOC_STRUCTURE = tocStructure;
@@ -5344,6 +5961,7 @@ article span[title]:hover::after {
         window.OBJETS = objets;
         window.MONSTRES = monstres;
         window.TABLES_TRESORS = tablesTresors;
+        window.COLLECTIONS = collections;
         window.STATIC_PAGES = this.data.STATIC_PAGES;
         window.STATIC_PAGES_CONFIG = this.data.STATIC_PAGES_CONFIG;
         window.TOC_STRUCTURE = this.data.TOC_STRUCTURE;
@@ -5776,7 +6394,6 @@ article span[title]:hover::after {
       // Configuration des filtres disponibles (MISE À JOUR AUTOMATIQUE)
       filterConfig: {
         availableTags: [
-          "Départ",
           "Arme",
           "Armure",
           "Consommable",
@@ -6518,10 +7135,21 @@ article span[title]:hover::after {
     }
 
     updatePageDescription(type, newDescription) {
+      // console.log('🔍 DEBUG updatePageDescription:', { type, newDescription });
+      // console.log('🔍 window.ContentTypes available:', !!window.ContentTypes);
+      // console.log('🔍 Available types:', Object.keys(window.ContentTypes || {}));
+      
+      // Ensure collections type exists (fallback injection)
+      if (type === 'collections' && (!window.ContentTypes || !window.ContentTypes.collections)) {
+        this.ensureCollectionsType();
+      }
+      
       const config = window.ContentTypes[type];
       
       if (!config || !config.pageDescription) {
         console.warn(`No page description config found for type: ${type}`);
+        // console.log('🔍 Config for type:', config);
+        // console.log('🔍 Full ContentTypes:', window.ContentTypes);
         return false;
       }
       
@@ -6535,6 +7163,12 @@ article span[title]:hover::after {
             window[pageDesc.dataKey] = {};
           }
           window[pageDesc.dataKey][pageDesc.storageKey] = newDescription;
+          
+          // Also update JdrApp.data.customPageDescriptions for consistency with router and storage
+          if (!JdrApp.data.customPageDescriptions) {
+            JdrApp.data.customPageDescriptions = {};
+          }
+          JdrApp.data.customPageDescriptions[pageDesc.storageKey] = newDescription;
         } else {
           // Mise à jour dans le dataKey principal
           const mainDataKey = config.dataKey;
@@ -6569,6 +7203,36 @@ article span[title]:hover::after {
       if (!config?.defaultValues) return {};
 
       return { ...config.defaultValues, ...overrides };
+    }
+
+    ensureCollectionsType() {
+      if (!window.ContentTypes) {
+        window.ContentTypes = {};
+      }
+      
+      // Inject collections type if missing
+      window.ContentTypes.collections = {
+        fields: {
+          description: { type: 'richtext', label: 'Description', required: true }
+        },
+        template: 'collections-page',
+        container: 'collections',
+        icons: { 
+          category: '📚', 
+          item: '📦'
+        },
+        pageDescription: {
+          dataSource: 'external',
+          dataKey: 'CUSTOM_PAGE_DESCRIPTIONS',
+          storageKey: 'collections-objets',
+          defaultValue: "Recherchez et explorez des collections d'objets organisées par thème"
+        },
+        defaultValues: {
+          description: "Recherchez et explorez des collections d'objets organisées par thème"
+        }
+      };
+      
+      console.log('✅ Collections type injected into ContentTypes');
     }
   }
 
@@ -7234,49 +7898,34 @@ article span[title]:hover::after {
     buildSingleObjectPage(objectData) {
       const config = window.ContentTypes['objet'];
       const allObjects = objectData.objets || [];
-      const filterSettings = objectData.filterSettings || {};
-      const visibleTags = filterSettings.visibleTags || config.filterConfig.defaultVisibleTags;
+      // SIMPLIFIÉ: Système simple avec variable globale pour les tags actifs
+      const availableTags = config.filterConfig.availableTags || [];
       
-      // CRITICAL: Ensure window.OBJETS.filterSettings is properly initialized with the same visibleTags
-      // This fixes the sync issue between visual state and data state in standalone mode
-      if (!window.OBJETS.filterSettings) {
-        window.OBJETS.filterSettings = { 
-          visibleTags: [...visibleTags],
-          displayedFilterButtons: [...config.filterConfig.availableTags]
-        };
+      // Initialiser la variable globale pour les tags actifs si elle n'existe pas
+      if (!window.ACTIVE_OBJECT_TAGS) {
+        window.ACTIVE_OBJECT_TAGS = []; // Aucun tag actif par défaut
       }
+      const activeTags = window.ACTIVE_OBJECT_TAGS;
       
-      // Ensure displayedFilterButtons is always initialized
-      if (!window.OBJETS.filterSettings.displayedFilterButtons) {
-        window.OBJETS.filterSettings.displayedFilterButtons = [...config.filterConfig.availableTags];
-      }
+      // Filtrer les objets selon le mode actuel
+      const isDevMode = JdrApp.utils.isDevMode();
       
-      // Filtrer les objets selon les tags visibles, sauf si une recherche par ID est active
+      // console.log('🎯 Object filtering - isDevMode:', isDevMode, 'activeIdSearch:', !!window.activeIdSearch, 'activeTags:', activeTags.length);
+      
       const filteredObjects = window.activeIdSearch 
-        ? allObjects // Afficher tous les objets quand une recherche par ID est active
-        : visibleTags.length === 0 
-          ? [] // Si aucun tag n'est visible, ne rien afficher
-          : allObjects.filter(obj => {
-              // Vérifier que l'objet a les tags requis pour être visible
-              if (!obj.tags) return false;
-              
-              // L'objet doit avoir au moins un tag visible
-              const hasVisibleTag = obj.tags.some(tag => visibleTags.includes(tag));
-              if (!hasVisibleTag) return false;
-              
-              // CONDITION OBLIGATOIRE : L'objet doit avoir le tag "Départ" pour être visible
-              // SAUF si mode MJ activé, dev mode activé, ou recherche par ID active
-              const isMJMode = window.JdrApp?.state?.isMJ || false;
-              const isDevMode = window.JdrApp?.utils?.isDevMode?.() || false;
-              const bypassDepartRequirement = isMJMode || isDevMode || window.activeIdSearch;
-              
-              if (!bypassDepartRequirement) {
-                const hasDepartTag = obj.tags.includes('Départ');
-                if (!hasDepartTag) return false;
-              }
-              
-              return true;
-            });
+        ? allObjects // TOUJOURS afficher tous les objets quand recherche par ID est active
+        : !isDevMode
+          ? [] // Mode dev OFF: aucun objet affiché par défaut (seule recherche ID fonctionne)
+          : activeTags.length === 0 
+            ? allObjects // Mode dev ON + aucun tag actif = TOUS les objets
+            : allObjects.filter(obj => {
+                // Mode dev ON: LOGIQUE ET - l'objet doit avoir TOUS les tags actifs
+                if (!obj.tags || obj.tags.length === 0) return false;
+                // Vérifier que l'objet a TOUS les tags actifs (logique AND)
+                return activeTags.every(activeTag => obj.tags.includes(activeTag));
+              });
+      
+      // console.log('📊 Filtered objects count:', filteredObjects.length, '/ Total objects:', allObjects.length);
       
       return `
         <article class="" data-page="objets">
@@ -7289,11 +7938,10 @@ article span[title]:hover::after {
             ${this.buildPageDescription('objet')}
             
             ${this.buildIdSearchFilter()}
-            ${this.buildTagFilters(visibleTags, filterSettings.displayedFilterButtons || config.filterConfig.availableTags)}
+            ${this.buildTagFilters(activeTags, availableTags)}
             
             <div style="display: flex; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap;">
               ${this.buildAddButton('objet', 'objets')}
-              ${this.buildFilterManagerButton()}
               ${this.buildTagsManagerButton()}
             </div>
             
@@ -7851,6 +8499,7 @@ article span[title]:hover::after {
 
     buildIdSearchFilter() {
       const isIdSearchActive = window.activeIdSearch || false;
+      const isDevMode = JdrApp.utils.isDevMode();
       const searchBorderColor = isIdSearchActive ? '#16a34a' : 'var(--rule)';
       const searchBoxShadow = isIdSearchActive ? 'box-shadow: 0 0 8px rgba(22, 163, 74, 0.3);' : '';
       const searchIndicator = isIdSearchActive ? '🎯 ' : '🔍 ';
@@ -7874,7 +8523,7 @@ article span[title]:hover::after {
               <button 
                 id="clear-id-search" 
                 class="btn small" 
-                style="background: var(--bronze); color: white; padding: 0.2rem 0.4rem; white-space: nowrap; font-size: 0.9em; display: flex; align-items: center; height: 2rem; justify-content: center;"
+                style="background: var(--bronze); color: white; padding: 0.2rem 0.4rem; white-space: nowrap; font-size: 0.9em; display: ${!isDevMode ? 'none' : 'flex'}; align-items: center; height: 2rem; justify-content: center;"
                 title="${buttonTitle}"
               >
                 ${buttonText}
@@ -7938,55 +8587,55 @@ article span[title]:hover::after {
       `;
     }
 
-    buildTagFilters(visibleTags, availableTags, context = 'objet') {
+    buildTagFilters(activeTags, availableTags, context = 'objet') {
+      // For objects page, show tag filters ONLY in dev mode ON
+      const isDevMode = JdrApp.utils.isDevMode();
+      
+      // console.log('🏷️ buildTagFilters - context:', context, 'isDevMode:', isDevMode, 'body class:', document.body.className);
+      // console.log('🏷️ Available tags:', availableTags.length, 'Active tags:', activeTags.length);
+      
+      if (context === 'objet' && !isDevMode) {
+        // console.log('🚫 Hiding tag filters for objects in dev mode OFF');
+        return ''; // Hide tag filters in normal mode
+      }
+      
+      // console.log('✅ Showing tag filters for objects in dev mode ON');
+      
       const isIdSearchActive = window.activeIdSearch || false;
       const containerOpacity = isIdSearchActive ? '0.4' : '1';
       const containerFilter = isIdSearchActive ? 'grayscale(1)' : 'none';
       const pointerEvents = isIdSearchActive ? 'none' : 'auto';
       
-      // Créer des chips pour tous les tags disponibles avec indicateur actif/inactif
+      // Afficher TOUS les tags disponibles, avec ceux actifs en vert
       const allFilterChips = availableTags.map(tag => {
-        const isActive = visibleTags.includes(tag);
+        const isActive = activeTags.includes(tag);
         const bgColor = isActive ? '#16a34a' : '#6b7280'; // Vert pour actif, gris pour inactif
         const textColor = 'white';
         const opacity = isActive ? '1' : '0.6';
         
-        return `<span class="filter-chip ${isActive ? 'active' : 'inactive'}" 
-                      data-tag="${tag}" 
-                      style="background: ${bgColor}; color: ${textColor}; opacity: ${opacity}; 
-                             padding: 6px 12px; border-radius: 20px; font-size: 0.9em; font-weight: 500;
-                             cursor: pointer; transition: all 0.2s ease; border: 2px solid transparent;
-                             ${isActive ? 'box-shadow: 0 2px 4px rgba(22, 163, 74, 0.3);' : ''}"
-                      title="${isActive ? 'Actif - Cliquer pour désactiver' : 'Inactif - Cliquer pour activer'}">
-                  ${isActive ? '✓ ' : ''}${tag}
-                </span>`;
+        return `<button class="filter-chip ${isActive ? 'active' : 'inactive'}" 
+                        data-tag="${tag}" 
+                        style="background: ${bgColor}; color: ${textColor}; opacity: ${opacity}; 
+                               padding: 8px 16px; border-radius: 20px; font-size: 0.9em; font-weight: 500;
+                               cursor: pointer; transition: all 0.2s ease; border: none;
+                               margin: 2px; ${isActive ? 'box-shadow: 0 2px 4px rgba(22, 163, 74, 0.3);' : ''}"
+                        title="${isActive ? 'Actif - Cliquer pour désactiver' : 'Inactif - Cliquer pour activer'}">
+                    ${isActive ? '✓ ' : ''}${tag}
+                </button>`;
       }).join('');
       
-      // Only show "Tous" and "Aucun" buttons for objects, not for monsters or tables de trésors
-      const showSelectAllButtons = context !== 'monster' && context !== 'tableTresor';
+      // Supprimer les boutons Tous/Aucun - les utilisateurs cliquent directement sur les tags
       
       return `
         <div class="objects-tag-display" style="margin: 1rem 0; padding: 1rem; background: var(--card); border: 2px solid var(--rule); border-radius: 12px; opacity: ${containerOpacity}; filter: ${containerFilter}; pointer-events: ${pointerEvents}; transition: all 0.3s ease;">
-          ${showSelectAllButtons ? `
-            <div style="display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 1rem;">
-              <button 
-                id="select-all-tags" 
-                class="btn small" 
-                style="background: #3b82f6; color: white; padding: 4px 8px; font-size: 0.8em; border-radius: 12px;"
-                title="Activer tous les tags"
-              >
-                ✓ Tous
-              </button>
-              <button 
-                id="select-no-tags" 
-                class="btn small" 
-                style="background: #6b7280; color: white; padding: 4px 8px; font-size: 0.8em; border-radius: 12px;"
-                title="Désactiver tous les tags"
-              >
-                ✗ Aucun
-              </button>
-            </div>
-          ` : ''}
+          <h3 style="margin: 0 0 1rem 0; text-align: center; color: var(--accent-ink);">🔍 Filtres par tag (ET)</h3>
+          <p style="text-align: center; color: var(--paper-muted); font-size: 0.9em; margin: 0 0 1rem 0;">
+            ${activeTags.length === 0 
+              ? 'Aucun filtre actif - Tous les objets affichés' 
+              : activeTags.length === 1 
+                ? '1 filtre actif - Objets avec ce tag uniquement'
+                : `${activeTags.length} filtres actifs - Objets avec TOUS ces tags`}
+          </p>
           <div class="filter-chips" style="display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center;">
             ${allFilterChips}
           </div>
@@ -7994,13 +8643,7 @@ article span[title]:hover::after {
       `;
     }
     
-    buildFilterManagerButton() {
-      // Only show in dev mode
-      if (!this.shouldShowEditButtons) {
-        return '';
-      }
-      return `<button class="filter-manager-btn btn" type="button" style="background: var(--bronze); color: white;">⚙️ Gérer les filtres</button>`;
-    }
+    // SUPPRIMÉ: buildFilterManagerButton - fonctionnalité retirée
 
     buildTagsManagerButton() {
       // Only show in dev mode - use direct utils check
@@ -8042,13 +8685,7 @@ article span[title]:hover::after {
       `;
     }
 
-    buildFilterManagerButton() {
-      // Only show in dev mode
-      if (!this.shouldShowEditButtons) {
-        return '';
-      }
-      return `<button class="filter-manager-btn btn" type="button" style="background: var(--bronze); color: white;">⚙️ Gérer les filtres</button>`;
-    }
+    // SUPPRIMÉ: buildFilterManagerButton - fonctionnalité retirée
     
     buildTagsManagerButton() {
       // ALWAYS generate the button - CSS will control visibility based on body.dev-on/dev-off  
@@ -8116,9 +8753,10 @@ article span[title]:hover::after {
             
             ${instance.buildTagFilters(visibleTags, availableTags, 'tableTresor')}
             
-            <div style="display: flex; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap;">
+            <div data-dev-only class="dev-buttons-container">
               ${instance.buildAddButton('tableTresor', 'tables')}
               ${instance.buildTagsManagerButton()}
+            </div>
             </div>
             
             <div class="grid cols-1" id="tables-tresors-container" style="gap: 1.5rem;">
@@ -8937,6 +9575,11 @@ article span[title]:hover::after {
           zip.file('data/tables-tresors.json', JSON.stringify(window.TABLES_TRESORS, null, 2));
         }
         
+        // Add collections data with current edits
+        if (window.COLLECTIONS) {
+          zip.file('data/collections.json', JSON.stringify(window.COLLECTIONS, null, 2));
+        }
+        
         // Add TOC structure with new pages
         if (window.TOC_STRUCTURE) {
           zip.file('data/toc-structure.json', JSON.stringify(window.TOC_STRUCTURE, null, 2));
@@ -8982,6 +9625,11 @@ article span[title]:hover::after {
         
         if (window.TABLES_TRESORS_PAGE_DESC) {
           zip.file('data/tables-tresors-page-desc.json', JSON.stringify(window.TABLES_TRESORS_PAGE_DESC, null, 2));
+        }
+        
+        // Add custom page descriptions (collections, etc.)
+        if (JdrApp.data.customPageDescriptions) {
+          zip.file('data/custom-page-descriptions.json', JSON.stringify(JdrApp.data.customPageDescriptions, null, 2));
         }
         
         // Add package.json and other config files
@@ -9619,14 +10267,28 @@ article span[title]:hover::after {
             
             if (dataFile === 'sorts.json') {
               window.SORTS = data;
+              JdrApp.data.SORTS = data;
             } else if (dataFile === 'classes.json') {
               window.CLASSES = data;
+              JdrApp.data.CLASSES = data;
             } else if (dataFile === 'dons.json') {
               window.DONS = data;
+              JdrApp.data.DONS = data;
             } else if (dataFile === 'objets.json') {
               window.OBJETS = data;
+              JdrApp.data.OBJETS = data;
             } else if (dataFile === 'monstres.json') {
               window.MONSTRES = data;
+              JdrApp.data.MONSTRES = data;
+            } else if (dataFile === 'tables-tresors.json') {
+              window.TABLES_TRESORS = data;
+              JdrApp.data.TABLES_TRESORS = data;
+            } else if (dataFile === 'collections.json') {
+              window.COLLECTIONS = data;
+              JdrApp.data.COLLECTIONS = data;
+            } else if (dataFile === 'toc-structure.json') {
+              window.TOC_STRUCTURE = data;
+              JdrApp.data.TOC_STRUCTURE = data;
             }
           }
         }
@@ -9636,17 +10298,21 @@ article span[title]:hover::after {
         if (configFile) {
           const configContent = await configFile.async('text');
           window.STATIC_PAGES_CONFIG = JSON.parse(configContent);
+          JdrApp.data.STATIC_PAGES_CONFIG = JSON.parse(configContent);
         }
 
         // Import static pages data
         if (window.STATIC_PAGES_CONFIG && window.STATIC_PAGES_CONFIG.pages) {
           window.STATIC_PAGES = {};
+          JdrApp.data.STATIC_PAGES = {};
           for (const pageConfig of window.STATIC_PAGES_CONFIG.pages) {
             if (pageConfig.active) {
               const pageFile = contents.file(`data/${pageConfig.file}`);
               if (pageFile) {
                 const pageContent = await pageFile.async('text');
-                window.STATIC_PAGES[pageConfig.id] = JSON.parse(pageContent);
+                const pageData = JSON.parse(pageContent);
+                window.STATIC_PAGES[pageConfig.id] = pageData;
+                JdrApp.data.STATIC_PAGES[pageConfig.id] = pageData;
               }
             }
           }
@@ -9660,6 +10326,15 @@ article span[title]:hover::after {
           if (imagesData.images) {
             JdrApp.modules.images.importImages(imagesData.images);
           }
+        }
+
+        // Import custom page descriptions
+        const customDescFile = contents.file('data/custom-page-descriptions.json');
+        if (customDescFile) {
+          const customDescContent = await customDescFile.async('text');
+          const customDescData = JSON.parse(customDescContent);
+          window.CUSTOM_PAGE_DESCRIPTIONS = customDescData;
+          JdrApp.data.customPageDescriptions = { ...JdrApp.data.customPageDescriptions, ...customDescData };
         }
 
         // Save imported data to localStorage
@@ -9702,6 +10377,24 @@ article span[title]:hover::after {
       // Set up route change listeners
       JdrApp.utils.events.onHashChange(() => this.parseRoute());
       JdrApp.utils.events.onDOMReady(() => this.parseRoute());
+      
+      // Listen for dev mode changes to refresh objects page
+      if (window.EventBus && window.Events) {
+        EventBus.on(Events.EDITOR_TOGGLE, (payload) => {
+          const currentHash = window.location.hash;
+          console.log('🔄 Router: Dev mode changed to:', payload.enabled, 'Current page:', currentHash);
+          
+          // Refresh objects page specifically when dev mode changes
+          if (currentHash === '#/objets') {
+            setTimeout(() => {
+              console.log('🗺️ Router: Force refreshing objects page after dev mode change');
+              // Force a complete refresh by setting the flag
+              this._forceObjectsRefresh = true;
+              this.renderObjectsPage();
+            }, 150);
+          }
+        });
+      }
     },
     
     parseRoute() {
@@ -9709,12 +10402,27 @@ article span[title]:hover::after {
       const page = hash || 'creation';
       const exists = JdrApp.utils.dom.$(`article[data-page="${page}"]`);
       
+      console.log(`🔍 parseRoute debug:`, {
+        hash,
+        page,
+        exists: !!exists,
+        existsValue: exists
+      });
+      
       this.currentRoute = page;
       
       // Handle dynamic category routing
-      if (!exists) {
+      // Fix: check if exists is falsy OR empty NodeList
+      const shouldUseRouter = !exists || (exists.length === 0);
+      console.log(`🔧 Router decision: shouldUseRouter=${shouldUseRouter}, exists=${!!exists}, length=${exists?.length}`);
+      
+      if (shouldUseRouter) {
+        console.log(`🔍 Page element doesn't exist for: ${page}, trying dynamic route...`);
         if (this.handleDynamicRoute(page)) {
+          console.log(`✅ Dynamic route handled for: ${page}`);
           return; // Route was handled dynamically
+        } else {
+          console.log(`❌ Dynamic route NOT handled for: ${page}, showing creation`);
         }
       }
       
@@ -9722,6 +10430,8 @@ article span[title]:hover::after {
     },
 
     handleDynamicRoute(page) {
+      console.log(`🔄 handleDynamicRoute called for: ${page}`);
+      
       // Handle sorts-* routes
       if (page.startsWith('sorts-')) {
         return this.renderDynamicCategory('sorts', 'spell', page);
@@ -9734,7 +10444,14 @@ article span[title]:hover::after {
       
       // Handle single objets page (objects now use unified page with tag filtering)
       if (page === 'objets') {
+        console.log('🎯 Router: objets page requested');
         return this.renderObjectsPage();
+      }
+      
+      // Handle collections-objets page
+      if (page === 'collections-objets') {
+        console.log('🎯 Router: collections-objets page requested');
+        return this.renderCollectionsObjectsPage();
       }
       
       // Handle single monstres page (monsters now use unified page with tag filtering)
@@ -9793,9 +10510,16 @@ article span[title]:hover::after {
     },
     
     show(page) {
+      console.log(`👁️ show() called for page: ${page}`);
       document.querySelectorAll('article').forEach(a => a.classList.remove('active'));
       const target = document.querySelector(`article[data-page="${page}"]`);
-      if (target) target.classList.add('active');
+      console.log(`🎯 Target element found:`, !!target);
+      if (target) {
+        target.classList.add('active');
+        console.log(`✅ Added 'active' class to ${page}`);
+      } else {
+        console.error(`❌ No target element found for page: ${page}`);
+      }
       
       document.querySelectorAll('.toc a').forEach(a => a.classList.remove('active'));
       const activeLink = document.querySelector(`a[href="#/${page}"]`);
@@ -10300,6 +11024,1202 @@ article span[title]:hover::after {
       this.updateActiveStates('tables-tresors');
       this.show('tables-tresors'); // Activer la page
       return true;
+    },
+
+    renderCollectionsObjectsPage() {
+      console.log('🔄 Starting renderCollectionsObjectsPage...');
+      console.log('📊 Data check:', {
+        COLLECTIONS: !!window.COLLECTIONS,
+        collectionsArray: window.COLLECTIONS?.collections?.length || 0,
+        OBJETS: !!window.OBJETS,
+        objetsArray: window.OBJETS?.objets?.length || 0,
+        isStandalone: !!window.STANDALONE_VERSION,
+        customDescriptions: !!JdrApp.data.customPageDescriptions
+      });
+
+      // Safety check - if collections data is not available, try to wait a bit
+      if (!window.COLLECTIONS || !window.COLLECTIONS.collections || window.COLLECTIONS.collections.length === 0) {
+        console.warn('⚠️ Collections data not ready, retrying in 100ms...');
+        setTimeout(() => this.renderCollectionsObjectsPage(), 100);
+        return false;
+      }
+      
+      // Create or find the page element
+      let pageElement = document.getElementById('collections-objets');
+      console.log('📄 Page element found:', !!pageElement);
+      
+      // If the page doesn't exist, create it
+      if (!pageElement) {
+        // console.log('📄 Creating new page element...');
+        pageElement = document.createElement('article');
+        pageElement.id = 'collections-objets';
+        pageElement.setAttribute('data-page', 'collections-objets');
+        pageElement.className = 'page';
+        
+        // Insert it into the views container
+        const viewsContainer = document.querySelector('#views');
+        // console.log('📦 Views container found:', !!viewsContainer);
+        
+        if (viewsContainer) {
+          viewsContainer.appendChild(pageElement);
+          // console.log('📄 Page element added to views');
+        } else {
+          console.error('Views container not found');
+          return false;
+        }
+      }
+      
+      // Create the collections page content
+      const collectionsContent = `
+        <div class="page-header">
+          <h1>📚 Collections d'Objets</h1>
+          <div class="editable-section" data-section-type="pageDescription">
+            <p class="editable" data-edit-type="generic" data-edit-section="description" data-item-identifier="collections-objets" data-page-type="collections">${this.getCollectionsDescription()}</p>
+            <button class="edit-btn" data-edit-type="collections-description" style="display: none;">✏️ Modifier</button>
+          </div>
+        </div>
+        
+        <div class="collections-search">
+          <div class="search-container">
+            <input 
+              type="text" 
+              id="collection-search-input" 
+              placeholder="Tapez le nom d'une collection..." 
+              class="search-input"
+            />
+            <button id="collection-search-btn" class="search-button">🔍 Rechercher</button>
+          </div>
+        </div>
+        
+        <div id="collection-results" class="collection-results" style="display: none;">
+          <div id="collection-header" class="collection-header"></div>
+          <div id="tag-filters" class="tag-filters"></div>
+          <div id="collection-items" class="collection-items"></div>
+        </div>
+        
+        <div id="available-collections" class="available-collections" style="display: none;">
+          <h2>Collections disponibles</h2>
+          <div class="collections-grid">
+            <!-- Collections will be generated dynamically -->
+          </div>
+        </div>
+      `;
+      
+      // Insert content into the page
+      console.log('📝 Injecting HTML content into page element...');
+      console.log('📝 Content length:', collectionsContent.length);
+      pageElement.innerHTML = collectionsContent;
+      console.log('📝 HTML injection completed');
+      console.log('📝 Page element HTML length after inject:', pageElement.innerHTML.length);
+      this.setupCollectionsEventListeners();
+      
+      // Show collections grid in dev mode, auto-fill search in normal mode
+      const availableCollections = document.getElementById('available-collections');
+      const searchInput = document.getElementById('collection-search-input');
+      const isDevMode = this.isDevModeActive();
+      
+      // console.log('🔧 Collections page debug:', {
+      //   isDevMode,
+      //   availableCollections: !!availableCollections,
+      //   bodyClass: document.body.className
+      // });
+      
+      // Generate collections dynamically
+      console.log('📋 About to generate collections grid...');
+      this.generateCollectionsGrid();
+      console.log('✅ Collections grid generation completed');
+      
+      if (availableCollections) {
+        if (isDevMode) {
+          // console.log('📋 Showing collections in dev mode');
+          availableCollections.style.display = 'block';
+          // In dev mode, show all collections without needing search
+          // But keep the search functional for filtering
+        } else {
+          // console.log('🔒 Hiding collections in normal mode');
+          availableCollections.style.display = 'none';
+          // In normal mode, collections are hidden - user must search manually
+        }
+      } else {
+        console.error('❌ available-collections element not found');
+      }
+      
+      // Setup dev mode change listener
+      this.setupDevModeListener();
+      
+      // Show and activate page after content is inserted
+      console.log('👀 About to show page: collections-objets');
+      this.show('collections-objets');
+      console.log('🎯 About to update active states for: collections-objets');
+      this.updateActiveStates('collections-objets');
+      
+      // Ensure the page is visible regardless of dev mode
+      if (pageElement) {
+        pageElement.classList.add('active');
+      }
+      
+      return true;
+    },
+
+    setupCollectionsEventListeners() {
+      // console.log('Setting up collections event listeners...');
+      const searchInput = document.getElementById('collection-search-input');
+      const searchBtn = document.getElementById('collection-search-btn');
+      const collectionCards = document.querySelectorAll('.collection-card');
+      
+      // console.log('Found elements:', {
+      //   searchInput: !!searchInput,
+      //   searchBtn: !!searchBtn,
+      //   collectionCards: collectionCards.length
+      // });
+      
+      // Search functionality
+      const performSearch = () => {
+        const searchTerm = searchInput.value.trim();
+        if (searchTerm) {
+          this.displayCollection(searchTerm);
+        }
+      };
+      
+      searchBtn.addEventListener('click', performSearch);
+      searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          performSearch();
+        }
+      });
+      
+      // Collection card clicks
+      collectionCards.forEach(card => {
+        card.addEventListener('click', () => {
+          const collection = card.getAttribute('data-collection');
+          searchInput.value = collection;
+          this.displayCollection(collection);
+        });
+      });
+    },
+
+    displayCollection(collectionName) {
+      if (!window.OBJETS || !window.OBJETS.objets || !window.COLLECTIONS || !window.COLLECTIONS.collections) return;
+      
+      // Find the collection by name or ID
+      const collection = window.COLLECTIONS.collections.find(coll => 
+        coll.id === collectionName || 
+        coll.nom.toLowerCase() === collectionName.toLowerCase()
+      );
+      
+      if (!collection) {
+        this.showCollectionNotFound(collectionName);
+        return;
+      }
+      
+      // Filter objects by collection (using object numbers/IDs defined in collection)
+      const filteredObjects = window.OBJETS.objets.filter(obj => {
+        return collection.objets && collection.objets.includes(obj.numero);
+      });
+      
+      const resultsContainer = document.getElementById('collection-results');
+      const headerContainer = document.getElementById('collection-header');
+      const itemsContainer = document.getElementById('collection-items');
+      const tagFiltersContainer = document.getElementById('tag-filters');
+      const availableCollections = document.getElementById('available-collections');
+      
+      // Hide available collections and show results
+      if (availableCollections) {
+        availableCollections.style.display = 'none';
+      }
+      if (resultsContainer) {
+        resultsContainer.style.display = 'block';
+      }
+      
+      const isDevMode = JdrApp.utils.isDevMode();
+      
+      // Update header with collection info
+      if (headerContainer) {
+        headerContainer.innerHTML = `
+          ${isDevMode ? `
+            <div class="collection-navigation" style="margin-bottom: 1rem;">
+              <button class="btn small back-to-collections-btn" style="background: #6B7280;">← Retour aux collections</button>
+            </div>
+          ` : ''}
+          <h2>${collection.icon} ${collection.nom}</h2>
+          <p class="collection-description">${collection.description}</p>
+          <p>${filteredObjects.length} objet(s) dans cette collection</p>
+          ${isDevMode ? `
+            <div class="collection-dev-actions" style="margin-top: 1rem;">
+              <button class="btn small add-object-btn" data-collection="${collection.id}">➕ Ajouter un objet à cette collection</button>
+              <button class="btn small remove-object-btn" data-collection="${collection.id}">➖ Retirer un objet de cette collection</button>
+            </div>
+          ` : ''}
+        `;
+      }
+      
+      // Get all unique tags from filtered objects for additional filtering
+      const allTags = [...new Set(filteredObjects.flatMap(obj => obj.tags || []))];
+      
+      // Create tag filters if objects have multiple tags
+      if (allTags.length > 1 && tagFiltersContainer) {
+        tagFiltersContainer.innerHTML = `
+          <h3>Filtrer par tag:</h3>
+          <div class="tag-buttons">
+            <button class="tag-filter-btn active" data-tag="all">Tous</button>
+            ${allTags.map(tag => `
+              <button class="tag-filter-btn" data-tag="${tag}">${tag}</button>
+            `).join('')}
+          </div>
+        `;
+      } else if (tagFiltersContainer) {
+        tagFiltersContainer.innerHTML = '';
+      }
+      
+      // Display objects
+      this.renderCollectionItems(filteredObjects);
+      
+      // Setup add/remove object button listeners if in dev mode
+      if (isDevMode) {
+        const addObjectBtn = document.querySelector('.add-object-btn');
+        if (addObjectBtn) {
+          addObjectBtn.addEventListener('click', () => {
+            const collection = addObjectBtn.getAttribute('data-collection');
+            this.addObjectToCollection(collection);
+          });
+        }
+        
+        const removeObjectBtn = document.querySelector('.remove-object-btn');
+        if (removeObjectBtn) {
+          removeObjectBtn.addEventListener('click', () => {
+            const collection = removeObjectBtn.getAttribute('data-collection');
+            this.removeObjectFromCollection(collection);
+          });
+        }
+
+        const backToCollectionsBtn = document.querySelector('.back-to-collections-btn');
+        if (backToCollectionsBtn) {
+          backToCollectionsBtn.addEventListener('click', () => {
+            this.showCollectionsGrid();
+          });
+        }
+      }
+      
+      // Tag filter event listeners
+      document.querySelectorAll('.tag-filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          // Update active state
+          document.querySelectorAll('.tag-filter-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          
+          const selectedTag = btn.getAttribute('data-tag');
+          let itemsToShow = filteredObjects;
+          
+          if (selectedTag !== 'all') {
+            itemsToShow = filteredObjects.filter(obj => 
+              obj.tags && obj.tags.includes(selectedTag)
+            );
+          }
+          
+          this.renderCollectionItems(itemsToShow);
+        });
+      });
+    },
+
+    showCollectionNotFound(collectionName) {
+      const resultsContainer = document.getElementById('collection-results');
+      const headerContainer = document.getElementById('collection-header');
+      const itemsContainer = document.getElementById('collection-items');
+      const tagFiltersContainer = document.getElementById('tag-filters');
+      const availableCollections = document.getElementById('available-collections');
+      
+      // Show error message for non-existent collection
+      if (availableCollections) {
+        availableCollections.style.display = 'none';
+      }
+      if (resultsContainer) {
+        resultsContainer.style.display = 'block';
+      }
+      
+      if (headerContainer) {
+        const isDevMode = this.isDevModeActive();
+        headerContainer.innerHTML = `
+          <div class="collection-error">
+            <h2>❌ Collection introuvable</h2>
+            <p>Aucune collection nommée "<strong>${collectionName}</strong>" n'a été trouvée.</p>
+            ${isDevMode ? 
+              `<p>Les collections disponibles sont listées ci-dessous.</p>` : 
+              `<p>Vérifiez l'orthographe ou contactez un administrateur pour connaître les collections disponibles.</p>`
+            }
+          </div>
+        `;
+      }
+      
+      if (itemsContainer) {
+        itemsContainer.innerHTML = '';
+      }
+      if (tagFiltersContainer) {
+        tagFiltersContainer.innerHTML = '';
+      }
+      
+      // Clear search input after delay and show available collections only in dev mode
+      setTimeout(() => {
+        document.getElementById('collection-search-input').value = '';
+        
+        // Only show collections grid in dev mode
+        const isDevMode = this.isDevModeActive();
+        if (availableCollections) {
+          availableCollections.style.display = isDevMode ? 'block' : 'none';
+        }
+        if (resultsContainer) {
+          resultsContainer.style.display = 'none';
+        }
+      }, 3000);
+    },
+
+    renderCollectionItems(items) {
+      const itemsContainer = document.getElementById('collection-items');
+      
+      // Multiple ways to detect dev mode for robustness
+      const isDevMode = (
+        (JdrApp && JdrApp.utils && JdrApp.utils.isDevMode && JdrApp.utils.isDevMode()) ||
+        document.body.classList.contains('dev-on') ||
+        (JdrApp.modules && JdrApp.modules.editor && JdrApp.modules.editor.isDevMode)
+      );
+      
+      
+      // Check if CardBuilder is available
+      if (!window.CardBuilder) {
+        console.error('CardBuilder not available, falling back to simple display');
+        const itemsHTML = items.map(item => `
+          <div class="card" data-object-numero="${item.numero}">
+            <h4>${item.nom}</h4>
+            <p><strong>N°${item.numero}</strong></p>
+            <p>${item.description}</p>
+            <hr>
+            <p>${item.effet}</p>
+            <div style="display: flex; justify-content: space-between;">
+              <span>${item.prix}</span>
+              <span>${item.poids}</span>
+            </div>
+            ${isDevMode ? `
+              <div class="dev-controls" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #ccc;">
+                <button class="btn small edit-object-btn" data-numero="${item.numero}">✏️ Éditer</button>
+                <button class="btn small remove-from-collection-btn" data-numero="${item.numero}" style="background: #f59e0b;">➖ Retirer</button>
+                <button class="btn small delete-object-btn" data-numero="${item.numero}" style="background: #ef4444;">🗑️ Supprimer</button>
+              </div>
+            ` : ''}
+          </div>
+        `).join('');
+        itemsContainer.innerHTML = itemsHTML;
+      } else {
+        // Use the existing CardBuilder system to ensure consistent formatting and images
+        const itemsHTML = items.map(item => {
+          let cardHTML = window.CardBuilder.create('objet', item, 'objets').build();
+          
+          // Add dev controls if in dev mode
+          if (isDevMode) {
+            // Insert dev controls before the closing </article> tag
+            cardHTML = cardHTML.replace('</article>', `
+              <div class="dev-controls collection-dev-controls">
+                <button class="btn small edit-object-btn" data-numero="${item.numero}">✏️ Éditer</button>
+                <button class="btn small remove-from-collection-btn" data-numero="${item.numero}">➖ Retirer de cette collection</button>
+                <button class="btn small delete-object-btn" data-numero="${item.numero}">🗑️ Supprimer définitivement</button>
+              </div>
+            </article>`);
+          }
+          
+          return cardHTML;
+        }).join('');
+        
+        itemsContainer.innerHTML = itemsHTML;
+      }
+      
+      // Add event listeners for dev controls
+      if (isDevMode) {
+        this.setupCollectionEditControls();
+      }
+      
+      // Auto-load images and manage dev mode buttons after rendering
+      setTimeout(() => {
+        if (JdrApp.modules.renderer && JdrApp.modules.renderer.autoLoadImages) {
+          JdrApp.modules.renderer.autoLoadImages();
+        }
+        
+        // Force apply dev mode classes to ensure CSS rules work
+        this.ensureDevModeClasses();
+      }, 100);
+    },
+
+    setupCollectionEditControls() {
+      // Edit object buttons
+      const editBtns = document.querySelectorAll('.edit-object-btn');
+      const removeBtns = document.querySelectorAll('.remove-from-collection-btn');
+      const deleteBtns = document.querySelectorAll('.delete-object-btn');
+      
+      // console.log('🎛️ Setting up object controls:', {
+      //   editBtns: editBtns.length,
+      //   removeBtns: removeBtns.length,
+      //   deleteBtns: deleteBtns.length
+      // });
+
+      editBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const objectNumero = parseInt(btn.getAttribute('data-numero'));
+          // console.log('✏️ Edit object clicked:', objectNumero);
+          this.editCollectionObject(objectNumero);
+        });
+      });
+
+      // Remove from collection buttons
+      removeBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const objectNumero = parseInt(btn.getAttribute('data-numero'));
+          // console.log('➖ Remove from collection clicked:', objectNumero);
+          this.removeObjectFromCurrentCollection(objectNumero);
+        });
+      });
+
+      // Delete object buttons
+      deleteBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const objectNumero = parseInt(btn.getAttribute('data-numero'));
+          // console.log('🗑️ Delete object clicked:', objectNumero);
+          this.deleteCollectionObject(objectNumero);
+        });
+      });
+    },
+
+    editCollectionObject(objectNumero) {
+      // Find the object in the data (normalize comparison)
+      const object = window.OBJETS.objets.find(obj => parseInt(obj.numero) === objectNumero);
+      if (!object) {
+        console.error('Object not found:', objectNumero);
+        return;
+      }
+
+      // Navigate to the objects page and trigger edit for this specific object
+      // This reuses the existing object editing functionality
+      window.location.hash = '#/objets';
+      
+      // Wait for the page to load, then trigger edit
+      setTimeout(() => {
+        const objectCard = document.querySelector(`[data-numero="${objectNumero}"]`);
+        if (objectCard) {
+          // Trigger the existing edit functionality
+          const editableElements = objectCard.querySelectorAll('.editable');
+          if (editableElements.length > 0) {
+            // Focus on the first editable element to start editing
+            editableElements[0].click();
+          }
+        }
+      }, 500);
+    },
+
+    removeObjectFromCurrentCollection(objectNumero) {
+      // Find the object in the data (normalize comparison)
+      const object = window.OBJETS.objets.find(obj => parseInt(obj.numero) === objectNumero);
+      if (!object) {
+        console.error('Object not found:', objectNumero);
+        return;
+      }
+
+      // Determine which collection we're currently viewing
+      const searchInput = document.getElementById('collection-search-input');
+      const currentCollectionName = searchInput ? searchInput.value : null;
+      
+      if (!currentCollectionName) {
+        alert('Impossible de déterminer la collection actuelle.');
+        return;
+      }
+
+      // Find the current collection
+      const collection = window.COLLECTIONS.collections.find(coll => 
+        coll.nom === currentCollectionName || coll.id === currentCollectionName
+      );
+      
+      if (!collection) {
+        alert(`Collection "${currentCollectionName}" introuvable.`);
+        return;
+      }
+
+      // Check if the object is in this collection (normalize comparison)
+      const objNum = parseInt(objectNumero);
+      const isInCollection = collection.objets.includes(objNum) || collection.objets.includes(objectNumero);
+      if (!isInCollection) {
+        alert(`L'objet "${object.nom}" n'est pas dans la collection "${collection.nom}".`);
+        return;
+      }
+
+      // Confirm removal
+      const confirmRemove = confirm(
+        `Êtes-vous sûr de vouloir retirer l'objet "${object.nom}" de la collection "${collection.nom}"?\n\n` +
+        `L'objet ne sera pas supprimé, seulement retiré de cette collection.`
+      );
+      if (!confirmRemove) return;
+
+      // Remove the object from the collection (normalize comparison)
+      let objectIndex = collection.objets.indexOf(objNum);
+      if (objectIndex === -1) {
+        objectIndex = collection.objets.indexOf(objectNumero);
+      }
+      if (objectIndex !== -1) {
+        collection.objets.splice(objectIndex, 1);
+        
+        // Show notification
+        if (JdrApp.modules.storage && JdrApp.modules.storage.showNotification) {
+          JdrApp.modules.storage.showNotification(`➖ Objet "${object.nom}" retiré de la collection "${collection.nom}"`, 'success');
+        }
+
+        // Refresh the current collection view
+        this.displayCollection(collection.id);
+      }
+    },
+
+    deleteCollectionObject(objectNumero) {
+      // Find the object in the data (normalize comparison)  
+      const object = window.OBJETS.objets.find(obj => parseInt(obj.numero) === objectNumero);
+      if (!object) {
+        console.error('Object not found:', objectNumero);
+        return;
+      }
+
+      // Confirm deletion
+      const confirmDelete = confirm(`Êtes-vous sûr de vouloir supprimer l'objet "${object.nom}" (N°${object.numero}) ?`);
+      if (!confirmDelete) return;
+
+      // Remove the object from the data (normalize comparison)
+      const objectIndex = window.OBJETS.objets.findIndex(obj => parseInt(obj.numero) === objectNumero);
+      if (objectIndex !== -1) {
+        window.OBJETS.objets.splice(objectIndex, 1);
+        
+        // Show notification
+        if (JdrApp.modules.storage && JdrApp.modules.storage.showNotification) {
+          JdrApp.modules.storage.showNotification(`🗑️ Objet "${object.nom}" supprimé`, 'success');
+        }
+
+        // Refresh the current collection view
+        const currentSearch = document.getElementById('collection-search-input').value;
+        if (currentSearch) {
+          this.displayCollection(currentSearch);
+        }
+      }
+    },
+
+    addObjectToCollection(collectionId) {
+      // Find the collection
+      const collection = window.COLLECTIONS.collections.find(coll => coll.id === collectionId);
+      if (!collection) {
+        alert('Collection introuvable.');
+        return;
+      }
+      
+      // Show a list of all available objects to choose from
+      const allObjects = window.OBJETS.objets;
+      if (allObjects.length === 0) {
+        alert('Aucun objet disponible à ajouter.');
+        return;
+      }
+      
+      // Filter out objects already in this collection
+      // Normalize number comparison to handle both string and number types
+      const availableObjects = allObjects.filter(obj => {
+        const objNum = parseInt(obj.numero);
+        return !collection.objets.includes(objNum) && !collection.objets.includes(obj.numero);
+      });
+      
+      if (availableObjects.length === 0) {
+        alert('Tous les objets sont déjà dans cette collection.');
+        return;
+      }
+      
+      // Create a selection modal with dropdown
+      this.showObjectSelectionModal(
+        `Ajouter un objet à la collection "${collection.nom}"`,
+        availableObjects,
+        (selectedObject) => {
+          // Add the object to the collection (normalize to number type)
+          const objNum = parseInt(selectedObject.numero);
+          collection.objets.push(objNum);
+          
+          // Show notification
+          if (JdrApp.modules.storage && JdrApp.modules.storage.showNotification) {
+            JdrApp.modules.storage.showNotification(`➕ Objet "${selectedObject.nom}" ajouté à la collection "${collection.nom}"`, 'success');
+          }
+          
+          // Refresh the current collection view to show the added object
+          this.displayCollection(collectionId);
+          
+          // Auto-scroll to the added object
+          setTimeout(() => {
+            const addedObjectCard = document.querySelector(`[data-numero="${selectedObject.numero}"]`);
+            if (addedObjectCard) {
+              addedObjectCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              // Highlight the added object briefly
+              addedObjectCard.style.border = '3px solid #10B981';
+              setTimeout(() => {
+                addedObjectCard.style.border = '';
+              }, 2000);
+            }
+          }, 500);
+        }
+      );
+    },
+
+    removeObjectFromCollection(collectionId) {
+      // Find the collection
+      const collection = window.COLLECTIONS.collections.find(coll => coll.id === collectionId);
+      if (!collection) {
+        alert('Collection introuvable.');
+        return;
+      }
+      
+      if (!collection.objets || collection.objets.length === 0) {
+        alert('Cette collection est vide.');
+        return;
+      }
+      
+      // Get the objects in this collection
+      const collectionObjects = window.OBJETS.objets.filter(obj => 
+        collection.objets.includes(obj.numero)
+      );
+      
+      // Create a selection modal with dropdown
+      this.showObjectSelectionModal(
+        `Retirer un objet de la collection "${collection.nom}"`,
+        collectionObjects,
+        (selectedObject) => {
+          // Remove the object from the collection
+          const objectIndex = collection.objets.indexOf(selectedObject.numero);
+          if (objectIndex !== -1) {
+            collection.objets.splice(objectIndex, 1);
+            
+            // Show notification
+            if (JdrApp.modules.storage && JdrApp.modules.storage.showNotification) {
+              JdrApp.modules.storage.showNotification(`➖ Objet "${selectedObject.nom}" retiré de la collection "${collection.nom}"`, 'success');
+            }
+            
+            // Refresh the current collection view
+            this.displayCollection(collectionId);
+          }
+        }
+      );
+    },
+
+    showCollectionsGrid() {
+      // Hide collection results and show collections grid only in dev mode
+      const resultsContainer = document.getElementById('collection-results');
+      const availableCollections = document.getElementById('available-collections');
+      const searchInput = document.getElementById('collection-search-input');
+      
+      if (resultsContainer) {
+        resultsContainer.style.display = 'none';
+      }
+      
+      // Only show collections grid in dev mode
+      const isDevMode = this.isDevModeActive();
+      if (availableCollections) {
+        availableCollections.style.display = isDevMode ? 'block' : 'none';
+      }
+      
+      // Clear the search input
+      if (searchInput) {
+        searchInput.value = '';
+      }
+      
+      // Refresh the collections grid to ensure it's up to date if in dev mode
+      if (isDevMode) {
+        this.generateCollectionsGrid();
+      }
+    },
+
+    showObjectSelectionModal(title, objects, onSelectCallback) {
+      // Remove any existing modal
+      const existingModal = document.querySelector('#object-selection-modal');
+      if (existingModal) {
+        existingModal.remove();
+      }
+
+      // Create modal HTML
+      const modal = document.createElement('dialog');
+      modal.id = 'object-selection-modal';
+      modal.style.cssText = `
+        max-width: 500px;
+        width: 90%;
+        border: 3px solid #8B4513;
+        border-radius: 12px;
+        padding: 0;
+        background: transparent !important;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
+      `;
+
+      const selectOptions = objects
+        .map(obj => `<option value="${obj.numero}">N°${obj.numero} - ${obj.nom}</option>`)
+        .join('');
+
+      modal.innerHTML = `
+        <div style="
+          background: white; 
+          border-radius: 12px; 
+          padding: 1.5rem; 
+          border: 3px solid #8B4513;
+          font-family: inherit;
+          font-size: 16px;
+        ">
+          <h2 style="
+            color: #8B4513; 
+            font-family: 'Cinzel', serif; 
+            margin: 0 0 1rem 0; 
+            text-align: center;
+          ">${title}</h2>
+          
+          <div style="margin: 1rem 0;">
+            <label for="object-select" style="
+              display: block; 
+              margin-bottom: 0.5rem; 
+              color: #8B4513; 
+              font-weight: bold;
+            ">Sélectionnez un objet :</label>
+            <select id="object-select" style="
+              width: 100%; 
+              padding: 0.5rem; 
+              border: 2px solid #8B4513; 
+              border-radius: 8px; 
+              font-size: 16px;
+              font-family: inherit;
+            ">
+              <option value="">-- Choisissez un objet --</option>
+              ${selectOptions}
+            </select>
+          </div>
+          
+          <div style="
+            display: flex; 
+            gap: 1rem; 
+            justify-content: center; 
+            margin-top: 1.5rem;
+          ">
+            <button class="btn-confirm-selection" style="
+              background: #10B981; 
+              color: white; 
+              border: none; 
+              padding: 0.75rem 1.5rem; 
+              border-radius: 8px; 
+              cursor: pointer; 
+              font-weight: bold;
+            ">Confirmer</button>
+            <button class="btn-cancel-selection" style="
+              background: #6B7280; 
+              color: white; 
+              border: none; 
+              padding: 0.75rem 1.5rem; 
+              border-radius: 8px; 
+              cursor: pointer; 
+              font-weight: bold;
+            ">Annuler</button>
+          </div>
+        </div>
+      `;
+
+      // Add to body and show
+      document.body.appendChild(modal);
+      modal.showModal();
+
+      // Set up event handlers
+      const select = modal.querySelector('#object-select');
+      const confirmBtn = modal.querySelector('.btn-confirm-selection');
+      const cancelBtn = modal.querySelector('.btn-cancel-selection');
+
+      confirmBtn.addEventListener('click', () => {
+        const selectedNumero = parseInt(select.value);
+        if (selectedNumero) {
+          const selectedObject = objects.find(obj => obj.numero === selectedNumero);
+          if (selectedObject && onSelectCallback) {
+            onSelectCallback(selectedObject);
+          }
+        } else {
+          alert('Veuillez sélectionner un objet.');
+          return;
+        }
+        modal.close();
+        modal.remove();
+      });
+
+      cancelBtn.addEventListener('click', () => {
+        modal.close();
+        modal.remove();
+      });
+
+      // Handle ESC key
+      modal.addEventListener('close', () => {
+        modal.remove();
+      });
+    },
+
+    ensureDevModeClasses() {
+      // Ensure the body has the correct dev mode class
+      const isDevMode = JdrApp && JdrApp.utils && JdrApp.utils.isDevMode ? JdrApp.utils.isDevMode() : false;
+      
+      if (isDevMode) {
+        document.body.classList.remove('dev-off');
+        document.body.classList.add('dev-on');
+      } else {
+        document.body.classList.remove('dev-on');
+        document.body.classList.add('dev-off');
+      }
+      
+      // Force hide image buttons on collections page if not in dev mode
+      if (!isDevMode) {
+        const collectionItems = document.getElementById('collection-items');
+        if (collectionItems) {
+          const imageButtons = collectionItems.querySelectorAll('.illus label.up, .illus button.rm');
+          imageButtons.forEach(button => {
+            button.style.setProperty('display', 'none', 'important');
+          });
+        }
+      }
+    },
+
+    getCollectionsDescription() {
+      return JdrApp.data.customPageDescriptions['collections-objets'] || 'Recherchez et explorez des collections d\'objets organisées par thème';
+    },
+
+    generateCollectionsGrid() {
+      if (!window.COLLECTIONS || !window.COLLECTIONS.collections) {
+        console.error('❌ No COLLECTIONS data available', {
+          windowCollections: !!window.COLLECTIONS,
+          collectionsArray: window.COLLECTIONS?.collections,
+          isStandalone: !!window.STANDALONE_VERSION
+        });
+        return;
+      }
+      
+      // Use defined collections instead of extracting from tags
+      const collections = window.COLLECTIONS.collections;
+      
+      console.log('📚 Found collections:', collections.length);
+      console.log('📚 Collections data:', collections);
+      
+      // Collection icons are now defined in the collections data itself
+      
+      const isDevMode = this.isDevModeActive();
+      const collectionsGrid = document.querySelector('.collections-grid');
+      
+      if (!collectionsGrid) return;
+      
+      // Generate HTML for each collection
+      const collectionsHTML = collections
+        .map((collection) => {
+          const count = collection.objets ? collection.objets.length : 0;
+          return `
+            <div class="collection-card" data-collection="${collection.id}">
+              <div class="collection-icon">${collection.icon}</div>
+              <h3>${collection.nom}</h3>
+              <p>${count} objet(s)</p>
+              <p class="collection-description">${collection.description}</p>
+              ${isDevMode ? `
+                <div class="collection-dev-controls">
+                  <button class="btn small edit-collection-btn" data-collection="${collection.id}" title="Modifier cette collection">✏️ Modifier</button>
+                  <button class="btn small delete-collection-btn" data-collection="${collection.id}" title="Supprimer cette collection">🗑️ Supprimer</button>
+                </div>
+              ` : ''}
+            </div>
+          `;
+        }).join('');
+      
+      // Add "create new collection" button in dev mode
+      const devActions = isDevMode ? `
+        <div class="collection-card new-collection-card">
+          <div class="collection-icon">➕</div>
+          <h3>Nouvelle Collection</h3>
+          <p>Créer une collection</p>
+          <button class="btn small create-collection-btn">➕ Créer</button>
+        </div>
+      ` : '';
+      
+      collectionsGrid.innerHTML = collectionsHTML + devActions;
+      
+      // console.log('📦 Collections grid generated:', {
+      //   collectionsCount: collections.length,
+      //   hasDevActions: !!devActions,
+      //   gridContent: collectionsGrid.innerHTML.length + ' chars'
+      // });
+      
+      // Setup event listeners for collections (always active)
+      this.setupCollectionEventListeners();
+      
+      // Setup dev-specific controls only in dev mode
+      if (isDevMode) {
+        this.setupCollectionManagementControls();
+      }
+    },
+
+    isDevModeActive() {
+      // Multiple ways to detect dev mode for robustness
+      return (
+        (JdrApp && JdrApp.utils && JdrApp.utils.isDevMode && JdrApp.utils.isDevMode()) ||
+        document.body.classList.contains('dev-on') ||
+        (JdrApp.modules && JdrApp.modules.editor && JdrApp.modules.editor.isDevMode)
+      );
+    },
+
+    setupCollectionEventListeners() {
+      // Collection card click listeners (open collection for viewing/editing)
+      const collectionCards = document.querySelectorAll('.collection-card:not(.new-collection-card)');
+      
+      collectionCards.forEach(card => {
+        card.addEventListener('click', (e) => {
+          // Don't trigger if clicking on control buttons
+          if (e.target.closest('.collection-dev-controls')) {
+            return;
+          }
+          
+          const collectionId = card.getAttribute('data-collection');
+          if (collectionId) {
+            // Find collection to get its name
+            const collection = window.COLLECTIONS.collections.find(coll => coll.id === collectionId);
+            if (collection) {
+              // Fill search input with collection name
+              const searchInput = document.getElementById('collection-search-input');
+              if (searchInput) {
+                searchInput.value = collection.nom;
+              }
+              
+              // Open the collection
+              this.displayCollection(collectionId);
+            }
+          }
+        });
+      });
+    },
+
+    setupCollectionManagementControls() {
+      // Create new collection button
+      const createBtn = document.querySelector('.create-collection-btn');
+      const editBtns = document.querySelectorAll('.edit-collection-btn');
+      const deleteBtns = document.querySelectorAll('.delete-collection-btn');
+      
+      // console.log('🎛️ Setting up collection controls:', {
+      //   createBtn: !!createBtn,
+      //   editBtns: editBtns.length,
+      //   deleteBtns: deleteBtns.length
+      // });
+      
+      if (createBtn) {
+        createBtn.addEventListener('click', () => {
+          // console.log('➕ Create collection clicked');
+          this.createNewCollection();
+        });
+      }
+
+      // Edit collection buttons (rename)
+      editBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const collectionName = btn.getAttribute('data-collection');
+          // console.log('✏️ Edit collection clicked:', collectionName);
+          this.renameCollection(collectionName);
+        });
+      });
+
+      // Delete collection buttons
+      deleteBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const collectionName = btn.getAttribute('data-collection');
+          // console.log('🗑️ Delete collection clicked:', collectionName);
+          this.deleteCollection(collectionName);
+        });
+      });
+    },
+
+    createNewCollection() {
+      const collectionName = prompt('Nom de la nouvelle collection:');
+      if (!collectionName || !collectionName.trim()) return;
+      
+      const trimmedName = collectionName.trim();
+      
+      // Generate an ID from the name
+      const collectionId = trimmedName.toLowerCase().replace(/[^a-z0-9]/g, '-');
+      
+      // Check if collection already exists
+      const existingCollection = window.COLLECTIONS.collections.find(coll => 
+        coll.id === collectionId || coll.nom.toLowerCase() === trimmedName.toLowerCase()
+      );
+      
+      if (existingCollection) {
+        alert(`La collection "${trimmedName}" existe déjà.`);
+        return;
+      }
+      
+      // Get collection description and icon
+      const collectionDescription = prompt('Description de la collection:', 'Nouvelle collection d\'objets');
+      const collectionIcon = prompt('Icône de la collection (emoji):', '📦');
+      
+      // Create new collection object
+      const newCollection = {
+        id: collectionId,
+        nom: trimmedName,
+        description: collectionDescription || 'Nouvelle collection d\'objets',
+        icon: collectionIcon || '📦',
+        objets: []
+      };
+      
+      // Add to collections data
+      window.COLLECTIONS.collections.push(newCollection);
+      
+      // Refresh the grid
+      this.generateCollectionsGrid();
+      
+      if (JdrApp.modules.storage && JdrApp.modules.storage.showNotification) {
+        JdrApp.modules.storage.showNotification(`✅ Collection "${trimmedName}" créée avec succès!`, 'success');
+      }
+    },
+
+    renameCollection(collectionId) {
+      // Find the collection by ID
+      const collection = window.COLLECTIONS.collections.find(coll => coll.id === collectionId);
+      if (!collection) {
+        alert('Collection introuvable.');
+        return;
+      }
+      
+      const newName = prompt(`Nouveau nom pour la collection "${collection.nom}":`, collection.nom);
+      if (!newName || !newName.trim() || newName.trim() === collection.nom) return;
+      
+      const trimmedNewName = newName.trim();
+      
+      // Check if new name already exists
+      const existingCollection = window.COLLECTIONS.collections.find(coll => 
+        coll.id !== collectionId && coll.nom.toLowerCase() === trimmedNewName.toLowerCase()
+      );
+      
+      if (existingCollection) {
+        alert(`La collection "${trimmedNewName}" existe déjà.`);
+        return;
+      }
+      
+      // Update collection name
+      collection.nom = trimmedNewName;
+      
+      // Refresh the collections grid
+      this.generateCollectionsGrid();
+      
+      if (JdrApp.modules.storage && JdrApp.modules.storage.showNotification) {
+        JdrApp.modules.storage.showNotification(`✅ Collection renommée en "${trimmedNewName}"`, 'success');
+      }
+    },
+
+    deleteCollection(collectionId) {
+      // Find the collection by ID
+      const collection = window.COLLECTIONS.collections.find(coll => coll.id === collectionId);
+      if (!collection) {
+        alert('Collection introuvable.');
+        return;
+      }
+      
+      const objectCount = collection.objets ? collection.objets.length : 0;
+      
+      const confirmDelete = confirm(
+        `Êtes-vous sûr de vouloir supprimer la collection "${collection.nom}"?\n` +
+        `Cette collection contient ${objectCount} objet(s).\n` +
+        `Les objets ne seront pas supprimés, seulement la collection sera retirée.`
+      );
+      
+      if (!confirmDelete) return;
+      
+      // Remove the collection from the collections array
+      const collectionIndex = window.COLLECTIONS.collections.findIndex(coll => coll.id === collectionId);
+      if (collectionIndex !== -1) {
+        window.COLLECTIONS.collections.splice(collectionIndex, 1);
+        
+        // Refresh the collections grid
+        this.generateCollectionsGrid();
+        
+        if (JdrApp.modules.storage && JdrApp.modules.storage.showNotification) {
+          JdrApp.modules.storage.showNotification(`🗑️ Collection "${collection.nom}" supprimée`, 'success');
+        }
+      }
+    },
+
+    setupDevModeListener() {
+      // Listen for dev mode changes via EventBus
+      if (window.EventBus && window.Events) {
+        EventBus.on(Events.EDITOR_TOGGLE, (payload) => {
+          // console.log('🔄 Dev mode changed via EventBus:', payload.enabled);
+          setTimeout(() => this.refreshCollectionsView(), 50);
+        });
+      }
+      
+      // Also listen for body class changes (fallback)
+      if (window.MutationObserver) {
+        if (this.devModeObserver) {
+          this.devModeObserver.disconnect();
+        }
+        
+        // Track the previous dev mode state to avoid loops
+        let lastDevMode = this.isDevModeActive();
+        
+        this.devModeObserver = new MutationObserver((mutations) => {
+          mutations.forEach((mutation) => {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+              const currentDevMode = this.isDevModeActive();
+              
+              // Only refresh if dev mode actually changed
+              if (currentDevMode !== lastDevMode) {
+                // console.log('🔄 Body class changed, refreshing views - Dev mode:', currentDevMode);
+                lastDevMode = currentDevMode;
+                setTimeout(() => this.refreshCollectionsView(), 100);
+              }
+            }
+          });
+        });
+        
+        this.devModeObserver.observe(document.body, {
+          attributes: true,
+          attributeFilter: ['class']
+        });
+      }
+    },
+
+    refreshCollectionsView() {
+      const currentHash = window.location.hash;
+      
+      // Refresh collections page if we're on it
+      if (currentHash === '#/collections-objets') {
+        const availableCollections = document.getElementById('available-collections');
+        const isDevMode = this.isDevModeActive();
+        
+        // console.log('🔄 Refreshing collections view - Dev mode:', isDevMode);
+        
+        // Regenerate the collections grid
+        this.generateCollectionsGrid();
+        
+        // Update visibility
+        if (availableCollections) {
+          if (isDevMode) {
+            // console.log('📋 Showing collections in dev mode');
+            availableCollections.style.display = 'block';
+          } else {
+            // console.log('🔒 Hiding collections in normal mode');
+            availableCollections.style.display = 'none';
+          }
+        }
+      }
+      
+      // Also refresh objects page if we're on it (for filter visibility)
+      if (currentHash === '#/objets') {
+        console.log('🔄 Refreshing objects page due to dev mode change');
+        setTimeout(() => {
+          this.renderObjectsPage();
+        }, 100); // Augmenter le délai pour être sûr que le dev mode est à jour
+      }
+    },
+
+    updateCollectionsDescription(newDescription) {
+      JdrApp.data.customPageDescriptions['collections-objets'] = newDescription;
+      // Also update via ContentFactory for consistency
+      if (window.ContentFactory) {
+        ContentFactory.updatePageDescription('collections', newDescription);
+      }
     }
   };
 
@@ -10443,6 +12363,7 @@ article span[title]:hover::after {
       return PageBuilder.buildSingleMonsterPage(window.MONSTRES);
     },
 
+
     renderCategoryPage(type, category) {
       const config = window.ContentTypes[type];
       
@@ -10550,6 +12471,7 @@ article span[title]:hover::after {
             <button class="btn small" id="elementsBtn" title="Choisir un élément pour copier sa balise HTML colorée">🎨 Éléments</button>
             <button class="btn small" id="etatsBtn" title="Choisir un état pour copier sa balise HTML avec tooltip">⚡ États</button>
             <button class="btn small" id="spellLinksBtn" title="Créer un lien vers un sort avec aperçu">🔮 Liens sorts</button>
+            <button class="btn small" id="pageLinksBtn" title="Créer un lien vers une page du projet">🔗 Liens pages</button>
           </div>
         </div>
       `;
@@ -11054,19 +12976,28 @@ article span[title]:hover::after {
       }
       
       // Check if we're editing a page description (unified system)
-      const pageDescSection = element.closest('.editable-section[data-section-type*="-category-description"]');
+      const pageDescSection = element.closest('.editable-section[data-section-type*="-category-description"], .editable-section[data-section-type="pageDescription"]');
       if (pageDescSection) {
         const sectionType = pageDescSection.dataset.sectionType;
         const editableElement = element.classList.contains('editable') ? element : element.querySelector('.editable');
         const editSection = editableElement ? editableElement.dataset.editSection : '';
         
-        // Extract content type from section type (e.g., "objet-category-description" -> "objet")
-        const contentType = sectionType.replace('-category-description', '');
+        let contentType;
+        
+        // Handle different types of page descriptions
+        if (sectionType === 'pageDescription') {
+          // For generic page descriptions, get the content type from the editable element
+          const pageType = editableElement?.dataset?.pageType;
+          contentType = pageType || 'collections'; // fallback to collections
+        } else {
+          // Extract content type from section type (e.g., "objet-category-description" -> "objet")
+          contentType = sectionType.replace('-category-description', '');
+        }
         
         // Use unified page description system via ContentFactory
         return {
           contentType: 'pageDescription',
-          pageType: contentType, // The actual content type (spell, don, objet, etc.)
+          pageType: contentType, // The actual content type (spell, don, objet, collections, etc.)
           itemIdentifier: contentType,
           categoryName: null,
           property: 'description',
@@ -11280,10 +13211,10 @@ article span[title]:hover::after {
     }
 
     makeTagsEditable(editableElement, container) {
-      console.log('🔍 DEBUG: makeTagsEditable called');
-      console.log('🔍 DEBUG: editableElement:', editableElement);
-      console.log('🔍 DEBUG: container:', container);
-      console.log('🔍 DEBUG: currentEditSession:', this.currentEditSession);
+      // console.log('🔍 DEBUG: makeTagsEditable called');
+      // console.log('🔍 DEBUG: editableElement:', editableElement);
+      // console.log('🔍 DEBUG: container:', container);
+      // console.log('🔍 DEBUG: currentEditSession:', this.currentEditSession);
       
       const originalHtml = editableElement.innerHTML;
       container.dataset.originalContent = originalHtml;
@@ -11291,40 +13222,40 @@ article span[title]:hover::after {
 
       // Get current tags from the object
       const objetName = this.currentEditSession.itemIdentifier;
-      console.log('🔍 DEBUG: objetName:', objetName);
+      // console.log('🔍 DEBUG: objetName:', objetName);
       
       const objet = window.OBJETS?.objets?.find(obj => obj.nom === objetName);
-      console.log('🔍 DEBUG: found objet:', objet);
+      // console.log('🔍 DEBUG: found objet:', objet);
       
       const currentTags = objet?.tags || [];
       const availableTags = window.ContentTypes.objet.filterConfig.availableTags;
-      console.log('🔍 DEBUG: currentTags:', currentTags);
-      console.log('🔍 DEBUG: availableTags:', availableTags);
+      // console.log('🔍 DEBUG: currentTags:', currentTags);
+      // console.log('🔍 DEBUG: availableTags:', availableTags);
 
       // Create and show modal instead of inline editor
       this.showTagsModal(objetName, currentTags, availableTags);
     }
 
     showTagsModal(objetName, currentTags, availableTags) {
-      console.log('🔍 DEBUG: showTagsModal called for object:', objetName);
-      console.log('🔍 DEBUG: currentTags:', currentTags);
-      console.log('🔍 DEBUG: availableTags:', availableTags);
+      // console.log('🔍 DEBUG: showTagsModal called for object:', objetName);
+      // console.log('🔍 DEBUG: currentTags:', currentTags);
+      // console.log('🔍 DEBUG: availableTags:', availableTags);
       
       // Remove any existing tags modal
       const existingModal = document.querySelector('#tagsEditModal');
       if (existingModal) {
-        console.log('🔍 DEBUG: Removing existing modal');
+        // console.log('🔍 DEBUG: Removing existing modal');
         existingModal.remove();
       }
 
       // Log DOM structure before creating modal
-      console.log('🔍 DEBUG: Current body children count:', document.body.children.length);
-      console.log('🔍 DEBUG: Body z-index elements:', Array.from(document.body.children).map(el => ({
-        tagName: el.tagName,
-        className: el.className,
-        zIndex: window.getComputedStyle(el).zIndex,
-        position: window.getComputedStyle(el).position
-      })));
+      // console.log('🔍 DEBUG: Current body children count:', document.body.children.length);
+      // console.log('🔍 DEBUG: Body z-index elements:', Array.from(document.body.children).map(el => ({
+        // tagName: el.tagName,
+        // className: el.className,
+        // zIndex: window.getComputedStyle(el).zIndex,
+        // position: window.getComputedStyle(el).position
+      // })));
 
       // Use native HTML5 dialog element for proper z-index handling
       const modal = document.createElement('dialog');
@@ -11339,7 +13270,7 @@ article span[title]:hover::after {
         box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
       `;
       
-      console.log('🔍 DEBUG: Created dialog element:', modal);
+      // console.log('🔍 DEBUG: Created dialog element:', modal);
 
       const checkboxesHTML = availableTags.map(tag => `
         <div style="display: flex; align-items: center; gap: 0.5rem; margin: 0.5rem 0; padding: 0.5rem; background: #f5f5f5; border-radius: 8px;">
@@ -11404,40 +13335,40 @@ article span[title]:hover::after {
       `;
 
       // Append to body and show modal using native dialog API
-      console.log('🔍 DEBUG: Adding modal to body');
+      // console.log('🔍 DEBUG: Adding modal to body');
       document.body.appendChild(modal);
       
-      console.log('🔍 DEBUG: Modal added to DOM, calling showModal()');
-      console.log('🔍 DEBUG: Modal computed styles before showModal:', {
-        display: window.getComputedStyle(modal).display,
-        position: window.getComputedStyle(modal).position,
-        zIndex: window.getComputedStyle(modal).zIndex,
-        visibility: window.getComputedStyle(modal).visibility
-      });
+      // console.log('🔍 DEBUG: Modal added to DOM, calling showModal()');
+      // console.log('🔍 DEBUG: Modal computed styles before showModal:', {
+        // display: window.getComputedStyle(modal).display,
+        // position: window.getComputedStyle(modal).position,
+        // zIndex: window.getComputedStyle(modal).zIndex,
+        // visibility: window.getComputedStyle(modal).visibility
+      // });
       
       // Use showModal() for proper top-level display
       try {
         modal.showModal();
-        console.log('🔍 DEBUG: showModal() called successfully');
+        // console.log('🔍 DEBUG: showModal() called successfully');
         
-        console.log('🔍 DEBUG: Modal computed styles after showModal:', {
-          display: window.getComputedStyle(modal).display,
-          position: window.getComputedStyle(modal).position,
-          zIndex: window.getComputedStyle(modal).zIndex,
-          visibility: window.getComputedStyle(modal).visibility
-        });
+        // console.log('🔍 DEBUG: Modal computed styles after showModal:', {
+          // display: window.getComputedStyle(modal).display,
+          // position: window.getComputedStyle(modal).position,
+          // zIndex: window.getComputedStyle(modal).zIndex,
+          // visibility: window.getComputedStyle(modal).visibility
+        // });
         
-        console.log('🔍 DEBUG: Modal bounding rect:', modal.getBoundingClientRect());
+        // console.log('🔍 DEBUG: Modal bounding rect:', modal.getBoundingClientRect());
         
         // Log all body children with their z-index after modal is shown
-        console.log('🔍 DEBUG: All body children after modal shown:', Array.from(document.body.children).map(el => ({
-          tagName: el.tagName,
-          id: el.id,
-          className: el.className,
-          zIndex: window.getComputedStyle(el).zIndex,
-          position: window.getComputedStyle(el).position,
-          display: window.getComputedStyle(el).display
-        })));
+        // console.log('🔍 DEBUG: All body children after modal shown:', Array.from(document.body.children).map(el => ({
+          // tagName: el.tagName,
+          // id: el.id,
+          // className: el.className,
+          // zIndex: window.getComputedStyle(el).zIndex,
+          // position: window.getComputedStyle(el).position,
+          // display: window.getComputedStyle(el).display
+        // })));
         
       } catch (error) {
         console.error('🔍 DEBUG: Error calling showModal():', error);
@@ -11652,7 +13583,7 @@ article span[title]:hover::after {
       // Backup current value for rollback capability
       const originalValue = monster[propertyName];
       
-      console.log('🔍 DEBUG: Updating monster', monster.nom, 'property', propertyName, 'from', originalValue, 'to', content);
+      // console.log('🔍 DEBUG: Updating monster', monster.nom, 'property', propertyName, 'from', originalValue, 'to', content);
       
       try {
         // Update the monster property
@@ -12410,9 +14341,10 @@ article span[title]:hover::after {
               <button id="elementsBtn" class="btn" style="background: #059669; color: white; font-size: 12px;">🔥 Éléments</button>
               <button id="etatsBtn" class="btn" style="background: #7c2d12; color: white; font-size: 12px;">⚡ États</button>
               <button id="spellLinksBtn" class="btn" style="background: #6b21a8; color: white; font-size: 12px;">🔗 Liens Sorts</button>
+              <button id="pageLinksBtn" class="btn" style="background: #1d4ed8; color: white; font-size: 12px;">🔗 Liens Pages</button>
             </div>
             <div style="font-size: 12px; color: var(--paper-muted); line-height: 1.4;">
-              💡 <strong>Astuce:</strong> Utilisez ces boutons pour insérer rapidement des éléments, états et liens vers les sorts dans votre contenu HTML.
+              💡 <strong>Astuce:</strong> Utilisez ces boutons pour insérer rapidement des éléments, états, liens vers les sorts et liens vers les pages dans votre contenu HTML.
             </div>
           </div>
           
@@ -12434,6 +14366,7 @@ article span[title]:hover::after {
       const elementsBtn = modal.querySelector('#elementsBtn');
       const etatsBtn = modal.querySelector('#etatsBtn');
       const spellLinksBtn = modal.querySelector('#spellLinksBtn');
+      const pageLinksBtn = modal.querySelector('#pageLinksBtn');
 
       // Helper function to insert text at cursor position in textarea
       const insertTextAtCursor = (text) => {
@@ -12477,6 +14410,14 @@ article span[title]:hover::after {
         spellLinksBtn.addEventListener('click', () => {
           if (JdrApp.modules.ui?.showSpellLinksModal) {
             JdrApp.modules.ui.showSpellLinksModal();
+          }
+        });
+      }
+
+      if (pageLinksBtn) {
+        pageLinksBtn.addEventListener('click', () => {
+          if (JdrApp.modules.ui?.showPageLinksModal) {
+            JdrApp.modules.ui.showPageLinksModal();
           }
         });
       }
@@ -14194,6 +16135,133 @@ article span[title]:hover::after {
   } else {
     window.TablesTresorsManager.init();
   }
+
+})();
+// ============================================================================
+// DYNAMIC CENTERING SYSTEM
+// ============================================================================
+
+(() => {
+  "use strict";
+
+  class DynamicCentering {
+    constructor() {
+      this.sidebarWidth = 350; // Width of the sidebar
+      this.isEnabled = false;
+      this.observer = null;
+      this.rafId = null;
+    }
+
+    init() {
+      this.isEnabled = true;
+      this.setupResizeObserver();
+      this.setupWindowResize();
+      // Initial calculation
+      this.updateCentering();
+    }
+
+    setupResizeObserver() {
+      if (!window.ResizeObserver) return;
+
+      // Observe changes to the main content container
+      const viewsContainer = document.getElementById('views');
+      if (!viewsContainer) return;
+
+      this.observer = new ResizeObserver(() => {
+        if (this.rafId) {
+          cancelAnimationFrame(this.rafId);
+        }
+        this.rafId = requestAnimationFrame(() => this.updateCentering());
+      });
+
+      this.observer.observe(viewsContainer);
+    }
+
+    setupWindowResize() {
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => this.updateCentering(), 100);
+      });
+    }
+
+    updateCentering() {
+      if (!this.isEnabled) return;
+
+      const viewsContainer = document.getElementById('views');
+      if (!viewsContainer) return;
+
+      // Get actual container dimensions
+      const containerRect = viewsContainer.getBoundingClientRect();
+      const actualContentWidth = containerRect.width;
+      const viewportWidth = window.innerWidth;
+
+      // Calculate available space after sidebar
+      const availableSpace = viewportWidth - this.sidebarWidth;
+      
+      // Calculate optimal margin to center content in available space
+      const optimalMarginLeft = this.sidebarWidth + (availableSpace - actualContentWidth) / 2;
+
+      // Apply the centering with bounds checking
+      const minMarginLeft = this.sidebarWidth + 20; // Minimum clearance
+      const maxMarginLeft = viewportWidth - actualContentWidth - 20; // Don't overflow right
+      
+      const finalMarginLeft = Math.max(minMarginLeft, Math.min(optimalMarginLeft, maxMarginLeft));
+
+      // Apply the calculated margin
+      viewsContainer.style.marginLeft = `${finalMarginLeft}px`;
+      viewsContainer.style.marginRight = '20px';
+
+      // Debug info (remove in production)
+      if (window.location.hash.includes('debug-centering')) {
+        console.log('🎯 Dynamic Centering:', {
+          viewportWidth,
+          availableSpace,
+          actualContentWidth,
+          optimalMarginLeft,
+          finalMarginLeft
+        });
+      }
+    }
+
+    disable() {
+      this.isEnabled = false;
+      if (this.observer) {
+        this.observer.disconnect();
+      }
+      if (this.rafId) {
+        cancelAnimationFrame(this.rafId);
+      }
+      
+      // Reset to CSS default
+      const viewsContainer = document.getElementById('views');
+      if (viewsContainer) {
+        viewsContainer.style.marginLeft = '';
+        viewsContainer.style.marginRight = '';
+      }
+    }
+  }
+
+  // Initialize the dynamic centering system
+  const dynamicCentering = new DynamicCentering();
+
+  // Attach to JdrApp
+  if (window.JdrApp) {
+    JdrApp.modules.dynamicCentering = dynamicCentering;
+  }
+
+  // Auto-initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      // Delay initialization to ensure layout is stable
+      setTimeout(() => dynamicCentering.init(), 500);
+    });
+  } else {
+    setTimeout(() => dynamicCentering.init(), 500);
+  }
+
+  // Make it globally available for debugging
+  window.DynamicCentering = dynamicCentering;
 
 })();
 // ============================================================================
@@ -15949,6 +18017,10 @@ article span[title]:hover::after {
         this.showSpellLinksModal();
       });
 
+      JdrApp.utils.events.register('click', '#pageLinksBtn', () => {
+        this.showPageLinksModal();
+      });
+
       // Gestionnaire pour les liens de sorts dans le contenu
       JdrApp.utils.events.register('click', '.spell-link', (e) => {
         e.preventDefault();
@@ -16798,14 +18870,14 @@ article span[title]:hover::after {
       }
       
       const pageId = visibleArticle ? visibleArticle.dataset.page : null;
-      console.log('🔍 DEBUG getCurrentPageId: Found visible article:', !!visibleArticle);
-      console.log('🔍 DEBUG getCurrentPageId: Page ID:', pageId);
+      // console.log('🔍 DEBUG getCurrentPageId: Found visible article:', !!visibleArticle);
+      // console.log('🔍 DEBUG getCurrentPageId: Page ID:', pageId);
       if (visibleArticle) {
-        console.log('🔍 DEBUG getCurrentPageId: Article attributes:', {
-          'data-static-page': visibleArticle.dataset.staticPage,
-          'data-page': visibleArticle.dataset.page,
-          'data-page-title': visibleArticle.dataset.pageTitle
-        });
+        // console.log('🔍 DEBUG getCurrentPageId: Article attributes:', {
+        //   'data-static-page': visibleArticle.dataset.staticPage,
+        //   'data-page': visibleArticle.dataset.page,
+        //   'data-page-title': visibleArticle.dataset.pageTitle
+        // });
       }
       return pageId;
     },
@@ -16823,8 +18895,8 @@ article span[title]:hover::after {
     // Save new section to JSON data
     saveNewSectionToJSON(sectionId, title, content) {
       const pageId = this.getCurrentPageId();
-      console.log('🔍 DEBUG SAVE: getCurrentPageId() returned:', pageId);
-      console.log('🔍 DEBUG SAVE: Available pages in STATIC_PAGES:', Object.keys(window.STATIC_PAGES || {}));
+      // console.log('🔍 DEBUG SAVE: getCurrentPageId() returned:', pageId);
+      // console.log('🔍 DEBUG SAVE: Available pages in STATIC_PAGES:', Object.keys(window.STATIC_PAGES || {}));
       
       if (!pageId || !window.STATIC_PAGES || !window.STATIC_PAGES[pageId]) {
         console.warn('Cannot save new section - page not found:', pageId);
@@ -16904,7 +18976,7 @@ article span[title]:hover::after {
         }
         
         console.error(`❌ ERREUR: Section "${sectionId}" introuvable pour suppression`);
-        console.log('🔍 Sections disponibles:', pageData.sections.map(s => ({id: s.id, title: s.title})));
+        // console.log('🔍 Sections disponibles:', pageData.sections.map(s => ({id: s.id, title: s.title})));
         return false;
       }
     },
@@ -17148,225 +19220,7 @@ article span[title]:hover::after {
       }
     },
 
-    // ==== FILTER MANAGEMENT METHODS ====
-
-    showFilterManagementModal() {
-      if (!window.OBJETS || !window.ContentTypes.objet) return;
-      
-      const config = window.ContentTypes.objet.filterConfig;
-      const currentSettings = window.OBJETS.filterSettings || { visibleTags: config.defaultVisibleTags };
-      
-      // Remove existing modal if any
-      const existingModal = document.querySelector('#filterModal');
-      if (existingModal) {
-        existingModal.remove();
-      }
-      
-      const modal = this.createFilterModal();
-      document.body.appendChild(modal);
-      
-      // Update modal content with current settings
-      this.updateFilterModalContent(modal, config, currentSettings);
-      
-      // Use native dialog showModal for proper z-index
-      modal.showModal();
-    },
-
-    createFilterModal() {
-      const modal = document.createElement('dialog');
-      modal.id = 'filterModal';
-      modal.style.cssText = `
-        max-width: 500px;
-        width: 90%;
-        padding: 0;
-        border: none;
-        border-radius: 12px;
-        background: transparent;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-      `;
-      modal.innerHTML = `
-        <div style="background: var(--paper); border-radius: 12px; padding: 1.5rem; border: 2px solid var(--rule);">
-          <h3 style="margin: 0 0 1rem 0; color: var(--accent-ink);">Gestion des filtres d'objets</h3>
-          <p style="margin: 0 0 1rem 0; color: var(--paper-muted);">Choisissez quels tags d'objets afficher sur la page :</p>
-          <div id="filterCheckboxes" style="margin: 1rem 0;">
-            <!-- Content will be populated by updateFilterModalContent -->
-          </div>
-          <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 1.5rem;">
-            <button class="btn" id="resetFiltersBtn" style="background: var(--bronze); color: white;">
-              🔄 Réinitialiser
-            </button>
-            <button class="btn" id="saveFiltersBtn" style="background: var(--accent); color: white;">
-              💾 Sauvegarder
-            </button>
-            <button class="btn modal-close" style="background: #666; color: white;">
-              ❌ Annuler
-            </button>
-          </div>
-        </div>
-      `;
-
-      // Add event listeners
-      modal.addEventListener('click', (e) => {
-        if (e.target.id === 'saveFiltersBtn') {
-          this.saveFilterSettings(modal);
-        } else if (e.target.id === 'resetFiltersBtn') {
-          this.resetFilterSettings(modal);
-        } else if (e.target.classList.contains('modal-close')) {
-          modal.close();
-          modal.remove();
-        } else if (e.target.classList.contains('move-tag-up')) {
-          this.moveTagInModal(modal, e.target.dataset.tag, -1);
-        } else if (e.target.classList.contains('move-tag-down')) {
-          this.moveTagInModal(modal, e.target.dataset.tag, 1);
-        }
-      });
-
-      // Handle dialog close events
-      modal.addEventListener('cancel', () => {
-        modal.close();
-        modal.remove();
-      });
-
-      modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-          modal.close();
-          modal.remove();
-        }
-      });
-
-      return modal;
-    },
-
-    updateFilterModalContent(modal, config, currentSettings) {
-      const checkboxContainer = modal.querySelector('#filterCheckboxes');
-      if (!checkboxContainer) return;
-
-      const checkboxHTML = config.availableTags.map(tag => {
-        const isVisible = currentSettings.displayedFilterButtons ? currentSettings.displayedFilterButtons.includes(tag) : currentSettings.visibleTags.includes(tag);
-        const isDefault = config.defaultVisibleTags.includes(tag);
-        
-        return `
-          <div class="tag-row" data-tag="${tag}" style="display: flex; align-items: center; gap: 0.5rem; margin: 0.5rem 0; padding: 0.5rem; background: var(--card); border-radius: 8px;">
-            <input 
-              type="checkbox" 
-              id="filter-${tag}" 
-              value="${tag}" 
-              ${isVisible ? 'checked' : ''}
-              style="margin: 0;"
-            >
-            <label for="filter-${tag}" style="flex: 1; cursor: pointer; font-weight: 500;">
-              <span class="tag-chip" style="margin-right: 0.5rem;">${tag}</span>
-              ${tag}
-            </label>
-            <input 
-              type="checkbox" 
-              id="default-${tag}" 
-              value="${tag}" 
-              ${isDefault ? 'checked' : ''}
-              style="margin: 0;"
-              title="Filtre par défaut au chargement du site"
-            >
-            <div style="display: flex; flex-direction: column; gap: 2px;">
-              <button type="button" class="move-tag-up" data-tag="${tag}" style="background: #ff8c00; color: white; border: none; border-radius: 3px; padding: 2px 6px; font-size: 12px; cursor: pointer;" title="Monter dans l'ordre">↑</button>
-              <button type="button" class="move-tag-down" data-tag="${tag}" style="background: #ff8c00; color: white; border: none; border-radius: 3px; padding: 2px 6px; font-size: 12px; cursor: pointer;" title="Descendre dans l'ordre">↓</button>
-            </div>
-          </div>
-        `;
-      }).join('');
-
-      checkboxContainer.innerHTML = `
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--rule);">
-          <span style="font-weight: 600; color: var(--accent-ink);">Tag visible</span>
-          <span style="font-weight: 600; color: var(--accent-ink);">Défaut</span>
-        </div>
-        <div id="sortable-tags-list">
-          ${checkboxHTML}
-        </div>
-        <div style="margin-top: 1rem; padding-top: 0.5rem; border-top: 1px solid var(--rule); font-size: 0.85em; color: var(--paper-muted);">
-          ℹ️ <strong>Visible</strong> : Tags affichés actuellement<br>
-          🏠 <strong>Par défaut</strong> : Tags automatiquement activés au chargement du site<br>
-          ↕️ <strong>Ordre</strong> : Utilisez les flèches pour réorganiser l'affichage
-        </div>
-      `;
-    },
-
-    saveFilterSettings(modal) {
-      // Get visible tags (currently active)
-      const visibleCheckboxes = modal.querySelectorAll('input[id^="filter-"]:checked');
-      const visibleTags = Array.from(visibleCheckboxes).map(cb => cb.value);
-
-      // Get default tags (active by default on site load)
-      const defaultCheckboxes = modal.querySelectorAll('input[id^="default-"]:checked');
-      const defaultTags = Array.from(defaultCheckboxes).map(cb => cb.value);
-
-      if (visibleTags.length === 0) {
-        this.showNotification('❌ Veuillez sélectionner au moins un tag visible', 'error');
-        return;
-      }
-
-      if (defaultTags.length === 0) {
-        this.showNotification('❌ Veuillez sélectionner au moins un tag par défaut', 'error');
-        return;
-      }
-
-      // Update displayed filter buttons and current visible tags in OBJETS
-      if (!window.OBJETS.filterSettings) {
-        window.OBJETS.filterSettings = {};
-      }
-      window.OBJETS.filterSettings.displayedFilterButtons = visibleTags;
-      // Set active filters to default tags only (not all displayed buttons)
-      window.OBJETS.filterSettings.visibleTags = [...defaultTags];
-
-      // Update default tags in ContentTypes configuration
-      // Note: availableTags order has already been updated by moveTagInModal()
-      if (window.ContentTypes.objet?.filterConfig) {
-        window.ContentTypes.objet.filterConfig.defaultVisibleTags = defaultTags;
-      }
-
-      // Trigger page re-render
-      this.refreshObjectsPage();
-      
-      // Save to storage (will include the updated order and defaultVisibleTags in export)
-      EventBus.emit(Events.STORAGE_SAVE);
-      
-      // Close modal and show notification
-      modal.close();
-      modal.remove();
-      this.showNotification(`🏷️ Filtres mis à jour : ${visibleTags.length} visible(s), ${defaultTags.length} par défaut`, 'success');
-    },
-
-    resetFilterSettings(modal) {
-      const config = window.ContentTypes.objet.filterConfig;
-      const defaultSettings = { visibleTags: config.defaultVisibleTags };
-      
-      this.updateFilterModalContent(modal, config, defaultSettings);
-      this.showNotification('🔄 Filtres réinitialisés aux valeurs par défaut', 'info');
-    },
-
-    moveTagInModal(modal, tagName, direction) {
-      // Get current configuration
-      const config = window.ContentTypes.objet.filterConfig;
-      const currentIndex = config.availableTags.indexOf(tagName);
-      
-      if (currentIndex === -1) return; // Tag not found
-      
-      const newIndex = currentIndex + direction;
-      
-      // Check bounds
-      if (newIndex < 0 || newIndex >= config.availableTags.length) return;
-      
-      // Swap tags in the array
-      const temp = config.availableTags[currentIndex];
-      config.availableTags[currentIndex] = config.availableTags[newIndex];
-      config.availableTags[newIndex] = temp;
-      
-      // Refresh the modal display
-      const currentSettings = window.OBJETS?.filterSettings || { visibleTags: config.defaultVisibleTags };
-      this.updateFilterModalContent(modal, config, currentSettings);
-      
-      this.showNotification(`📊 "${tagName}" ${direction > 0 ? 'descendu' : 'monté'} dans l'ordre`, 'info');
-    },
-
+    // SUPPRIMÉ: Toutes les méthodes de gestion des filtres (showFilterManagementModal, createFilterModal, updateFilterModalContent, saveFilterSettings, resetFilterSettings, moveTagInModal)
 
     refreshObjectsPage() {
       // Check if we're currently on the objects page
@@ -18059,27 +19913,43 @@ article span[title]:hover::after {
       // Set global flag BEFORE regenerating page
       window.activeIdSearch = true;
 
-      // Force regenerate page with all objects AND visual feedback
-      if (JdrApp.modules.renderer?.regenerateCurrentPage) {
-        JdrApp.modules.renderer.regenerateCurrentPage();
+      // Immediately hide the container to prevent flash
+      const container = document.querySelector('#objets-container');
+      if (container) {
+        container.style.visibility = 'hidden';
       }
 
-      // Show success message
+      // Show success message immediately
       if (resultDiv) {
         resultDiv.innerHTML = `✅ Objet trouvé : "${foundObject.nom}" (ID: ${searchNumber})`;
         resultDiv.style.color = '#16a34a';
       }
 
-      // Show only the found object (after page regeneration)
-      setTimeout(() => {
-        this.showOnlyObjectById(searchNumber);
-        
-        // Restore the search value in the input field
-        const searchInput = document.querySelector('#id-search-input');
-        if (searchInput) {
-          searchInput.value = searchNumber;
+      // Force regenerate page with all objects AND visual feedback
+      if (JdrApp.modules.renderer?.regenerateCurrentPage) {
+        JdrApp.modules.renderer.regenerateCurrentPage();
+      }
+
+      // After regeneration, configure display and show only target object
+      requestAnimationFrame(() => {
+        const newContainer = document.querySelector('#objets-container');
+        if (newContainer) {
+          // Hide all objects first
+          this.hideAllObjects();
+          
+          // Show only the target object and make container visible again
+          setTimeout(() => {
+            this.showOnlyObjectById(searchNumber);
+            newContainer.style.visibility = 'visible';
+            
+            // Restore the search value in the input field
+            const searchInput = document.querySelector('#id-search-input');
+            if (searchInput) {
+              searchInput.value = searchNumber;
+            }
+          }, 10);
         }
-      }, 100);
+      });
     },
 
     clearIdSearch() {
@@ -18098,6 +19968,26 @@ article span[title]:hover::after {
       // Clear global flag for active ID search
       window.activeIdSearch = false;
 
+      // Reset container styles when clearing search
+      const container = document.querySelector('#objets-container');
+      if (container) {
+        container.style.display = '';
+        container.style.flexDirection = '';
+        container.style.alignItems = '';
+        container.style.justifyContent = '';
+        container.style.minHeight = '';
+        container.style.padding = '';
+        container.style.visibility = ''; // Restore visibility
+        
+        // Reset all card sizes to normal
+        const allCards = container.querySelectorAll('.card');
+        allCards.forEach(card => {
+          card.style.minWidth = '';
+          card.style.maxWidth = '';
+          card.style.width = '';
+        });
+      }
+
       // Regenerate page to update visual feedback and return to normal display
       if (JdrApp.modules.renderer?.regenerateCurrentPage) {
         JdrApp.modules.renderer.regenerateCurrentPage();
@@ -18115,26 +20005,26 @@ article span[title]:hover::after {
     },
 
     showOnlyObjectById(objectId) {
-      console.log('🔍 showOnlyObjectById called with ID:', objectId);
+      // console.log('🔍 showOnlyObjectById called with ID:', objectId);
       const container = document.querySelector('#objets-container');
       if (!container) {
-        console.log('🔍 No objets-container found');
+        // console.log('🔍 No objets-container found');
         return;
       }
 
       const allCards = container.querySelectorAll('.card');
-      console.log('🔍 Found', allCards.length, 'cards in container');
+      // console.log('🔍 Found', allCards.length, 'cards in container');
       let foundCard = null;
 
       allCards.forEach((card, index) => {
         const objetName = card.dataset.objetName;
-        console.log(`🔍 Card ${index}: objetName = "${objetName}"`);
+        // console.log(`🔍 Card ${index}: objetName = "${objetName}"`);
         if (objetName) {
           // Find the object by name to get its number
           const obj = window.OBJETS?.objets?.find(o => o.nom === objetName);
-          console.log(`🔍 Found object:`, obj);
+          // console.log(`🔍 Found object:`, obj);
           if (obj && obj.numero === objectId) {
-            console.log('🔍 MATCH! Showing card for:', objetName);
+            // console.log('🔍 MATCH! Showing card for:', objetName);
             card.style.display = '';
             foundCard = card;
           } else {
@@ -18143,21 +20033,50 @@ article span[title]:hover::after {
         }
       });
 
-      console.log('🔍 foundCard:', foundCard);
+      // console.log('🔍 foundCard:', foundCard);
 
       // Scroll to the found card if it exists
       if (foundCard) {
+        // Center the found object both horizontally and vertically
+        const container = document.querySelector('#objets-container');
+        if (container) {
+          // Apply centering styles to the container when showing single object
+          container.style.display = 'flex';
+          container.style.flexDirection = 'column';
+          container.style.alignItems = 'center';
+          container.style.justifyContent = 'center';
+          container.style.minHeight = '70vh';
+          container.style.padding = '2rem';
+        }
+
+        // Enlarge the found card for better visibility when searched by ID
+        // Check if we're on mobile to adjust sizing accordingly
+        const isMobile = window.innerWidth <= 640;
+        if (isMobile) {
+          // On mobile, use slightly smaller enlargement to fit the screen
+          foundCard.style.minWidth = '320px';
+          foundCard.style.maxWidth = '90vw';
+          foundCard.style.width = '90vw';
+        } else {
+          // On desktop, double the normal size
+          foundCard.style.minWidth = '560px'; // Double the normal min-width (280px * 2)
+          foundCard.style.maxWidth = '700px'; // Double the normal max-width (350px * 2)
+          foundCard.style.width = 'auto';
+        }
+
         setTimeout(() => {
           foundCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          // Brief highlight effect
-          foundCard.style.transition = 'all 0.3s ease';
-          foundCard.style.boxShadow = '0 0 20px rgba(22, 163, 74, 0.5)';
-          foundCard.style.transform = 'scale(1.02)';
+          // Enhanced highlight effect for centered object
+          foundCard.style.transition = 'all 0.4s ease';
+          foundCard.style.boxShadow = '0 0 30px rgba(212, 175, 55, 0.6), 0 0 60px rgba(212, 175, 55, 0.3)';
+          foundCard.style.transform = 'scale(1.05)';
+          foundCard.style.zIndex = '10';
           
           setTimeout(() => {
-            foundCard.style.boxShadow = '';
-            foundCard.style.transform = '';
-          }, 1500);
+            foundCard.style.boxShadow = '0 4px 20px rgba(0,0,0,0.15)';
+            foundCard.style.transform = 'scale(1.02)';
+            foundCard.style.zIndex = '';
+          }, 2000);
         }, 100);
       }
     },
@@ -18171,8 +20090,22 @@ article span[title]:hover::after {
       const container = document.querySelector('#objets-container');
       if (!container) return;
 
+      // Reset container styles to normal grid layout
+      container.style.display = '';
+      container.style.flexDirection = '';
+      container.style.alignItems = '';
+      container.style.justifyContent = '';
+      container.style.minHeight = '';
+      container.style.padding = '';
+      container.style.visibility = ''; // Restore visibility
+
       const allCards = container.querySelectorAll('.card');
       allCards.forEach(card => {
+        // Reset card sizing to normal
+        card.style.minWidth = '';
+        card.style.maxWidth = '';
+        card.style.width = '';
+        
         const objetName = card.dataset.objetName;
         if (objetName) {
           // Find the object and check if it has visible tags
@@ -18226,11 +20159,11 @@ article span[title]:hover::after {
         }
         visibleTags = window.TABLES_TRESORS_FILTER_STATE.visibleTags;
       } else {
-        // Pour les objets (comportement existant)
-        if (!window.OBJETS.filterSettings) {
-          window.OBJETS.filterSettings = { visibleTags: [...window.ContentTypes.objet.filterConfig.defaultVisibleTags] };
+        // Pour les objets - NOUVEAU SYSTÈME SIMPLIFIÉ
+        if (!window.ACTIVE_OBJECT_TAGS) {
+          window.ACTIVE_OBJECT_TAGS = []; // Aucun tag actif par défaut
         }
-        visibleTags = window.OBJETS.filterSettings.visibleTags;
+        visibleTags = window.ACTIVE_OBJECT_TAGS;
       }
       
       // IMPORTANT: Track state BEFORE modification to know if we need full regeneration
@@ -18251,7 +20184,10 @@ article span[title]:hover::after {
         chipElement.style.background = '#6b7280';
         chipElement.style.opacity = '0.6';
         chipElement.style.boxShadow = '';
-        this.showNotification(`🏷️ Tag "${tag}" masqué`, 'info');
+        // Mise à jour du texte du bouton
+        chipElement.innerHTML = tag;
+        chipElement.title = 'Inactif - Cliquer pour activer';
+        this.showNotification(`🏷️ Tag "${tag}" désactivé`, 'info');
       } else {
         // ACTIVATE - add to visible tags
         if (!visibleTags.includes(tag)) {
@@ -18262,7 +20198,10 @@ article span[title]:hover::after {
         chipElement.style.background = '#16a34a';
         chipElement.style.opacity = '1';
         chipElement.style.boxShadow = '0 2px 4px rgba(22, 163, 74, 0.3)';
-        this.showNotification(`🏷️ Tag "${tag}" affiché`, 'info');
+        // Mise à jour du texte du bouton
+        chipElement.innerHTML = '✓ ' + tag;
+        chipElement.title = 'Actif - Cliquer pour désactiver';
+        this.showNotification(`🏷️ Tag "${tag}" activé`, 'info');
       }
 
 
@@ -18274,32 +20213,22 @@ article span[title]:hover::after {
         // Any change in tags can reveal/hide different content and update UI elements
         this.refreshCurrentPage(contentType);
       } else {
-        // Original logic for objects
-        if (wasEmpty && nowHasTags) {
-          // If we went from no tags to having tags, we need full regeneration
-          // because buildSingleObjectPage returns [] when visibleTags.length === 0
-          this._needsRegenerationAfterEmpty = true;
-          this.refreshCurrentPage(contentType);
-        } else if (this._needsRegenerationAfterEmpty && !isVisuallyActive) {
-          // If we're adding more tags after having started from empty, keep regenerating
-          this.refreshCurrentPage(contentType);
-        } else if (!isVisuallyActive) {
-          // CRITICAL FIX: When activating a new tag, always regenerate the page
-          // This ensures objects with the new tag appear in the DOM, not just get unhidden
-          // The issue was that updateObjectVisibility() can only show/hide existing DOM elements,
-          // but objects filtered out during initial page generation don't exist in DOM at all
-          this.refreshCurrentPage(contentType);
-        } else {
-          // Reset the flag if we're deactivating a tag (we have a complete DOM now)
-          this._needsRegenerationAfterEmpty = false;
-          // When deactivating, we can just hide existing elements for objects
-          // But for monsters and tables de trésors, always do full refresh to maintain UI consistency
-          if (contentType === 'monster' || contentType === 'tableTresor') {
-            this.refreshCurrentPage(contentType);
-          } else {
-            this.updateContentVisibility(contentType);
+        // SIMPLIFIÉ: Pour les objets, toujours rafraîchir la page
+        // C'est plus simple et évite les problèmes de synchronisation
+        this.refreshCurrentPage(contentType);
+        
+        // Mettre à jour le texte indicateur du nombre de tags actifs
+        setTimeout(() => {
+          const statusElement = document.querySelector('.objects-tag-display p');
+          if (statusElement) {
+            const activeCount = visibleTags.length;
+            statusElement.innerHTML = activeCount === 0 
+              ? 'Aucun filtre actif - Tous les objets affichés' 
+              : activeCount === 1 
+                ? '1 filtre actif - Objets avec ce tag uniquement'
+                : `${activeCount} filtres actifs - Objets avec TOUS ces tags`;
           }
-        }
+        }, 100);
       }
 
       // Save changes to storage
@@ -19108,6 +21037,157 @@ article span[title]:hover::after {
              (document.body.classList.contains('dev-on')) ||
              (window.location.protocol === 'file:' && !window.STANDALONE_VERSION) ||
              (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+    },
+
+    showPageLinksModal() {
+      let modal = JdrApp.utils.dom.$('#pageLinksModal');
+      if (modal) {
+        document.body.removeChild(modal);
+      }
+      
+      modal = this.createPageLinksModal();
+      document.body.appendChild(modal);
+      
+      this.openModal('pageLinksModal');
+    },
+
+    createPageLinksModal() {
+      // Construire la liste des pages à partir de la structure TOC
+      const pages = [];
+      
+      if (window.TOC_STRUCTURE && window.TOC_STRUCTURE.sections) {
+        window.TOC_STRUCTURE.sections.forEach(section => {
+          if (section.items && Array.isArray(section.items)) {
+            section.items.forEach(item => {
+              if (item.type === 'page') {
+                pages.push({
+                  id: item.id,
+                  title: item.title,
+                  icon: item.icon,
+                  section: section.title
+                });
+              } else if (item.type === 'category') {
+                // Ajouter la page principale de catégorie
+                pages.push({
+                  id: item.id,
+                  title: item.title,
+                  icon: item.icon,
+                  section: section.title
+                });
+                
+                // Ajouter les sous-catégories si elles existent
+                if (item.id === 'sorts' && window.SORTS) {
+                  window.SORTS.forEach(category => {
+                    pages.push({
+                      id: `sorts-${category.nom}`,
+                      title: `${category.nom} (sorts)`,
+                      icon: '🔮',
+                      section: section.title
+                    });
+                  });
+                } else if (item.id === 'dons' && window.DONS) {
+                  window.DONS.forEach(category => {
+                    pages.push({
+                      id: `dons-${category.nom}`,
+                      title: `${category.nom} (dons)`,
+                      icon: '🎖️',
+                      section: section.title
+                    });
+                  });
+                } else if (item.id === 'classes' && window.CLASSES) {
+                  window.CLASSES.forEach(classe => {
+                    pages.push({
+                      id: classe.nom.toLowerCase(),
+                      title: classe.nom,
+                      icon: '⚔️',
+                      section: section.title
+                    });
+                  });
+                }
+              }
+            });
+          }
+        });
+      }
+
+      const pagesHTML = pages.map(page => `
+        <div class="page-item" data-page-id="${page.id}">
+          <div class="page-info">
+            <div class="page-name">${page.icon} ${page.title}</div>
+            <div class="page-section" style="color: var(--paper-muted); font-size: 12px;">${page.section}</div>
+          </div>
+          <div class="copy-indicator">Copié!</div>
+        </div>
+      `).join('');
+
+      const modal = JdrApp.utils.dom.create('div', 'modal page-links-modal', `
+        <div class="modal-content page-links-modal-content">
+          <div style="position: relative;">
+            <button class="modal-close-x" style="position: absolute; top: 0; right: 0; background: none; border: none; font-size: 20px; cursor: pointer; color: var(--paper-muted); padding: 4px 8px; border-radius: 4px; transition: all 0.2s ease;" onmouseover="this.style.background='var(--rule)'; this.style.color='var(--accent-ink)';" onmouseout="this.style.background='none'; this.style.color='var(--paper-muted)';">×</button>
+            <h3>🔗 Liens vers les pages</h3>
+          </div>
+          <p>Cliquez sur une page pour copier un lien vers celle-ci.</p>
+          <div class="pages-search">
+            <input type="text" id="pageSearchInput" placeholder="Rechercher une page..." style="width: 100%; padding: 8px; margin-bottom: 12px; border: 1px solid var(--rule); border-radius: 4px;">
+          </div>
+          <div class="pages-list" style="max-height: 400px; overflow-y: auto;">
+            ${pagesHTML || '<div style="text-align: center; color: #666; padding: 2rem;">Aucune page trouvée</div>'}
+          </div>
+          <button class="modal-close btn">Fermer</button>
+        </div>
+      `, { id: 'pageLinksModal' });
+
+      // Recherche dans la modal
+      const searchInput = modal.querySelector('#pageSearchInput');
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          const searchTerm = e.target.value.toLowerCase();
+          const pageItems = modal.querySelectorAll('.page-item');
+          
+          pageItems.forEach(item => {
+            const pageName = item.querySelector('.page-name').textContent.toLowerCase();
+            const pageSection = item.querySelector('.page-section').textContent.toLowerCase();
+            
+            if (pageName.includes(searchTerm) || pageSection.includes(searchTerm)) {
+              item.style.display = '';
+            } else {
+              item.style.display = 'none';
+            }
+          });
+        });
+      }
+
+      // Clic sur une page
+      modal.addEventListener('click', (e) => {
+        const pageItem = e.target.closest('.page-item');
+        if (pageItem) {
+          const pageId = pageItem.dataset.pageId;
+          const pageTitle = pageItem.querySelector('.page-name').textContent.replace(/^[^\s]+ /, ''); // Enlever l'icône
+          
+          // Créer le lien vers la page
+          const pageLink = `<a href="#/${pageId}" style="color: var(--accent); text-decoration: underline;">${pageTitle}</a>`;
+          
+          this.copyToClipboard(pageLink);
+          
+          pageItem.classList.add('copied');
+          
+          // Fermer la modale après un court délai pour voir l'effet "Copié!"
+          setTimeout(() => {
+            this.closeModal(modal);
+          }, 500);
+        }
+      });
+
+      // Gestionnaire pour le bouton X de fermeture
+      const closeBtn = modal.querySelector('.modal-close-x');
+      if (closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          this.closeModal(modal);
+        });
+      }
+
+      return modal;
     },
 
     // Méthode robuste pour forcer le rafraîchissement de la page (fallback)

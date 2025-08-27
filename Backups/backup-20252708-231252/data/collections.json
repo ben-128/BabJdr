@@ -1,0 +1,13 @@
+{
+  "collections": [
+    {
+      "id": "d-part",
+      "nom": "Départ",
+      "description": "Objets disponibles à la création du personnage.",
+      "icon": "📦",
+      "objets": [
+        1
+      ]
+    }
+  ]
+}

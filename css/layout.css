@@ -14,7 +14,7 @@
 .page {
   position: relative;
   min-height: 100vh;
-  padding: 18px 18px 18px 368px;
+  padding: 18px; /* Equal padding all around */
   transition: padding var(--transition-normal);
   background: 
     var(--parchment-texture),
@@ -22,10 +22,12 @@
     var(--paper);
 }
 
-/* Content Container - Enhanced Centering */
+/* Content Container - Dynamic Centering (handled by JavaScript) */
 #views {
-  max-width: 1200px;
-  margin: 0 auto;
+  max-width: 1400px;
+  /* Fallback positioning - will be overridden by DynamicCentering.js */
+  margin-left: 370px; /* Just clear the sidebar */
+  margin-right: 20px;
   padding: 0 var(--space-lg);
   animation: fadeInUp 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
