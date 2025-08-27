@@ -27,7 +27,9 @@
       "Bash(rm:*)",
       "Bash(npm run dev:*)",
       "Bash(ls:*)",
-      "Bash(del:*)"
+      "Bash(del:*)",
+      "Bash(rg:*)",
+      "Bash(git reset:*)"
     ],
     "deny": []
   }

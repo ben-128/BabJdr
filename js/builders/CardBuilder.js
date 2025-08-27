@@ -367,25 +367,18 @@
         containerClasses += ` illus-${styleType}`;
       }
 
-      // CRITICAL FIX: Check for standalone mode like PageBuilder does
+      // HYBRID APPROACH: Never generate buttons in standalone, always generate in dev mode
       const isStandalone = window.STANDALONE_VERSION === true;
       
-      let shouldShowImageButtons = false;
-      
-      // If standalone, immediately set to false - no image buttons ever
       if (isStandalone) {
-        shouldShowImageButtons = false;
+        // STANDALONE: Never generate image buttons at all
+        return `
+          <div class="${containerClasses}" data-illus-key="${illusKey}" data-style-type="${styleType}" data-bound="1">
+            <img alt="Illustration ${altText}" class="thumb" style="${imageStyle}"${imageUrl ? ` src="${imageUrl}"` : ''}>
+          </div>
+        `;
       } else {
-        // Only for non-standalone: check dev mode conditions
-        const isDevModeActive = JdrApp.utils.isDevMode();
-        const hasDevClass = document.body.classList.contains('dev-on');
-        const editorDevMode = window.JdrApp?.modules?.editor?.isDevMode === true;
-        
-        // Only show image buttons if ALL conditions confirm we're in dev mode
-        shouldShowImageButtons = isDevModeActive && (hasDevClass || editorDevMode);
-      }
-
-      if (shouldShowImageButtons) {
+        // DEV MODE: Always generate buttons, let CSS handle visibility
         return `
           <div class="${containerClasses}" data-illus-key="${illusKey}" data-style-type="${styleType}" data-bound="1">
             <img alt="Illustration ${altText}" class="thumb" style="${imageStyle}"${imageUrl ? ` src="${imageUrl}"` : ''}>
@@ -394,12 +387,6 @@
           </div>
         `;
       }
-      
-      return `
-        <div class="${containerClasses}" data-illus-key="${illusKey}" data-style-type="${styleType}" data-bound="1">
-          <img alt="Illustration ${altText}" class="thumb" style="${imageStyle}"${imageUrl ? ` src="${imageUrl}"` : ''}>
-        </div>
-      `;
     }
 
     buildSpellElement() {
@@ -475,6 +462,14 @@
       const tableIndex = window.TABLES_TRESORS?.tables ? window.TABLES_TRESORS.tables.indexOf(this.data) : 0;
       const totalTables = window.TABLES_TRESORS?.tables?.length || 1;
       
+      // Condition améliorée pour afficher les boutons d'édition des fourchettes
+      const shouldShowFourchetteButtons = this.shouldShowEditButtons || 
+                                         (!window.STANDALONE_VERSION && window.location.search.includes('dev=1')) ||
+                                         (document.body.classList.contains('dev-on')) ||
+                                         (window.location.protocol === 'file:' && !window.STANDALONE_VERSION) ||
+                                         // Condition de fallback pour le développement
+                                         (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+      
       // Construire l'affichage des tags
       const tagsDisplay = this.data.tags && this.data.tags.length > 0 
         ? this.data.tags.map(tag => `<span class="tag-chip" style="background: var(--bronze); color: white; padding: 2px 6px; border-radius: 8px; font-size: 0.8em; margin-right: 4px;">${tag}</span>`).join('')
@@ -487,7 +482,7 @@
           ? `<a href="#" class="object-preview-link" data-object-numero="${objet.numero}" style="color: var(--accent); text-decoration: none;" title="Cliquer pour prévisualiser l'objet #${objet.numero}">📦 ${objet.nom} (N°${objet.numero})</a>`
           : `📦 ${objet?.nom || 'Objet inconnu'}`;
         
-        const editButtons = this.shouldShowEditButtons ? `
+        const editButtons = shouldShowFourchetteButtons ? `
           <div class="fourchette-actions" style="margin-left: 8px; display: flex; gap: 4px;">
             <button class="edit-fourchette-btn" data-table-name="${this.data.nom}" data-fourchette-index="${index}" title="Éditer cette fourchette" style="background: #3b82f6; color: white; border: none; border-radius: 4px; padding: 2px 6px; font-size: 0.8em; cursor: pointer;">✏️</button>
             <button class="delete-fourchette-btn" data-table-name="${this.data.nom}" data-fourchette-index="${index}" title="Supprimer cette fourchette" style="background: #dc2626; color: white; border: none; border-radius: 4px; padding: 2px 6px; font-size: 0.8em; cursor: pointer;">🗑️</button>
@@ -510,13 +505,9 @@
       return `
         <div class="card editable-section" data-section-type="tableTresor" data-table-tresor-name="${this.data.nom}" data-category-name="${this.categoryName}">
           ${this.buildEditableTitle(this.data.nom, 'table-tresor-name')}
-          <div style="text-align: center; margin: 0.5rem 0; color: var(--bronze);">
-            💎 Table de Trésor
-          </div>
           <div style="text-align: center; margin: 0.5rem 0;">
             ${this.buildEditableTagsField(tagsDisplay, 'table-tresor-tags', 'Tags')}
           </div>
-          ${this.buildEditableField(this.data.description, 'table-tresor-description', 'Description', { style: 'text-align: center; font-style: italic; margin: 1rem 0;' })}
           
           <hr style="margin: 1rem 0; border: none; border-top: 2px solid var(--bronze); opacity: 0.6;">
           
@@ -529,7 +520,7 @@
             </div>
           </div>
           
-          ${this.shouldShowEditButtons ? `
+          ${shouldShowFourchetteButtons ? `
             <div class="edit-actions" style="margin-top: 1rem; text-align: center; display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center;">
               <button class="table-tresor-add-fourchette btn" data-table-tresor-name="${this.data.nom}" type="button" style="background: var(--accent); color: white;">
                 ➕ Ajouter fourchette

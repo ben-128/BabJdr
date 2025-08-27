@@ -193,6 +193,9 @@
             } else {
               JdrApp.modules.editor.forceHideAllEditButtons();
             }
+          } else if (window.STANDALONE_VERSION) {
+            // FORCE STANDALONE MODE: Ensure dev-off class and hide all dev buttons
+            document.body.className = 'dev-off';
           }
         }, 50);
       }
@@ -313,6 +316,9 @@
             } else {
               JdrApp.modules.editor.forceHideAllEditButtons();
             }
+          } else if (window.STANDALONE_VERSION) {
+            // FORCE STANDALONE MODE: Ensure dev-off class and hide all dev buttons
+            document.body.className = 'dev-off';
           }
         }
       }
@@ -402,13 +408,15 @@
           
           this.autoLoadImages();
           
-          // Apply dev mode state
+          // Apply dev mode state with slight delay to ensure DOM is processed
           if (!window.STANDALONE_VERSION && JdrApp.modules.editor) {
-            if (JdrApp.modules.editor.isDevMode) {
-              JdrApp.modules.editor.forceShowAllEditButtons();
-            } else {
-              JdrApp.modules.editor.forceHideAllEditButtons();
-            }
+            setTimeout(() => {
+              if (JdrApp.modules.editor.isDevMode) {
+                JdrApp.modules.editor.forceShowAllEditButtons();
+              } else {
+                JdrApp.modules.editor.forceHideAllEditButtons();
+              }
+            }, 10);
           }
         }
       }

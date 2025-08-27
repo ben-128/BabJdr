@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-08-26T21:31:38.981Z by JdrBab Build System -->
+<!-- Generated on 2025-08-27T12:01:32.320Z by JdrBab Build System -->
 <title>JDR‑BAB — Livret de règles</title>
 <meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2308,12 +2308,15 @@ body.dev-off .btn.manage-tags-btn,
 body.dev-off .btn.tags-manager-btn,
 body.dev-off button[data-content-type="monster"],
 body.dev-off button[data-content-type="objet"],
+body.dev-off button[data-content-type="tableTresor"],
 body.dev-off .dev-mode-buttons button,
 body.dev-off div[data-dev-only] button,
+body.dev-off div[data-dev-only],
 body.dev-off .btn.btn-small.manage-tags-btn,
 body.dev-off button.btn.btn-small.manage-tags-btn,
 body.dev-off .dev-mode-buttons .manage-tags-btn,
 body.dev-off [data-dev-only] .manage-tags-btn,
+body.dev-off .tableTresor-add,
 body.dev-off .add-monster-btn,
 body.dev-off .btn.add-monster-btn,
 body.dev-off .tags-manager-btn,
@@ -4131,16 +4134,17 @@ article span[title]:hover::after {
       "poids": ""
     },
     {
-      "nom": "Baguette de Sommeil",
+      "nom": "Baguette de d'accélération",
       "numero": 17,
       "image": "",
       "description": "Description de l'objet.",
       "tags": [
-        "Départ"
+        "Consommable",
+        "Catalyseur"
       ],
-      "effet": "<strong>Effet:</strong> Description de l'effet de l'objet.",
-      "prix": "🔷 <strong>Prix:</strong> 10",
-      "poids": "⚖️ <strong>Poids:</strong> 1"
+      "effet": "<strong>Effet:</strong> <span class=\"spell-link\" data-spell=\"Accélération\" data-category=\"Sorts d'Enchanteur\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Accélération</span>",
+      "prix": "🔷 <strong>Prix:</strong> 30",
+      "poids": ""
     },
     {
       "nom": "Baguette de sommeil",
@@ -4159,7 +4163,7 @@ article span[title]:hover::after {
   ],
   "filterSettings": {
     "visibleTags": [
-      "Arme"
+      "Consommable"
     ],
     "displayedFilterButtons": [
       "Arme",
@@ -4169,7 +4173,7 @@ article span[title]:hover::after {
     ]
   },
   "categoryDescription": "Équipements, armes, armures et objets divers que peuvent posséder les personnages.",
-  "description": "Pour éviter le <strong>spoil</strong>, seuls les objets de départs sont visibles sans le <strong>mode maître de jeu</strong> d'actif. <br>Vous pouvez par contre rechercher un <strong>objet par ID</strong> quand le MJ vous indique que votre héros a trouvé un nouvel objet."
+  "description": "Fortune + d20"
 };
     window.MONSTRES = [
   {
@@ -4425,12 +4429,10 @@ article span[title]:hover::after {
     window.TABLES_TRESORS = {
   "tables": [
     {
-      "nom": "Trésor de gobelin",
-      "description": "Table de butin typique pour les gobelins et petites créatures",
+      "nom": "Monstre forêt commun",
+      "description": "feffez",
       "tags": [
-        "Faible",
-        "Humanoïde",
-        "Commun"
+        "Forêt"
       ],
       "fourchettes": [
         {
@@ -4438,8 +4440,8 @@ article span[title]:hover::after {
           "max": 5,
           "objet": {
             "type": "reference",
-            "numero": 45,
-            "nom": "Pièces de cuivre"
+            "numero": 15,
+            "nom": "Feuilleclaire"
           }
         },
         {
@@ -4468,16 +4470,24 @@ article span[title]:hover::after {
             "numero": 2,
             "nom": "Simple épée"
           }
+        },
+        {
+          "min": 21,
+          "max": 25,
+          "objet": {
+            "type": "reference",
+            "numero": 1,
+            "nom": "Nouvel objet"
+          }
         }
       ]
     },
     {
-      "nom": "Trésor de boss",
-      "description": "Récompenses pour les combats difficiles et boss de donjon",
+      "nom": "Boss forêt",
+      "description": "BBB",
       "tags": [
-        "Boss",
-        "Rare",
-        "Épique"
+        "Forêt",
+        "Boss"
       ],
       "fourchettes": [
         {
@@ -4527,7 +4537,14 @@ article span[title]:hover::after {
         }
       ]
     }
-  ]
+  ],
+  "_metadata": {
+    "availableTags": [
+      "Forêt",
+      "Boss",
+      "Coffre"
+    ]
+  }
 };
     window.IMAGES = {
   "images": {
@@ -4603,13 +4620,22 @@ article span[title]:hover::after {
     "monster:Serpent de la forêt": "https://i.ibb.co/svhHLvKZ/Monstre-For-t-Serpent.png",
     "monster:Scarabée géant": "https://i.ibb.co/wF5bRvts/Monstre-For-t-Scarabe-Geant.png",
     "monster:Boss Forêt": "https://i.ibb.co/1JR11CC7/Monstre-For-t-Boss.png",
-    "sort:Sorts de Mage:Volée de pierres": "https://i.ibb.co/GfPFdZPG/Volee-Pierre.png"
+    "sort:Sorts de Mage:Volée de pierres": "https://i.ibb.co/GfPFdZPG/Volee-Pierre.png",
+    "objet:Baguette de d'accélération": "https://i.ibb.co/zT29mKBd/Baguette-Lumiere.png"
   },
   "meta": {
-    "total_images": 73,
-    "exported_date": "2025-08-26",
+    "total_images": 74,
+    "exported_date": "2025-08-27",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
+};
+    
+    // Page descriptions
+    window.MONSTRES_PAGE_DESC = {
+  "description": "Créatures, ennemis et adversaires que peuvent affronter les héros dans leurs aventures."
+};
+    window.TABLES_TRESORS_PAGE_DESC = {
+  "description": "Fortune + d20"
 };
     
     // TOC Structure for advanced navigation
@@ -5271,6 +5297,25 @@ article span[title]:hover::after {
           fetch('data/toc-structure.json').then(r => r.json())
         ]);
 
+        // Load page descriptions (optional, with fallbacks)
+        try {
+          window.MONSTRES_PAGE_DESC = await fetch('data/monstres-page-desc.json').then(r => r.json());
+        } catch (error) {
+          // Fallback if file doesn't exist
+          window.MONSTRES_PAGE_DESC = {
+            description: "Créatures, ennemis et adversaires que peuvent affronter les héros dans leurs aventures."
+          };
+        }
+
+        try {
+          window.TABLES_TRESORS_PAGE_DESC = await fetch('data/tables-tresors-page-desc.json').then(r => r.json());
+        } catch (error) {
+          // Fallback if file doesn't exist
+          window.TABLES_TRESORS_PAGE_DESC = {
+            description: "Tables de butin permettant de générer aléatoirement des récompenses selon les fourchettes définies. Lancez un dé 20 et consultez la table correspondante pour déterminer l'objet obtenu."
+          };
+        }
+
         const staticPagesData = {};
         const activePages = staticPagesConfig.pages.filter(page => page.active);
         
@@ -5479,28 +5524,34 @@ article span[title]:hover::after {
         // Standalone mode sets window.STANDALONE_VERSION = true in the build
         const isStandalone = window.STANDALONE_VERSION === true;
         
-        console.log(`🔍 Mode detection: Standalone = ${isStandalone}`);
         
         if (!isStandalone) {
-          console.log('🛠️ Development mode detected: Auto-enabling MJ mode');
           
           // Enable MJ mode (not dev mode!) automatically in development
           if (!this.state.isMJ) {
-            console.log('🎭 Activating MJ mode...');
             this.state.isMJ = true;
             
             // Update MJ button visual if available and regenerate TOC
             if (JdrApp.modules.router && JdrApp.modules.router.updateMJButtonVisual) {
               JdrApp.modules.router.updateMJButtonVisual();
               JdrApp.modules.router.generateTOC();
-              console.log('🎭 MJ mode UI updated');
+              
+              // Refresh current page if it's tables-tresors to show edit buttons
+              const currentHash = window.location.hash;
+              if (currentHash === '#/tables-tresors') {
+                setTimeout(() => {
+                  if (JdrApp.modules.router && JdrApp.modules.router.renderTablesTresorsPage) {
+                    JdrApp.modules.router.renderTablesTresorsPage();
+                  }
+                }, 200);
+              }
+              
             } else {
               console.warn('⚠️ Router not ready yet, retrying in 1 second...');
               setTimeout(() => this.autoEnableMJModeInDevelopment(), 1000);
               return;
             }
             
-            console.log('✅ MJ mode activated successfully');
           } else {
             console.log('ℹ️ MJ mode already active');
           }
@@ -5874,13 +5925,12 @@ article span[title]:hover::after {
         nom: { type: 'text', label: 'Nom', required: true },
         description: { type: 'textarea', label: 'Description', required: true },
         tags: { type: 'tags', label: 'Tags', required: true },
-        fourchettes: { type: 'lootTable', label: 'Fourchettes', required: true }
+        fourchettes: { type: 'list', label: 'Fourchettes', required: true }
       },
       editMapping: {
         'table-tresor-name': 'nom',
         'table-tresor-description': 'description',
-        'table-tresor-tags': 'tags',
-        'table-tresor-fourchettes': 'fourchettes'
+        'table-tresor-tags': 'tags'
       },
       identifiers: {
         name: 'nom',
@@ -5890,35 +5940,24 @@ article span[title]:hover::after {
       container: 'tables-tresors',
       dataKey: 'TABLES_TRESORS',
       pageType: 'single',
-      filterMode: 'OR', // Mode OR pour tables de trésors (au moins un tag visible requis)
+      filterMode: 'OR',
       icons: { 
         category: '💎', 
-        item: '🎲',
+        item: '📦',
         add: '➕',
         delete: '🗑️'
       },
       filterConfig: {
-        availableTags: [
-          "Faible",
-          "Commun",
-          "Rare",
-          "Épique",
-          "Légendaire",
-          "Boss",
-          "Humanoïde",
-          "Bête",
-          "Dragon",
-          "Mort-vivant",
-          "Élémentaire"
-        ],
+        // availableTags managed dynamically via window.TABLES_TRESORS._metadata.availableTags
         defaultVisibleTags: [
-          "Commun"
+          "Forêt",
+          "Boss"
         ]
       },
       defaultValues: {
         nom: "Nouvelle Table de Trésor",
-        description: "Description de cette table de butin.",
-        tags: ["Commun"],
+        description: "Table de butin pour une situation spécifique.",
+        tags: ["Forêt"],
         fourchettes: [
           {
             min: 1,
@@ -5930,8 +5969,7 @@ article span[title]:hover::after {
             }
           }
         ]
-      },
-      requiresMJ: true // Visible uniquement en mode MJ
+      }
     },
 
     staticPage: {
@@ -6076,6 +6114,13 @@ article span[title]:hover::after {
         this.objectsData = this.data; // Keep reference to original structure
         this.data = [{ nom: 'objets', objets: this.data.objets }]; // Wrap in array format
       }
+      
+      // Handle special case for treasure tables with structure: { tables: [...], _metadata: {...} }
+      if (type === 'tableTresor' && this.data && !Array.isArray(this.data) && this.data.tables) {
+        // Convert to pseudo-category structure for compatibility
+        this.tablesData = this.data; // Keep reference to original structure
+        this.data = [{ nom: 'tables', tables: this.data.tables }]; // Wrap in array format
+      }
     }
 
     getAll() {
@@ -6218,6 +6263,7 @@ article span[title]:hover::after {
         case 'don': return 'dons';
         case 'objet': return 'objets';
         case 'class': return 'sousClasses';
+        case 'tableTresor': return 'tables';
         default: return 'items';
       }
     }
@@ -6252,6 +6298,14 @@ article span[title]:hover::after {
         const objectsCategory = this.data[0];
         if (objectsCategory && objectsCategory.objets) {
           this.objectsData.objets = objectsCategory.objets;
+        }
+      }
+      
+      // Sync treasure tables data
+      if (this.type === 'tableTresor' && this.tablesData && this.data.length > 0) {
+        const tablesCategory = this.data[0];
+        if (tablesCategory && tablesCategory.tables) {
+          this.tablesData.tables = tablesCategory.tables;
         }
       }
       
@@ -6420,6 +6474,90 @@ article span[title]:hover::after {
     refreshData() {
       this.entities.clear();
       this.initialize();
+    }
+
+    // ============================================================================
+    // UNIFIED PAGE DESCRIPTION SYSTEM
+    // ============================================================================
+
+    getPageDescription(type) {
+      const config = window.ContentTypes[type];
+      
+      if (!config || !config.pageDescription) {
+        return '';
+      }
+      
+      const pageDesc = config.pageDescription;
+      
+      if (pageDesc.dataSource === 'external') {
+        // Utilisation d'un fichier externe via dataKey
+        const dataObj = window[pageDesc.dataKey];
+        if (!dataObj) {
+          // Créer l'objet externe s'il n'existe pas
+          window[pageDesc.dataKey] = { [pageDesc.storageKey]: pageDesc.defaultValue };
+          return pageDesc.defaultValue;
+        }
+        return dataObj[pageDesc.storageKey] || pageDesc.defaultValue;
+      } else {
+        // Source de données intégrée dans le dataKey principal
+        const mainDataKey = config.dataKey;
+        const mainData = window[mainDataKey];
+        
+        if (!mainData) {
+          console.warn(`Main data key ${mainDataKey} not found for type ${type}`);
+          return pageDesc.defaultValue;
+        }
+        
+        // Initialiser la description si elle n'existe pas
+        if (!mainData[pageDesc.storageKey]) {
+          mainData[pageDesc.storageKey] = pageDesc.defaultValue;
+        }
+        
+        return mainData[pageDesc.storageKey];
+      }
+    }
+
+    updatePageDescription(type, newDescription) {
+      const config = window.ContentTypes[type];
+      
+      if (!config || !config.pageDescription) {
+        console.warn(`No page description config found for type: ${type}`);
+        return false;
+      }
+      
+      const pageDesc = config.pageDescription;
+      
+      try {
+        if (pageDesc.dataSource === 'external') {
+          // Mise à jour d'un fichier externe via dataKey
+          const dataObj = window[pageDesc.dataKey];
+          if (!dataObj) {
+            window[pageDesc.dataKey] = {};
+          }
+          window[pageDesc.dataKey][pageDesc.storageKey] = newDescription;
+        } else {
+          // Mise à jour dans le dataKey principal
+          const mainDataKey = config.dataKey;
+          const mainData = window[mainDataKey];
+          
+          if (!mainData) {
+            console.error(`Main data key ${mainDataKey} not found for type ${type}`);
+            return false;
+          }
+          
+          mainData[pageDesc.storageKey] = newDescription;
+        }
+        
+        // Émettre un événement pour notifier le changement
+        if (window.EventBus) {
+          window.EventBus.emit('pageDescriptionUpdated', { type, description: newDescription });
+        }
+        
+        return true;
+      } catch (error) {
+        console.error(`Error updating page description for ${type}:`, error);
+        return false;
+      }
     }
 
     getConfig(type) {
@@ -6806,25 +6944,18 @@ article span[title]:hover::after {
         containerClasses += ` illus-${styleType}`;
       }
 
-      // CRITICAL FIX: Check for standalone mode like PageBuilder does
+      // HYBRID APPROACH: Never generate buttons in standalone, always generate in dev mode
       const isStandalone = window.STANDALONE_VERSION === true;
       
-      let shouldShowImageButtons = false;
-      
-      // If standalone, immediately set to false - no image buttons ever
       if (isStandalone) {
-        shouldShowImageButtons = false;
+        // STANDALONE: Never generate image buttons at all
+        return `
+          <div class="${containerClasses}" data-illus-key="${illusKey}" data-style-type="${styleType}" data-bound="1">
+            <img alt="Illustration ${altText}" class="thumb" style="${imageStyle}"${imageUrl ? ` src="${imageUrl}"` : ''}>
+          </div>
+        `;
       } else {
-        // Only for non-standalone: check dev mode conditions
-        const isDevModeActive = JdrApp.utils.isDevMode();
-        const hasDevClass = document.body.classList.contains('dev-on');
-        const editorDevMode = window.JdrApp?.modules?.editor?.isDevMode === true;
-        
-        // Only show image buttons if ALL conditions confirm we're in dev mode
-        shouldShowImageButtons = isDevModeActive && (hasDevClass || editorDevMode);
-      }
-
-      if (shouldShowImageButtons) {
+        // DEV MODE: Always generate buttons, let CSS handle visibility
         return `
           <div class="${containerClasses}" data-illus-key="${illusKey}" data-style-type="${styleType}" data-bound="1">
             <img alt="Illustration ${altText}" class="thumb" style="${imageStyle}"${imageUrl ? ` src="${imageUrl}"` : ''}>
@@ -6833,12 +6964,6 @@ article span[title]:hover::after {
           </div>
         `;
       }
-      
-      return `
-        <div class="${containerClasses}" data-illus-key="${illusKey}" data-style-type="${styleType}" data-bound="1">
-          <img alt="Illustration ${altText}" class="thumb" style="${imageStyle}"${imageUrl ? ` src="${imageUrl}"` : ''}>
-        </div>
-      `;
     }
 
     buildSpellElement() {
@@ -6914,6 +7039,14 @@ article span[title]:hover::after {
       const tableIndex = window.TABLES_TRESORS?.tables ? window.TABLES_TRESORS.tables.indexOf(this.data) : 0;
       const totalTables = window.TABLES_TRESORS?.tables?.length || 1;
       
+      // Condition améliorée pour afficher les boutons d'édition des fourchettes
+      const shouldShowFourchetteButtons = this.shouldShowEditButtons || 
+                                         (!window.STANDALONE_VERSION && window.location.search.includes('dev=1')) ||
+                                         (document.body.classList.contains('dev-on')) ||
+                                         (window.location.protocol === 'file:' && !window.STANDALONE_VERSION) ||
+                                         // Condition de fallback pour le développement
+                                         (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+      
       // Construire l'affichage des tags
       const tagsDisplay = this.data.tags && this.data.tags.length > 0 
         ? this.data.tags.map(tag => `<span class="tag-chip" style="background: var(--bronze); color: white; padding: 2px 6px; border-radius: 8px; font-size: 0.8em; margin-right: 4px;">${tag}</span>`).join('')
@@ -6926,7 +7059,7 @@ article span[title]:hover::after {
           ? `<a href="#" class="object-preview-link" data-object-numero="${objet.numero}" style="color: var(--accent); text-decoration: none;" title="Cliquer pour prévisualiser l'objet #${objet.numero}">📦 ${objet.nom} (N°${objet.numero})</a>`
           : `📦 ${objet?.nom || 'Objet inconnu'}`;
         
-        const editButtons = this.shouldShowEditButtons ? `
+        const editButtons = shouldShowFourchetteButtons ? `
           <div class="fourchette-actions" style="margin-left: 8px; display: flex; gap: 4px;">
             <button class="edit-fourchette-btn" data-table-name="${this.data.nom}" data-fourchette-index="${index}" title="Éditer cette fourchette" style="background: #3b82f6; color: white; border: none; border-radius: 4px; padding: 2px 6px; font-size: 0.8em; cursor: pointer;">✏️</button>
             <button class="delete-fourchette-btn" data-table-name="${this.data.nom}" data-fourchette-index="${index}" title="Supprimer cette fourchette" style="background: #dc2626; color: white; border: none; border-radius: 4px; padding: 2px 6px; font-size: 0.8em; cursor: pointer;">🗑️</button>
@@ -6949,13 +7082,9 @@ article span[title]:hover::after {
       return `
         <div class="card editable-section" data-section-type="tableTresor" data-table-tresor-name="${this.data.nom}" data-category-name="${this.categoryName}">
           ${this.buildEditableTitle(this.data.nom, 'table-tresor-name')}
-          <div style="text-align: center; margin: 0.5rem 0; color: var(--bronze);">
-            💎 Table de Trésor
-          </div>
           <div style="text-align: center; margin: 0.5rem 0;">
             ${this.buildEditableTagsField(tagsDisplay, 'table-tresor-tags', 'Tags')}
           </div>
-          ${this.buildEditableField(this.data.description, 'table-tresor-description', 'Description', { style: 'text-align: center; font-style: italic; margin: 1rem 0;' })}
           
           <hr style="margin: 1rem 0; border: none; border-top: 2px solid var(--bronze); opacity: 0.6;">
           
@@ -6968,7 +7097,7 @@ article span[title]:hover::after {
             </div>
           </div>
           
-          ${this.shouldShowEditButtons ? `
+          ${shouldShowFourchetteButtons ? `
             <div class="edit-actions" style="margin-top: 1rem; text-align: center; display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center;">
               <button class="table-tresor-add-fourchette btn" data-table-tresor-name="${this.data.nom}" type="button" style="background: var(--accent); color: white;">
                 ➕ Ajouter fourchette
@@ -7157,7 +7286,7 @@ article span[title]:hover::after {
               ${this.buildIllustration('page:objets')}
             </div>
             
-            ${this.buildObjectsCategoryDescription()}
+            ${this.buildPageDescription('objet')}
             
             ${this.buildIdSearchFilter()}
             ${this.buildTagFilters(visibleTags, filterSettings.displayedFilterButtons || config.filterConfig.availableTags)}
@@ -7221,6 +7350,8 @@ article span[title]:hover::after {
               <h2>🐲 Monstres</h2>
               ${instance.buildIllustration('page:monstres')}
             </div>
+            
+            ${instance.buildPageDescription('monster')}
             
             ${instance.buildTagFilters(visibleTags, config.filterConfig.availableTags, 'monster')}
             
@@ -7510,26 +7641,18 @@ article span[title]:hover::after {
         }
       }
 
-      // Enhanced dev mode check to prevent image buttons from appearing incorrectly
-      // STRICT CHECK: In standalone mode, NEVER show image buttons
+      // HYBRID APPROACH: Never generate buttons in standalone, always generate in dev mode
       const isStandalone = window.STANDALONE_VERSION === true;
       
-      let shouldShowImageButtons = false;
-      
-      // If standalone, immediately set to false - no image buttons ever
       if (isStandalone) {
-        shouldShowImageButtons = false;
+        // STANDALONE: Never generate image buttons at all
+        return `
+          <div class="illus" data-illus-key="${illusKey}" data-bound="1">
+            <img alt="Illustration ${altText}" class="thumb" style="${imageStyle}"${imageUrl ? ` src="${imageUrl}"` : ''}>
+          </div>
+        `;
       } else {
-        // Only for non-standalone: check dev mode conditions
-        const isDevModeActive = JdrApp.utils.isDevMode();
-        const hasDevClass = document.body.classList.contains('dev-on');
-        const editorDevMode = window.JdrApp?.modules?.editor?.isDevMode === true;
-        
-        // Only show image buttons if ALL conditions confirm we're in dev mode
-        shouldShowImageButtons = isDevModeActive && (hasDevClass || editorDevMode);
-      }
-
-      if (shouldShowImageButtons) {
+        // DEV MODE: Always generate buttons, let CSS handle visibility
         return `
           <div class="illus" data-illus-key="${illusKey}" data-bound="1">
             <img alt="Illustration ${altText}" class="thumb" style="${imageStyle}"${imageUrl ? ` src="${imageUrl}"` : ''}>
@@ -7538,12 +7661,6 @@ article span[title]:hover::after {
           </div>
         `;
       }
-      
-      return `
-        <div class="illus" data-illus-key="${illusKey}" data-bound="1">
-          <img alt="Illustration ${altText}" class="thumb" style="${imageStyle}"${imageUrl ? ` src="${imageUrl}"` : ''}>
-        </div>
-      `;
     }
 
     buildFiltersSection(section, sectionIndex) {
@@ -7771,34 +7888,50 @@ article span[title]:hover::after {
       `;
     }
 
-    buildObjectsCategoryDescription() {
-      // Initialize description if it doesn't exist  
-      if (!window.OBJETS.description) {
-        window.OBJETS.description = "Équipements, armes, armures et objets divers que peuvent posséder les personnages.";
+    buildPageDescription(type) {
+      const config = window.ContentTypes[type];
+      
+      if (!config || !config.pageDescription) {
+        return '';
       }
       
-      return `
-        <div class="objects-category-description" style="margin: 1rem 0; padding: 1rem; background: var(--card); border-radius: 8px; border-left: 4px solid var(--bronze);">
-          <div class="editable-section" data-section-type="objet-category-description">
-            <p class="lead editable editable-paragraph" data-edit-type="generic" data-edit-section="description">${window.OBJETS.description}</p>
-            ${this.buildEditButton('section')}
-          </div>
-        </div>
-      `;
-    }
-
-    buildMonstersCategoryDescription() {
-      // Create a description object for monsters if it doesn't exist
-      if (!window.MONSTRES_PAGE_DESC) {
-        window.MONSTRES_PAGE_DESC = {
-          description: "Créatures, ennemis et adversaires que peuvent affronter les héros dans leurs aventures."
-        };
+      const pageDesc = config.pageDescription;
+      
+      // Obtenir la description de manière unifiée
+      let description = '';
+      
+      if (pageDesc.dataSource === 'external') {
+        // Utilisation d'un fichier externe via dataKey
+        const dataObj = window[pageDesc.dataKey];
+        if (!dataObj) {
+          // Créer l'objet externe s'il n'existe pas
+          window[pageDesc.dataKey] = { [pageDesc.storageKey]: pageDesc.defaultValue };
+        }
+        description = window[pageDesc.dataKey][pageDesc.storageKey] || pageDesc.defaultValue;
+      } else {
+        // Source de données intégrée dans le dataKey principal
+        const mainDataKey = config.dataKey;
+        const mainData = window[mainDataKey];
+        
+        if (!mainData) {
+          console.warn(`Main data key ${mainDataKey} not found for type ${type}`);
+          description = pageDesc.defaultValue;
+        } else {
+          // Initialiser la description si elle n'existe pas
+          if (!mainData[pageDesc.storageKey]) {
+            mainData[pageDesc.storageKey] = pageDesc.defaultValue;
+          }
+          description = mainData[pageDesc.storageKey];
+        }
       }
       
+      const cssClass = `${type}-category-description`;
+      const sectionType = `${type}-category-description`;
+      
       return `
-        <div class="monsters-category-description" style="margin: 1rem 0; padding: 1rem; background: var(--card); border-radius: 8px; border-left: 4px solid var(--bronze);">
-          <div class="editable-section" data-section-type="monster-category-description">
-            <p class="lead editable editable-paragraph" data-edit-type="generic" data-edit-section="description">${window.MONSTRES_PAGE_DESC.description}</p>
+        <div class="${cssClass}" style="margin: 1rem 0; padding: 1rem; background: var(--card); border-radius: 8px; border-left: 4px solid var(--bronze);">
+          <div class="editable-section" data-section-type="${sectionType}">
+            <p class="lead editable editable-paragraph" data-edit-type="generic" data-edit-section="${pageDesc.editSection}">${description}</p>
             ${this.buildEditButton('section')}
           </div>
         </div>
@@ -7910,12 +8043,17 @@ article span[title]:hover::after {
     }
 
     buildFilterManagerButton() {
-      // ALWAYS generate the button - CSS will control visibility based on body.dev-on/dev-off
-      return `<button class="filter-manager-btn btn" type="button" style="background: #16a34a; color: white; border: 2px solid #15803d;">🔧 Gérer les filtres</button>`;
+      // Only show in dev mode
+      if (!this.shouldShowEditButtons) {
+        return '';
+      }
+      return `<button class="filter-manager-btn btn" type="button" style="background: var(--bronze); color: white;">⚙️ Gérer les filtres</button>`;
     }
     
     buildTagsManagerButton() {
-      // ALWAYS generate the button - CSS will control visibility based on body.dev-on/dev-off
+      // ALWAYS generate the button - CSS will control visibility based on body.dev-on/dev-off  
+      if (window.STANDALONE_VERSION) return '';
+      
       return `<button class="tags-manager-btn btn" type="button" style="background: #dc2626; color: white; border: 2px solid #b91c1c;">🏷️ Gérer les tags</button>`;
     }
 
@@ -7929,27 +8067,30 @@ article span[title]:hover::after {
         console.warn('TableTresor config not loaded, using fallback defaults');
         config = {
           filterConfig: {
-            defaultVisibleTags: ['Commun', 'Rare'],
+            defaultVisibleTags: ['Commun'],
             availableTags: ['Faible', 'Commun', 'Rare', 'Épique', 'Légendaire', 'Boss', 'Humanoïde', 'Bête', 'Dragon', 'Mort-vivant', 'Élémentaire']
           }
         };
       }
       
-      // Utiliser le state du filtre s'il existe, sinon les tags par défaut
-      const visibleTags = window.TABLES_TRESORS_FILTER_STATE?.visibleTags || config.filterConfig.defaultVisibleTags;
+      // Priority: Use saved metadata tags as single source of truth
+      let availableTags = window.TABLES_TRESORS?._metadata?.availableTags || [];
       
-      console.log('🔍 Filtrage tables de trésors:', {
-        allTables: allTables.length,
-        visibleTags: visibleTags,
-        tablesWithTags: allTables.map(t => ({ nom: t.nom, tags: t.tags }))
-      });
+      // Utiliser le state du filtre s'il existe, sinon les tags par défaut qui existent vraiment
+      let defaultVisibleTags = config.filterConfig.defaultVisibleTags || [];
+      // Filter defaultVisibleTags to only include tags that actually exist in metadata
+      if (availableTags.length > 0) {
+        defaultVisibleTags = defaultVisibleTags.filter(tag => availableTags.includes(tag));
+      }
+      const visibleTags = window.TABLES_TRESORS_FILTER_STATE?.visibleTags || defaultVisibleTags;
+      
       
       // Filter tables according to visible tags
       const filterMode = config.filterMode || 'OR';
       const filteredTables = visibleTags.length === 0 
         ? allTables // If no tags are visible, show all tables
         : allTables.filter(table => {
-            // Check that the table has tags
+            // Check that the table has tags when filtering is active
             if (!table.tags || table.tags.length === 0) return false;
             
             if (filterMode === 'AND') {
@@ -7961,10 +8102,6 @@ article span[title]:hover::after {
             }
           });
           
-      console.log('🔍 Résultats filtrage:', {
-        filteredTables: filteredTables.length,
-        tableNames: filteredTables.map(t => t.nom)
-      });
       
       return `
         <article class="" data-page="tables-tresors">
@@ -7975,20 +8112,14 @@ article span[title]:hover::after {
               </h1>
             </header>
             
-            ${this.buildTableTresorsCategoryDescription()}
+            ${instance.buildPageDescription('tableTresor')}
             
-            ${this.buildTagFilters(visibleTags, config.filterConfig.availableTags, 'tableTresor')}
+            ${instance.buildTagFilters(visibleTags, availableTags, 'tableTresor')}
             
-            ${this.shouldShowEditButtons ? `
-              <div style="display: flex; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap;">
-                <button class="tableTresor-add btn" data-category-name="tables" type="button" style="background: var(--accent); color: white;">
-                  ➕ Ajouter une table de trésor
-                </button>
-                <button class="manage-tags-btn btn" data-content-type="tableTresor" type="button" style="background: #dc2626; color: white; border: 2px solid #b91c1c;">
-                  🏷️ Gérer les tags
-                </button>
-              </div>
-            ` : ''}
+            <div style="display: flex; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap;">
+              ${instance.buildAddButton('tableTresor', 'tables')}
+              ${instance.buildTagsManagerButton()}
+            </div>
             
             <div class="grid cols-1" id="tables-tresors-container" style="gap: 1.5rem;">
               ${filteredTables.map((table, index) => 
@@ -8003,7 +8134,7 @@ article span[title]:hover::after {
                 </p>
                 <p style="color: var(--paper-muted); font-style: italic;">
                   ${allTables.length === 0 
-                    ? (this.shouldShowEditButtons ? 'Utilisez le bouton "Ajouter une table de trésor" ci-dessus pour créer votre première table.' : 'Le Maître de jeu peut créer des tables de trésors en mode développement.')
+                    ? (instance.shouldShowEditButtons ? 'Utilisez le bouton "Ajouter une table de trésor" ci-dessus pour créer votre première table.' : 'Le Maître de jeu peut créer des tables de trésors en mode développement.')
                     : 'Modifiez vos filtres pour voir d\'autres tables de trésors.'
                   }
                 </p>
@@ -8020,23 +8151,6 @@ article span[title]:hover::after {
       `;
     }
     
-    buildTableTresorsCategoryDescription() {
-      // Create a description object for treasure tables if it doesn't exist
-      if (!window.TABLES_TRESORS_PAGE_DESC) {
-        window.TABLES_TRESORS_PAGE_DESC = {
-          description: "Tables de butin permettant de générer aléatoirement des récompenses selon les fourchettes définies. Lancez un dé 20 et consultez la table correspondante pour déterminer l'objet obtenu."
-        };
-      }
-      
-      return `
-        <div class="tables-tresors-category-description" style="margin: 1rem 0; padding: 1rem; background: var(--card); border-radius: 8px; border-left: 4px solid var(--bronze);">
-          <div class="editable-section" data-section-type="table-tresor-category-description">
-            <p class="lead editable editable-paragraph" data-edit-type="generic" data-edit-section="description">${window.TABLES_TRESORS_PAGE_DESC.description}</p>
-            ${this.buildEditButton('section')}
-          </div>
-        </div>
-      `;
-    }
 
     sanitizeId(str) {
       return str.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
@@ -8818,6 +8932,11 @@ article span[title]:hover::after {
           zip.file('data/monstres.json', JSON.stringify(window.MONSTRES, null, 2));
         }
         
+        // Add tables tresors data with current edits  
+        if (window.TABLES_TRESORS) {
+          zip.file('data/tables-tresors.json', JSON.stringify(window.TABLES_TRESORS, null, 2));
+        }
+        
         // Add TOC structure with new pages
         if (window.TOC_STRUCTURE) {
           zip.file('data/toc-structure.json', JSON.stringify(window.TOC_STRUCTURE, null, 2));
@@ -8854,6 +8973,15 @@ article span[title]:hover::after {
             }
           };
           zip.file('data/images.json', JSON.stringify(imagesData, null, 2));
+        }
+        
+        // Add page descriptions
+        if (window.MONSTRES_PAGE_DESC) {
+          zip.file('data/monstres-page-desc.json', JSON.stringify(window.MONSTRES_PAGE_DESC, null, 2));
+        }
+        
+        if (window.TABLES_TRESORS_PAGE_DESC) {
+          zip.file('data/tables-tresors-page-desc.json', JSON.stringify(window.TABLES_TRESORS_PAGE_DESC, null, 2));
         }
         
         // Add package.json and other config files
@@ -9205,6 +9333,58 @@ article span[title]:hover::after {
         armureMalefique: 0,
         abilites: "<strong>Attaque basique:</strong> Inflige 5 dégâts physiques.",
         butin: "<strong>Butin:</strong> 10-50 pièces d'or."
+      }
+    },
+
+    tableTresor: {
+      fields: {
+        nom: { type: 'text', label: 'Nom', required: true },
+        description: { type: 'textarea', label: 'Description', required: true },
+        tags: { type: 'tags', label: 'Tags', required: true },
+        fourchettes: { type: 'list', label: 'Fourchettes', required: true }
+      },
+      editMapping: {
+        'table-tresor-name': 'nom',
+        'table-tresor-description': 'description',
+        'table-tresor-tags': 'tags'
+      },
+      identifiers: {
+        name: 'nom',
+        category: 'tables'
+      },
+      template: 'table-tresor-card',
+      container: 'tables-tresors',
+      dataKey: 'TABLES_TRESORS',
+      pageType: 'single',
+      filterMode: 'OR',
+      icons: { 
+        category: '💎', 
+        item: '📦',
+        add: '➕',
+        delete: '🗑️'
+      },
+      filterConfig: {
+        // availableTags managed dynamically via window.TABLES_TRESORS._metadata.availableTags
+        defaultVisibleTags: [
+          "Forêt",
+          "Boss"
+        ]
+      },
+      defaultValues: {
+        nom: "Nouvelle Table de Trésor",
+        description: "Table de butin pour une situation spécifique.",
+        tags: ["Forêt"],
+        fourchettes: [
+          {
+            min: 1,
+            max: 10,
+            objet: {
+              type: "reference",
+              numero: 1,
+              nom: "Objet par défaut"
+            }
+          }
+        ]
       }
     },
 
@@ -10319,6 +10499,9 @@ article span[title]:hover::after {
             } else {
               JdrApp.modules.editor.forceHideAllEditButtons();
             }
+          } else if (window.STANDALONE_VERSION) {
+            // FORCE STANDALONE MODE: Ensure dev-off class and hide all dev buttons
+            document.body.className = 'dev-off';
           }
         }, 50);
       }
@@ -10439,6 +10622,9 @@ article span[title]:hover::after {
             } else {
               JdrApp.modules.editor.forceHideAllEditButtons();
             }
+          } else if (window.STANDALONE_VERSION) {
+            // FORCE STANDALONE MODE: Ensure dev-off class and hide all dev buttons
+            document.body.className = 'dev-off';
           }
         }
       }
@@ -10528,13 +10714,15 @@ article span[title]:hover::after {
           
           this.autoLoadImages();
           
-          // Apply dev mode state
+          // Apply dev mode state with slight delay to ensure DOM is processed
           if (!window.STANDALONE_VERSION && JdrApp.modules.editor) {
-            if (JdrApp.modules.editor.isDevMode) {
-              JdrApp.modules.editor.forceShowAllEditButtons();
-            } else {
-              JdrApp.modules.editor.forceHideAllEditButtons();
-            }
+            setTimeout(() => {
+              if (JdrApp.modules.editor.isDevMode) {
+                JdrApp.modules.editor.forceShowAllEditButtons();
+              } else {
+                JdrApp.modules.editor.forceHideAllEditButtons();
+              }
+            }, 10);
           }
         }
       }
@@ -10750,6 +10938,33 @@ article span[title]:hover::after {
         };
       }
       
+      // Check if we're in a table-tresor card
+      const tableTresorCard = element.closest('.card[data-table-tresor-name]');
+      if (tableTresorCard) {
+        const tableName = tableTresorCard.dataset.tableTresorName;
+        const categoryName = tableTresorCard.dataset.categoryName;
+        
+        const editableElement = element.classList.contains('editable') ? element : element.querySelector('.editable');
+        
+        // Use data-item-identifier if available, otherwise fall back to tableName
+        const itemIdentifier = editableElement?.dataset?.itemIdentifier || tableName;
+        
+        // Use editSection directly (new format: "table-tresor-fieldName")
+        const editSection = editableElement?.dataset?.editSection || 'description';
+        
+        return {
+          contentType: 'tableTresor',
+          itemIdentifier: itemIdentifier,
+          categoryName: categoryName || 'tables',
+          property: 'html',
+          editType: 'html', 
+          editSection: editSection,
+          config: window.ContentTypes.tableTresor,
+          element: editableElement,
+          container: element
+        };
+      }
+      
       // Check if we're in a class page (before static pages!)
       // IMPORTANT: Exclude static pages even if they have data-page-title
       const classArticle = element.closest('article[data-page-title]:not([data-static-page="true"])');
@@ -10838,20 +11053,48 @@ article span[title]:hover::after {
         };
       }
       
-      // Check if we're editing a category description (spell/don category pages)
-      const editableSection = element.closest('.editable-section[data-section-type*="-category-description"]');
-      if (editableSection) {
-        const sectionType = editableSection.dataset.sectionType;
+      // Check if we're editing a page description (unified system)
+      const pageDescSection = element.closest('.editable-section[data-section-type*="-category-description"]');
+      if (pageDescSection) {
+        const sectionType = pageDescSection.dataset.sectionType;
         const editableElement = element.classList.contains('editable') ? element : element.querySelector('.editable');
         const editSection = editableElement ? editableElement.dataset.editSection : '';
         
-        // Determine the category type (spell/don/etc) and category name
-        let contentType = 'spell'; // default
-        if (sectionType.includes('spell')) {
-          contentType = 'spell';
-        } else if (sectionType.includes('don')) {
-          contentType = 'don';
-        }
+        // Extract content type from section type (e.g., "objet-category-description" -> "objet")
+        const contentType = sectionType.replace('-category-description', '');
+        
+        // Use unified page description system via ContentFactory
+        return {
+          contentType: 'pageDescription',
+          pageType: contentType, // The actual content type (spell, don, objet, etc.)
+          itemIdentifier: contentType,
+          categoryName: null,
+          property: 'description',
+          editType: 'html',
+          editSection: editSection,
+          element: editableElement,
+          container: element,
+          applyEdit: (content) => {
+            const success = ContentFactory.updatePageDescription(contentType, content);
+            if (success) {
+              console.log(`✅ Updated page description for ${contentType}`);
+            } else {
+              console.error(`❌ Failed to update page description for ${contentType}`);
+            }
+            return success;
+          }
+        };
+      }
+        
+      // Check if we're editing a category description (spell/don category pages - fallback for old system)
+      const categorySection = element.closest('.editable-section');
+      if (categorySection && categorySection.dataset.sectionType && categorySection.dataset.sectionType.includes('category-description')) {
+        const sectionType = categorySection.dataset.sectionType;
+        const editableElement = element.classList.contains('editable') ? element : element.querySelector('.editable');
+        const editSection = editableElement ? editableElement.dataset.editSection : '';
+        
+        // Extract content type from section type
+        const contentType = sectionType.replace('-category-description', '');
         
         return {
           contentType: 'category',
@@ -11243,6 +11486,9 @@ article span[title]:hover::after {
       } else if (this.currentEditSession.contentType === 'monster') {
         // Update the monster data
         targetItem = window.MONSTRES?.find(monster => monster.nom === itemName);
+      } else if (this.currentEditSession.contentType === 'tableTresor') {
+        // Update the table tresor data
+        targetItem = window.TABLES_TRESORS?.tables?.find(table => table.nom === itemName);
       }
       
       if (targetItem) {
@@ -11340,6 +11586,10 @@ article span[title]:hover::after {
             return this.updateClassData(session, content);
           case 'staticPage':
             return this.updateStaticPageData(session, content);
+          case 'tableTresor':
+            return this.updateTableTresorData(session, content);
+          case 'pageDescription':
+            return this.updatePageDescriptionData(session, content);
           default:
             console.error('Unknown content type for update:', session.contentType);
             return false;
@@ -11432,6 +11682,65 @@ article span[title]:hover::after {
         // Rollback on error
         console.error('❌ Error updating monster, rolling back:', error);
         monster[propertyName] = originalValue;
+        return false;
+      }
+    }
+
+    // Update table tresor data
+    updateTableTresorData(session, content) {
+      const table = window.TABLES_TRESORS?.tables?.find(t => t.nom === session.itemIdentifier);
+      if (!table) {
+        console.error('Table tresor not found:', session.itemIdentifier, 'Available tables:', window.TABLES_TRESORS?.tables?.map(t => t.nom));
+        return false;
+      }
+      
+      // Use editMapping if available, otherwise use editSection directly
+      const config = session.config || window.ContentTypes.tableTresor;
+      const propertyName = config.editMapping?.[session.editSection] || session.editSection;
+      
+      // Backup current value for rollback capability
+      const originalValue = table[propertyName];
+      
+      
+      try {
+        // Update the table property
+        table[propertyName] = content;
+        
+        // If we're updating the name, we need to update the session itemIdentifier
+        // to prevent future saves from failing with the old name
+        if (propertyName === 'nom' && this.currentEditSession && this.currentEditSession.itemIdentifier === originalValue) {
+          console.log('🔄 Updating session itemIdentifier from', this.currentEditSession.itemIdentifier, 'to', content);
+          this.currentEditSession.itemIdentifier = content;
+        }
+        
+        // Force synchronization using ContentFactory to prevent data reversion
+        const contentFactory = window.ContentFactory?.getInstance ? window.ContentFactory.getInstance() : null;
+        if (contentFactory && contentFactory.updateItem) {
+          // Use ContentFactory to ensure proper data synchronization
+          contentFactory.updateItem('tableTresor', 'tables', table.nom, propertyName, content);
+        }
+        
+        console.log('✅ Table tresor update successful:', table);
+        return true;
+        
+      } catch (error) {
+        // Rollback on error
+        console.error('❌ Error updating table tresor, rolling back:', error);
+        table[propertyName] = originalValue;
+        return false;
+      }
+    }
+
+    // Update page description data (unified system)
+    updatePageDescriptionData(session, content) {
+      // Use the ContentFactory method that already handles the configuration
+      const success = ContentFactory.updatePageDescription(session.pageType, content);
+      
+      if (success) {
+        console.log(`✅ Updated page description for ${session.pageType}: "${content.substring(0, 50)}${content.length > 50 ? '...' : ''}"`);
+        return true;
+      } else {
+        console.error(`❌ Failed to update page description for ${session.pageType}`);
         return false;
       }
     }
@@ -11645,6 +11954,9 @@ article span[title]:hover::after {
       } else if (session.contentType === 'monster') {
         // Find monster directly in the array
         targetObject = jsonData?.find(monster => monster.nom === session.itemIdentifier);
+      } else if (session.contentType === 'tableTresor') {
+        // Find table tresor directly in the array
+        targetObject = jsonData?.tables?.find(table => table.nom === session.itemIdentifier);
       } else if (session.contentType === 'category') {
         // Find category by name and update its description
         targetObject = jsonData.find(category => category.nom === session.categoryName);
@@ -11890,6 +12202,30 @@ article span[title]:hover::after {
         };
       }
       
+      // Check if we're in a table de trésor card
+      const tableTresorCard = element.closest('.card[data-table-tresor-name]');
+      if (tableTresorCard) {
+        const tableTresorName = tableTresorCard.dataset.tableTresorName;
+        const categoryName = tableTresorCard.dataset.categoryName || 'tables';
+        
+        const editableElement = element.classList.contains('editable-tags') ? element : element.querySelector('.editable-tags');
+        
+        // Use data-item-identifier if available, otherwise fall back to tableTresorName
+        const itemIdentifier = editableElement?.dataset?.itemIdentifier || tableTresorName;
+        
+        return {
+          contentType: 'tableTresor',
+          itemIdentifier: itemIdentifier,
+          categoryName: categoryName,
+          property: 'tags',
+          editType: 'tags',
+          editSection: 'tags',
+          config: window.ContentTypes.tableTresor,
+          element: editableElement,
+          container: element
+        };
+      }
+      
       return null;
     }
 
@@ -11972,35 +12308,9 @@ article span[title]:hover::after {
       const decodedHtml = this.decodeHtmlEntities(originalContent);
       element.innerHTML = decodedHtml;
       
-      // Instead of contentEditable, show rendered content for editing
-      // The user should see the formatted text, not the HTML tags
-      
-      // Create a temporary textarea for HTML editing if needed
-      const useTextareaForHTML = decodedHtml.includes('<') && decodedHtml.includes('>');
-      
-      if (useTextareaForHTML) {
-        // For HTML content, show a modal with textarea
-        this.showHTMLEditModal(element, decodedHtml);
-      } else {
-        // For simple text, use contentEditable
-        element.contentEditable = true;
-        element.style.background = 'rgba(255, 255, 0, 0.1)';
-        element.style.border = '2px solid var(--accent)';
-        element.style.padding = '8px';
-        element.style.borderRadius = '4px';
-        element.style.fontFamily = 'inherit';
-        element.style.whiteSpace = 'pre-wrap';
-        
-        // Focus and select all content
-        element.focus();
-      }
-      
-      // Select all text
-      const range = document.createRange();
-      range.selectNodeContents(element);
-      const selection = window.getSelection();
-      selection.removeAllRanges();
-      selection.addRange(range);
+      // Always use modal editing for consistency
+      // Force modal editing for all content types to ensure uniform behavior
+      this.showHTMLEditModal(element, decodedHtml);
 
       return true;
     }
@@ -12076,26 +12386,26 @@ article span[title]:hover::after {
       `;
 
       modal.innerHTML = `
-        <div style="background: var(--paper); border-radius: 12px; padding: 1.5rem; border: 2px solid var(--rule);">
-          <h3 style="margin: 0 0 1rem 0; color: var(--accent-ink);">Édition du contenu</h3>
+        <div style="background: var(--paper); border-radius: 12px; padding: 1.5rem; border: 2px solid var(--rule); max-height: 80vh; overflow-y: auto; display: flex; flex-direction: column;">
+          <h3 style="margin: 0 0 1rem 0; color: var(--accent-ink); flex-shrink: 0;">Édition du contenu</h3>
           
-          <div style="margin-bottom: 1rem;">
+          <div style="margin-bottom: 1rem; flex-shrink: 0;">
             <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Aperçu du rendu:</label>
-            <div id="preview" style="border: 1px solid var(--rule); padding: 1rem; border-radius: 6px; background: var(--card); min-height: 60px;">
+            <div id="preview" style="border: 1px solid var(--rule); padding: 1rem; border-radius: 6px; background: var(--card); min-height: 60px; max-height: 150px; overflow-y: auto;">
               ${htmlContent}
             </div>
           </div>
           
-          <div style="margin-bottom: 1rem;">
-            <label for="htmlEditor" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Code HTML:</label>
+          <div style="margin-bottom: 1rem; flex: 1; min-height: 0; display: flex; flex-direction: column;">
+            <label for="htmlEditor" style="display: block; margin-bottom: 0.5rem; font-weight: 600; flex-shrink: 0;">Code HTML:</label>
             <textarea 
               id="htmlEditor" 
-              style="width: 100%; height: 200px; padding: 1rem; border: 1px solid var(--rule); border-radius: 6px; font-family: monospace; font-size: 14px; resize: vertical;"
+              style="width: 100%; flex: 1; min-height: 200px; padding: 1rem; border: 1px solid var(--rule); border-radius: 6px; font-family: monospace; font-size: 14px; resize: vertical;"
               placeholder="Entrez le HTML ici..."
             >${htmlContent}</textarea>
           </div>
           
-          <div style="margin-bottom: 1rem;">
+          <div style="margin-bottom: 1rem; flex-shrink: 0;">
             <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.5rem;">
               <button id="elementsBtn" class="btn" style="background: #059669; color: white; font-size: 12px;">🔥 Éléments</button>
               <button id="etatsBtn" class="btn" style="background: #7c2d12; color: white; font-size: 12px;">⚡ États</button>
@@ -12106,7 +12416,7 @@ article span[title]:hover::after {
             </div>
           </div>
           
-          <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+          <div style="display: flex; gap: 1rem; justify-content: flex-end; flex-shrink: 0;">
             <button id="cancelEdit" class="btn" style="background: #6b7280; color: white;">Annuler</button>
             <button id="saveEdit" class="btn" style="background: var(--accent); color: white;">💾 Sauvegarder</button>
           </div>
@@ -12401,6 +12711,12 @@ article span[title]:hover::after {
         const allMonsters = window.MONSTRES || [];
         targetItem = allMonsters.find(m => m.nom === context.itemIdentifier);
         availableTags = window.ContentTypes.monster.filterConfig.availableTags || [];
+      } else if (context.contentType === 'tableTresor') {
+        const allTables = window.TABLES_TRESORS?.tables || [];
+        targetItem = allTables.find(t => t.nom === context.itemIdentifier);
+        // Use metadata as primary source, fallback to ContentTypes config
+        availableTags = window.TABLES_TRESORS?._metadata?.availableTags || 
+                       window.ContentTypes.tableTresor?.filterConfig?.availableTags || [];
       }
       
       if (!targetItem) {
@@ -13206,8 +13522,38 @@ article span[title]:hover::after {
     },
 
     forceCollectAllEdits() {
+      // Collect page description edits before general edits
+      this.collectPageDescriptionEdits();
       UnifiedEditor.saveAllEdits();
       return this.editedData;
+    },
+
+    collectPageDescriptionEdits() {
+      // Check for edited table tresor page description
+      const tablesTresorsDesc = document.querySelector('[data-section-type="table-tresor-category-description"] .editable');
+      if (tablesTresorsDesc && tablesTresorsDesc.innerHTML) {
+        const content = tablesTresorsDesc.innerHTML.trim();
+        if (content && content !== "Tables de butin permettant de générer aléatoirement des récompenses selon les fourchettes définies. Lancez un dé 20 et consultez la table correspondante pour déterminer l'objet obtenu.") {
+          if (!window.TABLES_TRESORS_PAGE_DESC) {
+            window.TABLES_TRESORS_PAGE_DESC = {};
+          }
+          window.TABLES_TRESORS_PAGE_DESC.description = content;
+          console.log('💾 Collected Tables Tresors page description:', content);
+        }
+      }
+
+      // Check for edited monster page description
+      const monstersDesc = document.querySelector('[data-section-type="monster-category-description"] .editable');
+      if (monstersDesc && monstersDesc.innerHTML) {
+        const content = monstersDesc.innerHTML.trim();
+        if (content && content !== "Créatures, ennemis et adversaires que peuvent affronter les héros dans leurs aventures.") {
+          if (!window.MONSTRES_PAGE_DESC) {
+            window.MONSTRES_PAGE_DESC = {};
+          }
+          window.MONSTRES_PAGE_DESC.description = content;
+          console.log('💾 Collected Monsters page description:', content);
+        }
+      }
     },
 
     // Legacy methods for backward compatibility
@@ -13908,7 +14254,7 @@ article span[title]:hover::after {
       });
 
       // Generic content deletion - using multiple specific selectors
-      JdrApp.utils.events.register('click', '.spell-delete, .don-delete, .delete-subclass-btn, .objet-delete, .monster-delete', (e) => {
+      JdrApp.utils.events.register('click', '.spell-delete, .don-delete, .delete-subclass-btn, .objet-delete, .monster-delete, .tableTresor-delete', (e) => {
         const type = this.extractTypeFromClass(e.target.className);
         const categoryName = e.target.dataset.categoryName;
         
@@ -13922,6 +14268,8 @@ article span[title]:hover::after {
           itemName = e.target.dataset.objetName;
         } else if (type === 'monster') {
           itemName = e.target.dataset.monsterName;
+        } else if (type === 'tableTresor') {
+          itemName = e.target.dataset.tableTresorName;
         } else if (type === 'class') {
           itemName = e.target.dataset.className || e.target.dataset.subclassName;
         } else {
@@ -13944,6 +14292,8 @@ article span[title]:hover::after {
           itemName = e.target.dataset.spellName;
         } else if (type === 'don') {
           itemName = e.target.dataset.donName;
+        } else if (type === 'tableTresor') {
+          itemName = e.target.dataset.tableTresorName;
         } else if (type === 'class') {
           itemName = e.target.dataset.className || e.target.dataset.subclassName;
         } else {
@@ -14042,6 +14392,47 @@ article span[title]:hover::after {
         this.showFilterManagementModal();
       });
 
+      // Tables de trésors - Edition des fourchettes
+      JdrApp.utils.events.register('click', '.edit-fourchette-btn', (e) => {
+        const tableName = e.target.dataset.tableName;
+        const fourchetteIndex = parseInt(e.target.dataset.fourchetteIndex);
+        
+        if (tableName && fourchetteIndex >= 0) {
+          this.editFourchette(tableName, fourchetteIndex);
+        }
+      });
+
+      // Tables de trésors - Suppression des fourchettes
+      JdrApp.utils.events.register('click', '.delete-fourchette-btn', (e) => {
+        const tableName = e.target.dataset.tableName;
+        const fourchetteIndex = parseInt(e.target.dataset.fourchetteIndex);
+        
+        if (tableName && fourchetteIndex >= 0) {
+          if (confirm('Êtes-vous sûr de vouloir supprimer cette fourchette ?')) {
+            this.deleteFourchette(tableName, fourchetteIndex);
+          }
+        }
+      });
+
+      // Tables de trésors - Ajout de fourchettes
+      JdrApp.utils.events.register('click', '.table-tresor-add-fourchette', (e) => {
+        const tableName = e.target.dataset.tableTresorName;
+        
+        if (tableName) {
+          this.addFourchette(tableName);
+        }
+      });
+
+      // Tables de trésors - Prévisualisation des objets
+      JdrApp.utils.events.register('click', '.object-preview-link', (e) => {
+        e.preventDefault();
+        const objetNumero = parseInt(e.target.dataset.objectNumero);
+        
+        if (objetNumero) {
+          this.showObjectPreview(objetNumero);
+        }
+      });
+
       // Filter chip toggling (REMOVED - duplicate listener that was causing double toggle)
 
       // Element selector for spells (dev mode)
@@ -14056,6 +14447,8 @@ article span[title]:hover::after {
         const contentType = e.target.dataset.contentType;
         if (contentType === 'monster') {
           this.showMonsterTagsManagement();
+        } else if (contentType === 'tableTresor') {
+          this.showTableTresorTagsManagement();
         }
       });
     },
@@ -14075,6 +14468,35 @@ article span[title]:hover::after {
 
       const availableTags = config.filterConfig.availableTags || [];
       const modal = this.createMonsterTagsModal(availableTags);
+      document.body.appendChild(modal);
+      
+      // Use native dialog showModal for proper z-index
+      modal.showModal();
+    },
+
+    showTableTresorTagsManagement() {
+      // Priority: Load tags from metadata, then config, then fallback
+      let availableTags = [];
+      
+      if (window.TABLES_TRESORS?._metadata?.availableTags) {
+        availableTags = window.TABLES_TRESORS._metadata.availableTags;
+      } else {
+        // Initialize metadata if missing (shouldn't happen normally)
+        availableTags = ['Forêt', 'Boss', 'Coffre'];
+        if (window.TABLES_TRESORS) {
+          if (!window.TABLES_TRESORS._metadata) {
+            window.TABLES_TRESORS._metadata = {};
+          }
+          window.TABLES_TRESORS._metadata.availableTags = [...availableTags];
+        }
+      }
+
+      // Remove existing modal if any
+      const existingModal = document.querySelector('#tableTresorTagsModal');
+      if (existingModal) {
+        existingModal.remove();
+      }
+      const modal = this.createTableTresorTagsModal(availableTags);
       document.body.appendChild(modal);
       
       // Use native dialog showModal for proper z-index
@@ -14137,6 +14559,68 @@ article span[title]:hover::after {
 
       // Setup event handlers for this modal
       this.setupMonsterTagsModalEvents(modal, availableTags);
+
+      return modal;
+    },
+
+    createTableTresorTagsModal(availableTags) {
+      const modal = document.createElement('dialog');
+      modal.id = 'tableTresorTagsModal';
+      modal.style.cssText = `
+        max-width: 500px;
+        width: 90%;
+        border: 2px solid var(--gold);
+        border-radius: 12px;
+        padding: 0;
+        background: #2a2a2a;
+        color: #ffffff;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(8px);
+      `;
+      
+      const tagsListHTML = availableTags.map(tag => `
+        <div class="tag-item" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; margin: 4px 0; background: #3a3a3a; border-radius: 6px; border-left: 4px solid var(--gold);">
+          <span style="font-weight: 500; color: #ffffff;">${tag}</span>
+          <button type="button" class="delete-table-tresor-tag-btn" data-tag="${tag}" style="background: #dc2626; color: white; border: none; border-radius: 4px; padding: 4px 8px; font-size: 0.8em; cursor: pointer;" title="Supprimer ce tag">🗑️</button>
+        </div>
+      `).join('');
+      
+      modal.innerHTML = `
+        <div style="padding: 24px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h3 style="margin: 0; color: var(--gold); display: flex; align-items: center; gap: 8px;">
+              💎 <span>Gérer les Tags - Tables de Trésors</span>
+            </h3>
+            <button type="button" class="modal-close-btn" style="background: none; border: none; font-size: 1.5em; cursor: pointer; color: var(--text-color);" title="Fermer">×</button>
+          </div>
+          
+          <div style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 8px; font-weight: 600;">Ajouter un nouveau tag :</label>
+            <div style="display: flex; gap: 8px;">
+              <input type="text" id="newTableTresorTagInput" placeholder="Ex: Boss, Mythique..." style="flex: 1; padding: 8px 12px; border: 1px solid var(--gold); border-radius: 6px; background: #1a1a1a; color: #ffffff;">
+              <button type="button" id="addTableTresorTagBtn" style="background: var(--accent); color: white; border: none; border-radius: 6px; padding: 8px 16px; cursor: pointer; font-weight: 500;">
+                ➕ Ajouter
+              </button>
+            </div>
+          </div>
+          
+          <div style="margin-bottom: 20px;">
+            <h4 style="margin: 0 0 12px 0; color: var(--gold);">Tags existants :</h4>
+            <div id="tableTresorTagsList" style="max-height: 300px; overflow-y: auto;">
+              ${tagsListHTML}
+            </div>
+          </div>
+          
+          <div style="text-align: center; padding-top: 16px; border-top: 1px solid var(--rule);">
+            <button type="button" class="modal-close-btn" style="background: var(--secondary-color); color: white; border: none; border-radius: 6px; padding: 10px 20px; cursor: pointer; font-weight: 500;">
+              Fermer
+            </button>
+          </div>
+        </div>
+      `;
+      
+      // Setup event handlers for this modal
+      this.setupTableTresorTagsModalEvents(modal, availableTags);
 
       return modal;
     },
@@ -14267,12 +14751,150 @@ article span[title]:hover::after {
       });
     },
 
+    setupTableTresorTagsModalEvents(modal, availableTags) {
+      // Close modal
+      const closeButtons = modal.querySelectorAll('.modal-close-btn');
+      closeButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          modal.close();
+          modal.remove();
+        });
+      });
+
+      const newTagInput = modal.querySelector('#newTableTresorTagInput');
+      const addBtn = modal.querySelector('#addTableTresorTagBtn');
+
+      const addTag = () => {
+        const newTag = newTagInput.value.trim();
+        
+        if (newTag && !availableTags.includes(newTag)) {
+          // Add to the current available tags
+          availableTags.push(newTag);
+          
+          // Save in TABLES_TRESORS metadata for persistence (primary storage)
+          if (window.TABLES_TRESORS) {
+            if (!window.TABLES_TRESORS._metadata) {
+              window.TABLES_TRESORS._metadata = {};
+            }
+            window.TABLES_TRESORS._metadata.availableTags = [...availableTags];
+          }
+          
+          // Note: ContentTypes.tableTresor.filterConfig.availableTags removed - metadata is single source of truth
+          
+          // Save changes to storage
+          EventBus.emit(Events.STORAGE_SAVE);
+          
+          // Refresh modal and tables page
+          modal.close();
+          this.showTableTresorTagsManagement(); // Refresh modal
+          this.showNotification(`Tag "${newTag}" ajouté avec succès`, 'success');
+        } else if (newTag && availableTags.includes(newTag)) {
+          this.showNotification('Ce tag existe déjà', 'error');
+        }
+      };
+
+      addBtn.addEventListener('click', addTag);
+      newTagInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          addTag();
+        }
+      });
+
+      // Delete tag buttons using event delegation
+      modal.addEventListener('click', (e) => {        
+        // Check if the clicked element is a delete button
+        if (e.target && (e.target.classList.contains('delete-table-tresor-tag-btn') || 
+            e.target.closest('.delete-table-tresor-tag-btn'))) {
+          
+          e.preventDefault();
+          e.stopPropagation();
+          
+          const deleteBtn = e.target.classList.contains('delete-table-tresor-tag-btn') 
+            ? e.target 
+            : e.target.closest('.delete-table-tresor-tag-btn');
+          
+          const tagToDelete = deleteBtn.dataset.tag;
+          
+          if (confirm(`Êtes-vous sûr de vouloir supprimer le tag "${tagToDelete}" ?\n\nCela supprimera le tag de tous les filtres et des tables qui l'utilisent.`)) {
+            // Get current availableTags from metadata if available, otherwise from config
+            let currentAvailableTags = window.TABLES_TRESORS?._metadata?.availableTags || 
+                                     window.ContentTypes?.tableTresor?.filterConfig?.availableTags || 
+                                     availableTags;
+            
+            const tagIndex = currentAvailableTags.indexOf(tagToDelete);
+            
+            if (tagIndex > -1) {
+              // Remove from available tags
+              currentAvailableTags.splice(tagIndex, 1);
+              
+              // Remove from all tables that use this tag
+              if (window.TABLES_TRESORS?.tables) {
+                window.TABLES_TRESORS.tables.forEach(table => {
+                  if (table.tags && table.tags.includes(tagToDelete)) {
+                    const tableTagIndex = table.tags.indexOf(tagToDelete);
+                    table.tags.splice(tableTagIndex, 1);
+                  }
+                });
+              }
+              
+              // Save in TABLES_TRESORS metadata for persistence (primary storage)
+              if (window.TABLES_TRESORS) {
+                if (!window.TABLES_TRESORS._metadata) {
+                  window.TABLES_TRESORS._metadata = {};
+                }
+                window.TABLES_TRESORS._metadata.availableTags = [...currentAvailableTags];
+              }
+              
+              // Note: ContentTypes backup removed - metadata is single source of truth
+              
+              // Clear filter state to force refresh
+              if (window.TABLES_TRESORS_FILTER_STATE && window.TABLES_TRESORS_FILTER_STATE.visibleTags) {
+                // Remove the deleted tag from visible tags if present  
+                const visibleTagIndex = window.TABLES_TRESORS_FILTER_STATE.visibleTags.indexOf(tagToDelete);
+                if (visibleTagIndex > -1) {
+                  window.TABLES_TRESORS_FILTER_STATE.visibleTags.splice(visibleTagIndex, 1);
+                }
+              }
+              
+              // Save changes to storage
+              EventBus.emit(Events.STORAGE_SAVE);
+              
+              // Close modal first 
+              modal.close();
+              
+              // Force complete page reload for tables page to update filters
+              const currentPage = window.location.hash.replace('#/', '');
+              if (currentPage === 'tables-tresors') {
+                // Trigger router to completely rebuild the page
+                setTimeout(() => {
+                  if (JdrApp.modules.router && JdrApp.modules.router.renderTablesTresorsPage) {
+                    JdrApp.modules.router.renderTablesTresorsPage();
+                  }
+                }, 100);
+              }
+              
+              // Refresh modal after page update
+              setTimeout(() => {
+                this.showTableTresorTagsManagement();
+              }, 200);
+              
+              this.showNotification(`✅ Tag "${tagToDelete}" supprimé avec succès`, 'success');
+            }
+          } else {
+            console.error(`Tag "${tagToDelete}" not found in available tags`);
+            this.showNotification(`❌ Tag "${tagToDelete}" non trouvé`, 'error');
+          }
+        }
+      });
+    },
+
     extractTypeFromClass(className) {
       if (className.includes('spell')) return 'spell';
       if (className.includes('don')) return 'don';
       if (className.includes('class')) return 'class';
       if (className.includes('objet')) return 'objet';
       if (className.includes('monster')) return 'monster';
+      if (className.includes('tableTresor')) return 'tableTresor';
       return null;
     },
 
@@ -17598,7 +18220,9 @@ article span[title]:hover::after {
         contentType = 'tableTresor';
         // Pour les tables de trésors
         if (!window.TABLES_TRESORS_FILTER_STATE) {
-          window.TABLES_TRESORS_FILTER_STATE = { visibleTags: [...window.ContentTypes.tableTresor.filterConfig.defaultVisibleTags] };
+          // Use fallback default tags if ContentTypes is not available
+          const defaultTags = window.ContentTypes?.tableTresor?.filterConfig?.defaultVisibleTags || ['Commun'];
+          window.TABLES_TRESORS_FILTER_STATE = { visibleTags: [...defaultTags] };
         }
         visibleTags = window.TABLES_TRESORS_FILTER_STATE.visibleTags;
       } else {
@@ -17868,6 +18492,643 @@ article span[title]:hover::after {
         window.OBJETS.filterSettings.visibleTags = cleanedActiveFilters;
         const removedCount = activeFilters.length - cleanedActiveFilters.length;
       }
+    },
+
+    // ========================================
+    // UTILITY METHODS
+    // ========================================
+
+    // Créer une modale simple
+    createModal(title, content) {
+      // Créer le overlay de la modale
+      const overlay = document.createElement('div');
+      overlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+      `;
+
+      // Créer la modale
+      const modal = document.createElement('div');
+      modal.style.cssText = `
+        background: var(--parchment, #f4f1e8);
+        border: 2px solid var(--bronze, #8b5c17);
+        border-radius: 8px;
+        padding: 1.5rem;
+        max-width: 500px;
+        width: 90%;
+        max-height: 90vh;
+        overflow-y: auto;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      `;
+
+      modal.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; border-bottom: 1px solid var(--bronze); padding-bottom: 0.5rem;">
+          <h3 style="margin: 0; color: var(--bronze);">${title}</h3>
+          <button type="button" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--bronze);" title="Fermer">✕</button>
+        </div>
+        <div>${content}</div>
+      `;
+
+      overlay.appendChild(modal);
+
+      // Méthode pour fermer la modale
+      overlay.close = () => {
+        document.body.removeChild(overlay);
+      };
+
+      // Gestionnaires d'événements pour fermer
+      const closeBtn = modal.querySelector('button');
+      closeBtn.addEventListener('click', overlay.close);
+
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+          overlay.close();
+        }
+      });
+
+      // Ajouter au DOM
+      document.body.appendChild(overlay);
+
+      return overlay;
+    },
+
+    // ========================================
+    // TABLES DE TRÉSORS - GESTION DES FOURCHETTES
+    // ========================================
+
+    // Éditer une fourchette existante
+    editFourchette(tableName, fourchetteIndex) {
+      const table = this.findTableTresor(tableName);
+      if (!table || !table.fourchettes || fourchetteIndex >= table.fourchettes.length) {
+        this.showNotification('Table ou fourchette introuvable', 'error');
+        return;
+      }
+
+      const fourchette = table.fourchettes[fourchetteIndex];
+      this.showFourchetteModal(tableName, fourchetteIndex, fourchette);
+    },
+
+    // Supprimer une fourchette
+    deleteFourchette(tableName, fourchetteIndex) {
+      const table = this.findTableTresor(tableName);
+      if (!table || !table.fourchettes || fourchetteIndex >= table.fourchettes.length) {
+        this.showNotification('Table ou fourchette introuvable', 'error');
+        return;
+      }
+
+      // Supprimer la fourchette
+      table.fourchettes.splice(fourchetteIndex, 1);
+
+      // Sauvegarder les changements
+      EventBus.emit(Events.STORAGE_SAVE);
+
+      // Supprimer la fourchette du DOM et réindexer
+      this.removeFourchetteFromDOM(tableName, fourchetteIndex);
+
+      this.showNotification('Fourchette supprimée', 'success');
+    },
+
+    // Ajouter une nouvelle fourchette
+    addFourchette(tableName) {
+      const table = this.findTableTresor(tableName);
+      if (!table) {
+        this.showNotification('Table introuvable', 'error');
+        return;
+      }
+
+      // Calculer les valeurs par défaut pour la nouvelle fourchette
+      const lastFourchette = table.fourchettes?.[table.fourchettes.length - 1];
+      const nextMin = lastFourchette ? lastFourchette.max + 1 : 1;
+      const nextMax = nextMin + 4; // Fourchette de 5 valeurs par défaut
+
+      const newFourchette = {
+        min: nextMin,
+        max: nextMax,
+        objet: {
+          type: "reference",
+          numero: 1,
+          nom: "Nouvel objet"
+        }
+      };
+
+      // Ajouter la nouvelle fourchette
+      if (!table.fourchettes) {
+        table.fourchettes = [];
+      }
+      table.fourchettes.push(newFourchette);
+
+      // Ouvrir immédiatement le modal d'édition
+      const newIndex = table.fourchettes.length - 1;
+      this.showFourchetteModal(tableName, newIndex, newFourchette);
+    },
+
+    // Trouver une table de trésor par nom
+    findTableTresor(tableName) {
+      return window.TABLES_TRESORS?.tables?.find(table => table.nom === tableName);
+    },
+
+    // Afficher le modal d'édition d'une fourchette
+    showFourchetteModal(tableName, fourchetteIndex, fourchette) {
+      const modal = this.createModal('Éditer la fourchette', `
+        <form id="fourchette-edit-form" style="display: flex; flex-direction: column; gap: 1rem;">
+          <div style="display: flex; gap: 1rem;">
+            <div style="flex: 1;">
+              <label for="fourchette-min" style="display: block; margin-bottom: 0.25rem; font-weight: 600;">🎲 Valeur minimum:</label>
+              <input type="number" id="fourchette-min" value="${fourchette.min}" min="1" style="width: 100%; padding: 0.5rem; border: 1px solid var(--bronze); border-radius: 4px;">
+            </div>
+            <div style="flex: 1;">
+              <label for="fourchette-max" style="display: block; margin-bottom: 0.25rem; font-weight: 600;">🎲 Valeur maximum:</label>
+              <input type="number" id="fourchette-max" value="${fourchette.max}" min="1" style="width: 100%; padding: 0.5rem; border: 1px solid var(--bronze); border-radius: 4px;">
+            </div>
+          </div>
+          
+          <div>
+            <label style="display: block; margin-bottom: 0.25rem; font-weight: 600;">📦 Objet sélectionné:</label>
+            <div id="selected-object-display" style="padding: 0.75rem; border: 1px solid var(--bronze); border-radius: 4px; background: #f9f9f9; margin-bottom: 0.5rem; min-height: 2rem; display: flex; align-items: center; justify-content: space-between;">
+              <span id="selected-object-text" style="flex: 1;">
+                ${fourchette.objet?.nom ? `📦 ${fourchette.objet.nom} (N°${fourchette.objet.numero})` : 'Aucun objet sélectionné'}
+              </span>
+              ${fourchette.objet?.nom ? `<button type="button" id="clear-object-selection" style="background: #dc2626; color: white; border: none; border-radius: 3px; padding: 2px 6px; font-size: 0.8em; cursor: pointer;" title="Effacer la sélection">✕</button>` : ''}
+            </div>
+            <button type="button" id="select-object-btn" style="width: 100%; background: var(--accent); color: white; padding: 0.75rem; border: none; border-radius: 4px; font-weight: 600; cursor: pointer;">
+              🔍 Sélectionner un objet
+            </button>
+            <input type="hidden" id="fourchette-objet-numero" value="${fourchette.objet?.numero || ''}">
+            <input type="hidden" id="fourchette-objet-nom" value="${fourchette.objet?.nom || ''}">
+          </div>
+          
+          <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+            <button type="submit" style="flex: 1; background: var(--accent); color: white; padding: 0.75rem; border: none; border-radius: 4px; font-weight: 600; cursor: pointer;">
+              ✅ Sauvegarder
+            </button>
+            <button type="button" id="cancel-fourchette-edit" style="flex: 1; background: #666; color: white; padding: 0.75rem; border: none; border-radius: 4px; font-weight: 600; cursor: pointer;">
+              ❌ Annuler
+            </button>
+          </div>
+        </form>
+      `);
+
+      // Gestionnaire de soumission
+      const form = modal.querySelector('#fourchette-edit-form');
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        this.saveFourchette(tableName, fourchetteIndex, modal);
+      });
+
+      // Gestionnaire d'annulation
+      modal.querySelector('#cancel-fourchette-edit').addEventListener('click', () => {
+        modal.close();
+      });
+
+      // Gestionnaire de sélection d'objet
+      modal.querySelector('#select-object-btn').addEventListener('click', () => {
+        this.showObjectSelectionModal(modal);
+      });
+
+      // Gestionnaire d'effacement de sélection (si présent)
+      const clearBtn = modal.querySelector('#clear-object-selection');
+      if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+          this.clearObjectSelection(modal);
+        });
+      }
+    },
+
+    // Sauvegarder les modifications d'une fourchette
+    saveFourchette(tableName, fourchetteIndex, modal) {
+      const table = this.findTableTresor(tableName);
+      if (!table) {
+        this.showNotification('Table introuvable', 'error');
+        return;
+      }
+
+      // Récupérer les valeurs du formulaire
+      const minValue = parseInt(modal.querySelector('#fourchette-min').value);
+      const maxValue = parseInt(modal.querySelector('#fourchette-max').value);
+      const objetNumero = parseInt(modal.querySelector('#fourchette-objet-numero').value);
+      const objetNom = modal.querySelector('#fourchette-objet-nom').value.trim();
+
+      // Validation
+      if (minValue <= 0 || maxValue <= 0 || minValue > maxValue) {
+        this.showNotification('Les valeurs min/max doivent être positives et min ≤ max', 'error');
+        return;
+      }
+
+      if (!objetNumero || !objetNom) {
+        this.showNotification('Veuillez sélectionner un objet', 'error');
+        return;
+      }
+
+      // Mettre à jour la fourchette
+      const updatedFourchette = {
+        min: minValue,
+        max: maxValue,
+        objet: {
+          type: "reference",
+          numero: objetNumero,
+          nom: objetNom
+        }
+      };
+
+      table.fourchettes[fourchetteIndex] = updatedFourchette;
+
+      // Sauvegarder les changements
+      EventBus.emit(Events.STORAGE_SAVE);
+
+      // Fermer le modal
+      modal.close();
+
+      // Mettre à jour immédiatement l'affichage de la fourchette modifiée
+      this.updateFourchetteDisplay(tableName, fourchetteIndex, updatedFourchette);
+
+      this.showNotification('Fourchette mise à jour', 'success');
+    },
+
+    // Afficher la prévisualisation d'un objet
+    showObjectPreview(objetNumero) {
+      // Trouver l'objet par son numéro
+      const objet = this.findObjetByNumero(objetNumero);
+      
+      if (!objet) {
+        this.showNotification(`Objet N°${objetNumero} introuvable`, 'error');
+        return;
+      }
+
+      // Construire l'affichage des tags
+      const tagsDisplay = objet.tags && objet.tags.length > 0 
+        ? objet.tags.map(tag => `<span class="tag-chip" style="background: var(--bronze); color: white; padding: 2px 6px; border-radius: 8px; font-size: 0.8em; margin-right: 4px;">${tag}</span>`).join('')
+        : '<span style="font-style: italic; color: #666;">Aucun tag</span>';
+
+      // Créer le contenu de la prévisualisation
+      const previewContent = `
+        <div style="text-align: center; margin-bottom: 1rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin: 0.5rem 0; font-size: 0.9em; color: var(--bronze);">
+            <div style="font-weight: bold;">N°${objet.numero}</div>
+            <div style="flex: 1; text-align: right;">
+              ${tagsDisplay}
+            </div>
+          </div>
+        </div>
+        
+        <div style="margin: 1rem 0; text-align: center; font-style: italic;">
+          ${objet.description}
+        </div>
+        
+        <hr style="margin: 1rem 0; border: none; border-top: 1px solid var(--rule);">
+        
+        <div style="margin: 1rem 0;">
+          ${objet.effet}
+        </div>
+        
+        <div style="display: flex; justify-content: space-between; gap: 1rem; margin: 1rem 0; font-size: 0.9em;">
+          <div style="flex: 1;">
+            ${objet.prix}
+          </div>
+          <div style="flex: 1;">
+            ${objet.poids}
+          </div>
+        </div>
+      `;
+
+      // Afficher la modal de prévisualisation
+      const modal = this.createModal(`📦 ${objet.nom}`, previewContent);
+
+      // Ajouter un bouton pour aller à la page de l'objet si désiré
+      const modalContent = modal.querySelector('div:last-child');
+      modalContent.insertAdjacentHTML('beforeend', `
+        <div style="text-align: center; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--rule);">
+          <button type="button" onclick="window.location.hash = '#/objets'; this.closest('.modal-overlay, [style*=fixed]').remove();" 
+                  style="background: var(--accent); color: white; padding: 0.5rem 1rem; border: none; border-radius: 4px; cursor: pointer;">
+            🔗 Voir tous les objets
+          </button>
+        </div>
+      `);
+    },
+
+    // Trouver un objet par son numéro
+    findObjetByNumero(numero) {
+      if (!window.OBJETS || !window.OBJETS.objets) {
+        return null;
+      }
+      
+      return window.OBJETS.objets.find(objet => objet.numero === numero);
+    },
+
+    // Afficher la modal de sélection d'objets
+    showObjectSelectionModal(parentModal) {
+      const objets = window.OBJETS?.objets || [];
+      
+      if (objets.length === 0) {
+        this.showNotification('Aucun objet disponible', 'error');
+        return;
+      }
+
+      const selectionContent = `
+        <div style="margin-bottom: 1rem;">
+          <label for="object-search" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">🔍 Rechercher un objet:</label>
+          <input type="text" id="object-search" placeholder="Tapez le nom ou numéro d'un objet..." 
+                 style="width: 100%; padding: 0.75rem; border: 1px solid var(--bronze); border-radius: 4px; font-size: 1rem;">
+        </div>
+        
+        <div style="margin-bottom: 1rem; color: var(--bronze); font-size: 0.9em;">
+          <span id="object-count">${objets.length} objet(s) disponible(s)</span>
+        </div>
+        
+        <div id="objects-list" style="max-height: 400px; overflow-y: auto; border: 1px solid var(--bronze); border-radius: 4px;">
+          ${this.generateObjectsList(objets)}
+        </div>
+        
+        <div style="text-align: center; margin-top: 1rem;">
+          <button type="button" id="cancel-object-selection" style="background: #666; color: white; padding: 0.75rem 1.5rem; border: none; border-radius: 4px; font-weight: 600; cursor: pointer;">
+            ❌ Annuler
+          </button>
+        </div>
+      `;
+
+      const selectionModal = this.createModal('📦 Sélectionner un objet', selectionContent);
+      
+      // Référence au modal parent pour pouvoir le mettre à jour
+      selectionModal._parentModal = parentModal;
+
+      // Gestionnaire de recherche
+      const searchInput = selectionModal.querySelector('#object-search');
+      const objectsList = selectionModal.querySelector('#objects-list');
+      const objectCount = selectionModal.querySelector('#object-count');
+      
+      let searchTimeout;
+      searchInput.addEventListener('input', () => {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+          const query = searchInput.value.toLowerCase().trim();
+          const filteredObjets = this.filterObjects(objets, query);
+          objectsList.innerHTML = this.generateObjectsList(filteredObjets);
+          objectCount.textContent = `${filteredObjets.length} objet(s) trouvé(s)`;
+          
+          // Réattacher les gestionnaires de clic
+          this.attachObjectClickHandlers(selectionModal);
+        }, 300);
+      });
+
+      // Gestionnaire d'annulation
+      selectionModal.querySelector('#cancel-object-selection').addEventListener('click', () => {
+        selectionModal.close();
+      });
+
+      // Attacher les gestionnaires de clic aux objets
+      this.attachObjectClickHandlers(selectionModal);
+
+      // Focus sur le champ de recherche
+      setTimeout(() => {
+        searchInput.focus();
+      }, 100);
+    },
+
+    // Générer la liste HTML des objets
+    generateObjectsList(objets) {
+      if (objets.length === 0) {
+        return '<div style="padding: 2rem; text-align: center; color: #666; font-style: italic;">Aucun objet trouvé</div>';
+      }
+
+      return objets.map(objet => {
+        const tagsDisplay = objet.tags && objet.tags.length > 0 
+          ? objet.tags.slice(0, 3).map(tag => `<span style="background: var(--bronze); color: white; padding: 1px 4px; border-radius: 3px; font-size: 0.7em; margin-left: 4px;">${tag}</span>`).join('')
+          : '';
+
+        return `
+          <div class="object-selection-item" data-object-numero="${objet.numero}" data-object-nom="${objet.nom}" 
+               style="padding: 0.75rem; border-bottom: 1px solid #ddd; cursor: pointer; transition: background 0.2s;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div style="flex: 1;">
+                <div style="font-weight: 600; color: var(--bronze);">
+                  📦 ${objet.nom}
+                </div>
+                <div style="font-size: 0.9em; color: #666; margin-top: 2px;">
+                  N°${objet.numero} • ${objet.description.substring(0, 60)}${objet.description.length > 60 ? '...' : ''}
+                </div>
+              </div>
+              <div style="text-align: right;">
+                ${tagsDisplay}
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    },
+
+    // Filtrer les objets selon la recherche
+    filterObjects(objets, query) {
+      if (!query) return objets;
+
+      return objets.filter(objet => {
+        return (
+          objet.nom.toLowerCase().includes(query) ||
+          objet.description.toLowerCase().includes(query) ||
+          objet.numero.toString().includes(query) ||
+          (objet.tags && objet.tags.some(tag => tag.toLowerCase().includes(query)))
+        );
+      });
+    },
+
+    // Attacher les gestionnaires de clic aux objets
+    attachObjectClickHandlers(selectionModal) {
+      const objectItems = selectionModal.querySelectorAll('.object-selection-item');
+      
+      objectItems.forEach(item => {
+        // Style au survol
+        item.addEventListener('mouseenter', () => {
+          item.style.backgroundColor = 'rgba(139, 92, 23, 0.1)';
+        });
+        
+        item.addEventListener('mouseleave', () => {
+          item.style.backgroundColor = '';
+        });
+
+        // Clic pour sélectionner
+        item.addEventListener('click', () => {
+          const numero = parseInt(item.dataset.objectNumero);
+          const nom = item.dataset.objectNom;
+          
+          this.selectObject(selectionModal._parentModal, numero, nom);
+          selectionModal.close();
+        });
+      });
+    },
+
+    // Sélectionner un objet et mettre à jour le modal parent
+    selectObject(parentModal, numero, nom) {
+      const numeroInput = parentModal.querySelector('#fourchette-objet-numero');
+      const nomInput = parentModal.querySelector('#fourchette-objet-nom');
+      const displayText = parentModal.querySelector('#selected-object-text');
+      const displayContainer = parentModal.querySelector('#selected-object-display');
+
+      numeroInput.value = numero;
+      nomInput.value = nom;
+      displayText.textContent = `📦 ${nom} (N°${numero})`;
+      
+      // Ajouter le bouton d'effacement s'il n'existe pas
+      if (!parentModal.querySelector('#clear-object-selection')) {
+        displayContainer.insertAdjacentHTML('beforeend', `
+          <button type="button" id="clear-object-selection" style="background: #dc2626; color: white; border: none; border-radius: 3px; padding: 2px 6px; font-size: 0.8em; cursor: pointer;" title="Effacer la sélection">✕</button>
+        `);
+        
+        // Attacher le gestionnaire au nouveau bouton
+        parentModal.querySelector('#clear-object-selection').addEventListener('click', () => {
+          this.clearObjectSelection(parentModal);
+        });
+      }
+
+      this.showNotification(`📦 "${nom}" sélectionné`, 'success');
+    },
+
+    // Effacer la sélection d'objet
+    clearObjectSelection(parentModal) {
+      const numeroInput = parentModal.querySelector('#fourchette-objet-numero');
+      const nomInput = parentModal.querySelector('#fourchette-objet-nom');
+      const displayText = parentModal.querySelector('#selected-object-text');
+      const clearBtn = parentModal.querySelector('#clear-object-selection');
+
+      numeroInput.value = '';
+      nomInput.value = '';
+      displayText.textContent = 'Aucun objet sélectionné';
+      
+      if (clearBtn) {
+        clearBtn.remove();
+      }
+
+      this.showNotification('Sélection effacée', 'info');
+    },
+
+    // Mettre à jour l'affichage d'une fourchette spécifique sans recharger la page
+    updateFourchetteDisplay(tableName, fourchetteIndex, updatedFourchette) {
+      try {
+        // Trouver la table et la fourchette dans le DOM
+        const tableCard = document.querySelector(`[data-table-tresor-name="${tableName}"]`);
+        if (!tableCard) {
+          console.warn('Table non trouvée dans le DOM:', tableName);
+          this.forcePageRefresh();
+          return;
+        }
+
+        // Trouver toutes les fourchettes de cette table
+        const fourchetteRows = tableCard.querySelectorAll('.fourchette-row');
+        if (fourchetteIndex >= fourchetteRows.length) {
+          console.warn('Index de fourchette invalide:', fourchetteIndex);
+          this.forcePageRefresh();
+          return;
+        }
+
+        const fourchetteRow = fourchetteRows[fourchetteIndex];
+        
+        // Générer le nouveau contenu pour cette fourchette
+        const objet = updatedFourchette.objet;
+        const objetLink = objet?.type === 'reference' 
+          ? `<a href="#" class="object-preview-link" data-object-numero="${objet.numero}" style="color: var(--accent); text-decoration: none;" title="Cliquer pour prévisualiser l'objet #${objet.numero}">📦 ${objet.nom} (N°${objet.numero})</a>`
+          : `📦 ${objet?.nom || 'Objet inconnu'}`;
+
+        // Déterminer si on doit afficher les boutons d'édition
+        const shouldShowButtons = this.shouldShowFourchetteButtons();
+        const editButtons = shouldShowButtons ? `
+          <div class="fourchette-actions" style="margin-left: 8px; display: flex; gap: 4px;">
+            <button class="edit-fourchette-btn" data-table-name="${tableName}" data-fourchette-index="${fourchetteIndex}" title="Éditer cette fourchette" style="background: #3b82f6; color: white; border: none; border-radius: 4px; padding: 2px 6px; font-size: 0.8em; cursor: pointer;">✏️</button>
+            <button class="delete-fourchette-btn" data-table-name="${tableName}" data-fourchette-index="${fourchetteIndex}" title="Supprimer cette fourchette" style="background: #dc2626; color: white; border: none; border-radius: 4px; padding: 2px 6px; font-size: 0.8em; cursor: pointer;">🗑️</button>
+          </div>
+        ` : '';
+
+        // Mettre à jour le contenu de la fourchette
+        fourchetteRow.innerHTML = `
+          <div class="fourchette-range" style="font-weight: bold; color: var(--bronze); min-width: 80px;">
+            🎲 ${updatedFourchette.min}-${updatedFourchette.max}
+          </div>
+          <div class="fourchette-objet" style="flex: 1; margin-left: 12px;">
+            ${objetLink}
+          </div>
+          ${editButtons}
+        `;
+
+        console.log('Fourchette mise à jour dans le DOM:', tableName, fourchetteIndex);
+        
+      } catch (error) {
+        console.error('Erreur lors de la mise à jour de la fourchette:', error);
+        // En cas d'erreur, on revient au rechargement complet
+        this.forcePageRefresh();
+      }
+    },
+
+    // Supprimer une fourchette du DOM et réindexer les autres
+    removeFourchetteFromDOM(tableName, fourchetteIndex) {
+      try {
+        const tableCard = document.querySelector(`[data-table-tresor-name="${tableName}"]`);
+        if (!tableCard) {
+          console.warn('Table non trouvée dans le DOM:', tableName);
+          this.forcePageRefresh();
+          return;
+        }
+
+        const fourchetteRows = tableCard.querySelectorAll('.fourchette-row');
+        if (fourchetteIndex >= fourchetteRows.length) {
+          console.warn('Index de fourchette invalide:', fourchetteIndex);
+          this.forcePageRefresh();
+          return;
+        }
+
+        // Supprimer l'élément du DOM
+        fourchetteRows[fourchetteIndex].remove();
+
+        // Réindexer toutes les fourchettes restantes pour les boutons d'édition
+        const remainingRows = tableCard.querySelectorAll('.fourchette-row');
+        remainingRows.forEach((row, newIndex) => {
+          const editBtn = row.querySelector('.edit-fourchette-btn');
+          const deleteBtn = row.querySelector('.delete-fourchette-btn');
+          
+          if (editBtn) editBtn.dataset.fourchetteIndex = newIndex;
+          if (deleteBtn) deleteBtn.dataset.fourchetteIndex = newIndex;
+        });
+
+        console.log('Fourchette supprimée du DOM:', tableName, fourchetteIndex);
+        
+      } catch (error) {
+        console.error('Erreur lors de la suppression de la fourchette:', error);
+        this.forcePageRefresh();
+      }
+    },
+
+    // Vérifier si on doit afficher les boutons d'édition des fourchettes
+    shouldShowFourchetteButtons() {
+      // Reprendre la même logique que dans CardBuilder
+      return JdrApp.utils.isDevMode() || 
+             (!window.STANDALONE_VERSION && window.location.search.includes('dev=1')) ||
+             (document.body.classList.contains('dev-on')) ||
+             (window.location.protocol === 'file:' && !window.STANDALONE_VERSION) ||
+             (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+    },
+
+    // Méthode robuste pour forcer le rafraîchissement de la page (fallback)
+    forcePageRefresh() {
+      setTimeout(() => {
+        try {
+          const currentHash = window.location.hash;
+          const pageName = currentHash.replace('#/', '');
+          
+          if (JdrApp.modules.router && JdrApp.modules.router.show) {
+            JdrApp.modules.router.show(pageName);
+          } else if (JdrApp.modules.renderer && JdrApp.modules.renderer.regenerateCurrentPage) {
+            JdrApp.modules.renderer.regenerateCurrentPage();
+          } else {
+            window.location.reload();
+          }
+        } catch (error) {
+          console.error('Erreur lors du rafraîchissement:', error);
+          window.location.reload();
+        }
+      }, 100);
     }
   };
 

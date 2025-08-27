@@ -119,7 +119,7 @@
               ${this.buildIllustration('page:objets')}
             </div>
             
-            ${this.buildObjectsCategoryDescription()}
+            ${this.buildPageDescription('objet')}
             
             ${this.buildIdSearchFilter()}
             ${this.buildTagFilters(visibleTags, filterSettings.displayedFilterButtons || config.filterConfig.availableTags)}
@@ -183,6 +183,8 @@
               <h2>🐲 Monstres</h2>
               ${instance.buildIllustration('page:monstres')}
             </div>
+            
+            ${instance.buildPageDescription('monster')}
             
             ${instance.buildTagFilters(visibleTags, config.filterConfig.availableTags, 'monster')}
             
@@ -472,26 +474,18 @@
         }
       }
 
-      // Enhanced dev mode check to prevent image buttons from appearing incorrectly
-      // STRICT CHECK: In standalone mode, NEVER show image buttons
+      // HYBRID APPROACH: Never generate buttons in standalone, always generate in dev mode
       const isStandalone = window.STANDALONE_VERSION === true;
       
-      let shouldShowImageButtons = false;
-      
-      // If standalone, immediately set to false - no image buttons ever
       if (isStandalone) {
-        shouldShowImageButtons = false;
+        // STANDALONE: Never generate image buttons at all
+        return `
+          <div class="illus" data-illus-key="${illusKey}" data-bound="1">
+            <img alt="Illustration ${altText}" class="thumb" style="${imageStyle}"${imageUrl ? ` src="${imageUrl}"` : ''}>
+          </div>
+        `;
       } else {
-        // Only for non-standalone: check dev mode conditions
-        const isDevModeActive = JdrApp.utils.isDevMode();
-        const hasDevClass = document.body.classList.contains('dev-on');
-        const editorDevMode = window.JdrApp?.modules?.editor?.isDevMode === true;
-        
-        // Only show image buttons if ALL conditions confirm we're in dev mode
-        shouldShowImageButtons = isDevModeActive && (hasDevClass || editorDevMode);
-      }
-
-      if (shouldShowImageButtons) {
+        // DEV MODE: Always generate buttons, let CSS handle visibility
         return `
           <div class="illus" data-illus-key="${illusKey}" data-bound="1">
             <img alt="Illustration ${altText}" class="thumb" style="${imageStyle}"${imageUrl ? ` src="${imageUrl}"` : ''}>
@@ -500,12 +494,6 @@
           </div>
         `;
       }
-      
-      return `
-        <div class="illus" data-illus-key="${illusKey}" data-bound="1">
-          <img alt="Illustration ${altText}" class="thumb" style="${imageStyle}"${imageUrl ? ` src="${imageUrl}"` : ''}>
-        </div>
-      `;
     }
 
     buildFiltersSection(section, sectionIndex) {
@@ -733,34 +721,50 @@
       `;
     }
 
-    buildObjectsCategoryDescription() {
-      // Initialize description if it doesn't exist  
-      if (!window.OBJETS.description) {
-        window.OBJETS.description = "Équipements, armes, armures et objets divers que peuvent posséder les personnages.";
+    buildPageDescription(type) {
+      const config = window.ContentTypes[type];
+      
+      if (!config || !config.pageDescription) {
+        return '';
       }
       
-      return `
-        <div class="objects-category-description" style="margin: 1rem 0; padding: 1rem; background: var(--card); border-radius: 8px; border-left: 4px solid var(--bronze);">
-          <div class="editable-section" data-section-type="objet-category-description">
-            <p class="lead editable editable-paragraph" data-edit-type="generic" data-edit-section="description">${window.OBJETS.description}</p>
-            ${this.buildEditButton('section')}
-          </div>
-        </div>
-      `;
-    }
-
-    buildMonstersCategoryDescription() {
-      // Create a description object for monsters if it doesn't exist
-      if (!window.MONSTRES_PAGE_DESC) {
-        window.MONSTRES_PAGE_DESC = {
-          description: "Créatures, ennemis et adversaires que peuvent affronter les héros dans leurs aventures."
-        };
+      const pageDesc = config.pageDescription;
+      
+      // Obtenir la description de manière unifiée
+      let description = '';
+      
+      if (pageDesc.dataSource === 'external') {
+        // Utilisation d'un fichier externe via dataKey
+        const dataObj = window[pageDesc.dataKey];
+        if (!dataObj) {
+          // Créer l'objet externe s'il n'existe pas
+          window[pageDesc.dataKey] = { [pageDesc.storageKey]: pageDesc.defaultValue };
+        }
+        description = window[pageDesc.dataKey][pageDesc.storageKey] || pageDesc.defaultValue;
+      } else {
+        // Source de données intégrée dans le dataKey principal
+        const mainDataKey = config.dataKey;
+        const mainData = window[mainDataKey];
+        
+        if (!mainData) {
+          console.warn(`Main data key ${mainDataKey} not found for type ${type}`);
+          description = pageDesc.defaultValue;
+        } else {
+          // Initialiser la description si elle n'existe pas
+          if (!mainData[pageDesc.storageKey]) {
+            mainData[pageDesc.storageKey] = pageDesc.defaultValue;
+          }
+          description = mainData[pageDesc.storageKey];
+        }
       }
       
+      const cssClass = `${type}-category-description`;
+      const sectionType = `${type}-category-description`;
+      
       return `
-        <div class="monsters-category-description" style="margin: 1rem 0; padding: 1rem; background: var(--card); border-radius: 8px; border-left: 4px solid var(--bronze);">
-          <div class="editable-section" data-section-type="monster-category-description">
-            <p class="lead editable editable-paragraph" data-edit-type="generic" data-edit-section="description">${window.MONSTRES_PAGE_DESC.description}</p>
+        <div class="${cssClass}" style="margin: 1rem 0; padding: 1rem; background: var(--card); border-radius: 8px; border-left: 4px solid var(--bronze);">
+          <div class="editable-section" data-section-type="${sectionType}">
+            <p class="lead editable editable-paragraph" data-edit-type="generic" data-edit-section="${pageDesc.editSection}">${description}</p>
             ${this.buildEditButton('section')}
           </div>
         </div>
@@ -872,12 +876,17 @@
     }
 
     buildFilterManagerButton() {
-      // ALWAYS generate the button - CSS will control visibility based on body.dev-on/dev-off
-      return `<button class="filter-manager-btn btn" type="button" style="background: #16a34a; color: white; border: 2px solid #15803d;">🔧 Gérer les filtres</button>`;
+      // Only show in dev mode
+      if (!this.shouldShowEditButtons) {
+        return '';
+      }
+      return `<button class="filter-manager-btn btn" type="button" style="background: var(--bronze); color: white;">⚙️ Gérer les filtres</button>`;
     }
     
     buildTagsManagerButton() {
-      // ALWAYS generate the button - CSS will control visibility based on body.dev-on/dev-off
+      // ALWAYS generate the button - CSS will control visibility based on body.dev-on/dev-off  
+      if (window.STANDALONE_VERSION) return '';
+      
       return `<button class="tags-manager-btn btn" type="button" style="background: #dc2626; color: white; border: 2px solid #b91c1c;">🏷️ Gérer les tags</button>`;
     }
 
@@ -897,28 +906,24 @@
         };
       }
       
-      // Priority: Use saved metadata tags if available, then config, then fallback
-      let availableTags = config.filterConfig.availableTags;
-      if (window.TABLES_TRESORS?._metadata?.availableTags) {
-        availableTags = window.TABLES_TRESORS._metadata.availableTags;
-        console.log('🏷️ Using saved availableTags from metadata:', availableTags);
+      // Priority: Use saved metadata tags as single source of truth
+      let availableTags = window.TABLES_TRESORS?._metadata?.availableTags || [];
+      
+      // Utiliser le state du filtre s'il existe, sinon les tags par défaut qui existent vraiment
+      let defaultVisibleTags = config.filterConfig.defaultVisibleTags || [];
+      // Filter defaultVisibleTags to only include tags that actually exist in metadata
+      if (availableTags.length > 0) {
+        defaultVisibleTags = defaultVisibleTags.filter(tag => availableTags.includes(tag));
       }
+      const visibleTags = window.TABLES_TRESORS_FILTER_STATE?.visibleTags || defaultVisibleTags;
       
-      // Utiliser le state du filtre s'il existe, sinon les tags par défaut
-      const visibleTags = window.TABLES_TRESORS_FILTER_STATE?.visibleTags || config.filterConfig.defaultVisibleTags;
-      
-      console.log('🔍 Filtrage tables de trésors:', {
-        allTables: allTables.length,
-        visibleTags: visibleTags,
-        tablesWithTags: allTables.map(t => ({ nom: t.nom, tags: t.tags }))
-      });
       
       // Filter tables according to visible tags
       const filterMode = config.filterMode || 'OR';
       const filteredTables = visibleTags.length === 0 
         ? allTables // If no tags are visible, show all tables
         : allTables.filter(table => {
-            // Check that the table has tags
+            // Check that the table has tags when filtering is active
             if (!table.tags || table.tags.length === 0) return false;
             
             if (filterMode === 'AND') {
@@ -930,10 +935,6 @@
             }
           });
           
-      console.log('🔍 Résultats filtrage:', {
-        filteredTables: filteredTables.length,
-        tableNames: filteredTables.map(t => t.nom)
-      });
       
       return `
         <article class="" data-page="tables-tresors">
@@ -944,17 +945,13 @@
               </h1>
             </header>
             
-            ${this.buildTableTresorsCategoryDescription()}
+            ${instance.buildPageDescription('tableTresor')}
             
-            ${this.buildTagFilters(visibleTags, availableTags, 'tableTresor')}
+            ${instance.buildTagFilters(visibleTags, availableTags, 'tableTresor')}
             
-            <div data-dev-only style="display: flex; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap;">
-              <button class="tableTresor-add btn" data-category-name="tables" type="button" style="background: var(--accent); color: white;">
-                ➕ Ajouter une table de trésor
-              </button>
-              <button class="manage-tags-btn btn" data-content-type="tableTresor" type="button" style="background: #dc2626; color: white; border: 2px solid #b91c1c;">
-                🏷️ Gérer les tags
-              </button>
+            <div style="display: flex; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap;">
+              ${instance.buildAddButton('tableTresor', 'tables')}
+              ${instance.buildTagsManagerButton()}
             </div>
             
             <div class="grid cols-1" id="tables-tresors-container" style="gap: 1.5rem;">
@@ -970,7 +967,7 @@
                 </p>
                 <p style="color: var(--paper-muted); font-style: italic;">
                   ${allTables.length === 0 
-                    ? (this.shouldShowEditButtons ? 'Utilisez le bouton "Ajouter une table de trésor" ci-dessus pour créer votre première table.' : 'Le Maître de jeu peut créer des tables de trésors en mode développement.')
+                    ? (instance.shouldShowEditButtons ? 'Utilisez le bouton "Ajouter une table de trésor" ci-dessus pour créer votre première table.' : 'Le Maître de jeu peut créer des tables de trésors en mode développement.')
                     : 'Modifiez vos filtres pour voir d\'autres tables de trésors.'
                   }
                 </p>
@@ -987,23 +984,6 @@
       `;
     }
     
-    buildTableTresorsCategoryDescription() {
-      // Create a description object for treasure tables if it doesn't exist
-      if (!window.TABLES_TRESORS_PAGE_DESC) {
-        window.TABLES_TRESORS_PAGE_DESC = {
-          description: "Tables de butin permettant de générer aléatoirement des récompenses selon les fourchettes définies. Lancez un dé 20 et consultez la table correspondante pour déterminer l'objet obtenu."
-        };
-      }
-      
-      return `
-        <div class="tables-tresors-category-description" style="margin: 1rem 0; padding: 1rem; background: var(--card); border-radius: 8px; border-left: 4px solid var(--bronze);">
-          <div class="editable-section" data-section-type="table-tresor-category-description">
-            <p class="lead editable editable-paragraph" data-edit-type="generic" data-edit-section="description">${window.TABLES_TRESORS_PAGE_DESC.description}</p>
-            ${this.buildEditButton('section')}
-          </div>
-        </div>
-      `;
-    }
 
     sanitizeId(str) {
       return str.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');

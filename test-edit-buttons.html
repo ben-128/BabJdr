@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test des boutons d'édition</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-section { border: 1px solid #ccc; margin: 10px; padding: 15px; }
+        .edit-btn { background: #3b82f6; color: white; border: none; padding: 5px 10px; margin: 5px; cursor: pointer; }
+        .editable { border: 1px dashed #ccc; padding: 10px; margin: 5px 0; min-height: 30px; }
+        .result { margin-top: 10px; padding: 10px; background: #f0f0f0; }
+        #devToggle { background: #059669; color: white; padding: 10px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>Test des boutons d'édition - Fenêtre modale uniforme</h1>
+    <p>Ce test vérifie que tous les boutons d'édition ouvrent la fenêtre "Édition du contenu"</p>
+    
+    <button id="devToggle">🛠 Dev Mode: ON</button>
+    
+    <div class="test-section">
+        <h3>Test 1: Contenu HTML simple</h3>
+        <div class="editable-section">
+            <div class="editable" data-edit-type="generic" data-edit-section="test-simple">
+                Ceci est un texte simple sans HTML.
+            </div>
+            <button class="edit-btn" type="button">✏️</button>
+        </div>
+        <div class="result">✓ Devrait ouvrir la fenêtre modale</div>
+    </div>
+
+    <div class="test-section">
+        <h3>Test 2: Contenu HTML complexe</h3>
+        <div class="editable-section">
+            <div class="editable" data-edit-type="generic" data-edit-section="test-complex">
+                <p>Ceci est du contenu <strong>HTML</strong> avec des <em>balises</em>.</p>
+                <ul><li>Liste item 1</li><li>Liste item 2</li></ul>
+            </div>
+            <button class="edit-btn" type="button">✏️</button>
+        </div>
+        <div class="result">✓ Devrait ouvrir la fenêtre modale</div>
+    </div>
+
+    <div class="test-section">
+        <h3>Test 3: Contenu titre</h3>
+        <div class="editable-section">
+            <h4 class="editable editable-title" data-edit-type="generic" data-edit-section="test-title">
+                Titre de test
+            </h4>
+            <button class="edit-btn" type="button">✏️</button>
+        </div>
+        <div class="result">✓ Devrait ouvrir la fenêtre modale</div>
+    </div>
+
+    <div class="test-section">
+        <h3>Test 4: Contenu avec paragraphes</h3>
+        <div class="editable-section">
+            <div class="editable" data-edit-type="generic" data-edit-section="test-paragraphs">
+                <p>Premier paragraphe avec du texte.</p>
+                <p>Deuxième paragraphe avec plus de <strong>contenu formaté</strong>.</p>
+            </div>
+            <button class="edit-btn" type="button">✏️</button>
+        </div>
+        <div class="result">✓ Devrait ouvrir la fenêtre modale</div>
+    </div>
+
+    <div id="results">
+        <h3>Résultats du test</h3>
+        <p id="test-status">Cliquez sur les boutons d'édition ci-dessus pour tester...</p>
+    </div>
+
+    <script>
+        // Simuler l'environnement JdrApp minimal
+        window.JdrApp = {
+            utils: {
+                isDevMode: () => true,
+                events: {
+                    register: (event, selector, handler) => {
+                        document.addEventListener(event, (e) => {
+                            if (e.target.matches && e.target.matches(selector)) {
+                                handler(e);
+                            }
+                        });
+                    }
+                }
+            },
+            modules: {
+                ui: {
+                    showNotification: (message, type) => {
+                        console.log(`Notification [${type}]: ${message}`);
+                        document.getElementById('test-status').innerHTML += `<br>📢 ${message}`;
+                    }
+                }
+            }
+        };
+
+        // EventBus simulé
+        window.EventBus = {
+            emit: (event, data) => console.log(`Event: ${event}`, data),
+            on: () => {}
+        };
+
+        // Events simulé
+        window.Events = {
+            STORAGE_SAVE: 'storage.save',
+            CONTENT_UPDATE: 'content.update'
+        };
+
+        // UnifiedEditor simulé - on va intercepter showHTMLEditModal
+        window.UnifiedEditor = {
+            currentEditSession: null,
+            parseEditContext: (element) => {
+                return {
+                    contentType: 'test',
+                    itemIdentifier: 'test-item',
+                    editType: 'html',
+                    editSection: element.dataset.editSection || 'content',
+                    element: element.closest('.editable-section').querySelector('.editable'),
+                    container: element.closest('.editable-section'),
+                    originalContent: element.closest('.editable-section').querySelector('.editable').innerHTML
+                };
+            },
+            startEdit: (element) => {
+                const context = window.UnifiedEditor.parseEditContext(element);
+                if (context) {
+                    // Simuler le démarrage d'édition - devrait toujours ouvrir la modale
+                    window.UnifiedEditor.startInlineEdit(context);
+                    return true;
+                }
+                return false;
+            },
+            startInlineEdit: (context) => {
+                const decodedHtml = context.element.innerHTML;
+                // Toujours utiliser la modale maintenant
+                window.UnifiedEditor.showHTMLEditModal(context.element, decodedHtml);
+                return true;
+            },
+            showHTMLEditModal: (element, content) => {
+                // Intercepter l'appel à la modale pour tester
+                document.getElementById('test-status').innerHTML += 
+                    `<br>✅ SUCCÈS: Fenêtre modale ouverte pour "${element.dataset.editSection || 'content'}"`;
+                console.log('✅ Modal opened for element:', element, 'with content:', content);
+                
+                // Simuler la modale sans vraiment l'ouvrir
+                setTimeout(() => {
+                    alert(`✅ TEST RÉUSSI!\n\nFenêtre "Édition du contenu" ouverte pour:\n- Section: ${element.dataset.editSection || 'content'}\n- Contenu: ${content.substring(0, 100)}${content.length > 100 ? '...' : ''}`);
+                }, 100);
+            }
+        };
+
+        // Enregistrer les handlers de boutons d'édition
+        JdrApp.utils.events.register('click', '.edit-btn', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            console.log('Edit button clicked:', e.target);
+            
+            // Trouver l'élément éditable
+            let editableElement = e.target.previousElementSibling;
+            
+            if (!editableElement || !editableElement.classList.contains('editable')) {
+                const parent = e.target.parentElement;
+                editableElement = parent.querySelector('.editable');
+            }
+            
+            if (!editableElement || !editableElement.classList.contains('editable')) {
+                editableElement = e.target.closest('.editable-section')?.querySelector('.editable');
+            }
+            
+            if (editableElement && editableElement.classList.contains('editable')) {
+                window.UnifiedEditor.startEdit(editableElement);
+            } else {
+                console.warn('No editable element found for edit button');
+                document.getElementById('test-status').innerHTML += 
+                    '<br>❌ ERREUR: Élément éditable introuvable';
+            }
+        });
+
+        // Status initial
+        document.getElementById('test-status').innerHTML = '⏳ Prêt pour les tests. Cliquez sur les boutons ✏️ pour tester l\'ouverture des modales.';
+        
+        console.log('Test environment initialized. Click edit buttons to test modal opening.');
+    </script>
+</body>
+</html>

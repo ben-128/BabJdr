@@ -1,5 +1,4 @@
 
-- monstres
-- faire des tables de loots, et des tags caché par level
+- faire pour les objets, des recherches d'id, et recherche de magasin (dont celui départ)
 
 

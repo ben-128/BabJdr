@@ -128,8 +128,8 @@ function buildStandalone() {
     'sorts.json', 'classes.json', 'competences-tests.json', 
     'creation.json', 'dons.json', 'objets.json', 'elements.json', 'etats.json',
     'images.json', 'static-pages-config.json', 'stats.json', 'toc-structure.json',
-    'monstres.json', 'tables-tresors.json', 'combat.json', 'gestion-des-ressources.json', 
-    'histoire.json', 'dieux.json', 'geographie.json'
+    'monstres.json', 'tables-tresors.json', 'monstres-page-desc.json', 'tables-tresors-page-desc.json',
+    'combat.json', 'gestion-des-ressources.json', 'histoire.json', 'dieux.json', 'geographie.json'
   ];
   
   let dataObject = {};
@@ -190,6 +190,14 @@ function buildStandalone() {
     window.MONSTRES = ${JSON.stringify(dataObject.monstres || [], null, 2)};
     window.TABLES_TRESORS = ${JSON.stringify(dataObject.tables_tresors || { tables: [] }, null, 2)};
     window.IMAGES = ${JSON.stringify(dataObject.images || {}, null, 2)};
+    
+    // Page descriptions
+    window.MONSTRES_PAGE_DESC = ${JSON.stringify(dataObject.monstres_page_desc || {
+      description: "Créatures, ennemis et adversaires que peuvent affronter les héros dans leurs aventures."
+    }, null, 2)};
+    window.TABLES_TRESORS_PAGE_DESC = ${JSON.stringify(dataObject.tables_tresors_page_desc || {
+      description: "Tables de butin permettant de générer aléatoirement des récompenses selon les fourchettes définies. Lancez un dé 20 et consultez la table correspondante pour déterminer l'objet obtenu."
+    }, null, 2)};
     
     // TOC Structure for advanced navigation
     window.TOC_STRUCTURE = ${JSON.stringify(dataObject.toc_structure || {}, null, 2)};

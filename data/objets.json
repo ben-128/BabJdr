@@ -227,16 +227,17 @@
       "poids": ""
     },
     {
-      "nom": "Baguette de Sommeil",
+      "nom": "Baguette de d'accélération",
       "numero": 17,
       "image": "",
       "description": "Description de l'objet.",
       "tags": [
-        "Départ"
+        "Consommable",
+        "Catalyseur"
       ],
-      "effet": "<strong>Effet:</strong> Description de l'effet de l'objet.",
-      "prix": "🔷 <strong>Prix:</strong> 10",
-      "poids": "⚖️ <strong>Poids:</strong> 1"
+      "effet": "<strong>Effet:</strong> <span class=\"spell-link\" data-spell=\"Accélération\" data-category=\"Sorts d'Enchanteur\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Accélération</span>",
+      "prix": "🔷 <strong>Prix:</strong> 30",
+      "poids": ""
     },
     {
       "nom": "Baguette de sommeil",
@@ -255,7 +256,7 @@
   ],
   "filterSettings": {
     "visibleTags": [
-      "Arme"
+      "Consommable"
     ],
     "displayedFilterButtons": [
       "Arme",
@@ -265,5 +266,5 @@
     ]
   },
   "categoryDescription": "Équipements, armes, armures et objets divers que peuvent posséder les personnages.",
-  "description": "Pour éviter le <strong>spoil</strong>, seuls les objets de départs sont visibles sans le <strong>mode maître de jeu</strong> d'actif. <br>Vous pouvez par contre rechercher un <strong>objet par ID</strong> quand le MJ vous indique que votre héros a trouvé un nouvel objet."
+  "description": "Fortune + d20"
 }

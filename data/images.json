@@ -72,11 +72,12 @@
     "monster:Serpent de la forêt": "https://i.ibb.co/svhHLvKZ/Monstre-For-t-Serpent.png",
     "monster:Scarabée géant": "https://i.ibb.co/wF5bRvts/Monstre-For-t-Scarabe-Geant.png",
     "monster:Boss Forêt": "https://i.ibb.co/1JR11CC7/Monstre-For-t-Boss.png",
-    "sort:Sorts de Mage:Volée de pierres": "https://i.ibb.co/GfPFdZPG/Volee-Pierre.png"
+    "sort:Sorts de Mage:Volée de pierres": "https://i.ibb.co/GfPFdZPG/Volee-Pierre.png",
+    "objet:Baguette de d'accélération": "https://i.ibb.co/zT29mKBd/Baguette-Lumiere.png"
   },
   "meta": {
-    "total_images": 73,
-    "exported_date": "2025-08-26",
+    "total_images": 74,
+    "exported_date": "2025-08-27",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
 }
