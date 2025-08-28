@@ -51,6 +51,8 @@ menu.bat            # Interactive menu for all operations (RECOMMENDED)
 - Layout is responsive and readable on small screens
 - All content remains accessible without dev mode
 
+**✅ MOBILE FIX APPLIED (2025-08-28)**: Fixed critical mobile viewport issue where content was oversized and forced horizontal scrolling. Corrected responsive CSS in `layout.css` by resetting margin-left/margin-right to 0 on mobile breakpoints (≤980px, ≤768px, ≤480px).
+
 ### Windows Batch Alternatives
 - `dev-server.bat` - Development mode with dev tools and live reload
 - `build.bat` - Build standalone version with Windows-specific output handling
@@ -190,6 +192,41 @@ Modular CSS architecture:
 - `css/layout.css` - Layout and responsive design
 - `css/editor.css` - Development mode styles
 
+## Application Constants System
+
+### **🔧 Centralized Constants**
+
+The application uses centralized constants in `js/config/constants.js` to avoid magic numbers and improve maintainability:
+
+```javascript
+// UI layout dimensions
+window.UI_CONSTANTS.SIDEBAR_WIDTH = 350
+window.UI_CONSTANTS.BREAKPOINTS.MOBILE = 480
+
+// Timing constants
+window.UI_CONSTANTS.TIMEOUTS.VALIDATION_DELAY = 500
+window.UI_CONSTANTS.TIMEOUTS.AUTO_MJ_DELAY = 800
+
+// Element colors
+window.ELEMENT_COLORS.FEU = { color: '#ff6b35', weight: 'bold' }
+
+// Storage keys
+window.STORAGE_KEYS.EDITS = 'jdr-bab-edits'
+
+// Default values
+window.DEFAULT_VALUES.MAX_MONSTER_BACKUPS = 10
+```
+
+**Constants File Location:** `js/config/constants.js`
+
+**Usage Rules:**
+- ✅ **ALWAYS** use constants instead of magic numbers
+- ✅ **ALWAYS** reference constants via `window.UI_CONSTANTS.*` 
+- ✅ **ALWAYS** update constants.js when adding new dimensions or timeouts
+- ❌ **NEVER** hardcode timeout values, breakpoints, or dimensions
+- ❌ **NEVER** duplicate constant values across files
+- ❌ **NEVER** modify constants at runtime (they are configuration, not state)
+
 ## Critical Implementation Guidelines
 
 ### **🚨 MANDATORY: Adding New Content Types**
@@ -262,21 +299,22 @@ ContentFactory.deleteItem('equipment', categoryName, itemName)        // ✅ RIG
 Modules must be loaded in exact dependency order:
 ```javascript
 1. js/core.js                    // JdrApp namespace - MUST BE FIRST
-2. js/config/contentTypes.js     // Configuration layer
-3. js/core/EventBus.js          // Event system foundation  
-4. js/core/BaseEntity.js        // Entity base class
-5. js/factories/ContentFactory.js // Factory pattern implementation
-6. js/builders/CardBuilder.js    // Card template generation
-7. js/builders/PageBuilder.js    // Page template generation
-8. js/utils.js                  // DOM and utility functions
-9. js/modules/images.js         // Asset management
-10. js/storage.js               // Persistence layer
-11. js/router.js                // Navigation system
-12. js/renderer.js              // Content rendering 
-13. js/core/UnifiedEditor.js    // Editing system core
-14. js/editor.js                // Editor UI and interactions
-15. js/features/SpellFilter.js  // Specialized features
-16. js/ui.js                    // UI interactions - MUST BE LAST
+2. js/config/constants.js        // Application constants
+3. js/config/contentTypes.js     // Configuration layer
+4. js/core/EventBus.js          // Event system foundation  
+5. js/core/BaseEntity.js        // Entity base class
+6. js/factories/ContentFactory.js // Factory pattern implementation
+7. js/builders/CardBuilder.js    // Card template generation
+8. js/builders/PageBuilder.js    // Page template generation
+9. js/utils.js                  // DOM and utility functions
+10. js/modules/images.js         // Asset management
+11. js/storage.js               // Persistence layer
+12. js/router.js                // Navigation system
+13. js/renderer.js              // Content rendering 
+14. js/core/UnifiedEditor.js    // Editing system core
+15. js/editor.js                // Editor UI and interactions
+16. js/features/SpellFilter.js  // Specialized features
+17. js/ui.js                    // UI interactions - MUST BE LAST
 ```
 **Violation of this order will cause runtime errors and module failures.**
 
@@ -351,6 +389,29 @@ console.log(html);
 4. **Bypassing ContentFactory for data operations**
    - Bad: Direct manipulation of `window.SORTS`
    - Good: `ContentFactory.updateItem(type, category, name, property, value)`
+
+### **🧹 Code Quality & Production Readiness (Updated 2025-08-28)**
+
+**✅ COMPREHENSIVE CLEANUP COMPLETED:**
+
+1. **Debug Code Removal**: Removed 150+ console.log/warn/debug statements across all active files while preserving critical console.error statements for actual error conditions.
+
+2. **Constants Extraction**: Created `js/config/constants.js` with centralized configuration:
+   - UI layout dimensions and breakpoints
+   - Timing constants (timeouts, delays)
+   - Element colors and styling constants  
+   - Storage keys and default values
+   - Eliminates magic numbers throughout the codebase
+
+3. **File Cleanup**: Removed unused backup files (`CardBuilder_backup.js`) and organized project structure.
+
+4. **Production Optimizations**:
+   - Silent error handling for non-critical operations
+   - Reduced build output noise and debug overhead
+   - Improved maintainability with centralized constants
+   - Enhanced code readability by removing debug clutter
+
+**Build Integration**: Constants are now loaded first in the module dependency chain and included in standalone builds.
 
 ### **📝 Content Format Standards**
 

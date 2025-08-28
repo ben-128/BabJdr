@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-08-27T21:48:41.057Z by JdrBab Build System -->
+<!-- Generated on 2025-08-28T18:16:57.753Z by JdrBab Build System -->
 <title>JDR‑BAB — Livret de règles</title>
 <meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -412,6 +412,8 @@ h5, h6 {
   }
   
   #views {
+    margin-left: 0; /* Reset sidebar margin on mobile */
+    margin-right: 0;
     padding: 0 var(--space-md);
     max-width: 100%;
   }
@@ -821,6 +823,8 @@ footer{padding:24px;text-align:center;color:var(--paper-muted)}
   }
   
   #views {
+    margin-left: 340px; /* Adjust for smaller sidebar */
+    margin-right: 0;
     max-width: 100%;
     padding: 0 var(--space-md);
   }
@@ -828,6 +832,11 @@ footer{padding:24px;text-align:center;color:var(--paper-muted)}
 
 /* Tablet Portrait (768px and below) */
 @media (max-width: 768px) {
+  #views {
+    margin-left: 0; /* Reset margins for tablet portrait */
+    margin-right: 0;
+  }
+  
   .illus .thumb { 
     width: 100%; 
     max-width: 280px; 
@@ -4728,6 +4737,7 @@ article span[title]:hover::after {
     "pointsDeVie": 15,
     "armurePhysique": "0",
     "esquive": "2",
+    "initiative": 1,
     "coupCritique": "1",
     "coupCritiqueSorts": "0",
     "resistanceAlterations": "3",
@@ -4748,7 +4758,8 @@ article span[title]:hover::after {
     "monster-resistancealterations": "3",
     "monster-coupcritiquesorts": "0",
     "monster-armureterre": "2",
-    "monster-armureobscurite": "5"
+    "monster-armureobscurite": "5",
+    "monster-initiative": "3"
   },
   {
     "nom": "Crabe des Bois",
@@ -4760,6 +4771,7 @@ article span[title]:hover::after {
     "pointsDeVie": "30",
     "armurePhysique": "5",
     "esquive": "0",
+    "initiative": 1,
     "coupCritique": "1",
     "coupCritiqueSorts": "0",
     "resistanceAlterations": "5",
@@ -4784,6 +4796,7 @@ article span[title]:hover::after {
     "pointsDeVie": "15",
     "armurePhysique": "0",
     "esquive": "1",
+    "initiative": 1,
     "coupCritique": "0",
     "coupCritiqueSorts": "0",
     "resistanceAlterations": 3,
@@ -4808,6 +4821,7 @@ article span[title]:hover::after {
     "pointsDeVie": "15",
     "armurePhysique": "0",
     "esquive": "0",
+    "initiative": 1,
     "coupCritique": "0",
     "coupCritiqueSorts": "1",
     "resistanceAlterations": "4",
@@ -4832,6 +4846,7 @@ article span[title]:hover::after {
     "pointsDeVie": "15",
     "armurePhysique": 0,
     "esquive": "5",
+    "initiative": 1,
     "coupCritique": "3",
     "coupCritiqueSorts": "0",
     "resistanceAlterations": "3",
@@ -4844,7 +4859,8 @@ article span[title]:hover::after {
     "armureDivin": 0,
     "armureMalefique": 0,
     "abilites": "<strong>Volant</strong>: Necessite de sauter pour attaque au corps à corps.<br><strong>Dard: </strong> Inflige 5 degats physiques + 3 <span style=\"color: #22c55e; font-weight: bold;\">Air</span>. Critique : <span class=\"etat-link\" data-etat=\"Empoisonné\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Empoisonné</span> 1 , 5 tours",
-    "butin": "<strong>Butin:</strong>"
+    "butin": "<strong>Butin:</strong>",
+    "monster-initiative": "5"
   },
   {
     "nom": "Ours des Bois",
@@ -4857,6 +4873,7 @@ article span[title]:hover::after {
     "pointsDeVie": 60,
     "armurePhysique": 4,
     "esquive": 4,
+    "initiative": 1,
     "coupCritique": 12,
     "coupCritiqueSorts": 6,
     "resistanceAlterations": 8,
@@ -4881,6 +4898,7 @@ article span[title]:hover::after {
     "pointsDeVie": "10",
     "armurePhysique": "0",
     "esquive": "0",
+    "initiative": 1,
     "coupCritique": "0",
     "coupCritiqueSorts": "0",
     "resistanceAlterations": "0",
@@ -4893,7 +4911,8 @@ article span[title]:hover::after {
     "armureDivin": 0,
     "armureMalefique": 0,
     "abilites": "<strong>Accroche:</strong> Inflige 4 dégâts physiques. S'attache à la cible.",
-    "butin": "<strong>Butin:</strong>"
+    "butin": "<strong>Butin:</strong>",
+    "monster-initiative": "1"
   },
   {
     "nom": "Serpent de la forêt",
@@ -4905,6 +4924,7 @@ article span[title]:hover::after {
     "pointsDeVie": 20,
     "armurePhysique": "0",
     "esquive": 5,
+    "initiative": 1,
     "coupCritique": "2",
     "coupCritiqueSorts": "0",
     "resistanceAlterations": 3,
@@ -4917,7 +4937,8 @@ article span[title]:hover::after {
     "armureDivin": 0,
     "armureMalefique": 0,
     "abilites": "<strong>Morsure venimeuse:</strong> Inflige 5 dégâts Physiques. <br> Si (resistance altérations &lt; 3)  + <span title=\"Des dégats sont appliqués à chaque début de tour du lanceur, réduits ni par l'armure physique ni par l'armure élémentaire.\">Empoisonné</span>2 pendant 5 tours.<br><br>",
-    "butin": "<strong>Butin:</strong>"
+    "butin": "<strong>Butin:</strong>",
+    "monster-initiative": "4"
   },
   {
     "nom": "Scarabée géant",
@@ -4929,6 +4950,7 @@ article span[title]:hover::after {
     "pointsDeVie": 20,
     "armurePhysique": "3",
     "esquive": "0",
+    "initiative": 1,
     "coupCritique": "0",
     "coupCritiqueSorts": "0",
     "resistanceAlterations": "5",
@@ -4941,7 +4963,8 @@ article span[title]:hover::after {
     "armureDivin": 0,
     "armureMalefique": 0,
     "abilites": "<strong>Volant</strong>: Necessite de sauter pour attaque au corps à corps.<br><strong>Morsure: </strong> inflige 5 physique.",
-    "butin": "<strong>Butin:</strong>"
+    "butin": "<strong>Butin:</strong>",
+    "monster-initiative": "4"
   },
   {
     "nom": "Boss Forêt",
@@ -4953,6 +4976,7 @@ article span[title]:hover::after {
     "pointsDeVie": "200",
     "armurePhysique": "3",
     "esquive": "0",
+    "initiative": 1,
     "coupCritique": "2",
     "coupCritiqueSorts": "0",
     "resistanceAlterations": "10",
@@ -4965,7 +4989,8 @@ article span[title]:hover::after {
     "armureDivin": 0,
     "armureMalefique": "5",
     "abilites": "Double attaque.<br><strong>Attaque basique:</strong> Inflige 10 dégâts physiques. <br><strong>Hurlement:</strong> Tous les adversaires à 15m, avec Resistance altération &lt; 6, sont <span class=\"etat-link\" data-etat=\"Affaibli\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Affaibli</span>.  \n<br><b>Repoussoir</b>: Repousse une une cible à 10m. Inflige 5 dégats.\n<br><b>Appel </b>: Hurle et fait venir 2 Groinkas.",
-    "butin": "<strong>Butin:</strong>"
+    "butin": "<strong>Butin:</strong>",
+    "monster-initiative": "3"
   }
 ];
     window.TABLES_TRESORS = {
@@ -5195,7 +5220,7 @@ article span[title]:hover::after {
   },
   "meta": {
     "total_images": 74,
-    "exported_date": "2025-08-27",
+    "exported_date": "2025-08-28",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
 };
@@ -5405,7 +5430,7 @@ article span[title]:hover::after {
       "type": "card",
       "id": "elements-system",
       "title": "Système d'éléments",
-      "content": "<p>Il existe huit éléments, chacun ayant un opposé. Chaqué Héros où monstre possède un élément d'affiliation.<br><br> Une créature affiliée à un élément :<br> - Reçoit <strong>deux fois moins </strong>de dégats venant des sorts et attaques de cet élément, et ne peut pas recevoir d'effet critique d'une alteration magique de cet élément.<br>- Recevra systématiquement des <strong>effets critiques</strong> venant des sorts et altérations de l'élément opposé. Les dégats élémentaires d'une attaque physique (venant d'un objet ou sort) voit ses dégats doublés s'il est d'un élément opposé.</p>"
+      "content": "<p>Il existe huit éléments, chacun ayant un opposé. Chaqué Héros où monstre possède un élément d'affiliation.<br><br> Une créature affiliée à un élément :<br> - Reçoit <strong>deux fois moins </strong>de dégats venant des sorts et attaques de cet élément, et ne peut pas recevoir d'effet critique d'une alteration magique de cet élément.<br>- Recevra systématiquement des <strong>effets critiques</strong> venant des sorts et altérations de l'élément opposé. Les dégats élémentaires rattachés à une attaque physique (venant d'un objet ou sort) voit ses dégats doublés s'il est d'un élément opposé.</p>"
     },
     {
       "type": "card",
@@ -5425,7 +5450,7 @@ article span[title]:hover::after {
       "type": "card",
       "id": "element-attack",
       "title": "Attaque",
-      "content": "<p>Une attaque ne peut avoir qu'<strong>un seul élément</strong> (en plus d'éventuels dégats physiques). Si plusieurs sorts/équipements/bonus donnent un élément à l'attaque, le héros devra choisir quel est l'élément utilisé.</p> <br> Plusieurs bonus d'un même élément peuvent se cumuler.",
+      "content": "<p>Une attaque ne peut avoir qu'<strong>un seul élément</strong> (en plus d'éventuels dégats physiques). Si plusieurs sorts/équipements/bonus donnent un élément à l'attaque, le héros devra choisir quel est l'élément utilisé.</p> Plusieurs bonus d'un même élément peuvent se cumuler.\n<br><br> Si l'élément rattaché à une attaque physiques est opposé à l'élément d'affiliation de la cible, alors les dégats élémentaires sont doublés.",
       "deletable": true,
       "sectionName": "Attaque"
     }
@@ -5444,7 +5469,7 @@ article span[title]:hover::after {
       "type": "card",
       "id": "stats-base",
       "title": "Statistiques de base",
-      "content": "<hr><div class=\"stats-grid\"><div class=\"stat-card\"><h4>💪 Force</h4><p>Améliore les dégâts physiques.</p></div><hr><div class=\"stat-card\"><h4>🛡️ Endurance</h4><p>Les points de vie maximum sont de : <strong>(10 + 2 x Endurance)</strong></p><p>Un repos régénère des points de vie égaux à l'endurance</p></div><hr><div class=\"stat-card\"><h4>🏃 Agilité</h4><p>Chaque 5 points ajoutent <strong>+1</strong> aux jets d'esquive et de critique physique.</p></div><hr><div class=\"stat-card\"><h4>🧠 Intelligence</h4><p>Détermine la puissance des sorts.</p></div><hr><div class=\"stat-card\"><h4>⚡ Volonté</h4><p>Le mana maximum est de : <strong>(20 + 2 x Volonté)</strong></p><p>Augmente la Résistance altérations.</p></div><hr><div class=\"stat-card\"><h4>🍀 Chance</h4><p>Améliore la Fortune d'autant.</p><p>De plus, chaque 5 points ajoutent <strong>+1</strong> aux chances de coup critique avec les sorts et les consommables.</p></div></div>",
+      "content": "<hr><div class=\"stats-grid\"><div class=\"stat-card\"><h4>💪 Force</h4><p>Améliore les dégâts physiques.</p></div><hr><div class=\"stat-card\"><h4>🛡️ Endurance</h4><p>Les points de vie maximum sont de : <strong>(10 + 2 x Endurance)</strong></p><p>Un repos régénère des points de vie égaux à l'endurance</p></div><hr><div class=\"stat-card\">\n<h4>🏃 Agilité</h4><p>Chaque 5 points ajoutent <strong>+1</strong> aux jets d'esquive et de critique physique.<br><br>Augmente l'initiative d'autant.</p></div><hr><div class=\"stat-card\"><h4>🧠 Intelligence</h4><p>Détermine la puissance des sorts.</p></div><hr><div class=\"stat-card\"><h4>⚡ Volonté</h4><p>Le mana maximum est de : <strong>(20 + 2 x Volonté)</strong></p><p>Augmente la Résistance altérations.</p></div><hr><div class=\"stat-card\"><h4>🍀 Chance</h4><p>Améliore la Fortune d'autant.</p><p>De plus, chaque 5 points ajoutent <strong>+1</strong> aux chances de coup critique avec les sorts et les consommables.</p></div></div>",
       "deletable": true,
       "sectionName": "Statistiques de base"
     },
@@ -5452,7 +5477,7 @@ article span[title]:hover::after {
       "type": "card",
       "id": "stats-new-3-1755784997112",
       "title": "Statistiques secondaires",
-      "content": "<hr><br><br><strong>Chance de coup critique </strong> : blabla.<br><hr><br><strong>Esquive </strong> : blablabla.<br><hr><br><strong>Résistance altérations </strong> : blablabla.<br><hr><br><strong>Armure physique </strong> : blablabla.<br><hr><br><strong>Armure élémentaire </strong> : blablabla.<br><hr><br><strong>Mana </strong> : blablabla.<br><hr><br><strong>Vie </strong> : blablabla.<br><hr><br><strong>Fortune</strong> : blablabla.<br><hr><br>",
+      "content": "<hr><br><br><strong>Chance de coup critique (physique) </strong> : Lors d'une attaque physique, le lanceur de l'attaque lance un d20. S'il fait 20, alors les dégats physiques (et seulement physiques) sont doublés.<br> Augmenter les chances de coup critique réduit la valeur du dé nécéssaire pour faire un critique. Par exemple, avec 3 de chance de coup critique, si le dé fait de 17 à 20, l'attaque est critique.\n\n<br><br><hr><br><strong>Chance de coup critique (sorts et consommables)</strong> : Lorsque un héros ou un monstre lance un sort ou utilise un consommable, il lance un d20. S'il fait 20, alors le sort est critique, chaque sort/consommable ayant un effet critique différent (indiqué dans sa description).<br> Augmenter les chances de coup critique des sorts et consommables réduit la valeur du dé nécéssaire pour faire un critique. Par exemple, avec 3 de chance de coup critique, si le dé fait de 17 à 20, le resultat est critique. \n\n<br><br><hr><br><strong>Esquive </strong> : Lors d'une attaque physique, ou d'un sort sans effet si esquive (indiqué dans la fiche du sort), lorsque le lanceur lance son d20, si le resultat est 1, l'attaque est sans effet. Avoir de l'esquive pour la cible de l'attaque augmente la valeur du dé jusqu'a laquelle l'attaque échoue. Par exemple, avec 3 d'esquive, si le dé fait 4 ou moins, l'attaque échoue. La valeur d'esquive ne peut jamais dépasser 9, quel que soit l'equipement ou bonus d'un joueur ou monstre.\n\n\n<br><br><hr><br><strong>Résistance altérations </strong> : Lorsqu'un lanceur de sort tente d'infliger une alteration magique à une cible, on compare la valeur de l'intelligence du lanceur à la Résistance altérations de la cible. Si l'intelligence est strictement supérieure, alors l'ateration réussit, sinon elle est sans effet.\n\n\n<br><br><hr><br><strong>Armure physique </strong> : Lorsqu'un héros ou monstre reçoit des dégats physiques, ils sont alors réduit de la valeur de l'armure physique pour savoir combien de points de vies sont retirés à la cible. Cette valeur est retiré en dernier sur les degats (aprés avoir éventuellement doublé les dégats si critique etc...)\n\n<br><br><hr><br><strong>Armure élémentaire </strong> : L'armure élémentaire est spécifique pour chaque élément, il y a donc 8 types d'armure élémentaire. Lorsqu'un héros ou monstre subit des dégats élémentaire correspondant à l'armure élémentaire, ils sont alors réduit de la valeur de l'armure pour savoir combien de points de vies sont retirés à la cible. Cette valeur est retiré en dernier sur les degats (aprés avoir éventuellement doublé les dégats si critique etc...).\n\n<br><br><hr><br><strong>Mana </strong> : Il s'agit de la ressource utilisée pour lancer des sorts. Hors combat, il revient automatiquement au maximum aprés plus d'une heure sans être en combat. En combat, il est consommé aprés le lancement de chaque sort (le coût en mana étant indiqué dans la description de chaque sort). Si un sort devait faire passer le mana d'un héros en dessous de 0, alors le sort n'est pas effectif et le héros devient <span class=\"etat-link\" data-etat=\"Endormi/assomé/Effrayé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">paralysé</span> pendant 2 tours.\n\n<br><br><hr><br><strong>Vie </strong> : Les points de vie représentent la vitalité d’un héros ou d’un monstre, la mesure de son endurance face aux blessures. Tant qu’il lui reste des PV, le personnage peut continuer à se battre, à courir et à agir. Quand ses PV tombent à zéro, il s’effondre, mourant. Voir la page <a href=\"#/combat\" style=\"color: var(--accent); text-decoration: underline;\">Combat</a>.\nUn personnage qui effectue un repos régénère un nombre de points de vie égal à sa valeur d’Endurance.<br>\n\n<hr><br><strong>Fortune</strong> : Lorsqu’un événement fait appel à la Fortune (par exemple ouvrir un coffre et espérer y trouver un objet rare), le joueur lance un d20 et ajoute sa valeur de Fortune. Plus le total est élevé, meilleur sera le butin obtenu. \n\n<br><hr><br> <strong>Initiative</strong> : Cette valeur est comparée au début du combat avec tous les héros/monstres pour determiner l'ordre des tours de combat. Plus la valeur est élevée, plus le héros commence en premier.",
       "deletable": true,
       "sectionName": "Nouvelle section"
     }
@@ -5559,10 +5584,42 @@ article span[title]:hover::after {
     {
       "type": "card",
       "id": "etats-para-8-1755891140510",
-      "title": "Nouveau paragraphe",
-      "content": "<p>Contenu du nouveau paragraphe.</p>",
+      "title": "Silence",
+      "content": "Incapable de lancer des sorts.",
       "deletable": true,
       "sectionName": "Nouveau paragraphe"
+    },
+    {
+      "type": "card",
+      "id": "etats-new-9-1756400691334",
+      "title": "Vulnérable",
+      "content": "Plus aucune protection apporté par l'armure physique ou élémentaire.",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
+    },
+    {
+      "type": "card",
+      "id": "etats-new-10-1756400890785",
+      "title": "Confus",
+      "content": "A chaque début de tour, lancez un d20. si le resultat est de 10 ou moins, passe sont tour à se déplacer et attaquer au corp à corp la cible la plus proche.",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
+    },
+    {
+      "type": "card",
+      "id": "etats-new-11-1756401053782",
+      "title": "Maudit",
+      "content": "Impossible d'esquiver, d'effectuer des coups critiques (physiques ou magiques), et la resistance altération est divisé par 2.",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
+    },
+    {
+      "type": "card",
+      "id": "etats-new-12-1756401063266",
+      "title": "Débilité",
+      "content": "La cible est incpable d'effectuer la moindre action. A chaque début de tour, elle perd des points de vie, réduits ni par l'armure physique ni par l'armure élémentaire.",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
     }
   ]
 },
@@ -5572,7 +5629,47 @@ article span[title]:hover::after {
   "sections": [
     {
       "type": "intro",
-      "content": "deplacement, mort, actions primaire secondaire , armures phys et magique , critiques pour tout...\n<br>"
+      "content": "Les combats se font au tour par tour  &lt; ordre ????"
+    },
+    {
+      "type": "card",
+      "id": "combat-new-2-1756401371776",
+      "title": "Déplacement",
+      "content": "À chaque tour, un héros peut se déplacer de 9 mètres (plus s’il bénéficie de bonus), en plus de ses actions.\n<br><br>Certains terrains, comme la boue ou le sable, sont considérés comme des terrains difficiles : la vitesse y est alors réduite de moitié.\n<br><br>Un héros ou un monstre ne peut pas traverser un adversaire occupant une largeur de 3 mètres. Si plusieurs ennemis se tiennent côte à côte, ils forment un véritable mur infranchissable.",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
+    },
+    {
+      "type": "card",
+      "id": "combat-new-3-1756401384086",
+      "title": "Actions",
+      "content": "Chaque tour, un héros dispose d'une <b>action principale</b>, pour effectuer une attaque physique ou un sort.\nElle est perdue si elle n'est pas utilisé pendant son tour. Elle permet également de faire toute action qui nécéssite un test de compétence (ouvrir une porte, casser un rocher...).\n\n<br><br>Il dispose également d'une <b>action secondaire</b>, qui permet de faire un certains nombre de choses :\n<br>- Sauter.\n<br>- Utiliser un objet.\n<br>- Changer d'arme.\n<br>Certains dons ou abilités permettent également d'effectuer d'autres choses en utilisant l'action secondaire.\n\n<br><br> Les héros peuvent effectuer leur déplacement, action principale et secondaire dans l'ordre qui leur plait.",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
+    },
+    {
+      "type": "card",
+      "id": "combat-new-4-1756401409186",
+      "title": "Attaques, sorts, armure",
+      "content": "<p>Contenu de la nouvelle section.</p>",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
+    },
+    {
+      "type": "card",
+      "id": "combat-new-5-1756401438556",
+      "title": "Coup critique et esquive",
+      "content": "<hr><br><br><strong>Chance de coup critique (physique) </strong> : Lors d'une attaque physique, le lanceur de l'attaque lance un d20. S'il fait 20, alors les dégats physiques (et seulement physiques) sont doublés.<br> Augmenter les chances de coup critique réduit la valeur du dé nécéssaire pour faire un critique. Par exemple, avec 3 de chance de coup critique, si le dé fait de 17 à 20, l'attaque est critique.\n\n<br><br><hr><br><strong>Chance de coup critique (sorts et consommables)</strong> : Lorsque un héros ou un monstre lance un sort ou utilise un consommable, il lance un d20. S'il fait 20, alors le sort est critique, chaque sort/consommable ayant un effet critique différent (indiqué dans sa description).<br> Augmenter les chances de coup critique des sorts et consommables réduit la valeur du dé nécéssaire pour faire un critique. Par exemple, avec 3 de chance de coup critique, si le dé fait de 17 à 20, le resultat est critique. \n\n<br><br><hr><br><strong>Esquive </strong> : Lors d'une attaque physique, ou d'un sort sans effet si esquive (indiqué dans la fiche du sort), lorsque le lanceur lance son d20, si le resultat est 1, l'attaque est sans effet. Avoir de l'esquive pour la cible de l'attaque augmente la valeur du dé jusqu'a laquelle l'attaque échoue. Par exemple, avec 3 d'esquive, si le dé fait 4 ou moins, l'attaque échoue. La valeur d'esquive ne peut jamais dépasser 9, quel que soit l'equipement ou bonus d'un joueur ou monstre.",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
+    },
+    {
+      "type": "card",
+      "id": "combat-new-6-1756401461053",
+      "title": "Mort",
+      "content": "<p>Contenu de la nouvelle section.</p>",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
     }
   ]
 },
@@ -5582,7 +5679,47 @@ article span[title]:hover::after {
   "sections": [
     {
       "type": "intro",
-      "content": "loot stats fortune, mana , repos et pv, inventaire\n<br>"
+      "content": ""
+    },
+    {
+      "type": "card",
+      "id": "gestion-des-ressources-new-2-1756401478745",
+      "title": "Inventaire",
+      "content": "<p>Contenu de la nouvelle section.</p>",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
+    },
+    {
+      "type": "card",
+      "id": "gestion-des-ressources-new-3-1756401493443",
+      "title": "Mana",
+      "content": "Il s'agit de la ressource utilisée pour lancer des sorts. Hors combat, il revient automatiquement au maximum aprés plus d'une heure sans être en combat. En combat, il est consommé aprés le lancement de chaque sort (le coût en mana étant indiqué dans la description de chaque sort). Si un sort devait faire passer le mana d'un héros en dessous de 0, alors le sort n'est pas effectif et le héros devient <span class=\"etat-link\" data-etat=\"Endormi/assomé/Effrayé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">paralysé</span> pendant 2 tours.",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
+    },
+    {
+      "type": "card",
+      "id": "gestion-des-ressources-new-4-1756401498518",
+      "title": "Vie",
+      "content": "Les points de vie représentent la vitalité d’un héros ou d’un monstre, la mesure de son endurance face aux blessures. Tant qu’il lui reste des PV, le personnage peut continuer à se battre, à courir et à agir. Quand ses PV tombent à zéro, il s’effondre, mourant. Voir la page <a href=\"#/combat\" style=\"color: var(--accent); text-decoration: underline;\">Combat</a>.\nUn personnage qui effectue un repos régénère un nombre de points de vie égal à sa valeur d’Endurance.<br>",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
+    },
+    {
+      "type": "card",
+      "id": "gestion-des-ressources-new-5-1756401504961",
+      "title": "Fortune",
+      "content": "Lorsqu’un événement fait appel à la Fortune (par exemple ouvrir un coffre et espérer y trouver un objet rare), le joueur lance un d20 et ajoute sa valeur de Fortune. Plus le total est élevé, meilleur sera le butin obtenu.",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
+    },
+    {
+      "type": "card",
+      "id": "gestion-des-ressources-new-6-1756401692245",
+      "title": "Consommables",
+      "content": "<p>Contenu de la nouvelle section.</p>",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
     }
   ]
 },
@@ -5744,13 +5881,7 @@ article span[title]:hover::after {
       // Ensure dev mode is off
       document.body.className = 'dev-off';
       
-      // Debug: Check if collections data is loaded
-      console.log('🚀 Standalone mode - Data check:', {
-        COLLECTIONS: !!window.COLLECTIONS,
-        collectionsCount: window.COLLECTIONS?.collections?.length || 0,
-        OBJETS: !!window.OBJETS,
-        objetsCount: window.OBJETS?.objets?.length || 0
-      });
+      // Initialize in standalone mode with embedded data
       
       // Wait a bit to ensure all modules are loaded
       setTimeout(function() {
@@ -5826,7 +5957,7 @@ article span[title]:hover::after {
           this.autoEnableMJModeInDevelopment();
         }, 800);
       } catch (error) {
-        console.error('Failed to initialize JdrApp:', error);
+        // Silent error handling for initialization
       }
     },
 
@@ -5844,7 +5975,6 @@ article span[title]:hover::after {
           
           // Safety check - if MONSTRES is not an array, it might be page config
           if (!Array.isArray(monstres)) {
-            console.warn('window.MONSTRES is not an array, clearing corrupted data:', monstres);
             this.clearCorruptedMonsterData();
             monstres = [];
           }
@@ -5928,7 +6058,6 @@ article span[title]:hover::after {
           window.CUSTOM_PAGE_DESCRIPTIONS = { ...this.data.customPageDescriptions };
         } catch (error) {
           // Keep default values if file doesn't exist
-          console.log('Custom page descriptions file not found, using defaults');
           window.CUSTOM_PAGE_DESCRIPTIONS = { ...this.data.customPageDescriptions };
         }
 
@@ -5940,7 +6069,7 @@ article span[title]:hover::after {
             const pageData = await fetch(`data/${pageConfig.file}`).then(r => r.json());
             staticPagesData[pageConfig.id] = pageData;
           } catch (error) {
-            console.warn(`Failed to load static page ${pageConfig.id}:`, error);
+            // Silent handling for missing static pages
           }
         }
 
@@ -5972,7 +6101,6 @@ article span[title]:hover::after {
         // Initialize default filters for objects
         this.initializeDefaultFilters();
       } catch (error) {
-        console.error('Failed to load data:', error);
         throw error;
       }
     },
@@ -5993,7 +6121,6 @@ article span[title]:hover::after {
           }
         }
       } catch (error) {
-        console.error('Failed to load content:', error);
         throw error;
       }
     },
@@ -6059,21 +6186,18 @@ article span[title]:hover::after {
 
     // Clear corrupted localStorage data specifically for monsters
     clearCorruptedMonsterData() {
-      console.log('Clearing corrupted monster data from localStorage');
       const edits = JSON.parse(localStorage.getItem('jdr-bab-edits') || '{}');
       
       // Remove any MONSTRES data that might be corrupted
       if (edits.MONSTRES) {
         delete edits.MONSTRES;
         localStorage.setItem('jdr-bab-edits', JSON.stringify(edits));
-        console.log('Removed corrupted MONSTRES from localStorage');
       }
       
       // Also clear any other monster-related storage
       if (edits.monster) {
         delete edits.monster;
         localStorage.setItem('jdr-bab-edits', JSON.stringify(edits));
-        console.log('Removed corrupted monster data from localStorage');
       }
     },
 
@@ -6105,23 +6229,17 @@ article span[title]:hover::after {
           
         }
       } catch (error) {
-        console.error('Error initializing default filters:', error);
+        // Silent error handling for filter initialization
       }
     },
 
     // Validate data integrity on application startup
     validateDataIntegrity() {
-      // console.log('🔍 Validating data integrity on startup...');
-      
       try {
         // Validate monster data if available
         if (window.MONSTRES && Array.isArray(window.MONSTRES) && JdrApp.modules.images) {
           // Force sync monster images and paths
-          const correctedCount = JdrApp.modules.images.forceSyncMonsterImages();
-          
-          if (correctedCount > 0) {
-            // console.log(`✅ Startup validation: ${correctedCount} monster image paths corrected`);
-          }
+          JdrApp.modules.images.forceSyncMonsterImages();
         }
         
         // Validate UnifiedEditor if available
@@ -6129,10 +6247,8 @@ article span[title]:hover::after {
           JdrApp.modules.editor.validateAndRepairMonsterData();
         }
         
-        // console.log('✅ Data integrity validation completed');
-        
       } catch (error) {
-        console.error('❌ Error during data integrity validation:', error);
+        // Silent error handling for data validation
       }
     },
 
@@ -6165,19 +6281,14 @@ article span[title]:hover::after {
               }
               
             } else {
-              console.warn('⚠️ Router not ready yet, retrying in 1 second...');
+              // Router not ready yet, retry
               setTimeout(() => this.autoEnableMJModeInDevelopment(), 1000);
               return;
             }
             
-          } else {
-            console.log('ℹ️ MJ mode already active');
           }
-        } else {
-          console.log('📱 Standalone mode detected: MJ mode requires manual activation');
         }
       } catch (error) {
-        console.error('❌ Error during auto MJ mode enable:', error);
         // Retry once more after error
         setTimeout(() => this.autoEnableMJModeInDevelopment(), 2000);
       }
@@ -6190,6 +6301,84 @@ article span[title]:hover::after {
   } else {
     window.JdrApp.init();
   }
+
+})();
+// ============================================================================
+// JDR-BAB APPLICATION - CONSTANTS
+// ============================================================================
+
+(() => {
+  "use strict";
+
+  // ========================================
+  // UI CONSTANTS
+  // ========================================
+  window.UI_CONSTANTS = {
+    // Layout dimensions
+    SIDEBAR_WIDTH: 350,
+    SIDEBAR_WIDTH_TABLET: 320,
+    
+    // Image processing defaults
+    IMAGE_MAX_WIDTH: 800,
+    IMAGE_QUALITY: 0.85,
+    
+    // Timing constants (milliseconds)
+    TIMEOUTS: {
+      VALIDATION_DELAY: 500,
+      AUTO_MJ_DELAY: 800,
+      RENDER_DELAY: 100,
+      ROUTER_RETRY_DELAY: 1000,
+      ERROR_RETRY_DELAY: 2000,
+      DYNAMIC_CENTERING_DELAY: 50
+    },
+    
+    // Breakpoints
+    BREAKPOINTS: {
+      MOBILE: 480,
+      TABLET_PORTRAIT: 768,
+      TABLET_LANDSCAPE: 1024,
+      DESKTOP: 980
+    }
+  };
+
+  // ========================================
+  // ELEMENT COLORS
+  // ========================================
+  window.ELEMENT_COLORS = {
+    FEU: { color: '#ff6b35', weight: 'bold' },
+    EAU: { color: '#4682b4', weight: 'bold' },
+    TERRE: { color: '#8b4513', weight: 'bold' },
+    AIR: { color: '#87ceeb', weight: 'bold' },
+    DIVIN: { color: '#ffd700', weight: 'bold' },
+    MALEFIQUE: { color: '#8b008b', weight: 'bold' },
+    NEUTRE: { color: '#696969', weight: 'normal' }
+  };
+
+  // ========================================
+  // STORAGE KEYS
+  // ========================================
+  window.STORAGE_KEYS = {
+    EDITS: 'jdr-bab-edits',
+    LAST_MODIFIED: 'jdr-bab-last-modified',
+    MONSTER_BACKUPS: 'jdr-bab-monster-backups',
+    FILTER_SETTINGS: 'jdr-bab-filter-settings'
+  };
+
+  // ========================================
+  // DEFAULT VALUES
+  // ========================================
+  window.DEFAULT_VALUES = {
+    // Monster backup retention
+    MAX_MONSTER_BACKUPS: 10,
+    
+    // Filter defaults
+    DEFAULT_VISIBLE_TAGS: ['Arme', 'Armure', 'Bouclier', 'Consommable'],
+    
+    // Image defaults
+    DEFAULT_MONSTER_IMAGE: 'data/images/Monstres/foret/default-monster.png',
+    DEFAULT_SPELL_IMAGE: 'data/images/Sorts/default-spell.png',
+    DEFAULT_CLASS_IMAGE: 'data/images/Classes/default-class.png'
+  };
 
 })();
 // ============================================================================
@@ -6473,6 +6662,7 @@ article span[title]:hover::after {
         'monster-pointsdevie': 'pointsDeVie',
         'monster-armurephysique': 'armurePhysique', 
         'monster-esquive': 'esquive',
+        'monster-initiative': 'initiative',
         'monster-coupcritique': 'coupCritique',
         'monster-coupcritiquesorts': 'coupCritiqueSorts',
         'monster-resistancealterations': 'resistanceAlterations',
@@ -7121,7 +7311,6 @@ article span[title]:hover::after {
         const mainData = window[mainDataKey];
         
         if (!mainData) {
-          console.warn(`Main data key ${mainDataKey} not found for type ${type}`);
           return pageDesc.defaultValue;
         }
         
@@ -7135,9 +7324,6 @@ article span[title]:hover::after {
     }
 
     updatePageDescription(type, newDescription) {
-      // console.log('🔍 DEBUG updatePageDescription:', { type, newDescription });
-      // console.log('🔍 window.ContentTypes available:', !!window.ContentTypes);
-      // console.log('🔍 Available types:', Object.keys(window.ContentTypes || {}));
       
       // Ensure collections type exists (fallback injection)
       if (type === 'collections' && (!window.ContentTypes || !window.ContentTypes.collections)) {
@@ -7147,9 +7333,7 @@ article span[title]:hover::after {
       const config = window.ContentTypes[type];
       
       if (!config || !config.pageDescription) {
-        console.warn(`No page description config found for type: ${type}`);
-        // console.log('🔍 Config for type:', config);
-        // console.log('🔍 Full ContentTypes:', window.ContentTypes);
+        // No page description config found for type
         return false;
       }
       
@@ -7175,7 +7359,6 @@ article span[title]:hover::after {
           const mainData = window[mainDataKey];
           
           if (!mainData) {
-            console.error(`Main data key ${mainDataKey} not found for type ${type}`);
             return false;
           }
           
@@ -7189,7 +7372,6 @@ article span[title]:hover::after {
         
         return true;
       } catch (error) {
-        console.error(`Error updating page description for ${type}:`, error);
         return false;
       }
     }
@@ -7232,7 +7414,7 @@ article span[title]:hover::after {
         }
       };
       
-      console.log('✅ Collections type injected into ContentTypes');
+      // Collections type injected into ContentTypes
     }
   }
 
@@ -7400,12 +7582,14 @@ article span[title]:hover::after {
           <hr style="margin: 1.5rem 0 1rem 0; border: none; border-top: 2px solid var(--bronze); opacity: 0.3;">
           
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin: 1rem 0; font-size: 0.9em;">
+            <div>${this.buildEditableStatField('🎯 Initiative', this.data.initiative, 'monster-initiative', 'Initiative')}</div>
             <div>${this.buildEditableStatField('❤️ PV', this.data.pointsDeVie, 'monster-pointsdevie', 'Points de vie')}</div>
-            <div>${this.buildEditableStatField('🛡️ Armure', this.data.armurePhysique, 'monster-armurephysique', 'Armure physique')}</div>
             <div>${this.buildEditableStatField('⚡ Critique', this.data.coupCritique, 'monster-coupcritique', 'Coup critique')}</div>
-            <div>${this.buildEditableStatField('🏃 Esquive', this.data.esquive, 'monster-esquive', 'Esquive')}</div>
+            <div>${this.buildEditableStatField('🛡️ Armure', this.data.armurePhysique, 'monster-armurephysique', 'Armure physique')}</div>
             <div>${this.buildEditableStatField('🔮 Crit. Sorts', this.data.coupCritiqueSorts, 'monster-coupcritiquesorts', 'Critique sorts')}</div>
-            <div>${this.buildEditableStatField('🛡️ Rés. Alt.', this.data.resistanceAlterations, 'monster-resistancealterations', 'Résistance altérations')}</div>
+            <div>${this.buildEditableStatField('🏃 Esquive', this.data.esquive, 'monster-esquive', 'Esquive')}</div>
+            <div></div>
+            <div>${this.buildEditableStatField('✨ Rés. Alt.', this.data.resistanceAlterations, 'monster-resistancealterations', 'Résistance altérations')}</div>
           </div>
 
           <!-- Séparation après les stats principales -->
@@ -9429,7 +9613,6 @@ article span[title]:hover::after {
 
     // Force synchronization of all monster data
     forceSyncMonsterImages() {
-      // console.log('🔄 Force syncing monster images...');
       
       let syncCount = 0;
       
@@ -9444,7 +9627,6 @@ article span[title]:hover::after {
       
       this.ensureMonsterImageMappings();
       
-      // console.log(`✅ Force sync completed. ${syncCount} paths corrected.`);
       
       // Save changes
       if (JdrApp.modules.storage && JdrApp.modules.storage.saveChanges) {
@@ -10382,12 +10564,9 @@ article span[title]:hover::after {
       if (window.EventBus && window.Events) {
         EventBus.on(Events.EDITOR_TOGGLE, (payload) => {
           const currentHash = window.location.hash;
-          console.log('🔄 Router: Dev mode changed to:', payload.enabled, 'Current page:', currentHash);
-          
           // Refresh objects page specifically when dev mode changes
           if (currentHash === '#/objets') {
             setTimeout(() => {
-              console.log('🗺️ Router: Force refreshing objects page after dev mode change');
               // Force a complete refresh by setting the flag
               this._forceObjectsRefresh = true;
               this.renderObjectsPage();
@@ -10402,27 +10581,16 @@ article span[title]:hover::after {
       const page = hash || 'creation';
       const exists = JdrApp.utils.dom.$(`article[data-page="${page}"]`);
       
-      console.log(`🔍 parseRoute debug:`, {
-        hash,
-        page,
-        exists: !!exists,
-        existsValue: exists
-      });
       
       this.currentRoute = page;
       
       // Handle dynamic category routing
       // Fix: check if exists is falsy OR empty NodeList
       const shouldUseRouter = !exists || (exists.length === 0);
-      console.log(`🔧 Router decision: shouldUseRouter=${shouldUseRouter}, exists=${!!exists}, length=${exists?.length}`);
       
       if (shouldUseRouter) {
-        console.log(`🔍 Page element doesn't exist for: ${page}, trying dynamic route...`);
         if (this.handleDynamicRoute(page)) {
-          console.log(`✅ Dynamic route handled for: ${page}`);
           return; // Route was handled dynamically
-        } else {
-          console.log(`❌ Dynamic route NOT handled for: ${page}, showing creation`);
         }
       }
       
@@ -10430,8 +10598,6 @@ article span[title]:hover::after {
     },
 
     handleDynamicRoute(page) {
-      console.log(`🔄 handleDynamicRoute called for: ${page}`);
-      
       // Handle sorts-* routes
       if (page.startsWith('sorts-')) {
         return this.renderDynamicCategory('sorts', 'spell', page);
@@ -10444,13 +10610,11 @@ article span[title]:hover::after {
       
       // Handle single objets page (objects now use unified page with tag filtering)
       if (page === 'objets') {
-        console.log('🎯 Router: objets page requested');
         return this.renderObjectsPage();
       }
       
       // Handle collections-objets page
       if (page === 'collections-objets') {
-        console.log('🎯 Router: collections-objets page requested');
         return this.renderCollectionsObjectsPage();
       }
       
@@ -10510,15 +10674,10 @@ article span[title]:hover::after {
     },
     
     show(page) {
-      console.log(`👁️ show() called for page: ${page}`);
       document.querySelectorAll('article').forEach(a => a.classList.remove('active'));
       const target = document.querySelector(`article[data-page="${page}"]`);
-      console.log(`🎯 Target element found:`, !!target);
       if (target) {
         target.classList.add('active');
-        console.log(`✅ Added 'active' class to ${page}`);
-      } else {
-        console.error(`❌ No target element found for page: ${page}`);
       }
       
       document.querySelectorAll('.toc a').forEach(a => a.classList.remove('active'));
@@ -11027,30 +11186,17 @@ article span[title]:hover::after {
     },
 
     renderCollectionsObjectsPage() {
-      console.log('🔄 Starting renderCollectionsObjectsPage...');
-      console.log('📊 Data check:', {
-        COLLECTIONS: !!window.COLLECTIONS,
-        collectionsArray: window.COLLECTIONS?.collections?.length || 0,
-        OBJETS: !!window.OBJETS,
-        objetsArray: window.OBJETS?.objets?.length || 0,
-        isStandalone: !!window.STANDALONE_VERSION,
-        customDescriptions: !!JdrApp.data.customPageDescriptions
-      });
-
       // Safety check - if collections data is not available, try to wait a bit
       if (!window.COLLECTIONS || !window.COLLECTIONS.collections || window.COLLECTIONS.collections.length === 0) {
-        console.warn('⚠️ Collections data not ready, retrying in 100ms...');
         setTimeout(() => this.renderCollectionsObjectsPage(), 100);
         return false;
       }
       
       // Create or find the page element
       let pageElement = document.getElementById('collections-objets');
-      console.log('📄 Page element found:', !!pageElement);
       
       // If the page doesn't exist, create it
       if (!pageElement) {
-        // console.log('📄 Creating new page element...');
         pageElement = document.createElement('article');
         pageElement.id = 'collections-objets';
         pageElement.setAttribute('data-page', 'collections-objets');
@@ -11058,11 +11204,9 @@ article span[title]:hover::after {
         
         // Insert it into the views container
         const viewsContainer = document.querySelector('#views');
-        // console.log('📦 Views container found:', !!viewsContainer);
         
         if (viewsContainer) {
           viewsContainer.appendChild(pageElement);
-          // console.log('📄 Page element added to views');
         } else {
           console.error('Views container not found');
           return false;
@@ -11086,6 +11230,7 @@ article span[title]:hover::after {
               id="collection-search-input" 
               placeholder="Tapez le nom d'une collection..." 
               class="search-input"
+              value="Départ"
             />
             <button id="collection-search-btn" class="search-button">🔍 Rechercher</button>
           </div>
@@ -11106,11 +11251,7 @@ article span[title]:hover::after {
       `;
       
       // Insert content into the page
-      console.log('📝 Injecting HTML content into page element...');
-      console.log('📝 Content length:', collectionsContent.length);
       pageElement.innerHTML = collectionsContent;
-      console.log('📝 HTML injection completed');
-      console.log('📝 Page element HTML length after inject:', pageElement.innerHTML.length);
       this.setupCollectionsEventListeners();
       
       // Show collections grid in dev mode, auto-fill search in normal mode
@@ -11118,25 +11259,16 @@ article span[title]:hover::after {
       const searchInput = document.getElementById('collection-search-input');
       const isDevMode = this.isDevModeActive();
       
-      // console.log('🔧 Collections page debug:', {
-      //   isDevMode,
-      //   availableCollections: !!availableCollections,
-      //   bodyClass: document.body.className
-      // });
       
       // Generate collections dynamically
-      console.log('📋 About to generate collections grid...');
       this.generateCollectionsGrid();
-      console.log('✅ Collections grid generation completed');
       
       if (availableCollections) {
         if (isDevMode) {
-          // console.log('📋 Showing collections in dev mode');
           availableCollections.style.display = 'block';
           // In dev mode, show all collections without needing search
           // But keep the search functional for filtering
         } else {
-          // console.log('🔒 Hiding collections in normal mode');
           availableCollections.style.display = 'none';
           // In normal mode, collections are hidden - user must search manually
         }
@@ -11148,9 +11280,7 @@ article span[title]:hover::after {
       this.setupDevModeListener();
       
       // Show and activate page after content is inserted
-      console.log('👀 About to show page: collections-objets');
       this.show('collections-objets');
-      console.log('🎯 About to update active states for: collections-objets');
       this.updateActiveStates('collections-objets');
       
       // Ensure the page is visible regardless of dev mode
@@ -11884,19 +12014,11 @@ article span[title]:hover::after {
 
     generateCollectionsGrid() {
       if (!window.COLLECTIONS || !window.COLLECTIONS.collections) {
-        console.error('❌ No COLLECTIONS data available', {
-          windowCollections: !!window.COLLECTIONS,
-          collectionsArray: window.COLLECTIONS?.collections,
-          isStandalone: !!window.STANDALONE_VERSION
-        });
         return;
       }
       
       // Use defined collections instead of extracting from tags
       const collections = window.COLLECTIONS.collections;
-      
-      console.log('📚 Found collections:', collections.length);
-      console.log('📚 Collections data:', collections);
       
       // Collection icons are now defined in the collections data itself
       
@@ -12196,11 +12318,9 @@ article span[title]:hover::after {
         // Update visibility
         if (availableCollections) {
           if (isDevMode) {
-            // console.log('📋 Showing collections in dev mode');
-            availableCollections.style.display = 'block';
+              availableCollections.style.display = 'block';
           } else {
-            // console.log('🔒 Hiding collections in normal mode');
-            availableCollections.style.display = 'none';
+              availableCollections.style.display = 'none';
           }
         }
       }
@@ -12387,7 +12507,7 @@ article span[title]:hover::after {
         if (viewsContainer) {
           viewsContainer.appendChild(article);
         } else {
-          console.warn('Views container not found');
+          // Views container not found
           return;
         }
       }
@@ -12717,7 +12837,6 @@ article span[title]:hover::after {
       }
 
       // All legacy edit types have been migrated to 'generic'
-      console.warn('Unexpected edit type in parseEditContext:', editType);
       return null;
     }
 
@@ -13007,9 +13126,7 @@ article span[title]:hover::after {
           container: element,
           applyEdit: (content) => {
             const success = ContentFactory.updatePageDescription(contentType, content);
-            if (success) {
-              console.log(`✅ Updated page description for ${contentType}`);
-            } else {
+            if (!success) {
               console.error(`❌ Failed to update page description for ${contentType}`);
             }
             return success;
@@ -13211,10 +13328,6 @@ article span[title]:hover::after {
     }
 
     makeTagsEditable(editableElement, container) {
-      // console.log('🔍 DEBUG: makeTagsEditable called');
-      // console.log('🔍 DEBUG: editableElement:', editableElement);
-      // console.log('🔍 DEBUG: container:', container);
-      // console.log('🔍 DEBUG: currentEditSession:', this.currentEditSession);
       
       const originalHtml = editableElement.innerHTML;
       container.dataset.originalContent = originalHtml;
@@ -13222,40 +13335,22 @@ article span[title]:hover::after {
 
       // Get current tags from the object
       const objetName = this.currentEditSession.itemIdentifier;
-      // console.log('🔍 DEBUG: objetName:', objetName);
       
       const objet = window.OBJETS?.objets?.find(obj => obj.nom === objetName);
-      // console.log('🔍 DEBUG: found objet:', objet);
       
       const currentTags = objet?.tags || [];
       const availableTags = window.ContentTypes.objet.filterConfig.availableTags;
-      // console.log('🔍 DEBUG: currentTags:', currentTags);
-      // console.log('🔍 DEBUG: availableTags:', availableTags);
 
       // Create and show modal instead of inline editor
       this.showTagsModal(objetName, currentTags, availableTags);
     }
 
     showTagsModal(objetName, currentTags, availableTags) {
-      // console.log('🔍 DEBUG: showTagsModal called for object:', objetName);
-      // console.log('🔍 DEBUG: currentTags:', currentTags);
-      // console.log('🔍 DEBUG: availableTags:', availableTags);
-      
       // Remove any existing tags modal
       const existingModal = document.querySelector('#tagsEditModal');
       if (existingModal) {
-        // console.log('🔍 DEBUG: Removing existing modal');
         existingModal.remove();
       }
-
-      // Log DOM structure before creating modal
-      // console.log('🔍 DEBUG: Current body children count:', document.body.children.length);
-      // console.log('🔍 DEBUG: Body z-index elements:', Array.from(document.body.children).map(el => ({
-        // tagName: el.tagName,
-        // className: el.className,
-        // zIndex: window.getComputedStyle(el).zIndex,
-        // position: window.getComputedStyle(el).position
-      // })));
 
       // Use native HTML5 dialog element for proper z-index handling
       const modal = document.createElement('dialog');
@@ -13269,8 +13364,6 @@ article span[title]:hover::after {
         background: transparent !important;
         box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
       `;
-      
-      // console.log('🔍 DEBUG: Created dialog element:', modal);
 
       const checkboxesHTML = availableTags.map(tag => `
         <div style="display: flex; align-items: center; gap: 0.5rem; margin: 0.5rem 0; padding: 0.5rem; background: #f5f5f5; border-radius: 8px;">
@@ -13335,43 +13428,13 @@ article span[title]:hover::after {
       `;
 
       // Append to body and show modal using native dialog API
-      // console.log('🔍 DEBUG: Adding modal to body');
       document.body.appendChild(modal);
-      
-      // console.log('🔍 DEBUG: Modal added to DOM, calling showModal()');
-      // console.log('🔍 DEBUG: Modal computed styles before showModal:', {
-        // display: window.getComputedStyle(modal).display,
-        // position: window.getComputedStyle(modal).position,
-        // zIndex: window.getComputedStyle(modal).zIndex,
-        // visibility: window.getComputedStyle(modal).visibility
-      // });
-      
+
       // Use showModal() for proper top-level display
       try {
         modal.showModal();
-        // console.log('🔍 DEBUG: showModal() called successfully');
-        
-        // console.log('🔍 DEBUG: Modal computed styles after showModal:', {
-          // display: window.getComputedStyle(modal).display,
-          // position: window.getComputedStyle(modal).position,
-          // zIndex: window.getComputedStyle(modal).zIndex,
-          // visibility: window.getComputedStyle(modal).visibility
-        // });
-        
-        // console.log('🔍 DEBUG: Modal bounding rect:', modal.getBoundingClientRect());
-        
-        // Log all body children with their z-index after modal is shown
-        // console.log('🔍 DEBUG: All body children after modal shown:', Array.from(document.body.children).map(el => ({
-          // tagName: el.tagName,
-          // id: el.id,
-          // className: el.className,
-          // zIndex: window.getComputedStyle(el).zIndex,
-          // position: window.getComputedStyle(el).position,
-          // display: window.getComputedStyle(el).display
-        // })));
-        
       } catch (error) {
-        console.error('🔍 DEBUG: Error calling showModal():', error);
+        console.error('Error calling showModal():', error);
       }
 
       // Set up event handlers
@@ -13583,8 +13646,6 @@ article span[title]:hover::after {
       // Backup current value for rollback capability
       const originalValue = monster[propertyName];
       
-      // console.log('🔍 DEBUG: Updating monster', monster.nom, 'property', propertyName, 'from', originalValue, 'to', content);
-      
       try {
         // Update the monster property
         monster[propertyName] = content;
@@ -13600,13 +13661,11 @@ article span[title]:hover::after {
         if (propertyName === 'image' && JdrApp.modules.images) {
           const imageKey = `monster:${monster.nom}`;
           JdrApp.modules.images.setImage(imageKey, content);
-          console.log('📷 Updated image mapping for monster:', monster.nom);
         }
         
         // Create backup for crash recovery
         this.createMonsterBackup(monster);
         
-        console.log('✅ Monster update successful:', monster);
         return true;
         
       } catch (error) {
@@ -13632,7 +13691,6 @@ article span[title]:hover::after {
       // Backup current value for rollback capability
       const originalValue = table[propertyName];
       
-      
       try {
         // Update the table property
         table[propertyName] = content;
@@ -13640,7 +13698,6 @@ article span[title]:hover::after {
         // If we're updating the name, we need to update the session itemIdentifier
         // to prevent future saves from failing with the old name
         if (propertyName === 'nom' && this.currentEditSession && this.currentEditSession.itemIdentifier === originalValue) {
-          console.log('🔄 Updating session itemIdentifier from', this.currentEditSession.itemIdentifier, 'to', content);
           this.currentEditSession.itemIdentifier = content;
         }
         
@@ -13651,7 +13708,6 @@ article span[title]:hover::after {
           contentFactory.updateItem('tableTresor', 'tables', table.nom, propertyName, content);
         }
         
-        console.log('✅ Table tresor update successful:', table);
         return true;
         
       } catch (error) {
@@ -13668,7 +13724,6 @@ article span[title]:hover::after {
       const success = ContentFactory.updatePageDescription(session.pageType, content);
       
       if (success) {
-        console.log(`✅ Updated page description for ${session.pageType}: "${content.substring(0, 50)}${content.length > 50 ? '...' : ''}"`);
         return true;
       } else {
         console.error(`❌ Failed to update page description for ${session.pageType}`);
@@ -13832,7 +13887,6 @@ article span[title]:hover::after {
             jsonCategory = 'STATIC_PAGES';
             break;
           default:
-            console.warn('Unknown content type:', session.contentType);
             return false;
         }
         
@@ -13907,10 +13961,9 @@ article span[title]:hover::after {
     saveStaticPageToJson(jsonData, session, content) {
       const pageData = jsonData[session.itemIdentifier];
       if (!pageData?.sections) {
-        console.warn('Page data or sections not found for:', session.itemIdentifier);
+        console.error('Page data or sections not found for:', session.itemIdentifier);
         return false;
       }
-
 
       // Generic search by section ID or special cases
       const updateSection = (sections) => {
@@ -13963,7 +14016,7 @@ article span[title]:hover::after {
         return true;
       }
 
-      console.warn('Section not found for editSection:', session.editSection);
+      console.error('Section not found for editSection:', session.editSection);
       return false;
     }
 
@@ -14197,7 +14250,6 @@ article span[title]:hover::after {
 
       const context = this.parseEditContext(element);
       if (!context) {
-        console.warn('Unable to parse edit context for element:', element);
         return false;
       }
 
@@ -14497,7 +14549,6 @@ article span[title]:hover::after {
       // Find the display and selector sections
       const sectionContainer = element.closest('.monster-element-section, .spell-element-section');
       if (!sectionContainer) {
-        console.warn('Could not find element section container');
         return false;
       }
 
@@ -14505,7 +14556,6 @@ article span[title]:hover::after {
       const selectorSection = sectionContainer.querySelector('.monster-element-selector, .spell-element-selector');
       
       if (!displaySection || !selectorSection) {
-        console.warn('Could not find display or selector sections');
         return false;
       }
 
@@ -14790,7 +14840,7 @@ article span[title]:hover::after {
           window.MonsterBackups = new Map();
         }
         
-        // Keep only last 5 backups per monster
+        // Keep only last MAX_MONSTER_BACKUPS backups per monster
         const backupKey = monster.nom;
         const currentBackups = window.MonsterBackups.get(backupKey) || [];
         
@@ -14800,14 +14850,15 @@ article span[title]:hover::after {
         };
         
         currentBackups.push(backup);
-        if (currentBackups.length > 5) {
+        const maxBackups = window.DEFAULT_VALUES?.MAX_MONSTER_BACKUPS || 10;
+        if (currentBackups.length > maxBackups) {
           currentBackups.shift(); // Remove oldest
         }
         
         window.MonsterBackups.set(backupKey, currentBackups);
         
       } catch (error) {
-        console.warn('Failed to create monster backup:', error);
+        // Ignore backup failures - not critical
       }
     }
 
@@ -14843,7 +14894,6 @@ article span[title]:hover::after {
           contentFactory.refreshData();
         }
         
-        console.log('✅ Monster recovered from backup:', monsterName, backup.timestamp);
         return true;
         
       } catch (error) {
@@ -14855,7 +14905,6 @@ article span[title]:hover::after {
     // Global validation and repair of monster data
     validateAndRepairMonsterData() {
       if (!window.MONSTRES || !Array.isArray(window.MONSTRES)) {
-        console.warn('No monster data to validate');
         return 0;
       }
       
@@ -14875,7 +14924,6 @@ article span[title]:hover::after {
             if (fieldConfig.type === 'number') {
               if (typeof monster[fieldName] !== 'number' || isNaN(monster[fieldName])) {
                 const defaultValue = contentTypes.defaultValues?.[fieldName] || 0;
-                console.warn(`🔧 Repairing ${monster.nom}.${fieldName}: ${monster[fieldName]} -> ${defaultValue}`);
                 monster[fieldName] = defaultValue;
                 repairCount++;
               }
@@ -14899,8 +14947,6 @@ article span[title]:hover::after {
       });
       
       if (repairCount > 0) {
-        console.log(`🔧 Repaired ${repairCount} monster data issues`);
-        
         // Save repaired data
         if (JdrApp.modules.storage && JdrApp.modules.storage.saveChanges) {
           JdrApp.modules.storage.saveChanges(true);
@@ -15442,15 +15488,6 @@ article span[title]:hover::after {
       }
     },
 
-    createImageBackdrop() {
-      // Méthode obsolète - redirigée vers la nouvelle approche
-      console.warn('createImageBackdrop is deprecated, use showEnlargedImage instead');
-    },
-
-    removeImageBackdrop() {
-      // Méthode obsolète - redirigée vers la nouvelle approche
-      this.closeEnlargedImage();
-    },
 
     saveChangesToStorage() {
       try {
@@ -15458,7 +15495,7 @@ article span[title]:hover::after {
         localStorage.setItem('jdr-bab-last-modified', Date.now().toString());
         EventBus.emit(Events.STORAGE_SAVE);
       } catch (error) {
-        console.error('Failed to save changes:', error);
+        // Failed to save changes
       }
     },
 
@@ -15497,10 +15534,6 @@ article span[title]:hover::after {
       }
     },
 
-    // Legacy methods for backward compatibility
-    makeEditableSection(element) {
-      return UnifiedEditor.startEdit(element);
-    },
 
     saveAllEdits() {
       return UnifiedEditor.saveAllEdits();
@@ -15710,7 +15743,7 @@ article span[title]:hover::after {
       
       this.setupEventListeners();
       this.initialized = true;
-      console.log('📊 TablesTresorsManager initialized');
+      // TablesTresorsManager initialized
     }
 
     setupEventListeners() {
@@ -16040,7 +16073,7 @@ article span[title]:hover::after {
         } else {
           // Trouver l'index de la fourchette à modifier (pas optimal mais fonctionne)
           // Pour une vraie app, il faudrait passer l'index via les données du modal
-          console.log('Mode modification - non implémenté complètement dans cette demo');
+          // Mode modification - non implémenté complètement dans cette demo
         }
 
         // Sauvegarder et regénérer la page
@@ -16048,7 +16081,7 @@ article span[title]:hover::after {
         this.refreshTablesTresorsPage();
         this.closeAllModals();
         
-        console.log('Fourchette sauvegardée avec succès');
+        // Fourchette sauvegardée avec succès
 
       } catch (error) {
         console.error('Erreur lors de la sauvegarde:', error);
@@ -16078,7 +16111,7 @@ article span[title]:hover::after {
         this.saveToStorage();
         this.refreshTablesTresorsPage();
         
-        console.log('Fourchette supprimée avec succès');
+        // Fourchette supprimée avec succès
 
       } catch (error) {
         console.error('Erreur lors de la suppression:', error);
@@ -18870,14 +18903,7 @@ article span[title]:hover::after {
       }
       
       const pageId = visibleArticle ? visibleArticle.dataset.page : null;
-      // console.log('🔍 DEBUG getCurrentPageId: Found visible article:', !!visibleArticle);
-      // console.log('🔍 DEBUG getCurrentPageId: Page ID:', pageId);
       if (visibleArticle) {
-        // console.log('🔍 DEBUG getCurrentPageId: Article attributes:', {
-        //   'data-static-page': visibleArticle.dataset.staticPage,
-        //   'data-page': visibleArticle.dataset.page,
-        //   'data-page-title': visibleArticle.dataset.pageTitle
-        // });
       }
       return pageId;
     },
@@ -18895,13 +18921,9 @@ article span[title]:hover::after {
     // Save new section to JSON data
     saveNewSectionToJSON(sectionId, title, content) {
       const pageId = this.getCurrentPageId();
-      // console.log('🔍 DEBUG SAVE: getCurrentPageId() returned:', pageId);
-      // console.log('🔍 DEBUG SAVE: Available pages in STATIC_PAGES:', Object.keys(window.STATIC_PAGES || {}));
       
       if (!pageId || !window.STATIC_PAGES || !window.STATIC_PAGES[pageId]) {
-        console.warn('Cannot save new section - page not found:', pageId);
-        console.warn('window.STATIC_PAGES exists:', !!window.STATIC_PAGES);
-        console.warn('pageId exists in STATIC_PAGES:', pageId && window.STATIC_PAGES && !!window.STATIC_PAGES[pageId]);
+        // Cannot save new section - page not found
         return false;
       }
 
@@ -18975,8 +18997,6 @@ article span[title]:hover::after {
           }
         }
         
-        console.error(`❌ ERREUR: Section "${sectionId}" introuvable pour suppression`);
-        // console.log('🔍 Sections disponibles:', pageData.sections.map(s => ({id: s.id, title: s.title})));
         return false;
       }
     },
@@ -20005,26 +20025,20 @@ article span[title]:hover::after {
     },
 
     showOnlyObjectById(objectId) {
-      // console.log('🔍 showOnlyObjectById called with ID:', objectId);
       const container = document.querySelector('#objets-container');
       if (!container) {
-        // console.log('🔍 No objets-container found');
         return;
       }
 
       const allCards = container.querySelectorAll('.card');
-      // console.log('🔍 Found', allCards.length, 'cards in container');
       let foundCard = null;
 
       allCards.forEach((card, index) => {
         const objetName = card.dataset.objetName;
-        // console.log(`🔍 Card ${index}: objetName = "${objetName}"`);
         if (objetName) {
           // Find the object by name to get its number
           const obj = window.OBJETS?.objets?.find(o => o.nom === objetName);
-          // console.log(`🔍 Found object:`, obj);
           if (obj && obj.numero === objectId) {
-            // console.log('🔍 MATCH! Showing card for:', objetName);
             card.style.display = '';
             foundCard = card;
           } else {
@@ -20033,7 +20047,6 @@ article span[title]:hover::after {
         }
       });
 
-      // console.log('🔍 foundCard:', foundCard);
 
       // Scroll to the found card if it exists
       if (foundCard) {

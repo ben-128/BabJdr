@@ -94,6 +94,7 @@ function buildStandalone() {
   const jsFiles = [
     // Core framework files first - JdrApp namespace must be very first
     'js/core.js',                // Core JdrApp namespace - MUST BE FIRST
+    'js/config/constants.js',     // Constants
     'js/config/contentTypes.js',  // Configuration 
     'js/core/EventBus.js',        // Event system
     'js/core/BaseEntity.js',      // Entity base class

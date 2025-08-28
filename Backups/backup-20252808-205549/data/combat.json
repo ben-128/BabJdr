@@ -1,0 +1,50 @@
+{
+  "page": "combat",
+  "title": "Combat",
+  "sections": [
+    {
+      "type": "intro",
+      "content": "Lorsqu'un combat commence, on compare l'Initiative de tous les participants (héros et monstres), et on détermine alors un ordre de tour. Celui qui a la plus grande initiative commence, puis c'est au tour du second avec la plus grande initiative , etc...\n\n<br><br>Chaque participant joue son tour (déplacement et actions), puis on passe au suivant. Lorsque tous les monstres ou tous les héros sont morts ou hors d'état de se battre, le combat s'arrète."
+    },
+    {
+      "type": "card",
+      "id": "combat-new-2-1756401371776",
+      "title": "Déplacement",
+      "content": "À chaque tour, un héros peut se déplacer de 9 mètres (plus s’il bénéficie de bonus), en plus de ses actions.\n<br><br>Certains terrains, comme la boue ou le sable, sont considérés comme des terrains difficiles : la vitesse y est alors réduite de moitié.\n<br><br>Un héros ou un monstre ne peut pas traverser un adversaire occupant une largeur de 3 mètres. Si plusieurs ennemis se tiennent côte à côte, ils forment un véritable mur infranchissable.",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
+    },
+    {
+      "type": "card",
+      "id": "combat-new-3-1756401384086",
+      "title": "Actions",
+      "content": "Chaque tour, un héros dispose d'une <b>action principale</b>, pour effectuer une attaque physique ou un sort.\nElle est perdue si elle n'est pas utilisé pendant son tour. Elle permet également de faire toute action qui nécéssite un test de compétence (ouvrir une porte, casser un rocher...).\n\n<br><br>Il dispose également d'une <b>action secondaire</b>, qui permet de faire un certains nombre de choses :\n<br>- Sauter.\n<br>- Utiliser un objet.\n<br>- Changer d'arme.\n<br>Certains dons ou abilités permettent également d'effectuer d'autres choses en utilisant l'action secondaire.\n\n<br><br> Les héros peuvent effectuer leur déplacement, action principale et secondaire dans l'ordre qui leur plait.",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
+    },
+    {
+      "type": "card",
+      "id": "combat-new-4-1756401409186",
+      "title": "Attaques, sorts, armure",
+      "content": "Pour effectuer une attaque physique : \n<br>- Il faut être à bonne portée (1.5m pour une arme de mélée, ou indiquée sur l'arme sinon).\n<br>- Il faut effectuer un saut pour toucher un monstre volant\n<br><br>Ensuite l'attaquant lance un d20. Si le résultat est inferieur ou égal à (1 + Esquive) du défenseur, l'attaque rate. Si le resultat est supérieur ou égal à (20 - Chance de Critique) de l'attaque, l'attaque est un coup critique et les dégats physiques sont doublés.\n<br><br> Si l'attaque est réussit, on soustrait l'armure physique aux dégats de l'attaque, puis avec le resultat on diminue les points de vie du défenseur. Si ses points de vie passent à 0, il meurt.",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
+    },
+    {
+      "type": "card",
+      "id": "combat-new-5-1756401438556",
+      "title": "Coup critique et esquive",
+      "content": "<hr><br><br><strong>Chance de coup critique (physique) </strong> : Lors d'une attaque physique, le lanceur de l'attaque lance un d20. S'il fait 20, alors les dégats physiques (et seulement physiques) sont doublés.<br> Augmenter les chances de coup critique réduit la valeur du dé nécéssaire pour faire un critique. Par exemple, avec 3 de chance de coup critique, si le dé fait de 17 à 20, l'attaque est critique.\n\n<br><br><hr><br><strong>Chance de coup critique (sorts et consommables)</strong> : Lorsque un héros ou un monstre lance un sort ou utilise un consommable, il lance un d20. S'il fait 20, alors le sort est critique, chaque sort/consommable ayant un effet critique différent (indiqué dans sa description).<br> Augmenter les chances de coup critique des sorts et consommables réduit la valeur du dé nécéssaire pour faire un critique. Par exemple, avec 3 de chance de coup critique, si le dé fait de 17 à 20, le resultat est critique. \n\n<br><br><hr><br><strong>Esquive </strong> : Lors d'une attaque physique, ou d'un sort sans effet si esquive (indiqué dans la fiche du sort), lorsque le lanceur lance son d20, si le resultat est 1, l'attaque est sans effet. Avoir de l'esquive pour la cible de l'attaque augmente la valeur du dé jusqu'a laquelle l'attaque échoue. Par exemple, avec 3 d'esquive, si le dé fait 4 ou moins, l'attaque échoue. La valeur d'esquive ne peut jamais dépasser 9, quel que soit l'equipement ou bonus d'un joueur ou monstre.",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
+    },
+    {
+      "type": "card",
+      "id": "combat-new-6-1756401461053",
+      "title": "Mort",
+      "content": "Lorsque les points de vie d'un héros passe sous la barre des 0 points de vie, il meurt. Le joueur devra alors créer un nouveau personnage.\n<br><br>Il se murmure que certaines magies très puissantes sont capables de ressussiter un héros mort s'il elle est pratiquée peu de temps aprés la mort.",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
+    }
+  ]
+}

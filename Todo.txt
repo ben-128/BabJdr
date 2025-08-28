@@ -1,7 +1,30 @@
 
-- faire pour les objets, des recherches d'id, et recherche de magasin (dont celui départ)
+# JDR-BAB - Task List
 
+## ✅ Completed
+- [x] Mobile UI fixes (responsive design for all platforms)
+- [x] Console log cleanup (production-ready code)
+- [x] Code deduplication and refactoring
+- [x] Backup file cleanup
+- [x] Constants extraction and organization
 
-Recherchez et explorez des collections d'objets.
-<br>Par exemple, tapez <b>Départ</b> pour voir les objets disponnibles lors de la création du personnage.
-<br>Les collections sont cachés de base pour éviter le <b>spoil</b>.
+## 🚧 In Progress
+- [ ] Character page implementation
+- [ ] Documentation updates (CLAUDE.md, README.md)
+
+## 📋 Planned Features
+- [ ] Unit tests for core modules  
+- [ ] Performance monitoring for build process
+- [ ] Automated backup rotation
+- [ ] Enhanced error handling and user feedback
+
+## 🐛 Bug Fixes
+- [ ] (None currently identified)
+
+## 📚 Technical Debt
+- [ ] Add JSDoc comments to public methods
+- [ ] Consider implementing automated testing framework
+- [ ] Review and optimize image loading strategy
+
+---
+*Last updated: 2025-08-28*

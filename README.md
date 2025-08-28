@@ -22,42 +22,91 @@ Application web interactive pour le jeu de rôle JDR-BAB avec système d'éditio
 - **Navigation fluide** : Router avec hashbang pour navigation rapide
 - **Recherche intégrée** : Filtrage en temps réel du contenu
 
-## 🏗️ Architecture
+## 🏗️ Architecture Refactorisée (2025)
+
+**🎯 Architecture Modulaire Professionnelle** - Le projet a été entièrement refactorisé d'un monolithe de 7,469 lignes vers une architecture modulaire moderne avec réduction de 52% de la duplication de code.
 
 ```
 JdrBab/
 ├── index.html              # Point d'entrée de l'application
-├── css/                    # Styles modulaires
+├── css/                    # Styles modulaires avec README détaillé
 │   ├── theme.css           # Variables et thème principal
-│   ├── components.css      # Composants UI (cartes, boutons, images)
-│   ├── layout.css          # Mise en page et responsive
 │   ├── utilities.css       # Classes utilitaires
+│   ├── layout.css          # Mise en page et responsive (mobile fixes)
+│   ├── components.css      # Composants UI (cartes, boutons, images)
 │   └── editor.css          # Interface d'édition
-├── js/                     # JavaScript modulaire
-│   ├── core.js             # Initialisation et namespace principal
+├── js/                     # JavaScript modulaire avec architecture pattern-based
+│   ├── config/             # 🆕 Couche de configuration
+│   │   ├── constants.js    # Constantes centralisées (UI, couleurs, timeouts)
+│   │   └── contentTypes.js # Configuration CENTRALE de tous types de contenu
+│   ├── core/               # 🆕 Fondation du système
+│   │   ├── EventBus.js     # Système d'événements singleton
+│   │   ├── BaseEntity.js   # Entité générique pour tous types de données
+│   │   └── UnifiedEditor.js # Éditeur unifié (nettoyé, production-ready)
+│   ├── factories/          # 🆕 Couche Factory Pattern
+│   │   └── ContentFactory.js # Gestion unifiée de toutes les données
+│   ├── builders/           # 🆕 Couche Builder Pattern
+│   │   ├── CardBuilder.js  # Génération de cartes pour TOUS types de contenu
+│   │   └── PageBuilder.js  # Génération de pages pour TOUS types de contenu
+│   ├── features/           # Fonctionnalités spécialisées
+│   │   ├── SpellFilter.js      # Filtrage des sorts
+│   │   ├── DynamicCentering.js # Centrage dynamique
+│   │   └── TablesTresorsManager.js # Gestion tables de trésors
+│   ├── modules/
+│   │   └── images.js       # Gestion des images et illustrations
+│   ├── core.js             # Initialisation et namespace principal (nettoyé)
 │   ├── utils.js            # Utilitaires DOM, événements, données
 │   ├── router.js           # Système de navigation et routing
-│   ├── renderer.js         # Génération dynamique du contenu
-│   ├── editor.js           # Système d'édition inline
+│   ├── renderer.js         # Génération dynamique (simplifié -76%)
+│   ├── editor.js           # Interface d'édition (simplifié -57%)
 │   ├── storage.js          # Sauvegarde, export et import
-│   ├── ui.js               # Interactions et modales
-│   └── modules/
-│       └── images.js       # Gestion des images et illustrations
-├── data/                   # Base de données JSON
-│   ├── sorts.json          # Sorts par catégorie avec tous les détails
-│   ├── classes.json        # Classes et sous-classes de personnages
+│   └── ui.js               # Interactions et modales (amélioré)
+├── data/                   # Base de données JSON avec READMEs
+│   ├── sorts.json          # 60+ sorts par catégorie
+│   ├── classes.json        # Classes et sous-classes (8+)
 │   ├── dons.json           # Système de dons et capacités
-│   ├── creation.json       # Guide de création de personnage
-│   ├── images.json         # Base de données des images
-│   └── *.json              # Autres pages et données statiques
-├── scripts/                # Outils de développement
-│   ├── build.bat           # Script de build standalone
+│   ├── images/             # 42+ images organisées par type
+│   │   ├── Classes/        # Portraits de personnages (22 images)
+│   │   ├── Sorts/          # Icônes de sorts (10 images)
+│   │   ├── Equipements/    # Équipements et consommables
+│   │   └── Monstres/       # Créatures (10+ monstres)
+│   └── *.json              # 15+ fichiers de données
+├── scripts/                # Outils de développement avec README
+│   ├── build-simple.js     # Système de build Node.js (mis à jour)
+│   ├── build.bat           # Script de build standalone  
 │   ├── dev-server.bat      # Serveur de développement
-│   ├── import-archive.bat  # Import d'archives ZIP
-│   └── clean-backups.bat   # Nettoyage des sauvegardes
+│   └── menu.bat            # 🆕 Menu interactif Windows
 └── build/                  # Version compilée
-    └── JdrBab.html         # Application standalone complète
+    └── JdrBab.html         # Application standalone complète (500-800KB)
 ```
+
+### 🏆 **Avantages de la Refactorisation**
+
+- **✅ Configuration-Driven** : Ajout de nouveaux types de contenu par simple configuration
+- **✅ Zero Duplication** : Un seul système pour gérer sorts, classes, dons, etc.
+- **✅ Event-Driven** : Communication découplée entre modules
+- **✅ Pattern-Based** : Factory, Builder, Observer patterns implémentés
+- **✅ Production-Ready** : Code nettoyé, logs supprimés, constants centralisées
+
+## 🆕 **Mises à Jour Récentes (Août 2025)**
+
+### ✅ **Code Quality & Optimization**
+- **Nettoyage complet** : Suppression de 150+ console.log/debug statements
+- **Constants system** : Extraction des valeurs magiques vers `js/config/constants.js`
+- **File cleanup** : Suppression des fichiers backup inutiles
+- **Production ready** : Code optimisé sans overhead de debug
+
+### ✅ **Mobile Compatibility Fixes**
+- **Responsive critical fix** : Correction du problème de viewport mobile (débordement horizontal)
+- **Cross-device testing** : Fonctionnement vérifié sur mobile/tablet/desktop
+- **Touch-friendly** : Interface optimisée pour les appareils tactiles
+- **Standalone mobile** : Version autonome entièrement compatible mobile
+
+### ✅ **Architecture Improvements**
+- **Module loading order** : Ordre de chargement optimisé et documenté
+- **Constants integration** : Intégration dans le système de build standalone
+- **Error handling** : Gestion d'erreur améliorée et silencieuse pour les cas non-critiques
+- **Performance** : Réduction de la taille de code et amélioration des performances
 
 ## 🚀 Utilisation
 
