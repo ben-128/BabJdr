@@ -323,6 +323,20 @@ body.dev-on .tags-manager-btn {
   position: relative !important;
 }
 
+/* Limit objects to max 4 per row in dev mode */
+body.dev-on #objets-container {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  max-width: 1300px; /* Ensures max 4 columns on most screens */
+}
+
+/* Force max 4 columns on larger screens in dev mode */
+@media (min-width: 1600px) {
+  body.dev-on #objets-container {
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 1300px;
+  }
+}
+
 /* ULTIMATE SOLUTION: Force dimensions to prevent 0x0 collapse */
 html body.dev-on .edit-btn,
 html body.dev-on button[class*="edit"],

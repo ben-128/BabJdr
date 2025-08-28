@@ -828,7 +828,24 @@
       const spell = category.sorts?.find(s => s.nom === session.itemIdentifier);
       if (!spell) return false;
       
-      spell[session.editSection] = content;
+      // Use editMapping if available, otherwise use editSection directly
+      const config = session.config || window.ContentTypes.spell;
+      const propertyName = config.editMapping?.[session.editSection] || session.editSection;
+      
+      // If we're updating the name, we need to update the container's data-spell-name attribute
+      if (propertyName === 'nom') {
+        const oldName = spell.nom;
+        spell[propertyName] = content;
+        
+        // Update the data-spell-name attribute on the card container
+        const spellCard = session.container.closest('.card[data-spell-name]');
+        if (spellCard && spellCard.dataset.spellName === oldName) {
+          spellCard.dataset.spellName = content;
+        }
+      } else {
+        spell[propertyName] = content;
+      }
+      
       return true;
     }
 
@@ -840,7 +857,24 @@
       const don = category.dons?.find(d => d.nom === session.itemIdentifier);
       if (!don) return false;
       
-      don[session.editSection] = content;
+      // Use editMapping if available, otherwise use editSection directly
+      const config = session.config || window.ContentTypes.don;
+      const propertyName = config.editMapping?.[session.editSection] || session.editSection;
+      
+      // If we're updating the name, we need to update the container's data-don-name attribute
+      if (propertyName === 'nom') {
+        const oldName = don.nom;
+        don[propertyName] = content;
+        
+        // Update the data-don-name attribute on the card container
+        const donCard = session.container.closest('.card[data-don-name]');
+        if (donCard && donCard.dataset.donName === oldName) {
+          donCard.dataset.donName = content;
+        }
+      } else {
+        don[propertyName] = content;
+      }
+      
       return true;
     }
 
@@ -853,7 +887,20 @@
       const config = session.config || window.ContentTypes.objet;
       const propertyName = config.editMapping?.[session.editSection] || session.editSection;
       
-      objet[propertyName] = content;
+      // If we're updating the name, we need to update the container's data-objet-name attribute
+      if (propertyName === 'nom') {
+        const oldName = objet.nom;
+        objet[propertyName] = content;
+        
+        // Update the data-objet-name attribute on the card container
+        const objetCard = session.container.closest('.card[data-objet-name]');
+        if (objetCard && objetCard.dataset.objetName === oldName) {
+          objetCard.dataset.objetName = content;
+        }
+      } else {
+        objet[propertyName] = content;
+      }
+      
       return true;
     }
 
@@ -873,8 +920,20 @@
       const originalValue = monster[propertyName];
       
       try {
-        // Update the monster property
-        monster[propertyName] = content;
+        // If we're updating the name, we need to update the container's data-monster-name attribute
+        if (propertyName === 'nom') {
+          const oldName = monster.nom;
+          monster[propertyName] = content;
+          
+          // Update the data-monster-name attribute on the card container
+          const monsterCard = session.container.closest('.card[data-monster-name]');
+          if (monsterCard && monsterCard.dataset.monsterName === oldName) {
+            monsterCard.dataset.monsterName = content;
+          }
+        } else {
+          // Update the monster property
+          monster[propertyName] = content;
+        }
         
         // Force synchronization using ContentFactory to prevent data reversion
         const contentFactory = window.ContentFactory?.getInstance ? window.ContentFactory.getInstance() : null;
@@ -918,13 +977,25 @@
       const originalValue = table[propertyName];
       
       try {
-        // Update the table property
-        table[propertyName] = content;
-        
-        // If we're updating the name, we need to update the session itemIdentifier
-        // to prevent future saves from failing with the old name
-        if (propertyName === 'nom' && this.currentEditSession && this.currentEditSession.itemIdentifier === originalValue) {
-          this.currentEditSession.itemIdentifier = content;
+        // If we're updating the name, we need to update the container's data-table-tresor-name attribute
+        if (propertyName === 'nom') {
+          const oldName = table.nom;
+          table[propertyName] = content;
+          
+          // Update the data-table-tresor-name attribute on the card container
+          const tableTresorCard = session.container.closest('.card[data-table-tresor-name]');
+          if (tableTresorCard && tableTresorCard.dataset.tableTresorName === oldName) {
+            tableTresorCard.dataset.tableTresorName = content;
+          }
+          
+          // If we're updating the name, we need to update the session itemIdentifier
+          // to prevent future saves from failing with the old name
+          if (this.currentEditSession && this.currentEditSession.itemIdentifier === originalValue) {
+            this.currentEditSession.itemIdentifier = content;
+          }
+        } else {
+          // Update the table property
+          table[propertyName] = content;
         }
         
         // Force synchronization using ContentFactory to prevent data reversion
@@ -992,7 +1063,24 @@
       const subclass = classe.sousClasses?.find(sc => sc.nom === session.itemIdentifier);
       if (!subclass) return false;
       
-      subclass[session.editSection] = content;
+      // Use editMapping if available, otherwise use editSection directly
+      const config = session.config || window.ContentTypes.subclass;
+      const propertyName = config.editMapping?.[session.editSection] || session.editSection;
+      
+      // If we're updating the name, we need to update the container's data-subclass-name attribute
+      if (propertyName === 'nom') {
+        const oldName = subclass.nom;
+        subclass[propertyName] = content;
+        
+        // Update the data-subclass-name attribute on the card container
+        const subclassCard = session.container.closest('.card[data-subclass-name]');
+        if (subclassCard && subclassCard.dataset.subclassName === oldName) {
+          subclassCard.dataset.subclassName = content;
+        }
+      } else {
+        subclass[propertyName] = content;
+      }
+      
       return true;
     }
 
