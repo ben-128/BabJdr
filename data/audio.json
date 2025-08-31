@@ -5,7 +5,7 @@
   "sections": [
     {
       "type": "intro",
-      "content": "Gestion des musiques d'ambiance pour enrichir vos parties de JDR. Les musiques changent automatiquement selon les pages visitées et s'adaptent aux enceintes Bluetooth connectées.<br><br><strong>Note :</strong> Les contrôles audio apparaissent dans le coin inférieur droit une fois l'audio activé."
+      "content": "Gestion des musiques d'ambiance pour enrichir vos parties de JDR.<br><br><strong>💡 Important :</strong> La plupart des navigateurs bloquent l'audio automatique. Cliquez sur le bouton 'Lecture' pour démarrer la musique. Une fois autorisée, la musique continuera automatiquement."
     },
     {
       "type": "card",
@@ -18,12 +18,6 @@
       "id": "playlists-card", 
       "title": "Playlists disponibles",
       "content": "<div id='playlists-list'><p>Les playlists se chargent automatiquement...</p></div>"
-    },
-    {
-      "type": "card",
-      "id": "page-mapping-card",
-      "title": "Mapping page → playlist",
-      "content": "<div id='page-mapping-list'><p>Le mapping se charge automatiquement...</p></div>"
     }
   ]
 }

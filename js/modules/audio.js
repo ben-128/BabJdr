@@ -22,7 +22,7 @@
         await this.loadAudioConfig();
         this.setupEventListeners();
         this.restoreUserPreferences();
-        this.createAudioControls();
+        // Ne plus créer les contrôles flottants automatiquement
       } catch (error) {
         console.warn('Audio module initialization failed:', error);
       }
@@ -38,23 +38,44 @@
           window.AUDIO_CONFIG = this.config;
         }
         
+        // Générer automatiquement les playlists depuis la structure de dossiers
+        this.generatePlaylistsFromFolders();
+        
         this.volume = this.config.defaultVolume || 0.3;
         this.isEnabled = localStorage.getItem('jdr-audio-enabled') !== 'false';
       } catch (error) {
         console.warn('Failed to load audio config:', error);
-        this.config = { playlists: {}, pageMapping: {} };
+        this.config = { playlists: {}, folderIcons: {} };
       }
     },
 
-    setupEventListeners() {
-      // Écouter les changements de page pour changer la musique
-      EventBus.on(Events.PAGE_CHANGE || 'page-change', (payload) => {
-        if (this.isEnabled && payload.page) {
-          this.handlePageChange(payload.page);
-        }
-      });
+    generatePlaylistsFromFolders() {
+      // Structure de dossiers basée sur l'exploration précédente
+      const folderStructure = {
+        'Auberge': ['Auberge1.mp3', 'Auberge2.mp3', 'Auberge3.mp3', 'Auberge4.mp3'],
+        'Creation': ['Creation1.mp3', 'Creation2.mp3', 'Creation3.mp3'],
+        'Foret': ['BossForet1.mp3', 'BossForet2.mp3', 'Foret.mp3', 'Foret2.mp3', 'Foret3.mp3'],
+        'Mine': ['BossMine1.mp3', 'BossMine2.mp3', 'Mine1.mp3', 'Mine2.mp3', 'Mine3.mp3'],
+        'Voyage': ['Voyage1.mp3', 'Voyage2.mp3'],
+        'Autre': ['BOS01_01.mp3', 'BOS05_01.mp3', 'BOS06_01.mp3', 'BOS07_01.mp3', 'BOS09_01.mp3', 'BOS10_01.mp3', 'BOS99_01.mp3', 'MEL02_01.mp3', 'MEL04_01.mp3', 'MEL05_02.mp3', 'MEL05_03.mp3', 'MEL06_01.mp3', 'MEL07_01.mp3', 'MEL07_02.mp3', 'MEL08_01.mp3', 'MEL10_02.mp3']
+      };
 
-      // Écouter les changements de hash pour détecter les changements de page
+      this.config.playlists = {};
+      
+      Object.entries(folderStructure).forEach(([folder, files]) => {
+        const playlistId = folder.toLowerCase();
+        this.config.playlists[playlistId] = {
+          name: folder,
+          icon: this.config.folderIcons[folder] || '🎵',
+          tracks: files.map(file => `${folder}/${file}`),
+          loop: true,
+          shuffle: folder === 'Auberge' || folder === 'Voyage' || folder === 'Autre'
+        };
+      });
+    },
+
+    setupEventListeners() {
+      // Écouter les changements de hash pour mettre à jour la page audio
       window.addEventListener('hashchange', () => {
         const page = window.location.hash.replace('#/', '') || 'creation';
         
@@ -62,29 +83,58 @@
         if (page === 'audio') {
           setTimeout(() => this.populateAudioPage(), 100);
         }
-        
-        if (this.isEnabled) {
-          this.handlePageChange(page);
+      });
+
+      // Écouter l'événement de rendu de contenu pour initialiser la page audio
+      EventBus.on('content-rendered', () => {
+        const currentPage = window.location.hash.replace('#/', '') || 'creation';
+        if (currentPage === 'audio') {
+          setTimeout(() => this.populateAudioPage(), 50);
         }
       });
+
+      // Observer pour détecter quand la page audio devient visible
+      this.setupAudioPageObserver();
     },
 
-    handlePageChange(page) {
-      // Mapper la page à une playlist
-      const playlistId = this.config.pageMapping[page] || this.getPlaylistForPage(page);
+    setupAudioPageObserver() {
+      let isPopulating = false; // Éviter la boucle infinie
       
-      if (playlistId && this.config.playlists[playlistId]) {
-        this.switchToPlaylist(playlistId);
-      }
-    },
+      // Observer les changements dans le DOM pour détecter la page audio
+      const observer = new MutationObserver(() => {
+        if (isPopulating) return; // Éviter la boucle
+        
+        const audioPage = document.querySelector('article[data-page="audio"].active');
+        const audioControls = document.getElementById('audio-controls-page');
+        
+        // Ne peupler que si la page audio est active ET que les contrôles ne sont pas encore initialisés
+        if (audioPage && audioControls && audioControls.innerHTML.includes('se chargent automatiquement')) {
+          isPopulating = true;
+          setTimeout(() => {
+            this.populateAudioPage();
+            isPopulating = false;
+          }, 100);
+        }
+      });
 
-    getPlaylistForPage(page) {
-      // Logique de mapping par défaut
-      if (page === 'creation') return 'creation';
-      if (page.includes('foret') || page === 'monstres') return 'foret';
-      if (page.includes('boss')) return 'boss';
-      if (page === 'objets') return 'auberge';
-      return 'melodique'; // Par défaut
+      // Observer seulement les changements de classe (changement de page)
+      const viewsContainer = document.getElementById('views');
+      if (viewsContainer) {
+        observer.observe(viewsContainer, { 
+          attributes: true, 
+          attributeFilter: ['class'],
+          subtree: true
+        });
+      }
+
+      // Vérifier immédiatement si la page audio est déjà visible
+      setTimeout(() => {
+        const audioPage = document.querySelector('article[data-page="audio"].active');
+        const audioControls = document.getElementById('audio-controls-page');
+        if (audioPage && audioControls && audioControls.innerHTML.includes('se chargent automatiquement')) {
+          this.populateAudioPage();
+        }
+      }, 500);
     },
 
     async switchToPlaylist(playlistId) {
@@ -108,12 +158,14 @@
           this.currentAudio = null;
         }
 
-        const fullUrl = `${this.config.baseUrl}/${trackPath}`;
-        this.currentAudio = new Audio(fullUrl);
-        this.currentAudio.volume = this.volume;
+        // Utiliser les URLs locales en mode dev, GitHub en mode standalone
+        const baseUrl = window.STANDALONE_VERSION ? this.config.baseUrlGitHub : this.config.baseUrl;
+        const fullUrl = `${baseUrl}/${trackPath}`;
         
-        // Support Bluetooth automatique
-        this.currentAudio.preload = 'metadata';
+        this.currentAudio = new Audio();
+        this.currentAudio.volume = this.volume;
+        this.currentAudio.preload = 'auto';
+        this.currentAudio.crossOrigin = 'anonymous';
         
         // Gestion des événements audio
         this.currentAudio.addEventListener('ended', () => {
@@ -121,9 +173,14 @@
         });
         
         this.currentAudio.addEventListener('error', (e) => {
-          console.warn('Audio loading failed:', fullUrl, e);
-          this.playNext(); // Passer au suivant en cas d'erreur
+          console.error('🚫 Audio loading failed:', fullUrl, e);
+          console.error('Error details:', e.target.error);
+          this.playNext();
         });
+
+
+        // Définir la source APRÈS avoir configuré les event listeners
+        this.currentAudio.src = fullUrl;
 
         // Auto-play si était en cours de lecture
         if (this.isPlaying) {
@@ -131,22 +188,107 @@
         }
         
       } catch (error) {
-        console.warn('Failed to load track:', trackPath, error);
+        console.error('🚫 Failed to load track:', trackPath, error);
       }
     },
 
     async play() {
-      if (!this.currentAudio || !this.isEnabled) return;
+      
+      if (!this.currentAudio || !this.isEnabled) {
+        return;
+      }
       
       try {
-        await this.currentAudio.play();
-        this.isPlaying = true;
+        // Vérifier que l'audio est chargé
+        if (this.currentAudio.readyState === 0) {
+          await new Promise((resolve, reject) => {
+            this.currentAudio.addEventListener('loadeddata', resolve, { once: true });
+            this.currentAudio.addEventListener('error', reject, { once: true });
+            setTimeout(() => reject(new Error('Load timeout')), 10000);
+          });
+        }
+        
+        const playPromise = this.currentAudio.play();
+        
+        if (playPromise !== undefined) {
+          await playPromise;
+          this.isPlaying = true;
+        }
+        
         this.updateUI();
       } catch (error) {
-        console.warn('Autoplay blocked or audio failed:', error);
+        console.error('❌ Audio play failed:', error.message);
+        console.error('❌ Error name:', error.name);
+        console.error('❌ Audio state:', this.currentAudio.readyState);
+        console.error('❌ Audio src:', this.currentAudio.src);
+        
         this.isPlaying = false;
         this.updateUI();
+        
+        // Afficher un message d'erreur détaillé
+        this.showAudioError(error);
       }
+    },
+
+    showAudioPermissionMessage() {
+      // Afficher un message discret pour informer l'utilisateur
+      const message = document.createElement('div');
+      message.style.cssText = `
+        position: fixed; top: 20px; right: 20px; z-index: 1001;
+        background: var(--bronze); color: white; padding: 1rem; border-radius: 8px;
+        max-width: 300px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        font-family: "Cinzel", serif; text-align: center;
+      `;
+      message.innerHTML = `
+        <div style="margin-bottom: 0.5rem;">🎵 Audio bloqué par le navigateur</div>
+        <div style="font-size: 0.9rem; margin-bottom: 1rem;">Cliquez sur le bouton lecture pour démarrer la musique</div>
+        <button onclick="this.parentElement.remove()" style="background: var(--gold); color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer;">OK</button>
+      `;
+      
+      document.body.appendChild(message);
+      
+      // Retirer automatiquement après 5 secondes
+      setTimeout(() => {
+        if (message.parentElement) {
+          message.remove();
+        }
+      }, 5000);
+    },
+
+    showAudioError(error) {
+      const message = document.createElement('div');
+      message.style.cssText = `
+        position: fixed; top: 20px; right: 20px; z-index: 1001;
+        background: #dc2626; color: white; padding: 1rem; border-radius: 8px;
+        max-width: 350px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        font-family: "Cinzel", serif; text-align: left;
+      `;
+      
+      let errorMessage = 'Erreur audio inconnue';
+      if (error.name === 'NotSupportedError') {
+        errorMessage = 'Format audio non supporté';
+      } else if (error.name === 'NotAllowedError') {
+        errorMessage = 'Lecture audio bloquée par le navigateur';
+      } else if (error.message.includes('Network')) {
+        errorMessage = 'Erreur réseau - Fichier audio inaccessible';
+      }
+      
+      message.innerHTML = `
+        <div style="margin-bottom: 0.5rem; font-weight: bold;">🚫 Erreur Audio</div>
+        <div style="font-size: 0.9rem; margin-bottom: 1rem;">${errorMessage}</div>
+        <div style="font-size: 0.8rem; margin-bottom: 1rem; opacity: 0.8;">
+          Détails: ${error.message}
+        </div>
+        <button onclick="this.parentElement.remove()" style="background: var(--gold); color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer;">OK</button>
+      `;
+      
+      document.body.appendChild(message);
+      
+      setTimeout(() => {
+        if (message.parentElement) {
+          message.remove();
+        }
+      }, 8000);
     },
 
     pause() {
@@ -354,60 +496,123 @@
 
     // Peupler la page audio avec les contrôles et informations
     populateAudioPage() {
-      if (!this.config || !this.config.playlists) return;
+      if (!this.config || !this.config.playlists) {
+        return;
+      }
+
+      // Fonctions globales simples
+      window.audioToggle = () => {
+        this.toggleEnabled();
+        this.updateAudioPageUI();
+      };
+
+      window.audioPlayPause = () => {
+        this.toggle();
+        this.updateAudioPageUI();
+      };
+
+      window.audioVolume = (value) => {
+        this.setVolume(parseFloat(value));
+        const display = document.getElementById('vol-display');
+        if (display) display.textContent = `${Math.round(this.volume * 100)}%`;
+      };
+
+      window.audioNext = () => {
+        this.playNext();
+        this.updateAudioPageUI();
+      };
 
       // Contrôles audio principaux
       const audioControlsContainer = document.getElementById('audio-controls-page');
       if (audioControlsContainer) {
         audioControlsContainer.innerHTML = `
-          <div style="text-align: center; padding: 1rem; background: var(--card); border-radius: 8px; border: 2px solid var(--bronze);">
-            <h4 style="color: var(--gold); margin-bottom: 1rem;">🎵 Contrôles principaux</h4>
-            <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem;">
-              <button id="master-audio-toggle" class="btn" style="background: var(--bronze); color: white;">
-                ${this.isEnabled ? '🔊 Audio activé' : '🔇 Audio désactivé'}
-              </button>
-              <button id="master-audio-play-pause" class="btn" style="background: var(--gold); color: white;">
-                ${this.isPlaying ? '⏸️ Pause' : '▶️ Lecture'}
-              </button>
+          <div style="padding: 2rem; background: var(--card); border-radius: 8px;">
+            <h4 style="text-align: center; margin-bottom: 2rem;">🎵 Contrôles Audio</h4>
+            
+            <button id="toggle-btn" 
+                    style="display: block; width: 100%; padding: 1.5rem; margin-bottom: 1rem; background: ${this.isEnabled ? '#16a34a' : '#dc2626'}; color: white; border: none; border-radius: 8px; font-size: 1.3rem; cursor: pointer; font-weight: bold;">
+              ${this.isEnabled ? '🔊 AUDIO ACTIVÉ' : '🔇 AUDIO DÉSACTIVÉ'}
+            </button>
+            
+            <button id="play-pause-btn"
+                    style="display: block; width: 100%; padding: 1.5rem; margin-bottom: 1rem; background: var(--gold); color: white; border: none; border-radius: 8px; font-size: 1.3rem; cursor: pointer; font-weight: bold;">
+              ${this.isPlaying ? '⏸️ PAUSE' : '▶️ LECTURE'}
+            </button>
+            
+            <button id="next-btn"
+                    style="display: block; width: 100%; padding: 1.5rem; margin-bottom: 1rem; background: var(--bronze); color: white; border: none; border-radius: 8px; font-size: 1.3rem; cursor: pointer; font-weight: bold;">
+              ⏭️ MUSIQUE SUIVANTE
+            </button>
+            
+            <div style="margin-bottom: 1rem;">
+              <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">🔊 Volume: <span id="vol-display">${Math.round(this.volume * 100)}%</span></label>
+              <input type="range" id="volume-slider"
+                     min="0" max="1" step="0.1" value="${this.volume}" 
+                     style="width: 100%; height: 12px; cursor: pointer;">
             </div>
-            <div style="display: flex; align-items: center; justify-content: center; gap: 1rem;">
-              <span>🔊 Volume:</span>
-              <input type="range" id="master-volume" min="0" max="1" step="0.1" value="${this.volume}" style="flex: 1; max-width: 200px;">
-              <span id="master-volume-display">${Math.round(this.volume * 100)}%</span>
-            </div>
-            <p style="margin-top: 1rem; font-style: italic; color: var(--paper-muted);">
-              ${this.currentPlaylist ? `🎼 Playlist active: ${this.config.playlists[this.currentPlaylist].name}` : 'Aucune playlist active'}
+            
+            <p style="text-align: center; font-style: italic; color: var(--paper-muted);">
+              ${this.currentPlaylist ? `🎼 ${this.config.playlists[this.currentPlaylist].name}` : 'Aucune playlist'}
             </p>
           </div>
         `;
 
-        // Event listeners pour les contrôles de la page
-        document.getElementById('master-audio-toggle')?.addEventListener('click', () => {
-          this.toggleEnabled();
-          this.populateAudioPage(); // Rafraîchir l'affichage
-        });
+        // Ajouter les event listeners APRÈS avoir créé le HTML
+        setTimeout(() => {
+          const toggleBtn = document.getElementById('toggle-btn');
+          const playPauseBtn = document.getElementById('play-pause-btn');
+          const nextBtn = document.getElementById('next-btn');
+          const volumeSlider = document.getElementById('volume-slider');
 
-        document.getElementById('master-audio-play-pause')?.addEventListener('click', () => {
-          this.toggle();
-          this.populateAudioPage(); // Rafraîchir l'affichage
-        });
+          if (toggleBtn) {
+            toggleBtn.addEventListener('click', (e) => {
+              e.preventDefault();
+              window.audioToggle();
+            });
+          }
 
-        document.getElementById('master-volume')?.addEventListener('input', (e) => {
-          this.setVolume(parseFloat(e.target.value));
-          document.getElementById('master-volume-display').textContent = `${Math.round(this.volume * 100)}%`;
-        });
+          if (playPauseBtn) {
+            playPauseBtn.addEventListener('click', (e) => {
+              e.preventDefault();
+              window.audioPlayPause();
+            });
+          }
+
+          if (nextBtn) {
+            nextBtn.addEventListener('click', (e) => {
+              e.preventDefault();
+              window.audioNext();
+            });
+          }
+
+          if (volumeSlider) {
+            volumeSlider.addEventListener('input', (e) => {
+              window.audioVolume(e.target.value);
+            });
+          }
+        }, 50);
       }
 
       // Liste des playlists
       const playlistsContainer = document.getElementById('playlists-list');
       if (playlistsContainer) {
+        
+        // Créer les fonctions globales pour chaque playlist
+        Object.entries(this.config.playlists).forEach(([id, playlist]) => {
+          window[`selectPlaylist_${id}`] = () => {
+            this.switchToPlaylistById(id);
+            setTimeout(() => this.updateAudioPageUI(), 200);
+          };
+        });
+
         const playlistsHTML = Object.entries(this.config.playlists).map(([id, playlist]) => `
-          <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.5rem; margin: 0.5rem 0; background: var(--card); border-radius: 6px; border-left: 4px solid ${this.currentPlaylist === id ? 'var(--gold)' : 'var(--bronze)'};">
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 1rem; margin: 0.5rem 0; background: var(--card); border-radius: 8px; border: 2px solid ${this.currentPlaylist === id ? 'var(--gold)' : 'var(--bronze)'};">
             <div>
-              <strong>${playlist.icon} ${playlist.name}</strong>
-              <br><small style="color: var(--paper-muted);">${playlist.tracks.length} piste(s)</small>
+              <strong style="font-size: 1.1rem;">${playlist.icon} ${playlist.name}</strong>
+              <br><small style="color: var(--paper-muted); font-size: 0.9rem;">${playlist.tracks.length} piste(s)</small>
             </div>
-            <button class="btn small playlist-select-btn" data-playlist-id="${id}" style="background: var(--bronze); color: white;">
+            <button id="playlist-btn-${id}" 
+                    style="padding: 0.8rem 1.2rem; background: ${this.currentPlaylist === id ? 'var(--gold)' : 'var(--bronze)'}; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold;">
               ${this.currentPlaylist === id ? '🎵 Active' : '▶️ Activer'}
             </button>
           </div>
@@ -415,30 +620,41 @@
         
         playlistsContainer.innerHTML = playlistsHTML;
 
-        // Event listeners pour la sélection de playlist
-        document.querySelectorAll('.playlist-select-btn').forEach(btn => {
-          btn.addEventListener('click', async (e) => {
-            const playlistId = e.target.dataset.playlistId;
-            await this.switchToPlaylistById(playlistId);
-            this.populateAudioPage(); // Rafraîchir l'affichage
+        // Ajouter les event listeners pour les boutons de playlist
+        setTimeout(() => {
+          Object.entries(this.config.playlists).forEach(([id, playlist]) => {
+            const btn = document.getElementById(`playlist-btn-${id}`);
+            if (btn) {
+              btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                window[`selectPlaylist_${id}`]();
+              });
+            }
           });
-        });
+        }, 50);
       }
 
-      // Mapping page → playlist
-      const mappingContainer = document.getElementById('page-mapping-list');
-      if (mappingContainer) {
-        const mappingHTML = Object.entries(this.config.pageMapping).map(([page, playlistId]) => {
-          const playlist = this.config.playlists[playlistId];
-          return `
-            <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.25rem 0; border-bottom: 1px solid var(--rule);">
-              <span><strong>${page}</strong></span>
-              <span>${playlist ? playlist.icon + ' ' + playlist.name : playlistId}</span>
-            </div>
-          `;
-        }).join('');
-        
-        mappingContainer.innerHTML = mappingHTML || '<p style="color: var(--paper-muted); font-style: italic;">Aucun mapping configuré</p>';
+    },
+
+    // Mettre à jour seulement l'interface sans regénérer tout le HTML
+    updateAudioPageUI() {
+      // Mettre à jour le bouton toggle
+      const toggleBtn = document.getElementById('toggle-btn');
+      if (toggleBtn) {
+        toggleBtn.style.background = this.isEnabled ? '#16a34a' : '#dc2626';
+        toggleBtn.textContent = this.isEnabled ? '🔊 AUDIO ACTIVÉ' : '🔇 AUDIO DÉSACTIVÉ';
+      }
+
+      // Mettre à jour le bouton play/pause
+      const playPauseBtn = document.getElementById('play-pause-btn');
+      if (playPauseBtn) {
+        playPauseBtn.textContent = this.isPlaying ? '⏸️ PAUSE' : '▶️ LECTURE';
+      }
+
+      // Mettre à jour le volume
+      const volDisplay = document.getElementById('vol-display');
+      if (volDisplay) {
+        volDisplay.textContent = `${Math.round(this.volume * 100)}%`;
       }
     }
   };

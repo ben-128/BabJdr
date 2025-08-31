@@ -1968,3 +1968,116 @@ article[data-page="enchanteur"] .illus img:hover,
   }
 }
 
+/* ═══════════════════════════════════════════════════════════════════════════════════════
+   🔧 AUDIO PAGE CONTROLS - Boutons stables pour la page audio
+   ═══════════════════════════════════════════════════════════════════════════════════════ */
+
+.audio-control-btn {
+  background: var(--bronze) !important;
+  color: white !important;
+  border: none !important;
+  padding: 1rem 2rem !important;
+  border-radius: 8px !important;
+  cursor: pointer !important;
+  font-family: "Cinzel", serif !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  transition: none !important;
+  min-width: 160px !important;
+  min-height: 50px !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+.audio-control-btn:hover {
+  background: var(--gold) !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.audio-control-btn:active {
+  background: var(--bronze) !important;
+  transform: scale(0.98) !important;
+}
+
+.playlist-select-btn {
+  background: var(--bronze) !important;
+  color: white !important;
+  border: none !important;
+  padding: 1rem 1.5rem !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
+  font-family: "Cinzel", serif !important;
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+  transition: none !important;
+  min-width: 120px !important;
+  min-height: 45px !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+.playlist-select-btn:hover {
+  background: var(--gold) !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.playlist-select-btn:active {
+  transform: scale(0.98) !important;
+}
+
+/* Slider de volume amélioré */
+#master-volume {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  height: 6px !important;
+  background: var(--rule) !important;
+  border-radius: 3px !important;
+  outline: none !important;
+  cursor: pointer !important;
+  transition: none !important;
+}
+
+#master-volume::-webkit-slider-thumb {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  width: 20px !important;
+  height: 20px !important;
+  border-radius: 50% !important;
+  background: var(--bronze) !important;
+  cursor: pointer !important;
+  border: 2px solid var(--gold) !important;
+  transition: none !important;
+}
+
+#master-volume::-webkit-slider-thumb:hover {
+  background: var(--gold) !important;
+  border-color: var(--bronze) !important;
+}
+
+#master-volume::-moz-range-thumb {
+  width: 20px !important;
+  height: 20px !important;
+  border-radius: 50% !important;
+  background: var(--bronze) !important;
+  cursor: pointer !important;
+  border: 2px solid var(--gold) !important;
+  transition: none !important;
+}
+
+#master-volume::-moz-range-thumb:hover {
+  background: var(--gold) !important;
+  border-color: var(--bronze) !important;
+}
+

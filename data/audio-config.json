@@ -1,124 +1,15 @@
 {
-  "baseUrl": "https://raw.githubusercontent.com/ben-128/BabJdr/master/data/Musiques",
-  "playlists": {
-    "creation": {
-      "name": "Création de personnage",
-      "icon": "🎭",
-      "tracks": [
-        "Creation/Creation1.mp3",
-        "Creation/Creation2.mp3", 
-        "Creation/Creation3.mp3"
-      ],
-      "loop": true,
-      "shuffle": true
-    },
-    "auberge": {
-      "name": "Ambiance d'auberge",
-      "icon": "🍺",
-      "tracks": [
-        "Auberge/Auberge1.mp3",
-        "Auberge/Auberge2.mp3",
-        "Auberge/Auberge3.mp3",
-        "Auberge/Auberge4.mp3"
-      ],
-      "loop": true,
-      "shuffle": true
-    },
-    "foret": {
-      "name": "Exploration forêt",
-      "icon": "🌲",
-      "tracks": [
-        "Foret/Foret.mp3",
-        "Foret/Foret2.mp3",
-        "Foret/Foret3.mp3"
-      ],
-      "loop": true,
-      "shuffle": false
-    },
-    "foret-boss": {
-      "name": "Boss de forêt",
-      "icon": "🐲",
-      "tracks": [
-        "Foret/BossForet1.mp3",
-        "Foret/BossForet2.mp3"
-      ],
-      "loop": true,
-      "shuffle": false
-    },
-    "mine": {
-      "name": "Exploration mine",
-      "icon": "⛏️",
-      "tracks": [
-        "Mine/Mine1.mp3",
-        "Mine/Mine2.mp3", 
-        "Mine/Mine3.mp3"
-      ],
-      "loop": true,
-      "shuffle": false
-    },
-    "mine-boss": {
-      "name": "Boss de mine",
-      "icon": "💎",
-      "tracks": [
-        "Mine/BossMine1.mp3",
-        "Mine/BossMine2.mp3"
-      ],
-      "loop": true,
-      "shuffle": false
-    },
-    "voyage": {
-      "name": "Voyage/Déplacement",
-      "icon": "🚶",
-      "tracks": [
-        "Voyage/Voyage1.mp3",
-        "Voyage/Voyage2.mp3"
-      ],
-      "loop": true,
-      "shuffle": true
-    },
-    "melodique": {
-      "name": "Mélodies diverses",
-      "icon": "🎼",
-      "tracks": [
-        "Autre/MEL02_01.mp3",
-        "Autre/MEL04_01.mp3",
-        "Autre/MEL05_02.mp3",
-        "Autre/MEL05_03.mp3",
-        "Autre/MEL06_01.mp3",
-        "Autre/MEL07_01.mp3",
-        "Autre/MEL07_02.mp3",
-        "Autre/MEL08_01.mp3",
-        "Autre/MEL10_02.mp3"
-      ],
-      "loop": true,
-      "shuffle": true
-    },
-    "boss": {
-      "name": "Combats de boss",
-      "icon": "⚔️",
-      "tracks": [
-        "Autre/BOS01_01.mp3",
-        "Autre/BOS05_01.mp3",
-        "Autre/BOS06_01.mp3",
-        "Autre/BOS07_01.mp3",
-        "Autre/BOS09_01.mp3",
-        "Autre/BOS10_01.mp3",
-        "Autre/BOS99_01.mp3"
-      ],
-      "loop": true,
-      "shuffle": false
-    }
+  "baseUrl": "data/Musiques",
+  "baseUrlGitHub": "https://raw.githubusercontent.com/ben-128/BabJdr/master/data/Musiques",
+  "folderIcons": {
+    "Auberge": "🍺",
+    "Creation": "🎭", 
+    "Foret": "🌲",
+    "Mine": "⛏️",
+    "Voyage": "🚶",
+    "Autre": "🎼"
   },
-  "pageMapping": {
-    "creation": "creation",
-    "etats": "melodique",
-    "classes": "creation",
-    "sorts": "melodique",
-    "dons": "melodique",
-    "monstres": "foret",
-    "objets": "auberge"
-  },
-  "defaultVolume": 0.3,
+  "defaultVolume": 0.5,
   "enableAutoplay": false,
   "mobileOptimized": true
 }

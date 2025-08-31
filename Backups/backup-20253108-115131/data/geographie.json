@@ -1,0 +1,10 @@
+{
+  "page": "geographie",
+  "title": "Geographie",
+  "sections": [
+    {
+      "type": "intro",
+      "content": "Contenu de la page Geographie. Vous pouvez éditer ce texte en mode développement."
+    }
+  ]
+}
