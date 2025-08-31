@@ -1,0 +1,29 @@
+{
+  "page": "audio",
+  "title": "🎵 Musiques d'ambiance",
+  "static": true,
+  "sections": [
+    {
+      "type": "intro",
+      "content": "Gestion des musiques d'ambiance pour enrichir vos parties de JDR. Les musiques changent automatiquement selon les pages visitées et s'adaptent aux enceintes Bluetooth connectées.<br><br><strong>Note :</strong> Les contrôles audio apparaissent dans le coin inférieur droit une fois l'audio activé."
+    },
+    {
+      "type": "card",
+      "id": "audio-controls-card",
+      "title": "Contrôles audio",
+      "content": "<div id='audio-controls-page'><p>Les contrôles audio se chargent automatiquement...</p></div>"
+    },
+    {
+      "type": "card",
+      "id": "playlists-card", 
+      "title": "Playlists disponibles",
+      "content": "<div id='playlists-list'><p>Les playlists se chargent automatiquement...</p></div>"
+    },
+    {
+      "type": "card",
+      "id": "page-mapping-card",
+      "title": "Mapping page → playlist",
+      "content": "<div id='page-mapping-list'><p>Le mapping se charge automatiquement...</p></div>"
+    }
+  ]
+}

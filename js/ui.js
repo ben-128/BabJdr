@@ -241,6 +241,11 @@
       JdrApp.utils.events.register('change', '.spell-element-selector', (e) => {
         this.updateSpellElement(e.target);
       });
+
+      // Print button for states page
+      JdrApp.utils.events.register('click', '#print-etats-btn', () => {
+        this.printStates();
+      });
     },
 
     setupTagsManagement() {
@@ -4902,6 +4907,157 @@
       }
 
       return modal;
+    },
+
+    // Fonction d'impression des états
+    printStates() {
+      // Récupérer tous les états depuis les données chargées
+      let etatsData;
+      
+      // Essayer plusieurs sources de données
+      if (window.ETATS) {
+        etatsData = window.ETATS;
+      } else if (window.STATIC_PAGES?.etats) {
+        etatsData = window.STATIC_PAGES.etats;
+      } else {
+        // Essayer de récupérer depuis l'article actuellement affiché
+        const activeArticle = document.querySelector('article[data-page="etats"]');
+        if (activeArticle) {
+          const cards = activeArticle.querySelectorAll('.card');
+          const states = Array.from(cards).map(card => {
+            const title = card.querySelector('h3')?.textContent || 'État';
+            const content = card.querySelector('.editable')?.innerHTML || '';
+            return { title, content };
+          });
+          
+          if (states.length > 0) {
+            this.generatePrintableStates(states);
+            return;
+          }
+        }
+        
+        console.error('Données des états non trouvées');
+        return;
+      }
+
+      // Filtrer seulement les sections de type "card" (les états)
+      const states = etatsData.sections ? 
+        etatsData.sections.filter(section => section.type === 'card') :
+        [];
+      
+      if (states.length === 0) {
+        console.warn('Aucun état trouvé à imprimer');
+        return;
+      }
+
+      this.generatePrintableStates(states);
+    },
+
+    generatePrintableStates(states) {
+      // Ouvrir une nouvelle fenêtre pour l'impression
+      const printWindow = window.open('', '_blank', 'width=800,height=600');
+      
+      // Créer le HTML complet pour l'impression
+      const printableHTML = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta charset="UTF-8">
+          <title>États - Aide de jeu</title>
+          <style>
+            @page { 
+              margin: 15mm !important; 
+              size: A4 !important;
+            }
+            body { 
+              font-family: "Times New Roman", serif; 
+              background: white; 
+              color: black; 
+              margin: 0; 
+              padding: 0;
+              font-size: 10pt;
+              line-height: 1.2;
+            }
+            h1 { 
+              font-size: 16pt; 
+              font-weight: bold; 
+              text-align: center; 
+              margin-bottom: 8mm; 
+              color: black;
+            }
+            .printable-states-grid { 
+              display: grid; 
+              grid-template-columns: 1fr 1fr; 
+              gap: 4mm; 
+              margin: 0;
+            }
+            .printable-state-item { 
+              border: 1pt solid #ccc; 
+              border-radius: 2mm; 
+              padding: 3mm; 
+              page-break-inside: avoid; 
+              font-size: 9pt;
+              line-height: 1.1;
+              background: white;
+            }
+            .printable-state-item h3 { 
+              font-size: 11pt; 
+              font-weight: bold; 
+              margin: 0 0 2mm 0; 
+              color: black;
+            }
+            .printable-state-item p { 
+              margin: 1mm 0; 
+              color: black;
+            }
+          </style>
+        </head>
+        <body>
+          <h1>États - Aide de jeu</h1>
+          <div class="printable-states-grid">
+            ${states.map(state => `
+              <div class="printable-state-item">
+                <h3>${state.title}</h3>
+                <div>${this.stripHtmlTags(state.content)}</div>
+              </div>
+            `).join('')}
+          </div>
+        </body>
+        </html>
+      `;
+
+      // Écrire le contenu et imprimer
+      printWindow.document.write(printableHTML);
+      printWindow.document.close();
+      
+      // Attendre que le contenu soit chargé puis imprimer
+      printWindow.onload = function() {
+        printWindow.focus();
+        printWindow.print();
+        printWindow.close();
+      };
+    },
+
+    // Fonction utilitaire pour nettoyer les balises HTML pour l'impression
+    stripHtmlTags(html) {
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = html;
+      
+      // Convertir les listes en texte simple avec des tirets
+      const lists = tempDiv.querySelectorAll('ul');
+      lists.forEach(ul => {
+        const items = ul.querySelectorAll('li');
+        const textItems = Array.from(items).map(li => `• ${li.textContent.trim()}`);
+        ul.outerHTML = textItems.join('<br>');
+      });
+
+      // Préserver les paragraphes mais simplifier le formatage
+      const paragraphs = tempDiv.querySelectorAll('p');
+      paragraphs.forEach(p => {
+        p.style.margin = '2px 0';
+      });
+
+      return tempDiv.innerHTML;
     },
 
     // Méthode robuste pour forcer le rafraîchissement de la page (fallback)

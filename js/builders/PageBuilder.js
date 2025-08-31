@@ -256,6 +256,8 @@
     }
 
     buildStaticPageHeader(pageData) {
+      const printButton = pageData.page === 'etats' ? this.buildPrintButton() : '';
+      
       return `
         <div style="text-align:center;margin-bottom:2rem;">
           <div style="display:inline-flex;align-items:center;gap:8px;">
@@ -263,6 +265,7 @@
             ${this.buildEditButton('title')}
           </div>
           ${this.buildIllustration(`page:${pageData.page}`)}
+          ${printButton}
         </div>
       `;
     }
@@ -861,6 +864,16 @@
       if (window.STANDALONE_VERSION) return '';
       
       return `<button class="tags-manager-btn btn" type="button" style="background: #dc2626; color: white; border: 2px solid #b91c1c;">🏷️ Gérer les tags</button>`;
+    }
+
+    buildPrintButton() {
+      return `
+        <div style="margin-top: 1rem;">
+          <button id="print-etats-btn" class="print-button" type="button" title="Imprimer la liste des états">
+            🖨️ Version imprimable
+          </button>
+        </div>
+      `;
     }
 
     buildSingleTableTresorPage(tableData) {

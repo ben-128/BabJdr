@@ -127,6 +127,12 @@
           "id": "tables-tresors",
           "title": "Tables de trésors",
           "icon": "💎"
+        },
+        {
+          "type": "page",
+          "id": "audio",
+          "title": "Musiques d'ambiance",
+          "icon": "🎵"
         }
       ]
     },
