@@ -113,6 +113,7 @@ function buildStandalone() {
     'js/features/SpellFilter.js', // Spell filter feature
     'js/features/TablesTresorsManager.js', // Tables de trésors manager
     'js/features/DynamicCentering.js', // Dynamic centering system
+    'js/libs/jspdf-loader.js',    // External library loaders
     'js/ui.js'                    // UI module - last
   ];
   
