@@ -1826,22 +1826,142 @@
         }
       }
       
-      // Create the character sheet page content
+      // Create the character sheet page content - simplified approach that always works
       const feuillePersonnageContent = `
         <div class="page-header">
           <h1>📋 Feuille de personnage</h1>
-          <p>Page vide en attente de développement.</p>
+          <div class="character-sheet-actions" style="margin: 1rem 0; text-align: center;">
+            <button id="open-character-sheet" class="btn-base" style="background: var(--bronze); color: white; margin-right: 1rem;">
+              📖 Ouvrir le PDF
+            </button>
+            <button id="print-character-sheet" class="btn-base" style="background: var(--gold); color: white; margin-right: 1rem;">
+              🖨️ Imprimer
+            </button>
+            <button id="download-character-sheet" class="btn-base" style="background: var(--emerald); color: white;">
+              📥 Télécharger
+            </button>
+          </div>
+        </div>
+        
+        <div class="character-sheet-preview" style="width: 100%; border: 2px solid var(--bronze); border-radius: 8px; background: var(--parchment); padding: 2rem; text-align: center;">
+          <div class="pdf-preview-content">
+            <h2 style="color: var(--bronze); margin-bottom: 1.5rem;">📄 Feuille de personnage BabJDR</h2>
+            
+            <div class="pdf-info" style="background: white; border: 1px solid var(--rule); border-radius: 8px; padding: 1.5rem; margin: 1rem 0; text-align: left;">
+              <h3 style="color: var(--bronze); margin-top: 0;">📝 Contenu de la feuille:</h3>
+              <ul style="color: var(--accent-ink); line-height: 1.8;">
+                <li><strong>Informations du personnage:</strong> Nom, classe, niveau, expérience</li>
+                <li><strong>Caractéristiques:</strong> Force, Endurance, Agilité, Intelligence, Volonté, Chance</li>
+                <li><strong>Statistiques dérivées:</strong> Vie, Mana, Initiative, Fortune, Armure, Esquive</li>
+                <li><strong>Compétences:</strong> Hardiesse, Finesse, Coordination, Réflexion, Éloquence</li>
+                <li><strong>Éléments:</strong> Armure élémentaire (Feu, Eau, Terre, Air, Lumière, Nuit, Divin, Maléfique)</li>
+                <li><strong>Sorts et capacités:</strong> Liste des sorts connus et dons acquis</li>
+                <li><strong>Inventaire:</strong> Consommables et sac général</li>
+                <li><strong>Background:</strong> Histoire, apparence et personnalité du personnage</li>
+              </ul>
+            </div>
+            
+            <div class="pdf-actions" style="background: var(--card); border: 1px solid var(--bronze); border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
+              <p style="color: var(--accent-ink); margin-bottom: 1rem;">
+                <strong>🎯 Actions disponibles:</strong>
+              </p>
+              <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+                <button id="open-pdf-new-tab" class="btn-base" style="background: var(--bronze); color: white;">
+                  📖 Ouvrir dans un nouvel onglet
+                </button>
+                <button id="print-pdf-direct" class="btn-base" style="background: var(--gold); color: white;">
+                  🖨️ Imprimer directement
+                </button>
+                <button id="download-pdf-direct" class="btn-base" style="background: var(--emerald); color: white;">
+                  📥 Télécharger le fichier
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="character-sheet-info" style="margin-top: 1rem; text-align: center; color: var(--accent-ink);">
+          <p><strong>💡 Info:</strong> La feuille de personnage est un PDF imprimable de 3 pages contenant tous les champs nécessaires pour votre personnage.</p>
+          <p><strong>📱 Mobile:</strong> Sur mobile/tablette, utilisez "Télécharger" puis ouvrez dans votre application PDF.</p>
         </div>
       `;
       
       // Insert content into the page
       pageElement.innerHTML = feuillePersonnageContent;
       
+      // Setup event listeners for print and download functionality
+      this.setupCharacterSheetActions();
+      
+      
       // Show and activate page
       this.show('feuille-personnage');
       this.updateActiveStates('feuille-personnage');
       
       return true;
+    },
+
+    setupCharacterSheetActions() {
+      const pdfUrl = 'data/feuille-personnage.pdf';
+      
+      // Setup main action buttons
+      const openBtn = document.getElementById('open-character-sheet');
+      const printBtn = document.getElementById('print-character-sheet');
+      const downloadBtn = document.getElementById('download-character-sheet');
+      
+      // Setup preview action buttons
+      const openTabBtn = document.getElementById('open-pdf-new-tab');
+      const printDirectBtn = document.getElementById('print-pdf-direct');
+      const downloadDirectBtn = document.getElementById('download-pdf-direct');
+      
+      // Open PDF in new tab
+      const openPDF = () => {
+        window.open(pdfUrl, '_blank');
+        if (JdrApp.modules.storage && JdrApp.modules.storage.showNotification) {
+          JdrApp.modules.storage.showNotification('📖 PDF ouvert dans un nouvel onglet', 'success');
+        }
+      };
+      
+      // Print PDF
+      const printPDF = () => {
+        const printWindow = window.open(pdfUrl, '_blank');
+        if (printWindow) {
+          printWindow.focus();
+          setTimeout(() => {
+            try {
+              printWindow.print();
+            } catch (e) {
+              alert('PDF ouvert. Utilisez Ctrl+P pour imprimer.');
+            }
+          }, 1000);
+        } else {
+          alert('Impossible d\'ouvrir le PDF. Vérifiez que les popups ne sont pas bloqués.');
+        }
+      };
+      
+      // Download PDF
+      const downloadPDF = () => {
+        const link = document.createElement('a');
+        link.href = pdfUrl;
+        link.download = 'Feuille-Personnage-BabJDR.pdf';
+        link.style.display = 'none';
+        
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        if (JdrApp.modules.storage && JdrApp.modules.storage.showNotification) {
+          JdrApp.modules.storage.showNotification('📥 Téléchargement en cours...', 'success');
+        }
+      };
+      
+      // Attach event listeners
+      if (openBtn) openBtn.addEventListener('click', openPDF);
+      if (printBtn) printBtn.addEventListener('click', printPDF);
+      if (downloadBtn) downloadBtn.addEventListener('click', downloadPDF);
+      
+      if (openTabBtn) openTabBtn.addEventListener('click', openPDF);
+      if (printDirectBtn) printDirectBtn.addEventListener('click', printPDF);
+      if (downloadDirectBtn) downloadDirectBtn.addEventListener('click', downloadPDF);
     }
   
   };

@@ -53,6 +53,14 @@
       "content": "<p>Lorsqu’un groupe trouve et utilise un <b>cristal d’expérience</b>, tous les membres du groupe <b>gagnent</b> des points d’expérience.</p>\n<p>Les <b>cristaux d’expérience</b> provenant d’un même type de monstre sont de moins en moins efficaces, car la magie qu’ils renferment a déjà été assimilée.</p>\n\n\n<p>Lorsqu’un héros atteint <b>10 points d’expérience</b>, il gagne un niveau et son expérience revient à <b>0</b>. Il obtient alors :</p>\n<ul>\n  <li><b>1 point de don</b> (qu’il peut dépenser ou cumuler).</li>\n  <li>Des <b>statistiques fixes</b> (selon la sous-classe).</li>\n  <li><b>2 points de statistiques</b> à répartir.</li>\n  <li>L’<b>accès à de nouveaux sorts</b> (pour les classes qui le peuvent).</li>\n</ul>",
       "deletable": true,
       "sectionName": "Nouvelle section"
+    },
+    {
+      "type": "card",
+      "id": "gestion-des-ressources-new-8-1756658008017",
+      "title": "Equipements",
+      "content": "arme 2m : pas de bouclier\nbouclier : pas tout le monde peut en mettre\npas d'arme main gauche, même arme 1m",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
     }
   ]
 }

@@ -1,0 +1,58 @@
+{
+  "page": "gestion-des-ressources",
+  "title": "Gestion des ressources",
+  "sections": [
+    {
+      "type": "intro",
+      "content": ""
+    },
+    {
+      "type": "card",
+      "id": "gestion-des-ressources-new-2-1756401478745",
+      "title": "Inventaire",
+      "content": "<p>Chaque héros dispose de <b>trois inventaires</b> :</p>\n\n<ul>\n  <li>\n    <b>Équipement</b> : Toujours porté et actif, il est constitué d’une arme, d’une armure, \n    d’un éventuel bouclier et de <b>3 accessoires</b>.\n  </li>\n  <li>\n    <b>Sac de consommables</b> : Peut contenir jusqu’à <b>10 consommables</b>. Même si un héro possède plusieur fois le même consommable, ils prendront chacun une place.\n  </li>\n  <li>\n    <b>Sac général</b> : Dispose d’une capacité maximale de <b>10 points de poids</b>. \n    Chaque objet entreposé y possède une valeur de poids indiquée dans sa description.\n  </li>\n</ul>",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
+    },
+    {
+      "type": "card",
+      "id": "gestion-des-ressources-new-3-1756401493443",
+      "title": "Mana",
+      "content": "Il s'agit de la ressource utilisée pour lancer des sorts. Hors combat, il revient automatiquement au maximum aprés plus d'une heure sans être en combat. En combat, il est consommé aprés le lancement de chaque sort (le coût en mana étant indiqué dans la description de chaque sort). Si un sort devait faire passer le mana d'un héros en dessous de 0, alors le sort n'est pas effectif et le héros devient <span class=\"etat-link\" data-etat=\"Endormi/assomé/Effrayé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">paralysé</span> pendant 2 tours.",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
+    },
+    {
+      "type": "card",
+      "id": "gestion-des-ressources-new-4-1756401498518",
+      "title": "Vie",
+      "content": "Les points de vie représentent la vitalité d’un héros ou d’un monstre, la mesure de son endurance face aux blessures. Tant qu’il lui reste des PV, le personnage peut continuer à se battre, à courir et à agir. Quand ses PV tombent à zéro, il s’effondre, mourant. Voir la page <a href=\"#/combat\" style=\"color: var(--accent); text-decoration: underline;\">Combat</a>.\nUn personnage qui effectue un repos régénère un nombre de points de vie égal à sa valeur d’Endurance.<br>",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
+    },
+    {
+      "type": "card",
+      "id": "gestion-des-ressources-new-5-1756401504961",
+      "title": "Fortune",
+      "content": "Lorsqu’un événement fait appel à la Fortune (par exemple ouvrir un coffre et espérer y trouver un objet rare), le joueur lance un d20 et ajoute sa valeur de Fortune. Plus le total est élevé, meilleur sera le butin obtenu.",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
+    },
+    {
+      "type": "card",
+      "id": "gestion-des-ressources-new-7-1756408519770",
+      "title": "Sommeil et repas",
+      "content": "Chaque jour, un héros doit manger une ration et dormir au moins 8 heures sous peine d'être dans l'état <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
+    },
+    {
+      "type": "card",
+      "id": "gestion-des-ressources-new-7-1756634178476",
+      "title": "Experience et niveau",
+      "content": "<p>Lorsqu’un groupe trouve et utilise un <b>cristal d’expérience</b>, tous les membres du groupe <b>gagnent</b> des points d’expérience.</p>\n<p>Les <b>cristaux d’expérience</b> provenant d’un même type de monstre sont de moins en moins efficaces, car la magie qu’ils renferment a déjà été assimilée.</p>\n\n\n<p>Lorsqu’un héros atteint <b>10 points d’expérience</b>, il gagne un niveau et son expérience revient à <b>0</b>. Il obtient alors :</p>\n<ul>\n  <li><b>1 point de don</b> (qu’il peut dépenser ou cumuler).</li>\n  <li>Des <b>statistiques fixes</b> (selon la sous-classe).</li>\n  <li><b>2 points de statistiques</b> à répartir.</li>\n  <li>L’<b>accès à de nouveaux sorts</b> (pour les classes qui le peuvent).</li>\n</ul>",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
+    }
+  ]
+}

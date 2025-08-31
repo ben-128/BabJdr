@@ -15,7 +15,7 @@
     },
     {
       "type": "card",
-      "id": "playlists-card", 
+      "id": "playlists-card",
       "title": "Playlists disponibles",
       "content": "<div id='playlists-list'><p>Les playlists se chargent automatiquement...</p></div>"
     }

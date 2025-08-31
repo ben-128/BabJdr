@@ -31,7 +31,9 @@
       "Bash(rg:*)",
       "Bash(git reset:*)",
       "Bash(timeout:*)",
-      "Bash(scripts/clean-backups.bat)"
+      "Bash(scripts/clean-backups.bat)",
+      "Bash(copy:*)",
+      "Bash(cp:*)"
     ],
     "deny": []
   }
