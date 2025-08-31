@@ -58,14 +58,14 @@
         
         // Structure actuelle mise à jour
         const folderStructure = {
-          'Auberge': ['Auberge1.mp3', 'Auberge2.mp3', 'Auberge3.mp3', 'Auberge4.mp3'],
-          'Creation': ['Creation1.mp3', 'Creation2.mp3', 'Creation3.mp3'],
-          'Foret': ['Foret.mp3', 'Foret2.mp3', 'Foret3.mp3'],
-          'ForetBoss': ['BossForet/BossForet1.mp3', 'BossForet/BossForet2.mp3'],
-          'Mine': ['Mine1.mp3', 'Mine2.mp3', 'Mine3.mp3'],
-          'MineBoss': ['BossMine/BossMine1.mp3', 'BossMine/BossMine2.mp3'],
-          'Voyage': ['Voyage1.mp3', 'Voyage2.mp3'],
-          'Autre': ['BOS01_01.mp3', 'BOS05_01.mp3', 'BOS06_01.mp3', 'BOS07_01.mp3', 'BOS09_01.mp3', 'BOS10_01.mp3', 'BOS99_01.mp3', 'MEL02_01.mp3', 'MEL04_01.mp3', 'MEL05_02.mp3', 'MEL05_03.mp3', 'MEL06_01.mp3', 'MEL07_01.mp3', 'MEL07_02.mp3', 'MEL08_01.mp3', 'MEL10_02.mp3']
+        'Auberge': ['Auberge1.mp3', 'Auberge2.mp3', 'Auberge3.mp3', 'Auberge4.mp3'],
+        'Autre': ['BOS01_01.mp3', 'BOS05_01.mp3', 'BOS06_01.mp3', 'BOS07_01.mp3', 'BOS09_01.mp3', 'BOS10_01.mp3', 'BOS99_01.mp3', 'MEL02_01.mp3', 'MEL04_01.mp3', 'MEL05_02.mp3', 'MEL05_03.mp3', 'MEL06_01.mp3', 'MEL07_01.mp3', 'MEL07_02.mp3', 'MEL08_01.mp3', 'MEL10_02.mp3'],
+        'Creation': ['Creation1.mp3', 'Creation2.mp3', 'Creation3.mp3'],
+        'Foret': ['Foret.mp3', 'Foret2.mp3', 'Foret3.mp3'],
+        'ForetBoss': ['BossForet/BossForet1.mp3', 'BossForet/BossForet2.mp3'],
+        'Mine': ['Mine1.mp3', 'Mine2.mp3', 'Mine3.mp3'],
+        'MineBoss': ['BossMine/BossMine1.mp3', 'BossMine/BossMine2.mp3'],
+        'Voyage': ['Voyage1.mp3', 'Voyage2.mp3']
         };
 
         Object.entries(folderStructure).forEach(([folder, files]) => {
@@ -183,6 +183,7 @@
       if (playlist && this.isEnabled) {
         await this.loadTrack(playlist.tracks[0]);
         this.updateUI();
+        this.updateAudioPageUI(); // Mettre à jour l'affichage
       }
     },
 
@@ -364,6 +365,7 @@
       }
 
       this.loadTrack(playlist.tracks[this.currentTrackIndex]);
+      this.updateAudioPageUI(); // Mettre à jour l'affichage du titre
     },
 
     playPrevious() {
@@ -379,6 +381,7 @@
       }
 
       this.loadTrack(playlist.tracks[this.currentTrackIndex]);
+      this.updateAudioPageUI(); // Mettre à jour l'affichage du titre
     },
 
     setVolume(newVolume) {
@@ -582,9 +585,14 @@
                      style="width: 100%; height: 12px; cursor: pointer;">
             </div>
             
-            <p style="text-align: center; font-style: italic; color: var(--paper-muted);">
-              ${this.currentPlaylist ? `🎼 ${this.config.playlists[this.currentPlaylist].name}` : 'Aucune playlist'}
-            </p>
+            <div style="text-align: center; padding: 1rem; background: var(--paper-dark); border-radius: 6px; margin-bottom: 1rem;">
+              <p id="current-playlist" style="margin: 0; font-weight: bold; color: var(--gold);">
+                ${this.currentPlaylist ? `🎼 ${this.config.playlists[this.currentPlaylist].name}` : 'Aucune playlist'}
+              </p>
+              <p id="current-track" style="margin: 0.5rem 0 0 0; font-style: italic; color: var(--paper-muted); font-size: 0.9rem;">
+                ${this.getCurrentTrackName()}
+              </p>
+            </div>
           </div>
         `;
 
@@ -631,8 +639,20 @@
         // Créer les fonctions globales pour chaque playlist
         Object.entries(this.config.playlists).forEach(([id, playlist]) => {
           window[`selectPlaylist_${id}`] = () => {
+            // Feedback visuel immédiat
+            const btn = document.getElementById(`playlist-btn-${id}`);
+            if (btn) {
+              btn.style.background = '#16a34a';
+              btn.textContent = '⏳ Chargement...';
+              btn.disabled = true;
+            }
+            
             this.switchToPlaylistById(id);
-            setTimeout(() => this.updateAudioPageUI(), 200);
+            setTimeout(() => {
+              this.updateAudioPageUI();
+              // Re-générer la liste des playlists pour mettre à jour les états
+              this.updatePlaylistsDisplay();
+            }, 200);
           };
         });
 
@@ -667,6 +687,21 @@
 
     },
 
+    // Obtenir le nom de la piste actuelle
+    getCurrentTrackName() {
+      if (!this.currentPlaylist || !this.config.playlists[this.currentPlaylist]) {
+        return 'Aucun titre';
+      }
+      
+      const playlist = this.config.playlists[this.currentPlaylist];
+      const currentTrack = playlist.tracks[this.currentTrackIndex];
+      
+      if (!currentTrack) return 'Aucun titre';
+      
+      // Extraire le nom du fichier sans extension
+      return currentTrack.split('/').pop().replace('.mp3', '');
+    },
+
     // Mettre à jour seulement l'interface sans regénérer tout le HTML
     updateAudioPageUI() {
       // Mettre à jour le bouton toggle
@@ -687,6 +722,41 @@
       if (volDisplay) {
         volDisplay.textContent = `${Math.round(this.volume * 100)}%`;
       }
+
+      // Mettre à jour la playlist et track actuelles
+      const currentPlaylistEl = document.getElementById('current-playlist');
+      if (currentPlaylistEl) {
+        const playlistName = this.currentPlaylist ? 
+          `🎼 ${this.config.playlists[this.currentPlaylist].name}` : 
+          'Aucune playlist';
+        currentPlaylistEl.textContent = playlistName;
+      }
+
+      const currentTrackEl = document.getElementById('current-track');
+      if (currentTrackEl) {
+        currentTrackEl.textContent = this.getCurrentTrackName();
+      }
+    },
+
+    // Mettre à jour seulement l'affichage des playlists
+    updatePlaylistsDisplay() {
+      const playlistsContainer = document.getElementById('playlists-list');
+      if (!playlistsContainer) return;
+
+      Object.entries(this.config.playlists).forEach(([id, playlist]) => {
+        const btn = document.getElementById(`playlist-btn-${id}`);
+        const container = btn?.parentElement?.parentElement;
+        
+        if (btn && container) {
+          // Mettre à jour la bordure du container
+          container.style.border = `2px solid ${this.currentPlaylist === id ? 'var(--gold)' : 'var(--bronze)'}`;
+          
+          // Mettre à jour le bouton
+          btn.style.background = this.currentPlaylist === id ? 'var(--gold)' : 'var(--bronze)';
+          btn.textContent = this.currentPlaylist === id ? '🎵 Active' : '▶️ Activer';
+          btn.disabled = false;
+        }
+      });
     }
   };
 
