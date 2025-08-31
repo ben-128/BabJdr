@@ -361,10 +361,6 @@
       
       if (!this.isEnabled) {
         this.stop();
-      } else {
-        // Reprendre la musique de la page actuelle
-        const currentPage = window.location.hash.replace('#/', '') || 'creation';
-        this.handlePageChange(currentPage);
       }
       
       this.updateUI();
