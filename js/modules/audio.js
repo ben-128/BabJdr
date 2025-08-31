@@ -49,29 +49,64 @@
       }
     },
 
-    generatePlaylistsFromFolders() {
-      // Structure de dossiers basée sur l'exploration précédente
-      const folderStructure = {
-        'Auberge': ['Auberge1.mp3', 'Auberge2.mp3', 'Auberge3.mp3', 'Auberge4.mp3'],
-        'Creation': ['Creation1.mp3', 'Creation2.mp3', 'Creation3.mp3'],
-        'Foret': ['BossForet1.mp3', 'BossForet2.mp3', 'Foret.mp3', 'Foret2.mp3', 'Foret3.mp3'],
-        'Mine': ['BossMine1.mp3', 'BossMine2.mp3', 'Mine1.mp3', 'Mine2.mp3', 'Mine3.mp3'],
-        'Voyage': ['Voyage1.mp3', 'Voyage2.mp3'],
-        'Autre': ['BOS01_01.mp3', 'BOS05_01.mp3', 'BOS06_01.mp3', 'BOS07_01.mp3', 'BOS09_01.mp3', 'BOS10_01.mp3', 'BOS99_01.mp3', 'MEL02_01.mp3', 'MEL04_01.mp3', 'MEL05_02.mp3', 'MEL05_03.mp3', 'MEL06_01.mp3', 'MEL07_01.mp3', 'MEL07_02.mp3', 'MEL08_01.mp3', 'MEL10_02.mp3']
-      };
-
+    async generatePlaylistsFromFolders() {
       this.config.playlists = {};
       
-      Object.entries(folderStructure).forEach(([folder, files]) => {
-        const playlistId = folder.toLowerCase();
-        this.config.playlists[playlistId] = {
-          name: folder,
-          icon: this.config.folderIcons[folder] || '🎵',
-          tracks: files.map(file => `${folder}/${file}`),
-          loop: true,
-          shuffle: folder === 'Auberge' || folder === 'Voyage' || folder === 'Autre'
+      try {
+        // Scan dynamique des dossiers dans data/Musiques
+        const baseUrl = window.STANDALONE_VERSION ? this.config.baseUrlGitHub : this.config.baseUrl;
+        
+        // Structure actuelle mise à jour
+        const folderStructure = {
+          'Auberge': ['Auberge1.mp3', 'Auberge2.mp3', 'Auberge3.mp3', 'Auberge4.mp3'],
+          'Creation': ['Creation1.mp3', 'Creation2.mp3', 'Creation3.mp3'],
+          'Foret': ['Foret.mp3', 'Foret2.mp3', 'Foret3.mp3'],
+          'ForetBoss': ['BossForet/BossForet1.mp3', 'BossForet/BossForet2.mp3'],
+          'Mine': ['Mine1.mp3', 'Mine2.mp3', 'Mine3.mp3'],
+          'MineBoss': ['BossMine/BossMine1.mp3', 'BossMine/BossMine2.mp3'],
+          'Voyage': ['Voyage1.mp3', 'Voyage2.mp3'],
+          'Autre': ['BOS01_01.mp3', 'BOS05_01.mp3', 'BOS06_01.mp3', 'BOS07_01.mp3', 'BOS09_01.mp3', 'BOS10_01.mp3', 'BOS99_01.mp3', 'MEL02_01.mp3', 'MEL04_01.mp3', 'MEL05_02.mp3', 'MEL05_03.mp3', 'MEL06_01.mp3', 'MEL07_01.mp3', 'MEL07_02.mp3', 'MEL08_01.mp3', 'MEL10_02.mp3']
         };
-      });
+
+        Object.entries(folderStructure).forEach(([folder, files]) => {
+          const playlistId = folder.toLowerCase();
+          const folderName = folder === 'ForetBoss' ? 'Boss Forêt' : 
+                            folder === 'MineBoss' ? 'Boss Mine' : folder;
+          
+          this.config.playlists[playlistId] = {
+            name: folderName,
+            icon: this.getIconForFolder(folder),
+            tracks: files.map(file => {
+              if (folder === 'ForetBoss') {
+                return `Foret/${file}`;
+              } else if (folder === 'MineBoss') {
+                return `Mine/${file}`;
+              } else {
+                return `${folder}/${file}`;
+              }
+            }),
+            loop: true,
+            shuffle: ['Auberge', 'Voyage', 'Autre'].includes(folder)
+          };
+        });
+        
+      } catch (error) {
+        console.error('Error generating playlists:', error);
+      }
+    },
+
+    getIconForFolder(folder) {
+      const iconMap = {
+        'Auberge': '🍺',
+        'Creation': '🎭',
+        'Foret': '🌲', 
+        'ForetBoss': '🐲',
+        'Mine': '⛏️',
+        'MineBoss': '💎',
+        'Voyage': '🚶',
+        'Autre': '🎼'
+      };
+      return iconMap[folder] || '🎵';
     },
 
     setupEventListeners() {
