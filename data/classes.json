@@ -44,7 +44,7 @@
   {
     "nom": "Mage",
     "resume": "Spécialiste de la magie destructrice.",
-    "capacites": "<ul><li><em>Équipement de mage</em> : bâtons, robes.</li><li><em>Sorts de mage</em> : Apprend et lance des sorts de mage.</li></ul>",
+    "capacites": "<ul><li><em>Équipement de mage</em> : bâtons (une et deux mains), robes.</li><li><em>Sorts de mage</em> : Apprend et lance des sorts de mage.</li></ul>",
     "sousClasses": [
       {
         "nom": "Érudit",
@@ -72,7 +72,7 @@
   {
     "nom": "Prêtre",
     "resume": "Spécialiste de la magie de soutien et anti morts-vivants.",
-    "capacites": "<ul><li><em>Équipement de prêtre</em> : bâtons, robes.</li><li><em>Sorts de prêtre</em> : Apprend et lance des sorts de Prêtre.</li><li><em>Eloquence</em> : Gagne la compétence Eloquence rang 1.</li></ul>",
+    "capacites": "<ul><li><em>Équipement de prêtre</em> : bâtons (une et deux mains), robes.</li><li><em>Sorts de prêtre</em> : Apprend et lance des sorts de Prêtre.</li><li><em>Eloquence</em> : Gagne la compétence Eloquence rang 1.</li></ul>",
     "sousClasses": [
       {
         "nom": "Inquisiteur",
@@ -121,7 +121,7 @@
   {
     "nom": "Enchanteur",
     "resume": "Détenteur d'une magie singulière, qui fait de lui un allié précieux.",
-    "capacites": "<ul><li><em>Équipement d'enchanteur</em> : bâtons, dagues, Robes.</li><li><em>Sorts d'enchanteur</em> : Apprend et lance des sorts d'Enchanteur.</li></ul>",
+    "capacites": "<ul><li><em>Équipement d'enchanteur</em> : bâtons (une et deux mains), dagues, Robes.</li><li><em>Sorts d'enchanteur</em> : Apprend et lance des sorts d'Enchanteur.</li></ul>",
     "sousClasses": [
       {
         "nom": "Esprit de la grande Fée",

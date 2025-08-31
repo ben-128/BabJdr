@@ -58,7 +58,7 @@
       "type": "card",
       "id": "gestion-des-ressources-new-8-1756658008017",
       "title": "Equipements",
-      "content": "arme 2m : pas de bouclier\nbouclier : pas tout le monde peut en mettre\npas d'arme main gauche, même arme 1m",
+      "content": "Que l'on porte une arme à une main ou à deux mains, il est uniquement possible d'être équipé d'une seule arme.\nCependant, lorsque on porte une arme à deux mains, il est impossible de porter un bouclier.\n\n<br>Vérifiez dans la fiche de votre classe et sous classe pour savoir si vous pouvez porter un bouclier, ou des armes à deux mains.",
       "deletable": true,
       "sectionName": "Nouvelle section"
     }

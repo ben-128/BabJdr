@@ -243,12 +243,11 @@
       "image": "",
       "description": "<i>Un paquet frugal de pain sec et de viande salée.</i>",
       "tags": [
-        "Consommable",
         "Nourriture"
       ],
       "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore (Endurance) points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.",
       "prix": "🔷 <strong>Prix:</strong> 5",
-      "poids": ""
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
       "nom": "Ration copieuse de nourriture",
@@ -256,12 +255,11 @@
       "image": "",
       "description": "<i>Un coffret garni de mets fins et de vin épicé, offrant réconfort et vigueur bien au-delà de la simple survie</i>",
       "tags": [
-        "Consommable",
         "Nourriture"
       ],
       "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore (Endurance) points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.\n<br><b>Charges :</b> 3",
       "prix": "🔷 <strong>Prix:</strong> 15",
-      "poids": ""
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
       "nom": "Fruits de la forêt",
@@ -269,12 +267,11 @@
       "image": "",
       "description": "<i>Des baies juteuses et sucrées, cueillies à l’ombre des grands arbres, qui redonnent fraîcheur et énergie.</i>",
       "tags": [
-        "Consommable",
         "Nourriture"
       ],
-      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore (Endurance) points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>. <br>De plus, lorsque consommé, le mangeur ne neccessite plus que 4 heures de sommeil ce jour-ci.\n<br><br><b>Charges :</b> 3",
+      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore (Endurance) points de vie. <br>Couplé à un sommeil, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>. <br>De plus, lorsque consommé, le mangeur ne neccessite plus que 4 heures de sommeil ce jour-ci.\n<br><br><b>Charges :</b> 3",
       "prix": "🔷 <strong>Prix:</strong> 20",
-      "poids": ""
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
       "nom": "Ration de survie",
@@ -282,12 +279,11 @@
       "image": "",
       "description": "<i>Un maigre assemblage de galettes sèches, de viande fumée et d’eau amère, conçu pour soutenir la flamme vitale dans les heures les plus sombres.</i>",
       "tags": [
-        "Consommable",
         "Nourriture"
       ],
       "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.",
       "prix": "",
-      "poids": ""
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
       "nom": "Flèche aiguisée",

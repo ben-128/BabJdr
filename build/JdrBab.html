@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-08-28T20:31:35.975Z by JdrBab Build System -->
+<!-- Generated on 2025-08-31T18:06:41.567Z by JdrBab Build System -->
 <title>JDR‑BAB — Livret de règles</title>
 <meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2601,267 +2601,440 @@ article[data-page="enchanteur"] .illus img:hover,
   }
 }
 
-/* ─────────────────────────── Character Sheet Components ─────────────────────────── */
-.character-sheet-generator {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 var(--space-md);
-}
+/* ═══════════════════════════════════════════════════════════════════════════════════════
+   🖨️ PRINT STYLES - États imprimables
+   ═══════════════════════════════════════════════════════════════════════════════════════ */
 
-.generator-sections {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  margin-bottom: 3rem;
-}
-
-.character-sheet-generator section {
-  background: var(--card);
-  border: 2px solid var(--rule);
-  border-radius: 16px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transition: transform var(--transition-normal);
-}
-
-.character-sheet-generator section:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-}
-
-.character-sheet-generator h2 {
-  color: var(--gold);
-  font-family: "Cinzel", serif;
-  font-size: 1.4rem;
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  border-bottom: 2px solid var(--rule);
-  padding-bottom: 0.5rem;
-}
-
-.form-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.form-group label {
-  color: var(--accent-ink);
-  font-weight: 600;
-  font-size: 0.95rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-  padding: 0.75rem;
-  border: 2px solid var(--rule);
+.print-button {
+  background: var(--bronze) !important;
+  color: white !important;
+  border: 2px solid var(--gold) !important;
   border-radius: 8px;
-  background: var(--page);
-  color: var(--accent-ink);
-  font-size: 1rem;
-  transition: all var(--transition-normal);
+  padding: 0.5rem 1rem;
+  font-family: "Cinzel", serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-  outline: none;
-  border-color: var(--bronze);
-  box-shadow: 0 0 0 3px rgba(212,175,55,0.2);
+.print-button:hover {
+  background: var(--gold) !important;
+  border-color: var(--bronze) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
 }
 
-.stat-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  text-align: center;
+/* Styles pour la version imprimable */
+@media print {
+  @page {
+    margin: 0 !important;
+    size: A4 !important;
+  }
+  
+  html, body {
+    font-family: "Times New Roman", serif !important;
+    background: white !important;
+    color: black !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+  
+  .printable-states {
+    display: block !important;
+    padding: 15mm !important;
+    margin: 0 !important;
+    background: white !important;
+    color: black !important;
+    font-size: 10pt !important;
+    line-height: 1.2 !important;
+    width: 100% !important;
+    height: auto !important;
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+  }
+  
+  .printable-states h1 {
+    font-size: 16pt !important;
+    font-weight: bold !important;
+    text-align: center !important;
+    margin-bottom: 5mm !important;
+    color: black !important;
+    text-shadow: none !important;
+    background: none !important;
+    -webkit-text-fill-color: initial !important;
+  }
+  
+  .printable-states-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 3mm !important;
+    margin: 0 !important;
+  }
+  
+  .printable-state-item {
+    background: white !important;
+    border: 1pt solid #ccc !important;
+    border-radius: 2mm !important;
+    padding: 2mm !important;
+    margin: 0 !important;
+    page-break-inside: avoid !important;
+    font-size: 9pt !important;
+    line-height: 1.1 !important;
+  }
+  
+  .printable-state-item h3 {
+    font-size: 11pt !important;
+    font-weight: bold !important;
+    margin: 0 0 1mm 0 !important;
+    color: black !important;
+    text-shadow: none !important;
+    background: none !important;
+    -webkit-text-fill-color: initial !important;
+  }
+  
+  .printable-state-item p {
+    margin: 0.5mm 0 !important;
+    color: black !important;
+    font-size: 9pt !important;
+  }
+  
+  /* Masquer les éléments de l'interface lors de l'impression */
+  #sidebar, #views, .print-button, nav, header, footer, .edit-btn, .btn {
+    display: none !important;
+  }
+  
+  /* Afficher uniquement le contenu imprimable */
+  .printable-states {
+    display: block !important;
+  }
+  
+  .printable-states-grid {
+    display: grid !important;
+  }
+  
+  .printable-state-item {
+    display: block !important;
+  }
+  
+  .printable-state-item h3 {
+    display: block !important;
+  }
+  
+  .printable-state-item div {
+    display: block !important;
+  }
 }
 
-.stat-group input {
-  text-align: center;
-  font-weight: bold;
-  font-size: 1.1rem;
-}
+/* ═══════════════════════════════════════════════════════════════════════════════════════
+   🎵 AUDIO CONTROLS - Lecteur audio flottant
+   ═══════════════════════════════════════════════════════════════════════════════════════ */
 
-.generator-actions {
+.audio-controls {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
   background: var(--card);
   border: 2px solid var(--bronze);
-  border-radius: 16px;
-  padding: 2rem;
-  text-align: center;
-  box-shadow: 0 6px 20px rgba(212,175,55,0.15);
-}
-
-.generator-actions h2 {
-  color: var(--gold);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  backdrop-filter: blur(10px);
+  min-width: 280px;
   font-family: "Cinzel", serif;
-  font-size: 1.6rem;
-  margin-bottom: 1rem;
 }
 
-.pdf-controls {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin: 2rem 0;
-  flex-wrap: wrap;
+.audio-panel {
+  padding: 1rem;
 }
 
-.btn-large {
-  padding: 1rem 2rem !important;
-  font-size: 1.1rem !important;
-  font-weight: bold !important;
-  border-radius: 12px !important;
-  transition: all var(--transition-normal) !important;
-}
-
-.btn-primary {
-  background: linear-gradient(135deg, var(--bronze), var(--gold)) !important;
-  color: white !important;
-  border: 2px solid var(--bronze) !important;
-  box-shadow: 0 4px 12px rgba(212,175,55,0.3) !important;
-}
-
-.btn-primary:hover {
-  transform: translateY(-2px) !important;
-  box-shadow: 0 6px 20px rgba(212,175,55,0.4) !important;
-}
-
-.btn-secondary {
-  background: var(--rule) !important;
-  color: var(--accent-ink) !important;
-  border: 2px solid var(--rule) !important;
-}
-
-.btn-secondary:hover {
-  background: var(--accent-rule) !important;
-  border-color: var(--accent-rule) !important;
-  transform: translateY(-1px) !important;
-}
-
-.btn-warning {
-  background: #f59e0b !important;
-  color: white !important;
-  border: 2px solid #f59e0b !important;
-}
-
-.btn-warning:hover {
-  background: #d97706 !important;
-  border-color: #d97706 !important;
-  transform: translateY(-1px) !important;
-}
-
-.pdf-options {
-  margin: 2rem auto 0;
-  max-width: 400px;
-  text-align: left;
-}
-
-.pdf-options h3 {
-  color: var(--bronze);
-  font-family: "Cinzel", serif;
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-  text-align: center;
-}
-
-.checkbox-wrapper {
+.audio-header {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  justify-content: space-between;
   margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.audio-icon {
+  font-size: 1.2rem;
+}
+
+.audio-title {
+  font-weight: 600;
+  color: var(--gold);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.audio-toggle-btn {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
   cursor: pointer;
-  padding: 0.5rem;
-  border-radius: 8px;
-  transition: background-color var(--transition-normal);
+  padding: 0.25rem;
+  border-radius: 4px;
+  transition: background 0.2s ease;
 }
 
-.checkbox-wrapper:hover {
-  background: rgba(212,175,55,0.1);
+.audio-toggle-btn:hover {
+  background: var(--rule);
 }
 
-.checkbox-wrapper input[type="checkbox"] {
-  width: 20px;
-  height: 20px;
-  accent-color: var(--bronze);
-  cursor: pointer;
+.audio-info {
+  margin-bottom: 0.75rem;
+  text-align: center;
 }
 
-.checkbox-wrapper span {
+.playlist-name {
+  font-weight: 600;
   color: var(--accent-ink);
-  font-size: 0.95rem;
-  line-height: 1.4;
+  font-size: 0.85rem;
+  margin-bottom: 0.25rem;
 }
 
-/* Mobile responsive adjustments for character sheet */
-@media (max-width: 768px) {
-  .character-sheet-generator {
-    padding: 0 var(--space-sm);
-  }
-  
-  .form-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .pdf-controls {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .pdf-controls .btn {
-    width: 100%;
-    max-width: 300px;
-  }
-  
-  .generator-actions {
-    padding: 1.5rem;
-  }
-  
-  .character-sheet-generator section {
-    padding: 1rem;
-  }
+.track-name {
+  font-size: 0.75rem;
+  color: var(--paper-muted);
+  font-style: italic;
 }
 
+.audio-controls-row {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.audio-btn {
+  background: var(--bronze);
+  border: 1px solid var(--gold);
+  border-radius: 6px;
+  padding: 0.5rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: white;
+  transition: all 0.2s ease;
+  min-width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.audio-btn:hover {
+  background: var(--gold);
+  transform: translateY(-1px);
+}
+
+.audio-btn:active {
+  transform: translateY(0);
+}
+
+.audio-volume-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.volume-icon {
+  font-size: 0.9rem;
+  min-width: 20px;
+}
+
+.volume-slider {
+  flex: 1;
+  height: 4px;
+  background: var(--rule);
+  border-radius: 2px;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--bronze);
+  cursor: pointer;
+  border: 2px solid var(--gold);
+}
+
+.volume-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--bronze);
+  cursor: pointer;
+  border: 2px solid var(--gold);
+}
+
+.volume-value {
+  min-width: 35px;
+  text-align: right;
+  font-weight: 600;
+  color: var(--accent-ink);
+}
+
+/* Responsive pour mobile */
 @media (max-width: 480px) {
-  .stats-grid {
-    grid-template-columns: 1fr;
+  .audio-controls {
+    bottom: 10px;
+    right: 10px;
+    left: 10px;
+    min-width: auto;
   }
   
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    padding: 0.6rem;
+  .audio-panel {
+    padding: 0.75rem;
+  }
+  
+  .audio-title {
+    font-size: 0.8rem;
+  }
+  
+  .audio-controls-row {
+    gap: 0.75rem;
+  }
+  
+  .audio-btn {
+    min-width: 40px;
+    height: 40px;
     font-size: 1rem;
   }
-  
-  .character-sheet-generator h2 {
-    font-size: 1.2rem;
+}
+
+/* Masquer lors de l'impression */
+@media print {
+  .audio-controls {
+    display: none !important;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════════════════
+   🔧 AUDIO PAGE CONTROLS - Boutons stables pour la page audio
+   ═══════════════════════════════════════════════════════════════════════════════════════ */
+
+.audio-control-btn {
+  background: var(--bronze) !important;
+  color: white !important;
+  border: none !important;
+  padding: 1rem 2rem !important;
+  border-radius: 8px !important;
+  cursor: pointer !important;
+  font-family: "Cinzel", serif !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  transition: none !important;
+  min-width: 160px !important;
+  min-height: 50px !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+.audio-control-btn:hover {
+  background: var(--gold) !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.audio-control-btn:active {
+  background: var(--bronze) !important;
+  transform: scale(0.98) !important;
+}
+
+.playlist-select-btn {
+  background: var(--bronze) !important;
+  color: white !important;
+  border: none !important;
+  padding: 1rem 1.5rem !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
+  font-family: "Cinzel", serif !important;
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+  transition: none !important;
+  min-width: 120px !important;
+  min-height: 45px !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+.playlist-select-btn:hover {
+  background: var(--gold) !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.playlist-select-btn:active {
+  transform: scale(0.98) !important;
+}
+
+/* Slider de volume amélioré */
+#master-volume {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  height: 6px !important;
+  background: var(--rule) !important;
+  border-radius: 3px !important;
+  outline: none !important;
+  cursor: pointer !important;
+  transition: none !important;
+}
+
+#master-volume::-webkit-slider-thumb {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  width: 20px !important;
+  height: 20px !important;
+  border-radius: 50% !important;
+  background: var(--bronze) !important;
+  cursor: pointer !important;
+  border: 2px solid var(--gold) !important;
+  transition: none !important;
+}
+
+#master-volume::-webkit-slider-thumb:hover {
+  background: var(--gold) !important;
+  border-color: var(--bronze) !important;
+}
+
+#master-volume::-moz-range-thumb {
+  width: 20px !important;
+  height: 20px !important;
+  border-radius: 50% !important;
+  background: var(--bronze) !important;
+  cursor: pointer !important;
+  border: 2px solid var(--gold) !important;
+  transition: none !important;
+}
+
+#master-volume::-moz-range-thumb:hover {
+  background: var(--gold) !important;
+  border-color: var(--bronze) !important;
+}
+
+
 /* Editor and Dev Mode styles */
 
 /* === HIDE ALL EDITING ELEMENTS IN STANDALONE MODE === */
@@ -4228,7 +4401,7 @@ article span[title]:hover::after {
         "description": "Lance une boule de feu sur un adversaire, qui peut s'enflammer.",
         "categorie": "Mage",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 1",
-        "portee": "🎯 <strong>Portée:</strong> 20m",
+        "portee": "🎯 <strong>Portée:</strong> 15m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 3",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
@@ -4242,13 +4415,13 @@ article span[title]:hover::after {
         "description": "Frappe instantannément une cible avec un éclair électrique, ne laissant aucune chance à l'esquive.",
         "categorie": "Mage",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 2",
-        "portee": "🎯 <strong>Portée:</strong> 10m",
+        "portee": "🎯 <strong>Portée:</strong> 12m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 5",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> &nbsp;Inflige 6 dégats d'<span style=\"color: #22c55e; font-weight: bold;\">Air</span> à la cible.<br>&nbsp;Tous les 5 points d'intelligence, augmente les dégats de 1.",
-        "effetCritique": "<strong>Coup Critique:&nbsp;</strong> Les dégâts passent à 10 et ils sont aussi infligé à un ennemi à moins de 5m de la cible."
+        "effetCritique": "<strong>Coup Critique:&nbsp;</strong> Les dégâts passent à 10 et ils sont aussi infligé à un ennemi à moins de 3m de la cible."
       },
       {
         "nom": "Vague déferlante",
@@ -4256,13 +4429,13 @@ article span[title]:hover::after {
         "description": "Une puissante vague d'eau s'abat sur vos ennemis et les repousse.",
         "categorie": "Sorts de Mage",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 3",
-        "portee": "🎯 <strong>Portée:</strong> 5m",
+        "portee": "🎯 <strong>Portée:</strong> 6m",
         "coutMana": "🔵 <strong>Coût mana:</strong> 6",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> Volant.",
-        "effetNormal": "<strong>Effet:</strong> &nbsp;Inflige 6 dégats d'<span style=\"color: #2b6cb0; font-weight: bold;\">Eau</span> aux créature devant le lanceur (largeur 2m distance 5m) et les repousse jusqu'à 5m.<br>&nbsp;Tous les 5 points d'intelligence, augmente les dégats de 1.",
-        "effetCritique": "<strong>Coup Critique:&nbsp;</strong> les dégats passent à 10 et les enemis sont touchés/repoussés à 10m."
+        "effetNormal": "<strong>Effet:</strong> &nbsp;Inflige 6 dégats d'<span style=\"color: #2b6cb0; font-weight: bold;\">Eau</span> aux créature devant le lanceur (largeur 3m distance 6m) et les repousse jusqu'à 6m.<br>&nbsp;Tous les 5 points d'intelligence, augmente les dégats de 1.",
+        "effetCritique": "<strong>Coup Critique:&nbsp;</strong> les dégats passent à 10 et les enemis sont touchés/repoussés à 12m."
       },
       {
         "nom": "Volée de pierres",
@@ -4270,12 +4443,12 @@ article span[title]:hover::after {
         "description": "Invoque une volée de pierres qui tournoient autour du lanceur, puis qui sont éjectées devant lui.",
         "categorie": "Sorts de Mage",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 4",
-        "portee": "🎯 <strong>Portée:</strong> 10m",
+        "portee": "🎯 <strong>Portée:</strong> 6m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 10",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> Esquive.",
-        "effetNormal": "<strong>Effet:</strong> Inflige 7 dégats de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> aux créatures autour du lanceur (3m). <br>Puis inflige le même montant aux créatures devant le lanceur sur 10m.<br><br>&nbsp;Tous les 5 points d'intelligence, augmente les dégats de 1.",
+        "effetNormal": "<strong>Effet:</strong> Inflige 7 dégats de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> aux créatures autour du lanceur (3m). <br>Puis inflige le même montant aux créatures devant le lanceur sur 6m.<br><br>&nbsp;Tous les 5 points d'intelligence, augmente les dégats de 1.",
         "effetCritique": "<strong>Coup Critique:&nbsp;</strong>&nbsp;Les dégats passent à 12. Les cibles non volantes et de taille moyennes sont <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">A terre</span> pendant 1 tour."
       }
     ]
@@ -4290,7 +4463,7 @@ article span[title]:hover::after {
         "description": "Invoque un magie divine qui blesse les morts-vivants",
         "categorie": "Anti-mort-vivant",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 3",
-        "portee": "🎯 <strong>Portée:</strong> 20m",
+        "portee": "🎯 <strong>Portée:</strong> 18m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 3",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
@@ -4299,16 +4472,16 @@ article span[title]:hover::after {
         "effetCritique": "<strong>Coup Critique:&nbsp;</strong>Double dégâts."
       },
       {
-        "nom": "Soin mineur",
+        "nom": "Refermer les blessures",
         "element": "Divin",
-        "description": "Une magie divine soigne les blessures du héros ou d'un allié proche.",
+        "description": "Une magie divine soigne les blessures récentes du héros ou d'un allié proche.",
         "categorie": "Sorts de Prêtre",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 1",
         "portee": "🎯 <strong>Portée:</strong> 3m",
         "coutMana": "🔵 <strong>Coût mana:</strong> 5",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
-        "resistance": "<strong>Sans effet si:</strong> &nbsp;mort-vivant.",
+        "resistance": "<strong>Sans effet si:</strong> &nbsp;\n<br>- Hors combat.\n<br>- La cible n'a pas été blessée pendant plus de 3 tours.",
         "effetNormal": "<strong>Effet:</strong> Soigne la cible de 5 points de vie. Tous les 5 points d'intelligence, augmente le soin de 1.",
         "effetCritique": "<strong>Coup Critique:&nbsp;</strong>Double le soin."
       },
@@ -4364,7 +4537,7 @@ article span[title]:hover::after {
         "description": "Une magie des vents accélère un allié ou le lanceur.",
         "categorie": "Sorts d'Enchanteur",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 1",
-        "portee": "🎯 <strong>Portée:</strong> 5m",
+        "portee": "🎯 <strong>Portée:</strong> 6m",
         "coutMana": "🔵 <strong>Coût mana:</strong> 4",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
@@ -4378,7 +4551,7 @@ article span[title]:hover::after {
         "description": "Un voile d'ombre caresse la cible, l'enveloppant dans un sommeil surnaturel.",
         "categorie": "Sorts d'Enchanteur",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 2",
-        "portee": "🎯 <strong>Portée:</strong> 5m",
+        "portee": "🎯 <strong>Portée:</strong> 6m",
         "coutMana": "🔵 <strong>Coût mana:</strong> 8",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
@@ -4387,24 +4560,19 @@ article span[title]:hover::after {
         "effetCritique": "<strong>Coup Critique:&nbsp;</strong> L'effet dure 4 tours."
       }
     ]
-  },
-  {
-    "nom": "Sorts de Monstres",
-    "description": "Sorts divers de monstres.",
-    "sorts": []
   }
 ];
     window.CLASSES = [
   {
     "nom": "Guerrier",
     "resume": "Héros sans égal au combat au corp à corp.",
-    "capacites": "<ul><li><em>Expert de l'équipement</em> : Toutes les armes, armures (légères/lourdes), bouclier.</li><li><em>Hardiesse</em> : Gagne la compétence Hardiesse rang 1.</li></ul>",
+    "capacites": "<ul><li><em>Expert de l'équipement</em> : Capable d'utiliser toutes les armes (épées, arcs, batons, dagues, exotiques, une main et deux mains), armures (robes, légères, lourdes), et boucliers.</li><li><em>Hardiesse</em> : Gagne la compétence Hardiesse rang 1.</li></ul>",
     "sousClasses": [
       {
         "nom": "Nain des montagnes",
         "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>5</strong></span><span class=\"chip\">🏃 Agilité: <strong>1</strong></span><span class=\"chip\">🛡️ Endurance: <strong>7</strong></span><span class=\"chip\">🧠 Intelligence: <strong>1</strong></span><span class=\"chip\">⚡ Volonté: <strong>5</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +2 Force 💪, +3 Endurance 🛡️, +1 Volonté⚡   <strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Brise rocher</em>: Gagne 1 de compétence sur les tests de compétence Hardiesse pour une destruction d'objet.</li><li><em>Volonté inflexible</em>: Les nains possèdent une volonté inflexible qui les rendent résistants aux sortilèges (caractéristique Volonté élevée).</li></ul>",
+        "capacites": "<ul><li><em>Brise rocher : </em> Gagne 1 de compétence sur les tests de compétence Hardiesse pour une destruction d'objet.</li><li><em>Volonté inflexible :</em> Les nains possèdent une volonté inflexible qui les rendent résistants aux sortilèges (caractéristique Volonté élevée).</li></ul>",
         "description": "<i>Race robuste et inflexible, dotée d’une endurance exceptionnelle. Forgés par la roche et les sommets, ils résistent aux épreuves et possèdent une force colossale capable de briser murs, armures et créatures cuirassées.</i>"
       },
       {
@@ -4417,23 +4585,30 @@ article span[title]:hover::after {
           "Volonté": 1,
           "Chance": 1
         },
-        "progression": "<strong>📈 Progression par niveau:</strong> +2 Force 💪, +1 Agilité 🏃, +2 Endurance 🛡️<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Tourbillon de rage</em>: Sur un critique au corps à corps, touche aussi tous les adversaires à moins de 2m.</li><li><em>Risque sauvage</em>: +1 chance de critique physique s'il ne porte pas de bouclier.</li></ul>",
+        "progression": "<strong>📈 Progression par niveau:</strong> +3 Force 💪, +1 Agilité 🏃, +1 Endurance 🛡️<strong> +2 Au choix</strong>",
+        "capacites": "<ul><li><em>Tourbillon de rage :</em> Sur un critique au corps à corps, touche aussi tous les adversaires à moins de 3m.</li><li><em>Risque sauvage :</em> +1 chance de critique physique s'il ne porte pas de bouclier.</li></ul>",
         "description": "<i>Combattant sauvage, maître des armes à deux mains. Sa rage décuple sa force, lui permettant d’abattre ses ennemis dans un déchaînement de puissance brute et de coups imparables.</i>"
       },
       {
         "nom": "Aventurier",
-        "description": "Héros polyvalent et ingénieux, il affronte l’inconnu avec courage, et manie tous les outils à sa portée pour triompher.",
+        "description": "<i>Héros polyvalent et ingénieux, il affronte l’inconnu avec courage, et manie tous les outils à sa portée pour triompher.</i>",
         "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>5</strong></span><span class=\"chip\">🏃 Agilité: <strong>2</strong></span><span class=\"chip\">🛡️ Endurance: <strong>5</strong></span><span class=\"chip\">🧠 Intelligence: <strong>1</strong></span><span class=\"chip\">⚡ Volonté: <strong>1</strong></span><span class=\"chip\">🍀 Chance: <strong>5</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +2 Force 💪, +2 Endurance 🛡️, +1 Chance 🍀, <strong> +2 Au choix</strong>",
-        "capacites": "<ul><em>Passé glorieux</em> : Gagne la compétence Eloquence rang 1.<br><em>Sans failles</em> : Dispose d'un Effort supplémentaire maximum.<br><em>Épaules d’acier</em> : Peut porter jusqu’à cinq consommables de plus que la limite habituelle.</ul>"
+        "capacites": "<ul><em>Passé glorieux : </em>  Gagne la compétence Eloquence rang 1.<br><em>Sans failles :</em>  Dispose d'un Effort maximum supplémentaire .<br><em>Polyvalent : </em> Dispose d'un point de Don supplémentaire.</ul>"
+      },
+      {
+        "nom": "Maître d’armes",
+        "description": "<i>Guerrier érudit et redoutable, il manie avec aisance toutes les armes, des plus communes aux plus exotiques, transformant chaque outil de guerre en prolongement de son bras.</i>",
+        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>5</strong></span><span class=\"chip\">🏃 Agilité: <strong>2</strong></span><span class=\"chip\">🛡️ Endurance: <strong>5</strong></span><span class=\"chip\">🧠 Intelligence: <strong>1</strong></span><span class=\"chip\">⚡ Volonté: <strong>3</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
+        "progression": "<strong>📈 Progression par niveau:</strong> +3 Force 💪, +2 Endurance 🛡️<strong> +2 Au choix</strong>",
+        "capacites": "<ul><li><em>Volte d’armes :</em> Peut changer d'arme sans utiliser d'action secondaire.\n</li>\n               <li><em>Expert martial :</em> Lorsqu'il utilise une arme exotique, relance le dé en cas d'echec critique.\n</li>\n   <li><em>Erudit des lames :</em> Gagne 1 de compétence sur les tests de compétence Réflexion sur l'effet ou la provenance d'une arme.\n</li>\n\n</ul>"
       }
     ]
   },
   {
     "nom": "Mage",
     "resume": "Spécialiste de la magie destructrice.",
-    "capacites": "<ul><li><em>Équipement de mage</em> : bâtons, robes.</li><li><em>Sorts de mage</em> : Apprend et lance des sorts de mage.</li></ul>",
+    "capacites": "<ul><li><em>Équipement de mage</em> : bâtons (une et deux mains), robes.</li><li><em>Sorts de mage</em> : Apprend et lance des sorts de mage.</li></ul>",
     "sousClasses": [
       {
         "nom": "Érudit",
@@ -4461,7 +4636,7 @@ article span[title]:hover::after {
   {
     "nom": "Prêtre",
     "resume": "Spécialiste de la magie de soutien et anti morts-vivants.",
-    "capacites": "<ul><li><em>Équipement de prêtre</em> : bâtons, robes.</li><li><em>Sorts de prêtre</em> : Apprend et lance des sorts de Prêtre.</li><li><em>Eloquence</em> : Gagne la compétence Eloquence rang 1.</li></ul>",
+    "capacites": "<ul><li><em>Équipement de prêtre</em> : bâtons (une et deux mains), robes.</li><li><em>Sorts de prêtre</em> : Apprend et lance des sorts de Prêtre.</li><li><em>Eloquence</em> : Gagne la compétence Eloquence rang 1.</li></ul>",
     "sousClasses": [
       {
         "nom": "Inquisiteur",
@@ -4489,20 +4664,20 @@ article span[title]:hover::after {
   {
     "nom": "Rôdeur",
     "resume": "Héros très agile.",
-    "capacites": "<ul><li><em>Équipement de rôdeur</em> : armures légères, dagues.</li><li><em>Coordination</em> : Gagne la compétence Coordination rang 1.</li></ul>",
+    "capacites": "<ul><li><em>Équipement de rôdeur</em> : Dagues, robes, armures légères.</li><li><em>Coordination</em> : Gagne la compétence Coordination rang 1.</li></ul>",
     "sousClasses": [
       {
         "nom": "Voleur",
         "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>3</strong></span><span class=\"chip\">🏃 Agilité: <strong>5</strong></span><span class=\"chip\">🛡️ Endurance: <strong>2</strong></span><span class=\"chip\">🧠 Intelligence: <strong>2</strong></span><span class=\"chip\">⚡ Volonté: <strong>2</strong></span><span class=\"chip\">🍀 Chance: <strong>5</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +2 Agilité 🏃, +2 Force 💪, +1 Endurance 🛡️<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Mains expertes</em> : Gagne la compétence Finesse rang 1.</li><li><em>Sprint</em> : Peut utiliser une action secondaire pour doubler sa vitesse.</li><li><em>Vicieux</em> : Une fois par tour, permet d'effectuer une action secondaire supplémentaire aprés un coup critique d'une attaque physique au corps à corps.</li></ul>",
+        "capacites": "<ul><li><em>Mains expertes :</em> Gagne la compétence Finesse rang 1.</li><li><em>Sprint :</em> Peut utiliser une action secondaire pour doubler sa vitesse de déplacement.</li><li><em>Vicieux :</em> Double les chances de critiques physiques sur les cibles subissant un état qui les empeche d'esquiver.</li></ul>",
         "description": "<i>Maître de la finesse et de l’agilité, il se déplace avec rapidité fulgurante et frappe là où ça fait le plus mal. </i>"
       },
       {
         "nom": "Chasseur",
         "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>3</strong></span><span class=\"chip\">🏃 Agilité: <strong>5</strong></span><span class=\"chip\">🛡️ Endurance: <strong>2</strong></span><span class=\"chip\">🧠 Intelligence: <strong>4</strong></span><span class=\"chip\">⚡ Volonté: <strong>2</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +2 Agilité 🏃, +1 Force 💪, +1 Endurance 🛡️, +1 Intelligence 🧠<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Armes du Chasseur</em> : Peut utiliser les arcs.</li><li><em>Cueillette</em> : Une fois par jour, lors d’un repos, le personnage peut récolter 5 plantes locales (au choix du MJ). Leur efficacité dépend de l’Intelligence de l’utilisateur.</li><li><em>Connaissance de la faune et la flore</em> : Gagne 1 de compétence sur les tests de Réflexion lié à animal, un monstre ou une plante.</li></ul>",
+        "capacites": "<ul><li><em>Armes du Chasseur</em> : Peut utiliser les arcs.</li><li><em>Cueillette</em> : Une fois par jour, lors d’un repos, le personnage peut récolter 5 plantes locales (au choix du MJ). Leur efficacité dépend de l’Intelligence de l’utilisateur.</li><li><em>Connaissance du milieu naturel</em> : Gagne 1 de compétence sur les tests de Réflexion lié à animal, un monstre, une plante, ou la découverte de passages dérobés en milieu naturel.</li></ul>",
         "description": "<i>Précis et agile, il complète son art de l’arc par la science des herbes anciennes.</i>"
       }
     ]
@@ -4510,7 +4685,7 @@ article span[title]:hover::after {
   {
     "nom": "Enchanteur",
     "resume": "Détenteur d'une magie singulière, qui fait de lui un allié précieux.",
-    "capacites": "<ul><li><em>Équipement d'enchanteur</em> : Robes, bâtons, dagues.</li><li><em>Sorts d'enchanteur</em> : Apprend et lance des sorts d'Enchanteur.</li></ul>",
+    "capacites": "<ul><li><em>Équipement d'enchanteur</em> : bâtons (une et deux mains), dagues, Robes.</li><li><em>Sorts d'enchanteur</em> : Apprend et lance des sorts d'Enchanteur.</li></ul>",
     "sousClasses": [
       {
         "nom": "Esprit de la grande Fée",
@@ -4549,8 +4724,8 @@ article span[title]:hover::after {
       },
       {
         "nom": "Toujours pret",
-        "description": "Le maximum d'efforts passe à 4.",
-        "prerequis": "<strong> Prérequis :</strong> -",
+        "description": "Le maximum d'efforts maximum augmente de 1.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
       {
@@ -4621,7 +4796,7 @@ article span[title]:hover::after {
     "dons": [
       {
         "nom": "Croche-patte",
-        "description": "Peut utiliser une action secondaire pour mettre un adversaire au corp à corp, de moins de 2m, dans l'état <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">A terre</span>.",
+        "description": "Peut utiliser une action principale pour effectuer un croche- patte :\n\n\n<br><br><b>Sans effet si :</b> \n<br>- Esquive.\n<br>- Volant ou lévitant.\n<br>- Taille supérieure à Moyen.\n\n<br><br><b>Effet :</b> Inflige (Force) dégats Physiques à la cible. Met la cible dans l'état <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">A terre</span>.\n✏️\n<br><br><b>Coup Critique :</b>  Les dégats sont doublés et la cible est <span class=\"etat-link\" data-etat=\"Endormi/assomé/Effrayé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Assomé</span> 1 tour.\n\n<br><br><hr>",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -4675,7 +4850,7 @@ article span[title]:hover::after {
       },
       {
         "nom": "Infusion élémentaire",
-        "description": "Aprés avoir lancé un sort, le héros peut, en utilisant une action secondaire, imprégner son arme de l'élément du sort. Elle infligera à sa prochaine attaque des dégats de cet élément équivalents au niveau du sort.",
+        "description": "Aprés avoir lancé un sort, le héros peut, en utilisant une action secondaire, imprégner son arme de l'élément du sort. Elle infligera à sa prochaine attaque physique des dégats de cet élément équivalents au niveau du sort.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -4699,9 +4874,9 @@ article span[title]:hover::after {
       },
       {
         "nom": "Au milieu du combat",
-        "description": "Permet de porter une armure légère.",
-        "prerequis": "<strong> Prérequis :</strong>💪Force 5",
-        "cout": "2 point de don"
+        "description": "Permet d'utiliser s'équiper de dagues.",
+        "prerequis": "<strong> Prérequis :</strong>🏃Agilité 5",
+        "cout": "1 point de don"
       },
       {
         "nom": "Jugement éclair",
@@ -4830,7 +5005,7 @@ article span[title]:hover::after {
         "Deux mains",
         "Arc"
       ],
-      "effet": "<strong>Portée: </strong> 15m.<br>\n<strong>Dégâts: </strong> Inflige (Force) points de dégats physiques.",
+      "effet": "<strong>Portée: </strong> 12m.<br>\n<strong>Dégâts: </strong> Inflige (Force) points de dégats physiques.",
       "prix": "🔷 <strong>Prix:</strong> 30",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -4965,12 +5140,12 @@ article span[title]:hover::after {
       "nom": "Baguette de d'accélération",
       "numero": 17,
       "image": "",
-      "description": "Description de l'objet.",
+      "description": "<i>Une fine tige de cristal rayonnant, dont l’éclat sacré nimbe son porteur d’une aura éclatante, lui conférant une vitesse surnaturelle et des réflexes fulgurants.</i>",
       "tags": [
         "Consommable",
         "Catalyseur"
       ],
-      "effet": "<strong>Effet:</strong> <span class=\"spell-link\" data-spell=\"Accélération\" data-category=\"Sorts d'Enchanteur\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Accélération</span>",
+      "effet": "<strong>Effet:</strong> Remplace votre prochaine action principale par le sort d'enchanteur <span class=\"spell-link\" data-spell=\"Accélération\" data-category=\"Sorts d'Enchanteur\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Accélération</span>. <br><i>Les prérequis pour le sort ne sont pas requis mais le mana et l'intelligence du héros sont utilisés.</i>\n    <br><br><strong>Charges :</strong> 3",
       "prix": "🔷 <strong>Prix:</strong> 30",
       "poids": ""
     },
@@ -4993,11 +5168,11 @@ article span[title]:hover::after {
       "image": "",
       "description": "<i>Un paquet frugal de pain sec et de viande salée.</i>",
       "tags": [
-        "Consommable"
+        "Nourriture"
       ],
-      "effet": "<strong>Effet:</strong> permet de se nourrir pour éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.",
+      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore (Endurance) points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.",
       "prix": "🔷 <strong>Prix:</strong> 5",
-      "poids": ""
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
       "nom": "Ration copieuse de nourriture",
@@ -5005,11 +5180,11 @@ article span[title]:hover::after {
       "image": "",
       "description": "<i>Un coffret garni de mets fins et de vin épicé, offrant réconfort et vigueur bien au-delà de la simple survie</i>",
       "tags": [
-        "Consommable"
+        "Nourriture"
       ],
-      "effet": "<strong>Effet:</strong> permet de se nourrir pour éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.\n<br><b>Charges :</b> 3",
-      "prix": "🔷 <strong>Prix:</strong> 10",
-      "poids": ""
+      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore (Endurance) points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.\n<br><b>Charges :</b> 3",
+      "prix": "🔷 <strong>Prix:</strong> 15",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
       "nom": "Fruits de la forêt",
@@ -5017,11 +5192,49 @@ article span[title]:hover::after {
       "image": "",
       "description": "<i>Des baies juteuses et sucrées, cueillies à l’ombre des grands arbres, qui redonnent fraîcheur et énergie.</i>",
       "tags": [
-        "Consommable"
+        "Nourriture"
       ],
-      "effet": "<strong>Effet:</strong> Permet de se nourrir pour éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>. <br>De plus, lorsque consommé, le mangeur ne neccessite plus que 4 heures de sommeil ce jour-ci.\n<br><br><b>Charges :</b> 3",
-      "prix": "🔷 <strong>Prix:</strong> 10",
+      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore (Endurance) points de vie. <br>Couplé à un sommeil, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>. <br>De plus, lorsque consommé, le mangeur ne neccessite plus que 4 heures de sommeil ce jour-ci.\n<br><br><b>Charges :</b> 3",
+      "prix": "🔷 <strong>Prix:</strong> 20",
       "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Ration de survie",
+      "numero": 22,
+      "image": "",
+      "description": "<i>Un maigre assemblage de galettes sèches, de viande fumée et d’eau amère, conçu pour soutenir la flamme vitale dans les heures les plus sombres.</i>",
+      "tags": [
+        "Nourriture"
+      ],
+      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.",
+      "prix": "",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Flèche aiguisée",
+      "numero": 23,
+      "image": "",
+      "description": "<i>Un trait finement taillé, dont la pointe acérée perce l’armure avec une précision mortelle.</i>",
+      "tags": [
+        "Consommable",
+        "Flèche"
+      ],
+      "effet": "<b>Effet :</b> Renforce la prochaine attaque à l'arc et lui rajoute +3 points de dégats physiques en cas de réussite de l'attaque.\n\n<br><br><b>Charges :</b> 3",
+      "prix": "🔷 <strong>Prix:</strong> 10",
+      "poids": ""
+    },
+    {
+      "nom": "Flèche de la terre",
+      "numero": "24",
+      "image": "",
+      "description": "<i>Une flèche alourdie de pierres runiques, qui libère la force brutale de l’élément Terre à l’impact.</i>",
+      "tags": [
+        "Consommable",
+        "Flèche"
+      ],
+      "effet": "<b>Effet :</b> Renforce la prochaine attaque à l'arc et lui rajoute +5 points de dégats élémentaire de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> en cas de réussite de l'attaque.\n\n<br><br><b>Charges :</b> 3",
+      "prix": "🔷 <strong>Prix:</strong> 20",
+      "poids": ""
     }
   ],
   "filterSettings": {
@@ -5061,7 +5274,7 @@ article span[title]:hover::after {
     "armureObscurite": "5",
     "armureDivin": 0,
     "armureMalefique": 0,
-    "abilites": "<strong>Morsure venimeuse:</strong> Inflige 5 dégâts Physiques. <br> Si (resistance altérations &lt; 3)  + <span class=\"etat-link\" data-etat=\"Empoisonné\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Empoisonné</span> 1 pendant 5 tours.<br><br><strong>Toile:</strong> Portée 10m. <span class=\"etat-link\" data-etat=\"Entravé/Entoilé/Embourbé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Entoile</span> la cible pendant 2 tour.",
+    "abilites": "<strong>Morsure venimeuse:</strong> Inflige 5 dégâts Physiques. <br> Si (resistance altérations &lt; 3)  + <span class=\"etat-link\" data-etat=\"Empoisonné\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Empoisonné</span> 1 pendant 5 tours.<br><br><strong>Toile:</strong> Portée 9m, equivable, <span class=\"etat-link\" data-etat=\"Entravé/Entoilé/Embourbé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Entoile</span> la cible pendant 2 tour.",
     "butin": "<strong>Butin:</strong>",
     "monster-abilites": "AAAAAAAA",
     "monster-armurephysique": "0",
@@ -5177,18 +5390,17 @@ article span[title]:hover::after {
   {
     "nom": "Ours des Bois",
     "tags": [
-      "Forêt",
-      "Boss"
+      "Forêt"
     ],
     "image": "data/images/Monstres/foret/Monstre_Forêt_OursdesBois.png",
     "element": "Terre",
-    "pointsDeVie": 60,
+    "pointsDeVie": "40",
     "armurePhysique": 4,
-    "esquive": 4,
+    "esquive": "0",
     "initiative": 1,
-    "coupCritique": 12,
-    "coupCritiqueSorts": 6,
-    "resistanceAlterations": 8,
+    "coupCritique": "1",
+    "coupCritiqueSorts": "0",
+    "resistanceAlterations": "4",
     "armureFeu": 0,
     "armureEau": 0,
     "armureTerre": 2,
@@ -5197,8 +5409,9 @@ article span[title]:hover::after {
     "armureObscurite": 1,
     "armureDivin": 0,
     "armureMalefique": 0,
-    "abilites": "<strong>Griffes dévastatrices:</strong> Inflige 12 dégâts physiques à une cible.<br><strong>Rugissement:</strong> Terrorise tous les ennemis pendant 2 tours.<br><strong>Charge écrasante:</strong> Inflige 15 dégâts et étourdit pendant 1 tour.",
-    "butin": "<strong>Butin:</strong> 80-150 pièces d'or, fourrure d'ours, griffes acérées."
+    "abilites": "<strong>Griffes dévastatrices:</strong> Inflige 7 dégâts physiques à une cible.<br><strong>Rugissement:</strong> Cible à 9m  <span class=\"etat-link\" data-etat=\"Affaibli\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Affaibli</span> , si  (resistance altérations &lt; 4)",
+    "butin": "<strong>Butin:</strong>",
+    "monster-initiative": "1"
   },
   {
     "nom": "Pouple de la forêt",
@@ -5222,7 +5435,7 @@ article span[title]:hover::after {
     "armureObscurite": 0,
     "armureDivin": 0,
     "armureMalefique": 0,
-    "abilites": "<strong>Accroche:</strong> Inflige 4 dégâts physiques. S'attache à la cible.",
+    "abilites": "<strong>Accroche:</strong> Inflige 4 dégâts physiques. S'attache à la cible, qui devient <span class=\"etat-link\" data-etat=\"Ralenti\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Ralenti</span>.",
     "butin": "<strong>Butin:</strong>",
     "monster-initiative": "2"
   },
@@ -5248,7 +5461,7 @@ article span[title]:hover::after {
     "armureObscurite": 0,
     "armureDivin": 0,
     "armureMalefique": 0,
-    "abilites": "<strong>Morsure venimeuse:</strong> Inflige 5 dégâts Physiques. <br> Si (resistance altérations &lt; 3)  + <span title=\"Des dégats sont appliqués à chaque début de tour du lanceur, réduits ni par l'armure physique ni par l'armure élémentaire.\">Empoisonné</span>2 pendant 5 tours.<br><br>",
+    "abilites": "<strong>Morsure venimeuse:</strong> Inflige 5 dégâts Physiques. <br> Si (resistance altérations &lt; 4)  + <span title=\"Des dégats sont appliqués à chaque début de tour du lanceur, réduits ni par l'armure physique ni par l'armure élémentaire.\">Empoisonné</span>2 pendant 5 tours.<br><br>",
     "butin": "<strong>Butin:</strong>",
     "monster-initiative": "4"
   },
@@ -5274,7 +5487,7 @@ article span[title]:hover::after {
     "armureObscurite": "5",
     "armureDivin": 0,
     "armureMalefique": 0,
-    "abilites": "<strong>Volant</strong>: Necessite de sauter pour attaque au corps à corps.<br><strong>Morsure: </strong> inflige 5 physique.",
+    "abilites": "<strong>Volant</strong>: Necessite de sauter pour attaque au corps à corps.<br><strong>Morsure: </strong> inflige 5 physique.\n<br><strong>Vent aveuglant: </strong> Portée 6m, esquivable, inflige 5 <span style=\"color: #22c55e; font-weight: bold;\">Air</span>. Si (Res Alt &lt; 4) <span class=\"etat-link\" data-etat=\"Aveuglé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Aveuglé</span>",
     "butin": "<strong>Butin:</strong>",
     "monster-initiative": "5"
   },
@@ -5300,7 +5513,7 @@ article span[title]:hover::after {
     "armureObscurite": "5",
     "armureDivin": 0,
     "armureMalefique": "5",
-    "abilites": "Double attaque.<br><strong>Attaque basique:</strong> Inflige 10 dégâts physiques. <br><strong>Hurlement:</strong> Tous les adversaires à 15m, avec Resistance altération &lt; 6, sont <span class=\"etat-link\" data-etat=\"Affaibli\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Affaibli</span>.  \n<br><b>Repoussoir</b>: Repousse une une cible à 10m. Inflige 5 dégats.\n<br><b>Appel </b>: Hurle et fait venir 2 Groinkas.",
+    "abilites": "Double attaque.<br><strong>Attaque basique:</strong> Inflige 10 dégâts physiques. <br><strong>Hurlement:</strong> Tous les adversaires à 15m, avec Resistance altération &lt; 6, sont <span class=\"etat-link\" data-etat=\"Affaibli\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Affaibli</span>.  \n<br><b>Repoussoir</b>: Repousse une une cible à 9m. Inflige 5 dégats.\n<br><b>Appel </b>: Hurle et fait venir 2 Groinkas.\n<br><b>Tremblement de terre </b>: Tous les adversaires à 15m, 7 dégats <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> , critique 12.",
     "butin": "<strong>Butin:</strong>",
     "monster-initiative": "3"
   }
@@ -5459,7 +5672,8 @@ article span[title]:hover::after {
         18,
         13,
         19,
-        20
+        20,
+        23
       ]
     }
   ]
@@ -5526,7 +5740,7 @@ article span[title]:hover::after {
     "objet:Baguette de boule de feu": "https://i.ibb.co/JwXs3k2V/Baguette-Feu.png",
     "objet:Feuilleclaire": "https://i.ibb.co/bMDstDVV/Herb1.png",
     "objet:Nocteline": "https://i.ibb.co/7JpQ7Kr7/Herb2.png",
-    "objet:Nouvel Objet": "https://i.ibb.co/bMXNS4gy/Baguette-Nuit.png",
+    "objet:Nouvel Objet": "https://i.ibb.co/Py57FHy/Food0.png",
     "objet:Baguette de sommeil": "https://i.ibb.co/bMXNS4gy/Baguette-Nuit.png",
     "monster:Araignée Géante": "https://i.ibb.co/b0XHjQJ/Monstre-For-t-Araign-e.png",
     "monster:Crabe des Bois": "https://i.ibb.co/7dY3GgJS/Monstre-For-t-Crab.png",
@@ -5542,11 +5756,18 @@ article span[title]:hover::after {
     "objet:Baguette de d'accélération": "https://i.ibb.co/zT29mKBd/Baguette-Lumiere.png",
     "objet:Ration de nourriture": "https://i.ibb.co/tT6gW6p0/Food1.png",
     "objet:Ration copieuse de nourriture": "https://i.ibb.co/7JZW2ZZT/Food2.png",
-    "objet:Fruits de la forêt": "https://i.ibb.co/svC0cDH6/food3.png"
+    "objet:Fruits de la forêt": "https://i.ibb.co/svC0cDH6/food3.png",
+    "sort:Sorts de Prêtre:Refermer les blessures": "https://i.ibb.co/zV1rzFkd/Soin-Mineur.png",
+    "objet:Ration de survie": "https://i.ibb.co/Py57FHy/Food0.png",
+    "subclass:Guerrier:Nouvelle sous-classe:1": "https://i.ibb.co/dsPhMWkY/Ma-tre-d-armes.png",
+    "subclass:Guerrier:Maître d’armes:1": "https://i.ibb.co/dsPhMWkY/Ma-tre-d-armes.png",
+    "subclass:Guerrier:Maître d’armes:2": "https://i.ibb.co/BVD015MF/Ma-tre-d-armes-F.png",
+    "objet:Flèche aiguisée": "https://i.ibb.co/4Z7qKXCx/Fleche-Aiguis-e.png",
+    "objet:Flèche de la terre": "https://i.ibb.co/ZpScRTwS/Fleche-Terre.png"
   },
   "meta": {
-    "total_images": 77,
-    "exported_date": "2025-08-28",
+    "total_images": 84,
+    "exported_date": "2025-08-31",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
 };
@@ -5694,6 +5915,12 @@ article span[title]:hover::after {
           "id": "tables-tresors",
           "title": "Tables de trésors",
           "icon": "💎"
+        },
+        {
+          "type": "page",
+          "id": "audio",
+          "title": "Musiques d'ambiance",
+          "icon": "🎵"
         }
       ]
     },
@@ -5801,7 +6028,7 @@ article span[title]:hover::after {
       "type": "card",
       "id": "stats-base",
       "title": "Statistiques de base",
-      "content": "<hr><div class=\"stats-grid\"><div class=\"stat-card\"><h4>💪 Force</h4><p>Améliore les dégâts physiques.</p></div><hr><div class=\"stat-card\"><h4>🛡️ Endurance</h4><p>Les points de vie maximum sont de : <strong>(10 + 2 x Endurance)</strong></p><p>Un repos régénère des points de vie égaux à l'endurance</p></div><hr><div class=\"stat-card\">\n<h4>🏃 Agilité</h4><p>Chaque 5 points ajoutent <strong>+1</strong> aux jets d'esquive et de critique physique.<br><br>Augmente l'initiative d'autant.</p></div><hr><div class=\"stat-card\"><h4>🧠 Intelligence</h4><p>Détermine la puissance des sorts.</p></div><hr><div class=\"stat-card\"><h4>⚡ Volonté</h4><p>Le mana maximum est de : <strong>(20 + 2 x Volonté)</strong></p><p>Augmente la Résistance altérations.</p></div><hr><div class=\"stat-card\"><h4>🍀 Chance</h4><p>Améliore la Fortune d'autant.</p><p>De plus, chaque 5 points ajoutent <strong>+1</strong> aux chances de coup critique avec les sorts et les consommables.</p></div></div>",
+      "content": "<hr><div class=\"stats-grid\"><div class=\"stat-card\"><h4>💪 Force</h4><p>Améliore les dégâts physiques.</p></div><hr><div class=\"stat-card\"><h4>🛡️ Endurance</h4><p>Les points de vie maximum sont de : <strong>(10 + 2 x Endurance)</strong></p><p>Augmente les soins prodigués par la consommation de nourriture.</p></div><hr><div class=\"stat-card\">\n<h4>🏃 Agilité</h4><p>Chaque 5 points ajoutent <strong>+1</strong> aux jets d'esquive et de critique physique.<br><br>Augmente l'initiative d'autant.</p></div><hr><div class=\"stat-card\"><h4>🧠 Intelligence</h4><p>Détermine la puissance des sorts.</p></div><hr><div class=\"stat-card\"><h4>⚡ Volonté</h4><p>Le mana maximum est de : <strong>(20 + 2 x Volonté)</strong></p><p>Augmente la Résistance altérations.</p></div><hr><div class=\"stat-card\"><h4>🍀 Chance</h4><p>Améliore la Fortune d'autant.</p><p>De plus, chaque 5 points ajoutent <strong>+1</strong> aux chances de coup critique avec les sorts et les consommables.</p></div></div>",
       "deletable": true,
       "sectionName": "Statistiques de base"
     },
@@ -5809,7 +6036,7 @@ article span[title]:hover::after {
       "type": "card",
       "id": "stats-new-3-1755784997112",
       "title": "Statistiques secondaires",
-      "content": "<hr><br><br><strong>Chance de coup critique (physique) </strong> : Lors d'une attaque physique, le lanceur de l'attaque lance un d20. S'il fait 20, alors les dégats physiques (et seulement physiques) sont doublés.<br> Augmenter les chances de coup critique réduit la valeur du dé nécéssaire pour faire un critique. Par exemple, avec 3 de chance de coup critique, si le dé fait de 17 à 20, l'attaque est critique.\n\n<br><br><hr><br><strong>Chance de coup critique (sorts et consommables)</strong> : Lorsque un héros ou un monstre lance un sort ou utilise un consommable, il lance un d20. S'il fait 20, alors le sort est critique, chaque sort/consommable ayant un effet critique différent (indiqué dans sa description).<br> Augmenter les chances de coup critique des sorts et consommables réduit la valeur du dé nécéssaire pour faire un critique. Par exemple, avec 3 de chance de coup critique, si le dé fait de 17 à 20, le resultat est critique. \n\n<br><br><hr><br><strong>Esquive </strong> : Lors d'une attaque physique, ou d'un sort sans effet si esquive (indiqué dans la fiche du sort), lorsque le lanceur lance son d20, si le resultat est 1, l'attaque est sans effet. Avoir de l'esquive pour la cible de l'attaque augmente la valeur du dé jusqu'a laquelle l'attaque échoue. Par exemple, avec 3 d'esquive, si le dé fait 4 ou moins, l'attaque échoue. La valeur d'esquive ne peut jamais dépasser 9, quel que soit l'equipement ou bonus d'un joueur ou monstre.\n\n\n<br><br><hr><br><strong>Résistance altérations </strong> : Lorsqu'un lanceur de sort tente d'infliger une alteration magique à une cible, on compare la valeur de l'intelligence du lanceur à la Résistance altérations de la cible. Si l'intelligence est strictement supérieure, alors l'ateration réussit, sinon elle est sans effet.\n\n\n<br><br><hr><br><strong>Armure physique </strong> : Lorsqu'un héros ou monstre reçoit des dégats physiques, ils sont alors réduit de la valeur de l'armure physique pour savoir combien de points de vies sont retirés à la cible. Cette valeur est retiré en dernier sur les degats (aprés avoir éventuellement doublé les dégats si critique etc...)\n\n<br><br><hr><br><strong>Armure élémentaire </strong> : L'armure élémentaire est spécifique pour chaque élément, il y a donc 8 types d'armure élémentaire. Lorsqu'un héros ou monstre subit des dégats élémentaire correspondant à l'armure élémentaire, ils sont alors réduit de la valeur de l'armure pour savoir combien de points de vies sont retirés à la cible. Cette valeur est retiré en dernier sur les degats (aprés avoir éventuellement doublé les dégats si critique etc...).\n\n<br><br><hr><br><strong>Mana </strong> : Il s'agit de la ressource utilisée pour lancer des sorts. Hors combat, il revient automatiquement au maximum aprés plus d'une heure sans être en combat. En combat, il est consommé aprés le lancement de chaque sort (le coût en mana étant indiqué dans la description de chaque sort). Si un sort devait faire passer le mana d'un héros en dessous de 0, alors le sort n'est pas effectif et le héros devient <span class=\"etat-link\" data-etat=\"Endormi/assomé/Effrayé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">paralysé</span> pendant 2 tours.\n\n<br><br><hr><br><strong>Vie </strong> : Les points de vie représentent la vitalité d’un héros ou d’un monstre, la mesure de son endurance face aux blessures. Tant qu’il lui reste des PV, le personnage peut continuer à se battre, à courir et à agir. Quand ses PV tombent à zéro, il s’effondre, mourant. Voir la page <a href=\"#/combat\" style=\"color: var(--accent); text-decoration: underline;\">Combat</a>.\nUn personnage qui effectue un repos régénère un nombre de points de vie égal à sa valeur d’Endurance.<br>\n\n<hr><br><strong>Fortune</strong> : Lorsqu’un événement fait appel à la Fortune (par exemple ouvrir un coffre et espérer y trouver un objet rare), le joueur lance un d20 et ajoute sa valeur de Fortune. Plus le total est élevé, meilleur sera le butin obtenu. \n\n<br><hr><br> <strong>Initiative</strong> : Cette valeur est comparée au début du combat avec tous les héros/monstres pour determiner l'ordre des tours de combat. Plus la valeur est élevée, plus le héros commence en premier.",
+      "content": "<hr><br><br><strong>Chance de coup critique (physique) </strong> : Lors d'une attaque physique, le lanceur de l'attaque lance un d20. S'il fait 20, alors les dégats physiques (et seulement physiques) sont doublés.<br> Augmenter les chances de coup critique réduit la valeur du dé nécéssaire pour faire un critique. Par exemple, avec 3 de chance de coup critique, si le dé fait de 17 à 20, l'attaque est critique.\n\n<br><br><hr><br><strong>Chance de coup critique (sorts et consommables)</strong> : Lorsque un héros ou un monstre lance un sort ou utilise un consommable, il lance un d20. S'il fait 20, alors le sort est critique, chaque sort/consommable ayant un effet critique différent (indiqué dans sa description).<br> Augmenter les chances de coup critique des sorts et consommables réduit la valeur du dé nécéssaire pour faire un critique. Par exemple, avec 3 de chance de coup critique, si le dé fait de 17 à 20, le resultat est critique. \n\n<br><br><hr><br><strong>Esquive </strong> : Lors d'une attaque physique, ou d'un sort sans effet si esquive (indiqué dans la fiche du sort), lorsque le lanceur lance son d20, si le resultat est 1, l'attaque est sans effet. Avoir de l'esquive pour la cible de l'attaque augmente la valeur du dé jusqu'a laquelle l'attaque échoue. Par exemple, avec 3 d'esquive, si le dé fait 4 ou moins, l'attaque échoue. La valeur d'esquive ne peut jamais dépasser 9, quel que soit l'equipement ou bonus d'un joueur ou monstre.\n\n\n<br><br><hr><br><strong>Résistance altérations </strong> : Lorsqu'un lanceur de sort tente d'infliger une alteration magique à une cible, on compare la valeur de l'intelligence du lanceur à la Résistance altérations de la cible. Si l'intelligence est strictement supérieure, alors l'ateration réussit, sinon elle est sans effet.\n\n\n<br><br><hr><br><strong>Armure physique </strong> : Lorsqu'un héros ou monstre reçoit des dégats physiques, ils sont alors réduit de la valeur de l'armure physique pour savoir combien de points de vies sont retirés à la cible. Cette valeur est retiré en dernier sur les degats (aprés avoir éventuellement doublé les dégats si critique etc...)\n\n<br><br><hr><br><strong>Armure élémentaire </strong> : L'armure élémentaire est spécifique pour chaque élément, il y a donc 8 types d'armure élémentaire. Lorsqu'un héros ou monstre subit des dégats élémentaire correspondant à l'armure élémentaire, ils sont alors réduit de la valeur de l'armure pour savoir combien de points de vies sont retirés à la cible. Cette valeur est retiré en dernier sur les degats (aprés avoir éventuellement doublé les dégats si critique etc...).\n\n<br><br><hr><br><strong>Mana </strong> : Il s'agit de la ressource utilisée pour lancer des sorts. Hors combat, il revient automatiquement au maximum aprés plus d'une heure sans être en combat. En combat, il est consommé aprés le lancement de chaque sort (le coût en mana étant indiqué dans la description de chaque sort). Si un sort devait faire passer le mana d'un héros en dessous de 0, alors le sort n'est pas effectif et le héros devient <span class=\"etat-link\" data-etat=\"Endormi/assomé/Effrayé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">paralysé</span> pendant 2 tours.\n\n<br><br><hr><br><strong>Vie </strong> : Les points de vie représentent la vitalité d’un héros ou d’un monstre, la mesure de son endurance face aux blessures. Tant qu’il lui reste des PV, le personnage peut continuer à se battre, à courir et à agir. Quand ses PV tombent à zéro, il s’effondre, mourant. Voir la page <a href=\"#/combat\" style=\"color: var(--accent); text-decoration: underline;\">Combat</a>.\nUn personnage qui effectue un repos régénère un nombre de points de vie égal à sa valeur d’Endurance.<br>\n\n<hr><br><strong>Fortune</strong> : Lorsqu’un événement fait appel à la Fortune (par exemple ouvrir un coffre et espérer y trouver un objet rare), le joueur lance un d20 et ajoute sa valeur de Fortune. Plus le total est élevé, meilleur sera le butin obtenu. \n\n<br><hr><br> <strong>Initiative</strong> : Cette valeur est comparée au début du combat avec tous les héros/monstres pour determiner l'ordre des tours de combat. Plus la valeur est élevée, plus le héros commence en premier.\n\n\n<br><hr><br> <strong>Taille </strong> : Détermine la taille d’une créature. Certains effets ne fonctionnent que sur certaines tailles :\n<ul>\n  <li><b>Petit</b> : 1 mètre ou moins</li>\n  <li><b>Moyen</b> : moins de 2 mètres</li>\n  <li><b>Grand</b> : moins de 3,5 mètres</li>\n  <li><b>Géant</b> : plus de 3,5 mètres</li>\n</ul>",
       "deletable": true,
       "sectionName": "Nouvelle section"
     }
@@ -5941,7 +6168,7 @@ article span[title]:hover::after {
       "type": "card",
       "id": "etats-new-11-1756401053782",
       "title": "Maudit",
-      "content": "Impossible d'esquiver, d'effectuer des coups critiques (physiques ou magiques), et la resistance altération est divisé par 2.",
+      "content": "Impossible d'effectuer des coups critiques (physiques ou magiques), et la resistance altération est divisé par 2.",
       "deletable": true,
       "sectionName": "Nouvelle section"
     },
@@ -5949,7 +6176,7 @@ article span[title]:hover::after {
       "type": "card",
       "id": "etats-new-12-1756401063266",
       "title": "Débilité",
-      "content": "La cible est incpable d'effectuer la moindre action. A chaque début de tour, elle perd des points de vie, réduits ni par l'armure physique ni par l'armure élémentaire.",
+      "content": "La cible est incpable d'effectuer la moindre action ou d'esquiver. A chaque début de tour, elle perd des points de vie, réduits ni par l'armure physique ni par l'armure élémentaire.",
       "deletable": true,
       "sectionName": "Nouvelle section"
     },
@@ -5957,7 +6184,15 @@ article span[title]:hover::after {
       "type": "card",
       "id": "etats-new-13-1756408622987",
       "title": "Fatigué",
-      "content": "Incapable d'utiliser des efforts. coût en mana des sorts doublés. Dégats physiques infligés réduits de moitié.",
+      "content": "Incapable d'utiliser des efforts. Coût en mana des sorts doublés. Dégats physiques infligés réduits de moitié.",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
+    },
+    {
+      "type": "card",
+      "id": "etats-new-14-1756637917339",
+      "title": "Aveuglé",
+      "content": "Toutes les attaques et sorts ont une portée maximum de 3m. Incapable d'esquiver.",
       "deletable": true,
       "sectionName": "Nouvelle section"
     }
@@ -6033,7 +6268,7 @@ article span[title]:hover::after {
       "type": "card",
       "id": "gestion-des-ressources-new-2-1756401478745",
       "title": "Inventaire",
-      "content": "<p>Chaque héros dispose de <b>trois inventaires</b> :</p>\n\n<ul>\n  <li>\n    <b>Équipement</b> : toujours porté et actif, il est constitué d’une arme, d’une armure, \n    d’un éventuel bouclier et de <b>3 accessoires</b>.\n  </li>\n  <li>\n    <b>Sac de consommables</b> : peut contenir jusqu’à <b>10 consommables</b>.\n  </li>\n  <li>\n    <b>Sac général</b> : dispose d’une capacité maximale de <b>10 points de poids</b>. \n    Chaque objet entreposé y possède une valeur de poids indiquée dans sa description.\n  </li>\n</ul>",
+      "content": "<p>Chaque héros dispose de <b>trois inventaires</b> :</p>\n\n<ul>\n  <li>\n    <b>Équipement</b> : Toujours porté et actif, il est constitué d’une arme, d’une armure, \n    d’un éventuel bouclier et de <b>3 accessoires</b>.\n  </li>\n  <li>\n    <b>Sac de consommables</b> : Peut contenir jusqu’à <b>10 consommables</b>. Même si un héro possède plusieur fois le même consommable, ils prendront chacun une place.\n  </li>\n  <li>\n    <b>Sac général</b> : Dispose d’une capacité maximale de <b>10 points de poids</b>. \n    Chaque objet entreposé y possède une valeur de poids indiquée dans sa description.\n  </li>\n</ul>",
       "deletable": true,
       "sectionName": "Nouvelle section"
     },
@@ -6066,6 +6301,22 @@ article span[title]:hover::after {
       "id": "gestion-des-ressources-new-7-1756408519770",
       "title": "Sommeil et repas",
       "content": "Chaque jour, un héros doit manger une ration et dormir au moins 8 heures sous peine d'être dans l'état <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
+    },
+    {
+      "type": "card",
+      "id": "gestion-des-ressources-new-7-1756634178476",
+      "title": "Experience et niveau",
+      "content": "<p>Lorsqu’un groupe trouve et utilise un <b>cristal d’expérience</b>, tous les membres du groupe <b>gagnent</b> des points d’expérience.</p>\n<p>Les <b>cristaux d’expérience</b> provenant d’un même type de monstre sont de moins en moins efficaces, car la magie qu’ils renferment a déjà été assimilée.</p>\n\n\n<p>Lorsqu’un héros atteint <b>10 points d’expérience</b>, il gagne un niveau et son expérience revient à <b>0</b>. Il obtient alors :</p>\n<ul>\n  <li><b>1 point de don</b> (qu’il peut dépenser ou cumuler).</li>\n  <li>Des <b>statistiques fixes</b> (selon la sous-classe).</li>\n  <li><b>2 points de statistiques</b> à répartir.</li>\n  <li>L’<b>accès à de nouveaux sorts</b> (pour les classes qui le peuvent).</li>\n</ul>",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
+    },
+    {
+      "type": "card",
+      "id": "gestion-des-ressources-new-8-1756658008017",
+      "title": "Equipements",
+      "content": "Que l'on porte une arme à une main ou à deux mains, il est uniquement possible d'être équipé d'une seule arme.\nCependant, lorsque on porte une arme à deux mains, il est impossible de porter un bouclier.\n\n<br>Vérifiez dans la fiche de votre classe et sous classe pour savoir si vous pouvez porter un bouclier, ou des armes à deux mains.",
       "deletable": true,
       "sectionName": "Nouvelle section"
     }
@@ -6206,6 +6457,13 @@ article span[title]:hover::after {
       "file": "geographie.json",
       "active": true,
       "order": 10
+    },
+    {
+      "id": "audio",
+      "title": "Musiques d'ambiance",
+      "file": "audio.json",
+      "active": true,
+      "order": 11
     }
   ],
   "template": {
@@ -6367,7 +6625,7 @@ article span[title]:hover::after {
         }
         
         // Development mode - fetch files
-        const [sorts, classes, dons, objets, monstres, tablesTresors, collections, staticPagesConfig, tocStructure] = await Promise.all([
+        const [sorts, classes, dons, objets, monstres, tablesTresors, collections, staticPagesConfig, tocStructure, audioConfig] = await Promise.all([
           fetch('data/sorts.json').then(r => r.json()),
           fetch('data/classes.json').then(r => r.json()),
           fetch('data/dons.json').then(r => r.json()),
@@ -6376,7 +6634,8 @@ article span[title]:hover::after {
           fetch('data/tables-tresors.json').then(r => r.json()),
           fetch('data/collections.json').then(r => r.json()),
           fetch('data/static-pages-config.json').then(r => r.json()),
-          fetch('data/toc-structure.json').then(r => r.json())
+          fetch('data/toc-structure.json').then(r => r.json()),
+          fetch('data/audio-config.json').then(r => r.json()).catch(() => null)
         ]);
 
         // Load page descriptions (optional, with fallbacks)
@@ -6430,6 +6689,7 @@ article span[title]:hover::after {
         this.data.COLLECTIONS = collections;
         this.data.STATIC_PAGES = staticPagesData;
         this.data.STATIC_PAGES_CONFIG = staticPagesConfig;
+        this.data.AUDIO_CONFIG = audioConfig;
         this.data.TOC_STRUCTURE = tocStructure;
 
         window.SORTS = sorts;
@@ -6442,6 +6702,7 @@ article span[title]:hover::after {
         window.STATIC_PAGES = this.data.STATIC_PAGES;
         window.STATIC_PAGES_CONFIG = this.data.STATIC_PAGES_CONFIG;
         window.TOC_STRUCTURE = this.data.TOC_STRUCTURE;
+        window.AUDIO_CONFIG = audioConfig;
         
         // Load stored edits in development mode (after data is loaded)
         this.loadStoredEditsEarly();
@@ -6517,6 +6778,7 @@ article span[title]:hover::after {
       if (this.utils.events.init) this.utils.events.init();
       if (this.utils.dom.init) this.utils.dom.init();
       if (this.modules.images.init) this.modules.images.init();
+      if (this.modules.audio.init) this.modules.audio.init();
       if (this.modules.renderer.init) this.modules.renderer.init();
       if (this.modules.router.init) this.modules.router.init();
       if (this.modules.editor.init) this.modules.editor.init();
@@ -6947,7 +7209,10 @@ article span[title]:hover::after {
           "Robe",
           "Plante",
           "Catalyseur",
-          "Nouvel objet"
+          "Nouvel objet",
+          "Nourriture",
+          "Non identifié",
+          "Flèche"
 ],
         defaultVisibleTags: [
           "Arme"
@@ -6958,7 +7223,7 @@ article span[title]:hover::after {
         numero: 1,
         image: "",
         description: "Description de l'objet.",
-        tags: ["Arme"],
+        tags: ["Nouvel objet"],
         effet: "<strong>Effet:</strong> Description de l'effet de l'objet.",
         prix: "🔷 <strong>Prix:</strong> 10",
         poids: "⚖️ <strong>Poids:</strong> 1"
@@ -8619,6 +8884,8 @@ article span[title]:hover::after {
     }
 
     buildStaticPageHeader(pageData) {
+      const printButton = pageData.page === 'etats' ? this.buildPrintButton() : '';
+      
       return `
         <div style="text-align:center;margin-bottom:2rem;">
           <div style="display:inline-flex;align-items:center;gap:8px;">
@@ -8626,6 +8893,7 @@ article span[title]:hover::after {
             ${this.buildEditButton('title')}
           </div>
           ${this.buildIllustration(`page:${pageData.page}`)}
+          ${printButton}
         </div>
       `;
     }
@@ -9224,6 +9492,16 @@ article span[title]:hover::after {
       if (window.STANDALONE_VERSION) return '';
       
       return `<button class="tags-manager-btn btn" type="button" style="background: #dc2626; color: white; border: 2px solid #b91c1c;">🏷️ Gérer les tags</button>`;
+    }
+
+    buildPrintButton() {
+      return `
+        <div style="margin-top: 1rem;">
+          <button id="print-etats-btn" class="print-button" type="button" title="Imprimer la liste des états">
+            🖨️ Version imprimable
+          </button>
+        </div>
+      `;
     }
 
     buildSingleTableTresorPage(tableData) {
@@ -10402,7 +10680,7 @@ article span[title]:hover::after {
         numero: 1,
         image: "",
         description: "Description de l'objet.",
-        tags: ["Arme"],
+        tags: ["Nouvel objet"],
         effet: "<strong>Effet:</strong> Description de l'effet de l'objet.",
         prix: "🔷 <strong>Prix:</strong> 10",
         poids: "⚖️ <strong>Poids:</strong> 1"
@@ -12717,233 +12995,165 @@ article span[title]:hover::after {
         }
       }
       
-      // Create the character sheet page content
-      const feuillePersonnageContent = `
+      // Check if we're in standalone mode
+      const isStandalone = window.STANDALONE_VERSION === true;
+      
+      // Create different content based on mode
+      const feuillePersonnageContent = isStandalone ? `
         <div class="page-header">
           <h1>📋 Feuille de personnage</h1>
-          <p>Créez et générez des feuilles de personnage PDF complètes pour vos héros.</p>
+          <p style="color: var(--accent-ink); font-style: italic;">Version standalone - PDF disponible en version complète</p>
         </div>
         
-        <div class="character-sheet-generator">
-          <div class="generator-sections">
-            
-            <!-- Section Informations générales -->
-            <section class="info-section">
-              <h2>🦸 Informations du personnage</h2>
-              <div class="form-grid">
-                <div class="form-group">
-                  <label for="char-name">Nom du personnage :</label>
-                  <input type="text" id="char-name" placeholder="Ex: Aelron le Brave">
-                </div>
-                <div class="form-group">
-                  <label for="char-player">Nom du joueur :</label>
-                  <input type="text" id="char-player" placeholder="Ex: Marie">
-                </div>
-                <div class="form-group">
-                  <label for="char-race">Race :</label>
-                  <select id="char-race">
-                    <option value="">Choisir une race</option>
-                    <option value="Humain">Humain</option>
-                    <option value="Elfe">Elfe</option>
-                    <option value="Nain">Nain</option>
-                    <option value="Lutin">Lutin</option>
-                    <option value="Fée">Fée</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="char-class">Classe principale :</label>
-                  <select id="char-class">
-                    <option value="">Choisir une classe</option>
-                    <option value="Guerrier">Guerrier</option>
-                    <option value="Mage">Mage</option>
-                    <option value="Prêtre">Prêtre</option>
-                    <option value="Rôdeur">Rôdeur</option>
-                    <option value="Enchanteur">Enchanteur</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="char-subclass">Sous-classe :</label>
-                  <input type="text" id="char-subclass" placeholder="Ex: Berserker, Chasseur...">
-                </div>
-                <div class="form-group">
-                  <label for="char-level">Niveau :</label>
-                  <input type="number" id="char-level" min="1" max="20" value="1">
-                </div>
-                <div class="form-group">
-                  <label for="char-exp">Points d'expérience :</label>
-                  <input type="number" id="char-exp" min="0" value="0">
-                </div>
-                <div class="form-group">
-                  <label for="char-background">Historique :</label>
-                  <textarea id="char-background" placeholder="Histoire et background du personnage..." rows="3"></textarea>
-                </div>
+        <div class="character-sheet-standalone" style="max-width: 800px; margin: 0 auto; padding: 2rem; background: var(--card); border: 2px solid var(--bronze); border-radius: 12px;">
+          <h2 style="color: var(--bronze); text-align: center; margin-bottom: 2rem;">📄 Modèle de Feuille de Personnage</h2>
+          
+          <div class="character-form-preview" style="display: grid; gap: 1.5rem;">
+            <div class="form-section" style="background: var(--parchment); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--rule);">
+              <h3 style="color: var(--bronze); margin: 0 0 1rem 0;">🎭 Informations du personnage</h3>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                <div><strong>Nom Joueur:</strong> ________________________</div>
+                <div><strong>Nom personnage:</strong> ____________________</div>
+                <div><strong>Expérience:</strong> ________________________</div>
+                <div><strong>Niveau:</strong> ____________________</div>
+                <div><strong>Classe:</strong> __________________________</div>
               </div>
-            </section>
-
-            <!-- Section Caractéristiques -->
-            <section class="stats-section">
-              <h2>📊 Caractéristiques</h2>
-              <div class="stats-grid">
-                <div class="stat-group">
-                  <label for="stat-force">💪 Force :</label>
-                  <input type="number" id="stat-force" min="1" max="20" value="10">
-                </div>
-                <div class="stat-group">
-                  <label for="stat-agilite">🏃 Agilité :</label>
-                  <input type="number" id="stat-agilite" min="1" max="20" value="10">
-                </div>
-                <div class="stat-group">
-                  <label for="stat-endurance">🛡️ Endurance :</label>
-                  <input type="number" id="stat-endurance" min="1" max="20" value="10">
-                </div>
-                <div class="stat-group">
-                  <label for="stat-intelligence">🧠 Intelligence :</label>
-                  <input type="number" id="stat-intelligence" min="1" max="20" value="10">
-                </div>
-                <div class="stat-group">
-                  <label for="stat-volonte">⚡ Volonté :</label>
-                  <input type="number" id="stat-volonte" min="1" max="20" value="10">
-                </div>
-                <div class="stat-group">
-                  <label for="stat-chance">🍀 Chance :</label>
-                  <input type="number" id="stat-chance" min="1" max="20" value="10">
-                </div>
-              </div>
-            </section>
-
-            <!-- Section Ressources -->
-            <section class="resources-section">
-              <h2>💎 Ressources et combat</h2>
-              <div class="form-grid">
-                <div class="form-group">
-                  <label for="char-pv-max">❤️ Points de vie maximum :</label>
-                  <input type="number" id="char-pv-max" min="1" value="20">
-                </div>
-                <div class="form-group">
-                  <label for="char-pv-current">❤️ Points de vie actuels :</label>
-                  <input type="number" id="char-pv-current" min="0" value="20">
-                </div>
-                <div class="form-group">
-                  <label for="char-mana-max">🔵 Points de mana maximum :</label>
-                  <input type="number" id="char-mana-max" min="0" value="10">
-                </div>
-                <div class="form-group">
-                  <label for="char-mana-current">🔵 Points de mana actuels :</label>
-                  <input type="number" id="char-mana-current" min="0" value="10">
-                </div>
-                <div class="form-group">
-                  <label for="char-armure">🛡️ Armure physique :</label>
-                  <input type="number" id="char-armure" min="0" value="2">
-                </div>
-                <div class="form-group">
-                  <label for="char-esquive">🌪️ Esquive :</label>
-                  <input type="number" id="char-esquive" min="0" value="5">
-                </div>
-                <div class="form-group">
-                  <label for="char-critique">💥 Coup critique :</label>
-                  <input type="number" id="char-critique" min="0" value="10">
-                </div>
-                <div class="form-group">
-                  <label for="char-critique-sorts">✨ Critique sorts :</label>
-                  <input type="number" id="char-critique-sorts" min="0" value="8">
-                </div>
-                <div class="form-group">
-                  <label for="char-resistance">✨ Résistance altérations :</label>
-                  <input type="number" id="char-resistance" min="0" value="3">
-                </div>
-              </div>
-            </section>
-
-            <!-- Section Compétences et Dons -->
-            <section class="skills-section">
-              <h2>🎖️ Compétences et Dons</h2>
-              <div class="form-group">
-                <label for="char-capacites">🏆 Capacités spéciales :</label>
-                <textarea id="char-capacites" placeholder="Listez les capacités, talents spéciaux..." rows="4"></textarea>
-              </div>
-              <div class="form-group">
-                <label for="char-dons">🎖️ Dons acquis :</label>
-                <textarea id="char-dons" placeholder="Listez tous les dons du personnage..." rows="4"></textarea>
-              </div>
-              <div class="form-group">
-                <label for="char-sorts">🔮 Sorts connus :</label>
-                <textarea id="char-sorts" placeholder="Listez tous les sorts maîtrisés..." rows="4"></textarea>
-              </div>
-            </section>
-
-            <!-- Section Équipement -->
-            <section class="equipment-section">
-              <h2>⚔️ Équipement</h2>
-              <div class="form-grid">
-                <div class="form-group">
-                  <label for="char-armes">⚔️ Armes :</label>
-                  <textarea id="char-armes" placeholder="Épées, arcs, bâtons..." rows="3"></textarea>
-                </div>
-                <div class="form-group">
-                  <label for="char-armures">🛡️ Armures et protection :</label>
-                  <textarea id="char-armures" placeholder="Armures, boucliers, robes..." rows="3"></textarea>
-                </div>
-                <div class="form-group">
-                  <label for="char-objets">📦 Objets et consommables :</label>
-                  <textarea id="char-objets" placeholder="Potions, herbes, objets magiques..." rows="3"></textarea>
-                </div>
-                <div class="form-group">
-                  <label for="char-richesses">💰 Richesses :</label>
-                  <input type="text" id="char-richesses" placeholder="Ex: 150 pièces d'or">
-                </div>
-              </div>
-            </section>
-
-          </div>
-
-          <!-- Section Actions -->
-          <div class="generator-actions">
-            <h2>📄 Génération PDF</h2>
-            <p>Cliquez sur le bouton ci-dessous pour générer une feuille de personnage PDF de 3 pages avec toutes les informations saisies.</p>
-            
-            <div class="pdf-controls">
-              <button id="generate-pdf-btn" class="btn-primary btn-large">
-                📋 Générer la feuille PDF
-              </button>
-              <button id="save-character-btn" class="btn-secondary">
-                💾 Sauvegarder dans le navigateur
-              </button>
-              <button id="load-character-btn" class="btn-secondary">
-                📁 Charger depuis le navigateur
-              </button>
-              <button id="clear-form-btn" class="btn-warning">
-                🗑️ Vider le formulaire
-              </button>
             </div>
             
-            <div class="pdf-options">
-              <h3>Options PDF :</h3>
-              <label class="checkbox-wrapper">
-                <input type="checkbox" id="include-background" checked>
-                <span class="checkmark"></span>
-                Inclure l'historique du personnage
-              </label>
-              <label class="checkbox-wrapper">
-                <input type="checkbox" id="include-notes" checked>
-                <span class="checkmark"></span>
-                Ajouter une page de notes vierges
-              </label>
-              <label class="checkbox-wrapper">
-                <input type="checkbox" id="include-portrait">
-                <span class="checkmark"></span>
-                Réserver un espace pour portrait
-              </label>
+            <div class="form-section" style="background: var(--parchment); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--rule);">
+              <h3 style="color: var(--bronze); margin: 0 0 1rem 0;">💪 Caractéristiques</h3>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.8rem; font-size: 0.9rem;">
+                <div><strong>Force:</strong> _____ / _____</div>
+                <div><strong>Endurance:</strong> _____ / _____</div>
+                <div><strong>Agilité:</strong> _____ / _____</div>
+                <div><strong>Intelligence:</strong> _____ / _____</div>
+                <div><strong>Volonté:</strong> _____ / _____</div>
+                <div><strong>Chance:</strong> _____ / _____</div>
+              </div>
+            </div>
+            
+            <div class="form-section" style="background: var(--parchment); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--rule);">
+              <h3 style="color: var(--bronze); margin: 0 0 1rem 0;">⚔️ Statistiques dérivées</h3>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.8rem; font-size: 0.9rem;">
+                <div><strong>Vie:</strong> _____ / _____</div>
+                <div><strong>Mana:</strong> _____ / _____</div>
+                <div><strong>Initiative:</strong> _____ / _____</div>
+                <div><strong>Fortune:</strong> _____ / _____</div>
+                <div><strong>Armure:</strong> _____ / _____</div>
+                <div><strong>Esquive:</strong> _____ / _____</div>
+              </div>
+            </div>
+            
+            <div class="form-section" style="background: var(--parchment); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--rule);">
+              <h3 style="color: var(--bronze); margin: 0 0 1rem 0;">🌟 Compétences</h3>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.8rem; font-size: 0.9rem;">
+                <div><strong>Hardiesse:</strong> _____</div>
+                <div><strong>Finesse:</strong> _____</div>
+                <div><strong>Coordination:</strong> _____</div>
+                <div><strong>Réflexion:</strong> _____</div>
+                <div><strong>Éloquence:</strong> _____</div>
+              </div>
+            </div>
+            
+            <div class="form-section" style="background: var(--parchment); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--rule);">
+              <h3 style="color: var(--bronze); margin: 0 0 1rem 0;">🔥 Armure élémentaire</h3>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 0.8rem; font-size: 0.9rem;">
+                <div><strong>Feu:</strong> _____</div>
+                <div><strong>Eau:</strong> _____</div>
+                <div><strong>Terre:</strong> _____</div>
+                <div><strong>Air:</strong> _____</div>
+                <div><strong>Lumière:</strong> _____</div>
+                <div><strong>Nuit:</strong> _____</div>
+                <div><strong>Divin:</strong> _____</div>
+                <div><strong>Maléfique:</strong> _____</div>
+              </div>
+            </div>
+            
+            <div class="form-section" style="background: var(--parchment); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--rule);">
+              <h3 style="color: var(--bronze); margin: 0 0 1rem 0;">📝 Notes</h3>
+              <div style="display: grid; gap: 1rem;">
+                <div><strong>Sorts:</strong><br>_____________________________________<br>_____________________________________</div>
+                <div><strong>Capacités et dons:</strong><br>_____________________________________<br>_____________________________________</div>
+                <div><strong>Inventaire:</strong><br>_____________________________________<br>_____________________________________</div>
+                <div><strong>Histoire & Personnalité:</strong><br>_____________________________________<br>_____________________________________</div>
+              </div>
             </div>
           </div>
-
+          
+          <div class="standalone-info" style="text-align: center; margin-top: 2rem; padding: 1rem; background: var(--accent-bg); border-radius: 8px;">
+            <p style="color: var(--accent-ink); margin: 0;">
+              <strong>📱 Info:</strong> Cette version standalone affiche un aperçu de la feuille. 
+              Pour obtenir le PDF complet imprimable, utilisez la version développement.
+            </p>
+          </div>
+        </div>
+      ` : `
+        <div class="page-header">
+          <h1>📋 Feuille de personnage</h1>
+          <div class="character-sheet-actions" style="margin: 1rem 0; text-align: center;">
+            <button id="open-character-sheet" class="btn-base" style="background: var(--bronze); color: white; margin-right: 1rem;">
+              📖 Ouvrir le PDF
+            </button>
+            <button id="print-character-sheet" class="btn-base" style="background: var(--gold); color: white; margin-right: 1rem;">
+              🖨️ Imprimer
+            </button>
+            <button id="download-character-sheet" class="btn-base" style="background: var(--emerald); color: white;">
+              📥 Télécharger
+            </button>
+          </div>
+        </div>
+        
+        <div class="character-sheet-preview" style="width: 100%; border: 2px solid var(--bronze); border-radius: 8px; background: var(--parchment); padding: 2rem; text-align: center;">
+          <div class="pdf-preview-content">
+            <h2 style="color: var(--bronze); margin-bottom: 1.5rem;">📄 Feuille de personnage BabJDR</h2>
+            
+            <div class="pdf-info" style="background: white; border: 1px solid var(--rule); border-radius: 8px; padding: 1.5rem; margin: 1rem 0; text-align: left;">
+              <h3 style="color: var(--bronze); margin-top: 0;">📝 Contenu de la feuille:</h3>
+              <ul style="color: var(--accent-ink); line-height: 1.8;">
+                <li><strong>Informations du personnage:</strong> Nom, classe, niveau, expérience</li>
+                <li><strong>Caractéristiques:</strong> Force, Endurance, Agilité, Intelligence, Volonté, Chance</li>
+                <li><strong>Statistiques dérivées:</strong> Vie, Mana, Initiative, Fortune, Armure, Esquive</li>
+                <li><strong>Compétences:</strong> Hardiesse, Finesse, Coordination, Réflexion, Éloquence</li>
+                <li><strong>Éléments:</strong> Armure élémentaire (Feu, Eau, Terre, Air, Lumière, Nuit, Divin, Maléfique)</li>
+                <li><strong>Sorts et capacités:</strong> Liste des sorts connus et dons acquis</li>
+                <li><strong>Inventaire:</strong> Consommables et sac général</li>
+                <li><strong>Background:</strong> Histoire, apparence et personnalité du personnage</li>
+              </ul>
+            </div>
+            
+            <div class="pdf-actions" style="background: var(--card); border: 1px solid var(--bronze); border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
+              <p style="color: var(--accent-ink); margin-bottom: 1rem;">
+                <strong>🎯 Actions disponibles:</strong>
+              </p>
+              <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+                <button id="open-pdf-new-tab" class="btn-base" style="background: var(--bronze); color: white;">
+                  📖 Ouvrir dans un nouvel onglet
+                </button>
+                <button id="print-pdf-direct" class="btn-base" style="background: var(--gold); color: white;">
+                  🖨️ Imprimer directement
+                </button>
+                <button id="download-pdf-direct" class="btn-base" style="background: var(--emerald); color: white;">
+                  📥 Télécharger le fichier
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="character-sheet-info" style="margin-top: 1rem; text-align: center; color: var(--accent-ink);">
+          <p><strong>💡 Info:</strong> La feuille de personnage est un PDF imprimable de 3 pages contenant tous les champs nécessaires pour votre personnage.</p>
+          <p><strong>📱 Mobile:</strong> Sur mobile/tablette, utilisez "Télécharger" puis ouvrez dans votre application PDF.</p>
         </div>
       `;
       
       // Insert content into the page
       pageElement.innerHTML = feuillePersonnageContent;
       
-      // Setup event listeners for the character sheet functionality
-      this.setupCharacterSheetEventListeners();
+      // Setup event listeners for print and download functionality (only in dev mode)
+      if (!isStandalone) {
+        this.setupCharacterSheetActions();
+      }
+      
       
       // Show and activate page
       this.show('feuille-personnage');
@@ -12952,451 +13162,74 @@ article span[title]:hover::after {
       return true;
     },
 
-    setupCharacterSheetEventListeners() {
-      // Auto-calculate derived stats
-      this.setupStatCalculations();
+    setupCharacterSheetActions() {
+      const pdfUrl = 'data/feuille-personnage.pdf';
       
-      // Form management
-      this.setupFormManagement();
+      // Setup main action buttons
+      const openBtn = document.getElementById('open-character-sheet');
+      const printBtn = document.getElementById('print-character-sheet');
+      const downloadBtn = document.getElementById('download-character-sheet');
       
-      // PDF generation
-      this.setupPDFGeneration();
-    },
-
-    setupStatCalculations() {
-      // Auto-update PV and mana based on stats changes
-      const updateDerivedStats = () => {
-        const endurance = parseInt(document.getElementById('stat-endurance')?.value) || 10;
-        const intelligence = parseInt(document.getElementById('stat-intelligence')?.value) || 10;
-        const level = parseInt(document.getElementById('char-level')?.value) || 1;
-        
-        // Calculate max HP (base + endurance bonus + level bonus)
-        const maxHp = Math.max(1, 10 + Math.floor((endurance - 10) / 2) + (level - 1) * 3);
-        const maxMana = Math.max(0, Math.floor((intelligence - 10) / 2) + (level - 1));
-        
-        const hpMax = document.getElementById('char-pv-max');
-        const manaMax = document.getElementById('char-mana-max');
-        
-        if (hpMax && !hpMax.dataset.userModified) {
-          hpMax.value = maxHp;
-        }
-        if (manaMax && !manaMax.dataset.userModified) {
-          manaMax.value = Math.max(0, maxMana);
+      // Setup preview action buttons
+      const openTabBtn = document.getElementById('open-pdf-new-tab');
+      const printDirectBtn = document.getElementById('print-pdf-direct');
+      const downloadDirectBtn = document.getElementById('download-pdf-direct');
+      
+      // Open PDF in new tab
+      const openPDF = () => {
+        window.open(pdfUrl, '_blank');
+        if (JdrApp.modules.storage && JdrApp.modules.storage.showNotification) {
+          JdrApp.modules.storage.showNotification('📖 PDF ouvert dans un nouvel onglet', 'success');
         }
       };
       
-      // Listen for stat changes
-      ['stat-endurance', 'stat-intelligence', 'char-level'].forEach(id => {
-        const element = document.getElementById(id);
-        if (element) {
-          element.addEventListener('input', updateDerivedStats);
-        }
-      });
-      
-      // Mark fields as user-modified when manually changed
-      ['char-pv-max', 'char-mana-max'].forEach(id => {
-        const element = document.getElementById(id);
-        if (element) {
-          element.addEventListener('input', () => {
-            element.dataset.userModified = 'true';
-          });
-        }
-      });
-      
-      // Initial calculation
-      setTimeout(updateDerivedStats, 100);
-    },
-
-    setupFormManagement() {
-      // Save character data
-      const saveBtn = document.getElementById('save-character-btn');
-      if (saveBtn) {
-        saveBtn.addEventListener('click', () => {
-          const characterData = this.collectCharacterData();
-          localStorage.setItem('jdr-bab-character-sheet', JSON.stringify(characterData));
-          
-          if (JdrApp.modules.storage && JdrApp.modules.storage.showNotification) {
-            JdrApp.modules.storage.showNotification('💾 Personnage sauvegardé !', 'success');
-          } else {
-            alert('Personnage sauvegardé dans le navigateur !');
-          }
-        });
-      }
-      
-      // Load character data
-      const loadBtn = document.getElementById('load-character-btn');
-      if (loadBtn) {
-        loadBtn.addEventListener('click', () => {
-          const savedData = localStorage.getItem('jdr-bab-character-sheet');
-          if (savedData) {
+      // Print PDF
+      const printPDF = () => {
+        const printWindow = window.open(pdfUrl, '_blank');
+        if (printWindow) {
+          printWindow.focus();
+          setTimeout(() => {
             try {
-              const characterData = JSON.parse(savedData);
-              this.populateForm(characterData);
-              
-              if (JdrApp.modules.storage && JdrApp.modules.storage.showNotification) {
-                JdrApp.modules.storage.showNotification('📁 Personnage chargé !', 'success');
-              } else {
-                alert('Personnage chargé depuis le navigateur !');
-              }
-            } catch (error) {
-              alert('Erreur lors du chargement des données sauvegardées.');
+              printWindow.print();
+            } catch (e) {
+              alert('PDF ouvert. Utilisez Ctrl+P pour imprimer.');
             }
-          } else {
-            alert('Aucune sauvegarde trouvée.');
-          }
-        });
-      }
-      
-      // Clear form
-      const clearBtn = document.getElementById('clear-form-btn');
-      if (clearBtn) {
-        clearBtn.addEventListener('click', () => {
-          if (confirm('Êtes-vous sûr de vouloir vider complètement le formulaire ?')) {
-            this.clearForm();
-          }
-        });
-      }
-    },
-
-    collectCharacterData() {
-      const data = {};
-      
-      // Collect all form fields
-      const fields = [
-        'char-name', 'char-player', 'char-race', 'char-class', 'char-subclass',
-        'char-level', 'char-exp', 'char-background',
-        'stat-force', 'stat-agilite', 'stat-endurance', 'stat-intelligence', 'stat-volonte', 'stat-chance',
-        'char-pv-max', 'char-pv-current', 'char-mana-max', 'char-mana-current',
-        'char-armure', 'char-esquive', 'char-critique', 'char-critique-sorts', 'char-resistance',
-        'char-capacites', 'char-dons', 'char-sorts',
-        'char-armes', 'char-armures', 'char-objets', 'char-richesses'
-      ];
-      
-      fields.forEach(fieldId => {
-        const element = document.getElementById(fieldId);
-        if (element) {
-          data[fieldId] = element.value;
+          }, 1000);
+        } else {
+          alert('Impossible d\'ouvrir le PDF. Vérifiez que les popups ne sont pas bloqués.');
         }
-      });
+      };
       
-      // Save checkbox states
-      const checkboxes = ['include-background', 'include-notes', 'include-portrait'];
-      checkboxes.forEach(checkboxId => {
-        const checkbox = document.getElementById(checkboxId);
-        if (checkbox) {
-          data[checkboxId] = checkbox.checked;
-        }
-      });
-      
-      data.saved_at = new Date().toISOString();
-      
-      return data;
-    },
-
-    populateForm(data) {
-      Object.entries(data).forEach(([fieldId, value]) => {
-        const element = document.getElementById(fieldId);
-        if (element) {
-          if (element.type === 'checkbox') {
-            element.checked = value;
-          } else {
-            element.value = value;
-          }
-        }
-      });
-      
-      // Trigger stat recalculations
-      this.setupStatCalculations();
-    },
-
-    clearForm() {
-      const form = document.querySelector('.character-sheet-generator');
-      if (form) {
-        // Reset all inputs
-        form.querySelectorAll('input, textarea, select').forEach(element => {
-          if (element.type === 'checkbox') {
-            element.checked = element.id === 'include-background' || element.id === 'include-notes';
-          } else if (element.type === 'number') {
-            // Reset to default values
-            if (element.id.startsWith('stat-')) {
-              element.value = 10;
-            } else if (element.id === 'char-level') {
-              element.value = 1;
-            } else {
-              element.value = element.id.includes('current') ? 
-                (element.id.includes('pv') ? 20 : 10) : 
-                (element.min || 0);
-            }
-          } else {
-            element.value = '';
-          }
-          
-          // Clear user modification flags
-          delete element.dataset.userModified;
-        });
+      // Download PDF
+      const downloadPDF = () => {
+        const link = document.createElement('a');
+        link.href = pdfUrl;
+        link.download = 'Feuille-Personnage-BabJDR.pdf';
+        link.style.display = 'none';
         
-        // Recalculate derived stats
-        setTimeout(() => this.setupStatCalculations(), 100);
-      }
-    },
-
-    setupPDFGeneration() {
-      const generateBtn = document.getElementById('generate-pdf-btn');
-      if (generateBtn) {
-        generateBtn.addEventListener('click', () => {
-          const characterData = this.collectCharacterData();
-          this.generatePDF(characterData);
-        });
-      }
-    },
-
-    generatePDF(characterData) {
-      // Check if jsPDF is loaded (multiple possible globals)
-      const jsPDF = window.jsPDF?.jsPDF || window.jsPDF;
-      if (typeof jsPDF === 'undefined') {
-        alert('La bibliothèque PDF n\'est pas encore chargée. Veuillez réessayer dans quelques secondes.');
-        return;
-      }
-      
-      try {
-        // Create new PDF document
-        const doc = new jsPDF();
-        
-        // Generate the 3-page PDF
-        this.createPDFPage1(doc, characterData);
-        this.createPDFPage2(doc, characterData);
-        this.createPDFPage3(doc, characterData);
-        
-        // Generate filename
-        const characterName = characterData['char-name'] || 'Personnage';
-        const filename = `Feuille_${characterName.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`;
-        
-        // Save the PDF
-        doc.save(filename);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
         
         if (JdrApp.modules.storage && JdrApp.modules.storage.showNotification) {
-          JdrApp.modules.storage.showNotification('📋 PDF généré avec succès !', 'success');
+          JdrApp.modules.storage.showNotification('📥 Téléchargement en cours...', 'success');
         }
-        
-      } catch (error) {
-        console.error('Erreur lors de la génération PDF:', error);
-        alert('Erreur lors de la génération du PDF. Vérifiez la console pour plus de détails.');
-      }
-    },
-
-    createPDFPage1(doc, data) {
-      // Page 1: Character Info & Stats
-      doc.setFontSize(20);
-      doc.text('FEUILLE DE PERSONNAGE JDR-BAB', 105, 20, { align: 'center' });
+      };
       
-      doc.setFontSize(16);
-      doc.text('='.repeat(50), 105, 25, { align: 'center' });
+      // Attach event listeners
+      if (openBtn) openBtn.addEventListener('click', openPDF);
+      if (printBtn) printBtn.addEventListener('click', printPDF);
+      if (downloadBtn) downloadBtn.addEventListener('click', downloadPDF);
       
-      let y = 40;
-      
-      // Character basic info
-      doc.setFontSize(14);
-      doc.text('INFORMATIONS GÉNÉRALES', 20, y);
-      y += 10;
-      
-      doc.setFontSize(10);
-      doc.text(`Nom: ${data['char-name'] || 'N/A'}`, 20, y);
-      doc.text(`Joueur: ${data['char-player'] || 'N/A'}`, 120, y);
-      y += 8;
-      
-      doc.text(`Race: ${data['char-race'] || 'N/A'}`, 20, y);
-      doc.text(`Niveau: ${data['char-level'] || '1'}`, 120, y);
-      y += 8;
-      
-      doc.text(`Classe: ${data['char-class'] || 'N/A'}`, 20, y);
-      doc.text(`Exp: ${data['char-exp'] || '0'}`, 120, y);
-      y += 8;
-      
-      doc.text(`Sous-classe: ${data['char-subclass'] || 'N/A'}`, 20, y);
-      y += 15;
-      
-      // Stats section
-      doc.setFontSize(14);
-      doc.text('CARACTÉRISTIQUES', 20, y);
-      y += 10;
-      
-      doc.setFontSize(10);
-      const stats = [
-        ['Force', data['stat-force'] || '10'],
-        ['Agilité', data['stat-agilite'] || '10'],
-        ['Endurance', data['stat-endurance'] || '10'],
-        ['Intelligence', data['stat-intelligence'] || '10'],
-        ['Volonté', data['stat-volonte'] || '10'],
-        ['Chance', data['stat-chance'] || '10']
-      ];
-      
-      stats.forEach(([name, value], index) => {
-        const x = 20 + (index % 2) * 90;
-        const yPos = y + Math.floor(index / 2) * 8;
-        doc.text(`${name}: ${value}`, x, yPos);
-      });
-      
-      y += 30;
-      
-      // Combat stats
-      doc.setFontSize(14);
-      doc.text('COMBAT & RESSOURCES', 20, y);
-      y += 10;
-      
-      doc.setFontSize(10);
-      doc.text(`PV Max: ${data['char-pv-max'] || '20'}`, 20, y);
-      doc.text(`PV Actuels: ${data['char-pv-current'] || '20'}`, 120, y);
-      y += 8;
-      
-      doc.text(`Mana Max: ${data['char-mana-max'] || '10'}`, 20, y);
-      doc.text(`Mana Actuels: ${data['char-mana-current'] || '10'}`, 120, y);
-      y += 8;
-      
-      doc.text(`Armure: ${data['char-armure'] || '2'}`, 20, y);
-      doc.text(`Esquive: ${data['char-esquive'] || '5'}`, 120, y);
-      y += 8;
-      
-      doc.text(`Critique: ${data['char-critique'] || '10'}`, 20, y);
-      doc.text(`Critique Sorts: ${data['char-critique-sorts'] || '8'}`, 120, y);
-      y += 8;
-      
-      doc.text(`Résistance Alt.: ${data['char-resistance'] || '3'}`, 20, y);
-      y += 15;
-      
-      // Background if included
-      if (data['include-background'] && data['char-background']) {
-        doc.setFontSize(14);
-        doc.text('HISTORIQUE', 20, y);
-        y += 8;
-        
-        doc.setFontSize(10);
-        const backgroundLines = doc.splitTextToSize(data['char-background'], 170);
-        doc.text(backgroundLines, 20, y);
-      }
-    },
-
-    createPDFPage2(doc, data) {
-      // Page 2: Skills, Spells, Feats
-      doc.addPage();
-      
-      doc.setFontSize(16);
-      doc.text('COMPÉTENCES, DONS ET SORTS', 105, 20, { align: 'center' });
-      
-      let y = 40;
-      
-      // Capacités
-      doc.setFontSize(14);
-      doc.text('CAPACITÉS SPÉCIALES', 20, y);
-      y += 8;
-      
-      doc.setFontSize(10);
-      if (data['char-capacites']) {
-        const capaciteLines = doc.splitTextToSize(data['char-capacites'], 170);
-        doc.text(capaciteLines, 20, y);
-        y += capaciteLines.length * 5 + 10;
-      } else {
-        y += 20;
-      }
-      
-      // Dons
-      doc.setFontSize(14);
-      doc.text('DONS ACQUIS', 20, y);
-      y += 8;
-      
-      doc.setFontSize(10);
-      if (data['char-dons']) {
-        const donsLines = doc.splitTextToSize(data['char-dons'], 170);
-        doc.text(donsLines, 20, y);
-        y += donsLines.length * 5 + 10;
-      } else {
-        y += 30;
-      }
-      
-      // Sorts
-      doc.setFontSize(14);
-      doc.text('SORTS CONNUS', 20, y);
-      y += 8;
-      
-      doc.setFontSize(10);
-      if (data['char-sorts']) {
-        const sortsLines = doc.splitTextToSize(data['char-sorts'], 170);
-        doc.text(sortsLines, 20, y);
-      }
-    },
-
-    createPDFPage3(doc, data) {
-      // Page 3: Equipment and Notes
-      doc.addPage();
-      
-      doc.setFontSize(16);
-      doc.text('ÉQUIPEMENT ET NOTES', 105, 20, { align: 'center' });
-      
-      let y = 40;
-      
-      // Equipment
-      doc.setFontSize(14);
-      doc.text('ARMES', 20, y);
-      y += 8;
-      
-      doc.setFontSize(10);
-      if (data['char-armes']) {
-        const armesLines = doc.splitTextToSize(data['char-armes'], 170);
-        doc.text(armesLines, 20, y);
-        y += armesLines.length * 5 + 10;
-      } else {
-        y += 25;
-      }
-      
-      doc.setFontSize(14);
-      doc.text('ARMURES ET PROTECTION', 20, y);
-      y += 8;
-      
-      doc.setFontSize(10);
-      if (data['char-armures']) {
-        const armuresLines = doc.splitTextToSize(data['char-armures'], 170);
-        doc.text(armuresLines, 20, y);
-        y += armuresLines.length * 5 + 10;
-      } else {
-        y += 25;
-      }
-      
-      doc.setFontSize(14);
-      doc.text('OBJETS ET CONSOMMABLES', 20, y);
-      y += 8;
-      
-      doc.setFontSize(10);
-      if (data['char-objets']) {
-        const objetsLines = doc.splitTextToSize(data['char-objets'], 170);
-        doc.text(objetsLines, 20, y);
-        y += objetsLines.length * 5 + 10;
-      } else {
-        y += 25;
-      }
-      
-      // Richesses
-      doc.setFontSize(14);
-      doc.text('RICHESSES', 20, y);
-      y += 8;
-      
-      doc.setFontSize(10);
-      doc.text(data['char-richesses'] || 'Aucune richesse répertoriée', 20, y);
-      y += 15;
-      
-      // Notes section if enabled
-      if (data['include-notes']) {
-        doc.setFontSize(14);
-        doc.text('NOTES', 20, y);
-        y += 10;
-        
-        // Add lines for notes
-        for (let i = 0; i < 15; i++) {
-          doc.line(20, y + (i * 8), 190, y + (i * 8));
-        }
-      }
+      if (openTabBtn) openTabBtn.addEventListener('click', openPDF);
+      if (printDirectBtn) printDirectBtn.addEventListener('click', printPDF);
+      if (downloadDirectBtn) downloadDirectBtn.addEventListener('click', downloadPDF);
     }
+  
   };
 
 })();
+
 // ============================================================================
 // JDR-BAB APPLICATION - RENDERER MODULE
 // ============================================================================
@@ -17719,6 +17552,11 @@ article span[title]:hover::after {
       // Element selector for spells (dev mode)
       JdrApp.utils.events.register('change', '.spell-element-selector', (e) => {
         this.updateSpellElement(e.target);
+      });
+
+      // Print button for states page
+      JdrApp.utils.events.register('click', '#print-etats-btn', () => {
+        this.printStates();
       });
     },
 
@@ -22381,6 +22219,157 @@ article span[title]:hover::after {
       }
 
       return modal;
+    },
+
+    // Fonction d'impression des états
+    printStates() {
+      // Récupérer tous les états depuis les données chargées
+      let etatsData;
+      
+      // Essayer plusieurs sources de données
+      if (window.ETATS) {
+        etatsData = window.ETATS;
+      } else if (window.STATIC_PAGES?.etats) {
+        etatsData = window.STATIC_PAGES.etats;
+      } else {
+        // Essayer de récupérer depuis l'article actuellement affiché
+        const activeArticle = document.querySelector('article[data-page="etats"]');
+        if (activeArticle) {
+          const cards = activeArticle.querySelectorAll('.card');
+          const states = Array.from(cards).map(card => {
+            const title = card.querySelector('h3')?.textContent || 'État';
+            const content = card.querySelector('.editable')?.innerHTML || '';
+            return { title, content };
+          });
+          
+          if (states.length > 0) {
+            this.generatePrintableStates(states);
+            return;
+          }
+        }
+        
+        console.error('Données des états non trouvées');
+        return;
+      }
+
+      // Filtrer seulement les sections de type "card" (les états)
+      const states = etatsData.sections ? 
+        etatsData.sections.filter(section => section.type === 'card') :
+        [];
+      
+      if (states.length === 0) {
+        console.warn('Aucun état trouvé à imprimer');
+        return;
+      }
+
+      this.generatePrintableStates(states);
+    },
+
+    generatePrintableStates(states) {
+      // Ouvrir une nouvelle fenêtre pour l'impression
+      const printWindow = window.open('', '_blank', 'width=800,height=600');
+      
+      // Créer le HTML complet pour l'impression
+      const printableHTML = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta charset="UTF-8">
+          <title>États - Aide de jeu</title>
+          <style>
+            @page { 
+              margin: 15mm !important; 
+              size: A4 !important;
+            }
+            body { 
+              font-family: "Times New Roman", serif; 
+              background: white; 
+              color: black; 
+              margin: 0; 
+              padding: 0;
+              font-size: 10pt;
+              line-height: 1.2;
+            }
+            h1 { 
+              font-size: 16pt; 
+              font-weight: bold; 
+              text-align: center; 
+              margin-bottom: 8mm; 
+              color: black;
+            }
+            .printable-states-grid { 
+              display: grid; 
+              grid-template-columns: 1fr 1fr; 
+              gap: 4mm; 
+              margin: 0;
+            }
+            .printable-state-item { 
+              border: 1pt solid #ccc; 
+              border-radius: 2mm; 
+              padding: 3mm; 
+              page-break-inside: avoid; 
+              font-size: 9pt;
+              line-height: 1.1;
+              background: white;
+            }
+            .printable-state-item h3 { 
+              font-size: 11pt; 
+              font-weight: bold; 
+              margin: 0 0 2mm 0; 
+              color: black;
+            }
+            .printable-state-item p { 
+              margin: 1mm 0; 
+              color: black;
+            }
+          </style>
+        </head>
+        <body>
+          <h1>États - Aide de jeu</h1>
+          <div class="printable-states-grid">
+            ${states.map(state => `
+              <div class="printable-state-item">
+                <h3>${state.title}</h3>
+                <div>${this.stripHtmlTags(state.content)}</div>
+              </div>
+            `).join('')}
+          </div>
+        </body>
+        </html>
+      `;
+
+      // Écrire le contenu et imprimer
+      printWindow.document.write(printableHTML);
+      printWindow.document.close();
+      
+      // Attendre que le contenu soit chargé puis imprimer
+      printWindow.onload = function() {
+        printWindow.focus();
+        printWindow.print();
+        printWindow.close();
+      };
+    },
+
+    // Fonction utilitaire pour nettoyer les balises HTML pour l'impression
+    stripHtmlTags(html) {
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = html;
+      
+      // Convertir les listes en texte simple avec des tirets
+      const lists = tempDiv.querySelectorAll('ul');
+      lists.forEach(ul => {
+        const items = ul.querySelectorAll('li');
+        const textItems = Array.from(items).map(li => `• ${li.textContent.trim()}`);
+        ul.outerHTML = textItems.join('<br>');
+      });
+
+      // Préserver les paragraphes mais simplifier le formatage
+      const paragraphs = tempDiv.querySelectorAll('p');
+      paragraphs.forEach(p => {
+        p.style.margin = '2px 0';
+      });
+
+      return tempDiv.innerHTML;
     },
 
     // Méthode robuste pour forcer le rafraîchissement de la page (fallback)
