@@ -27,7 +27,7 @@
       "type": "card",
       "id": "etats-new-4-1755725440741",
       "title": "Ralenti",
-      "content": "Vitesse de déplacement réduite de moitié.<br> Impossible de sauter ou d'esquiver.",
+      "content": "Vitesse de déplacement réduite de 6m.<br> Impossible de sauter ou d'esquiver.",
       "deletable": true,
       "sectionName": "Nouvelle section"
     },

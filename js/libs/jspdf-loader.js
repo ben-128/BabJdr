@@ -7,7 +7,6 @@
 
   // Check if jsPDF is already loaded
   if (window.jsPDF) {
-    console.log('📋 jsPDF already loaded');
     return;
   }
 
@@ -17,7 +16,6 @@
       const script = document.createElement('script');
       script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
       script.onload = () => {
-        console.log('📋 jsPDF loaded successfully');
         resolve();
       };
       script.onerror = () => {
@@ -30,9 +28,8 @@
 
   // Load jsPDF if not available
   if (typeof window.jsPDF === 'undefined') {
-    console.log('📋 Loading jsPDF for character sheet functionality...');
     loadJsPDF().catch(() => {
-      console.warn('⚠️ jsPDF could not be loaded. PDF generation will not be available.');
+      // Silent fallback - PDF generation will not be available
     });
   }
 

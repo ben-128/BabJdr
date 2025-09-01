@@ -33,7 +33,8 @@
       "Bash(timeout:*)",
       "Bash(scripts/clean-backups.bat)",
       "Bash(copy:*)",
-      "Bash(cp:*)"
+      "Bash(cp:*)",
+      "Bash(powershell:*)"
     ],
     "deny": []
   }

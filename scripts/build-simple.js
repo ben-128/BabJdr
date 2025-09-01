@@ -64,9 +64,7 @@ function buildStandalone() {
     </div>
   </main>
   
-  <footer>
-    <p>JDR‑BAB — Règles et contenus sous licence libre</p>
-  </footer>
+  <footer></footer>
 </div>
 
 </body>

@@ -300,7 +300,7 @@
     },
     {
       "nom": "Flèche de la terre",
-      "numero": "24",
+      "numero": 24,
       "image": "",
       "description": "<i>Une flèche alourdie de pierres runiques, qui libère la force brutale de l’élément Terre à l’impact.</i>",
       "tags": [

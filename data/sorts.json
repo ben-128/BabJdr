@@ -150,8 +150,8 @@
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> Aucune",
-        "effetNormal": "<strong>Effet:</strong> &nbsp;La vitesse de déplacement de la cible est augmentée de 50% pendant 5 tours. Non Cumulable.",
-        "effetCritique": "<strong>Coup Critique:&nbsp;</strong> La vitesse est augmentée de 100%."
+        "effetNormal": "<strong>Effet:</strong> &nbsp;La vitesse de déplacement de la cible est augmentée de 3m pendant 5 tours. Non Cumulable.",
+        "effetCritique": "<strong>Coup Critique:&nbsp;</strong> La vitesse est augmentée de 6m."
       },
       {
         "nom": "Sommeil",
