@@ -1826,99 +1826,8 @@
         }
       }
       
-      // Check if we're in standalone mode
-      const isStandalone = window.STANDALONE_VERSION === true;
-      
-      // Create different content based on mode
-      const feuillePersonnageContent = isStandalone ? `
-        <div class="page-header">
-          <h1>📋 Feuille de personnage</h1>
-          <p style="color: var(--accent-ink); font-style: italic;">Version standalone - PDF disponible en version complète</p>
-        </div>
-        
-        <div class="character-sheet-standalone" style="max-width: 800px; margin: 0 auto; padding: 2rem; background: var(--card); border: 2px solid var(--bronze); border-radius: 12px;">
-          <h2 style="color: var(--bronze); text-align: center; margin-bottom: 2rem;">📄 Modèle de Feuille de Personnage</h2>
-          
-          <div class="character-form-preview" style="display: grid; gap: 1.5rem;">
-            <div class="form-section" style="background: var(--parchment); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--rule);">
-              <h3 style="color: var(--bronze); margin: 0 0 1rem 0;">🎭 Informations du personnage</h3>
-              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-                <div><strong>Nom Joueur:</strong> ________________________</div>
-                <div><strong>Nom personnage:</strong> ____________________</div>
-                <div><strong>Expérience:</strong> ________________________</div>
-                <div><strong>Niveau:</strong> ____________________</div>
-                <div><strong>Classe:</strong> __________________________</div>
-              </div>
-            </div>
-            
-            <div class="form-section" style="background: var(--parchment); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--rule);">
-              <h3 style="color: var(--bronze); margin: 0 0 1rem 0;">💪 Caractéristiques</h3>
-              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.8rem; font-size: 0.9rem;">
-                <div><strong>Force:</strong> _____ / _____</div>
-                <div><strong>Endurance:</strong> _____ / _____</div>
-                <div><strong>Agilité:</strong> _____ / _____</div>
-                <div><strong>Intelligence:</strong> _____ / _____</div>
-                <div><strong>Volonté:</strong> _____ / _____</div>
-                <div><strong>Chance:</strong> _____ / _____</div>
-              </div>
-            </div>
-            
-            <div class="form-section" style="background: var(--parchment); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--rule);">
-              <h3 style="color: var(--bronze); margin: 0 0 1rem 0;">⚔️ Statistiques dérivées</h3>
-              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.8rem; font-size: 0.9rem;">
-                <div><strong>Vie:</strong> _____ / _____</div>
-                <div><strong>Mana:</strong> _____ / _____</div>
-                <div><strong>Initiative:</strong> _____ / _____</div>
-                <div><strong>Fortune:</strong> _____ / _____</div>
-                <div><strong>Armure:</strong> _____ / _____</div>
-                <div><strong>Esquive:</strong> _____ / _____</div>
-              </div>
-            </div>
-            
-            <div class="form-section" style="background: var(--parchment); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--rule);">
-              <h3 style="color: var(--bronze); margin: 0 0 1rem 0;">🌟 Compétences</h3>
-              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.8rem; font-size: 0.9rem;">
-                <div><strong>Hardiesse:</strong> _____</div>
-                <div><strong>Finesse:</strong> _____</div>
-                <div><strong>Coordination:</strong> _____</div>
-                <div><strong>Réflexion:</strong> _____</div>
-                <div><strong>Éloquence:</strong> _____</div>
-              </div>
-            </div>
-            
-            <div class="form-section" style="background: var(--parchment); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--rule);">
-              <h3 style="color: var(--bronze); margin: 0 0 1rem 0;">🔥 Armure élémentaire</h3>
-              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 0.8rem; font-size: 0.9rem;">
-                <div><strong>Feu:</strong> _____</div>
-                <div><strong>Eau:</strong> _____</div>
-                <div><strong>Terre:</strong> _____</div>
-                <div><strong>Air:</strong> _____</div>
-                <div><strong>Lumière:</strong> _____</div>
-                <div><strong>Nuit:</strong> _____</div>
-                <div><strong>Divin:</strong> _____</div>
-                <div><strong>Maléfique:</strong> _____</div>
-              </div>
-            </div>
-            
-            <div class="form-section" style="background: var(--parchment); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--rule);">
-              <h3 style="color: var(--bronze); margin: 0 0 1rem 0;">📝 Notes</h3>
-              <div style="display: grid; gap: 1rem;">
-                <div><strong>Sorts:</strong><br>_____________________________________<br>_____________________________________</div>
-                <div><strong>Capacités et dons:</strong><br>_____________________________________<br>_____________________________________</div>
-                <div><strong>Inventaire:</strong><br>_____________________________________<br>_____________________________________</div>
-                <div><strong>Histoire & Personnalité:</strong><br>_____________________________________<br>_____________________________________</div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="standalone-info" style="text-align: center; margin-top: 2rem; padding: 1rem; background: var(--accent-bg); border-radius: 8px;">
-            <p style="color: var(--accent-ink); margin: 0;">
-              <strong>📱 Info:</strong> Cette version standalone affiche un aperçu de la feuille. 
-              Pour obtenir le PDF complet imprimable, utilisez la version développement.
-            </p>
-          </div>
-        </div>
-      ` : `
+      // Create full PDF content for all versions  
+      const feuillePersonnageContent = `
         <div class="page-header">
           <h1>📋 Feuille de personnage</h1>
           <div class="character-sheet-actions" style="margin: 1rem 0; text-align: center;">
@@ -1934,12 +1843,28 @@
           </div>
         </div>
         
-        <div class="character-sheet-preview" style="width: 100%; border: 2px solid var(--bronze); border-radius: 8px; background: var(--parchment); padding: 2rem; text-align: center;">
-          <div class="pdf-preview-content">
-            <h2 style="color: var(--bronze); margin-bottom: 1.5rem;">📄 Feuille de personnage BabJDR</h2>
+          
+          
+          <!-- PDF Embed Container -->
+          <div class="pdf-embed-container" style="width: 100%; height: 600px; margin: 1rem 0; border: 1px solid var(--rule); border-radius: 8px; overflow: hidden;">
+            <embed 
+              id="pdf-embed" 
+              src="data/feuille-personnage.pdf" 
+              type="application/pdf" 
+              width="100%" 
+              height="100%"
+              style="border: none;"
+            />
+          </div>
+          
+          <div class="pdf-fallback" style="display: none; text-align: center; padding: 2rem; background: var(--accent-bg); border-radius: 8px; margin: 1rem 0;">
+            <h3 style="color: var(--bronze);">📄 Feuille de personnage BabJDR</h3>
+            <p style="color: var(--accent-ink); margin: 1rem 0;">
+              Votre navigateur ne peut pas afficher le PDF directement. Utilisez les boutons ci-dessous:
+            </p>
             
             <div class="pdf-info" style="background: white; border: 1px solid var(--rule); border-radius: 8px; padding: 1.5rem; margin: 1rem 0; text-align: left;">
-              <h3 style="color: var(--bronze); margin-top: 0;">📝 Contenu de la feuille:</h3>
+              <h4 style="color: var(--bronze); margin-top: 0;">📝 Contenu de la feuille:</h4>
               <ul style="color: var(--accent-ink); line-height: 1.8;">
                 <li><strong>Informations du personnage:</strong> Nom, classe, niveau, expérience</li>
                 <li><strong>Caractéristiques:</strong> Force, Endurance, Agilité, Intelligence, Volonté, Chance</li>
@@ -1951,22 +1876,22 @@
                 <li><strong>Background:</strong> Histoire, apparence et personnalité du personnage</li>
               </ul>
             </div>
-            
-            <div class="pdf-actions" style="background: var(--card); border: 1px solid var(--bronze); border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
-              <p style="color: var(--accent-ink); margin-bottom: 1rem;">
-                <strong>🎯 Actions disponibles:</strong>
-              </p>
-              <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
-                <button id="open-pdf-new-tab" class="btn-base" style="background: var(--bronze); color: white;">
-                  📖 Ouvrir dans un nouvel onglet
-                </button>
-                <button id="print-pdf-direct" class="btn-base" style="background: var(--gold); color: white;">
-                  🖨️ Imprimer directement
-                </button>
-                <button id="download-pdf-direct" class="btn-base" style="background: var(--emerald); color: white;">
-                  📥 Télécharger le fichier
-                </button>
-              </div>
+          </div>
+          
+          <div class="pdf-actions" style="background: var(--card); border: 1px solid var(--bronze); border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
+            <p style="color: var(--accent-ink); margin-bottom: 1rem;">
+              <strong>🎯 Actions disponibles:</strong>
+            </p>
+            <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+              <button id="open-pdf-new-tab" class="btn-base" style="background: var(--bronze); color: white;">
+                📖 Ouvrir dans un nouvel onglet
+              </button>
+              <button id="print-pdf-direct" class="btn-base" style="background: var(--gold); color: white;">
+                🖨️ Imprimer directement
+              </button>
+              <button id="download-pdf-direct" class="btn-base" style="background: var(--emerald); color: white;">
+                📥 Télécharger le fichier
+              </button>
             </div>
           </div>
         </div>
@@ -1980,10 +1905,8 @@
       // Insert content into the page
       pageElement.innerHTML = feuillePersonnageContent;
       
-      // Setup event listeners for print and download functionality (only in dev mode)
-      if (!isStandalone) {
-        this.setupCharacterSheetActions();
-      }
+      // Setup event listeners for print and download functionality
+      this.setupCharacterSheetActions();
       
       
       // Show and activate page
@@ -2005,6 +1928,38 @@
       const openTabBtn = document.getElementById('open-pdf-new-tab');
       const printDirectBtn = document.getElementById('print-pdf-direct');
       const downloadDirectBtn = document.getElementById('download-pdf-direct');
+      
+      // Check if PDF embed is supported and handle fallback
+      const pdfEmbed = document.getElementById('pdf-embed');
+      const pdfFallback = document.querySelector('.pdf-fallback');
+      
+      if (pdfEmbed) {
+        // Add load error handler for PDF embed
+        pdfEmbed.addEventListener('error', () => {
+          // Hide embed and show fallback
+          pdfEmbed.style.display = 'none';
+          if (pdfFallback) {
+            pdfFallback.style.display = 'block';
+          }
+        });
+        
+        // Test if PDF can be loaded after a delay
+        setTimeout(() => {
+          // Check if the embed has loaded properly
+          try {
+            const embedDoc = pdfEmbed.contentDocument || pdfEmbed.contentWindow.document;
+            if (!embedDoc || embedDoc.body.innerHTML.includes('%PDF')) {
+              // PDF is showing as raw text, use fallback
+              pdfEmbed.style.display = 'none';
+              if (pdfFallback) {
+                pdfFallback.style.display = 'block';
+              }
+            }
+          } catch (e) {
+            // Can't access content, probably loaded correctly
+          }
+        }, 1000);
+      }
       
       // Open PDF in new tab
       const openPDF = () => {
