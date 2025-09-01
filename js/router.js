@@ -1849,7 +1849,7 @@
           <div class="pdf-embed-container" style="width: 100%; height: 600px; margin: 1rem 0; border: 1px solid var(--rule); border-radius: 8px; overflow: hidden;">
             <embed 
               id="pdf-embed" 
-              src="data/feuille-personnage.pdf" 
+              src="https://github.com/ben-128/BabJdr/raw/master/data/feuille-personnage.pdf" 
               type="application/pdf" 
               width="100%" 
               height="100%"
@@ -1917,7 +1917,7 @@
     },
 
     setupCharacterSheetActions() {
-      const pdfUrl = 'data/feuille-personnage.pdf';
+      const pdfUrl = 'https://github.com/ben-128/BabJdr/raw/master/data/feuille-personnage.pdf';
       
       // Setup main action buttons
       const openBtn = document.getElementById('open-character-sheet');
