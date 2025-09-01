@@ -1888,27 +1888,10 @@
             </div>
           </div>
           
-          <div class="pdf-actions" style="background: var(--card); border: 1px solid var(--bronze); border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
-            <p style="color: var(--accent-ink); margin-bottom: 1rem;">
-              <strong>🎯 Actions disponibles:</strong>
-            </p>
-            <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
-              <button id="open-pdf-new-tab" class="btn-base" style="background: var(--bronze); color: white;">
-                📖 Ouvrir dans un nouvel onglet
-              </button>
-              <button id="print-pdf-direct" class="btn-base" style="background: var(--gold); color: white;">
-                🖨️ Imprimer directement
-              </button>
-              <button id="download-pdf-direct" class="btn-base" style="background: var(--emerald); color: white;">
-                📥 Télécharger le fichier
-              </button>
-            </div>
-          </div>
         </div>
         
         <div class="character-sheet-info" style="margin-top: 1rem; text-align: center; color: var(--accent-ink);">
           <p><strong>💡 Info:</strong> La feuille de personnage est un PDF imprimable de 3 pages contenant tous les champs nécessaires pour votre personnage.</p>
-          <p><strong>📱 Mobile:</strong> Sur mobile/tablette, utilisez "Télécharger" puis ouvrez dans votre application PDF.</p>
         </div>
       `;
       
