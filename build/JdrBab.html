@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-09-01T11:41:08.236Z by JdrBab Build System -->
+<!-- Generated on 2025-09-01T11:44:03.758Z by JdrBab Build System -->
 <title>JDR‑BAB — Livret de règles</title>
 <meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -4540,8 +4540,8 @@ article span[title]:hover::after {
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> Aucune",
-        "effetNormal": "<strong>Effet:</strong> &nbsp;La vitesse de déplacement de la cible est augmentée de 50% pendant 5 tours. Non Cumulable.",
-        "effetCritique": "<strong>Coup Critique:&nbsp;</strong> La vitesse est augmentée de 100%."
+        "effetNormal": "<strong>Effet:</strong> &nbsp;La vitesse de déplacement de la cible est augmentée de 3m pendant 5 tours. Non Cumulable.",
+        "effetCritique": "<strong>Coup Critique:&nbsp;</strong> La vitesse est augmentée de 6m."
       },
       {
         "nom": "Sommeil",
@@ -6110,7 +6110,7 @@ article span[title]:hover::after {
       "type": "card",
       "id": "etats-new-4-1755725440741",
       "title": "Ralenti",
-      "content": "Vitesse de déplacement réduite de moitié.<br> Impossible de sauter ou d'esquiver.",
+      "content": "Vitesse de déplacement réduite de 6m.<br> Impossible de sauter ou d'esquiver.",
       "deletable": true,
       "sectionName": "Nouvelle section"
     },
@@ -12998,17 +12998,6 @@ article span[title]:hover::after {
       const feuillePersonnageContent = `
         <div class="page-header">
           <h1>📋 Feuille de personnage</h1>
-          <div class="character-sheet-actions" style="margin: 1rem 0; text-align: center;">
-            <button id="open-character-sheet" class="btn-base" style="background: var(--bronze); color: white; margin-right: 1rem;">
-              📖 Ouvrir le PDF
-            </button>
-            <button id="print-character-sheet" class="btn-base" style="background: var(--gold); color: white; margin-right: 1rem;">
-              🖨️ Imprimer
-            </button>
-            <button id="download-character-sheet" class="btn-base" style="background: var(--emerald); color: white;">
-              📥 Télécharger
-            </button>
-          </div>
         </div>
         
           

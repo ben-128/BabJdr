@@ -1830,17 +1830,6 @@
       const feuillePersonnageContent = `
         <div class="page-header">
           <h1>📋 Feuille de personnage</h1>
-          <div class="character-sheet-actions" style="margin: 1rem 0; text-align: center;">
-            <button id="open-character-sheet" class="btn-base" style="background: var(--bronze); color: white; margin-right: 1rem;">
-              📖 Ouvrir le PDF
-            </button>
-            <button id="print-character-sheet" class="btn-base" style="background: var(--gold); color: white; margin-right: 1rem;">
-              🖨️ Imprimer
-            </button>
-            <button id="download-character-sheet" class="btn-base" style="background: var(--emerald); color: white;">
-              📥 Télécharger
-            </button>
-          </div>
         </div>
         
           
