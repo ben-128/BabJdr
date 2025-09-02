@@ -133,6 +133,12 @@
           "id": "audio",
           "title": "Musiques d'ambiance",
           "icon": "🎵"
+        },
+        {
+          "type": "page",
+          "id": "traumas",
+          "title": "Traumas",
+          "icon": "🩹"
         }
       ]
     },
