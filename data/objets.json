@@ -26,7 +26,7 @@
       ],
       "effet": "<span style=\"font-weight: 700; font-family: \" source=\"\" serif=\"\" pro\",=\"\" serif;=\"\" color:=\"\" rgb(74,=\"\" 44,=\"\" 23);=\"\" text-shadow:=\"\" rgba(0,=\"\" 0,=\"\" 0.05)=\"\" 0px=\"\" 1px=\"\" 2px;\"=\"\">Dégâts: </span> Inflige (2  + Force) points de dégats physiques.",
       "prix": "🔷 <strong>Prix:</strong> 20",
-      "poids": "⚖️ <strong>Poids:</strong> 1"
+      "poids": ""
     },
     {
       "nom": "Dague en fer",
@@ -40,7 +40,7 @@
       ],
       "effet": "<strong>Dégâts: </strong> Inflige (1  + Force) points de dégats physiques.",
       "prix": "🔷 <strong>Prix:</strong> 10",
-      "poids": "⚖️ <strong>Poids:</strong> 1"
+      "poids": ""
     },
     {
       "nom": "Bâton en bois",
@@ -54,7 +54,7 @@
       ],
       "effet": "<strong>Dégâts: </strong> Inflige (2  + Force) points de dégats physiques.",
       "prix": "🔷 <strong>Prix:</strong> 5",
-      "poids": "⚖️ <strong>Poids:</strong> 1"
+      "poids": ""
     },
     {
       "nom": "Gourdin",
@@ -68,7 +68,7 @@
       ],
       "effet": "<strong>Dégâts: </strong> Inflige (1  + Force) points de dégats physiques.",
       "prix": "🔷 <strong>Prix:</strong> 10",
-      "poids": "⚖️ <strong>Poids:</strong> 1"
+      "poids": ""
     },
     {
       "nom": "Arc simple",
@@ -82,7 +82,7 @@
       ],
       "effet": "<strong>Portée: </strong> 12m.<br>\n<strong>Dégâts: </strong> Inflige (Force) points de dégats physiques.",
       "prix": "🔷 <strong>Prix:</strong> 30",
-      "poids": "⚖️ <strong>Poids:</strong> 1"
+      "poids": ""
     },
     {
       "nom": "Bouclier en bois",
@@ -94,7 +94,7 @@
       ],
       "effet": "<strong>Effet:</strong> Augmente l'armure physique de 2.",
       "prix": "🔷 <strong>Prix:</strong> 15",
-      "poids": "⚖️ <strong>Poids:</strong> 1"
+      "poids": ""
     },
     {
       "nom": "Robe simple",
@@ -107,7 +107,7 @@
       ],
       "effet": "<strong>Effet:</strong> Augmente la Volonté de 1.",
       "prix": "🔷 <strong>Prix:</strong> 20",
-      "poids": "⚖️ <strong>Poids:</strong> 1"
+      "poids": ""
     },
     {
       "nom": "Armure de cuir",
@@ -120,7 +120,7 @@
       ],
       "effet": "<strong>Effet:</strong> Augmente l'armure physique de 1.",
       "prix": "🔷 <strong>Prix:</strong> 30",
-      "poids": "⚖️ <strong>Poids:</strong> 1"
+      "poids": ""
     },
     {
       "nom": "Armure en maille",
@@ -158,7 +158,7 @@
       ],
       "effet": "<strong>Effet:</strong> Rend 15 (critique : 25) points de vie au héros.",
       "prix": "🔷 <strong>Prix:</strong> 10",
-      "poids": "⚖️ <strong>Poids:</strong> 1"
+      "poids": ""
     },
     {
       "nom": "Petite potion de mana",
@@ -170,7 +170,7 @@
       ],
       "effet": "<strong>Effet:</strong> Rend 20 (critique : 35) points de mana au héros.",
       "prix": "🔷 <strong>Prix:</strong> 10",
-      "poids": "⚖️ <strong>Poids:</strong> 1"
+      "poids": ""
     },
     {
       "nom": "Baguette de boule de feu",
@@ -183,7 +183,7 @@
       ],
       "effet": "<strong>Effet:</strong> Remplace votre prochaine action principale par le sort de mage <span class=\"spell-link\" data-spell=\"Boule de Feu\" data-category=\"Sorts de Mage\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Boule de Feu</span>. <br><i>Les prérequis pour le sort ne sont pas requis mais le mana et les statistiques du héros sont utilisés.</i>\n    <br><br><strong>Charges :</strong> 3",
       "prix": "🔷 <strong>Prix:</strong> 25",
-      "poids": "⚖️ <strong>Poids:</strong> 1"
+      "poids": ""
     },
     {
       "nom": "Feuilleclaire",
@@ -196,7 +196,7 @@
       ],
       "effet": "<strong>Effet:</strong> Rend 10 (critique : 20) points de vie au héros ou à une cible proche.\n<br>Tous les 5 points d'intelligence, augmente les soins de 1.",
       "prix": "🔷 <strong>Prix:</strong> 10",
-      "poids": "⚖️ <strong>Poids:</strong> 1"
+      "poids": ""
     },
     {
       "nom": "Nocteline",
@@ -209,7 +209,7 @@
       ],
       "effet": "<strong>Prérequis:</strong> Intelligence 5.<br>\n<strong>Effet:</strong> Soigne le héros ou une cible proche du poison. <br>Critique : rend également 5 points de vie.",
       "prix": "🔷 <strong>Prix:</strong> 10",
-      "poids": "⚖️ <strong>Poids:</strong> 1"
+      "poids": ""
     },
     {
       "nom": "Baguette de d'accélération",
@@ -222,7 +222,7 @@
       ],
       "effet": "<strong>Effet:</strong> Remplace votre prochaine action principale par le sort d'enchanteur <span class=\"spell-link\" data-spell=\"Accélération\" data-category=\"Sorts d'Enchanteur\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Accélération</span>. <br><i>Les prérequis pour le sort ne sont pas requis mais le mana et les statistiques du héros sont utilisés.</i>\n    <br><br><strong>Charges :</strong> 3",
       "prix": "🔷 <strong>Prix:</strong> 30",
-      "poids": "⚖️ <strong>Poids:</strong> 1"
+      "poids": ""
     },
     {
       "nom": "Baguette de sommeil",
@@ -235,7 +235,7 @@
       ],
       "effet": "<strong>Effet:</strong> Remplace votre prochaine action principale par le sort d'enchanteur <span class=\"spell-link\" data-spell=\"Sommeil\" data-category=\"Sorts d'Enchanteur\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Sommeil</span>. <br><i>Les prérequis pour le sort ne sont pas requis mais le mana et les statistiques du héros sont utilisés.</i>\n    <br><br><strong>Charges :</strong> 3",
       "prix": "🔷 <strong>Prix:</strong> 30",
-      "poids": "⚖️ <strong>Poids:</strong> 1"
+      "poids": ""
     },
     {
       "nom": "Ration de nourriture",
@@ -247,7 +247,7 @@
       ],
       "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore (Endurance) points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.",
       "prix": "🔷 <strong>Prix:</strong> 5",
-      "poids": "⚖️ <strong>Poids:</strong> 1"
+      "poids": ""
     },
     {
       "nom": "Ration copieuse de nourriture",
@@ -259,7 +259,7 @@
       ],
       "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore (Endurance) points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.\n<br><b>Charges :</b> 3",
       "prix": "🔷 <strong>Prix:</strong> 15",
-      "poids": "⚖️ <strong>Poids:</strong> 1"
+      "poids": ""
     },
     {
       "nom": "Fruits de la forêt",
@@ -271,7 +271,7 @@
       ],
       "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore (Endurance) points de vie. <br>Couplé à un sommeil, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>. <br>De plus, lorsque consommé, le mangeur ne neccessite plus que 4 heures de sommeil ce jour-ci.\n<br><br><b>Charges :</b> 3",
       "prix": "🔷 <strong>Prix:</strong> 20",
-      "poids": "⚖️ <strong>Poids:</strong> 1"
+      "poids": ""
     },
     {
       "nom": "Ration de survie",
@@ -283,7 +283,7 @@
       ],
       "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.",
       "prix": "",
-      "poids": "⚖️ <strong>Poids:</strong> 1"
+      "poids": ""
     },
     {
       "nom": "Flèche aiguisée",
@@ -296,7 +296,7 @@
       ],
       "effet": "<b>Effet :</b> Renforce la prochaine attaque à l'arc et lui rajoute +3 (critique : +5) points de dégats physiques en cas de réussite de l'attaque.\n\n<br><br><b>Charges :</b> 3",
       "prix": "🔷 <strong>Prix:</strong> 10",
-      "poids": "⚖️ <strong>Poids:</strong> 1"
+      "poids": ""
     },
     {
       "nom": "Flèche de la terre",
@@ -309,7 +309,7 @@
       ],
       "effet": "<b>Effet :</b> Renforce la prochaine attaque à l'arc et lui rajoute +5 (critique : +10) points de dégats élémentaire de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> en cas de réussite de l'attaque.\n\n<br><br><b>Charges :</b> 3",
       "prix": "🔷 <strong>Prix:</strong> 20",
-      "poids": "⚖️ <strong>Poids:</strong> 1"
+      "poids": ""
     },
     {
       "nom": "Bandage d'urgence",
@@ -321,7 +321,7 @@
       ],
       "effet": "Inutilisable hors combat.      \n<br><strong>Portée :</strong>   3m.\n<br><strong>Effet:</strong> Rend 5 (critique : 10) points de vie à la cible.\n<br><strong>Charges:</strong> 3.",
       "prix": "🔷 <strong>Prix:</strong> 10",
-      "poids": "⚖️ <strong>Poids:</strong> 1"
+      "poids": ""
     },
     {
       "nom": "Bracelet médicinal de la forêt",
@@ -333,7 +333,7 @@
       ],
       "effet": "<strong>Effet:</strong> Soigne son porteur du poison. Utilisable une fois par jour maximum.",
       "prix": "🔷 <strong>Prix:</strong> ?",
-      "poids": "⚖️ <strong>Poids:</strong> 1"
+      "poids": ""
     },
     {
       "nom": "Dent de Grouink",
@@ -345,7 +345,7 @@
       ],
       "effet": "<strong>Effet:</strong> Augmente la Force du porteur de 3.",
       "prix": "🔷 <strong>Prix:</strong> ?",
-      "poids": "⚖️ <strong>Poids:</strong> 1"
+      "poids": ""
     },
     {
       "nom": "Echarpe de chaman Groink",
@@ -357,7 +357,7 @@
       ],
       "effet": "<strong>Effet:</strong> Augmente de 3m la portée des sorts d'alterations magiques et d'améliorations temporaires.",
       "prix": "🔷 <strong>Prix:</strong> ?",
-      "poids": "⚖️ <strong>Poids:</strong> 1"
+      "poids": ""
     },
     {
       "nom": "Fourrure d'ours",
@@ -369,7 +369,7 @@
       ],
       "effet": "",
       "prix": "🔷 <strong>Prix:</strong> 100",
-      "poids": "⚖️ <strong>Poids:</strong> 1"
+      "poids": ""
     },
     {
       "nom": "Pierre à aiguiser",
@@ -381,7 +381,7 @@
       ],
       "effet": "<strong>Effet:</strong> Augmente les dégats de la prochaine attaque physique de 3.\n  <br><strong>Charges:</strong> 3.",
       "prix": "🔷 <strong>Prix:</strong> 20",
-      "poids": "⚖️ <strong>Poids:</strong> 1"
+      "poids": ""
     },
     {
       "nom": "Cristal d'effort",
@@ -393,7 +393,7 @@
       ],
       "effet": "<strong>Effet:</strong> Recharge un effort utilisable par le héros.<br><strong>Charges:</strong> 3.",
       "prix": "🔷 <strong>Prix:</strong> 50",
-      "poids": "⚖️ <strong>Poids:</strong> 1"
+      "poids": ""
     },
     {
       "nom": "Pince de crabe géant des forêts",
@@ -407,7 +407,7 @@
       ],
       "effet": "<strong>Dégâts: </strong> Inflige (3  + Force) points de dégats physiques.\n<br> L'arme est imprégnée de 5 points de dégats d'élément <span style=\"color: #4682b4; font-weight: bold;\">Eau</span>.",
       "prix": "🔷 <strong>Prix:</strong> ?",
-      "poids": "⚖️ <strong>Poids:</strong> 1"
+      "poids": ""
     }
   ],
   "filterSettings": {
