@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-09-03T11:52:32.448Z by JdrBab Build System -->
+<!-- Generated on 2025-09-03T21:27:40.252Z by JdrBab Build System -->
 <title>JDR‑BAB — Livret de règles</title>
 <meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -3820,6 +3820,128 @@ span[title] {
   opacity: 1;
 }
 
+/* Styles pour les monstres - identiques aux sorts */
+.monster-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  border: 2px solid var(--rule);
+  border-radius: var(--space-md);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  background: var(--card);
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.monster-item:hover {
+  background: var(--paper);
+  border-color: var(--bronze);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.monster-item:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.monster-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.monster-name {
+  font-weight: 600;
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+
+.monster-meta {
+  font-size: 12px;
+  color: var(--paper-muted);
+  margin-bottom: 6px;
+}
+
+.monster-description {
+  font-size: 14px;
+  color: var(--paper-muted);
+  line-height: 1.4;
+}
+
+.monster-item .copy-indicator {
+  position: absolute;
+  top: 50%;
+  right: var(--space-md);
+  transform: translateY(-50%);
+  font-size: 12px;
+  color: var(--bronze);
+  opacity: 0;
+  font-weight: 600;
+  transition: opacity 0.3s ease;
+}
+
+.monster-item.copied .copy-indicator {
+  opacity: 1;
+}
+
+/* Popup de prévisualisation des monstres */
+.monster-preview-popup {
+  position: fixed;
+  z-index: 10001;
+  background: var(--card);
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  max-width: 450px;
+  max-height: 600px;
+  overflow-y: auto;
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.4;
+}
+
+.monster-preview-popup .monster-preview-header {
+  background: linear-gradient(135deg, var(--bronze), var(--accent));
+  color: white;
+  padding: var(--space-lg);
+  border-radius: 8px 8px 0 0;
+  font-weight: bold;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.monster-preview-popup .monster-preview-content {
+  padding: var(--space-lg);
+}
+
+.monster-preview-popup .monster-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 8px;
+  margin: var(--space-md) 0;
+}
+
+.monster-preview-popup .monster-stat {
+  background: var(--paper);
+  padding: 8px;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 12px;
+}
+
+.monster-preview-popup .monster-stat-label {
+  font-weight: 600;
+  color: var(--paper-muted);
+  margin-bottom: 2px;
+}
+
+.monster-preview-popup .monster-stat-value {
+  font-weight: bold;
+  font-size: 14px;
+}
+
 /* Popup de prévisualisation des sorts */
 .spell-preview-popup {
   position: fixed;
@@ -3909,13 +4031,15 @@ body.dev-on .dev-toolbox * {
 /* Forcer les modales toolbox à apparaître devant les dialogues d'édition HTML */
 .elements-modal,
 .etats-modal, 
-.spell-links-modal {
+.spell-links-modal,
+.monster-links-modal {
   z-index: 2147483647 !important; /* Maximum z-index possible */
 }
 
 .elements-modal-content,
 .etats-modal-content,
-.spell-links-modal-content {
+.spell-links-modal-content,
+.monster-links-modal-content {
   z-index: 2147483647 !important;
   position: relative;
 }
@@ -4572,6 +4696,42 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> L'arme du prêtre infligera 2 dégats de lumière à chaque coup, pendant 4 tours.<br> Tous les 5 d'intelligence, augmente les dégats de 1.",
         "effetCritique": "<strong>Coup Critique:&nbsp;</strong>&nbsp;Les dégats passent à 4."
+      },
+      {
+        "nom": "Révélation mineure",
+        "element": "Lumière",
+        "description": "Un éclat de lumière se pose sur la cible, dévoilant son nom et son élément d’affiliation.",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 2",
+        "portee": "🎯 <strong>Portée:</strong> 18m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 5",
+        "resistance": "<strong>Sans effet si:</strong> -",
+        "effetNormal": "<strong>Effet:</strong> Révèle le nom et l'élément d’affiliation d'une cible.",
+        "effetCritique": "<strong>Coup Critique: </strong> Révèle également son armure physique et élémentaire."
+      },
+      {
+        "nom": "Révélation majeure",
+        "element": "Lumière",
+        "description": "Le halo lumineux perce le secret des défenses de la cible.",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 5",
+        "portee": "🎯 <strong>Portée:</strong> 18m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 10",
+        "resistance": "<strong>Sans effet si:</strong> -",
+        "effetNormal": "<strong>Effet:</strong>  Révèle le nom et l'élément d’affiliation d'une cible, ainsi que son armure physique et élémentaire et ses points de vie.",
+        "effetCritique": "<strong>Coup Critique: </strong> Révèle également son Esquive, et sa resistance altération."
+      },
+      {
+        "nom": "Révélation ultime",
+        "element": "Lumière",
+        "description": "Un faisceau éclatant dévoile toute l’essence de l’adversaire.",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 10",
+        "portee": "🎯 <strong>Portée:</strong> 18m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 20",
+        "resistance": "<strong>Sans effet si:</strong> -",
+        "effetNormal": "<strong>Effet:</strong> Révèle le nom et l'élément d’affiliation d'une cible, ainsi que son armure physique et élémentaire, et ses points de vie. Révèle également son Esquive, sa resistance altération, ses chances de coup critiques physiques et magiques.",
+        "effetCritique": "<strong>Coup Critique: </strong> Révèle une capacité de la cible."
       }
     ]
   },
@@ -4632,21 +4792,14 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
     "sousClasses": [
       {
         "nom": "Nain des montagnes",
-        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>5</strong></span><span class=\"chip\">🏃 Agilité: <strong>1</strong></span><span class=\"chip\">🛡️ Endurance: <strong>7</strong></span><span class=\"chip\">🧠 Intelligence: <strong>1</strong></span><span class=\"chip\">⚡ Volonté: <strong>5</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
+        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>5</strong></span><span class=\"chip\">🏃 Agilité: <strong>1</strong></span><span class=\"chip\">🛡️ Endurance: <strong>10</strong></span><span class=\"chip\">🧠 Intelligence: <strong>1</strong></span><span class=\"chip\">⚡ Volonté: <strong>5</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +2 Force 💪, +3 Endurance 🛡️, +1 Volonté⚡   <strong> +2 Au choix</strong>",
         "capacites": "<ul><li><em>Brise rocher : </em> Gagne 1 de compétence sur les tests de compétence Hardiesse pour une destruction d'objet.</li><li><em>Volonté inflexible :</em> Les nains possèdent une volonté inflexible qui les rendent résistants aux sortilèges (caractéristique Volonté élevée).</li></ul>",
         "description": "<i>Race robuste et inflexible, dotée d’une endurance exceptionnelle. Forgés par la roche et les sommets, ils résistent aux épreuves et possèdent une force colossale capable de briser murs, armures et créatures cuirassées.</i>"
       },
       {
         "nom": "Berserker",
-        "base": {
-          "Force": 5,
-          "Agilité": 4,
-          "Endurance": 5,
-          "Intelligence": 1,
-          "Volonté": 1,
-          "Chance": 1
-        },
+        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>5</strong></span><span class=\"chip\">🏃 Agilité: <strong>4</strong></span><span class=\"chip\">🛡️ Endurance: <strong>8</strong></span><span class=\"chip\">🧠 Intelligence: <strong>1</strong></span><span class=\"chip\">⚡ Volonté: <strong>1</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +3 Force 💪, +1 Agilité 🏃, +1 Endurance 🛡️<strong> +2 Au choix</strong>",
         "capacites": "<ul><li><em>Tourbillon de rage :</em> Sur un critique au corps à corps, touche aussi tous les adversaires à moins de 3m.</li><li><em>Risque sauvage :</em> +1 chance de critique physique s'il ne porte pas de bouclier.</li></ul>",
         "description": "<i>Combattant sauvage, maître des armes à deux mains. Sa rage décuple sa force, lui permettant d’abattre ses ennemis dans un déchaînement de puissance brute et de coups imparables.</i>"
@@ -4654,14 +4807,14 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       {
         "nom": "Aventurier",
         "description": "<i>Héros polyvalent et ingénieux, il affronte l’inconnu avec courage, et manie tous les outils à sa portée pour triompher.</i>",
-        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>5</strong></span><span class=\"chip\">🏃 Agilité: <strong>2</strong></span><span class=\"chip\">🛡️ Endurance: <strong>5</strong></span><span class=\"chip\">🧠 Intelligence: <strong>1</strong></span><span class=\"chip\">⚡ Volonté: <strong>1</strong></span><span class=\"chip\">🍀 Chance: <strong>5</strong></span></div>",
+        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>5</strong></span><span class=\"chip\">🏃 Agilité: <strong>2</strong></span><span class=\"chip\">🛡️ Endurance: <strong>8</strong></span><span class=\"chip\">🧠 Intelligence: <strong>1</strong></span><span class=\"chip\">⚡ Volonté: <strong>1</strong></span><span class=\"chip\">🍀 Chance: <strong>5</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +2 Force 💪, +2 Endurance 🛡️, +1 Chance 🍀, <strong> +2 Au choix</strong>",
         "capacites": "<ul><em>Passé glorieux : </em>  Gagne la compétence Eloquence rang 1.<br><em>Sans failles :</em>  Dispose d'un Effort maximum supplémentaire .<br><em>Polyvalent : </em> Dispose d'un point de Don supplémentaire.</ul>"
       },
       {
         "nom": "Maître d’armes",
         "description": "<i>Guerrier érudit et redoutable, il manie avec aisance toutes les armes, des plus communes aux plus exotiques, transformant chaque outil de guerre en prolongement de son bras.</i>",
-        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>5</strong></span><span class=\"chip\">🏃 Agilité: <strong>2</strong></span><span class=\"chip\">🛡️ Endurance: <strong>5</strong></span><span class=\"chip\">🧠 Intelligence: <strong>1</strong></span><span class=\"chip\">⚡ Volonté: <strong>3</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
+        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>5</strong></span><span class=\"chip\">🏃 Agilité: <strong>2</strong></span><span class=\"chip\">🛡️ Endurance: <strong>8</strong></span><span class=\"chip\">🧠 Intelligence: <strong>1</strong></span><span class=\"chip\">⚡ Volonté: <strong>3</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +3 Force 💪, +2 Endurance 🛡️<strong> +2 Au choix</strong>",
         "capacites": "<ul><li><em>Volte d’armes :</em> Peut changer d'arme sans utiliser d'action secondaire.\n</li>\n               <li><em>Expert martial :</em> Lorsqu'il utilise une arme exotique, relance le dé en cas d'echec critique.\n</li>\n   <li><em>Erudit des lames :</em> Gagne 1 de compétence sur les tests de compétence Réflexion sur l'effet ou la provenance d'une arme.\n</li>\n\n</ul>"
       }
@@ -4674,21 +4827,14 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
     "sousClasses": [
       {
         "nom": "Érudit",
-        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>1</strong></span><span class=\"chip\">🏃 Agilité: <strong>1</strong></span><span class=\"chip\">🛡️ Endurance: <strong>1</strong></span><span class=\"chip\">🧠 Intelligence: <strong>6</strong></span><span class=\"chip\">⚡ Volonté: <strong>3</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
+        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>1</strong></span><span class=\"chip\">🏃 Agilité: <strong>1</strong></span><span class=\"chip\">🛡️ Endurance: <strong>4</strong></span><span class=\"chip\">🧠 Intelligence: <strong>6</strong></span><span class=\"chip\">⚡ Volonté: <strong>3</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +3 Intelligence 🧠, +2 Volonté ⚡<strong> +2 Au choix</strong>",
         "capacites": "<ul><li><em>Instruit</em> : Gagne la compétence Réflexion rang 1.</li><li><em>Apprentissage accéléré</em> : Le niveau de l'érudit est considéré comme deux fois plus élevé pour les prérequis d'apprentissage de sorts.</li></ul>",
         "description": "<i>Mage avide de savoir, doté d’une mémoire prodigieuse. Il assimile les arcanes avec une rapidité fulgurante et maîtrise de nouveaux sorts bien plus vite que ses pairs.</i>"
       },
       {
         "nom": "Elfe",
-        "base": {
-          "Force": 2,
-          "Agilité": 2,
-          "Endurance": 3,
-          "Intelligence": 3,
-          "Volonté": 2,
-          "Chance": 1
-        },
+        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>2</strong></span><span class=\"chip\">🏃 Agilité: <strong>2</strong></span><span class=\"chip\">🛡️ Endurance: <strong>6</strong></span><span class=\"chip\">🧠 Intelligence: <strong>3</strong></span><span class=\"chip\">⚡ Volonté: <strong>2</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +1 Force 💪, +1 Agilité 🏃, +1 Endurance 🛡️, +1 Intelligence 🧠, +1 Volonté ⚡<strong> +2 Au choix</strong>",
         "capacites": "<ul><li><em>Instinct elfique</em> : Gagne la compétence Coordination rang 1.</li><li><em>Équipement d'elfe</em> : Epées à une main, armures légères.</li><li><em>Briseur de sceaux</em> : Gagne 1 de compétence sur les tests de compétence pour comprendre ou ouvrir une porte scellée magiquement</li></ul>",
         "description": "<i>Guerrier-mage polyvalent, aussi agile qu’élégant. Maître des arcanes comme du combat rapproché, il allie puissance magique et adresse martiale avec une grâce inégalée.</i>"
@@ -4702,21 +4848,14 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
     "sousClasses": [
       {
         "nom": "Inquisiteur",
-        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>3</strong></span><span class=\"chip\">🏃 Agilité: <strong>1</strong></span><span class=\"chip\">🛡️ Endurance: <strong>4</strong></span><span class=\"chip\">🧠 Intelligence: <strong>3</strong></span><span class=\"chip\">⚡ Volonté: <strong>5</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
+        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>3</strong></span><span class=\"chip\">🏃 Agilité: <strong>1</strong></span><span class=\"chip\">🛡️ Endurance: <strong>7</strong></span><span class=\"chip\">🧠 Intelligence: <strong>3</strong></span><span class=\"chip\">⚡ Volonté: <strong>5</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +1 Force 💪, +1 Intelligence 🧠, +2 Volonté ⚡, +1 Endurance 🛡️<strong> +2 Au choix</strong>",
         "capacites": "<ul><li><em>Equipement d'inquisiteur</em> : Peut s'équiper d'armures légères et de boucliers.</li><li><em>Fléau des morts-vivants</em> : Les sorts visant les morts-vivants ne ratent jamais.</li><li><em>Lumière purificatrice</em> : Double l'effet de l'intelligence sur les dégats des sorts d'élément <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span> ou <span style=\"color: #f5f5f5; font-weight: bold; background: rgba(100, 100, 100, 0.3); padding: 2px 4px; border-radius: 3px;\">Divin</span>.</li></ul>",
         "description": "<i>Champion de la foi, il renforce ses alliés par la magie sacrée et traque sans relâche les morts-vivants. Quand la lumière seule ne suffit plus, il n’hésite pas à prendre les armes et combattre en première ligne.</i>"
       },
       {
         "nom": "Clerc Divin",
-        "base": {
-          "Force": 1,
-          "Agilité": 1,
-          "Endurance": 2,
-          "Intelligence": 3,
-          "Volonté": 5,
-          "Chance": 5
-        },
+        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>1</strong></span><span class=\"chip\">🏃 Agilité: <strong>1</strong></span><span class=\"chip\">🛡️ Endurance: <strong>5</strong></span><span class=\"chip\">🧠 Intelligence: <strong>3</strong></span><span class=\"chip\">⚡ Volonté: <strong>5</strong></span><span class=\"chip\">🍀 Chance: <strong>5</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +2 Intelligence 🧠, +2 Volonté ⚡, +1 Chance 🍀<strong> +2 Au choix</strong>",
         "capacites": "<ul><li><em>Maître des soins</em> : Double l'effet de l'intelligence sur les sorts de soins.</li><li><em> Pieu </em>:  Gagne 1 de compétence sur les tests de compétence Reflexion sur un dieu ou une religion.</li><li><em> Protection divine </em>:  Dispose d'une armure élementaire <span style=\"color: #f5f5f5; font-weight: bold; background: rgba(100, 100, 100, 0.3); padding: 2px 4px; border-radius: 3px;\">Divin</span> de 10.</li></ul>",
         "description": "<i>Serviteur sacré, maître des arts de guérison. Sa puissante magie de soins protège ses alliés et les relève même aux portes de la mort.</i>"
@@ -4730,14 +4869,14 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
     "sousClasses": [
       {
         "nom": "Voleur",
-        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>3</strong></span><span class=\"chip\">🏃 Agilité: <strong>5</strong></span><span class=\"chip\">🛡️ Endurance: <strong>2</strong></span><span class=\"chip\">🧠 Intelligence: <strong>2</strong></span><span class=\"chip\">⚡ Volonté: <strong>2</strong></span><span class=\"chip\">🍀 Chance: <strong>5</strong></span></div>",
+        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>3</strong></span><span class=\"chip\">🏃 Agilité: <strong>5</strong></span><span class=\"chip\">🛡️ Endurance: <strong>5</strong></span><span class=\"chip\">🧠 Intelligence: <strong>2</strong></span><span class=\"chip\">⚡ Volonté: <strong>2</strong></span><span class=\"chip\">🍀 Chance: <strong>5</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +2 Agilité 🏃, +2 Force 💪, +1 Endurance 🛡️<strong> +2 Au choix</strong>",
         "capacites": "<ul><li><em>Mains expertes :</em> Gagne la compétence Finesse rang 1.</li><li><em>Sprint :</em> Peut utiliser une action secondaire pour doubler sa vitesse de déplacement.</li><li><em>Vicieux :</em> Double les chances de critiques physiques sur les cibles subissant un état qui les empeche d'esquiver.</li></ul>",
         "description": "<i>Maître de la finesse et de l’agilité, il se déplace avec rapidité fulgurante et frappe là où ça fait le plus mal. </i>"
       },
       {
         "nom": "Chasseur",
-        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>3</strong></span><span class=\"chip\">🏃 Agilité: <strong>5</strong></span><span class=\"chip\">🛡️ Endurance: <strong>2</strong></span><span class=\"chip\">🧠 Intelligence: <strong>4</strong></span><span class=\"chip\">⚡ Volonté: <strong>2</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
+        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>3</strong></span><span class=\"chip\">🏃 Agilité: <strong>5</strong></span><span class=\"chip\">🛡️ Endurance: <strong>5</strong></span><span class=\"chip\">🧠 Intelligence: <strong>4</strong></span><span class=\"chip\">⚡ Volonté: <strong>2</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +2 Agilité 🏃, +1 Force 💪, +1 Endurance 🛡️, +1 Intelligence 🧠<strong> +2 Au choix</strong>",
         "capacites": "<ul><li><em>Armes du Chasseur</em> : Peut utiliser les arcs.</li><li><em>Cueillette</em> : Une fois par jour, lors d’un repos, le personnage peut récolter 5 plantes locales (au choix du MJ). Leur efficacité dépend de l’Intelligence de l’utilisateur.</li><li><em>Connaissance du milieu naturel</em> : Gagne 1 de compétence sur les tests de Réflexion lié à animal, un monstre, une plante, ou la découverte de passages dérobés en milieu naturel.</li></ul>",
         "description": "<i>Précis et agile, il complète son art de l’arc par la science des herbes anciennes.</i>"
@@ -4751,21 +4890,14 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
     "sousClasses": [
       {
         "nom": "Esprit de la grande Fée",
-        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>1</strong></span><span class=\"chip\">🏃 Agilité: <strong>5</strong></span><span class=\"chip\">🛡️ Endurance: <strong>2</strong></span><span class=\"chip\">🧠 Intelligence: <strong>5</strong></span><span class=\"chip\">⚡ Volonté: <strong>2</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
+        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>1</strong></span><span class=\"chip\">🏃 Agilité: <strong>5</strong></span><span class=\"chip\">🛡️ Endurance: <strong>5</strong></span><span class=\"chip\">🧠 Intelligence: <strong>5</strong></span><span class=\"chip\">⚡ Volonté: <strong>2</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +1 Agilité 🏃, +1 Intelligence 🧠, +1 Endurance 🛡️, +1 Volonté ⚡, +1 Chance 🍀<strong> +2 Au choix</strong>",
         "capacites": "<ul><li><em>Tatillon</em> : Gagne la compétence Finesse rang 1.</li><li><em>Lévitation</em> : Ignore dégâts/ralentissements venant du sol.</li><li><em>Rayon de l'Amitié</em> : Par une action secondaire, peut répéter sur une autre cible à portée un sort bénéfique qui a ciblé un allié se tour ci, sans coût en mana supplémentaire.</li></ul>",
         "description": "<i>Être mystique qui flotte au-dessus du sol, il invoque des sorts imprévisibles pour soutenir ses alliés.</i>"
       },
       {
         "nom": "Lutin",
-        "base": {
-          "Force": 1,
-          "Agilité": 1,
-          "Endurance": 1,
-          "Intelligence": 5,
-          "Volonté": 2,
-          "Chance": 5
-        },
+        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>1</strong></span><span class=\"chip\">🏃 Agilité: <strong>1</strong></span><span class=\"chip\">🛡️ Endurance: <strong>4</strong></span><span class=\"chip\">🧠 Intelligence: <strong>5</strong></span><span class=\"chip\">⚡ Volonté: <strong>2</strong></span><span class=\"chip\">🍀 Chance: <strong>5</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +1 Intelligence 🧠, +2 Volonté ⚡, +2 Chance 🍀<strong> +2 Au choix</strong>",
         "capacites": "<ul><li><em>Secrets bien gardés</em> : Gagne la compétence Reflexion rang 1.</li><li><em>Expert des baguettes</em> : Sur un critique à la baguette, la charge n'est pas consommée.</li><li><em>Rire malicieux</em> : Par une action secondaire, peut répéter sur une autre cible à portée un sort d'altération qui a ciblé un enemi ce tour ci, sans coût en mana supplémentaire.</li></ul>",
         "description": "<i>Esprit espiègle et rusé, passé maître dans l’art des altérations magiques. </i>"
@@ -5168,7 +5300,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
         "Consommable",
         "Catalyseur"
       ],
-      "effet": "<strong>Effet:</strong> Remplace votre prochaine action principale par le sort de mage <span class=\"spell-link\" data-spell=\"Boule de Feu\" data-category=\"Sorts de Mage\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Boule de Feu</span>. <br><i>Les prérequis pour le sort ne sont pas requis mais le mana et l'intelligence du héros sont utilisés.</i>\n    <br><br><strong>Charges :</strong> 3",
+      "effet": "<strong>Effet:</strong> Remplace votre prochaine action principale par le sort de mage <span class=\"spell-link\" data-spell=\"Boule de Feu\" data-category=\"Sorts de Mage\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Boule de Feu</span>. <br><i>Les prérequis pour le sort ne sont pas requis mais le mana et les statistiques du héros sont utilisés.</i>\n    <br><br><strong>Charges :</strong> 3",
       "prix": "🔷 <strong>Prix:</strong> 25",
       "poids": ""
     },
@@ -5194,7 +5326,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
         "Consommable",
         "Plante"
       ],
-      "effet": "<strong>Prérequis:</strong> Intelligence 5.<br>\n<strong>Effet:</strong> Soigne le héros ou une cible proche du poison.",
+      "effet": "<strong>Prérequis:</strong> Intelligence 5.<br>\n<strong>Effet:</strong> Soigne le héros ou une cible proche du poison. <br>Critique : rend également 5 points de vie.",
       "prix": "🔷 <strong>Prix:</strong> 10",
       "poids": ""
     },
@@ -5207,7 +5339,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
         "Consommable",
         "Catalyseur"
       ],
-      "effet": "<strong>Effet:</strong> Remplace votre prochaine action principale par le sort d'enchanteur <span class=\"spell-link\" data-spell=\"Accélération\" data-category=\"Sorts d'Enchanteur\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Accélération</span>. <br><i>Les prérequis pour le sort ne sont pas requis mais le mana et l'intelligence du héros sont utilisés.</i>\n    <br><br><strong>Charges :</strong> 3",
+      "effet": "<strong>Effet:</strong> Remplace votre prochaine action principale par le sort d'enchanteur <span class=\"spell-link\" data-spell=\"Accélération\" data-category=\"Sorts d'Enchanteur\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Accélération</span>. <br><i>Les prérequis pour le sort ne sont pas requis mais le mana et les statistiques du héros sont utilisés.</i>\n    <br><br><strong>Charges :</strong> 3",
       "prix": "🔷 <strong>Prix:</strong> 30",
       "poids": ""
     },
@@ -5220,7 +5352,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
         "Consommable",
         "Catalyseur"
       ],
-      "effet": "<strong>Effet:</strong> Remplace votre prochaine action principale par le sort d'enchanteur <span class=\"spell-link\" data-spell=\"Sommeil\" data-category=\"Sorts d'Enchanteur\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Sommeil</span>. <br><i>Les prérequis pour le sort ne sont pas requis mais le mana et l'intelligence du héros sont utilisés.</i>\n    <br><br><strong>Charges :</strong> 3",
+      "effet": "<strong>Effet:</strong> Remplace votre prochaine action principale par le sort d'enchanteur <span class=\"spell-link\" data-spell=\"Sommeil\" data-category=\"Sorts d'Enchanteur\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Sommeil</span>. <br><i>Les prérequis pour le sort ne sont pas requis mais le mana et les statistiques du héros sont utilisés.</i>\n    <br><br><strong>Charges :</strong> 3",
       "prix": "🔷 <strong>Prix:</strong> 30",
       "poids": ""
     },
@@ -5281,7 +5413,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
         "Consommable",
         "Flèche"
       ],
-      "effet": "<b>Effet :</b> Renforce la prochaine attaque à l'arc et lui rajoute +3 points de dégats physiques en cas de réussite de l'attaque.\n\n<br><br><b>Charges :</b> 3",
+      "effet": "<b>Effet :</b> Renforce la prochaine attaque à l'arc et lui rajoute +3 (critique : +5) points de dégats physiques en cas de réussite de l'attaque.\n\n<br><br><b>Charges :</b> 3",
       "prix": "🔷 <strong>Prix:</strong> 10",
       "poids": ""
     },
@@ -5294,9 +5426,57 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
         "Consommable",
         "Flèche"
       ],
-      "effet": "<b>Effet :</b> Renforce la prochaine attaque à l'arc et lui rajoute +5 points de dégats élémentaire de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> en cas de réussite de l'attaque.\n\n<br><br><b>Charges :</b> 3",
+      "effet": "<b>Effet :</b> Renforce la prochaine attaque à l'arc et lui rajoute +5 (critique : +10) points de dégats élémentaire de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> en cas de réussite de l'attaque.\n\n<br><br><b>Charges :</b> 3",
       "prix": "🔷 <strong>Prix:</strong> 20",
       "poids": ""
+    },
+    {
+      "nom": "Bandage d'urgence",
+      "numero": 25,
+      "image": "",
+      "description": "<i>Liens grossiers appliqués à la hâte en plein combat, permettant de maintenir un héros en vie quelques instants de plus</i>",
+      "tags": [
+        "Consommable"
+      ],
+      "effet": "Inutilisable hors combat.      \n<br><strong>Portée :</strong>   3m.\n<br><strong>Effet:</strong> Rend 5 (critique : 10) points de vie à la cible.\n<br><strong>Charges:</strong> 3.",
+      "prix": "🔷 <strong>Prix:</strong> 10",
+      "poids": ""
+    },
+    {
+      "nom": "Bracelet médicinal de la forêt",
+      "numero": 26,
+      "image": "",
+      "description": "<i>Tressé de plantes médicinales, il purifie le sang de son porteur et dissipe les poisons.</i>",
+      "tags": [
+        "Accessoire"
+      ],
+      "effet": "<strong>Effet:</strong> Soigne son porteur du poison. Utilisable une fois par jour maximum.",
+      "prix": "🔷 <strong>Prix:</strong> ?",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Dent de Grouink",
+      "numero": 27,
+      "image": "",
+      "description": "<i>Portée en collier, cette énorme canine de bête sauvage insuffle à son porteur une force brute et indomptée.</i>",
+      "tags": [
+        "Accessoire"
+      ],
+      "effet": "<strong>Effet:</strong> Augmente la Force du porteur de 3.",
+      "prix": "🔷 <strong>Prix:</strong> ?",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Echarpe de chaman Groink",
+      "numero": 28,
+      "image": "",
+      "description": "<i>Tissée de symboles anciens et imprégnée de sagesse mystique.</i>",
+      "tags": [
+        "Accessoire"
+      ],
+      "effet": "aaa",
+      "prix": "🔷 <strong>Prix:</strong> ?",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     }
   ],
   "filterSettings": {
@@ -5556,7 +5736,8 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
   {
     "nom": "Boss Forêt",
     "tags": [
-      "Forêt"
+      "Forêt",
+      "Boss"
     ],
     "image": "",
     "element": "Terre",
@@ -5699,13 +5880,86 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
           }
         }
       ]
+    },
+    {
+      "nom": "ProvisionAuberge",
+      "description": "Table de butin pour une situation spécifique.",
+      "tags": [
+        "Auberge"
+      ],
+      "fourchettes": [
+        {
+          "min": 1,
+          "max": 5,
+          "objet": {
+            "type": "reference",
+            "numero": 22,
+            "nom": "Ration de survie"
+          }
+        },
+        {
+          "min": 5,
+          "max": 8,
+          "objet": {
+            "type": "reference",
+            "numero": 19,
+            "nom": "Ration de nourriture"
+          }
+        },
+        {
+          "min": 9,
+          "max": 12,
+          "objet": {
+            "type": "reference",
+            "numero": 15,
+            "nom": "Feuilleclaire"
+          }
+        },
+        {
+          "min": 13,
+          "max": 17,
+          "objet": {
+            "type": "reference",
+            "numero": 25,
+            "nom": "Bandage d'urgence"
+          }
+        },
+        {
+          "min": 18,
+          "max": 21,
+          "objet": {
+            "type": "reference",
+            "numero": 12,
+            "nom": "Petite potion de vie"
+          }
+        },
+        {
+          "min": 22,
+          "max": 30,
+          "objet": {
+            "type": "reference",
+            "numero": 20,
+            "nom": "Ration copieuse de nourriture"
+          }
+        },
+        {
+          "min": 31,
+          "max": 35,
+          "objet": {
+            "type": "reference",
+            "numero": 1,
+            "nom": "Nouvel objet"
+          }
+        }
+      ]
     }
   ],
   "_metadata": {
     "availableTags": [
       "Forêt",
       "Boss",
-      "Coffre"
+      "Coffre",
+      "Auberge"
     ]
   }
 };
@@ -5731,11 +5985,11 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
         16,
         15,
         14,
-        18,
         13,
         19,
         20,
-        23
+        23,
+        25
       ]
     }
   ]
@@ -5802,7 +6056,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
     "objet:Baguette de boule de feu": "https://i.ibb.co/JwXs3k2V/Baguette-Feu.png",
     "objet:Feuilleclaire": "https://i.ibb.co/bMDstDVV/Herb1.png",
     "objet:Nocteline": "https://i.ibb.co/7JpQ7Kr7/Herb2.png",
-    "objet:Nouvel Objet": "https://i.ibb.co/Py57FHy/Food0.png",
+    "objet:Nouvel Objet": "https://i.ibb.co/W4tfpFcH/Echarpe-Chaman.png",
     "objet:Baguette de sommeil": "https://i.ibb.co/bMXNS4gy/Baguette-Nuit.png",
     "monster:Araignée Géante": "https://i.ibb.co/b0XHjQJ/Monstre-For-t-Araign-e.png",
     "monster:Crabe des Bois": "https://i.ibb.co/7dY3GgJS/Monstre-For-t-Crab.png",
@@ -5826,10 +6080,17 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
     "subclass:Guerrier:Maître d’armes:2": "https://i.ibb.co/BVD015MF/Ma-tre-d-armes-F.png",
     "objet:Flèche aiguisée": "https://i.ibb.co/4Z7qKXCx/Fleche-Aiguis-e.png",
     "objet:Flèche de la terre": "https://i.ibb.co/ZpScRTwS/Fleche-Terre.png",
-    "page:geographie": "https://i.ibb.co/svmYXJbN/Carte-fantastique-d-taill-e-et-color-e.png"
+    "page:geographie": "https://i.ibb.co/svmYXJbN/Carte-fantastique-d-taill-e-et-color-e.png",
+    "sort:Sorts de Prêtre:Révélation mineure": "https://i.ibb.co/DP5md5sT/Revelation-Mineure.png",
+    "sort:Sorts de Prêtre:Révélation majeure": "https://i.ibb.co/hRhqmPCK/Revelation-Majeure.png",
+    "sort:Sorts de Prêtre:Révélation ultime": "https://i.ibb.co/7xY0wvNK/Revelation-Ultime.png",
+    "objet:Bandage d'urgence": "https://i.ibb.co/4ZPsSM3p/Bandages.png",
+    "objet:Bracelet médicinal de la forêt": "https://i.ibb.co/k2h292gV/Bracelet-Foret.png",
+    "objet:Dent de Grouink": "https://i.ibb.co/whc5dwnw/Dent-Grouik.png",
+    "objet:Echarpe de chaman Groink": "https://i.ibb.co/W4tfpFcH/Echarpe-Chaman.png"
   },
   "meta": {
-    "total_images": 85,
+    "total_images": 92,
     "exported_date": "2025-09-03",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
@@ -6103,7 +6364,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       "type": "card",
       "id": "stats-base",
       "title": "Statistiques de base",
-      "content": "<hr><div class=\"stats-grid\"><div class=\"stat-card\"><h4>💪 Force</h4><p>Améliore les dégâts physiques.</p></div><hr><div class=\"stat-card\"><h4>🛡️ Endurance</h4><p>Les points de vie maximum sont de : <strong>(10 + 2 x Endurance)</strong></p><p>Augmente les soins prodigués par la consommation de nourriture.</p></div><hr><div class=\"stat-card\">\n<h4>🏃 Agilité</h4><p>Chaque 5 points ajoutent <strong>+1</strong> aux jets d'esquive et de critique physique.<br><br>Augmente l'initiative d'autant.</p></div><hr><div class=\"stat-card\"><h4>🧠 Intelligence</h4><p>Détermine la puissance des sorts.</p></div><hr><div class=\"stat-card\"><h4>⚡ Volonté</h4><p>Le mana maximum est de : <strong>(20 + 2 x Volonté)</strong></p><p>Augmente la Résistance altérations.</p></div><hr><div class=\"stat-card\"><h4>🍀 Chance</h4><p>Améliore la Fortune d'autant.</p><p>De plus, chaque 5 points ajoutent <strong>+1</strong> aux chances de coup critique avec les sorts et les consommables.</p></div></div>",
+      "content": "<hr><div class=\"stats-grid\"><div class=\"stat-card\"><h4>💪 Force</h4><p>Améliore les dégâts physiques.</p></div><hr>\n\n<div class=\"stat-card\"><h4>🛡️ Endurance</h4><p>Les points de vie maximum sont de : <strong>(2 x Endurance)</strong></p><p>Augmente les soins prodigués par la consommation de nourriture.</p></div>\n\n<hr><div class=\"stat-card\">\n<h4>🏃 Agilité</h4><p>Chaque 5 points ajoutent <strong>+1</strong> aux jets d'esquive et de critique physique.\n<br><br>Augmente l'initiative d'autant.</p></div><hr>\n\n<div class=\"stat-card\"><h4>🧠 Intelligence</h4><p>Détermine la puissance des sorts.</p></div><hr><div class=\"stat-card\"><h4>⚡ Volonté</h4><p>Le mana maximum est de : <strong>(10 + 2 x Volonté)</strong></p><p>Augmente la Résistance altérations.</p>\n\n</div><hr><div class=\"stat-card\"><h4>🍀 Chance</h4><p>Améliore la Fortune d'autant.</p><p>De plus, chaque 5 points ajoutent <strong>+1</strong> aux chances de coup critique avec les sorts et les consommables.</p></div></div>",
       "deletable": true,
       "sectionName": "Statistiques de base"
     },
@@ -6317,7 +6578,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       "type": "card",
       "id": "combat-new-6-1756401461053",
       "title": "Mort",
-      "content": "<p>\nLorsque les <b>points de vie</b> d’un héros passent sous la barre des 0, il devient <b>inconscient</b> jusqu’à la fin du combat. \nAprès le combat, si un allié le soigne (via objet ou sort), il redevient capable d’agir. \nCependant, il gagne <b>1 point de trauma</b>, représentant un handicap définitif en fonction de ce qui l’a abattu. \nAu bout du <b>troisième trauma</b>, le héros <b>meurt définitivement</b>.\n</p>\n\n<p>\nLe joueur devra alors créer un nouveau personnage.  \nIl se murmure que certaines <b>magies très puissantes</b> sont capables de ressusciter un héros mort, à condition qu’elles soient pratiquées rapidement après le décès.\n</p>\n\n<p>\n<b>Exemples de traumas</b>\n</p>\n<ul>\n  <li><b>Cicatrice profonde</b> : –1 en compétence Éloquence.</li>\n  <li><b>Amnésie partielle</b> : Oubli d’un sort, d’une langue ou d’une compétence.</li>\n  <li><b>Claudication</b> : Vitesse de déplacement réduite de 3 m.</li>\n</ul>",
+      "content": "<p>\nLorsque les <b>points de vie</b> d’un héros passent sous la barre des 0, il devient <b>inconscient</b> jusqu’à la fin du combat. \nAprès le combat, si un allié le soigne (via objet ou sort), il redevient capable d’agir. \nCependant, il gagne <b>un trauma</b>, représentant un handicap définitif en fonction de ce qui l’a abattu. \nAu bout du <b>troisième trauma</b>, le héros <b>meurt définitivement</b>.\n</p>\n\n<p>\nLe joueur devra alors créer un nouveau personnage.  \nIl se murmure que certaines <b>magies très puissantes</b> sont capables de ressusciter un héros mort, à condition qu’elles soient pratiquées rapidement après le décès.\n</p>\n\n<p>\n<b>Exemples de traumas</b>\n</p>\n<ul>\n  <li><b>Cicatrice profonde</b> : –1 en compétence Éloquence.</li>\n  <li><b>Amnésie partielle</b> : Oubli d’un sort, d’une langue ou d’une compétence.</li>\n  <li><b>Claudication</b> : Vitesse de déplacement réduite de 3 m.</li>\n</ul>",
       "deletable": true,
       "sectionName": "Nouvelle section"
     },
@@ -6325,7 +6586,15 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       "type": "card",
       "id": "combat-new-7-1756407955417",
       "title": "Incantation sur plusieurs tours",
-      "content": "Certains sorts puissants nécéssitent plusieurs tours d'incantation.\n\n<br>Aprés avoir commencé une incantation, aucun déplacement/action n'est possible. Les effets du sort sont effectués au dernier tour de l'incantation, tour où la créature pourra de nouveau effectuer des actions/déplacement.\n<br> Les dégâts subis n’interrompent pas l’incantation, sauf en cas de mort ou d’effet particulier.",
+      "content": "Certains sorts puissants nécéssitent plusieurs tours d'incantation.\n\n<br>Aprés avoir commencé une incantation, aucun déplacement/action n'est possible. Les effets du sort sont effectués au dernier tour de l'incantation, tour où la créature pourra de nouveau effectuer des actions/déplacement.\n<br> Les dégâts subis n’interrompent pas l’incantation, sauf en cas de mort ou d’effet empechant d'effectuer des actions (exemple : <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">A terre</span>).",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
+    },
+    {
+      "type": "card",
+      "id": "combat-new-8-1756926911533",
+      "title": "Combat - Hors combat",
+      "content": "<p><b>Hors combat</b></p>\n<p>Par défaut, les héros sont hors combat. Ils agissent librement : discuter, se déplacer, manger des rations, changer d’équipement, etc.</p>\n\n<p><b>Déclenchement d’un combat</b></p>\n<p>Quand un affrontement commence, on passe en mode <b>tour par tour</b>. Certaines actions deviennent alors interdites :</p>\n<ul>\n  <li>Changer d’équipement (armures, accessoires).</li>\n  <li>Utiliser des objets <i>non consommables</i> comme de la nourriture.</li>\n  <li>Effectuer des actions longues (à l’appréciation du MJ).</li>\n</ul>\n<p>Le mode tour par tour s’arrête lorsque le dernier adversaire est neutralisé.</p>\n\n<p><b>Après-combat (10 minutes)</b></p>\n<p>À la fin d’un combat, les héros restent sous tension pendant <b>10 minutes</b> : ils ne sont pas encore considérés comme hors combat.</p>\n<ul>\n  <li>Ils ne regagnent pas encore leur mana.</li>\n  <li>Manger, dormir ou entreprendre des activités longues reste impossible.</li>\n  <li>Les effets « en combat » s’estompent selon leur durée.</li>\n  <li>Les héros peuvent parler librement, utiliser leur mana restant et faire toute autre activité rapide.</li>\n</ul>\n\n<p><b>Retour hors combat</b></p>\n<p>Une fois ces 10 minutes écoulées, les héros redeviennent hors combat : ils <b>récupèrent tout leur mana</b>, peuvent manger et dormir. Les <b>sorts/effets réservés au combat</b> deviennent alors indisponibles (notamment certains sorts de soins).</p>\n\n<p><b>Note sur les soins</b></p>\n<p>La plupart des blessures se soignent plus difficilement une fois l’adrénaline retombée : de nombreux effets de soin ne sont donc plus utilisables hors combat.</p>",
       "deletable": true,
       "sectionName": "Nouvelle section"
     }
@@ -6351,7 +6620,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       "type": "card",
       "id": "gestion-des-ressources-new-3-1756401493443",
       "title": "Mana",
-      "content": "Il s'agit de la ressource utilisée pour lancer des sorts. Hors combat, il revient automatiquement au maximum aprés plus d'une heure sans être en combat. En combat, il est consommé aprés le lancement de chaque sort (le coût en mana étant indiqué dans la description de chaque sort). Si un sort devait faire passer le mana d'un héros en dessous de 0, alors le sort n'est pas effectif et le héros devient <span class=\"etat-link\" data-etat=\"Endormi/assomé/Effrayé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">paralysé</span> pendant 2 tours.",
+      "content": "Il s'agit de la ressource utilisée pour lancer des sorts. Hors combat, il revient automatiquement quand le héros passe hors combat (c'est à dire aprés 10 minutes sans être en combat). En combat, il est consommé aprés le lancement de chaque sort (le coût en mana étant indiqué dans la description de chaque sort). Si un sort devait faire passer le mana d'un héros en dessous de 0, alors le sort n'est pas effectif et le héros devient <span class=\"etat-link\" data-etat=\"Endormi/assomé/Effrayé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">paralysé</span> pendant 2 tours.",
       "deletable": true,
       "sectionName": "Nouvelle section"
     },
@@ -6499,15 +6768,15 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       "subPages": {
         "Long terme": {
           "title": "Long terme",
-          "content": "🕯️ Le Dieu Maléfique\n\nNerhaz, le Sépulcral\n\nSymbole : un cristal noir fendu, entouré de chaînes.\n\nDomaine : mort, corruption, secrets interdits.\n\nHistoire : banni par l’Empire des Anciens, il fut scellé dans leurs temples. Mais les cristaux magiques, instables, ont servi de réceptacles à ses murmures.\n\nParticularité : Nerhaz attire les ambitieux et les désespérés, promettant pouvoir en échange de sacrifices. Son retour progressif est lié à l’altération des créatures par les cristaux."
+          "content": "<b> Le Dieu Maléfique</b>\n\n<br><br>Nerhaz, le Sépulcral (Symbole : un cristal noir fendu, entouré de chaînes)\n\n\n<br><br> Histoire : banni par l’Empire des Anciens, il fut scellé dans leurs temples. Mais les cristaux magiques, instables, ont servi de réceptacles à ses murmures.\n\n<br><br>Particularité : Nerhaz attire les ambitieux et les désespérés, promettant pouvoir en échange de sacrifices. Son retour progressif est lié à l’altération des créatures par les cristaux."
         },
         "Auberge": {
           "title": "Auberge",
-          "content": "<p>Contenu de la sous-page...</p>"
+          "content": "<hr>\nAvant de partir la femme de l'aubergiste qui a entendu les héros, leur propose de piocher dans le sac a provision, mais leur demande de n'en prendre que un par personne maximum. Table de loot <i>ProvisionAuberge</i> <a href=\"#/tables-tresors\" style=\"color: var(--accent); text-decoration: underline;\">Tables de trésors</a>."
         },
         "Forêt": {
           "title": "Forêt",
-          "content": "<p>Contenu de la sous-page...</p>"
+          "content": "combat <span class=\"monster-link\" data-monster=\"Groink\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Groink</span>  <span class=\"monster-link\" data-monster=\"Groinka\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Groinka</span>\n<hr>\npierre a pousser pour reveler TP\nchemins différents avec un qui mene a pierre qui revele la puissance de chacun\n<hr>\nautre chemins avec platforme/pieges/ passage secret\nCombat groinks énervés + porte en metal\n<hr>\nport avec bateau pas dispo\nCombat <span class=\"monster-link\" data-monster=\"Crabe des Bois\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Crabe des Bois</span>   <span class=\"monster-link\" data-monster=\"Pouple de la forêt\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Pouple de la forêt</span>\n<hr>\n\nnuit attaque de  <span class=\"monster-link\" data-monster=\"Araignée Géante\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Araignée Géante</span>\n<hr>\nriviere avec tronc , pont qui casse...\ncombat  <span class=\"monster-link\" data-monster=\"Serpent de la forêt\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Serpent de la forêt</span>  <span class=\"monster-link\" data-monster=\"Scarabée géant\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Scarabée géant</span>  \n<hr>\nmaison bucheron avec jeu du tonneau, portes fermés mais loot bucheron \n<span class=\"monster-link\" data-monster=\"Ours des Bois\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ours des Bois</span>   + <span class=\"monster-link\" data-monster=\"Guêpe Géante\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Guêpe Géante</span>\n<hr>\nDialogue bucheron\ncombat  <span class=\"monster-link\" data-monster=\"Boss Forêt\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Boss Forêt</span>\n<hr>\nretourner camp bucheron, reveler tablette\nTP"
         }
       }
     }
@@ -7372,7 +7641,8 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
           "Nouvel objet",
           "Nourriture",
           "Non identifié",
-          "Flèche"
+          "Flèche",
+          "Accessoire"
 ],
         defaultVisibleTags: [
           "Arme"
@@ -7594,38 +7864,6 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
     'Nuit': '⚫',
     'Divin': '⚪',
     'Maléfique': '🟣'
-  };
-
-  // Campaign content type
-  window.ContentTypes.campaign = {
-    fields: {
-      name: { type: 'text', label: 'Nom', required: true },
-      description: { type: 'textarea', label: 'Description', required: false }
-    },
-    template: 'campaign',
-    container: 'campaigns',
-    dataKey: 'CAMPAIGNS',
-    icons: { category: '🗂️', item: '📋', add: '➕', delete: '🗑️' },
-    defaultValues: {
-      name: 'Nouvelle Campagne',
-      description: 'Description de la campagne'
-    }
-  };
-
-  // Campaign sub-page content type  
-  window.ContentTypes.campaignSubPage = {
-    fields: {
-      title: { type: 'text', label: 'Titre', required: true },
-      content: { type: 'textarea', label: 'Contenu', required: false }
-    },
-    template: 'campaign-subpage',
-    container: 'campaign-subpages', 
-    dataKey: 'CAMPAIGN_SUBPAGES',
-    icons: { category: '📄', item: '📝', add: '➕', delete: '🗑️' },
-    defaultValues: {
-      title: 'Nouvelle sous-page',
-      content: 'Contenu de la sous-page...'
-    }
   };
 
 })();
@@ -8714,6 +8952,8 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
         
         const editButtons = shouldShowFourchetteButtons ? `
           <div class="fourchette-actions" style="margin-left: 8px; display: flex; gap: 4px;">
+            ${index > 0 ? `<button class="move-fourchette-up-btn" data-table-name="${this.data.nom}" data-fourchette-index="${index}" title="Déplacer vers le haut" style="background: #059669; color: white; border: none; border-radius: 4px; padding: 2px 6px; font-size: 0.8em; cursor: pointer;">⬆️</button>` : ''}
+            ${index < this.data.fourchettes.length - 1 ? `<button class="move-fourchette-down-btn" data-table-name="${this.data.nom}" data-fourchette-index="${index}" title="Déplacer vers le bas" style="background: #059669; color: white; border: none; border-radius: 4px; padding: 2px 6px; font-size: 0.8em; cursor: pointer;">⬇️</button>` : ''}
             <button class="edit-fourchette-btn" data-table-name="${this.data.nom}" data-fourchette-index="${index}" title="Éditer cette fourchette" style="background: #3b82f6; color: white; border: none; border-radius: 4px; padding: 2px 6px; font-size: 0.8em; cursor: pointer;">✏️</button>
             <button class="delete-fourchette-btn" data-table-name="${this.data.nom}" data-fourchette-index="${index}" title="Supprimer cette fourchette" style="background: #dc2626; color: white; border: none; border-radius: 4px; padding: 2px 6px; font-size: 0.8em; cursor: pointer;">🗑️</button>
           </div>
@@ -9890,19 +10130,11 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
               </h3>
               ${this.buildEditButton('title')}
             </div>
-            <div style="display: flex; align-items: flex-start;">
-              <p class="editable" data-edit-type="generic" data-edit-section="campaign-${campaignName}-description" 
-                 style="color: var(--paper-muted); margin: 0; font-style: italic; flex: 1;">
-                ${campaign.description || 'Description de la campagne'}
-              </p>
-              ${this.buildEditButton('section')}
-            </div>
           </div>
           
           <!-- Sub-pages Section -->
           <div class="campaign-subpages">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-              <h4 style="margin: 0; color: var(--accent-ink);">📄 Sous-pages de la campagne (${subPageList.length})</h4>
               <button class="btn primary small dev-only" onclick="JdrApp.modules.ui.addCampaignSubPage('${campaignName}')" style="display: none;">
                 ➕ Nouvelle Sous-page
               </button>
@@ -13807,6 +14039,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
             <button class="btn small" id="etatsBtn" title="Choisir un état pour copier sa balise HTML avec tooltip">⚡ États</button>
             <button class="btn small" id="spellLinksBtn" title="Créer un lien vers un sort avec aperçu">🔮 Liens sorts</button>
             <button class="btn small" id="pageLinksBtn" title="Créer un lien vers une page du projet">🔗 Liens pages</button>
+            <button class="btn small" id="monsterLinksBtn" title="Créer un lien vers un monstre avec aperçu">🐲 Liens monstres</button>
           </div>
         </div>
       `;
@@ -15034,6 +15267,12 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
           const tableTresorCard = session.container.closest('.card[data-table-tresor-name]');
           if (tableTresorCard && tableTresorCard.dataset.tableTresorName === oldName) {
             tableTresorCard.dataset.tableTresorName = content;
+            
+            // Also update the button that uses the table name
+            const addFourchetteBtn = tableTresorCard.querySelector('.table-tresor-add-fourchette');
+            if (addFourchetteBtn && addFourchetteBtn.dataset.tableTresorName === oldName) {
+              addFourchetteBtn.dataset.tableTresorName = content;
+            }
           }
           
           // If we're updating the name, we need to update the session itemIdentifier
@@ -15824,13 +16063,14 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
           
           <div style="margin-bottom: 1rem; flex-shrink: 0;">
             <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.5rem;">
-              <button id="elementsBtn" class="btn" style="background: #059669; color: white; font-size: 12px;">🔥 Éléments</button>
-              <button id="etatsBtn" class="btn" style="background: #7c2d12; color: white; font-size: 12px;">⚡ États</button>
-              <button id="spellLinksBtn" class="btn" style="background: #6b21a8; color: white; font-size: 12px;">🔗 Liens Sorts</button>
-              <button id="pageLinksBtn" class="btn" style="background: #1d4ed8; color: white; font-size: 12px;">🔗 Liens Pages</button>
+              <button id="editorElementsBtn" class="btn" style="background: #059669; color: white; font-size: 12px;">🔥 Éléments</button>
+              <button id="editorEtatsBtn" class="btn" style="background: #7c2d12; color: white; font-size: 12px;">⚡ États</button>
+              <button id="editorSpellLinksBtn" class="btn" style="background: #6b21a8; color: white; font-size: 12px;">🔗 Liens Sorts</button>
+              <button id="editorPageLinksBtn" class="btn" style="background: #1d4ed8; color: white; font-size: 12px;">🔗 Liens Pages</button>
+              <button id="editorMonsterLinksBtn" class="btn" style="background: #dc2626; color: white; font-size: 12px;">🐲 Liens Monstres</button>
             </div>
             <div style="font-size: 12px; color: var(--paper-muted); line-height: 1.4;">
-              💡 <strong>Astuce:</strong> Utilisez ces boutons pour insérer rapidement des éléments, états, liens vers les sorts et liens vers les pages dans votre contenu HTML.
+              💡 <strong>Astuce:</strong> Utilisez ces boutons pour insérer rapidement des éléments, états, liens vers les sorts, liens vers les pages et liens vers les monstres dans votre contenu HTML.
             </div>
           </div>
           
@@ -15849,10 +16089,11 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       const preview = modal.querySelector('#preview');
       const saveBtn = modal.querySelector('#saveEdit');
       const cancelBtn = modal.querySelector('#cancelEdit');
-      const elementsBtn = modal.querySelector('#elementsBtn');
-      const etatsBtn = modal.querySelector('#etatsBtn');
-      const spellLinksBtn = modal.querySelector('#spellLinksBtn');
-      const pageLinksBtn = modal.querySelector('#pageLinksBtn');
+      const elementsBtn = modal.querySelector('#editorElementsBtn');
+      const etatsBtn = modal.querySelector('#editorEtatsBtn');
+      const spellLinksBtn = modal.querySelector('#editorSpellLinksBtn');
+      const pageLinksBtn = modal.querySelector('#editorPageLinksBtn');
+      const monsterLinksBtn = modal.querySelector('#editorMonsterLinksBtn');
 
       // Helper function to insert text at cursor position in textarea
       const insertTextAtCursor = (text) => {
@@ -15904,6 +16145,14 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
         pageLinksBtn.addEventListener('click', () => {
           if (JdrApp.modules.ui?.showPageLinksModal) {
             JdrApp.modules.ui.showPageLinksModal();
+          }
+        });
+      }
+
+      if (monsterLinksBtn) {
+        monsterLinksBtn.addEventListener('click', () => {
+          if (JdrApp.modules.ui?.showMonsterLinksModal) {
+            JdrApp.modules.ui.showMonsterLinksModal();
           }
         });
       }
@@ -16483,14 +16732,8 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
           }
         }
         
-        // Direct save to avoid infinite loop from STORAGE_SAVE event
-        try {
-          if (JdrApp?.modules?.storage?.saveChanges) {
-            JdrApp.modules.storage.saveChanges(true); // Silent save
-          }
-        } catch (saveError) {
-          // Ignore save errors - data is still updated in memory
-        }
+        // Data updated in memory only - will be saved during export
+        // No automatic save to prevent infinite loops
         
         return true;
         
@@ -17455,6 +17698,9 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
           </header>
           
           <form id="edit-fourchette-form">
+            <input type="hidden" id="table-name" value="${tableName}">
+            <input type="hidden" id="fourchette-index" value="${fourchetteIndex}">
+            <input type="hidden" id="is-new-fourchette" value="${isNewFourchette}">
             <div style="margin: 1rem 0;">
               <label style="display: block; margin-bottom: 0.5rem; font-weight: bold; color: var(--accent);">
                 🎲 Fourchette de dé (1-20):
@@ -17605,8 +17851,11 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
           }
         };
 
-        // Extraire les informations depuis le modal
-        const tableName = document.querySelector('.edit-fourchette-content h3 + div').textContent.replace('Table: ', '');
+        // Extraire les informations depuis les champs cachés du formulaire
+        const tableName = document.getElementById('table-name').value;
+        const fourchetteIndex = parseInt(document.getElementById('fourchette-index').value);
+        const isNewFourchette = document.getElementById('is-new-fourchette').value === 'true';
+        
         const table = window.TABLES_TRESORS?.tables?.find(t => t.nom === tableName);
         
         if (!table) {
@@ -17614,16 +17863,16 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
           return;
         }
 
-        // Déterminer si c'est une nouvelle fourchette ou une modification
-        const currentModal = document.querySelector('.modal-overlay.edit-fourchette');
-        const isNewFourchette = currentModal?.querySelector('h3')?.textContent.includes('Ajouter');
-
         if (isNewFourchette) {
           table.fourchettes.push(newFourchette);
         } else {
-          // Trouver l'index de la fourchette à modifier (pas optimal mais fonctionne)
-          // Pour une vraie app, il faudrait passer l'index via les données du modal
-          // Mode modification - non implémenté complètement dans cette demo
+          // Mode modification - remplacer la fourchette existante
+          if (fourchetteIndex >= 0 && fourchetteIndex < table.fourchettes.length) {
+            table.fourchettes[fourchetteIndex] = newFourchette;
+          } else {
+            console.error('Index de fourchette invalide pour la modification:', fourchetteIndex);
+            return;
+          }
         }
 
         // Sauvegarder et regénérer la page
@@ -17704,7 +17953,10 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
     refreshTablesTresorsPage() {
       // Regénérer la page des tables de trésors
       if (JdrApp.modules.router && JdrApp.modules.router.getCurrentRoute() === 'tables-tresors') {
-        JdrApp.modules.router.renderTablesTresorsPage();
+        // Force refresh with current data from window.TABLES_TRESORS
+        JdrApp.modules.renderer.renderUnifiedContentPage('tableTresor', window.TABLES_TRESORS || { tables: [] });
+        JdrApp.modules.router.updateActiveStates('tables-tresors');
+        JdrApp.modules.router.show('tables-tresors');
       }
     }
   }
@@ -18101,6 +18353,26 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
         }
       });
 
+      // Tables de trésors - Déplacement des fourchettes vers le haut
+      JdrApp.utils.events.register('click', '.move-fourchette-up-btn', (e) => {
+        const tableName = e.target.dataset.tableName;
+        const fourchetteIndex = parseInt(e.target.dataset.fourchetteIndex);
+        
+        if (tableName && fourchetteIndex > 0) {
+          this.moveFourchette(tableName, fourchetteIndex, fourchetteIndex - 1);
+        }
+      });
+
+      // Tables de trésors - Déplacement des fourchettes vers le bas
+      JdrApp.utils.events.register('click', '.move-fourchette-down-btn', (e) => {
+        const tableName = e.target.dataset.tableName;
+        const fourchetteIndex = parseInt(e.target.dataset.fourchetteIndex);
+        
+        if (tableName && fourchetteIndex >= 0) {
+          this.moveFourchette(tableName, fourchetteIndex, fourchetteIndex + 1);
+        }
+      });
+
       // Tables de trésors - Ajout de fourchettes
       JdrApp.utils.events.register('click', '.table-tresor-add-fourchette', (e) => {
         const tableName = e.target.dataset.tableTresorName;
@@ -18479,6 +18751,12 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
           // Refresh modal and tables page
           modal.close();
           this.showTableTresorTagsManagement(); // Refresh modal
+          
+          // Force refresh of the tables-tresors page to show new tag in filters
+          if (window.location.hash === '#/tables-tresors') {
+            this.forcePageRefresh();
+          }
+          
           this.showNotification(`Tag "${newTag}" ajouté avec succès`, 'success');
         } else if (newTag && availableTags.includes(newTag)) {
           this.showNotification('Ce tag existe déjà', 'error');
@@ -19645,6 +19923,10 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
         this.showPageLinksModal();
       });
 
+      JdrApp.utils.events.register('click', '#monsterLinksBtn', () => {
+        this.showMonsterLinksModal();
+      });
+
       // Gestionnaire pour les liens de sorts dans le contenu
       JdrApp.utils.events.register('click', '.spell-link', (e) => {
         e.preventDefault();
@@ -19682,6 +19964,14 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
         }
         
         this.showEtatPreview(etatName, etatDescription, e.target);
+      });
+
+      // Gestionnaire pour les liens de monstres dans le contenu
+      JdrApp.utils.events.register('click', '.monster-link', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const monsterName = e.target.dataset.monster;
+        this.showMonsterPreview(monsterName, e.target, e);
       });
 
       EventBus.on(Events.MODAL_OPEN, (payload) => {
@@ -20035,6 +20325,123 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       return modal;
     },
 
+    showMonsterLinksModal() {
+      let modal = JdrApp.utils.dom.$('#monsterLinksModal');
+      if (modal) {
+        document.body.removeChild(modal);
+      }
+      
+      modal = this.createMonsterLinksModal();
+      document.body.appendChild(modal);
+
+      this.openModal('monsterLinksModal');
+    },
+
+    createMonsterLinksModal() {
+      // Récupérer tous les monstres depuis window.MONSTRES
+      const monsters = [];
+      
+      if (window.MONSTRES && Array.isArray(window.MONSTRES)) {
+        window.MONSTRES.forEach(monster => {
+          monsters.push({
+            name: monster.nom,
+            element: monster.element,
+            pointsDeVie: monster.pointsDeVie || 0,
+            tags: monster.tags || [],
+            description: monster.abilites || '',
+            image: monster.image || ''
+          });
+        });
+      }
+
+      const monstersHTML = monsters.map(monster => `
+        <div class="monster-item" data-monster-name="${monster.name}">
+          <div class="monster-info">
+            <div class="monster-name" style="color: ${this.getElementColor(monster.element)}; text-shadow: 0 1px 2px rgba(0,0,0,0.3);">${monster.name}</div>
+            <span data-monster-meta style="color: ${this.getElementColor(monster.element)} !important; font-size: 12px; margin-bottom: 6px; display: block;">${this.getElementIcon(monster.element)} ${monster.element} • ${monster.pointsDeVie} PV • ${monster.tags.join(', ')}</span>
+            <div class="monster-description">${this.stripHtml(monster.description).length > 80 ? this.stripHtml(monster.description).substring(0, 80) + '...' : this.stripHtml(monster.description)}</div>
+          </div>
+          <div class="copy-indicator">Copié!</div>
+        </div>
+      `).join('');
+
+      const modal = JdrApp.utils.dom.create('div', 'modal monster-links-modal', `
+        <div class="modal-content monster-links-modal-content">
+          <div style="position: relative;">
+            <button class="modal-close-x" style="position: absolute; top: 0; right: 0; background: none; border: none; font-size: 20px; cursor: pointer; color: var(--paper-muted); padding: 4px 8px; border-radius: 4px; transition: all 0.2s ease;" onmouseover="this.style.background='var(--rule)'; this.style.color='var(--accent-ink)';" onmouseout="this.style.background='none'; this.style.color='var(--paper-muted)';">×</button>
+            <h3>🐲 Liens vers les monstres</h3>
+          </div>
+          <p>Cliquez sur un monstre pour copier un lien avec aperçu interactif.</p>
+          
+          <div style="margin-bottom: 1rem;">
+            <input type="text" id="monsterSearchInput" placeholder="Rechercher un monstre..." style="width: 100%; padding: 8px; border: 1px solid var(--rule); border-radius: 4px; background: var(--paper); color: var(--paper-ink);">
+          </div>
+          
+          <div class="monsters-list" style="max-height: 400px; overflow-y: auto;">
+            ${monstersHTML}
+          </div>
+        </div>
+      `);
+
+      // Recherche en temps réel
+      const searchInput = modal.querySelector('#monsterSearchInput');
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          const searchTerm = e.target.value.toLowerCase();
+          const monsterItems = modal.querySelectorAll('.monster-item');
+          
+          monsterItems.forEach(item => {
+            const monsterName = item.querySelector('.monster-name').textContent.toLowerCase();
+            const monsterMeta = item.querySelector('[data-monster-meta]').textContent.toLowerCase();
+            const monsterDesc = item.querySelector('.monster-description').textContent.toLowerCase();
+            
+            const matches = monsterName.includes(searchTerm) || 
+                          monsterMeta.includes(searchTerm) || 
+                          monsterDesc.includes(searchTerm);
+            
+            item.style.display = matches ? 'block' : 'none';
+          });
+        });
+      }
+
+      // Clic sur un monstre
+      modal.addEventListener('click', (e) => {
+        const monsterItem = e.target.closest('.monster-item');
+        if (monsterItem) {
+          const monsterName = monsterItem.dataset.monsterName;
+          
+          // Créer le lien HTML avec les attributs nécessaires
+          const monsterLink = `<span class="monster-link" data-monster="${monsterName}" style="color: var(--accent); cursor: pointer; text-decoration: underline;">${monsterName}</span>`;
+          
+          this.copyToClipboard(monsterLink);
+          
+          monsterItem.classList.add('copied');
+          
+          // Fermer la modale après un court délai pour voir l'effet "Copié!"
+          setTimeout(() => {
+            this.closeModal(modal);
+          }, 500);
+        }
+      });
+
+      // Gestionnaire pour le bouton X de fermeture
+      const closeBtn = modal.querySelector('.modal-close-x');
+      if (closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          this.closeModal(modal);
+        });
+      }
+
+      return modal;
+    },
+
+    stripHtml(html) {
+      const tmp = document.createElement('div');
+      tmp.innerHTML = html || '';
+      return tmp.textContent || tmp.innerText || '';
+    },
+
     getElementColor(element) {
       // Couleurs optimisées pour la lisibilité sur fond clair et foncé
       const colorMap = {
@@ -20175,6 +20582,226 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
         }
       };
       document.addEventListener('keydown', handleEscape);
+    },
+
+    showMonsterPreview(monsterName, triggerElement, event) {
+      // Trouver le monstre dans les données
+      let monsterData = null;
+      
+      if (window.MONSTRES && Array.isArray(window.MONSTRES)) {
+        monsterData = window.MONSTRES.find(monster => monster.nom === monsterName);
+      }
+
+      if (!monsterData) {
+        this.showNotification(`❌ Monstre "${monsterName}" non trouvé`, 'error');
+        return;
+      }
+
+      // Fermer toute preview existante
+      const existingPreview = document.querySelector('.monster-preview-popup');
+      if (existingPreview) {
+        existingPreview.remove();
+      }
+
+      // Calculer la position de la popup à partir de la souris si disponible
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+      
+      // Utiliser la position de la souris si disponible, sinon fallback sur l'élément
+      const mouseX = event ? event.clientX : triggerElement.getBoundingClientRect().left;
+      const mouseY = event ? event.clientY : triggerElement.getBoundingClientRect().bottom;
+      
+      // Créer la popup de preview
+      const popup = document.createElement('div');
+      popup.className = 'monster-preview-popup';
+      
+      const elementColor = this.getElementColor(monsterData.element);
+      
+      // Construire les résistances élémentaires avec les bonnes icônes
+      const resistances = [];
+      const armures = {
+        'Feu': { value: monsterData.armureFeu, icon: '🔥' },
+        'Eau': { value: monsterData.armureEau, icon: '💧' },
+        'Terre': { value: monsterData.armureTerre, icon: '⛰️' },
+        'Air': { value: monsterData.armureAir, icon: '💨' },
+        'Lumière': { value: monsterData.armureLumiere, icon: '✨' },
+        'Obscurité': { value: monsterData.armureObscurite, icon: '🌑' },
+        'Divin': { value: monsterData.armureDivin, icon: '✨' },
+        'Maléfique': { value: monsterData.armureMalefique, icon: '👹' }
+      };
+      
+      for (const [element, data] of Object.entries(armures)) {
+        if (data.value && data.value > 0) {
+          resistances.push(`${data.icon} ${element}: ${data.value}`);
+        }
+      }
+
+      popup.innerHTML = `
+        <div class="monster-preview-content">
+          <div class="monster-preview-header" style="border-left: 4px solid ${elementColor};">
+            <div class="monster-title" style="color: ${elementColor}; text-shadow: 0 1px 2px rgba(0,0,0,0.3);">${monsterData.nom}</div>
+            <span data-element-display style="color: ${elementColor} !important; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;">${this.getElementIcon(monsterData.element)} ${monsterData.element}</span>
+            <button class="monster-preview-close">✕</button>
+          </div>
+          <div class="monster-preview-body">
+            <div class="monster-stats" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 12px; font-size: 12px;">
+              <div><strong>❤️ PV:</strong> ${monsterData.pointsDeVie}</div>
+              <div><strong>🛡️ Armure:</strong> ${monsterData.armurePhysique || 0}</div>
+              <div><strong>💨 Esquive:</strong> ${monsterData.esquive || 0}</div>
+              <div><strong>⚡ Initiative:</strong> ${monsterData.initiative || 0}</div>
+              <div><strong>💥 Critique:</strong> ${monsterData.coupCritique || 0}</div>
+              <div><strong>🎯 Crit. Sorts:</strong> ${monsterData.coupCritiqueSorts || 0}</div>
+              <div><strong>🛡️ Résist. Alt.:</strong> ${monsterData.resistanceAlterations || 0}</div>
+            </div>
+            ${resistances.length > 0 ? `<div class="monster-resistances" style="margin-bottom: 12px; font-size: 12px;"><strong>Résistances élémentaires:</strong><br>${resistances.join(', ')}</div>` : ''}
+            ${monsterData.abilites ? `<div class="monster-abilities" style="margin-top: 12px;"><strong>Capacités:</strong><div style="margin-top: 6px;">${monsterData.abilites}</div></div>` : ''}
+            ${monsterData.butin ? `<div class="monster-loot" style="margin-top: 12px;"><div style="margin-top: 6px;">${monsterData.butin}</div></div>` : ''}
+            <div class="monster-actions" style="margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--rule); text-align: center;">
+              <button class="monster-goto-page" style="background: var(--accent); color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px;">
+                🔍 Voir dans la page Monstres
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // Styles de la popup
+      popup.style.cssText = `
+        position: fixed;
+        z-index: 2147483647;
+        background: var(--card);
+        border: 2px solid ${elementColor};
+        border-radius: 8px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+        max-width: 450px;
+        max-height: 500px;
+        overflow-y: auto;
+        padding: 0;
+      `;
+
+      document.body.appendChild(popup);
+
+      // Calculer position après ajout au DOM pour obtenir les dimensions réelles
+      const popupRect = popup.getBoundingClientRect();
+      const popupWidth = popupRect.width;
+      const popupHeight = popupRect.height;
+
+      // Position de base : décalage à partir de la position de la souris
+      // mouseX et mouseY sont déjà en coordonnées viewport, on ajoute le scroll pour les coordonnées absolues
+      let left = mouseX + 15; // 15px à droite de la souris
+      let top = mouseY + 10;   // 10px en bas de la souris
+
+      // Ajuster si la popup déborde horizontalement
+      if (left + popupWidth > viewportWidth) {
+        left = mouseX - popupWidth - 15; // 15px à gauche de la souris
+      }
+      if (left < 10) {
+        left = 10; // Marge minimale du bord gauche
+      }
+
+      // Ajuster si la popup déborde verticalement
+      if (top + popupHeight > viewportHeight) {
+        top = mouseY - popupHeight - 10; // 10px au-dessus de la souris
+      }
+      if (top < 10) {
+        top = 10; // Marge minimale du bord haut
+      }
+
+      // Convertir en coordonnées absolues en ajoutant le scroll
+      popup.style.left = `${left + window.scrollX}px`;
+      popup.style.top = `${top + window.scrollY}px`;
+
+      // Gestionnaires d'événements
+      popup.querySelector('.monster-preview-close').addEventListener('click', () => {
+        popup.remove();
+      });
+
+      // Bouton pour aller à la page monstres
+      popup.querySelector('.monster-goto-page').addEventListener('click', () => {
+        popup.remove();
+        this.goToMonstersPage(monsterName);
+      });
+
+      // Fermer en cliquant à l'extérieur
+      const handleOutsideClick = (e) => {
+        if (!popup.contains(e.target) && e.target !== triggerElement) {
+          popup.remove();
+          document.removeEventListener('click', handleOutsideClick);
+        }
+      };
+      
+      setTimeout(() => {
+        document.addEventListener('click', handleOutsideClick);
+      }, 100);
+
+      // Fermer avec Escape
+      const handleEscape = (e) => {
+        if (e.key === 'Escape') {
+          popup.remove();
+          document.removeEventListener('keydown', handleEscape);
+        }
+      };
+      document.addEventListener('keydown', handleEscape);
+    },
+
+    goToMonstersPage(monsterName) {
+      // Naviguer vers la page monstres
+      if (JdrApp.modules.router) {
+        JdrApp.modules.router.navigate('monstres');
+        
+        // Attendre que la page soit chargée puis filtrer le monstre
+        setTimeout(() => {
+          this.filterMonsterByName(monsterName);
+        }, 300);
+      }
+    },
+
+    filterMonsterByName(monsterName) {
+      // Trouver la carte du monstre et la mettre en évidence
+      setTimeout(() => {
+        const monsterCards = document.querySelectorAll('[data-monster-name]');
+        let targetCard = null;
+        
+        monsterCards.forEach(card => {
+          const cardMonsterName = card.dataset.monsterName || 
+                                  card.querySelector('h3, .card-title, .monster-name')?.textContent?.trim();
+          
+          if (cardMonsterName === monsterName) {
+            targetCard = card;
+          }
+        });
+        
+        if (targetCard) {
+          // Scroller vers le monstre
+          targetCard.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'center'
+          });
+          
+          // Mettre en évidence temporairement
+          targetCard.style.border = '3px solid var(--accent)';
+          targetCard.style.boxShadow = '0 0 20px rgba(139, 92, 23, 0.5)';
+          targetCard.style.transform = 'scale(1.02)';
+          targetCard.style.transition = 'all 0.3s ease';
+          
+          // Enlever la mise en évidence après 3 secondes
+          setTimeout(() => {
+            targetCard.style.border = '';
+            targetCard.style.boxShadow = '';
+            targetCard.style.transform = '';
+            
+            // Attendre la transition avant de supprimer
+            setTimeout(() => {
+              targetCard.style.transition = '';
+            }, 300);
+          }, 3000);
+          
+          // Afficher une notification
+          this.showNotification(`🎯 Monstre "${monsterName}" mis en évidence`, 'success');
+        } else {
+          this.showNotification(`❌ Monstre "${monsterName}" non trouvé dans la page`, 'error');
+        }
+      }, 100);
     },
 
     showEtatPreview(etatName, etatDescription, triggerElement) {
@@ -21202,6 +21829,10 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       if (currentPage === 'monstres' && window.ContentTypes.monster?.filterConfig) {
         contentType = 'monster';
         config = window.ContentTypes.monster.filterConfig;
+      } else if (currentPage === 'tables-tresors') {
+        // For tables-tresors, show TableTresorTagsManagement instead
+        this.showTableTresorTagsManagement();
+        return;
       } else if (window.ContentTypes.objet?.filterConfig) {
         contentType = 'objet';
         config = window.ContentTypes.objet.filterConfig;
@@ -22161,6 +22792,50 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       // Ouvrir immédiatement le modal d'édition
       const newIndex = table.fourchettes.length - 1;
       this.showFourchetteModal(tableName, newIndex, newFourchette);
+    },
+
+    // Déplacer une fourchette
+    moveFourchette(tableName, fromIndex, toIndex) {
+      const table = this.findTableTresor(tableName);
+      if (!table || !table.fourchettes || fromIndex < 0 || toIndex < 0 || 
+          fromIndex >= table.fourchettes.length || toIndex >= table.fourchettes.length) {
+        this.showNotification('Impossible de déplacer la fourchette', 'error');
+        return;
+      }
+
+      // Échanger les fourchettes
+      const temp = table.fourchettes[fromIndex];
+      table.fourchettes[fromIndex] = table.fourchettes[toIndex];
+      table.fourchettes[toIndex] = temp;
+
+      // Sauvegarder les changements
+      EventBus.emit(Events.STORAGE_SAVE);
+
+      // Rafraîchir l'affichage de la table
+      const tableCard = document.querySelector(`[data-table-tresor-name="${tableName}"]`);
+      if (!tableCard) {
+        this.forcePageRefresh();
+        return;
+      }
+
+      // Rechercher et rerendre la carte de la table
+      const tableContainer = tableCard.closest('.grid');
+      if (tableContainer) {
+        // Trouver l'index de la table dans le DOM pour la reconstruire
+        const allTables = Array.from(tableContainer.children);
+        const tableIndex = allTables.indexOf(tableCard);
+        
+        if (tableIndex >= 0) {
+          // Reconstruire la carte avec les nouvelles données
+          const newCard = CardBuilder.create('tableTresor', table, 'tables', tableIndex).build();
+          tableCard.outerHTML = newCard;
+          this.showNotification('Fourchette déplacée avec succès', 'success');
+        } else {
+          this.forcePageRefresh();
+        }
+      } else {
+        this.forcePageRefresh();
+      }
     },
 
     // Trouver une table de trésor par nom
