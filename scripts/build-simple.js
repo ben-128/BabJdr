@@ -130,7 +130,7 @@ function buildStandalone() {
     'creation.json', 'dons.json', 'objets.json', 'elements.json', 'etats.json',
     'images.json', 'static-pages-config.json', 'stats.json', 'toc-structure.json',
     'monstres.json', 'tables-tresors.json', 'collections.json', 'monstres-page-desc.json', 'tables-tresors-page-desc.json', 'custom-page-descriptions.json',
-    'combat.json', 'gestion-des-ressources.json', 'histoire.json', 'dieux.json', 'geographie.json'
+    'combat.json', 'gestion-des-ressources.json', 'histoire.json', 'dieux.json', 'geographie.json', 'campagne.json'
   ];
   
   let dataObject = {};
@@ -220,7 +220,8 @@ function buildStandalone() {
       'gestion-des-ressources': ${JSON.stringify(dataObject.gestion_des_ressources || {}, null, 2)},
       'histoire': ${JSON.stringify(dataObject.histoire || {}, null, 2)},
       'dieux': ${JSON.stringify(dataObject.dieux || {}, null, 2)},
-      'geographie': ${JSON.stringify(dataObject.geographie || {}, null, 2)}
+      'geographie': ${JSON.stringify(dataObject.geographie || {}, null, 2)},
+      'campagne': ${JSON.stringify(dataObject.campagne || {}, null, 2)}
     };
     
     // Static pages configuration

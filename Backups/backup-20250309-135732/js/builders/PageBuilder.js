@@ -1070,11 +1070,19 @@
               </h3>
               ${this.buildEditButton('title')}
             </div>
+            <div style="display: flex; align-items: flex-start;">
+              <p class="editable" data-edit-type="generic" data-edit-section="campaign-${campaignName}-description" 
+                 style="color: var(--paper-muted); margin: 0; font-style: italic; flex: 1;">
+                ${campaign.description || 'Description de la campagne'}
+              </p>
+              ${this.buildEditButton('section')}
+            </div>
           </div>
           
           <!-- Sub-pages Section -->
           <div class="campaign-subpages">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+              <h4 style="margin: 0; color: var(--accent-ink);">📄 Sous-pages de la campagne (${subPageList.length})</h4>
               <button class="btn primary small dev-only" onclick="JdrApp.modules.ui.addCampaignSubPage('${campaignName}')" style="display: none;">
                 ➕ Nouvelle Sous-page
               </button>

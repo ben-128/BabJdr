@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-09-02T11:23:08.331Z by JdrBab Build System -->
+<!-- Generated on 2025-09-03T11:52:32.448Z by JdrBab Build System -->
 <title>JDR‑BAB — Livret de règles</title>
 <meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -4349,6 +4349,70 @@ article span[title]:hover::after {
   display: block;
   margin-right: 35px;
 }
+
+/* === MJ-ONLY VISIBILITY CONTROLS === */
+/* Show MJ-only elements when MJ state is active */
+body.mj-on .mj-only {
+  display: block !important;
+}
+
+/* Hide MJ-only elements by default and when MJ is off */
+.mj-only,
+body.mj-off .mj-only {
+  display: none !important;
+}
+
+/* Show non-MJ elements by default and when MJ is off */
+.non-mj-only,
+body.mj-off .non-mj-only {
+  display: block !important;
+}
+
+/* Hide non-MJ elements when MJ is on */
+body.mj-on .non-mj-only {
+  display: none !important;
+}
+
+/* For flex and inline-flex elements */
+body.mj-on .mj-only[style*="display: flex"] {
+  display: flex !important;
+}
+
+body.mj-on .mj-only[style*="display: inline-flex"] {
+  display: inline-flex !important;
+}
+
+/* === DEV-ONLY VISIBILITY CONTROLS === */
+/* Show dev-only elements when dev mode is active */
+body.dev-on .dev-only {
+  display: block !important;
+}
+
+/* Hide dev-only elements by default and when dev is off */
+.dev-only,
+body.dev-off .dev-only {
+  display: none !important;
+}
+
+/* Show non-dev elements by default and when dev is off */
+.non-dev-only,
+body.dev-off .non-dev-only {
+  display: block !important;
+}
+
+/* Hide non-dev elements when dev is on */
+body.dev-on .non-dev-only {
+  display: none !important;
+}
+
+/* For flex and inline-flex elements in dev mode */
+body.dev-on .dev-only[style*="display: flex"] {
+  display: flex !important;
+}
+
+body.dev-on .dev-only[style*="display: inline-flex"] {
+  display: inline-flex !important;
+}
 </style>
 </head>
 <body class="dev-off">
@@ -5761,11 +5825,12 @@ article span[title]:hover::after {
     "subclass:Guerrier:Maître d’armes:1": "https://i.ibb.co/dsPhMWkY/Ma-tre-d-armes.png",
     "subclass:Guerrier:Maître d’armes:2": "https://i.ibb.co/BVD015MF/Ma-tre-d-armes-F.png",
     "objet:Flèche aiguisée": "https://i.ibb.co/4Z7qKXCx/Fleche-Aiguis-e.png",
-    "objet:Flèche de la terre": "https://i.ibb.co/ZpScRTwS/Fleche-Terre.png"
+    "objet:Flèche de la terre": "https://i.ibb.co/ZpScRTwS/Fleche-Terre.png",
+    "page:geographie": "https://i.ibb.co/svmYXJbN/Carte-fantastique-d-taill-e-et-color-e.png"
   },
   "meta": {
-    "total_images": 84,
-    "exported_date": "2025-09-01",
+    "total_images": 85,
+    "exported_date": "2025-09-03",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
 };
@@ -5925,6 +5990,12 @@ article span[title]:hover::after {
           "id": "traumas",
           "title": "Traumas",
           "icon": "🩹"
+        },
+        {
+          "type": "page",
+          "id": "campagne",
+          "title": "Campagne",
+          "icon": "📖"
         }
       ]
     },
@@ -6329,41 +6400,26 @@ article span[title]:hover::after {
       'histoire': {
   "page": "histoire",
   "title": "Histoire",
-  "static": true,
   "sections": [
     {
       "type": "intro",
-      "content": "<p>Plongez dans le passé de l'univers, ses légendes et les événements qui ont façonné le monde actuel.</p>"
+      "content": ""
     },
     {
       "type": "card",
       "id": "ere-legendaire",
-      "title": "⚡ L'Ère Légendaire",
-      "content": "<p>Les temps mythiques où dieux et héros façonnaient le monde par leurs exploits.</p><p><strong>Événements marquants :</strong></p><ul><li>La Grande Forge des Éléments</li><li>La Première Guerre des Mages</li><li>L'Éveil des Dragons</li></ul><p><em>Développez l'histoire selon votre univers.</em></p>"
-    },
-    {
-      "type": "grid",
-      "cols": 2,
-      "content": [
-        {
-          "type": "card",
-          "id": "ere-ancienne",
-          "title": "🏛️ L'Ère Ancienne",
-          "content": "<p>L'établissement des premiers royaumes et l'organisation de la civilisation.</p><p><strong>Caractéristiques :</strong></p><ul><li>Fondation des grandes cités</li><li>Naissance des guildes</li><li>Codification de la magie</li></ul>"
-        },
-        {
-          "type": "card",
-          "id": "ere-moderne",
-          "title": "⚔️ L'Ère Moderne",
-          "content": "<p>L'époque actuelle où évoluent les héros joueurs.</p><p><strong>Défis contemporains :</strong></p><ul><li>Menaces émergentes</li><li>Conflits politiques</li><li>Découvertes magiques</li></ul>"
-        }
-      ]
+      "title": "",
+      "content": "<b>Foresia, royaume ancien aux mille visages</b><br>\nDans les terres de <b>Foresia</b>, un royaume ancien aux mille visages, la <b>magie</b> imprègne chaque pierre et chaque souffle de vent. \nForêts luminescentes, volcans grondants, temples enfouis et ruines cyclopéennes rappellent que les dieux et les anciens peuples ont marqué cette terre de leur puissance.\n\n<br><br><b>La région de Mabresia</b><br>\nAu cœur de ce royaume s’étend la région de <b>Mabresia</b>, autrefois fertile et paisible, où se dressaient des cités marchandes prospères et des villages agricoles nourris par des rivières cristallines.\n\n<br><br><b>La malédiction des cristaux</b><br>\nMais depuis quelques décennies, un mal mystérieux s’est abattu sur la contrée. \nDes <b>cristaux magiques</b> surgis des profondeurs de la terre altèrent la nature et les êtres vivants : animaux, monstres, et même parfois les races intelligentes. \nCes cristaux provoquent des <b>mutations</b> et une <b>soif de violence</b> incontrôlable.\n\n<br><br><b>Peuples et tensions</b><br>\nLes habitants de Foresia — <b>humains</b>, <b>elfes</b>, <b>nains</b>, mais aussi des créatures plus sombres comme <b>démons</b> et <b>morts-vivants</b> — vivent désormais dans une tension permanente, oscillant entre alliances fragiles et guerres ouvertes. \nChacun cherche à <b>exploiter</b> ou <b>détruire</b> ces cristaux, selon ses croyances et ambitions.",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
     },
     {
       "type": "card",
       "id": "chronologie",
-      "title": "📅 Chronologie Importante",
-      "content": "<div class=\"timeline\"><div class=\"event\"><strong>An -1000 :</strong> La Grande Forge des Éléments</div><div class=\"event\"><strong>An -500 :</strong> Fondation du Premier Royaume</div><div class=\"event\"><strong>An 0 :</strong> L'Accord des Nations</div><div class=\"event\"><strong>An 200 :</strong> La Guerre des Mages Noirs</div><div class=\"event\"><strong>An 400 :</strong> Époque actuelle</div></div><p><em>Adaptez cette chronologie à votre univers de jeu.</em></p>"
+      "title": "📅 Chronologie",
+      "content": "<b>Il y a 300 ans</b> – L’Empire des Anciens, peuple oublié, érige d’immenses temples et scelle dans leurs fondations des secrets de magie que nul ne comprendra jamais entièrement.<br><br>\n\n<b>Il y a 200 ans</b> – Chute de l’Empire : guerres entre dieux mineurs et rois mortels. Les temples sont abandonnés, et les ruines se couvrent de végétation.<br><br>\n\n<b>Il y a 80 ans</b> – Premiers récits d’étranges cristaux luminescents découverts dans les montagnes de Mabresia. Au début considérés comme bénédictions, certains se révèlent instables.<br><br>\n\n<b>Il y a 50 ans</b> – Des bêtes sauvages commencent à muter et deviennent plus féroces. Les premiers villages sont détruits par des créatures altérées.<br><br>\n\n<b>Il y a 30 ans</b> – Les cristaux se répandent : on les retrouve dans les forêts, les marécages et même les ruines anciennes. De plus en plus de créatures sont transformées.<br><br>\n\n<b>Il y a 20 ans</b> – Les premières guerres éclatent entre royaumes frontaliers : certains veulent s’emparer des cristaux comme armes, d’autres cherchent à les détruire.<br><br>\n\n<b>Aujourd’hui</b> – La région de Mabresia est devenue une terre sauvage, où nul n’est à l’abri : les routes sont envahies de créatures mutées, les villages se fortifient, et des aventuriers de tous horizons s’y aventurent à la recherche de gloire, de savoir… ou de pouvoir.",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
     }
   ]
 },
@@ -6373,7 +6429,39 @@ article span[title]:hover::after {
   "sections": [
     {
       "type": "intro",
-      "content": "Contenu de la page Dieux. Vous pouvez éditer ce texte en mode développement."
+      "content": ""
+    },
+    {
+      "type": "card",
+      "id": "dieux-new-2-1756899335313",
+      "title": "Dieu des Humains – Aedor, le Forgeron-Soleil",
+      "content": "Symbole : un marteau auréolé d’un disque solaire.<br>\nDomaine : courage, guerre juste, travail artisanal.<br>\nCroyances : les humains voient en lui celui qui éclaire leur chemin et leur donne la force de bâtir des cités.<br>\nParticularité : ses prêtres prônent la discipline et la reconstruction, mais certains royaumes l’utilisent aussi pour justifier leurs conquêtes.<br><br>",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
+    },
+    {
+      "type": "card",
+      "id": "dieux-para-3-1756899336921",
+      "title": "Dieu des Nains – Durnak, le Cœur-de-Pierre",
+      "content": "Symbole : une enclume fissurée d’où s’écoule une lueur rouge.<br>\nDomaine : terre, montagne, persévérance, serments.<br>\nCroyances : gardien des mines et des profondeurs, il protège les clans nains et punit sévèrement ceux qui trahissent leur parole.<br>\nParticularité : les nains affirment que ses battements résonnent dans les montagnes, guidant les mineurs vers les métaux rares.<br><br>",
+      "deletable": true,
+      "sectionName": "Nouveau paragraphe"
+    },
+    {
+      "type": "card",
+      "id": "dieux-new-4-1756899338873",
+      "title": "Déesse des Elfes – Liryel, la Dame des Brumes",
+      "content": "Symbole : une feuille argentée flottant sur l’eau.<br>\nDomaine : forêts, magie ancienne, mémoire.<br>\nCroyances : les elfes la vénèrent comme gardienne du cycle de la vie et de la magie pure.<br>\nParticularité : ses temples sont souvent des clairières protégées par des enchantements, où les brumes recouvrent les intrus.<br><br>",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
+    },
+    {
+      "type": "card",
+      "id": "dieux-new-5-1756899431837",
+      "title": "Dieu des Fées et des Lutins – Myrin, l’Éclat-Changeant",
+      "content": "Symbole : une luciole ou une étoile facétieuse à cinq branches.<br>\nDomaine : illusions, rêves, joie, malice.<br>\nCroyances : les fées et lutins croient qu’il danse entre les mondes, semant à la fois la protection et la farce.<br>\nParticularité : ses fidèles accordent beaucoup d’importance aux fêtes, à la musique et aux pactes imprévisibles.<br><br>",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
     }
   ]
 },
@@ -6383,9 +6471,52 @@ article span[title]:hover::after {
   "sections": [
     {
       "type": "intro",
-      "content": "Contenu de la page Geographie. Vous pouvez éditer ce texte en mode développement."
+      "content": "Voici la carte de la région de Mabresia, dans le Royaume de Foresia"
     }
   ]
+},
+      'campagne': {
+  "id": "campagne",
+  "title": "Campagne",
+  "icon": "📖",
+  "sections": [
+    {
+      "type": "intro",
+      "content": "<strong>🎭 Espace Campagne</strong><br>Créez et gérez vos campagnes avec leurs sous-pages personnalisées. Cette section est uniquement visible en mode Maître de Jeu."
+    },
+    {
+      "type": "campaign-manager",
+      "content": {
+        "title": "Gestionnaire de Campagnes",
+        "campaigns": {}
+      }
+    }
+  ],
+  "subPages": {
+    "Classique": {
+      "name": "Classique",
+      "description": "",
+      "subPages": {
+        "Long terme": {
+          "title": "Long terme",
+          "content": "🕯️ Le Dieu Maléfique\n\nNerhaz, le Sépulcral\n\nSymbole : un cristal noir fendu, entouré de chaînes.\n\nDomaine : mort, corruption, secrets interdits.\n\nHistoire : banni par l’Empire des Anciens, il fut scellé dans leurs temples. Mais les cristaux magiques, instables, ont servi de réceptacles à ses murmures.\n\nParticularité : Nerhaz attire les ambitieux et les désespérés, promettant pouvoir en échange de sacrifices. Son retour progressif est lié à l’altération des créatures par les cristaux."
+        },
+        "Auberge": {
+          "title": "Auberge",
+          "content": "<p>Contenu de la sous-page...</p>"
+        },
+        "Forêt": {
+          "title": "Forêt",
+          "content": "<p>Contenu de la sous-page...</p>"
+        }
+      }
+    }
+  },
+  "meta": {
+    "requiresMJ": true,
+    "allowSubPages": true,
+    "lastModified": "2025-01-01T00:00:00.000Z"
+  }
 }
     };
     
@@ -6475,6 +6606,14 @@ article span[title]:hover::after {
       "file": "traumas.json",
       "active": true,
       "order": 12
+    },
+    {
+      "id": "campagne",
+      "title": "Campagne",
+      "file": "campagne.json",
+      "active": true,
+      "order": 13,
+      "requiresMJ": true
     }
   ],
   "template": {
@@ -6987,6 +7126,15 @@ article span[title]:hover::after {
   };
 
   // ========================================
+  // EVENT CONSTANTS
+  // ========================================
+  window.Events = {
+    STORAGE_SAVE: 'storage:save',
+    PAGE_RENDER: 'page:render',
+    CONTENT_UPDATE: 'content:update'
+  };
+
+  // ========================================
   // DEFAULT VALUES
   // ========================================
   window.DEFAULT_VALUES = {
@@ -7446,6 +7594,38 @@ article span[title]:hover::after {
     'Nuit': '⚫',
     'Divin': '⚪',
     'Maléfique': '🟣'
+  };
+
+  // Campaign content type
+  window.ContentTypes.campaign = {
+    fields: {
+      name: { type: 'text', label: 'Nom', required: true },
+      description: { type: 'textarea', label: 'Description', required: false }
+    },
+    template: 'campaign',
+    container: 'campaigns',
+    dataKey: 'CAMPAIGNS',
+    icons: { category: '🗂️', item: '📋', add: '➕', delete: '🗑️' },
+    defaultValues: {
+      name: 'Nouvelle Campagne',
+      description: 'Description de la campagne'
+    }
+  };
+
+  // Campaign sub-page content type  
+  window.ContentTypes.campaignSubPage = {
+    fields: {
+      title: { type: 'text', label: 'Titre', required: true },
+      content: { type: 'textarea', label: 'Contenu', required: false }
+    },
+    template: 'campaign-subpage',
+    container: 'campaign-subpages', 
+    dataKey: 'CAMPAIGN_SUBPAGES',
+    icons: { category: '📄', item: '📝', add: '➕', delete: '🗑️' },
+    defaultValues: {
+      title: 'Nouvelle sous-page',
+      content: 'Contenu de la sous-page...'
+    }
   };
 
 })();
@@ -8863,6 +9043,11 @@ article span[title]:hover::after {
       const title = pageData.title || pageId;
       const page = pageData.page || pageId;
       
+      // Special handling for campaign page
+      if (pageId === 'campagne') {
+        return this.buildCampaignPage(pageId, pageData);
+      }
+      
       return `
         <article class="${isActive}" data-page="${page}" data-static-page="true" data-page-title="${title}">
           <section>
@@ -8906,6 +9091,17 @@ article span[title]:hover::after {
           </div>
           ${this.buildIllustration(`page:${pageData.page}`)}
           ${printButton}
+        </div>
+      `;
+    }
+
+    buildCompactCampaignHeader(pageData) {
+      return `
+        <div style="text-align:center;margin-bottom:0.5rem;">
+          <div style="display:inline-flex;align-items:center;gap:8px;">
+            <h2 class="editable editable-title" data-edit-type="generic" data-edit-section="page-title">${pageData.title}</h2>
+            ${this.buildEditButton('title')}
+          </div>
         </div>
       `;
     }
@@ -9610,6 +9806,173 @@ article span[title]:hover::after {
         </article>
       `;
     }
+
+    buildCampaignPage(pageId, pageData) {
+      const campaigns = pageData.subPages || {};
+      const campaignList = Object.keys(campaigns);
+      
+      // Get current selections (default to first available or empty)
+      const selectedCampaign = window.JdrApp?.state?.selectedCampaign || (campaignList.length > 0 ? campaignList[0] : null);
+      const currentCampaign = selectedCampaign && campaigns[selectedCampaign] ? campaigns[selectedCampaign] : null;
+      const subPageList = currentCampaign ? Object.keys(currentCampaign.subPages || {}) : [];
+      const selectedSubPage = window.JdrApp?.state?.selectedSubPage || (subPageList.length > 0 ? subPageList[0] : null);
+      const currentSubPage = selectedSubPage && currentCampaign?.subPages?.[selectedSubPage] ? currentCampaign.subPages[selectedSubPage] : null;
+      
+      return `
+        <article class="" data-page="${pageId}" data-static-page="true" data-page-title="${pageData.title}">
+          <section>
+            ${pageId === 'campagne' ? this.buildCompactCampaignHeader(pageData) : this.buildStaticPageHeader(pageData)}
+            ${pageId === 'campagne' ? '' : this.buildSections(pageData.sections)}
+            
+            <div class="campaign-manager" style="margin-top: 0.5rem;">
+              <!-- Campaign Management Controls -->
+              <div class="campaign-controls" style="background: var(--card); border-radius: 12px; padding: 1rem; margin-bottom: 0.5rem;">
+                <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 0.5rem;">
+                  <div class="dev-buttons" style="display: flex; gap: 8px;">
+                    <button class="btn primary small dev-only" onclick="JdrApp.modules.ui.addCampaign()" style="display: none;">
+                      ➕ Nouvelle Campagne
+                    </button>
+                  </div>
+                </div>
+                
+                ${campaignList.length === 0 ? `
+                  <div style="text-align: center; padding: 2rem;">
+                    <p style="color: var(--accent-ink); font-size: 1.1em; margin-bottom: 1rem;">
+                      📖 Aucune campagne créée
+                    </p>
+                    <p style="color: var(--paper-muted); font-style: italic;">
+                      <span class="dev-only" style="display: none;">Utilisez le bouton "Nouvelle Campagne" ci-dessus pour créer votre première campagne.</span>
+                      <span class="non-dev-only">Le Maître de jeu peut créer des campagnes en mode développement.</span>
+                    </p>
+                  </div>
+                ` : `
+                  <!-- Campaign Selector -->
+                  <div class="campaign-selector" style="margin-bottom: 0.5rem; text-align: center;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--accent-ink); text-align: center;">
+                      📚 Campagne Active:
+                    </label>
+                    <div style="display: inline-flex; align-items: center; gap: 8px;">
+                      <select id="campaignSelector" onchange="JdrApp.modules.ui.selectCampaign(this.value)" 
+                              style="padding: 8px; border-radius: 6px; border: 2px solid var(--rule); background: var(--paper); font-family: inherit;">
+                        ${campaignList.map(name => 
+                          `<option value="${name}" ${name === selectedCampaign ? 'selected' : ''}>${name}</option>`
+                        ).join('')}
+                      </select>
+                      <button class="btn danger small dev-only" onclick="JdrApp.modules.ui.deleteCampaign('${selectedCampaign}')" 
+                              style="display: none;" ${!selectedCampaign ? 'disabled' : ''}>
+                        🗑️ Supprimer
+                      </button>
+                    </div>
+                  </div>
+                `}
+              </div>
+              <!-- Campaign Content -->
+              ${selectedCampaign && currentCampaign ? this.buildSelectedCampaignContent(selectedCampaign, currentCampaign, selectedSubPage, currentSubPage) : ''}
+            </div>
+            
+            ${this.buildAddSectionButton()}
+          </section>
+        </article>
+      `;
+    }
+
+    buildSelectedCampaignContent(campaignName, campaign, selectedSubPage, currentSubPage) {
+      const subPageList = campaign.subPages ? Object.keys(campaign.subPages) : [];
+      
+      return `
+        <div class="selected-campaign" style="background: var(--card); border-radius: 12px; padding: 1.5rem; border-left: 4px solid var(--bronze);">
+          <!-- Campaign Header -->
+          <div class="campaign-header" style="margin-bottom: 1.5rem; border-bottom: 2px solid var(--rule); padding-bottom: 1rem;">
+            <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+              <h3 class="editable" data-edit-type="generic" data-edit-section="campaign-${campaignName}-name" 
+                  style="margin: 0; color: var(--accent-ink); flex: 1;">
+                ${campaignName}
+              </h3>
+              ${this.buildEditButton('title')}
+            </div>
+            <div style="display: flex; align-items: flex-start;">
+              <p class="editable" data-edit-type="generic" data-edit-section="campaign-${campaignName}-description" 
+                 style="color: var(--paper-muted); margin: 0; font-style: italic; flex: 1;">
+                ${campaign.description || 'Description de la campagne'}
+              </p>
+              ${this.buildEditButton('section')}
+            </div>
+          </div>
+          
+          <!-- Sub-pages Section -->
+          <div class="campaign-subpages">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+              <h4 style="margin: 0; color: var(--accent-ink);">📄 Sous-pages de la campagne (${subPageList.length})</h4>
+              <button class="btn primary small dev-only" onclick="JdrApp.modules.ui.addCampaignSubPage('${campaignName}')" style="display: none;">
+                ➕ Nouvelle Sous-page
+              </button>
+            </div>
+            
+            ${subPageList.length === 0 ? `
+              <div style="text-align: center; padding: 2rem; background: var(--paper-light); border-radius: 8px; margin-bottom: 1rem;">
+                <p style="color: var(--paper-muted); font-style: italic;">
+                  Aucune sous-page créée pour cette campagne.
+                </p>
+                <p class="dev-only" style="color: var(--paper-muted); font-size: 0.9em; display: none;">
+                  Utilisez le bouton "Nouvelle Sous-page" pour commencer.
+                </p>
+              </div>
+            ` : `
+              <!-- Sub-page Selector -->
+              <div class="subpage-selector" style="margin-bottom: 1.5rem;">
+                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--accent-ink);">
+                  📝 Sous-page Active:
+                </label>
+                <select id="subPageSelector" onchange="JdrApp.modules.ui.selectSubPage(this.value)" 
+                        style="padding: 8px; border-radius: 6px; border: 2px solid var(--rule); background: var(--paper); font-family: inherit;">
+                  ${subPageList.map(name => 
+                    `<option value="${name}" ${name === selectedSubPage ? 'selected' : ''}>${name}</option>`
+                  ).join('')}
+                </select>
+                <button class="btn danger small dev-only" onclick="JdrApp.modules.ui.deleteCampaignSubPage('${campaignName}', '${selectedSubPage}')" 
+                        style="margin-left: 8px; display: none;" ${!selectedSubPage ? 'disabled' : ''}>
+                  🗑️ Supprimer
+                </button>
+              </div>
+              
+              <!-- Sub-page Content -->
+              ${selectedSubPage && currentSubPage ? this.buildSelectedSubPageContent(campaignName, selectedSubPage, currentSubPage) : ''}
+            `}
+          </div>
+        </div>
+      `;
+    }
+
+    buildSelectedSubPageContent(campaignName, subPageName, subPage) {
+      return `
+        <div class="selected-subpage" style="background: var(--paper-light); border-radius: 8px; padding: 1.5rem; border: 2px solid var(--rule);">
+          <!-- Sub-page Header -->
+          <div class="subpage-header" style="margin-bottom: 1rem; border-bottom: 1px solid var(--rule); padding-bottom: 0.75rem;">
+            <div style="display: flex; align-items: center;">
+              <h5 class="editable" data-edit-type="generic" data-edit-section="subpage-${campaignName}-${subPageName}-title" 
+                  style="margin: 0; color: var(--accent-ink); font-size: 1.2em; flex: 1;">
+                📄 ${subPage.title || subPageName}
+              </h5>
+              ${this.buildEditButton('title')}
+            </div>
+          </div>
+          
+          <!-- Sub-page Content -->
+          <div style="display: flex; align-items: flex-start;">
+            <div class="subpage-content editable" data-edit-type="generic" data-edit-section="subpage-${campaignName}-${subPageName}-content" 
+                 style="line-height: 1.6; min-height: 200px; flex: 1;">
+              ${subPage.content || '<p>Contenu de la sous-page...</p>'}
+            </div>
+            ${this.buildEditButton('section')}
+          </div>
+        </div>
+      `;
+    }
+
+    buildEditButton(buttonType) {
+      // Always generate the button - CSS will control visibility based on body.dev-on/dev-off
+      return `<button class="edit-btn" type="button" style="background: var(--accent); color: white; border: none; border-radius: 4px; padding: 4px 8px; cursor: pointer; font-size: 12px; margin-left: 8px;">✏️</button>`;
+    }
     
 
     sanitizeId(str) {
@@ -10296,7 +10659,10 @@ article span[title]:hover::after {
       // Set up save handlers
       JdrApp.utils.events.register('click', '#saveAndExport', () => this.saveAndExportZip());
       
-      
+      // Listen for storage save events
+      EventBus.on(Events.STORAGE_SAVE, () => {
+        this.saveChanges(true); // Silent save
+      });
       
       // Auto-save functionality
       this.setupAutoSave();
@@ -11406,12 +11772,14 @@ article span[title]:hover::after {
 
       // Initialize visual state based on current MJ status
       this.updateMJButtonVisual();
+      this.updateMJBodyClass();
 
       const handleMJToggle = () => {
         if (window.JdrApp.state.isMJ) {
           // Déjà en mode MJ, désactiver
           window.JdrApp.state.isMJ = false;
           this.updateMJButtonVisual();
+          this.updateMJBodyClass();
           this.generateTOC(); // Régénérer le TOC pour cacher les sections MJ
           
           // Refresh objects display if currently on objects page
@@ -11421,6 +11789,7 @@ article span[title]:hover::after {
           this.showMJConfirmation(() => {
             window.JdrApp.state.isMJ = true;
             this.updateMJButtonVisual();
+            this.updateMJBodyClass();
             this.generateTOC(); // Régénérer le TOC pour afficher les sections MJ
             
             // Refresh objects display if currently on objects page
@@ -11526,6 +11895,17 @@ article span[title]:hover::after {
         mjBtn.style.background = 'var(--bronze)';
         mjBtn.style.borderColor = 'var(--bronze)';
         mjBtn.innerHTML = '🎭 Maître de jeu <span id="mjStatusIndicator" style="position: absolute; top: -5px; right: -5px; width: 12px; height: 12px; border-radius: 50%; background: #dc2626; border: 2px solid white; display: none;"></span>';
+      }
+    },
+
+    updateMJBodyClass() {
+      const body = document.body;
+      if (window.JdrApp.state.isMJ) {
+        body.classList.remove('mj-off');
+        body.classList.add('mj-on');
+      } else {
+        body.classList.remove('mj-on');
+        body.classList.add('mj-off');
       }
     },
 
@@ -13993,6 +14373,61 @@ article span[title]:hover::after {
         };
       }
       
+      // Check if we're editing campaign or sub-page content (specific handling before static page fallback)
+      const campaignArticle = element.closest('article[data-static-page="true"]');
+      if (campaignArticle && campaignArticle.dataset.page === 'campagne') {
+        const editableElement = element.classList.contains('editable') ? element : element.querySelector('.editable');
+        const editSection = editableElement?.dataset?.editSection || '';
+        
+        // Handle campaign-specific edit sections
+        if (editSection.startsWith('campaign-')) {
+          // Parse campaign edit section: campaign-{campaignName}-{property}
+          const parts = editSection.split('-');
+          if (parts.length >= 3) {
+            const campaignName = parts.slice(1, -1).join('-'); // Handle campaign names with hyphens
+            const property = parts[parts.length - 1]; // last part is the property
+            
+            return {
+              contentType: 'campaign',
+              itemIdentifier: campaignName,
+              categoryName: null,
+              property: 'html',
+              editType: 'html',
+              editSection: property, // 'name' or 'description'
+              config: window.ContentTypes.campaign,
+              element: editableElement,
+              container: element,
+              applyEdit: (content) => {
+                return this.updateCampaignData('campaign', campaignName, property, content);
+              }
+            };
+          }
+        } else if (editSection.startsWith('subpage-')) {
+          // Parse sub-page edit section: subpage-{campaignName}-{subPageName}-{property}
+          const parts = editSection.split('-');
+          if (parts.length >= 4) {
+            const campaignName = parts[1];
+            const subPageName = parts.slice(2, -1).join('-'); // Handle sub-page names with hyphens
+            const property = parts[parts.length - 1]; // last part is the property
+            
+            return {
+              contentType: 'campaignSubPage',
+              itemIdentifier: `${campaignName}:${subPageName}`,
+              categoryName: campaignName,
+              property: 'html',
+              editType: 'html',
+              editSection: property, // 'title' or 'content'
+              config: window.ContentTypes.campaignSubPage,
+              element: editableElement,
+              container: element,
+              applyEdit: (content) => {
+                return this.updateCampaignData('subpage', campaignName, property, content, subPageName);
+              }
+            };
+          }
+        }
+      }
+      
       // Check if we're in a static page (LAST, as fallback)
       // Now we include ALL static pages, regardless of data-page-title
       const staticPageArticle = element.closest('article[data-static-page="true"]');
@@ -14419,6 +14854,10 @@ article span[title]:hover::after {
             return this.updateTableTresorData(session, content);
           case 'pageDescription':
             return this.updatePageDescriptionData(session, content);
+          case 'campaign':
+            return session.applyEdit(content);
+          case 'campaignSubPage':
+            return session.applyEdit(content);
           default:
             console.error('Unknown content type for update:', session.contentType);
             return false;
@@ -14715,6 +15154,11 @@ article span[title]:hover::after {
         return true;
       }
       
+      // Handle campaign data (special case for campaign page)
+      if (pageKey === 'campagne') {
+        return this.updateCampaignData(pageData, session, content);
+      }
+      
       // Handle sections
       return this.updateStaticPageSection(pageData, session, content);
     }
@@ -14762,6 +15206,85 @@ article span[title]:hover::after {
         const introSection = sections.find(s => s.type === 'intro');
         if (introSection) {
           introSection.content = content;
+          return true;
+        }
+      }
+      
+      return false;
+    }
+
+    // Update campaign and sub-page data
+    updateCampaignData(pageData, session, content) {
+      const editSection = session.editSection;
+      
+      // Initialize subPages if not exists
+      if (!pageData.subPages) {
+        pageData.subPages = {};
+      }
+      
+      // Parse edit section: campaign-{campaignName}-{field} or subpage-{campaignName}-{subPageName}-{field}
+      if (editSection.startsWith('campaign-')) {
+        // Format: campaign-{campaignName}-{field}
+        const parts = editSection.split('-');
+        if (parts.length >= 3) {
+          const campaignName = parts.slice(1, -1).join('-'); // Handle campaign names with dashes
+          const field = parts[parts.length - 1];
+          
+          if (!pageData.subPages[campaignName]) {
+            pageData.subPages[campaignName] = {
+              name: campaignName,
+              description: 'Description de la campagne',
+              subPages: {}
+            };
+          }
+          
+          if (field === 'name') {
+            // If renaming campaign, we need to move the entire campaign data
+            if (campaignName !== content && !pageData.subPages[content]) {
+              pageData.subPages[content] = pageData.subPages[campaignName];
+              pageData.subPages[content].name = content;
+              delete pageData.subPages[campaignName];
+            }
+          } else if (field === 'description') {
+            pageData.subPages[campaignName].description = content;
+          }
+          
+          return true;
+        }
+      } else if (editSection.startsWith('subpage-')) {
+        // Format: subpage-{campaignName}-{subPageName}-{field}
+        const parts = editSection.split('-');
+        if (parts.length >= 4) {
+          const campaignName = parts[1];
+          const subPageName = parts.slice(2, -1).join('-'); // Handle sub-page names with dashes
+          const field = parts[parts.length - 1];
+          
+          if (!pageData.subPages[campaignName]) {
+            return false; // Campaign doesn't exist
+          }
+          
+          if (!pageData.subPages[campaignName].subPages) {
+            pageData.subPages[campaignName].subPages = {};
+          }
+          
+          if (!pageData.subPages[campaignName].subPages[subPageName]) {
+            pageData.subPages[campaignName].subPages[subPageName] = {
+              title: subPageName,
+              content: '<p>Contenu de la sous-page...</p>'
+            };
+          }
+          
+          if (field === 'title') {
+            // If renaming sub-page, we need to move the entire sub-page data
+            if (subPageName !== content && !pageData.subPages[campaignName].subPages[content]) {
+              pageData.subPages[campaignName].subPages[content] = pageData.subPages[campaignName].subPages[subPageName];
+              pageData.subPages[campaignName].subPages[content].title = content;
+              delete pageData.subPages[campaignName].subPages[subPageName];
+            }
+          } else if (field === 'content') {
+            pageData.subPages[campaignName].subPages[subPageName].content = content;
+          }
+          
           return true;
         }
       }
@@ -14967,12 +15490,12 @@ article span[title]:hover::after {
       
       // Standard editing cleanup (modal is handled separately)
       editableElement.contentEditable = false;
-      editableElement.style.cssText = editableElement.style.cssText
-        .replace(/background-color[^;]*;?/g, '')
-        .replace(/border[^;]*;?/g, '')
-        .replace(/padding[^;]*;?/g, '')
-        .replace(/font-family[^;]*;?/g, '')
-        .replace(/white-space[^;]*;?/g, '');
+      // Simplified cleanup to prevent stack overflow
+      editableElement.style.background = '';
+      editableElement.style.border = '';
+      editableElement.style.padding = '';
+      editableElement.style.fontFamily = '';
+      editableElement.style.whiteSpace = '';
       
       // Reset both container and editable element attributes
       container.dataset.editing = 'false';
@@ -15000,31 +15523,21 @@ article span[title]:hover::after {
     }
 
     normalizeHTMLContent(html) {
-      // First, unescape any already escaped HTML to prevent double-escaping
-      let cleanHtml = html
-        .replace(/&amp;lt;/g, '<')  // Handle double-escaped &amp;lt; -> &lt; -> <
-        .replace(/&amp;gt;/g, '>')  // Handle double-escaped &amp;gt; -> &gt; -> >
-        .replace(/&lt;/g, '<')
-        .replace(/&gt;/g, '>')
-        .replace(/&quot;/g, '"')
-        .replace(/&#39;/g, "'");
+      // SIMPLIFIED VERSION to prevent infinite loops
+      // Just return the trimmed HTML without complex transformations
+      if (!html || typeof html !== 'string') {
+        return '';
+      }
       
-      // Create temp div to parse and clean the HTML
-      const tempDiv = document.createElement('div');
-      tempDiv.innerHTML = cleanHtml;
+      // Basic cleanup only - avoid complex regex chains that can loop
+      let cleaned = html.trim();
       
-      // Clean up any problematic div elements
-      tempDiv.querySelectorAll('div').forEach(div => {
-        if (div.innerHTML === '<br>' || div.innerHTML === '<br/>') {
-          div.outerHTML = '<br>';
-        }
-      });
+      // Only safe, non-recursive replacements
+      cleaned = cleaned.replace(/&quot;/g, '"');
+      cleaned = cleaned.replace(/&#39;/g, "'");
+      cleaned = cleaned.replace(/<br\s*\/?>/gi, '<br>');
       
-      // Return the cleaned HTML
-      return tempDiv.innerHTML.trim()
-        .replace(/<br\s*\/?>/gi, '<br>')
-        .replace(/\u00a0/g, '&nbsp;')
-        .replace(/(\w+)\s*=\s*'([^']*)'/g, '$1="$2"');
+      return cleaned;
     }
 
     // Cancel current edit
@@ -15239,9 +15752,7 @@ article span[title]:hover::after {
         // Update display
         this.restoreElementContent(session, processedContent);
         
-        // Emit storage save event
-        EventBus.emit(Events.STORAGE_SAVE);
-        
+        // Note: Storage save is handled elsewhere to prevent loops
         // Show success notification
         if (JdrApp.modules.ui?.showNotification) {
           JdrApp.modules.ui.showNotification('💾 Modification sauvegardée', 'success');
@@ -15397,13 +15908,17 @@ article span[title]:hover::after {
         });
       }
 
-      // Live preview update
+      // Live preview update with debounce to prevent performance issues
+      let previewUpdateTimeout;
       textarea.addEventListener('input', () => {
-        try {
-          preview.innerHTML = textarea.value;
-        } catch (e) {
-          preview.textContent = 'Aperçu invalide: ' + e.message;
-        }
+        clearTimeout(previewUpdateTimeout);
+        previewUpdateTimeout = setTimeout(() => {
+          try {
+            preview.innerHTML = textarea.value;
+          } catch (e) {
+            preview.textContent = 'Aperçu invalide: ' + e.message;
+          }
+        }, 300); // 300ms debounce
       });
 
       // Save handler
@@ -15878,6 +16393,112 @@ article span[title]:hover::after {
       
       return repairCount;
     }
+    
+    // Update static page data method
+    updateStaticPageData(session, content) {
+      try {
+        const pageId = session.itemIdentifier;
+        const editSection = session.editSection;
+        
+        // Get the static page data
+        const staticPageData = window.STATIC_PAGES?.[pageId];
+        if (!staticPageData) {
+          console.error('Static page not found:', pageId);
+          return false;
+        }
+        
+        // Handle different edit section formats
+        if (editSection.startsWith('intro-')) {
+          // Editing intro section
+          const sectionIndex = parseInt(editSection.split('-')[1]);
+          if (staticPageData.sections && staticPageData.sections[sectionIndex] && staticPageData.sections[sectionIndex].type === 'intro') {
+            staticPageData.sections[sectionIndex].content = content;
+          }
+        } else if (editSection === 'page-title') {
+          // Editing page title
+          staticPageData.title = content;
+        } else if (editSection.endsWith('-title')) {
+          // Editing card title (e.g., "dieux-new-2-1756899335313-title")
+          const cardId = editSection.slice(0, -6); // Remove "-title"
+          const cardSection = staticPageData.sections?.find(s => s.id === cardId);
+          if (cardSection) {
+            cardSection.title = content;
+          }
+        } else {
+          // Editing card content (e.g., "dieux-new-2-1756899335313")
+          const cardSection = staticPageData.sections?.find(s => s.id === editSection);
+          if (cardSection) {
+            cardSection.content = content;
+          } else {
+            console.warn('Unhandled static page edit section:', editSection);
+            return false;
+          }
+        }
+        
+        return true;
+        
+      } catch (error) {
+        console.error('Failed to update static page data:', error);
+        return false;
+      }
+    }
+
+    // Campaign and sub-page data update method
+    updateCampaignData(type, campaignName, property, content, subPageName = null) {
+      try {
+        // Get the campaign data from the static pages
+        const campagneData = window.STATIC_PAGES?.campagne;
+        if (!campagneData || !campagneData.subPages) {
+          return false;
+        }
+        
+        if (type === 'campaign') {
+          // Update campaign property (name or description)
+          if (!campagneData.subPages[campaignName]) {
+            return false;
+          }
+          
+          if (property === 'name') {
+            // Renaming a campaign requires more complex handling
+            // For now, just update the description property
+            return false;
+          } else if (property === 'description') {
+            campagneData.subPages[campaignName].description = content;
+          }
+        } else if (type === 'subpage') {
+          // Update sub-page property (title or content)
+          if (!campagneData.subPages[campaignName] || !campagneData.subPages[campaignName].subPages || !subPageName) {
+            return false;
+          }
+          
+          const subPage = campagneData.subPages[campaignName].subPages[subPageName];
+          if (!subPage) {
+            return false;
+          }
+          
+          if (property === 'title') {
+            subPage.title = content;
+          } else if (property === 'content') {
+            subPage.content = content;
+          }
+        }
+        
+        // Direct save to avoid infinite loop from STORAGE_SAVE event
+        try {
+          if (JdrApp?.modules?.storage?.saveChanges) {
+            JdrApp.modules.storage.saveChanges(true); // Silent save
+          }
+        } catch (saveError) {
+          // Ignore save errors - data is still updated in memory
+        }
+        
+        return true;
+        
+      } catch (error) {
+        console.error('Failed to update campaign data:', error);
+        return false;
+      }
+    }
   }
 
   window.UnifiedEditor = UnifiedEditor.getInstance();
@@ -16036,6 +16657,12 @@ article span[title]:hover::after {
         e.stopPropagation();
         
         if (!this.isDevMode) return;
+        
+        // Prevent multiple edit sessions
+        if (UnifiedEditor.currentEditSession) {
+          console.warn('Another edit session is already active');
+          return;
+        }
         
         // Find the editable element near the button
         let editableElement = e.target.previousElementSibling;
@@ -22337,6 +22964,136 @@ article span[title]:hover::after {
           window.location.reload();
         }
       }, 100);
+    },
+
+    // ========================================
+    // CAMPAIGN MANAGEMENT
+    // ========================================
+
+    addCampaign() {
+      const campaignName = prompt("Nom de la nouvelle campagne:");
+      if (!campaignName || !campaignName.trim()) return;
+      
+      // Initialize campaigns structure if needed
+      if (!window.STATIC_PAGES.campagne) {
+        window.STATIC_PAGES.campagne = {
+          id: 'campagne',
+          title: 'Campagne',
+          sections: [],
+          subPages: {}
+        };
+      }
+      
+      if (!window.STATIC_PAGES.campagne.subPages) {
+        window.STATIC_PAGES.campagne.subPages = {};
+      }
+      
+      const trimmedName = campaignName.trim();
+      
+      // Check if campaign already exists
+      if (window.STATIC_PAGES.campagne.subPages[trimmedName]) {
+        this.showNotification('❌ Une campagne avec ce nom existe déjà', 'error');
+        return;
+      }
+      
+      // Create new campaign
+      window.STATIC_PAGES.campagne.subPages[trimmedName] = {
+        name: trimmedName,
+        description: "Description de la campagne",
+        subPages: {}
+      };
+      
+      // Save and refresh
+      EventBus.emit(Events.STORAGE_SAVE);
+      this.refreshCurrentPage();
+      this.showNotification('📖 Campagne créée avec succès', 'success');
+    },
+
+    deleteCampaign(campaignName) {
+      if (!confirm(`Supprimer la campagne "${campaignName}" et toutes ses sous-pages ?`)) {
+        return;
+      }
+      
+      if (window.STATIC_PAGES.campagne && window.STATIC_PAGES.campagne.subPages) {
+        delete window.STATIC_PAGES.campagne.subPages[campaignName];
+        EventBus.emit(Events.STORAGE_SAVE);
+        this.refreshCurrentPage();
+        this.showNotification('🗑️ Campagne supprimée', 'success');
+      }
+    },
+
+    addCampaignSubPage(campaignName) {
+      const subPageName = prompt("Nom de la nouvelle sous-page:");
+      if (!subPageName || !subPageName.trim()) return;
+      
+      const trimmedName = subPageName.trim();
+      
+      const campaign = window.STATIC_PAGES.campagne?.subPages?.[campaignName];
+      if (!campaign) {
+        this.showNotification('❌ Campagne introuvable', 'error');
+        return;
+      }
+      
+      if (!campaign.subPages) {
+        campaign.subPages = {};
+      }
+      
+      // Check if sub-page already exists
+      if (campaign.subPages[trimmedName]) {
+        this.showNotification('❌ Une sous-page avec ce nom existe déjà', 'error');
+        return;
+      }
+      
+      // Create new sub-page
+      campaign.subPages[trimmedName] = {
+        title: trimmedName,
+        content: "<p>Contenu de la sous-page...</p>"
+      };
+      
+      // Save and refresh
+      EventBus.emit(Events.STORAGE_SAVE);
+      this.refreshCurrentPage();
+      this.showNotification('📄 Sous-page créée avec succès', 'success');
+    },
+
+    editCampaignSubPage(campaignName, subPageName) {
+      // This would open a modal or navigate to an edit view
+      // For now, just show a notification that editing is available through inline editing
+      this.showNotification('✏️ Vous pouvez éditer le contenu directement en double-cliquant dessus', 'info');
+    },
+
+    deleteCampaignSubPage(campaignName, subPageName) {
+      if (!confirm(`Supprimer la sous-page "${subPageName}" ?`)) {
+        return;
+      }
+      
+      const campaign = window.STATIC_PAGES.campagne?.subPages?.[campaignName];
+      if (campaign && campaign.subPages) {
+        delete campaign.subPages[subPageName];
+        EventBus.emit(Events.STORAGE_SAVE);
+        this.refreshCurrentPage();
+        this.showNotification('🗑️ Sous-page supprimée', 'success');
+      }
+    },
+
+    // Campaign and Sub-page Selection
+    selectCampaign(campaignName) {
+      if (!window.JdrApp.state) {
+        window.JdrApp.state = {};
+      }
+      window.JdrApp.state.selectedCampaign = campaignName;
+      window.JdrApp.state.selectedSubPage = null; // Reset sub-page selection
+      this.refreshCurrentPage();
+      this.showNotification(`📖 Campagne "${campaignName}" sélectionnée`, 'info');
+    },
+
+    selectSubPage(subPageName) {
+      if (!window.JdrApp.state) {
+        window.JdrApp.state = {};
+      }
+      window.JdrApp.state.selectedSubPage = subPageName;
+      this.refreshCurrentPage();
+      this.showNotification(`📄 Sous-page "${subPageName}" sélectionnée`, 'info');
     }
   };
 

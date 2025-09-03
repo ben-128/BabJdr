@@ -1,0 +1,43 @@
+{
+  "id": "campagne",
+  "title": "Campagne",
+  "icon": "📖",
+  "sections": [
+    {
+      "type": "intro",
+      "content": "<strong>🎭 Espace Campagne</strong><br>Créez et gérez vos campagnes avec leurs sous-pages personnalisées. Cette section est uniquement visible en mode Maître de Jeu."
+    },
+    {
+      "type": "campaign-manager",
+      "content": {
+        "title": "Gestionnaire de Campagnes",
+        "campaigns": {}
+      }
+    }
+  ],
+  "subPages": {
+    "Classique": {
+      "name": "Classique",
+      "description": "",
+      "subPages": {
+        "Long terme": {
+          "title": "Long terme",
+          "content": "🕯️ Le Dieu Maléfique\n\nNerhaz, le Sépulcral\n\nSymbole : un cristal noir fendu, entouré de chaînes.\n\nDomaine : mort, corruption, secrets interdits.\n\nHistoire : banni par l’Empire des Anciens, il fut scellé dans leurs temples. Mais les cristaux magiques, instables, ont servi de réceptacles à ses murmures.\n\nParticularité : Nerhaz attire les ambitieux et les désespérés, promettant pouvoir en échange de sacrifices. Son retour progressif est lié à l’altération des créatures par les cristaux."
+        },
+        "Auberge": {
+          "title": "Auberge",
+          "content": "<p>Contenu de la sous-page...</p>"
+        },
+        "Forêt": {
+          "title": "Forêt",
+          "content": "<p>Contenu de la sous-page...</p>"
+        }
+      }
+    }
+  },
+  "meta": {
+    "requiresMJ": true,
+    "allowSubPages": true,
+    "lastModified": "2025-01-01T00:00:00.000Z"
+  }
+}
