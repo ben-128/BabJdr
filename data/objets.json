@@ -3,7 +3,7 @@
     {
       "nom": "Espadon",
       "numero": 1,
-      "image": "",
+      "image": "https://i.ibb.co/35rpP6ZS/Epee2M1.png",
       "description": "<i>Longue épée à deux mains, lourde mais puissante.</i>",
       "tags": [
         "Arme",
@@ -17,7 +17,7 @@
     {
       "nom": "Simple épée",
       "numero": 2,
-      "image": "",
+      "image": "https://i.ibb.co/PsSXvSXx/Epee1.png",
       "description": "<i>Arme droite et équilibrée, conçue pour être maniée d’une seule main</i>",
       "tags": [
         "Arme",
@@ -31,7 +31,7 @@
     {
       "nom": "Dague en fer",
       "numero": 3,
-      "image": "",
+      "image": "https://i.ibb.co/1fCwy6cR/Dague1.png",
       "description": "<i>Petite lame simple, légère et maniable.</i>",
       "tags": [
         "Arme",
@@ -45,7 +45,7 @@
     {
       "nom": "Bâton en bois",
       "numero": 4,
-      "image": "",
+      "image": "https://i.ibb.co/PsyCNw86/Baton1.png",
       "description": "<i>Long bâton solide, utilisé comme arme et appui.</i>",
       "tags": [
         "Arme",
@@ -59,7 +59,7 @@
     {
       "nom": "Gourdin",
       "numero": 5,
-      "image": "",
+      "image": "https://i.ibb.co/whZCKww0/Baton2.png",
       "description": "<i>Arme rudimentaire faite de bois dur. </i>",
       "tags": [
         "Arme",
@@ -73,7 +73,7 @@
     {
       "nom": "Arc simple",
       "numero": 6,
-      "image": "",
+      "image": "https://i.ibb.co/cKb1JKZQ/Arc1.png",
       "description": "<i>Arc basique en bois, sans ornement.</i>",
       "tags": [
         "Arme",
@@ -87,7 +87,7 @@
     {
       "nom": "Bouclier en bois",
       "numero": 7,
-      "image": "",
+      "image": "https://i.ibb.co/67bK4Bw8/Bouclier1.png",
       "description": "<i>Un bouclier grossier taillé dans des planches épaisses, marqué de cicatrices de bataille.</i>",
       "tags": [
         "Bouclier"
@@ -99,7 +99,7 @@
     {
       "nom": "Robe simple",
       "numero": 8,
-      "image": "",
+      "image": "https://i.ibb.co/VYFpnz8h/Robe1.png",
       "description": "<i>Une robe de toile modeste, aux plis fatigués mais encore emplis de dignité.</i>",
       "tags": [
         "Armure",
@@ -112,7 +112,7 @@
     {
       "nom": "Armure de cuir",
       "numero": 9,
-      "image": "",
+      "image": "https://i.ibb.co/9Hkw2VFb/Armure-Cuir1.png",
       "description": "<i>Une armure souple en cuir tanné, taillée pour offrir une protection rudimentaire.</i>",
       "tags": [
         "Armure",
@@ -125,7 +125,7 @@
     {
       "nom": "Armure en maille",
       "numero": 10,
-      "image": "",
+      "image": "https://i.ibb.co/cXtwzw5b/Armure-Lourde1.png",
       "description": "<i>Une cotte de mailles dont chaque anneau forgé promet résistance et endurance au combat.</i>",
       "tags": [
         "Armure",
@@ -138,7 +138,7 @@
     {
       "nom": "Armure de plaque",
       "numero": 11,
-      "image": "",
+      "image": "https://i.ibb.co/fVg5Fp6h/Armure-Lourde2.png",
       "description": "<i>Une imposante armure de métal poli, dont les plaques luisantes forment une carapace presque impénétrable.</i>",
       "tags": [
         "Armure",
@@ -151,7 +151,7 @@
     {
       "nom": "Petite potion de vie",
       "numero": 12,
-      "image": "",
+      "image": "https://i.ibb.co/Mw2Qb8Y/LifePot1.png",
       "description": "<i>Une fiole écarlate dont le liquide vif régénère les blessures et ranime les forces vitales.</i>",
       "tags": [
         "Consommable"
@@ -163,7 +163,7 @@
     {
       "nom": "Petite potion de mana",
       "numero": 13,
-      "image": "",
+      "image": "https://i.ibb.co/MkwzbQ3S/Potion-Mana1.png",
       "description": "<i>Une essence azur miroitante qui restaure l’énergie magique et ravive le flux des arcanes.</i>",
       "tags": [
         "Consommable"
@@ -175,7 +175,7 @@
     {
       "nom": "Baguette de boule de feu",
       "numero": 14,
-      "image": "",
+      "image": "https://i.ibb.co/JwXs3k2V/Baguette-Feu.png",
       "description": "<i>Une fine tige runique qui libère des flammes brûlantes au commandement de son porteur.</i>",
       "tags": [
         "Consommable",
@@ -188,7 +188,7 @@
     {
       "nom": "Feuilleclaire",
       "numero": 15,
-      "image": "",
+      "image": "https://i.ibb.co/bMDstDVV/Herb1.png",
       "description": "<i>Herbe des forêts profondes, aux feuilles luisantes et aux petites fleurs rosées. Appliquée directement sur la peau, elle referme les plaies et apaise la douleur presque instantanément.</i>",
       "tags": [
         "Consommable",
@@ -201,20 +201,20 @@
     {
       "nom": "Nocteline",
       "numero": 16,
-      "image": "",
+      "image": "https://i.ibb.co/7JpQ7Kr7/Herb2.png",
       "description": "<i>une plante sombre aux fleurs violettes dont l’essence neutralise les venins et purifie le sang.</i>",
       "tags": [
         "Consommable",
         "Plante"
       ],
-      "effet": "<strong>Prérequis:</strong> Intelligence 5.<br>\n<strong>Effet:</strong> Soigne le héros ou une cible proche du poison. <br>Critique : rend également 5 points de vie.",
+      "effet": "<strong>Prérequis:</strong> Intelligence 5.<br>\n<strong>Effet:</strong> Soigne le héros ou une cible proche du poison. \n<br><b>Critique</b> : Rend également 5 points de vie.",
       "prix": "🔷 <strong>Prix:</strong> 10",
       "poids": ""
     },
     {
       "nom": "Baguette de d'accélération",
       "numero": 17,
-      "image": "",
+      "image": "https://i.ibb.co/zT29mKBd/Baguette-Lumiere.png",
       "description": "<i>Une fine tige de cristal rayonnant, dont l’éclat sacré nimbe son porteur d’une aura éclatante, lui conférant une vitesse surnaturelle et des réflexes fulgurants.</i>",
       "tags": [
         "Consommable",
@@ -227,7 +227,7 @@
     {
       "nom": "Baguette de sommeil",
       "numero": 18,
-      "image": "",
+      "image": "https://i.ibb.co/bMXNS4gy/Baguette-Nuit.png",
       "description": "<i>Une tige sombre incrustée de gemmes lunaires, qui libère une aura ténébreuse plongeant ses cibles dans un profond sommeil enchanté.</i>",
       "tags": [
         "Consommable",
@@ -240,7 +240,7 @@
     {
       "nom": "Ration de nourriture",
       "numero": 19,
-      "image": "",
+      "image": "https://i.ibb.co/tT6gW6p0/Food1.png",
       "description": "<i>Un paquet frugal de pain sec et de viande salée.</i>",
       "tags": [
         "Nourriture"
@@ -252,7 +252,7 @@
     {
       "nom": "Ration copieuse de nourriture",
       "numero": 20,
-      "image": "",
+      "image": "https://i.ibb.co/7JZW2ZZT/Food2.png",
       "description": "<i>Un coffret garni de mets fins et de vin épicé, offrant réconfort et vigueur bien au-delà de la simple survie</i>",
       "tags": [
         "Nourriture"
@@ -264,7 +264,7 @@
     {
       "nom": "Fruits de la forêt",
       "numero": 21,
-      "image": "",
+      "image": "https://i.ibb.co/svC0cDH6/food3.png",
       "description": "<i>Des baies juteuses et sucrées, cueillies à l’ombre des grands arbres, qui redonnent fraîcheur et énergie.</i>",
       "tags": [
         "Nourriture"
@@ -276,7 +276,7 @@
     {
       "nom": "Ration de survie",
       "numero": 22,
-      "image": "",
+      "image": "https://i.ibb.co/Py57FHy/Food0.png",
       "description": "<i>Un maigre assemblage de galettes sèches, de viande fumée et d’eau amère, conçu pour soutenir la flamme vitale dans les heures les plus sombres.</i>",
       "tags": [
         "Nourriture"
@@ -288,7 +288,7 @@
     {
       "nom": "Flèche aiguisée",
       "numero": 23,
-      "image": "",
+      "image": "https://i.ibb.co/4Z7qKXCx/Fleche-Aiguis-e.png",
       "description": "<i>Un trait finement taillé, dont la pointe acérée perce l’armure avec une précision mortelle.</i>",
       "tags": [
         "Consommable",
@@ -301,7 +301,7 @@
     {
       "nom": "Flèche de la terre",
       "numero": 24,
-      "image": "",
+      "image": "https://i.ibb.co/ZpScRTwS/Fleche-Terre.png",
       "description": "<i>Une flèche alourdie de pierres runiques, qui libère la force brutale de l’élément Terre à l’impact.</i>",
       "tags": [
         "Consommable",
@@ -314,7 +314,7 @@
     {
       "nom": "Bandage d'urgence",
       "numero": 25,
-      "image": "",
+      "image": "https://i.ibb.co/4ZPsSM3p/Bandages.png",
       "description": "<i>Liens grossiers appliqués à la hâte en plein combat, permettant de maintenir un héros en vie quelques instants de plus</i>",
       "tags": [
         "Consommable"
@@ -326,7 +326,7 @@
     {
       "nom": "Bracelet médicinal de la forêt",
       "numero": 26,
-      "image": "",
+      "image": "https://i.ibb.co/k2h292gV/Bracelet-Foret.png",
       "description": "<i>Tressé de plantes médicinales, il purifie le sang de son porteur et dissipe les poisons.</i>",
       "tags": [
         "Accessoire"
@@ -338,7 +338,7 @@
     {
       "nom": "Dent de Grouink",
       "numero": 27,
-      "image": "",
+      "image": "https://i.ibb.co/whc5dwnw/Dent-Grouik.png",
       "description": "<i>Portée en collier, cette énorme canine de bête sauvage insuffle à son porteur une force brute et indomptée.</i>",
       "tags": [
         "Accessoire"
@@ -350,7 +350,7 @@
     {
       "nom": "Echarpe de chaman Groink",
       "numero": 28,
-      "image": "",
+      "image": "https://i.ibb.co/W4tfpFcH/Echarpe-Chaman.png",
       "description": "<i>Tissée de symboles anciens et imprégnée de sagesse mystique.</i>",
       "tags": [
         "Accessoire"
@@ -362,7 +362,7 @@
     {
       "nom": "Fourrure d'ours",
       "numero": 29,
-      "image": "",
+      "image": "https://i.ibb.co/9HhVCqvk/Fourrure-Ours.png",
       "description": "<i>Épaisse et robuste, cette peau intacte pourrait aisément être taillée en une armure protectrice.</i>",
       "tags": [
         "Composant"
@@ -374,7 +374,7 @@
     {
       "nom": "Pierre à aiguiser",
       "numero": 30,
-      "image": "",
+      "image": "https://i.ibb.co/SX10mS2q/Buff01.png",
       "description": "<i>Outil simple mais efficace, elle redonne du tranchant aux lames et prépare les armes pour le combat.</i>",
       "tags": [
         "Consommable"
@@ -386,7 +386,7 @@
     {
       "nom": "Cristal d'effort",
       "numero": 31,
-      "image": "",
+      "image": "https://i.ibb.co/k2MHGqhx/Cristal-Effort.png",
       "description": "<i>Fragment lumineux empli d’énergie, il ravive la volonté du porteur et lui rend la force d’accomplir un nouvel effort. </i>",
       "tags": [
         "Consommable"
@@ -398,7 +398,7 @@
     {
       "nom": "Pince de crabe géant des forêts",
       "numero": 32,
-      "image": "",
+      "image": "https://i.ibb.co/VWKF2ysm/Masse-Foret1.png",
       "description": "<i>Massive et bleutée, vestige d’une créature des forêts profondes, elle témoigne d’une puissance brute capable de broyer la pierre.</i>",
       "tags": [
         "Arme",
@@ -408,6 +408,121 @@
       "effet": "<strong>Dégâts: </strong> Inflige (3  + Force) points de dégats physiques.\n<br> L'arme est imprégnée de 5 points de dégats d'élément <span style=\"color: #4682b4; font-weight: bold;\">Eau</span>.",
       "prix": "🔷 <strong>Prix:</strong> ?",
       "poids": ""
+    },
+    {
+      "nom": "Clairgivre",
+      "numero": 33,
+      "image": "https://i.ibb.co/s9CJtsPr/Herb5.png",
+      "description": "<i>Une herbe bleu clair, semblant givrée en permanence, même au soleil.</i>",
+      "tags": [
+        "Consommable",
+        "Plante",
+        "Non identifié"
+      ],
+      "effet": "<strong>Prérequis:</strong> Intelligence 10.     \n<br><strong>Effet:</strong> Le héros ou la cible proche dispose de deux actions principales au lieu d'une (non cumulable). \n<br><strong>Durée:</strong> 2 tours (Critique : 3).",
+      "prix": "🔷 <strong>Prix:</strong> 65",
+      "poids": ""
+    },
+    {
+      "nom": "Auréline des Roches",
+      "numero": 34,
+      "image": "https://i.ibb.co/My3mcc60/Herb3.png",
+      "description": "<i>une fleur jaune éclatante aux pétales veinés de brun, poussant sur les falaises et près des rivières.</i>",
+      "tags": [
+        "Consommable",
+        "Plante",
+        "Non identifié"
+      ],
+      "effet": "<strong>Effet:</strong> Augmente la protection élémentaire de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> et d'<span style=\"color: #4682b4; font-weight: bold;\">Eau</span>  du héros ou d'une cible proche du niveau d'Intelligence du héros. <br><b>Critique :</b> le bonus d'armure est amélioré de 5.\n<br><strong>Durée:</strong> 5 tours.",
+      "prix": "🔷 <strong>Prix:</strong> 25",
+      "poids": ""
+    },
+    {
+      "nom": "Nébrelle d’Azur",
+      "numero": 35,
+      "image": "https://i.ibb.co/bMn4mMyK/Herb4.png",
+      "description": "<i>Une herbe fine, aux brins violets et bleus luminescents, qui pousse dans les clairières baignées de lune.</i>",
+      "tags": [
+        "Consommable",
+        "Plante",
+        "Non identifié"
+      ],
+      "effet": "<b>Effet:</b> Rend au héros à une cible proche une quantitée de mana équilavent au niveau d'Intelligence du héros.\n<br><b>Ciritique :</b> Mana rendu augmenté de 5.",
+      "prix": "🔷 <strong>Prix:</strong> 25",
+      "poids": ""
+    },
+    {
+      "nom": "Aile de scarabée géant",
+      "numero": 36,
+      "image": "https://i.ibb.co/RGZM6Tfx/Cape-Scarab.png",
+      "description": "<i>Cape faite d’une aile translucide arrachée à un scarabée géant. Elle bruisse à chaque mouvement.</i>",
+      "tags": [
+        "Accessoire"
+      ],
+      "effet": "<strong>Effet:</strong> Augmente l'initiative de 4 et l'armure élémentaire d'<span style=\"color: #22c55e; font-weight: bold;\">Air</span> de 5.",
+      "prix": "🔷 <strong>Prix:</strong> ?",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Bottes en cuir de guêpe géante",
+      "numero": 37,
+      "image": "https://i.ibb.co/k2V6Df2z/Botte-Guepe.png",
+      "description": "<i>Bottes souples taillées dans le cuir chitineux d’une guêpe géante. Leur légèreté accroît la rapidité.</i>",
+      "tags": [
+        "Accessoire"
+      ],
+      "effet": "<strong>Effet:</strong> Augmente l'Esquive de 1.",
+      "prix": "🔷 <strong>Prix:</strong> ?",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Gants patte d'ours",
+      "numero": 38,
+      "image": "https://i.ibb.co/KzrZRGcd/Gants-Patte-Ours.png",
+      "description": "<i>De véritables pattes d’ours, évidées et enfilées comme des gants. Bruts et redoutables, elles permettent d’abattre des coups capables de faire chuter un adversaire.</i>",
+      "tags": [
+        "Accessoire"
+      ],
+      "effet": "<strong>Effet:</strong> En cas de coup critique physique sur une attaque au corp à corp, l'adversaire sera mis dans l'état <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">A terre</span>.\n<br><strong>Sans effet si :</strong> Adversaire de taille Grand ou supérieur, ou adversaire volant.",
+      "prix": "🔷 <strong>Prix:</strong> ?",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Bouclier de la forêt",
+      "numero": 39,
+      "image": "https://i.ibb.co/Zpkw8qVL/Bouclier-Foret.png",
+      "description": "<i>Bouclier rond taillé dans un bois ancien et orné d’un arbre majestueux dont les racines et les branches s’entrelacent en relief.</i>",
+      "tags": [
+        "Bouclier"
+      ],
+      "effet": "<strong>Effet:</strong> Augmente l'armure physique de 4. Augmente l'armure élémentaire de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> de 5.",
+      "prix": "🔷 <strong>Prix:</strong> ?",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Couronne d'épines",
+      "numero": 40,
+      "image": "https://i.ibb.co/d09YYyy8/Couronne-Epines.png",
+      "description": "<i>Diadème tressé de ronces encore vivantes, dont les pointes s’enfoncent légèrement dans la peau. La douleur qu’elle inflige endurcit le porteur.</i>",
+      "tags": [
+        "Accessoire"
+      ],
+      "effet": "<strong>Effet:</strong> Augmente l'endurance de 3.",
+      "prix": "🔷 <strong>Prix:</strong> ?",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Collier terrestre",
+      "numero": 41,
+      "image": "https://i.ibb.co/ksxCppN8/Collier-Terrestre.png",
+      "description": "<i>Un pendentif massif orné d’une gemme verte veinée, sertie dans un motif doré évoquant les racines et la roche. Il pulse d’une force tellurique.</i>",
+      "tags": [
+        "Non identifié",
+        "Accessoire"
+      ],
+      "effet": "<strong>Effet:</strong> Les attaques physiques sont imprégnés d'une force élémentaire, qui inflige 4 dégats de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>.",
+      "prix": "🔷 <strong>Prix:</strong> ?",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     }
   ],
   "filterSettings": {

@@ -1,0 +1,66 @@
+{
+  "page": "combat",
+  "title": "Combat",
+  "sections": [
+    {
+      "type": "intro",
+      "content": "Lorsqu'un combat commence, on compare l'Initiative de tous les participants (héros et monstres), et on détermine alors un ordre de tour. Celui qui a la plus grande initiative commence, puis c'est au tour du second avec la plus grande initiative , etc...\n\n<br><br>Chaque participant joue son tour (déplacement et actions), puis on passe au suivant. Lorsque tous les monstres ou tous les héros sont morts ou hors d'état de se battre, le combat s'arrète."
+    },
+    {
+      "type": "card",
+      "id": "combat-new-2-1756401371776",
+      "title": "Déplacement",
+      "content": "À chaque tour, un héros peut se déplacer de 9 mètres (plus s’il bénéficie de bonus), en plus de ses actions.\n<br><br>Certains terrains, comme la boue ou le sable, sont considérés comme des terrains difficiles : la vitesse y est alors réduite de moitié.\n<br><br>Un héros ou un monstre ne peut pas traverser un adversaire occupant une largeur de 3 mètres. Si plusieurs ennemis se tiennent côte à côte, ils forment un véritable mur infranchissable.",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
+    },
+    {
+      "type": "card",
+      "id": "combat-new-3-1756401384086",
+      "title": "Actions",
+      "content": "Chaque tour, un héros dispose d'une <b>action principale</b>, pour effectuer une attaque physique ou un sort.\nElle est perdue si elle n'est pas utilisé pendant son tour. Elle permet également de faire toute action qui nécéssite un test de compétence (ouvrir une porte, casser un rocher...).\n\n<br><br>Il dispose également d'une <b>action secondaire</b>, qui permet de faire un certains nombre de choses :\n<br>- Sauter.\n<br>- Utiliser un objet.\n<br>- Changer d'arme.\n<br>Certains dons ou abilités permettent également d'effectuer d'autres choses en utilisant l'action secondaire.\n\n<br><br> Les héros peuvent effectuer leur déplacement, action principale et secondaire dans l'ordre qui leur plait.",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
+    },
+    {
+      "type": "card",
+      "id": "combat-new-4-1756401409186",
+      "title": "Attaques, sorts, armure",
+      "content": "<b>Attaque physique</b>\n\n<ul>\n  <li>Il faut être à bonne portée (1,5 m pour une arme de mêlée, ou selon la portée indiquée sur l’arme).</li>\n  <li>Il faut effectuer un saut pour toucher un monstre volant.</li>\n</ul>\n\n<p>\nEnsuite l’attaquant lance un <b>d20</b> :\n</p>\n\n<ul>\n  <li>Si le résultat est ≤ <b>(1 + Esquive)</b> du défenseur, l’attaque rate.</li>\n  <li>Si le résultat est ≥ <b>(20 - Chance de Critique)</b> de l’attaquant, l’attaque est un <b>coup critique</b> et les dégâts physiques sont doublés.</li>\n</ul>\n\n<p>\nSi des <b>dégâts élémentaires</b> sont rattachés à l’arme (via sort, objet ou autre), ils ne sont critiques que si l’élément de l’attaque est opposé à l’élément d’affiliation de la cible.\n</p>\n\n<p>\nSi l’attaque réussit :\n</p>\n<ul>\n  <li>On soustrait l’armure physique aux dégâts physiques, puis on retire ce total aux points de vie du défenseur.</li>\n  <li>On fait de même avec les dégâts élémentaires en utilisant l’armure élémentaire correspondante.</li>\n</ul>\n\n<hr>\n\n<br><b>Lancer un sort</b>\n\n<ul>\n  <li>Le lanceur doit être à portée de la cible.</li>\n  <li>Le lanceur dépense le mana en fonction du coût du sort. S'il passe en dessous de 0, le sort échoue et le lanceur devient <span class=\"etat-link\" data-etat=\"Endormi/assomé/Effrayé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Paralysé</span> pendant 2 tours.</li>\n</ul>\n\n<p>\nEnsuite le lanceur lance un <b>d20</b> :\n</p>\n\n<ul>\n  <li>Si le résultat est ≤ 1, le sort échoue.</li>\n  <li>Si le résultat est ≥ <b>(20 - Chance de Critique des sorts)</b> du lanceur, l’effet du sort sera <b>critique</b> (s’il réussit).</li>\n</ul>\n\n<b>Cas « Sans effet si » :</b>\n<br>Chaque sort indique sans sa decription dans quels cas le sort peut échouer.\n<ul>\n  <li>S’il est annulé en cas d’esquive, on vérifie si le résultat du dé est ≤ <b>(1 + Esquive)</b> du défenseur.</li>\n  <li>S’il n’affecte pas certaines créatures en fonction de leur élément d’assignation, le MJ indiquera si le sort est sans effet.</li>\n  <li>S’il s’agit d’un sort d’altération magique, on compare l’<b>Intelligence</b> du lanceur avec la <b>Résistance à l’altération</b> du défenseur : si elle n’est pas strictement supérieure, le sort est sans effet.</li>\n</ul>\n\n<p>\nSi aucun des cas « Sans effet si » ne s’applique, on résout le sort :\n</p>\n\n<ul>\n  <li>Si l’élément du sort est opposé à l’affiliation de la cible, l’effet est <b>forcément critique</b>.</li>\n  <li>Son effet est appliqué (en cas d'effet critique, la description du sort indique les effets).</li>\n  <li>Si le sort inflige des dégâts élémentaires, on soustrait l’armure élémentaire correspondante.</li>\n  <li>Si le sort inflige une altération, on place un dé indiquant le nombre de tours restants.</li>\n</ul>",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
+    },
+    {
+      "type": "card",
+      "id": "combat-new-5-1756401438556",
+      "title": "Coup critique et esquive",
+      "content": "<hr><br><br><strong>Chance de coup critique (physique) </strong> : Lors d'une attaque physique, le lanceur de l'attaque lance un d20. S'il fait 20, alors les dégats physiques (et seulement physiques) sont doublés.<br> Augmenter les chances de coup critique réduit la valeur du dé nécéssaire pour faire un critique. Par exemple, avec 3 de chance de coup critique, si le dé fait de 17 à 20, l'attaque est critique.\n\n<br><br><hr><br><strong>Chance de coup critique (sorts et consommables)</strong> : Lorsque un héros ou un monstre lance un sort ou utilise un consommable, il lance un d20. S'il fait 20, alors le sort est critique, chaque sort/consommable ayant un effet critique différent (indiqué dans sa description).<br> Augmenter les chances de coup critique des sorts et consommables réduit la valeur du dé nécéssaire pour faire un critique. Par exemple, avec 3 de chance de coup critique, si le dé fait de 17 à 20, le resultat est critique. \n\n<br><br><hr><br><strong>Esquive </strong> : Lors d'une attaque physique, ou d'un sort sans effet si esquive (indiqué dans la fiche du sort), lorsque le lanceur lance son d20, si le resultat est 1, l'attaque est sans effet. Avoir de l'esquive pour la cible de l'attaque augmente la valeur du dé jusqu'a laquelle l'attaque échoue. Par exemple, avec 3 d'esquive, si le dé fait 4 ou moins, l'attaque échoue. La valeur d'esquive ne peut jamais dépasser 9, quel que soit l'equipement ou bonus d'un joueur ou monstre.",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
+    },
+    {
+      "type": "card",
+      "id": "combat-new-6-1756401461053",
+      "title": "Mort",
+      "content": "<p>\nLorsque les <b>points de vie</b> d’un héros passent sous la barre des 0, il devient <b>inconscient</b> jusqu’à la fin du combat. \nAprès le combat, si un allié le soigne (via objet ou sort), il redevient capable d’agir. \nCependant, il gagne <b>un trauma</b>, représentant un handicap définitif en fonction de ce qui l’a abattu. \nAu bout du <b>troisième trauma</b>, le héros <b>meurt définitivement</b>.\n</p>\n\n<p>\nLe joueur devra alors créer un nouveau personnage.  \nIl se murmure que certaines <b>magies très puissantes</b> sont capables de ressusciter un héros mort, à condition qu’elles soient pratiquées rapidement après le décès.\n</p>\n\n<p>\n<b>Exemples de traumas</b>\n</p>\n<ul>\n  <li><b>Cicatrice profonde</b> : –1 en compétence Éloquence.</li>\n  <li><b>Amnésie partielle</b> : Oubli d’un sort, d’une langue ou d’une compétence.</li>\n  <li><b>Claudication</b> : Vitesse de déplacement réduite de 3 m.</li>\n</ul>",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
+    },
+    {
+      "type": "card",
+      "id": "combat-new-7-1756407955417",
+      "title": "Incantation sur plusieurs tours",
+      "content": "Certains sorts puissants nécéssitent plusieurs tours d'incantation.\n\n<br>Aprés avoir commencé une incantation, aucun déplacement/action n'est possible. Les effets du sort sont effectués au dernier tour de l'incantation, tour où la créature pourra de nouveau effectuer des actions/déplacement.\n<br> Les dégâts subis n’interrompent pas l’incantation, sauf en cas de mort ou d’effet empechant d'effectuer des actions (exemple : <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">A terre</span>).",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
+    },
+    {
+      "type": "card",
+      "id": "combat-new-8-1756926911533",
+      "title": "Combat - Hors combat",
+      "content": "<p><b>Hors combat</b></p>\n<p>Par défaut, les héros sont hors combat. Ils agissent librement : discuter, se déplacer, manger des rations, changer d’équipement, etc.</p>\n\n<p><b>Déclenchement d’un combat</b></p>\n<p>Quand un affrontement commence, on passe en mode <b>tour par tour</b>. Certaines actions deviennent alors interdites :</p>\n<ul>\n  <li>Changer d’équipement (armures, accessoires).</li>\n  <li>Utiliser des objets <i>non consommables</i> comme de la nourriture.</li>\n  <li>Effectuer des actions longues (à l’appréciation du MJ).</li>\n</ul>\n<p>Le mode tour par tour s’arrête lorsque le dernier adversaire est neutralisé.</p>\n\n<p><b>Après-combat (10 minutes)</b></p>\n<p>À la fin d’un combat, les héros restent sous tension pendant <b>10 minutes</b> : ils ne sont pas encore considérés comme hors combat.</p>\n<ul>\n  <li>Ils ne regagnent pas encore leur mana.</li>\n  <li>Manger, dormir ou entreprendre des activités longues reste impossible.</li>\n  <li>Les effets « en combat » s’estompent selon leur durée.</li>\n  <li>Les héros peuvent parler librement, utiliser leur mana restant et faire toute autre activité rapide.</li>\n</ul>\n\n<p><b>Retour hors combat</b></p>\n<p>Une fois ces 10 minutes écoulées, les héros redeviennent hors combat : ils <b>récupèrent tout leur mana</b>, peuvent manger et dormir. Les <b>sorts/effets réservés au combat</b> deviennent alors indisponibles (notamment certains sorts de soins).</p>\n\n<p><b>Note sur les soins</b></p>\n<p>La plupart des blessures se soignent plus difficilement une fois l’adrénaline retombée : de nombreux effets de soin ne sont donc plus utilisables hors combat.</p>",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
+    }
+  ]
+}

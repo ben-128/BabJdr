@@ -60,7 +60,7 @@
     "objet:Baguette de boule de feu": "https://i.ibb.co/JwXs3k2V/Baguette-Feu.png",
     "objet:Feuilleclaire": "https://i.ibb.co/bMDstDVV/Herb1.png",
     "objet:Nocteline": "https://i.ibb.co/7JpQ7Kr7/Herb2.png",
-    "objet:Nouvel Objet": "https://i.ibb.co/SX10mS2q/Buff01.png",
+    "objet:Nouvel Objet": "https://i.ibb.co/ksxCppN8/Collier-Terrestre.png",
     "objet:Baguette de sommeil": "https://i.ibb.co/bMXNS4gy/Baguette-Nuit.png",
     "monster:Araignée Géante": "https://i.ibb.co/b0XHjQJ/Monstre-For-t-Araign-e.png",
     "monster:Crabe des Bois": "https://i.ibb.co/7dY3GgJS/Monstre-For-t-Crab.png",
@@ -95,11 +95,20 @@
     "objet:Fourrure d'ours": "https://i.ibb.co/9HhVCqvk/Fourrure-Ours.png",
     "objet:Pierre à aiguiser": "https://i.ibb.co/SX10mS2q/Buff01.png",
     "objet:Cristal d'effort": "https://i.ibb.co/k2MHGqhx/Cristal-Effort.png",
-    "objet:Pince de crabe géant des forêts": "https://i.ibb.co/VWKF2ysm/Masse-Foret1.png"
+    "objet:Pince de crabe géant des forêts": "https://i.ibb.co/VWKF2ysm/Masse-Foret1.png",
+    "objet:Clairgivre": "https://i.ibb.co/s9CJtsPr/Herb5.png",
+    "objet:Auréline des Roches": "https://i.ibb.co/My3mcc60/Herb3.png",
+    "objet:Nébrelle d’Azur": "https://i.ibb.co/bMn4mMyK/Herb4.png",
+    "objet:Aile de scarabée géant": "https://i.ibb.co/RGZM6Tfx/Cape-Scarab.png",
+    "objet:Bottes en cuir de guêpe géante": "https://i.ibb.co/k2V6Df2z/Botte-Guepe.png",
+    "objet:Gants patte d'ours": "https://i.ibb.co/KzrZRGcd/Gants-Patte-Ours.png",
+    "objet:Bouclier de la forêt": "https://i.ibb.co/Zpkw8qVL/Bouclier-Foret.png",
+    "objet:Couronne d'épines": "https://i.ibb.co/d09YYyy8/Couronne-Epines.png",
+    "objet:Collier terrestre": "https://i.ibb.co/ksxCppN8/Collier-Terrestre.png"
   },
   "meta": {
-    "total_images": 96,
-    "exported_date": "2025-09-03",
+    "total_images": 105,
+    "exported_date": "2025-09-04",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
 }
