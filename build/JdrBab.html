@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-09-04T21:48:43.189Z by JdrBab Build System -->
+<!-- Generated on 2025-09-04T22:02:39.560Z by JdrBab Build System -->
 <title>JDR‑BAB — Livret de règles</title>
 <meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -5617,6 +5617,31 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       "effet": "<strong>Effet:</strong> Augmente l'armure physique de 4. Augmente l'armure élémentaire de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> de 5.",
       "prix": "🔷 <strong>Prix:</strong> ?",
       "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Couronne d'épines",
+      "numero": 40,
+      "image": "https://i.ibb.co/d09YYyy8/Couronne-Epines.png",
+      "description": "<i>Diadème tressé de ronces encore vivantes, dont les pointes s’enfoncent légèrement dans la peau. La douleur qu’elle inflige endurcit le porteur.</i>",
+      "tags": [
+        "Accessoire"
+      ],
+      "effet": "<strong>Effet:</strong> Augmente l'endurance de 3.",
+      "prix": "🔷 <strong>Prix:</strong> ?",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Collier terrestre",
+      "numero": 41,
+      "image": "https://i.ibb.co/ksxCppN8/Collier-Terrestre.png",
+      "description": "<i>Un pendentif massif orné d’une gemme verte veinée, sertie dans un motif doré évoquant les racines et la roche. Il pulse d’une force tellurique.</i>",
+      "tags": [
+        "Non identifié",
+        "Accessoire"
+      ],
+      "effet": "<strong>Effet:</strong> Les attaques physiques sont imprégnés d'une force élémentaire, qui inflige 4 dégats de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>.",
+      "prix": "🔷 <strong>Prix:</strong> ?",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     }
   ],
   "filterSettings": {
@@ -6196,7 +6221,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
     "objet:Baguette de boule de feu": "https://i.ibb.co/JwXs3k2V/Baguette-Feu.png",
     "objet:Feuilleclaire": "https://i.ibb.co/bMDstDVV/Herb1.png",
     "objet:Nocteline": "https://i.ibb.co/7JpQ7Kr7/Herb2.png",
-    "objet:Nouvel Objet": "https://i.ibb.co/KzrZRGcd/Gants-Patte-Ours.png",
+    "objet:Nouvel Objet": "https://i.ibb.co/ksxCppN8/Collier-Terrestre.png",
     "objet:Baguette de sommeil": "https://i.ibb.co/bMXNS4gy/Baguette-Nuit.png",
     "monster:Araignée Géante": "https://i.ibb.co/b0XHjQJ/Monstre-For-t-Araign-e.png",
     "monster:Crabe des Bois": "https://i.ibb.co/7dY3GgJS/Monstre-For-t-Crab.png",
@@ -6238,10 +6263,12 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
     "objet:Aile de scarabée géant": "https://i.ibb.co/RGZM6Tfx/Cape-Scarab.png",
     "objet:Bottes en cuir de guêpe géante": "https://i.ibb.co/k2V6Df2z/Botte-Guepe.png",
     "objet:Gants patte d'ours": "https://i.ibb.co/KzrZRGcd/Gants-Patte-Ours.png",
-    "objet:Bouclier de la forêt": "https://i.ibb.co/Zpkw8qVL/Bouclier-Foret.png"
+    "objet:Bouclier de la forêt": "https://i.ibb.co/Zpkw8qVL/Bouclier-Foret.png",
+    "objet:Couronne d'épines": "https://i.ibb.co/d09YYyy8/Couronne-Epines.png",
+    "objet:Collier terrestre": "https://i.ibb.co/ksxCppN8/Collier-Terrestre.png"
   },
   "meta": {
-    "total_images": 103,
+    "total_images": 105,
     "exported_date": "2025-09-04",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
@@ -23294,11 +23321,29 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
         return;
       }
 
+      // Générer la liste des tags uniques
+      const allTags = new Set();
+      objets.forEach(obj => {
+        obj.tags?.forEach(tag => allTags.add(tag));
+      });
+      const sortedTags = Array.from(allTags).sort();
+      
+      const tagOptions = ['<option value="">Tous les objets</option>']
+        .concat(sortedTags.map(tag => `<option value="${tag}">${tag}</option>`))
+        .join('');
+
       const selectionContent = `
         <div style="margin-bottom: 1rem;">
           <label for="object-search" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">🔍 Rechercher un objet:</label>
           <input type="text" id="object-search" placeholder="Tapez le nom ou numéro d'un objet..." 
                  style="width: 100%; padding: 0.75rem; border: 1px solid var(--bronze); border-radius: 4px; font-size: 1rem;">
+        </div>
+        
+        <div style="margin-bottom: 1rem;">
+          <label for="tag-filter-selection" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">🏷️ Filtrer par tag:</label>
+          <select id="tag-filter-selection" style="width: 100%; padding: 0.75rem; border: 1px solid var(--bronze); border-radius: 4px; font-size: 1rem; background: var(--paper-light);">
+            ${tagOptions}
+          </select>
         </div>
         
         <div style="margin-bottom: 1rem; color: var(--bronze); font-size: 0.9em;">
@@ -23321,24 +23366,46 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       // Référence au modal parent pour pouvoir le mettre à jour
       selectionModal._parentModal = parentModal;
 
-      // Gestionnaire de recherche
+      // Gestionnaire de recherche et de filtre
       const searchInput = selectionModal.querySelector('#object-search');
+      const tagFilter = selectionModal.querySelector('#tag-filter-selection');
       const objectsList = selectionModal.querySelector('#objects-list');
       const objectCount = selectionModal.querySelector('#object-count');
+      
+      // Fonction pour filtrer et afficher les objets
+      const updateObjectsList = () => {
+        const query = searchInput.value.toLowerCase().trim();
+        const selectedTag = tagFilter.value;
+        
+        let filteredObjets = objets;
+        
+        // Filtrage par tag
+        if (selectedTag) {
+          filteredObjets = filteredObjets.filter(obj => 
+            obj.tags && obj.tags.includes(selectedTag)
+          );
+        }
+        
+        // Filtrage par recherche
+        if (query) {
+          filteredObjets = this.filterObjects(filteredObjets, query);
+        }
+        
+        objectsList.innerHTML = this.generateObjectsList(filteredObjets);
+        objectCount.textContent = `${filteredObjets.length} objet(s) ${query || selectedTag ? 'trouvé(s)' : 'disponible(s)'}`;
+        
+        // Réattacher les gestionnaires de clic
+        this.attachObjectClickHandlers(selectionModal);
+      };
       
       let searchTimeout;
       searchInput.addEventListener('input', () => {
         clearTimeout(searchTimeout);
-        searchTimeout = setTimeout(() => {
-          const query = searchInput.value.toLowerCase().trim();
-          const filteredObjets = this.filterObjects(objets, query);
-          objectsList.innerHTML = this.generateObjectsList(filteredObjets);
-          objectCount.textContent = `${filteredObjets.length} objet(s) trouvé(s)`;
-          
-          // Réattacher les gestionnaires de clic
-          this.attachObjectClickHandlers(selectionModal);
-        }, 300);
+        searchTimeout = setTimeout(updateObjectsList, 300);
       });
+
+      // Gestionnaire de filtre par tag
+      tagFilter.addEventListener('change', updateObjectsList);
 
       // Gestionnaire d'annulation
       selectionModal.querySelector('#cancel-object-selection').addEventListener('click', () => {

@@ -4902,11 +4902,29 @@
         return;
       }
 
+      // Générer la liste des tags uniques
+      const allTags = new Set();
+      objets.forEach(obj => {
+        obj.tags?.forEach(tag => allTags.add(tag));
+      });
+      const sortedTags = Array.from(allTags).sort();
+      
+      const tagOptions = ['<option value="">Tous les objets</option>']
+        .concat(sortedTags.map(tag => `<option value="${tag}">${tag}</option>`))
+        .join('');
+
       const selectionContent = `
         <div style="margin-bottom: 1rem;">
           <label for="object-search" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">🔍 Rechercher un objet:</label>
           <input type="text" id="object-search" placeholder="Tapez le nom ou numéro d'un objet..." 
                  style="width: 100%; padding: 0.75rem; border: 1px solid var(--bronze); border-radius: 4px; font-size: 1rem;">
+        </div>
+        
+        <div style="margin-bottom: 1rem;">
+          <label for="tag-filter-selection" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">🏷️ Filtrer par tag:</label>
+          <select id="tag-filter-selection" style="width: 100%; padding: 0.75rem; border: 1px solid var(--bronze); border-radius: 4px; font-size: 1rem; background: var(--paper-light);">
+            ${tagOptions}
+          </select>
         </div>
         
         <div style="margin-bottom: 1rem; color: var(--bronze); font-size: 0.9em;">
@@ -4929,24 +4947,46 @@
       // Référence au modal parent pour pouvoir le mettre à jour
       selectionModal._parentModal = parentModal;
 
-      // Gestionnaire de recherche
+      // Gestionnaire de recherche et de filtre
       const searchInput = selectionModal.querySelector('#object-search');
+      const tagFilter = selectionModal.querySelector('#tag-filter-selection');
       const objectsList = selectionModal.querySelector('#objects-list');
       const objectCount = selectionModal.querySelector('#object-count');
+      
+      // Fonction pour filtrer et afficher les objets
+      const updateObjectsList = () => {
+        const query = searchInput.value.toLowerCase().trim();
+        const selectedTag = tagFilter.value;
+        
+        let filteredObjets = objets;
+        
+        // Filtrage par tag
+        if (selectedTag) {
+          filteredObjets = filteredObjets.filter(obj => 
+            obj.tags && obj.tags.includes(selectedTag)
+          );
+        }
+        
+        // Filtrage par recherche
+        if (query) {
+          filteredObjets = this.filterObjects(filteredObjets, query);
+        }
+        
+        objectsList.innerHTML = this.generateObjectsList(filteredObjets);
+        objectCount.textContent = `${filteredObjets.length} objet(s) ${query || selectedTag ? 'trouvé(s)' : 'disponible(s)'}`;
+        
+        // Réattacher les gestionnaires de clic
+        this.attachObjectClickHandlers(selectionModal);
+      };
       
       let searchTimeout;
       searchInput.addEventListener('input', () => {
         clearTimeout(searchTimeout);
-        searchTimeout = setTimeout(() => {
-          const query = searchInput.value.toLowerCase().trim();
-          const filteredObjets = this.filterObjects(objets, query);
-          objectsList.innerHTML = this.generateObjectsList(filteredObjets);
-          objectCount.textContent = `${filteredObjets.length} objet(s) trouvé(s)`;
-          
-          // Réattacher les gestionnaires de clic
-          this.attachObjectClickHandlers(selectionModal);
-        }, 300);
+        searchTimeout = setTimeout(updateObjectsList, 300);
       });
+
+      // Gestionnaire de filtre par tag
+      tagFilter.addEventListener('change', updateObjectsList);
 
       // Gestionnaire d'annulation
       selectionModal.querySelector('#cancel-object-selection').addEventListener('click', () => {
