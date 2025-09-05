@@ -245,15 +245,7 @@
         }
       });
 
-      // Tables de trésors - Prévisualisation des objets
-      JdrApp.utils.events.register('click', '.object-preview-link', (e) => {
-        e.preventDefault();
-        const objetNumero = parseInt(e.target.dataset.objectNumero);
-        
-        if (objetNumero) {
-          this.showObjectPreview(objetNumero);
-        }
-      });
+      // Tables de trésors - Prévisualisation des objets (géré par TablesTresorsManager)
 
       // Filter chip toggling (REMOVED - duplicate listener that was causing double toggle)
 
