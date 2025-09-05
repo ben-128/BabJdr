@@ -247,7 +247,7 @@
       ],
       "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore (Endurance) points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.",
       "prix": "🔷 <strong>Prix:</strong> 5",
-      "poids": "⚖️ <strong>Poids:</strong> 1"
+      "poids": ""
     },
     {
       "nom": "Ration copieuse de nourriture",
@@ -259,7 +259,7 @@
       ],
       "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore (Endurance) points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.\n<br><b>Charges :</b> 3",
       "prix": "🔷 <strong>Prix:</strong> 15",
-      "poids": "⚖️ <strong>Poids:</strong> 1"
+      "poids": ""
     },
     {
       "nom": "Fruits de la forêt",
@@ -271,7 +271,7 @@
       ],
       "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore (Endurance) points de vie. <br>Couplé à un sommeil, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>. <br>De plus, lorsque consommé, le mangeur ne neccessite plus que 4 heures de sommeil ce jour-ci.\n<br><br><b>Charges :</b> 3",
       "prix": "🔷 <strong>Prix:</strong> 20",
-      "poids": "⚖️ <strong>Poids:</strong> 1"
+      "poids": ""
     },
     {
       "nom": "Ration de survie",
@@ -283,7 +283,7 @@
       ],
       "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.",
       "prix": "",
-      "poids": "⚖️ <strong>Poids:</strong> 1"
+      "poids": ""
     },
     {
       "nom": "Flèche aiguisée",
@@ -379,7 +379,7 @@
       "tags": [
         "Consommable"
       ],
-      "effet": "<strong>Effet:</strong> Augmente les dégats de la prochaine attaque physique de 3 (Critique : 5).\n  <br><strong>Charges:</strong> 3.",
+      "effet": "<strong>Effet:</strong> Augmente les dégats de la prochaine attaque physique de 3.\n  <br><strong>Charges:</strong> 3.",
       "prix": "🔷 <strong>Prix:</strong> 20",
       "poids": ""
     },
@@ -391,7 +391,7 @@
       "tags": [
         "Consommable"
       ],
-      "effet": "<strong>Effet:</strong> Recharge un (Critique : deux) effort utilisable par le héros.<br><strong>Charges:</strong> 3.",
+      "effet": "<strong>Effet:</strong> Recharge un effort utilisable par le héros.<br><strong>Charges:</strong> 3.",
       "prix": "🔷 <strong>Prix:</strong> 50",
       "poids": ""
     },
@@ -522,18 +522,6 @@
       ],
       "effet": "<strong>Effet:</strong> Les attaques physiques sont imprégnés d'une force élémentaire, qui inflige 4 dégats de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>.",
       "prix": "🔷 <strong>Prix:</strong> ?",
-      "poids": "⚖️ <strong>Poids:</strong> 1"
-    },
-    {
-      "nom": "Viande de monstre",
-      "numero": 42,
-      "image": "https://i.ibb.co/bgD4LzVC/Viande-Monstre.png",
-      "description": "<i>Une tranche de chair de monstre, sombre et fumante, qui rassasie l’aventurier affamé.</i>",
-      "tags": [
-        "Nourriture"
-      ],
-      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore (Endurance) points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.",
-      "prix": "🔷 <strong>Prix:</strong> 10",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     }
   ],

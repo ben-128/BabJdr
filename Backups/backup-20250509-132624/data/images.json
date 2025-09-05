@@ -60,7 +60,7 @@
     "objet:Baguette de boule de feu": "https://i.ibb.co/JwXs3k2V/Baguette-Feu.png",
     "objet:Feuilleclaire": "https://i.ibb.co/bMDstDVV/Herb1.png",
     "objet:Nocteline": "https://i.ibb.co/7JpQ7Kr7/Herb2.png",
-    "objet:Nouvel Objet": "https://i.ibb.co/bgD4LzVC/Viande-Monstre.png",
+    "objet:Nouvel Objet": "https://i.ibb.co/ksxCppN8/Collier-Terrestre.png",
     "objet:Baguette de sommeil": "https://i.ibb.co/bMXNS4gy/Baguette-Nuit.png",
     "monster:Araignée Géante": "https://i.ibb.co/b0XHjQJ/Monstre-For-t-Araign-e.png",
     "monster:Crabe des Bois": "https://i.ibb.co/7dY3GgJS/Monstre-For-t-Crab.png",
@@ -104,12 +104,11 @@
     "objet:Gants patte d'ours": "https://i.ibb.co/KzrZRGcd/Gants-Patte-Ours.png",
     "objet:Bouclier de la forêt": "https://i.ibb.co/Zpkw8qVL/Bouclier-Foret.png",
     "objet:Couronne d'épines": "https://i.ibb.co/d09YYyy8/Couronne-Epines.png",
-    "objet:Collier terrestre": "https://i.ibb.co/ksxCppN8/Collier-Terrestre.png",
-    "objet:Viande de monstre": "https://i.ibb.co/bgD4LzVC/Viande-Monstre.png"
+    "objet:Collier terrestre": "https://i.ibb.co/ksxCppN8/Collier-Terrestre.png"
   },
   "meta": {
-    "total_images": 106,
-    "exported_date": "2025-09-05",
+    "total_images": 105,
+    "exported_date": "2025-09-04",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
 }

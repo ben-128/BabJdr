@@ -379,7 +379,7 @@
       "tags": [
         "Consommable"
       ],
-      "effet": "<strong>Effet:</strong> Augmente les dégats de la prochaine attaque physique de 3 (Critique : 5).\n  <br><strong>Charges:</strong> 3.",
+      "effet": "<strong>Effet:</strong> Augmente les dégats de la prochaine attaque physique de 3.\n  <br><strong>Charges:</strong> 3.",
       "prix": "🔷 <strong>Prix:</strong> 20",
       "poids": ""
     },
@@ -391,7 +391,7 @@
       "tags": [
         "Consommable"
       ],
-      "effet": "<strong>Effet:</strong> Recharge un (Critique : deux) effort utilisable par le héros.<br><strong>Charges:</strong> 3.",
+      "effet": "<strong>Effet:</strong> Recharge un effort utilisable par le héros.<br><strong>Charges:</strong> 3.",
       "prix": "🔷 <strong>Prix:</strong> 50",
       "poids": ""
     },

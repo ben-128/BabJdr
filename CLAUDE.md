@@ -51,8 +51,6 @@ menu.bat            # Interactive menu for all operations (RECOMMENDED)
 - Layout is responsive and readable on small screens
 - All content remains accessible without dev mode
 
-**✅ MOBILE FIX APPLIED (2025-08-28)**: Fixed critical mobile viewport issue where content was oversized and forced horizontal scrolling. Corrected responsive CSS in `layout.css` by resetting margin-left/margin-right to 0 on mobile breakpoints (≤980px, ≤768px, ≤480px).
-
 ### Windows Batch Alternatives
 - `dev-server.bat` - Development mode with dev tools and live reload
 - `build.bat` - Build standalone version with Windows-specific output handling
@@ -63,24 +61,26 @@ menu.bat            # Interactive menu for all operations (RECOMMENDED)
 - **Build script**: `scripts/build-simple.js` (Node.js-based build system)
 - **Dual-mode architecture**: Development (modular files) vs Production (embedded data)
 - **Data embedding**: JSON files become `window.SORTS`, `window.CLASSES`, etc.
-- **Complete build**: Combines 15+ JS modules, 5 CSS files, and 8+ JSON data files
+- **Complete build**: Combines 20+ JS modules, 5 CSS files, and 27+ JSON data files
 - **Size**: ~500-800KB complete application with all content and assets
 
 ## Architecture Overview
 
-### Refactored Modular Structure
-This codebase has been completely refactored from a 7,469-line monolith into a professional, modular architecture. The new structure reduces code duplication by 52% while maintaining full functionality.
+### Complete Refactored Modular Structure
+This codebase has been completely refactored from a 7,469-line monolith into a professional, modular architecture. The new structure reduces code duplication by 52% while maintaining full functionality and adding advanced features.
 
 ### Core Application Structure
 - **Namespace**: `window.JdrApp` - main application object
-- **Data Models**: SORTS, CLASSES, DONS managed by ContentFactory
+- **Data Models**: Complete RPG system managed by ContentFactory (200+ content items)
 - **Event System**: Decentralized EventBus for module communication
 - **Pattern-Based Architecture**: Factory, Builder, Observer patterns
 - **Dual Mode Support**: Development (modular files) vs Production (standalone HTML)
+- **UnifiedEditor System**: Advanced context-aware content editing
 
 ### New Architecture Components
 
 #### Configuration Layer (`js/config/`)
+- `constants.js` - **CENTRALIZED CONSTANTS** (UI_CONSTANTS, ELEMENT_COLORS, etc.)
 - `contentTypes.js` - **CENTRAL CONFIGURATION** for all content types
 - Defines fields, templates, icons, default values for spells, dons, classes, etc.
 - **CRITICAL**: All new content types MUST be defined here first
@@ -88,6 +88,7 @@ This codebase has been completely refactored from a 7,469-line monolith into a p
 #### Core Foundation (`js/core/`)
 - `EventBus.js` - Singleton event system for decoupled communication
 - `BaseEntity.js` - Generic entity class for all data types (spells, dons, etc.)
+- `UnifiedEditor.js` - **ADVANCED EDITING SYSTEM** with context-aware content editing
 - Eliminates duplicate CRUD operations across different content types
 
 #### Factory Layer (`js/factories/`)
@@ -99,6 +100,11 @@ This codebase has been completely refactored from a 7,469-line monolith into a p
 - `CardBuilder.js` - Generates cards for ANY content type using templates
 - `PageBuilder.js` - Generates pages for ANY content type using templates  
 - **NO MORE** separate methods for spells, dons, classes - one builder handles all
+
+#### Advanced Features (`js/features/`)
+- `SpellFilter.js` - Advanced filtering system with AND/OR logic
+- `TablesTresorsManager.js` - **TREASURE TABLE SYSTEM** with fourchettes management
+- `DynamicCentering.js` - UI centering features
 
 ### Refactored Main Modules
 
@@ -118,10 +124,11 @@ This codebase has been completely refactored from a 7,469-line monolith into a p
 - Event-driven rendering via EventBus
 - Static page content management
 
-#### Editor (`js/editor.js`) - 584 lines (was 1370) **-57% reduction**  
+#### Editor (`js/editor.js`) - 665 lines (was 1370) **-51% reduction**  
 - **UNIFIED**: Single editing system for all content types via ContentFactory
-- **EVENT-DRIVEN**: Uses EventBus for decoupled communication
-- Dev mode toggle functionality
+- **ADVANCED FEATURES**: Image enlargement, dev toolbox, subclass management
+- **EVENT-DRIVEN**: Uses EventBus and UnifiedEditor for decoupled communication
+- Dev mode toggle functionality with comprehensive button management
 - Real-time content modification with automatic persistence
 
 #### UI (`js/ui.js`) - 478 lines (was 467) **Enhanced functionality**
@@ -134,20 +141,31 @@ This codebase has been completely refactored from a 7,469-line monolith into a p
 - Export functionality (JSON, HTML)  
 - Data persistence across sessions
 
-### Data Structure and Content Types
+### Data Structure and Content Types (27 JSON Files)
 ```
 data/
-├── sorts.json              # Spell categories with 60+ spells
-├── classes.json            # 8+ character classes and subclasses
-├── dons.json              # Feat categories and abilities
-├── objets.json            # Equipment and items with filtering
-├── monstres.json          # Creature bestiary with full RPG stats  
-├── images.json            # Image URL mappings (42+ images)
-├── static-pages-config.json # Static page configurations
-├── toc-structure.json     # Navigation structure
-├── elements.json          # Elemental types and relationships
-├── stats.json, states.json # Game mechanics data
-└── creation.json          # Character creation rules
+├── sorts.json              # Spell system (11 spells, 3 categories)
+├── classes.json            # Character classes (5 main + 10 subclasses)
+├── dons.json              # Feat system (24+ feats, 5 categories)
+├── objets.json            # Equipment system (41+ items with tags)
+├── monstres.json          # Creature bestiary (10 monsters with full stats)
+├── tables-tresors.json    # Treasure table system with fourchettes
+├── images.json            # Asset management (105+ images)
+├── audio.json, audio-config.json # Music and ambient audio system
+├── static-pages-config.json # Static page definitions (13 pages)
+├── toc-structure.json     # Navigation structure (5 main sections)
+├── elements.json          # Elemental system (8 elements, 4 opposing pairs)
+├── stats.json, etats.json # Character stats and status effects
+├── creation.json          # Character creation rules
+├── combat.json, competences-tests.json # Combat and skill systems
+├── dieux.json, histoire.json, geographie.json # World building
+├── gestion-des-ressources.json # Resource management
+├── collections.json       # Character creation collections
+├── traumas.json           # Trauma system
+├── campagne.json          # Campaign management tools
+├── custom-page-descriptions.json # Custom page content
+├── monstres-page-desc.json, tables-tresors-page-desc.json # Page descriptions
+└── Musiques/ (42+ audio files) # Ambient music by category
 ```
 
 **Content Type System**: All content types are defined in `js/config/contentTypes.js` with:
@@ -156,26 +174,30 @@ data/
 - Icons and default values
 - Edit mappings for UI elements
 
-### Asset Organization (42+ Images)
+### Asset Organization (105+ Images)
 ```
 data/images/
-├── Classes/               # Character portraits (22 images)  
-│   ├── Aventurier.png, AventurierF.png
-│   ├── Mage.png, MageF.png, Guerrier.png, etc.
-│   └── [Male/Female variants for each class]
-├── Sorts/                 # Spell icons (10 images)
-│   ├── BouleDeFeu.png, Eclair.png, Protection.png
-│   └── [Elemental and utility spell icons]
-├── Equipements/           # Equipment imagery
-│   ├── Armes/            # Weapons (6+ items)
-│   ├── Armures/          # Armor (6+ items including robes)
-│   ├── Bouclier/         # Shields  
-│   └── Consumables/      # Consumable items
-│       ├── Herbs/        # Herbal items (8 images)
+├── Classes/               # Character portraits (22+ images)  
+│   ├── All 5 main classes with male/female variants
+│   ├── All 10 subclasses with specialized portraits
+│   └── Racial variants (Elfe, Nain, Fée, Lutin, etc.)
+├── Sorts/                 # Spell icons (13+ images)
+│   ├── Offensive: BouleDeFeu.png, Eclair.png, VoleePierre.png
+│   ├── Defensive: Protection.png, SoinMineur.png
+│   ├── Divine: ChatimentSacré.png, ArmeLum.png, Revelation series
+│   └── Utility: Acceleration.png, Sleep.png, AccrocheTerre.png
+├── Equipements/           # Equipment imagery (40+ images)
+│   ├── Armes/            # Weapons (6 images: swords, bow, dagger, staffs)
+│   ├── Armures/          # Armor (6 images: leather, heavy armor, robes)
+│   ├── Bouclier/         # Shields (1 image)
+│   └── Consumables/      # Consumable items (27+ images)
+│       ├── Herbs/        # Herbal remedies (8 images)
 │       ├── Pots/         # Potions (2 images)
-│       └── SpellCasting/ # Magical implements (8 wands)
-└── Monstres/             # Monster imagery
-    └── foret/            # Forest creatures (10+ monsters)
+│       └── SpellCasting/ # Magical wands (8+ elemental variants)
+├── Monstres/             # Monster imagery (10+ images)
+│   └── foret/            # Forest creatures with boss variants
+└── Musiques/             # Audio assets (42+ MP3 files)
+    ├── Auberge/, Creation/, Foret/, Mine/, Voyage/, Autre/
 ```
 
 **Image Management System**:
@@ -186,7 +208,7 @@ data/images/
 
 ### Styling
 Modular CSS architecture:
-- `css/theme.css` - Variables and theming
+- `css/theme.css` - Variables and theming (medieval-fantasy design)
 - `css/utilities.css` - Utility classes
 - `css/components.css` - UI components
 - `css/layout.css` - Layout and responsive design
@@ -268,7 +290,7 @@ getEquipment() {
 - ✅ **CardBuilder** automatically generates cards for your new type
 - ✅ **PageBuilder** automatically generates pages for your new type  
 - ✅ **UI handlers** automatically handle add/delete/move operations
-- ✅ **Editor** automatically handles editing for your new type
+- ✅ **UnifiedEditor** automatically handles editing for your new type
 - ✅ **Search** automatically includes your new content type
 
 #### **❌ NEVER DO THIS (Old Anti-Pattern)**
@@ -295,28 +317,31 @@ ContentFactory.deleteItem('equipment', categoryName, itemName)        // ✅ RIG
 - **Before writing similar methods**: Check if an existing generic method can be extended
 - **Before duplicating logic**: Use EventBus to communicate between modules
 
-### Critical Module Loading Order
+### Critical Module Loading Order (Verified Current Order)
 Modules must be loaded in exact dependency order:
 ```javascript
-1. js/core.js                    // JdrApp namespace - MUST BE FIRST
-2. js/config/constants.js        // Application constants
-3. js/config/contentTypes.js     // Configuration layer
-4. js/core/EventBus.js          // Event system foundation  
-5. js/core/BaseEntity.js        // Entity base class
+1. js/config/constants.js        // Application constants - LOADED FIRST
+2. js/config/contentTypes.js     // Configuration layer
+3. js/core/EventBus.js          // Event system foundation  
+4. js/core/BaseEntity.js        // Entity base class
+5. js/core/UnifiedEditor.js     // Advanced unified editing system
 6. js/factories/ContentFactory.js // Factory pattern implementation
 7. js/builders/CardBuilder.js    // Card template generation
 8. js/builders/PageBuilder.js    // Page template generation
-9. js/utils.js                  // DOM and utility functions
-10. js/modules/images.js         // Asset management
-11. js/storage.js               // Persistence layer
-12. js/router.js                // Navigation system
-13. js/renderer.js              // Content rendering 
-14. js/core/UnifiedEditor.js    // Editing system core
-15. js/editor.js                // Editor UI and interactions
-16. js/features/SpellFilter.js  // Specialized features
-17. js/ui.js                    // UI interactions - MUST BE LAST
+9. js/core.js                   // JdrApp namespace and initialization
+10. js/utils.js                 // DOM and utility functions
+11. js/modules/images.js        // Asset management
+12. js/modules/audio.js         // Audio system
+13. js/storage.js               // Persistence layer
+14. js/router.js                // Navigation system
+15. js/renderer.js              // Content rendering 
+16. js/editor.js                // Editor UI and interactions
+17. js/features/SpellFilter.js  // Spell filtering system
+18. js/features/TablesTresorsManager.js // Treasure table management
+19. js/libs/jspdf-loader.js     // PDF generation support
+20. js/ui.js                    // UI interactions - MUST BE LAST
 ```
-**Violation of this order will cause runtime errors and module failures.**
+**⚠️ This exact order is enforced in index.html and build-simple.js**
 
 ### Data Loading Strategy
 - Development: Fetches individual JSON files
@@ -331,8 +356,9 @@ Modules must be loaded in exact dependency order:
 
 ### Editor Integration
 - Dev mode toggle: `#devToggle` button
-- Inline editing: Double-click elements with `editable` class
+- Inline editing: Edit buttons with UnifiedEditor integration
 - Changes stored in `JdrApp.data.editedData` overlay system
+- Advanced features: Image enlargement, dev toolbox, subclass management
 
 ### **🔧 Development Best Practices**
 
@@ -341,6 +367,8 @@ Modules must be loaded in exact dependency order:
 2. **Use EventBus**: Communicate between modules via events, not direct calls
 3. **Extend Builders**: If you need custom rendering, extend CardBuilder/PageBuilder
 4. **Generic Methods**: Always prefer `ContentFactory.operation()` over type-specific methods
+5. **UnifiedEditor Integration**: Use UnifiedEditor for all content editing workflows
+6. **Test Standalone Build**: Ensure mobile/tablet compatibility in build/JdrBab.html
 
 #### **Code Quality Rules**
 - ❌ **NEVER** create methods like `addSpell()`, `addDon()`, `addEquipment()`  
@@ -390,28 +418,37 @@ console.log(html);
    - Bad: Direct manipulation of `window.SORTS`
    - Good: `ContentFactory.updateItem(type, category, name, property, value)`
 
-### **🧹 Code Quality & Production Readiness (Updated 2025-08-28)**
+### **🔧 Code Quality & Production Readiness (Updated 2025-09-05)**
 
-**✅ COMPREHENSIVE CLEANUP COMPLETED:**
+**✅ COMPREHENSIVE SYSTEM COMPLETED:**
 
-1. **Debug Code Removal**: Removed 150+ console.log/warn/debug statements across all active files while preserving critical console.error statements for actual error conditions.
+1. **Advanced Editing System**: Implemented UnifiedEditor with:
+   - Context-aware content editing for all content types
+   - Session-based editing with proper content restoration
+   - Universal content restoration preventing HTML tag visibility
+   - Smart edit button management and dev mode integration
 
-2. **Constants Extraction**: Created `js/config/constants.js` with centralized configuration:
-   - UI layout dimensions and breakpoints
-   - Timing constants (timeouts, delays)
-   - Element colors and styling constants  
-   - Storage keys and default values
-   - Eliminates magic numbers throughout the codebase
+2. **Enhanced Architecture**: 
+   - **27 JSON data files** with complete RPG system (200+ content items)
+   - **105+ multimedia assets** with dual-mode URL system
+   - **Advanced treasure table system** with fourchettes management
+   - **Complete audio system** with ambient music playlists
+   - **Campaign management tools** with hierarchical content structure
 
-3. **File Cleanup**: Removed unused backup files (`CardBuilder_backup.js`) and organized project structure.
+3. **Production Features**:
+   - **Mobile-first standalone build** (build/JdrBab.html) for tablets/mobile
+   - **Constants system** with centralized configuration (UI_CONSTANTS, etc.)
+   - **Silent error handling** for production deployment
+   - **Advanced filtering systems** (AND/OR logic for equipment/spells)
+   - **Dev toolbox** with treasure table HTML link generation
 
-4. **Production Optimizations**:
-   - Silent error handling for non-critical operations
-   - Reduced build output noise and debug overhead
-   - Improved maintainability with centralized constants
-   - Enhanced code readability by removing debug clutter
+4. **Developer Experience**:
+   - **Interactive Windows batch menu** (menu.bat) for all operations
+   - **Comprehensive README system** for js/, data/, css/, scripts/ directories
+   - **Image enlargement system** with mobile touch support
+   - **Real-time content editing** with automatic persistence
 
-**Build Integration**: Constants are now loaded first in the module dependency chain and included in standalone builds.
+**Current Status**: Complete tabletop RPG system ready for production deployment.
 
 ### **📝 Content Format Standards**
 
@@ -508,13 +545,13 @@ The codebase includes detailed README files in key directories to help analyze s
 **Read**: [`js/README.md`](js/README.md)
 - **When**: Understanding module structure, adding new features, debugging architecture
 - **Contains**: Module dependency order, architecture patterns, code quality rules
-- **Key Info**: Factory/Builder patterns, EventBus communication, configuration-driven development
+- **Key Info**: Factory/Builder patterns, EventBus communication, UnifiedEditor system, configuration-driven development
 
 #### **Data Structure & Content Management**
 **Read**: [`data/README.md`](data/README.md)  
 - **When**: Working with JSON data, adding content types, understanding content format
-- **Contains**: All data files explained, image management system, content type schemas
-- **Key Info**: 60+ spells, 42+ images, universal HTML format rules, asset organization
+- **Contains**: All 27 data files explained, 105+ images, content type schemas
+- **Key Info**: Complete RPG system (11 spells, 5 classes, 24+ feats, 41+ items, 10 monsters), treasure tables, audio system
 
 #### **Styling & Visual Design**
 **Read**: [`css/README.md`](css/README.md)
@@ -526,39 +563,44 @@ The codebase includes detailed README files in key directories to help analyze s
 **Read**: [`scripts/README.md`](scripts/README.md)
 - **When**: Build issues, development server problems, understanding deployment process
 - **Contains**: Build pipeline, Windows batch tools, import/export system
-- **Key Info**: Module loading order, data embedding process, development workflow
+- **Key Info**: Module loading order, data embedding process, standalone mobile build
 
 ### 🎯 Common Task Scenarios
 
 #### **"I need to add a new content type (equipment, NPCs, etc.)"**
 1. **Start with**: [`js/README.md`](js/README.md) → "Configuration Over Code" section
 2. **Then read**: [`data/README.md`](data/README.md) → "Content Type System" section
-3. **Key process**: Define in `contentTypes.js` → System handles the rest automatically
+3. **Key process**: Define in `contentTypes.js` → UnifiedEditor + builders handle automatically
 
 #### **"I'm getting build errors or module loading issues"**
 1. **Start with**: [`scripts/README.md`](scripts/README.md) → "Build System Architecture"
-2. **Then check**: [`js/README.md`](js/README.md) → "Critical Loading Order" section
-3. **Debug approach**: Verify module dependency order, check for syntax errors
+2. **Then check**: [`js/README.md`](js/README.md) → "Critical Loading Order" section (updated 20 modules)
+3. **Debug approach**: Verify constants.js loads first, check UnifiedEditor integration
 
 #### **"I need to understand the data format or add new content"**
 1. **Start with**: [`data/README.md`](data/README.md) → "Universal Content Format" section
 2. **Key rule**: All content must be HTML strings, never arrays or complex objects
-3. **Reference**: See content type examples and field schemas
+3. **Reference**: 27 JSON files with complete RPG system (200+ items total)
 
 #### **"I want to modify the visual design or add responsive features"**
 1. **Start with**: [`css/README.md`](css/README.md) → "Design System" section
-2. **Key info**: CSS custom properties, utility classes, responsive breakpoints
-3. **Approach**: Use existing components and utilities before creating new CSS
+2. **Key info**: Medieval-fantasy theme, mobile-first responsive design
+3. **Approach**: Test in standalone build (mobile users' primary access method)
 
 #### **"I need to understand how editing and persistence works"**
-1. **Start with**: [`js/README.md`](js/README.md) → "Event-Driven Communication" section
-2. **Then read**: [`data/README.md`](data/README.md) → "Data Validation Rules" section
-3. **Key concepts**: UnifiedEditor system, EventBus, localStorage persistence
+1. **Start with**: [`js/README.md`](js/README.md) → "UnifiedEditor System" section
+2. **Key concepts**: Context-aware editing, session-based editing, universal content restoration
+3. **Integration**: EventBus communication, localStorage persistence, dev mode management
 
 #### **"I'm working on mobile compatibility or responsive design"**
 1. **Primary**: [`css/README.md`](css/README.md) → "Responsive Design System" section
-2. **Secondary**: [`scripts/README.md`](scripts/README.md) → "Mobile Compatible" build process
-3. **Remember**: Mobile users only access the standalone build, not dev mode
+2. **Secondary**: [`scripts/README.md`](scripts/README.md) → "Mobile-first standalone build"
+3. **Critical**: Mobile users ONLY access build/JdrBab.html (not dev mode)
+
+#### **"I want to add treasure tables, audio, or campaign features"**
+1. **Start with**: [`data/README.md`](data/README.md) → "Advanced Features" section
+2. **Reference**: TablesTresorsManager.js, audio system, campaign tools
+3. **Integration**: Dev toolbox provides HTML link generation for treasure tables
 
 ### 📋 Quick Reference Cheat Sheet
 

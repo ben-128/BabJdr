@@ -60,24 +60,6 @@
             "numero": 17,
             "nom": "Baguette de d'accélération"
           }
-        },
-        {
-          "min": 20,
-          "max": 24,
-          "objet": {
-            "type": "reference",
-            "numero": 27,
-            "nom": "Dent de Grouink"
-          }
-        },
-        {
-          "min": 25,
-          "max": 29,
-          "objet": {
-            "type": "reference",
-            "numero": 23,
-            "nom": "Flèche aiguisée"
-          }
         }
       ]
     },
