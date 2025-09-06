@@ -310,6 +310,30 @@
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> La cible lévite pendant 5 tours. Elle ignore les dégâts/ralentissements venant du sol, ainsi que l'état <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">A terre</span>.",
         "effetCritique": "<strong>Coup Critique: </strong> La cible a également sa vitesse de déplacement augmentée de 3m."
+      },
+      {
+        "nom": "Imprégnation élémentaire feu terre nuit",
+        "element": "Feu",
+        "description": "Lance une boule de Feu sur un adversaire.",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 3",
+        "portee": "🎯 <strong>Portée:</strong> 3m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 14",
+        "resistance": "<strong>Sans effet si:</strong> -",
+        "effetNormal": "<strong>Effet:</strong> Le lanceur choisi un élément au choix entre <span style=\"color: #ff6b35; font-weight: bold;\">Feu</span>, <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>, et <span style=\"color: #1a1a1a; font-weight: bold;\">Nuit</span>. \n<br>La cible voit son arme imprégnée de cet élement, qui infligera 4 points de degats de cet élément à chaque coup. <br>Dure 5 tours. Non cumulable.\n<br><br> Chaque 5 points d'Intelligence, les dégats élémentaires sont augmentés de 1.",
+        "effetCritique": "<strong>Coup Critique: </strong> Le coup en mana est réduit de moitié."
+      },
+      {
+        "nom": "Imprégnation élémentaire eau air lumière",
+        "element": "Eau",
+        "description": "Lance une boule de Feu sur un adversaire.",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 3",
+        "portee": "🎯 <strong>Portée:</strong> 3m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 14",
+        "resistance": "<strong>Sans effet si:</strong> -",
+        "effetNormal": "<strong>Effet:</strong> Le lanceur choisi un élément au choix entre <span style=\"color: #4682b4; font-weight: bold;\">Eau</span>, <span style=\"color: #22c55e; font-weight: bold;\">Air</span>, et <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span>.\n<br>La cible voit son arme imprégnée de cet élement, qui infligera 4 points de degats de cet élément à chaque coup. <br>Dure 5 tours. Non cumulable.\n<br><br> Chaque 5 points d'Intelligence, les dégats élémentaires sont augmentés de 1.",
+        "effetCritique": "<strong>Coup Critique: </strong> Le coup en mana est réduit de moitié."
       }
     ]
   }
