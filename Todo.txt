@@ -1,25 +1,24 @@
 
 sort de lutin :
 
-2 : levitation
-3 :Buff arme élément 1
-Buff arme élément 2
+4:
+silence
 
-4 :
-buff dégats physiques
-5:
+5 :
 buff degats magiques
 
 6:
-confus
-
+buff dégats physiques
 
 7:
+confus
+
+8:
 buff armure élément 1
 buff armure élément 2
 
-8:
-silence
+8: petrification
+
 9 :
 buff de groupe speed, debuff de groupe speed
 10:
@@ -28,4 +27,5 @@ sleep de zone
 invisible
 mini TP
 Vol
+Changement de taille
 un buff de stats

@@ -291,7 +291,7 @@
         "description": "Un voile d'ombre caresse la cible, l'enveloppant dans un sommeil surnaturel.",
         "categorie": "Sorts d'Enchanteur",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 2",
-        "portee": "🎯 <strong>Portée:</strong> 3m",
+        "portee": "🎯 <strong>Portée:</strong> 6m",
         "coutMana": "🔵 <strong>Coût mana:</strong> 8",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
@@ -321,7 +321,7 @@
         "coutMana": "🔵 <strong>Coût mana:</strong> 14",
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Le lanceur choisi un élément au choix entre <span style=\"color: #ff6b35; font-weight: bold;\">Feu</span>, <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>, et <span style=\"color: #1a1a1a; font-weight: bold;\">Nuit</span>. \n<br>La cible voit son arme imprégnée de cet élement, qui infligera 4 points de degats de cet élément à chaque coup. <br>Dure 5 tours. Non cumulable.\n<br><br> Chaque 5 points d'Intelligence, les dégats élémentaires sont augmentés de 1.",
-        "effetCritique": "<strong>Coup Critique:&nbsp;</strong>&nbsp;Le coup en mana est réduit de moitié."
+        "effetCritique": "<strong>Coup Critique: </strong> Le coup en mana est réduit de moitié."
       },
       {
         "nom": "Imprégnation élémentaire eau air lumière",
@@ -368,13 +368,13 @@
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 14",
         "resistance": "<strong>Sans effet si:</strong> -",
-        "effetNormal": "Inutilisable Hors combat.           \n<br> <strong>Effet:</strong> Augmente la force de la cible de 5. <br>Dure jusqu'au retour hors combat.<br><br> Tous les 5 points d'intelligence, augmente la force prodiguée de 1.",
-        "effetCritique": "<strong>Coup Critique: </strong> La force prodiguée passe à 8."
+        "effetNormal": "Inutilisable Hors combat.           \n<br> <strong>Effet:</strong> Augmente les dégats physiques effectués par les sorts de la cible de 5. <br>Dure jusqu'au retour hors combat.<br><br> Tous les 5 points d'intelligence, augmente les dégats de 1.",
+        "effetCritique": "<strong>Coup Critique: </strong> Augmente les dégats de 8."
       },
       {
         "nom": "Confusion",
         "element": "Maléfique",
-        "description": "Un voile d’illusions trouble l’esprit de la cible, la rendant incapable de distinguer alliés et ennemis.",
+        "description": "Lance une boule de Feu sur un adversaire.",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 7",
         "portee": "🎯 <strong>Portée:</strong> 12m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
@@ -386,26 +386,26 @@
       {
         "nom": "Armure élémentaire Feu Terre Nuit",
         "element": "Feu",
-        "description": "Un voile protecteur d’énergie enveloppe la cible, renforçant son armure élémentaire.",
+        "description": "Lance une boule de Feu sur un adversaire.",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 8",
-        "portee": "🎯 <strong>Portée:</strong> 3m",
+        "portee": "🎯 <strong>Portée:</strong> 20m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 14",
-        "resistance": "<strong>Sans effet si:</strong> -",
-        "effetNormal": "<strong>Effet:</strong> Le lanceur choisi un élément au choix entre <span style=\"color: #ff6b35; font-weight: bold;\">Feu</span>, <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>, et <span style=\"color: #1a1a1a; font-weight: bold;\">Nuit</span>. \n<br>La cible voit son armure de cet élement, augmentant l'armure élémentaire de cet élément de 5. <br>Dure 5 tours. Non cumulable.\n<br><br> Chaque 5 points d'Intelligence, les dégats élémentaires sont augmentés de 1.",
-        "effetCritique": "<strong>Coup Critique:&nbsp;</strong>&nbsp;Le coup en mana est réduit de moitié."
+        "coutMana": "🔵 <strong>Coût mana:</strong> 3",
+        "resistance": "<strong>Sans effet si:</strong> Esquive.",
+        "effetNormal": "<strong>Effet:</strong> Inflige 5 dégats de <span style='color: #e25822; font-weight: bold;'>Feu</span> à la cible.<br>&nbsp;Tous les 5 points d'intelligence, augmente les dégats de 1.",
+        "effetCritique": "<strong>Coup Critique:&nbsp;</strong>&nbsp;Double les dégâts et enflamme la cible."
       },
       {
         "nom": "Armure élémentaire Eau Air Lumière",
         "element": "Eau",
-        "description": "Un voile protecteur d’énergie enveloppe la cible, renforçant son armure élémentaire.",
+        "description": "Lance une boule de Feu sur un adversaire.",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 8",
-        "portee": "🎯 <strong>Portée:</strong> 3m",
+        "portee": "🎯 <strong>Portée:</strong> 20m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 14",
-        "resistance": "<strong>Sans effet si:</strong> -",
-        "effetNormal": "<strong>Effet:</strong> Le lanceur choisi un élément au choix entre <span style=\"color: #4682b4; font-weight: bold;\">Eau</span>, <span style=\"color: #22c55e; font-weight: bold;\">Air</span>, et <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span>.\n<br>La cible voit son armure de cet élement, augmentant l'armure élémentaire de cet élément de 5. <br>Dure 5 tours. Non cumulable.\n<br><br> Chaque 5 points d'Intelligence, les dégats élémentaires sont augmentés de 1.",
-        "effetCritique": "<strong>Coup Critique:&nbsp;</strong>&nbsp;Le coup en mana est réduit de moitié."
+        "coutMana": "🔵 <strong>Coût mana:</strong> 3",
+        "resistance": "<strong>Sans effet si:</strong> Esquive.",
+        "effetNormal": "<strong>Effet:</strong> Inflige 5 dégats de <span style='color: #e25822; font-weight: bold;'>Feu</span> à la cible.<br>&nbsp;Tous les 5 points d'intelligence, augmente les dégats de 1.",
+        "effetCritique": "<strong>Coup Critique:&nbsp;</strong>&nbsp;Double les dégâts et enflamme la cible."
       }
     ]
   }

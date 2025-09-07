@@ -123,16 +123,10 @@
     "sort:Sorts d'Enchanteur:Nouveau Sort": "https://i.ibb.co/FLbCrnKQ/L-vitation.png",
     "sort:Sorts d'Enchanteur:Lévitation": "https://i.ibb.co/FLbCrnKQ/L-vitation.png",
     "sort:Sorts d'Enchanteur:Imprégnation élémentaire feu terre nuit": "https://i.ibb.co/RkrW8CRC/Enchant-Element.png",
-    "sort:Sorts d'Enchanteur:Imprégnation élémentaire eau air lumière": "https://i.ibb.co/WNWfc1jC/Enchant-Element2.png",
-    "sort:Sorts d'Enchanteur:Silence": "https://i.ibb.co/7JRKfdMw/Silence.png",
-    "sort:Sorts d'Enchanteur:Puissance magique": "https://i.ibb.co/FbtF1PjX/Puissance-Sort.png",
-    "sort:Sorts d'Enchanteur:Puissance physique": "https://i.ibb.co/VckPSx1C/Puissance-Physique.png",
-    "sort:Sorts d'Enchanteur:Confusion": "https://i.ibb.co/vCwsVnR5/Confusion.png",
-    "sort:Sorts d'Enchanteur:Armure élémentaire Feu Terre Nuit": "https://i.ibb.co/SH5jcyv/Armure-El-mentaire1.png",
-    "sort:Sorts d'Enchanteur:Armure élémentaire Eau Air Lumière": "https://i.ibb.co/jP9RKzdq/Armure-El-mentaire2.png"
+    "sort:Sorts d'Enchanteur:Imprégnation élémentaire eau air lumière": "https://i.ibb.co/WNWfc1jC/Enchant-Element2.png"
   },
   "meta": {
-    "total_images": 130,
+    "total_images": 124,
     "exported_date": "2025-09-07",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
