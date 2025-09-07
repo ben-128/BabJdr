@@ -26,7 +26,7 @@
       ],
       "effet": "<span style=\"font-weight: 700; font-family: \" source=\"\" serif=\"\" pro\",=\"\" serif;=\"\" color:=\"\" rgb(74,=\"\" 44,=\"\" 23);=\"\" text-shadow:=\"\" rgba(0,=\"\" 0,=\"\" 0.05)=\"\" 0px=\"\" 1px=\"\" 2px;\"=\"\">Dégâts: </span> Inflige (2  + Force) points de dégats physiques.",
       "prix": "🔷 <strong>Prix:</strong> 20",
-      "poids": ""
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
       "nom": "Dague en fer",
@@ -40,7 +40,7 @@
       ],
       "effet": "<strong>Dégâts: </strong> Inflige (1  + Force) points de dégats physiques.",
       "prix": "🔷 <strong>Prix:</strong> 10",
-      "poids": ""
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
       "nom": "Bâton en bois",
@@ -54,7 +54,7 @@
       ],
       "effet": "<strong>Dégâts: </strong> Inflige (2  + Force) points de dégats physiques.",
       "prix": "🔷 <strong>Prix:</strong> 5",
-      "poids": ""
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
       "nom": "Gourdin",
@@ -68,7 +68,7 @@
       ],
       "effet": "<strong>Dégâts: </strong> Inflige (1  + Force) points de dégats physiques.",
       "prix": "🔷 <strong>Prix:</strong> 10",
-      "poids": ""
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
       "nom": "Arc simple",
@@ -82,7 +82,7 @@
       ],
       "effet": "<strong>Portée: </strong> 12m.<br>\n<strong>Dégâts: </strong> Inflige (Force) points de dégats physiques.",
       "prix": "🔷 <strong>Prix:</strong> 30",
-      "poids": ""
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
       "nom": "Bouclier en bois",
@@ -94,7 +94,7 @@
       ],
       "effet": "<strong>Effet:</strong> Augmente l'armure physique de 2.",
       "prix": "🔷 <strong>Prix:</strong> 15",
-      "poids": ""
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
       "nom": "Robe simple",
@@ -107,7 +107,7 @@
       ],
       "effet": "<strong>Effet:</strong> Augmente la Volonté de 1.",
       "prix": "🔷 <strong>Prix:</strong> 20",
-      "poids": ""
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
       "nom": "Armure de cuir",
@@ -120,7 +120,7 @@
       ],
       "effet": "<strong>Effet:</strong> Augmente l'armure physique de 1.",
       "prix": "🔷 <strong>Prix:</strong> 30",
-      "poids": ""
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
       "nom": "Armure en maille",
@@ -245,9 +245,9 @@
       "tags": [
         "Nourriture"
       ],
-      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore (Endurance) points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.",
+      "effet": "Inutilisable en combat. Maximum deux nourritures consommées par jour.\n<br><br><strong>Effet:</strong> Restore (Endurance) points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.",
       "prix": "🔷 <strong>Prix:</strong> 5",
-      "poids": ""
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
       "nom": "Ration copieuse de nourriture",
@@ -257,9 +257,9 @@
       "tags": [
         "Nourriture"
       ],
-      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore (Endurance) points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.\n<br><b>Charges :</b> 3",
+      "effet": "Inutilisable en combat. Maximum deux nourritures consommées par jour.\n<br>\n<br><strong>Effet:</strong> Restore (Endurance) points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.\n<br><b>Charges :</b> 3",
       "prix": "🔷 <strong>Prix:</strong> 15",
-      "poids": ""
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
       "nom": "Fruits de la forêt",
@@ -269,9 +269,9 @@
       "tags": [
         "Nourriture"
       ],
-      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore (Endurance) points de vie. <br>Couplé à un sommeil, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>. <br>De plus, lorsque consommé, le mangeur ne neccessite plus que 4 heures de sommeil ce jour-ci.\n<br><br><b>Charges :</b> 3",
+      "effet": "Inutilisable en combat. Maximum deux nourritures consommées par jour.\n<br>\n<br><strong>Effet:</strong> Restore (Endurance) points de vie. <br>Couplé à un sommeil, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>. <br>De plus, lorsque consommé, le mangeur ne neccessite plus que 4 heures de sommeil ce jour-ci.\n<br><br><b>Charges :</b> 3",
       "prix": "🔷 <strong>Prix:</strong> 20",
-      "poids": ""
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
       "nom": "Ration de survie",
@@ -281,9 +281,9 @@
       "tags": [
         "Nourriture"
       ],
-      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.",
+      "effet": "Inutilisable en combat. Maximum deux nourritures consommées par jour.\n<br>\n<br><strong>Effet:</strong> Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.",
       "prix": "",
-      "poids": ""
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
       "nom": "Flèche aiguisée",
@@ -321,7 +321,7 @@
       ],
       "effet": "Inutilisable hors combat.      \n<br><strong>Portée :</strong>   3m.\n<br><strong>Effet:</strong> Rend 5 (critique : 10) points de vie à la cible.\n<br><strong>Charges:</strong> 3.",
       "prix": "🔷 <strong>Prix:</strong> 10",
-      "poids": ""
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
       "nom": "Bracelet médicinal de la forêt",
@@ -333,7 +333,7 @@
       ],
       "effet": "<strong>Effet:</strong> Soigne son porteur du poison. Utilisable une fois par jour maximum.",
       "prix": "🔷 <strong>Prix:</strong> ?",
-      "poids": ""
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
       "nom": "Dent de Grouink",
@@ -345,7 +345,7 @@
       ],
       "effet": "<strong>Effet:</strong> Augmente la Force du porteur de 3.",
       "prix": "🔷 <strong>Prix:</strong> ?",
-      "poids": ""
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
       "nom": "Echarpe de chaman Groink",
@@ -357,7 +357,7 @@
       ],
       "effet": "<strong>Effet:</strong> Augmente de 3m la portée des sorts d'alterations magiques et d'améliorations temporaires.",
       "prix": "🔷 <strong>Prix:</strong> ?",
-      "poids": ""
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
       "nom": "Fourrure d'ours",
@@ -369,7 +369,7 @@
       ],
       "effet": "",
       "prix": "🔷 <strong>Prix:</strong> 100",
-      "poids": ""
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
       "nom": "Pierre à aiguiser",
@@ -407,7 +407,7 @@
       ],
       "effet": "<strong>Dégâts: </strong> Inflige (3  + Force) points de dégats physiques.\n<br> L'arme est imprégnée de 5 points de dégats d'élément <span style=\"color: #4682b4; font-weight: bold;\">Eau</span>.",
       "prix": "🔷 <strong>Prix:</strong> ?",
-      "poids": ""
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
       "nom": "Clairgivre",
@@ -483,7 +483,7 @@
       "tags": [
         "Accessoire"
       ],
-      "effet": "<strong>Effet:</strong> En cas de coup critique physique sur une attaque au corp à corp, l'adversaire sera mis dans l'état <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">A terre</span>.\n<br><strong>Sans effet si :</strong> Adversaire de taille Grand ou supérieur, ou adversaire volant.",
+      "effet": "<strong>Effet:</strong> En cas de coup critique physique sur une attaque au corp à corp, l'adversaire sera mis dans l'état <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">A terre</span>.\n<br><strong>Sans effet si :</strong> <br>- Adversaire de taille Grand ou supérieur <br>- Adversaire volant ou lévitant.",
       "prix": "🔷 <strong>Prix:</strong> ?",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -617,18 +617,6 @@
       ],
       "effet": "<strong>Dégats:</strong> Inflige (4 + Force) points de dégats physiques.\n<br><strong>Effet:</strong> Augmente l'intelligence de 3.",
       "prix": "🔷 <strong>Prix:</strong> ?",
-      "poids": "⚖️ <strong>Poids:</strong> 1"
-    },
-    {
-      "nom": "Rapière elfique",
-      "numero": 49,
-      "image": "https://i.ibb.co/Z1FnQ4TH/Rapi-re-Elfique.png",
-      "description": "Description de l'objet.",
-      "tags": [
-        "Nouvel objet"
-      ],
-      "effet": "<strong>Effet:</strong> Description de l'effet de l'objet.",
-      "prix": "🔷 <strong>Prix:</strong> 10",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     }
   ],
