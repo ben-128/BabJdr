@@ -29,3 +29,7 @@ mini TP
 Vol
 Changement de taille
 un buff de stats
+
+- endurance : juste PV.
+- bouffe : pv fixe
+- don gros mangeur : double pv de bouffe + nombre de fois bouffe mangeable par jour

@@ -402,8 +402,22 @@
             e.preventDefault();
             this.toggleImageEnlargement(e.target);
           });
+          
+          // Attendre que l'image lazy soit chargée pour définir le curseur
+          img.addEventListener('load', () => {
+            if (this.isImageEnlargeable(img)) {
+              img.style.cursor = 'zoom-in';
+            }
+          });
+          
+          // Si l'image est déjà chargée
+          if (img.complete && img.naturalWidth > 0) {
+            if (this.isImageEnlargeable(img)) {
+              img.style.cursor = 'zoom-in';
+            }
+          }
+          
           img.setAttribute('data-events-attached', 'true');
-          img.style.cursor = 'zoom-in';
         }
       });
     },
@@ -454,11 +468,36 @@
     },
 
     toggleImageEnlargement(img) {
+      // Vérifier si l'image est valide pour l'agrandissement
+      if (!this.isImageEnlargeable(img)) {
+        return;
+      }
+      
       if (img.classList.contains('enlarged')) {
         this.closeEnlargedImage();
       } else {
         this.showEnlargedImage(img);
       }
+    },
+
+    // Vérifier si une image peut être agrandie
+    isImageEnlargeable(img) {
+      // Ne pas agrandir les placeholders SVG
+      if (img.src && img.src.startsWith('data:image/svg+xml')) {
+        return false;
+      }
+      
+      // Ne pas agrandir si pas de source réelle
+      if (!img.src && !img.getAttribute('data-src')) {
+        return false;
+      }
+      
+      // Ne pas agrandir les images trop petites (probablement des icônes)
+      if (img.naturalWidth < 50 || img.naturalHeight < 50) {
+        return false;
+      }
+      
+      return true;
     },
 
     showEnlargedImage(img) {
@@ -484,6 +523,16 @@
       
       // Créer une copie de l'image
       const enlargedImg = img.cloneNode(true);
+      
+      // S'assurer que l'image agrandie a la bonne source (pour les images lazy-loaded)
+      if (img.hasAttribute('data-src') && !enlargedImg.src) {
+        enlargedImg.src = img.getAttribute('data-src');
+        enlargedImg.removeAttribute('data-src');
+      }
+      
+      // Supprimer les classes de lazy loading qui pourraient interférer
+      enlargedImg.classList.remove('lazy-load', 'lazy-loaded');
+      
       enlargedImg.style.cssText = `
         max-width: 90vw;
         max-height: 90vh;
@@ -495,6 +544,8 @@
         background: white;
         box-shadow: 0 20px 60px rgba(0,0,0,.8), 0 0 20px rgba(212,175,55,.3);
         cursor: zoom-out;
+        opacity: 1;
+        transition: none;
       `;
       
       modal.appendChild(enlargedImg);

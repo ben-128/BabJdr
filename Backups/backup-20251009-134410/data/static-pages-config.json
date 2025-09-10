@@ -1,0 +1,107 @@
+{
+  "pages": [
+    {
+      "id": "creation",
+      "title": "Création d'un personnage",
+      "file": "creation.json",
+      "active": true,
+      "order": 1
+    },
+    {
+      "id": "elements",
+      "title": "Elements",
+      "file": "elements.json",
+      "active": true,
+      "order": 2
+    },
+    {
+      "id": "stats",
+      "title": "Statistiques",
+      "file": "stats.json",
+      "active": true,
+      "order": 3
+    },
+    {
+      "id": "competences-tests",
+      "title": "Compétences & Tests",
+      "file": "competences-tests.json",
+      "active": true,
+      "order": 4
+    },
+    {
+      "id": "etats",
+      "title": "Etats",
+      "file": "etats.json",
+      "active": true,
+      "order": 5
+    },
+    {
+      "id": "histoire",
+      "title": "Histoire",
+      "file": "histoire.json",
+      "active": true,
+      "order": 6
+    },
+    {
+      "id": "combat",
+      "title": "Combat",
+      "file": "combat.json",
+      "active": true,
+      "order": 7
+    },
+    {
+      "id": "gestion-des-ressources",
+      "title": "Gestion des ressources",
+      "file": "gestion-des-ressources.json",
+      "active": true,
+      "order": 8
+    },
+    {
+      "id": "dieux",
+      "title": "Dieux",
+      "file": "dieux.json",
+      "active": true,
+      "order": 9
+    },
+    {
+      "id": "geographie",
+      "title": "Geographie",
+      "file": "geographie.json",
+      "active": true,
+      "order": 10
+    },
+    {
+      "id": "audio",
+      "title": "Musiques d'ambiance",
+      "file": "audio.json",
+      "active": true,
+      "order": 11
+    },
+    {
+      "id": "traumas",
+      "title": "Traumas",
+      "file": "traumas.json",
+      "active": true,
+      "order": 12
+    },
+    {
+      "id": "campagne",
+      "title": "Campagne",
+      "file": "campagne.json",
+      "active": true,
+      "order": 13,
+      "requiresMJ": true
+    }
+  ],
+  "template": {
+    "page": "new-page",
+    "title": "Nouvelle page",
+    "static": true,
+    "sections": [
+      {
+        "type": "intro",
+        "content": "Contenu de la nouvelle page."
+      }
+    ]
+  }
+}

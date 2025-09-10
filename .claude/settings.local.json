@@ -35,7 +35,11 @@
       "Bash(copy:*)",
       "Bash(cp:*)",
       "Bash(powershell:*)",
-      "Bash(git log:*)"
+      "Bash(git log:*)",
+      "Bash(git clone:*)",
+      "Bash(cat:*)",
+      "Bash(npm install)",
+      "Bash(dir:*)"
     ],
     "deny": []
   }

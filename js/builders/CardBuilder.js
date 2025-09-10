@@ -24,22 +24,38 @@
     }
 
     build() {
+      let html = '';
+      
       switch (this.type) {
         case 'spell':
-          return this.buildSpellCard();
+          html = this.buildSpellCard();
+          break;
         case 'don':
-          return this.buildDonCard();
+          html = this.buildDonCard();
+          break;
         case 'subclass':
-          return this.buildSubclassCard();
+          html = this.buildSubclassCard();
+          break;
         case 'objet':
-          return this.buildObjetCard();
+          html = this.buildObjetCard();
+          break;
         case 'monster':
-          return this.buildMonsterCard();
+          html = this.buildMonsterCard();
+          break;
         case 'tableTresor':
-          return this.buildTableTresorCard();
+          html = this.buildTableTresorCard();
+          break;
         default:
-          return this.buildGenericCard();
+          html = this.buildGenericCard();
+          break;
       }
+      
+      // Apply HTML minification for performance optimization in standalone mode
+      if (window.STANDALONE_VERSION && JdrApp.utils && JdrApp.utils.minifyHTML) {
+        html = JdrApp.utils.minifyHTML(html);
+      }
+      
+      return html;
     }
 
     buildSpellCard() {
@@ -376,7 +392,7 @@
         // STANDALONE: Never generate image buttons at all
         return `
           <div class="${containerClasses}" data-illus-key="${illusKey}" data-style-type="${styleType}" data-bound="1">
-            <img alt="Illustration ${altText}" class="thumb" style="${imageStyle}"${imageUrl ? ` src="${imageUrl}"` : ''}>
+            <img alt="Illustration ${altText}" class="thumb lazy-load" loading="lazy" style="${imageStyle}"${imageUrl ? ` data-src="${imageUrl}"` : ''} src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjE1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkNoYXJnZW1lbnQuLi48L3RleHQ+PC9zdmc+">
           </div>
         `;
       } else {

@@ -129,11 +129,12 @@
     "sort:Sorts d'Enchanteur:Puissance physique": "https://i.ibb.co/VckPSx1C/Puissance-Physique.png",
     "sort:Sorts d'Enchanteur:Confusion": "https://i.ibb.co/vCwsVnR5/Confusion.png",
     "sort:Sorts d'Enchanteur:Armure élémentaire Feu Terre Nuit": "https://i.ibb.co/SH5jcyv/Armure-El-mentaire1.png",
-    "sort:Sorts d'Enchanteur:Armure élémentaire Eau Air Lumière": "https://i.ibb.co/jP9RKzdq/Armure-El-mentaire2.png"
+    "sort:Sorts d'Enchanteur:Armure élémentaire Eau Air Lumière": "https://i.ibb.co/jP9RKzdq/Armure-El-mentaire2.png",
+    "objet:Armure de cuir de monstre": "https://i.ibb.co/MyZR8SYt/Armure-Cuir-Monstre.png"
   },
   "meta": {
-    "total_images": 130,
-    "exported_date": "2025-09-07",
+    "total_images": 131,
+    "exported_date": "2025-09-10",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
 }

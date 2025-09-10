@@ -20,7 +20,16 @@
 <body class="dev-off" style="">
 
 <!-- Le contenu HTML complet sera injecté ici par le JavaScript -->
-<div id="app-loading">Chargement...</div>
+<div id="app-loading" class="loading-screen">
+  <div class="loading-content">
+    <div class="loading-spinner"></div>
+    <h2>JDR-BAB</h2>
+    <p>Chargement en cours...</p>
+    <div class="loading-progress">
+      <div class="loading-bar"></div>
+    </div>
+  </div>
+</div>
 
 <!-- JavaScript Modulaire -->
 <!-- Configuration et classes de base -->
@@ -50,6 +59,8 @@
 <script src="js/features/SpellFilter.js"></script>
 <script src="js/features/TablesTresorsManager.js"></script>
 
+<!-- PDF support -->
+<script src="js/libs/jspdf-loader.js"></script>
 
 <!-- Live reload disabled - uncomment to enable when needed -->
 <!--

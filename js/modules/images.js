@@ -15,11 +15,80 @@
     async init() {
       await this.loadImageData();
       this.initImageHandlers();
+      this.initLazyLoading();
       
       // Auto-sync monster images on startup to ensure consistency
       setTimeout(() => {
         this.ensureMonsterImageMappings();
       }, 1000);
+    },
+
+    // Initialize lazy loading with Intersection Observer
+    initLazyLoading() {
+      if ('IntersectionObserver' in window) {
+        this.lazyImageObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const img = entry.target;
+              const dataSrc = img.getAttribute('data-src');
+              if (dataSrc) {
+                img.src = dataSrc;
+                img.removeAttribute('data-src');
+                img.classList.remove('lazy-load');
+                img.classList.add('lazy-loaded');
+                
+                // Une fois l'image chargée, s'assurer que les événements d'agrandissement sont attachés
+                img.addEventListener('load', () => {
+                  if (JdrApp.modules.editor && JdrApp.modules.editor.attachImageEvents) {
+                    JdrApp.modules.editor.attachImageEvents();
+                  }
+                }, { once: true });
+              }
+              observer.unobserve(img);
+            }
+          });
+        }, {
+          rootMargin: '50px 0px', // Start loading 50px before image comes into view
+          threshold: 0.01
+        });
+      } else {
+        // Fallback for browsers without IntersectionObserver
+        this.initFallbackLazyLoading();
+      }
+    },
+
+    // Fallback lazy loading for older browsers
+    initFallbackLazyLoading() {
+      const lazyLoad = () => {
+        const lazyImages = document.querySelectorAll('img.lazy-load[data-src]');
+        lazyImages.forEach(img => {
+          const rect = img.getBoundingClientRect();
+          if (rect.top < window.innerHeight + 50 && rect.bottom > -50) {
+            const dataSrc = img.getAttribute('data-src');
+            if (dataSrc) {
+              img.src = dataSrc;
+              img.removeAttribute('data-src');
+              img.classList.remove('lazy-load');
+              img.classList.add('lazy-loaded');
+              
+              // Une fois l'image chargée, s'assurer que les événements d'agrandissement sont attachés
+              img.addEventListener('load', () => {
+                if (JdrApp.modules.editor && JdrApp.modules.editor.attachImageEvents) {
+                  JdrApp.modules.editor.attachImageEvents();
+                }
+              }, { once: true });
+            }
+          }
+        });
+      };
+      
+      // Use throttled scroll events for better performance
+      const throttledLazyLoad = JdrApp.utils.throttle(lazyLoad, 100);
+      const debouncedLazyLoad = JdrApp.utils.debounce(lazyLoad, 250);
+      
+      window.addEventListener('scroll', throttledLazyLoad, { passive: true });
+      window.addEventListener('resize', debouncedLazyLoad, { passive: true });
+      lazyLoad(); // Initial check
     },
 
     // Load image data from JSON file or embedded data
@@ -71,7 +140,9 @@
     processImageUrl(originalUrl) {
       // If it's an i.ibb.co URL, use proxy for better mobile compatibility
       if (originalUrl.includes('i.ibb.co') && !originalUrl.includes('images.weserv.nl')) {
-        return `https://images.weserv.nl/?url=${encodeURIComponent(originalUrl)}`;
+        const format = this.supportsWebP() ? 'webp' : 'jpeg';
+        const quality = this.getOptimalQuality();
+        return `https://images.weserv.nl/?url=${encodeURIComponent(originalUrl)}&we&output=${format}&q=${quality}&w=400&h=300&fit=inside`;
       }
       
       // For local monster paths, encode only the filename to handle French characters properly
@@ -85,6 +156,33 @@
       return originalUrl;
     },
 
+    // Detect WebP support
+    supportsWebP() {
+      if (this._webpSupport !== undefined) return this._webpSupport;
+      
+      try {
+        this._webpSupport = document.createElement('canvas')
+          .toDataURL('image/webp', 0.5)
+          .indexOf('data:image/webp') === 0;
+      } catch (err) {
+        this._webpSupport = false;
+      }
+      
+      return this._webpSupport;
+    },
+
+    // Get optimal quality based on connection speed
+    getOptimalQuality() {
+      if ('connection' in navigator) {
+        const connection = navigator.connection;
+        if (connection.effectiveType === '4g') return 85;
+        if (connection.effectiveType === '3g') return 75;
+        if (connection.effectiveType === '2g') return 65;
+        return 60; // slow-2g
+      }
+      return 80; // Default quality
+    },
+
     autoLoadImages() {
       const illusElements = document.querySelectorAll('[data-illus-key]');
       let loadedCount = 0;
@@ -94,7 +192,18 @@
         const imageUrl = this.getImageUrl(illusKey);
         
         if (imageUrl) {
-          this.applyImage(illusElement, imageUrl);
+          const img = illusElement.querySelector('img');
+          if (img && img.classList.contains('lazy-load')) {
+            // For lazy loading, set data-src and observe
+            const processedUrl = this.processImageUrl(imageUrl);
+            img.setAttribute('data-src', processedUrl);
+            if (this.lazyImageObserver) {
+              this.lazyImageObserver.observe(img);
+            }
+          } else {
+            // Fallback to immediate loading
+            this.applyImage(illusElement, imageUrl);
+          }
           loadedCount++;
         }
       });

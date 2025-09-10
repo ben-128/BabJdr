@@ -47,13 +47,22 @@
     // Initialization
     async init() {
       try {
+        this.updateLoadingProgress(10);
         await this.loadData();
+        
+        this.updateLoadingProgress(40);
         await this.loadContent();
+        
+        this.updateLoadingProgress(70);
         this.initializeModules();
+        
+        this.updateLoadingProgress(90);
         
         // Execute data validation after all modules are loaded
         setTimeout(() => {
           this.validateDataIntegrity();
+          this.updateLoadingProgress(100);
+          this.hideLoadingScreen();
         }, 500);
         
         // Auto-enable MJ mode with additional delay to ensure router is ready
@@ -61,7 +70,29 @@
           this.autoEnableMJModeInDevelopment();
         }, 800);
       } catch (error) {
+        this.hideLoadingScreen();
         // Silent error handling for initialization
+      }
+    },
+
+    // Update loading progress
+    updateLoadingProgress(percentage) {
+      const progressBar = document.querySelector('.loading-bar');
+      if (progressBar) {
+        progressBar.style.width = `${percentage}%`;
+      }
+    },
+
+    // Hide loading screen with animation
+    hideLoadingScreen() {
+      const loadingScreen = document.getElementById('app-loading');
+      if (loadingScreen) {
+        loadingScreen.classList.add('fade-out');
+        setTimeout(() => {
+          if (loadingScreen.parentNode) {
+            loadingScreen.parentNode.removeChild(loadingScreen);
+          }
+        }, 500);
       }
     },
 

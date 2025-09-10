@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-09-04T22:02:39.560Z by JdrBab Build System -->
+<!-- Generated on 2025-09-10T12:02:08.583Z by JdrBab Build System -->
 <title>JDR‑BAB — Livret de règles</title>
 <meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -982,6 +982,118 @@ footer{padding:24px;text-align:center;color:var(--paper-muted)}
   height: 2px;
   background: linear-gradient(90deg, transparent, var(--gold), transparent);
   opacity: 0.7;
+}
+
+/* ─────────────────────────── Image Optimization Components ─────────────────────────── */
+.lazy-load {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  background: #f0f0f0;
+  min-height: 100px;
+}
+
+.lazy-loaded {
+  opacity: 1;
+}
+
+/* Improve image rendering performance */
+img {
+  will-change: auto;
+  transform: translateZ(0); /* Force GPU acceleration */
+}
+
+/* Placeholder for lazy loading */
+.illus img[src*="data:image/svg+xml"] {
+  background: linear-gradient(45deg, #f8f8f8 25%, transparent 25%), 
+              linear-gradient(-45deg, #f8f8f8 25%, transparent 25%), 
+              linear-gradient(45deg, transparent 75%, #f8f8f8 75%), 
+              linear-gradient(-45deg, transparent 75%, #f8f8f8 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+  animation: loading 2s infinite linear;
+}
+
+@keyframes loading {
+  0% { background-position: 0 0, 0 10px, 10px -10px, -10px 0px; }
+  100% { background-position: 20px 20px, 20px 30px, 30px 10px, 10px 20px; }
+}
+
+/* Loading Screen Components */
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #2c1810, #1a0f0a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
+}
+
+.loading-screen.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loading-content {
+  text-align: center;
+  color: var(--gold);
+  max-width: 300px;
+  padding: 2rem;
+}
+
+.loading-content h2 {
+  font-family: "Cinzel", serif;
+  font-size: 2rem;
+  margin: 1rem 0;
+  color: var(--gold);
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.loading-content p {
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
+.loading-spinner {
+  width: 60px;
+  height: 60px;
+  border: 3px solid rgba(212, 175, 55, 0.3);
+  border-top: 3px solid var(--gold);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem auto;
+}
+
+.loading-progress {
+  width: 100%;
+  height: 4px;
+  background: rgba(212, 175, 55, 0.2);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.loading-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold), var(--bronze), var(--gold));
+  width: 0%;
+  border-radius: 2px;
+  transition: width 0.3s ease-out;
+  animation: loading-pulse 2s ease-in-out infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes loading-pulse {
+  0%, 100% { background: linear-gradient(90deg, var(--gold), var(--bronze), var(--gold)); }
+  50% { background: linear-gradient(90deg, var(--bronze), var(--gold), var(--bronze)); }
 }
 
 /* ─────────────────────────── Page Header Components ─────────────────────────── */
@@ -3019,6 +3131,43 @@ article[data-page="enchanteur"] .illus img:hover,
   border-color: var(--bronze) !important;
 }
 
+/* ─────────────────────────── Notification Animations ─────────────────────────── */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* Notification positioning and styles */
+.notification {
+  position: fixed !important;
+  top: 20px !important;
+  right: 20px !important;
+  padding: 12px 20px !important;
+  border-radius: 8px !important;
+  z-index: 1001 !important;
+  font-size: 14px !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3) !important;
+  font-family: inherit !important;
+  font-weight: 500 !important;
+}
+
 #master-volume::-moz-range-thumb {
   width: 20px !important;
   height: 20px !important;
@@ -4589,7 +4738,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 1",
         "portee": "🎯 <strong>Portée:</strong> 15m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 3",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 4",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> Esquive.",
         "effetNormal": "<strong>Effet:</strong> Inflige 5 dégats de <span style=\"color: #e25822; font-weight: bold;\">Feu</span> à la cible.<br>&nbsp;Tous les 5 points d'intelligence, augmente les dégats de 1.",
@@ -4598,44 +4747,92 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       {
         "nom": "Éclair",
         "element": "Air",
-        "description": "Frappe instantannément une cible avec un éclair électrique, ne laissant aucune chance à l'esquive.",
+        "description": "Le lanceur concentre une sphère crépitante d’énergie instable qui fuse vers sa cible et explose dans un éclair.",
         "categorie": "Mage",
-        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 2",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 1",
         "portee": "🎯 <strong>Portée:</strong> 12m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 5",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 4",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
-        "resistance": "<strong>Sans effet si:</strong> -",
-        "effetNormal": "<strong>Effet:</strong> &nbsp;Inflige 6 dégats d'<span style=\"color: #22c55e; font-weight: bold;\">Air</span> à la cible.<br>&nbsp;Tous les 5 points d'intelligence, augmente les dégats de 1.",
-        "effetCritique": "<strong>Coup Critique:&nbsp;</strong> Les dégâts passent à 10 et ils sont aussi infligé à un ennemi à moins de 3m de la cible."
+        "resistance": "<strong>Sans effet si:</strong> Esquive.",
+        "effetNormal": "<strong>Effet:</strong>  Inflige 5 dégats d'<span style=\"color: #22c55e; font-weight: bold;\">Air</span> à la cible.<br> Tous les 5 points d'intelligence, augmente les dégats de 1.",
+        "effetCritique": "<strong>Coup Critique: </strong> Les dégâts passent à 7 et ils sont aussi infligé à un ennemi à moins de 3m de la cible."
       },
       {
         "nom": "Vague déferlante",
         "element": "Eau",
         "description": "Une puissante vague d'eau s'abat sur vos ennemis et les repousse.",
         "categorie": "Sorts de Mage",
-        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 3",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 2",
         "portee": "🎯 <strong>Portée:</strong> 6m",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 6",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 8",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> Volant.",
-        "effetNormal": "<strong>Effet:</strong> &nbsp;Inflige 6 dégats d'<span style=\"color: #2b6cb0; font-weight: bold;\">Eau</span> aux créature devant le lanceur (largeur 3m distance 6m) et les repousse jusqu'à 6m.<br>&nbsp;Tous les 5 points d'intelligence, augmente les dégats de 1.",
-        "effetCritique": "<strong>Coup Critique:&nbsp;</strong> les dégats passent à 10 et les enemis sont touchés/repoussés à 12m."
+        "effetNormal": "<strong>Effet:</strong> &nbsp;Inflige 7 dégats d'<span style=\"color: #2b6cb0; font-weight: bold;\">Eau</span> aux créatures devant le lanceur (largeur 3m distance 6m) et les repousse jusqu'à 6m.<br>&nbsp;Tous les 5 points d'intelligence, augmente les dégats de 1.",
+        "effetCritique": "<strong>Coup Critique: </strong> les dégats passent à 12 et les enemis sont touchés/repoussés à 12m."
       },
       {
         "nom": "Volée de pierres",
         "element": "Terre",
         "description": "Invoque une volée de pierres qui tournoient autour du lanceur, puis qui sont éjectées devant lui.",
         "categorie": "Sorts de Mage",
-        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 4",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 2",
         "portee": "🎯 <strong>Portée:</strong> 6m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 10",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 8",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
-        "resistance": "<strong>Sans effet si:</strong> Esquive.",
-        "effetNormal": "<strong>Effet:</strong> Inflige 7 dégats de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> aux créatures autour du lanceur (3m). <br>Puis inflige le même montant aux créatures devant le lanceur sur 6m.<br><br>&nbsp;Tous les 5 points d'intelligence, augmente les dégats de 1.",
+        "resistance": "<strong>Sans effet si:</strong> -",
+        "effetNormal": "<strong>Effet:</strong> Inflige 7 dégats de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> aux créatures autour du lanceur (3m). <br>Puis inflige le même montant aux créatures devant le lanceur sur 6m.<br><br> Tous les 5 points d'intelligence, augmente les dégats de 1.",
         "effetCritique": "<strong>Coup Critique:&nbsp;</strong>&nbsp;Les dégats passent à 12. Les cibles non volantes et de taille moyennes sont <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">A terre</span> pendant 1 tour."
+      },
+      {
+        "nom": "Faisceau lumineux",
+        "element": "Lumière",
+        "description": "Un faisceau lumineux canalisé jaillit des mains du lanceur, transperçant les ennemis d’une énergie pure.",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 3",
+        "portee": "🎯 <strong>Portée:</strong> 9m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 10",
+        "resistance": "<strong>Sans effet si:</strong> -",
+        "effetNormal": "<strong>Effet:</strong> Inflige 10 points de dégats de <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span>  aux créatures devant le lanceur (9m).\n<br><br>Le lanceur peut continuer de <b>canaliser</b> le sort (ne pouvant plus esquiver ou faire d'actions). S'il le fait, n'importe créature qui rendre dans la zone subit les dégats, et toutes les creatures encore dans la zone au prochain tour du lanceur subiront les dégats. A chaque début de tour, le lanceur consomme alors <b>la moitié du coût en mana</b> du sort.\n\n\n<br><br>Tous les 5 points d'intelligence, augmente les dégats de 1.",
+        "effetCritique": "<strong>Coup Critique: </strong> Les dégats passent à 15, et les créatures ayant une Resistance alération inférieure à l'Intelligence du lanceur sont <span class=\"etat-link\" data-etat=\"Aveuglé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Aveuglé</span> pendant 2 tours."
+      },
+      {
+        "nom": "Vague sombre",
+        "element": "Nuit",
+        "description": "Une onde de ténèbres mouvantes se déploie, repoussant violemment les adversaires alentours.",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 4",
+        "portee": "🎯 <strong>Portée:</strong> 9m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 15",
+        "resistance": "<strong>Sans effet si:</strong> -",
+        "effetNormal": "<strong>Effet:</strong>  Inflige 13 dégats de <span style=\"color: #1a1a1a; font-weight: bold;\">Nuit</span> aux créatures dans un cone devant le lanceur (largeur 9m, distance 9m) et les repousse chacune de 3m.<br> Tous les 5 points d'intelligence, augmente les dégats de 1.",
+        "effetCritique": "<strong>Coup Critique: </strong> Les dégats passent à 20 et les cibles sont repoussées de 6m."
+      },
+      {
+        "nom": "Missile magique",
+        "element": "Lumière",
+        "description": "Un projectile d’énergie condensée file à longue portée, frappant la cible avec la force d’un impact physique.",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 5",
+        "portee": "🎯 <strong>Portée:</strong> 30m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 10",
+        "resistance": "<strong>Sans effet si:</strong> Esquive.",
+        "effetNormal": "<strong>Effet:</strong> Inflige 15 dégats physiques à la cible. Ces dégats sont réduits par l'armure.\n<br>Tous les 5 points d'intelligence, augmente les dégats de 1.",
+        "effetCritique": "<strong>Coup Critique: </strong> Les dégats passent à 25 et la cible (si elle est de taille Moyenne ou moins) subit l'état <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">A terre</span>."
+      },
+      {
+        "nom": "Nuage toxique",
+        "element": "Terre",
+        "description": "Une brume opaque se déploie à l’endroit choisi, persistant plusieurs tours et infligeant son toxique insidieux.",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 6",
+        "portee": "🎯 <strong>Portée:</strong> 18m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 20",
+        "resistance": "<strong>Sans effet si:</strong> -",
+        "effetNormal": "<strong>Effet:</strong> Crée à la position d'une cible à portée, un nuage toxique qui inflige 15 points de dégats de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>.\n\n<br>Chaque début de tour, le lanceur peut choisir de dépenser une action principale et 5 points de mana pour que le nuage se déplace inflige ses dégats à une cible à portée du lanceur. Sinon, le nuage disparait.\n\n<br><br> Tous les 5 points d'intelligence, augmente les dégats de 1.",
+        "effetCritique": "<strong>Coup Critique: </strong> Les dégats sont de 25 et la cible est <span class=\"etat-link\" data-etat=\"Ralenti\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Ralenti</span> pendant 1 tour."
       }
     ]
   },
@@ -4651,7 +4848,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 3",
         "portee": "🎯 <strong>Portée:</strong> 18m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 3",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 6",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> &nbsp;<br>- Non mort-vivant <br>- Esquive.",
         "effetNormal": "<strong>Effet:</strong> Inflige *Intelligence* dégâts <span style=\"color: #d0d0d0; font-weight: bold; background: rgba(0, 0, 0, 0.4); padding: 2px 4px; border-radius: 3px;\">Divin</span> à la cible.",
@@ -4667,9 +4864,9 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
         "coutMana": "🔵 <strong>Coût mana:</strong> 5",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
-        "resistance": "<strong>Sans effet si:</strong> &nbsp;\n<br>- Hors combat.\n<br>- La cible n'a pas été blessée pendant plus de 3 tours.",
+        "resistance": "<strong>Sans effet si:</strong>  \n<br>- Hors combat.",
         "effetNormal": "<strong>Effet:</strong> Soigne la cible de 5 points de vie. Tous les 5 points d'intelligence, augmente le soin de 1.",
-        "effetCritique": "<strong>Coup Critique:&nbsp;</strong>Double le soin."
+        "effetCritique": "<strong>Coup Critique: </strong>Le soin passe à 10."
       },
       {
         "nom": "Protection",
@@ -4708,6 +4905,54 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Révèle le nom et l'élément d’affiliation d'une cible.",
         "effetCritique": "<strong>Coup Critique: </strong> Révèle également son armure physique et élémentaire."
+      },
+      {
+        "nom": "Resistance",
+        "element": "Divin",
+        "description": "Enveloppe le porteur d’une aura protectrice qui le rend moins vulnérable aux altérations d’état.",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 3",
+        "portee": "🎯 <strong>Portée:</strong> 3m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 8",
+        "resistance": "<strong>Sans effet si:</strong> -",
+        "effetNormal": "<strong>Effet:</strong>  Augmente la Résistance altération de 3 pendant 5 tours.<br> Tous les 5 d'Intelligence, l'augmente de 1 supplémentaire.",
+        "effetCritique": "<strong>Coup Critique: </strong>  La Résistance altération est augmentée de 5."
+      },
+      {
+        "nom": "Guérison du poison",
+        "element": "Terre",
+        "description": "Dissipe le poison du corps de la cible, purifiant instantanément son sang.",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 4",
+        "portee": "🎯 <strong>Portée:</strong> 3m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 10",
+        "resistance": "<strong>Sans effet si:</strong> -",
+        "effetNormal": "<strong>Effet:</strong> Enlève l'état <span class=\"etat-link\" data-etat=\"Empoisonné\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Empoisonné</span> de la cible.",
+        "effetCritique": "<strong>Coup Critique: </strong> La cible est également soignée de 5 points de vie."
+      },
+      {
+        "nom": "Nova lumineuse",
+        "element": "Lumière",
+        "description": "Crée une zone de lumière brûlante autour du lanceur.",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 4",
+        "portee": "🎯 <strong>Portée:</strong> 6m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 10",
+        "resistance": "<strong>Sans effet si:</strong> -",
+        "effetNormal": "<strong>Effet:</strong> Inflige 5 dégats de <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span> à toutes les créatures à moins de 6m du lanceur.<br> Tous les 5 points d'intelligence, augmente les dégats de 1.",
+        "effetCritique": "<strong>Coup Critique: </strong> Les dégats passent à 8, et les créatures ayant une Resistance alération inférieure à l'Intelligence du lanceur sont <span class=\"etat-link\" data-etat=\"Aveuglé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Aveuglé</span> pendant 2 tours."
+      },
+      {
+        "nom": "Toucher Lointain",
+        "element": "Divin",
+        "description": "Projette une onde de guérison à distance qui restaure superficiellement les blessures d’un allié.",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 5",
+        "portee": "🎯 <strong>Portée:</strong> 12m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 10",
+        "resistance": "<strong>Sans effet si:</strong>  \n<br>- Hors combat.",
+        "effetNormal": "<strong>Effet:</strong> Soigne la cible de 5 points de vie. Tous les 5 points d'intelligence, augmente le soin de 1.",
+        "effetCritique": "<strong>Coup Critique: </strong>Le soin passe à 10."
       },
       {
         "nom": "Révélation majeure",
@@ -4749,7 +4994,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
         "coutMana": "🔵 <strong>Coût mana:</strong> 3",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
-        "resistance": "<strong>Sans effet si:</strong> <br>- Résistance altérations &gt; Intelligence du lanceur<br>- Lévitation ou Volant.",
+        "resistance": "<strong>Sans effet si:</strong> <br>- Résistance altérations >= Intelligence du lanceur<br>- Lévitation ou Volant.",
         "effetNormal": "<strong>Effet:</strong>&nbsp;La cible contracte l'état <span class=\"etat-link\" data-etat=\"Ralenti\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Ralenti</span> pendant 5 tours.",
         "effetCritique": "<strong>Coup Critique:&nbsp;</strong>La cible ne peut plus effectuer de déplacement pendant la durée du sort."
       },
@@ -4773,13 +5018,121 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
         "description": "Un voile d'ombre caresse la cible, l'enveloppant dans un sommeil surnaturel.",
         "categorie": "Sorts d'Enchanteur",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 2",
-        "portee": "🎯 <strong>Portée:</strong> 6m",
+        "portee": "🎯 <strong>Portée:</strong> 3m",
         "coutMana": "🔵 <strong>Coût mana:</strong> 8",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
-        "resistance": "<strong>Sans effet si:</strong> <br>- Résistance altérations &gt; Intelligence du lanceur<br>- Element <span style=\"color: #0f172a; font-weight: bold;\">Nuit</span>",
+        "resistance": "<strong>Sans effet si:</strong> <br>- Résistance altérations &gt;= Intelligence du lanceur<br>- Element <span style=\"color: #0f172a; font-weight: bold;\">Nuit</span>",
         "effetNormal": "<strong>Effet:</strong> La cible passe dans l'état <span class=\"etat-link\" data-etat=\"Endormi/assomé/Effrayé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Endormi</span> pendant ses 2 prochains tours.",
         "effetCritique": "<strong>Coup Critique:&nbsp;</strong> L'effet dure 4 tours."
+      },
+      {
+        "nom": "Lévitation",
+        "element": "Air",
+        "description": "Une bourrasque ascendante enveloppe la cible, lui permettant de s’élever légèrement dans les airs et d’échapper aux entraves du sol.",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 2",
+        "portee": "🎯 <strong>Portée:</strong> 3m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 6",
+        "resistance": "<strong>Sans effet si:</strong> -",
+        "effetNormal": "<strong>Effet:</strong> La cible lévite pendant 5 tours. Elle ignore les dégâts/ralentissements venant du sol, ainsi que l'état <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">A terre</span>.",
+        "effetCritique": "<strong>Coup Critique: </strong> La cible a également sa vitesse de déplacement augmentée de 3m."
+      },
+      {
+        "nom": "Imprégnation élémentaire feu terre nuit",
+        "element": "Feu",
+        "description": "Imprègne une arme de la puissance d'un élément.",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 3",
+        "portee": "🎯 <strong>Portée:</strong> 3m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 14",
+        "resistance": "<strong>Sans effet si:</strong> -",
+        "effetNormal": "<strong>Effet:</strong> Le lanceur choisi un élément au choix entre <span style=\"color: #ff6b35; font-weight: bold;\">Feu</span>, <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>, et <span style=\"color: #1a1a1a; font-weight: bold;\">Nuit</span>. \n<br>La cible voit son arme imprégnée de cet élement, qui infligera 4 points de degats de cet élément à chaque coup. <br>Dure 5 tours. Non cumulable.\n<br><br> Chaque 5 points d'Intelligence, les dégats élémentaires sont augmentés de 1.",
+        "effetCritique": "<strong>Coup Critique:&nbsp;</strong>&nbsp;Le coup en mana est réduit de moitié."
+      },
+      {
+        "nom": "Imprégnation élémentaire eau air lumière",
+        "element": "Eau",
+        "description": "Imprègne une arme de la puissance d'un élément.",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 3",
+        "portee": "🎯 <strong>Portée:</strong> 3m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 14",
+        "resistance": "<strong>Sans effet si:</strong> -",
+        "effetNormal": "<strong>Effet:</strong> Le lanceur choisi un élément au choix entre <span style=\"color: #4682b4; font-weight: bold;\">Eau</span>, <span style=\"color: #22c55e; font-weight: bold;\">Air</span>, et <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span>.\n<br>La cible voit son arme imprégnée de cet élement, qui infligera 4 points de degats de cet élément à chaque coup. <br>Dure 5 tours. Non cumulable.\n<br><br> Chaque 5 points d'Intelligence, les dégats élémentaires sont augmentés de 1.",
+        "effetCritique": "<strong>Coup Critique: </strong> Le coup en mana est réduit de moitié."
+      },
+      {
+        "nom": "Silence",
+        "element": "Nuit",
+        "description": "Une aura muette se referme sur la cible, étouffant toute incantation.",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 4",
+        "portee": "🎯 <strong>Portée:</strong> 12m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 10",
+        "resistance": "<strong>Sans effet si:</strong> <br>- Résistance altérations &gt;= Intelligence du lanceur.",
+        "effetNormal": "<strong>Effet:</strong> La cible est incapable de lancer des sorts pendant 3 tours.",
+        "effetCritique": "<strong>Coup Critique: </strong> L'effet dure 5 tours."
+      },
+      {
+        "nom": "Puissance magique",
+        "element": "Feu",
+        "description": "Le corps de la cible s’illumine d’arcanes, décuplant la force de ses sorts.",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 5",
+        "portee": "🎯 <strong>Portée:</strong> 3m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 14",
+        "resistance": "<strong>Sans effet si:</strong> -",
+        "effetNormal": "Inutilisable Hors combat.           \n<br> <strong>Effet:</strong> Augmente les dégats élémentaires effectués par les sorts de la cible de 3. <br>Dure jusqu'au retour hors combat.<br><br> Tous les 5 points d'intelligence, augmente les dégats de 1.",
+        "effetCritique": "<strong>Coup Critique: </strong> Les dégats sont augmentés de 5."
+      },
+      {
+        "nom": "Puissance physique",
+        "element": "Terre",
+        "description": "Une vigueur surnaturelle envahit les muscles, augmentant chaque coup porté.",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 6",
+        "portee": "🎯 <strong>Portée:</strong> 3m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 14",
+        "resistance": "<strong>Sans effet si:</strong> -",
+        "effetNormal": "Inutilisable Hors combat.           \n<br> <strong>Effet:</strong> Augmente la force de la cible de 5. <br>Dure jusqu'au retour hors combat.<br><br> Tous les 5 points d'intelligence, augmente la force prodiguée de 1.",
+        "effetCritique": "<strong>Coup Critique: </strong> La force prodiguée passe à 8."
+      },
+      {
+        "nom": "Confusion",
+        "element": "Maléfique",
+        "description": "Un voile d’illusions trouble l’esprit de la cible, la rendant incapable de distinguer alliés et ennemis.",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 7",
+        "portee": "🎯 <strong>Portée:</strong> 12m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 15",
+        "resistance": "<strong>Sans effet si:</strong> <br>- Résistance altérations >= Intelligence du lanceur<br>- Element <span style=\"color: #8b5cf6; font-weight: bold;\">Maléfique</span>",
+        "effetNormal": "<strong>Effet:</strong> La cible passe dans l'état <span class=\"etat-link\" data-etat=\"Confus\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Confus</span>, pendant 4 tours.",
+        "effetCritique": "<strong>Coup Critique: </strong> L'effet dure 6 tours."
+      },
+      {
+        "nom": "Armure élémentaire Feu Terre Nuit",
+        "element": "Feu",
+        "description": "Un voile protecteur d’énergie enveloppe la cible, renforçant son armure élémentaire.",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 8",
+        "portee": "🎯 <strong>Portée:</strong> 3m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 14",
+        "resistance": "<strong>Sans effet si:</strong> -",
+        "effetNormal": "<strong>Effet:</strong> Le lanceur choisi un élément au choix entre <span style=\"color: #ff6b35; font-weight: bold;\">Feu</span>, <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>, et <span style=\"color: #1a1a1a; font-weight: bold;\">Nuit</span>. \n<br>La cible voit son armure de cet élement, augmentant l'armure élémentaire de cet élément de 5. <br>Dure 5 tours. Non cumulable.\n<br><br> Chaque 5 points d'Intelligence, les dégats élémentaires sont augmentés de 1.",
+        "effetCritique": "<strong>Coup Critique:&nbsp;</strong>&nbsp;Le coup en mana est réduit de moitié."
+      },
+      {
+        "nom": "Armure élémentaire Eau Air Lumière",
+        "element": "Eau",
+        "description": "Un voile protecteur d’énergie enveloppe la cible, renforçant son armure élémentaire.",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 8",
+        "portee": "🎯 <strong>Portée:</strong> 3m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 14",
+        "resistance": "<strong>Sans effet si:</strong> -",
+        "effetNormal": "<strong>Effet:</strong> Le lanceur choisi un élément au choix entre <span style=\"color: #4682b4; font-weight: bold;\">Eau</span>, <span style=\"color: #22c55e; font-weight: bold;\">Air</span>, et <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span>.\n<br>La cible voit son armure de cet élement, augmentant l'armure élémentaire de cet élément de 5. <br>Dure 5 tours. Non cumulable.\n<br><br> Chaque 5 points d'Intelligence, les dégats élémentaires sont augmentés de 1.",
+        "effetCritique": "<strong>Coup Critique:&nbsp;</strong>&nbsp;Le coup en mana est réduit de moitié."
       }
     ]
   }
@@ -4829,7 +5182,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
         "nom": "Érudit",
         "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>1</strong></span><span class=\"chip\">🏃 Agilité: <strong>1</strong></span><span class=\"chip\">🛡️ Endurance: <strong>4</strong></span><span class=\"chip\">🧠 Intelligence: <strong>6</strong></span><span class=\"chip\">⚡ Volonté: <strong>3</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +3 Intelligence 🧠, +2 Volonté ⚡<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Instruit</em> : Gagne la compétence Réflexion rang 1.</li><li><em>Apprentissage accéléré</em> : Le niveau de l'érudit est considéré comme deux fois plus élevé pour les prérequis d'apprentissage de sorts.</li></ul>",
+        "capacites": "<ul><li><em>Instruit</em> : Gagne la compétence Réflexion rang 1.</li><li><em>Apprentissage accéléré</em> : Le niveau de l'érudit est considéré plus élevé d'un niveau pour les prérequis d'apprentissage de sorts.</li>\n<li><em>Mana inépuisable</em> : Chaque point de volonté augmente le mana de 3 au lieu de 2.</li>\n<li><em>Magie interdite</em> : Capable d'utiliser ses lectures (s'il les comprends) pour apprendre de nouveaux sorts.</li></ul>",
         "description": "<i>Mage avide de savoir, doté d’une mémoire prodigieuse. Il assimile les arcanes avec une rapidité fulgurante et maîtrise de nouveaux sorts bien plus vite que ses pairs.</i>"
       },
       {
@@ -4850,14 +5203,14 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
         "nom": "Inquisiteur",
         "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>3</strong></span><span class=\"chip\">🏃 Agilité: <strong>1</strong></span><span class=\"chip\">🛡️ Endurance: <strong>7</strong></span><span class=\"chip\">🧠 Intelligence: <strong>3</strong></span><span class=\"chip\">⚡ Volonté: <strong>5</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +1 Force 💪, +1 Intelligence 🧠, +2 Volonté ⚡, +1 Endurance 🛡️<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Equipement d'inquisiteur</em> : Peut s'équiper d'armures légères et de boucliers.</li><li><em>Fléau des morts-vivants</em> : Les sorts visant les morts-vivants ne ratent jamais.</li><li><em>Lumière purificatrice</em> : Double l'effet de l'intelligence sur les dégats des sorts d'élément <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span> ou <span style=\"color: #f5f5f5; font-weight: bold; background: rgba(100, 100, 100, 0.3); padding: 2px 4px; border-radius: 3px;\">Divin</span>.</li></ul>",
+        "capacites": "<ul><li><em>Equipement d'inquisiteur</em> : Peut s'équiper d'armures légères et de boucliers.</li><li><em>Fléau des morts-vivants</em> : Les attaques physiques contre les morts-vivants ne ratent jamais.</li><li><em>Lumière purificatrice</em> : Double l'effet de l'intelligence sur les dégats des sorts d'élément <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span> ou <span style=\"color: #f5f5f5; font-weight: bold; background: rgba(100, 100, 100, 0.3); padding: 2px 4px; border-radius: 3px;\">Divin</span>.</li></ul>",
         "description": "<i>Champion de la foi, il renforce ses alliés par la magie sacrée et traque sans relâche les morts-vivants. Quand la lumière seule ne suffit plus, il n’hésite pas à prendre les armes et combattre en première ligne.</i>"
       },
       {
         "nom": "Clerc Divin",
         "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>1</strong></span><span class=\"chip\">🏃 Agilité: <strong>1</strong></span><span class=\"chip\">🛡️ Endurance: <strong>5</strong></span><span class=\"chip\">🧠 Intelligence: <strong>3</strong></span><span class=\"chip\">⚡ Volonté: <strong>5</strong></span><span class=\"chip\">🍀 Chance: <strong>5</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +2 Intelligence 🧠, +2 Volonté ⚡, +1 Chance 🍀<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Maître des soins</em> : Double l'effet de l'intelligence sur les sorts de soins.</li><li><em> Pieu </em>:  Gagne 1 de compétence sur les tests de compétence Reflexion sur un dieu ou une religion.</li><li><em> Protection divine </em>:  Dispose d'une armure élementaire <span style=\"color: #f5f5f5; font-weight: bold; background: rgba(100, 100, 100, 0.3); padding: 2px 4px; border-radius: 3px;\">Divin</span> de 10.</li></ul>",
+        "capacites": "<ul><li><em>Maître des soins</em> : Double l'effet de l'intelligence sur les sorts de soins.</li><li><em> Pieu </em>:  Gagne 1 de compétence sur les tests de compétence Reflexion sur un dieu ou une religion.</li><li><em> Protection divine </em>:  Dispose d'une armure élementaire <span style=\"color: #f5f5f5; font-weight: bold; background: rgba(100, 100, 100, 0.3); padding: 2px 4px; border-radius: 3px;\">Divin</span> et <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span> de 10.</li></ul>",
         "description": "<i>Serviteur sacré, maître des arts de guérison. Sa puissante magie de soins protège ses alliés et les relève même aux portes de la mort.</i>"
       }
     ]
@@ -4871,7 +5224,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
         "nom": "Voleur",
         "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>3</strong></span><span class=\"chip\">🏃 Agilité: <strong>5</strong></span><span class=\"chip\">🛡️ Endurance: <strong>5</strong></span><span class=\"chip\">🧠 Intelligence: <strong>2</strong></span><span class=\"chip\">⚡ Volonté: <strong>2</strong></span><span class=\"chip\">🍀 Chance: <strong>5</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +2 Agilité 🏃, +2 Force 💪, +1 Endurance 🛡️<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Mains expertes :</em> Gagne la compétence Finesse rang 1.</li><li><em>Sprint :</em> Peut utiliser une action secondaire pour doubler sa vitesse de déplacement.</li><li><em>Vicieux :</em> Double les chances de critiques physiques sur les cibles subissant un état qui les empeche d'esquiver.</li></ul>",
+        "capacites": "<ul><li><em>Mains expertes :</em> Gagne la compétence Finesse rang 1.</li><li><em>Sprint :</em> Peut utiliser une action secondaire pour doubler sa vitesse de déplacement.</li><li><em>Vicieux :</em> Double les chances de critiques physiques au corps à corps sur les cibles subissant un état qui les empeche d'esquiver.</li></ul>",
         "description": "<i>Maître de la finesse et de l’agilité, il se déplace avec rapidité fulgurante et frappe là où ça fait le plus mal. </i>"
       },
       {
@@ -4892,7 +5245,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
         "nom": "Esprit de la grande Fée",
         "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>1</strong></span><span class=\"chip\">🏃 Agilité: <strong>5</strong></span><span class=\"chip\">🛡️ Endurance: <strong>5</strong></span><span class=\"chip\">🧠 Intelligence: <strong>5</strong></span><span class=\"chip\">⚡ Volonté: <strong>2</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +1 Agilité 🏃, +1 Intelligence 🧠, +1 Endurance 🛡️, +1 Volonté ⚡, +1 Chance 🍀<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Tatillon</em> : Gagne la compétence Finesse rang 1.</li><li><em>Lévitation</em> : Ignore dégâts/ralentissements venant du sol.</li><li><em>Rayon de l'Amitié</em> : Par une action secondaire, peut répéter sur une autre cible à portée un sort bénéfique qui a ciblé un allié se tour ci, sans coût en mana supplémentaire.</li></ul>",
+        "capacites": "<ul><li><em>Tatillon</em> : Gagne la compétence Finesse rang 1.</li><li><em>Lévitation</em> : Ignore dégâts/ralentissements venant du sol, ainsi que l'état <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">A terre</span>.</li><li><em>Rayon de l'Amitié</em> : Par une action secondaire, peut répéter sur une autre cible à portée un sort bénéfique qui a ciblé un allié se tour ci, sans coût en mana supplémentaire.</li></ul>",
         "description": "<i>Être mystique qui flotte au-dessus du sol, il invoque des sorts imprévisibles pour soutenir ses alliés.</i>"
       },
       {
@@ -4945,6 +5298,36 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
         "description": "Permet de monter à cheval ou équivalent.",
         "prerequis": "<strong> Prérequis :</strong> Niveau 5",
         "cout": "1 point de don"
+      },
+      {
+        "nom": "Gros mangeur",
+        "description": "Les points de vie rendus en mangeant de la nourriture sont doublés. De plus, il est possible de consommer 4 rations de nourriture par jour au lieu de 2.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Grand sacs",
+        "description": "Augmente le poid maximum transportable de 3, et le nombre de consommables transportables de 3.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Maitrise de la dague",
+        "description": "Le héros est capable d'équiper et d'utiliser des Dagues.",
+        "prerequis": "<strong> Prérequis :</strong> 🏃 Agilité 5.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Maitrise de l'arc",
+        "description": "Le héros est capable d'équiper et d'utiliser des Arcs.",
+        "prerequis": "<strong> Prérequis :</strong> 🏃 Agilité 10.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Sommeil léger",
+        "description": "Pendant qu'il dort, le héros est aussi alerte que s'il effectuait un tour de garde.\nDe plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
       }
     ]
   },
@@ -4996,7 +5379,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       },
       {
         "nom": "Chasse et pêche",
-        "description": "Le héros n'as plus besoin de sa ratio de nourriture quotidienne.",
+        "description": "Le héros n'as plus besoin de sa ration de nourriture quotidienne.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -5129,7 +5512,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
         "Épée",
         "Deux mains"
       ],
-      "effet": "<strong>Dégâts: </strong> Inflige (5  + Force) points de dégats physiques.",
+      "effet": "<strong>Dégâts: </strong> Inflige (4  + Force) points de dégats physiques.",
       "prix": "🔷 <strong>Prix:</strong> 35",
       "poids": "⚖️ <strong>Poids:</strong> 2"
     },
@@ -5145,7 +5528,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       ],
       "effet": "<span style=\"font-weight: 700; font-family: \" source=\"\" serif=\"\" pro\",=\"\" serif;=\"\" color:=\"\" rgb(74,=\"\" 44,=\"\" 23);=\"\" text-shadow:=\"\" rgba(0,=\"\" 0,=\"\" 0.05)=\"\" 0px=\"\" 1px=\"\" 2px;\"=\"\">Dégâts: </span> Inflige (2  + Force) points de dégats physiques.",
       "prix": "🔷 <strong>Prix:</strong> 20",
-      "poids": ""
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
       "nom": "Dague en fer",
@@ -5159,7 +5542,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       ],
       "effet": "<strong>Dégâts: </strong> Inflige (1  + Force) points de dégats physiques.",
       "prix": "🔷 <strong>Prix:</strong> 10",
-      "poids": ""
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
       "nom": "Bâton en bois",
@@ -5173,7 +5556,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       ],
       "effet": "<strong>Dégâts: </strong> Inflige (2  + Force) points de dégats physiques.",
       "prix": "🔷 <strong>Prix:</strong> 5",
-      "poids": ""
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
       "nom": "Gourdin",
@@ -5187,7 +5570,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       ],
       "effet": "<strong>Dégâts: </strong> Inflige (1  + Force) points de dégats physiques.",
       "prix": "🔷 <strong>Prix:</strong> 10",
-      "poids": ""
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
       "nom": "Arc simple",
@@ -5201,7 +5584,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       ],
       "effet": "<strong>Portée: </strong> 12m.<br>\n<strong>Dégâts: </strong> Inflige (Force) points de dégats physiques.",
       "prix": "🔷 <strong>Prix:</strong> 30",
-      "poids": ""
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
       "nom": "Bouclier en bois",
@@ -5213,7 +5596,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       ],
       "effet": "<strong>Effet:</strong> Augmente l'armure physique de 2.",
       "prix": "🔷 <strong>Prix:</strong> 15",
-      "poids": ""
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
       "nom": "Robe simple",
@@ -5226,7 +5609,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       ],
       "effet": "<strong>Effet:</strong> Augmente la Volonté de 1.",
       "prix": "🔷 <strong>Prix:</strong> 20",
-      "poids": ""
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
       "nom": "Armure de cuir",
@@ -5239,7 +5622,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       ],
       "effet": "<strong>Effet:</strong> Augmente l'armure physique de 1.",
       "prix": "🔷 <strong>Prix:</strong> 30",
-      "poids": ""
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
       "nom": "Armure en maille",
@@ -5364,9 +5747,9 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       "tags": [
         "Nourriture"
       ],
-      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore (Endurance) points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.",
+      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore 5 points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.",
       "prix": "🔷 <strong>Prix:</strong> 5",
-      "poids": ""
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
       "nom": "Ration copieuse de nourriture",
@@ -5376,9 +5759,9 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       "tags": [
         "Nourriture"
       ],
-      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore (Endurance) points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.\n<br><b>Charges :</b> 3",
+      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore 8 points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.\n<br><b>Charges :</b> 3",
       "prix": "🔷 <strong>Prix:</strong> 15",
-      "poids": ""
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
       "nom": "Fruits de la forêt",
@@ -5388,9 +5771,9 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       "tags": [
         "Nourriture"
       ],
-      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore (Endurance) points de vie. <br>Couplé à un sommeil, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>. <br>De plus, lorsque consommé, le mangeur ne neccessite plus que 4 heures de sommeil ce jour-ci.\n<br><br><b>Charges :</b> 3",
+      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore 5 points de vie. <br>Couplé à un sommeil, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>. <br>De plus, lorsque consommé, le mangeur ne neccessite plus que 4 heures de sommeil ce jour-ci.\n<br><br><b>Charges :</b> 3",
       "prix": "🔷 <strong>Prix:</strong> 20",
-      "poids": ""
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
       "nom": "Ration de survie",
@@ -5400,9 +5783,9 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       "tags": [
         "Nourriture"
       ],
-      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.",
+      "effet": "Inutilisable en combat. Maximum deux nourritures consommées par jour.\n<br>\n<br><strong>Effet:</strong> Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.",
       "prix": "",
-      "poids": ""
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
       "nom": "Flèche aiguisée",
@@ -5440,7 +5823,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       ],
       "effet": "Inutilisable hors combat.      \n<br><strong>Portée :</strong>   3m.\n<br><strong>Effet:</strong> Rend 5 (critique : 10) points de vie à la cible.\n<br><strong>Charges:</strong> 3.",
       "prix": "🔷 <strong>Prix:</strong> 10",
-      "poids": ""
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
       "nom": "Bracelet médicinal de la forêt",
@@ -5452,7 +5835,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       ],
       "effet": "<strong>Effet:</strong> Soigne son porteur du poison. Utilisable une fois par jour maximum.",
       "prix": "🔷 <strong>Prix:</strong> ?",
-      "poids": ""
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
       "nom": "Dent de Grouink",
@@ -5464,7 +5847,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       ],
       "effet": "<strong>Effet:</strong> Augmente la Force du porteur de 3.",
       "prix": "🔷 <strong>Prix:</strong> ?",
-      "poids": ""
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
       "nom": "Echarpe de chaman Groink",
@@ -5476,7 +5859,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       ],
       "effet": "<strong>Effet:</strong> Augmente de 3m la portée des sorts d'alterations magiques et d'améliorations temporaires.",
       "prix": "🔷 <strong>Prix:</strong> ?",
-      "poids": ""
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
       "nom": "Fourrure d'ours",
@@ -5488,7 +5871,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       ],
       "effet": "",
       "prix": "🔷 <strong>Prix:</strong> 100",
-      "poids": ""
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
       "nom": "Pierre à aiguiser",
@@ -5526,7 +5909,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       ],
       "effet": "<strong>Dégâts: </strong> Inflige (3  + Force) points de dégats physiques.\n<br> L'arme est imprégnée de 5 points de dégats d'élément <span style=\"color: #4682b4; font-weight: bold;\">Eau</span>.",
       "prix": "🔷 <strong>Prix:</strong> ?",
-      "poids": ""
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
       "nom": "Clairgivre",
@@ -5602,7 +5985,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       "tags": [
         "Accessoire"
       ],
-      "effet": "<strong>Effet:</strong> En cas de coup critique physique sur une attaque au corp à corp, l'adversaire sera mis dans l'état <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">A terre</span>.\n<br><strong>Sans effet si :</strong> Adversaire de taille Grand ou supérieur, ou adversaire volant.",
+      "effet": "<strong>Effet:</strong> En cas de coup critique physique sur une attaque au corp à corp, l'adversaire sera mis dans l'état <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">A terre</span>.\n<br><strong>Sans effet si :</strong> <br>- Adversaire de taille Grand ou supérieur <br>- Adversaire volant ou lévitant.",
       "prix": "🔷 <strong>Prix:</strong> ?",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -5641,6 +6024,116 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       ],
       "effet": "<strong>Effet:</strong> Les attaques physiques sont imprégnés d'une force élémentaire, qui inflige 4 dégats de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>.",
       "prix": "🔷 <strong>Prix:</strong> ?",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Dard de guêpe géante",
+      "numero": 42,
+      "image": "https://i.ibb.co/mjcDdck/Dague2.png",
+      "description": "<i>Un dard chitineux acéré, arraché à une guêpe géante, utilisé comme une dague imprégnée de venin.</i>",
+      "tags": [
+        "Arme",
+        "Une main",
+        "Dague"
+      ],
+      "effet": "<strong>Dégâts: </strong> Inflige (4  + Force) points de dégats physiques.\n<br> Si la cible a une résistance alteration inférieure à 5, elle subit l'état <span class=\"etat-link\" data-etat=\"Empoisonné\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Empoisonné</span> 2, pendant 5 tours.",
+      "prix": "🔷 <strong>Prix:</strong> ?",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Arc de chasseur",
+      "numero": 43,
+      "image": "https://i.ibb.co/bRXH0Vwj/Arc2.png",
+      "description": "<i>Un arc de chasseur finement façonné, dont la courbure élégante et la corde tendue promettent des tirs précis et implacables.</i>",
+      "tags": [
+        "Arme",
+        "Deux mains",
+        "Arc"
+      ],
+      "effet": "<strong>Portée: </strong> 15m.<br>\n<strong>Dégâts: </strong> Inflige (Force) points de dégats physiques.\n<br> En cas de coup critique, si une charge de consomable flèche avait été utilisée, elle est récupérée.",
+      "prix": "🔷 <strong>Prix:</strong> 100",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Grande hache de bûcheron",
+      "numero": 44,
+      "image": "https://i.ibb.co/gMbq4QZD/Hache-Bucheron.png",
+      "description": "<i>Une lourde hache à long manche de bois renforcé, dont la large lame d’acier est faite pour fendre les troncs les plus épais.</i>",
+      "tags": [
+        "Arme",
+        "Arme exotique",
+        "Deux mains"
+      ],
+      "effet": "<strong>Dégâts: </strong> Inflige (7  + Force) points de dégats physiques.",
+      "prix": "🔷 <strong>Prix:</strong> 100",
+      "poids": "⚖️ <strong>Poids:</strong> 2"
+    },
+    {
+      "nom": "Tunique d'explorateur",
+      "numero": 45,
+      "image": "https://i.ibb.co/Kj070KVw/Robe2.png",
+      "description": "<i>Légère et pratique, elle est garnie de poches et de lanières pour affronter de longues marches et résister aux intempéries.</i>",
+      "tags": [
+        "Armure",
+        "Robe"
+      ],
+      "effet": "<strong>Effet:</strong> Augmente la Chance de 3.\n<br> Permet de stocker 2 consommables supplémentaires dans le sac.",
+      "prix": "🔷 <strong>Prix:</strong> 130",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Robe de la forêt",
+      "numero": 46,
+      "image": "https://i.ibb.co/Kj070KVw/Robe2.png",
+      "description": "<i>Tissée de fibres vertes et ornée de feuillage vivant, elle se fond dans la végétation et améliore son porteur par la magie sylvestre.</i>",
+      "tags": [
+        "Armure",
+        "Robe",
+        "Non identifié"
+      ],
+      "effet": "<strong>Effet:</strong> Augmente les dégats élémentaires de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> et d'<span style=\"color: #4682b4; font-weight: bold;\">Eau</span> infligés par les sorts de 5.",
+      "prix": "🔷 <strong>Prix:</strong> ?",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Armure en cuir d'ours",
+      "numero": 47,
+      "image": "https://i.ibb.co/C3bVcQkV/Armure-Ours.png",
+      "description": "<i>Massive et chaude, faite d’une épaisse fourrure brune et de cuir tanné, elle confère force et résistance sauvage.</i>",
+      "tags": [
+        "Armure",
+        "Armure légère"
+      ],
+      "effet": "<strong>Effet:</strong> Augmente l'armure physique de 3.\n<br>Augmente l'armure élémentaire <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> et <span style=\"color: #22c55e; font-weight: bold;\">Air</span> de 5.",
+      "prix": "🔷 <strong>Prix:</strong> 200",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Rapière elfique",
+      "numero": 48,
+      "image": "https://i.ibb.co/Z1FnQ4TH/Rapi-re-Elfique.png",
+      "description": "<i>Fine et élégante, gravée de runes lumineuses, elle canalise l’énergie des anciens bois pour renforcer la magie de son porteur.</i>",
+      "tags": [
+        "Arme",
+        "Épée",
+        "Une main",
+        "Non identifié"
+      ],
+      "effet": "<strong>Dégats:</strong> Inflige (4 + Force) points de dégats physiques.\n<br><strong>Effet:</strong> Augmente l'intelligence de 5.",
+      "prix": "🔷 <strong>Prix:</strong> ?",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Armure de cuir de monstre",
+      "numero": 49,
+      "image": "https://i.ibb.co/MyZR8SYt/Armure-Cuir-Monstre.png",
+      "description": "<i>Une armure légère tannée dans la peau rugueuse d’une bête abattue, souple mais marquée de cicatrices naturelles qui témoignent de la sauvagerie de la créature.</i>",
+      "tags": [
+        "Armure",
+        "Armure légère"
+      ],
+      "effet": "<strong>Effet:</strong> Augmente l'Armure physique de 2.<br> Augmente l'Endurance de 2.",
+      "prix": "🔷 <strong>Prix:</strong> 120",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     }
   ],
@@ -6172,14 +6665,14 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
     "subclass:Enchanteur:Esprit de la grande Fée": "https://i.ibb.co/Cswfsyzz/9920a4e75242.jpg",
     "subclass:Enchanteur:Lutin": "https://i.ibb.co/Fbspq9hP/dd5e7b366e0f.jpg",
     "sort:Sorts de Mage:Boule de Feu": "https://i.ibb.co/vCWmgrQ5/Boule-De-Feu.png",
-    "sort:Sorts de Mage:Éclair": "https://i.ibb.co/h194qhvd/Eclair.png",
+    "sort:Sorts de Mage:Éclair": "https://i.ibb.co/VYCTyMdH/Eclair.png",
     "sort:Sorts de Mage:Vague déferlante": "https://i.ibb.co/BSHtL8K/Vague.png",
     "sort:Sorts de Prêtre:Châtiment": "https://i.ibb.co/JRPyXx1L/Chatiment-Sacr.png",
     "sort:Sorts de Prêtre:Soin mineur": "https://i.ibb.co/YBC2HSnK/Soin-Mineur.png",
     "sort:Sorts d'Enchanteur:Accroche terrestre": "https://i.ibb.co/27W4NtSQ/Accroche-Terre.png",
     "sort:Sorts d'Enchanteur:Accélération": "https://i.ibb.co/Vc072qQB/Acceleration.png",
     "sort:Sorts d'Enchanteur:Sommeil": "https://i.ibb.co/rKyTh27C/Sleep.png",
-    "sort:Sorts de Prêtre:Nouveau Sort": "https://i.ibb.co/cXh57Pdn/ArmeLum.png",
+    "sort:Sorts de Prêtre:Nouveau Sort": "https://i.ibb.co/7d1L9BCj/Nova-Lumineuse.png",
     "sort:Sorts de Prêtre:Protection": "https://i.ibb.co/QvK52kxH/Protection.png",
     "subclass:Guerrier:Nain des montagnes:1": "https://i.ibb.co/FL9m5HJn/Nain.png",
     "subclass:Guerrier:Nain des montagnes:2": "https://i.ibb.co/wNnJxSbj/NaineF.png",
@@ -6221,7 +6714,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
     "objet:Baguette de boule de feu": "https://i.ibb.co/JwXs3k2V/Baguette-Feu.png",
     "objet:Feuilleclaire": "https://i.ibb.co/bMDstDVV/Herb1.png",
     "objet:Nocteline": "https://i.ibb.co/7JpQ7Kr7/Herb2.png",
-    "objet:Nouvel Objet": "https://i.ibb.co/ksxCppN8/Collier-Terrestre.png",
+    "objet:Nouvel Objet": "https://i.ibb.co/Z1FnQ4TH/Rapi-re-Elfique.png",
     "objet:Baguette de sommeil": "https://i.ibb.co/bMXNS4gy/Baguette-Nuit.png",
     "monster:Araignée Géante": "https://i.ibb.co/b0XHjQJ/Monstre-For-t-Araign-e.png",
     "monster:Crabe des Bois": "https://i.ibb.co/7dY3GgJS/Monstre-For-t-Crab.png",
@@ -6265,11 +6758,37 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
     "objet:Gants patte d'ours": "https://i.ibb.co/KzrZRGcd/Gants-Patte-Ours.png",
     "objet:Bouclier de la forêt": "https://i.ibb.co/Zpkw8qVL/Bouclier-Foret.png",
     "objet:Couronne d'épines": "https://i.ibb.co/d09YYyy8/Couronne-Epines.png",
-    "objet:Collier terrestre": "https://i.ibb.co/ksxCppN8/Collier-Terrestre.png"
+    "objet:Collier terrestre": "https://i.ibb.co/ksxCppN8/Collier-Terrestre.png",
+    "objet:Arc de chasseur": "https://i.ibb.co/bRXH0Vwj/Arc2.png",
+    "objet:Dard de guêpe géante": "https://i.ibb.co/mjcDdck/Dague2.png",
+    "objet:Grande hache de bûcheron": "https://i.ibb.co/gMbq4QZD/Hache-Bucheron.png",
+    "objet:Tunique d'explorateur": "https://i.ibb.co/Kj070KVw/Robe2.png",
+    "objet:Robe de la forêt": "https://i.ibb.co/Zp7bLygX/Robe3.png",
+    "objet:Armure en cuir d'ours": "https://i.ibb.co/C3bVcQkV/Armure-Ours.png",
+    "objet:Rapière elfique": "https://i.ibb.co/Z1FnQ4TH/Rapi-re-Elfique.png",
+    "sort:Sorts de Prêtre:Resistance": "https://i.ibb.co/TxWg9bns/Resistance.png",
+    "sort:Sorts de Prêtre:Guérison du poison": "https://i.ibb.co/4nhGwkjX/Anti-Poison.png",
+    "sort:Sorts de Prêtre:Nova lumineuse": "https://i.ibb.co/7d1L9BCj/Nova-Lumineuse.png",
+    "sort:Sorts de Prêtre:Toucher Lointain": "https://i.ibb.co/k2Z2WrP4/Soin-Distance.png",
+    "sort:Sorts de Mage:Faisceau lumineux": "https://i.ibb.co/KpXwSx6V/Faiseau-Lum.png",
+    "sort:Sorts de Mage:Vague sombre": "https://i.ibb.co/0yRTFkqy/Vague-sombre.png",
+    "sort:Sorts de Mage:Missile magique": "https://i.ibb.co/bM9VS8GB/Missile-Magique.png",
+    "sort:Sorts de Mage:Nuage toxique": "https://i.ibb.co/35C4DgdS/Nuage-Toxique.png",
+    "sort:Sorts d'Enchanteur:Nouveau Sort": "https://i.ibb.co/FLbCrnKQ/L-vitation.png",
+    "sort:Sorts d'Enchanteur:Lévitation": "https://i.ibb.co/FLbCrnKQ/L-vitation.png",
+    "sort:Sorts d'Enchanteur:Imprégnation élémentaire feu terre nuit": "https://i.ibb.co/RkrW8CRC/Enchant-Element.png",
+    "sort:Sorts d'Enchanteur:Imprégnation élémentaire eau air lumière": "https://i.ibb.co/WNWfc1jC/Enchant-Element2.png",
+    "sort:Sorts d'Enchanteur:Silence": "https://i.ibb.co/7JRKfdMw/Silence.png",
+    "sort:Sorts d'Enchanteur:Puissance magique": "https://i.ibb.co/FbtF1PjX/Puissance-Sort.png",
+    "sort:Sorts d'Enchanteur:Puissance physique": "https://i.ibb.co/VckPSx1C/Puissance-Physique.png",
+    "sort:Sorts d'Enchanteur:Confusion": "https://i.ibb.co/vCwsVnR5/Confusion.png",
+    "sort:Sorts d'Enchanteur:Armure élémentaire Feu Terre Nuit": "https://i.ibb.co/SH5jcyv/Armure-El-mentaire1.png",
+    "sort:Sorts d'Enchanteur:Armure élémentaire Eau Air Lumière": "https://i.ibb.co/jP9RKzdq/Armure-El-mentaire2.png",
+    "objet:Armure de cuir de monstre": "https://i.ibb.co/MyZR8SYt/Armure-Cuir-Monstre.png"
   },
   "meta": {
-    "total_images": 105,
-    "exported_date": "2025-09-04",
+    "total_images": 131,
+    "exported_date": "2025-09-10",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
 };
@@ -6542,7 +7061,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       "type": "card",
       "id": "stats-base",
       "title": "Statistiques de base",
-      "content": "<hr><div class=\"stats-grid\"><div class=\"stat-card\"><h4>💪 Force</h4><p>Améliore les dégâts physiques.</p></div><hr>\n\n<div class=\"stat-card\"><h4>🛡️ Endurance</h4><p>Les points de vie maximum sont de : <strong>(2 x Endurance)</strong></p><p>Augmente les soins prodigués par la consommation de nourriture.</p></div>\n\n<hr><div class=\"stat-card\">\n<h4>🏃 Agilité</h4><p>Chaque 5 points ajoutent <strong>+1</strong> aux jets d'esquive et de critique physique.\n<br><br>Augmente l'initiative d'autant.</p></div><hr>\n\n<div class=\"stat-card\"><h4>🧠 Intelligence</h4><p>Détermine la puissance des sorts.</p></div><hr><div class=\"stat-card\"><h4>⚡ Volonté</h4><p>Le mana maximum est de : <strong>(10 + 2 x Volonté)</strong></p><p>Augmente la Résistance altérations.</p>\n\n</div><hr><div class=\"stat-card\"><h4>🍀 Chance</h4><p>Améliore la Fortune d'autant.</p><p>De plus, chaque 5 points ajoutent <strong>+1</strong> aux chances de coup critique avec les sorts et les consommables.</p></div></div>",
+      "content": "<hr><div class=\"stats-grid\"><div class=\"stat-card\"><h4>💪 Force</h4><p>Améliore les dégâts physiques.</p></div><hr>\n\n<div class=\"stat-card\"><h4>🛡️ Endurance</h4><p>Les points de vie maximum sont de : <strong>(2 x Endurance)</strong></p><p></div>\n\n<hr><div class=\"stat-card\">\n<h4>🏃 Agilité</h4><p>Chaque 5 points ajoutent <strong>+1</strong> aux jets d'esquive et de critique physique.\n<br><br>Augmente l'initiative d'autant.</p></div><hr>\n\n<div class=\"stat-card\"><h4>🧠 Intelligence</h4><p>Détermine la puissance des sorts.</p></div><hr><div class=\"stat-card\"><h4>⚡ Volonté</h4><p>Le mana maximum est de : <strong>(10 + 2 x Volonté)</strong></p><p>Augmente la Résistance altérations.</p>\n\n</div><hr><div class=\"stat-card\"><h4>🍀 Chance</h4><p>Améliore la Fortune d'autant.</p><p>De plus, chaque 5 points ajoutent <strong>+1</strong> aux chances de coup critique avec les sorts et les consommables.</p></div></div>",
       "deletable": true,
       "sectionName": "Statistiques de base"
     },
@@ -6634,7 +7153,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       "type": "card",
       "id": "etats-new-5-1755762657383",
       "title": "Empoisonné",
-      "content": "Des dégats sont appliqués à chaque début de tour du lanceur, réduits ni par l'armure physique ni par l'armure élémentaire.",
+      "content": "Des dégats sont appliqués à chaque début de tour, réduits ni par l'armure physique ni par l'armure élémentaire.",
       "deletable": true,
       "sectionName": "Nouvelle section"
     },
@@ -6764,7 +7283,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       "type": "card",
       "id": "combat-new-7-1756407955417",
       "title": "Incantation sur plusieurs tours",
-      "content": "Certains sorts puissants nécéssitent plusieurs tours d'incantation.\n\n<br>Aprés avoir commencé une incantation, aucun déplacement/action n'est possible. Les effets du sort sont effectués au dernier tour de l'incantation, tour où la créature pourra de nouveau effectuer des actions/déplacement.\n<br> Les dégâts subis n’interrompent pas l’incantation, sauf en cas de mort ou d’effet empechant d'effectuer des actions (exemple : <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">A terre</span>).",
+      "content": "Certains sorts ont un effet qui dure plusieurs tours.\n<br> Dans ce cas, le dé qui determine si l'effet est critique doit être relancé à chaque tour (l'effet \"critique\" d'un sort ne dure qu'un seul tour).<br>  <br>\n\n<hr>\n\n<br>Certains sorts puissants nécéssitent plusieurs tours d'incantation.\n\n<br><br>Aprés avoir commencé une incantation, aucun déplacement/action n'est possible. Les effets du sort sont effectués au dernier tour de l'incantation, tour où la créature pourra de nouveau effectuer des actions/déplacement.\n<br> Les dégâts subis n’interrompent pas l’incantation, sauf en cas de mort ou d’effet empechant d'effectuer des actions (exemple : <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">A terre</span>).\n<br><hr>",
       "deletable": true,
       "sectionName": "Nouvelle section"
     },
@@ -7146,13 +7665,22 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
     // Initialization
     async init() {
       try {
+        this.updateLoadingProgress(10);
         await this.loadData();
+        
+        this.updateLoadingProgress(40);
         await this.loadContent();
+        
+        this.updateLoadingProgress(70);
         this.initializeModules();
+        
+        this.updateLoadingProgress(90);
         
         // Execute data validation after all modules are loaded
         setTimeout(() => {
           this.validateDataIntegrity();
+          this.updateLoadingProgress(100);
+          this.hideLoadingScreen();
         }, 500);
         
         // Auto-enable MJ mode with additional delay to ensure router is ready
@@ -7160,7 +7688,29 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
           this.autoEnableMJModeInDevelopment();
         }, 800);
       } catch (error) {
+        this.hideLoadingScreen();
         // Silent error handling for initialization
+      }
+    },
+
+    // Update loading progress
+    updateLoadingProgress(percentage) {
+      const progressBar = document.querySelector('.loading-bar');
+      if (progressBar) {
+        progressBar.style.width = `${percentage}%`;
+      }
+    },
+
+    // Hide loading screen with animation
+    hideLoadingScreen() {
+      const loadingScreen = document.getElementById('app-loading');
+      if (loadingScreen) {
+        loadingScreen.classList.add('fade-out');
+        setTimeout(() => {
+          if (loadingScreen.parentNode) {
+            loadingScreen.parentNode.removeChild(loadingScreen);
+          }
+        }, 500);
       }
     },
 
@@ -8669,22 +9219,38 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
     }
 
     build() {
+      let html = '';
+      
       switch (this.type) {
         case 'spell':
-          return this.buildSpellCard();
+          html = this.buildSpellCard();
+          break;
         case 'don':
-          return this.buildDonCard();
+          html = this.buildDonCard();
+          break;
         case 'subclass':
-          return this.buildSubclassCard();
+          html = this.buildSubclassCard();
+          break;
         case 'objet':
-          return this.buildObjetCard();
+          html = this.buildObjetCard();
+          break;
         case 'monster':
-          return this.buildMonsterCard();
+          html = this.buildMonsterCard();
+          break;
         case 'tableTresor':
-          return this.buildTableTresorCard();
+          html = this.buildTableTresorCard();
+          break;
         default:
-          return this.buildGenericCard();
+          html = this.buildGenericCard();
+          break;
       }
+      
+      // Apply HTML minification for performance optimization in standalone mode
+      if (window.STANDALONE_VERSION && JdrApp.utils && JdrApp.utils.minifyHTML) {
+        html = JdrApp.utils.minifyHTML(html);
+      }
+      
+      return html;
     }
 
     buildSpellCard() {
@@ -9021,7 +9587,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
         // STANDALONE: Never generate image buttons at all
         return `
           <div class="${containerClasses}" data-illus-key="${illusKey}" data-style-type="${styleType}" data-bound="1">
-            <img alt="Illustration ${altText}" class="thumb" style="${imageStyle}"${imageUrl ? ` src="${imageUrl}"` : ''}>
+            <img alt="Illustration ${altText}" class="thumb lazy-load" loading="lazy" style="${imageStyle}"${imageUrl ? ` data-src="${imageUrl}"` : ''} src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjE1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkNoYXJnZW1lbnQuLi48L3RleHQ+PC9zdmc+">
           </div>
         `;
       } else {
@@ -10712,6 +11278,54 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
     });
   };
 
+  // ========================================
+  // PERFORMANCE OPTIMIZATION UTILITIES
+  // ========================================
+  
+  // Minify HTML to reduce size (for performance optimization)
+  JdrApp.utils.minifyHTML = function(html) {
+    if (!html || typeof html !== 'string') return html;
+    
+    return html
+      // Remove comments
+      .replace(/<!--[\s\S]*?-->/g, '')
+      // Remove extra whitespace between tags
+      .replace(/>\s+</g, '><')
+      // Remove whitespace at start and end of lines
+      .replace(/^\s+|\s+$/gm, '')
+      // Remove empty lines
+      .replace(/\n\s*\n/g, '\n')
+      // Trim the result
+      .trim();
+  };
+
+  // Debounce function for performance
+  JdrApp.utils.debounce = function(func, wait, immediate) {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        timeout = null;
+        if (!immediate) func.apply(this, args);
+      };
+      const callNow = immediate && !timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+      if (callNow) func.apply(this, args);
+    };
+  };
+
+  // Throttle function for performance
+  JdrApp.utils.throttle = function(func, limit) {
+    let inThrottle;
+    return function(...args) {
+      if (!inThrottle) {
+        func.apply(this, args);
+        inThrottle = true;
+        setTimeout(() => inThrottle = false, limit);
+      }
+    };
+  };
+
 })();
 // ============================================================================
 // JDR-BAB APPLICATION - IMAGES MODULE
@@ -10730,11 +11344,80 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
     async init() {
       await this.loadImageData();
       this.initImageHandlers();
+      this.initLazyLoading();
       
       // Auto-sync monster images on startup to ensure consistency
       setTimeout(() => {
         this.ensureMonsterImageMappings();
       }, 1000);
+    },
+
+    // Initialize lazy loading with Intersection Observer
+    initLazyLoading() {
+      if ('IntersectionObserver' in window) {
+        this.lazyImageObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const img = entry.target;
+              const dataSrc = img.getAttribute('data-src');
+              if (dataSrc) {
+                img.src = dataSrc;
+                img.removeAttribute('data-src');
+                img.classList.remove('lazy-load');
+                img.classList.add('lazy-loaded');
+                
+                // Une fois l'image chargée, s'assurer que les événements d'agrandissement sont attachés
+                img.addEventListener('load', () => {
+                  if (JdrApp.modules.editor && JdrApp.modules.editor.attachImageEvents) {
+                    JdrApp.modules.editor.attachImageEvents();
+                  }
+                }, { once: true });
+              }
+              observer.unobserve(img);
+            }
+          });
+        }, {
+          rootMargin: '50px 0px', // Start loading 50px before image comes into view
+          threshold: 0.01
+        });
+      } else {
+        // Fallback for browsers without IntersectionObserver
+        this.initFallbackLazyLoading();
+      }
+    },
+
+    // Fallback lazy loading for older browsers
+    initFallbackLazyLoading() {
+      const lazyLoad = () => {
+        const lazyImages = document.querySelectorAll('img.lazy-load[data-src]');
+        lazyImages.forEach(img => {
+          const rect = img.getBoundingClientRect();
+          if (rect.top < window.innerHeight + 50 && rect.bottom > -50) {
+            const dataSrc = img.getAttribute('data-src');
+            if (dataSrc) {
+              img.src = dataSrc;
+              img.removeAttribute('data-src');
+              img.classList.remove('lazy-load');
+              img.classList.add('lazy-loaded');
+              
+              // Une fois l'image chargée, s'assurer que les événements d'agrandissement sont attachés
+              img.addEventListener('load', () => {
+                if (JdrApp.modules.editor && JdrApp.modules.editor.attachImageEvents) {
+                  JdrApp.modules.editor.attachImageEvents();
+                }
+              }, { once: true });
+            }
+          }
+        });
+      };
+      
+      // Use throttled scroll events for better performance
+      const throttledLazyLoad = JdrApp.utils.throttle(lazyLoad, 100);
+      const debouncedLazyLoad = JdrApp.utils.debounce(lazyLoad, 250);
+      
+      window.addEventListener('scroll', throttledLazyLoad, { passive: true });
+      window.addEventListener('resize', debouncedLazyLoad, { passive: true });
+      lazyLoad(); // Initial check
     },
 
     // Load image data from JSON file or embedded data
@@ -10786,7 +11469,9 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
     processImageUrl(originalUrl) {
       // If it's an i.ibb.co URL, use proxy for better mobile compatibility
       if (originalUrl.includes('i.ibb.co') && !originalUrl.includes('images.weserv.nl')) {
-        return `https://images.weserv.nl/?url=${encodeURIComponent(originalUrl)}`;
+        const format = this.supportsWebP() ? 'webp' : 'jpeg';
+        const quality = this.getOptimalQuality();
+        return `https://images.weserv.nl/?url=${encodeURIComponent(originalUrl)}&we&output=${format}&q=${quality}&w=400&h=300&fit=inside`;
       }
       
       // For local monster paths, encode only the filename to handle French characters properly
@@ -10800,6 +11485,33 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       return originalUrl;
     },
 
+    // Detect WebP support
+    supportsWebP() {
+      if (this._webpSupport !== undefined) return this._webpSupport;
+      
+      try {
+        this._webpSupport = document.createElement('canvas')
+          .toDataURL('image/webp', 0.5)
+          .indexOf('data:image/webp') === 0;
+      } catch (err) {
+        this._webpSupport = false;
+      }
+      
+      return this._webpSupport;
+    },
+
+    // Get optimal quality based on connection speed
+    getOptimalQuality() {
+      if ('connection' in navigator) {
+        const connection = navigator.connection;
+        if (connection.effectiveType === '4g') return 85;
+        if (connection.effectiveType === '3g') return 75;
+        if (connection.effectiveType === '2g') return 65;
+        return 60; // slow-2g
+      }
+      return 80; // Default quality
+    },
+
     autoLoadImages() {
       const illusElements = document.querySelectorAll('[data-illus-key]');
       let loadedCount = 0;
@@ -10809,7 +11521,18 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
         const imageUrl = this.getImageUrl(illusKey);
         
         if (imageUrl) {
-          this.applyImage(illusElement, imageUrl);
+          const img = illusElement.querySelector('img');
+          if (img && img.classList.contains('lazy-load')) {
+            // For lazy loading, set data-src and observe
+            const processedUrl = this.processImageUrl(imageUrl);
+            img.setAttribute('data-src', processedUrl);
+            if (this.lazyImageObserver) {
+              this.lazyImageObserver.observe(img);
+            }
+          } else {
+            // Fallback to immediate loading
+            this.applyImage(illusElement, imageUrl);
+          }
           loadedCount++;
         }
       });
@@ -14067,30 +14790,74 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       const viewsContainer = document.querySelector('#views');
       if (!viewsContainer) return;
 
-      let articlesHTML = '';
-      articlesHTML += this.generateStaticPages();
-      articlesHTML += this.generateClassPages();
-      articlesHTML += this.generateCategoryPages();
-      articlesHTML += this.generateMonstersPage();
+      // Use progressive rendering to avoid blocking the main thread
+      this.progressiveRender([
+        { fn: () => this.generateStaticPages(), name: 'static' },
+        { fn: () => this.generateClassPages(), name: 'classes' },
+        { fn: () => this.generateCategoryPages(), name: 'categories' },
+        { fn: () => this.generateMonstersPage(), name: 'monsters' }
+      ], viewsContainer);
+    },
 
-      viewsContainer.innerHTML = articlesHTML;
-      setTimeout(() => {
-        this.autoLoadImages();
-        // Reapply dev mode state to new elements
+    // Progressive rendering to avoid blocking the UI thread
+    async progressiveRender(renderFunctions, container) {
+      container.innerHTML = ''; // Clear first
+      
+      for (let i = 0; i < renderFunctions.length; i++) {
+        const { fn, name } = renderFunctions[i];
+        
+        // Use requestAnimationFrame to yield to browser between renders
+        await new Promise(resolve => {
+          requestAnimationFrame(() => {
+            try {
+              const html = fn();
+              if (html) {
+                container.insertAdjacentHTML('beforeend', html);
+              }
+            } catch (error) {
+              console.warn(`Error rendering ${name}:`, error);
+            }
+            resolve();
+          });
+        });
+        
+        // Yield every few operations to prevent blocking
+        if (i % 2 === 0) {
+          await new Promise(resolve => setTimeout(resolve, 5));
+        }
+      }
+
+      // Post-render operations with improved batching
+      requestAnimationFrame(() => {
+        this.batchPostRenderOperations();
+      });
+    },
+
+    // Batch post-render operations to reduce layout thrashing
+    batchPostRenderOperations() {
+      // Batch DOM reads first, then writes
+      const hasDevMode = JdrApp.modules.editor && JdrApp.modules.editor.isDevMode;
+      const hasEditor = JdrApp.modules.editor;
+      const monstersContainer = document.getElementById('monsters-container');
+
+      // Batch writes
+      this.autoLoadImages();
+      
+      if (hasEditor) {
         this.applyDevModeToNewContent();
-        // Attach image events for standalone compatibility
-        if (JdrApp.modules.editor && JdrApp.modules.editor.attachImageEvents) {
-          JdrApp.modules.editor.attachImageEvents();
+        
+        if (hasEditor.attachImageEvents) {
+          hasEditor.attachImageEvents();
         }
-        // Create proxy buttons for new content
-        if (JdrApp.modules.editor && JdrApp.modules.editor.isDevMode) {
-          setTimeout(() => JdrApp.modules.editor.createProxyButtons(), 100);
+        
+        if (hasDevMode) {
+          setTimeout(() => hasEditor.createProxyButtons(), 50);
         }
-        // Auto-populate monsters page if it exists
-        if (document.getElementById('monsters-container')) {
-          setTimeout(() => this.populateMonstersPage(), 50);
-        }
-      }, 100);
+      }
+      
+      if (monstersContainer) {
+        setTimeout(() => this.populateMonstersPage(), 30);
+      }
     },
 
     applyDevModeToNewContent() {
@@ -14254,16 +15021,6 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
           </div>
         </div>
         
-        <div>
-          <div style="font-size: 12px; color: var(--paper-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">🎭 Ressources</div>
-          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-            <button class="btn small" id="elementsBtn" title="Choisir un élément pour copier sa balise HTML colorée">🎨 Éléments</button>
-            <button class="btn small" id="etatsBtn" title="Choisir un état pour copier sa balise HTML avec tooltip">⚡ États</button>
-            <button class="btn small" id="spellLinksBtn" title="Créer un lien vers un sort avec aperçu">🔮 Liens sorts</button>
-            <button class="btn small" id="pageLinksBtn" title="Créer un lien vers une page du projet">🔗 Liens pages</button>
-            <button class="btn small" id="monsterLinksBtn" title="Créer un lien vers un monstre avec aperçu">🐲 Liens monstres</button>
-          </div>
-        </div>
       `;
 
       devToolbox.innerHTML = toolboxHTML;
@@ -15043,6 +15800,10 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
         font-family: monospace;
         white-space: pre-wrap;
       `;
+
+      // Add editing controls toolbar
+      this.addEditingControls(container, editableElement);
+
       editableElement.focus();
 
       const range = document.createRange();
@@ -16290,9 +17051,10 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
               <button id="editorSpellLinksBtn" class="btn" style="background: #6b21a8; color: white; font-size: 12px;">🔗 Liens Sorts</button>
               <button id="editorPageLinksBtn" class="btn" style="background: #1d4ed8; color: white; font-size: 12px;">🔗 Liens Pages</button>
               <button id="editorMonsterLinksBtn" class="btn" style="background: #dc2626; color: white; font-size: 12px;">🐲 Liens Monstres</button>
+              <button id="editorTreasureTablesBtn" class="btn" style="background: #b45309; color: white; font-size: 12px;">🎲 Tables Trésors</button>
             </div>
             <div style="font-size: 12px; color: var(--paper-muted); line-height: 1.4;">
-              💡 <strong>Astuce:</strong> Utilisez ces boutons pour insérer rapidement des éléments, états, liens vers les sorts, liens vers les pages et liens vers les monstres dans votre contenu HTML.
+              💡 <strong>Astuce:</strong> Utilisez ces boutons pour insérer rapidement des éléments, états, liens vers les sorts, les pages, les monstres et les tables de trésors dans votre contenu HTML.
             </div>
           </div>
           
@@ -16316,6 +17078,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       const spellLinksBtn = modal.querySelector('#editorSpellLinksBtn');
       const pageLinksBtn = modal.querySelector('#editorPageLinksBtn');
       const monsterLinksBtn = modal.querySelector('#editorMonsterLinksBtn');
+      const treasureTablesBtn = modal.querySelector('#editorTreasureTablesBtn');
 
       // Helper function to insert text at cursor position in textarea
       const insertTextAtCursor = (text) => {
@@ -16438,6 +17201,13 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
         modal.remove();
         backdrop.remove();
       });
+
+      // Treasure tables button handler
+      if (treasureTablesBtn) {
+        treasureTablesBtn.addEventListener('click', () => {
+          this.showTreasureTablesModal(insertTextAtCursor);
+        });
+      }
 
       // Focus textarea
       textarea.focus();
@@ -16964,6 +17734,349 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
         return false;
       }
     }
+
+    addEditingControls(container, editableElement) {
+      // Remove any existing editing controls
+      const existingControls = container.querySelector('.editing-controls');
+      if (existingControls) {
+        existingControls.remove();
+      }
+
+      // Create editing controls toolbar
+      const controlsDiv = document.createElement('div');
+      controlsDiv.className = 'editing-controls';
+      controlsDiv.style.cssText = `
+        position: absolute;
+        top: -40px;
+        right: 0;
+        background: var(--paper);
+        border: 1px solid var(--bronze);
+        border-radius: 6px;
+        padding: 4px;
+        display: flex;
+        gap: 4px;
+        z-index: 1000;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      `;
+
+      // Get available treasure tables for the dropdown
+      const availableTables = window.TABLES_TRESORS?.tables || [];
+      let treasureControls = '';
+      
+      if (availableTables.length > 0) {
+        const tableOptions = availableTables.map(table => 
+          `<option value="${table.nom}">${table.nom}</option>`
+        ).join('');
+
+        treasureControls = `
+          <div class="treasure-table-controls" style="display: flex; align-items: center; gap: 2px; border-right: 1px solid var(--rule); padding-right: 4px; margin-right: 4px;">
+            <select class="treasure-table-select" style="font-size: 11px; padding: 2px; border: 1px solid var(--rule); border-radius: 3px;">
+              <option value="">Choisir table</option>
+              ${tableOptions}
+            </select>
+            <button type="button" class="copy-treasure-link-btn btn" style="
+              background: var(--bronze); 
+              color: white; 
+              border: none; 
+              padding: 2px 6px; 
+              border-radius: 3px; 
+              cursor: pointer; 
+              font-size: 10px;
+              white-space: nowrap;
+            " title="Copier le lien HTML de la table sélectionnée">
+              📋 Table
+            </button>
+          </div>
+        `;
+      }
+
+      controlsDiv.innerHTML = `
+        ${treasureControls}
+        <button type="button" class="save-edit-btn btn" style="
+          background: var(--accent); 
+          color: white; 
+          border: none; 
+          padding: 2px 6px; 
+          border-radius: 3px; 
+          cursor: pointer; 
+          font-size: 11px;
+        ">
+          ✓ Sauver
+        </button>
+        <button type="button" class="cancel-edit-btn btn" style="
+          background: #666; 
+          color: white; 
+          border: none; 
+          padding: 2px 6px; 
+          border-radius: 3px; 
+          cursor: pointer; 
+          font-size: 11px;
+        ">
+          ✕ Annuler
+        </button>
+      `;
+
+      // Position the container relatively for absolute positioning of controls
+      container.style.position = 'relative';
+      container.appendChild(controlsDiv);
+
+      // Set up event listeners
+      this.setupEditingControlsListeners(controlsDiv, container, editableElement);
+    }
+
+    setupEditingControlsListeners(controlsDiv, container, editableElement) {
+      // Save button
+      const saveBtn = controlsDiv.querySelector('.save-edit-btn');
+      if (saveBtn) {
+        saveBtn.addEventListener('click', () => {
+          // Get current content
+          const newContent = editableElement.innerHTML.trim();
+          const normalizedContent = this.normalizeHTMLContent(newContent);
+          
+          // Update in data structure using current session
+          if (this.currentEditSession) {
+            const success = this.updateContentInDataStructure(this.currentEditSession, normalizedContent);
+            
+            if (success) {
+              EventBus.emit(Events.STORAGE_SAVE);
+              if (JdrApp.modules.ui?.showNotification) {
+                JdrApp.modules.ui.showNotification('💾 Modification sauvegardée', 'success');
+              }
+            }
+            
+            // Reset editing state
+            this.resetEditingState(container);
+            this.currentEditSession = null;
+          }
+          
+          this.removeEditingControls(container);
+        });
+      }
+
+      // Cancel button  
+      const cancelBtn = controlsDiv.querySelector('.cancel-edit-btn');
+      if (cancelBtn) {
+        cancelBtn.addEventListener('click', () => {
+          // Reset editing state without saving
+          this.resetEditingState(container);
+          if (this.currentEditSession) {
+            this.currentEditSession = null;
+          }
+          this.removeEditingControls(container);
+        });
+      }
+
+      // Copy treasure table link button
+      const copyBtn = controlsDiv.querySelector('.copy-treasure-link-btn');
+      const tableSelect = controlsDiv.querySelector('.treasure-table-select');
+      
+      if (copyBtn && tableSelect) {
+        copyBtn.addEventListener('click', () => {
+          const selectedTable = tableSelect.value;
+          if (selectedTable && window.TablesTresorsManager) {
+            const htmlLink = window.TablesTresorsManager.generateTreasureTableHtmlLink(selectedTable);
+            
+            // Insert the link at cursor position
+            if (editableElement.contentEditable === 'true') {
+              const selection = window.getSelection();
+              if (selection.rangeCount > 0) {
+                const range = selection.getRangeAt(0);
+                range.deleteContents();
+                const linkNode = document.createTextNode(htmlLink);
+                range.insertNode(linkNode);
+                
+                // Move cursor after the inserted text
+                range.setStartAfter(linkNode);
+                range.setEndAfter(linkNode);
+                selection.removeAllRanges();
+                selection.addRange(range);
+              } else {
+                // Fallback: append at the end
+                editableElement.innerHTML += htmlLink;
+              }
+              
+              // Show notification
+              if (window.TablesTresorsManager.showNotification) {
+                window.TablesTresorsManager.showNotification('✓ Lien de table inséré!', 'success');
+              }
+            }
+          }
+        });
+      }
+
+      // Also handle Enter and Escape keys on the editable element
+      editableElement.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          e.preventDefault();
+          // Reset editing state without saving
+          this.resetEditingState(container);
+          if (this.currentEditSession) {
+            this.currentEditSession = null;
+          }
+          this.removeEditingControls(container);
+        } else if (e.key === 'Enter' && e.ctrlKey) {
+          e.preventDefault();
+          // Save with Ctrl+Enter
+          const newContent = editableElement.innerHTML.trim();
+          const normalizedContent = this.normalizeHTMLContent(newContent);
+          
+          if (this.currentEditSession) {
+            const success = this.updateContentInDataStructure(this.currentEditSession, normalizedContent);
+            
+            if (success) {
+              EventBus.emit(Events.STORAGE_SAVE);
+              if (JdrApp.modules.ui?.showNotification) {
+                JdrApp.modules.ui.showNotification('💾 Modification sauvegardée', 'success');
+              }
+            }
+            
+            this.resetEditingState(container);
+            this.currentEditSession = null;
+          }
+          
+          this.removeEditingControls(container);
+        }
+      });
+    }
+
+    removeEditingControls(container) {
+      const controls = container.querySelector('.editing-controls');
+      if (controls) {
+        controls.remove();
+      }
+    }
+
+    // Show treasure tables selection modal
+    showTreasureTablesModal(insertTextAtCursor) {
+      const availableTables = window.TABLES_TRESORS?.tables || [];
+      
+      if (availableTables.length === 0) {
+        if (JdrApp.modules.ui?.showNotification) {
+          JdrApp.modules.ui.showNotification('❌ Aucune table de trésor disponible', 'error');
+        }
+        return;
+      }
+
+      // Create modal
+      const modal = document.createElement('dialog');
+      modal.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 0;
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        max-width: 500px;
+        width: 90%;
+        z-index: 1000001 !important;
+        background: transparent;
+      `;
+
+      // Create backdrop
+      const backdrop = document.createElement('div');
+      backdrop.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000000 !important;
+        backdrop-filter: blur(4px);
+      `;
+
+      const tableOptions = availableTables.map(table => 
+        `<option value="${table.nom}">${table.nom}${table.tags ? ` (${table.tags.join(', ')})` : ''}</option>`
+      ).join('');
+
+      modal.innerHTML = `
+        <div style="background: var(--paper); border-radius: 12px; padding: 1.5rem; border: 2px solid var(--rule);">
+          <h3 style="margin: 0 0 1rem 0; color: var(--accent-ink);">🎲 Insérer un lien de table de trésor</h3>
+          
+          <div style="margin-bottom: 1rem;">
+            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Choisir une table:</label>
+            <select id="treasureTableSelect" style="width: 100%; padding: 0.5rem; border: 1px solid var(--rule); border-radius: 6px; font-size: 14px;">
+              <option value="">-- Sélectionner une table --</option>
+              ${tableOptions}
+            </select>
+          </div>
+
+          <div style="margin-bottom: 1rem;">
+            <div id="tablePreview" style="border: 1px solid var(--rule); padding: 1rem; border-radius: 6px; background: var(--card); min-height: 50px; font-size: 12px; color: var(--paper-muted);">
+              Sélectionnez une table pour voir l'aperçu
+            </div>
+          </div>
+          
+          <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+            <button id="cancelTreasureModal" class="btn" style="background: #6b7280; color: white;">Annuler</button>
+            <button id="insertTreasureLink" class="btn" style="background: var(--accent); color: white;" disabled>🎲 Insérer le lien</button>
+          </div>
+        </div>
+      `;
+
+      document.body.appendChild(backdrop);
+      document.body.appendChild(modal);
+      modal.show();
+
+      // Get elements
+      const select = modal.querySelector('#treasureTableSelect');
+      const preview = modal.querySelector('#tablePreview');
+      const insertBtn = modal.querySelector('#insertTreasureLink');
+      const cancelBtn = modal.querySelector('#cancelTreasureModal');
+
+      // Handle table selection
+      select.addEventListener('change', () => {
+        const selectedTableName = select.value;
+        if (selectedTableName) {
+          insertBtn.disabled = false;
+          
+          const selectedTable = availableTables.find(t => t.nom === selectedTableName);
+          if (selectedTable && window.TablesTresorsManager) {
+            const previewHtml = window.TablesTresorsManager.generateTablePreviewHtml(selectedTable);
+            preview.innerHTML = previewHtml;
+          }
+        } else {
+          insertBtn.disabled = true;
+          preview.innerHTML = 'Sélectionnez une table pour voir l\'aperçu';
+        }
+      });
+
+      // Handle insert
+      insertBtn.addEventListener('click', () => {
+        const selectedTableName = select.value;
+        if (selectedTableName && window.TablesTresorsManager) {
+          const htmlLink = window.TablesTresorsManager.generateTreasureTableHtmlLink(selectedTableName);
+          insertTextAtCursor(htmlLink);
+          
+          if (JdrApp.modules.ui?.showNotification) {
+            JdrApp.modules.ui.showNotification('✓ Lien de table inséré!', 'success');
+          }
+        }
+        
+        modal.close();
+        modal.remove();
+        backdrop.remove();
+      });
+
+      // Handle cancel
+      cancelBtn.addEventListener('click', () => {
+        modal.close();
+        modal.remove();
+        backdrop.remove();
+      });
+
+      // Handle backdrop click
+      backdrop.addEventListener('click', () => {
+        modal.close();
+        modal.remove();
+        backdrop.remove();
+      });
+
+      // Focus select
+      select.focus();
+    }
   }
 
   window.UnifiedEditor = UnifiedEditor.getInstance();
@@ -17031,6 +18144,14 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       
       if (devToolbox) {
         devToolbox.style.display = this.isDevMode ? 'block' : 'none';
+        
+        // Initialize toolbox content if empty or only has comments
+        if (this.isDevMode) {
+          const trimmedContent = devToolbox.innerHTML.trim();
+          if (trimmedContent === '' || trimmedContent === '<!-- Dev toolbox content will be injected here -->' || !devToolbox.querySelector('.dev-toolbox-content')) {
+            this.initializeDevToolbox(devToolbox);
+          }
+        }
       }
       
       // Update dev-only containers visibility - same approach as modal buttons
@@ -17365,8 +18486,22 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
             e.preventDefault();
             this.toggleImageEnlargement(e.target);
           });
+          
+          // Attendre que l'image lazy soit chargée pour définir le curseur
+          img.addEventListener('load', () => {
+            if (this.isImageEnlargeable(img)) {
+              img.style.cursor = 'zoom-in';
+            }
+          });
+          
+          // Si l'image est déjà chargée
+          if (img.complete && img.naturalWidth > 0) {
+            if (this.isImageEnlargeable(img)) {
+              img.style.cursor = 'zoom-in';
+            }
+          }
+          
           img.setAttribute('data-events-attached', 'true');
-          img.style.cursor = 'zoom-in';
         }
       });
     },
@@ -17417,11 +18552,36 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
     },
 
     toggleImageEnlargement(img) {
+      // Vérifier si l'image est valide pour l'agrandissement
+      if (!this.isImageEnlargeable(img)) {
+        return;
+      }
+      
       if (img.classList.contains('enlarged')) {
         this.closeEnlargedImage();
       } else {
         this.showEnlargedImage(img);
       }
+    },
+
+    // Vérifier si une image peut être agrandie
+    isImageEnlargeable(img) {
+      // Ne pas agrandir les placeholders SVG
+      if (img.src && img.src.startsWith('data:image/svg+xml')) {
+        return false;
+      }
+      
+      // Ne pas agrandir si pas de source réelle
+      if (!img.src && !img.getAttribute('data-src')) {
+        return false;
+      }
+      
+      // Ne pas agrandir les images trop petites (probablement des icônes)
+      if (img.naturalWidth < 50 || img.naturalHeight < 50) {
+        return false;
+      }
+      
+      return true;
     },
 
     showEnlargedImage(img) {
@@ -17447,6 +18607,16 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       
       // Créer une copie de l'image
       const enlargedImg = img.cloneNode(true);
+      
+      // S'assurer que l'image agrandie a la bonne source (pour les images lazy-loaded)
+      if (img.hasAttribute('data-src') && !enlargedImg.src) {
+        enlargedImg.src = img.getAttribute('data-src');
+        enlargedImg.removeAttribute('data-src');
+      }
+      
+      // Supprimer les classes de lazy loading qui pourraient interférer
+      enlargedImg.classList.remove('lazy-load', 'lazy-loaded');
+      
       enlargedImg.style.cssText = `
         max-width: 90vw;
         max-height: 90vh;
@@ -17458,6 +18628,8 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
         background: white;
         box-shadow: 0 20px 60px rgba(0,0,0,.8), 0 0 20px rgba(212,175,55,.3);
         cursor: zoom-out;
+        opacity: 1;
+        transition: none;
       `;
       
       modal.appendChild(enlargedImg);
@@ -17559,6 +18731,36 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       if (JdrApp.modules.renderer && JdrApp.modules.renderer.regenerateCurrentPage) {
         JdrApp.modules.renderer.regenerateCurrentPage();
       }
+    },
+
+    initializeDevToolbox(devToolbox) {
+      // Check if toolbox already has content and preserve it
+      const existingContent = devToolbox.querySelector('.dev-toolbox-content');
+      if (existingContent) {
+        // Toolbox already initialized, don't override
+        return;
+      }
+
+      // Store any existing content that might be there from other modules
+      const existingHTML = devToolbox.innerHTML.trim();
+      const hasExistingContent = existingHTML && 
+        existingHTML !== '<!-- Dev toolbox content will be injected here -->' && 
+        existingHTML !== '';
+
+      // If there was existing content, preserve it without adding treasure tools
+      if (hasExistingContent) {
+        // Keep existing content as-is, don't add our tools
+        return;
+      } else {
+        // Toolbox is empty, don't initialize anything for now
+        // This keeps the toolbox clean as requested
+        devToolbox.innerHTML = '<!-- Dev toolbox: tools removed as requested -->';
+      }
+    },
+
+    setupDevToolboxEventListeners() {
+      // No toolbox event listeners needed for now
+      // Toolbox tools have been removed as requested
     }
   };
 
@@ -17744,6 +18946,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       this.initialized = false;
       this.currentPreviewModal = null;
       this.currentEditModal = null;
+      this.modalIsOpening = false;
     }
 
     static getInstance() {
@@ -17766,6 +18969,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       document.addEventListener('click', (e) => {
         if (e.target.matches('.object-preview-link')) {
           e.preventDefault();
+          e.stopPropagation();
           const numeroObjet = e.target.dataset.objectNumero;
           this.showObjectPreview(numeroObjet);
         }
@@ -17810,6 +19014,15 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
           this.closeAllModals();
         }
       });
+
+      // Preview de table de trésor via lien HTML
+      document.addEventListener('click', (e) => {
+        if (e.target.matches('.treasure-table-link')) {
+          e.preventDefault();
+          const tableName = e.target.dataset.tableName;
+          this.showTablePreview(tableName);
+        }
+      });
     }
 
     showObjectPreview(numeroObjet) {
@@ -17827,6 +19040,38 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
         
       } catch (error) {
         console.error('Erreur lors de l\'affichage de la preview:', error);
+      }
+    }
+
+    showTablePreview(tableName) {
+      try {
+        // Trouver la table par son nom
+        const table = window.TABLES_TRESORS?.tables?.find(t => t.nom === tableName);
+        
+        if (!table) {
+          console.error('Table non trouvée:', tableName);
+          return;
+        }
+
+        const previewHtml = this.generateTablePreviewHtml(table);
+        const modalContent = `
+          <div class="table-preview-content">
+            ${previewHtml}
+            <div style="text-align: center; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--rule);">
+              <button class="btn" onclick="window.TablesTresorsManager.closeAllModals()" style="background: var(--accent); color: white;">
+                ✓ Fermer
+              </button>
+              <button class="btn" onclick="window.TablesTresorsManager.goToTablesTresorsPage()" style="background: var(--bronze); color: white; margin-left: 0.5rem;">
+                🔗 Aller à la page tables de trésors
+              </button>
+            </div>
+          </div>
+        `;
+        
+        this.showModal(modalContent, 'table-preview');
+        
+      } catch (error) {
+        console.error('Erreur lors de l\'affichage de la preview de table:', error);
       }
     }
 
@@ -18016,6 +19261,12 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
     }
 
     showModal(content, modalClass = '') {
+      // Éviter l'ouverture de modals multiples rapidement
+      if (this.modalIsOpening) {
+        return;
+      }
+      
+      this.modalIsOpening = true;
       this.closeAllModals(); // Fermer les modals existants
 
       const modalHtml = `
@@ -18032,6 +19283,11 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       if (modalClass === 'edit-fourchette') {
         this.setupEditFormHandlers();
       }
+      
+      // Réinitialiser le flag après un court délai
+      setTimeout(() => {
+        this.modalIsOpening = false;
+      }, 200);
     }
 
     setupEditFormHandlers() {
@@ -18161,8 +19417,6 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
         this.saveToStorage();
         this.refreshTablesTresorsPage();
         this.closeAllModals();
-        
-        // Fourchette sauvegardée avec succès
 
       } catch (error) {
         console.error('Erreur lors de la sauvegarde:', error);
@@ -18218,6 +19472,17 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       }, 500);
     }
 
+    goToTablesTresorsPage() {
+      this.closeAllModals();
+      // Naviguer vers la page tables de trésors
+      if (JdrApp.modules.router && JdrApp.modules.router.navigate) {
+        JdrApp.modules.router.navigate('tables-tresors');
+      } else {
+        // Fallback direct navigation
+        window.location.hash = '#/tables-tresors';
+      }
+    }
+
     closeAllModals() {
       const modals = document.querySelectorAll('.modal-overlay');
       modals.forEach(modal => modal.remove());
@@ -18226,20 +19491,137 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
     }
 
     saveToStorage() {
-      // Utiliser le système de stockage existant
-      if (JdrApp.modules.storage) {
-        JdrApp.modules.storage.save();
+      // Les modifications sont déjà dans window.TABLES_TRESORS et seront incluses dans les exports
+      // Émettre l'événement de mise à jour pour notifier les autres modules
+      if (window.EventBus && window.Events) {
+        EventBus.emit(Events.CONTENT_UPDATE, {
+          type: 'tablesTresors',
+          data: window.TABLES_TRESORS
+        });
       }
     }
 
     refreshTablesTresorsPage() {
       // Regénérer la page des tables de trésors
       if (JdrApp.modules.router && JdrApp.modules.router.getCurrentRoute() === 'tables-tresors') {
-        // Force refresh with current data from window.TABLES_TRESORS
-        JdrApp.modules.renderer.renderUnifiedContentPage('tableTresor', window.TABLES_TRESORS || { tables: [] });
-        JdrApp.modules.router.updateActiveStates('tables-tresors');
-        JdrApp.modules.router.show('tables-tresors');
+        // Force complete page regeneration via router navigation
+        JdrApp.modules.router.navigate('tables-tresors');
       }
+    }
+
+    // Generate HTML link with table preview
+    generateTreasureTableHtmlLink(tableName) {
+      try {
+        const table = window.TABLES_TRESORS?.tables?.find(t => t.nom === tableName);
+        if (!table) {
+          console.error('Table non trouvée:', tableName);
+          return '';
+        }
+
+        // Generate table preview HTML
+        const tableHtml = this.generateTablePreviewHtml(table);
+        
+        // Create a compact link with preview tooltip
+        const htmlLink = `<span class="treasure-table-link" data-table-name="${tableName}" style="color: var(--accent); cursor: pointer; text-decoration: underline;" title="Cliquer pour voir la table des trésors">[Table: ${tableName}]</span>`;
+        
+        return htmlLink;
+
+      } catch (error) {
+        console.error('Erreur lors de la génération du lien HTML:', error);
+        return `[Erreur: ${tableName}]`;
+      }
+    }
+
+    generateTablePreviewHtml(table) {
+      const fourchettesList = table.fourchettes.map(fourchette => {
+        const range = fourchette.min === fourchette.max 
+          ? `${fourchette.min}` 
+          : `${fourchette.min}-${fourchette.max}`;
+        
+        return `
+          <tr>
+            <td style="text-align: center; font-weight: bold; color: var(--accent);">${range}</td>
+            <td>
+              <span class="object-preview-link" data-object-numero="${fourchette.objet.numero}" style="color: var(--accent); cursor: pointer; text-decoration: underline;" title="Cliquer pour voir la preview de l'objet">
+                ${fourchette.objet.nom} (N°${fourchette.objet.numero})
+              </span>
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      return `
+        <div class="treasure-table-preview" style="background: var(--paper); border: 2px solid var(--bronze); border-radius: 12px; padding: 1rem; max-width: 500px;">
+          <h3 style="margin: 0 0 1rem 0; color: var(--accent); text-align: center;">🎲 ${table.nom}</h3>
+          
+          <table style="width: 100%; border-collapse: collapse; margin-top: 1rem;">
+            <thead>
+              <tr style="background: var(--bronze); color: white;">
+                <th style="padding: 8px; text-align: center; border: 1px solid var(--rule);">Dé (d20)</th>
+                <th style="padding: 8px; text-align: left; border: 1px solid var(--rule);">Objet obtenu</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${fourchettesList}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    // Copy HTML link to clipboard
+    copyTreasureTableHtmlLink(tableName) {
+      try {
+        const htmlLink = this.generateTreasureTableHtmlLink(tableName);
+        
+        // Copy to clipboard using modern API
+        navigator.clipboard.writeText(htmlLink).then(() => {
+          this.showNotification('✓ Lien HTML copié dans le presse-papiers!', 'success');
+        }).catch(err => {
+          // Fallback for older browsers
+          const textArea = document.createElement('textarea');
+          textArea.value = htmlLink;
+          document.body.appendChild(textArea);
+          textArea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textArea);
+          
+          this.showNotification('✓ Lien HTML copié dans le presse-papiers!', 'success');
+        });
+
+      } catch (error) {
+        console.error('Erreur lors de la copie:', error);
+        this.showNotification('❌ Erreur lors de la copie du lien', 'error');
+      }
+    }
+
+    // Show notification
+    showNotification(message, type = 'info') {
+      const notification = document.createElement('div');
+      notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${type === 'success' ? '#4CAF50' : type === 'error' ? '#f44336' : '#2196F3'};
+        color: white;
+        padding: 12px 20px;
+        border-radius: 8px;
+        z-index: 1001;
+        font-size: 14px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        animation: slideInRight 0.3s ease;
+      `;
+      notification.textContent = message;
+      
+      document.body.appendChild(notification);
+      
+      // Auto remove after 3 seconds
+      setTimeout(() => {
+        if (notification.parentNode) {
+          notification.style.animation = 'slideOutRight 0.3s ease';
+          setTimeout(() => notification.remove(), 300);
+        }
+      }, 3000);
     }
   }
 
@@ -18664,15 +20046,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
         }
       });
 
-      // Tables de trésors - Prévisualisation des objets
-      JdrApp.utils.events.register('click', '.object-preview-link', (e) => {
-        e.preventDefault();
-        const objetNumero = parseInt(e.target.dataset.objectNumero);
-        
-        if (objetNumero) {
-          this.showObjectPreview(objetNumero);
-        }
-      });
+      // Tables de trésors - Prévisualisation des objets (géré par TablesTresorsManager)
 
       // Filter chip toggling (REMOVED - duplicate listener that was causing double toggle)
 

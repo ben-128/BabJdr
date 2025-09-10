@@ -245,7 +245,7 @@
       "tags": [
         "Nourriture"
       ],
-      "effet": "Inutilisable en combat. Maximum deux nourritures consommées par jour.\n<br><br><strong>Effet:</strong> Restore (Endurance) points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.",
+      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore 5 points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.",
       "prix": "🔷 <strong>Prix:</strong> 5",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -257,7 +257,7 @@
       "tags": [
         "Nourriture"
       ],
-      "effet": "Inutilisable en combat. Maximum deux nourritures consommées par jour.\n<br>\n<br><strong>Effet:</strong> Restore (Endurance) points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.\n<br><b>Charges :</b> 3",
+      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore 8 points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.\n<br><b>Charges :</b> 3",
       "prix": "🔷 <strong>Prix:</strong> 15",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -269,7 +269,7 @@
       "tags": [
         "Nourriture"
       ],
-      "effet": "Inutilisable en combat. Maximum deux nourritures consommées par jour.\n<br>\n<br><strong>Effet:</strong> Restore (Endurance) points de vie. <br>Couplé à un sommeil, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>. <br>De plus, lorsque consommé, le mangeur ne neccessite plus que 4 heures de sommeil ce jour-ci.\n<br><br><b>Charges :</b> 3",
+      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore 5 points de vie. <br>Couplé à un sommeil, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>. <br>De plus, lorsque consommé, le mangeur ne neccessite plus que 4 heures de sommeil ce jour-ci.\n<br><br><b>Charges :</b> 3",
       "prix": "🔷 <strong>Prix:</strong> 20",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -586,7 +586,8 @@
       "description": "<i>Tissée de fibres vertes et ornée de feuillage vivant, elle se fond dans la végétation et améliore son porteur par la magie sylvestre.</i>",
       "tags": [
         "Armure",
-        "Robe"
+        "Robe",
+        "Non identifié"
       ],
       "effet": "<strong>Effet:</strong> Augmente les dégats élémentaires de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> et d'<span style=\"color: #4682b4; font-weight: bold;\">Eau</span> infligés par les sorts de 5.",
       "prix": "🔷 <strong>Prix:</strong> ?",
@@ -613,10 +614,24 @@
       "tags": [
         "Arme",
         "Épée",
-        "Une main"
+        "Une main",
+        "Non identifié"
       ],
-      "effet": "<strong>Dégats:</strong> Inflige (4 + Force) points de dégats physiques.\n<br><strong>Effet:</strong> Augmente l'intelligence de 3.",
+      "effet": "<strong>Dégats:</strong> Inflige (4 + Force) points de dégats physiques.\n<br><strong>Effet:</strong> Augmente l'intelligence de 5.",
       "prix": "🔷 <strong>Prix:</strong> ?",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Armure de cuir de monstre",
+      "numero": 49,
+      "image": "https://i.ibb.co/MyZR8SYt/Armure-Cuir-Monstre.png",
+      "description": "<i>Une armure légère tannée dans la peau rugueuse d’une bête abattue, souple mais marquée de cicatrices naturelles qui témoignent de la sauvagerie de la créature.</i>",
+      "tags": [
+        "Armure",
+        "Armure légère"
+      ],
+      "effet": "<strong>Effet:</strong> Augmente l'Armure physique de 2.<br> Augmente l'Endurance de 2.",
+      "prix": "🔷 <strong>Prix:</strong> 120",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     }
   ],

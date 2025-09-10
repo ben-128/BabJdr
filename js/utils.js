@@ -316,4 +316,52 @@
     });
   };
 
+  // ========================================
+  // PERFORMANCE OPTIMIZATION UTILITIES
+  // ========================================
+  
+  // Minify HTML to reduce size (for performance optimization)
+  JdrApp.utils.minifyHTML = function(html) {
+    if (!html || typeof html !== 'string') return html;
+    
+    return html
+      // Remove comments
+      .replace(/<!--[\s\S]*?-->/g, '')
+      // Remove extra whitespace between tags
+      .replace(/>\s+</g, '><')
+      // Remove whitespace at start and end of lines
+      .replace(/^\s+|\s+$/gm, '')
+      // Remove empty lines
+      .replace(/\n\s*\n/g, '\n')
+      // Trim the result
+      .trim();
+  };
+
+  // Debounce function for performance
+  JdrApp.utils.debounce = function(func, wait, immediate) {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        timeout = null;
+        if (!immediate) func.apply(this, args);
+      };
+      const callNow = immediate && !timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+      if (callNow) func.apply(this, args);
+    };
+  };
+
+  // Throttle function for performance
+  JdrApp.utils.throttle = function(func, limit) {
+    let inThrottle;
+    return function(...args) {
+      if (!inThrottle) {
+        func.apply(this, args);
+        inThrottle = true;
+        setTimeout(() => inThrottle = false, limit);
+      }
+    };
+  };
+
 })();
