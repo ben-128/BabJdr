@@ -115,6 +115,14 @@
         if (hasDevMode) {
           setTimeout(() => hasEditor.createProxyButtons(), 50);
         }
+        
+        // Force image event attachment after a delay to catch lazy-loaded images
+        setTimeout(() => {
+          if (hasEditor.attachImageEvents) {
+            console.log('Re-attaching image events after render delay');
+            hasEditor.attachImageEvents();
+          }
+        }, 1000);
       }
       
       if (monstersContainer) {

@@ -373,6 +373,12 @@
         });
         observer.observe(document.body, { childList: true, subtree: true });
       }
+      
+      // Force l'attachement après un délai pour s'assurer que les images lazy sont chargées
+      setTimeout(() => {
+        this.attachImageEvents();
+        console.log('Image handlers re-attached after delay');
+      }, 2000);
     },
 
     attachImageEvents() {
@@ -393,13 +399,22 @@
       });
 
       // Attacher aux images pour agrandissement - toutes les images, pas seulement celles dans .illus
-      document.querySelectorAll('img').forEach(img => {
+      const images = document.querySelectorAll('img');
+      console.log(`Found ${images.length} images on page`);
+      
+      images.forEach(img => {
         // Éviter les images dans les éditeurs ou les inputs
         if (!img.closest('.editor-content') && !img.hasAttribute('data-events-attached')) {
+          console.log(`Attaching events to image: ${img.src || img.getAttribute('data-src')}`, img);
+          
           // Ajouter support tactile pour mobile
-          img.addEventListener('click', (e) => this.toggleImageEnlargement(e.target));
+          img.addEventListener('click', (e) => {
+            console.log('Image clicked!', e.target);
+            this.toggleImageEnlargement(e.target);
+          });
           img.addEventListener('touchend', (e) => {
             e.preventDefault();
+            console.log('Image touched!', e.target);
             this.toggleImageEnlargement(e.target);
           });
           
@@ -407,6 +422,7 @@
           img.addEventListener('load', () => {
             if (this.isImageEnlargeable(img)) {
               img.style.cursor = 'zoom-in';
+              console.log('Cursor set to zoom-in for loaded image:', img);
             }
           });
           
@@ -414,6 +430,7 @@
           if (img.complete && img.naturalWidth > 0) {
             if (this.isImageEnlargeable(img)) {
               img.style.cursor = 'zoom-in';
+              console.log('Cursor set to zoom-in for already loaded image:', img);
             }
           }
           
@@ -524,11 +541,24 @@
       // Créer une copie de l'image
       const enlargedImg = img.cloneNode(true);
       
-      // S'assurer que l'image agrandie a la bonne source (pour les images lazy-loaded)
+      // Extraire l'URL originale pour le chargement haute résolution
+      let originalUrl = img.src;
       if (img.hasAttribute('data-src') && !enlargedImg.src) {
-        enlargedImg.src = img.getAttribute('data-src');
-        enlargedImg.removeAttribute('data-src');
+        originalUrl = img.getAttribute('data-src');
       }
+      
+      // Si l'image utilise le service weserv.nl, extraire l'URL originale haute résolution
+      if (originalUrl.includes('images.weserv.nl')) {
+        const urlParams = new URLSearchParams(originalUrl.split('?')[1]);
+        const encodedOriginal = urlParams.get('url');
+        if (encodedOriginal) {
+          originalUrl = decodeURIComponent(encodedOriginal);
+        }
+      }
+      
+      // Charger l'image haute résolution SEULEMENT maintenant
+      enlargedImg.src = originalUrl;
+      enlargedImg.removeAttribute('data-src');
       
       // Supprimer les classes de lazy loading qui pourraient interférer
       enlargedImg.classList.remove('lazy-load', 'lazy-loaded');
