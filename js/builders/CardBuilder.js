@@ -174,7 +174,7 @@
           <!-- Séparation avant les stats principales -->
           <hr style="margin: 1.5rem 0 1rem 0; border: none; border-top: 2px solid var(--bronze); opacity: 0.3;">
           
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin: 1rem 0; font-size: 0.9em;">
+          <div class="monster-stats-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin: 1rem 0; font-size: 0.9em;">
             <div>${this.buildEditableStatField('🎯 Initiative', this.data.initiative, 'monster-initiative', 'Initiative')}</div>
             <div>${this.buildEditableStatField('❤️ PV', this.data.pointsDeVie, 'monster-pointsdevie', 'Points de vie')}</div>
             <div>${this.buildEditableStatField('⚡ Critique', this.data.coupCritique, 'monster-coupcritique', 'Coup critique')}</div>
@@ -190,7 +190,7 @@
 
           <div style="margin: 1rem 0;">
             <strong>🌟 Armures Élémentaires:</strong>
-            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 0.25rem; font-size: 0.8em; margin-top: 0.5rem;">
+            <div class="monster-elemental-grid" style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 0.25rem; font-size: 0.8em; margin-top: 0.5rem;">
               <div>${this.buildEditableStatField(this.getElementIcon('Feu'), this.data.armureFeu, 'monster-armurefeu', 'Armure Feu')}</div>
               <div>${this.buildEditableStatField(this.getElementIcon('Eau'), this.data.armureEau, 'monster-armureeau', 'Armure Eau')}</div>
               <div>${this.buildEditableStatField(this.getElementIcon('Terre'), this.data.armureTerre, 'monster-armureterre', 'Armure Terre')}</div>

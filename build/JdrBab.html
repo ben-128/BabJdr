@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-09-10T12:08:48.537Z by JdrBab Build System -->
+<!-- Generated on 2025-09-10T12:57:41.554Z by JdrBab Build System -->
 <title>JDR‑BAB — Livret de règles</title>
 <meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -93,7 +93,7 @@
 }
 
 /* Base styles */
-html,body{height:100%}
+html,body{height:100%; overflow-x:hidden} /* Prevent horizontal scroll */
 body{
   margin:0;
   background:
@@ -370,6 +370,18 @@ h5, h6 {
 .subclass-stack{display:flex;flex-direction:column;gap:var(--space-lg)}
 .chip{font-size:14px;border:2px solid var(--rule);border-radius:999px;padding:6px 12px;background:rgba(155,107,47,.12);font-weight:600;box-shadow:0 2px 6px rgba(0,0,0,.1)}
 .chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+
+/* Mobile-specific utilities for Game Master pages */
+@media (max-width: 480px) {
+  .mobile-stack { flex-direction: column !important; }
+  .mobile-center { text-align: center !important; }
+  .mobile-hide { display: none !important; }
+  .mobile-full-width { width: 100% !important; }
+  .mobile-touch-target { min-height: 44px !important; min-width: 44px !important; }
+  .mobile-no-margin { margin-left: 0 !important; margin-right: 0 !important; }
+  .mobile-wrap { flex-wrap: wrap !important; }
+  .mobile-break-word { word-break: break-word !important; }
+}
 /* ═══════════════════════════════════════════════════════════════════════════════════════
    🏗️ LAYOUT SYSTEM - Enhanced Responsive Design
    ═══════════════════════════════════════════════════════════════════════════════════════ */
@@ -380,6 +392,7 @@ h5, h6 {
   grid-template-rows: 1fr auto;
   min-height: 100svh;
   position: relative;
+  overflow-x: hidden; /* Prevent horizontal scroll on mobile */
 }
 
 /* Main Content Area - Enhanced Parchment Background */
@@ -398,10 +411,17 @@ h5, h6 {
 #views {
   max-width: 1400px;
   /* Fallback positioning - will be overridden by DynamicCentering.js */
-  margin-left: 370px; /* Just clear the sidebar */
+  margin-left: 0; /* Reset to 0 - will be handled by responsive design */
   margin-right: 20px;
   padding: 0 var(--space-lg);
   animation: fadeInUp 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Desktop layout with sidebar */
+@media (min-width: 1025px) {
+  #views {
+    margin-left: 370px; /* Only apply sidebar margin on large screens */
+  }
 }
 
 /* Mobile Responsiveness */
@@ -810,6 +830,161 @@ footer{padding:24px;text-align:center;color:var(--paper-muted)}
   section{break-inside:avoid;box-shadow:none} 
 }
 
+/* ========================================
+   🎯 GAME MASTER PAGES - MOBILE FIXES
+   ======================================== */
+
+/* Monster Cards - Responsive Stats Grid */
+@media (max-width: 480px) {
+  .card[data-section-type="monster"] .monster-stats-grid,
+  .monster-stats-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 0.5rem !important;
+    font-size: 0.85em !important;
+  }
+  
+  .card[data-section-type="monster"] .monster-elemental-grid,
+  .monster-elemental-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.3rem !important;
+    font-size: 0.75em !important;
+  }
+  
+  .card[data-section-type="monster"] .tag-chip,
+  .monster-card .tag-chip {
+    display: inline-block !important;
+    margin: 2px 4px 2px 0 !important;
+    font-size: 0.75em !important;
+    padding: 1px 4px !important;
+  }
+}
+
+/* Treasure Tables - Responsive Fourchettes */
+@media (max-width: 480px) {
+  .fourchette-row,
+  .responsive-fourchette {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    gap: 8px !important;
+  }
+  
+  .fourchette-range {
+    min-width: auto !important;
+    margin-bottom: 4px !important;
+  }
+  
+  .fourchette-objet {
+    flex: none !important;
+    margin-left: 0 !important;
+    margin-bottom: 8px !important;
+    word-break: break-word !important;
+    width: 100% !important;
+  }
+  
+  .fourchette-actions {
+    margin-left: 0 !important;
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+    justify-content: flex-start !important;
+    width: 100% !important;
+  }
+  
+  .fourchette-actions button {
+    font-size: 0.7em !important;
+    padding: 4px 8px !important;
+    min-height: 44px !important; /* Touch-friendly */
+    min-width: 44px !important;
+  }
+}
+
+/* Campaign Page - Responsive Selectors */
+@media (max-width: 480px) {
+  .campaign-selector > div,
+  .campaign-controls {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+  }
+  
+  .campaign-selector select,
+  .campaign-controls select {
+    width: 100% !important;
+    font-size: 16px !important; /* Prevents zoom on iOS */
+    min-height: 44px !important;
+    padding: 8px 12px !important;
+  }
+  
+  .subpage-selector,
+  .campaign-subpages {
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+  
+  .subpage-selector button,
+  .campaign-subpages button {
+    width: 100% !important;
+    min-height: 44px !important;
+  }
+}
+
+/* Audio Page - Touch-Friendly Controls */
+@media (max-width: 480px) {
+  #audio-controls-page button,
+  .audio-player button,
+  .playlist-controls button {
+    min-height: 44px !important;
+    min-width: 44px !important;
+    padding: 8px 12px !important;
+    font-size: 14px !important;
+  }
+  
+  .playlist-item,
+  .audio-track {
+    padding: 12px !important;
+    margin: 8px 0 !important;
+  }
+  
+  .audio-controls-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+  }
+}
+
+/* General MJ Page Improvements */
+@media (max-width: 768px) {
+  /* Better button spacing for all MJ pages */
+  .btn.danger,
+  .btn.small,
+  .edit-btn,
+  .delete-btn {
+    min-height: 44px;
+    min-width: 44px;
+    margin: 2px;
+  }
+  
+  /* Responsive tables for all MJ content */
+  .mj-table,
+  .stats-table,
+  .treasure-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  
+  .mj-table th,
+  .mj-table td,
+  .stats-table th,
+  .stats-table td {
+    min-width: 120px;
+    padding: 8px 4px;
+  }
+}
+
 /* ─────────────────────────── Enhanced Mobile & Tablet Responsiveness ─────────────────────────── */
 
 /* Tablet Landscape (1024px and below) */
@@ -823,7 +998,7 @@ footer{padding:24px;text-align:center;color:var(--paper-muted)}
   }
   
   #views {
-    margin-left: 340px; /* Adjust for smaller sidebar */
+    margin-left: 0; /* Reset margin on tablet to prevent horizontal scroll */
     margin-right: 0;
     max-width: 100%;
     padding: 0 var(--space-md);
@@ -1579,12 +1754,20 @@ body.dev-off .new-collection-card {
 
 .card:hover,
 .card-base:hover {
-  transform: translateY(-3px) scale(1.01);
+  transform: translate3d(0, -3px, 0) scale(1.01); /* Use 3D transform for better mobile performance */
   box-shadow: 
     0 16px 48px rgba(139,69,19,.25),
     0 6px 16px rgba(139,69,19,.18),
     inset 0 1px 0 rgba(255,255,255,.3),
     inset 0 -1px 0 rgba(139,69,19,.12);
+}
+
+/* Improve mobile performance with will-change on interactive elements */
+.card,
+.card-base,
+.btn-base,
+.toc a {
+  will-change: transform;
 }
 
 /* ─────────────────────────── Button System Enhanced ─────────────────────────── */
@@ -1596,6 +1779,7 @@ body.dev-off .new-collection-card {
   border: 2px solid var(--rule);
   border-radius: 12px;
   padding: var(--space-md) var(--space-lg);
+  min-height: 44px; /* Ensure minimum touch target size */
   box-shadow: 
     0 4px 16px rgba(0,0,0,.08),
     0 2px 4px rgba(139,69,19,.1),
@@ -1621,7 +1805,7 @@ body.dev-off .new-collection-card {
 }
 
 .btn-base:hover {
-  transform: translateY(-2px) scale(1.02);
+  transform: translate3d(0, -2px, 0) scale(1.02); /* Use 3D transform for better mobile performance */
   box-shadow: 
     0 8px 32px rgba(0,0,0,.15),
     0 4px 8px rgba(139,69,19,.12),
@@ -1641,6 +1825,8 @@ body.dev-off .new-collection-card {
 .btn-small {
   padding: var(--space-sm) var(--space-md);
   font-size: 0.9em;
+  min-height: 44px; /* Ensure minimum touch target size */
+  min-width: 44px;
 }
 
 /* ─────────────────────────── Card Variants ─────────────────────────── */
@@ -1921,6 +2107,409 @@ body.dev-off .new-collection-card {
 .search-no-results p {
   margin: 0;
   font-style: italic;
+}
+
+/* ─────────────────────────── Collections Grid System ─────────────────────────── */
+.collections-grid {
+  display: grid;
+  gap: 1.5rem;
+  margin: 2rem auto;
+  max-width: 1400px;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.collection-card {
+  background: 
+    linear-gradient(135deg, var(--card), rgba(250,246,238,0.9)),
+    radial-gradient(circle at 20% 30%, rgba(212,175,55,0.03), transparent 70%);
+  border: 2px solid var(--bronze);
+  border-radius: 16px;
+  padding: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  box-shadow: 
+    0 6px 20px rgba(0,0,0,.1),
+    0 2px 6px rgba(139,69,19,.08),
+    inset 0 1px 0 rgba(255,255,255,.1);
+  width: 100%;
+  margin: 0;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+.collection-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    var(--gold), 
+    var(--bronze), 
+    var(--gold), 
+    transparent);
+  opacity: 0.6;
+}
+
+.collection-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 
+    0 12px 32px rgba(139,69,19,.2),
+    0 4px 12px rgba(139,69,19,.15),
+    inset 0 1px 0 rgba(255,255,255,.2);
+  border-color: var(--gold);
+}
+
+.collection-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.collection-card h3 {
+  color: var(--bronze);
+  font-family: 'Cinzel', serif;
+  font-size: 1.3rem;
+  margin: 0.5rem 0 1rem 0;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.collection-card p {
+  margin: 0.5rem 0;
+  color: var(--paper-muted);
+  line-height: 1.4;
+}
+
+.collection-description {
+  font-size: 0.9em;
+  font-style: italic;
+  color: var(--paper-ink);
+  opacity: 0.8;
+}
+
+.collection-dev-controls {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.new-collection-card {
+  border: 2px dashed var(--bronze);
+  background: 
+    linear-gradient(135deg, rgba(212,175,55,0.05), rgba(139,69,19,0.02)),
+    var(--card);
+  opacity: 0.8;
+}
+
+.new-collection-card:hover {
+  opacity: 1;
+  border-style: solid;
+}
+
+/* Collection items display */
+.collection-items {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.collection-header {
+  text-align: center;
+  padding: 2rem 0;
+  border-bottom: 2px solid var(--rule);
+  margin-bottom: 1.5rem;
+}
+
+.collection-header h2 {
+  color: var(--bronze);
+  font-family: 'Cinzel', serif;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.collection-results {
+  margin-top: 2rem;
+}
+
+/* Collections search styles */
+.collections-search {
+  margin: 2rem 0;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.search-container {
+  display: flex;
+  gap: 0.5rem;
+  align-items: stretch;
+}
+
+.search-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--rule);
+  border-radius: 12px;
+  font-size: 16px; /* Prevents zoom on iOS */
+  background: var(--card);
+  color: var(--paper-ink);
+  font-family: inherit;
+}
+
+.search-button {
+  background: linear-gradient(135deg, var(--gold), var(--bronze));
+  color: white;
+  border: 2px solid var(--bronze);
+  border-radius: 12px;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+  min-height: 44px; /* Touch target */
+}
+
+.search-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(139,69,19,.3);
+}
+
+/* Tag filters */
+.tag-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+  justify-content: center;
+}
+
+.tag-filter-btn {
+  background: var(--card);
+  border: 2px solid var(--bronze);
+  border-radius: 20px;
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--paper-ink);
+  min-height: 44px; /* Touch target */
+  display: flex;
+  align-items: center;
+}
+
+.tag-filter-btn:hover {
+  background: linear-gradient(135deg, var(--gold), rgba(212,175,55,0.8));
+  color: white;
+  transform: translateY(-1px);
+}
+
+.tag-filter-btn.active {
+  background: var(--bronze);
+  color: white;
+  border-color: var(--gold);
+}
+
+/* Mobile Responsive Design for Collections */
+@media (max-width: 768px) {
+  .collections-grid {
+    grid-template-columns: 1fr; /* Single column on mobile */
+    gap: 1rem;
+    margin: 1rem 0;
+    max-width: 100%;
+    padding: 0 1rem;
+  }
+  
+  .collection-card {
+    padding: 1rem;
+    min-height: auto;
+  }
+  
+  .collection-card h3 {
+    font-size: 1.1rem;
+  }
+  
+  .collection-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.8rem;
+  }
+  
+  .collection-items {
+    grid-template-columns: 1fr; /* Single column for items on mobile */
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .collection-header {
+    padding: 1rem 0;
+  }
+  
+  .collection-header h2 {
+    font-size: 1.3rem;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .collection-dev-controls {
+    gap: 0.3rem;
+  }
+  
+  .collection-dev-controls .btn.small {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+  
+  /* Mobile search improvements */
+  .collections-search {
+    margin: 1rem;
+    max-width: 100%;
+    padding: 0 0.5rem;
+  }
+  
+  .search-container {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .search-input,
+  .search-button {
+    width: 100%;
+    padding: 0.8rem 1rem;
+  }
+  
+  .search-button {
+    order: 2;
+  }
+  
+  .tag-filters {
+    gap: 0.4rem;
+    margin: 1rem 0;
+  }
+  
+  .tag-filter-btn {
+    font-size: 0.85rem;
+    padding: 0.5rem 0.8rem;
+    min-height: 44px;
+  }
+}
+
+/* Small tablets */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .collections-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.25rem;
+    padding: 0 1rem;
+  }
+  
+  .collection-card {
+    padding: 1.25rem;
+  }
+  
+  .collection-items {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+}
+
+/* ─────────────────────────── Treasure Tables Components ─────────────────────────── */
+.fourchette-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  margin: 4px 0;
+  background: rgba(139, 92, 23, 0.1);
+  border-radius: 6px;
+  border-left: 3px solid var(--bronze);
+  transition: all var(--transition-fast);
+}
+
+.fourchette-row:hover {
+  background: rgba(139, 92, 23, 0.15);
+  transform: translateX(2px);
+}
+
+.fourchette-range {
+  font-weight: bold;
+  color: var(--bronze);
+  min-width: 80px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.fourchette-objet {
+  flex: 1;
+  margin-left: 12px;
+  color: var(--paper-ink);
+}
+
+.fourchette-objet a {
+  color: var(--link);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.fourchette-objet a:hover {
+  color: var(--bronze);
+  text-decoration: underline;
+}
+
+.fourchette-actions {
+  margin-left: 8px;
+  display: flex;
+  gap: 4px;
+}
+
+.fourchette-actions button {
+  padding: 2px 6px;
+  font-size: 0.7em;
+  border-radius: 4px;
+  transition: all var(--transition-fast);
+  min-height: 32px;
+  min-width: 32px;
+}
+
+/* Treasure table page layout */
+.treasure-tables-page {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.treasure-filter-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+  justify-content: center;
+}
+
+/* Mobile-specific treasure table improvements */
+@media (max-width: 768px) {
+  .treasure-tables-page {
+    padding: 0 1rem;
+  }
+  
+  .treasure-filter-tags {
+    gap: 0.25rem;
+    margin: 0.5rem 0;
+  }
+  
+  .fourchette-actions button {
+    min-height: 40px;
+    min-width: 40px;
+    padding: 4px 6px;
+  }
 }
 
 /* Search results page */
@@ -9369,7 +9958,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
           <!-- Séparation avant les stats principales -->
           <hr style="margin: 1.5rem 0 1rem 0; border: none; border-top: 2px solid var(--bronze); opacity: 0.3;">
           
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin: 1rem 0; font-size: 0.9em;">
+          <div class="monster-stats-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin: 1rem 0; font-size: 0.9em;">
             <div>${this.buildEditableStatField('🎯 Initiative', this.data.initiative, 'monster-initiative', 'Initiative')}</div>
             <div>${this.buildEditableStatField('❤️ PV', this.data.pointsDeVie, 'monster-pointsdevie', 'Points de vie')}</div>
             <div>${this.buildEditableStatField('⚡ Critique', this.data.coupCritique, 'monster-coupcritique', 'Coup critique')}</div>
@@ -9385,7 +9974,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
 
           <div style="margin: 1rem 0;">
             <strong>🌟 Armures Élémentaires:</strong>
-            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 0.25rem; font-size: 0.8em; margin-top: 0.5rem;">
+            <div class="monster-elemental-grid" style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 0.25rem; font-size: 0.8em; margin-top: 0.5rem;">
               <div>${this.buildEditableStatField(this.getElementIcon('Feu'), this.data.armureFeu, 'monster-armurefeu', 'Armure Feu')}</div>
               <div>${this.buildEditableStatField(this.getElementIcon('Eau'), this.data.armureEau, 'monster-armureeau', 'Armure Eau')}</div>
               <div>${this.buildEditableStatField(this.getElementIcon('Terre'), this.data.armureTerre, 'monster-armureterre', 'Armure Terre')}</div>
@@ -18577,50 +19166,35 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
     },
 
     toggleImageEnlargement(img) {
-      console.log('toggleImageEnlargement called with:', img);
-      
       // Vérifier si l'image est valide pour l'agrandissement
       if (!this.isImageEnlargeable(img)) {
-        console.log('Image not enlargeable, returning');
         return;
       }
       
       if (img.classList.contains('enlarged')) {
-        console.log('Image already enlarged, closing');
         this.closeEnlargedImage();
       } else {
-        console.log('Showing enlarged image');
         this.showEnlargedImage(img);
       }
     },
 
     // Vérifier si une image peut être agrandie
     isImageEnlargeable(img) {
-      console.log('Checking if image is enlargeable:', img);
-      console.log('- src:', img.src);
-      console.log('- data-src:', img.getAttribute('data-src'));
-      console.log('- naturalWidth:', img.naturalWidth);
-      console.log('- naturalHeight:', img.naturalHeight);
-      
       // Ne pas agrandir les placeholders SVG
       if (img.src && img.src.startsWith('data:image/svg+xml')) {
-        console.log('- Not enlargeable: SVG placeholder');
         return false;
       }
       
       // Ne pas agrandir si pas de source réelle
       if (!img.src && !img.getAttribute('data-src')) {
-        console.log('- Not enlargeable: no source');
         return false;
       }
       
       // Ne pas agrandir les images trop petites (probablement des icônes)
       if (img.naturalWidth < 50 || img.naturalHeight < 50) {
-        console.log('- Not enlargeable: too small');
         return false;
       }
       
-      console.log('- Image is enlargeable!');
       return true;
     },
 
@@ -18660,7 +19234,6 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
         const encodedOriginal = urlParams.get('url');
         if (encodedOriginal) {
           originalUrl = decodeURIComponent(encodedOriginal);
-          console.log('Loading high-res image for enlargement:', originalUrl);
         }
       }
       
@@ -19744,10 +20317,34 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       const viewsContainer = document.getElementById('views');
       if (!viewsContainer) return;
 
+      const viewportWidth = window.innerWidth;
+
+      // Use CSS media queries for robust device detection (same as CSS breakpoints)
+      const isMobileBreakpoint = window.matchMedia('(max-width: 980px)').matches;
+      const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
+      const isTouchOnly = window.matchMedia('(hover: none)').matches;
+      
+      // Check if sidebar is actually visible/active
+      const sidebar = document.querySelector('.sidebar');
+      const isSidebarVisible = sidebar && !sidebar.classList.contains('mobile-open') && 
+                              window.getComputedStyle(sidebar).position === 'fixed' &&
+                              viewportWidth > 980; // Sidebar only shows above 980px
+      
+      // Disable dynamic centering if:
+      // 1. CSS mobile breakpoint is active (matches our responsive CSS) OR
+      // 2. Device has coarse pointer (touch-first device) OR  
+      // 3. Device can't hover (mobile/touch-only) OR
+      // 4. Sidebar is not visible
+      if (isMobileBreakpoint || isCoarsePointer || isTouchOnly || !isSidebarVisible) {
+        // Reset to CSS responsive behavior
+        viewsContainer.style.marginLeft = '';
+        viewsContainer.style.marginRight = '';
+        return;
+      }
+
       // Get actual container dimensions
       const containerRect = viewsContainer.getBoundingClientRect();
       const actualContentWidth = containerRect.width;
-      const viewportWidth = window.innerWidth;
 
       // Calculate available space after sidebar
       const availableSpace = viewportWidth - this.sidebarWidth;

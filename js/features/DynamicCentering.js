@@ -52,10 +52,34 @@
       const viewsContainer = document.getElementById('views');
       if (!viewsContainer) return;
 
+      const viewportWidth = window.innerWidth;
+
+      // Use CSS media queries for robust device detection (same as CSS breakpoints)
+      const isMobileBreakpoint = window.matchMedia('(max-width: 980px)').matches;
+      const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
+      const isTouchOnly = window.matchMedia('(hover: none)').matches;
+      
+      // Check if sidebar is actually visible/active
+      const sidebar = document.querySelector('.sidebar');
+      const isSidebarVisible = sidebar && !sidebar.classList.contains('mobile-open') && 
+                              window.getComputedStyle(sidebar).position === 'fixed' &&
+                              viewportWidth > 980; // Sidebar only shows above 980px
+      
+      // Disable dynamic centering if:
+      // 1. CSS mobile breakpoint is active (matches our responsive CSS) OR
+      // 2. Device has coarse pointer (touch-first device) OR  
+      // 3. Device can't hover (mobile/touch-only) OR
+      // 4. Sidebar is not visible
+      if (isMobileBreakpoint || isCoarsePointer || isTouchOnly || !isSidebarVisible) {
+        // Reset to CSS responsive behavior
+        viewsContainer.style.marginLeft = '';
+        viewsContainer.style.marginRight = '';
+        return;
+      }
+
       // Get actual container dimensions
       const containerRect = viewsContainer.getBoundingClientRect();
       const actualContentWidth = containerRect.width;
-      const viewportWidth = window.innerWidth;
 
       // Calculate available space after sidebar
       const availableSpace = viewportWidth - this.sidebarWidth;

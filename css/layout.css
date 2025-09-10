@@ -8,6 +8,7 @@
   grid-template-rows: 1fr auto;
   min-height: 100svh;
   position: relative;
+  overflow-x: hidden; /* Prevent horizontal scroll on mobile */
 }
 
 /* Main Content Area - Enhanced Parchment Background */
@@ -26,10 +27,17 @@
 #views {
   max-width: 1400px;
   /* Fallback positioning - will be overridden by DynamicCentering.js */
-  margin-left: 370px; /* Just clear the sidebar */
+  margin-left: 0; /* Reset to 0 - will be handled by responsive design */
   margin-right: 20px;
   padding: 0 var(--space-lg);
   animation: fadeInUp 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Desktop layout with sidebar */
+@media (min-width: 1025px) {
+  #views {
+    margin-left: 370px; /* Only apply sidebar margin on large screens */
+  }
 }
 
 /* Mobile Responsiveness */
@@ -438,6 +446,161 @@ footer{padding:24px;text-align:center;color:var(--paper-muted)}
   section{break-inside:avoid;box-shadow:none} 
 }
 
+/* ========================================
+   🎯 GAME MASTER PAGES - MOBILE FIXES
+   ======================================== */
+
+/* Monster Cards - Responsive Stats Grid */
+@media (max-width: 480px) {
+  .card[data-section-type="monster"] .monster-stats-grid,
+  .monster-stats-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 0.5rem !important;
+    font-size: 0.85em !important;
+  }
+  
+  .card[data-section-type="monster"] .monster-elemental-grid,
+  .monster-elemental-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.3rem !important;
+    font-size: 0.75em !important;
+  }
+  
+  .card[data-section-type="monster"] .tag-chip,
+  .monster-card .tag-chip {
+    display: inline-block !important;
+    margin: 2px 4px 2px 0 !important;
+    font-size: 0.75em !important;
+    padding: 1px 4px !important;
+  }
+}
+
+/* Treasure Tables - Responsive Fourchettes */
+@media (max-width: 480px) {
+  .fourchette-row,
+  .responsive-fourchette {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    gap: 8px !important;
+  }
+  
+  .fourchette-range {
+    min-width: auto !important;
+    margin-bottom: 4px !important;
+  }
+  
+  .fourchette-objet {
+    flex: none !important;
+    margin-left: 0 !important;
+    margin-bottom: 8px !important;
+    word-break: break-word !important;
+    width: 100% !important;
+  }
+  
+  .fourchette-actions {
+    margin-left: 0 !important;
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+    justify-content: flex-start !important;
+    width: 100% !important;
+  }
+  
+  .fourchette-actions button {
+    font-size: 0.7em !important;
+    padding: 4px 8px !important;
+    min-height: 44px !important; /* Touch-friendly */
+    min-width: 44px !important;
+  }
+}
+
+/* Campaign Page - Responsive Selectors */
+@media (max-width: 480px) {
+  .campaign-selector > div,
+  .campaign-controls {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+  }
+  
+  .campaign-selector select,
+  .campaign-controls select {
+    width: 100% !important;
+    font-size: 16px !important; /* Prevents zoom on iOS */
+    min-height: 44px !important;
+    padding: 8px 12px !important;
+  }
+  
+  .subpage-selector,
+  .campaign-subpages {
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+  
+  .subpage-selector button,
+  .campaign-subpages button {
+    width: 100% !important;
+    min-height: 44px !important;
+  }
+}
+
+/* Audio Page - Touch-Friendly Controls */
+@media (max-width: 480px) {
+  #audio-controls-page button,
+  .audio-player button,
+  .playlist-controls button {
+    min-height: 44px !important;
+    min-width: 44px !important;
+    padding: 8px 12px !important;
+    font-size: 14px !important;
+  }
+  
+  .playlist-item,
+  .audio-track {
+    padding: 12px !important;
+    margin: 8px 0 !important;
+  }
+  
+  .audio-controls-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+  }
+}
+
+/* General MJ Page Improvements */
+@media (max-width: 768px) {
+  /* Better button spacing for all MJ pages */
+  .btn.danger,
+  .btn.small,
+  .edit-btn,
+  .delete-btn {
+    min-height: 44px;
+    min-width: 44px;
+    margin: 2px;
+  }
+  
+  /* Responsive tables for all MJ content */
+  .mj-table,
+  .stats-table,
+  .treasure-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  
+  .mj-table th,
+  .mj-table td,
+  .stats-table th,
+  .stats-table td {
+    min-width: 120px;
+    padding: 8px 4px;
+  }
+}
+
 /* ─────────────────────────── Enhanced Mobile & Tablet Responsiveness ─────────────────────────── */
 
 /* Tablet Landscape (1024px and below) */
@@ -451,7 +614,7 @@ footer{padding:24px;text-align:center;color:var(--paper-muted)}
   }
   
   #views {
-    margin-left: 340px; /* Adjust for smaller sidebar */
+    margin-left: 0; /* Reset margin on tablet to prevent horizontal scroll */
     margin-right: 0;
     max-width: 100%;
     padding: 0 var(--space-md);
