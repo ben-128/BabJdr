@@ -13,7 +13,7 @@ function buildStandalone() {
   console.log('🔨 Building standalone version from modular files...');
   
   const rootDir = path.resolve(__dirname, '..');
-  const outputDir = path.join(rootDir, 'build');
+  const outputDir = path.join(rootDir, 'build-output');
   
   // Create output directory
   if (!fs.existsSync(outputDir)) {
@@ -39,7 +39,7 @@ function buildStandalone() {
 <!-- PWA Configuration - Manifest embedded as JSON -->
 <script>
 // Embed manifest for PWA functionality
-window.MANIFEST_DATA = ${fs.readFileSync(path.join(rootDir, 'manifest.json'), 'utf8')};
+window.MANIFEST_DATA = ${fs.readFileSync(path.join(rootDir, 'config', 'manifest.json'), 'utf8')};
 </script>
 <meta name="theme-color" content="#8b4513">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -49,7 +49,7 @@ window.MANIFEST_DATA = ${fs.readFileSync(path.join(rootDir, 'manifest.json'), 'u
 <meta name="msapplication-TileColor" content="#8b4513">
 
 <!-- Favicon (embedded SVG) -->
-<link rel="icon" href="data:image/svg+xml;base64,${Buffer.from(fs.readFileSync(path.join(rootDir, 'icons', 'safari-pinned-tab.svg'), 'utf8')).toString('base64')}">
+<link rel="icon" href="data:image/svg+xml;base64,${Buffer.from(fs.readFileSync(path.join(rootDir, 'assets', 'pwa', 'safari-pinned-tab.svg'), 'utf8')).toString('base64')}">
 </head>
 <body class="dev-off">
 
@@ -287,12 +287,12 @@ window.MANIFEST_DATA = ${fs.readFileSync(path.join(rootDir, 'manifest.json'), 'u
   `;
   
   // Add PWA Service Worker (embedded) with base64 icons
-  const swContent = fs.readFileSync(path.join(rootDir, 'sw.js'), 'utf-8');
+  const swContent = fs.readFileSync(path.join(rootDir, 'config', 'sw.js'), 'utf-8');
   
   // Pre-calculate base64 icons for file:// protocol
-  const icon144Base64 = fs.readFileSync(path.join(rootDir, 'icons', 'icon-144x144.png')).toString('base64');
-  const icon192Base64 = fs.readFileSync(path.join(rootDir, 'icons', 'icon-192x192.png')).toString('base64');
-  const icon512Base64 = fs.readFileSync(path.join(rootDir, 'icons', 'icon-512x512.png')).toString('base64');
+  const icon144Base64 = fs.readFileSync(path.join(rootDir, 'assets', 'pwa', 'icon-144x144.png')).toString('base64');
+  const icon192Base64 = fs.readFileSync(path.join(rootDir, 'assets', 'pwa', 'icon-192x192.png')).toString('base64');
+  const icon512Base64 = fs.readFileSync(path.join(rootDir, 'assets', 'pwa', 'icon-512x512.png')).toString('base64');
   
   const pwaSW = `
 <!-- PWA Service Worker (Embedded) -->

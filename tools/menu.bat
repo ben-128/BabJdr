@@ -28,25 +28,25 @@ if errorlevel 1 goto :dev
 :dev
 echo.
 echo [INFO] Lancement du serveur de développement...
-call scripts\dev-server.bat
+call ..\scripts\dev-server.bat
 goto :menu
 
 :build
 echo.
 echo [INFO] Lancement du build standalone...
-call scripts\build.bat
+call ..\scripts\build.bat
 goto :menu
 
 :import
 echo.
 echo [INFO] Lancement de l'import d'archive...
-call scripts\import-archive.bat
+call ..\scripts\import-archive.bat
 goto :menu
 
 :clean
 echo.
 echo [INFO] Lancement du nettoyage des sauvegardes...
-call scripts\clean-backups.bat
+call ..\scripts\clean-backups.bat
 goto :menu
 
 :quit
