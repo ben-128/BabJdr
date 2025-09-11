@@ -1019,24 +1019,28 @@
       } else {
         // Use the existing CardBuilder system to ensure consistent formatting and images
         const itemsHTML = items.map(item => {
-          let cardHTML = window.CardBuilder.create('objet', item, 'objets').build();
-          
-          // Add dev controls if in dev mode
-          if (isDevMode) {
-            // Insert dev controls before the closing </article> tag
-            cardHTML = cardHTML.replace('</article>', `
-              <div class="dev-controls collection-dev-controls">
-                <button class="btn small edit-object-btn" data-numero="${item.numero}">✏️ Éditer</button>
-                <button class="btn small remove-from-collection-btn" data-numero="${item.numero}">➖ Retirer de cette collection</button>
-                <button class="btn small delete-object-btn" data-numero="${item.numero}">🗑️ Supprimer définitivement</button>
-              </div>
-            </article>`);
-          }
-          
-          return cardHTML;
+          return window.CardBuilder.create('objet', item, 'objets').build();
         }).join('');
         
         itemsContainer.innerHTML = itemsHTML;
+        
+        // Add dev controls after DOM insertion if in dev mode
+        if (isDevMode) {
+          items.forEach(item => {
+            const card = itemsContainer.querySelector(`.card[data-objet-name="${item.nom}"]`);
+            if (card) {
+              const devControls = document.createElement('div');
+              devControls.className = 'dev-controls collection-dev-controls';
+              devControls.style.cssText = 'margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #ddd;';
+              devControls.innerHTML = `
+                <button class="btn small edit-object-btn" data-numero="${item.numero}" style="margin: 2px;">✏️ Éditer</button>
+                <button class="btn small remove-from-collection-btn" data-numero="${item.numero}" style="margin: 2px; background: #f59e0b;">➖ Retirer de cette collection</button>
+                <button class="btn small delete-object-btn" data-numero="${item.numero}" style="margin: 2px; background: #ef4444;">🗑️ Supprimer définitivement</button>
+              `;
+              card.appendChild(devControls);
+            }
+          });
+        }
       }
       
       // Add event listeners for dev controls

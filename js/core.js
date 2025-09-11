@@ -314,6 +314,11 @@
       if (this.modules.editor && this.modules.editor.init) this.modules.editor.init();
       if (this.modules.storage && this.modules.storage.init) this.modules.storage.init();
       if (this.modules.ui && this.modules.ui.init) this.modules.ui.init();
+      
+      // Initialize performance optimizations after all modules are loaded
+      if (window.ScrollOptimizer && window.ScrollOptimizer.init) {
+        window.ScrollOptimizer.init();
+      }
     },
 
     // Force reload JSON data (clear localStorage cache)

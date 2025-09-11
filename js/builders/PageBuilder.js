@@ -82,7 +82,7 @@
       // console.log('🎯 Object filtering - isDevMode:', isDevMode, 'activeIdSearch:', !!window.activeIdSearch, 'activeTags:', activeTags.length);
       
       const filteredObjects = window.activeIdSearch 
-        ? allObjects // TOUJOURS afficher tous les objets quand recherche par ID est active
+        ? [] // En recherche ID, on affiche rien initialement - showOnlyObjectById() s'occupera d'afficher le bon objet
         : !isDevMode
           ? [] // Mode dev OFF: aucun objet affiché par défaut (seule recherche ID fonctionne)
           : activeTags.length === 0 
@@ -93,6 +93,9 @@
                 // Vérifier que l'objet a TOUS les tags actifs (logique AND)
                 return activeTags.every(activeTag => obj.tags.includes(activeTag));
               });
+
+      // Pour la recherche par ID, on doit quand même générer toutes les cartes mais les cacher
+      const objectsToRender = window.activeIdSearch ? allObjects : filteredObjects;
       
       // console.log('📊 Filtered objects count:', filteredObjects.length, '/ Total objects:', allObjects.length);
       
@@ -115,9 +118,15 @@
             </div>
             
             <div class="grid cols-2" id="objets-container">
-              ${filteredObjects.map((item, index) => 
-                CardBuilder.create('objet', item, 'objets', index).build()
-              ).join('')}
+              ${objectsToRender.map((item, index) => {
+                // Si on est en recherche ID, cacher toutes les cartes par défaut
+                const cardHTML = CardBuilder.create('objet', item, 'objets', index).build();
+                if (window.activeIdSearch) {
+                  // Injecter style="display: none;" dans la div de la carte
+                  return cardHTML.replace('<div class="card', '<div class="card" style="display: none;"');
+                }
+                return cardHTML;
+              }).join('')}
             </div>
             
             ${filteredObjects.length === 0 && !window.activeIdSearch ? '<p style="text-align: center; color: #666; margin: 2rem 0;">Aucun objet ne correspond aux filtres sélectionnés.</p>' : ''}

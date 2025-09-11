@@ -207,7 +207,7 @@
       if (!article) {
         article = document.createElement('article');
         article.setAttribute('data-page', pageId);
-        article.className = 'active'; // Make it active since we're showing it
+        // DON'T make it active immediately - let the show() method handle this
         
         const viewsContainer = document.querySelector('#views');
         if (viewsContainer) {

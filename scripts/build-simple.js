@@ -76,7 +76,8 @@ function buildStandalone() {
     'css/utilities.css', 
     'css/layout.css',
     'css/components.css',
-    'css/editor.css'
+    'css/editor.css',
+    'css/scroll-optimizations.css'
   ];
   
   let allCSS = '';
@@ -110,6 +111,7 @@ function buildStandalone() {
     'js/features/TablesTresorsManager.js', // Tables de trésors manager
     'js/features/FavorisManager.js', // Favoris manager - AVANT renderer
     'js/features/FavorisRenderer.js', // Favoris renderer - AVANT renderer
+    'js/features/ScrollOptimizer.js', // Scroll performance optimizations
     'js/features/DynamicCentering.js', // Dynamic centering system
     
     // Modules qui dépendent des features

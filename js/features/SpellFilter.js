@@ -9,16 +9,20 @@
   // SPELL FILTER MODULE
   // ========================================
   const SpellFilter = {
+    // Cache for performance
+    _cachedCards: null,
+    _lastCategoryHash: null,
     
     init() {
       this.setupEventListeners();
     },
 
     setupEventListeners() {
-      // Use direct event delegation on document to catch dynamically added elements
+      // Use throttled event delegation for better performance
       document.addEventListener('input', (e) => {
         if (e.target && e.target.id === 'spell-level-filter') {
-          this.filterSpellsByLevel(parseInt(e.target.value, 10));
+          // Throttle filter calls for smoother performance
+          this.throttledFilter(parseInt(e.target.value, 10));
         }
       });
 
@@ -33,7 +37,8 @@
       if (window.EventBus && window.Events) {
         EventBus.on(Events.PAGE_RENDER, (payload) => {
           if (payload.type === 'category' && payload.categoryType === 'spell') {
-            // Re-setup filter after page render
+            // Clear cache and re-setup filter after page render
+            this.clearCache();
             setTimeout(() => this.initializeFilter(), 200);
           }
         });
@@ -41,9 +46,27 @@
 
       // Also listen to hash changes for direct navigation
       window.addEventListener('hashchange', () => {
+        this.clearCache();
         setTimeout(() => this.initializeFilter(), 200);
       });
     },
+
+    // Clear cache when changing pages
+    clearCache() {
+      this._cachedCards = null;
+      this._lastCategoryHash = null;
+    },
+
+    // Throttled filter function for better performance
+    throttledFilter: (function() {
+      let timeout = null;
+      return function(maxLevel) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+          this.filterSpellsByLevel(maxLevel);
+        }, 100); // 100ms throttle
+      };
+    })(),
 
     initializeFilter() {
       const filterInput = document.querySelector('#spell-level-filter');
@@ -70,8 +93,16 @@
         currentCategoryName = currentCategoryName.replace('sorts-', '');
       }
       
-      // Find all spell cards in the current page
-      const spellCards = document.querySelectorAll('.card[data-spell-name]');
+      // Use cached cards if same category, otherwise refresh cache
+      let spellCards;
+      if (this._lastCategoryHash === currentHash && this._cachedCards) {
+        spellCards = this._cachedCards;
+      } else {
+        // Only query DOM when necessary
+        spellCards = document.querySelectorAll('article.active .card[data-spell-name]');
+        this._cachedCards = spellCards;
+        this._lastCategoryHash = currentHash;
+      }
       
       if (spellCards.length === 0) return;
 
