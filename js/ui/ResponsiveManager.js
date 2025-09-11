@@ -30,29 +30,74 @@
      * Create mobile navigation toggle
      */
     createMobileNavToggle() {
-      // Check if toggle already exists
-      if (document.querySelector('#menuToggle')) {
-        return;
-      }
+      // Use existing toggle or create new one
+      let menuToggle = document.querySelector('#menuToggle');
+      let isExisting = !!menuToggle;
 
-      const menuToggle = document.createElement('button');
-      menuToggle.id = 'menuToggle';
-      menuToggle.className = 'menu-toggle';
-      menuToggle.setAttribute('aria-controls', 'sidebar');
-      menuToggle.setAttribute('aria-expanded', 'false');
-      menuToggle.setAttribute('aria-label', 'Ouvrir le sommaire');
-      menuToggle.innerHTML = '☰ Sommaire';
+      if (!menuToggle) {
+        menuToggle = document.createElement('button');
+        menuToggle.id = 'menuToggle';
+        menuToggle.className = 'menu-toggle';
+        menuToggle.setAttribute('aria-controls', 'sidebar');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.setAttribute('aria-label', 'Ouvrir le sommaire');
+        
+        // Insert at the beginning of the shell
+        const shell = document.querySelector('.shell');
+        if (shell) {
+          shell.insertBefore(menuToggle, shell.firstChild);
+        }
+      }
+      
+      // Create prettier button with icon and text
+      menuToggle.innerHTML = `
+        <span class="menu-icon">☰</span>
+        <span class="menu-text">Sommaire</span>
+      `;
+      
+      // Add proper styling - fix width and position issues
+      menuToggle.style.cssText = `
+        position: fixed !important;
+        top: 16px !important;
+        left: 16px !important;
+        z-index: 1000 !important;
+        background: var(--primary-color, #8b4513) !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 8px !important;
+        padding: 12px 16px !important;
+        font-size: 14px !important;
+        font-weight: 500 !important;
+        cursor: pointer !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important;
+        transition: all 0.2s ease !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        width: auto !important;
+        max-width: 140px !important;
+        min-width: 120px !important;
+      `;
+      
+      // Remove old event listeners to avoid conflicts
+      menuToggle.replaceWith(menuToggle.cloneNode(true));
+      menuToggle = document.querySelector('#menuToggle');
+
+      // Add hover effect
+      menuToggle.addEventListener('mouseenter', () => {
+        menuToggle.style.transform = 'scale(1.05)';
+        menuToggle.style.boxShadow = '0 4px 12px rgba(0,0,0,0.25)';
+      });
+      
+      menuToggle.addEventListener('mouseleave', () => {
+        menuToggle.style.transform = 'scale(1)';
+        menuToggle.style.boxShadow = '0 2px 8px rgba(0,0,0,0.15)';
+      });
 
       // Add toggle functionality
       menuToggle.addEventListener('click', () => {
         this.toggleMobileNav();
       });
-
-      // Insert at the beginning of the shell
-      const shell = document.querySelector('.shell');
-      if (shell) {
-        shell.insertBefore(menuToggle, shell.firstChild);
-      }
 
       // Create backdrop for mobile
       if (!document.querySelector('#backdrop')) {
@@ -120,9 +165,16 @@
       const menuToggle = document.querySelector('#menuToggle');
       const backdrop = document.querySelector('#backdrop');
 
-      // Mobile breakpoint
-      if (width <= window.UI_CONSTANTS.BREAKPOINTS.MOBILE) {
-        // Mobile mode
+      // Check if device is touch-capable
+      const isTouchDevice = this.isTouchDevice();
+      const isMobileSize = width <= window.UI_CONSTANTS.BREAKPOINTS.MOBILE;
+      const isTabletSize = width > window.UI_CONSTANTS.BREAKPOINTS.MOBILE && width <= window.UI_CONSTANTS.BREAKPOINTS.TABLET_LANDSCAPE;
+      
+      // Show menu toggle on touch devices OR mobile size screens
+      const shouldShowToggle = isTouchDevice || isMobileSize;
+
+      if (shouldShowToggle) {
+        // Mobile/Touch mode
         if (menuToggle) menuToggle.style.display = 'block';
         if (sidebar) {
           sidebar.classList.remove('desktop-open');
@@ -133,7 +185,7 @@
         if (backdrop) backdrop.style.display = 'none';
         document.body.style.overflow = '';
       } else {
-        // Desktop mode
+        // Desktop mode (non-touch, large screen)
         if (menuToggle) menuToggle.style.display = 'none';
         if (sidebar) {
           sidebar.classList.remove('mobile-open');
@@ -142,6 +194,16 @@
         if (backdrop) backdrop.style.display = 'none';
         document.body.style.overflow = '';
       }
+    },
+
+    /**
+     * Check if device has touch capability
+     */
+    isTouchDevice() {
+      return 'ontouchstart' in window || 
+             navigator.maxTouchPoints > 0 || 
+             navigator.msMaxTouchPoints > 0 ||
+             window.matchMedia('(pointer: coarse)').matches;
     },
 
     /**

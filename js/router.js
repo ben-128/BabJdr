@@ -335,9 +335,40 @@
               JdrApp.modules.router._forceObjectsRefresh = true;
             }
             JdrApp.modules.router.navigate(route);
+            
+            // Auto-close sidebar on mobile/touch devices after navigation
+            this.autoCloseMobileSidebar();
           }
         });
       });
+    },
+
+    /**
+     * Auto-close sidebar on mobile/touch devices after navigation
+     */
+    autoCloseMobileSidebar() {
+      // Check if device should show mobile toggle (touch device or mobile size)
+      const isTouchDevice = 'ontouchstart' in window || 
+                           navigator.maxTouchPoints > 0 || 
+                           navigator.msMaxTouchPoints > 0 ||
+                           window.matchMedia('(pointer: coarse)').matches;
+      
+      const isMobileSize = window.innerWidth <= window.UI_CONSTANTS?.BREAKPOINTS?.MOBILE;
+      const shouldAutoClose = isTouchDevice || isMobileSize;
+      
+      if (shouldAutoClose) {
+        const sidebar = document.querySelector('#sidebar');
+        const menuToggle = document.querySelector('#menuToggle');
+        const backdrop = document.querySelector('#backdrop');
+        
+        if (sidebar && sidebar.classList.contains('mobile-open')) {
+          // Close mobile nav
+          sidebar.classList.remove('mobile-open');
+          if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
+          if (backdrop) backdrop.style.display = 'none';
+          document.body.style.overflow = '';
+        }
+      }
     },
 
     updateMJButtonVisual() {

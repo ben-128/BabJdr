@@ -66,6 +66,23 @@ git push origin master
 
 ## 🏗️ Architecture
 
+### JavaScript Modulaire
+- **UI Core**: Architecture modulaire optimisée (`js/ui/` folder)
+  - `UICore.js`: Coordinateur principal (9.5KB)
+  - `SearchManager.js`: Gestion des recherches (11KB)
+  - `ModalManager.js`: Système de modales (12KB)
+  - `ResponsiveManager.js`: Adaptabilité mobile (8.4KB)
+  - `PageManager.js`: Navigation (13KB)
+  - `TagsManager.js`: Filtrage par tags (15KB)
+  - `ContentManager.js`: Gestion du contenu (7.3KB)
+  - `EventHandlers.js`: Événements (8.4KB)
+
+### Optimisations récentes ⚡
+- **UI.js réduit de 208KB à 3.9KB** (98% de réduction)
+- **Suppression du code dupliqué** entre `ui.js` et `js/ui/`
+- **Architecture 100% modulaire** pour de meilleures performances
+
+### Technologies
 - **Modular Development**: Fichiers séparés pour développement
 - **Standalone Production**: Fichier unique ~1MB avec tout embedded
 - **PWA Features**: Service Worker, manifest, offline-first

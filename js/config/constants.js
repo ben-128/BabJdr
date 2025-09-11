@@ -27,9 +27,9 @@
       DYNAMIC_CENTERING_DELAY: 50
     },
     
-    // Breakpoints
+    // Breakpoints (aligned with CSS media queries)
     BREAKPOINTS: {
-      MOBILE: 480,
+      MOBILE: 768,  // Updated to match CSS @media (max-width: 768px)
       TABLET_PORTRAIT: 768,
       TABLET_LANDSCAPE: 1024,
       DESKTOP: 980

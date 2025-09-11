@@ -106,6 +106,53 @@ This codebase has been completely refactored from a 7,469-line monolith into a p
 - `TablesTresorsManager.js` - **TREASURE TABLE SYSTEM** with fourchettes management
 - `DynamicCentering.js` - UI centering features
 
+### UI Architecture Optimization (September 2025)
+
+#### **🚀 Major UI Refactor - 98% Code Reduction**
+Recent optimization completely refactored the UI layer, eliminating massive code duplication:
+
+**Before Optimization:**
+- `ui.js`: 208KB, 5,411 lines with fallback implementations
+- Duplicated code between `ui.js` and `js/ui/` folder
+- Monolithic approach with redundant functionality
+
+**After Optimization:**
+- `ui.js`: 3.9KB, 156 lines (pure delegation layer)
+- **Eliminated 204KB of duplicated code**
+- **10 specialized UI modules** in `js/ui/` folder:
+  - `UICore.js` (9.5KB) - Main coordinator
+  - `SearchManager.js` (11KB) - Search functionality
+  - `ModalManager.js` (12KB) - Modal system
+  - `ResponsiveManager.js` (8.4KB) - Responsive design
+  - `PageManager.js` (13KB) - Page navigation
+  - `TagsManager.js` (15KB) - Tag filtering
+  - `ContentManager.js` (7.3KB) - Content operations
+  - `EventHandlers.js` (8.4KB) - Event management
+  - `BaseModal.js` (7.5KB) - Modal base class
+  - `UIUtilities.js` (5.9KB) - UI utilities
+
+#### **Critical UI Module Loading Order**
+UI modules must be loaded in this specific order in HTML:
+```html
+<script src="js/ui/UIUtilities.js"></script>
+<script src="js/ui/BaseModal.js"></script>
+<script src="js/ui/EventHandlers.js"></script>
+<script src="js/ui/ContentManager.js"></script>
+<script src="js/ui/SearchManager.js"></script>
+<script src="js/ui/ModalManager.js"></script>
+<script src="js/ui/ResponsiveManager.js"></script>
+<script src="js/ui/PageManager.js"></script>
+<script src="js/ui/TagsManager.js"></script>
+<script src="js/ui/UICore.js"></script>
+<script src="js/ui.js"></script> <!-- Main delegation layer LAST -->
+```
+
+#### **⚠️ Implementation Requirements**
+- **ALL UI functionality** must go through the modular components
+- **NO fallback implementations** in main ui.js
+- **UICore requires** all specialized modules to be loaded first
+- **Backup available** as `ui.js.backup` if rollback needed
+
 ### Refactored Main Modules
 
 #### Core (`js/core.js`) - 172 lines (was 203)
@@ -131,10 +178,11 @@ This codebase has been completely refactored from a 7,469-line monolith into a p
 - Dev mode toggle functionality with comprehensive button management
 - Real-time content modification with automatic persistence
 
-#### UI (`js/ui.js`) - 478 lines (was 467) **Enhanced functionality**
-- **GENERIC**: Single handler for all content operations (add/delete/move)
-- **EVENT-BASED**: Modal and notification system via EventBus
-- Search, responsive design, accessibility features
+#### UI (`js/ui.js`) - 156 lines (was 5,411) **98% reduction, optimized**
+- **STREAMLINED**: Removed 204KB of duplicated code, now pure delegation layer
+- **MODULAR ARCHITECTURE**: Relies entirely on specialized `js/ui/` modules
+- **NO FALLBACKS**: Eliminated redundant implementations, 100% modular approach
+- **10 UI MODULES**: UICore, SearchManager, ModalManager, ResponsiveManager, PageManager, TagsManager, ContentManager, EventHandlers, BaseModal, UIUtilities
 
 #### Storage (`js/storage.js`) - Unchanged
 - Local storage management
