@@ -633,6 +633,18 @@
       "effet": "<strong>Effet:</strong> Augmente l'Armure physique de 2.<br> Augmente l'Endurance de 2.",
       "prix": "🔷 <strong>Prix:</strong> 120",
       "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Cristal de Sel",
+      "numero": 50,
+      "image": "",
+      "description": "<i>Sel raffiné qui sublime le goût de chaque plat.</i>",
+      "tags": [
+        "Nourriture"
+      ],
+      "effet": "<strong>Effet:</strong> Double les soins prodigués par une nourriture.\n\n<br>          <strong>Charges:</strong> 5.",
+      "prix": "🔷 <strong>Prix:</strong> 50",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     }
   ],
   "filterSettings": {

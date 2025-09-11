@@ -1,0 +1,27 @@
+<svg width="152" height="152" viewBox="0 0 152 152" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#f4f0e6"/>
+      <stop offset="100%" stop-color="#d4af37"/>
+    </radialGradient>
+    <linearGradient id="shadow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="rgba(139,69,19,0.3)"/>
+      <stop offset="100%" stop-color="rgba(139,69,19,0.1)"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="76" cy="76" r="72" fill="url(#bg)" stroke="#8b4513" stroke-width="2"/>
+  
+  <!-- Scroll/Parchment design -->
+  <rect x="38" y="30.4" width="76" height="91.2" rx="4" fill="#f4f0e6" stroke="#8b4513" stroke-width="1"/>
+  <rect x="42" y="34.4" width="68" height="83.2" rx="2" fill="none" stroke="#d4af37" stroke-width="1"/>
+  
+  <!-- Medieval text lines -->
+  <line x1="50.666666666666664" y1="60.8" x2="101.84" y2="60.8" stroke="#8b4513" stroke-width="2" opacity="0.7"/>
+  <line x1="50.666666666666664" y1="76" x2="101.84" y2="76" stroke="#8b4513" stroke-width="2" opacity="0.7"/>
+  <line x1="50.666666666666664" y1="91.2" x2="91.2" y2="91.2" stroke="#8b4513" stroke-width="2" opacity="0.7"/>
+  
+  <!-- Decorative corner -->
+  <circle cx="121.60000000000001" cy="30.400000000000002" r="3" fill="#d4af37"/>
+</svg>

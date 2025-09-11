@@ -39,7 +39,10 @@
       "Bash(git clone:*)",
       "Bash(cat:*)",
       "Bash(npm install)",
-      "Bash(dir:*)"
+      "Bash(dir:*)",
+      "Bash(mkdir:*)",
+      "Bash(npm run icons-png:*)",
+      "Bash(mkdir:*)"
     ],
     "deny": []
   }

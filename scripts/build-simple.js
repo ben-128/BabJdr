@@ -35,6 +35,21 @@ function buildStandalone() {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&amp;family=Source+Serif+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600&amp;display=swap" rel="stylesheet">
+
+<!-- PWA Configuration - Manifest embedded as JSON -->
+<script>
+// Embed manifest for PWA functionality
+window.MANIFEST_DATA = ${fs.readFileSync(path.join(rootDir, 'manifest.json'), 'utf8')};
+</script>
+<meta name="theme-color" content="#8b4513">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="JDR-BAB">
+<meta name="application-name" content="JDR-BAB">
+<meta name="msapplication-TileColor" content="#8b4513">
+
+<!-- Favicon (embedded SVG) -->
+<link rel="icon" href="data:image/svg+xml;base64,${Buffer.from(fs.readFileSync(path.join(rootDir, 'icons', 'safari-pinned-tab.svg'), 'utf8')).toString('base64')}">
 </head>
 <body class="dev-off">
 
@@ -101,6 +116,7 @@ function buildStandalone() {
     'js/builders/CardBuilder.js',  // Card builder
     'js/builders/PageBuilder.js',  // Page builder
     'js/utils.js',               // Utilities
+    'js/utils/device-detection.js', // Device detection utilities
     
     // Feature modules
     'js/modules/images.js',       // Image module
@@ -119,6 +135,15 @@ function buildStandalone() {
     'js/renderer.js',             // Renderer module - APRÈS les features
     'js/core/UnifiedEditor.js',   // Unified editor
     'js/editor.js',               // Editor module
+    
+    // UI utilities (before main UI module)
+    'js/ui/UIUtilities.js',       // UI utilities - AVANT ui.js
+    'js/ui/BaseModal.js',         // Modal base class - AVANT ui.js
+    'js/ui/UICore.js',            // UI core initialization - AVANT ui.js
+    'js/ui/EventHandlers.js',     // Event delegation - AVANT ui.js
+    'js/ui/ContentManager.js',    // Content CRUD operations - AVANT ui.js
+    'js/ui/TagsManager.js',       // Tags management - AVANT ui.js
+    
     'js/ui.js',                   // UI module - en dernier
     'js/libs/jspdf-loader.js'     // External library loaders - last
   ];
@@ -257,9 +282,150 @@ function buildStandalone() {
     });
   `;
   
+  // Add PWA Service Worker (embedded) with base64 icons
+  const swContent = fs.readFileSync(path.join(rootDir, 'sw.js'), 'utf-8');
+  
+  // Pre-calculate base64 icons for file:// protocol
+  const icon144Base64 = fs.readFileSync(path.join(rootDir, 'icons', 'icon-144x144.png')).toString('base64');
+  const icon192Base64 = fs.readFileSync(path.join(rootDir, 'icons', 'icon-192x192.png')).toString('base64');
+  const icon512Base64 = fs.readFileSync(path.join(rootDir, 'icons', 'icon-512x512.png')).toString('base64');
+  
+  const pwaSW = `
+<!-- PWA Service Worker (Embedded) -->
+<script>
+// Create dynamic manifest for PWA - Protocol-aware
+if (window.MANIFEST_DATA) {
+  let manifest = JSON.parse(JSON.stringify(window.MANIFEST_DATA));
+  
+  // Only modify manifest for file:// protocol
+  if (window.location.protocol === 'file:') {
+    manifest.start_url = window.location.href;
+    manifest.scope = window.location.href;
+    
+    // Create a simple SVG icon that works with file:// protocol
+    const simpleIcon = 'data:image/svg+xml;base64,' + btoa('<svg xmlns="http://www.w3.org/2000/svg" width="144" height="144" viewBox="0 0 144 144"><rect width="144" height="144" fill="#f4f0e6" rx="16"/><rect x="24" y="30" width="96" height="84" fill="#fff" stroke="#8b4513" stroke-width="2" rx="4"/><line x1="36" y1="50" x2="108" y2="50" stroke="#8b4513" stroke-width="2"/><line x1="36" y1="70" x2="108" y2="70" stroke="#8b4513" stroke-width="2"/><line x1="36" y1="90" x2="90" y2="90" stroke="#8b4513" stroke-width="2"/><circle cx="120" cy="24" r="4" fill="#d4af37"/></svg>');
+    
+    manifest.icons = [
+      {
+        "src": simpleIcon,
+        "sizes": "144x144",
+        "type": "image/svg+xml",
+        "purpose": "any"
+      },
+      {
+        "src": simpleIcon,
+        "sizes": "192x192", 
+        "type": "image/svg+xml",
+        "purpose": "any"
+      },
+      {
+        "src": simpleIcon,
+        "sizes": "512x512",
+        "type": "image/svg+xml", 
+        "purpose": "any"
+      }
+    ];
+    
+    // Remove problematic elements for file:// 
+    manifest.shortcuts = [];
+    delete manifest.screenshots;
+    console.log('📱 PWA manifest adapted for file:// protocol');
+  } else {
+    // For HTTPS - use original manifest as-is
+    console.log('📱 PWA using original manifest for HTTPS');
+  }
+  
+  // Create manifest blob and URL
+  const manifestBlob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
+  const manifestUrl = URL.createObjectURL(manifestBlob);
+  
+  // Inject manifest link dynamically
+  const manifestLink = document.createElement('link');
+  manifestLink.rel = 'manifest';
+  manifestLink.href = manifestUrl;
+  document.head.appendChild(manifestLink);
+  
+  console.log('📱 PWA manifest injected');
+}
+
+// Service Worker only works on HTTPS or localhost
+const canUseServiceWorker = 'serviceWorker' in navigator && 
+  (window.location.protocol === 'https:' || 
+   window.location.hostname === 'localhost' ||
+   window.location.hostname === '127.0.0.1');
+
+if (canUseServiceWorker) {
+  // Service Worker Registration - use external file only
+  const swUrl = '/sw.js';
+
+  // Progressive Web App - Service Worker Registration
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register(swUrl)
+      .then((registration) => {
+        console.log('✅ Service Worker registered successfully:', registration);
+        
+        // Check for updates
+        registration.addEventListener('updatefound', () => {
+          const newWorker = registration.installing;
+          if (newWorker) {
+            newWorker.addEventListener('statechange', () => {
+              if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                // New content available, notify user
+                if (window.JdrApp && JdrApp.modules && JdrApp.modules.ui) {
+                  JdrApp.modules.ui.showNotification('🔄 Nouvelle version disponible ! Rechargez la page.', 'info');
+                }
+              }
+            });
+          }
+        });
+      })
+      .catch((error) => {
+        console.log('❌ Service Worker registration failed:', error);
+      });
+  });
+
+  // Listen for app install prompt
+  let deferredPrompt;
+  window.addEventListener('beforeinstallprompt', (e) => {
+    console.log('💾 PWA install prompt available');
+    e.preventDefault();
+    deferredPrompt = e;
+    
+    // Show install button or notification
+    if (window.JdrApp && JdrApp.modules && JdrApp.modules.ui) {
+      JdrApp.modules.ui.showNotification('📱 Installer JDR-BAB sur votre appareil ?', 'info');
+    }
+  });
+
+  // Track install success
+  window.addEventListener('appinstalled', (e) => {
+    console.log('✅ PWA was installed successfully');
+    if (window.JdrApp && JdrApp.modules && JdrApp.modules.ui) {
+      JdrApp.modules.ui.showNotification('✅ JDR-BAB installé avec succès !', 'success');
+    }
+    deferredPrompt = null;
+  });
+} else {
+  console.log('⚠️ Service Worker not available (requires HTTPS)');
+  console.log('💡 For full PWA features, serve via HTTPS server');
+}
+
+// PWA Display Mode Detection
+if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
+  console.log('📱 Running as PWA');
+  document.body.classList.add('pwa-mode');
+}
+
+// Basic PWA install prompt for non-HTTPS environments
+if (!canUseServiceWorker && window.MANIFEST_DATA) {
+  console.log('💡 Limited PWA support without Service Worker');
+  console.log('📱 Try: Add to Home Screen (mobile) or Install App (desktop)');
+}
+</script>`;
+
   htmlContent = htmlContent.replace(
     '</body>',
-    `<script>\n${dataScript}\n${allJS}\n</script>\n</body>`
+    `<script>\n${dataScript}\n${allJS}\n</script>\n${pwaSW}\n</body>`
   );
   
   // Remove any external script tags that might have been added somehow

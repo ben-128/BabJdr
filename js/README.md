@@ -27,6 +27,10 @@ This directory contains the modular JavaScript architecture of the JDR-BAB appli
 - **`PageBuilder.js`** - Generates pages for ANY content type using templates
 - **NO MORE** separate methods for spells, dons, classes - one builder handles all
 
+### UI System (`/ui/`) **NEW MODULAR ARCHITECTURE**
+- **`UIUtilities.js`** - Helper functions and utility methods (stripHtml, getElementColor, copyToClipboard, notifications)
+- **`BaseModal.js`** - Generic modal management system with event handling and common patterns
+
 ### Feature Modules (`/modules/`, `/features/`)
 - **`images.js`** - Asset management and dual-mode image handling
 - **`audio.js`** - Audio system with ambient music playlists
@@ -141,11 +145,58 @@ const html = CardBuilder.create('spell', testData, 'Feu').build();
 console.log(html);
 ```
 
+## 🔄 UI Module Refactoring (In Progress)
+
+### **Phase 1: COMPLETED ✅**
+**Status**: UI Utilities Extraction
+- **`UIUtilities.js`** (200 lignes) - Extracted utility functions from ui.js
+  - `stripHtml()`, `getElementColor()`, `getElementIcon()`
+  - `copyToClipboard()`, `showNotification()`
+  - `getCurrentPageId()`, `forcePageRefresh()`, `triggerDataSave()`
+- **`BaseModal.js`** (200 lignes) - Generic modal management
+  - Modal creation, opening, closing with event handling
+  - Confirmation and input dialogs
+  - EventBus integration
+
+**Impact**: ui.js reduced from 5,643 to ~5,200 lignes (-400 lignes)
+
+### **Phase 2: COMPLETED ✅**
+**Status**: Core Infrastructure Extraction
+- **`UICore.js`** (300 lignes) - Main UI initialization and setup
+  - `init()`, `setupEventListeners()`, `setupSearch()`, `setupModals()`
+  - Content event handlers delegation
+  - EventBus integration for CONTENT_ADD/DELETE/MOVE
+- **`EventHandlers.js`** (200 lignes) - UI event delegation system
+  - Generic content handlers (add, delete, move)
+  - Tags management event handlers
+  - Smart event delegation with type extraction
+  - Method delegation to ui.js main module
+
+**Impact**: ui.js reduced from ~5,200 to ~4,700 lignes (-500 lignes)
+
+### **Phase 3: COMPLETED ✅**
+**Status**: Content & Tags Management Extraction
+- **`ContentManager.js`** (250 lignes) - CRUD operations for all content types
+  - `addContent()`, `deleteContent()`, `moveContent()` with smart delegation
+  - Special handling for objects/monsters vs standard category-based content
+  - EventBus integration and post-processing handlers
+- **`TagsManager.js`** (400 lignes) - Tags management for monsters and treasure tables
+  - `showTagsManagementModal()` with content type detection
+  - Monster tags management with modal UI and persistence
+  - Table tresor tags management with metadata storage
+  - Complete CRUD operations for tag systems
+
+**Impact**: ui.js reduced from ~4,700 to ~4,050 lignes (-650 lignes)
+
+### **Refactoring Goal**: 
+Transform ui.js monolith (5,643 lignes) into **13 focused modules** of 150-1,200 lignes each.
+
 ## 📊 Module Statistics (Post-Refactoring)
 
 - **core.js**: 172 lines (was 203) - Application initialization
 - **renderer.js**: 172 lines (was 711) - **76% reduction** through builders
 - **editor.js**: 584 lines (was 1370) - **57% reduction** through unification
-- **ui.js**: 478 lines (was 467) - Enhanced functionality with generics
+- **ui.js**: ~4,050 lines (was 5,643) - **Refactoring in progress** 
+- **UI modules**: 1,550+ lines extracted to 6 specialized modules
 
 **Total code reduction: 52% while maintaining full functionality**

@@ -92,15 +92,17 @@
   opacity: 0.6;
 }
 
-/* Mobile Sidebar with Collapsible Navigation */
-@media (max-width: 980px) { 
+/* Mobile and Tablet Sidebar with Collapsible Navigation */
+@media (max-width: 1024px) { 
   .sidebar {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: auto;
-    max-height: 80vh;
+    height: 100vh;
+    height: 100dvh; /* Dynamic viewport height for better mobile support */
+    min-height: 100vh;
+    min-height: 100dvh;
     background: 
       linear-gradient(135deg, var(--card), rgba(244,240,230,0.98)),
       radial-gradient(circle at 50% 30%, rgba(212,175,55,0.05), transparent 70%);
@@ -113,16 +115,24 @@
     transform: translateY(-100%);
     transition: transform var(--transition-normal);
     z-index: 200;
-    overflow-y: auto;
+    overflow: hidden; /* Prevent sidebar itself from scrolling */
   }
   
   .sidebar.mobile-open {
     transform: translateY(0);
   }
   
-  /* Adjust page layout for mobile */
+  /* Adjust page layout for mobile and tablet */
   .page {
     padding: 80px 12px 12px 12px; /* Top padding for mobile nav button */
+  }
+  
+  /* Ensure content uses full width on tablet */
+  #views {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    max-width: 100% !important;
+    padding: 0 var(--space-md) !important;
   }
   
   .sidebar::before {
@@ -177,7 +187,7 @@
   }
   
   /* Hide toggle on desktop */
-  @media (min-width: 981px) {
+  @media (min-width: 1025px) {
     .mobile-nav-toggle {
       display: none;
     }
@@ -236,13 +246,63 @@
     inset 0 1px 0 rgba(255,255,255,.15);
 }
 
-/* Table of Contents */
+/* Table of Contents - Full height sidebar OVERRIDE */
+.sidebar .panel {
+  height: calc(100vh - 24px) !important; /* Full height minus margin - FORCE */
+  margin: 12px !important;
+  padding: 18px !important; /* Keep original panel padding */
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+
+.sidebar .panel .searchbar {
+  flex-shrink: 0 !important; /* Don't shrink searchbar */
+  margin-bottom: 16px !important;
+}
+
+.sidebar .panel .tools {
+  flex-shrink: 0 !important; /* Don't shrink tools */
+  margin: 0 0 16px 0 !important;
+}
+
 .toc {
-  max-height: calc(100vh - 150px);
-  overflow-y: auto;
-  overflow-x: hidden;
+  flex: 1 !important; /* Take all remaining space - FORCE */
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
   scrollbar-width: thin;
   scrollbar-color: var(--bronze) transparent;
+  padding-right: 4px;
+  min-height: 0 !important; /* Allow flex shrinking */
+}
+
+/* Tablet/Mobile TOC */
+@media (max-width: 1024px) {
+  .sidebar .panel {
+    height: 100% !important; /* Use full sidebar height */
+    min-height: 100% !important;
+    margin: 0 !important; /* Remove margins for full coverage */
+    border-radius: 0 !important; /* Remove rounded corners for edge-to-edge */
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+  }
+  
+  .sidebar .panel .searchbar,
+  .sidebar .panel .tools {
+    flex-shrink: 0 !important; /* Keep fixed size for controls */
+    margin: 12px !important; /* Add margin back to controls only */
+  }
+  
+  .toc {
+    flex: 1 !important; /* Take all remaining space */
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    min-height: 0 !important;
+    margin: 0 12px 12px 12px !important; /* Add margin to TOC content only */
+  }
 }
 
 .toc::-webkit-scrollbar {
@@ -446,6 +506,37 @@ footer{padding:24px;text-align:center;color:var(--paper-muted)}
   section{break-inside:avoid;box-shadow:none} 
 }
 
+/* PWA Mode Styles */
+.pwa-mode {
+  /* Remove any browser chrome when running as PWA */
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.pwa-mode input, .pwa-mode textarea {
+  -webkit-user-select: auto;
+  user-select: auto;
+}
+
+/* PWA display mode detection */
+@media (display-mode: standalone) {
+  body {
+    /* App-like appearance when installed */
+    background: var(--paper);
+  }
+  
+  /* Hide any web-specific elements in PWA mode */
+  .web-only {
+    display: none !important;
+  }
+  
+  /* Enhance touch targets for PWA */
+  button, .btn, .toc a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
 /* ========================================
    🎯 GAME MASTER PAGES - MOBILE FIXES
    ======================================== */
@@ -603,21 +694,22 @@ footer{padding:24px;text-align:center;color:var(--paper-muted)}
 
 /* ─────────────────────────── Enhanced Mobile & Tablet Responsiveness ─────────────────────────── */
 
-/* Tablet Landscape (1024px and below) */
+/* Tablet Landscape (1024px and below) - Full width when TOC hidden */
 @media (max-width: 1024px) {
   .sidebar {
     width: 320px;
   }
   
   .page {
-    padding-left: 340px;
+    /* Remove fixed left padding - let content use full width when TOC is hidden */
+    padding: 18px;
   }
   
   #views {
-    margin-left: 0; /* Reset margin on tablet to prevent horizontal scroll */
-    margin-right: 0;
-    max-width: 100%;
-    padding: 0 var(--space-md);
+    margin-left: 0 !important; /* Always reset margin on tablet */
+    margin-right: 0 !important;
+    max-width: 100% !important;
+    padding: 0 var(--space-md) !important;
   }
 }
 

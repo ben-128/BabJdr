@@ -60,7 +60,7 @@
     "objet:Baguette de boule de feu": "https://i.ibb.co/JwXs3k2V/Baguette-Feu.png",
     "objet:Feuilleclaire": "https://i.ibb.co/bMDstDVV/Herb1.png",
     "objet:Nocteline": "https://i.ibb.co/7JpQ7Kr7/Herb2.png",
-    "objet:Nouvel Objet": "https://i.ibb.co/Z1FnQ4TH/Rapi-re-Elfique.png",
+    "objet:Nouvel Objet": "https://i.ibb.co/3Y0fvrCG/Sel.png",
     "objet:Baguette de sommeil": "https://i.ibb.co/bMXNS4gy/Baguette-Nuit.png",
     "monster:Araignée Géante": "https://i.ibb.co/b0XHjQJ/Monstre-For-t-Araign-e.png",
     "monster:Crabe des Bois": "https://i.ibb.co/7dY3GgJS/Monstre-For-t-Crab.png",
@@ -134,7 +134,7 @@
   },
   "meta": {
     "total_images": 131,
-    "exported_date": "2025-09-10",
+    "exported_date": "2025-09-11",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
 }

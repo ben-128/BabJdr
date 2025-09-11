@@ -1,0 +1,100 @@
+{
+  "name": "JDR-BAB - Livret de règles",
+  "short_name": "JDR-BAB",
+  "description": "Livret web multipages des règles JDR-BAB, thème parchemin, illustrations par catégorie/classe/sous-classe",
+  "version": "1.0.0",
+  "start_url": "/BabJdr/",
+  "display": "standalone",
+  "background_color": "#f4f0e6",
+  "theme_color": "#8b4513",
+  "orientation": "any",
+  "scope": "/BabJdr/",
+  "lang": "fr",
+  "categories": ["games", "entertainment", "productivity"],
+  "icons": [
+    {
+      "src": "/BabJdr/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/BabJdr/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/BabJdr/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/BabJdr/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/BabJdr/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Création de personnage",
+      "short_name": "Création",
+      "description": "Accéder directement à la création de personnage",
+      "url": "/BabJdr/#/creation",
+      "icons": [
+        {
+          "src": "/BabJdr/icons/icon-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Classes",
+      "short_name": "Classes",
+      "description": "Consulter les classes de personnage",
+      "url": "/BabJdr/#/classes",
+      "icons": [
+        {
+          "src": "/BabJdr/icons/icon-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Sorts",
+      "short_name": "Sorts",
+      "description": "Consulter la liste des sorts",
+      "url": "/BabJdr/#/sorts",
+      "icons": [
+        {
+          "src": "/BabJdr/icons/icon-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Dons",
+      "short_name": "Dons",
+      "description": "Consulter la liste des dons",
+      "url": "/BabJdr/#/dons",
+      "icons": [
+        {
+          "src": "/BabJdr/icons/icon-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+}
