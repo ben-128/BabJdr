@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-09-11T20:36:10.715Z by JdrBab Build System -->
+<!-- Generated on 2025-09-11T20:43:32.141Z by JdrBab Build System -->
 <title>JDR‑BAB — Livret de règles</title>
 <meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23299,32 +23299,47 @@ article.active .grid {
       }
     },
 
-    // Modal methods - delegate to ui.js for now (will be extracted later)
+    // Modal methods - delegate to ModalManager
     showElementsModal() {
+      if (window.ModalManager) {
+        return ModalManager.showElementsModal();
+      }
       if (JdrApp.modules.ui?.showElementsModal) {
         return JdrApp.modules.ui.showElementsModal();
       }
     },
 
     showEtatsModal() {
+      if (window.ModalManager) {
+        return ModalManager.showEtatsModal();
+      }
       if (JdrApp.modules.ui?.showEtatsModal) {
         return JdrApp.modules.ui.showEtatsModal();
       }
     },
 
     showSpellLinksModal() {
+      if (window.ModalManager) {
+        return ModalManager.showSpellLinksModal();
+      }
       if (JdrApp.modules.ui?.showSpellLinksModal) {
         return JdrApp.modules.ui.showSpellLinksModal();
       }
     },
 
     showPageLinksModal() {
+      if (window.ModalManager) {
+        return ModalManager.showPageLinksModal();
+      }
       if (JdrApp.modules.ui?.showPageLinksModal) {
         return JdrApp.modules.ui.showPageLinksModal();
       }
     },
 
     showMonsterLinksModal() {
+      if (window.ModalManager) {
+        return ModalManager.showMonsterLinksModal();
+      }
       if (JdrApp.modules.ui?.showMonsterLinksModal) {
         return JdrApp.modules.ui.showMonsterLinksModal();
       }
@@ -23349,18 +23364,27 @@ article.active .grid {
     },
 
     setupMobileNavigation() {
+      if (window.ResponsiveManager) {
+        return ResponsiveManager.setupMobileNavigation();
+      }
       if (JdrApp.modules.ui?.setupMobileNavigation) {
         return JdrApp.modules.ui.setupMobileNavigation();
       }
     },
 
     setupLegacyResponsive() {
+      if (window.ResponsiveManager) {
+        return ResponsiveManager.setupLegacyResponsive();
+      }
       if (JdrApp.modules.ui?.setupLegacyResponsive) {
         return JdrApp.modules.ui.setupLegacyResponsive();
       }
     },
 
     showSectionSelectionModal() {
+      if (window.PageManager) {
+        return PageManager.showSectionSelectionModal();
+      }
       if (JdrApp.modules.ui?.showSectionSelectionModal) {
         return JdrApp.modules.ui.showSectionSelectionModal();
       }
@@ -24239,6 +24263,1352 @@ article.active .grid {
           }
         }
       });
+    }
+  };
+
+})();
+// ============================================================================
+// JDR-BAB APPLICATION - SEARCH MANAGER MODULE
+// ============================================================================
+
+(() => {
+  "use strict";
+
+  // ========================================
+  // SEARCH MANAGER - SEARCH FUNCTIONALITY
+  // ========================================
+  window.SearchManager = {
+
+    /**
+     * Perform search across all content types
+     */
+    performSearch(query) {
+      const normalizedQuery = query.toLowerCase().trim();
+      
+      if (!normalizedQuery) {
+        this.clearMainSearchResults();
+        return;
+      }
+
+      const results = [];
+      
+      // Search in spells
+      if (window.SORTS && Array.isArray(window.SORTS)) {
+        window.SORTS.forEach(category => {
+          if (category.sorts && Array.isArray(category.sorts)) {
+            category.sorts.forEach(spell => {
+              if (this.matchesSearch(spell, normalizedQuery)) {
+                results.push({
+                  type: 'spell',
+                  category: category.nom,
+                  data: spell,
+                  summary: this.generateSpellSummary(spell)
+                });
+              }
+            });
+          }
+        });
+      }
+
+      // Search in dons
+      if (window.DONS && Array.isArray(window.DONS)) {
+        window.DONS.forEach(category => {
+          if (category.dons && Array.isArray(category.dons)) {
+            category.dons.forEach(don => {
+              if (this.matchesSearch(don, normalizedQuery)) {
+                results.push({
+                  type: 'don',
+                  category: category.nom,
+                  data: don,
+                  summary: this.generateDonSummary(don)
+                });
+              }
+            });
+          }
+        });
+      }
+
+      // Search in classes
+      if (window.CLASSES && Array.isArray(window.CLASSES)) {
+        window.CLASSES.forEach(classe => {
+          if (this.matchesSearch(classe, normalizedQuery)) {
+            results.push({
+              type: 'class',
+              category: 'Classes',
+              data: classe,
+              summary: this.generateClassSummary(classe)
+            });
+          }
+          
+          // Search in subclasses
+          if (classe.sousClasses && Array.isArray(classe.sousClasses)) {
+            classe.sousClasses.forEach(sousClasse => {
+              if (this.matchesSearch(sousClasse, normalizedQuery)) {
+                results.push({
+                  type: 'subclass',
+                  category: classe.nom,
+                  data: sousClasse,
+                  summary: this.generateSubclassSummary(sousClasse, classe.nom)
+                });
+              }
+            });
+          }
+        });
+      }
+
+      // Search in static pages
+      if (window.STATIC_PAGES) {
+        Object.entries(window.STATIC_PAGES).forEach(([pageId, pageData]) => {
+          if (pageData && this.matchesSearch(pageData, normalizedQuery)) {
+            results.push({
+              type: 'static-page',
+              category: 'Pages',
+              data: pageData,
+              pageId: pageId,
+              summary: this.generateStaticPageSummary(pageData)
+            });
+          }
+        });
+      }
+
+      this.displaySearchResults(results, query);
+    },
+
+    /**
+     * Check if item matches search query
+     */
+    matchesSearch(item, query) {
+      // Fonction pour nettoyer le HTML et extraire le texte
+      const stripHtml = (text) => {
+        if (!text) return '';
+        if (typeof text !== 'string') text = String(text);
+        return text.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+      };
+
+      const processArray = (arr) => {
+        if (!arr) return '';
+        if (Array.isArray(arr)) {
+          return arr.map(item => stripHtml(item)).join(' ');
+        }
+        return stripHtml(arr);
+      };
+
+      // Collecter TOUS les champs textuels possibles
+      const searchFields = [
+        // Champs communs
+        item.nom, item.name, item.title, item.titre,
+        item.description, item.resume, item.content,
+        item.prerequis, item.coutMana, item.cout, item.temps,
+        item.distance, item.duree, item.damage, item.effet,
+        item.capacites, item.competences, item.avantages,
+        item.inconvenients, item.cout_creation,
+        
+        // Champs spécifiques aux classes
+        item.caracteristiques, item.competencesPrincipales,
+        item.progression, item.equipementDeBase,
+        
+        // Champs des objets et monstres  
+        item.type, item.tags, item.element, item.numero,
+        item.pointsDeVie, item.armure, item.dommages,
+        
+        // Champs des sections de pages statiques
+        processArray(item.sections),
+        
+        // Sous-classes
+        processArray(item.sousClasses),
+        
+        // Meta-données
+        item.author, item.source, item.version
+      ];
+
+      // Joindre tous les champs en un seul texte de recherche
+      const searchText = searchFields
+        .filter(field => field !== null && field !== undefined)
+        .map(field => stripHtml(field))
+        .join(' ')
+        .toLowerCase();
+      
+      // Chercher chaque mot de la requête
+      const queryWords = query.toLowerCase().split(/\s+/).filter(word => word.length > 0);
+      return queryWords.every(word => searchText.includes(word));
+    },
+
+    /**
+     * Display search results
+     */
+    displaySearchResults(results, query) {
+      if (results.length === 0) {
+        this.showNoResults(query);
+        return;
+      }
+
+      // Group results by type for better organization
+      const groupedResults = {};
+      results.forEach(result => {
+        const type = result.type;
+        if (!groupedResults[type]) {
+          groupedResults[type] = [];
+        }
+        groupedResults[type].push(result);
+      });
+
+      // Generate HTML for results
+      let resultsHTML = `
+        <div class="search-results-header">
+          <h2>🔍 Résultats de recherche pour "${query}"</h2>
+          <p>${results.length} résultat${results.length > 1 ? 's' : ''} trouvé${results.length > 1 ? 's' : ''}</p>
+          <button class="btn small" onclick="JdrApp.modules.ui.clearMainSearchResults()">
+            ← Retour au sommaire
+          </button>
+        </div>
+        <div class="search-results-content">
+      `;
+
+      // Add results by type
+      Object.entries(groupedResults).forEach(([type, typeResults]) => {
+        const typeLabel = this.getTypeLabel(type);
+        resultsHTML += `
+          <div class="search-results-section">
+            <h3>${typeLabel} (${typeResults.length})</h3>
+            <div class="search-results-grid">
+        `;
+        
+        typeResults.forEach(result => {
+          resultsHTML += this.generateResultCard(result);
+        });
+        
+        resultsHTML += `
+            </div>
+          </div>
+        `;
+      });
+
+      resultsHTML += `</div>`;
+      
+      // Replace main content with search results
+      const main = document.querySelector('main .content');
+      if (main) {
+        main.innerHTML = resultsHTML;
+      }
+    },
+
+    /**
+     * Show no results message
+     */
+    showNoResults(query) {
+      const noResultsHTML = `
+        <div class="search-results-header">
+          <h2>🔍 Aucun résultat pour "${query}"</h2>
+          <p>Essayez avec d'autres mots-clés ou vérifiez l'orthographe.</p>
+          <button class="btn small" onclick="JdrApp.modules.ui.clearMainSearchResults()">
+            ← Retour au sommaire
+          </button>
+        </div>
+      `;
+      
+      const main = document.querySelector('main .content');
+      if (main) {
+        main.innerHTML = noResultsHTML;
+      }
+    },
+
+    /**
+     * Clear search results and return to normal view
+     */
+    clearMainSearchResults() {
+      // Reload the current page or go back to homepage
+      if (window.location.hash && window.location.hash !== '#/') {
+        // Reload current page
+        if (JdrApp.modules.router && JdrApp.modules.router.handleRoute) {
+          JdrApp.modules.router.handleRoute();
+        }
+      } else {
+        // Go to homepage
+        window.location.hash = '#/creation';
+      }
+      
+      // Clear search input
+      const searchInput = document.querySelector('#search');
+      if (searchInput) {
+        searchInput.value = '';
+      }
+    },
+
+    // Summary generators
+    generateSpellSummary(spell) {
+      return `🔮 ${UIUtilities.stripHtml(spell.nom)} - ${UIUtilities.stripHtml(spell.prerequis || 'Aucun prérequis')} | ${UIUtilities.stripHtml(spell.coutMana || 'Coût inconnu')}`;
+    },
+
+    generateDonSummary(don) {
+      return `🏆 ${UIUtilities.stripHtml(don.nom)} - ${UIUtilities.stripHtml(don.prerequis || 'Aucun prérequis')} | ${UIUtilities.stripHtml(don.cout || 'Coût inconnu')}`;
+    },
+
+    generateClassSummary(classe) {
+      return `⚔️ ${UIUtilities.stripHtml(classe.nom)} - ${UIUtilities.stripHtml(classe.resume || 'Classe de combat')}`;
+    },
+
+    generateSubclassSummary(sousClasse, parentClass) {
+      return `⚡ ${UIUtilities.stripHtml(sousClasse.nom)} (${UIUtilities.stripHtml(parentClass)}) - Sous-classe spécialisée`;
+    },
+
+    generateStaticPageSummary(pageData) {
+      return `📄 ${UIUtilities.stripHtml(pageData.title)} - ${UIUtilities.stripHtml(pageData.description || 'Page d\'information du jeu')}`;
+    },
+
+    getTypeLabel(type) {
+      const typeLabels = {
+        'spell': '🔮 Sorts',
+        'don': '🏆 Dons',
+        'class': '⚔️ Classes',
+        'subclass': '⚡ Sous-classes',
+        'static-page': '📄 Pages'
+      };
+      return typeLabels[type] || type;
+    },
+
+    generateResultCard(result) {
+      const linkHash = this.generateLinkHash(result);
+      
+      return `
+        <div class="search-result-card" onclick="window.location.hash='${linkHash}'">
+          <div class="search-result-content">
+            <div class="search-result-summary">${result.summary}</div>
+            <div class="search-result-category">${result.category}</div>
+          </div>
+        </div>
+      `;
+    },
+
+    generateLinkHash(result) {
+      switch (result.type) {
+        case 'spell':
+          return `#/sorts-${UIUtilities.slugify(result.category)}`;
+        case 'don':
+          return `#/dons-${UIUtilities.slugify(result.category)}`;
+        case 'class':
+          return `#/${UIUtilities.slugify(result.data.nom)}`;
+        case 'subclass':
+          return `#/${UIUtilities.slugify(result.category)}`;
+        case 'static-page':
+          return `#/${result.pageId}`;
+        default:
+          return '#/creation';
+      }
+    }
+  };
+
+})();
+// ============================================================================
+// JDR-BAB APPLICATION - MODAL MANAGER MODULE
+// ============================================================================
+
+(() => {
+  "use strict";
+
+  // ========================================
+  // MODAL MANAGER - SPECIALIZED MODALS
+  // ========================================
+  window.ModalManager = {
+
+    /**
+     * Show elements modal for dev tools
+     */
+    showElementsModal() {
+      let modal = JdrApp.utils.dom.$('#elementsModal');
+      if (!modal) {
+        modal = this.createElementsModal();
+        document.body.appendChild(modal);
+      }
+      
+      BaseModal.openModal('elementsModal');
+    },
+
+    /**
+     * Create elements selection modal
+     */
+    createElementsModal() {
+      const elements = Object.entries(window.ElementColors).map(([name, config]) => ({
+        name,
+        color: config.color,
+        icon: UIUtilities.getElementIcon(name)
+      }));
+
+      const elementsHTML = elements.map(element => `
+        <div class="element-item" data-element="${element.name}" data-color="${element.color}">
+          <div class="element-icon" style="background: ${element.color};">${element.icon}</div>
+          <div class="element-name">${element.name}</div>
+          <div class="copy-indicator">Copié!</div>
+        </div>
+      `).join('');
+
+      const modal = BaseModal.createModal('elementsModal', '⚡ Éléments', `
+        <p>Cliquez sur un élément pour copier son code HTML stylé dans le presse-papiers :</p>
+        <div class="elements-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; margin: 20px 0;">
+          ${elementsHTML}
+        </div>
+      `);
+
+      // Add event listeners
+      modal.addEventListener('click', (e) => {
+        const elementItem = e.target.closest('.element-item');
+        if (elementItem) {
+          const elementName = elementItem.dataset.element;
+          const elementColor = elementItem.dataset.color;
+          
+          // Get element configuration
+          const elementConfig = window.ElementColors[elementName];
+          if (elementConfig) {
+            const styleString = `color: ${elementConfig.color}; font-weight: ${elementConfig.weight || 'bold'};`;
+            
+            const html = `<span style="${styleString}">${elementName}</span>`;
+            UIUtilities.copyToClipboard(html);
+          } else {
+            // Fallback for elements not found
+            const html = `<span style="color: ${elementColor}; font-weight: bold;">${elementName}</span>`;
+            UIUtilities.copyToClipboard(html);
+          }
+          
+          elementItem.classList.add('copied');
+          
+          // Fermer la modale après un court délai pour voir l'effet "Copié!"
+          setTimeout(() => {
+            BaseModal.closeModal(modal);
+            elementItem.classList.remove('copied');
+          }, 800);
+        }
+      });
+
+      return modal;
+    },
+
+    /**
+     * Show states modal
+     */
+    showEtatsModal() {
+      let modal = JdrApp.utils.dom.$('#etatsModal');
+      if (!modal) {
+        modal = this.createEtatsModal();
+        document.body.appendChild(modal);
+      }
+      
+      BaseModal.openModal('etatsModal');
+    },
+
+    /**
+     * Create states modal
+     */
+    createEtatsModal() {
+      // Extract states from static pages
+      let etats = [];
+      if (window.STATIC_PAGES?.etats?.sections) {
+        etats = window.STATIC_PAGES.etats.sections.filter(section => 
+          section.type === 'card' && section.title
+        );
+      }
+
+      const etatsHTML = etats.map(etat => `
+        <div class="etat-item" data-etat-name="${etat.title}">
+          <div class="etat-name">${etat.title}</div>
+          <div class="copy-indicator">Copié!</div>
+        </div>
+      `).join('');
+
+      const modal = BaseModal.createModal('etatsModal', '🎭 États', `
+        <p>Cliquez sur un état pour copier son lien HTML dans le presse-papiers :</p>
+        <div class="etats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; margin: 20px 0;">
+          ${etatsHTML}
+        </div>
+      `);
+
+      // Add event listeners
+      modal.addEventListener('click', (e) => {
+        const etatItem = e.target.closest('.etat-item');
+        if (etatItem) {
+          const etatName = etatItem.dataset.etatName;
+          
+          // Create clickable link
+          const etatLink = `<span class="etat-link" data-etat="${etatName}" style="color: var(--accent); cursor: pointer; text-decoration: underline;">${etatName}</span>`;
+          
+          // Toujours copier dans le presse-papiers
+          UIUtilities.copyToClipboard(etatLink);
+          
+          etatItem.classList.add('copied');
+          
+          // Fermer la modale après un court délai pour voir l'effet "Copié!"
+          setTimeout(() => {
+            BaseModal.closeModal(modal);
+            etatItem.classList.remove('copied');
+          }, 800);
+        }
+      });
+
+      return modal;
+    },
+
+    /**
+     * Show spell links modal
+     */
+    showSpellLinksModal() {
+      let modal = JdrApp.utils.dom.$('#spellLinksModal');
+      if (!modal) {
+        modal = this.createSpellLinksModal();
+        document.body.appendChild(modal);
+      }
+      
+      BaseModal.openModal('spellLinksModal');
+    },
+
+    /**
+     * Create spell links modal
+     */
+    createSpellLinksModal() {
+      // Extract spells from data
+      let spells = [];
+      if (window.SORTS && Array.isArray(window.SORTS)) {
+        window.SORTS.forEach(category => {
+          if (category.sorts && Array.isArray(category.sorts)) {
+            category.sorts.forEach(spell => {
+              spells.push({
+                name: spell.nom,
+                category: category.nom,
+                element: spell.element || 'Neutre',
+                description: spell.description || ''
+              });
+            });
+          }
+        });
+      }
+
+      const spellsHTML = spells.map(spell => `
+        <div class="spell-item" data-spell-name="${spell.name}" data-spell-category="${spell.category}">
+          <div class="spell-info">
+            <div class="spell-name" style="color: ${UIUtilities.getElementColor(spell.element)}; text-shadow: 0 1px 2px rgba(0,0,0,0.3);">${spell.name}</div>
+            <span data-spell-meta style="color: ${UIUtilities.getElementColor(spell.element)} !important; font-size: 12px; margin-bottom: 6px; display: block;">${UIUtilities.getElementIcon(spell.element)} ${spell.element} • ${spell.category}</span>
+            <div class="spell-description">${spell.description.length > 80 ? spell.description.substring(0, 80) + '...' : spell.description}</div>
+          </div>
+          <div class="copy-indicator">Copié!</div>
+        </div>
+      `).join('');
+
+      const modal = BaseModal.createModal('spellLinksModal', '🔮 Liens de Sorts', `
+        <p>Cliquez sur un sort pour copier son lien HTML dans le presse-papiers :</p>
+        <div class="spells-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; margin: 20px 0; max-height: 400px; overflow-y: auto;">
+          ${spellsHTML}
+        </div>
+      `);
+
+      // Add event listeners
+      modal.addEventListener('click', (e) => {
+        const spellItem = e.target.closest('.spell-item');
+        if (spellItem) {
+          const spellName = spellItem.dataset.spellName;
+          const spellCategory = spellItem.dataset.spellCategory;
+          
+          // Create clickable spell link
+          const spellLink = `<span class="spell-link" data-spell="${spellName}" data-category="${spellCategory}" style="color: var(--accent); cursor: pointer; text-decoration: underline;">${spellName}</span>`;
+          
+          UIUtilities.copyToClipboard(spellLink);
+          
+          spellItem.classList.add('copied');
+          
+          // Fermer la modale après un court délai pour voir l'effet "Copié!"
+          setTimeout(() => {
+            BaseModal.closeModal(modal);
+            spellItem.classList.remove('copied');
+          }, 800);
+        }
+      });
+
+      return modal;
+    },
+
+    /**
+     * Show monster links modal
+     */
+    showMonsterLinksModal() {
+      let modal = JdrApp.utils.dom.$('#monsterLinksModal');
+      if (!modal) {
+        modal = this.createMonsterLinksModal();
+        document.body.appendChild(modal);
+      }
+      
+      BaseModal.openModal('monsterLinksModal');
+    },
+
+    /**
+     * Create monster links modal
+     */
+    createMonsterLinksModal() {
+      // Extract monsters from data
+      let monsters = [];
+      if (window.MONSTRES && Array.isArray(window.MONSTRES)) {
+        monsters = window.MONSTRES.map(monster => ({
+          name: monster.nom,
+          element: monster.element || 'Neutre',
+          pointsDeVie: monster.pointsDeVie || '?',
+          tags: monster.tags || [],
+          description: monster.description || ''
+        }));
+      }
+
+      const monstersHTML = monsters.map(monster => `
+        <div class="monster-item" data-monster-name="${monster.name}">
+          <div class="monster-info">
+            <div class="monster-name" style="color: ${UIUtilities.getElementColor(monster.element)}; text-shadow: 0 1px 2px rgba(0,0,0,0.3);">${monster.name}</div>
+            <span data-monster-meta style="color: ${UIUtilities.getElementColor(monster.element)} !important; font-size: 12px; margin-bottom: 6px; display: block;">${UIUtilities.getElementIcon(monster.element)} ${monster.element} • ${monster.pointsDeVie} PV • ${monster.tags.join(', ')}</span>
+            <div class="monster-description">${UIUtilities.stripHtml(monster.description).length > 80 ? UIUtilities.stripHtml(monster.description).substring(0, 80) + '...' : UIUtilities.stripHtml(monster.description)}</div>
+          </div>
+          <div class="copy-indicator">Copié!</div>
+        </div>
+      `).join('');
+
+      const modal = BaseModal.createModal('monsterLinksModal', '👹 Liens de Monstres', `
+        <p>Cliquez sur un monstre pour copier son lien HTML dans le presse-papiers :</p>
+        <div class="monsters-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; margin: 20px 0; max-height: 400px; overflow-y: auto;">
+          ${monstersHTML}
+        </div>
+      `);
+
+      // Add event listeners
+      modal.addEventListener('click', (e) => {
+        const monsterItem = e.target.closest('.monster-item');
+        if (monsterItem) {
+          const monsterName = monsterItem.dataset.monsterName;
+          
+          // Create clickable monster link
+          const monsterLink = `<span class="monster-link" data-monster="${monsterName}" style="color: var(--accent); cursor: pointer; text-decoration: underline;">${monsterName}</span>`;
+          
+          UIUtilities.copyToClipboard(monsterLink);
+          
+          monsterItem.classList.add('copied');
+          
+          // Fermer la modale après un court délai pour voir l'effet "Copié!"
+          setTimeout(() => {
+            BaseModal.closeModal(modal);
+            monsterItem.classList.remove('copied');
+          }, 800);
+        }
+      });
+
+      return modal;
+    },
+
+    /**
+     * Show page links modal
+     */
+    showPageLinksModal() {
+      // Simple implementation - delegate to ui.js for now
+      if (JdrApp.modules.ui?.showPageLinksModal) {
+        return JdrApp.modules.ui.showPageLinksModal();
+      }
+    }
+  };
+
+})();
+// ============================================================================
+// JDR-BAB APPLICATION - RESPONSIVE MANAGER MODULE
+// ============================================================================
+
+(() => {
+  "use strict";
+
+  // ========================================
+  // RESPONSIVE MANAGER - MOBILE & RESPONSIVE DESIGN
+  // ========================================
+  window.ResponsiveManager = {
+
+    /**
+     * Setup responsive design features
+     */
+    setupResponsive() {
+      this.setupMobileNavigation();
+      this.setupLegacyResponsive();
+    },
+
+    /**
+     * Setup mobile navigation
+     */
+    setupMobileNavigation() {
+      this.createMobileNavToggle();
+      this.setupResponsiveBreakpoints();
+    },
+
+    /**
+     * Create mobile navigation toggle
+     */
+    createMobileNavToggle() {
+      // Check if toggle already exists
+      if (document.querySelector('#menuToggle')) {
+        return;
+      }
+
+      const menuToggle = document.createElement('button');
+      menuToggle.id = 'menuToggle';
+      menuToggle.className = 'menu-toggle';
+      menuToggle.setAttribute('aria-controls', 'sidebar');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Ouvrir le sommaire');
+      menuToggle.innerHTML = '☰ Sommaire';
+
+      // Add toggle functionality
+      menuToggle.addEventListener('click', () => {
+        this.toggleMobileNav();
+      });
+
+      // Insert at the beginning of the shell
+      const shell = document.querySelector('.shell');
+      if (shell) {
+        shell.insertBefore(menuToggle, shell.firstChild);
+      }
+
+      // Create backdrop for mobile
+      if (!document.querySelector('#backdrop')) {
+        const backdrop = document.createElement('div');
+        backdrop.id = 'backdrop';
+        backdrop.className = 'backdrop';
+        backdrop.style.display = 'none';
+        backdrop.addEventListener('click', () => {
+          this.toggleMobileNav();
+        });
+        shell.appendChild(backdrop);
+      }
+    },
+
+    /**
+     * Toggle mobile navigation
+     */
+    toggleMobileNav() {
+      const sidebar = document.querySelector('#sidebar');
+      const menuToggle = document.querySelector('#menuToggle');
+      const backdrop = document.querySelector('#backdrop');
+      
+      if (!sidebar || !menuToggle) return;
+
+      const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+      
+      if (isExpanded) {
+        // Close mobile nav
+        sidebar.classList.remove('mobile-open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        if (backdrop) backdrop.style.display = 'none';
+        document.body.style.overflow = '';
+      } else {
+        // Open mobile nav
+        sidebar.classList.add('mobile-open');
+        menuToggle.setAttribute('aria-expanded', 'true');
+        if (backdrop) backdrop.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+      }
+    },
+
+    /**
+     * Setup responsive breakpoints
+     */
+    setupResponsiveBreakpoints() {
+      // Handle window resize
+      let resizeTimeout;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+          this.handleResize();
+        }, 100);
+      });
+
+      // Initial setup
+      this.handleResize();
+    },
+
+    /**
+     * Handle window resize
+     */
+    handleResize() {
+      const width = window.innerWidth;
+      const sidebar = document.querySelector('#sidebar');
+      const menuToggle = document.querySelector('#menuToggle');
+      const backdrop = document.querySelector('#backdrop');
+
+      // Mobile breakpoint
+      if (width <= window.UI_CONSTANTS.BREAKPOINTS.MOBILE) {
+        // Mobile mode
+        if (menuToggle) menuToggle.style.display = 'block';
+        if (sidebar) {
+          sidebar.classList.remove('desktop-open');
+          // Close mobile nav on resize to mobile
+          sidebar.classList.remove('mobile-open');
+          if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
+        }
+        if (backdrop) backdrop.style.display = 'none';
+        document.body.style.overflow = '';
+      } else {
+        // Desktop mode
+        if (menuToggle) menuToggle.style.display = 'none';
+        if (sidebar) {
+          sidebar.classList.remove('mobile-open');
+          sidebar.classList.add('desktop-open');
+        }
+        if (backdrop) backdrop.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+    },
+
+    /**
+     * Setup legacy responsive features
+     */
+    setupLegacyResponsive() {
+      // Handle orientation changes on mobile
+      window.addEventListener('orientationchange', () => {
+        setTimeout(() => {
+          this.handleResize();
+        }, 300);
+      });
+
+      // Handle touch events for better mobile experience
+      this.setupTouchEvents();
+    },
+
+    /**
+     * Setup touch events for mobile
+     */
+    setupTouchEvents() {
+      let touchStartX = 0;
+      let touchStartY = 0;
+
+      // Handle touch start
+      document.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+      }, { passive: true });
+
+      // Handle swipe gestures
+      document.addEventListener('touchend', (e) => {
+        if (!e.changedTouches[0]) return;
+
+        const touchEndX = e.changedTouches[0].clientX;
+        const touchEndY = e.changedTouches[0].clientY;
+        const deltaX = touchEndX - touchStartX;
+        const deltaY = touchEndY - touchStartY;
+
+        // Only handle horizontal swipes
+        if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
+          const sidebar = document.querySelector('#sidebar');
+          const menuToggle = document.querySelector('#menuToggle');
+          
+          if (!sidebar || !menuToggle) return;
+
+          const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+          const isMobile = window.innerWidth <= window.UI_CONSTANTS.BREAKPOINTS.MOBILE;
+
+          if (isMobile) {
+            // Swipe right from left edge to open
+            if (deltaX > 0 && touchStartX < 50 && !isExpanded) {
+              this.toggleMobileNav();
+            }
+            // Swipe left when sidebar is open to close
+            else if (deltaX < 0 && isExpanded) {
+              this.toggleMobileNav();
+            }
+          }
+        }
+      }, { passive: true });
+    },
+
+    /**
+     * Check if device is mobile
+     */
+    isMobileDevice() {
+      return window.innerWidth <= window.UI_CONSTANTS.BREAKPOINTS.MOBILE;
+    },
+
+    /**
+     * Check if device is tablet
+     */
+    isTabletDevice() {
+      const width = window.innerWidth;
+      return width > window.UI_CONSTANTS.BREAKPOINTS.MOBILE && 
+             width <= window.UI_CONSTANTS.BREAKPOINTS.TABLET;
+    },
+
+    /**
+     * Get current device type
+     */
+    getDeviceType() {
+      if (this.isMobileDevice()) return 'mobile';
+      if (this.isTabletDevice()) return 'tablet';
+      return 'desktop';
+    },
+
+    /**
+     * Apply device-specific optimizations
+     */
+    applyDeviceOptimizations() {
+      const deviceType = this.getDeviceType();
+      document.body.setAttribute('data-device-type', deviceType);
+
+      // Add device-specific CSS classes
+      document.body.classList.remove('device-mobile', 'device-tablet', 'device-desktop');
+      document.body.classList.add(`device-${deviceType}`);
+
+      // Apply device-specific optimizations
+      switch (deviceType) {
+        case 'mobile':
+          this.applyMobileOptimizations();
+          break;
+        case 'tablet':
+          this.applyTabletOptimizations();
+          break;
+        case 'desktop':
+          this.applyDesktopOptimizations();
+          break;
+      }
+    },
+
+    /**
+     * Apply mobile-specific optimizations
+     */
+    applyMobileOptimizations() {
+      // Reduce animations for better performance
+      document.body.classList.add('reduced-motion');
+      
+      // Optimize scroll behavior
+      if (window.ScrollOptimizer) {
+        ScrollOptimizer.enableMobileOptimizations();
+      }
+    },
+
+    /**
+     * Apply tablet-specific optimizations
+     */
+    applyTabletOptimizations() {
+      // Tablet-specific optimizations
+      document.body.classList.remove('reduced-motion');
+    },
+
+    /**
+     * Apply desktop-specific optimizations
+     */
+    applyDesktopOptimizations() {
+      // Desktop-specific optimizations
+      document.body.classList.remove('reduced-motion');
+    }
+  };
+
+})();
+// ============================================================================
+// JDR-BAB APPLICATION - PAGE MANAGER MODULE
+// ============================================================================
+
+(() => {
+  "use strict";
+
+  // ========================================
+  // PAGE MANAGER - STATIC PAGE MANAGEMENT
+  // ========================================
+  window.PageManager = {
+
+    /**
+     * Show section selection modal for new page creation
+     */
+    showSectionSelectionModal() {
+      const modalId = 'sectionSelectionModal';
+      
+      // Remove existing modal
+      BaseModal.destroyModal(modalId);
+
+      const content = `
+        <p>Sélectionnez le type de contenu à ajouter :</p>
+        <div class="section-types" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 20px 0;">
+          <button class="btn btn-primary section-type-btn" data-type="section">
+            📄 Nouvelle Section
+          </button>
+          <button class="btn btn-secondary section-type-btn" data-type="paragraph">
+            📝 Nouveau Paragraphe
+          </button>
+        </div>
+      `;
+
+      const modal = BaseModal.createModal(modalId, '➕ Nouveau Contenu', content);
+      document.body.appendChild(modal);
+
+      // Setup event handlers
+      modal.addEventListener('click', (e) => {
+        if (e.target.classList.contains('section-type-btn')) {
+          const type = e.target.dataset.type;
+          BaseModal.closeModal(modal);
+          BaseModal.destroyModal(modal);
+          
+          if (type === 'section') {
+            this.createNewSection();
+          } else if (type === 'paragraph') {
+            this.createNewParagraph();
+          }
+        }
+      });
+
+      BaseModal.openModal(modalId);
+    },
+
+    /**
+     * Create new section
+     */
+    createNewSection() {
+      const sectionTitle = prompt('Titre de la nouvelle section :');
+      if (!sectionTitle || !sectionTitle.trim()) return;
+
+      const pageId = UIUtilities.getCurrentPageId();
+      if (!pageId) {
+        UIUtilities.showNotification('❌ Impossible de déterminer la page courante', 'error');
+        return;
+      }
+
+      // Generate unique ID
+      const sectionId = UIUtilities.generateUniqueId('section');
+      
+      // Create section data
+      const newSection = {
+        id: sectionId,
+        type: 'card',
+        title: sectionTitle.trim(),
+        content: '<p>Contenu de la nouvelle section...</p>'
+      };
+
+      // Add to page data
+      if (!window.STATIC_PAGES[pageId]) {
+        window.STATIC_PAGES[pageId] = { sections: [] };
+      }
+      if (!window.STATIC_PAGES[pageId].sections) {
+        window.STATIC_PAGES[pageId].sections = [];
+      }
+
+      window.STATIC_PAGES[pageId].sections.push(newSection);
+
+      // Save and refresh
+      this.savePageData();
+      this.refreshCurrentPage();
+      
+      UIUtilities.showNotification('➕ Nouvelle section ajoutée et sauvegardée', 'success');
+    },
+
+    /**
+     * Create new paragraph
+     */
+    createNewParagraph() {
+      const paragraphContent = prompt('Contenu du nouveau paragraphe :');
+      if (!paragraphContent || !paragraphContent.trim()) return;
+
+      const pageId = UIUtilities.getCurrentPageId();
+      if (!pageId) {
+        UIUtilities.showNotification('❌ Impossible de déterminer la page courante', 'error');
+        return;
+      }
+
+      // Generate unique ID
+      const paragraphId = UIUtilities.generateUniqueId('paragraph');
+      
+      // Create paragraph data
+      const newParagraph = {
+        id: paragraphId,
+        type: 'text',
+        content: `<p>${paragraphContent.trim()}</p>`
+      };
+
+      // Add to page data
+      if (!window.STATIC_PAGES[pageId]) {
+        window.STATIC_PAGES[pageId] = { sections: [] };
+      }
+      if (!window.STATIC_PAGES[pageId].sections) {
+        window.STATIC_PAGES[pageId].sections = [];
+      }
+
+      window.STATIC_PAGES[pageId].sections.push(newParagraph);
+
+      // Save and refresh
+      this.savePageData();
+      this.refreshCurrentPage();
+      
+      UIUtilities.showNotification('➕ Paragraphe ajouté et sauvegardé', 'success');
+    },
+
+    /**
+     * Add paragraph to existing target
+     */
+    addParagraph(target, button) {
+      if (!target || !button) {
+        UIUtilities.showNotification('❌ Target ou bouton manquant', 'error');
+        return;
+      }
+
+      const paragraphContent = prompt('Contenu du nouveau paragraphe :');
+      if (!paragraphContent || !paragraphContent.trim()) return;
+
+      // Handle different types of additions based on target
+      if (target === 'new-section') {
+        this.createNewSection();
+      } else {
+        this.addParagraphToSection(target, button);
+      }
+    },
+
+    /**
+     * Add paragraph to specific section
+     */
+    addParagraphToSection(target, button) {
+      const paragraphContent = prompt('Contenu du nouveau paragraphe :');
+      if (!paragraphContent || !paragraphContent.trim()) return;
+
+      // Generate unique ID
+      const pageId = UIUtilities.getCurrentPageId();
+      const paragraphId = UIUtilities.generateUniqueId('paragraph');
+      
+      // Create paragraph data
+      const newParagraph = {
+        id: paragraphId,
+        type: 'text',
+        content: `<p>${paragraphContent.trim()}</p>`
+      };
+
+      // Find target section and add paragraph
+      if (window.STATIC_PAGES[pageId]?.sections) {
+        const targetSection = window.STATIC_PAGES[pageId].sections.find(section => 
+          section.id === target
+        );
+        
+        if (targetSection) {
+          if (!targetSection.paragraphs) {
+            targetSection.paragraphs = [];
+          }
+          targetSection.paragraphs.push(newParagraph);
+        } else {
+          // Add as new section if target not found
+          window.STATIC_PAGES[pageId].sections.push(newParagraph);
+        }
+      }
+
+      // Save and refresh
+      this.savePageData();
+      this.refreshCurrentPage();
+      
+      UIUtilities.showNotification('➕ Paragraphe ajouté et sauvegardé', 'success');
+    },
+
+    /**
+     * Delete section
+     */
+    deleteSection(sectionName, button) {
+      if (!sectionName || !button) {
+        UIUtilities.showNotification('❌ Section ou bouton manquant', 'error');
+        return;
+      }
+
+      if (!confirm(`Supprimer la section "${sectionName}" ?`)) {
+        return;
+      }
+
+      const pageId = UIUtilities.getCurrentPageId();
+      if (!pageId || !window.STATIC_PAGES[pageId]?.sections) {
+        UIUtilities.showNotification('❌ Page ou sections non trouvées', 'error');
+        return;
+      }
+
+      // Find and remove the section
+      const section = button.closest('.card');
+      if (section) {
+        // Extract the section ID from the editable elements
+        const editableElements = section.querySelectorAll('[data-edit-type]');
+        let sectionId = null;
+        
+        for (const element of editableElements) {
+          const id = element.dataset.sectionId || element.id;
+          if (id) {
+            // Remove "-title" suffix if present to get base ID
+            sectionId = id.replace(/-title$/, '');
+            break;
+          }
+        }
+
+        if (sectionId) {
+          // Remove from data
+          window.STATIC_PAGES[pageId].sections = window.STATIC_PAGES[pageId].sections.filter(
+            s => s.id !== sectionId
+          );
+
+          // Save the deletion to JSON
+          this.savePageData();
+
+          // Recalculate all section indices after deletion
+          this.recalculateSectionIndices(pageId);
+
+          // Trigger persistent storage save
+          UIUtilities.triggerDataSave();
+          
+          UIUtilities.showNotification(`🗑️ Section "${sectionName}" supprimée et mise à jour JSON`, 'success');
+          
+          // Refresh page
+          this.refreshCurrentPage();
+        }
+      }
+    },
+
+    /**
+     * Save page data
+     */
+    savePageData() {
+      // Trigger storage save event
+      UIUtilities.triggerDataSave();
+    },
+
+    /**
+     * Refresh current page
+     */
+    refreshCurrentPage() {
+      UIUtilities.forcePageRefresh();
+    },
+
+    /**
+     * Count existing sections for unique ID generation
+     */
+    countExistingSections() {
+      const pageId = UIUtilities.getCurrentPageId();
+      if (!pageId || !window.STATIC_PAGES || !window.STATIC_PAGES[pageId]) {
+        return 0;
+      }
+      const pageData = window.STATIC_PAGES[pageId];
+      return pageData.sections ? pageData.sections.length : 0;
+    },
+
+    /**
+     * Save new section to JSON data
+     */
+    saveNewSectionToJSON(sectionId, title, content) {
+      const pageId = UIUtilities.getCurrentPageId();
+      
+      if (!pageId || !window.STATIC_PAGES || !window.STATIC_PAGES[pageId]) {
+        return false;
+      }
+      
+      const pageData = window.STATIC_PAGES[pageId];
+      if (!pageData.sections) {
+        pageData.sections = [];
+      }
+      
+      // Create new section object
+      const newSection = {
+        id: sectionId,
+        type: 'card',
+        title: title,
+        content: content
+      };
+      
+      // Add to sections array
+      pageData.sections.push(newSection);
+      
+      return true;
+    },
+
+    /**
+     * Recalculate section indices after changes
+     */
+    recalculateSectionIndices(pageId) {
+      if (!window.STATIC_PAGES[pageId]?.sections) {
+        return false;
+      }
+      
+      const sections = window.STATIC_PAGES[pageId].sections;
+      
+      // Update indices for all sections
+      sections.forEach((section, index) => {
+        if (section.id) {
+          section.index = index;
+        }
+      });
+      
+      console.log(`Recalculated indices for ${sections.length} sections in page ${pageId}`);
+      return true;
+    },
+
+    /**
+     * Create new category for content types
+     */
+    createNewCategory(type) {
+      const config = window.ContentTypes[type];
+      if (!config) {
+        UIUtilities.showNotification(`❌ Configuration manquante pour le type ${type}`, 'error');
+        return;
+      }
+
+      // Demander le nom de la catégorie
+      const categoryName = prompt(`Nom de la nouvelle catégorie ${config.container} :`);
+      if (!categoryName || !categoryName.trim()) {
+        return;
+      }
+
+      const trimmedName = categoryName.trim();
+      
+      // Vérifier si la catégorie existe déjà
+      const entity = ContentFactory.getEntity(type);
+      if (entity && entity.findCategory(trimmedName)) {
+        UIUtilities.showNotification(`❌ La catégorie "${trimmedName}" existe déjà`, 'error');
+        return;
+      }
+
+      // Créer la nouvelle catégorie
+      const success = ContentFactory.addCategory(type, {
+        nom: trimmedName,
+        [config.dataKey.toLowerCase()]: []
+      });
+
+      if (success) {
+        // Sauvegarder les modifications
+        EventBus.emit(Events.STORAGE_SAVE);
+
+        // Rafraîchir ContentFactory
+        ContentFactory.refreshData();
+
+        // Rafraîchir le router TOC
+        if (JdrApp.modules.router && JdrApp.modules.router.generateTOC) {
+          JdrApp.modules.router.generateTOC();
+        }
+
+        // Naviguer vers la nouvelle catégorie
+        const categoryRoute = `${config.container}-${JdrApp.utils.data.sanitizeId(trimmedName)}`;
+        JdrApp.modules.router.navigate(categoryRoute);
+
+        UIUtilities.showNotification(`${config.icons.category} Catégorie "${trimmedName}" créée avec succès!`, 'success');
+      }
+    },
+
+    /**
+     * Delete category
+     */
+    deleteCategory(type, categoryName) {
+      const config = window.ContentTypes[type];
+      if (!config) {
+        UIUtilities.showNotification(`❌ Configuration manquante pour le type ${type}`, 'error');
+        return;
+      }
+
+      if (!confirm(`Supprimer la catégorie "${categoryName}" et tout son contenu ?`)) {
+        return;
+      }
+
+      const success = ContentFactory.deleteCategory(type, categoryName);
+
+      if (success) {
+        // Sauvegarder les modifications
+        EventBus.emit(Events.STORAGE_SAVE);
+
+        // Rafraîchir ContentFactory
+        ContentFactory.refreshData();
+
+        // Rafraîchir le router TOC
+        if (JdrApp.modules.router && JdrApp.modules.router.generateTOC) {
+          JdrApp.modules.router.generateTOC();
+        }
+
+        // Naviguer vers la page principale du type
+        JdrApp.modules.router.navigate(config.container);
+
+        UIUtilities.showNotification(`${config.icons.delete} Catégorie "${categoryName}" supprimée`, 'success');
+      }
     }
   };
 
