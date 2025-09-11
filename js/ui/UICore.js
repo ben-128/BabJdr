@@ -227,32 +227,47 @@
       }
     },
 
-    // Modal methods - delegate to ui.js for now (will be extracted later)
+    // Modal methods - delegate to ModalManager
     showElementsModal() {
+      if (window.ModalManager) {
+        return ModalManager.showElementsModal();
+      }
       if (JdrApp.modules.ui?.showElementsModal) {
         return JdrApp.modules.ui.showElementsModal();
       }
     },
 
     showEtatsModal() {
+      if (window.ModalManager) {
+        return ModalManager.showEtatsModal();
+      }
       if (JdrApp.modules.ui?.showEtatsModal) {
         return JdrApp.modules.ui.showEtatsModal();
       }
     },
 
     showSpellLinksModal() {
+      if (window.ModalManager) {
+        return ModalManager.showSpellLinksModal();
+      }
       if (JdrApp.modules.ui?.showSpellLinksModal) {
         return JdrApp.modules.ui.showSpellLinksModal();
       }
     },
 
     showPageLinksModal() {
+      if (window.ModalManager) {
+        return ModalManager.showPageLinksModal();
+      }
       if (JdrApp.modules.ui?.showPageLinksModal) {
         return JdrApp.modules.ui.showPageLinksModal();
       }
     },
 
     showMonsterLinksModal() {
+      if (window.ModalManager) {
+        return ModalManager.showMonsterLinksModal();
+      }
       if (JdrApp.modules.ui?.showMonsterLinksModal) {
         return JdrApp.modules.ui.showMonsterLinksModal();
       }
@@ -277,18 +292,27 @@
     },
 
     setupMobileNavigation() {
+      if (window.ResponsiveManager) {
+        return ResponsiveManager.setupMobileNavigation();
+      }
       if (JdrApp.modules.ui?.setupMobileNavigation) {
         return JdrApp.modules.ui.setupMobileNavigation();
       }
     },
 
     setupLegacyResponsive() {
+      if (window.ResponsiveManager) {
+        return ResponsiveManager.setupLegacyResponsive();
+      }
       if (JdrApp.modules.ui?.setupLegacyResponsive) {
         return JdrApp.modules.ui.setupLegacyResponsive();
       }
     },
 
     showSectionSelectionModal() {
+      if (window.PageManager) {
+        return PageManager.showSectionSelectionModal();
+      }
       if (JdrApp.modules.ui?.showSectionSelectionModal) {
         return JdrApp.modules.ui.showSectionSelectionModal();
       }

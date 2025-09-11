@@ -42,7 +42,11 @@
       "Bash(dir:*)",
       "Bash(mkdir:*)",
       "Bash(npm run icons-png:*)",
-      "Bash(mkdir:*)"
+      "Bash(mkdir:*)",
+      "Bash(gh repo view:*)",
+      "WebFetch(domain:github.com)",
+      "Bash(git remote get-url:*)",
+      "WebFetch(domain:raw.githubusercontent.com)"
     ],
     "deny": []
   }

@@ -143,6 +143,10 @@ window.MANIFEST_DATA = ${fs.readFileSync(path.join(rootDir, 'manifest.json'), 'u
     'js/ui/EventHandlers.js',     // Event delegation - AVANT ui.js
     'js/ui/ContentManager.js',    // Content CRUD operations - AVANT ui.js
     'js/ui/TagsManager.js',       // Tags management - AVANT ui.js
+    'js/ui/SearchManager.js',     // Search functionality - AVANT ui.js
+    'js/ui/ModalManager.js',      // Specialized modals - AVANT ui.js
+    'js/ui/ResponsiveManager.js', // Responsive design - AVANT ui.js
+    'js/ui/PageManager.js',       // Page management - AVANT ui.js
     
     'js/ui.js',                   // UI module - en dernier
     'js/libs/jspdf-loader.js'     // External library loaders - last
