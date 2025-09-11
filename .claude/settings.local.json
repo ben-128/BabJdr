@@ -50,7 +50,8 @@
       "Bash(git submodule:*)",
       "Bash(# Move configuration files\nmv manifest.json config/\nmv browserconfig.xml config/\nmv sw.js config/\n\n# Move documentation\nmv README*.md docs/\nmv CLAUDE.md docs/\nmv Todo.txt docs/\n\n# Move development tools  \nmv menu.bat tools/\nmv check_storage.js tools/\n\n# Move build output to proper location\nmv build/* build-output/ 2>/dev/null || true\n\n# Move PWA assets\nmv icons/* assets/pwa/ 2>/dev/null || true)",
       "Bash(true)",
-      "Bash(tree:*)"
+      "Bash(tree:*)",
+      "Bash(# Make dev.html the main development file by replacing index.html with it\nmv index.html landing.html\nmv dev.html index.html)"
     ],
     "deny": []
   }

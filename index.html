@@ -2,88 +2,259 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>JDR-BAB - Accès au livret de règles</title>
-<style>
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #f4f0e6, #e8dcc6);
-  margin: 0;
-  padding: 40px 20px;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.container {
-  max-width: 600px;
-  text-align: center;
-  background: white;
-  padding: 40px;
-  border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-  border: 2px solid #d4af37;
-}
-h1 {
-  color: #8b4513;
-  margin-bottom: 20px;
-  font-size: 2.5em;
-}
-.description {
-  color: #666;
-  margin-bottom: 30px;
-  line-height: 1.6;
-}
-.access-button {
-  display: inline-block;
-  background: linear-gradient(135deg, #8b4513, #a0522d);
-  color: white;
-  padding: 15px 30px;
-  text-decoration: none;
-  border-radius: 8px;
-  font-size: 1.2em;
-  font-weight: bold;
-  transition: transform 0.2s;
-  box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
-}
-.access-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(139, 69, 19, 0.4);
-}
-.features {
-  margin-top: 30px;
-  text-align: left;
-  display: inline-block;
-}
-.feature {
-  margin: 8px 0;
-  color: #555;
-}
-.feature::before {
-  content: "⚔️";
-  margin-right: 8px;
-}
-</style>
+<meta content="width=device-width, initial-scale=1" name="viewport">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<title>JDR‑BAB — Livret de règles</title>
+<meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&amp;family=Source+Serif+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600&amp;display=swap" rel="stylesheet">
+
+<!-- PWA Configuration -->
+<link rel="manifest" href="config/manifest.json">
+<meta name="theme-color" content="#8b4513">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="JDR-BAB">
+<meta name="application-name" content="JDR-BAB">
+<meta name="msapplication-TileColor" content="#8b4513">
+<meta name="msapplication-config" content="config/browserconfig.xml">
+
+<!-- PWA Icons -->
+<link rel="icon" type="image/png" sizes="32x32" href="assets/pwa/icon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/pwa/icon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/pwa/icon-180x180.png">
+<link rel="apple-touch-icon" sizes="152x152" href="assets/pwa/icon-152x152.png">
+<link rel="apple-touch-icon" sizes="144x144" href="assets/pwa/icon-144x144.png">
+<link rel="apple-touch-icon" sizes="120x120" href="assets/pwa/icon-120x120.png">
+<link rel="apple-touch-icon" sizes="114x114" href="assets/pwa/icon-114x114.png">
+<link rel="apple-touch-icon" sizes="76x76" href="assets/pwa/icon-76x76.png">
+<link rel="apple-touch-icon" sizes="72x72" href="assets/pwa/icon-72x72.png">
+<link rel="apple-touch-icon" sizes="60x60" href="assets/pwa/icon-60x60.png">
+<link rel="apple-touch-icon" sizes="57x57" href="assets/pwa/icon-57x57.png">
+<link rel="mask-icon" href="assets/pwa/safari-pinned-tab.svg" color="#8b4513">
+
+<!-- CSS Modulaire -->
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/utilities.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/editor.css">
+<link rel="stylesheet" href="css/scroll-optimizations.css">
 </head>
-<body>
-<div class="container">
-  <h1>⚔️ JDR-BAB ⚔️</h1>
-  <p class="description">
-    Livret de règles interactif pour le système de jeu de rôle JDR-BAB.
-    Version Progressive Web App optimisée pour mobile et tablette.
-  </p>
-  
-  <a href="build-output/JdrBab.html" class="access-button">
-    📱 Accéder au livret de règles
-  </a>
-  
-  <div class="features">
-    <div class="feature">Installation possible sur mobile/tablette</div>
-    <div class="feature">Fonctionnement 100% hors ligne</div>
-    <div class="feature">Classes, sorts, dons et équipements</div>
-    <div class="feature">Tables de trésors et bestiaire</div>
-    <div class="feature">Outils de création de personnage</div>
+<body class="dev-off" style="">
+
+<!-- Le contenu HTML complet sera injecté ici par le JavaScript -->
+<div id="app-loading" class="loading-screen">
+  <div class="loading-content">
+    <div class="loading-spinner"></div>
+    <h2>JDR-BAB</h2>
+    <p>Chargement en cours...</p>
+    <div class="loading-progress">
+      <div class="loading-bar"></div>
+    </div>
   </div>
 </div>
+
+<!-- JavaScript Modulaire -->
+<!-- Configuration et classes de base -->
+<script src="js/config/constants.js"></script>
+<script src="js/config/contentTypes.js"></script>
+<script src="js/core/EventBus.js"></script>
+<script src="js/core/BaseEntity.js"></script>
+<script src="js/core/UnifiedEditor.js"></script>
+<script src="js/factories/ContentFactory.js"></script>
+
+<!-- Builders et templates -->
+<script src="js/builders/CardBuilder.js"></script>
+<script src="js/builders/PageBuilder.js"></script>
+
+<!-- Modules principaux -->
+<script src="js/core.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/utils/device-detection.js"></script>
+<script src="js/modules/images.js"></script>
+<script src="js/modules/audio.js"></script>
+
+<!-- Features modules (AVANT renderer pour être disponibles au rendu) -->
+<script src="js/features/SpellFilter.js"></script>
+<script src="js/features/TablesTresorsManager.js"></script>
+<script src="js/features/FavorisManager.js"></script>
+<script src="js/features/FavorisRenderer.js"></script>
+<script src="js/features/ScrollOptimizer.js"></script>
+
+<!-- Modules qui dépendent des features -->
+<script src="js/router.js"></script>
+<script src="js/renderer.js"></script>
+<script src="js/editor.js"></script>
+<script src="js/storage.js"></script>
+
+<!-- UI modules (utilitaires en premier) -->
+<script src="js/ui/UIUtilities.js"></script>
+<script src="js/ui/BaseModal.js"></script>
+<script src="js/ui/UICore.js"></script>
+<script src="js/ui/EventHandlers.js"></script>
+<script src="js/ui/ContentManager.js"></script>
+<script src="js/ui/TagsManager.js"></script>
+
+<!-- UI module principal (doit être en dernier) -->
+<script src="js/ui.js"></script>
+
+<!-- PDF support -->
+<script src="js/libs/jspdf-loader.js"></script>
+
+<!-- Live reload disabled - uncomment to enable when needed -->
+<!--
+<script type="text/javascript">
+	if ('WebSocket' in window) {
+		(function() {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					head.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					head.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function(msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+		})();
+	}
+</script>
+-->
+<!-- Code injected by live-server -->
+<script type="text/javascript">
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function() {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					head.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					head.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function(msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			console.log('Live reload enabled.');
+		})();
+	}
+	// ]]>
+</script>
+<!-- Code injected by live-server -->
+<script type="text/javascript">
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function() {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					head.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					head.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function(msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			console.log('Live reload enabled.');
+		})();
+	}
+	// ]]>
+</script>
+
+<!-- PWA Service Worker Registration -->
+<script>
+// Progressive Web App - Service Worker Registration
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/config/sw.js')
+      .then((registration) => {
+        console.log('✅ Service Worker registered successfully:', registration);
+        
+        // Check for updates
+        registration.addEventListener('updatefound', () => {
+          const newWorker = registration.installing;
+          if (newWorker) {
+            newWorker.addEventListener('statechange', () => {
+              if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                // New content available, notify user
+                if (window.JdrApp && JdrApp.modules && JdrApp.modules.ui) {
+                  JdrApp.modules.ui.showNotification('🔄 Nouvelle version disponible ! Rechargez la page.', 'info');
+                }
+              }
+            });
+          }
+        });
+      })
+      .catch((error) => {
+        console.log('❌ Service Worker registration failed:', error);
+      });
+  });
+
+  // Listen for app install prompt
+  let deferredPrompt;
+  window.addEventListener('beforeinstallprompt', (e) => {
+    console.log('💾 PWA install prompt available');
+    e.preventDefault();
+    deferredPrompt = e;
+    
+    // Show install button or notification
+    if (window.JdrApp && JdrApp.modules && JdrApp.modules.ui) {
+      JdrApp.modules.ui.showNotification('📱 Installer JDR-BAB sur votre appareil ?', 'info');
+    }
+  });
+
+  // Track install success
+  window.addEventListener('appinstalled', (e) => {
+    console.log('✅ PWA was installed successfully');
+    if (window.JdrApp && JdrApp.modules && JdrApp.modules.ui) {
+      JdrApp.modules.ui.showNotification('✅ JDR-BAB installé avec succès !', 'success');
+    }
+    deferredPrompt = null;
+  });
+}
+
+// PWA Display Mode Detection
+window.addEventListener('DOMContentLoaded', () => {
+  if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
+    console.log('📱 Running as PWA');
+    document.body.classList.add('pwa-mode');
+  }
+});
+</script>
 </body>
 </html>

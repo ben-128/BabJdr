@@ -441,6 +441,14 @@ if (!canUseServiceWorker && window.MANIFEST_DATA) {
   const outputPath = path.join(outputDir, 'JdrBab.html');
   fs.writeFileSync(outputPath, htmlContent, 'utf-8');
   
+  // Also copy landing page as index.html for GitHub Pages
+  const landingPath = path.join(rootDir, 'landing.html');
+  if (fs.existsSync(landingPath)) {
+    const githubIndexPath = path.join(rootDir, 'github-index.html');
+    fs.copyFileSync(landingPath, githubIndexPath);
+    console.log('📄 GitHub Pages landing page copied to github-index.html');
+  }
+  
   const sizeKB = (fs.statSync(outputPath).size / 1024).toFixed(1);
   
   console.log('✅ Build completed successfully!');

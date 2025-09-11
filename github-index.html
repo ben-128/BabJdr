@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JDR-BAB - Accès au livret de règles</title>
+<style>
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #f4f0e6, #e8dcc6);
+  margin: 0;
+  padding: 40px 20px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.container {
+  max-width: 600px;
+  text-align: center;
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  border: 2px solid #d4af37;
+}
+h1 {
+  color: #8b4513;
+  margin-bottom: 20px;
+  font-size: 2.5em;
+}
+.description {
+  color: #666;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+.access-button {
+  display: inline-block;
+  background: linear-gradient(135deg, #8b4513, #a0522d);
+  color: white;
+  padding: 15px 30px;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 1.2em;
+  font-weight: bold;
+  transition: transform 0.2s;
+  box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
+}
+.access-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(139, 69, 19, 0.4);
+}
+.features {
+  margin-top: 30px;
+  text-align: left;
+  display: inline-block;
+}
+.feature {
+  margin: 8px 0;
+  color: #555;
+}
+.feature::before {
+  content: "⚔️";
+  margin-right: 8px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>⚔️ JDR-BAB ⚔️</h1>
+  <p class="description">
+    Livret de règles interactif pour le système de jeu de rôle JDR-BAB.
+    Version Progressive Web App optimisée pour mobile et tablette.
+  </p>
+  
+  <a href="build-output/JdrBab.html" class="access-button">
+    📱 Accéder au livret de règles
+  </a>
+  
+  <div class="features">
+    <div class="feature">Installation possible sur mobile/tablette</div>
+    <div class="feature">Fonctionnement 100% hors ligne</div>
+    <div class="feature">Classes, sorts, dons et équipements</div>
+    <div class="feature">Tables de trésors et bestiaire</div>
+    <div class="feature">Outils de création de personnage</div>
+  </div>
+</div>
+</body>
+</html>
