@@ -49,15 +49,21 @@
 <script src="js/utils.js"></script>
 <script src="js/modules/images.js"></script>
 <script src="js/modules/audio.js"></script>
+
+<!-- Features modules (AVANT renderer pour être disponibles au rendu) -->
+<script src="js/features/SpellFilter.js"></script>
+<script src="js/features/TablesTresorsManager.js"></script>
+<script src="js/features/FavorisManager.js"></script>
+<script src="js/features/FavorisRenderer.js"></script>
+
+<!-- Modules qui dépendent des features -->
 <script src="js/router.js"></script>
 <script src="js/renderer.js"></script>
 <script src="js/editor.js"></script>
 <script src="js/storage.js"></script>
-<script src="js/ui.js"></script>
 
-<!-- Features modules -->
-<script src="js/features/SpellFilter.js"></script>
-<script src="js/features/TablesTresorsManager.js"></script>
+<!-- UI module (doit être en dernier) -->
+<script src="js/ui.js"></script>
 
 <!-- PDF support -->
 <script src="js/libs/jspdf-loader.js"></script>

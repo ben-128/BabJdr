@@ -353,7 +353,6 @@
           if (monster.image && monster.image.trim()) {
             this.imageStore[imageKey] = monster.image;
             hasUpdates = true;
-            console.log(`📷 Auto-synced image for monster: ${monster.nom}`);
           }
         }
         
@@ -362,7 +361,6 @@
       });
 
       if (hasUpdates) {
-        console.log('✅ Auto-synced monster image mappings');
       }
     },
 
@@ -402,9 +400,6 @@
         }
 
         if (correctedPath && correctedPath !== currentPath) {
-          console.log(`🔧 Auto-correcting image path for ${monster.nom}:`);
-          console.log(`   From: ${currentPath}`);
-          console.log(`   To: ${correctedPath}`);
           
           // Update monster data
           monster.image = correctedPath;

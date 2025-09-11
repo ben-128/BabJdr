@@ -56,7 +56,8 @@
     EDITS: 'jdr-bab-edits',
     LAST_MODIFIED: 'jdr-bab-last-modified',
     MONSTER_BACKUPS: 'jdr-bab-monster-backups',
-    FILTER_SETTINGS: 'jdr-bab-filter-settings'
+    FILTER_SETTINGS: 'jdr-bab-filter-settings',
+    FAVORIS: 'jdr-bab-favoris'
   };
 
   // ========================================
@@ -65,7 +66,10 @@
   window.Events = {
     STORAGE_SAVE: 'storage:save',
     PAGE_RENDER: 'page:render',
-    CONTENT_UPDATE: 'content:update'
+    CONTENT_UPDATE: 'content:update',
+    FAVORIS_ADD: 'favoris:add',
+    FAVORIS_REMOVE: 'favoris:remove',
+    FAVORIS_UPDATE: 'favoris:update'
   };
 
   // ========================================

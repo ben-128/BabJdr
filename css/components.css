@@ -2147,6 +2147,209 @@ article[data-page="enchanteur"] .illus img:hover,
   border-color: var(--gold) !important;
 }
 
+/* ─────────────────────────── Favoris Components ─────────────────────────── */
+
+/* Cartes avec favoris - permettre l'overflow pour les boutons étoile */
+.card:has(.favoris-star) {
+  overflow: visible !important;
+}
+
+/* Fallback pour navigateurs sans support :has() */
+.spell-card,
+.item-card {
+  overflow: visible !important;
+}
+
+.favoris-star {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(0,0,0,0.1);
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10;
+  backdrop-filter: blur(4px);
+}
+
+.favoris-star:hover {
+  background: rgba(0,0,0,0.2);
+  transform: scale(1.1);
+}
+
+.favoris-star.favoris-active {
+  background: rgba(255,215,0,0.2);
+  color: #ffd700;
+}
+
+.favoris-star.favoris-active:hover {
+  background: rgba(255,215,0,0.3);
+  transform: scale(1.15);
+}
+
+/* Notification des favoris */
+.favoris-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: var(--surface-color, #f0f0f0);
+  color: var(--text-color, #333);
+  padding: 12px 16px;
+  border-radius: 8px;
+  border-left: 4px solid var(--accent-color, #d4af37);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  z-index: 10000;
+  font-size: 14px;
+  max-width: 300px;
+}
+
+.favoris-notification.favoris-success {
+  border-left-color: #22c55e;
+  background: rgba(34,197,94,0.1);
+}
+
+.favoris-notification.favoris-info {
+  border-left-color: #3b82f6;
+  background: rgba(59,130,246,0.1);
+}
+
+/* Animations pour les notifications */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* Page favoris */
+.favoris-section {
+  margin: 2rem 0;
+}
+
+.favoris-section h2 {
+  color: var(--accent-ink);
+  border-bottom: 2px solid var(--gold);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Sections pliables favoris */
+.favoris-collapsible {
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  background: var(--card);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.favoris-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  background: var(--surface-subtle);
+  border-bottom: 1px solid var(--rule);
+  transition: background 0.2s ease;
+}
+
+.favoris-header:hover {
+  background: var(--surface-color);
+}
+
+.favoris-header h2 {
+  margin: 0;
+  border: none;
+  padding: 0;
+  font-size: 1.3em;
+  color: var(--accent-ink);
+}
+
+.favoris-toggle {
+  font-size: 1.2em;
+  color: var(--accent-ink);
+  transition: transform 0.3s ease;
+  user-select: none;
+}
+
+.favoris-collapsible.collapsed .favoris-toggle {
+  transform: rotate(-90deg);
+}
+
+.favoris-content {
+  padding: 1.5rem;
+  max-height: 1000px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.favoris-collapsible.collapsed .favoris-content {
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.favoris-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.favoris-empty {
+  text-align: center;
+  color: var(--muted-ink);
+  font-style: italic;
+  padding: 2rem;
+  background: var(--surface-subtle);
+  border-radius: 12px;
+  border: 2px dashed var(--rule);
+}
+
+/* Mise en position relative pour les cartes avec étoiles */
+.card.spell-card,
+.card.item-card {
+  position: relative;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .favoris-star {
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+    top: 6px;
+    right: 6px;
+  }
+  
+  .favoris-notification {
+    right: 10px;
+    top: 10px;
+    max-width: calc(100vw - 20px);
+  }
+}
+
 /* Mobile optimization for section selection modal */
 @media (max-width: 480px) {
   .section-selection-modal .modal-content {

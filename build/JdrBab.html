@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-09-10T12:57:41.554Z by JdrBab Build System -->
+<!-- Generated on 2025-09-11T14:08:08.414Z by JdrBab Build System -->
 <title>JDR‑BAB — Livret de règles</title>
 <meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -3275,6 +3275,209 @@ article[data-page="enchanteur"] .illus img:hover,
   border-color: var(--gold) !important;
 }
 
+/* ─────────────────────────── Favoris Components ─────────────────────────── */
+
+/* Cartes avec favoris - permettre l'overflow pour les boutons étoile */
+.card:has(.favoris-star) {
+  overflow: visible !important;
+}
+
+/* Fallback pour navigateurs sans support :has() */
+.spell-card,
+.item-card {
+  overflow: visible !important;
+}
+
+.favoris-star {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(0,0,0,0.1);
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10;
+  backdrop-filter: blur(4px);
+}
+
+.favoris-star:hover {
+  background: rgba(0,0,0,0.2);
+  transform: scale(1.1);
+}
+
+.favoris-star.favoris-active {
+  background: rgba(255,215,0,0.2);
+  color: #ffd700;
+}
+
+.favoris-star.favoris-active:hover {
+  background: rgba(255,215,0,0.3);
+  transform: scale(1.15);
+}
+
+/* Notification des favoris */
+.favoris-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: var(--surface-color, #f0f0f0);
+  color: var(--text-color, #333);
+  padding: 12px 16px;
+  border-radius: 8px;
+  border-left: 4px solid var(--accent-color, #d4af37);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  z-index: 10000;
+  font-size: 14px;
+  max-width: 300px;
+}
+
+.favoris-notification.favoris-success {
+  border-left-color: #22c55e;
+  background: rgba(34,197,94,0.1);
+}
+
+.favoris-notification.favoris-info {
+  border-left-color: #3b82f6;
+  background: rgba(59,130,246,0.1);
+}
+
+/* Animations pour les notifications */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* Page favoris */
+.favoris-section {
+  margin: 2rem 0;
+}
+
+.favoris-section h2 {
+  color: var(--accent-ink);
+  border-bottom: 2px solid var(--gold);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Sections pliables favoris */
+.favoris-collapsible {
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  background: var(--card);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.favoris-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  background: var(--surface-subtle);
+  border-bottom: 1px solid var(--rule);
+  transition: background 0.2s ease;
+}
+
+.favoris-header:hover {
+  background: var(--surface-color);
+}
+
+.favoris-header h2 {
+  margin: 0;
+  border: none;
+  padding: 0;
+  font-size: 1.3em;
+  color: var(--accent-ink);
+}
+
+.favoris-toggle {
+  font-size: 1.2em;
+  color: var(--accent-ink);
+  transition: transform 0.3s ease;
+  user-select: none;
+}
+
+.favoris-collapsible.collapsed .favoris-toggle {
+  transform: rotate(-90deg);
+}
+
+.favoris-content {
+  padding: 1.5rem;
+  max-height: 1000px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.favoris-collapsible.collapsed .favoris-content {
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.favoris-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.favoris-empty {
+  text-align: center;
+  color: var(--muted-ink);
+  font-style: italic;
+  padding: 2rem;
+  background: var(--surface-subtle);
+  border-radius: 12px;
+  border: 2px dashed var(--rule);
+}
+
+/* Mise en position relative pour les cartes avec étoiles */
+.card.spell-card,
+.card.item-card {
+  position: relative;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .favoris-star {
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+    top: 6px;
+    right: 6px;
+  }
+  
+  .favoris-notification {
+    right: 10px;
+    top: 10px;
+    max-width: calc(100vw - 20px);
+  }
+}
+
 /* Mobile optimization for section selection modal */
 @media (max-width: 480px) {
   .section-selection-modal .modal-content {
@@ -4174,6 +4377,15 @@ body.dev-off button[class*="edit"] {
   visibility: hidden !important;
   opacity: 0 !important;
   pointer-events: none !important;
+}
+
+/* Exception: les boutons favoris doivent TOUJOURS être visibles */
+body.dev-off button.favoris-star,
+body.dev-on button.favoris-star {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
 }
 
 /* SPÉCIFIQUE: Règles avec spécificité maximale pour forcer le masquage */
@@ -7397,6 +7609,14 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
     
     // TOC Structure for advanced navigation
     window.TOC_STRUCTURE = {
+  "directPages": [
+    {
+      "type": "page",
+      "id": "favoris",
+      "title": "⭐ Favoris",
+      "icon": "⭐"
+    }
+  ],
   "sections": [
     {
       "id": "heros",
@@ -8079,6 +8299,13 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
     window.STATIC_PAGES_CONFIG = {
   "pages": [
     {
+      "id": "favoris",
+      "title": "Favoris",
+      "file": "favoris.json",
+      "active": true,
+      "order": 0
+    },
+    {
       "id": "creation",
       "title": "Création d'un personnage",
       "file": "creation.json",
@@ -8708,7 +8935,8 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
     EDITS: 'jdr-bab-edits',
     LAST_MODIFIED: 'jdr-bab-last-modified',
     MONSTER_BACKUPS: 'jdr-bab-monster-backups',
-    FILTER_SETTINGS: 'jdr-bab-filter-settings'
+    FILTER_SETTINGS: 'jdr-bab-filter-settings',
+    FAVORIS: 'jdr-bab-favoris'
   };
 
   // ========================================
@@ -8717,7 +8945,10 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
   window.Events = {
     STORAGE_SAVE: 'storage:save',
     PAGE_RENDER: 'page:render',
-    CONTENT_UPDATE: 'content:update'
+    CONTENT_UPDATE: 'content:update',
+    FAVORIS_ADD: 'favoris:add',
+    FAVORIS_REMOVE: 'favoris:remove',
+    FAVORIS_UPDATE: 'favoris:update'
   };
 
   // ========================================
@@ -9843,8 +10074,11 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
     }
 
     buildSpellCard() {
-      return `
-        <div class="card editable-section" data-section-type="spell" data-spell-name="${this.data.nom}" data-spell-index="${this.index}" data-category-name="${this.categoryName}">
+      const favorisButtonHTML = this.buildFavorisButton('sorts', this.data.nom);
+      
+      const result = `
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="${this.data.nom}" data-spell-index="${this.index}" data-category-name="${this.categoryName}">
+          ${favorisButtonHTML}
           ${this.buildEditableTitle(this.data.nom, 'spell-name')}
           ${this.buildSpellElement()}
           ${this.buildIllustration(`sort:${this.categoryName}:${this.data.nom}`, this.data.nom)}
@@ -9862,6 +10096,8 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
           ${this.buildDeleteButton('spell')}
         </div>
       `;
+      
+      return result;
     }
 
     buildDonCard() {
@@ -9909,7 +10145,8 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
         : '<span style="font-style: italic; color: #666;">Aucun tag</span>';
 
       return `
-        <div class="card editable-section" data-section-type="objet" data-objet-name="${this.data.nom}" data-category-name="${this.categoryName}">
+        <div class="card editable-section item-card" data-section-type="objet" data-objet-name="${this.data.nom}" data-category-name="${this.categoryName}">
+          ${this.buildFavorisButton('objets', this.data.nom)}
           ${this.buildEditableTitle(this.data.nom, 'objet-name')}
           ${this.buildIllustration(`objet:${this.data.nom}`, this.data.nom)}
           <div style="display: flex; justify-content: space-between; align-items: center; margin: 0.5rem 0; font-size: 0.9em; color: var(--bronze);">
@@ -10387,6 +10624,21 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       }
       return { [this.type + 's']: [] };
     }
+
+    /**
+     * Construit le bouton étoile pour les favoris
+     * @param {string} type - Type de contenu ('sorts' ou 'objets')
+     * @param {string} nom - Nom de l'élément
+     * @returns {string} HTML du bouton favoris
+     */
+    buildFavorisButton(type, nom) {
+      // Vérifier que le FavorisManager est disponible
+      if (typeof window.FavorisManager === 'undefined') {
+        return '';
+      }
+      
+      return window.FavorisManager.createStarButton(type, nom);
+    }
   }
 
   window.CardBuilder = CardBuilder;
@@ -10617,6 +10869,11 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       const title = pageData.title || pageId;
       const page = pageData.page || pageId;
       
+      // Special handling for favoris page
+      if (pageId === 'favoris') {
+        return this.buildFavorisPage(pageId, pageData);
+      }
+      
       // Special handling for campaign page
       if (pageId === 'campagne') {
         return this.buildCampaignPage(pageId, pageData);
@@ -10636,12 +10893,15 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
     buildCategoryHeader(category, type) {
       const config = window.ContentTypes[type];
       
+      // Don't show descriptions for spell categories
+      const showDescription = type !== 'spell';
+      
       return `
         <div style="text-align:center;margin-bottom:2rem;">
           ${this.buildEditableTitle(category.nom, `${type}-category-name`)}
           ${this.buildIllustration(`${type}category:${category.nom}`)}
         </div>
-        ${this.buildEditableSection(category.description, `${type}-category-description`, 'paragraph', category.nom)}
+        ${showDescription ? this.buildEditableSection(category.description, `${type}-category-description`, 'paragraph', category.nom) : ''}
       `;
     }
 
@@ -11056,7 +11316,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
             <label style="font-weight: 600; color: var(--accent-ink);">
               🎯 Filtrer par niveau maximum :
             </label>
-            <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
               <input 
                 type="number" 
                 id="spell-level-filter" 
@@ -11073,6 +11333,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
               >
                 🔄 Tout afficher
               </button>
+              <div id="spell-filter-count" class="spell-filter-count" style="margin-left: 0.5rem; font-size: 0.9rem; color: var(--bronze); font-weight: 500;"></div>
             </div>
           </div>
         </div>
@@ -11543,6 +11804,56 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
 
     sanitizeId(str) {
       return str.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+    }
+
+    /**
+     * Construit la page spéciale des favoris
+     * @param {string} pageId - ID de la page
+     * @param {Object} pageData - Données de la page
+     * @returns {string} HTML de la page favoris
+     */
+    buildFavorisPage(pageId, pageData) {
+      const title = pageData.title || 'Favoris';
+      
+      return `
+        <article class="" data-page="${pageId}" data-static-page="true" data-page-title="${title}">
+          <section>
+            ${this.buildStaticPageHeader(pageData)}
+            
+            <div class="favoris-section favoris-collapsible" id="favoris-objets-section">
+              <div class="favoris-header" onclick="this.parentElement.classList.toggle('collapsed')">
+                <h2>📦 Objets favoris</h2>
+                <span class="favoris-toggle">▼</span>
+              </div>
+              <div class="favoris-content">
+                <div id="favoris-objets-container" class="favoris-grid">
+                  <!-- Les objets favoris seront affichés ici dynamiquement -->
+                </div>
+                <div id="favoris-objets-empty" class="favoris-empty" style="display: none;">
+                  <p>Aucun objet en favoris</p>
+                  <p style="font-size: 0.9em;">Cliquez sur l'étoile ⭐ à côté d'un objet pour l'ajouter à vos favoris</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="favoris-section favoris-collapsible" id="favoris-sorts-section">
+              <div class="favoris-header" onclick="this.parentElement.classList.toggle('collapsed')">
+                <h2>🔮 Sorts favoris</h2>
+                <span class="favoris-toggle">▼</span>
+              </div>
+              <div class="favoris-content">
+                <div id="favoris-sorts-container" class="favoris-grid">
+                  <!-- Les sorts favoris seront affichés ici dynamiquement -->
+                </div>
+                <div id="favoris-sorts-empty" class="favoris-empty" style="display: none;">
+                  <p>Aucun sort en favoris</p>
+                  <p style="font-size: 0.9em;">Cliquez sur l'étoile ⭐ à côté d'un sort pour l'ajouter à vos favoris</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </article>
+      `;
     }
   }
 
@@ -12271,7 +12582,6 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
           if (monster.image && monster.image.trim()) {
             this.imageStore[imageKey] = monster.image;
             hasUpdates = true;
-            console.log(`📷 Auto-synced image for monster: ${monster.nom}`);
           }
         }
         
@@ -12280,7 +12590,6 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       });
 
       if (hasUpdates) {
-        console.log('✅ Auto-synced monster image mappings');
       }
     },
 
@@ -12320,9 +12629,6 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
         }
 
         if (correctedPath && correctedPath !== currentPath) {
-          console.log(`🔧 Auto-correcting image path for ${monster.nom}:`);
-          console.log(`   From: ${currentPath}`);
-          console.log(`   To: ${correctedPath}`);
           
           // Update monster data
           monster.image = correctedPath;
@@ -13312,6 +13618,1664 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
 
 })();
 // ============================================================================
+// JDR-BAB APPLICATION - SPELL FILTER MODULE
+// ============================================================================
+
+(() => {
+  "use strict";
+
+  // ========================================
+  // SPELL FILTER MODULE
+  // ========================================
+  const SpellFilter = {
+    
+    init() {
+      this.setupEventListeners();
+    },
+
+    setupEventListeners() {
+      // Use direct event delegation on document to catch dynamically added elements
+      document.addEventListener('input', (e) => {
+        if (e.target && e.target.id === 'spell-level-filter') {
+          this.filterSpellsByLevel(parseInt(e.target.value, 10));
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (e.target && e.target.id === 'reset-spell-filter') {
+          e.preventDefault();
+          this.resetFilter();
+        }
+      });
+
+      // Setup when page changes (router events)
+      if (window.EventBus && window.Events) {
+        EventBus.on(Events.PAGE_RENDER, (payload) => {
+          if (payload.type === 'category' && payload.categoryType === 'spell') {
+            // Re-setup filter after page render
+            setTimeout(() => this.initializeFilter(), 200);
+          }
+        });
+      }
+
+      // Also listen to hash changes for direct navigation
+      window.addEventListener('hashchange', () => {
+        setTimeout(() => this.initializeFilter(), 200);
+      });
+    },
+
+    initializeFilter() {
+      const filterInput = document.querySelector('#spell-level-filter');
+      if (!filterInput) return;
+      
+      
+      // Set initial value and apply filter
+      const initialValue = parseInt(filterInput.value, 10) || 20;
+      this.filterSpellsByLevel(initialValue);
+    },
+
+    filterSpellsByLevel(maxLevel) {
+      // Get current page from URL hash
+      const currentHash = window.location.hash.replace('#/', '');
+      
+      if (!currentHash.startsWith('sorts-')) {
+        return;
+      }
+      
+      // Extract category name from hash (e.g., 'sorts-mage' -> 'mage')
+      const currentCategoryName = currentHash.replace('sorts-', '');
+      
+      // Find all spell cards in the current page
+      const spellCards = document.querySelectorAll('.card[data-spell-name]');
+      
+      if (spellCards.length === 0) return;
+
+      let visibleCount = 0;
+      let categoryTotalCount = 0;
+
+      spellCards.forEach((card) => {
+        const spellName = card.dataset.spellName;
+        const categoryName = card.dataset.categoryName;
+        
+        // More flexible category matching
+        const matches = this.categoryMatches(categoryName, currentCategoryName);
+        
+        if (matches) {
+          categoryTotalCount++;
+          
+          // Find the spell data to get its level
+          const spellLevel = this.getSpellLevel(spellName, categoryName);
+          
+          if (spellLevel <= maxLevel) {
+            card.style.display = '';
+            visibleCount++;
+          } else {
+            card.style.display = 'none';
+          }
+        } else {
+          // Hide cards from other categories completely
+          card.style.display = 'none';
+        }
+      });
+      
+      // Update filter display with count (use category total instead of all spells)
+      this.updateFilterDisplay(maxLevel, visibleCount, categoryTotalCount);
+    },
+
+    categoryMatches(categoryName, currentCategoryName) {
+      if (!categoryName || !currentCategoryName) {
+        return false;
+      }
+      
+      const catLower = categoryName.toLowerCase();
+      const currentLower = currentCategoryName.toLowerCase();
+      
+      // Normalize both strings: replace hyphens with spaces
+      const normalizedCat = catLower.replace(/[-_]/g, ' ').trim();
+      const normalizedCurrent = currentLower.replace(/[-_]/g, ' ').trim();
+      
+      // Direct match
+      if (normalizedCat === normalizedCurrent) {
+        return true;
+      }
+      
+      // Handle all possible URL-to-category mappings (including malformed URLs):
+      const categoryMappings = {
+        'mage': 'sorts de mage',
+        'pretre': 'sorts de prêtre', 
+        'prêtre': 'sorts de prêtre',
+        'pr tre': 'sorts de prêtre',           // Malformed: missing ê
+        'sorts de pr tre': 'sorts de prêtre',  // Malformed: missing ê
+        'enchanteur': "sorts d'enchanteur",
+        'd enchanteur': "sorts d'enchanteur",  // Malformed: missing '
+        'sorts d enchanteur': "sorts d'enchanteur" // Malformed: missing '
+      };
+      
+      // Direct mapping lookup
+      if (categoryMappings[normalizedCurrent] && normalizedCat === categoryMappings[normalizedCurrent]) {
+        return true;
+      }
+      
+      // Reverse lookup - strip common prefixes from category
+      const strippedCat = normalizedCat
+        .replace(/^sorts de /, '')
+        .replace(/^sorts d'/, '')
+        .replace(/^sorts d /, '')    // Handle missing apostrophe
+        .replace(/^sorts /, '');
+        
+      if (strippedCat === normalizedCurrent) {
+        return true;
+      }
+      
+      // Handle various character issues
+      const normalizedStrippedCat = strippedCat
+        .replace(/ê/g, 'e')     // ê -> e
+        .replace(/'/g, '')      // Remove apostrophes
+        .replace(/\s+/g, ' ')   // Normalize spaces
+        .trim();
+        
+      const normalizedExtracted = normalizedCurrent
+        .replace(/ê/g, 'e')     
+        .replace(/'/g, '')      
+        .replace(/\s+/g, ' ')   
+        .trim();
+        
+      if (normalizedStrippedCat === normalizedExtracted) {
+        return true;
+      }
+      
+      // Additional fuzzy matches for common issues
+      if ((strippedCat === 'prêtre' || strippedCat === 'pretre') && 
+          (normalizedCurrent.includes('pr') && normalizedCurrent.includes('tre'))) {
+        return true;
+      }
+      
+      if (strippedCat === 'enchanteur' && 
+          (normalizedCurrent.includes('enchanteur') || normalizedCurrent.includes('d enchanteur'))) {
+        return true;
+      }
+      
+      return false;
+    },
+
+    getSpellLevel(spellName, categoryName) {
+      if (!window.SORTS) return 0;
+
+      // Find the category using flexible matching
+      let category = window.SORTS.find(cat => {
+        const catLower = cat.nom.toLowerCase();
+        const nameLower = categoryName.toLowerCase();
+        
+        return catLower === nameLower ||
+               catLower === `sorts de ${nameLower}` ||
+               catLower === `sorts d'${nameLower}` ||
+               catLower.includes(nameLower);
+      });
+      
+      if (!category || !category.sorts) return 0;
+
+      // Find the spell
+      const spell = category.sorts.find(sort => sort.nom === spellName);
+      if (!spell || !spell.prerequis) return 0;
+
+      // Extract level from prerequisite - handle HTML content
+      const cleanPrerequisite = spell.prerequis.replace(/<[^>]*>/g, '');
+      const match = cleanPrerequisite.match(/Niveau\s*(\d+)/i);
+      
+      return match ? parseInt(match[1], 10) : 0;
+    },
+
+    updateFilterDisplay(maxLevel, visibleCount, totalCount) {
+      // Try to find the dedicated count container first
+      let countContainer = document.querySelector('#spell-filter-count');
+      
+      if (countContainer) {
+        // Use the dedicated container next to the "Tout afficher" button
+        const countText = `📊 ${visibleCount}/${totalCount} sorts affichés (niveau ≤ ${maxLevel})`;
+        countContainer.textContent = countText;
+        countContainer.style.display = 'block';
+        return;
+      }
+      
+      // Fallback: remove any existing floating count display first
+      const existingCount = document.querySelector('.filter-count');
+      if (existingCount) {
+        existingCount.remove();
+      }
+      
+      // Create floating display as fallback
+      const countText = `📊 ${visibleCount}/${totalCount} sorts affichés (niveau ≤ ${maxLevel})`;
+      const countDisplay = document.createElement('div');
+      countDisplay.className = 'filter-count';
+      countDisplay.style.cssText = `
+        position: fixed;
+        top: 80px;
+        right: 20px;
+        z-index: 10000;
+        background: rgba(139, 90, 60, 0.95) !important;
+        color: white !important;
+        padding: 8px 12px !important;
+        border-radius: 6px !important;
+        border: 2px solid #8b5a3c !important;
+        font-size: 0.9rem !important;
+        font-weight: 600 !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        font-family: Arial, sans-serif !important;
+        cursor: pointer !important;
+      `;
+      countDisplay.textContent = countText;
+      countDisplay.title = "Cliquer pour masquer";
+      
+      // Add click to hide functionality
+      countDisplay.addEventListener('click', () => {
+        countDisplay.remove();
+      });
+      
+      // Add directly to body for maximum visibility
+      document.body.appendChild(countDisplay);
+    },
+
+    resetFilter() {
+      const filterInput = document.querySelector('#spell-level-filter');
+      if (filterInput) {
+        filterInput.value = '20';
+        this.filterSpellsByLevel(20);
+      }
+      
+      // Clear the count display
+      const countContainer = document.querySelector('#spell-filter-count');
+      if (countContainer) {
+        countContainer.textContent = '';
+        countContainer.style.display = 'none';
+      }
+    }
+  };
+
+  // Initialize the spell filter when the app is ready
+  function initializeSpellFilter() {
+    
+    if (window.JdrApp) {
+      if (JdrApp.modules) {
+        JdrApp.modules.spellFilter = SpellFilter;
+      }
+    }
+    
+    // Initialize the filter
+    SpellFilter.init();
+    
+    // Try to initialize the filter after a delay to ensure DOM is ready
+    setTimeout(() => {
+      if (window.location.hash.includes('sorts-')) {
+        SpellFilter.initializeFilter();
+      }
+    }, 500);
+  }
+
+  // Initialize on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeSpellFilter);
+  } else {
+    // DOM is already ready
+    initializeSpellFilter();
+  }
+
+  window.SpellFilter = SpellFilter;
+
+})();
+// ============================================================================
+// JDR-BAB APPLICATION - TABLES DE TRESORS MANAGER
+// ============================================================================
+
+(() => {
+  "use strict";
+
+  class TablesTresorsManager {
+    constructor() {
+      this.initialized = false;
+      this.currentPreviewModal = null;
+      this.currentEditModal = null;
+      this.modalIsOpening = false;
+    }
+
+    static getInstance() {
+      if (!TablesTresorsManager.instance) {
+        TablesTresorsManager.instance = new TablesTresorsManager();
+      }
+      return TablesTresorsManager.instance;
+    }
+
+    init() {
+      if (this.initialized) return;
+      
+      this.setupEventListeners();
+      this.initialized = true;
+      // TablesTresorsManager initialized
+    }
+
+    setupEventListeners() {
+      // Preview d'objets
+      document.addEventListener('click', (e) => {
+        if (e.target.matches('.object-preview-link')) {
+          e.preventDefault();
+          e.stopPropagation();
+          const numeroObjet = e.target.dataset.objectNumero;
+          this.showObjectPreview(numeroObjet);
+        }
+      });
+
+      // Édition de fourchette
+      document.addEventListener('click', (e) => {
+        if (e.target.matches('.edit-fourchette-btn')) {
+          const tableName = e.target.dataset.tableName;
+          const fourchetteIndex = parseInt(e.target.dataset.fourchetteIndex);
+          this.showEditFourchetteModal(tableName, fourchetteIndex);
+        }
+      });
+
+      // Suppression de fourchette
+      document.addEventListener('click', (e) => {
+        if (e.target.matches('.delete-fourchette-btn')) {
+          const tableName = e.target.dataset.tableName;
+          const fourchetteIndex = parseInt(e.target.dataset.fourchetteIndex);
+          this.deleteFourchette(tableName, fourchetteIndex);
+        }
+      });
+
+      // Ajout de nouvelle fourchette
+      document.addEventListener('click', (e) => {
+        if (e.target.matches('.table-tresor-add-fourchette')) {
+          const tableName = e.target.dataset.tableTresorName;
+          this.showEditFourchetteModal(tableName, -1); // -1 pour nouvelle fourchette
+        }
+      });
+
+      // Fermer les modals en cliquant à l'extérieur
+      document.addEventListener('click', (e) => {
+        if (e.target.matches('.modal-overlay')) {
+          this.closeAllModals();
+        }
+      });
+
+      // Fermer avec la touche Escape
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          this.closeAllModals();
+        }
+      });
+
+      // Preview de table de trésor via lien HTML
+      document.addEventListener('click', (e) => {
+        if (e.target.matches('.treasure-table-link')) {
+          e.preventDefault();
+          const tableName = e.target.dataset.tableName;
+          this.showTablePreview(tableName);
+        }
+      });
+    }
+
+    showObjectPreview(numeroObjet) {
+      try {
+        // Trouver l'objet par son numéro
+        const objet = window.OBJETS?.objets?.find(obj => obj.numero == numeroObjet);
+        
+        if (!objet) {
+          console.error('Objet non trouvé:', numeroObjet);
+          return;
+        }
+
+        const previewHtml = this.generateObjectPreviewHtml(objet);
+        this.showModal(previewHtml, 'object-preview');
+        
+      } catch (error) {
+        console.error('Erreur lors de l\'affichage de la preview:', error);
+      }
+    }
+
+    showTablePreview(tableName) {
+      try {
+        // Trouver la table par son nom
+        const table = window.TABLES_TRESORS?.tables?.find(t => t.nom === tableName);
+        
+        if (!table) {
+          console.error('Table non trouvée:', tableName);
+          return;
+        }
+
+        const previewHtml = this.generateTablePreviewHtml(table);
+        const modalContent = `
+          <div class="table-preview-content">
+            ${previewHtml}
+            <div style="text-align: center; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--rule);">
+              <button class="btn" onclick="window.TablesTresorsManager.closeAllModals()" style="background: var(--accent); color: white;">
+                ✓ Fermer
+              </button>
+              <button class="btn" onclick="window.TablesTresorsManager.goToTablesTresorsPage()" style="background: var(--bronze); color: white; margin-left: 0.5rem;">
+                🔗 Aller à la page tables de trésors
+              </button>
+            </div>
+          </div>
+        `;
+        
+        this.showModal(modalContent, 'table-preview');
+        
+      } catch (error) {
+        console.error('Erreur lors de l\'affichage de la preview de table:', error);
+      }
+    }
+
+    generateObjectPreviewHtml(objet) {
+      const tagsDisplay = objet.tags?.map(tag => 
+        `<span class="tag-chip" style="background: var(--bronze); color: white; padding: 2px 6px; border-radius: 8px; font-size: 0.8em; margin-right: 4px;">${tag}</span>`
+      ).join('') || 'Aucun tag';
+
+      return `
+        <div class="object-preview-content">
+          <header style="text-align: center; margin-bottom: 1rem; border-bottom: 2px solid var(--bronze); padding-bottom: 1rem;">
+            <h3 style="margin: 0; color: var(--accent);">📦 ${objet.nom}</h3>
+            <div style="color: var(--bronze); font-size: 0.9em;">Objet N°${objet.numero}</div>
+          </header>
+          
+          <div style="margin: 1rem 0;">
+            <strong>Tags:</strong><br>
+            ${tagsDisplay}
+          </div>
+          
+          <div style="margin: 1rem 0;">
+            <strong>Description:</strong><br>
+            <div style="font-style: italic; margin: 0.5rem 0;">${objet.description || 'Aucune description'}</div>
+          </div>
+          
+          <div style="margin: 1rem 0;">
+            <strong>Effet:</strong><br>
+            <div>${objet.effet || 'Aucun effet spécifié'}</div>
+          </div>
+          
+          <div style="display: flex; gap: 1rem; margin: 1rem 0;">
+            <div style="flex: 1;">
+              <strong>Prix:</strong><br>
+              ${objet.prix || 'Non spécifié'}
+            </div>
+            <div style="flex: 1;">
+              <strong>Poids:</strong><br>
+              ${objet.poids || 'Non spécifié'}
+            </div>
+          </div>
+          
+          <div style="text-align: center; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--rule);">
+            <button class="btn" onclick="window.TablesTresorsManager.closeAllModals()" style="background: var(--accent); color: white;">
+              ✓ Fermer
+            </button>
+            <button class="btn" onclick="window.TablesTresorsManager.goToObject(${objet.numero})" style="background: var(--bronze); color: white; margin-left: 0.5rem;">
+              🔗 Aller à la page objets
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    showEditFourchetteModal(tableName, fourchetteIndex) {
+      try {
+        const table = window.TABLES_TRESORS?.tables?.find(t => t.nom === tableName);
+        if (!table) {
+          console.error('Table non trouvée:', tableName);
+          return;
+        }
+
+        const isNewFourchette = fourchetteIndex === -1;
+        const fourchette = isNewFourchette ? { min: 1, max: 1, objet: { type: 'reference', numero: 1, nom: 'Choisir un objet' } } : table.fourchettes[fourchetteIndex];
+
+        if (!isNewFourchette && !fourchette) {
+          console.error('Fourchette non trouvée:', fourchetteIndex);
+          return;
+        }
+
+        const editHtml = this.generateEditFourchetteHtml(tableName, fourchetteIndex, fourchette, isNewFourchette);
+        this.showModal(editHtml, 'edit-fourchette');
+
+      } catch (error) {
+        console.error('Erreur lors de l\'affichage du modal d\'édition:', error);
+      }
+    }
+
+    generateEditFourchetteHtml(tableName, fourchetteIndex, fourchette, isNewFourchette) {
+      // Générer la liste des tags uniques
+      const allTags = new Set();
+      window.OBJETS?.objets?.forEach(obj => {
+        obj.tags?.forEach(tag => allTags.add(tag));
+      });
+      const sortedTags = Array.from(allTags).sort();
+      
+      const tagOptions = ['<option value="">Tous les objets</option>']
+        .concat(sortedTags.map(tag => `<option value="${tag}">${tag}</option>`))
+        .join('');
+
+      // Générer la liste des objets disponibles
+      const objetsOptions = window.OBJETS?.objets?.map(obj => 
+        `<option value="${obj.numero}" data-tags="${obj.tags?.join(',') || ''}" ${obj.numero == fourchette.objet.numero ? 'selected' : ''}>N°${obj.numero} - ${obj.nom}</option>`
+      ).join('') || '<option value="1">Aucun objet disponible</option>';
+
+      return `
+        <div class="edit-fourchette-content">
+          <header style="text-align: center; margin-bottom: 1rem; border-bottom: 2px solid var(--bronze); padding-bottom: 1rem;">
+            <h3 style="margin: 0; color: var(--accent);">
+              ${isNewFourchette ? '➕ Ajouter une fourchette' : '✏️ Éditer la fourchette'}
+            </h3>
+            <div style="color: var(--bronze); font-size: 0.9em;">Table: ${tableName}</div>
+          </header>
+          
+          <form id="edit-fourchette-form">
+            <input type="hidden" id="table-name" value="${tableName}">
+            <input type="hidden" id="fourchette-index" value="${fourchetteIndex}">
+            <input type="hidden" id="is-new-fourchette" value="${isNewFourchette}">
+            <div style="margin: 1rem 0;">
+              <label style="display: block; margin-bottom: 0.5rem; font-weight: bold; color: var(--accent);">
+                🎲 Fourchette de dé (1-20):
+              </label>
+              <div style="display: flex; gap: 1rem; align-items: center;">
+                <div style="flex: 1;">
+                  <label style="font-size: 0.9em; color: var(--paper-muted);">Minimum:</label>
+                  <input 
+                    type="number" 
+                    id="fourchette-min" 
+                    min="1" 
+                    max="20" 
+                    value="${fourchette.min}"
+                    style="width: 100%; padding: 0.5rem; border: 1px solid var(--rule); border-radius: 6px;"
+                    required
+                  >
+                </div>
+                <div style="padding: 1rem 0.5rem; color: var(--accent); font-weight: bold;">-</div>
+                <div style="flex: 1;">
+                  <label style="font-size: 0.9em; color: var(--paper-muted);">Maximum:</label>
+                  <input 
+                    type="number" 
+                    id="fourchette-max" 
+                    min="1" 
+                    max="20" 
+                    value="${fourchette.max}"
+                    style="width: 100%; padding: 0.5rem; border: 1px solid var(--rule); border-radius: 6px;"
+                    required
+                  >
+                </div>
+              </div>
+            </div>
+            
+            <div style="margin: 1rem 0;">
+              <label style="display: block; margin-bottom: 0.5rem; font-weight: bold; color: var(--accent);">
+                🏷️ Filtrer par tag:
+              </label>
+              <select 
+                id="tag-filter" 
+                style="width: 100%; padding: 0.5rem; border: 1px solid var(--rule); border-radius: 6px; background: var(--paper-light);"
+              >
+                ${tagOptions}
+              </select>
+            </div>
+            
+            <div style="margin: 1rem 0;">
+              <label style="display: block; margin-bottom: 0.5rem; font-weight: bold; color: var(--accent);">
+                📦 Objet associé:
+              </label>
+              <select 
+                id="fourchette-objet" 
+                style="width: 100%; padding: 0.5rem; border: 1px solid var(--rule); border-radius: 6px;"
+                required
+              >
+                ${objetsOptions}
+              </select>
+              <div style="margin-top: 0.5rem;">
+                <button 
+                  type="button" 
+                  id="preview-selected-object" 
+                  class="btn small" 
+                  style="background: var(--bronze); color: white; font-size: 0.8em;"
+                >
+                  👁️ Aperçu de l'objet sélectionné
+                </button>
+              </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--rule);">
+              <button type="submit" class="btn" style="background: var(--accent); color: white;">
+                ${isNewFourchette ? '➕ Ajouter' : '✓ Sauvegarder'}
+              </button>
+              <button type="button" onclick="window.TablesTresorsManager.closeAllModals()" class="btn" style="background: #6b7280; color: white; margin-left: 0.5rem;">
+                ❌ Annuler
+              </button>
+            </div>
+          </form>
+        </div>
+      `;
+    }
+
+    showModal(content, modalClass = '') {
+      // Éviter l'ouverture de modals multiples rapidement
+      if (this.modalIsOpening) {
+        return;
+      }
+      
+      this.modalIsOpening = true;
+      this.closeAllModals(); // Fermer les modals existants
+
+      const modalHtml = `
+        <div class="modal-overlay ${modalClass}" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; z-index: 1000;">
+          <div class="modal-content" style="background: var(--paper); border-radius: 12px; padding: 2rem; max-width: 90vw; max-height: 90vh; overflow-y: auto; box-shadow: 0 10px 25px rgba(0,0,0,0.3); border: 2px solid var(--rule);">
+            ${content}
+          </div>
+        </div>
+      `;
+
+      document.body.insertAdjacentHTML('beforeend', modalHtml);
+      
+      // Setup form handler si c'est le modal d'édition
+      if (modalClass === 'edit-fourchette') {
+        this.setupEditFormHandlers();
+      }
+      
+      // Réinitialiser le flag après un court délai
+      setTimeout(() => {
+        this.modalIsOpening = false;
+      }, 200);
+    }
+
+    setupEditFormHandlers() {
+      const form = document.getElementById('edit-fourchette-form');
+      if (!form) return;
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        this.saveFourchette();
+      });
+
+      // Preview de l'objet sélectionné
+      const previewBtn = document.getElementById('preview-selected-object');
+      if (previewBtn) {
+        previewBtn.addEventListener('click', () => {
+          const selectElement = document.getElementById('fourchette-objet');
+          const selectedNumero = selectElement.value;
+          this.showObjectPreview(selectedNumero);
+        });
+      }
+
+      // Filtrage par tag
+      const tagFilter = document.getElementById('tag-filter');
+      const objectSelect = document.getElementById('fourchette-objet');
+      
+      if (tagFilter && objectSelect) {
+        // Stocker toutes les options initiales
+        const allOptions = Array.from(objectSelect.options);
+        
+        tagFilter.addEventListener('change', () => {
+          const selectedTag = tagFilter.value;
+          const currentSelectedValue = objectSelect.value;
+          
+          // Vider les options actuelles
+          objectSelect.innerHTML = '';
+          
+          // Filtrer et réajouter les options
+          const filteredOptions = allOptions.filter(option => {
+            if (!selectedTag) return true; // Afficher tous si aucun tag sélectionné
+            const optionTags = option.dataset.tags || '';
+            return optionTags.split(',').includes(selectedTag);
+          });
+          
+          // Réajouter les options filtrées
+          filteredOptions.forEach(option => {
+            objectSelect.appendChild(option.cloneNode(true));
+          });
+          
+          // Restaurer la sélection si elle est toujours disponible
+          const stillAvailable = filteredOptions.find(option => option.value === currentSelectedValue);
+          if (stillAvailable) {
+            objectSelect.value = currentSelectedValue;
+          } else if (filteredOptions.length > 0) {
+            objectSelect.selectedIndex = 0;
+          }
+        });
+      }
+
+      // Validation en temps réel
+      const minInput = document.getElementById('fourchette-min');
+      const maxInput = document.getElementById('fourchette-max');
+      
+      const validateRange = () => {
+        const min = parseInt(minInput.value);
+        const max = parseInt(maxInput.value);
+        
+        if (min > max) {
+          maxInput.value = min;
+        }
+      };
+
+      minInput.addEventListener('change', validateRange);
+      maxInput.addEventListener('change', validateRange);
+    }
+
+    saveFourchette() {
+      try {
+        const form = document.getElementById('edit-fourchette-form');
+        const formData = new FormData(form);
+        
+        const min = parseInt(document.getElementById('fourchette-min').value);
+        const max = parseInt(document.getElementById('fourchette-max').value);
+        const objetNumero = parseInt(document.getElementById('fourchette-objet').value);
+        
+        // Trouver l'objet sélectionné
+        const objet = window.OBJETS?.objets?.find(obj => obj.numero === objetNumero);
+        if (!objet) {
+          alert('Objet sélectionné introuvable');
+          return;
+        }
+
+        const newFourchette = {
+          min: min,
+          max: max,
+          objet: {
+            type: 'reference',
+            numero: objet.numero,
+            nom: objet.nom
+          }
+        };
+
+        // Extraire les informations depuis les champs cachés du formulaire
+        const tableName = document.getElementById('table-name').value;
+        const fourchetteIndex = parseInt(document.getElementById('fourchette-index').value);
+        const isNewFourchette = document.getElementById('is-new-fourchette').value === 'true';
+        
+        const table = window.TABLES_TRESORS?.tables?.find(t => t.nom === tableName);
+        
+        if (!table) {
+          console.error('Table non trouvée pour la sauvegarde');
+          return;
+        }
+
+        if (isNewFourchette) {
+          table.fourchettes.push(newFourchette);
+        } else {
+          // Mode modification - remplacer la fourchette existante
+          if (fourchetteIndex >= 0 && fourchetteIndex < table.fourchettes.length) {
+            table.fourchettes[fourchetteIndex] = newFourchette;
+          } else {
+            console.error('Index de fourchette invalide pour la modification:', fourchetteIndex);
+            return;
+          }
+        }
+
+        // Sauvegarder et regénérer la page
+        this.saveToStorage();
+        this.refreshTablesTresorsPage();
+        this.closeAllModals();
+
+      } catch (error) {
+        console.error('Erreur lors de la sauvegarde:', error);
+        alert('Erreur lors de la sauvegarde de la fourchette');
+      }
+    }
+
+    deleteFourchette(tableName, fourchetteIndex) {
+      if (!confirm('Êtes-vous sûr de vouloir supprimer cette fourchette ?')) {
+        return;
+      }
+
+      try {
+        const table = window.TABLES_TRESORS?.tables?.find(t => t.nom === tableName);
+        if (!table) {
+          console.error('Table non trouvée:', tableName);
+          return;
+        }
+
+        if (fourchetteIndex < 0 || fourchetteIndex >= table.fourchettes.length) {
+          console.error('Index de fourchette invalide:', fourchetteIndex);
+          return;
+        }
+
+        table.fourchettes.splice(fourchetteIndex, 1);
+        
+        this.saveToStorage();
+        this.refreshTablesTresorsPage();
+        
+        // Fourchette supprimée avec succès
+
+      } catch (error) {
+        console.error('Erreur lors de la suppression:', error);
+        alert('Erreur lors de la suppression de la fourchette');
+      }
+    }
+
+    goToObject(numeroObjet) {
+      this.closeAllModals();
+      // Naviguer vers la page objets avec focus sur l'objet spécifique
+      JdrApp.modules.router.navigate('objets');
+      
+      // Optionnel: highlight l'objet après navigation
+      setTimeout(() => {
+        const objectCard = document.querySelector(`[data-objet-name*="${numeroObjet}"]`);
+        if (objectCard) {
+          objectCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          objectCard.style.border = '3px solid var(--accent)';
+          setTimeout(() => {
+            objectCard.style.border = '';
+          }, 2000);
+        }
+      }, 500);
+    }
+
+    goToTablesTresorsPage() {
+      this.closeAllModals();
+      // Naviguer vers la page tables de trésors
+      if (JdrApp.modules.router && JdrApp.modules.router.navigate) {
+        JdrApp.modules.router.navigate('tables-tresors');
+      } else {
+        // Fallback direct navigation
+        window.location.hash = '#/tables-tresors';
+      }
+    }
+
+    closeAllModals() {
+      const modals = document.querySelectorAll('.modal-overlay');
+      modals.forEach(modal => modal.remove());
+      this.currentPreviewModal = null;
+      this.currentEditModal = null;
+    }
+
+    saveToStorage() {
+      // Les modifications sont déjà dans window.TABLES_TRESORS et seront incluses dans les exports
+      // Émettre l'événement de mise à jour pour notifier les autres modules
+      if (window.EventBus && window.Events) {
+        EventBus.emit(Events.CONTENT_UPDATE, {
+          type: 'tablesTresors',
+          data: window.TABLES_TRESORS
+        });
+      }
+    }
+
+    refreshTablesTresorsPage() {
+      // Regénérer la page des tables de trésors
+      if (JdrApp.modules.router && JdrApp.modules.router.getCurrentRoute() === 'tables-tresors') {
+        // Force complete page regeneration via router navigation
+        JdrApp.modules.router.navigate('tables-tresors');
+      }
+    }
+
+    // Generate HTML link with table preview
+    generateTreasureTableHtmlLink(tableName) {
+      try {
+        const table = window.TABLES_TRESORS?.tables?.find(t => t.nom === tableName);
+        if (!table) {
+          console.error('Table non trouvée:', tableName);
+          return '';
+        }
+
+        // Generate table preview HTML
+        const tableHtml = this.generateTablePreviewHtml(table);
+        
+        // Create a compact link with preview tooltip
+        const htmlLink = `<span class="treasure-table-link" data-table-name="${tableName}" style="color: var(--accent); cursor: pointer; text-decoration: underline;" title="Cliquer pour voir la table des trésors">[Table: ${tableName}]</span>`;
+        
+        return htmlLink;
+
+      } catch (error) {
+        console.error('Erreur lors de la génération du lien HTML:', error);
+        return `[Erreur: ${tableName}]`;
+      }
+    }
+
+    generateTablePreviewHtml(table) {
+      const fourchettesList = table.fourchettes.map(fourchette => {
+        const range = fourchette.min === fourchette.max 
+          ? `${fourchette.min}` 
+          : `${fourchette.min}-${fourchette.max}`;
+        
+        return `
+          <tr>
+            <td style="text-align: center; font-weight: bold; color: var(--accent);">${range}</td>
+            <td>
+              <span class="object-preview-link" data-object-numero="${fourchette.objet.numero}" style="color: var(--accent); cursor: pointer; text-decoration: underline;" title="Cliquer pour voir la preview de l'objet">
+                ${fourchette.objet.nom} (N°${fourchette.objet.numero})
+              </span>
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      return `
+        <div class="treasure-table-preview" style="background: var(--paper); border: 2px solid var(--bronze); border-radius: 12px; padding: 1rem; max-width: 500px;">
+          <h3 style="margin: 0 0 1rem 0; color: var(--accent); text-align: center;">🎲 ${table.nom}</h3>
+          
+          <table style="width: 100%; border-collapse: collapse; margin-top: 1rem;">
+            <thead>
+              <tr style="background: var(--bronze); color: white;">
+                <th style="padding: 8px; text-align: center; border: 1px solid var(--rule);">Dé (d20)</th>
+                <th style="padding: 8px; text-align: left; border: 1px solid var(--rule);">Objet obtenu</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${fourchettesList}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    // Copy HTML link to clipboard
+    copyTreasureTableHtmlLink(tableName) {
+      try {
+        const htmlLink = this.generateTreasureTableHtmlLink(tableName);
+        
+        // Copy to clipboard using modern API
+        navigator.clipboard.writeText(htmlLink).then(() => {
+          this.showNotification('✓ Lien HTML copié dans le presse-papiers!', 'success');
+        }).catch(err => {
+          // Fallback for older browsers
+          const textArea = document.createElement('textarea');
+          textArea.value = htmlLink;
+          document.body.appendChild(textArea);
+          textArea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textArea);
+          
+          this.showNotification('✓ Lien HTML copié dans le presse-papiers!', 'success');
+        });
+
+      } catch (error) {
+        console.error('Erreur lors de la copie:', error);
+        this.showNotification('❌ Erreur lors de la copie du lien', 'error');
+      }
+    }
+
+    // Show notification
+    showNotification(message, type = 'info') {
+      const notification = document.createElement('div');
+      notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${type === 'success' ? '#4CAF50' : type === 'error' ? '#f44336' : '#2196F3'};
+        color: white;
+        padding: 12px 20px;
+        border-radius: 8px;
+        z-index: 1001;
+        font-size: 14px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        animation: slideInRight 0.3s ease;
+      `;
+      notification.textContent = message;
+      
+      document.body.appendChild(notification);
+      
+      // Auto remove after 3 seconds
+      setTimeout(() => {
+        if (notification.parentNode) {
+          notification.style.animation = 'slideOutRight 0.3s ease';
+          setTimeout(() => notification.remove(), 300);
+        }
+      }, 3000);
+    }
+  }
+
+  // Exposer globalement pour les event handlers inline
+  window.TablesTresorsManager = TablesTresorsManager.getInstance();
+
+  // Auto-initialiser quand le DOM est prêt
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => window.TablesTresorsManager.init());
+  } else {
+    window.TablesTresorsManager.init();
+  }
+
+})();
+// ============================================================================
+// JDR-BAB APPLICATION - FAVORIS MANAGER
+// ============================================================================
+
+(() => {
+  "use strict";
+
+  /**
+   * Gestionnaire des favoris pour sorts et objets
+   * Permet d'ajouter/supprimer des éléments en favoris avec persistance locale
+   */
+  class FavorisManager {
+    constructor() {
+      this.favoris = this.loadFavoris();
+      this.initializeEventListeners();
+    }
+
+    /**
+     * Charge les favoris depuis le stockage local
+     */
+    loadFavoris() {
+      try {
+        const saved = localStorage.getItem(window.STORAGE_KEYS.FAVORIS);
+        return saved ? JSON.parse(saved) : {
+          sorts: [],
+          objets: []
+        };
+      } catch (error) {
+        console.warn('Erreur lors du chargement des favoris:', error);
+        return {
+          sorts: [],
+          objets: []
+        };
+      }
+    }
+
+    /**
+     * Sauvegarde les favoris dans le stockage local
+     */
+    saveFavoris() {
+      try {
+        localStorage.setItem(window.STORAGE_KEYS.FAVORIS, JSON.stringify(this.favoris));
+        EventBus.emit(window.Events.FAVORIS_UPDATE, { favoris: this.favoris });
+      } catch (error) {
+        console.error('Erreur lors de la sauvegarde des favoris:', error);
+      }
+    }
+
+    /**
+     * Vérifie si un élément est en favoris
+     * @param {string} type - 'sorts' ou 'objets'
+     * @param {string} nom - Nom de l'élément
+     * @returns {boolean}
+     */
+    isFavoris(type, nom) {
+      return this.favoris[type] && this.favoris[type].includes(nom);
+    }
+
+    /**
+     * Ajoute un élément aux favoris
+     * @param {string} type - 'sorts' ou 'objets'
+     * @param {string} nom - Nom de l'élément
+     */
+    addFavoris(type, nom) {
+      if (!this.favoris[type]) {
+        this.favoris[type] = [];
+      }
+      
+      if (!this.favoris[type].includes(nom)) {
+        this.favoris[type].push(nom);
+        this.saveFavoris();
+        
+        EventBus.emit(window.Events.FAVORIS_ADD, { 
+          type, 
+          nom, 
+          count: this.favoris[type].length 
+        });
+        
+        this.showFeedback(`✨ ${nom} ajouté aux favoris`, 'success');
+        return true;
+      }
+      return false;
+    }
+
+    /**
+     * Supprime un élément des favoris
+     * @param {string} type - 'sorts' ou 'objets'
+     * @param {string} nom - Nom de l'élément
+     */
+    removeFavoris(type, nom) {
+      if (this.favoris[type]) {
+        const index = this.favoris[type].indexOf(nom);
+        if (index > -1) {
+          this.favoris[type].splice(index, 1);
+          this.saveFavoris();
+          
+          EventBus.emit(window.Events.FAVORIS_REMOVE, { 
+            type, 
+            nom,
+            count: this.favoris[type].length 
+          });
+          
+          this.showFeedback(`🗑️ ${nom} retiré des favoris`, 'info');
+          return true;
+        }
+      }
+      return false;
+    }
+
+    /**
+     * Bascule l'état favori d'un élément
+     * @param {string} type - 'sorts' ou 'objets'
+     * @param {string} nom - Nom de l'élément
+     */
+    toggleFavoris(type, nom) {
+      if (this.isFavoris(type, nom)) {
+        return this.removeFavoris(type, nom);
+      } else {
+        return this.addFavoris(type, nom);
+      }
+    }
+
+    /**
+     * Récupère tous les favoris d'un type
+     * @param {string} type - 'sorts' ou 'objets'
+     * @returns {Array}
+     */
+    getFavoris(type) {
+      return this.favoris[type] || [];
+    }
+
+    /**
+     * Récupère tous les favoris
+     * @returns {Object}
+     */
+    getAllFavoris() {
+      return { ...this.favoris };
+    }
+
+    /**
+     * Compte le nombre de favoris d'un type
+     * @param {string} type - 'sorts' ou 'objets'
+     * @returns {number}
+     */
+    countFavoris(type) {
+      return this.favoris[type] ? this.favoris[type].length : 0;
+    }
+
+    /**
+     * Vide tous les favoris d'un type
+     * @param {string} type - 'sorts' ou 'objets'
+     */
+    clearFavoris(type) {
+      if (this.favoris[type]) {
+        const count = this.favoris[type].length;
+        this.favoris[type] = [];
+        this.saveFavoris();
+        this.showFeedback(`🗑️ ${count} favoris ${type} supprimés`, 'info');
+      }
+    }
+
+    /**
+     * Initialise les écouteurs d'événements
+     */
+    initializeEventListeners() {
+      // Écouter les clics sur les étoiles de favoris
+      document.addEventListener('click', (event) => {
+        const starBtn = event.target.closest('.favoris-star');
+        if (starBtn) {
+          event.preventDefault();
+          event.stopPropagation();
+          
+          const type = starBtn.dataset.type;
+          const nom = starBtn.dataset.nom;
+          
+          this.toggleFavoris(type, nom);
+          this.updateStarDisplay(starBtn, type, nom);
+        }
+      });
+    }
+
+    /**
+     * Met à jour l'affichage de l'étoile
+     * @param {Element} starBtn - Bouton étoile
+     * @param {string} type - Type de favori
+     * @param {string} nom - Nom de l'élément
+     */
+    updateStarDisplay(starBtn, type, nom) {
+      const isFav = this.isFavoris(type, nom);
+      starBtn.innerHTML = isFav ? '⭐' : '☆';
+      starBtn.classList.toggle('favoris-active', isFav);
+      starBtn.title = isFav ? 'Retirer des favoris' : 'Ajouter aux favoris';
+    }
+
+    /**
+     * Affiche un feedback utilisateur
+     * @param {string} message - Message à afficher
+     * @param {string} type - Type de feedback (success, info, warning, error)
+     */
+    showFeedback(message, type = 'info') {
+      // Utilise le système de notification existant si disponible
+      if (window.JdrApp && window.JdrApp.ui && window.JdrApp.ui.showNotification) {
+        window.JdrApp.ui.showNotification(message, type);
+      } else {
+        // Fallback simple
+        
+        // Créer une notification temporaire
+        const notification = document.createElement('div');
+        notification.className = `favoris-notification favoris-${type}`;
+        notification.textContent = message;
+        notification.style.cssText = `
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          background: var(--surface-color, #f0f0f0);
+          color: var(--text-color, #333);
+          padding: 12px 16px;
+          border-radius: 8px;
+          border-left: 4px solid var(--accent-color, #d4af37);
+          box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+          z-index: 10000;
+          font-size: 14px;
+          max-width: 300px;
+          animation: slideInRight 0.3s ease-out;
+        `;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+          notification.style.animation = 'slideOutRight 0.3s ease-in';
+          setTimeout(() => {
+            if (notification.parentNode) {
+              notification.parentNode.removeChild(notification);
+            }
+          }, 300);
+        }, 3000);
+      }
+    }
+
+    /**
+     * Crée un bouton étoile pour les favoris
+     * @param {string} type - 'sorts' ou 'objets'
+     * @param {string} nom - Nom de l'élément
+     * @returns {string} HTML du bouton étoile
+     */
+    createStarButton(type, nom, data = null) {
+      const isFav = this.isFavoris(type, nom);
+      
+      return `
+        <button class="favoris-star ${isFav ? 'favoris-active' : ''}" 
+                data-type="${type}" 
+                data-nom="${nom}" 
+                title="${isFav ? 'Retirer des favoris' : 'Ajouter aux favoris'}"
+                aria-label="${isFav ? 'Retirer des favoris' : 'Ajouter aux favoris'}">
+          ${isFav ? '⭐' : '☆'}
+        </button>
+      `;
+    }
+  }
+
+  // ========================================
+  // INITIALISATION GLOBALE
+  // ========================================
+  
+  // Créer l'instance globale
+  window.FavorisManager = new FavorisManager();
+  
+  // Exposer dans le namespace JdrApp si disponible
+  if (window.JdrApp) {
+    window.JdrApp.favoris = window.FavorisManager;
+  }
+
+})();
+// ============================================================================
+// JDR-BAB APPLICATION - FAVORIS RENDERER
+// ============================================================================
+
+(() => {
+  "use strict";
+
+  /**
+   * Gestionnaire de rendu pour la page des favoris
+   * Met à jour l'affichage des favoris en temps réel
+   */
+  class FavorisRenderer {
+    constructor() {
+      this.isInitialized = false;
+      this.initializeEventListeners();
+    }
+
+    /**
+     * Initialise les écouteurs d'événements
+     */
+    initializeEventListeners() {
+      // Écouter les changements de favoris
+      EventBus.on(window.Events.FAVORIS_UPDATE, (data) => {
+        this.updateFavorisDisplay();
+      });
+
+      EventBus.on(window.Events.FAVORIS_ADD, (data) => {
+        this.updateFavorisDisplay();
+      });
+
+      EventBus.on(window.Events.FAVORIS_REMOVE, (data) => {
+        this.updateFavorisDisplay();
+      });
+
+      // Écouter les changements de page pour mettre à jour au besoin
+      EventBus.on('router:page-changed', (data) => {
+        if (data.page === 'favoris') {
+          setTimeout(() => this.updateFavorisDisplay(), 100);
+        }
+      });
+    }
+
+    /**
+     * Met à jour l'affichage complet des favoris
+     */
+    updateFavorisDisplay() {
+      if (!window.FavorisManager) {
+        console.warn('FavorisManager not available');
+        return;
+      }
+
+      // Vérifier si nous sommes sur la page des favoris
+      const favorisPage = document.querySelector('[data-page="favoris"]');
+      if (!favorisPage || favorisPage.style.display === 'none') {
+        return;
+      }
+
+      this.updateSortsDisplay();
+      this.updateObjetsDisplay();
+    }
+
+    /**
+     * Met à jour l'affichage des sorts favoris
+     */
+    updateSortsDisplay() {
+      const container = document.getElementById('favoris-sorts-container');
+      const emptyState = document.getElementById('favoris-sorts-empty');
+      const section = document.getElementById('favoris-sorts-section');
+      
+      if (!container || !emptyState) return;
+
+      const favorisNames = window.FavorisManager.getFavoris('sorts');
+      
+      if (favorisNames.length === 0) {
+        container.style.display = 'none';
+        emptyState.style.display = 'block';
+        return;
+      }
+
+      container.style.display = 'grid';
+      emptyState.style.display = 'none';
+
+      // Récupérer les données des sorts favoris
+      const favorisData = this.getSortsData(favorisNames);
+      
+      // Générer les cartes
+      const cardsHtml = favorisData.map(sortData => {
+        return CardBuilder.create('spell', sortData.sort, sortData.category).build();
+      }).join('');
+
+      container.innerHTML = cardsHtml;
+
+      // S'assurer que la section n'est pas pliée si elle a du contenu
+      if (section && favorisNames.length > 0) {
+        section.classList.remove('collapsed');
+      }
+    }
+
+    /**
+     * Met à jour l'affichage des objets favoris
+     */
+    updateObjetsDisplay() {
+      const container = document.getElementById('favoris-objets-container');
+      const emptyState = document.getElementById('favoris-objets-empty');
+      const section = document.getElementById('favoris-objets-section');
+      
+      if (!container || !emptyState) return;
+
+      const favorisNames = window.FavorisManager.getFavoris('objets');
+      
+      if (favorisNames.length === 0) {
+        container.style.display = 'none';
+        emptyState.style.display = 'block';
+        return;
+      }
+
+      container.style.display = 'grid';
+      emptyState.style.display = 'none';
+
+      // Récupérer les données des objets favoris
+      const favorisData = this.getObjetsData(favorisNames);
+      
+      // Générer les cartes
+      const cardsHtml = favorisData.map(objetData => {
+        return CardBuilder.create('objet', objetData, null).build();
+      }).join('');
+
+      container.innerHTML = cardsHtml;
+
+      // S'assurer que la section n'est pas pliée si elle a du contenu
+      if (section && favorisNames.length > 0) {
+        section.classList.remove('collapsed');
+      }
+    }
+
+    /**
+     * Récupère les données des sorts favoris
+     * @param {Array} favorisNames - Noms des sorts favoris
+     * @returns {Array} Données des sorts avec leurs catégories
+     */
+    getSortsData(favorisNames) {
+      const sortsData = [];
+      
+      if (!window.SORTS) return sortsData;
+
+      // Parcourir toutes les catégories de sorts
+      window.SORTS.forEach(category => {
+        if (category.sorts) {
+          category.sorts.forEach(sort => {
+            if (favorisNames.includes(sort.nom)) {
+              sortsData.push({
+                sort: sort,
+                category: category.nom
+              });
+            }
+          });
+        }
+      });
+
+      return sortsData;
+    }
+
+    /**
+     * Récupère les données des objets favoris
+     * @param {Array} favorisNames - Noms des objets favoris
+     * @returns {Array} Données des objets
+     */
+    getObjetsData(favorisNames) {
+      const objetsData = [];
+      
+      if (!window.OBJETS || !window.OBJETS.objets) return objetsData;
+
+      // Parcourir tous les objets
+      window.OBJETS.objets.forEach(objet => {
+        if (favorisNames.includes(objet.nom)) {
+          objetsData.push(objet);
+        }
+      });
+
+      return objetsData;
+    }
+
+    /**
+     * Force la mise à jour de l'affichage
+     */
+    forceUpdate() {
+      this.updateFavorisDisplay();
+    }
+
+    /**
+     * Initialise le renderer quand la DOM est prête
+     */
+    initialize() {
+      if (this.isInitialized) return;
+      
+      // Attendre que tout soit chargé
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+          setTimeout(() => this.updateFavorisDisplay(), 500);
+        });
+      } else {
+        setTimeout(() => this.updateFavorisDisplay(), 100);
+      }
+
+      this.isInitialized = true;
+    }
+  }
+
+  // ========================================
+  // INITIALISATION GLOBALE
+  // ========================================
+  
+  // Créer l'instance globale
+  window.FavorisRenderer = new FavorisRenderer();
+  
+  // Exposer dans le namespace JdrApp si disponible
+  if (window.JdrApp) {
+    window.JdrApp.favorisRenderer = window.FavorisRenderer;
+  }
+
+  // Initialiser automatiquement
+  window.FavorisRenderer.initialize();
+
+})();
+// ============================================================================
+// DYNAMIC CENTERING SYSTEM
+// ============================================================================
+
+(() => {
+  "use strict";
+
+  class DynamicCentering {
+    constructor() {
+      this.sidebarWidth = 350; // Width of the sidebar
+      this.isEnabled = false;
+      this.observer = null;
+      this.rafId = null;
+    }
+
+    init() {
+      this.isEnabled = true;
+      this.setupResizeObserver();
+      this.setupWindowResize();
+      // Initial calculation
+      this.updateCentering();
+    }
+
+    setupResizeObserver() {
+      if (!window.ResizeObserver) return;
+
+      // Observe changes to the main content container
+      const viewsContainer = document.getElementById('views');
+      if (!viewsContainer) return;
+
+      this.observer = new ResizeObserver(() => {
+        if (this.rafId) {
+          cancelAnimationFrame(this.rafId);
+        }
+        this.rafId = requestAnimationFrame(() => this.updateCentering());
+      });
+
+      this.observer.observe(viewsContainer);
+    }
+
+    setupWindowResize() {
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => this.updateCentering(), 100);
+      });
+    }
+
+    updateCentering() {
+      if (!this.isEnabled) return;
+
+      const viewsContainer = document.getElementById('views');
+      if (!viewsContainer) return;
+
+      const viewportWidth = window.innerWidth;
+
+      // Use CSS media queries for robust device detection (same as CSS breakpoints)
+      const isMobileBreakpoint = window.matchMedia('(max-width: 980px)').matches;
+      const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
+      const isTouchOnly = window.matchMedia('(hover: none)').matches;
+      
+      // Check if sidebar is actually visible/active
+      const sidebar = document.querySelector('.sidebar');
+      const isSidebarVisible = sidebar && !sidebar.classList.contains('mobile-open') && 
+                              window.getComputedStyle(sidebar).position === 'fixed' &&
+                              viewportWidth > 980; // Sidebar only shows above 980px
+      
+      // Disable dynamic centering if:
+      // 1. CSS mobile breakpoint is active (matches our responsive CSS) OR
+      // 2. Device has coarse pointer (touch-first device) OR  
+      // 3. Device can't hover (mobile/touch-only) OR
+      // 4. Sidebar is not visible
+      if (isMobileBreakpoint || isCoarsePointer || isTouchOnly || !isSidebarVisible) {
+        // Reset to CSS responsive behavior
+        viewsContainer.style.marginLeft = '';
+        viewsContainer.style.marginRight = '';
+        return;
+      }
+
+      // Get actual container dimensions
+      const containerRect = viewsContainer.getBoundingClientRect();
+      const actualContentWidth = containerRect.width;
+
+      // Calculate available space after sidebar
+      const availableSpace = viewportWidth - this.sidebarWidth;
+      
+      // Calculate optimal margin to center content in available space
+      const optimalMarginLeft = this.sidebarWidth + (availableSpace - actualContentWidth) / 2;
+
+      // Apply the centering with bounds checking
+      const minMarginLeft = this.sidebarWidth + 20; // Minimum clearance
+      const maxMarginLeft = viewportWidth - actualContentWidth - 20; // Don't overflow right
+      
+      const finalMarginLeft = Math.max(minMarginLeft, Math.min(optimalMarginLeft, maxMarginLeft));
+
+      // Apply the calculated margin
+      viewsContainer.style.marginLeft = `${finalMarginLeft}px`;
+      viewsContainer.style.marginRight = '20px';
+
+      // Debug info (remove in production)
+      if (window.location.hash.includes('debug-centering')) {
+        console.log('🎯 Dynamic Centering:', {
+          viewportWidth,
+          availableSpace,
+          actualContentWidth,
+          optimalMarginLeft,
+          finalMarginLeft
+        });
+      }
+    }
+
+    disable() {
+      this.isEnabled = false;
+      if (this.observer) {
+        this.observer.disconnect();
+      }
+      if (this.rafId) {
+        cancelAnimationFrame(this.rafId);
+      }
+      
+      // Reset to CSS default
+      const viewsContainer = document.getElementById('views');
+      if (viewsContainer) {
+        viewsContainer.style.marginLeft = '';
+        viewsContainer.style.marginRight = '';
+      }
+    }
+  }
+
+  // Initialize the dynamic centering system
+  const dynamicCentering = new DynamicCentering();
+
+  // Attach to JdrApp
+  if (window.JdrApp) {
+    JdrApp.modules.dynamicCentering = dynamicCentering;
+  }
+
+  // Auto-initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      // Delay initialization to ensure layout is stable
+      setTimeout(() => dynamicCentering.init(), 500);
+    });
+  } else {
+    setTimeout(() => dynamicCentering.init(), 500);
+  }
+
+  // Make it globally available for debugging
+  window.DynamicCentering = dynamicCentering;
+
+})();
+// ============================================================================
 // JDR-BAB APPLICATION - ROUTER MODULE
 // ============================================================================
 
@@ -13497,6 +15461,9 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
 
       const tocHTML = `
         <h4>Sommaire</h4>
+        ${window.TOC_STRUCTURE.directPages ? 
+          window.TOC_STRUCTURE.directPages.map(page => this.generateTOCItem(page)).join('') : 
+          ''}
         ${window.TOC_STRUCTURE.sections
           .filter(section => !section.requiresMJ || window.JdrApp.state.isMJ)
           .map(section => this.generateTOCSection(section)).join('')}
@@ -15419,6 +17386,7 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       // Post-render operations with improved batching
       requestAnimationFrame(() => {
         this.batchPostRenderOperations();
+        
       });
     },
 
@@ -15446,7 +17414,6 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
         // Force image event attachment after a delay to catch lazy-loaded images
         setTimeout(() => {
           if (hasEditor.attachImageEvents) {
-            console.log('Re-attaching image events after render delay');
             hasEditor.attachImageEvents();
           }
         }, 1000);
@@ -18944,29 +20911,23 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
         }
       }
       
-      console.log('Adding subclass to class:', className);
       
       if (!className || !window.CLASSES) {
-        console.log('Missing className or CLASSES:', { className, hasClasses: !!window.CLASSES });
         return;
       }
       
       const classe = window.CLASSES.find(c => c.nom === className);
       if (!classe) {
-        console.log('Class not found:', className);
-        console.log('Available classes:', window.CLASSES.map(c => c.nom));
         return;
       }
       
       const config = window.ContentTypes.subclass;
       const newSubclass = { ...config.defaultValues };
       
-      console.log('Creating new subclass:', newSubclass);
       
       if (!classe.sousClasses) classe.sousClasses = [];
       classe.sousClasses.push(newSubclass);
       
-      console.log('Class after adding subclass:', classe);
       
       EventBus.emit(Events.CONTENT_ADD, {
         type: 'subclass',
@@ -19058,7 +21019,6 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       // Force l'attachement après un délai pour s'assurer que les images lazy sont chargées
       setTimeout(() => {
         this.attachImageEvents();
-        console.log('Image handlers re-attached after delay');
       }, 2000);
     },
 
@@ -19081,21 +21041,17 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
 
       // Attacher aux images pour agrandissement - toutes les images, pas seulement celles dans .illus
       const images = document.querySelectorAll('img');
-      console.log(`Found ${images.length} images on page`);
       
       images.forEach(img => {
         // Éviter les images dans les éditeurs ou les inputs
         if (!img.closest('.editor-content') && !img.hasAttribute('data-events-attached')) {
-          console.log(`Attaching events to image: ${img.src || img.getAttribute('data-src')}`, img);
           
           // Ajouter support tactile pour mobile
           img.addEventListener('click', (e) => {
-            console.log('Image clicked!', e.target);
             this.toggleImageEnlargement(e.target);
           });
           img.addEventListener('touchend', (e) => {
             e.preventDefault();
-            console.log('Image touched!', e.target);
             this.toggleImageEnlargement(e.target);
           });
           
@@ -19103,7 +21059,6 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
           img.addEventListener('load', () => {
             if (this.isImageEnlargeable(img)) {
               img.style.cursor = 'zoom-in';
-              console.log('Cursor set to zoom-in for loaded image:', img);
             }
           });
           
@@ -19111,7 +21066,6 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
           if (img.complete && img.naturalWidth > 0) {
             if (this.isImageEnlargeable(img)) {
               img.style.cursor = 'zoom-in';
-              console.log('Cursor set to zoom-in for already loaded image:', img);
             }
           }
           
@@ -19330,7 +21284,6 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
             window.TABLES_TRESORS_PAGE_DESC = {};
           }
           window.TABLES_TRESORS_PAGE_DESC.description = content;
-          console.log('💾 Collected Tables Tresors page description:', content);
         }
       }
 
@@ -19343,7 +21296,6 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
             window.MONSTRES_PAGE_DESC = {};
           }
           window.MONSTRES_PAGE_DESC.description = content;
-          console.log('💾 Collected Monsters page description:', content);
         }
       }
     },
@@ -19390,1064 +21342,6 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       // Toolbox tools have been removed as requested
     }
   };
-
-})();
-// ============================================================================
-// JDR-BAB APPLICATION - SPELL FILTER MODULE
-// ============================================================================
-
-(() => {
-  "use strict";
-
-  // ========================================
-  // SPELL FILTER MODULE
-  // ========================================
-  const SpellFilter = {
-    
-    init() {
-      this.setupEventListeners();
-    },
-
-    setupEventListeners() {
-      // Use direct event delegation on document to catch dynamically added elements
-      document.addEventListener('input', (e) => {
-        if (e.target && e.target.id === 'spell-level-filter') {
-          this.filterSpellsByLevel(parseInt(e.target.value, 10));
-        }
-      });
-
-      document.addEventListener('click', (e) => {
-        if (e.target && e.target.id === 'reset-spell-filter') {
-          e.preventDefault();
-          this.resetFilter();
-        }
-      });
-
-      // Setup when page changes (router events)
-      if (window.EventBus && window.Events) {
-        EventBus.on(Events.PAGE_RENDER, (payload) => {
-          if (payload.type === 'category' && payload.categoryType === 'spell') {
-            // Re-setup filter after page render
-            setTimeout(() => this.initializeFilter(), 200);
-          }
-        });
-      }
-
-      // Also listen to hash changes for direct navigation
-      window.addEventListener('hashchange', () => {
-        setTimeout(() => this.initializeFilter(), 200);
-      });
-    },
-
-    initializeFilter() {
-      const filterInput = document.querySelector('#spell-level-filter');
-      if (!filterInput) return;
-      
-      
-      // Set initial value and apply filter
-      const initialValue = parseInt(filterInput.value, 10) || 20;
-      this.filterSpellsByLevel(initialValue);
-    },
-
-    filterSpellsByLevel(maxLevel) {
-      
-      // Get current page from URL hash
-      const currentHash = window.location.hash.replace('#/', '');
-      
-      if (!currentHash.startsWith('sorts-')) {
-        return;
-      }
-      
-      // Find all spell cards in the current page
-      const spellCards = document.querySelectorAll('.card[data-spell-name]');
-      
-      if (spellCards.length === 0) return;
-
-      let visibleCount = 0;
-
-      spellCards.forEach((card) => {
-        const spellName = card.dataset.spellName;
-        const categoryName = card.dataset.categoryName;
-        
-        // Find the spell data to get its level
-        const spellLevel = this.getSpellLevel(spellName, categoryName);
-        
-        if (spellLevel <= maxLevel) {
-          card.style.display = '';
-          visibleCount++;
-        } else {
-          card.style.display = 'none';
-        }
-      });
-
-      
-      // Update filter display with count
-      this.updateFilterDisplay(maxLevel, visibleCount, spellCards.length);
-    },
-
-    getSpellLevel(spellName, categoryName) {
-      if (!window.SORTS) return 0;
-
-      // Find the category
-      const category = window.SORTS.find(cat => cat.nom === categoryName);
-      if (!category || !category.sorts) return 0;
-
-      // Find the spell
-      const spell = category.sorts.find(sort => sort.nom === spellName);
-      if (!spell || !spell.prerequis) return 0;
-
-      // Extract level from prerequisite
-      const match = spell.prerequis.match(/Niveau (\d+)/i);
-      return match ? parseInt(match[1], 10) : 0;
-    },
-
-    updateFilterDisplay(maxLevel, visibleCount, totalCount) {
-      const filterContainer = document.querySelector('.spell-level-filter');
-      if (!filterContainer) return;
-
-      // Remove existing count display
-      let countDisplay = filterContainer.querySelector('.filter-count');
-      if (countDisplay) {
-        countDisplay.remove();
-      }
-
-      // Add new count display
-      const countText = `📊 ${visibleCount}/${totalCount} sorts affichés (niveau ≤ ${maxLevel})`;
-      countDisplay = document.createElement('div');
-      countDisplay.className = 'filter-count';
-      countDisplay.style.cssText = 'margin-top: 0.5rem; font-size: 0.9rem; color: var(--bronze); font-weight: 500;';
-      countDisplay.textContent = countText;
-      
-      filterContainer.appendChild(countDisplay);
-    },
-
-    resetFilter() {
-      const filterInput = document.querySelector('#spell-level-filter');
-      if (filterInput) {
-        filterInput.value = '20';
-        this.filterSpellsByLevel(20);
-      }
-    }
-  };
-
-  // Initialize the spell filter when the app is ready
-  function initializeSpellFilter() {
-    
-    if (window.JdrApp) {
-      if (JdrApp.modules) {
-        JdrApp.modules.spellFilter = SpellFilter;
-      }
-    }
-    
-    // Initialize the filter
-    SpellFilter.init();
-    
-    // Try to initialize the filter after a delay to ensure DOM is ready
-    setTimeout(() => {
-      if (window.location.hash.includes('sorts-')) {
-        SpellFilter.initializeFilter();
-      }
-    }, 500);
-  }
-
-  // Initialize on DOM ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializeSpellFilter);
-  } else {
-    // DOM is already ready
-    initializeSpellFilter();
-  }
-
-  window.SpellFilter = SpellFilter;
-
-})();
-// ============================================================================
-// JDR-BAB APPLICATION - TABLES DE TRESORS MANAGER
-// ============================================================================
-
-(() => {
-  "use strict";
-
-  class TablesTresorsManager {
-    constructor() {
-      this.initialized = false;
-      this.currentPreviewModal = null;
-      this.currentEditModal = null;
-      this.modalIsOpening = false;
-    }
-
-    static getInstance() {
-      if (!TablesTresorsManager.instance) {
-        TablesTresorsManager.instance = new TablesTresorsManager();
-      }
-      return TablesTresorsManager.instance;
-    }
-
-    init() {
-      if (this.initialized) return;
-      
-      this.setupEventListeners();
-      this.initialized = true;
-      // TablesTresorsManager initialized
-    }
-
-    setupEventListeners() {
-      // Preview d'objets
-      document.addEventListener('click', (e) => {
-        if (e.target.matches('.object-preview-link')) {
-          e.preventDefault();
-          e.stopPropagation();
-          const numeroObjet = e.target.dataset.objectNumero;
-          this.showObjectPreview(numeroObjet);
-        }
-      });
-
-      // Édition de fourchette
-      document.addEventListener('click', (e) => {
-        if (e.target.matches('.edit-fourchette-btn')) {
-          const tableName = e.target.dataset.tableName;
-          const fourchetteIndex = parseInt(e.target.dataset.fourchetteIndex);
-          this.showEditFourchetteModal(tableName, fourchetteIndex);
-        }
-      });
-
-      // Suppression de fourchette
-      document.addEventListener('click', (e) => {
-        if (e.target.matches('.delete-fourchette-btn')) {
-          const tableName = e.target.dataset.tableName;
-          const fourchetteIndex = parseInt(e.target.dataset.fourchetteIndex);
-          this.deleteFourchette(tableName, fourchetteIndex);
-        }
-      });
-
-      // Ajout de nouvelle fourchette
-      document.addEventListener('click', (e) => {
-        if (e.target.matches('.table-tresor-add-fourchette')) {
-          const tableName = e.target.dataset.tableTresorName;
-          this.showEditFourchetteModal(tableName, -1); // -1 pour nouvelle fourchette
-        }
-      });
-
-      // Fermer les modals en cliquant à l'extérieur
-      document.addEventListener('click', (e) => {
-        if (e.target.matches('.modal-overlay')) {
-          this.closeAllModals();
-        }
-      });
-
-      // Fermer avec la touche Escape
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-          this.closeAllModals();
-        }
-      });
-
-      // Preview de table de trésor via lien HTML
-      document.addEventListener('click', (e) => {
-        if (e.target.matches('.treasure-table-link')) {
-          e.preventDefault();
-          const tableName = e.target.dataset.tableName;
-          this.showTablePreview(tableName);
-        }
-      });
-    }
-
-    showObjectPreview(numeroObjet) {
-      try {
-        // Trouver l'objet par son numéro
-        const objet = window.OBJETS?.objets?.find(obj => obj.numero == numeroObjet);
-        
-        if (!objet) {
-          console.error('Objet non trouvé:', numeroObjet);
-          return;
-        }
-
-        const previewHtml = this.generateObjectPreviewHtml(objet);
-        this.showModal(previewHtml, 'object-preview');
-        
-      } catch (error) {
-        console.error('Erreur lors de l\'affichage de la preview:', error);
-      }
-    }
-
-    showTablePreview(tableName) {
-      try {
-        // Trouver la table par son nom
-        const table = window.TABLES_TRESORS?.tables?.find(t => t.nom === tableName);
-        
-        if (!table) {
-          console.error('Table non trouvée:', tableName);
-          return;
-        }
-
-        const previewHtml = this.generateTablePreviewHtml(table);
-        const modalContent = `
-          <div class="table-preview-content">
-            ${previewHtml}
-            <div style="text-align: center; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--rule);">
-              <button class="btn" onclick="window.TablesTresorsManager.closeAllModals()" style="background: var(--accent); color: white;">
-                ✓ Fermer
-              </button>
-              <button class="btn" onclick="window.TablesTresorsManager.goToTablesTresorsPage()" style="background: var(--bronze); color: white; margin-left: 0.5rem;">
-                🔗 Aller à la page tables de trésors
-              </button>
-            </div>
-          </div>
-        `;
-        
-        this.showModal(modalContent, 'table-preview');
-        
-      } catch (error) {
-        console.error('Erreur lors de l\'affichage de la preview de table:', error);
-      }
-    }
-
-    generateObjectPreviewHtml(objet) {
-      const tagsDisplay = objet.tags?.map(tag => 
-        `<span class="tag-chip" style="background: var(--bronze); color: white; padding: 2px 6px; border-radius: 8px; font-size: 0.8em; margin-right: 4px;">${tag}</span>`
-      ).join('') || 'Aucun tag';
-
-      return `
-        <div class="object-preview-content">
-          <header style="text-align: center; margin-bottom: 1rem; border-bottom: 2px solid var(--bronze); padding-bottom: 1rem;">
-            <h3 style="margin: 0; color: var(--accent);">📦 ${objet.nom}</h3>
-            <div style="color: var(--bronze); font-size: 0.9em;">Objet N°${objet.numero}</div>
-          </header>
-          
-          <div style="margin: 1rem 0;">
-            <strong>Tags:</strong><br>
-            ${tagsDisplay}
-          </div>
-          
-          <div style="margin: 1rem 0;">
-            <strong>Description:</strong><br>
-            <div style="font-style: italic; margin: 0.5rem 0;">${objet.description || 'Aucune description'}</div>
-          </div>
-          
-          <div style="margin: 1rem 0;">
-            <strong>Effet:</strong><br>
-            <div>${objet.effet || 'Aucun effet spécifié'}</div>
-          </div>
-          
-          <div style="display: flex; gap: 1rem; margin: 1rem 0;">
-            <div style="flex: 1;">
-              <strong>Prix:</strong><br>
-              ${objet.prix || 'Non spécifié'}
-            </div>
-            <div style="flex: 1;">
-              <strong>Poids:</strong><br>
-              ${objet.poids || 'Non spécifié'}
-            </div>
-          </div>
-          
-          <div style="text-align: center; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--rule);">
-            <button class="btn" onclick="window.TablesTresorsManager.closeAllModals()" style="background: var(--accent); color: white;">
-              ✓ Fermer
-            </button>
-            <button class="btn" onclick="window.TablesTresorsManager.goToObject(${objet.numero})" style="background: var(--bronze); color: white; margin-left: 0.5rem;">
-              🔗 Aller à la page objets
-            </button>
-          </div>
-        </div>
-      `;
-    }
-
-    showEditFourchetteModal(tableName, fourchetteIndex) {
-      try {
-        const table = window.TABLES_TRESORS?.tables?.find(t => t.nom === tableName);
-        if (!table) {
-          console.error('Table non trouvée:', tableName);
-          return;
-        }
-
-        const isNewFourchette = fourchetteIndex === -1;
-        const fourchette = isNewFourchette ? { min: 1, max: 1, objet: { type: 'reference', numero: 1, nom: 'Choisir un objet' } } : table.fourchettes[fourchetteIndex];
-
-        if (!isNewFourchette && !fourchette) {
-          console.error('Fourchette non trouvée:', fourchetteIndex);
-          return;
-        }
-
-        const editHtml = this.generateEditFourchetteHtml(tableName, fourchetteIndex, fourchette, isNewFourchette);
-        this.showModal(editHtml, 'edit-fourchette');
-
-      } catch (error) {
-        console.error('Erreur lors de l\'affichage du modal d\'édition:', error);
-      }
-    }
-
-    generateEditFourchetteHtml(tableName, fourchetteIndex, fourchette, isNewFourchette) {
-      // Générer la liste des tags uniques
-      const allTags = new Set();
-      window.OBJETS?.objets?.forEach(obj => {
-        obj.tags?.forEach(tag => allTags.add(tag));
-      });
-      const sortedTags = Array.from(allTags).sort();
-      
-      const tagOptions = ['<option value="">Tous les objets</option>']
-        .concat(sortedTags.map(tag => `<option value="${tag}">${tag}</option>`))
-        .join('');
-
-      // Générer la liste des objets disponibles
-      const objetsOptions = window.OBJETS?.objets?.map(obj => 
-        `<option value="${obj.numero}" data-tags="${obj.tags?.join(',') || ''}" ${obj.numero == fourchette.objet.numero ? 'selected' : ''}>N°${obj.numero} - ${obj.nom}</option>`
-      ).join('') || '<option value="1">Aucun objet disponible</option>';
-
-      return `
-        <div class="edit-fourchette-content">
-          <header style="text-align: center; margin-bottom: 1rem; border-bottom: 2px solid var(--bronze); padding-bottom: 1rem;">
-            <h3 style="margin: 0; color: var(--accent);">
-              ${isNewFourchette ? '➕ Ajouter une fourchette' : '✏️ Éditer la fourchette'}
-            </h3>
-            <div style="color: var(--bronze); font-size: 0.9em;">Table: ${tableName}</div>
-          </header>
-          
-          <form id="edit-fourchette-form">
-            <input type="hidden" id="table-name" value="${tableName}">
-            <input type="hidden" id="fourchette-index" value="${fourchetteIndex}">
-            <input type="hidden" id="is-new-fourchette" value="${isNewFourchette}">
-            <div style="margin: 1rem 0;">
-              <label style="display: block; margin-bottom: 0.5rem; font-weight: bold; color: var(--accent);">
-                🎲 Fourchette de dé (1-20):
-              </label>
-              <div style="display: flex; gap: 1rem; align-items: center;">
-                <div style="flex: 1;">
-                  <label style="font-size: 0.9em; color: var(--paper-muted);">Minimum:</label>
-                  <input 
-                    type="number" 
-                    id="fourchette-min" 
-                    min="1" 
-                    max="20" 
-                    value="${fourchette.min}"
-                    style="width: 100%; padding: 0.5rem; border: 1px solid var(--rule); border-radius: 6px;"
-                    required
-                  >
-                </div>
-                <div style="padding: 1rem 0.5rem; color: var(--accent); font-weight: bold;">-</div>
-                <div style="flex: 1;">
-                  <label style="font-size: 0.9em; color: var(--paper-muted);">Maximum:</label>
-                  <input 
-                    type="number" 
-                    id="fourchette-max" 
-                    min="1" 
-                    max="20" 
-                    value="${fourchette.max}"
-                    style="width: 100%; padding: 0.5rem; border: 1px solid var(--rule); border-radius: 6px;"
-                    required
-                  >
-                </div>
-              </div>
-            </div>
-            
-            <div style="margin: 1rem 0;">
-              <label style="display: block; margin-bottom: 0.5rem; font-weight: bold; color: var(--accent);">
-                🏷️ Filtrer par tag:
-              </label>
-              <select 
-                id="tag-filter" 
-                style="width: 100%; padding: 0.5rem; border: 1px solid var(--rule); border-radius: 6px; background: var(--paper-light);"
-              >
-                ${tagOptions}
-              </select>
-            </div>
-            
-            <div style="margin: 1rem 0;">
-              <label style="display: block; margin-bottom: 0.5rem; font-weight: bold; color: var(--accent);">
-                📦 Objet associé:
-              </label>
-              <select 
-                id="fourchette-objet" 
-                style="width: 100%; padding: 0.5rem; border: 1px solid var(--rule); border-radius: 6px;"
-                required
-              >
-                ${objetsOptions}
-              </select>
-              <div style="margin-top: 0.5rem;">
-                <button 
-                  type="button" 
-                  id="preview-selected-object" 
-                  class="btn small" 
-                  style="background: var(--bronze); color: white; font-size: 0.8em;"
-                >
-                  👁️ Aperçu de l'objet sélectionné
-                </button>
-              </div>
-            </div>
-            
-            <div style="text-align: center; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--rule);">
-              <button type="submit" class="btn" style="background: var(--accent); color: white;">
-                ${isNewFourchette ? '➕ Ajouter' : '✓ Sauvegarder'}
-              </button>
-              <button type="button" onclick="window.TablesTresorsManager.closeAllModals()" class="btn" style="background: #6b7280; color: white; margin-left: 0.5rem;">
-                ❌ Annuler
-              </button>
-            </div>
-          </form>
-        </div>
-      `;
-    }
-
-    showModal(content, modalClass = '') {
-      // Éviter l'ouverture de modals multiples rapidement
-      if (this.modalIsOpening) {
-        return;
-      }
-      
-      this.modalIsOpening = true;
-      this.closeAllModals(); // Fermer les modals existants
-
-      const modalHtml = `
-        <div class="modal-overlay ${modalClass}" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; z-index: 1000;">
-          <div class="modal-content" style="background: var(--paper); border-radius: 12px; padding: 2rem; max-width: 90vw; max-height: 90vh; overflow-y: auto; box-shadow: 0 10px 25px rgba(0,0,0,0.3); border: 2px solid var(--rule);">
-            ${content}
-          </div>
-        </div>
-      `;
-
-      document.body.insertAdjacentHTML('beforeend', modalHtml);
-      
-      // Setup form handler si c'est le modal d'édition
-      if (modalClass === 'edit-fourchette') {
-        this.setupEditFormHandlers();
-      }
-      
-      // Réinitialiser le flag après un court délai
-      setTimeout(() => {
-        this.modalIsOpening = false;
-      }, 200);
-    }
-
-    setupEditFormHandlers() {
-      const form = document.getElementById('edit-fourchette-form');
-      if (!form) return;
-
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        this.saveFourchette();
-      });
-
-      // Preview de l'objet sélectionné
-      const previewBtn = document.getElementById('preview-selected-object');
-      if (previewBtn) {
-        previewBtn.addEventListener('click', () => {
-          const selectElement = document.getElementById('fourchette-objet');
-          const selectedNumero = selectElement.value;
-          this.showObjectPreview(selectedNumero);
-        });
-      }
-
-      // Filtrage par tag
-      const tagFilter = document.getElementById('tag-filter');
-      const objectSelect = document.getElementById('fourchette-objet');
-      
-      if (tagFilter && objectSelect) {
-        // Stocker toutes les options initiales
-        const allOptions = Array.from(objectSelect.options);
-        
-        tagFilter.addEventListener('change', () => {
-          const selectedTag = tagFilter.value;
-          const currentSelectedValue = objectSelect.value;
-          
-          // Vider les options actuelles
-          objectSelect.innerHTML = '';
-          
-          // Filtrer et réajouter les options
-          const filteredOptions = allOptions.filter(option => {
-            if (!selectedTag) return true; // Afficher tous si aucun tag sélectionné
-            const optionTags = option.dataset.tags || '';
-            return optionTags.split(',').includes(selectedTag);
-          });
-          
-          // Réajouter les options filtrées
-          filteredOptions.forEach(option => {
-            objectSelect.appendChild(option.cloneNode(true));
-          });
-          
-          // Restaurer la sélection si elle est toujours disponible
-          const stillAvailable = filteredOptions.find(option => option.value === currentSelectedValue);
-          if (stillAvailable) {
-            objectSelect.value = currentSelectedValue;
-          } else if (filteredOptions.length > 0) {
-            objectSelect.selectedIndex = 0;
-          }
-        });
-      }
-
-      // Validation en temps réel
-      const minInput = document.getElementById('fourchette-min');
-      const maxInput = document.getElementById('fourchette-max');
-      
-      const validateRange = () => {
-        const min = parseInt(minInput.value);
-        const max = parseInt(maxInput.value);
-        
-        if (min > max) {
-          maxInput.value = min;
-        }
-      };
-
-      minInput.addEventListener('change', validateRange);
-      maxInput.addEventListener('change', validateRange);
-    }
-
-    saveFourchette() {
-      try {
-        const form = document.getElementById('edit-fourchette-form');
-        const formData = new FormData(form);
-        
-        const min = parseInt(document.getElementById('fourchette-min').value);
-        const max = parseInt(document.getElementById('fourchette-max').value);
-        const objetNumero = parseInt(document.getElementById('fourchette-objet').value);
-        
-        // Trouver l'objet sélectionné
-        const objet = window.OBJETS?.objets?.find(obj => obj.numero === objetNumero);
-        if (!objet) {
-          alert('Objet sélectionné introuvable');
-          return;
-        }
-
-        const newFourchette = {
-          min: min,
-          max: max,
-          objet: {
-            type: 'reference',
-            numero: objet.numero,
-            nom: objet.nom
-          }
-        };
-
-        // Extraire les informations depuis les champs cachés du formulaire
-        const tableName = document.getElementById('table-name').value;
-        const fourchetteIndex = parseInt(document.getElementById('fourchette-index').value);
-        const isNewFourchette = document.getElementById('is-new-fourchette').value === 'true';
-        
-        const table = window.TABLES_TRESORS?.tables?.find(t => t.nom === tableName);
-        
-        if (!table) {
-          console.error('Table non trouvée pour la sauvegarde');
-          return;
-        }
-
-        if (isNewFourchette) {
-          table.fourchettes.push(newFourchette);
-        } else {
-          // Mode modification - remplacer la fourchette existante
-          if (fourchetteIndex >= 0 && fourchetteIndex < table.fourchettes.length) {
-            table.fourchettes[fourchetteIndex] = newFourchette;
-          } else {
-            console.error('Index de fourchette invalide pour la modification:', fourchetteIndex);
-            return;
-          }
-        }
-
-        // Sauvegarder et regénérer la page
-        this.saveToStorage();
-        this.refreshTablesTresorsPage();
-        this.closeAllModals();
-
-      } catch (error) {
-        console.error('Erreur lors de la sauvegarde:', error);
-        alert('Erreur lors de la sauvegarde de la fourchette');
-      }
-    }
-
-    deleteFourchette(tableName, fourchetteIndex) {
-      if (!confirm('Êtes-vous sûr de vouloir supprimer cette fourchette ?')) {
-        return;
-      }
-
-      try {
-        const table = window.TABLES_TRESORS?.tables?.find(t => t.nom === tableName);
-        if (!table) {
-          console.error('Table non trouvée:', tableName);
-          return;
-        }
-
-        if (fourchetteIndex < 0 || fourchetteIndex >= table.fourchettes.length) {
-          console.error('Index de fourchette invalide:', fourchetteIndex);
-          return;
-        }
-
-        table.fourchettes.splice(fourchetteIndex, 1);
-        
-        this.saveToStorage();
-        this.refreshTablesTresorsPage();
-        
-        // Fourchette supprimée avec succès
-
-      } catch (error) {
-        console.error('Erreur lors de la suppression:', error);
-        alert('Erreur lors de la suppression de la fourchette');
-      }
-    }
-
-    goToObject(numeroObjet) {
-      this.closeAllModals();
-      // Naviguer vers la page objets avec focus sur l'objet spécifique
-      JdrApp.modules.router.navigate('objets');
-      
-      // Optionnel: highlight l'objet après navigation
-      setTimeout(() => {
-        const objectCard = document.querySelector(`[data-objet-name*="${numeroObjet}"]`);
-        if (objectCard) {
-          objectCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          objectCard.style.border = '3px solid var(--accent)';
-          setTimeout(() => {
-            objectCard.style.border = '';
-          }, 2000);
-        }
-      }, 500);
-    }
-
-    goToTablesTresorsPage() {
-      this.closeAllModals();
-      // Naviguer vers la page tables de trésors
-      if (JdrApp.modules.router && JdrApp.modules.router.navigate) {
-        JdrApp.modules.router.navigate('tables-tresors');
-      } else {
-        // Fallback direct navigation
-        window.location.hash = '#/tables-tresors';
-      }
-    }
-
-    closeAllModals() {
-      const modals = document.querySelectorAll('.modal-overlay');
-      modals.forEach(modal => modal.remove());
-      this.currentPreviewModal = null;
-      this.currentEditModal = null;
-    }
-
-    saveToStorage() {
-      // Les modifications sont déjà dans window.TABLES_TRESORS et seront incluses dans les exports
-      // Émettre l'événement de mise à jour pour notifier les autres modules
-      if (window.EventBus && window.Events) {
-        EventBus.emit(Events.CONTENT_UPDATE, {
-          type: 'tablesTresors',
-          data: window.TABLES_TRESORS
-        });
-      }
-    }
-
-    refreshTablesTresorsPage() {
-      // Regénérer la page des tables de trésors
-      if (JdrApp.modules.router && JdrApp.modules.router.getCurrentRoute() === 'tables-tresors') {
-        // Force complete page regeneration via router navigation
-        JdrApp.modules.router.navigate('tables-tresors');
-      }
-    }
-
-    // Generate HTML link with table preview
-    generateTreasureTableHtmlLink(tableName) {
-      try {
-        const table = window.TABLES_TRESORS?.tables?.find(t => t.nom === tableName);
-        if (!table) {
-          console.error('Table non trouvée:', tableName);
-          return '';
-        }
-
-        // Generate table preview HTML
-        const tableHtml = this.generateTablePreviewHtml(table);
-        
-        // Create a compact link with preview tooltip
-        const htmlLink = `<span class="treasure-table-link" data-table-name="${tableName}" style="color: var(--accent); cursor: pointer; text-decoration: underline;" title="Cliquer pour voir la table des trésors">[Table: ${tableName}]</span>`;
-        
-        return htmlLink;
-
-      } catch (error) {
-        console.error('Erreur lors de la génération du lien HTML:', error);
-        return `[Erreur: ${tableName}]`;
-      }
-    }
-
-    generateTablePreviewHtml(table) {
-      const fourchettesList = table.fourchettes.map(fourchette => {
-        const range = fourchette.min === fourchette.max 
-          ? `${fourchette.min}` 
-          : `${fourchette.min}-${fourchette.max}`;
-        
-        return `
-          <tr>
-            <td style="text-align: center; font-weight: bold; color: var(--accent);">${range}</td>
-            <td>
-              <span class="object-preview-link" data-object-numero="${fourchette.objet.numero}" style="color: var(--accent); cursor: pointer; text-decoration: underline;" title="Cliquer pour voir la preview de l'objet">
-                ${fourchette.objet.nom} (N°${fourchette.objet.numero})
-              </span>
-            </td>
-          </tr>
-        `;
-      }).join('');
-
-      return `
-        <div class="treasure-table-preview" style="background: var(--paper); border: 2px solid var(--bronze); border-radius: 12px; padding: 1rem; max-width: 500px;">
-          <h3 style="margin: 0 0 1rem 0; color: var(--accent); text-align: center;">🎲 ${table.nom}</h3>
-          
-          <table style="width: 100%; border-collapse: collapse; margin-top: 1rem;">
-            <thead>
-              <tr style="background: var(--bronze); color: white;">
-                <th style="padding: 8px; text-align: center; border: 1px solid var(--rule);">Dé (d20)</th>
-                <th style="padding: 8px; text-align: left; border: 1px solid var(--rule);">Objet obtenu</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${fourchettesList}
-            </tbody>
-          </table>
-        </div>
-      `;
-    }
-
-    // Copy HTML link to clipboard
-    copyTreasureTableHtmlLink(tableName) {
-      try {
-        const htmlLink = this.generateTreasureTableHtmlLink(tableName);
-        
-        // Copy to clipboard using modern API
-        navigator.clipboard.writeText(htmlLink).then(() => {
-          this.showNotification('✓ Lien HTML copié dans le presse-papiers!', 'success');
-        }).catch(err => {
-          // Fallback for older browsers
-          const textArea = document.createElement('textarea');
-          textArea.value = htmlLink;
-          document.body.appendChild(textArea);
-          textArea.select();
-          document.execCommand('copy');
-          document.body.removeChild(textArea);
-          
-          this.showNotification('✓ Lien HTML copié dans le presse-papiers!', 'success');
-        });
-
-      } catch (error) {
-        console.error('Erreur lors de la copie:', error);
-        this.showNotification('❌ Erreur lors de la copie du lien', 'error');
-      }
-    }
-
-    // Show notification
-    showNotification(message, type = 'info') {
-      const notification = document.createElement('div');
-      notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: ${type === 'success' ? '#4CAF50' : type === 'error' ? '#f44336' : '#2196F3'};
-        color: white;
-        padding: 12px 20px;
-        border-radius: 8px;
-        z-index: 1001;
-        font-size: 14px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        animation: slideInRight 0.3s ease;
-      `;
-      notification.textContent = message;
-      
-      document.body.appendChild(notification);
-      
-      // Auto remove after 3 seconds
-      setTimeout(() => {
-        if (notification.parentNode) {
-          notification.style.animation = 'slideOutRight 0.3s ease';
-          setTimeout(() => notification.remove(), 300);
-        }
-      }, 3000);
-    }
-  }
-
-  // Exposer globalement pour les event handlers inline
-  window.TablesTresorsManager = TablesTresorsManager.getInstance();
-
-  // Auto-initialiser quand le DOM est prêt
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => window.TablesTresorsManager.init());
-  } else {
-    window.TablesTresorsManager.init();
-  }
-
-})();
-// ============================================================================
-// DYNAMIC CENTERING SYSTEM
-// ============================================================================
-
-(() => {
-  "use strict";
-
-  class DynamicCentering {
-    constructor() {
-      this.sidebarWidth = 350; // Width of the sidebar
-      this.isEnabled = false;
-      this.observer = null;
-      this.rafId = null;
-    }
-
-    init() {
-      this.isEnabled = true;
-      this.setupResizeObserver();
-      this.setupWindowResize();
-      // Initial calculation
-      this.updateCentering();
-    }
-
-    setupResizeObserver() {
-      if (!window.ResizeObserver) return;
-
-      // Observe changes to the main content container
-      const viewsContainer = document.getElementById('views');
-      if (!viewsContainer) return;
-
-      this.observer = new ResizeObserver(() => {
-        if (this.rafId) {
-          cancelAnimationFrame(this.rafId);
-        }
-        this.rafId = requestAnimationFrame(() => this.updateCentering());
-      });
-
-      this.observer.observe(viewsContainer);
-    }
-
-    setupWindowResize() {
-      let resizeTimer;
-      window.addEventListener('resize', () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => this.updateCentering(), 100);
-      });
-    }
-
-    updateCentering() {
-      if (!this.isEnabled) return;
-
-      const viewsContainer = document.getElementById('views');
-      if (!viewsContainer) return;
-
-      const viewportWidth = window.innerWidth;
-
-      // Use CSS media queries for robust device detection (same as CSS breakpoints)
-      const isMobileBreakpoint = window.matchMedia('(max-width: 980px)').matches;
-      const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
-      const isTouchOnly = window.matchMedia('(hover: none)').matches;
-      
-      // Check if sidebar is actually visible/active
-      const sidebar = document.querySelector('.sidebar');
-      const isSidebarVisible = sidebar && !sidebar.classList.contains('mobile-open') && 
-                              window.getComputedStyle(sidebar).position === 'fixed' &&
-                              viewportWidth > 980; // Sidebar only shows above 980px
-      
-      // Disable dynamic centering if:
-      // 1. CSS mobile breakpoint is active (matches our responsive CSS) OR
-      // 2. Device has coarse pointer (touch-first device) OR  
-      // 3. Device can't hover (mobile/touch-only) OR
-      // 4. Sidebar is not visible
-      if (isMobileBreakpoint || isCoarsePointer || isTouchOnly || !isSidebarVisible) {
-        // Reset to CSS responsive behavior
-        viewsContainer.style.marginLeft = '';
-        viewsContainer.style.marginRight = '';
-        return;
-      }
-
-      // Get actual container dimensions
-      const containerRect = viewsContainer.getBoundingClientRect();
-      const actualContentWidth = containerRect.width;
-
-      // Calculate available space after sidebar
-      const availableSpace = viewportWidth - this.sidebarWidth;
-      
-      // Calculate optimal margin to center content in available space
-      const optimalMarginLeft = this.sidebarWidth + (availableSpace - actualContentWidth) / 2;
-
-      // Apply the centering with bounds checking
-      const minMarginLeft = this.sidebarWidth + 20; // Minimum clearance
-      const maxMarginLeft = viewportWidth - actualContentWidth - 20; // Don't overflow right
-      
-      const finalMarginLeft = Math.max(minMarginLeft, Math.min(optimalMarginLeft, maxMarginLeft));
-
-      // Apply the calculated margin
-      viewsContainer.style.marginLeft = `${finalMarginLeft}px`;
-      viewsContainer.style.marginRight = '20px';
-
-      // Debug info (remove in production)
-      if (window.location.hash.includes('debug-centering')) {
-        console.log('🎯 Dynamic Centering:', {
-          viewportWidth,
-          availableSpace,
-          actualContentWidth,
-          optimalMarginLeft,
-          finalMarginLeft
-        });
-      }
-    }
-
-    disable() {
-      this.isEnabled = false;
-      if (this.observer) {
-        this.observer.disconnect();
-      }
-      if (this.rafId) {
-        cancelAnimationFrame(this.rafId);
-      }
-      
-      // Reset to CSS default
-      const viewsContainer = document.getElementById('views');
-      if (viewsContainer) {
-        viewsContainer.style.marginLeft = '';
-        viewsContainer.style.marginRight = '';
-      }
-    }
-  }
-
-  // Initialize the dynamic centering system
-  const dynamicCentering = new DynamicCentering();
-
-  // Attach to JdrApp
-  if (window.JdrApp) {
-    JdrApp.modules.dynamicCentering = dynamicCentering;
-  }
-
-  // Auto-initialize when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      // Delay initialization to ensure layout is stable
-      setTimeout(() => dynamicCentering.init(), 500);
-    });
-  } else {
-    setTimeout(() => dynamicCentering.init(), 500);
-  }
-
-  // Make it globally available for debugging
-  window.DynamicCentering = dynamicCentering;
-
-})();
-// ============================================================================
-// JSPDF LOADER - Character Sheet PDF Generation Support
-// ============================================================================
-
-(() => {
-  "use strict";
-
-  // Check if jsPDF is already loaded
-  if (window.jsPDF) {
-    return;
-  }
-
-  // For standalone builds, we need to handle jsPDF loading
-  const loadJsPDF = () => {
-    return new Promise((resolve, reject) => {
-      const script = document.createElement('script');
-      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
-      script.onload = () => {
-        resolve();
-      };
-      script.onerror = () => {
-        console.error('❌ Failed to load jsPDF');
-        reject();
-      };
-      document.head.appendChild(script);
-    });
-  };
-
-  // Load jsPDF if not available
-  if (typeof window.jsPDF === 'undefined') {
-    loadJsPDF().catch(() => {
-      // Silent fallback - PDF generation will not be available
-    });
-  }
 
 })();
 // ============================================================================
@@ -26118,6 +27012,42 @@ body.dev-on .dev-only[style*="display: inline-flex"] {
       this.showNotification(`📄 Sous-page "${subPageName}" sélectionnée`, 'info');
     }
   };
+
+})();
+// ============================================================================
+// JSPDF LOADER - Character Sheet PDF Generation Support
+// ============================================================================
+
+(() => {
+  "use strict";
+
+  // Check if jsPDF is already loaded
+  if (window.jsPDF) {
+    return;
+  }
+
+  // For standalone builds, we need to handle jsPDF loading
+  const loadJsPDF = () => {
+    return new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+      script.onload = () => {
+        resolve();
+      };
+      script.onerror = () => {
+        console.error('❌ Failed to load jsPDF');
+        reject();
+      };
+      document.head.appendChild(script);
+    });
+  };
+
+  // Load jsPDF if not available
+  if (typeof window.jsPDF === 'undefined') {
+    loadJsPDF().catch(() => {
+      // Silent fallback - PDF generation will not be available
+    });
+  }
 
 })();
 

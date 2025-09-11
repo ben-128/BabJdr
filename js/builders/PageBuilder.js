@@ -223,6 +223,11 @@
       const title = pageData.title || pageId;
       const page = pageData.page || pageId;
       
+      // Special handling for favoris page
+      if (pageId === 'favoris') {
+        return this.buildFavorisPage(pageId, pageData);
+      }
+      
       // Special handling for campaign page
       if (pageId === 'campagne') {
         return this.buildCampaignPage(pageId, pageData);
@@ -242,12 +247,15 @@
     buildCategoryHeader(category, type) {
       const config = window.ContentTypes[type];
       
+      // Don't show descriptions for spell categories
+      const showDescription = type !== 'spell';
+      
       return `
         <div style="text-align:center;margin-bottom:2rem;">
           ${this.buildEditableTitle(category.nom, `${type}-category-name`)}
           ${this.buildIllustration(`${type}category:${category.nom}`)}
         </div>
-        ${this.buildEditableSection(category.description, `${type}-category-description`, 'paragraph', category.nom)}
+        ${showDescription ? this.buildEditableSection(category.description, `${type}-category-description`, 'paragraph', category.nom) : ''}
       `;
     }
 
@@ -662,7 +670,7 @@
             <label style="font-weight: 600; color: var(--accent-ink);">
               🎯 Filtrer par niveau maximum :
             </label>
-            <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
               <input 
                 type="number" 
                 id="spell-level-filter" 
@@ -679,6 +687,7 @@
               >
                 🔄 Tout afficher
               </button>
+              <!-- Texte du filtre ajouté dynamiquement par SpellFilter.js -->
             </div>
           </div>
         </div>
@@ -1149,6 +1158,56 @@
 
     sanitizeId(str) {
       return str.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+    }
+
+    /**
+     * Construit la page spéciale des favoris
+     * @param {string} pageId - ID de la page
+     * @param {Object} pageData - Données de la page
+     * @returns {string} HTML de la page favoris
+     */
+    buildFavorisPage(pageId, pageData) {
+      const title = pageData.title || 'Favoris';
+      
+      return `
+        <article class="" data-page="${pageId}" data-static-page="true" data-page-title="${title}">
+          <section>
+            ${this.buildStaticPageHeader(pageData)}
+            
+            <div class="favoris-section favoris-collapsible" id="favoris-objets-section">
+              <div class="favoris-header" onclick="this.parentElement.classList.toggle('collapsed')">
+                <h2>📦 Objets favoris</h2>
+                <span class="favoris-toggle">▼</span>
+              </div>
+              <div class="favoris-content">
+                <div id="favoris-objets-container" class="favoris-grid">
+                  <!-- Les objets favoris seront affichés ici dynamiquement -->
+                </div>
+                <div id="favoris-objets-empty" class="favoris-empty" style="display: none;">
+                  <p>Aucun objet en favoris</p>
+                  <p style="font-size: 0.9em;">Cliquez sur l'étoile ⭐ à côté d'un objet pour l'ajouter à vos favoris</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="favoris-section favoris-collapsible" id="favoris-sorts-section">
+              <div class="favoris-header" onclick="this.parentElement.classList.toggle('collapsed')">
+                <h2>🔮 Sorts favoris</h2>
+                <span class="favoris-toggle">▼</span>
+              </div>
+              <div class="favoris-content">
+                <div id="favoris-sorts-container" class="favoris-grid">
+                  <!-- Les sorts favoris seront affichés ici dynamiquement -->
+                </div>
+                <div id="favoris-sorts-empty" class="favoris-empty" style="display: none;">
+                  <p>Aucun sort en favoris</p>
+                  <p style="font-size: 0.9em;">Cliquez sur l'étoile ⭐ à côté d'un sort pour l'ajouter à vos favoris</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </article>
+      `;
     }
   }
 

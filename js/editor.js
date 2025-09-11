@@ -263,29 +263,23 @@
         }
       }
       
-      console.log('Adding subclass to class:', className);
       
       if (!className || !window.CLASSES) {
-        console.log('Missing className or CLASSES:', { className, hasClasses: !!window.CLASSES });
         return;
       }
       
       const classe = window.CLASSES.find(c => c.nom === className);
       if (!classe) {
-        console.log('Class not found:', className);
-        console.log('Available classes:', window.CLASSES.map(c => c.nom));
         return;
       }
       
       const config = window.ContentTypes.subclass;
       const newSubclass = { ...config.defaultValues };
       
-      console.log('Creating new subclass:', newSubclass);
       
       if (!classe.sousClasses) classe.sousClasses = [];
       classe.sousClasses.push(newSubclass);
       
-      console.log('Class after adding subclass:', classe);
       
       EventBus.emit(Events.CONTENT_ADD, {
         type: 'subclass',
@@ -377,7 +371,6 @@
       // Force l'attachement après un délai pour s'assurer que les images lazy sont chargées
       setTimeout(() => {
         this.attachImageEvents();
-        console.log('Image handlers re-attached after delay');
       }, 2000);
     },
 
@@ -400,21 +393,17 @@
 
       // Attacher aux images pour agrandissement - toutes les images, pas seulement celles dans .illus
       const images = document.querySelectorAll('img');
-      console.log(`Found ${images.length} images on page`);
       
       images.forEach(img => {
         // Éviter les images dans les éditeurs ou les inputs
         if (!img.closest('.editor-content') && !img.hasAttribute('data-events-attached')) {
-          console.log(`Attaching events to image: ${img.src || img.getAttribute('data-src')}`, img);
           
           // Ajouter support tactile pour mobile
           img.addEventListener('click', (e) => {
-            console.log('Image clicked!', e.target);
             this.toggleImageEnlargement(e.target);
           });
           img.addEventListener('touchend', (e) => {
             e.preventDefault();
-            console.log('Image touched!', e.target);
             this.toggleImageEnlargement(e.target);
           });
           
@@ -422,7 +411,6 @@
           img.addEventListener('load', () => {
             if (this.isImageEnlargeable(img)) {
               img.style.cursor = 'zoom-in';
-              console.log('Cursor set to zoom-in for loaded image:', img);
             }
           });
           
@@ -430,7 +418,6 @@
           if (img.complete && img.naturalWidth > 0) {
             if (this.isImageEnlargeable(img)) {
               img.style.cursor = 'zoom-in';
-              console.log('Cursor set to zoom-in for already loaded image:', img);
             }
           }
           
@@ -649,7 +636,6 @@
             window.TABLES_TRESORS_PAGE_DESC = {};
           }
           window.TABLES_TRESORS_PAGE_DESC.description = content;
-          console.log('💾 Collected Tables Tresors page description:', content);
         }
       }
 
@@ -662,7 +648,6 @@
             window.MONSTRES_PAGE_DESC = {};
           }
           window.MONSTRES_PAGE_DESC.description = content;
-          console.log('💾 Collected Monsters page description:', content);
         }
       }
     },

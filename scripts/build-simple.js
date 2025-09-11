@@ -104,15 +104,21 @@ function buildStandalone() {
     // Feature modules
     'js/modules/images.js',       // Image module
     'js/storage.js',              // Storage functions
-    'js/router.js',               // Router module
-    'js/renderer.js',             // Renderer module
-    'js/core/UnifiedEditor.js',   // Unified editor
-    'js/editor.js',               // Editor module
+    
+    // Features modules (AVANT renderer pour être disponibles au rendu)
     'js/features/SpellFilter.js', // Spell filter feature
     'js/features/TablesTresorsManager.js', // Tables de trésors manager
+    'js/features/FavorisManager.js', // Favoris manager - AVANT renderer
+    'js/features/FavorisRenderer.js', // Favoris renderer - AVANT renderer
     'js/features/DynamicCentering.js', // Dynamic centering system
-    'js/libs/jspdf-loader.js',    // External library loaders
-    'js/ui.js'                    // UI module - last
+    
+    // Modules qui dépendent des features
+    'js/router.js',               // Router module
+    'js/renderer.js',             // Renderer module - APRÈS les features
+    'js/core/UnifiedEditor.js',   // Unified editor
+    'js/editor.js',               // Editor module
+    'js/ui.js',                   // UI module - en dernier
+    'js/libs/jspdf-loader.js'     // External library loaders - last
   ];
   
   let allJS = '';
@@ -130,7 +136,7 @@ function buildStandalone() {
     'creation.json', 'dons.json', 'objets.json', 'elements.json', 'etats.json',
     'images.json', 'static-pages-config.json', 'stats.json', 'toc-structure.json',
     'monstres.json', 'tables-tresors.json', 'collections.json', 'monstres-page-desc.json', 'tables-tresors-page-desc.json', 'custom-page-descriptions.json',
-    'combat.json', 'gestion-des-ressources.json', 'histoire.json', 'dieux.json', 'geographie.json', 'campagne.json'
+    'combat.json', 'gestion-des-ressources.json', 'histoire.json', 'dieux.json', 'geographie.json', 'campagne.json', 'favoris.json'
   ];
   
   let dataObject = {};

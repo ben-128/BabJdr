@@ -1,4 +1,12 @@
 {
+  "directPages": [
+    {
+      "type": "page",
+      "id": "favoris",
+      "title": "⭐ Favoris",
+      "icon": "⭐"
+    }
+  ],
   "sections": [
     {
       "id": "heros",

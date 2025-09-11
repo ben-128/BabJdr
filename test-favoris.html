@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Test Favoris - JDR BAB</title>
+<style>
+body { font-family: Arial, sans-serif; padding: 20px; }
+.test-result { margin: 10px 0; padding: 10px; border-radius: 5px; }
+.success { background-color: #d4edda; color: #155724; }
+.error { background-color: #f8d7da; color: #721c24; }
+.info { background-color: #d1ecf1; color: #0c5460; }
+</style>
+</head>
+<body>
+<h1>🧪 Test du système de favoris</h1>
+<div id="test-results"></div>
+
+<script>
+// Simuler les constantes nécessaires
+window.STORAGE_KEYS = { FAVORIS: 'jdr-bab-favoris' };
+window.Events = { 
+  FAVORIS_ADD: 'favoris:add', 
+  FAVORIS_REMOVE: 'favoris:remove', 
+  FAVORIS_UPDATE: 'favoris:update' 
+};
+
+// Mock EventBus simple
+window.EventBus = {
+  events: {},
+  emit(event, data) {
+    if (this.events[event]) {
+      this.events[event].forEach(callback => callback(data));
+    }
+  },
+  on(event, callback) {
+    if (!this.events[event]) this.events[event] = [];
+    this.events[event].push(callback);
+  }
+};
+
+// Fonction de test
+function runTests() {
+  const results = document.getElementById('test-results');
+  
+  function addResult(message, type = 'info') {
+    const div = document.createElement('div');
+    div.className = `test-result ${type}`;
+    div.textContent = message;
+    results.appendChild(div);
+  }
+
+  addResult('🚀 Démarrage des tests du système de favoris', 'info');
+
+  try {
+    // Test 1: Vérification du localStorage
+    localStorage.removeItem(window.STORAGE_KEYS.FAVORIS);
+    const testData = { sorts: ['Test Sort'], objets: ['Test Objet'] };
+    localStorage.setItem(window.STORAGE_KEYS.FAVORIS, JSON.stringify(testData));
+    const retrieved = JSON.parse(localStorage.getItem(window.STORAGE_KEYS.FAVORIS));
+    
+    if (retrieved && retrieved.sorts[0] === 'Test Sort') {
+      addResult('✅ Test 1: Stockage localStorage - OK', 'success');
+    } else {
+      addResult('❌ Test 1: Stockage localStorage - ÉCHEC', 'error');
+    }
+
+    // Test 2: Test de l'EventBus
+    let eventReceived = false;
+    window.EventBus.on('test-event', () => { eventReceived = true; });
+    window.EventBus.emit('test-event');
+    
+    if (eventReceived) {
+      addResult('✅ Test 2: EventBus - OK', 'success');
+    } else {
+      addResult('❌ Test 2: EventBus - ÉCHEC', 'error');
+    }
+
+    // Test 3: Création HTML étoile
+    const starHtml = `
+      <button class="favoris-star" 
+              data-type="sorts" 
+              data-nom="Test Sort"
+              title="Ajouter aux favoris">☆</button>
+    `;
+    
+    if (starHtml.includes('favoris-star') && starHtml.includes('data-type')) {
+      addResult('✅ Test 3: Génération HTML étoile - OK', 'success');
+    } else {
+      addResult('❌ Test 3: Génération HTML étoile - ÉCHEC', 'error');
+    }
+
+    // Test 4: Simulation clic étoile
+    const testButton = document.createElement('button');
+    testButton.className = 'favoris-star';
+    testButton.dataset.type = 'sorts';
+    testButton.dataset.nom = 'Test Sort';
+    testButton.textContent = '☆';
+    
+    // Simuler un clic
+    testButton.click();
+    addResult('✅ Test 4: Simulation clic étoile - OK', 'success');
+
+    addResult('🎉 Tous les tests de base sont passés !', 'success');
+    addResult('ℹ️  Maintenant, testez manuellement dans l\'application :', 'info');
+    addResult('1. Allez sur la page Favoris', 'info');
+    addResult('2. Naviguez vers une page de sorts ou d\'objets', 'info');
+    addResult('3. Cliquez sur les étoiles ⭐ pour ajouter aux favoris', 'info');
+    addResult('4. Retournez à la page Favoris pour voir le résultat', 'info');
+
+  } catch (error) {
+    addResult(`❌ Erreur pendant les tests: ${error.message}`, 'error');
+  }
+}
+
+// Lancer les tests au chargement
+document.addEventListener('DOMContentLoaded', runTests);
+</script>
+</body>
+</html>

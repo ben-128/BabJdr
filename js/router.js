@@ -184,6 +184,9 @@
 
       const tocHTML = `
         <h4>Sommaire</h4>
+        ${window.TOC_STRUCTURE.directPages ? 
+          window.TOC_STRUCTURE.directPages.map(page => this.generateTOCItem(page)).join('') : 
+          ''}
         ${window.TOC_STRUCTURE.sections
           .filter(section => !section.requiresMJ || window.JdrApp.state.isMJ)
           .map(section => this.generateTOCSection(section)).join('')}

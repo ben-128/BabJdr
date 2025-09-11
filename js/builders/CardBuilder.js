@@ -59,8 +59,11 @@
     }
 
     buildSpellCard() {
-      return `
-        <div class="card editable-section" data-section-type="spell" data-spell-name="${this.data.nom}" data-spell-index="${this.index}" data-category-name="${this.categoryName}">
+      const favorisButtonHTML = this.buildFavorisButton('sorts', this.data.nom);
+      
+      const result = `
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="${this.data.nom}" data-spell-index="${this.index}" data-category-name="${this.categoryName}">
+          ${favorisButtonHTML}
           ${this.buildEditableTitle(this.data.nom, 'spell-name')}
           ${this.buildSpellElement()}
           ${this.buildIllustration(`sort:${this.categoryName}:${this.data.nom}`, this.data.nom)}
@@ -78,6 +81,8 @@
           ${this.buildDeleteButton('spell')}
         </div>
       `;
+      
+      return result;
     }
 
     buildDonCard() {
@@ -125,7 +130,8 @@
         : '<span style="font-style: italic; color: #666;">Aucun tag</span>';
 
       return `
-        <div class="card editable-section" data-section-type="objet" data-objet-name="${this.data.nom}" data-category-name="${this.categoryName}">
+        <div class="card editable-section item-card" data-section-type="objet" data-objet-name="${this.data.nom}" data-category-name="${this.categoryName}">
+          ${this.buildFavorisButton('objets', this.data.nom)}
           ${this.buildEditableTitle(this.data.nom, 'objet-name')}
           ${this.buildIllustration(`objet:${this.data.nom}`, this.data.nom)}
           <div style="display: flex; justify-content: space-between; align-items: center; margin: 0.5rem 0; font-size: 0.9em; color: var(--bronze);">
@@ -602,6 +608,21 @@
         return categoryData || { dons: [] };
       }
       return { [this.type + 's']: [] };
+    }
+
+    /**
+     * Construit le bouton étoile pour les favoris
+     * @param {string} type - Type de contenu ('sorts' ou 'objets')
+     * @param {string} nom - Nom de l'élément
+     * @returns {string} HTML du bouton favoris
+     */
+    buildFavorisButton(type, nom) {
+      // Vérifier que le FavorisManager est disponible
+      if (typeof window.FavorisManager === 'undefined') {
+        return '';
+      }
+      
+      return window.FavorisManager.createStarButton(type, nom);
     }
   }
 

@@ -1,6 +1,13 @@
 {
   "pages": [
     {
+      "id": "favoris",
+      "title": "Favoris",
+      "file": "favoris.json",
+      "active": true,
+      "order": 0
+    },
+    {
       "id": "creation",
       "title": "Création d'un personnage",
       "file": "creation.json",

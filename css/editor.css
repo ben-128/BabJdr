@@ -401,6 +401,15 @@ body.dev-off button[class*="edit"] {
   pointer-events: none !important;
 }
 
+/* Exception: les boutons favoris doivent TOUJOURS être visibles */
+body.dev-off button.favoris-star,
+body.dev-on button.favoris-star {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
 /* SPÉCIFIQUE: Règles avec spécificité maximale pour forcer le masquage */
 body.dev-off button.spell-add.btn,
 body.dev-off button.don-add.btn,
