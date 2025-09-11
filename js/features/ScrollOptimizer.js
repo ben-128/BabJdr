@@ -24,7 +24,6 @@
       this.optimizeExistingContent();
       
       this._initialized = true;
-      console.log('🚀 ScrollOptimizer initialized');
     },
 
     // Configure scroll event optimizations
