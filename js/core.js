@@ -274,10 +274,6 @@
           <main class="page">
             <aside class="sidebar" id="sidebar">
               <div class="panel">
-                <div class="searchbar">
-                  <input autocomplete="off" id="search" placeholder="Rechercher une règle, une classe…">
-                  <button class="btn" id="clear" title="Effacer">✖</button>
-                </div>
                 <div class="tools">
                   <button class="btn small" id="devToggle" title="Activer/désactiver le mode développeur">🛠 Dev Mode: OFF</button>
                 </div>
@@ -285,6 +281,10 @@
                   <!-- Dev toolbox content will be injected here -->
                 </div>
                 <div class="toc" id="toc">
+                  <div class="toc-search">
+                    <input autocomplete="off" id="search" placeholder="Rechercher une règle, une classe…">
+                    <button class="btn-clear" id="clear" title="Effacer">✖</button>
+                  </div>
                   <!-- Table of contents will be injected here -->
                 </div>
               </div>

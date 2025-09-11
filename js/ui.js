@@ -146,12 +146,134 @@
       if (window.EventHandlers) {
         return EventHandlers.setupKeyboardShortcuts();
       }
+    },
+
+    // ID Search functionality (for objects page)
+    performIdSearch(searchValue) {
+      const searchId = searchValue.trim();
+      const resultDiv = document.querySelector('#id-search-result');
+      
+      if (!searchId) {
+        this.clearIdSearch();
+        return;
+      }
+
+      const searchNumber = parseInt(searchId, 10);
+      if (isNaN(searchNumber)) {
+        if (resultDiv) {
+          resultDiv.innerHTML = '❌ Veuillez saisir un numéro valide';
+          resultDiv.style.color = '#dc2626';
+        }
+        return;
+      }
+
+      // Find object by number
+      const allObjects = window.OBJETS?.objets || [];
+      const foundObject = allObjects.find(obj => obj.numero === searchNumber);
+
+      if (!foundObject) {
+        if (resultDiv) {
+          resultDiv.innerHTML = `❌ Aucun objet trouvé avec l'ID ${searchNumber}`;
+          resultDiv.style.color = '#dc2626';
+        }
+        // Hide all objects
+        this.hideAllObjects();
+        return;
+      }
+
+      // Set global flag BEFORE regenerating page
+      window.activeIdSearch = true;
+
+      // Immediately hide the container to prevent flash
+      const container = document.querySelector('#objets-container');
+      if (container) {
+        container.style.visibility = 'hidden';
+      }
+
+      // Show success message immediately
+      if (resultDiv) {
+        resultDiv.innerHTML = `✅ Objet trouvé : "${foundObject.nom}" (ID: ${searchNumber})`;
+        resultDiv.style.color = '#16a34a';
+      }
+
+      // Force regenerate page with all objects AND visual feedback
+      if (JdrApp.modules.renderer?.regenerateCurrentPage) {
+        JdrApp.modules.renderer.regenerateCurrentPage();
+      }
+
+      // After regeneration, configure display and show only target object
+      requestAnimationFrame(() => {
+        const newContainer = document.querySelector('#objets-container');
+        if (newContainer) {
+          // Hide all objects first
+          this.hideAllObjects();
+          
+          // Show only the target object and make container visible again
+          setTimeout(() => {
+            this.showOnlyObjectById(searchNumber);
+            newContainer.style.visibility = 'visible';
+            
+            // Restore the search value in the input field
+            const searchInput = document.querySelector('#id-search-input');
+            if (searchInput) {
+              searchInput.value = searchNumber;
+            }
+          }, 10);
+        }
+      });
+    },
+
+    clearIdSearch() {
+      const input = document.querySelector('#id-search-input');
+      const resultDiv = document.querySelector('#id-search-result');
+      
+      if (input) {
+        input.value = '';
+      }
+      
+      if (resultDiv) {
+        resultDiv.innerHTML = '';
+      }
+      
+      // Clear the global flag
+      window.activeIdSearch = false;
+      
+      // Show all objects again
+      this.showAllObjects();
+    },
+
+    hideAllObjects() {
+      document.querySelectorAll('.card').forEach(card => {
+        card.style.display = 'none';
+      });
+    },
+
+    showAllObjects() {
+      document.querySelectorAll('.card').forEach(card => {
+        card.style.display = '';
+      });
+    },
+
+    showOnlyObjectById(searchNumber) {
+      this.hideAllObjects();
+      
+      // Show only the target object
+      const targetCard = document.querySelector(`[data-object-id="${searchNumber}"]`);
+      if (targetCard) {
+        targetCard.style.display = '';
+        targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
     }
   };
 
   // Auto-initialize when DOM is ready
-  JdrApp.utils.dom.ready(() => {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      JdrApp.modules.ui.init();
+    });
+  } else {
+    // DOM is already loaded
     JdrApp.modules.ui.init();
-  });
+  }
 
 })();

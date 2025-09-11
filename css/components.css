@@ -907,6 +907,47 @@ body.dev-off .new-collection-card {
 .searchbar input{flex:1 1 auto;max-width:100%;height:38px;font-size:15px;padding:var(--space-md) 10px;border-radius:10px;border:1px solid var(--rule);background:#fff6e8;color:inherit}
 .searchbar button{height:38px}
 
+/* TOC Search bar - compact horizontal layout in table of contents */
+.toc-search{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  margin-bottom:16px;
+  padding:12px;
+  background:rgba(255,246,232,0.5);
+  border-radius:12px;
+  border:1px solid var(--rule);
+}
+.toc-search input{
+  flex:1 1 auto;
+  height:32px;
+  font-size:14px;
+  padding:6px 12px;
+  border-radius:8px;
+  border:1px solid var(--rule);
+  background:#fff6e8;
+  color:inherit;
+}
+.toc-search .btn-clear{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:32px;
+  height:32px;
+  background:#dc2626;
+  color:white;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:14px;
+  transition:var(--transition-fast);
+  flex-shrink:0;
+}
+.toc-search .btn-clear:hover{
+  background:#b91c1c;
+  transform:scale(1.05);
+}
+
 /* Search results */
 .search-results-container {
   font-size: 14px;
