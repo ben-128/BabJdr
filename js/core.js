@@ -357,58 +357,80 @@
             console.log('Tag added:', tag, 'Active tags:', window.ACTIVE_GM_OBJECT_TAGS);
           }
           
-          // Regenerate the GM objects page
+          // Update the GM objects filters (safer than full regeneration)
           try {
-            self.regenerateGMObjectsPage();
+            self.updateGMObjectsFilters();
           } catch (error) {
-            console.error('Error regenerating GM objects page:', error);
+            console.error('Error updating GM objects filters:', error);
           }
         }
       });
     },
 
-    regenerateGMObjectsPage() {
-      console.log('Regenerating GM objects page...');
+    updateGMObjectsFilters() {
+      console.log('Updating GM objects filters...');
       
-      if (!window.OBJETS || !PageBuilder) {
-        console.error('Missing dependencies for GM page regeneration:', {
-          OBJETS: !!window.OBJETS,
-          PageBuilder: !!PageBuilder
-        });
+      if (!window.OBJETS || !window.ACTIVE_GM_OBJECT_TAGS) {
+        console.error('Missing dependencies for GM filter update');
         return;
       }
       
-      // Find the GM objects page article
-      const gmArticle = document.querySelector('article[data-page="gestion-objets"]');
-      if (!gmArticle) {
-        console.error('GM objects page article not found');
+      // Find the GM objects container and filter display
+      const objectsContainer = document.getElementById('gestion-objets-container');
+      const filtersDisplay = document.querySelector('.gm-objects-tag-display');
+      
+      if (!objectsContainer) {
+        console.error('GM objects container not found');
         return;
       }
       
       try {
-        // Generate new content
-        const newContent = PageBuilder.buildGameMasterObjectPage(window.OBJETS);
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(newContent, 'text/html');
-        const newArticle = doc.querySelector('article');
+        const allObjects = window.OBJETS.objets || [];
+        const activeTags = window.ACTIVE_GM_OBJECT_TAGS;
         
-        if (newArticle) {
-          gmArticle.innerHTML = newArticle.innerHTML;
-          console.log('GM objects page regenerated successfully');
+        console.log('Filtering objects with tags:', activeTags);
+        
+        // Filter objects based on active tags
+        const filteredObjects = activeTags.length === 0 
+          ? allObjects // No tags active = show all objects
+          : allObjects.filter(obj => {
+              // AND logic - object must have ALL active tags
+              if (!obj.tags || obj.tags.length === 0) return false;
+              return activeTags.every(activeTag => obj.tags.includes(activeTag));
+            });
+        
+        console.log(`Filtered ${filteredObjects.length} objects out of ${allObjects.length}`);
+        
+        // Update objects container with filtered results
+        objectsContainer.innerHTML = filteredObjects.map((item, index) => 
+          CardBuilder.create('objet', item, 'objets', index).build()
+        ).join('');
+        
+        // Update filter display if it exists
+        if (filtersDisplay && PageBuilder.buildGMTagFilters) {
+          const config = window.ContentTypes['objet'];
+          const availableTags = config.filterConfig.availableTags || [];
+          const newFiltersHTML = PageBuilder.buildGMTagFilters(activeTags, availableTags);
           
-          // Auto-load images and apply dev mode
-          if (this.modules.renderer && this.modules.renderer.autoLoadImages) {
-            this.modules.renderer.autoLoadImages();
+          // Create temporary container to extract just the inner content
+          const tempDiv = document.createElement('div');
+          tempDiv.innerHTML = newFiltersHTML;
+          const newFiltersContent = tempDiv.querySelector('.gm-objects-tag-display');
+          
+          if (newFiltersContent) {
+            filtersDisplay.innerHTML = newFiltersContent.innerHTML;
           }
-          
-          // Ensure any needed event listeners are reattached
-          // (The main event listener uses delegation so should still work)
-          
-        } else {
-          console.error('Failed to parse new GM objects page content');
         }
+        
+        // Auto-load images if available
+        if (this.modules.renderer && this.modules.renderer.autoLoadImages) {
+          this.modules.renderer.autoLoadImages();
+        }
+        
+        console.log('GM objects filters updated successfully');
+        
       } catch (error) {
-        console.error('Error in GM objects page regeneration:', error);
+        console.error('Error updating GM objects filters:', error);
       }
     },
 
