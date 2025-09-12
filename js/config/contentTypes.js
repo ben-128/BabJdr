@@ -369,7 +369,7 @@
       container: 'tables-tresors',
       dataKey: 'TABLES_TRESORS',
       pageType: 'single',
-      filterMode: 'OR',
+      filterMode: 'AND',
       icons: { 
         category: '💎', 
         item: '📦',

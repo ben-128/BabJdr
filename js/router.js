@@ -2414,7 +2414,7 @@
 
     renderGMObjectsPage() {
       if (!window.OBJETS) {
-        console.error('OBJETS data not loaded');
+        // OBJETS data not loaded
         return false;
       }
       

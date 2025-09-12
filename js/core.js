@@ -451,30 +451,24 @@
           window.JdrApp.modules.router.renderTablesTresorsPage();
         }
       } catch (error) {
-        console.error('Error reloading tables page:', error);
+        // Silent error handling
       }
     },
 
     updateGMObjectsDisplay() {
-      console.log('Updating GM objects display...');
-      
       if (!window.OBJETS || !window.ACTIVE_GM_OBJECT_TAGS) {
-        console.error('Missing dependencies for GM display update');
         return;
       }
       
       // Only proceed if we're actually on the GM objects page
       const gmArticle = document.querySelector('article[data-page="gestion-objets"]');
       if (!gmArticle) {
-        console.log('Not on GM objects page, skipping update');
         return;
       }
       
       try {
         const allObjects = window.OBJETS.objets || [];
         const activeTags = window.ACTIVE_GM_OBJECT_TAGS;
-        
-        console.log('Applying filters:', activeTags);
         
         // Filter objects based on active tags
         const filteredObjects = activeTags.length === 0 
@@ -484,18 +478,12 @@
               return activeTags.every(activeTag => obj.tags.includes(activeTag));
             });
         
-        console.log(`Showing ${filteredObjects.length}/${allObjects.length} objects`);
-        
         // Update ONLY the objects container
         const objectsContainer = document.getElementById('gestion-objets-container');
         if (objectsContainer && CardBuilder) {
           objectsContainer.innerHTML = filteredObjects.map((item, index) => 
             CardBuilder.create('objet', item, 'objets', index).build()
           ).join('');
-          
-          console.log('Objects container updated successfully');
-        } else {
-          console.error('Objects container or CardBuilder not found');
         }
         
         // Update ONLY the filter chips visual state
@@ -519,15 +507,13 @@
           }
         });
         
-        console.log('Filter chips updated successfully');
-        
         // Auto-load images if available
         if (this.modules.renderer && this.modules.renderer.autoLoadImages) {
           this.modules.renderer.autoLoadImages();
         }
         
       } catch (error) {
-        console.error('Error updating GM objects display:', error);
+        // Silent error handling
       }
     },
 

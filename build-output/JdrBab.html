@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-09-12T15:50:20.744Z by JdrBab Build System -->
+<!-- Generated on 2025-09-12T16:00:29.996Z by JdrBab Build System -->
 <title>JDR‑BAB — Livret de règles</title>
 <meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -9484,30 +9484,24 @@ article.active .grid {
           window.JdrApp.modules.router.renderTablesTresorsPage();
         }
       } catch (error) {
-        console.error('Error reloading tables page:', error);
+        // Silent error handling
       }
     },
 
     updateGMObjectsDisplay() {
-      console.log('Updating GM objects display...');
-      
       if (!window.OBJETS || !window.ACTIVE_GM_OBJECT_TAGS) {
-        console.error('Missing dependencies for GM display update');
         return;
       }
       
       // Only proceed if we're actually on the GM objects page
       const gmArticle = document.querySelector('article[data-page="gestion-objets"]');
       if (!gmArticle) {
-        console.log('Not on GM objects page, skipping update');
         return;
       }
       
       try {
         const allObjects = window.OBJETS.objets || [];
         const activeTags = window.ACTIVE_GM_OBJECT_TAGS;
-        
-        console.log('Applying filters:', activeTags);
         
         // Filter objects based on active tags
         const filteredObjects = activeTags.length === 0 
@@ -9517,18 +9511,12 @@ article.active .grid {
               return activeTags.every(activeTag => obj.tags.includes(activeTag));
             });
         
-        console.log(`Showing ${filteredObjects.length}/${allObjects.length} objects`);
-        
         // Update ONLY the objects container
         const objectsContainer = document.getElementById('gestion-objets-container');
         if (objectsContainer && CardBuilder) {
           objectsContainer.innerHTML = filteredObjects.map((item, index) => 
             CardBuilder.create('objet', item, 'objets', index).build()
           ).join('');
-          
-          console.log('Objects container updated successfully');
-        } else {
-          console.error('Objects container or CardBuilder not found');
         }
         
         // Update ONLY the filter chips visual state
@@ -9552,15 +9540,13 @@ article.active .grid {
           }
         });
         
-        console.log('Filter chips updated successfully');
-        
         // Auto-load images if available
         if (this.modules.renderer && this.modules.renderer.autoLoadImages) {
           this.modules.renderer.autoLoadImages();
         }
         
       } catch (error) {
-        console.error('Error updating GM objects display:', error);
+        // Silent error handling
       }
     },
 
@@ -10153,7 +10139,7 @@ article.active .grid {
       container: 'tables-tresors',
       dataKey: 'TABLES_TRESORS',
       pageType: 'single',
-      filterMode: 'OR',
+      filterMode: 'AND',
       icons: { 
         category: '💎', 
         item: '📦',
@@ -19247,7 +19233,7 @@ article.active .grid {
 
     renderGMObjectsPage() {
       if (!window.OBJETS) {
-        console.error('OBJETS data not loaded');
+        // OBJETS data not loaded
         return false;
       }
       
