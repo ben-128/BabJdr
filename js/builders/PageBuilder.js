@@ -84,7 +84,7 @@
       const filteredObjects = window.activeIdSearch 
         ? [] // En recherche ID, on affiche rien initialement - performIdSearch() s'occupera d'afficher le bon objet
         : !isDevMode
-          ? allObjects // Mode dev OFF: afficher TOUS les objets (recherche ID et navigation normale fonctionnent)
+          ? [] // Mode dev OFF: aucun objet affiché par défaut (seule recherche ID fonctionne)
           : activeTags.length === 0 
             ? allObjects // Mode dev ON + aucun tag actif = TOUS les objets
             : allObjects.filter(obj => {
@@ -95,7 +95,9 @@
               });
 
       // Pour la recherche par ID, on doit quand même générer toutes les cartes mais les cacher
-      const objectsToRender = window.activeIdSearch ? allObjects : filteredObjects;
+      // En mode normal (!isDevMode), toujours rendre TOUS les objets mais les cacher par défaut
+      // Cela permet à la recherche par ID de fonctionner
+      const objectsToRender = !isDevMode ? allObjects : (window.activeIdSearch ? allObjects : filteredObjects);
       
       // console.log('📊 Filtered objects count:', filteredObjects.length, '/ Total objects:', allObjects.length);
       
@@ -119,9 +121,15 @@
             
             <div class="grid cols-2" id="objets-container">
               ${objectsToRender.map((item, index) => {
-                // Si on est en recherche ID, cacher toutes les cartes par défaut
                 const cardHTML = CardBuilder.create('objet', item, 'objets', index).build();
-                if (window.activeIdSearch) {
+                
+                // Logique d'affichage:
+                // - Mode dev OFF: cacher tous les objets par défaut (seule recherche ID les affichera)
+                // - Mode dev ON + recherche ID: cacher tous les objets par défaut 
+                // - Mode dev ON + pas de recherche ID: afficher selon les filtres
+                const shouldHide = !isDevMode || window.activeIdSearch;
+                
+                if (shouldHide) {
                   // Injecter style="display: none;" dans la div de la carte
                   return cardHTML.replace('<div class="card', '<div class="card" style="display: none;"');
                 }
@@ -129,7 +137,8 @@
               }).join('')}
             </div>
             
-            ${filteredObjects.length === 0 && !window.activeIdSearch ? '<p style="text-align: center; color: #666; margin: 2rem 0;">Aucun objet ne correspond aux filtres sélectionnés.</p>' : ''}
+            ${!isDevMode && filteredObjects.length === 0 && !window.activeIdSearch ? '<p style="text-align: center; color: #666; margin: 2rem 0;">Utilisez la recherche par ID ci-dessus pour trouver un objet spécifique.</p>' : ''}
+            ${isDevMode && filteredObjects.length === 0 && !window.activeIdSearch ? '<p style="text-align: center; color: #666; margin: 2rem 0;">Aucun objet ne correspond aux filtres sélectionnés.</p>' : ''}
           </section>
         </article>
       `;
