@@ -560,6 +560,42 @@
       `;
     }
 
+    buildObjetCard() {
+      const favorisButtonHTML = this.buildFavorisButton('objets', this.data.nom);
+      
+      // Build tags display
+      const tagsDisplay = this.data.tags && this.data.tags.length > 0
+        ? this.data.tags.map(tag => `<span class="tag-chip" style="background: var(--bronze); color: white; padding: 2px 6px; border-radius: 8px; font-size: 0.8em; margin-right: 4px;">${tag}</span>`).join('')
+        : '<span style="font-style: italic; color: #666;">Aucun tag</span>';
+      
+      return `
+        <div class="card editable-section objet-card" data-section-type="objet" data-objet-name="${this.data.nom}" data-numero="${this.data.numero}" data-object-numero="${this.data.numero}" data-category-name="${this.categoryName}">
+          ${favorisButtonHTML}
+          ${this.buildEditableTitle(this.data.nom, 'objet-name')}
+          ${this.data.numero ? `<div style="text-align: center; font-weight: bold; color: var(--bronze); margin-bottom: 0.5rem;">N°${this.data.numero}</div>` : ''}
+          
+          ${this.buildIllustration(`objet:${this.data.nom}`, this.data.nom, 'objet')}
+          
+          <div style="text-align: center; margin: 0.5rem 0;">
+            ${this.buildEditableTagsField(tagsDisplay, 'objet-tags', 'Tags')}
+          </div>
+          
+          ${this.buildEditableField(this.data.description, 'objet-description', 'Description', { style: 'text-align: center; font-style: italic; margin: 1rem 0;' })}
+          
+          <hr style="margin: 1rem 0; border: none; border-top: 2px solid var(--bronze); opacity: 0.6;">
+          
+          ${this.buildEditableField(this.data.effet, 'objet-effet', 'Effet', { style: 'margin: 1rem 0;' })}
+          
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; font-size: 0.9em;">
+            ${this.data.prix ? `<div>${this.buildEditableField(this.data.prix, 'objet-prix', 'Prix')}</div>` : ''}
+            ${this.data.poids ? `<div>${this.buildEditableField(this.data.poids, 'objet-poids', 'Poids')}</div>` : ''}
+          </div>
+          
+          ${this.buildDeleteButton('objet')}
+        </div>
+      `;
+    }
+
     buildGenericCard() {
       return `
         <div class="card">

@@ -2196,7 +2196,11 @@
         const searchNumber = parseInt(searchValue);
         if (!isNaN(searchNumber)) {
           allCards.forEach(card => {
-            const cardNumero = card.getAttribute('data-numero') || card.getAttribute('data-object-numero');
+            // Try multiple possible attribute names for the object number
+            const cardNumero = card.getAttribute('data-numero') || 
+                              card.getAttribute('data-object-numero') ||
+                              card.getAttribute('data-objet-numero');
+            
             if (cardNumero && parseInt(cardNumero) === searchNumber) {
               card.style.display = 'block';
               foundCard = card;
