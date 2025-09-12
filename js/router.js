@@ -38,8 +38,6 @@
       const page = hash || 'creation';
       const exists = JdrApp.utils.dom.$(`article[data-page="${page}"]`);
       
-      console.log('🧭 Parsing route:', page, 'Existing element:', !!exists);
-      
       this.currentRoute = page;
       
       // Handle dynamic category routing
@@ -68,7 +66,6 @@
       
       // Handle single objets page (objects now use unified page with tag filtering)
       if (page === 'objets') {
-        console.log('📦 Router handling objets page');
         return this.renderObjectsPage();
       }
       
@@ -2095,16 +2092,12 @@
     },
 
     renderObjectsPage() {
-      console.log('🚀 renderObjectsPage() called');
       // Check if page already exists and force refresh is requested
       const existingPage = document.querySelector('[data-page="objets"]');
       const shouldRefresh = this._forceObjectsRefresh || !existingPage;
       
-      console.log('Existing page:', !!existingPage, 'Should refresh:', shouldRefresh);
-      
       if (!shouldRefresh && existingPage) {
         // Page exists and no refresh needed, just show it
-        console.log('Using existing page, setting up search...');
         setTimeout(() => {
           this.setupObjectSearchFunctionality();
         }, 100);
@@ -2125,17 +2118,8 @@
         return false;
       }
       
-      console.log('📄 About to build objects page, data:', objectsData);
-      
       // Generate page HTML using PageBuilder
-      let pageHtml;
-      try {
-        pageHtml = PageBuilder.buildSingleObjectPage(objectsData);
-        console.log('✅ Page HTML generated successfully, length:', pageHtml.length);
-      } catch (error) {
-        console.error('❌ Error building objects page:', error);
-        return false;
-      }
+      const pageHtml = PageBuilder.buildSingleObjectPage(objectsData);
       
       // Find or create the views container
       const viewsContainer = document.querySelector('#views');
@@ -2144,36 +2128,23 @@
         return false;
       }
       
-      console.log('📍 Views container found, inserting page');
-      
       // Remove existing objects page if it exists
       if (existingPage) {
-        console.log('🗑️ Removing existing page');
         existingPage.remove();
       }
       
       // Insert the new page
-      console.log('📝 Inserting new page HTML');
-      try {
-        viewsContainer.insertAdjacentHTML('beforeend', pageHtml);
-        console.log('✅ Page HTML inserted successfully');
-      } catch (error) {
-        console.error('❌ Error inserting HTML:', error);
-        return false;
-      }
+      viewsContainer.insertAdjacentHTML('beforeend', pageHtml);
       
       // Setup object search functionality
-      console.log('⏰ Setting up search functionality in 100ms');
       setTimeout(() => {
         this.setupObjectSearchFunctionality();
       }, 100);
       
       // Show and activate page
-      console.log('👁️ Showing and activating objets page');
       this.show('objets');
       this.updateActiveStates('objets');
       
-      console.log('✅ renderObjectsPage completed successfully');
       return true;
     },
 
@@ -2188,16 +2159,12 @@
     },
 
     setupObjectSearchFunctionality() {
-      console.log('🔧 Setting up object search functionality');
       // Setup ID search functionality
       const idSearchInput = document.getElementById('id-search-input');
       const clearButton = document.getElementById('clear-id-search');
       const resultDiv = document.getElementById('id-search-result');
       
-      console.log('Elements found:', { idSearchInput: !!idSearchInput, clearButton: !!clearButton, resultDiv: !!resultDiv });
-      
       if (!idSearchInput) {
-        console.warn('ID search input not found');
         return;
       }
       
@@ -2205,12 +2172,10 @@
       const performIdSearch = (searchValue) => {
         const objectsContainer = document.getElementById('objets-container');
         if (!objectsContainer) {
-          console.warn('Objects container not found');
           return;
         }
         
         const allCards = objectsContainer.querySelectorAll('.card');
-        console.log('Found cards:', allCards.length);
         let foundCard = null;
         
         if (!searchValue || searchValue.trim() === '') {
@@ -2233,7 +2198,6 @@
         
         // Find and show matching card
         const searchNumber = parseInt(searchValue);
-        console.log('Searching for object number:', searchNumber);
         if (!isNaN(searchNumber)) {
           allCards.forEach(card => {
             // Try multiple possible attribute names for the object number
@@ -2241,12 +2205,19 @@
                               card.getAttribute('data-object-numero') ||
                               card.getAttribute('data-objet-numero');
             
-            console.log('Card numero:', cardNumero, 'Comparing with:', searchNumber);
             if (cardNumero && parseInt(cardNumero) === searchNumber) {
               card.style.display = 'block';
               card.style.visibility = 'visible';
               foundCard = card;
-              console.log('Found matching card!', card);
+              
+              // Center the found object
+              setTimeout(() => {
+                card.scrollIntoView({ 
+                  behavior: 'smooth', 
+                  block: 'center', 
+                  inline: 'center' 
+                });
+              }, 100);
             }
           });
         }
@@ -2266,11 +2237,7 @@
         }
       };
       
-      // Setup event listeners
-      idSearchInput.addEventListener('input', (e) => {
-        performIdSearch(e.target.value);
-      });
-      
+      // Setup event listeners - Only search on Enter, not on input
       idSearchInput.addEventListener('keyup', (e) => {
         if (e.key === 'Enter') {
           performIdSearch(e.target.value);

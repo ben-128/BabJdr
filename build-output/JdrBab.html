@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-09-11T22:04:55.309Z by JdrBab Build System -->
+<!-- Generated on 2025-09-12T08:58:29.888Z by JdrBab Build System -->
 <title>JDR‑BAB — Livret de règles</title>
 <meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11177,6 +11177,42 @@ article.active .grid {
       `;
     }
 
+    buildObjetCard() {
+      const favorisButtonHTML = this.buildFavorisButton('objets', this.data.nom);
+      
+      // Build tags display
+      const tagsDisplay = this.data.tags && this.data.tags.length > 0
+        ? this.data.tags.map(tag => `<span class="tag-chip" style="background: var(--bronze); color: white; padding: 2px 6px; border-radius: 8px; font-size: 0.8em; margin-right: 4px;">${tag}</span>`).join('')
+        : '<span style="font-style: italic; color: #666;">Aucun tag</span>';
+      
+      return `
+        <div class="card editable-section objet-card" data-section-type="objet" data-objet-name="${this.data.nom}" data-numero="${this.data.numero}" data-object-numero="${this.data.numero}" data-category-name="${this.categoryName}">
+          ${favorisButtonHTML}
+          ${this.buildEditableTitle(this.data.nom, 'objet-name')}
+          ${this.data.numero ? `<div style="text-align: center; font-weight: bold; color: var(--bronze); margin-bottom: 0.5rem;">N°${this.data.numero}</div>` : ''}
+          
+          ${this.buildIllustration(`objet:${this.data.nom}`, this.data.nom, 'objet')}
+          
+          <div style="text-align: center; margin: 0.5rem 0;">
+            ${this.buildEditableTagsField(tagsDisplay, 'objet-tags', 'Tags')}
+          </div>
+          
+          ${this.buildEditableField(this.data.description, 'objet-description', 'Description', { style: 'text-align: center; font-style: italic; margin: 1rem 0;' })}
+          
+          <hr style="margin: 1rem 0; border: none; border-top: 2px solid var(--bronze); opacity: 0.6;">
+          
+          ${this.buildEditableField(this.data.effet, 'objet-effet', 'Effet', { style: 'margin: 1rem 0;' })}
+          
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; font-size: 0.9em;">
+            ${this.data.prix ? `<div>${this.buildEditableField(this.data.prix, 'objet-prix', 'Prix')}</div>` : ''}
+            ${this.data.poids ? `<div>${this.buildEditableField(this.data.poids, 'objet-poids', 'Poids')}</div>` : ''}
+          </div>
+          
+          ${this.buildDeleteButton('objet')}
+        </div>
+      `;
+    }
+
     buildGenericCard() {
       return `
         <div class="card">
@@ -11331,7 +11367,7 @@ article.active .grid {
       // console.log('🎯 Object filtering - isDevMode:', isDevMode, 'activeIdSearch:', !!window.activeIdSearch, 'activeTags:', activeTags.length);
       
       const filteredObjects = window.activeIdSearch 
-        ? [] // En recherche ID, on affiche rien initialement - showOnlyObjectById() s'occupera d'afficher le bon objet
+        ? [] // En recherche ID, on affiche rien initialement - performIdSearch() s'occupera d'afficher le bon objet
         : !isDevMode
           ? [] // Mode dev OFF: aucun objet affiché par défaut (seule recherche ID fonctionne)
           : activeTags.length === 0 
@@ -11344,7 +11380,9 @@ article.active .grid {
               });
 
       // Pour la recherche par ID, on doit quand même générer toutes les cartes mais les cacher
-      const objectsToRender = window.activeIdSearch ? allObjects : filteredObjects;
+      // En mode normal (!isDevMode), toujours rendre TOUS les objets mais les cacher par défaut
+      // Cela permet à la recherche par ID de fonctionner
+      const objectsToRender = !isDevMode ? allObjects : (window.activeIdSearch ? allObjects : filteredObjects);
       
       // console.log('📊 Filtered objects count:', filteredObjects.length, '/ Total objects:', allObjects.length);
       
@@ -11368,9 +11406,15 @@ article.active .grid {
             
             <div class="grid cols-2" id="objets-container">
               ${objectsToRender.map((item, index) => {
-                // Si on est en recherche ID, cacher toutes les cartes par défaut
                 const cardHTML = CardBuilder.create('objet', item, 'objets', index).build();
-                if (window.activeIdSearch) {
+                
+                // Logique d'affichage:
+                // - Mode dev OFF: cacher tous les objets par défaut (seule recherche ID les affichera)
+                // - Mode dev ON + recherche ID: cacher tous les objets par défaut 
+                // - Mode dev ON + pas de recherche ID: afficher selon les filtres
+                const shouldHide = !isDevMode || window.activeIdSearch;
+                
+                if (shouldHide) {
                   // Injecter style="display: none;" dans la div de la carte
                   return cardHTML.replace('<div class="card', '<div class="card" style="display: none;"');
                 }
@@ -11378,7 +11422,8 @@ article.active .grid {
               }).join('')}
             </div>
             
-            ${filteredObjects.length === 0 && !window.activeIdSearch ? '<p style="text-align: center; color: #666; margin: 2rem 0;">Aucun objet ne correspond aux filtres sélectionnés.</p>' : ''}
+            ${!isDevMode && filteredObjects.length === 0 && !window.activeIdSearch ? '<p style="text-align: center; color: #666; margin: 2rem 0;">Utilisez la recherche par ID ci-dessus pour trouver un objet spécifique.</p>' : ''}
+            ${isDevMode && filteredObjects.length === 0 && !window.activeIdSearch ? '<p style="text-align: center; color: #666; margin: 2rem 0;">Aucun objet ne correspond aux filtres sélectionnés.</p>' : ''}
           </section>
         </article>
       `;
@@ -16557,7 +16602,6 @@ article.active .grid {
       const page = hash || 'creation';
       const exists = JdrApp.utils.dom.$(`article[data-page="${page}"]`);
       
-      
       this.currentRoute = page;
       
       // Handle dynamic category routing
@@ -18609,6 +18653,203 @@ article.active .grid {
       this.updateActiveStates('favoris');
       
       return true;
+    },
+
+    renderObjectsPage() {
+      // Check if page already exists and force refresh is requested
+      const existingPage = document.querySelector('[data-page="objets"]');
+      const shouldRefresh = this._forceObjectsRefresh || !existingPage;
+      
+      if (!shouldRefresh && existingPage) {
+        // Page exists and no refresh needed, just show it
+        setTimeout(() => {
+          this.setupObjectSearchFunctionality();
+        }, 100);
+        this.show('objets');
+        this.updateActiveStates('objets');
+        return true;
+      }
+      
+      // Reset the force refresh flag
+      this._forceObjectsRefresh = false;
+      
+      // Get objects data
+      const objectsData = window.OBJETS || { objets: [] };
+      
+      // Use PageBuilder to generate the objects page
+      if (!window.PageBuilder) {
+        console.error('PageBuilder not available for objects page');
+        return false;
+      }
+      
+      // Generate page HTML using PageBuilder
+      const pageHtml = PageBuilder.buildSingleObjectPage(objectsData);
+      
+      // Find or create the views container
+      const viewsContainer = document.querySelector('#views');
+      if (!viewsContainer) {
+        console.error('Views container not found');
+        return false;
+      }
+      
+      // Remove existing objects page if it exists
+      if (existingPage) {
+        existingPage.remove();
+      }
+      
+      // Insert the new page
+      viewsContainer.insertAdjacentHTML('beforeend', pageHtml);
+      
+      // Setup object search functionality
+      setTimeout(() => {
+        this.setupObjectSearchFunctionality();
+      }, 100);
+      
+      // Show and activate page
+      this.show('objets');
+      this.updateActiveStates('objets');
+      
+      return true;
+    },
+
+    refreshObjectsPageIfActive() {
+      if (window.location.hash === '#/objets') {
+        console.log('🔄 Refreshing objects page due to state change');
+        setTimeout(() => {
+          this._forceObjectsRefresh = true;
+          this.renderObjectsPage();
+        }, 50);
+      }
+    },
+
+    setupObjectSearchFunctionality() {
+      // Setup ID search functionality
+      const idSearchInput = document.getElementById('id-search-input');
+      const clearButton = document.getElementById('clear-id-search');
+      const resultDiv = document.getElementById('id-search-result');
+      
+      if (!idSearchInput) {
+        return;
+      }
+      
+      // Search function
+      const performIdSearch = (searchValue) => {
+        const objectsContainer = document.getElementById('objets-container');
+        if (!objectsContainer) {
+          return;
+        }
+        
+        const allCards = objectsContainer.querySelectorAll('.card');
+        let foundCard = null;
+        
+        if (!searchValue || searchValue.trim() === '') {
+          // Show all cards when search is empty in dev mode, hide in normal mode
+          const isDevMode = JdrApp.utils.isDevMode();
+          allCards.forEach(card => {
+            card.style.display = isDevMode ? 'block' : 'none';
+          });
+          window.activeIdSearch = false;
+          if (resultDiv) {
+            resultDiv.textContent = 'Entrez un numéro pour rechercher un objet spécifique';
+          }
+          return;
+        }
+        
+        // Hide all cards first
+        allCards.forEach(card => {
+          card.style.display = 'none';
+        });
+        
+        // Find and show matching card
+        const searchNumber = parseInt(searchValue);
+        if (!isNaN(searchNumber)) {
+          allCards.forEach(card => {
+            // Try multiple possible attribute names for the object number
+            const cardNumero = card.getAttribute('data-numero') || 
+                              card.getAttribute('data-object-numero') ||
+                              card.getAttribute('data-objet-numero');
+            
+            if (cardNumero && parseInt(cardNumero) === searchNumber) {
+              card.style.display = 'block';
+              card.style.visibility = 'visible';
+              foundCard = card;
+              
+              // Center the found object
+              setTimeout(() => {
+                card.scrollIntoView({ 
+                  behavior: 'smooth', 
+                  block: 'center', 
+                  inline: 'center' 
+                });
+              }, 100);
+            }
+          });
+        }
+        
+        window.activeIdSearch = true;
+        
+        // Update result text
+        if (resultDiv) {
+          if (foundCard) {
+            const objectName = foundCard.querySelector('h4, .card-title')?.textContent || 'Objet trouvé';
+            resultDiv.textContent = `✅ Objet trouvé: ${objectName}`;
+            resultDiv.style.color = '#16a34a';
+          } else {
+            resultDiv.textContent = `❌ Aucun objet trouvé avec le numéro ${searchNumber}`;
+            resultDiv.style.color = '#ef4444';
+          }
+        }
+      };
+      
+      // Setup event listeners - Only search on Enter, not on input
+      idSearchInput.addEventListener('keyup', (e) => {
+        if (e.key === 'Enter') {
+          performIdSearch(e.target.value);
+        }
+      });
+      
+      if (clearButton) {
+        clearButton.addEventListener('click', () => {
+          idSearchInput.value = '';
+          performIdSearch('');
+        });
+      }
+      
+      // Setup tag filter functionality if available
+      this.setupObjectTagFilters();
+    },
+
+    setupObjectTagFilters() {
+      const filterChips = document.querySelectorAll('.filter-chip');
+      const objectsContainer = document.getElementById('objets-container');
+      
+      if (!objectsContainer || filterChips.length === 0) return;
+      
+      filterChips.forEach(chip => {
+        chip.addEventListener('click', (e) => {
+          const tag = e.target.getAttribute('data-tag');
+          if (!tag) return;
+          
+          const isActive = e.target.classList.contains('active');
+          
+          // Toggle the tag in global state
+          if (!window.ACTIVE_OBJECT_TAGS) {
+            window.ACTIVE_OBJECT_TAGS = [];
+          }
+          
+          if (isActive) {
+            // Remove tag
+            window.ACTIVE_OBJECT_TAGS = window.ACTIVE_OBJECT_TAGS.filter(t => t !== tag);
+          } else {
+            // Add tag
+            window.ACTIVE_OBJECT_TAGS.push(tag);
+          }
+          
+          // Refresh the objects page to apply filters
+          this._forceObjectsRefresh = true;
+          this.renderObjectsPage();
+        });
+      });
     }
   
   };
@@ -24428,6 +24669,20 @@ article.active .grid {
         });
       }
 
+      // Search in objects
+      if (window.OBJETS && window.OBJETS.objets && Array.isArray(window.OBJETS.objets)) {
+        window.OBJETS.objets.forEach(objet => {
+          if (this.matchesSearch(objet, normalizedQuery)) {
+            results.push({
+              type: 'objet',
+              category: 'Objets',
+              data: objet,
+              summary: this.generateObjetSummary(objet)
+            });
+          }
+        });
+      }
+
       // Search in static pages
       if (window.STATIC_PAGES) {
         Object.entries(window.STATIC_PAGES).forEach(([pageId, pageData]) => {
@@ -24623,6 +24878,12 @@ article.active .grid {
       return `⚡ ${UIUtilities.stripHtml(sousClasse.nom)} (${UIUtilities.stripHtml(parentClass)}) - Sous-classe spécialisée`;
     },
 
+    generateObjetSummary(objet) {
+      const tags = objet.tags && Array.isArray(objet.tags) ? objet.tags.join(', ') : '';
+      const numero = objet.numero ? `#${objet.numero}` : '';
+      return `⚔️ ${UIUtilities.stripHtml(objet.nom)} ${numero} - ${UIUtilities.stripHtml(tags)} | ${UIUtilities.stripHtml(objet.prix || 'Prix non défini')}`;
+    },
+
     generateStaticPageSummary(pageData) {
       return `📄 ${UIUtilities.stripHtml(pageData.title)} - ${UIUtilities.stripHtml(pageData.description || 'Page d\'information du jeu')}`;
     },
@@ -24633,6 +24894,7 @@ article.active .grid {
         'don': '🏆 Dons',
         'class': '⚔️ Classes',
         'subclass': '⚡ Sous-classes',
+        'objet': '⚔️ Objets',
         'static-page': '📄 Pages'
       };
       return typeLabels[type] || type;
@@ -24661,6 +24923,8 @@ article.active .grid {
           return `#/${UIUtilities.slugify(result.data.nom)}`;
         case 'subclass':
           return `#/${UIUtilities.slugify(result.category)}`;
+        case 'objet':
+          return `#/objets`;
         case 'static-page':
           return `#/${result.pageId}`;
         default:
@@ -25059,24 +25323,27 @@ article.active .grid {
       `;
       
       // Remove old event listeners to avoid conflicts
-      menuToggle.replaceWith(menuToggle.cloneNode(true));
-      menuToggle = document.querySelector('#menuToggle');
+      const newMenuToggle = menuToggle.cloneNode(true);
+      menuToggle.replaceWith(newMenuToggle);
+      menuToggle = newMenuToggle;
 
       // Add hover effect
-      menuToggle.addEventListener('mouseenter', () => {
-        menuToggle.style.transform = 'scale(1.05)';
-        menuToggle.style.boxShadow = '0 4px 12px rgba(0,0,0,0.25)';
-      });
-      
-      menuToggle.addEventListener('mouseleave', () => {
-        menuToggle.style.transform = 'scale(1)';
-        menuToggle.style.boxShadow = '0 2px 8px rgba(0,0,0,0.15)';
-      });
+      if (menuToggle) {
+        menuToggle.addEventListener('mouseenter', () => {
+          menuToggle.style.transform = 'scale(1.05)';
+          menuToggle.style.boxShadow = '0 4px 12px rgba(0,0,0,0.25)';
+        });
+        
+        menuToggle.addEventListener('mouseleave', () => {
+          menuToggle.style.transform = 'scale(1)';
+          menuToggle.style.boxShadow = '0 2px 8px rgba(0,0,0,0.15)';
+        });
 
-      // Add toggle functionality
-      menuToggle.addEventListener('click', () => {
-        this.toggleMobileNav();
-      });
+        // Add toggle functionality
+        menuToggle.addEventListener('click', () => {
+          this.toggleMobileNav();
+        });
+      }
 
       // Create backdrop for mobile
       if (!document.querySelector('#backdrop')) {
@@ -25087,7 +25354,12 @@ article.active .grid {
         backdrop.addEventListener('click', () => {
           this.toggleMobileNav();
         });
-        shell.appendChild(backdrop);
+        const shell = document.querySelector('.shell');
+        if (shell) {
+          shell.appendChild(backdrop);
+        } else {
+          document.body.appendChild(backdrop);
+        }
       }
     },
 
