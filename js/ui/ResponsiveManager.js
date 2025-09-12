@@ -80,24 +80,27 @@
       `;
       
       // Remove old event listeners to avoid conflicts
-      menuToggle.replaceWith(menuToggle.cloneNode(true));
-      menuToggle = document.querySelector('#menuToggle');
+      const newMenuToggle = menuToggle.cloneNode(true);
+      menuToggle.replaceWith(newMenuToggle);
+      menuToggle = newMenuToggle;
 
       // Add hover effect
-      menuToggle.addEventListener('mouseenter', () => {
-        menuToggle.style.transform = 'scale(1.05)';
-        menuToggle.style.boxShadow = '0 4px 12px rgba(0,0,0,0.25)';
-      });
-      
-      menuToggle.addEventListener('mouseleave', () => {
-        menuToggle.style.transform = 'scale(1)';
-        menuToggle.style.boxShadow = '0 2px 8px rgba(0,0,0,0.15)';
-      });
+      if (menuToggle) {
+        menuToggle.addEventListener('mouseenter', () => {
+          menuToggle.style.transform = 'scale(1.05)';
+          menuToggle.style.boxShadow = '0 4px 12px rgba(0,0,0,0.25)';
+        });
+        
+        menuToggle.addEventListener('mouseleave', () => {
+          menuToggle.style.transform = 'scale(1)';
+          menuToggle.style.boxShadow = '0 2px 8px rgba(0,0,0,0.15)';
+        });
 
-      // Add toggle functionality
-      menuToggle.addEventListener('click', () => {
-        this.toggleMobileNav();
-      });
+        // Add toggle functionality
+        menuToggle.addEventListener('click', () => {
+          this.toggleMobileNav();
+        });
+      }
 
       // Create backdrop for mobile
       if (!document.querySelector('#backdrop')) {
@@ -108,7 +111,12 @@
         backdrop.addEventListener('click', () => {
           this.toggleMobileNav();
         });
-        shell.appendChild(backdrop);
+        const shell = document.querySelector('.shell');
+        if (shell) {
+          shell.appendChild(backdrop);
+        } else {
+          document.body.appendChild(backdrop);
+        }
       }
     },
 

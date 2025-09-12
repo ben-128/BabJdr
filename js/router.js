@@ -2157,10 +2157,13 @@
     },
 
     setupObjectSearchFunctionality() {
+      console.log('🔧 Setting up object search functionality');
       // Setup ID search functionality
       const idSearchInput = document.getElementById('id-search-input');
       const clearButton = document.getElementById('clear-id-search');
       const resultDiv = document.getElementById('id-search-result');
+      
+      console.log('Elements found:', { idSearchInput: !!idSearchInput, clearButton: !!clearButton, resultDiv: !!resultDiv });
       
       if (!idSearchInput) {
         console.warn('ID search input not found');
@@ -2170,15 +2173,20 @@
       // Search function
       const performIdSearch = (searchValue) => {
         const objectsContainer = document.getElementById('objets-container');
-        if (!objectsContainer) return;
+        if (!objectsContainer) {
+          console.warn('Objects container not found');
+          return;
+        }
         
         const allCards = objectsContainer.querySelectorAll('.card');
+        console.log('Found cards:', allCards.length);
         let foundCard = null;
         
         if (!searchValue || searchValue.trim() === '') {
-          // Show all cards when search is empty
+          // Show all cards when search is empty in dev mode, hide in normal mode
+          const isDevMode = JdrApp.utils.isDevMode();
           allCards.forEach(card => {
-            card.style.display = 'block';
+            card.style.display = isDevMode ? 'block' : 'none';
           });
           window.activeIdSearch = false;
           if (resultDiv) {
@@ -2194,6 +2202,7 @@
         
         // Find and show matching card
         const searchNumber = parseInt(searchValue);
+        console.log('Searching for object number:', searchNumber);
         if (!isNaN(searchNumber)) {
           allCards.forEach(card => {
             // Try multiple possible attribute names for the object number
@@ -2201,9 +2210,12 @@
                               card.getAttribute('data-object-numero') ||
                               card.getAttribute('data-objet-numero');
             
+            console.log('Card numero:', cardNumero, 'Comparing with:', searchNumber);
             if (cardNumero && parseInt(cardNumero) === searchNumber) {
               card.style.display = 'block';
+              card.style.visibility = 'visible';
               foundCard = card;
+              console.log('Found matching card!', card);
             }
           });
         }
