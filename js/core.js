@@ -357,80 +357,43 @@
             console.log('Tag added:', tag, 'Active tags:', window.ACTIVE_GM_OBJECT_TAGS);
           }
           
-          // Update the GM objects filters (safer than full regeneration)
+          // Refresh the GM objects page properly
           try {
-            self.updateGMObjectsFilters();
+            self.refreshGMObjectsPage();
           } catch (error) {
-            console.error('Error updating GM objects filters:', error);
+            console.error('Error refreshing GM objects page:', error);
           }
         }
       });
     },
 
-    updateGMObjectsFilters() {
-      console.log('Updating GM objects filters...');
+    refreshGMObjectsPage() {
+      console.log('Refreshing GM objects page...');
       
-      if (!window.OBJETS || !window.ACTIVE_GM_OBJECT_TAGS) {
-        console.error('Missing dependencies for GM filter update');
+      if (!window.OBJETS || !PageBuilder) {
+        console.error('Missing dependencies for GM page refresh');
         return;
       }
       
-      // Find the GM objects container and filter display
-      const objectsContainer = document.getElementById('gestion-objets-container');
-      const filtersDisplay = document.querySelector('.gm-objects-tag-display');
-      
-      if (!objectsContainer) {
-        console.error('GM objects container not found');
+      // Only proceed if we're actually on the GM objects page
+      const gmArticle = document.querySelector('article[data-page="gestion-objets"]');
+      if (!gmArticle) {
+        console.log('Not on GM objects page, skipping refresh');
         return;
       }
       
       try {
-        const allObjects = window.OBJETS.objets || [];
-        const activeTags = window.ACTIVE_GM_OBJECT_TAGS;
-        
-        console.log('Filtering objects with tags:', activeTags);
-        
-        // Filter objects based on active tags
-        const filteredObjects = activeTags.length === 0 
-          ? allObjects // No tags active = show all objects
-          : allObjects.filter(obj => {
-              // AND logic - object must have ALL active tags
-              if (!obj.tags || obj.tags.length === 0) return false;
-              return activeTags.every(activeTag => obj.tags.includes(activeTag));
-            });
-        
-        console.log(`Filtered ${filteredObjects.length} objects out of ${allObjects.length}`);
-        
-        // Update objects container with filtered results
-        objectsContainer.innerHTML = filteredObjects.map((item, index) => 
-          CardBuilder.create('objet', item, 'objets', index).build()
-        ).join('');
-        
-        // Update filter display if it exists
-        if (filtersDisplay && PageBuilder.buildGMTagFilters) {
-          const config = window.ContentTypes['objet'];
-          const availableTags = config.filterConfig.availableTags || [];
-          const newFiltersHTML = PageBuilder.buildGMTagFilters(activeTags, availableTags);
-          
-          // Create temporary container to extract just the inner content
-          const tempDiv = document.createElement('div');
-          tempDiv.innerHTML = newFiltersHTML;
-          const newFiltersContent = tempDiv.querySelector('.gm-objects-tag-display');
-          
-          if (newFiltersContent) {
-            filtersDisplay.innerHTML = newFiltersContent.innerHTML;
-          }
+        // Use the router to properly navigate to the same page, which will regenerate it cleanly
+        if (window.JdrApp && window.JdrApp.modules && window.JdrApp.modules.router) {
+          // Force a clean re-render of the GM objects page
+          window.JdrApp.modules.router.renderGMObjectsPage();
+          console.log('GM objects page refreshed successfully via router');
+        } else {
+          console.error('Router not available for GM page refresh');
         }
-        
-        // Auto-load images if available
-        if (this.modules.renderer && this.modules.renderer.autoLoadImages) {
-          this.modules.renderer.autoLoadImages();
-        }
-        
-        console.log('GM objects filters updated successfully');
         
       } catch (error) {
-        console.error('Error updating GM objects filters:', error);
+        console.error('Error refreshing GM objects page:', error);
       }
     },
 
