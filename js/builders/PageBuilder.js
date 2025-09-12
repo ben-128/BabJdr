@@ -813,87 +813,100 @@
     }
 
     buildTagFilters(activeTags, availableTags, context = 'objet') {
-      // For objects page, no longer show tag filters (moved to GM page)
-      if (context === 'objet') {
-        return ''; // Regular objects page has no tag filters
+      if (!availableTags || availableTags.length === 0) {
+        return '';
       }
-      
-      const isIdSearchActive = window.activeIdSearch || false;
-      const containerOpacity = isIdSearchActive ? '0.4' : '1';
-      const containerFilter = isIdSearchActive ? 'grayscale(1)' : 'none';
-      const pointerEvents = isIdSearchActive ? 'none' : 'auto';
-      
-      // Display all available tags, with active ones highlighted in green
-      const allFilterChips = availableTags.map(tag => {
-        const isActive = activeTags.includes(tag);
-        const bgColor = isActive ? '#16a34a' : '#6b7280';
-        const textColor = 'white';
-        const opacity = isActive ? '1' : '0.6';
-        
-        return `<button class="filter-chip ${isActive ? 'active' : 'inactive'}" 
-                        data-tag="${tag}" 
-                        style="background: ${bgColor}; color: ${textColor}; opacity: ${opacity}; 
-                               padding: 8px 16px; border-radius: 20px; font-size: 0.9em; font-weight: 500;
-                               cursor: pointer; transition: all 0.2s ease; border: none;
-                               margin: 2px; ${isActive ? 'box-shadow: 0 2px 4px rgba(22, 163, 74, 0.3);' : ''}"
-                        title="${isActive ? 'Actif - Cliquer pour désactiver' : 'Inactif - Cliquer pour activer'}">
-                    ${isActive ? '✓ ' : ''}${tag}
-                </button>`;
-      }).join('');
-      
+
+      const filterTitle = context === 'monster' ? '🎯 Filtrer les monstres par tags :' : 
+                         context === 'tableTresor' ? '🎯 Filtrer les tables par tags :' : 
+                         '🎯 Filtrer par tags :';
+
       return `
-        <div class="objects-tag-display" style="margin: 1rem 0; padding: 1rem; background: var(--card); border: 2px solid var(--rule); border-radius: 12px; opacity: ${containerOpacity}; filter: ${containerFilter}; pointer-events: ${pointerEvents}; transition: all 0.3s ease;">
-          <h3 style="margin: 0 0 1rem 0; text-align: center; color: var(--accent-ink);">🔍 Filtres par tag (ET)</h3>
-          <p style="text-align: center; color: var(--paper-muted); font-size: 0.9em; margin: 0 0 1rem 0;">
-            ${activeTags.length === 0 
-              ? 'Aucun filtre actif - Tous les objets affichés' 
-              : activeTags.length === 1 
-                ? '1 filtre actif - Objets avec ce tag uniquement'
-                : `${activeTags.length} filtres actifs - Objets avec TOUS ces tags`}
-          </p>
-          <div class="filter-chips" style="display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center;">
-            ${allFilterChips}
+        <div class="tag-filters" style="margin: 1rem 0; padding: 1rem; background: var(--card); border: 2px solid var(--rule); border-radius: 12px;">
+          <div style="margin-bottom: 1rem;">
+            <h4 style="margin: 0 0 0.5rem 0; color: var(--accent-ink); font-size: 1em;">
+              ${filterTitle}
+            </h4>
+            <p style="margin: 0; font-size: 0.85em; color: var(--paper-muted); font-style: italic;">
+              Cliquez sur les tags pour filtrer le contenu
+            </p>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+            ${availableTags.map(tag => {
+              const isActive = activeTags && activeTags.includes(tag);
+              const bgColor = isActive ? '#16a34a' : '#6b7280';
+              const opacity = isActive ? '1' : '0.6';
+              const prefix = isActive ? '✓ ' : '';
+              
+              return `
+                <button 
+                  class="filter-chip" 
+                  data-tag="${tag}"
+                  style="
+                    padding: 0.25rem 0.75rem;
+                    border: none;
+                    border-radius: 20px;
+                    background: ${bgColor};
+                    color: white;
+                    opacity: ${opacity};
+                    font-size: 0.85em;
+                    cursor: pointer;
+                    transition: all 0.2s ease;
+                  "
+                  title="${isActive ? 'Cliquez pour désactiver' : 'Cliquez pour activer'}"
+                >
+                  ${prefix}${tag}
+                </button>
+              `;
+            }).join('')}
           </div>
         </div>
       `;
     }
 
     buildGMTagFilters(activeTags, availableTags) {
-      const isIdSearchActive = window.activeIdSearch || false;
-      const containerOpacity = isIdSearchActive ? '0.4' : '1';
-      const containerFilter = isIdSearchActive ? 'grayscale(1)' : 'none';
-      const pointerEvents = isIdSearchActive ? 'none' : 'auto';
-      
-      // Display all available tags, with active ones highlighted in green
-      const allFilterChips = availableTags.map(tag => {
-        const isActive = activeTags.includes(tag);
-        const bgColor = isActive ? '#16a34a' : '#6b7280';
-        const textColor = 'white';
-        const opacity = isActive ? '1' : '0.6';
-        
-        return `<button class="gm-filter-chip ${isActive ? 'active' : 'inactive'}" 
-                        data-tag="${tag}" 
-                        style="background: ${bgColor}; color: ${textColor}; opacity: ${opacity}; 
-                               padding: 8px 16px; border-radius: 20px; font-size: 0.9em; font-weight: 500;
-                               cursor: pointer; transition: all 0.2s ease; border: none;
-                               margin: 2px; ${isActive ? 'box-shadow: 0 2px 4px rgba(22, 163, 74, 0.3);' : ''}"
-                        title="${isActive ? 'Actif - Cliquer pour désactiver' : 'Inactif - Cliquer pour activer'}">
-                    ${isActive ? '✓ ' : ''}${tag}
-                </button>`;
-      }).join('');
-      
+      if (!availableTags || availableTags.length === 0) {
+        return '';
+      }
+
       return `
-        <div class="gm-objects-tag-display" style="margin: 1rem 0; padding: 1rem; background: var(--card); border: 2px solid var(--rule); border-radius: 12px; opacity: ${containerOpacity}; filter: ${containerFilter}; pointer-events: ${pointerEvents}; transition: all 0.3s ease;">
-          <h3 style="margin: 0 0 1rem 0; text-align: center; color: var(--accent-ink);">🔍 Filtres par tag (ET)</h3>
-          <p style="text-align: center; color: var(--paper-muted); font-size: 0.9em; margin: 0 0 1rem 0;">
-            ${activeTags.length === 0 
-              ? 'Aucun filtre actif - Tous les objets affichés' 
-              : activeTags.length === 1 
-                ? '1 filtre actif - Objets avec ce tag uniquement'
-                : `${activeTags.length} filtres actifs - Objets avec TOUS ces tags`}
-          </p>
-          <div class="gm-filter-chips" style="display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center;">
-            ${allFilterChips}
+        <div class="gm-tag-filters" style="margin: 1rem 0; padding: 1rem; background: var(--card); border: 2px solid var(--bronze); border-radius: 12px;">
+          <div style="margin-bottom: 1rem;">
+            <h4 style="margin: 0 0 0.5rem 0; color: var(--accent-ink); font-size: 1em;">
+              🎯 Filtrer les objets par tags (Mode GM) :
+            </h4>
+            <p style="margin: 0; font-size: 0.85em; color: var(--paper-muted); font-style: italic;">
+              Cliquez sur les tags pour filtrer les objets. Logique ET (tous les tags sélectionnés requis).
+            </p>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+            ${availableTags.map(tag => {
+              const isActive = activeTags && activeTags.includes(tag);
+              const bgColor = isActive ? '#16a34a' : '#6b7280';
+              const opacity = isActive ? '1' : '0.6';
+              const prefix = isActive ? '✓ ' : '';
+              
+              return `
+                <button 
+                  class="gm-filter-chip" 
+                  data-tag="${tag}"
+                  style="
+                    padding: 0.25rem 0.75rem;
+                    border: none;
+                    border-radius: 20px;
+                    background: ${bgColor};
+                    color: white;
+                    opacity: ${opacity};
+                    font-size: 0.85em;
+                    cursor: pointer;
+                    transition: all 0.2s ease;
+                  "
+                  title="${isActive ? 'Cliquez pour désactiver' : 'Cliquez pour activer'}"
+                >
+                  ${prefix}${tag}
+                </button>
+              `;
+            }).join('')}
           </div>
         </div>
       `;

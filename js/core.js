@@ -320,17 +320,42 @@
         window.ScrollOptimizer.init();
       }
       
-      // Initialize GM objects page event handlers
-      this.initializeGMEventHandlers();
+      // Re-enable filter event handlers with fixed implementation
+      this.initializeFilterEventHandlers();
     },
 
-    initializeGMEventHandlers() {
+    initializeFilterEventHandlers() {
       // Store reference to this for use in event handlers
       const self = this;
       
-      // Use event delegation for GM filter chips
+      // Use event delegation for ALL filter chips (both regular and GM)
       document.addEventListener('click', (e) => {
-        // Handle GM filter chip clicks
+        
+        // Handle regular filter chips (monstres, tables, etc.)
+        if (e.target.classList.contains('filter-chip')) {
+          e.preventDefault();
+          e.stopPropagation();
+          
+          const tag = e.target.dataset.tag;
+          if (!tag) return;
+          
+          console.log('Regular filter clicked:', tag);
+          
+          // Determine which page we're on based on current route
+          const currentPage = window.location.hash.replace('#/', '') || 'creation';
+          
+          if (currentPage === 'monstres') {
+            this.handleMonsterFilter(tag);
+          } else if (currentPage === 'tables-tresors') {
+            this.handleTableTresorFilter(tag);
+          } else {
+            console.log('Filter not supported on this page:', currentPage);
+          }
+          
+          return;
+        }
+        
+        // Handle GM filter chips (objets page GM)
         if (e.target.classList.contains('gm-filter-chip')) {
           e.preventDefault();
           e.stopPropagation();
@@ -357,43 +382,156 @@
             console.log('Tag added:', tag, 'Active tags:', window.ACTIVE_GM_OBJECT_TAGS);
           }
           
-          // Refresh the GM objects page properly
+          // For GM filters, reload the page via router (cleaner approach)
           try {
-            self.refreshGMObjectsPage();
+            console.log('Reloading GM objects page...');
+            if (window.JdrApp && window.JdrApp.modules && window.JdrApp.modules.router) {
+              window.JdrApp.modules.router.renderGMObjectsPage();
+            }
           } catch (error) {
-            console.error('Error refreshing GM objects page:', error);
+            console.error('Error reloading GM objects page:', error);
           }
         }
       });
     },
 
-    refreshGMObjectsPage() {
-      console.log('Refreshing GM objects page...');
+    handleMonsterFilter(tag) {
+      // Initialize filter state if needed
+      if (!window.MONSTRES_FILTER_STATE) {
+        const config = window.ContentTypes?.monster?.filterConfig;
+        window.MONSTRES_FILTER_STATE = {
+          visibleTags: config?.defaultVisibleTags || ['Forêt']
+        };
+      }
       
-      if (!window.OBJETS || !PageBuilder) {
-        console.error('Missing dependencies for GM page refresh');
+      const state = window.MONSTRES_FILTER_STATE;
+      const index = state.visibleTags.indexOf(tag);
+      
+      if (index > -1) {
+        // Remove tag
+        state.visibleTags.splice(index, 1);
+        console.log('Monster tag removed:', tag, 'Active tags:', state.visibleTags);
+      } else {
+        // Add tag
+        state.visibleTags.push(tag);
+        console.log('Monster tag added:', tag, 'Active tags:', state.visibleTags);
+      }
+      
+      // Reload monsters page to apply filter
+      try {
+        if (window.JdrApp && window.JdrApp.modules && window.JdrApp.modules.router) {
+          window.JdrApp.modules.router.renderMonstersPage();
+        }
+      } catch (error) {
+        console.error('Error reloading monsters page:', error);
+      }
+    },
+
+    handleTableTresorFilter(tag) {
+      // Initialize filter state if needed
+      if (!window.TABLES_TRESORS_FILTER_STATE) {
+        const config = window.ContentTypes?.tableTresor?.filterConfig;
+        window.TABLES_TRESORS_FILTER_STATE = {
+          visibleTags: config?.defaultVisibleTags || ['Commun']
+        };
+      }
+      
+      const state = window.TABLES_TRESORS_FILTER_STATE;
+      const index = state.visibleTags.indexOf(tag);
+      
+      if (index > -1) {
+        // Remove tag
+        state.visibleTags.splice(index, 1);
+        console.log('Table tresor tag removed:', tag, 'Active tags:', state.visibleTags);
+      } else {
+        // Add tag
+        state.visibleTags.push(tag);
+        console.log('Table tresor tag added:', tag, 'Active tags:', state.visibleTags);
+      }
+      
+      // Reload tables page to apply filter
+      try {
+        if (window.JdrApp && window.JdrApp.modules && window.JdrApp.modules.router) {
+          window.JdrApp.modules.router.renderTablesTresorsPage();
+        }
+      } catch (error) {
+        console.error('Error reloading tables page:', error);
+      }
+    },
+
+    updateGMObjectsDisplay() {
+      console.log('Updating GM objects display...');
+      
+      if (!window.OBJETS || !window.ACTIVE_GM_OBJECT_TAGS) {
+        console.error('Missing dependencies for GM display update');
         return;
       }
       
       // Only proceed if we're actually on the GM objects page
       const gmArticle = document.querySelector('article[data-page="gestion-objets"]');
       if (!gmArticle) {
-        console.log('Not on GM objects page, skipping refresh');
+        console.log('Not on GM objects page, skipping update');
         return;
       }
       
       try {
-        // Use the router to properly navigate to the same page, which will regenerate it cleanly
-        if (window.JdrApp && window.JdrApp.modules && window.JdrApp.modules.router) {
-          // Force a clean re-render of the GM objects page
-          window.JdrApp.modules.router.renderGMObjectsPage();
-          console.log('GM objects page refreshed successfully via router');
+        const allObjects = window.OBJETS.objets || [];
+        const activeTags = window.ACTIVE_GM_OBJECT_TAGS;
+        
+        console.log('Applying filters:', activeTags);
+        
+        // Filter objects based on active tags
+        const filteredObjects = activeTags.length === 0 
+          ? allObjects
+          : allObjects.filter(obj => {
+              if (!obj.tags || obj.tags.length === 0) return false;
+              return activeTags.every(activeTag => obj.tags.includes(activeTag));
+            });
+        
+        console.log(`Showing ${filteredObjects.length}/${allObjects.length} objects`);
+        
+        // Update ONLY the objects container
+        const objectsContainer = document.getElementById('gestion-objets-container');
+        if (objectsContainer && CardBuilder) {
+          objectsContainer.innerHTML = filteredObjects.map((item, index) => 
+            CardBuilder.create('objet', item, 'objets', index).build()
+          ).join('');
+          
+          console.log('Objects container updated successfully');
         } else {
-          console.error('Router not available for GM page refresh');
+          console.error('Objects container or CardBuilder not found');
+        }
+        
+        // Update ONLY the filter chips visual state
+        const filterChips = document.querySelectorAll('.gm-filter-chip');
+        filterChips.forEach(chip => {
+          const tag = chip.dataset.tag;
+          const isActive = activeTags.includes(tag);
+          
+          if (isActive) {
+            chip.style.background = '#16a34a';
+            chip.style.opacity = '1';
+            chip.textContent = `✓ ${tag}`;
+            chip.classList.add('active');
+            chip.classList.remove('inactive');
+          } else {
+            chip.style.background = '#6b7280';
+            chip.style.opacity = '0.6';
+            chip.textContent = tag;
+            chip.classList.add('inactive');
+            chip.classList.remove('active');
+          }
+        });
+        
+        console.log('Filter chips updated successfully');
+        
+        // Auto-load images if available
+        if (this.modules.renderer && this.modules.renderer.autoLoadImages) {
+          this.modules.renderer.autoLoadImages();
         }
         
       } catch (error) {
-        console.error('Error refreshing GM objects page:', error);
+        console.error('Error updating GM objects display:', error);
       }
     },
 

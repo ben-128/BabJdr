@@ -2357,6 +2357,127 @@
           this.renderObjectsPage();
         });
       });
+    },
+
+    renderGMObjectsPage() {
+      if (!window.OBJETS) {
+        console.error('OBJETS data not loaded');
+        return false;
+      }
+      
+      // Generate the GM objects page HTML
+      const pageHTML = PageBuilder.getInstance().buildGameMasterObjectPage(window.OBJETS);
+      
+      // Clear and set content
+      const viewsContainer = document.getElementById('views');
+      if (viewsContainer) {
+        viewsContainer.innerHTML = pageHTML;
+        this.updateActiveStates('gestion-objets');
+        this.setupGMObjectSearch();
+        return true;
+      }
+      
+      return false;
+    },
+
+    setupGMObjectSearch() {
+      // Setup ID search for GM objects page
+      const idSearchInput = document.getElementById('id-search-input');
+      const searchButton = document.getElementById('search-object-btn');
+      const clearButton = document.getElementById('clear-id-search');
+      
+      const performIdSearch = (searchId) => {
+        const objectsContainer = document.getElementById('gestion-objets-container');
+        if (!objectsContainer) return;
+        
+        const allCards = objectsContainer.querySelectorAll('.card');
+        
+        if (!searchId) {
+          // Show all objects
+          allCards.forEach(card => card.style.display = 'block');
+          window.activeIdSearch = false;
+          return;
+        }
+        
+        // Hide all first
+        allCards.forEach(card => card.style.display = 'none');
+        
+        // Find and show matching object
+        const targetCard = Array.from(allCards).find(card => {
+          const cardIdElement = card.querySelector('.object-id');
+          return cardIdElement && cardIdElement.textContent.includes(`#${searchId}`);
+        });
+        
+        if (targetCard) {
+          targetCard.style.display = 'block';
+          targetCard.style.gridColumn = '1 / -1';
+          targetCard.style.justifySelf = 'center';
+          window.activeIdSearch = true;
+        } else {
+          window.activeIdSearch = false;
+        }
+      };
+      
+      if (searchButton && idSearchInput) {
+        searchButton.addEventListener('click', () => {
+          const searchId = idSearchInput.value.trim();
+          performIdSearch(searchId);
+        });
+        
+        idSearchInput.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
+            const searchId = idSearchInput.value.trim();
+            performIdSearch(searchId);
+          }
+        });
+      }
+      
+      if (clearButton) {
+        clearButton.addEventListener('click', () => {
+          idSearchInput.value = '';
+          performIdSearch('');
+        });
+      }
+    },
+
+    renderMonstersPage() {
+      if (!window.MONSTRES) {
+        console.error('MONSTRES data not loaded');
+        return false;
+      }
+      
+      // Generate the monsters page HTML
+      const pageHTML = PageBuilder.getInstance().buildSingleMonsterPage(window.MONSTRES);
+      
+      // Clear and set content
+      const viewsContainer = document.getElementById('views');
+      if (viewsContainer) {
+        viewsContainer.innerHTML = pageHTML;
+        this.updateActiveStates('monstres');
+        return true;
+      }
+      
+      return false;
+    },
+
+    renderTablesTresorsPage() {
+      if (!window.TABLES_TRESORS) {
+        console.error('TABLES_TRESORS data not loaded');
+        return false;
+      }
+      
+      // Generate the tables page HTML
+      const pageHTML = PageBuilder.getInstance().buildSingleTableTresorPage(window.TABLES_TRESORS);
+      
+      // Clear and set content
+      const viewsContainer = document.getElementById('views');
+      if (viewsContainer) {
+        viewsContainer.innerHTML = pageHTML;
+        this.updateActiveStates('tables-tresors');
+        return true;
+      }
+      
+      return false;
     }
   
   };

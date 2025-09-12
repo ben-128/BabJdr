@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-09-12T14:10:08.111Z by JdrBab Build System -->
+<!-- Generated on 2025-09-12T14:59:37.405Z by JdrBab Build System -->
 <title>JDR‑BAB — Livret de règles</title>
 <meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -9353,17 +9353,42 @@ article.active .grid {
         window.ScrollOptimizer.init();
       }
       
-      // Initialize GM objects page event handlers
-      this.initializeGMEventHandlers();
+      // Re-enable filter event handlers with fixed implementation
+      this.initializeFilterEventHandlers();
     },
 
-    initializeGMEventHandlers() {
+    initializeFilterEventHandlers() {
       // Store reference to this for use in event handlers
       const self = this;
       
-      // Use event delegation for GM filter chips
+      // Use event delegation for ALL filter chips (both regular and GM)
       document.addEventListener('click', (e) => {
-        // Handle GM filter chip clicks
+        
+        // Handle regular filter chips (monstres, tables, etc.)
+        if (e.target.classList.contains('filter-chip')) {
+          e.preventDefault();
+          e.stopPropagation();
+          
+          const tag = e.target.dataset.tag;
+          if (!tag) return;
+          
+          console.log('Regular filter clicked:', tag);
+          
+          // Determine which page we're on based on current route
+          const currentPage = window.location.hash.replace('#/', '') || 'creation';
+          
+          if (currentPage === 'monstres') {
+            this.handleMonsterFilter(tag);
+          } else if (currentPage === 'tables-tresors') {
+            this.handleTableTresorFilter(tag);
+          } else {
+            console.log('Filter not supported on this page:', currentPage);
+          }
+          
+          return;
+        }
+        
+        // Handle GM filter chips (objets page GM)
         if (e.target.classList.contains('gm-filter-chip')) {
           e.preventDefault();
           e.stopPropagation();
@@ -9390,43 +9415,156 @@ article.active .grid {
             console.log('Tag added:', tag, 'Active tags:', window.ACTIVE_GM_OBJECT_TAGS);
           }
           
-          // Refresh the GM objects page properly
+          // For GM filters, reload the page via router (cleaner approach)
           try {
-            self.refreshGMObjectsPage();
+            console.log('Reloading GM objects page...');
+            if (window.JdrApp && window.JdrApp.modules && window.JdrApp.modules.router) {
+              window.JdrApp.modules.router.renderGMObjectsPage();
+            }
           } catch (error) {
-            console.error('Error refreshing GM objects page:', error);
+            console.error('Error reloading GM objects page:', error);
           }
         }
       });
     },
 
-    refreshGMObjectsPage() {
-      console.log('Refreshing GM objects page...');
+    handleMonsterFilter(tag) {
+      // Initialize filter state if needed
+      if (!window.MONSTRES_FILTER_STATE) {
+        const config = window.ContentTypes?.monster?.filterConfig;
+        window.MONSTRES_FILTER_STATE = {
+          visibleTags: config?.defaultVisibleTags || ['Forêt']
+        };
+      }
       
-      if (!window.OBJETS || !PageBuilder) {
-        console.error('Missing dependencies for GM page refresh');
+      const state = window.MONSTRES_FILTER_STATE;
+      const index = state.visibleTags.indexOf(tag);
+      
+      if (index > -1) {
+        // Remove tag
+        state.visibleTags.splice(index, 1);
+        console.log('Monster tag removed:', tag, 'Active tags:', state.visibleTags);
+      } else {
+        // Add tag
+        state.visibleTags.push(tag);
+        console.log('Monster tag added:', tag, 'Active tags:', state.visibleTags);
+      }
+      
+      // Reload monsters page to apply filter
+      try {
+        if (window.JdrApp && window.JdrApp.modules && window.JdrApp.modules.router) {
+          window.JdrApp.modules.router.renderMonstersPage();
+        }
+      } catch (error) {
+        console.error('Error reloading monsters page:', error);
+      }
+    },
+
+    handleTableTresorFilter(tag) {
+      // Initialize filter state if needed
+      if (!window.TABLES_TRESORS_FILTER_STATE) {
+        const config = window.ContentTypes?.tableTresor?.filterConfig;
+        window.TABLES_TRESORS_FILTER_STATE = {
+          visibleTags: config?.defaultVisibleTags || ['Commun']
+        };
+      }
+      
+      const state = window.TABLES_TRESORS_FILTER_STATE;
+      const index = state.visibleTags.indexOf(tag);
+      
+      if (index > -1) {
+        // Remove tag
+        state.visibleTags.splice(index, 1);
+        console.log('Table tresor tag removed:', tag, 'Active tags:', state.visibleTags);
+      } else {
+        // Add tag
+        state.visibleTags.push(tag);
+        console.log('Table tresor tag added:', tag, 'Active tags:', state.visibleTags);
+      }
+      
+      // Reload tables page to apply filter
+      try {
+        if (window.JdrApp && window.JdrApp.modules && window.JdrApp.modules.router) {
+          window.JdrApp.modules.router.renderTablesTresorsPage();
+        }
+      } catch (error) {
+        console.error('Error reloading tables page:', error);
+      }
+    },
+
+    updateGMObjectsDisplay() {
+      console.log('Updating GM objects display...');
+      
+      if (!window.OBJETS || !window.ACTIVE_GM_OBJECT_TAGS) {
+        console.error('Missing dependencies for GM display update');
         return;
       }
       
       // Only proceed if we're actually on the GM objects page
       const gmArticle = document.querySelector('article[data-page="gestion-objets"]');
       if (!gmArticle) {
-        console.log('Not on GM objects page, skipping refresh');
+        console.log('Not on GM objects page, skipping update');
         return;
       }
       
       try {
-        // Use the router to properly navigate to the same page, which will regenerate it cleanly
-        if (window.JdrApp && window.JdrApp.modules && window.JdrApp.modules.router) {
-          // Force a clean re-render of the GM objects page
-          window.JdrApp.modules.router.renderGMObjectsPage();
-          console.log('GM objects page refreshed successfully via router');
+        const allObjects = window.OBJETS.objets || [];
+        const activeTags = window.ACTIVE_GM_OBJECT_TAGS;
+        
+        console.log('Applying filters:', activeTags);
+        
+        // Filter objects based on active tags
+        const filteredObjects = activeTags.length === 0 
+          ? allObjects
+          : allObjects.filter(obj => {
+              if (!obj.tags || obj.tags.length === 0) return false;
+              return activeTags.every(activeTag => obj.tags.includes(activeTag));
+            });
+        
+        console.log(`Showing ${filteredObjects.length}/${allObjects.length} objects`);
+        
+        // Update ONLY the objects container
+        const objectsContainer = document.getElementById('gestion-objets-container');
+        if (objectsContainer && CardBuilder) {
+          objectsContainer.innerHTML = filteredObjects.map((item, index) => 
+            CardBuilder.create('objet', item, 'objets', index).build()
+          ).join('');
+          
+          console.log('Objects container updated successfully');
         } else {
-          console.error('Router not available for GM page refresh');
+          console.error('Objects container or CardBuilder not found');
+        }
+        
+        // Update ONLY the filter chips visual state
+        const filterChips = document.querySelectorAll('.gm-filter-chip');
+        filterChips.forEach(chip => {
+          const tag = chip.dataset.tag;
+          const isActive = activeTags.includes(tag);
+          
+          if (isActive) {
+            chip.style.background = '#16a34a';
+            chip.style.opacity = '1';
+            chip.textContent = `✓ ${tag}`;
+            chip.classList.add('active');
+            chip.classList.remove('inactive');
+          } else {
+            chip.style.background = '#6b7280';
+            chip.style.opacity = '0.6';
+            chip.textContent = tag;
+            chip.classList.add('inactive');
+            chip.classList.remove('active');
+          }
+        });
+        
+        console.log('Filter chips updated successfully');
+        
+        // Auto-load images if available
+        if (this.modules.renderer && this.modules.renderer.autoLoadImages) {
+          this.modules.renderer.autoLoadImages();
         }
         
       } catch (error) {
-        console.error('Error refreshing GM objects page:', error);
+        console.error('Error updating GM objects display:', error);
       }
     },
 
@@ -12176,87 +12314,100 @@ article.active .grid {
     }
 
     buildTagFilters(activeTags, availableTags, context = 'objet') {
-      // For objects page, no longer show tag filters (moved to GM page)
-      if (context === 'objet') {
-        return ''; // Regular objects page has no tag filters
+      if (!availableTags || availableTags.length === 0) {
+        return '';
       }
-      
-      const isIdSearchActive = window.activeIdSearch || false;
-      const containerOpacity = isIdSearchActive ? '0.4' : '1';
-      const containerFilter = isIdSearchActive ? 'grayscale(1)' : 'none';
-      const pointerEvents = isIdSearchActive ? 'none' : 'auto';
-      
-      // Display all available tags, with active ones highlighted in green
-      const allFilterChips = availableTags.map(tag => {
-        const isActive = activeTags.includes(tag);
-        const bgColor = isActive ? '#16a34a' : '#6b7280';
-        const textColor = 'white';
-        const opacity = isActive ? '1' : '0.6';
-        
-        return `<button class="filter-chip ${isActive ? 'active' : 'inactive'}" 
-                        data-tag="${tag}" 
-                        style="background: ${bgColor}; color: ${textColor}; opacity: ${opacity}; 
-                               padding: 8px 16px; border-radius: 20px; font-size: 0.9em; font-weight: 500;
-                               cursor: pointer; transition: all 0.2s ease; border: none;
-                               margin: 2px; ${isActive ? 'box-shadow: 0 2px 4px rgba(22, 163, 74, 0.3);' : ''}"
-                        title="${isActive ? 'Actif - Cliquer pour désactiver' : 'Inactif - Cliquer pour activer'}">
-                    ${isActive ? '✓ ' : ''}${tag}
-                </button>`;
-      }).join('');
-      
+
+      const filterTitle = context === 'monster' ? '🎯 Filtrer les monstres par tags :' : 
+                         context === 'tableTresor' ? '🎯 Filtrer les tables par tags :' : 
+                         '🎯 Filtrer par tags :';
+
       return `
-        <div class="objects-tag-display" style="margin: 1rem 0; padding: 1rem; background: var(--card); border: 2px solid var(--rule); border-radius: 12px; opacity: ${containerOpacity}; filter: ${containerFilter}; pointer-events: ${pointerEvents}; transition: all 0.3s ease;">
-          <h3 style="margin: 0 0 1rem 0; text-align: center; color: var(--accent-ink);">🔍 Filtres par tag (ET)</h3>
-          <p style="text-align: center; color: var(--paper-muted); font-size: 0.9em; margin: 0 0 1rem 0;">
-            ${activeTags.length === 0 
-              ? 'Aucun filtre actif - Tous les objets affichés' 
-              : activeTags.length === 1 
-                ? '1 filtre actif - Objets avec ce tag uniquement'
-                : `${activeTags.length} filtres actifs - Objets avec TOUS ces tags`}
-          </p>
-          <div class="filter-chips" style="display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center;">
-            ${allFilterChips}
+        <div class="tag-filters" style="margin: 1rem 0; padding: 1rem; background: var(--card); border: 2px solid var(--rule); border-radius: 12px;">
+          <div style="margin-bottom: 1rem;">
+            <h4 style="margin: 0 0 0.5rem 0; color: var(--accent-ink); font-size: 1em;">
+              ${filterTitle}
+            </h4>
+            <p style="margin: 0; font-size: 0.85em; color: var(--paper-muted); font-style: italic;">
+              Cliquez sur les tags pour filtrer le contenu
+            </p>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+            ${availableTags.map(tag => {
+              const isActive = activeTags && activeTags.includes(tag);
+              const bgColor = isActive ? '#16a34a' : '#6b7280';
+              const opacity = isActive ? '1' : '0.6';
+              const prefix = isActive ? '✓ ' : '';
+              
+              return `
+                <button 
+                  class="filter-chip" 
+                  data-tag="${tag}"
+                  style="
+                    padding: 0.25rem 0.75rem;
+                    border: none;
+                    border-radius: 20px;
+                    background: ${bgColor};
+                    color: white;
+                    opacity: ${opacity};
+                    font-size: 0.85em;
+                    cursor: pointer;
+                    transition: all 0.2s ease;
+                  "
+                  title="${isActive ? 'Cliquez pour désactiver' : 'Cliquez pour activer'}"
+                >
+                  ${prefix}${tag}
+                </button>
+              `;
+            }).join('')}
           </div>
         </div>
       `;
     }
 
     buildGMTagFilters(activeTags, availableTags) {
-      const isIdSearchActive = window.activeIdSearch || false;
-      const containerOpacity = isIdSearchActive ? '0.4' : '1';
-      const containerFilter = isIdSearchActive ? 'grayscale(1)' : 'none';
-      const pointerEvents = isIdSearchActive ? 'none' : 'auto';
-      
-      // Display all available tags, with active ones highlighted in green
-      const allFilterChips = availableTags.map(tag => {
-        const isActive = activeTags.includes(tag);
-        const bgColor = isActive ? '#16a34a' : '#6b7280';
-        const textColor = 'white';
-        const opacity = isActive ? '1' : '0.6';
-        
-        return `<button class="gm-filter-chip ${isActive ? 'active' : 'inactive'}" 
-                        data-tag="${tag}" 
-                        style="background: ${bgColor}; color: ${textColor}; opacity: ${opacity}; 
-                               padding: 8px 16px; border-radius: 20px; font-size: 0.9em; font-weight: 500;
-                               cursor: pointer; transition: all 0.2s ease; border: none;
-                               margin: 2px; ${isActive ? 'box-shadow: 0 2px 4px rgba(22, 163, 74, 0.3);' : ''}"
-                        title="${isActive ? 'Actif - Cliquer pour désactiver' : 'Inactif - Cliquer pour activer'}">
-                    ${isActive ? '✓ ' : ''}${tag}
-                </button>`;
-      }).join('');
-      
+      if (!availableTags || availableTags.length === 0) {
+        return '';
+      }
+
       return `
-        <div class="gm-objects-tag-display" style="margin: 1rem 0; padding: 1rem; background: var(--card); border: 2px solid var(--rule); border-radius: 12px; opacity: ${containerOpacity}; filter: ${containerFilter}; pointer-events: ${pointerEvents}; transition: all 0.3s ease;">
-          <h3 style="margin: 0 0 1rem 0; text-align: center; color: var(--accent-ink);">🔍 Filtres par tag (ET)</h3>
-          <p style="text-align: center; color: var(--paper-muted); font-size: 0.9em; margin: 0 0 1rem 0;">
-            ${activeTags.length === 0 
-              ? 'Aucun filtre actif - Tous les objets affichés' 
-              : activeTags.length === 1 
-                ? '1 filtre actif - Objets avec ce tag uniquement'
-                : `${activeTags.length} filtres actifs - Objets avec TOUS ces tags`}
-          </p>
-          <div class="gm-filter-chips" style="display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center;">
-            ${allFilterChips}
+        <div class="gm-tag-filters" style="margin: 1rem 0; padding: 1rem; background: var(--card); border: 2px solid var(--bronze); border-radius: 12px;">
+          <div style="margin-bottom: 1rem;">
+            <h4 style="margin: 0 0 0.5rem 0; color: var(--accent-ink); font-size: 1em;">
+              🎯 Filtrer les objets par tags (Mode GM) :
+            </h4>
+            <p style="margin: 0; font-size: 0.85em; color: var(--paper-muted); font-style: italic;">
+              Cliquez sur les tags pour filtrer les objets. Logique ET (tous les tags sélectionnés requis).
+            </p>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+            ${availableTags.map(tag => {
+              const isActive = activeTags && activeTags.includes(tag);
+              const bgColor = isActive ? '#16a34a' : '#6b7280';
+              const opacity = isActive ? '1' : '0.6';
+              const prefix = isActive ? '✓ ' : '';
+              
+              return `
+                <button 
+                  class="gm-filter-chip" 
+                  data-tag="${tag}"
+                  style="
+                    padding: 0.25rem 0.75rem;
+                    border: none;
+                    border-radius: 20px;
+                    background: ${bgColor};
+                    color: white;
+                    opacity: ${opacity};
+                    font-size: 0.85em;
+                    cursor: pointer;
+                    transition: all 0.2s ease;
+                  "
+                  title="${isActive ? 'Cliquez pour désactiver' : 'Cliquez pour activer'}"
+                >
+                  ${prefix}${tag}
+                </button>
+              `;
+            }).join('')}
           </div>
         </div>
       `;
@@ -19040,6 +19191,127 @@ article.active .grid {
           this.renderObjectsPage();
         });
       });
+    },
+
+    renderGMObjectsPage() {
+      if (!window.OBJETS) {
+        console.error('OBJETS data not loaded');
+        return false;
+      }
+      
+      // Generate the GM objects page HTML
+      const pageHTML = PageBuilder.getInstance().buildGameMasterObjectPage(window.OBJETS);
+      
+      // Clear and set content
+      const viewsContainer = document.getElementById('views');
+      if (viewsContainer) {
+        viewsContainer.innerHTML = pageHTML;
+        this.updateActiveStates('gestion-objets');
+        this.setupGMObjectSearch();
+        return true;
+      }
+      
+      return false;
+    },
+
+    setupGMObjectSearch() {
+      // Setup ID search for GM objects page
+      const idSearchInput = document.getElementById('id-search-input');
+      const searchButton = document.getElementById('search-object-btn');
+      const clearButton = document.getElementById('clear-id-search');
+      
+      const performIdSearch = (searchId) => {
+        const objectsContainer = document.getElementById('gestion-objets-container');
+        if (!objectsContainer) return;
+        
+        const allCards = objectsContainer.querySelectorAll('.card');
+        
+        if (!searchId) {
+          // Show all objects
+          allCards.forEach(card => card.style.display = 'block');
+          window.activeIdSearch = false;
+          return;
+        }
+        
+        // Hide all first
+        allCards.forEach(card => card.style.display = 'none');
+        
+        // Find and show matching object
+        const targetCard = Array.from(allCards).find(card => {
+          const cardIdElement = card.querySelector('.object-id');
+          return cardIdElement && cardIdElement.textContent.includes(`#${searchId}`);
+        });
+        
+        if (targetCard) {
+          targetCard.style.display = 'block';
+          targetCard.style.gridColumn = '1 / -1';
+          targetCard.style.justifySelf = 'center';
+          window.activeIdSearch = true;
+        } else {
+          window.activeIdSearch = false;
+        }
+      };
+      
+      if (searchButton && idSearchInput) {
+        searchButton.addEventListener('click', () => {
+          const searchId = idSearchInput.value.trim();
+          performIdSearch(searchId);
+        });
+        
+        idSearchInput.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
+            const searchId = idSearchInput.value.trim();
+            performIdSearch(searchId);
+          }
+        });
+      }
+      
+      if (clearButton) {
+        clearButton.addEventListener('click', () => {
+          idSearchInput.value = '';
+          performIdSearch('');
+        });
+      }
+    },
+
+    renderMonstersPage() {
+      if (!window.MONSTRES) {
+        console.error('MONSTRES data not loaded');
+        return false;
+      }
+      
+      // Generate the monsters page HTML
+      const pageHTML = PageBuilder.getInstance().buildSingleMonsterPage(window.MONSTRES);
+      
+      // Clear and set content
+      const viewsContainer = document.getElementById('views');
+      if (viewsContainer) {
+        viewsContainer.innerHTML = pageHTML;
+        this.updateActiveStates('monstres');
+        return true;
+      }
+      
+      return false;
+    },
+
+    renderTablesTresorsPage() {
+      if (!window.TABLES_TRESORS) {
+        console.error('TABLES_TRESORS data not loaded');
+        return false;
+      }
+      
+      // Generate the tables page HTML
+      const pageHTML = PageBuilder.getInstance().buildSingleTableTresorPage(window.TABLES_TRESORS);
+      
+      // Clear and set content
+      const viewsContainer = document.getElementById('views');
+      if (viewsContainer) {
+        viewsContainer.innerHTML = pageHTML;
+        this.updateActiveStates('tables-tresors');
+        return true;
+      }
+      
+      return false;
     }
   
   };
