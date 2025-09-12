@@ -565,16 +565,39 @@
         targetCard.style.border = '3px solid #16a34a';
         targetCard.style.boxShadow = '0 0 15px rgba(22, 163, 74, 0.5)';
         
-        // Center the object with multiple approaches for better compatibility
+        // Center the object with mobile-optimized approach
         setTimeout(() => {
-          // First try scrollIntoView
-          targetCard.scrollIntoView({ 
-            behavior: 'smooth', 
-            block: 'center', 
-            inline: 'center' 
-          });
+          // Mobile-specific centering that accounts for viewport and layout
+          const isMobile = window.innerWidth <= 768;
           
-          // Also try manual scroll calculation as fallback
+          if (isMobile) {
+            // Mobile centering - account for mobile layout specifics
+            const rect = targetCard.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            const windowWidth = window.innerWidth;
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+            
+            // Calculate center position accounting for mobile viewport
+            const targetY = rect.top + scrollTop - (windowHeight / 2) + (rect.height / 2);
+            const targetX = rect.left + scrollLeft - (windowWidth / 2) + (rect.width / 2);
+            
+            // Scroll to center both vertically and horizontally on mobile
+            window.scrollTo({
+              top: Math.max(0, targetY),
+              left: Math.max(0, targetX),
+              behavior: 'smooth'
+            });
+          } else {
+            // Desktop centering - use scrollIntoView which works well on desktop
+            targetCard.scrollIntoView({ 
+              behavior: 'smooth', 
+              block: 'center', 
+              inline: 'center' 
+            });
+          }
+          
+          // Additional fallback for problematic browsers
           setTimeout(() => {
             const rect = targetCard.getBoundingClientRect();
             const windowHeight = window.innerHeight;
@@ -585,7 +608,7 @@
               top: Math.max(0, targetY),
               behavior: 'smooth'
             });
-          }, 200);
+          }, 300);
         }, 100);
 
         // Update search result message
