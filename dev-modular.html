@@ -13,6 +13,7 @@
 <!-- PWA Configuration -->
 <link rel="manifest" href="config/manifest.json">
 <meta name="theme-color" content="#8b4513">
+<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="JDR-BAB">
@@ -127,12 +128,15 @@
 				}
 			}
 			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-			var address = protocol + window.location.host + window.location.pathname + '/ws';
-			var socket = new WebSocket(address);
-			socket.onmessage = function(msg) {
-				if (msg.data == 'reload') window.location.reload();
-				else if (msg.data == 'refreshcss') refreshCSS();
-			};
+			var address = protocol + window.location.host + window.location.pathname.replace(/\/$/, '') + '/ws';
+			// Skip WebSocket connection in development to avoid console errors
+			if (false) {
+				var socket = new WebSocket(address);
+				socket.onmessage = function(msg) {
+					if (msg.data == 'reload') window.location.reload();
+					else if (msg.data == 'refreshcss') refreshCSS();
+				};
+			}
 		})();
 	}
 </script>
@@ -157,13 +161,15 @@
 				}
 			}
 			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-			var address = protocol + window.location.host + window.location.pathname + '/ws';
-			var socket = new WebSocket(address);
-			socket.onmessage = function(msg) {
-				if (msg.data == 'reload') window.location.reload();
-				else if (msg.data == 'refreshcss') refreshCSS();
-			};
-			console.log('Live reload enabled.');
+			var address = protocol + window.location.host + window.location.pathname.replace(/\/$/, '') + '/ws';
+			// Skip WebSocket connection in development to avoid console errors
+			if (false) {
+				var socket = new WebSocket(address);
+				socket.onmessage = function(msg) {
+					if (msg.data == 'reload') window.location.reload();
+					else if (msg.data == 'refreshcss') refreshCSS();
+				};
+			}
 		})();
 	}
 	// ]]>
@@ -188,13 +194,15 @@
 				}
 			}
 			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-			var address = protocol + window.location.host + window.location.pathname + '/ws';
-			var socket = new WebSocket(address);
-			socket.onmessage = function(msg) {
-				if (msg.data == 'reload') window.location.reload();
-				else if (msg.data == 'refreshcss') refreshCSS();
-			};
-			console.log('Live reload enabled.');
+			var address = protocol + window.location.host + window.location.pathname.replace(/\/$/, '') + '/ws';
+			// Skip WebSocket connection in development to avoid console errors
+			if (false) {
+				var socket = new WebSocket(address);
+				socket.onmessage = function(msg) {
+					if (msg.data == 'reload') window.location.reload();
+					else if (msg.data == 'refreshcss') refreshCSS();
+				};
+			}
 		})();
 	}
 	// ]]>
@@ -216,7 +224,7 @@ if ('serviceWorker' in navigator) {
             newWorker.addEventListener('statechange', () => {
               if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
                 // New content available, notify user
-                if (window.JdrApp && JdrApp.modules && JdrApp.modules.ui) {
+                if (window.JdrApp && JdrApp.modules && JdrApp.modules.ui && typeof JdrApp.modules.ui.showNotification === 'function') {
                   JdrApp.modules.ui.showNotification('🔄 Nouvelle version disponible ! Rechargez la page.', 'info');
                 }
               }
@@ -232,20 +240,18 @@ if ('serviceWorker' in navigator) {
   // Listen for app install prompt
   let deferredPrompt;
   window.addEventListener('beforeinstallprompt', (e) => {
-    console.log('💾 PWA install prompt available');
     e.preventDefault();
     deferredPrompt = e;
     
     // Show install button or notification
-    if (window.JdrApp && JdrApp.modules && JdrApp.modules.ui) {
+    if (window.JdrApp && JdrApp.modules && JdrApp.modules.ui && typeof JdrApp.modules.ui.showNotification === 'function') {
       JdrApp.modules.ui.showNotification('📱 Installer JDR-BAB sur votre appareil ?', 'info');
     }
   });
 
   // Track install success
   window.addEventListener('appinstalled', (e) => {
-    console.log('✅ PWA was installed successfully');
-    if (window.JdrApp && JdrApp.modules && JdrApp.modules.ui) {
+    if (window.JdrApp && JdrApp.modules && JdrApp.modules.ui && typeof JdrApp.modules.ui.showNotification === 'function') {
       JdrApp.modules.ui.showNotification('✅ JDR-BAB installé avec succès !', 'success');
     }
     deferredPrompt = null;

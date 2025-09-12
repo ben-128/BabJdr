@@ -27,7 +27,6 @@
       this.setupNewPageHandler();
       this._initialized = true;
       
-      console.log('✅ UICore initialized');
     },
 
     /**

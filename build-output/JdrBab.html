@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-09-12T15:41:08.924Z by JdrBab Build System -->
+<!-- Generated on 2025-09-12T15:49:04.406Z by JdrBab Build System -->
 <title>JDR‑BAB — Livret de règles</title>
 <meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,41 +19,41 @@ window.MANIFEST_DATA = {
   "short_name": "JDR-BAB",
   "description": "Livret web multipages des règles JDR-BAB, thème parchemin, illustrations par catégorie/classe/sous-classe",
   "version": "1.0.0",
-  "start_url": "/BabJdr/",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#f4f0e6",
   "theme_color": "#8b4513",
   "orientation": "any",
-  "scope": "/BabJdr/",
+  "scope": "/",
   "lang": "fr",
   "categories": ["games", "entertainment", "productivity"],
   "icons": [
     {
-      "src": "/BabJdr/icons/icon-72x72.png",
+      "src": "../assets/pwa/icon-72x72.png",
       "sizes": "72x72",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/BabJdr/icons/icon-96x96.png",
+      "src": "../assets/pwa/icon-96x96.png",
       "sizes": "96x96",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/BabJdr/icons/icon-144x144.png",
+      "src": "../assets/pwa/icon-144x144.png",
       "sizes": "144x144",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/BabJdr/icons/icon-192x192.png",
+      "src": "../assets/pwa/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/BabJdr/icons/icon-512x512.png",
+      "src": "../assets/pwa/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
@@ -64,10 +64,10 @@ window.MANIFEST_DATA = {
       "name": "Création de personnage",
       "short_name": "Création",
       "description": "Accéder directement à la création de personnage",
-      "url": "/BabJdr/#/creation",
+      "url": "/#/creation",
       "icons": [
         {
-          "src": "/BabJdr/icons/icon-96x96.png",
+          "src": "../assets/pwa/icon-96x96.png",
           "sizes": "96x96",
           "type": "image/png"
         }
@@ -77,10 +77,10 @@ window.MANIFEST_DATA = {
       "name": "Classes",
       "short_name": "Classes",
       "description": "Consulter les classes de personnage",
-      "url": "/BabJdr/#/classes",
+      "url": "/#/classes",
       "icons": [
         {
-          "src": "/BabJdr/icons/icon-96x96.png",
+          "src": "../assets/pwa/icon-96x96.png",
           "sizes": "96x96",
           "type": "image/png"
         }
@@ -90,10 +90,10 @@ window.MANIFEST_DATA = {
       "name": "Sorts",
       "short_name": "Sorts",
       "description": "Consulter la liste des sorts",
-      "url": "/BabJdr/#/sorts",
+      "url": "/#/sorts",
       "icons": [
         {
-          "src": "/BabJdr/icons/icon-96x96.png",
+          "src": "../assets/pwa/icon-96x96.png",
           "sizes": "96x96",
           "type": "image/png"
         }
@@ -103,16 +103,16 @@ window.MANIFEST_DATA = {
       "name": "Dons",
       "short_name": "Dons",
       "description": "Consulter la liste des dons",
-      "url": "/BabJdr/#/dons",
+      "url": "/#/dons",
       "icons": [
         {
-          "src": "/BabJdr/icons/icon-96x96.png",
+          "src": "../assets/pwa/icon-96x96.png",
           "sizes": "96x96",
           "type": "image/png"
         }
       ]
     }
-  ],
+  ]
 };
 </script>
 <meta name="theme-color" content="#8b4513">
@@ -16977,88 +16977,19 @@ article.active .grid {
         
         // IMPORTANT: Reset the activeIdSearch state when navigating to Objects page
         if (page === 'objets') {
-          console.log('🔍 DEBUG: Navigating to Objects page, resetting search state');
-          console.log('🔍 DEBUG: activeIdSearch before reset:', window.activeIdSearch);
           window.activeIdSearch = false;
-          console.log('🔍 DEBUG: activeIdSearch after reset:', window.activeIdSearch);
           
           // Clear any search results
           const resultDiv = document.getElementById('id-search-result');
           if (resultDiv) {
-            console.log('🔍 DEBUG: Found result div, clearing content');
             resultDiv.textContent = '';
-          } else {
-            console.log('🔍 DEBUG: Result div not found');
           }
           
           // Clear search input
           const searchInput = document.getElementById('id-search-input');
           if (searchInput) {
-            console.log('🔍 DEBUG: Found search input, clearing value');
             searchInput.value = '';
-          } else {
-            console.log('🔍 DEBUG: Search input not found');
           }
-          
-          // Check if objects container exists and its state
-          const objectsContainer = document.getElementById('objets-container');
-          if (objectsContainer) {
-            const allCards = objectsContainer.querySelectorAll('.card');
-            console.log('🔍 DEBUG: Objects container found, total cards:', allCards.length);
-            let visibleCards = 0;
-            allCards.forEach((card, index) => {
-              if (card.style.display !== 'none') {
-                visibleCards++;
-                if (index < 3) { // Log first 3 visible cards
-                  console.log(`🔍 DEBUG: Card ${index} is visible`);
-                }
-              }
-            });
-            console.log('🔍 DEBUG: Total visible cards:', visibleCards);
-          } else {
-            console.log('🔍 DEBUG: Objects container not found');
-          }
-          
-          // Add debug event listeners for search functionality
-          setTimeout(() => {
-            console.log('🔍 DEBUG: Setting up debug event listeners for search');
-            
-            const searchBtn = document.getElementById('search-object-btn');
-            const searchInput = document.getElementById('id-search-input');
-            const clearBtn = document.getElementById('clear-id-search');
-            
-            if (searchBtn) {
-              console.log('🔍 DEBUG: Search button found, adding debug listener');
-              searchBtn.addEventListener('click', () => {
-                console.log('🔍 DEBUG: Search button clicked!');
-                const inputValue = searchInput ? searchInput.value : 'no input found';
-                console.log('🔍 DEBUG: Input value:', inputValue);
-                console.log('🔍 DEBUG: activeIdSearch state:', window.activeIdSearch);
-              });
-            } else {
-              console.log('🔍 DEBUG: Search button not found');
-            }
-            
-            if (searchInput) {
-              console.log('🔍 DEBUG: Search input found, adding debug listener');
-              searchInput.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter') {
-                  console.log('🔍 DEBUG: Enter key pressed in search input!');
-                  console.log('🔍 DEBUG: Input value:', e.target.value);
-                  console.log('🔍 DEBUG: activeIdSearch state:', window.activeIdSearch);
-                }
-              });
-            } else {
-              console.log('🔍 DEBUG: Search input not found');
-            }
-            
-            if (clearBtn) {
-              console.log('🔍 DEBUG: Clear button found');
-            } else {
-              console.log('🔍 DEBUG: Clear button not found');
-            }
-            
-          }, 500);
         }
       }
       
@@ -24261,7 +24192,6 @@ article.active .grid {
       this.setupNewPageHandler();
       this._initialized = true;
       
-      console.log('✅ UICore initialized');
     },
 
     /**

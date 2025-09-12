@@ -144,88 +144,19 @@
         
         // IMPORTANT: Reset the activeIdSearch state when navigating to Objects page
         if (page === 'objets') {
-          console.log('🔍 DEBUG: Navigating to Objects page, resetting search state');
-          console.log('🔍 DEBUG: activeIdSearch before reset:', window.activeIdSearch);
           window.activeIdSearch = false;
-          console.log('🔍 DEBUG: activeIdSearch after reset:', window.activeIdSearch);
           
           // Clear any search results
           const resultDiv = document.getElementById('id-search-result');
           if (resultDiv) {
-            console.log('🔍 DEBUG: Found result div, clearing content');
             resultDiv.textContent = '';
-          } else {
-            console.log('🔍 DEBUG: Result div not found');
           }
           
           // Clear search input
           const searchInput = document.getElementById('id-search-input');
           if (searchInput) {
-            console.log('🔍 DEBUG: Found search input, clearing value');
             searchInput.value = '';
-          } else {
-            console.log('🔍 DEBUG: Search input not found');
           }
-          
-          // Check if objects container exists and its state
-          const objectsContainer = document.getElementById('objets-container');
-          if (objectsContainer) {
-            const allCards = objectsContainer.querySelectorAll('.card');
-            console.log('🔍 DEBUG: Objects container found, total cards:', allCards.length);
-            let visibleCards = 0;
-            allCards.forEach((card, index) => {
-              if (card.style.display !== 'none') {
-                visibleCards++;
-                if (index < 3) { // Log first 3 visible cards
-                  console.log(`🔍 DEBUG: Card ${index} is visible`);
-                }
-              }
-            });
-            console.log('🔍 DEBUG: Total visible cards:', visibleCards);
-          } else {
-            console.log('🔍 DEBUG: Objects container not found');
-          }
-          
-          // Add debug event listeners for search functionality
-          setTimeout(() => {
-            console.log('🔍 DEBUG: Setting up debug event listeners for search');
-            
-            const searchBtn = document.getElementById('search-object-btn');
-            const searchInput = document.getElementById('id-search-input');
-            const clearBtn = document.getElementById('clear-id-search');
-            
-            if (searchBtn) {
-              console.log('🔍 DEBUG: Search button found, adding debug listener');
-              searchBtn.addEventListener('click', () => {
-                console.log('🔍 DEBUG: Search button clicked!');
-                const inputValue = searchInput ? searchInput.value : 'no input found';
-                console.log('🔍 DEBUG: Input value:', inputValue);
-                console.log('🔍 DEBUG: activeIdSearch state:', window.activeIdSearch);
-              });
-            } else {
-              console.log('🔍 DEBUG: Search button not found');
-            }
-            
-            if (searchInput) {
-              console.log('🔍 DEBUG: Search input found, adding debug listener');
-              searchInput.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter') {
-                  console.log('🔍 DEBUG: Enter key pressed in search input!');
-                  console.log('🔍 DEBUG: Input value:', e.target.value);
-                  console.log('🔍 DEBUG: activeIdSearch state:', window.activeIdSearch);
-                }
-              });
-            } else {
-              console.log('🔍 DEBUG: Search input not found');
-            }
-            
-            if (clearBtn) {
-              console.log('🔍 DEBUG: Clear button found');
-            } else {
-              console.log('🔍 DEBUG: Clear button not found');
-            }
-            
-          }, 500);
         }
       }
       
