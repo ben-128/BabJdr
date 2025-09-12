@@ -466,6 +466,13 @@
               }
             }, 10);
           }
+          
+          // Setup object search specifically for objects page
+          if (contentType === 'objet') {
+            setTimeout(() => {
+              this.setupObjectSearchIfNeeded();
+            }, 100);
+          }
         }
       }
     },
@@ -481,13 +488,45 @@
       const newSearchInput = idSearchInput.cloneNode(true);
       idSearchInput.parentNode.replaceChild(newSearchInput, idSearchInput);
       
-      // Add keyup event listener for Enter key validation
+      // Add multiple event listeners to catch Enter key
       newSearchInput.addEventListener('keyup', (e) => {
         if (e.key === 'Enter') {
+          e.preventDefault();
+          e.stopPropagation();
           const searchId = e.target.value.trim();
           this.performIdSearch(searchId);
         }
       });
+      
+      newSearchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          e.stopPropagation();
+          const searchId = e.target.value.trim();
+          this.performIdSearch(searchId);
+        }
+      });
+      
+      newSearchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          e.stopPropagation();
+          const searchId = e.target.value.trim();
+          this.performIdSearch(searchId);
+        }
+      });
+
+      // Setup search button
+      const searchButton = document.getElementById('search-object-btn');
+      if (searchButton) {
+        const newSearchButton = searchButton.cloneNode(true);
+        searchButton.parentNode.replaceChild(newSearchButton, searchButton);
+        
+        newSearchButton.addEventListener('click', () => {
+          const searchId = newSearchInput.value.trim();
+          this.performIdSearch(searchId);
+        });
+      }
 
       // Setup clear search button if it exists
       if (clearSearchButton) {
@@ -522,13 +561,31 @@
         // Show the found object and center it
         targetCard.style.display = 'block';
         
-        // Center the object with smooth scrolling
+        // Add highlight effect
+        targetCard.style.border = '3px solid #16a34a';
+        targetCard.style.boxShadow = '0 0 15px rgba(22, 163, 74, 0.5)';
+        
+        // Center the object with multiple approaches for better compatibility
         setTimeout(() => {
+          // First try scrollIntoView
           targetCard.scrollIntoView({ 
             behavior: 'smooth', 
             block: 'center', 
             inline: 'center' 
           });
+          
+          // Also try manual scroll calculation as fallback
+          setTimeout(() => {
+            const rect = targetCard.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const targetY = rect.top + scrollTop - (windowHeight / 2) + (rect.height / 2);
+            
+            window.scrollTo({
+              top: Math.max(0, targetY),
+              behavior: 'smooth'
+            });
+          }, 200);
         }, 100);
 
         // Update search result message
@@ -567,11 +624,14 @@
         resultDiv.textContent = '';
       }
       
-      // Show all objects
+      // Show all objects and remove highlights
       if (objectsContainer) {
         const allObjectCards = objectsContainer.querySelectorAll('.card');
         allObjectCards.forEach(card => {
           card.style.display = 'block';
+          // Remove highlight effects
+          card.style.border = '';
+          card.style.boxShadow = '';
         });
       }
       

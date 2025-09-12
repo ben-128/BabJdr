@@ -736,6 +736,14 @@
                 style="padding: 0.2rem; border: 1px solid ${searchBorderColor}; border-radius: 6px; font-size: 0.95em; width: 150px; height: 2rem; display: flex; align-items: center;"
               >
               <button 
+                id="search-object-btn" 
+                class="btn small" 
+                style="background: var(--primary-color); color: white; padding: 0.2rem 0.4rem; white-space: nowrap; font-size: 0.9em; display: flex; align-items: center; height: 2rem; justify-content: center;"
+                title="Rechercher cet objet"
+              >
+                🔍 Chercher
+              </button>
+              <button 
                 id="clear-id-search" 
                 class="btn small" 
                 style="background: var(--bronze); color: white; padding: 0.2rem 0.4rem; white-space: nowrap; font-size: 0.9em; display: ${!isDevMode ? 'none' : 'flex'}; align-items: center; height: 2rem; justify-content: center;"
