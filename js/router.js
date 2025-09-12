@@ -144,17 +144,88 @@
         
         // IMPORTANT: Reset the activeIdSearch state when navigating to Objects page
         if (page === 'objets') {
+          console.log('🔍 DEBUG: Navigating to Objects page, resetting search state');
+          console.log('🔍 DEBUG: activeIdSearch before reset:', window.activeIdSearch);
           window.activeIdSearch = false;
+          console.log('🔍 DEBUG: activeIdSearch after reset:', window.activeIdSearch);
+          
           // Clear any search results
           const resultDiv = document.getElementById('id-search-result');
           if (resultDiv) {
+            console.log('🔍 DEBUG: Found result div, clearing content');
             resultDiv.textContent = '';
+          } else {
+            console.log('🔍 DEBUG: Result div not found');
           }
+          
           // Clear search input
           const searchInput = document.getElementById('id-search-input');
           if (searchInput) {
+            console.log('🔍 DEBUG: Found search input, clearing value');
             searchInput.value = '';
+          } else {
+            console.log('🔍 DEBUG: Search input not found');
           }
+          
+          // Check if objects container exists and its state
+          const objectsContainer = document.getElementById('objets-container');
+          if (objectsContainer) {
+            const allCards = objectsContainer.querySelectorAll('.card');
+            console.log('🔍 DEBUG: Objects container found, total cards:', allCards.length);
+            let visibleCards = 0;
+            allCards.forEach((card, index) => {
+              if (card.style.display !== 'none') {
+                visibleCards++;
+                if (index < 3) { // Log first 3 visible cards
+                  console.log(`🔍 DEBUG: Card ${index} is visible`);
+                }
+              }
+            });
+            console.log('🔍 DEBUG: Total visible cards:', visibleCards);
+          } else {
+            console.log('🔍 DEBUG: Objects container not found');
+          }
+          
+          // Add debug event listeners for search functionality
+          setTimeout(() => {
+            console.log('🔍 DEBUG: Setting up debug event listeners for search');
+            
+            const searchBtn = document.getElementById('search-object-btn');
+            const searchInput = document.getElementById('id-search-input');
+            const clearBtn = document.getElementById('clear-id-search');
+            
+            if (searchBtn) {
+              console.log('🔍 DEBUG: Search button found, adding debug listener');
+              searchBtn.addEventListener('click', () => {
+                console.log('🔍 DEBUG: Search button clicked!');
+                const inputValue = searchInput ? searchInput.value : 'no input found';
+                console.log('🔍 DEBUG: Input value:', inputValue);
+                console.log('🔍 DEBUG: activeIdSearch state:', window.activeIdSearch);
+              });
+            } else {
+              console.log('🔍 DEBUG: Search button not found');
+            }
+            
+            if (searchInput) {
+              console.log('🔍 DEBUG: Search input found, adding debug listener');
+              searchInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                  console.log('🔍 DEBUG: Enter key pressed in search input!');
+                  console.log('🔍 DEBUG: Input value:', e.target.value);
+                  console.log('🔍 DEBUG: activeIdSearch state:', window.activeIdSearch);
+                }
+              });
+            } else {
+              console.log('🔍 DEBUG: Search input not found');
+            }
+            
+            if (clearBtn) {
+              console.log('🔍 DEBUG: Clear button found');
+            } else {
+              console.log('🔍 DEBUG: Clear button not found');
+            }
+            
+          }, 500);
         }
       }
       
@@ -517,8 +588,9 @@
     },
 
     generateTOCSection(section) {
-      const sectionClass = section.collapsed ? 'toc-section collapsed' : 'toc-section';
-      const toggleIcon = section.collapsed ? '▶' : '▼';
+      // Make all sections collapsed by default (ignoring section.collapsed from data)
+      const sectionClass = 'toc-section collapsed';
+      const toggleIcon = '▶';
       
       return `
         <div class="${sectionClass}" data-section="${section.id}">
@@ -548,7 +620,7 @@
 
       if (item.id === 'classes') {
         return `
-          <div class="toc-category">
+          <div class="toc-category collapsed">
             <a data-route="classes" href="#/classes" class="">${item.icon} ${item.title}</a>
             <div class="toc-sub">
               ${dataSource.map(classe => 
@@ -570,7 +642,7 @@
         `;
       } else if (item.id === 'dons') {
         return `
-          <div class="toc-category">
+          <div class="toc-category collapsed">
             <a data-route="dons" href="#/dons" class="">${item.icon} ${item.title}</a>
             <div class="toc-sub">
               ${dataSource.map(category => 
@@ -592,7 +664,7 @@
         <h4>Sommaire</h4>
         <a class="" data-route="creation" href="#/creation">🧙‍♂️ Création d'un personnage</a>
         
-        <div class="toc-category">
+        <div class="toc-category collapsed">
           <a data-route="classes" href="#/classes" class="">⚔️ Classes</a>
           <div class="toc-sub">
             ${window.CLASSES ? window.CLASSES.map(classe => 
@@ -601,7 +673,7 @@
           </div>
         </div>
         
-        <div class="toc-category">
+        <div class="toc-category collapsed">
           <a data-route="sorts" href="#/sorts">🔮 Sorts</a>
           <div class="toc-sub">
             ${window.SORTS ? window.SORTS.map(category => 
@@ -610,7 +682,7 @@
           </div>
         </div>
         
-        <div class="toc-category">
+        <div class="toc-category collapsed">
           <a data-route="dons" href="#/dons" class="">🎖️ Dons</a>
           <div class="toc-sub">
             ${window.DONS ? window.DONS.map(category => 
@@ -2418,11 +2490,26 @@
       // Generate the GM objects page HTML
       const pageHTML = window.PageBuilder.buildGameMasterObjectPage(window.OBJETS);
       
-      // Clear and set content
-      const viewsContainer = document.getElementById('views');
-      if (viewsContainer) {
-        viewsContainer.innerHTML = pageHTML;
-        
+      // Update only the specific article instead of wiping entire views container
+      let gmObjectsArticle = document.querySelector('article[data-page="gestion-objets"]');
+      if (!gmObjectsArticle) {
+        // Create the article if it doesn't exist
+        const viewsContainer = document.getElementById('views');
+        if (viewsContainer) {
+          viewsContainer.insertAdjacentHTML('beforeend', pageHTML);
+          gmObjectsArticle = document.querySelector('article[data-page="gestion-objets"]');
+        }
+      } else {
+        // Update existing article content
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = pageHTML;
+        const newArticleContent = tempDiv.querySelector('article[data-page="gestion-objets"]');
+        if (newArticleContent) {
+          gmObjectsArticle.innerHTML = newArticleContent.innerHTML;
+        }
+      }
+      
+      if (gmObjectsArticle) {
         this.updateActiveStates('gestion-objets');
         this.setupGMObjectSearch();
         return true;
@@ -2500,11 +2587,26 @@
       // Generate the monsters page HTML
       const pageHTML = window.PageBuilder.buildSingleMonsterPage(window.MONSTRES);
       
-      // Clear and set content
-      const viewsContainer = document.getElementById('views');
-      if (viewsContainer) {
-        viewsContainer.innerHTML = pageHTML;
-        
+      // Update only the specific article instead of wiping entire views container
+      let monstersArticle = document.querySelector('article[data-page="monstres"]');
+      if (!monstersArticle) {
+        // Create the article if it doesn't exist
+        const viewsContainer = document.getElementById('views');
+        if (viewsContainer) {
+          viewsContainer.insertAdjacentHTML('beforeend', pageHTML);
+          monstersArticle = document.querySelector('article[data-page="monstres"]');
+        }
+      } else {
+        // Update existing article content
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = pageHTML;
+        const newArticleContent = tempDiv.querySelector('article[data-page="monstres"]');
+        if (newArticleContent) {
+          monstersArticle.innerHTML = newArticleContent.innerHTML;
+        }
+      }
+      
+      if (monstersArticle) {
         this.updateActiveStates('monstres');
         return true;
       }
@@ -2521,11 +2623,26 @@
       // Generate the tables page HTML
       const pageHTML = window.PageBuilder.buildSingleTableTresorPage(window.TABLES_TRESORS);
       
-      // Clear and set content
-      const viewsContainer = document.getElementById('views');
-      if (viewsContainer) {
-        viewsContainer.innerHTML = pageHTML;
-        
+      // Update only the specific article instead of wiping entire views container
+      let tablesArticle = document.querySelector('article[data-page="tables-tresors"]');
+      if (!tablesArticle) {
+        // Create the article if it doesn't exist
+        const viewsContainer = document.getElementById('views');
+        if (viewsContainer) {
+          viewsContainer.insertAdjacentHTML('beforeend', pageHTML);
+          tablesArticle = document.querySelector('article[data-page="tables-tresors"]');
+        }
+      } else {
+        // Update existing article content
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = pageHTML;
+        const newArticleContent = tempDiv.querySelector('article[data-page="tables-tresors"]');
+        if (newArticleContent) {
+          tablesArticle.innerHTML = newArticleContent.innerHTML;
+        }
+      }
+      
+      if (tablesArticle) {
         this.updateActiveStates('tables-tresors');
         return true;
       }
