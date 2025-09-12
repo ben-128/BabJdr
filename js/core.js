@@ -389,7 +389,7 @@
               window.JdrApp.modules.router.renderGMObjectsPage();
             }
           } catch (error) {
-            console.error('Error reloading GM objects page:', error);
+            // Silent error handling
           }
         }
       });

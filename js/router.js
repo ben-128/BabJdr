@@ -741,39 +741,6 @@
       return true;
     },
 
-    renderGMObjectsPage() {
-      if (!window.OBJETS) return false;
-      
-      // Generate the GM objects page using PageBuilder
-      const pageHtml = PageBuilder.buildGameMasterObjectPage(window.OBJETS);
-      
-      // Find or create the views container
-      const viewsContainer = document.querySelector('#views');
-      if (!viewsContainer) {
-        console.error('Views container not found');
-        return false;
-      }
-      
-      // Remove existing GM objects page if it exists
-      const existingPage = document.querySelector('[data-page="gestion-objets"]');
-      if (existingPage) {
-        existingPage.remove();
-      }
-      
-      // Insert the new page
-      viewsContainer.insertAdjacentHTML('beforeend', pageHtml);
-      
-      // Setup search functionality for GM page
-      setTimeout(() => {
-        this.setupGMObjectSearch();
-      }, 100);
-      
-      // Show and activate page
-      this.show('gestion-objets');
-      this.updateActiveStates('gestion-objets');
-      
-      return true;
-    },
 
     setupGMObjectSearch() {
       // Setup ID search for the GM objects page
@@ -2414,7 +2381,6 @@
 
     renderGMObjectsPage() {
       if (!window.OBJETS) {
-        // OBJETS data not loaded
         return false;
       }
       
@@ -2423,6 +2389,7 @@
       
       // Update only the specific article instead of wiping entire views container
       let gmObjectsArticle = document.querySelector('article[data-page="gestion-objets"]');
+      
       if (!gmObjectsArticle) {
         // Create the article if it doesn't exist
         const viewsContainer = document.getElementById('views');
@@ -2579,6 +2546,33 @@
       }
       
       return false;
+    },
+
+    show(page) {
+      // Hide all articles first
+      const allArticles = document.querySelectorAll('#views article');
+      allArticles.forEach(article => {
+        article.style.display = 'none';
+      });
+      
+      // Show the requested page
+      const targetArticle = document.querySelector(`article[data-page="${page}"]`);
+      if (targetArticle) {
+        targetArticle.style.display = 'block';
+      }
+      
+      this.updateActiveStates(page);
+    },
+
+    updateActiveStates(page) {
+      // Update navigation active states
+      const navLinks = document.querySelectorAll('nav a');
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#/${page}`) {
+          link.classList.add('active');
+        }
+      });
     }
   
   };

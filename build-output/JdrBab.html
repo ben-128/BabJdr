@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-09-12T16:00:29.996Z by JdrBab Build System -->
+<!-- Generated on 2025-09-12T16:03:31.515Z by JdrBab Build System -->
 <title>JDR‑BAB — Livret de règles</title>
 <meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -9422,7 +9422,7 @@ article.active .grid {
               window.JdrApp.modules.router.renderGMObjectsPage();
             }
           } catch (error) {
-            console.error('Error reloading GM objects page:', error);
+            // Silent error handling
           }
         }
       });
@@ -11578,8 +11578,10 @@ article.active .grid {
     }
 
     buildGameMasterObjectPage(objectData) {
+      console.log('🔧 DEBUG buildGameMasterObjectPage - objectData:', objectData);
       const config = window.ContentTypes['objet'];
       const allObjects = objectData.objets || [];
+      console.log('🔧 DEBUG buildGameMasterObjectPage - allObjects count:', allObjects.length);
       const availableTags = config?.filterConfig?.availableTags || [];
       
       // Initialize active tags for GM page
@@ -11587,6 +11589,7 @@ article.active .grid {
         window.ACTIVE_GM_OBJECT_TAGS = [];
       }
       const activeTags = window.ACTIVE_GM_OBJECT_TAGS;
+      console.log('🔧 DEBUG buildGameMasterObjectPage - activeTags:', activeTags);
       
       // Filter objects based on active tags
       const filteredObjects = activeTags.length === 0 
@@ -11596,6 +11599,8 @@ article.active .grid {
             if (!obj.tags || obj.tags.length === 0) return false;
             return activeTags.every(activeTag => obj.tags.includes(activeTag));
           });
+          
+      console.log('🔧 DEBUG buildGameMasterObjectPage - filteredObjects count:', filteredObjects.length);
       
       
       const result = `
@@ -11619,9 +11624,19 @@ article.active .grid {
             </div>
             
             <div class="grid cols-2" id="gestion-objets-container">
-              ${filteredObjects.map((item, index) => 
-                CardBuilder.create('objet', item, 'objets', index).build()
-              ).join('')}
+              ${(() => {
+                try {
+                  const cards = filteredObjects.map((item, index) => {
+                    const card = CardBuilder.create('objet', item, 'objets', index).build();
+                    return card;
+                  }).join('');
+                  console.log('🔧 DEBUG buildGameMasterObjectPage - generated cards length:', cards.length);
+                  return cards;
+                } catch (error) {
+                  console.error('🔧 DEBUG buildGameMasterObjectPage - error generating cards:', error);
+                  return '<p style="color: red;">Erreur lors de la génération des cartes objets</p>';
+                }
+              })()}
             </div>
             
             ${filteredObjects.length === 0 ? '<p style="text-align: center; color: #666; margin: 2rem 0;">Aucun objet ne correspond aux filtres sélectionnés.</p>' : ''}
@@ -17560,39 +17575,6 @@ article.active .grid {
       return true;
     },
 
-    renderGMObjectsPage() {
-      if (!window.OBJETS) return false;
-      
-      // Generate the GM objects page using PageBuilder
-      const pageHtml = PageBuilder.buildGameMasterObjectPage(window.OBJETS);
-      
-      // Find or create the views container
-      const viewsContainer = document.querySelector('#views');
-      if (!viewsContainer) {
-        console.error('Views container not found');
-        return false;
-      }
-      
-      // Remove existing GM objects page if it exists
-      const existingPage = document.querySelector('[data-page="gestion-objets"]');
-      if (existingPage) {
-        existingPage.remove();
-      }
-      
-      // Insert the new page
-      viewsContainer.insertAdjacentHTML('beforeend', pageHtml);
-      
-      // Setup search functionality for GM page
-      setTimeout(() => {
-        this.setupGMObjectSearch();
-      }, 100);
-      
-      // Show and activate page
-      this.show('gestion-objets');
-      this.updateActiveStates('gestion-objets');
-      
-      return true;
-    },
 
     setupGMObjectSearch() {
       // Setup ID search for the GM objects page
@@ -19232,39 +19214,54 @@ article.active .grid {
     },
 
     renderGMObjectsPage() {
+      console.log('🔧 DEBUG renderGMObjectsPage - start');
       if (!window.OBJETS) {
         // OBJETS data not loaded
+        console.log('🔧 DEBUG renderGMObjectsPage - no OBJETS data');
         return false;
       }
       
       // Generate the GM objects page HTML
       const pageHTML = window.PageBuilder.buildGameMasterObjectPage(window.OBJETS);
+      console.log('🔧 DEBUG renderGMObjectsPage - pageHTML length:', pageHTML.length);
       
       // Update only the specific article instead of wiping entire views container
       let gmObjectsArticle = document.querySelector('article[data-page="gestion-objets"]');
+      console.log('🔧 DEBUG renderGMObjectsPage - existing article:', !!gmObjectsArticle);
+      
       if (!gmObjectsArticle) {
         // Create the article if it doesn't exist
         const viewsContainer = document.getElementById('views');
+        console.log('🔧 DEBUG renderGMObjectsPage - views container:', !!viewsContainer);
         if (viewsContainer) {
           viewsContainer.insertAdjacentHTML('beforeend', pageHTML);
           gmObjectsArticle = document.querySelector('article[data-page="gestion-objets"]');
+          console.log('🔧 DEBUG renderGMObjectsPage - article created:', !!gmObjectsArticle);
         }
       } else {
         // Update existing article content
+        console.log('🔧 DEBUG renderGMObjectsPage - updating existing article');
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = pageHTML;
         const newArticleContent = tempDiv.querySelector('article[data-page="gestion-objets"]');
+        console.log('🔧 DEBUG renderGMObjectsPage - new content found:', !!newArticleContent);
         if (newArticleContent) {
+          console.log('🔧 DEBUG renderGMObjectsPage - new content HTML length:', newArticleContent.innerHTML.length);
           gmObjectsArticle.innerHTML = newArticleContent.innerHTML;
+          console.log('🔧 DEBUG renderGMObjectsPage - article content updated');
         }
       }
       
       if (gmObjectsArticle) {
+        console.log('🔧 DEBUG renderGMObjectsPage - calling updateActiveStates');
         this.updateActiveStates('gestion-objets');
+        console.log('🔧 DEBUG renderGMObjectsPage - calling setupGMObjectSearch');
         this.setupGMObjectSearch();
+        console.log('🔧 DEBUG renderGMObjectsPage - success');
         return true;
       }
       
+      console.log('🔧 DEBUG renderGMObjectsPage - failed');
       return false;
     },
 

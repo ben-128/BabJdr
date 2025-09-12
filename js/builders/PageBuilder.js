@@ -136,9 +136,17 @@
             </div>
             
             <div class="grid cols-2" id="gestion-objets-container">
-              ${filteredObjects.map((item, index) => 
-                CardBuilder.create('objet', item, 'objets', index).build()
-              ).join('')}
+              ${(() => {
+                try {
+                  const cards = filteredObjects.map((item, index) => {
+                    const card = CardBuilder.create('objet', item, 'objets', index).build();
+                    return card;
+                  }).join('');
+                  return cards;
+                } catch (error) {
+                  return '<p style="color: red;">Erreur lors de la génération des cartes objets</p>';
+                }
+              })()}
             </div>
             
             ${filteredObjects.length === 0 ? '<p style="text-align: center; color: #666; margin: 2rem 0;">Aucun objet ne correspond aux filtres sélectionnés.</p>' : ''}
