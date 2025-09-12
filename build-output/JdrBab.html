@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-09-12T14:59:37.405Z by JdrBab Build System -->
+<!-- Generated on 2025-09-12T15:01:30.480Z by JdrBab Build System -->
 <title>JDR‑BAB — Livret de règles</title>
 <meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19200,7 +19200,7 @@ article.active .grid {
       }
       
       // Generate the GM objects page HTML
-      const pageHTML = PageBuilder.getInstance().buildGameMasterObjectPage(window.OBJETS);
+      const pageHTML = window.PageBuilder.buildGameMasterObjectPage(window.OBJETS);
       
       // Clear and set content
       const viewsContainer = document.getElementById('views');
@@ -19281,7 +19281,7 @@ article.active .grid {
       }
       
       // Generate the monsters page HTML
-      const pageHTML = PageBuilder.getInstance().buildSingleMonsterPage(window.MONSTRES);
+      const pageHTML = window.PageBuilder.buildSingleMonsterPage(window.MONSTRES);
       
       // Clear and set content
       const viewsContainer = document.getElementById('views');
@@ -19301,7 +19301,7 @@ article.active .grid {
       }
       
       // Generate the tables page HTML
-      const pageHTML = PageBuilder.getInstance().buildSingleTableTresorPage(window.TABLES_TRESORS);
+      const pageHTML = window.PageBuilder.buildSingleTableTresorPage(window.TABLES_TRESORS);
       
       // Clear and set content
       const viewsContainer = document.getElementById('views');
@@ -24446,12 +24446,12 @@ article.active .grid {
         this.delegateToUI('showTagsManagementModal');
       });
 
-      // Filter chip toggle for objects
-      JdrApp.utils.events.register('click', '.filter-chip', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        this.delegateToUI('toggleFilter', e.target);
-      });
+      // Filter chip toggle for objects - DISABLED (handled by core.js now)
+      // JdrApp.utils.events.register('click', '.filter-chip', (e) => {
+      //   e.preventDefault();
+      //   e.stopPropagation();
+      //   this.delegateToUI('toggleFilter', e.target);
+      // });
 
       // Select all tags button
       JdrApp.utils.events.register('click', '#select-all-tags', () => {

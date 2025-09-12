@@ -59,12 +59,12 @@
         this.delegateToUI('showTagsManagementModal');
       });
 
-      // Filter chip toggle for objects
-      JdrApp.utils.events.register('click', '.filter-chip', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        this.delegateToUI('toggleFilter', e.target);
-      });
+      // Filter chip toggle for objects - DISABLED (handled by core.js now)
+      // JdrApp.utils.events.register('click', '.filter-chip', (e) => {
+      //   e.preventDefault();
+      //   e.stopPropagation();
+      //   this.delegateToUI('toggleFilter', e.target);
+      // });
 
       // Select all tags button
       JdrApp.utils.events.register('click', '#select-all-tags', () => {

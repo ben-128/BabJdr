@@ -2366,7 +2366,7 @@
       }
       
       // Generate the GM objects page HTML
-      const pageHTML = PageBuilder.getInstance().buildGameMasterObjectPage(window.OBJETS);
+      const pageHTML = window.PageBuilder.buildGameMasterObjectPage(window.OBJETS);
       
       // Clear and set content
       const viewsContainer = document.getElementById('views');
@@ -2447,7 +2447,7 @@
       }
       
       // Generate the monsters page HTML
-      const pageHTML = PageBuilder.getInstance().buildSingleMonsterPage(window.MONSTRES);
+      const pageHTML = window.PageBuilder.buildSingleMonsterPage(window.MONSTRES);
       
       // Clear and set content
       const viewsContainer = document.getElementById('views');
@@ -2467,7 +2467,7 @@
       }
       
       // Generate the tables page HTML
-      const pageHTML = PageBuilder.getInstance().buildSingleTableTresorPage(window.TABLES_TRESORS);
+      const pageHTML = window.PageBuilder.buildSingleTableTresorPage(window.TABLES_TRESORS);
       
       // Clear and set content
       const viewsContainer = document.getElementById('views');
