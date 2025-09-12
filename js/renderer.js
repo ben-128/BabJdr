@@ -128,6 +128,9 @@
       if (monstersContainer) {
         setTimeout(() => this.populateMonstersPage(), 30);
       }
+
+      // Setup object search functionality if we're on the objects page
+      this.setupObjectSearchIfNeeded();
     },
 
     applyDevModeToNewContent() {
@@ -465,6 +468,115 @@
           }
         }
       }
+    },
+
+    setupObjectSearchIfNeeded() {
+      // Check if we're on the objects page and the search input exists
+      const idSearchInput = document.getElementById('id-search-input');
+      const clearSearchButton = document.getElementById('clear-id-search');
+      
+      if (!idSearchInput) return; // Not on objects page or search not available
+
+      // Remove any existing event listeners to avoid duplicates
+      const newSearchInput = idSearchInput.cloneNode(true);
+      idSearchInput.parentNode.replaceChild(newSearchInput, idSearchInput);
+      
+      // Add keyup event listener for Enter key validation
+      newSearchInput.addEventListener('keyup', (e) => {
+        if (e.key === 'Enter') {
+          const searchId = e.target.value.trim();
+          this.performIdSearch(searchId);
+        }
+      });
+
+      // Setup clear search button if it exists
+      if (clearSearchButton) {
+        const newClearButton = clearSearchButton.cloneNode(true);
+        clearSearchButton.parentNode.replaceChild(newClearButton, clearSearchButton);
+        
+        newClearButton.addEventListener('click', () => {
+          this.clearIdSearch();
+        });
+      }
+    },
+
+    performIdSearch(searchId) {
+      const resultDiv = document.getElementById('id-search-result');
+      const objectsContainer = document.getElementById('objets-container');
+      
+      if (!searchId || !objectsContainer) {
+        if (resultDiv) resultDiv.textContent = '';
+        return;
+      }
+
+      // Hide all objects first
+      const allObjectCards = objectsContainer.querySelectorAll('.card');
+      allObjectCards.forEach(card => {
+        card.style.display = 'none';
+      });
+
+      // Find object by ID (search in data-object-numero attribute)
+      const targetCard = objectsContainer.querySelector(`[data-object-numero="${searchId}"]`);
+      
+      if (targetCard) {
+        // Show the found object and center it
+        targetCard.style.display = 'block';
+        
+        // Center the object with smooth scrolling
+        setTimeout(() => {
+          targetCard.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'center', 
+            inline: 'center' 
+          });
+        }, 100);
+
+        // Update search result message
+        if (resultDiv) {
+          const objectName = targetCard.getAttribute('data-objet-name') || 'Objet';
+          resultDiv.innerHTML = `<span style="color: #16a34a;">✅ Objet #${searchId} trouvé: ${objectName}</span>`;
+        }
+        
+        // Mark search as active
+        window.activeIdSearch = true;
+      } else {
+        // No object found
+        if (resultDiv) {
+          resultDiv.innerHTML = `<span style="color: #dc2626;">❌ Aucun objet trouvé avec l'ID #${searchId}</span>`;
+        }
+        
+        // Show all objects if nothing found
+        allObjectCards.forEach(card => {
+          card.style.display = 'block';
+        });
+      }
+    },
+
+    clearIdSearch() {
+      const idSearchInput = document.getElementById('id-search-input');
+      const resultDiv = document.getElementById('id-search-result');
+      const objectsContainer = document.getElementById('objets-container');
+      
+      // Clear search input
+      if (idSearchInput) {
+        idSearchInput.value = '';
+      }
+      
+      // Clear result message
+      if (resultDiv) {
+        resultDiv.textContent = '';
+      }
+      
+      // Show all objects
+      if (objectsContainer) {
+        const allObjectCards = objectsContainer.querySelectorAll('.card');
+        allObjectCards.forEach(card => {
+          card.style.display = 'block';
+        });
+      }
+      
+      // Mark search as inactive
+      window.activeIdSearch = false;
     }
   };
 
