@@ -325,6 +325,9 @@
     },
 
     initializeGMEventHandlers() {
+      // Store reference to this for use in event handlers
+      const self = this;
+      
       // Use event delegation for GM filter chips
       document.addEventListener('click', (e) => {
         // Handle GM filter chip clicks
@@ -334,6 +337,8 @@
           
           const tag = e.target.dataset.tag;
           if (!tag) return;
+          
+          console.log('GM filter clicked:', tag);
           
           // Initialize GM tags if needed
           if (!window.ACTIVE_GM_OBJECT_TAGS) {
@@ -345,37 +350,65 @@
           if (index > -1) {
             // Remove tag
             window.ACTIVE_GM_OBJECT_TAGS.splice(index, 1);
+            console.log('Tag removed:', tag, 'Active tags:', window.ACTIVE_GM_OBJECT_TAGS);
           } else {
             // Add tag
             window.ACTIVE_GM_OBJECT_TAGS.push(tag);
+            console.log('Tag added:', tag, 'Active tags:', window.ACTIVE_GM_OBJECT_TAGS);
           }
           
           // Regenerate the GM objects page
-          this.regenerateGMObjectsPage();
+          try {
+            self.regenerateGMObjectsPage();
+          } catch (error) {
+            console.error('Error regenerating GM objects page:', error);
+          }
         }
       });
     },
 
     regenerateGMObjectsPage() {
-      if (!window.OBJETS || !PageBuilder) return;
+      console.log('Regenerating GM objects page...');
+      
+      if (!window.OBJETS || !PageBuilder) {
+        console.error('Missing dependencies for GM page regeneration:', {
+          OBJETS: !!window.OBJETS,
+          PageBuilder: !!PageBuilder
+        });
+        return;
+      }
       
       // Find the GM objects page article
       const gmArticle = document.querySelector('article[data-page="gestion-objets"]');
-      if (!gmArticle) return;
+      if (!gmArticle) {
+        console.error('GM objects page article not found');
+        return;
+      }
       
-      // Generate new content
-      const newContent = PageBuilder.buildGameMasterObjectPage(window.OBJETS);
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(newContent, 'text/html');
-      const newArticle = doc.querySelector('article');
-      
-      if (newArticle) {
-        gmArticle.innerHTML = newArticle.innerHTML;
+      try {
+        // Generate new content
+        const newContent = PageBuilder.buildGameMasterObjectPage(window.OBJETS);
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(newContent, 'text/html');
+        const newArticle = doc.querySelector('article');
         
-        // Auto-load images and apply dev mode
-        if (this.modules.renderer) {
-          this.modules.renderer.autoLoadImages();
+        if (newArticle) {
+          gmArticle.innerHTML = newArticle.innerHTML;
+          console.log('GM objects page regenerated successfully');
+          
+          // Auto-load images and apply dev mode
+          if (this.modules.renderer && this.modules.renderer.autoLoadImages) {
+            this.modules.renderer.autoLoadImages();
+          }
+          
+          // Ensure any needed event listeners are reattached
+          // (The main event listener uses delegation so should still work)
+          
+        } else {
+          console.error('Failed to parse new GM objects page content');
         }
+      } catch (error) {
+        console.error('Error in GM objects page regeneration:', error);
       }
     },
 

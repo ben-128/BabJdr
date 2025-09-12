@@ -60,10 +60,6 @@ window.MANIFEST_DATA = ${fs.readFileSync(path.join(rootDir, 'config', 'manifest.
   <main class="page">
     <aside class="sidebar" id="sidebar">
       <div class="panel">
-        <div class="searchbar">
-          <input autocomplete="off" id="search" placeholder="Rechercher une règle, une classe…">
-          <button class="btn" id="clear" title="Effacer">✖</button>
-        </div>
         <div class="tools">
           <!-- Dev mode disabled in standalone version -->
         </div>
