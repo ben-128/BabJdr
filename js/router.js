@@ -94,6 +94,11 @@
         return this.renderFavorisPage();
       }
       
+      // Handle GM objects page
+      if (page === 'gestion-objets') {
+        return this.renderGMObjectsPage();
+      }
+      
       return false; // Route not handled
     },
 
@@ -681,6 +686,72 @@
       this.updateActiveStates('objets');
       this.show('objets'); // Activer la page
       return true;
+    },
+
+    renderGMObjectsPage() {
+      if (!window.OBJETS) return false;
+      
+      // Generate the GM objects page using PageBuilder
+      const pageHtml = PageBuilder.buildGameMasterObjectPage(window.OBJETS);
+      
+      // Find or create the views container
+      const viewsContainer = document.querySelector('#views');
+      if (!viewsContainer) {
+        console.error('Views container not found');
+        return false;
+      }
+      
+      // Remove existing GM objects page if it exists
+      const existingPage = document.querySelector('[data-page="gestion-objets"]');
+      if (existingPage) {
+        existingPage.remove();
+      }
+      
+      // Insert the new page
+      viewsContainer.insertAdjacentHTML('beforeend', pageHtml);
+      
+      // Setup search functionality for GM page
+      setTimeout(() => {
+        this.setupGMObjectSearch();
+      }, 100);
+      
+      // Show and activate page
+      this.show('gestion-objets');
+      this.updateActiveStates('gestion-objets');
+      
+      return true;
+    },
+
+    setupGMObjectSearch() {
+      // Setup ID search for the GM objects page
+      const idSearchInput = document.getElementById('id-search-input');
+      if (idSearchInput) {
+        // Remove existing listeners
+        const newInput = idSearchInput.cloneNode(true);
+        idSearchInput.parentNode.replaceChild(newInput, idSearchInput);
+        
+        newInput.addEventListener('keyup', (e) => {
+          if (e.key === 'Enter') {
+            const searchId = e.target.value.trim();
+            if (JdrApp.modules.renderer && JdrApp.modules.renderer.performIdSearch) {
+              JdrApp.modules.renderer.performIdSearch(searchId);
+            }
+          }
+        });
+      }
+      
+      // Setup clear button
+      const clearButton = document.getElementById('clear-id-search');
+      if (clearButton) {
+        const newClearButton = clearButton.cloneNode(true);
+        clearButton.parentNode.replaceChild(newClearButton, clearButton);
+        
+        newClearButton.addEventListener('click', () => {
+          if (JdrApp.modules.renderer && JdrApp.modules.renderer.clearIdSearch) {
+            JdrApp.modules.renderer.clearIdSearch();
+          }
+        });
+      }
     },
 
     renderMonstersPage() {

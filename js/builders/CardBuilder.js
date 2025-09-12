@@ -519,7 +519,7 @@
         return `
           <div class="fourchette-row" style="display: flex; justify-content: space-between; align-items: center; padding: 8px; margin: 4px 0; background: rgba(139, 92, 23, 0.1); border-radius: 6px; border-left: 3px solid var(--bronze);">
             <div class="fourchette-range" style="font-weight: bold; color: var(--bronze); min-width: 80px;">
-              🎲 ${fourchette.min}-${fourchette.max}
+              🎲 ${fourchette.min || 1}-${fourchette.max || 1}
             </div>
             <div class="fourchette-objet" style="flex: 1; margin-left: 12px;">
               ${objetLink}

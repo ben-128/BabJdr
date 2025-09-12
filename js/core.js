@@ -319,6 +319,64 @@
       if (window.ScrollOptimizer && window.ScrollOptimizer.init) {
         window.ScrollOptimizer.init();
       }
+      
+      // Initialize GM objects page event handlers
+      this.initializeGMEventHandlers();
+    },
+
+    initializeGMEventHandlers() {
+      // Use event delegation for GM filter chips
+      document.addEventListener('click', (e) => {
+        // Handle GM filter chip clicks
+        if (e.target.classList.contains('gm-filter-chip')) {
+          e.preventDefault();
+          e.stopPropagation();
+          
+          const tag = e.target.dataset.tag;
+          if (!tag) return;
+          
+          // Initialize GM tags if needed
+          if (!window.ACTIVE_GM_OBJECT_TAGS) {
+            window.ACTIVE_GM_OBJECT_TAGS = [];
+          }
+          
+          // Toggle the tag
+          const index = window.ACTIVE_GM_OBJECT_TAGS.indexOf(tag);
+          if (index > -1) {
+            // Remove tag
+            window.ACTIVE_GM_OBJECT_TAGS.splice(index, 1);
+          } else {
+            // Add tag
+            window.ACTIVE_GM_OBJECT_TAGS.push(tag);
+          }
+          
+          // Regenerate the GM objects page
+          this.regenerateGMObjectsPage();
+        }
+      });
+    },
+
+    regenerateGMObjectsPage() {
+      if (!window.OBJETS || !PageBuilder) return;
+      
+      // Find the GM objects page article
+      const gmArticle = document.querySelector('article[data-page="gestion-objets"]');
+      if (!gmArticle) return;
+      
+      // Generate new content
+      const newContent = PageBuilder.buildGameMasterObjectPage(window.OBJETS);
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(newContent, 'text/html');
+      const newArticle = doc.querySelector('article');
+      
+      if (newArticle) {
+        gmArticle.innerHTML = newArticle.innerHTML;
+        
+        // Auto-load images and apply dev mode
+        if (this.modules.renderer) {
+          this.modules.renderer.autoLoadImages();
+        }
+      }
     },
 
     // Force reload JSON data (clear localStorage cache)

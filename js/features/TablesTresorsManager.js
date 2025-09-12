@@ -228,7 +228,7 @@
                     id="fourchette-min" 
                     min="1" 
                     max="20" 
-                    value="${fourchette.min}"
+                    value="${fourchette.min || 1}"
                     style="width: 100%; padding: 0.5rem; border: 1px solid var(--rule); border-radius: 6px;"
                     required
                   >
@@ -241,7 +241,7 @@
                     id="fourchette-max" 
                     min="1" 
                     max="20" 
-                    value="${fourchette.max}"
+                    value="${fourchette.max || 1}"
                     style="width: 100%; padding: 0.5rem; border: 1px solid var(--rule); border-radius: 6px;"
                     required
                   >
@@ -571,9 +571,9 @@
 
     generateTablePreviewHtml(table) {
       const fourchettesList = table.fourchettes.map(fourchette => {
-        const range = fourchette.min === fourchette.max 
-          ? `${fourchette.min}` 
-          : `${fourchette.min}-${fourchette.max}`;
+        const range = (fourchette.min || 1) === (fourchette.max || 1) 
+          ? `${fourchette.min || 1}` 
+          : `${fourchette.min || 1}-${fourchette.max || 1}`;
         
         return `
           <tr>

@@ -57,7 +57,8 @@
         { fn: () => this.generateStaticPages(), name: 'static' },
         { fn: () => this.generateClassPages(), name: 'classes' },
         { fn: () => this.generateCategoryPages(), name: 'categories' },
-        { fn: () => this.generateMonstersPage(), name: 'monsters' }
+        { fn: () => this.generateMonstersPage(), name: 'monsters' },
+        { fn: () => this.generateGMObjectsPage(), name: 'gm-objects' }
       ], viewsContainer);
     },
 
@@ -190,6 +191,12 @@
       if (!window.MONSTRES) return '';
       
       return PageBuilder.buildSingleMonsterPage(window.MONSTRES);
+    },
+
+    generateGMObjectsPage() {
+      if (!window.OBJETS) return '';
+      
+      return PageBuilder.buildGameMasterObjectPage(window.OBJETS);
     },
 
 
@@ -542,20 +549,24 @@
     performIdSearch(searchId) {
       const resultDiv = document.getElementById('id-search-result');
       const objectsContainer = document.getElementById('objets-container');
+      const gmObjectsContainer = document.getElementById('gestion-objets-container');
       
-      if (!searchId || !objectsContainer) {
+      // Determine which container to use based on current page
+      const activeContainer = objectsContainer || gmObjectsContainer;
+      
+      if (!searchId || !activeContainer) {
         if (resultDiv) resultDiv.textContent = '';
         return;
       }
 
       // Hide all objects first
-      const allObjectCards = objectsContainer.querySelectorAll('.card');
+      const allObjectCards = activeContainer.querySelectorAll('.card');
       allObjectCards.forEach(card => {
         card.style.display = 'none';
       });
 
       // Find object by ID (search in data-object-numero attribute)
-      const targetCard = objectsContainer.querySelector(`[data-object-numero="${searchId}"]`);
+      const targetCard = activeContainer.querySelector(`[data-object-numero="${searchId}"]`);
       
       if (targetCard) {
         // Show the found object and center it
@@ -565,50 +576,39 @@
         targetCard.style.border = '3px solid #16a34a';
         targetCard.style.boxShadow = '0 0 15px rgba(22, 163, 74, 0.5)';
         
-        // Center the object with mobile-optimized approach
+        // Center the object on screen
         setTimeout(() => {
-          // Mobile-specific centering that accounts for viewport and layout
-          const isMobile = window.innerWidth <= 768;
+          // First try the standard scrollIntoView method
+          targetCard.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'center', 
+            inline: 'center' 
+          });
           
-          if (isMobile) {
-            // Mobile centering - account for mobile layout specifics
-            const rect = targetCard.getBoundingClientRect();
-            const windowHeight = window.innerHeight;
-            const windowWidth = window.innerWidth;
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-            
-            // Calculate center position accounting for mobile viewport
-            const targetY = rect.top + scrollTop - (windowHeight / 2) + (rect.height / 2);
-            const targetX = rect.left + scrollLeft - (windowWidth / 2) + (rect.width / 2);
-            
-            // Scroll to center both vertically and horizontally on mobile
-            window.scrollTo({
-              top: Math.max(0, targetY),
-              left: Math.max(0, targetX),
-              behavior: 'smooth'
-            });
-          } else {
-            // Desktop centering - use scrollIntoView which works well on desktop
-            targetCard.scrollIntoView({ 
-              behavior: 'smooth', 
-              block: 'center', 
-              inline: 'center' 
-            });
-          }
-          
-          // Additional fallback for problematic browsers
+          // Additional centering for better positioning
           setTimeout(() => {
             const rect = targetCard.getBoundingClientRect();
-            const windowHeight = window.innerHeight;
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            const targetY = rect.top + scrollTop - (windowHeight / 2) + (rect.height / 2);
+            const viewportHeight = window.innerHeight;
+            const viewportWidth = window.innerWidth;
             
-            window.scrollTo({
-              top: Math.max(0, targetY),
+            // Calculate how much to scroll to center the card
+            const cardCenterY = rect.top + (rect.height / 2);
+            const cardCenterX = rect.left + (rect.width / 2);
+            
+            const viewportCenterY = viewportHeight / 2;
+            const viewportCenterX = viewportWidth / 2;
+            
+            // Calculate scroll adjustments needed
+            const scrollAdjustY = cardCenterY - viewportCenterY;
+            const scrollAdjustX = cardCenterX - viewportCenterX;
+            
+            // Apply the scroll adjustments
+            window.scrollBy({
+              top: scrollAdjustY,
+              left: scrollAdjustX,
               behavior: 'smooth'
             });
-          }, 300);
+          }, 200);
         }, 100);
 
         // Update search result message
@@ -636,6 +636,7 @@
       const idSearchInput = document.getElementById('id-search-input');
       const resultDiv = document.getElementById('id-search-result');
       const objectsContainer = document.getElementById('objets-container');
+      const gmObjectsContainer = document.getElementById('gestion-objets-container');
       
       // Clear search input
       if (idSearchInput) {
@@ -647,16 +648,24 @@
         resultDiv.textContent = '';
       }
       
-      // Show all objects and remove highlights
-      if (objectsContainer) {
-        const allObjectCards = objectsContainer.querySelectorAll('.card');
-        allObjectCards.forEach(card => {
-          card.style.display = 'block';
-          // Remove highlight effects
-          card.style.border = '';
-          card.style.boxShadow = '';
-        });
-      }
+      // Show all objects and remove highlights for both containers
+      [objectsContainer, gmObjectsContainer].forEach(container => {
+        if (container) {
+          const allObjectCards = container.querySelectorAll('.card');
+          allObjectCards.forEach(card => {
+            // For regular objects page, keep objects hidden by default
+            // For GM objects page, show all objects
+            if (container.id === 'objets-container') {
+              card.style.display = 'none'; // Regular page: hide all
+            } else if (container.id === 'gestion-objets-container') {
+              card.style.display = 'block'; // GM page: show all
+            }
+            // Remove highlight effects
+            card.style.border = '';
+            card.style.boxShadow = '';
+          });
+        }
+      });
       
       // Mark search as inactive
       window.activeIdSearch = false;

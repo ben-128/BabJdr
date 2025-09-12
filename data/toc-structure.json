@@ -153,6 +153,12 @@
           "id": "campagne",
           "title": "Campagne",
           "icon": "📖"
+        },
+        {
+          "type": "page",
+          "id": "gestion-objets",
+          "title": "Gestion des Objets",
+          "icon": "⚔️"
         }
       ]
     },

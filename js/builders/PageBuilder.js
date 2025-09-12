@@ -65,42 +65,9 @@
     }
     
     buildSingleObjectPage(objectData) {
-      const config = window.ContentTypes['objet'];
       const allObjects = objectData.objets || [];
-      // SIMPLIFIÉ: Système simple avec variable globale pour les tags actifs
-      const availableTags = config.filterConfig.availableTags || [];
       
-      // Initialiser la variable globale pour les tags actifs si elle n'existe pas
-      if (!window.ACTIVE_OBJECT_TAGS) {
-        window.ACTIVE_OBJECT_TAGS = []; // Aucun tag actif par défaut
-      }
-      const activeTags = window.ACTIVE_OBJECT_TAGS;
-      
-      // Filtrer les objets selon le mode actuel
-      const isDevMode = JdrApp.utils.isDevMode();
-      
-      // console.log('🎯 Object filtering - isDevMode:', isDevMode, 'activeIdSearch:', !!window.activeIdSearch, 'activeTags:', activeTags.length);
-      
-      const filteredObjects = window.activeIdSearch 
-        ? [] // En recherche ID, on affiche rien initialement - performIdSearch() s'occupera d'afficher le bon objet
-        : !isDevMode
-          ? [] // Mode dev OFF: aucun objet affiché par défaut (seule recherche ID fonctionne)
-          : activeTags.length === 0 
-            ? allObjects // Mode dev ON + aucun tag actif = TOUS les objets
-            : allObjects.filter(obj => {
-                // Mode dev ON: LOGIQUE ET - l'objet doit avoir TOUS les tags actifs
-                if (!obj.tags || obj.tags.length === 0) return false;
-                // Vérifier que l'objet a TOUS les tags actifs (logique AND)
-                return activeTags.every(activeTag => obj.tags.includes(activeTag));
-              });
-
-      // Pour la recherche par ID, on doit quand même générer toutes les cartes mais les cacher
-      // En mode normal (!isDevMode), toujours rendre TOUS les objets mais les cacher par défaut
-      // Cela permet à la recherche par ID de fonctionner
-      const objectsToRender = !isDevMode ? allObjects : (window.activeIdSearch ? allObjects : filteredObjects);
-      
-      // console.log('📊 Filtered objects count:', filteredObjects.length, '/ Total objects:', allObjects.length);
-      
+      // Objects page now only shows ID search - all objects hidden by default
       return `
         <article class="" data-page="objets">
           <section>
@@ -112,33 +79,68 @@
             ${this.buildPageDescription('objet')}
             
             ${this.buildIdSearchFilter()}
-            ${this.buildTagFilters(activeTags, availableTags)}
+            
+            <div class="grid cols-2" id="objets-container">
+              ${allObjects.map((item, index) => {
+                const cardHTML = CardBuilder.create('objet', item, 'objets', index).build();
+                // Hide all objects by default - only ID search will show them
+                return cardHTML.replace('<div class="card', '<div class="card" style="display: none;"');
+              }).join('')}
+            </div>
+            
+            ${!window.activeIdSearch ? '<p style="text-align: center; color: #666; margin: 2rem 0;">Utilisez la recherche par ID ci-dessus pour trouver un objet spécifique.</p>' : ''}
+          </section>
+        </article>
+      `;
+    }
+
+    buildGameMasterObjectPage(objectData) {
+      const config = window.ContentTypes['objet'];
+      const allObjects = objectData.objets || [];
+      const availableTags = config.filterConfig.availableTags || [];
+      
+      // Initialize active tags for GM page
+      if (!window.ACTIVE_GM_OBJECT_TAGS) {
+        window.ACTIVE_GM_OBJECT_TAGS = [];
+      }
+      const activeTags = window.ACTIVE_GM_OBJECT_TAGS;
+      
+      // Filter objects based on active tags
+      const filteredObjects = activeTags.length === 0 
+        ? allObjects // No tags active = show all objects
+        : allObjects.filter(obj => {
+            // AND logic - object must have ALL active tags
+            if (!obj.tags || obj.tags.length === 0) return false;
+            return activeTags.every(activeTag => obj.tags.includes(activeTag));
+          });
+      
+      return `
+        <article class="" data-page="gestion-objets">
+          <section>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
+              <h2>📦 Gestion des Objets</h2>
+              ${this.buildIllustration('page:gestion-objets')}
+            </div>
+            
+            <div style="margin: 1rem 0; padding: 1rem; background: var(--card); border-radius: 8px; border-left: 4px solid var(--bronze);">
+              <p class="lead">Page dédiée au Maître de jeu pour gérer, créer et modifier les objets du jeu. Utilisez les filtres pour organiser votre contenu et les outils de création pour ajouter de nouveaux équipements.</p>
+            </div>
+            
+            ${this.buildIdSearchFilter()}
+            ${this.buildGMTagFilters(activeTags, availableTags)}
             
             <div style="display: flex; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap;">
               ${this.buildAddButton('objet', 'objets')}
               ${this.buildTagsManagerButton()}
             </div>
             
-            <div class="grid cols-2" id="objets-container">
-              ${objectsToRender.map((item, index) => {
-                const cardHTML = CardBuilder.create('objet', item, 'objets', index).build();
-                
-                // Logique d'affichage:
-                // - Mode dev OFF: cacher tous les objets par défaut (seule recherche ID les affichera)
-                // - Mode dev ON + recherche ID: cacher tous les objets par défaut 
-                // - Mode dev ON + pas de recherche ID: afficher selon les filtres
-                const shouldHide = !isDevMode || window.activeIdSearch;
-                
-                if (shouldHide) {
-                  // Injecter style="display: none;" dans la div de la carte
-                  return cardHTML.replace('<div class="card', '<div class="card" style="display: none;"');
-                }
-                return cardHTML;
-              }).join('')}
+            <div class="grid cols-2" id="gestion-objets-container">
+              ${filteredObjects.map((item, index) => 
+                CardBuilder.create('objet', item, 'objets', index).build()
+              ).join('')}
             </div>
             
-            ${!isDevMode && filteredObjects.length === 0 && !window.activeIdSearch ? '<p style="text-align: center; color: #666; margin: 2rem 0;">Utilisez la recherche par ID ci-dessus pour trouver un objet spécifique.</p>' : ''}
-            ${isDevMode && filteredObjects.length === 0 && !window.activeIdSearch ? '<p style="text-align: center; color: #666; margin: 2rem 0;">Aucun objet ne correspond aux filtres sélectionnés.</p>' : ''}
+            ${filteredObjects.length === 0 ? '<p style="text-align: center; color: #666; margin: 2rem 0;">Aucun objet ne correspond aux filtres sélectionnés.</p>' : ''}
           </section>
         </article>
       `;
@@ -811,28 +813,20 @@
     }
 
     buildTagFilters(activeTags, availableTags, context = 'objet') {
-      // For objects page, show tag filters ONLY in dev mode ON
-      const isDevMode = JdrApp.utils.isDevMode();
-      
-      // console.log('🏷️ buildTagFilters - context:', context, 'isDevMode:', isDevMode, 'body class:', document.body.className);
-      // console.log('🏷️ Available tags:', availableTags.length, 'Active tags:', activeTags.length);
-      
-      if (context === 'objet' && !isDevMode) {
-        // console.log('🚫 Hiding tag filters for objects in dev mode OFF');
-        return ''; // Hide tag filters in normal mode
+      // For objects page, no longer show tag filters (moved to GM page)
+      if (context === 'objet') {
+        return ''; // Regular objects page has no tag filters
       }
-      
-      // console.log('✅ Showing tag filters for objects in dev mode ON');
       
       const isIdSearchActive = window.activeIdSearch || false;
       const containerOpacity = isIdSearchActive ? '0.4' : '1';
       const containerFilter = isIdSearchActive ? 'grayscale(1)' : 'none';
       const pointerEvents = isIdSearchActive ? 'none' : 'auto';
       
-      // Afficher TOUS les tags disponibles, avec ceux actifs en vert
+      // Display all available tags, with active ones highlighted in green
       const allFilterChips = availableTags.map(tag => {
         const isActive = activeTags.includes(tag);
-        const bgColor = isActive ? '#16a34a' : '#6b7280'; // Vert pour actif, gris pour inactif
+        const bgColor = isActive ? '#16a34a' : '#6b7280';
         const textColor = 'white';
         const opacity = isActive ? '1' : '0.6';
         
@@ -847,8 +841,6 @@
                 </button>`;
       }).join('');
       
-      // Supprimer les boutons Tous/Aucun - les utilisateurs cliquent directement sur les tags
-      
       return `
         <div class="objects-tag-display" style="margin: 1rem 0; padding: 1rem; background: var(--card); border: 2px solid var(--rule); border-radius: 12px; opacity: ${containerOpacity}; filter: ${containerFilter}; pointer-events: ${pointerEvents}; transition: all 0.3s ease;">
           <h3 style="margin: 0 0 1rem 0; text-align: center; color: var(--accent-ink);">🔍 Filtres par tag (ET)</h3>
@@ -860,6 +852,47 @@
                 : `${activeTags.length} filtres actifs - Objets avec TOUS ces tags`}
           </p>
           <div class="filter-chips" style="display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center;">
+            ${allFilterChips}
+          </div>
+        </div>
+      `;
+    }
+
+    buildGMTagFilters(activeTags, availableTags) {
+      const isIdSearchActive = window.activeIdSearch || false;
+      const containerOpacity = isIdSearchActive ? '0.4' : '1';
+      const containerFilter = isIdSearchActive ? 'grayscale(1)' : 'none';
+      const pointerEvents = isIdSearchActive ? 'none' : 'auto';
+      
+      // Display all available tags, with active ones highlighted in green
+      const allFilterChips = availableTags.map(tag => {
+        const isActive = activeTags.includes(tag);
+        const bgColor = isActive ? '#16a34a' : '#6b7280';
+        const textColor = 'white';
+        const opacity = isActive ? '1' : '0.6';
+        
+        return `<button class="gm-filter-chip ${isActive ? 'active' : 'inactive'}" 
+                        data-tag="${tag}" 
+                        style="background: ${bgColor}; color: ${textColor}; opacity: ${opacity}; 
+                               padding: 8px 16px; border-radius: 20px; font-size: 0.9em; font-weight: 500;
+                               cursor: pointer; transition: all 0.2s ease; border: none;
+                               margin: 2px; ${isActive ? 'box-shadow: 0 2px 4px rgba(22, 163, 74, 0.3);' : ''}"
+                        title="${isActive ? 'Actif - Cliquer pour désactiver' : 'Inactif - Cliquer pour activer'}">
+                    ${isActive ? '✓ ' : ''}${tag}
+                </button>`;
+      }).join('');
+      
+      return `
+        <div class="gm-objects-tag-display" style="margin: 1rem 0; padding: 1rem; background: var(--card); border: 2px solid var(--rule); border-radius: 12px; opacity: ${containerOpacity}; filter: ${containerFilter}; pointer-events: ${pointerEvents}; transition: all 0.3s ease;">
+          <h3 style="margin: 0 0 1rem 0; text-align: center; color: var(--accent-ink);">🔍 Filtres par tag (ET)</h3>
+          <p style="text-align: center; color: var(--paper-muted); font-size: 0.9em; margin: 0 0 1rem 0;">
+            ${activeTags.length === 0 
+              ? 'Aucun filtre actif - Tous les objets affichés' 
+              : activeTags.length === 1 
+                ? '1 filtre actif - Objets avec ce tag uniquement'
+                : `${activeTags.length} filtres actifs - Objets avec TOUS ces tags`}
+          </p>
+          <div class="gm-filter-chips" style="display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center;">
             ${allFilterChips}
           </div>
         </div>

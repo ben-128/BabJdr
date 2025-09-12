@@ -1,4 +1,15 @@
 
+
+- en mode MJ,nouvelle page avec tous les objets? a la place de la page objets recherche par ID
+
+
+
+
+
+
+
+
+
 sort de lutin :
 
 4:
@@ -31,5 +42,4 @@ Changement de taille
 un buff de stats
 
 - endurance : juste PV.
-- bouffe : pv fixe
-- don gros mangeur : double pv de bouffe + nombre de fois bouffe mangeable par jour
+
