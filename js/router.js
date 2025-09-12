@@ -2372,6 +2372,14 @@
       const viewsContainer = document.getElementById('views');
       if (viewsContainer) {
         viewsContainer.innerHTML = pageHTML;
+        
+        // Ensure the article is visible (fix display: none issue)
+        const article = viewsContainer.querySelector('article[data-page="gestion-objets"]');
+        if (article) {
+          article.style.display = 'block';
+          article.classList.add('active');
+        }
+        
         this.updateActiveStates('gestion-objets');
         this.setupGMObjectSearch();
         return true;
@@ -2453,6 +2461,14 @@
       const viewsContainer = document.getElementById('views');
       if (viewsContainer) {
         viewsContainer.innerHTML = pageHTML;
+        
+        // Ensure the article is visible (fix display: none issue)
+        const article = viewsContainer.querySelector('article[data-page="monstres"]');
+        if (article) {
+          article.style.display = 'block';
+          article.classList.add('active');
+        }
+        
         this.updateActiveStates('monstres');
         return true;
       }
@@ -2473,6 +2489,14 @@
       const viewsContainer = document.getElementById('views');
       if (viewsContainer) {
         viewsContainer.innerHTML = pageHTML;
+        
+        // Ensure the article is visible (fix display: none issue)
+        const article = viewsContainer.querySelector('article[data-page="tables-tresors"]');
+        if (article) {
+          article.style.display = 'block';
+          article.classList.add('active');
+        }
+        
         this.updateActiveStates('tables-tresors');
         return true;
       }

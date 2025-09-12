@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-09-12T15:01:30.480Z by JdrBab Build System -->
+<!-- Generated on 2025-09-12T15:21:03.979Z by JdrBab Build System -->
 <title>JDR‑BAB — Livret de règles</title>
 <meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -9372,8 +9372,6 @@ article.active .grid {
           const tag = e.target.dataset.tag;
           if (!tag) return;
           
-          console.log('Regular filter clicked:', tag);
-          
           // Determine which page we're on based on current route
           const currentPage = window.location.hash.replace('#/', '') || 'creation';
           
@@ -9396,7 +9394,12 @@ article.active .grid {
           const tag = e.target.dataset.tag;
           if (!tag) return;
           
-          console.log('GM filter clicked:', tag);
+          // Only proceed if we're actually on the GM objects page
+          const currentPage = window.location.hash.replace('#/', '') || 'creation';
+          if (currentPage !== 'gestion-objets') {
+            console.log('GM filter clicked but not on gestion-objets page, ignoring');
+            return;
+          }
           
           // Initialize GM tags if needed
           if (!window.ACTIVE_GM_OBJECT_TAGS) {
@@ -9408,16 +9411,13 @@ article.active .grid {
           if (index > -1) {
             // Remove tag
             window.ACTIVE_GM_OBJECT_TAGS.splice(index, 1);
-            console.log('Tag removed:', tag, 'Active tags:', window.ACTIVE_GM_OBJECT_TAGS);
           } else {
             // Add tag
             window.ACTIVE_GM_OBJECT_TAGS.push(tag);
-            console.log('Tag added:', tag, 'Active tags:', window.ACTIVE_GM_OBJECT_TAGS);
           }
           
-          // For GM filters, reload the page via router (cleaner approach)
+          // For GM filters, reload the page via router
           try {
-            console.log('Reloading GM objects page...');
             if (window.JdrApp && window.JdrApp.modules && window.JdrApp.modules.router) {
               window.JdrApp.modules.router.renderGMObjectsPage();
             }
@@ -9443,11 +9443,9 @@ article.active .grid {
       if (index > -1) {
         // Remove tag
         state.visibleTags.splice(index, 1);
-        console.log('Monster tag removed:', tag, 'Active tags:', state.visibleTags);
       } else {
         // Add tag
         state.visibleTags.push(tag);
-        console.log('Monster tag added:', tag, 'Active tags:', state.visibleTags);
       }
       
       // Reload monsters page to apply filter
@@ -9475,11 +9473,9 @@ article.active .grid {
       if (index > -1) {
         // Remove tag
         state.visibleTags.splice(index, 1);
-        console.log('Table tresor tag removed:', tag, 'Active tags:', state.visibleTags);
       } else {
         // Add tag
         state.visibleTags.push(tag);
-        console.log('Table tresor tag added:', tag, 'Active tags:', state.visibleTags);
       }
       
       // Reload tables page to apply filter
@@ -11598,7 +11594,7 @@ article.active .grid {
     buildGameMasterObjectPage(objectData) {
       const config = window.ContentTypes['objet'];
       const allObjects = objectData.objets || [];
-      const availableTags = config.filterConfig.availableTags || [];
+      const availableTags = config?.filterConfig?.availableTags || [];
       
       // Initialize active tags for GM page
       if (!window.ACTIVE_GM_OBJECT_TAGS) {
@@ -11615,7 +11611,8 @@ article.active .grid {
             return activeTags.every(activeTag => obj.tags.includes(activeTag));
           });
       
-      return `
+      
+      const result = `
         <article class="" data-page="gestion-objets">
           <section>
             <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
@@ -11645,6 +11642,8 @@ article.active .grid {
           </section>
         </article>
       `;
+      
+      return result;
     }
 
     buildSingleMonsterPage(monsterData) {
@@ -19206,6 +19205,14 @@ article.active .grid {
       const viewsContainer = document.getElementById('views');
       if (viewsContainer) {
         viewsContainer.innerHTML = pageHTML;
+        
+        // Ensure the article is visible (fix display: none issue)
+        const article = viewsContainer.querySelector('article[data-page="gestion-objets"]');
+        if (article) {
+          article.style.display = 'block';
+          article.classList.add('active');
+        }
+        
         this.updateActiveStates('gestion-objets');
         this.setupGMObjectSearch();
         return true;
@@ -19287,6 +19294,14 @@ article.active .grid {
       const viewsContainer = document.getElementById('views');
       if (viewsContainer) {
         viewsContainer.innerHTML = pageHTML;
+        
+        // Ensure the article is visible (fix display: none issue)
+        const article = viewsContainer.querySelector('article[data-page="monstres"]');
+        if (article) {
+          article.style.display = 'block';
+          article.classList.add('active');
+        }
+        
         this.updateActiveStates('monstres');
         return true;
       }
@@ -19307,6 +19322,14 @@ article.active .grid {
       const viewsContainer = document.getElementById('views');
       if (viewsContainer) {
         viewsContainer.innerHTML = pageHTML;
+        
+        // Ensure the article is visible (fix display: none issue)
+        const article = viewsContainer.querySelector('article[data-page="tables-tresors"]');
+        if (article) {
+          article.style.display = 'block';
+          article.classList.add('active');
+        }
+        
         this.updateActiveStates('tables-tresors');
         return true;
       }

@@ -339,8 +339,6 @@
           const tag = e.target.dataset.tag;
           if (!tag) return;
           
-          console.log('Regular filter clicked:', tag);
-          
           // Determine which page we're on based on current route
           const currentPage = window.location.hash.replace('#/', '') || 'creation';
           
@@ -363,7 +361,12 @@
           const tag = e.target.dataset.tag;
           if (!tag) return;
           
-          console.log('GM filter clicked:', tag);
+          // Only proceed if we're actually on the GM objects page
+          const currentPage = window.location.hash.replace('#/', '') || 'creation';
+          if (currentPage !== 'gestion-objets') {
+            console.log('GM filter clicked but not on gestion-objets page, ignoring');
+            return;
+          }
           
           // Initialize GM tags if needed
           if (!window.ACTIVE_GM_OBJECT_TAGS) {
@@ -375,16 +378,13 @@
           if (index > -1) {
             // Remove tag
             window.ACTIVE_GM_OBJECT_TAGS.splice(index, 1);
-            console.log('Tag removed:', tag, 'Active tags:', window.ACTIVE_GM_OBJECT_TAGS);
           } else {
             // Add tag
             window.ACTIVE_GM_OBJECT_TAGS.push(tag);
-            console.log('Tag added:', tag, 'Active tags:', window.ACTIVE_GM_OBJECT_TAGS);
           }
           
-          // For GM filters, reload the page via router (cleaner approach)
+          // For GM filters, reload the page via router
           try {
-            console.log('Reloading GM objects page...');
             if (window.JdrApp && window.JdrApp.modules && window.JdrApp.modules.router) {
               window.JdrApp.modules.router.renderGMObjectsPage();
             }
@@ -410,11 +410,9 @@
       if (index > -1) {
         // Remove tag
         state.visibleTags.splice(index, 1);
-        console.log('Monster tag removed:', tag, 'Active tags:', state.visibleTags);
       } else {
         // Add tag
         state.visibleTags.push(tag);
-        console.log('Monster tag added:', tag, 'Active tags:', state.visibleTags);
       }
       
       // Reload monsters page to apply filter
@@ -442,11 +440,9 @@
       if (index > -1) {
         // Remove tag
         state.visibleTags.splice(index, 1);
-        console.log('Table tresor tag removed:', tag, 'Active tags:', state.visibleTags);
       } else {
         // Add tag
         state.visibleTags.push(tag);
-        console.log('Table tresor tag added:', tag, 'Active tags:', state.visibleTags);
       }
       
       // Reload tables page to apply filter

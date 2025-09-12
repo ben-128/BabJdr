@@ -97,7 +97,7 @@
     buildGameMasterObjectPage(objectData) {
       const config = window.ContentTypes['objet'];
       const allObjects = objectData.objets || [];
-      const availableTags = config.filterConfig.availableTags || [];
+      const availableTags = config?.filterConfig?.availableTags || [];
       
       // Initialize active tags for GM page
       if (!window.ACTIVE_GM_OBJECT_TAGS) {
@@ -114,7 +114,8 @@
             return activeTags.every(activeTag => obj.tags.includes(activeTag));
           });
       
-      return `
+      
+      const result = `
         <article class="" data-page="gestion-objets">
           <section>
             <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
@@ -144,6 +145,8 @@
           </section>
         </article>
       `;
+      
+      return result;
     }
 
     buildSingleMonsterPage(monsterData) {
