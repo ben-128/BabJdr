@@ -141,6 +141,21 @@
       if (currentArticle) {
         currentArticle.classList.add('active');
         currentArticle.style.display = 'block'; // Force show current article
+        
+        // IMPORTANT: Reset the activeIdSearch state when navigating to Objects page
+        if (page === 'objets') {
+          window.activeIdSearch = false;
+          // Clear any search results
+          const resultDiv = document.getElementById('id-search-result');
+          if (resultDiv) {
+            resultDiv.textContent = '';
+          }
+          // Clear search input
+          const searchInput = document.getElementById('id-search-input');
+          if (searchInput) {
+            searchInput.value = '';
+          }
+        }
       }
       
       // Set active link in TOC
@@ -168,6 +183,21 @@
       if (target) {
         target.classList.add('active');
         target.style.display = 'block';
+        
+        // Reset ID search state when navigating to Objects page
+        if (page === 'objets') {
+          window.activeIdSearch = false;
+          setTimeout(() => {
+            const resultDiv = document.getElementById('id-search-result');
+            if (resultDiv) {
+              resultDiv.textContent = '';
+            }
+            const searchInput = document.getElementById('id-search-input');
+            if (searchInput) {
+              searchInput.value = '';
+            }
+          }, 100);
+        }
       }
       
       // Update TOC active states
