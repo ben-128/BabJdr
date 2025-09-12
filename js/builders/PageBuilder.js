@@ -82,9 +82,9 @@
       // console.log('🎯 Object filtering - isDevMode:', isDevMode, 'activeIdSearch:', !!window.activeIdSearch, 'activeTags:', activeTags.length);
       
       const filteredObjects = window.activeIdSearch 
-        ? [] // En recherche ID, on affiche rien initialement - showOnlyObjectById() s'occupera d'afficher le bon objet
+        ? [] // En recherche ID, on affiche rien initialement - performIdSearch() s'occupera d'afficher le bon objet
         : !isDevMode
-          ? [] // Mode dev OFF: aucun objet affiché par défaut (seule recherche ID fonctionne)
+          ? allObjects // Mode dev OFF: afficher TOUS les objets (recherche ID et navigation normale fonctionnent)
           : activeTags.length === 0 
             ? allObjects // Mode dev ON + aucun tag actif = TOUS les objets
             : allObjects.filter(obj => {
