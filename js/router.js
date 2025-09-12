@@ -2125,8 +2125,17 @@
         return false;
       }
       
+      console.log('📄 About to build objects page, data:', objectsData);
+      
       // Generate page HTML using PageBuilder
-      const pageHtml = PageBuilder.getInstance().buildSingleObjectPage(objectsData);
+      let pageHtml;
+      try {
+        pageHtml = PageBuilder.getInstance().buildSingleObjectPage(objectsData);
+        console.log('✅ Page HTML generated successfully, length:', pageHtml.length);
+      } catch (error) {
+        console.error('❌ Error building objects page:', error);
+        return false;
+      }
       
       // Find or create the views container
       const viewsContainer = document.querySelector('#views');
@@ -2135,23 +2144,36 @@
         return false;
       }
       
+      console.log('📍 Views container found, inserting page');
+      
       // Remove existing objects page if it exists
       if (existingPage) {
+        console.log('🗑️ Removing existing page');
         existingPage.remove();
       }
       
       // Insert the new page
-      viewsContainer.insertAdjacentHTML('beforeend', pageHtml);
+      console.log('📝 Inserting new page HTML');
+      try {
+        viewsContainer.insertAdjacentHTML('beforeend', pageHtml);
+        console.log('✅ Page HTML inserted successfully');
+      } catch (error) {
+        console.error('❌ Error inserting HTML:', error);
+        return false;
+      }
       
       // Setup object search functionality
+      console.log('⏰ Setting up search functionality in 100ms');
       setTimeout(() => {
         this.setupObjectSearchFunctionality();
       }, 100);
       
       // Show and activate page
+      console.log('👁️ Showing and activating objets page');
       this.show('objets');
       this.updateActiveStates('objets');
       
+      console.log('✅ renderObjectsPage completed successfully');
       return true;
     },
 
