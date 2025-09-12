@@ -127,9 +127,21 @@
     },
 
     updateActiveStates(page) {
-      // Remove active class from all articles and links
-      document.querySelectorAll('article').forEach(a => a.classList.remove('active'));
+      // Remove active class from all articles and hide them
+      document.querySelectorAll('article').forEach(a => {
+        a.classList.remove('active');
+        a.style.display = 'none'; // Force hide all articles
+      });
+      
+      // Remove active class from all TOC links
       document.querySelectorAll('.toc a').forEach(a => a.classList.remove('active'));
+      
+      // Show the current page article
+      const currentArticle = document.querySelector(`article[data-page="${page}"]`);
+      if (currentArticle) {
+        currentArticle.classList.add('active');
+        currentArticle.style.display = 'block'; // Force show current article
+      }
       
       // Set active link in TOC
       const activeLink = document.querySelector(`a[href="#/${page}"]`);
@@ -145,12 +157,20 @@
     },
     
     show(page) {
-      document.querySelectorAll('article').forEach(a => a.classList.remove('active'));
+      // Hide all articles and remove active class
+      document.querySelectorAll('article').forEach(a => {
+        a.classList.remove('active');
+        a.style.display = 'none';
+      });
+      
+      // Show and activate the target page
       const target = document.querySelector(`article[data-page="${page}"]`);
       if (target) {
         target.classList.add('active');
+        target.style.display = 'block';
       }
       
+      // Update TOC active states
       document.querySelectorAll('.toc a').forEach(a => a.classList.remove('active'));
       const activeLink = document.querySelector(`a[href="#/${page}"]`);
       if (activeLink) activeLink.classList.add('active');
@@ -2373,13 +2393,6 @@
       if (viewsContainer) {
         viewsContainer.innerHTML = pageHTML;
         
-        // Ensure the article is visible (fix display: none issue)
-        const article = viewsContainer.querySelector('article[data-page="gestion-objets"]');
-        if (article) {
-          article.style.display = 'block';
-          article.classList.add('active');
-        }
-        
         this.updateActiveStates('gestion-objets');
         this.setupGMObjectSearch();
         return true;
@@ -2462,13 +2475,6 @@
       if (viewsContainer) {
         viewsContainer.innerHTML = pageHTML;
         
-        // Ensure the article is visible (fix display: none issue)
-        const article = viewsContainer.querySelector('article[data-page="monstres"]');
-        if (article) {
-          article.style.display = 'block';
-          article.classList.add('active');
-        }
-        
         this.updateActiveStates('monstres');
         return true;
       }
@@ -2489,13 +2495,6 @@
       const viewsContainer = document.getElementById('views');
       if (viewsContainer) {
         viewsContainer.innerHTML = pageHTML;
-        
-        // Ensure the article is visible (fix display: none issue)
-        const article = viewsContainer.querySelector('article[data-page="tables-tresors"]');
-        if (article) {
-          article.style.display = 'block';
-          article.classList.add('active');
-        }
         
         this.updateActiveStates('tables-tresors');
         return true;
