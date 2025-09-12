@@ -569,47 +569,58 @@
       const targetCard = activeContainer.querySelector(`[data-object-numero="${searchId}"]`);
       
       if (targetCard) {
-        // Show the found object and center it
+        // Show the found object and center it both visually and scroll-wise
         targetCard.style.display = 'block';
         
         // Add highlight effect
         targetCard.style.border = '3px solid #16a34a';
         targetCard.style.boxShadow = '0 0 15px rgba(22, 163, 74, 0.5)';
         
-        // Center the object on screen
+        // CENTER THE OBJECT VISUALLY IN THE GRID
+        // When only one object is shown, center it horizontally in the grid
+        const container = activeContainer;
+        if (container) {
+          // Temporarily change grid to center the single item
+          const isDesktop = window.innerWidth > 768;
+          if (isDesktop) {
+            // On desktop: center the single card by spanning both columns
+            targetCard.style.gridColumn = '1 / -1'; // Span all columns
+            targetCard.style.justifySelf = 'center'; // Center within the span
+            targetCard.style.maxWidth = '500px'; // Reasonable max width for single card
+          } else {
+            // On mobile: grid is already single column, just center it
+            targetCard.style.justifySelf = 'center';
+            targetCard.style.maxWidth = '100%';
+          }
+        }
+        
+        // Center the object on screen with scroll
         setTimeout(() => {
-          // First try the standard scrollIntoView method
+          // Use scrollIntoView for reliable centering
           targetCard.scrollIntoView({ 
             behavior: 'smooth', 
             block: 'center', 
             inline: 'center' 
           });
           
-          // Additional centering for better positioning
+          // Additional fine-tuning for better positioning
           setTimeout(() => {
             const rect = targetCard.getBoundingClientRect();
             const viewportHeight = window.innerHeight;
-            const viewportWidth = window.innerWidth;
             
-            // Calculate how much to scroll to center the card
+            // Only adjust vertically to avoid horizontal scroll issues
             const cardCenterY = rect.top + (rect.height / 2);
-            const cardCenterX = rect.left + (rect.width / 2);
-            
             const viewportCenterY = viewportHeight / 2;
-            const viewportCenterX = viewportWidth / 2;
-            
-            // Calculate scroll adjustments needed
             const scrollAdjustY = cardCenterY - viewportCenterY;
-            const scrollAdjustX = cardCenterX - viewportCenterX;
             
-            // Apply the scroll adjustments
+            // Apply vertical scroll adjustment only
             window.scrollBy({
               top: scrollAdjustY,
-              left: scrollAdjustX,
+              left: 0, // Don't adjust horizontal scroll
               behavior: 'smooth'
             });
-          }, 200);
-        }, 100);
+          }, 300);
+        }, 150);
 
         // Update search result message
         if (resultDiv) {
@@ -660,9 +671,12 @@
             } else if (container.id === 'gestion-objets-container') {
               card.style.display = 'block'; // GM page: show all
             }
-            // Remove highlight effects
+            // Remove highlight effects and grid centering styles
             card.style.border = '';
             card.style.boxShadow = '';
+            card.style.gridColumn = ''; // Reset grid column span
+            card.style.justifySelf = ''; // Reset justify
+            card.style.maxWidth = ''; // Reset max width
           });
         }
       });
