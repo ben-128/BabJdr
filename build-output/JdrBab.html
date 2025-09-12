@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-09-12T09:20:34.809Z by JdrBab Build System -->
+<!-- Generated on 2025-09-12T11:16:30.963Z by JdrBab Build System -->
 <title>JDR‑BAB — Livret de règles</title>
 <meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -755,6 +755,10 @@ h5, h6 {
   box-sizing: border-box !important;
 }
 
+.sidebar .panel .searchbar {
+  flex-shrink: 0 !important; /* Don't shrink searchbar */
+  margin-bottom: 16px !important;
+}
 
 .sidebar .panel .tools {
   flex-shrink: 0 !important; /* Don't shrink tools */
@@ -784,8 +788,9 @@ h5, h6 {
     box-sizing: border-box !important;
   }
   
+  .sidebar .panel .searchbar,
   .sidebar .panel .tools {
-    flex-shrink: 0 !important; /* Keep fixed size for tools */
+    flex-shrink: 0 !important; /* Keep fixed size for controls */
     margin: 12px !important; /* Add margin back to controls only */
   }
   
@@ -2232,7 +2237,50 @@ body.dev-off .new-collection-card {
 .btn.small{padding:var(--space-sm) var(--space-md)}
 
 /* Search bar */
+.searchbar{display:flex;gap:var(--space-md);align-items:center}
+.searchbar input{flex:1 1 auto;max-width:100%;height:38px;font-size:15px;padding:var(--space-md) 10px;border-radius:10px;border:1px solid var(--rule);background:#fff6e8;color:inherit}
+.searchbar button{height:38px}
 
+/* TOC Search bar - compact horizontal layout in table of contents */
+.toc-search{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  margin-bottom:16px;
+  padding:12px;
+  background:rgba(255,246,232,0.5);
+  border-radius:12px;
+  border:1px solid var(--rule);
+}
+.toc-search input{
+  flex:1 1 auto;
+  height:32px;
+  font-size:14px;
+  padding:6px 12px;
+  border-radius:8px;
+  border:1px solid var(--rule);
+  background:#fff6e8;
+  color:inherit;
+}
+.toc-search .btn-clear{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:32px;
+  height:32px;
+  background:#dc2626;
+  color:white;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:14px;
+  transition:var(--transition-fast);
+  flex-shrink:0;
+}
+.toc-search .btn-clear:hover{
+  background:#b91c1c;
+  transform:scale(1.05);
+}
 
 /* Search results */
 .search-results-container {
@@ -6035,6 +6083,10 @@ article.active .grid {
   <main class="page">
     <aside class="sidebar" id="sidebar">
       <div class="panel">
+        <div class="searchbar">
+          <input autocomplete="off" id="search" placeholder="Rechercher une règle, une classe…">
+          <button class="btn" id="clear" title="Effacer">✖</button>
+        </div>
         <div class="tools">
           <!-- Dev mode disabled in standalone version -->
         </div>
@@ -8308,6 +8360,12 @@ article.active .grid {
           "id": "campagne",
           "title": "Campagne",
           "icon": "📖"
+        },
+        {
+          "type": "page",
+          "id": "gestion-objets",
+          "title": "Gestion des Objets",
+          "icon": "⚔️"
         }
       ]
     },
@@ -9260,6 +9318,10 @@ article.active .grid {
                   <!-- Dev toolbox content will be injected here -->
                 </div>
                 <div class="toc" id="toc">
+                  <div class="toc-search">
+                    <input autocomplete="off" id="search" placeholder="Rechercher une règle, une classe…">
+                    <button class="btn-clear" id="clear" title="Effacer">✖</button>
+                  </div>
                   <!-- Table of contents will be injected here -->
                 </div>
               </div>
@@ -9293,6 +9355,64 @@ article.active .grid {
       // Initialize performance optimizations after all modules are loaded
       if (window.ScrollOptimizer && window.ScrollOptimizer.init) {
         window.ScrollOptimizer.init();
+      }
+      
+      // Initialize GM objects page event handlers
+      this.initializeGMEventHandlers();
+    },
+
+    initializeGMEventHandlers() {
+      // Use event delegation for GM filter chips
+      document.addEventListener('click', (e) => {
+        // Handle GM filter chip clicks
+        if (e.target.classList.contains('gm-filter-chip')) {
+          e.preventDefault();
+          e.stopPropagation();
+          
+          const tag = e.target.dataset.tag;
+          if (!tag) return;
+          
+          // Initialize GM tags if needed
+          if (!window.ACTIVE_GM_OBJECT_TAGS) {
+            window.ACTIVE_GM_OBJECT_TAGS = [];
+          }
+          
+          // Toggle the tag
+          const index = window.ACTIVE_GM_OBJECT_TAGS.indexOf(tag);
+          if (index > -1) {
+            // Remove tag
+            window.ACTIVE_GM_OBJECT_TAGS.splice(index, 1);
+          } else {
+            // Add tag
+            window.ACTIVE_GM_OBJECT_TAGS.push(tag);
+          }
+          
+          // Regenerate the GM objects page
+          this.regenerateGMObjectsPage();
+        }
+      });
+    },
+
+    regenerateGMObjectsPage() {
+      if (!window.OBJETS || !PageBuilder) return;
+      
+      // Find the GM objects page article
+      const gmArticle = document.querySelector('article[data-page="gestion-objets"]');
+      if (!gmArticle) return;
+      
+      // Generate new content
+      const newContent = PageBuilder.buildGameMasterObjectPage(window.OBJETS);
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(newContent, 'text/html');
+      const newArticle = doc.querySelector('article');
+      
+      if (newArticle) {
+        gmArticle.innerHTML = newArticle.innerHTML;
+        
+        // Auto-load images and apply dev mode
+        if (this.modules.renderer) {
+          this.modules.renderer.autoLoadImages();
+        }
       }
     },
 
@@ -11080,7 +11200,7 @@ article.active .grid {
         return `
           <div class="fourchette-row" style="display: flex; justify-content: space-between; align-items: center; padding: 8px; margin: 4px 0; background: rgba(139, 92, 23, 0.1); border-radius: 6px; border-left: 3px solid var(--bronze);">
             <div class="fourchette-range" style="font-weight: bold; color: var(--bronze); min-width: 80px;">
-              🎲 ${fourchette.min}-${fourchette.max}
+              🎲 ${fourchette.min || 1}-${fourchette.max || 1}
             </div>
             <div class="fourchette-objet" style="flex: 1; margin-left: 12px;">
               ${objetLink}
@@ -11294,42 +11414,9 @@ article.active .grid {
     }
     
     buildSingleObjectPage(objectData) {
-      const config = window.ContentTypes['objet'];
       const allObjects = objectData.objets || [];
-      // SIMPLIFIÉ: Système simple avec variable globale pour les tags actifs
-      const availableTags = config.filterConfig.availableTags || [];
       
-      // Initialiser la variable globale pour les tags actifs si elle n'existe pas
-      if (!window.ACTIVE_OBJECT_TAGS) {
-        window.ACTIVE_OBJECT_TAGS = []; // Aucun tag actif par défaut
-      }
-      const activeTags = window.ACTIVE_OBJECT_TAGS;
-      
-      // Filtrer les objets selon le mode actuel
-      const isDevMode = JdrApp.utils.isDevMode();
-      
-      // console.log('🎯 Object filtering - isDevMode:', isDevMode, 'activeIdSearch:', !!window.activeIdSearch, 'activeTags:', activeTags.length);
-      
-      const filteredObjects = window.activeIdSearch 
-        ? [] // En recherche ID, on affiche rien initialement - performIdSearch() s'occupera d'afficher le bon objet
-        : !isDevMode
-          ? [] // Mode dev OFF: aucun objet affiché par défaut (seule recherche ID fonctionne)
-          : activeTags.length === 0 
-            ? allObjects // Mode dev ON + aucun tag actif = TOUS les objets
-            : allObjects.filter(obj => {
-                // Mode dev ON: LOGIQUE ET - l'objet doit avoir TOUS les tags actifs
-                if (!obj.tags || obj.tags.length === 0) return false;
-                // Vérifier que l'objet a TOUS les tags actifs (logique AND)
-                return activeTags.every(activeTag => obj.tags.includes(activeTag));
-              });
-
-      // Pour la recherche par ID, on doit quand même générer toutes les cartes mais les cacher
-      // En mode normal (!isDevMode), toujours rendre TOUS les objets mais les cacher par défaut
-      // Cela permet à la recherche par ID de fonctionner
-      const objectsToRender = !isDevMode ? allObjects : (window.activeIdSearch ? allObjects : filteredObjects);
-      
-      // console.log('📊 Filtered objects count:', filteredObjects.length, '/ Total objects:', allObjects.length);
-      
+      // Objects page now only shows ID search - all objects hidden by default
       return `
         <article class="" data-page="objets">
           <section>
@@ -11341,33 +11428,68 @@ article.active .grid {
             ${this.buildPageDescription('objet')}
             
             ${this.buildIdSearchFilter()}
-            ${this.buildTagFilters(activeTags, availableTags)}
+            
+            <div class="grid cols-2" id="objets-container">
+              ${allObjects.map((item, index) => {
+                const cardHTML = CardBuilder.create('objet', item, 'objets', index).build();
+                // Hide all objects by default - only ID search will show them
+                return cardHTML.replace('<div class="card', '<div class="card" style="display: none;"');
+              }).join('')}
+            </div>
+            
+            ${!window.activeIdSearch ? '<p style="text-align: center; color: #666; margin: 2rem 0;">Utilisez la recherche par ID ci-dessus pour trouver un objet spécifique.</p>' : ''}
+          </section>
+        </article>
+      `;
+    }
+
+    buildGameMasterObjectPage(objectData) {
+      const config = window.ContentTypes['objet'];
+      const allObjects = objectData.objets || [];
+      const availableTags = config.filterConfig.availableTags || [];
+      
+      // Initialize active tags for GM page
+      if (!window.ACTIVE_GM_OBJECT_TAGS) {
+        window.ACTIVE_GM_OBJECT_TAGS = [];
+      }
+      const activeTags = window.ACTIVE_GM_OBJECT_TAGS;
+      
+      // Filter objects based on active tags
+      const filteredObjects = activeTags.length === 0 
+        ? allObjects // No tags active = show all objects
+        : allObjects.filter(obj => {
+            // AND logic - object must have ALL active tags
+            if (!obj.tags || obj.tags.length === 0) return false;
+            return activeTags.every(activeTag => obj.tags.includes(activeTag));
+          });
+      
+      return `
+        <article class="" data-page="gestion-objets">
+          <section>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
+              <h2>📦 Gestion des Objets</h2>
+              ${this.buildIllustration('page:gestion-objets')}
+            </div>
+            
+            <div style="margin: 1rem 0; padding: 1rem; background: var(--card); border-radius: 8px; border-left: 4px solid var(--bronze);">
+              <p class="lead">Page dédiée au Maître de jeu pour gérer, créer et modifier les objets du jeu. Utilisez les filtres pour organiser votre contenu et les outils de création pour ajouter de nouveaux équipements.</p>
+            </div>
+            
+            ${this.buildIdSearchFilter()}
+            ${this.buildGMTagFilters(activeTags, availableTags)}
             
             <div style="display: flex; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap;">
               ${this.buildAddButton('objet', 'objets')}
               ${this.buildTagsManagerButton()}
             </div>
             
-            <div class="grid cols-2" id="objets-container">
-              ${objectsToRender.map((item, index) => {
-                const cardHTML = CardBuilder.create('objet', item, 'objets', index).build();
-                
-                // Logique d'affichage:
-                // - Mode dev OFF: cacher tous les objets par défaut (seule recherche ID les affichera)
-                // - Mode dev ON + recherche ID: cacher tous les objets par défaut 
-                // - Mode dev ON + pas de recherche ID: afficher selon les filtres
-                const shouldHide = !isDevMode || window.activeIdSearch;
-                
-                if (shouldHide) {
-                  // Injecter style="display: none;" dans la div de la carte
-                  return cardHTML.replace('<div class="card', '<div class="card" style="display: none;"');
-                }
-                return cardHTML;
-              }).join('')}
+            <div class="grid cols-2" id="gestion-objets-container">
+              ${filteredObjects.map((item, index) => 
+                CardBuilder.create('objet', item, 'objets', index).build()
+              ).join('')}
             </div>
             
-            ${!isDevMode && filteredObjects.length === 0 && !window.activeIdSearch ? '<p style="text-align: center; color: #666; margin: 2rem 0;">Utilisez la recherche par ID ci-dessus pour trouver un objet spécifique.</p>' : ''}
-            ${isDevMode && filteredObjects.length === 0 && !window.activeIdSearch ? '<p style="text-align: center; color: #666; margin: 2rem 0;">Aucun objet ne correspond aux filtres sélectionnés.</p>' : ''}
+            ${filteredObjects.length === 0 ? '<p style="text-align: center; color: #666; margin: 2rem 0;">Aucun objet ne correspond aux filtres sélectionnés.</p>' : ''}
           </section>
         </article>
       `;
@@ -12040,28 +12162,20 @@ article.active .grid {
     }
 
     buildTagFilters(activeTags, availableTags, context = 'objet') {
-      // For objects page, show tag filters ONLY in dev mode ON
-      const isDevMode = JdrApp.utils.isDevMode();
-      
-      // console.log('🏷️ buildTagFilters - context:', context, 'isDevMode:', isDevMode, 'body class:', document.body.className);
-      // console.log('🏷️ Available tags:', availableTags.length, 'Active tags:', activeTags.length);
-      
-      if (context === 'objet' && !isDevMode) {
-        // console.log('🚫 Hiding tag filters for objects in dev mode OFF');
-        return ''; // Hide tag filters in normal mode
+      // For objects page, no longer show tag filters (moved to GM page)
+      if (context === 'objet') {
+        return ''; // Regular objects page has no tag filters
       }
-      
-      // console.log('✅ Showing tag filters for objects in dev mode ON');
       
       const isIdSearchActive = window.activeIdSearch || false;
       const containerOpacity = isIdSearchActive ? '0.4' : '1';
       const containerFilter = isIdSearchActive ? 'grayscale(1)' : 'none';
       const pointerEvents = isIdSearchActive ? 'none' : 'auto';
       
-      // Afficher TOUS les tags disponibles, avec ceux actifs en vert
+      // Display all available tags, with active ones highlighted in green
       const allFilterChips = availableTags.map(tag => {
         const isActive = activeTags.includes(tag);
-        const bgColor = isActive ? '#16a34a' : '#6b7280'; // Vert pour actif, gris pour inactif
+        const bgColor = isActive ? '#16a34a' : '#6b7280';
         const textColor = 'white';
         const opacity = isActive ? '1' : '0.6';
         
@@ -12076,8 +12190,6 @@ article.active .grid {
                 </button>`;
       }).join('');
       
-      // Supprimer les boutons Tous/Aucun - les utilisateurs cliquent directement sur les tags
-      
       return `
         <div class="objects-tag-display" style="margin: 1rem 0; padding: 1rem; background: var(--card); border: 2px solid var(--rule); border-radius: 12px; opacity: ${containerOpacity}; filter: ${containerFilter}; pointer-events: ${pointerEvents}; transition: all 0.3s ease;">
           <h3 style="margin: 0 0 1rem 0; text-align: center; color: var(--accent-ink);">🔍 Filtres par tag (ET)</h3>
@@ -12089,6 +12201,47 @@ article.active .grid {
                 : `${activeTags.length} filtres actifs - Objets avec TOUS ces tags`}
           </p>
           <div class="filter-chips" style="display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center;">
+            ${allFilterChips}
+          </div>
+        </div>
+      `;
+    }
+
+    buildGMTagFilters(activeTags, availableTags) {
+      const isIdSearchActive = window.activeIdSearch || false;
+      const containerOpacity = isIdSearchActive ? '0.4' : '1';
+      const containerFilter = isIdSearchActive ? 'grayscale(1)' : 'none';
+      const pointerEvents = isIdSearchActive ? 'none' : 'auto';
+      
+      // Display all available tags, with active ones highlighted in green
+      const allFilterChips = availableTags.map(tag => {
+        const isActive = activeTags.includes(tag);
+        const bgColor = isActive ? '#16a34a' : '#6b7280';
+        const textColor = 'white';
+        const opacity = isActive ? '1' : '0.6';
+        
+        return `<button class="gm-filter-chip ${isActive ? 'active' : 'inactive'}" 
+                        data-tag="${tag}" 
+                        style="background: ${bgColor}; color: ${textColor}; opacity: ${opacity}; 
+                               padding: 8px 16px; border-radius: 20px; font-size: 0.9em; font-weight: 500;
+                               cursor: pointer; transition: all 0.2s ease; border: none;
+                               margin: 2px; ${isActive ? 'box-shadow: 0 2px 4px rgba(22, 163, 74, 0.3);' : ''}"
+                        title="${isActive ? 'Actif - Cliquer pour désactiver' : 'Inactif - Cliquer pour activer'}">
+                    ${isActive ? '✓ ' : ''}${tag}
+                </button>`;
+      }).join('');
+      
+      return `
+        <div class="gm-objects-tag-display" style="margin: 1rem 0; padding: 1rem; background: var(--card); border: 2px solid var(--rule); border-radius: 12px; opacity: ${containerOpacity}; filter: ${containerFilter}; pointer-events: ${pointerEvents}; transition: all 0.3s ease;">
+          <h3 style="margin: 0 0 1rem 0; text-align: center; color: var(--accent-ink);">🔍 Filtres par tag (ET)</h3>
+          <p style="text-align: center; color: var(--paper-muted); font-size: 0.9em; margin: 0 0 1rem 0;">
+            ${activeTags.length === 0 
+              ? 'Aucun filtre actif - Tous les objets affichés' 
+              : activeTags.length === 1 
+                ? '1 filtre actif - Objets avec ce tag uniquement'
+                : `${activeTags.length} filtres actifs - Objets avec TOUS ces tags`}
+          </p>
+          <div class="gm-filter-chips" style="display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center;">
             ${allFilterChips}
           </div>
         </div>
@@ -14870,7 +15023,7 @@ article.active .grid {
                     id="fourchette-min" 
                     min="1" 
                     max="20" 
-                    value="${fourchette.min}"
+                    value="${fourchette.min || 1}"
                     style="width: 100%; padding: 0.5rem; border: 1px solid var(--rule); border-radius: 6px;"
                     required
                   >
@@ -14883,7 +15036,7 @@ article.active .grid {
                     id="fourchette-max" 
                     min="1" 
                     max="20" 
-                    value="${fourchette.max}"
+                    value="${fourchette.max || 1}"
                     style="width: 100%; padding: 0.5rem; border: 1px solid var(--rule); border-radius: 6px;"
                     required
                   >
@@ -15213,9 +15366,9 @@ article.active .grid {
 
     generateTablePreviewHtml(table) {
       const fourchettesList = table.fourchettes.map(fourchette => {
-        const range = fourchette.min === fourchette.max 
-          ? `${fourchette.min}` 
-          : `${fourchette.min}-${fourchette.max}`;
+        const range = (fourchette.min || 1) === (fourchette.max || 1) 
+          ? `${fourchette.min || 1}` 
+          : `${fourchette.min || 1}-${fourchette.max || 1}`;
         
         return `
           <tr>
@@ -16610,6 +16763,11 @@ article.active .grid {
         return this.renderFavorisPage();
       }
       
+      // Handle GM objects page
+      if (page === 'gestion-objets') {
+        return this.renderGMObjectsPage();
+      }
+      
       return false; // Route not handled
     },
 
@@ -17197,6 +17355,72 @@ article.active .grid {
       this.updateActiveStates('objets');
       this.show('objets'); // Activer la page
       return true;
+    },
+
+    renderGMObjectsPage() {
+      if (!window.OBJETS) return false;
+      
+      // Generate the GM objects page using PageBuilder
+      const pageHtml = PageBuilder.buildGameMasterObjectPage(window.OBJETS);
+      
+      // Find or create the views container
+      const viewsContainer = document.querySelector('#views');
+      if (!viewsContainer) {
+        console.error('Views container not found');
+        return false;
+      }
+      
+      // Remove existing GM objects page if it exists
+      const existingPage = document.querySelector('[data-page="gestion-objets"]');
+      if (existingPage) {
+        existingPage.remove();
+      }
+      
+      // Insert the new page
+      viewsContainer.insertAdjacentHTML('beforeend', pageHtml);
+      
+      // Setup search functionality for GM page
+      setTimeout(() => {
+        this.setupGMObjectSearch();
+      }, 100);
+      
+      // Show and activate page
+      this.show('gestion-objets');
+      this.updateActiveStates('gestion-objets');
+      
+      return true;
+    },
+
+    setupGMObjectSearch() {
+      // Setup ID search for the GM objects page
+      const idSearchInput = document.getElementById('id-search-input');
+      if (idSearchInput) {
+        // Remove existing listeners
+        const newInput = idSearchInput.cloneNode(true);
+        idSearchInput.parentNode.replaceChild(newInput, idSearchInput);
+        
+        newInput.addEventListener('keyup', (e) => {
+          if (e.key === 'Enter') {
+            const searchId = e.target.value.trim();
+            if (JdrApp.modules.renderer && JdrApp.modules.renderer.performIdSearch) {
+              JdrApp.modules.renderer.performIdSearch(searchId);
+            }
+          }
+        });
+      }
+      
+      // Setup clear button
+      const clearButton = document.getElementById('clear-id-search');
+      if (clearButton) {
+        const newClearButton = clearButton.cloneNode(true);
+        clearButton.parentNode.replaceChild(newClearButton, clearButton);
+        
+        newClearButton.addEventListener('click', () => {
+          if (JdrApp.modules.renderer && JdrApp.modules.renderer.clearIdSearch) {
+            JdrApp.modules.renderer.clearIdSearch();
+          }
+        });
+      }
     },
 
     renderMonstersPage() {
@@ -18867,7 +19091,8 @@ article.active .grid {
         { fn: () => this.generateStaticPages(), name: 'static' },
         { fn: () => this.generateClassPages(), name: 'classes' },
         { fn: () => this.generateCategoryPages(), name: 'categories' },
-        { fn: () => this.generateMonstersPage(), name: 'monsters' }
+        { fn: () => this.generateMonstersPage(), name: 'monsters' },
+        { fn: () => this.generateGMObjectsPage(), name: 'gm-objects' }
       ], viewsContainer);
     },
 
@@ -19000,6 +19225,12 @@ article.active .grid {
       if (!window.MONSTRES) return '';
       
       return PageBuilder.buildSingleMonsterPage(window.MONSTRES);
+    },
+
+    generateGMObjectsPage() {
+      if (!window.OBJETS) return '';
+      
+      return PageBuilder.buildGameMasterObjectPage(window.OBJETS);
     },
 
 
@@ -19352,74 +19583,78 @@ article.active .grid {
     performIdSearch(searchId) {
       const resultDiv = document.getElementById('id-search-result');
       const objectsContainer = document.getElementById('objets-container');
+      const gmObjectsContainer = document.getElementById('gestion-objets-container');
       
-      if (!searchId || !objectsContainer) {
+      // Determine which container to use based on current page
+      const activeContainer = objectsContainer || gmObjectsContainer;
+      
+      if (!searchId || !activeContainer) {
         if (resultDiv) resultDiv.textContent = '';
         return;
       }
 
       // Hide all objects first
-      const allObjectCards = objectsContainer.querySelectorAll('.card');
+      const allObjectCards = activeContainer.querySelectorAll('.card');
       allObjectCards.forEach(card => {
         card.style.display = 'none';
       });
 
       // Find object by ID (search in data-object-numero attribute)
-      const targetCard = objectsContainer.querySelector(`[data-object-numero="${searchId}"]`);
+      const targetCard = activeContainer.querySelector(`[data-object-numero="${searchId}"]`);
       
       if (targetCard) {
-        // Show the found object and center it
+        // Show the found object and center it both visually and scroll-wise
         targetCard.style.display = 'block';
         
         // Add highlight effect
         targetCard.style.border = '3px solid #16a34a';
         targetCard.style.boxShadow = '0 0 15px rgba(22, 163, 74, 0.5)';
         
-        // Center the object with mobile-optimized approach
-        setTimeout(() => {
-          // Mobile-specific centering that accounts for viewport and layout
-          const isMobile = window.innerWidth <= 768;
-          
-          if (isMobile) {
-            // Mobile centering - account for mobile layout specifics
-            const rect = targetCard.getBoundingClientRect();
-            const windowHeight = window.innerHeight;
-            const windowWidth = window.innerWidth;
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-            
-            // Calculate center position accounting for mobile viewport
-            const targetY = rect.top + scrollTop - (windowHeight / 2) + (rect.height / 2);
-            const targetX = rect.left + scrollLeft - (windowWidth / 2) + (rect.width / 2);
-            
-            // Scroll to center both vertically and horizontally on mobile
-            window.scrollTo({
-              top: Math.max(0, targetY),
-              left: Math.max(0, targetX),
-              behavior: 'smooth'
-            });
+        // CENTER THE OBJECT VISUALLY IN THE GRID
+        // When only one object is shown, center it horizontally in the grid
+        const container = activeContainer;
+        if (container) {
+          // Temporarily change grid to center the single item
+          const isDesktop = window.innerWidth > 768;
+          if (isDesktop) {
+            // On desktop: center the single card by spanning both columns
+            targetCard.style.gridColumn = '1 / -1'; // Span all columns
+            targetCard.style.justifySelf = 'center'; // Center within the span
+            targetCard.style.maxWidth = '500px'; // Reasonable max width for single card
           } else {
-            // Desktop centering - use scrollIntoView which works well on desktop
-            targetCard.scrollIntoView({ 
-              behavior: 'smooth', 
-              block: 'center', 
-              inline: 'center' 
-            });
+            // On mobile: grid is already single column, just center it
+            targetCard.style.justifySelf = 'center';
+            targetCard.style.maxWidth = '100%';
           }
+        }
+        
+        // Center the object on screen with scroll
+        setTimeout(() => {
+          // Use scrollIntoView for reliable centering
+          targetCard.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'center', 
+            inline: 'center' 
+          });
           
-          // Additional fallback for problematic browsers
+          // Additional fine-tuning for better positioning
           setTimeout(() => {
             const rect = targetCard.getBoundingClientRect();
-            const windowHeight = window.innerHeight;
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            const targetY = rect.top + scrollTop - (windowHeight / 2) + (rect.height / 2);
+            const viewportHeight = window.innerHeight;
             
-            window.scrollTo({
-              top: Math.max(0, targetY),
+            // Only adjust vertically to avoid horizontal scroll issues
+            const cardCenterY = rect.top + (rect.height / 2);
+            const viewportCenterY = viewportHeight / 2;
+            const scrollAdjustY = cardCenterY - viewportCenterY;
+            
+            // Apply vertical scroll adjustment only
+            window.scrollBy({
+              top: scrollAdjustY,
+              left: 0, // Don't adjust horizontal scroll
               behavior: 'smooth'
             });
           }, 300);
-        }, 100);
+        }, 150);
 
         // Update search result message
         if (resultDiv) {
@@ -19446,6 +19681,7 @@ article.active .grid {
       const idSearchInput = document.getElementById('id-search-input');
       const resultDiv = document.getElementById('id-search-result');
       const objectsContainer = document.getElementById('objets-container');
+      const gmObjectsContainer = document.getElementById('gestion-objets-container');
       
       // Clear search input
       if (idSearchInput) {
@@ -19457,16 +19693,27 @@ article.active .grid {
         resultDiv.textContent = '';
       }
       
-      // Show all objects and remove highlights
-      if (objectsContainer) {
-        const allObjectCards = objectsContainer.querySelectorAll('.card');
-        allObjectCards.forEach(card => {
-          card.style.display = 'block';
-          // Remove highlight effects
-          card.style.border = '';
-          card.style.boxShadow = '';
-        });
-      }
+      // Show all objects and remove highlights for both containers
+      [objectsContainer, gmObjectsContainer].forEach(container => {
+        if (container) {
+          const allObjectCards = container.querySelectorAll('.card');
+          allObjectCards.forEach(card => {
+            // For regular objects page, keep objects hidden by default
+            // For GM objects page, show all objects
+            if (container.id === 'objets-container') {
+              card.style.display = 'none'; // Regular page: hide all
+            } else if (container.id === 'gestion-objets-container') {
+              card.style.display = 'block'; // GM page: show all
+            }
+            // Remove highlight effects and grid centering styles
+            card.style.border = '';
+            card.style.boxShadow = '';
+            card.style.gridColumn = ''; // Reset grid column span
+            card.style.justifySelf = ''; // Reset justify
+            card.style.maxWidth = ''; // Reset max width
+          });
+        }
+      });
       
       // Mark search as inactive
       window.activeIdSearch = false;
@@ -23590,7 +23837,36 @@ article.active .grid {
      * Setup search functionality
      */
     setupSearch() {
-      // Search functionality removed - no search bar in TOC
+      const searchInput = JdrApp.utils.dom.$('#search');
+      const clearButton = JdrApp.utils.dom.$('#clear');
+      
+      if (searchInput) {
+        // Only search on Enter key press
+        JdrApp.utils.events.register('keydown', '#search', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            const query = e.target.value.trim();
+            if (query.length > 0) {
+              this.performSearch(query);
+            } else {
+              this.clearMainSearchResults();
+            }
+          } else if (e.key === 'Escape') {
+            this.clearMainSearchResults();
+            e.target.value = '';
+            e.target.blur();
+          }
+        });
+      }
+      
+      if (clearButton) {
+        JdrApp.utils.events.register('click', '#clear', () => {
+          if (searchInput) {
+            searchInput.value = '';
+            this.clearMainSearchResults();
+          }
+        });
+      }
     },
 
     /**
