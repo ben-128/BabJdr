@@ -38,6 +38,7 @@
       const page = hash || 'creation';
       const exists = JdrApp.utils.dom.$(`article[data-page="${page}"]`);
       
+      console.log('🧭 Parsing route:', page, 'Existing element:', !!exists);
       
       this.currentRoute = page;
       
@@ -67,6 +68,7 @@
       
       // Handle single objets page (objects now use unified page with tag filtering)
       if (page === 'objets') {
+        console.log('📦 Router handling objets page');
         return this.renderObjectsPage();
       }
       
@@ -2093,12 +2095,19 @@
     },
 
     renderObjectsPage() {
+      console.log('🚀 renderObjectsPage() called');
       // Check if page already exists and force refresh is requested
       const existingPage = document.querySelector('[data-page="objets"]');
       const shouldRefresh = this._forceObjectsRefresh || !existingPage;
       
+      console.log('Existing page:', !!existingPage, 'Should refresh:', shouldRefresh);
+      
       if (!shouldRefresh && existingPage) {
         // Page exists and no refresh needed, just show it
+        console.log('Using existing page, setting up search...');
+        setTimeout(() => {
+          this.setupObjectSearchFunctionality();
+        }, 100);
         this.show('objets');
         this.updateActiveStates('objets');
         return true;
