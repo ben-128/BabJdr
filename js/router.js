@@ -2090,6 +2090,188 @@
       this.updateActiveStates('favoris');
       
       return true;
+    },
+
+    renderObjectsPage() {
+      // Check if page already exists and force refresh is requested
+      const existingPage = document.querySelector('[data-page="objets"]');
+      const shouldRefresh = this._forceObjectsRefresh || !existingPage;
+      
+      if (!shouldRefresh && existingPage) {
+        // Page exists and no refresh needed, just show it
+        this.show('objets');
+        this.updateActiveStates('objets');
+        return true;
+      }
+      
+      // Reset the force refresh flag
+      this._forceObjectsRefresh = false;
+      
+      // Get objects data
+      const objectsData = window.OBJETS || { objets: [] };
+      
+      // Use PageBuilder to generate the objects page
+      if (!window.PageBuilder) {
+        console.error('PageBuilder not available for objects page');
+        return false;
+      }
+      
+      // Generate page HTML using PageBuilder
+      const pageHtml = PageBuilder.getInstance().buildSingleObjectPage(objectsData);
+      
+      // Find or create the views container
+      const viewsContainer = document.querySelector('#views');
+      if (!viewsContainer) {
+        console.error('Views container not found');
+        return false;
+      }
+      
+      // Remove existing objects page if it exists
+      if (existingPage) {
+        existingPage.remove();
+      }
+      
+      // Insert the new page
+      viewsContainer.insertAdjacentHTML('beforeend', pageHtml);
+      
+      // Setup object search functionality
+      setTimeout(() => {
+        this.setupObjectSearchFunctionality();
+      }, 100);
+      
+      // Show and activate page
+      this.show('objets');
+      this.updateActiveStates('objets');
+      
+      return true;
+    },
+
+    refreshObjectsPageIfActive() {
+      if (window.location.hash === '#/objets') {
+        console.log('🔄 Refreshing objects page due to state change');
+        setTimeout(() => {
+          this._forceObjectsRefresh = true;
+          this.renderObjectsPage();
+        }, 50);
+      }
+    },
+
+    setupObjectSearchFunctionality() {
+      // Setup ID search functionality
+      const idSearchInput = document.getElementById('id-search-input');
+      const clearButton = document.getElementById('clear-id-search');
+      const resultDiv = document.getElementById('id-search-result');
+      
+      if (!idSearchInput) {
+        console.warn('ID search input not found');
+        return;
+      }
+      
+      // Search function
+      const performIdSearch = (searchValue) => {
+        const objectsContainer = document.getElementById('objets-container');
+        if (!objectsContainer) return;
+        
+        const allCards = objectsContainer.querySelectorAll('.card');
+        let foundCard = null;
+        
+        if (!searchValue || searchValue.trim() === '') {
+          // Show all cards when search is empty
+          allCards.forEach(card => {
+            card.style.display = 'block';
+          });
+          window.activeIdSearch = false;
+          if (resultDiv) {
+            resultDiv.textContent = 'Entrez un numéro pour rechercher un objet spécifique';
+          }
+          return;
+        }
+        
+        // Hide all cards first
+        allCards.forEach(card => {
+          card.style.display = 'none';
+        });
+        
+        // Find and show matching card
+        const searchNumber = parseInt(searchValue);
+        if (!isNaN(searchNumber)) {
+          allCards.forEach(card => {
+            const cardNumero = card.getAttribute('data-numero') || card.getAttribute('data-object-numero');
+            if (cardNumero && parseInt(cardNumero) === searchNumber) {
+              card.style.display = 'block';
+              foundCard = card;
+            }
+          });
+        }
+        
+        window.activeIdSearch = true;
+        
+        // Update result text
+        if (resultDiv) {
+          if (foundCard) {
+            const objectName = foundCard.querySelector('h4, .card-title')?.textContent || 'Objet trouvé';
+            resultDiv.textContent = `✅ Objet trouvé: ${objectName}`;
+            resultDiv.style.color = '#16a34a';
+          } else {
+            resultDiv.textContent = `❌ Aucun objet trouvé avec le numéro ${searchNumber}`;
+            resultDiv.style.color = '#ef4444';
+          }
+        }
+      };
+      
+      // Setup event listeners
+      idSearchInput.addEventListener('input', (e) => {
+        performIdSearch(e.target.value);
+      });
+      
+      idSearchInput.addEventListener('keyup', (e) => {
+        if (e.key === 'Enter') {
+          performIdSearch(e.target.value);
+        }
+      });
+      
+      if (clearButton) {
+        clearButton.addEventListener('click', () => {
+          idSearchInput.value = '';
+          performIdSearch('');
+        });
+      }
+      
+      // Setup tag filter functionality if available
+      this.setupObjectTagFilters();
+    },
+
+    setupObjectTagFilters() {
+      const filterChips = document.querySelectorAll('.filter-chip');
+      const objectsContainer = document.getElementById('objets-container');
+      
+      if (!objectsContainer || filterChips.length === 0) return;
+      
+      filterChips.forEach(chip => {
+        chip.addEventListener('click', (e) => {
+          const tag = e.target.getAttribute('data-tag');
+          if (!tag) return;
+          
+          const isActive = e.target.classList.contains('active');
+          
+          // Toggle the tag in global state
+          if (!window.ACTIVE_OBJECT_TAGS) {
+            window.ACTIVE_OBJECT_TAGS = [];
+          }
+          
+          if (isActive) {
+            // Remove tag
+            window.ACTIVE_OBJECT_TAGS = window.ACTIVE_OBJECT_TAGS.filter(t => t !== tag);
+          } else {
+            // Add tag
+            window.ACTIVE_OBJECT_TAGS.push(tag);
+          }
+          
+          // Refresh the objects page to apply filters
+          this._forceObjectsRefresh = true;
+          this.renderObjectsPage();
+        });
+      });
     }
   
   };

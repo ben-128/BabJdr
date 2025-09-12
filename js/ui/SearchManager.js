@@ -87,6 +87,20 @@
         });
       }
 
+      // Search in objects
+      if (window.OBJETS && window.OBJETS.objets && Array.isArray(window.OBJETS.objets)) {
+        window.OBJETS.objets.forEach(objet => {
+          if (this.matchesSearch(objet, normalizedQuery)) {
+            results.push({
+              type: 'objet',
+              category: 'Objets',
+              data: objet,
+              summary: this.generateObjetSummary(objet)
+            });
+          }
+        });
+      }
+
       // Search in static pages
       if (window.STATIC_PAGES) {
         Object.entries(window.STATIC_PAGES).forEach(([pageId, pageData]) => {
@@ -282,6 +296,12 @@
       return `⚡ ${UIUtilities.stripHtml(sousClasse.nom)} (${UIUtilities.stripHtml(parentClass)}) - Sous-classe spécialisée`;
     },
 
+    generateObjetSummary(objet) {
+      const tags = objet.tags && Array.isArray(objet.tags) ? objet.tags.join(', ') : '';
+      const numero = objet.numero ? `#${objet.numero}` : '';
+      return `⚔️ ${UIUtilities.stripHtml(objet.nom)} ${numero} - ${UIUtilities.stripHtml(tags)} | ${UIUtilities.stripHtml(objet.prix || 'Prix non défini')}`;
+    },
+
     generateStaticPageSummary(pageData) {
       return `📄 ${UIUtilities.stripHtml(pageData.title)} - ${UIUtilities.stripHtml(pageData.description || 'Page d\'information du jeu')}`;
     },
@@ -292,6 +312,7 @@
         'don': '🏆 Dons',
         'class': '⚔️ Classes',
         'subclass': '⚡ Sous-classes',
+        'objet': '⚔️ Objets',
         'static-page': '📄 Pages'
       };
       return typeLabels[type] || type;
@@ -320,6 +341,8 @@
           return `#/${UIUtilities.slugify(result.data.nom)}`;
         case 'subclass':
           return `#/${UIUtilities.slugify(result.category)}`;
+        case 'objet':
+          return `#/objets`;
         case 'static-page':
           return `#/${result.pageId}`;
         default:
