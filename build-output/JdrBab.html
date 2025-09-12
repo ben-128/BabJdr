@@ -756,7 +756,7 @@ h5, h6 {
 }
 
 .sidebar .panel .searchbar {
-  flex-shrink: 0 !important; /* Don't shrink searchbar */
+  flex-shrink: 1 !important; /* Allow searchbar to scroll with content */
   margin-bottom: 16px !important;
 }
 
@@ -788,9 +788,13 @@ h5, h6 {
     box-sizing: border-box !important;
   }
   
-  .sidebar .panel .searchbar,
+  .sidebar .panel .searchbar {
+    flex-shrink: 1 !important; /* Allow searchbar to scroll with content */
+    margin: 12px !important; /* Add margin back to controls only */
+  }
+  
   .sidebar .panel .tools {
-    flex-shrink: 0 !important; /* Keep fixed size for controls */
+    flex-shrink: 0 !important; /* Keep fixed size for tools */
     margin: 12px !important; /* Add margin back to controls only */
   }
   
@@ -2261,25 +2265,6 @@ body.dev-off .new-collection-card {
   border:1px solid var(--rule);
   background:#fff6e8;
   color:inherit;
-}
-.toc-search .btn-clear{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  width:32px;
-  height:32px;
-  background:#dc2626;
-  color:white;
-  border:none;
-  border-radius:8px;
-  cursor:pointer;
-  font-size:14px;
-  transition:var(--transition-fast);
-  flex-shrink:0;
-}
-.toc-search .btn-clear:hover{
-  background:#b91c1c;
-  transform:scale(1.05);
 }
 
 /* Search results */
@@ -6085,7 +6070,6 @@ article.active .grid {
       <div class="panel">
         <div class="searchbar">
           <input autocomplete="off" id="search" placeholder="Rechercher une règle, une classe…">
-          <button class="btn" id="clear" title="Effacer">✖</button>
         </div>
         <div class="tools">
           <!-- Dev mode disabled in standalone version -->
@@ -9314,7 +9298,6 @@ article.active .grid {
                 <div class="toc" id="toc">
                   <div class="toc-search">
                     <input autocomplete="off" id="search" placeholder="Rechercher une règle, une classe…">
-                    <button class="btn-clear" id="clear" title="Effacer">✖</button>
                   </div>
                   <!-- Table of contents will be injected here -->
                 </div>
@@ -23647,7 +23630,6 @@ article.active .grid {
      */
     setupSearch() {
       const searchInput = JdrApp.utils.dom.$('#search');
-      const clearButton = JdrApp.utils.dom.$('#clear');
       
       if (searchInput) {
         // Only search on Enter key press
@@ -23664,15 +23646,6 @@ article.active .grid {
             this.clearMainSearchResults();
             e.target.value = '';
             e.target.blur();
-          }
-        });
-      }
-      
-      if (clearButton) {
-        JdrApp.utils.events.register('click', '#clear', () => {
-          if (searchInput) {
-            searchInput.value = '';
-            this.clearMainSearchResults();
           }
         });
       }
