@@ -2130,7 +2130,7 @@
       // Generate page HTML using PageBuilder
       let pageHtml;
       try {
-        pageHtml = PageBuilder.getInstance().buildSingleObjectPage(objectsData);
+        pageHtml = PageBuilder.buildSingleObjectPage(objectsData);
         console.log('✅ Page HTML generated successfully, length:', pageHtml.length);
       } catch (error) {
         console.error('❌ Error building objects page:', error);
