@@ -15,7 +15,7 @@ if not exist "package.json" (
     echo [ERREUR] package.json non trouvé !
     echo Assurez-vous d'être dans le dossier du projet
     echo.
-    set /p "temp=Appuyez sur Entree pour continuer..." <nul
+    pause
     exit /b 1
 )
 
@@ -40,4 +40,4 @@ call npm run dev-clean 2>nul
 
 echo.
 echo [INFO] Serveur arrêté
-set /p "temp=Appuyez sur Entree pour continuer..." <nul
+pause

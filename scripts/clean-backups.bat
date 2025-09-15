@@ -16,7 +16,7 @@ if not exist "package.json" (
     echo [ERREUR] package.json non trouvé !
     echo Assurez-vous d'être dans le dossier du projet
     echo.
-    set /p "temp=Appuyez sur Entree pour continuer..." <nul
+    pause
     exit /b 1
 )
 
@@ -27,7 +27,7 @@ echo.
 if not exist "Backups" (
     echo [INFO] Aucun dossier Backups trouvé
     echo.
-    set /p "temp=Appuyez sur Entree pour continuer..." <nul
+    pause
     exit /b 0
 )
 
@@ -43,7 +43,7 @@ for /d %%D in (backup-*) do (
 if %BACKUP_COUNT%==0 (
     echo [INFO] Aucun dossier de sauvegarde trouvé
     echo.
-    set /p "temp=Appuyez sur Entree pour continuer..." <nul
+    pause
     exit /b 0
 )
 
@@ -133,5 +133,5 @@ echo ========================================
 echo   NETTOYAGE TERMINÉ
 echo ========================================
 echo.
-set /p "temp=Appuyez sur Entree pour continuer..." <nul
+pause
 exit /b 0

@@ -16,7 +16,7 @@ if not exist "package.json" (
     echo [ERREUR] package.json non trouvé !
     echo Assurez-vous d'être dans le dossier du projet
     echo.
-    set /p "temp=Appuyez sur Entree pour continuer..." <nul
+    pause
     exit /b 1
 )
 
@@ -72,5 +72,5 @@ if errorlevel 1 (
 
 echo.
 echo Appuyez sur une touche pour retourner au menu...
-set /p "temp=Appuyez sur Entree pour continuer..." <nul
+pause
 exit /b 0
