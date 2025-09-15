@@ -87,6 +87,13 @@
         }
       });
 
+      JdrApp.utils.events.register('click', '#search-object-btn', () => {
+        const input = document.querySelector('#id-search-input');
+        if (input) {
+          this.delegateToUI('performIdSearch', input.value);
+        }
+      });
+
       JdrApp.utils.events.register('click', '#clear-id-search', () => {
         this.delegateToUI('clearIdSearch');
       });

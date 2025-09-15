@@ -181,46 +181,17 @@
         return;
       }
 
-      // Set global flag BEFORE regenerating page
+      // Set global flag for ID search
       window.activeIdSearch = true;
 
-      // Immediately hide the container to prevent flash
-      const container = document.querySelector('#objets-container');
-      if (container) {
-        container.style.visibility = 'hidden';
-      }
-
-      // Show success message immediately
+      // Show success message
       if (resultDiv) {
         resultDiv.innerHTML = `✅ Objet trouvé : "${foundObject.nom}" (ID: ${searchNumber})`;
         resultDiv.style.color = '#16a34a';
       }
 
-      // Force regenerate page with all objects AND visual feedback
-      if (JdrApp.modules.renderer?.regenerateCurrentPage) {
-        JdrApp.modules.renderer.regenerateCurrentPage();
-      }
-
-      // After regeneration, configure display and show only target object
-      requestAnimationFrame(() => {
-        const newContainer = document.querySelector('#objets-container');
-        if (newContainer) {
-          // Hide all objects first
-          this.hideAllObjects();
-          
-          // Show only the target object and make container visible again
-          setTimeout(() => {
-            this.showOnlyObjectById(searchNumber);
-            newContainer.style.visibility = 'visible';
-            
-            // Restore the search value in the input field
-            const searchInput = document.querySelector('#id-search-input');
-            if (searchInput) {
-              searchInput.value = searchNumber;
-            }
-          }, 10);
-        }
-      });
+      // Show only the target object
+      this.showOnlyObjectById(searchNumber);
     },
 
     clearIdSearch() {
@@ -243,13 +214,13 @@
     },
 
     hideAllObjects() {
-      document.querySelectorAll('.card').forEach(card => {
+      document.querySelectorAll('#objets-container .card, #gestion-objets-container .card').forEach(card => {
         card.style.display = 'none';
       });
     },
 
     showAllObjects() {
-      document.querySelectorAll('.card').forEach(card => {
+      document.querySelectorAll('#objets-container .card, #gestion-objets-container .card').forEach(card => {
         card.style.display = '';
       });
     },
@@ -257,8 +228,8 @@
     showOnlyObjectById(searchNumber) {
       this.hideAllObjects();
       
-      // Show only the target object
-      const targetCard = document.querySelector(`[data-object-id="${searchNumber}"]`);
+      // Show only the target object - check both containers
+      const targetCard = document.querySelector(`[data-object-id="${searchNumber}"], [data-numero="${searchNumber}"]`);
       if (targetCard) {
         targetCard.style.display = '';
         targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
