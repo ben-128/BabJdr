@@ -98,7 +98,7 @@
       container.innerHTML = cardsHtml;
       
       // Force responsive grid layout after content insertion
-      this.applyResponsiveGrid(container);
+      this.ensureResponsiveGrid(container);
 
       // Déclencher le chargement des images après insertion du contenu
       if (JdrApp.modules.renderer?.autoLoadImages) {
@@ -143,7 +143,7 @@
       container.innerHTML = cardsHtml;
       
       // Force responsive grid layout after content insertion
-      this.applyResponsiveGrid(container);
+      this.ensureResponsiveGrid(container);
 
       // Déclencher le chargement des images après insertion du contenu
       if (JdrApp.modules.renderer?.autoLoadImages) {
@@ -226,6 +226,30 @@
       }
 
       this.isInitialized = true;
+    }
+
+    /**
+     * Assure que le container utilise un responsive grid layout
+     */
+    ensureResponsiveGrid(container) {
+      if (!container) return;
+      
+      // Ajouter classes CSS pour le responsive grid
+      container.classList.add('favoris-grid', 'collection-items');
+      
+      // Forcer le layout avec CSS inline si nécessaire
+      container.style.display = 'grid';
+      container.style.gap = '1.5rem';
+      container.style.gridTemplateColumns = 'repeat(auto-fit, minmax(250px, 1fr))';
+      container.style.justifyContent = 'center';
+      
+      // Assurer que les cartes prennent toute la largeur
+      const cards = container.querySelectorAll('.card');
+      cards.forEach(card => {
+        card.style.width = '100%';
+        card.style.margin = '0';
+        card.style.boxSizing = 'border-box';
+      });
     }
   }
 
