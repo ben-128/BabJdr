@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-09-15T20:19:42.973Z by JdrBab Build System -->
+<!-- Generated on 2025-09-15T22:04:44.045Z by JdrBab Build System -->
 <title>JDR‑BAB — Livret de règles</title>
 <meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -211,16 +211,75 @@ html,body{height:100%; overflow-x:hidden} /* Prevent horizontal scroll */
 body{
   margin:0;
   background:
-    radial-gradient(1600px 800px at 50% -10%, rgba(212,175,55,.08), transparent 45%),
-    radial-gradient(1400px 700px at 120% 10%, rgba(139,69,19,.06), transparent 40%),
-    radial-gradient(800px 400px at 20% 80%, rgba(205,127,50,.04), transparent 30%),
-    repeating-linear-gradient(90deg, rgba(74,44,23,.02) 0 1px, transparent 1px 3px),
-    repeating-linear-gradient(0deg, rgba(139,69,19,.015) 0 1px, transparent 1px 4px),
-    var(--paper);
+    radial-gradient(1600px 800px at 50% -10%, rgba(212,175,55,.3), rgba(248,246,240,1) 45%),
+    radial-gradient(1400px 700px at 120% 10%, rgba(139,69,19,.25), rgba(248,246,240,1) 40%),
+    radial-gradient(800px 400px at 20% 80%, rgba(205,127,50,.2), rgba(248,246,240,1) 30%),
+    repeating-linear-gradient(90deg, rgba(74,44,23,.1) 0 1px, rgba(248,246,240,1) 1px 3px),
+    repeating-linear-gradient(0deg, rgba(139,69,19,.08) 0 1px, rgba(248,246,240,1) 1px 4px),
+    rgb(248,246,240);
   color:var(--paper-ink); 
-  font:17px/1.65 "Source Serif Pro", "Cinzel", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif; 
+  font:17px/1.65 "Source Serif Pro", "Cinzel", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   -webkit-font-smoothing:antialiased; 
   text-rendering:optimizeLegibility;
+}
+
+/* Force solid background and visibility for ALL modals - Override dev-off rules */
+.modal,
+.modal-base,
+#elementsModal,
+#etatsModal, 
+#spellLinksModal,
+#pageLinksModal,
+#monsterLinksModal,
+.spell-preview-tooltip,
+.monster-preview-tooltip,
+.etat-preview-tooltip {
+  background: rgba(0, 0, 0, 0.7) !important;
+  opacity: 1 !important;
+}
+
+/* Force solid background for modal content */
+.modal .modal-content,
+.modal .modal-body,
+.modal-base .modal-content,
+.modal-base .modal-body,
+#elementsModal .modal-content,
+#etatsModal .modal-content,
+#spellLinksModal .modal-content,
+#pageLinksModal .modal-content,
+#monsterLinksModal .modal-content {
+  background: rgb(248, 246, 240) !important;
+  opacity: 1 !important;
+}
+.spell-preview-tooltip *,
+.monster-preview-tooltip *,
+.etat-preview-tooltip * {
+  background-color: rgb(248, 246, 240) !important;
+  opacity: 1 !important;
+  display: initial !important;
+  visibility: visible !important;
+  position: static !important;
+  left: auto !important;
+  width: auto !important;
+  height: auto !important;
+  pointer-events: auto !important;
+}
+/* Specific overrides for card elements in previews */
+.spell-preview-tooltip .card,
+.monster-preview-tooltip .card,
+.etat-preview-tooltip .card {
+  opacity: 1 !important;
+  background: rgb(248, 246, 240) !important;
+  display: block !important;
+  visibility: visible !important;
+}
+.spell-preview-tooltip .card *,
+.monster-preview-tooltip .card *,
+.etat-preview-tooltip .card * {
+  opacity: 1 !important;
+  background-color: rgb(248, 246, 240) !important;
+  display: initial !important;
+  visibility: visible !important;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════════════════
@@ -2177,7 +2236,7 @@ body.dev-off .new-collection-card {
   background: var(--accent) !important;
 }
 
-.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:999999;display:flex;align-items:center;justify-content:center}
+.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:2147483647;display:flex;align-items:center;justify-content:center}
 .modal-base{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:99999;display:none;align-items:center;justify-content:center}
 .modal-base.visible{display:flex}
 .modal-content-base{background:var(--card);border:2px solid var(--rule);border-radius:16px;padding:var(--space-2xl);box-shadow:var(--shadow);position:relative}
@@ -3689,16 +3748,36 @@ article[data-page="enchanteur"] .illus img:hover,
 
 .favoris-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1rem;
-  width: 100%;
-  margin: 0.5rem 0;
+  gap: 1.5rem;
+  margin: 1rem auto;
+  max-width: 1400px;
+  justify-content: center;
+  
+  /* Use auto-fit with smaller minmax to allow more columns */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
 
+/* Consistent sizing for favoris cards */
+.favoris-grid .card {
+  width: 100%; /* Take full column width */
+  margin: 0; /* Remove default margin, use grid gap instead */
+  box-sizing: border-box; /* Include padding and border in width calculation */
+}
+
+/* Tablet responsive */
+@media (max-width: 1024px) {
+  .favoris-grid {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+}
+
+/* Mobile responsive */
 @media (max-width: 768px) {
   .favoris-grid {
     grid-template-columns: 1fr;
     gap: 0.75rem;
+    margin: 0.5rem 0;
   }
 }
 
@@ -4806,7 +4885,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
   z-index:2147483647; display:none; align-items:center; justify-content:center;
 }
 .elements-modal.visible {
-  display:flex;
+  display: flex !important;
 }
 .elements-modal-content {
   background:var(--card); border:2px solid var(--rule); border-radius:16px;
@@ -4848,7 +4927,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
   z-index:2147483647; display:none; align-items:center; justify-content:center;
 }
 .etats-modal.visible {
-  display:flex;
+  display: flex !important;
 }
 .etats-modal-content {
   background:var(--card); border:2px solid var(--rule); border-radius:16px;
@@ -4946,7 +5025,7 @@ span[title] {
 }
 
 .spell-links-modal.visible {
-  display: flex;
+  display: flex !important;
 }
 
 .spell-links-modal-content {
@@ -6888,7 +6967,7 @@ article.active .grid {
       "nom": "Espadon",
       "numero": 1,
       "image": "https://i.ibb.co/35rpP6ZS/Epee2M1.png",
-      "description": "<strong>Dégâts: </strong> Inflige (4  + Force) points de dégats physiques.",
+      "description": "<i>Longue épée à deux mains, lourde mais puissante.</i>",
       "tags": [
         "Arme",
         "Épée",
@@ -6974,7 +7053,8 @@ article.active .grid {
       "image": "https://i.ibb.co/67bK4Bw8/Bouclier1.png",
       "description": "<i>Un bouclier grossier taillé dans des planches épaisses, marqué de cicatrices de bataille.</i>",
       "tags": [
-        "Bouclier"
+        "Bouclier",
+        "Main secondaire"
       ],
       "effet": "<strong>Effet:</strong> Augmente l'armure physique de 2.",
       "prix": "🔷 <strong>Prix:</strong> 15",
@@ -7063,9 +7143,9 @@ article.active .grid {
       "description": "<i>Une fine tige runique qui libère des flammes brûlantes au commandement de son porteur.</i>",
       "tags": [
         "Consommable",
-        "Catalyseur"
+        "Magie"
       ],
-      "effet": "<strong>Effet:</strong> Remplace votre prochaine action principale par le sort de mage <span class=\"spell-link\" data-spell=\"Boule de Feu\" data-category=\"Sorts de Mage\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Boule de Feu</span>. <br><i>Les prérequis pour le sort ne sont pas requis mais le mana et les statistiques du héros sont utilisés.</i>\n    <br><br><strong>Charges :</strong> 3",
+      "effet": "<strong>Effet:</strong> Remplace votre prochaine action principale par le sort de mage <span class=\"spell-link\" data-spell=\"Boule de Feu\" data-category=\"Sorts de Mage\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Boule de Feu</span>. <br><i>Le mana et les statistiques du héros sont utilisés.</i>\n    <br><br><strong>Charges :</strong> 3",
       "prix": "🔷 <strong>Prix:</strong> 25",
       "poids": ""
     },
@@ -7078,7 +7158,7 @@ article.active .grid {
         "Consommable",
         "Plante"
       ],
-      "effet": "<strong>Effet:</strong> Rend 10 (critique : 20) points de vie au héros ou à une cible proche.\n<br>Tous les 5 points d'intelligence, augmente les soins de 1.",
+      "effet": "<strong>Effet:</strong> Rend (10 (critique : 20) + Puiss. Sorts) points de vie au héros ou à une cible proche.",
       "prix": "🔷 <strong>Prix:</strong> 10",
       "poids": ""
     },
@@ -7102,9 +7182,9 @@ article.active .grid {
       "description": "<i>Une fine tige de cristal rayonnant, dont l’éclat sacré nimbe son porteur d’une aura éclatante, lui conférant une vitesse surnaturelle et des réflexes fulgurants.</i>",
       "tags": [
         "Consommable",
-        "Catalyseur"
+        "Magie"
       ],
-      "effet": "<strong>Effet:</strong> Remplace votre prochaine action principale par le sort d'enchanteur <span class=\"spell-link\" data-spell=\"Accélération\" data-category=\"Sorts d'Enchanteur\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Accélération</span>. <br><i>Les prérequis pour le sort ne sont pas requis mais le mana et les statistiques du héros sont utilisés.</i>\n    <br><br><strong>Charges :</strong> 3",
+      "effet": "<strong>Effet:</strong> Remplace votre prochaine action principale par le sort d'enchanteur <span class=\"spell-link\" data-spell=\"Accélération\" data-category=\"Sorts d'Enchanteur\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Accélération</span>. <br><i>Le mana et les statistiques du héros sont utilisés.</i>\n    <br><br><strong>Charges :</strong> 3",
       "prix": "🔷 <strong>Prix:</strong> 30",
       "poids": ""
     },
@@ -7115,9 +7195,9 @@ article.active .grid {
       "description": "<i>Une tige sombre incrustée de gemmes lunaires, qui libère une aura ténébreuse plongeant ses cibles dans un profond sommeil enchanté.</i>",
       "tags": [
         "Consommable",
-        "Catalyseur"
+        "Magie"
       ],
-      "effet": "<strong>Effet:</strong> Remplace votre prochaine action principale par le sort d'enchanteur <span class=\"spell-link\" data-spell=\"Sommeil\" data-category=\"Sorts d'Enchanteur\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Sommeil</span>. <br><i>Les prérequis pour le sort ne sont pas requis mais le mana et les statistiques du héros sont utilisés.</i>\n    <br><br><strong>Charges :</strong> 3",
+      "effet": "<strong>Effet:</strong> Remplace votre prochaine action principale par le sort d'enchanteur <span class=\"spell-link\" data-spell=\"Sommeil\" data-category=\"Sorts d'Enchanteur\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Sommeil</span>. <br><i>Le mana et les statistiques du héros sont utilisés.</i>\n    <br><br><strong>Charges :</strong> 3",
       "prix": "🔷 <strong>Prix:</strong> 30",
       "poids": ""
     },
@@ -7331,7 +7411,7 @@ article.active .grid {
         "Plante",
         "Non identifié"
       ],
-      "effet": "<b>Effet:</b> Rend au héros à une cible proche une quantitée de mana équilavent au niveau d'Intelligence du héros.\n<br><b>Ciritique :</b> Mana rendu augmenté de 5.",
+      "effet": "<b>Effet:</b> Rend au héros ou à une cible proche une quantitée de mana équilavent au niveau d'Intelligence du héros.\n<br><b>Ciritique :</b> Mana rendu augmenté de 5.",
       "prix": "🔷 <strong>Prix:</strong> 25",
       "poids": ""
     },
@@ -7377,7 +7457,8 @@ article.active .grid {
       "image": "https://i.ibb.co/Zpkw8qVL/Bouclier-Foret.png",
       "description": "<i>Bouclier rond taillé dans un bois ancien et orné d’un arbre majestueux dont les racines et les branches s’entrelacent en relief.</i>",
       "tags": [
-        "Bouclier"
+        "Bouclier",
+        "Main secondaire"
       ],
       "effet": "<strong>Effet:</strong> Augmente l'armure physique de 4. Augmente l'armure élémentaire de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> de 5.",
       "prix": "🔷 <strong>Prix:</strong> ?",
@@ -7543,7 +7624,35 @@ article.active .grid {
     ]
   },
   "categoryDescription": "Équipements, armes, armures et objets divers que peuvent posséder les personnages.",
-  "description": "Fortune + d20"
+  "description": "Fortune + d20",
+  "_metadata": {
+    "availableTags": [
+      "Arme",
+      "Armure",
+      "Consommable",
+      "Bouclier",
+      "Épée",
+      "Arme exotique",
+      "Une main",
+      "Deux mains",
+      "Baton",
+      "Dague",
+      "Arc",
+      "Armure lourde",
+      "Armure légère",
+      "Robe",
+      "Plante",
+      "Catalyseur",
+      "Nouvel objet",
+      "Nourriture",
+      "Non identifié",
+      "Flèche",
+      "Accessoire",
+      "Composant",
+      "Magie",
+      "Main secondaire"
+    ]
+  }
 };
     window.MONSTRES = [
   {
@@ -8011,7 +8120,8 @@ article.active .grid {
       "Forêt",
       "Boss",
       "Coffre",
-      "Auberge"
+      "Auberge",
+      "test"
     ]
   }
 };
@@ -9269,6 +9379,9 @@ article.active .grid {
         // Load stored edits in development mode (after data is loaded)
         this.loadStoredEditsEarly();
         
+        // Synchronize tags from metadata to ContentTypes
+        this.syncTagsFromMetadata();
+        
         // Note: initializeDefaultFilters removed - now handled by specialized filter modules
       } catch (error) {
         throw error;
@@ -9334,6 +9447,19 @@ article.active .grid {
     loadStoredEditsEarly() {
       // Ne plus charger automatiquement le localStorage
       // Laisser les JSON files être la source de vérité
+    },
+
+    // Synchronize tags from metadata to ContentTypes
+    syncTagsFromMetadata() {
+      // Sync objects tags
+      if (window.OBJETS?._metadata?.availableTags && window.ContentTypes?.objet?.filterConfig) {
+        window.ContentTypes.objet.filterConfig.availableTags = [...window.OBJETS._metadata.availableTags];
+      }
+      
+      // Sync monsters tags
+      if (window.MONSTRES?._metadata?.availableTags && window.ContentTypes?.monster?.filterConfig) {
+        window.ContentTypes.monster.filterConfig.availableTags = [...window.MONSTRES._metadata.availableTags];
+      }
     },
 
     initializeModules() {
@@ -12260,14 +12386,14 @@ article.active .grid {
       ).join('');
 
       return `
-        <div style="margin-top: 4rem; padding: 2rem; border-top: 3px solid var(--bronze); background: linear-gradient(135deg, rgba(212,175,55,0.05), transparent); border-radius: 12px; padding: 2rem;">
+        <div style="margin-top: 4rem; padding-top: 3rem; border-top: 3px solid var(--bronze); background: linear-gradient(135deg, rgba(212,175,55,0.05), transparent); border-radius: 12px; padding: 2rem;">
           <h3 style="color: var(--bronze); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem; font-size: 1.5em; text-align: center; justify-content: center;">
             🎖️ Dons Généraux
           </h3>
           <p style="margin-bottom: 2rem; font-style: italic; color: var(--accent-ink); opacity: 0.8; text-align: center; font-size: 1.1em;">
             Ces dons sont accessibles à toutes les classes et peuvent compléter votre build.
           </p>
-          <div class="grid cols-2" id="dons-generaux-container" style="position: relative; z-index: 1; clear: both;">
+          <div class="grid cols-2" id="dons-generaux-container">
             ${generalDonsCards}
           </div>
         </div>
@@ -12589,7 +12715,7 @@ article.active .grid {
                 <span class="favoris-toggle">▼</span>
               </div>
               <div class="favoris-content">
-                <div id="favoris-objets-container" class="favoris-grid">
+                <div id="favoris-objets-container" class="favoris-grid collection-items">
                   <!-- Les objets favoris seront affichés ici dynamiquement -->
                 </div>
                 <div id="favoris-objets-empty" class="favoris-empty" style="display: none;">
@@ -12605,7 +12731,7 @@ article.active .grid {
                 <span class="favoris-toggle">▼</span>
               </div>
               <div class="favoris-content">
-                <div id="favoris-sorts-container" class="favoris-grid">
+                <div id="favoris-sorts-container" class="favoris-grid collection-items">
                   <!-- Les sorts favoris seront affichés ici dynamiquement -->
                 </div>
                 <div id="favoris-sorts-empty" class="favoris-empty" style="display: none;">
@@ -13566,6 +13692,7 @@ article.active .grid {
       
       // Listen for storage save events
       EventBus.on(Events.STORAGE_SAVE, () => {
+        console.log('📢 STORAGE_SAVE event received');
         this.saveChanges(true); // Silent save
       });
       
@@ -13654,15 +13781,23 @@ article.active .grid {
         zip.file('data/sorts.json', JSON.stringify(window.SORTS, null, 2));
         zip.file('data/classes.json', JSON.stringify(window.CLASSES, null, 2));
         zip.file('data/dons.json', JSON.stringify(window.DONS, null, 2));
-        zip.file('data/objets.json', JSON.stringify(window.OBJETS, null, 2));
         
-        // Add monsters data with current edits
+        // Add objects data with metadata for tags persistence
+        if (window.OBJETS) {
+          zip.file('data/objets.json', JSON.stringify(window.OBJETS, null, 2));
+        }
+        
+        // Add monsters data with metadata for tags persistence
         if (window.MONSTRES) {
           zip.file('data/monstres.json', JSON.stringify(window.MONSTRES, null, 2));
         }
         
         // Add tables tresors data with current edits  
         if (window.TABLES_TRESORS) {
+          console.log('📦 Exporting TABLES_TRESORS:', {
+            hasMetadata: !!window.TABLES_TRESORS._metadata,
+            availableTags: window.TABLES_TRESORS._metadata?.availableTags
+          });
           zip.file('data/tables-tresors.json', JSON.stringify(window.TABLES_TRESORS, null, 2));
         }
         
@@ -15767,50 +15902,33 @@ article.active .grid {
       // Vérifier si nous sommes sur la page des favoris
       const favorisPage = document.querySelector('[data-page="favoris"]');
       if (!favorisPage) {
-        console.log('FavorisRenderer: Page favoris not found in DOM');
         return;
       }
       
       // Vérifier si la page est visible
       const isVisible = favorisPage.style.display !== 'none' && favorisPage.classList.contains('active');
       if (!isVisible) {
-        console.log('FavorisRenderer: Page favoris not visible', {
-          display: favorisPage.style.display,
-          hasActive: favorisPage.classList.contains('active')
-        });
         // Essayer quand même de mettre à jour, peut-être que les styles CSS gèrent la visibilité
       }
 
-      console.log('FavorisRenderer: Updating favoris display...');
-      
       // Mettre à jour dans l'ordre : objets d'abord, puis sorts (même ordre que PageBuilder)
       this.updateObjetsDisplay();
       this.updateSortsDisplay();
-      
-      console.log('FavorisRenderer: Display update completed');
     }
 
     /**
      * Met à jour l'affichage des sorts favoris
      */
     updateSortsDisplay() {
-      console.log('FavorisRenderer: updateSortsDisplay called');
       const container = document.getElementById('favoris-sorts-container');
       const emptyState = document.getElementById('favoris-sorts-empty');
       const section = document.getElementById('favoris-sorts-section');
       
-      console.log('FavorisRenderer: Found elements', { container: !!container, emptyState: !!emptyState });
-      
-      if (!container || !emptyState) {
-        console.warn('FavorisRenderer: Missing sorts containers');
-        return;
-      }
+      if (!container || !emptyState) return;
 
       const favorisNames = window.FavorisManager.getFavoris('sorts');
-      console.log('FavorisRenderer: Sorts favoris:', favorisNames);
       
       if (favorisNames.length === 0) {
-        console.log('FavorisRenderer: No sorts favoris, showing empty state');
         container.style.display = 'none';
         emptyState.style.display = 'block';
         return;
@@ -15821,15 +15939,16 @@ article.active .grid {
 
       // Récupérer les données des sorts favoris
       const favorisData = this.getSortsData(favorisNames);
-      console.log('FavorisRenderer: Sorts data found:', favorisData.length);
       
       // Générer les cartes avec les images
       const cardsHtml = favorisData.map(sortData => {
         return CardBuilder.create('spell', sortData.sort, sortData.category).build();
       }).join('');
 
-      console.log('FavorisRenderer: Generated sorts HTML, inserting...');
       container.innerHTML = cardsHtml;
+      
+      // Force responsive grid layout after content insertion
+      this.ensureResponsiveGrid(container);
 
       // Déclencher le chargement des images après insertion du contenu
       if (JdrApp.modules.renderer?.autoLoadImages) {
@@ -15872,6 +15991,9 @@ article.active .grid {
       }).join('');
 
       container.innerHTML = cardsHtml;
+      
+      // Force responsive grid layout after content insertion
+      this.ensureResponsiveGrid(container);
 
       // Déclencher le chargement des images après insertion du contenu
       if (JdrApp.modules.renderer?.autoLoadImages) {
@@ -15954,6 +16076,30 @@ article.active .grid {
       }
 
       this.isInitialized = true;
+    }
+
+    /**
+     * Assure que le container utilise un responsive grid layout
+     */
+    ensureResponsiveGrid(container) {
+      if (!container) return;
+      
+      // Ajouter classes CSS pour le responsive grid
+      container.classList.add('favoris-grid', 'collection-items');
+      
+      // Forcer le layout avec CSS inline si nécessaire
+      container.style.display = 'grid';
+      container.style.gap = '1.5rem';
+      container.style.gridTemplateColumns = 'repeat(auto-fit, minmax(250px, 1fr))';
+      container.style.justifyContent = 'center';
+      
+      // Assurer que les cartes prennent toute la largeur
+      const cards = container.querySelectorAll('.card');
+      cards.forEach(card => {
+        card.style.width = '100%';
+        card.style.margin = '0';
+        card.style.boxSizing = 'border-box';
+      });
     }
   }
 
@@ -20196,15 +20342,19 @@ article.active .grid {
         const objetName = objetCard.dataset.objetName;
         const categoryName = objetCard.dataset.categoryName;
         
-        // Use index-based detection for objet sections
-        const allEditables = Array.from(objetCard.querySelectorAll('.editable'));
+        // Use data-edit-section detection for objet sections (more reliable than index)
         const editableElement = element.classList.contains('editable') ? element : element.querySelector('.editable');
-        const currentIndex = allEditables.indexOf(editableElement);
         
-        // Map index to objet property based on CardBuilder order
-        // 0=nom, 1=numero, 2=tags, 3=description, 4=effet, 5=prix, 6=poids
-        const objetSections = ['nom', 'numero', 'tags', 'description', 'effet', 'prix', 'poids'];
-        const objetEditSection = objetSections[currentIndex] || 'description';
+        // Get the edit section from data attribute and map it to property name
+        let objetEditSection = 'description'; // default fallback
+        
+        if (editableElement?.dataset?.editSection) {
+          const dataEditSection = editableElement.dataset.editSection;
+          
+          // Map data-edit-section to property name using editMapping
+          const config = window.ContentTypes?.objet;
+          objetEditSection = config?.editMapping?.[dataEditSection] || dataEditSection;
+        }
         
         return {
           contentType: 'objet',
@@ -20990,6 +21140,7 @@ article.active .grid {
       // Use editMapping if available, otherwise use editSection directly
       const config = session.config || window.ContentTypes.objet;
       const propertyName = config.editMapping?.[session.editSection] || session.editSection;
+      
       
       // If we're updating the name, we need to update the container's data-objet-name attribute
       if (propertyName === 'nom') {
@@ -23943,6 +24094,17 @@ article.active .grid {
           modal.style.display = 'flex';
         }
         
+        // Force background and opacity on modal
+        modal.style.setProperty('background', 'rgba(0, 0, 0, 0.7)', 'important');
+        modal.style.setProperty('opacity', '1', 'important');
+        
+        // Force background on modal content
+        const modalContent = modal.querySelector('.modal-content, .modal-body');
+        if (modalContent) {
+          modalContent.style.setProperty('background', 'rgb(248, 246, 240)', 'important');
+          modalContent.style.setProperty('opacity', '1', 'important');
+        }
+        
         // Focus first input element
         const firstInput = modal.querySelector('input, textarea, select');
         if (firstInput) {
@@ -24690,6 +24852,13 @@ article.active .grid {
     delegateToUI(methodName, ...args) {
       if (JdrApp.modules.ui && typeof JdrApp.modules.ui[methodName] === 'function') {
         return JdrApp.modules.ui[methodName](...args);
+      } else if (methodName === 'showTagsManagementModal') {
+        // Delegate to TagsManager for tags management
+        if (window.TagsManager && typeof TagsManager.showTagsManagementModal === 'function') {
+          return TagsManager.showTagsManagementModal(...args);
+        } else {
+          console.warn('TagsManager not available yet');
+        }
       } else if (methodName === 'addContent') {
         // Multiple fallback approaches for addContent
         if (window.ContentManager && typeof ContentManager.addContent === 'function') {
@@ -24802,15 +24971,9 @@ article.active .grid {
           item: defaultItem
         });
         
-        // Force regenerate page to ensure proper display
+        // Try to add the new card directly to avoid full page refresh
         setTimeout(() => {
-          // Find the current category to refresh
-          const currentCategory = this.findCurrentCategory(type, categoryName);
-          if (currentCategory && JdrApp.modules.renderer?.renderCategoryPage) {
-            JdrApp.modules.renderer.renderCategoryPage(type, currentCategory);
-          } else if (JdrApp.modules.renderer?.regenerateCurrentPage) {
-            JdrApp.modules.renderer.regenerateCurrentPage();
-          }
+          this.addNewCardDirectly(type, categoryName, defaultItem);
         }, 100);
       }
     },
@@ -24881,15 +25044,9 @@ article.active .grid {
           item: itemName
         });
         
-        // Force regenerate page to ensure proper display
+        // Try to add the new card directly to avoid full page refresh
         setTimeout(() => {
-          // Find the current category to refresh
-          const currentCategory = this.findCurrentCategory(type, categoryName);
-          if (currentCategory && JdrApp.modules.renderer?.renderCategoryPage) {
-            JdrApp.modules.renderer.renderCategoryPage(type, currentCategory);
-          } else if (JdrApp.modules.renderer?.regenerateCurrentPage) {
-            JdrApp.modules.renderer.regenerateCurrentPage();
-          }
+          this.addNewCardDirectly(type, categoryName, defaultItem);
         }, 100);
       }
     },
@@ -24947,15 +25104,9 @@ article.active .grid {
           direction: direction
         });
         
-        // Force regenerate page to ensure proper display
+        // Try to add the new card directly to avoid full page refresh
         setTimeout(() => {
-          // Find the current category to refresh
-          const currentCategory = this.findCurrentCategory(type, categoryName);
-          if (currentCategory && JdrApp.modules.renderer?.renderCategoryPage) {
-            JdrApp.modules.renderer.renderCategoryPage(type, currentCategory);
-          } else if (JdrApp.modules.renderer?.regenerateCurrentPage) {
-            JdrApp.modules.renderer.regenerateCurrentPage();
-          }
+          this.addNewCardDirectly(type, categoryName, defaultItem);
         }, 100);
       }
     },
@@ -24970,6 +25121,60 @@ article.active .grid {
         return window.SORTS.find(cat => cat.nom === categoryName);
       }
       return null;
+    },
+
+    /**
+     * Add new card directly to DOM without full page refresh
+     */
+    addNewCardDirectly(type, categoryName, newItem) {
+      try {
+        // Find the container for this category using the correct ID pattern
+        const config = window.ContentTypes[type];
+        if (!config) {
+          return false;
+        }
+        
+        const sanitizedCategoryName = JdrApp.utils.data.sanitizeId(categoryName);
+        const containerId = `${config.container}-container-${sanitizedCategoryName}`;
+        const categoryContainer = document.getElementById(containerId);
+        
+        if (!categoryContainer) {
+          return false;
+        }
+
+        // Create the new card HTML
+        const cardIndex = categoryContainer.children.length; // Use actual DOM count
+        const newCardHTML = window.CardBuilder?.create(type, newItem, categoryName, cardIndex)?.build();
+        if (!newCardHTML) {
+          return false;
+        }
+
+        // Add the card to the container
+        categoryContainer.insertAdjacentHTML('beforeend', newCardHTML);
+        
+        // Load images for the new card
+        if (JdrApp.modules.renderer?.autoLoadImages) {
+          JdrApp.modules.renderer.autoLoadImages();
+        }
+        
+        return true;
+      } catch (error) {
+        return false;
+      }
+    },
+
+    /**
+     * Get the next card index for a category
+     */
+    getNextCardIndex(type, categoryName) {
+      if (type === 'don' && window.DONS) {
+        const category = window.DONS.find(cat => cat.nom === categoryName);
+        return category?.dons?.length || 0;
+      } else if (type === 'spell' && window.SORTS) {
+        const category = window.SORTS.find(cat => cat.nom === categoryName);
+        return category?.sorts?.length || 0;
+      }
+      return 0;
     },
 
     /**
@@ -25052,7 +25257,21 @@ article.active .grid {
         existingModal.remove();
       }
 
-      const availableTags = config.filterConfig.availableTags || [];
+      // Priority: Load tags from metadata, then config
+      let availableTags = [];
+      if (window.MONSTRES?._metadata?.availableTags) {
+        availableTags = window.MONSTRES._metadata.availableTags;
+      } else {
+        availableTags = config.filterConfig.availableTags || [];
+        
+        // Initialize metadata if missing
+        if (window.MONSTRES) {
+          if (!window.MONSTRES._metadata) {
+            window.MONSTRES._metadata = {};
+          }
+          window.MONSTRES._metadata.availableTags = [...availableTags];
+        }
+      }
       const modal = this.createMonsterTagsModal(availableTags);
       document.body.appendChild(modal);
       
@@ -25095,10 +25314,101 @@ article.active .grid {
      * Show general tags management for objects
      */
     showGeneralTagsManagement() {
-      // Delegate to ui.js for now (will be extracted in Phase 4)
-      if (JdrApp.modules.ui?.showTagsManagementModal) {
-        return JdrApp.modules.ui.showTagsManagementModal();
+      const config = window.ContentTypes.objet;
+      if (!config || !config.filterConfig) {
+        UIUtilities.showNotification('Configuration des tags objets non trouvée', 'error');
+        return;
       }
+
+      // Remove existing modal if any
+      const existingModal = document.querySelector('#objetTagsModal');
+      if (existingModal) {
+        existingModal.remove();
+      }
+
+      // Priority: Load tags from metadata, then config
+      let availableTags = [];
+      if (window.OBJETS?._metadata?.availableTags) {
+        availableTags = window.OBJETS._metadata.availableTags;
+      } else {
+        availableTags = config.filterConfig.availableTags || [];
+        
+        // Initialize metadata if missing
+        if (window.OBJETS) {
+          if (!window.OBJETS._metadata) {
+            window.OBJETS._metadata = {};
+          }
+          window.OBJETS._metadata.availableTags = [...availableTags];
+        }
+      }
+      const modal = this.createObjetTagsModal(availableTags);
+      document.body.appendChild(modal);
+      
+      // Use native dialog showModal for proper z-index
+      modal.showModal();
+    },
+
+    /**
+     * Create object tags modal
+     */
+    createObjetTagsModal(availableTags) {
+      const modal = document.createElement('dialog');
+      modal.id = 'objetTagsModal';
+      modal.style.cssText = `
+        max-width: 500px;
+        width: 90%;
+        padding: 20px;
+        border: none;
+        border-radius: 12px;
+        background: var(--background);
+        color: var(--text);
+        box-shadow: 0 8px 32px rgba(0,0,0,1);
+        z-index: 9999;
+        opacity: 1;
+      `;
+
+      // Force backdrop opacity to full
+      const style = document.createElement('style');
+      style.textContent = `
+        #objetTagsModal::backdrop {
+          background-color: rgba(0, 0, 0, 1) !important;
+          opacity: 1 !important;
+        }
+        dialog::backdrop {
+          background-color: rgba(0, 0, 0, 0.9) !important;
+          opacity: 1 !important;
+        }
+      `;
+      document.head.appendChild(style);
+
+      modal.innerHTML = `
+        <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <h3 style="margin: 0; color: var(--accent);">🏷️ Gestion des Tags - Objets</h3>
+          <button class="modal-close" style="background: none; border: none; font-size: 20px; cursor: pointer; color: var(--text);">✕</button>
+        </div>
+        
+        <div class="modal-body">
+          <div style="margin-bottom: 20px;">
+            <h4>Tags Disponibles:</h4>
+            <div id="availableTagsList" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px;">
+              ${availableTags.map(tag => `
+                <span class="tag-item" style="background: var(--accent-dark); color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px; display: flex; align-items: center; gap: 4px;">
+                  ${tag}
+                  <button class="delete-tag-btn" data-tag="${tag}" style="background: none; border: none; color: white; cursor: pointer; font-size: 14px;">🗑️</button>
+                </span>
+              `).join('')}
+            </div>
+            
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <input type="text" id="newObjetTag" placeholder="Nouveau tag..." style="flex: 1; padding: 8px; border: 1px solid var(--border); border-radius: 4px;">
+              <button id="addObjetTagBtn" style="background: var(--accent); color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">Ajouter</button>
+            </div>
+          </div>
+        </div>
+      `;
+
+      this.setupObjetTagsModalEvents(modal, availableTags);
+      return modal;
     },
 
     /**
@@ -25115,8 +25425,24 @@ article.active .grid {
         border-radius: 12px;
         background: var(--background);
         color: var(--text);
-        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        box-shadow: 0 8px 32px rgba(0,0,0,1);
+        z-index: 9999;
+        opacity: 1;
       `;
+
+      // Force backdrop opacity to full
+      const style = document.createElement('style');
+      style.textContent = `
+        #monsterTagsModal::backdrop {
+          background-color: rgba(0, 0, 0, 1) !important;
+          opacity: 1 !important;
+        }
+        dialog::backdrop {
+          background-color: rgba(0, 0, 0, 0.9) !important;
+          opacity: 1 !important;
+        }
+      `;
+      document.head.appendChild(style);
 
       modal.innerHTML = `
         <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
@@ -25162,8 +25488,24 @@ article.active .grid {
         border-radius: 12px;
         background: var(--background);
         color: var(--text);
-        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        box-shadow: 0 8px 32px rgba(0,0,0,1);
+        z-index: 9999;
+        opacity: 1;
       `;
+
+      // Force backdrop opacity to full
+      const style = document.createElement('style');
+      style.textContent = `
+        #tableTresorTagsModal::backdrop {
+          background-color: rgba(0, 0, 0, 1) !important;
+          opacity: 1 !important;
+        }
+        dialog::backdrop {
+          background-color: rgba(0, 0, 0, 0.9) !important;
+          opacity: 1 !important;
+        }
+      `;
+      document.head.appendChild(style);
 
       modal.innerHTML = `
         <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
@@ -25196,6 +25538,102 @@ article.active .grid {
     },
 
     /**
+     * Setup object tags modal events
+     */
+    setupObjetTagsModalEvents(modal, availableTags) {
+      // Close modal
+      modal.querySelector('.modal-close').addEventListener('click', () => {
+        modal.close();
+      });
+
+      // Add new tag
+      const addTag = () => {
+        const newTagInput = modal.querySelector('#newObjetTag');
+        const newTag = newTagInput.value.trim();
+        
+        if (newTag && !availableTags.includes(newTag)) {
+          // Add to the current available tags
+          availableTags.push(newTag);
+          
+          // Save to the config (for runtime)
+          const config = window.ContentTypes.objet;
+          config.filterConfig.availableTags = [...availableTags];
+          
+          // ALSO save in OBJETS metadata for persistence (like TABLES_TRESORS)
+          if (window.OBJETS) {
+            if (!window.OBJETS._metadata) {
+              window.OBJETS._metadata = {};
+            }
+            window.OBJETS._metadata.availableTags = [...availableTags];
+          }
+          
+          // Save changes to storage
+          EventBus.emit(Events.STORAGE_SAVE);
+          
+          modal.close();
+          this.showGeneralTagsManagement(); // Refresh modal
+          UIUtilities.showNotification(`Tag "${newTag}" ajouté avec succès`, 'success');
+        } else if (newTag && availableTags.includes(newTag)) {
+          UIUtilities.showNotification('Ce tag existe déjà', 'error');
+        }
+      };
+
+      const addBtn = modal.querySelector('#addObjetTagBtn');
+      const newTagInput = modal.querySelector('#newObjetTag');
+
+      addBtn.addEventListener('click', addTag);
+      newTagInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          addTag();
+        }
+      });
+
+      // Delete tag buttons using event delegation
+      modal.addEventListener('click', (e) => {
+        if (e.target.classList.contains('delete-tag-btn')) {
+          const tagToDelete = e.target.dataset.tag;
+          
+          if (confirm(`Supprimer le tag "${tagToDelete}" ?`)) {
+            const config = window.ContentTypes.objet;
+            const index = config.filterConfig.availableTags.indexOf(tagToDelete);
+            
+            if (index > -1) {
+              // Remove from available tags
+              config.filterConfig.availableTags.splice(index, 1);
+              
+              // Remove the tag from all objects
+              if (window.OBJETS) {
+                window.OBJETS.forEach(objet => {
+                  if (objet.tags && objet.tags.includes(tagToDelete)) {
+                    objet.tags = objet.tags.filter(tag => tag !== tagToDelete);
+                    // Ensure object has at least one tag if possible
+                    if (objet.tags.length === 0 && config.filterConfig.availableTags.length > 0) {
+                      objet.tags = [config.filterConfig.availableTags[0]];
+                    }
+                  }
+                });
+              }
+              
+              // Save changes
+              EventBus.emit(Events.STORAGE_SAVE);
+              
+              // Refresh modal and objects page
+              modal.close();
+              this.showGeneralTagsManagement();
+              
+              // Force complete page reload for objects page if we're on creation page
+              if (window.location.hash === '#/' || window.location.hash === '' || window.location.hash === '#/creation') {
+                UIUtilities.forcePageRefresh();
+              }
+              
+              UIUtilities.showNotification(`✅ Tag "${tagToDelete}" supprimé avec succès`, 'success');
+            }
+          }
+        }
+      });
+    },
+
+    /**
      * Setup monster tags modal events
      */
     setupMonsterTagsModalEvents(modal, availableTags) {
@@ -25213,9 +25651,17 @@ article.active .grid {
           // Add to the current available tags
           availableTags.push(newTag);
           
-          // Save to the config
+          // Save to the config (for runtime)
           const config = window.ContentTypes.monster;
           config.filterConfig.availableTags = [...availableTags];
+          
+          // ALSO save in MONSTRES metadata for persistence (like TABLES_TRESORS)
+          if (window.MONSTRES) {
+            if (!window.MONSTRES._metadata) {
+              window.MONSTRES._metadata = {};
+            }
+            window.MONSTRES._metadata.availableTags = [...availableTags];
+          }
           
           // Save changes to storage
           EventBus.emit(Events.STORAGE_SAVE);
@@ -25301,6 +25747,9 @@ article.active .grid {
         const newTag = newTagInput.value.trim();
         
         if (newTag && !availableTags.includes(newTag)) {
+          console.log('🏷️ Adding tag to table tresor:', newTag);
+          console.log('🏷️ Current availableTags before:', [...availableTags]);
+          
           // Add to available tags
           availableTags.push(newTag);
           
@@ -25310,19 +25759,15 @@ article.active .grid {
               window.TABLES_TRESORS._metadata = {};
             }
             window.TABLES_TRESORS._metadata.availableTags = [...availableTags];
+            console.log('🏷️ Updated TABLES_TRESORS._metadata.availableTags:', window.TABLES_TRESORS._metadata.availableTags);
           }
           
-          // Save changes
+          // Save changes to storage
+          console.log('💾 Saving table tresor tags changes...');
           EventBus.emit(Events.STORAGE_SAVE);
           
-          // Refresh modal and page
           modal.close();
           this.showTableTresorTagsManagement();
-          
-          // Force refresh of the tables-tresors page
-          if (window.location.hash === '#/tables-tresors') {
-            UIUtilities.forcePageRefresh();
-          }
           
           UIUtilities.showNotification(`Tag "${newTag}" ajouté avec succès`, 'success');
         } else if (newTag && availableTags.includes(newTag)) {
@@ -25362,6 +25807,10 @@ article.active .grid {
                 });
               }
               
+              // Save changes to storage
+              console.log('💾 Saving table tresor tag deletion...');
+              EventBus.emit(Events.STORAGE_SAVE);
+              
               // Save in metadata
               if (window.TABLES_TRESORS) {
                 if (!window.TABLES_TRESORS._metadata) {
@@ -25375,11 +25824,6 @@ article.active .grid {
               
               // Close and refresh
               modal.close();
-              
-              // Force page reload
-              if (window.location.hash === '#/tables-tresors') {
-                UIUtilities.forcePageRefresh();
-              }
               
               setTimeout(() => {
                 this.showTableTresorTagsManagement();
@@ -25980,17 +26424,29 @@ article.active .grid {
       preview.className = 'spell-preview-tooltip';
       preview.innerHTML = `
         <style>
-          .spell-preview-tooltip * {
+          .spell-preview-tooltip,
+          .spell-preview-tooltip *,
+          .spell-preview-tooltip *::before,
+          .spell-preview-tooltip *::after {
             opacity: 1 !important;
-            background-color: transparent !important;
+            background-color: rgba(248, 246, 240, 1) !important;
           }
-          .spell-preview-tooltip .card {
+          .spell-preview-tooltip .card,
+          .spell-preview-tooltip .card *,
+          .spell-preview-tooltip div,
+          .spell-preview-tooltip span,
+          .spell-preview-tooltip p,
+          .spell-preview-tooltip section,
+          .spell-preview-tooltip article,
+          .spell-preview-tooltip header,
+          .spell-preview-tooltip footer {
             opacity: 1 !important;
-            background: var(--paper) !important;
+            background-color: rgba(248, 246, 240, 1) !important;
+            background: rgba(248, 246, 240, 1) !important;
           }
           .spell-preview-tooltip .card:hover {
             opacity: 1 !important;
-            background: var(--paper) !important;
+            background: rgba(248, 246, 240, 1) !important;
             transform: none !important;
           }
           .preview-close-btn {
@@ -26035,18 +26491,25 @@ article.active .grid {
         border-radius: 12px;
         pointer-events: auto;
         opacity: 1 !important;
-        background: var(--paper) !important;
+        background: rgb(248, 246, 240) !important;
+        background-color: rgb(248, 246, 240) !important;
       `;
       
       // Force styles after element is added to DOM
       setTimeout(() => {
         preview.style.setProperty('opacity', '1', 'important');
-        preview.style.setProperty('background', 'var(--paper)', 'important');
-        const card = preview.querySelector('.card');
-        if (card) {
-          card.style.setProperty('opacity', '1', 'important');
-          card.style.setProperty('background', 'var(--paper)', 'important');
-        }
+        preview.style.setProperty('background', 'rgb(248, 246, 240)', 'important');
+        preview.style.setProperty('background-color', 'rgb(248, 246, 240)', 'important');
+        
+        // Force background on all child elements
+        const allElements = preview.querySelectorAll('*');
+        allElements.forEach(el => {
+          el.style.setProperty('opacity', '1', 'important');
+          el.style.setProperty('background-color', 'rgb(248, 246, 240)', 'important');
+          el.style.setProperty('background', 'rgb(248, 246, 240)', 'important');
+          el.style.setProperty('display', 'initial', 'important');
+          el.style.setProperty('visibility', 'visible', 'important');
+        });
       }, 10);
       
       // Position near the trigger element
@@ -26129,17 +26592,29 @@ article.active .grid {
       preview.className = 'monster-preview-tooltip';
       preview.innerHTML = `
         <style>
-          .monster-preview-tooltip * {
+          .monster-preview-tooltip,
+          .monster-preview-tooltip *,
+          .monster-preview-tooltip *::before,
+          .monster-preview-tooltip *::after {
             opacity: 1 !important;
-            background-color: transparent !important;
+            background-color: rgba(248, 246, 240, 1) !important;
           }
-          .monster-preview-tooltip .card {
+          .monster-preview-tooltip .card,
+          .monster-preview-tooltip .card *,
+          .monster-preview-tooltip div,
+          .monster-preview-tooltip span,
+          .monster-preview-tooltip p,
+          .monster-preview-tooltip section,
+          .monster-preview-tooltip article,
+          .monster-preview-tooltip header,
+          .monster-preview-tooltip footer {
             opacity: 1 !important;
-            background: var(--paper) !important;
+            background-color: rgba(248, 246, 240, 1) !important;
+            background: rgba(248, 246, 240, 1) !important;
           }
           .monster-preview-tooltip .card:hover {
             opacity: 1 !important;
-            background: var(--paper) !important;
+            background: rgba(248, 246, 240, 1) !important;
             transform: none !important;
           }
           .preview-close-btn {
@@ -26184,18 +26659,25 @@ article.active .grid {
         border-radius: 12px;
         pointer-events: auto;
         opacity: 1 !important;
-        background: var(--paper) !important;
+        background: rgb(248, 246, 240) !important;
+        background-color: rgb(248, 246, 240) !important;
       `;
       
       // Force styles after element is added to DOM
       setTimeout(() => {
         preview.style.setProperty('opacity', '1', 'important');
-        preview.style.setProperty('background', 'var(--paper)', 'important');
-        const card = preview.querySelector('.card');
-        if (card) {
-          card.style.setProperty('opacity', '1', 'important');
-          card.style.setProperty('background', 'var(--paper)', 'important');
-        }
+        preview.style.setProperty('background', 'rgb(248, 246, 240)', 'important');
+        preview.style.setProperty('background-color', 'rgb(248, 246, 240)', 'important');
+        
+        // Force background on all child elements
+        const allElements = preview.querySelectorAll('*');
+        allElements.forEach(el => {
+          el.style.setProperty('opacity', '1', 'important');
+          el.style.setProperty('background-color', 'rgb(248, 246, 240)', 'important');
+          el.style.setProperty('background', 'rgb(248, 246, 240)', 'important');
+          el.style.setProperty('display', 'initial', 'important');
+          el.style.setProperty('visibility', 'visible', 'important');
+        });
       }, 10);
       
       // Position near the trigger element
@@ -28269,6 +28751,42 @@ article.active .grid {
       if (window.ContentManager) {
         return ContentManager.addContent(type, categoryName);
       }
+    },
+
+    // Modal methods - delegate to ModalManager
+    showElementsModal() {
+      if (window.ModalManager) {
+        return ModalManager.showElementsModal();
+      }
+    },
+
+    showEtatsModal() {
+      if (window.ModalManager) {
+        return ModalManager.showEtatsModal();
+      }
+    },
+
+    showSpellLinksModal() {
+      if (window.ModalManager) {
+        return ModalManager.showSpellLinksModal();
+      }
+    },
+
+    showPageLinksModal() {
+      if (window.ModalManager) {
+        return ModalManager.showPageLinksModal();
+      }
+    },
+
+    showMonsterLinksModal() {
+      if (window.ModalManager) {
+        return ModalManager.showMonsterLinksModal();
+      }
+    },
+
+    showNotification(message, type = 'info') {
+      // Simple notification for now
+      console.log(`[${type.toUpperCase()}] ${message}`);
     }
   };
 

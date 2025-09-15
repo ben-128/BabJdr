@@ -448,7 +448,7 @@
         "Plante",
         "Non identifié"
       ],
-      "effet": "<b>Effet:</b> Rend au héros ou à une cible proche une quantitée de mana équilavent au niveau d'Intelligence du héros.\n<br><b>Ciritique :</b> Mana rendu augmenté de 5.",
+      "effet": "<b>Effet:</b> Rend au héros à une cible proche une quantitée de mana équilavent au niveau d'Intelligence du héros.\n<br><b>Ciritique :</b> Mana rendu augmenté de 5.",
       "prix": "🔷 <strong>Prix:</strong> 25",
       "poids": ""
     },
