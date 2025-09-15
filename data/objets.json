@@ -4,7 +4,7 @@
       "nom": "Espadon",
       "numero": 1,
       "image": "https://i.ibb.co/35rpP6ZS/Epee2M1.png",
-      "description": "<i>Longue épée à deux mains, lourde mais puissante.</i>",
+      "description": "<strong>Dégâts: </strong> Inflige (4  + Force) points de dégats physiques.",
       "tags": [
         "Arme",
         "Épée",
