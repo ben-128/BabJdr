@@ -91,6 +91,13 @@
         
         // Reset the regeneration flag immediately after DOM update
         this._regenerating = false;
+        
+        // Reapply images after filtering
+        setTimeout(() => {
+          if (JdrApp.modules.renderer && JdrApp.modules.renderer.autoLoadImages) {
+            JdrApp.modules.renderer.autoLoadImages();
+          }
+        }, 100);
       } else {
         this._regenerating = false;
       }

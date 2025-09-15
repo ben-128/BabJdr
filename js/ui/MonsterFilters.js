@@ -146,6 +146,13 @@
         // Reset the regeneration flag immediately after DOM update
         this._regenerating = false;
         
+        // Reapply images after filtering
+        setTimeout(() => {
+          if (JdrApp.modules.renderer && JdrApp.modules.renderer.autoLoadImages) {
+            JdrApp.modules.renderer.autoLoadImages();
+          }
+        }, 100);
+        
         // Also force the router to show and activate the page
         if (JdrApp.modules.router?.show) {
           JdrApp.modules.router.show('monstres');

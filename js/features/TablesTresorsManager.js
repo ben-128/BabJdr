@@ -316,6 +316,13 @@
 
       document.body.insertAdjacentHTML('beforeend', modalHtml);
       
+      // Reapply images in modal content
+      setTimeout(() => {
+        if (JdrApp.modules.renderer && JdrApp.modules.renderer.autoLoadImages) {
+          JdrApp.modules.renderer.autoLoadImages();
+        }
+      }, 100);
+      
       // Setup form handler si c'est le modal d'édition
       if (modalClass === 'edit-fourchette') {
         this.setupEditFormHandlers();

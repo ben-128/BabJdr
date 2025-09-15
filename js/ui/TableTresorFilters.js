@@ -108,8 +108,22 @@
       // Force regeneration of the page using the router (like MonsterFilters)
       if (JdrApp.modules.router?.renderTablesTresorsPage) {
         JdrApp.modules.router.renderTablesTresorsPage();
+        
+        // Reapply images after filtering
+        setTimeout(() => {
+          if (JdrApp.modules.renderer && JdrApp.modules.renderer.autoLoadImages) {
+            JdrApp.modules.renderer.autoLoadImages();
+          }
+        }, 100);
       } else if (JdrApp.modules.renderer?.regenerateCurrentPage) {
         JdrApp.modules.renderer.regenerateCurrentPage();
+        
+        // Reapply images after filtering
+        setTimeout(() => {
+          if (JdrApp.modules.renderer && JdrApp.modules.renderer.autoLoadImages) {
+            JdrApp.modules.renderer.autoLoadImages();
+          }
+        }, 100);
       }
     },
 
