@@ -93,10 +93,87 @@
      * Show general tags management for objects
      */
     showGeneralTagsManagement() {
-      // Delegate to ui.js for now (will be extracted in Phase 4)
-      if (JdrApp.modules.ui?.showTagsManagementModal) {
-        return JdrApp.modules.ui.showTagsManagementModal();
+      const config = window.ContentTypes.objet;
+      if (!config || !config.filterConfig) {
+        UIUtilities.showNotification('Configuration des tags objets non trouvée', 'error');
+        return;
       }
+
+      // Remove existing modal if any
+      const existingModal = document.querySelector('#objetTagsModal');
+      if (existingModal) {
+        existingModal.remove();
+      }
+
+      const availableTags = config.filterConfig.availableTags || [];
+      const modal = this.createObjetTagsModal(availableTags);
+      document.body.appendChild(modal);
+      
+      // Use native dialog showModal for proper z-index
+      modal.showModal();
+    },
+
+    /**
+     * Create object tags modal
+     */
+    createObjetTagsModal(availableTags) {
+      const modal = document.createElement('dialog');
+      modal.id = 'objetTagsModal';
+      modal.style.cssText = `
+        max-width: 500px;
+        width: 90%;
+        padding: 20px;
+        border: none;
+        border-radius: 12px;
+        background: var(--background);
+        color: var(--text);
+        box-shadow: 0 8px 32px rgba(0,0,0,1);
+        z-index: 9999;
+        opacity: 1;
+      `;
+
+      // Force backdrop opacity to full
+      const style = document.createElement('style');
+      style.textContent = `
+        #objetTagsModal::backdrop {
+          background-color: rgba(0, 0, 0, 1) !important;
+          opacity: 1 !important;
+        }
+        dialog::backdrop {
+          background-color: rgba(0, 0, 0, 0.9) !important;
+          opacity: 1 !important;
+        }
+      `;
+      document.head.appendChild(style);
+
+      modal.innerHTML = `
+        <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <h3 style="margin: 0; color: var(--accent);">🏷️ Gestion des Tags - Objets</h3>
+          <button class="modal-close" style="background: none; border: none; font-size: 20px; cursor: pointer; color: var(--text);">✕</button>
+        </div>
+        
+        <div class="modal-body">
+          <div style="margin-bottom: 20px;">
+            <h4>Tags Disponibles:</h4>
+            <div id="availableTagsList" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px;">
+              ${availableTags.map(tag => `
+                <span class="tag-item" style="background: var(--accent-dark); color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px; display: flex; align-items: center; gap: 4px;">
+                  ${tag}
+                  <button class="delete-tag-btn" data-tag="${tag}" style="background: none; border: none; color: white; cursor: pointer; font-size: 14px;">🗑️</button>
+                </span>
+              `).join('')}
+            </div>
+            
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <input type="text" id="newObjetTag" placeholder="Nouveau tag..." style="flex: 1; padding: 8px; border: 1px solid var(--border); border-radius: 4px;">
+              <button id="addObjetTagBtn" style="background: var(--accent); color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">Ajouter</button>
+            </div>
+          </div>
+        </div>
+      `;
+
+      this.setupObjetTagsModalEvents(modal, availableTags);
+      return modal;
     },
 
     /**
@@ -113,8 +190,24 @@
         border-radius: 12px;
         background: var(--background);
         color: var(--text);
-        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        box-shadow: 0 8px 32px rgba(0,0,0,1);
+        z-index: 9999;
+        opacity: 1;
       `;
+
+      // Force backdrop opacity to full
+      const style = document.createElement('style');
+      style.textContent = `
+        #monsterTagsModal::backdrop {
+          background-color: rgba(0, 0, 0, 1) !important;
+          opacity: 1 !important;
+        }
+        dialog::backdrop {
+          background-color: rgba(0, 0, 0, 0.9) !important;
+          opacity: 1 !important;
+        }
+      `;
+      document.head.appendChild(style);
 
       modal.innerHTML = `
         <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
@@ -160,8 +253,24 @@
         border-radius: 12px;
         background: var(--background);
         color: var(--text);
-        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        box-shadow: 0 8px 32px rgba(0,0,0,1);
+        z-index: 9999;
+        opacity: 1;
       `;
+
+      // Force backdrop opacity to full
+      const style = document.createElement('style');
+      style.textContent = `
+        #tableTresorTagsModal::backdrop {
+          background-color: rgba(0, 0, 0, 1) !important;
+          opacity: 1 !important;
+        }
+        dialog::backdrop {
+          background-color: rgba(0, 0, 0, 0.9) !important;
+          opacity: 1 !important;
+        }
+      `;
+      document.head.appendChild(style);
 
       modal.innerHTML = `
         <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
@@ -191,6 +300,94 @@
 
       this.setupTableTresorTagsModalEvents(modal, availableTags);
       return modal;
+    },
+
+    /**
+     * Setup object tags modal events
+     */
+    setupObjetTagsModalEvents(modal, availableTags) {
+      // Close modal
+      modal.querySelector('.modal-close').addEventListener('click', () => {
+        modal.close();
+      });
+
+      // Add new tag
+      const addTag = () => {
+        const newTagInput = modal.querySelector('#newObjetTag');
+        const newTag = newTagInput.value.trim();
+        
+        if (newTag && !availableTags.includes(newTag)) {
+          // Add to the current available tags
+          availableTags.push(newTag);
+          
+          // Save to the config
+          const config = window.ContentTypes.objet;
+          config.filterConfig.availableTags = [...availableTags];
+          
+          // Save changes to storage
+          EventBus.emit(Events.STORAGE_SAVE);
+          
+          modal.close();
+          this.showGeneralTagsManagement(); // Refresh modal
+          UIUtilities.showNotification(`Tag "${newTag}" ajouté avec succès`, 'success');
+        } else if (newTag && availableTags.includes(newTag)) {
+          UIUtilities.showNotification('Ce tag existe déjà', 'error');
+        }
+      };
+
+      const addBtn = modal.querySelector('#addObjetTagBtn');
+      const newTagInput = modal.querySelector('#newObjetTag');
+
+      addBtn.addEventListener('click', addTag);
+      newTagInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          addTag();
+        }
+      });
+
+      // Delete tag buttons using event delegation
+      modal.addEventListener('click', (e) => {
+        if (e.target.classList.contains('delete-tag-btn')) {
+          const tagToDelete = e.target.dataset.tag;
+          
+          if (confirm(`Supprimer le tag "${tagToDelete}" ?`)) {
+            const config = window.ContentTypes.objet;
+            const index = config.filterConfig.availableTags.indexOf(tagToDelete);
+            
+            if (index > -1) {
+              // Remove from available tags
+              config.filterConfig.availableTags.splice(index, 1);
+              
+              // Remove the tag from all objects
+              if (window.OBJETS) {
+                window.OBJETS.forEach(objet => {
+                  if (objet.tags && objet.tags.includes(tagToDelete)) {
+                    objet.tags = objet.tags.filter(tag => tag !== tagToDelete);
+                    // Ensure object has at least one tag if possible
+                    if (objet.tags.length === 0 && config.filterConfig.availableTags.length > 0) {
+                      objet.tags = [config.filterConfig.availableTags[0]];
+                    }
+                  }
+                });
+              }
+              
+              // Save changes
+              EventBus.emit(Events.STORAGE_SAVE);
+              
+              // Refresh modal and objects page
+              modal.close();
+              this.showGeneralTagsManagement();
+              
+              // Force complete page reload for objects page if we're on creation page
+              if (window.location.hash === '#/' || window.location.hash === '' || window.location.hash === '#/creation') {
+                UIUtilities.forcePageRefresh();
+              }
+              
+              UIUtilities.showNotification(`✅ Tag "${tagToDelete}" supprimé avec succès`, 'success');
+            }
+          }
+        }
+      });
     },
 
     /**

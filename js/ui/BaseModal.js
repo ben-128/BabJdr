@@ -115,6 +115,17 @@
           modal.style.display = 'flex';
         }
         
+        // Force background and opacity on modal
+        modal.style.setProperty('background', 'rgba(0, 0, 0, 0.7)', 'important');
+        modal.style.setProperty('opacity', '1', 'important');
+        
+        // Force background on modal content
+        const modalContent = modal.querySelector('.modal-content, .modal-body');
+        if (modalContent) {
+          modalContent.style.setProperty('background', 'rgb(248, 246, 240)', 'important');
+          modalContent.style.setProperty('opacity', '1', 'important');
+        }
+        
         // Focus first input element
         const firstInput = modal.querySelector('input, textarea, select');
         if (firstInput) {

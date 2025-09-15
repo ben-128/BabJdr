@@ -96,17 +96,63 @@ body{
   text-rendering:optimizeLegibility;
 }
 
-/* Force solid background for modal previews */
+/* Force solid background and visibility for ALL modals - Override dev-off rules */
+.modal,
+.modal-base,
+#elementsModal,
+#etatsModal, 
+#spellLinksModal,
+#pageLinksModal,
+#monsterLinksModal,
 .spell-preview-tooltip,
 .monster-preview-tooltip,
 .etat-preview-tooltip {
+  background: rgba(0, 0, 0, 0.7) !important;
+  opacity: 1 !important;
+}
+
+/* Force solid background for modal content */
+.modal .modal-content,
+.modal .modal-body,
+.modal-base .modal-content,
+.modal-base .modal-body,
+#elementsModal .modal-content,
+#etatsModal .modal-content,
+#spellLinksModal .modal-content,
+#pageLinksModal .modal-content,
+#monsterLinksModal .modal-content {
   background: rgb(248, 246, 240) !important;
+  opacity: 1 !important;
 }
 .spell-preview-tooltip *,
 .monster-preview-tooltip *,
 .etat-preview-tooltip * {
   background-color: rgb(248, 246, 240) !important;
   opacity: 1 !important;
+  display: initial !important;
+  visibility: visible !important;
+  position: static !important;
+  left: auto !important;
+  width: auto !important;
+  height: auto !important;
+  pointer-events: auto !important;
+}
+/* Specific overrides for card elements in previews */
+.spell-preview-tooltip .card,
+.monster-preview-tooltip .card,
+.etat-preview-tooltip .card {
+  opacity: 1 !important;
+  background: rgb(248, 246, 240) !important;
+  display: block !important;
+  visibility: visible !important;
+}
+.spell-preview-tooltip .card *,
+.monster-preview-tooltip .card *,
+.etat-preview-tooltip .card * {
+  opacity: 1 !important;
+  background-color: rgb(248, 246, 240) !important;
+  display: initial !important;
+  visibility: visible !important;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════════════════

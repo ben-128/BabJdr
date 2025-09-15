@@ -313,6 +313,8 @@
           el.style.setProperty('opacity', '1', 'important');
           el.style.setProperty('background-color', 'rgb(248, 246, 240)', 'important');
           el.style.setProperty('background', 'rgb(248, 246, 240)', 'important');
+          el.style.setProperty('display', 'initial', 'important');
+          el.style.setProperty('visibility', 'visible', 'important');
         });
       }, 10);
       
@@ -479,6 +481,8 @@
           el.style.setProperty('opacity', '1', 'important');
           el.style.setProperty('background-color', 'rgb(248, 246, 240)', 'important');
           el.style.setProperty('background', 'rgb(248, 246, 240)', 'important');
+          el.style.setProperty('display', 'initial', 'important');
+          el.style.setProperty('visibility', 'visible', 'important');
         });
       }, 10);
       

@@ -243,6 +243,13 @@
     delegateToUI(methodName, ...args) {
       if (JdrApp.modules.ui && typeof JdrApp.modules.ui[methodName] === 'function') {
         return JdrApp.modules.ui[methodName](...args);
+      } else if (methodName === 'showTagsManagementModal') {
+        // Delegate to TagsManager for tags management
+        if (window.TagsManager && typeof TagsManager.showTagsManagementModal === 'function') {
+          return TagsManager.showTagsManagementModal(...args);
+        } else {
+          console.warn('TagsManager not available yet');
+        }
       } else if (methodName === 'addContent') {
         // Multiple fallback approaches for addContent
         if (window.ContentManager && typeof ContentManager.addContent === 'function') {
