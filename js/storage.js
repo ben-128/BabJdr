@@ -658,53 +658,8 @@
     },
 
     async getMainHTML() {
-      // Get the current index.html content or reconstruct it
-      try {
-        const response = await fetch('index.html');
-        if (response.ok) {
-          return await response.text();
-        }
-      } catch (error) {
-        // Could not fetch index.html, generating from current state
-      }
-      
-      // Fallback: generate HTML from current document state
-      return `<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1" name="viewport">
-<meta name="referrer" content="no-referrer-when-downgrade">
-<title>JDR‑BAB — Livret de règles</title>
-<meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&amp;family=Source+Serif+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600&amp;display=swap" rel="stylesheet">
-
-<!-- CSS Modulaire -->
-<link rel="stylesheet" href="css/theme.css">
-<link rel="stylesheet" href="css/utilities.css">
-<link rel="stylesheet" href="css/components.css">
-<link rel="stylesheet" href="css/layout.css">
-<link rel="stylesheet" href="css/editor.css">
-</head>
-<body class="dev-off" style="">
-
-<!-- Le contenu HTML complet sera injecté ici par le JavaScript -->
-<div id="app-loading">Chargement...</div>
-
-<!-- JavaScript Modulaire -->
-<script src="js/core.js"></script>
-<script src="js/utils.js"></script>
-<script src="js/modules/images.js"></script>
-<script src="js/router.js"></script>
-<script src="js/renderer.js"></script>
-<script src="js/editor.js"></script>
-<script src="js/storage.js"></script>
-<script src="js/ui.js"></script>
-
-</body>
-</html>`;
+      // Return the current document HTML to avoid double body tags
+      return document.documentElement.outerHTML;
     },
 
 

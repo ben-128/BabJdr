@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-09-15T12:07:50.208Z by JdrBab Build System -->
+<!-- Generated on 2025-09-15T12:51:48.535Z by JdrBab Build System -->
 <title>JDR‑BAB — Livret de règles</title>
 <meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -9189,8 +9189,7 @@ article.active .grid {
           // Load stored edits AFTER setting up the data structure
           this.loadStoredEditsEarly();
           
-          // Initialize default filters for objects
-          this.initializeDefaultFilters();
+          // Note: initializeDefaultFilters removed - now handled by specialized filter modules
           return;
         }
         
@@ -9277,8 +9276,7 @@ article.active .grid {
         // Load stored edits in development mode (after data is loaded)
         this.loadStoredEditsEarly();
         
-        // Initialize default filters for objects
-        // this.initializeDefaultFilters(); // Function doesn't exist, commenting out
+        // Note: initializeDefaultFilters removed - now handled by specialized filter modules
       } catch (error) {
         throw error;
       }
@@ -14213,44 +14211,8 @@ article.active .grid {
     },
 
     async getMainHTML() {
-      // Get the current index.html content or reconstruct it
-      try {
-        const response = await fetch('index.html');
-        if (response.ok) {
-          return await response.text();
-        }
-      } catch (error) {
-        // Could not fetch index.html, generating from current state
-      }
-      
-      // Fallback: generate HTML from current document state
-      return `<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1" name="viewport">
-<meta name="referrer" content="no-referrer-when-downgrade">
-<title>JDR‑BAB — Livret de règles</title>
-<meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&amp;family=Source+Serif+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600&amp;display=swap" rel="stylesheet">
-
-<!-- CSS Modulaire -->
-<link rel="stylesheet" href="css/theme.css">
-<link rel="stylesheet" href="css/utilities.css">
-<link rel="stylesheet" href="css/components.css">
-<link rel="stylesheet" href="css/layout.css">
-<link rel="stylesheet" href="css/editor.css">
-</head>
-<body class="dev-off" style="">
-
-<!-- Le contenu HTML complet sera injecté ici par le JavaScript -->
-<div id="app-loading">Chargement...</div>
-
-<!-- JavaScript Modulaire -->
-</body>
-</html>`;
+      // Return the current document HTML to avoid double body tags
+      return document.documentElement.outerHTML;
     },
 
 
@@ -24135,7 +24097,6 @@ article.active .grid {
       this.setupNewPageHandler();
       this.initializeFilterModules();
       this._initialized = true;
-      
     },
 
     /**
@@ -24444,14 +24405,20 @@ article.active .grid {
       // Initialize specialized filter modules
       if (window.MonsterFilters && MonsterFilters.init) {
         MonsterFilters.init();
+      } else {
+        console.warn('MonsterFilters not available:', !!window.MonsterFilters, !!(window.MonsterFilters && window.MonsterFilters.init));
       }
       
       if (window.GMObjectFilters && GMObjectFilters.init) {
         GMObjectFilters.init();
+      } else {
+        console.warn('GMObjectFilters not available:', !!window.GMObjectFilters, !!(window.GMObjectFilters && window.GMObjectFilters.init));
       }
       
       if (window.TableTresorFilters && TableTresorFilters.init) {
         TableTresorFilters.init();
+      } else {
+        console.warn('TableTresorFilters not available:', !!window.TableTresorFilters, !!(window.TableTresorFilters && window.TableTresorFilters.init));
       }
     }
   };
@@ -27635,7 +27602,21 @@ article.active .grid {
 
 })();
 
+
+// Initialize main app when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    if (window.JdrApp && typeof JdrApp.init === 'function') {
+      JdrApp.init();
+    }
+  });
+} else {
+  if (window.JdrApp && typeof JdrApp.init === 'function') {
+    JdrApp.init();
+  }
+}
 </script>
+
 
 <!-- PWA Service Worker (Embedded) -->
 <script>

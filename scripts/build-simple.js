@@ -143,6 +143,9 @@ window.MANIFEST_DATA = ${fs.readFileSync(path.join(rootDir, 'config', 'manifest.
     'js/ui/ModalManager.js',      // Specialized modals - AVANT ui.js
     'js/ui/ResponsiveManager.js', // Responsive design - AVANT ui.js
     'js/ui/PageManager.js',       // Page management - AVANT ui.js
+    'js/ui/GMObjectFilters.js',   // Filter modules - AVANT ui.js
+    'js/ui/MonsterFilters.js',    // Monster filters - AVANT ui.js  
+    'js/ui/TableTresorFilters.js', // Treasure filters - AVANT ui.js
     
     'js/ui.js',                   // UI module - en dernier
     'js/libs/jspdf-loader.js'     // External library loaders - last
@@ -425,7 +428,7 @@ if (!canUseServiceWorker && window.MANIFEST_DATA) {
 
   htmlContent = htmlContent.replace(
     '</body>',
-    `<script>\n${dataScript}\n${allJS}\n</script>\n${pwaSW}\n</body>`
+    `<script>\n${dataScript}\n${allJS}\n\n// Initialize main app when DOM is ready\nif (document.readyState === 'loading') {\n  document.addEventListener('DOMContentLoaded', () => {\n    if (window.JdrApp && typeof JdrApp.init === 'function') {\n      JdrApp.init();\n    }\n  });\n} else {\n  if (window.JdrApp && typeof JdrApp.init === 'function') {\n    JdrApp.init();\n  }\n}\n</script>\n\n${pwaSW}\n</body>`
   );
   
   // Remove any external script tags that might have been added somehow

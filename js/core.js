@@ -149,8 +149,7 @@
           // Load stored edits AFTER setting up the data structure
           this.loadStoredEditsEarly();
           
-          // Initialize default filters for objects
-          this.initializeDefaultFilters();
+          // Note: initializeDefaultFilters removed - now handled by specialized filter modules
           return;
         }
         
@@ -237,8 +236,7 @@
         // Load stored edits in development mode (after data is loaded)
         this.loadStoredEditsEarly();
         
-        // Initialize default filters for objects
-        // this.initializeDefaultFilters(); // Function doesn't exist, commenting out
+        // Note: initializeDefaultFilters removed - now handled by specialized filter modules
       } catch (error) {
         throw error;
       }
