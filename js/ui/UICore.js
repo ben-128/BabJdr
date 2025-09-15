@@ -335,20 +335,14 @@
       // Initialize specialized filter modules
       if (window.MonsterFilters && MonsterFilters.init) {
         MonsterFilters.init();
-      } else {
-        console.warn('MonsterFilters not available:', !!window.MonsterFilters, !!(window.MonsterFilters && window.MonsterFilters.init));
       }
       
       if (window.GMObjectFilters && GMObjectFilters.init) {
         GMObjectFilters.init();
-      } else {
-        console.warn('GMObjectFilters not available:', !!window.GMObjectFilters, !!(window.GMObjectFilters && window.GMObjectFilters.init));
       }
       
       if (window.TableTresorFilters && TableTresorFilters.init) {
         TableTresorFilters.init();
-      } else {
-        console.warn('TableTresorFilters not available:', !!window.TableTresorFilters, !!(window.TableTresorFilters && window.TableTresorFilters.init));
       }
     }
   };
