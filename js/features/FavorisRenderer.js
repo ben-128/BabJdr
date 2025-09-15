@@ -96,6 +96,9 @@
       }).join('');
 
       container.innerHTML = cardsHtml;
+      
+      // Force responsive grid layout after content insertion
+      this.applyResponsiveGrid(container);
 
       // Déclencher le chargement des images après insertion du contenu
       if (JdrApp.modules.renderer?.autoLoadImages) {
@@ -138,6 +141,9 @@
       }).join('');
 
       container.innerHTML = cardsHtml;
+      
+      // Force responsive grid layout after content insertion
+      this.applyResponsiveGrid(container);
 
       // Déclencher le chargement des images après insertion du contenu
       if (JdrApp.modules.renderer?.autoLoadImages) {

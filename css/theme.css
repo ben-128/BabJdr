@@ -84,16 +84,29 @@ html,body{height:100%; overflow-x:hidden} /* Prevent horizontal scroll */
 body{
   margin:0;
   background:
-    radial-gradient(1600px 800px at 50% -10%, rgba(212,175,55,.08), transparent 45%),
-    radial-gradient(1400px 700px at 120% 10%, rgba(139,69,19,.06), transparent 40%),
-    radial-gradient(800px 400px at 20% 80%, rgba(205,127,50,.04), transparent 30%),
-    repeating-linear-gradient(90deg, rgba(74,44,23,.02) 0 1px, transparent 1px 3px),
-    repeating-linear-gradient(0deg, rgba(139,69,19,.015) 0 1px, transparent 1px 4px),
-    var(--paper);
+    radial-gradient(1600px 800px at 50% -10%, rgba(212,175,55,.3), rgba(248,246,240,1) 45%),
+    radial-gradient(1400px 700px at 120% 10%, rgba(139,69,19,.25), rgba(248,246,240,1) 40%),
+    radial-gradient(800px 400px at 20% 80%, rgba(205,127,50,.2), rgba(248,246,240,1) 30%),
+    repeating-linear-gradient(90deg, rgba(74,44,23,.1) 0 1px, rgba(248,246,240,1) 1px 3px),
+    repeating-linear-gradient(0deg, rgba(139,69,19,.08) 0 1px, rgba(248,246,240,1) 1px 4px),
+    rgb(248,246,240);
   color:var(--paper-ink); 
-  font:17px/1.65 "Source Serif Pro", "Cinzel", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif; 
+  font:17px/1.65 "Source Serif Pro", "Cinzel", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   -webkit-font-smoothing:antialiased; 
   text-rendering:optimizeLegibility;
+}
+
+/* Force solid background for modal previews */
+.spell-preview-tooltip,
+.monster-preview-tooltip,
+.etat-preview-tooltip {
+  background: rgb(248, 246, 240) !important;
+}
+.spell-preview-tooltip *,
+.monster-preview-tooltip *,
+.etat-preview-tooltip * {
+  background-color: rgb(248, 246, 240) !important;
+  opacity: 1 !important;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════════════════

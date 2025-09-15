@@ -1297,7 +1297,7 @@
                 <span class="favoris-toggle">▼</span>
               </div>
               <div class="favoris-content">
-                <div id="favoris-objets-container" class="favoris-grid">
+                <div id="favoris-objets-container" class="favoris-grid collection-items">
                   <!-- Les objets favoris seront affichés ici dynamiquement -->
                 </div>
                 <div id="favoris-objets-empty" class="favoris-empty" style="display: none;">
@@ -1313,7 +1313,7 @@
                 <span class="favoris-toggle">▼</span>
               </div>
               <div class="favoris-content">
-                <div id="favoris-sorts-container" class="favoris-grid">
+                <div id="favoris-sorts-container" class="favoris-grid collection-items">
                   <!-- Les sorts favoris seront affichés ici dynamiquement -->
                 </div>
                 <div id="favoris-sorts-empty" class="favoris-empty" style="display: none;">

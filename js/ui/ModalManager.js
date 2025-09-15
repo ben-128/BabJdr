@@ -230,17 +230,29 @@
       preview.className = 'spell-preview-tooltip';
       preview.innerHTML = `
         <style>
-          .spell-preview-tooltip * {
+          .spell-preview-tooltip,
+          .spell-preview-tooltip *,
+          .spell-preview-tooltip *::before,
+          .spell-preview-tooltip *::after {
             opacity: 1 !important;
-            background-color: transparent !important;
+            background-color: rgba(248, 246, 240, 1) !important;
           }
-          .spell-preview-tooltip .card {
+          .spell-preview-tooltip .card,
+          .spell-preview-tooltip .card *,
+          .spell-preview-tooltip div,
+          .spell-preview-tooltip span,
+          .spell-preview-tooltip p,
+          .spell-preview-tooltip section,
+          .spell-preview-tooltip article,
+          .spell-preview-tooltip header,
+          .spell-preview-tooltip footer {
             opacity: 1 !important;
-            background: var(--paper) !important;
+            background-color: rgba(248, 246, 240, 1) !important;
+            background: rgba(248, 246, 240, 1) !important;
           }
           .spell-preview-tooltip .card:hover {
             opacity: 1 !important;
-            background: var(--paper) !important;
+            background: rgba(248, 246, 240, 1) !important;
             transform: none !important;
           }
           .preview-close-btn {
@@ -285,18 +297,23 @@
         border-radius: 12px;
         pointer-events: auto;
         opacity: 1 !important;
-        background: var(--paper) !important;
+        background: rgb(248, 246, 240) !important;
+        background-color: rgb(248, 246, 240) !important;
       `;
       
       // Force styles after element is added to DOM
       setTimeout(() => {
         preview.style.setProperty('opacity', '1', 'important');
-        preview.style.setProperty('background', 'var(--paper)', 'important');
-        const card = preview.querySelector('.card');
-        if (card) {
-          card.style.setProperty('opacity', '1', 'important');
-          card.style.setProperty('background', 'var(--paper)', 'important');
-        }
+        preview.style.setProperty('background', 'rgb(248, 246, 240)', 'important');
+        preview.style.setProperty('background-color', 'rgb(248, 246, 240)', 'important');
+        
+        // Force background on all child elements
+        const allElements = preview.querySelectorAll('*');
+        allElements.forEach(el => {
+          el.style.setProperty('opacity', '1', 'important');
+          el.style.setProperty('background-color', 'rgb(248, 246, 240)', 'important');
+          el.style.setProperty('background', 'rgb(248, 246, 240)', 'important');
+        });
       }, 10);
       
       // Position near the trigger element
@@ -379,17 +396,29 @@
       preview.className = 'monster-preview-tooltip';
       preview.innerHTML = `
         <style>
-          .monster-preview-tooltip * {
+          .monster-preview-tooltip,
+          .monster-preview-tooltip *,
+          .monster-preview-tooltip *::before,
+          .monster-preview-tooltip *::after {
             opacity: 1 !important;
-            background-color: transparent !important;
+            background-color: rgba(248, 246, 240, 1) !important;
           }
-          .monster-preview-tooltip .card {
+          .monster-preview-tooltip .card,
+          .monster-preview-tooltip .card *,
+          .monster-preview-tooltip div,
+          .monster-preview-tooltip span,
+          .monster-preview-tooltip p,
+          .monster-preview-tooltip section,
+          .monster-preview-tooltip article,
+          .monster-preview-tooltip header,
+          .monster-preview-tooltip footer {
             opacity: 1 !important;
-            background: var(--paper) !important;
+            background-color: rgba(248, 246, 240, 1) !important;
+            background: rgba(248, 246, 240, 1) !important;
           }
           .monster-preview-tooltip .card:hover {
             opacity: 1 !important;
-            background: var(--paper) !important;
+            background: rgba(248, 246, 240, 1) !important;
             transform: none !important;
           }
           .preview-close-btn {
@@ -434,18 +463,23 @@
         border-radius: 12px;
         pointer-events: auto;
         opacity: 1 !important;
-        background: var(--paper) !important;
+        background: rgb(248, 246, 240) !important;
+        background-color: rgb(248, 246, 240) !important;
       `;
       
       // Force styles after element is added to DOM
       setTimeout(() => {
         preview.style.setProperty('opacity', '1', 'important');
-        preview.style.setProperty('background', 'var(--paper)', 'important');
-        const card = preview.querySelector('.card');
-        if (card) {
-          card.style.setProperty('opacity', '1', 'important');
-          card.style.setProperty('background', 'var(--paper)', 'important');
-        }
+        preview.style.setProperty('background', 'rgb(248, 246, 240)', 'important');
+        preview.style.setProperty('background-color', 'rgb(248, 246, 240)', 'important');
+        
+        // Force background on all child elements
+        const allElements = preview.querySelectorAll('*');
+        allElements.forEach(el => {
+          el.style.setProperty('opacity', '1', 'important');
+          el.style.setProperty('background-color', 'rgb(248, 246, 240)', 'important');
+          el.style.setProperty('background', 'rgb(248, 246, 240)', 'important');
+        });
       }, 10);
       
       // Position near the trigger element
