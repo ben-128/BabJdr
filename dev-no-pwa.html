@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1" name="viewport">
+<title>JDR‑BAB — Livret de règles (No PWA)</title>
+<meta content="Livret web multipages des règles JDR‑BAB, thème parchemin" name="description">
+
+<!-- CSS Modulaire -->
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/utilities.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/editor.css">
+<link rel="stylesheet" href="css/scroll-optimizations.css">
+</head>
+<body class="dev-off">
+
+<!-- Le contenu HTML complet sera injecté ici par le JavaScript -->
+<div id="app-loading" class="loading-screen">
+  <div class="loading-content">
+    <div class="loading-spinner"></div>
+    <h2>JDR-BAB</h2>
+    <p>Chargement en cours...</p>
+    <div class="loading-progress">
+      <div class="loading-bar"></div>
+    </div>
+  </div>
+</div>
+
+<!-- JavaScript Modulaire -->
+<!-- Configuration et classes de base -->
+<script src="js/config/constants.js"></script>
+<script src="js/config/contentTypes.js"></script>
+<script src="js/core/EventBus.js"></script>
+<script src="js/core/BaseEntity.js"></script>
+<script src="js/core/UnifiedEditor.js"></script>
+<script src="js/factories/ContentFactory.js"></script>
+
+<!-- Builders et templates -->
+<script src="js/builders/CardBuilder.js"></script>
+<script src="js/builders/PageBuilder.js"></script>
+
+<!-- Modules principaux -->
+<script src="js/core.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/utils/device-detection.js"></script>
+<script src="js/modules/images.js"></script>
+<script src="js/modules/audio.js"></script>
+
+<!-- Features modules (AVANT renderer pour être disponibles au rendu) -->
+<script src="js/features/SpellFilter.js"></script>
+<script src="js/features/TablesTresorsManager.js"></script>
+<script src="js/features/FavorisManager.js"></script>
+<script src="js/features/FavorisRenderer.js"></script>
+<script src="js/features/ScrollOptimizer.js"></script>
+
+<!-- Modules qui dépendent des features -->
+<script src="js/router.js"></script>
+<script src="js/renderer.js"></script>
+<script src="js/editor.js"></script>
+<script src="js/storage.js"></script>
+
+<!-- UI modules (utilitaires en premier) -->
+<script src="js/ui/UIUtilities.js"></script>
+<script src="js/ui/BaseModal.js"></script>
+<script src="js/ui/EventHandlers.js"></script>
+<script src="js/ui/ContentManager.js"></script>
+<script src="js/ui/SearchManager.js"></script>
+<script src="js/ui/ModalManager.js"></script>
+<script src="js/ui/ResponsiveManager.js"></script>
+<script src="js/ui/PageManager.js"></script>
+<script src="js/ui/TagsManager.js"></script>
+<script src="js/ui/GMObjectFilters.js"></script>
+<script src="js/ui/MonsterFilters.js"></script>
+<script src="js/ui/TableTresorFilters.js"></script>
+<script src="js/ui/UICore.js"></script>
+
+<!-- UI module principal (doit être en dernier) -->
+<script src="js/ui.js"></script>
+
+<!-- PDF support -->
+<script src="js/libs/jspdf-loader.js"></script>
+
+</body>
+</html>
