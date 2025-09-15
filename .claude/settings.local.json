@@ -52,7 +52,8 @@
       "Bash(true)",
       "Bash(tree:*)",
       "Bash(# Make dev.html the main development file by replacing index.html with it\nmv index.html landing.html\nmv dev.html index.html)",
-      "Bash(# Remove redundant files and simplify\nrm github-index.html landing.html\n\n# Rename for clarity  \nmv index.html dev-modular.html)"
+      "Bash(# Remove redundant files and simplify\nrm github-index.html landing.html\n\n# Rename for clarity  \nmv index.html dev-modular.html)",
+      "Bash(python:*)"
     ],
     "deny": []
   }

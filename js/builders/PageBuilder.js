@@ -83,8 +83,17 @@
             <div class="grid cols-2" id="objets-container">
               ${allObjects.map((item, index) => {
                 const cardHTML = CardBuilder.create('objet', item, 'objets', index).build();
-                // Hide all objects by default - only ID search will show them
-                return cardHTML.replace('<div class="card', '<div class="card" style="display: none;"');
+                // Show only the searched object if ID search is active
+                if (window.activeIdSearch && window.activeSearchId) {
+                  if (item.numero === window.activeSearchId) {
+                    return cardHTML; // Show this object
+                  } else {
+                    return cardHTML.replace('<div class="card', '<div class="card" style="display: none;"'); // Hide others
+                  }
+                } else {
+                  // Hide all objects by default when no search is active
+                  return cardHTML.replace('<div class="card', '<div class="card" style="display: none;"');
+                }
               }).join('')}
             </div>
             

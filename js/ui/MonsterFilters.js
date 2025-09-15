@@ -104,13 +104,6 @@
     }
   };
 
-  // Auto-initialize when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      MonsterFilters.init();
-    });
-  } else {
-    MonsterFilters.init();
-  }
+  // Module is now initialized by UICore
 
 })();

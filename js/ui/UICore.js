@@ -51,6 +51,17 @@
         EventHandlers.setupContentHandlers();
         EventHandlers.setupTagsManagement();
       }
+      
+      // Initialize specialized filter modules
+      if (window.GMObjectFilters && window.GMObjectFilters.init) {
+        window.GMObjectFilters.init();
+      }
+      if (window.MonsterFilters && window.MonsterFilters.init) {
+        window.MonsterFilters.init();
+      }
+      if (window.TableTresorFilters && window.TableTresorFilters.init) {
+        window.TableTresorFilters.init();
+      }
     },
 
     /**

@@ -122,13 +122,6 @@
     }
   };
 
-  // Auto-initialize when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      TableTresorFilters.init();
-    });
-  } else {
-    TableTresorFilters.init();
-  }
+  // Module is now initialized by UICore
 
 })();

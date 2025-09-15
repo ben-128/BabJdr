@@ -181,8 +181,9 @@
         return;
       }
 
-      // Set global flag for ID search
+      // Set global flag for ID search BEFORE any regeneration
       window.activeIdSearch = true;
+      window.activeSearchId = searchNumber;
 
       // Show success message
       if (resultDiv) {
@@ -190,8 +191,15 @@
         resultDiv.style.color = '#16a34a';
       }
 
-      // Show only the target object
-      this.showOnlyObjectById(searchNumber);
+      // Force regenerate page first, then show the object
+      if (JdrApp.modules.renderer?.regenerateCurrentPage) {
+        JdrApp.modules.renderer.regenerateCurrentPage();
+      }
+      
+      // After regeneration, show only the target object
+      setTimeout(() => {
+        this.showOnlyObjectById(searchNumber);
+      }, 100);
     },
 
     clearIdSearch() {
@@ -206,11 +214,14 @@
         resultDiv.innerHTML = '';
       }
       
-      // Clear the global flag
+      // Clear the global flags
       window.activeIdSearch = false;
+      window.activeSearchId = null;
       
-      // Show all objects again
-      this.showAllObjects();
+      // Regenerate page to show all objects hidden again
+      if (JdrApp.modules.renderer?.regenerateCurrentPage) {
+        JdrApp.modules.renderer.regenerateCurrentPage();
+      }
     },
 
     hideAllObjects() {

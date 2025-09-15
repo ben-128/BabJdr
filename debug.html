@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Debug Filters</title>
+</head>
+<body>
+    <h1>Debug Filtering System</h1>
+    <div id="debug-output"></div>
+    
+    <script>
+        function debug(message) {
+            const output = document.getElementById('debug-output');
+            output.innerHTML += '<p>' + message + '</p>';
+            console.log(message);
+        }
+        
+        // Test if modules are loaded
+        debug('=== TESTING MODULE LOADING ===');
+        debug('GMObjectFilters available: ' + (typeof window.GMObjectFilters !== 'undefined'));
+        debug('MonsterFilters available: ' + (typeof window.MonsterFilters !== 'undefined'));
+        debug('TableTresorFilters available: ' + (typeof window.TableTresorFilters !== 'undefined'));
+        
+        // Test if event listeners are working
+        debug('=== TESTING EVENT LISTENERS ===');
+        document.addEventListener('click', (e) => {
+            debug('Click detected on: ' + e.target.className + ' with data-tag: ' + e.target.dataset.tag);
+        });
+        
+        // Create test buttons
+        const testDiv = document.createElement('div');
+        testDiv.innerHTML = `
+            <h3>Test Buttons:</h3>
+            <button class="filter-chip" data-tag="test-monster">Test Monster Filter</button>
+            <button class="gm-filter-chip" data-tag="test-gm">Test GM Filter</button>
+        `;
+        document.body.appendChild(testDiv);
+    </script>
+</body>
+</html>
