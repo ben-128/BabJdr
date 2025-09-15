@@ -51,8 +51,14 @@
 
       // Vérifier si nous sommes sur la page des favoris
       const favorisPage = document.querySelector('[data-page="favoris"]');
-      if (!favorisPage || favorisPage.style.display === 'none') {
+      if (!favorisPage) {
         return;
+      }
+      
+      // Vérifier si la page est visible
+      const isVisible = favorisPage.style.display !== 'none' && favorisPage.classList.contains('active');
+      if (!isVisible) {
+        // Essayer quand même de mettre à jour, peut-être que les styles CSS gèrent la visibilité
       }
 
       // Mettre à jour dans l'ordre : objets d'abord, puis sorts (même ordre que PageBuilder)

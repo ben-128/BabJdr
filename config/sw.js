@@ -2,9 +2,9 @@
 // JDR-BAB PWA SERVICE WORKER
 // ============================================================================
 
-const CACHE_NAME = 'jdr-bab-v1.0.0';
-const STATIC_CACHE_NAME = 'jdr-bab-static-v1.0.0';
-const RUNTIME_CACHE_NAME = 'jdr-bab-runtime-v1.0.0';
+const CACHE_NAME = 'jdr-bab-v1.0.1';
+const STATIC_CACHE_NAME = 'jdr-bab-static-v1.0.1';
+const RUNTIME_CACHE_NAME = 'jdr-bab-runtime-v1.0.1';
 
 // Files to cache immediately (critical resources)
 const STATIC_ASSETS = [
@@ -40,6 +40,14 @@ const STATIC_ASSETS = [
   '/js/renderer.js',
   '/js/editor.js',
   '/js/ui.js',
+  
+  // UI Modules
+  '/js/ui/EventHandlers.js',
+  '/js/ui/ContentManager.js',
+  '/js/ui/ModalManager.js',
+  '/js/ui/UICore.js',
+  '/js/ui/SearchManager.js',
+  '/js/ui/TagsManager.js',
   
   // Features
   '/js/features/SpellFilter.js',
