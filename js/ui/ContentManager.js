@@ -78,15 +78,9 @@
           item: defaultItem
         });
         
-        // Force regenerate page to ensure proper display
+        // Try to add the new card directly to avoid full page refresh
         setTimeout(() => {
-          // Find the current category to refresh
-          const currentCategory = this.findCurrentCategory(type, categoryName);
-          if (currentCategory && JdrApp.modules.renderer?.renderCategoryPage) {
-            JdrApp.modules.renderer.renderCategoryPage(type, currentCategory);
-          } else if (JdrApp.modules.renderer?.regenerateCurrentPage) {
-            JdrApp.modules.renderer.regenerateCurrentPage();
-          }
+          this.addNewCardDirectly(type, categoryName, defaultItem);
         }, 100);
       }
     },
@@ -157,15 +151,9 @@
           item: itemName
         });
         
-        // Force regenerate page to ensure proper display
+        // Try to add the new card directly to avoid full page refresh
         setTimeout(() => {
-          // Find the current category to refresh
-          const currentCategory = this.findCurrentCategory(type, categoryName);
-          if (currentCategory && JdrApp.modules.renderer?.renderCategoryPage) {
-            JdrApp.modules.renderer.renderCategoryPage(type, currentCategory);
-          } else if (JdrApp.modules.renderer?.regenerateCurrentPage) {
-            JdrApp.modules.renderer.regenerateCurrentPage();
-          }
+          this.addNewCardDirectly(type, categoryName, defaultItem);
         }, 100);
       }
     },
@@ -223,15 +211,9 @@
           direction: direction
         });
         
-        // Force regenerate page to ensure proper display
+        // Try to add the new card directly to avoid full page refresh
         setTimeout(() => {
-          // Find the current category to refresh
-          const currentCategory = this.findCurrentCategory(type, categoryName);
-          if (currentCategory && JdrApp.modules.renderer?.renderCategoryPage) {
-            JdrApp.modules.renderer.renderCategoryPage(type, currentCategory);
-          } else if (JdrApp.modules.renderer?.regenerateCurrentPage) {
-            JdrApp.modules.renderer.regenerateCurrentPage();
-          }
+          this.addNewCardDirectly(type, categoryName, defaultItem);
         }, 100);
       }
     },
@@ -246,6 +228,60 @@
         return window.SORTS.find(cat => cat.nom === categoryName);
       }
       return null;
+    },
+
+    /**
+     * Add new card directly to DOM without full page refresh
+     */
+    addNewCardDirectly(type, categoryName, newItem) {
+      try {
+        // Find the container for this category using the correct ID pattern
+        const config = window.ContentTypes[type];
+        if (!config) {
+          return false;
+        }
+        
+        const sanitizedCategoryName = JdrApp.utils.data.sanitizeId(categoryName);
+        const containerId = `${config.container}-container-${sanitizedCategoryName}`;
+        const categoryContainer = document.getElementById(containerId);
+        
+        if (!categoryContainer) {
+          return false;
+        }
+
+        // Create the new card HTML
+        const cardIndex = categoryContainer.children.length; // Use actual DOM count
+        const newCardHTML = window.CardBuilder?.create(type, newItem, categoryName, cardIndex)?.build();
+        if (!newCardHTML) {
+          return false;
+        }
+
+        // Add the card to the container
+        categoryContainer.insertAdjacentHTML('beforeend', newCardHTML);
+        
+        // Load images for the new card
+        if (JdrApp.modules.renderer?.autoLoadImages) {
+          JdrApp.modules.renderer.autoLoadImages();
+        }
+        
+        return true;
+      } catch (error) {
+        return false;
+      }
+    },
+
+    /**
+     * Get the next card index for a category
+     */
+    getNextCardIndex(type, categoryName) {
+      if (type === 'don' && window.DONS) {
+        const category = window.DONS.find(cat => cat.nom === categoryName);
+        return category?.dons?.length || 0;
+      } else if (type === 'spell' && window.SORTS) {
+        const category = window.SORTS.find(cat => cat.nom === categoryName);
+        return category?.sorts?.length || 0;
+      }
+      return 0;
     },
 
     /**

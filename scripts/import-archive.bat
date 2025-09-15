@@ -135,7 +135,7 @@ echo.
 :: Copier les fichiers extraits
 echo [INFO] Import des fichiers...
 
-:: Copier les dossiers data, css, js
+:: Copier SEULEMENT les dossiers data (pas js ni css pour préserver les corrections)
 if exist "%TEMP_EXTRACT%\data" (
     echo [INFO] Import des données...
     xcopy "%TEMP_EXTRACT%\data" "data\" /E /I /Y /Q >nul
@@ -146,25 +146,9 @@ if exist "%TEMP_EXTRACT%\data" (
     )
 )
 
-if exist "%TEMP_EXTRACT%\css" (
-    echo [INFO] Import des styles CSS...
-    xcopy "%TEMP_EXTRACT%\css" "css\" /E /I /Y /Q >nul
-    if errorlevel 1 (
-        echo [ATTENTION] Erreur lors de l'import des CSS
-    ) else (
-        echo [OK] CSS importés
-    )
-)
-
-if exist "%TEMP_EXTRACT%\js" (
-    echo [INFO] Import des scripts JavaScript...
-    xcopy "%TEMP_EXTRACT%\js" "js\" /E /I /Y /Q >nul
-    if errorlevel 1 (
-        echo [ATTENTION] Erreur lors de l'import des JS
-    ) else (
-        echo [OK] JavaScript importés
-    )
-)
+:: NE PAS importer CSS et JS pour préserver les corrections locales
+echo [INFO] CSS et JS non importés pour préserver les corrections locales
+echo [OK] Import limité aux données JSON uniquement
 
 :: Copier index.html si présent
 if exist "%TEMP_EXTRACT%\index.html" (

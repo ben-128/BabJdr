@@ -100,7 +100,8 @@ window.MANIFEST_DATA = ${fs.readFileSync(path.join(rootDir, 'config', 'manifest.
     }
   });
   
-  // Read all JS files in correct loading order
+  // Read all JS files from current working directory (not for replacement, just for standalone build)
+  // IMPORTANT: This is for building standalone version only - does NOT modify source files
   const jsFiles = [
     // Core framework files first - JdrApp namespace must be very first
     'js/core.js',                // Core JdrApp namespace - MUST BE FIRST

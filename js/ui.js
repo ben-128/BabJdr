@@ -408,6 +408,42 @@
       if (window.ContentManager) {
         return ContentManager.addContent(type, categoryName);
       }
+    },
+
+    // Modal methods - delegate to ModalManager
+    showElementsModal() {
+      if (window.ModalManager) {
+        return ModalManager.showElementsModal();
+      }
+    },
+
+    showEtatsModal() {
+      if (window.ModalManager) {
+        return ModalManager.showEtatsModal();
+      }
+    },
+
+    showSpellLinksModal() {
+      if (window.ModalManager) {
+        return ModalManager.showSpellLinksModal();
+      }
+    },
+
+    showPageLinksModal() {
+      if (window.ModalManager) {
+        return ModalManager.showPageLinksModal();
+      }
+    },
+
+    showMonsterLinksModal() {
+      if (window.ModalManager) {
+        return ModalManager.showMonsterLinksModal();
+      }
+    },
+
+    showNotification(message, type = 'info') {
+      // Simple notification for now
+      console.log(`[${type.toUpperCase()}] ${message}`);
     }
   };
 

@@ -571,7 +571,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
   z-index:2147483647; display:none; align-items:center; justify-content:center;
 }
 .elements-modal.visible {
-  display:flex;
+  display: flex !important;
 }
 .elements-modal-content {
   background:var(--card); border:2px solid var(--rule); border-radius:16px;
@@ -613,7 +613,7 @@ body.dev-on article[data-page="enchanteur"] .add-subclass-btn:hover {
   z-index:2147483647; display:none; align-items:center; justify-content:center;
 }
 .etats-modal.visible {
-  display:flex;
+  display: flex !important;
 }
 .etats-modal-content {
   background:var(--card); border:2px solid var(--rule); border-radius:16px;
@@ -711,7 +711,7 @@ span[title] {
 }
 
 .spell-links-modal.visible {
-  display: flex;
+  display: flex !important;
 }
 
 .spell-links-modal-content {
