@@ -50,9 +50,6 @@
         activeTags.splice(tagIndex, 1);
       }
 
-      // Update visual state of filter chips
-      this.updateGMFilterChipsDisplay();
-
       // Regenerate the GM objects page with new filters
       this.regenerateGMObjectsPage();
     },
@@ -61,22 +58,8 @@
      * Update the visual display of GM filter chips
      */
     updateGMFilterChipsDisplay() {
-      const activeTags = window.ACTIVE_GM_OBJECT_TAGS || [];
-      
-      document.querySelectorAll('.gm-filter-chip').forEach(chip => {
-        const tag = chip.dataset.tag;
-        const isActive = activeTags.includes(tag);
-        
-        if (isActive) {
-          chip.style.background = '#16a34a';
-          chip.style.opacity = '1';
-          chip.textContent = `✓ ${tag}`;
-        } else {
-          chip.style.background = '#6b7280';
-          chip.style.opacity = '0.6';
-          chip.textContent = tag;
-        }
-      });
+      // This method is now not needed as the page regeneration will
+      // handle the correct display state automatically via PageBuilder
     },
 
     /**
@@ -99,7 +82,6 @@
      */
     clearAllGMObjectFilters() {
       window.ACTIVE_GM_OBJECT_TAGS = [];
-      this.updateGMFilterChipsDisplay();
       this.regenerateGMObjectsPage();
     },
 

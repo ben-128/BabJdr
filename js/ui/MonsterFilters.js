@@ -55,9 +55,6 @@
         visibleTags.splice(tagIndex, 1);
       }
 
-      // Update visual state of filter chips
-      this.updateMonsterFilterChipsDisplay();
-
       // Regenerate the monsters page with new filters
       this.regenerateMonstersPage();
     },
@@ -66,22 +63,8 @@
      * Update the visual display of monster filter chips
      */
     updateMonsterFilterChipsDisplay() {
-      const visibleTags = window.MONSTRES_FILTER_STATE?.visibleTags || [];
-      
-      document.querySelectorAll('.filter-chip[data-tag]').forEach(chip => {
-        const tag = chip.dataset.tag;
-        const isActive = visibleTags.includes(tag);
-        
-        if (isActive) {
-          chip.style.background = '#16a34a';
-          chip.style.opacity = '1';
-          chip.textContent = `✓ ${tag}`;
-        } else {
-          chip.style.background = '#6b7280';
-          chip.style.opacity = '0.6';
-          chip.textContent = tag;
-        }
-      });
+      // This method is now not needed as the page regeneration will
+      // handle the correct display state automatically via PageBuilder
     },
 
     /**
@@ -110,7 +93,6 @@
         visibleTags: [...defaultTags]
       };
       
-      this.updateMonsterFilterChipsDisplay();
       this.regenerateMonstersPage();
     },
 

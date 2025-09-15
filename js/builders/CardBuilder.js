@@ -131,7 +131,7 @@
         : '<span style="font-style: italic; color: #666;">Aucun tag</span>';
 
       return `
-        <div class="card editable-section item-card" data-section-type="objet" data-objet-name="${this.data.nom}" data-category-name="${this.categoryName}">
+        <div class="card editable-section item-card" data-section-type="objet" data-objet-name="${this.data.nom}" data-numero="${this.data.numero}" data-object-id="${this.data.numero}" data-category-name="${this.categoryName}">
           ${this.buildFavorisButton('objets', this.data.nom)}
           ${this.buildEditableTitle(this.data.nom, 'objet-name')}
           ${this.buildIllustration(`objet:${this.data.nom}`, this.data.nom)}
