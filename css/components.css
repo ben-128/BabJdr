@@ -843,21 +843,9 @@ body.dev-off .new-collection-card {
   background: var(--accent) !important;
 }
 
-.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:2147483647;display:flex;align-items:center;justify-content:center}
-.modal-base{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:2147483647;display:none;align-items:center;justify-content:center}
+.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:999999;display:flex;align-items:center;justify-content:center}
+.modal-base{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:99999;display:none;align-items:center;justify-content:center}
 .modal-base.visible{display:flex}
-.modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:2147483647;display:flex;align-items:center;justify-content:center}
-.modal-content{background:var(--card);border:2px solid var(--rule);border-radius:16px;padding:var(--space-2xl);box-shadow:var(--shadow);position:relative;max-width:90vw;max-height:90vh;overflow-y:auto}
-.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--space-lg);border-bottom:1px solid var(--rule);padding-bottom:var(--space-md)}
-.modal-header h3{margin:0;color:var(--accent-ink);font-family:'Cinzel',serif}
-.modal-close{background:var(--danger);color:white;border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:18px;font-weight:bold;display:flex;align-items:center;justify-content:center}
-.modal-close:hover{background:var(--danger-dark);transform:scale(1.1)}
-.modal-body{color:var(--ink)}
-.element-item,.etat-item,.spell-item,.monster-item,.page-item{padding:12px;border:1px solid var(--rule);border-radius:8px;cursor:pointer;transition:all 0.2s ease;position:relative;background:var(--paper)}
-.element-item:hover,.etat-item:hover,.spell-item:hover,.monster-item:hover,.page-item:hover{background:var(--card);transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.1)}
-.element-item.copied,.etat-item.copied,.spell-item.copied,.monster-item.copied,.page-item.copied{background:var(--success-light);border-color:var(--success)}
-.copy-indicator{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--success);color:white;padding:4px 8px;border-radius:4px;font-size:12px;opacity:0;transition:opacity 0.2s ease}
-.copied .copy-indicator{opacity:1}
 .modal-content-base{background:var(--card);border:2px solid var(--rule);border-radius:16px;padding:var(--space-2xl);box-shadow:var(--shadow);position:relative}
 
 /* Legacy Cards - Enhanced with Modern Styling */

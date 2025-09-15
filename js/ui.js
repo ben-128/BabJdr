@@ -401,37 +401,6 @@
           JdrApp.modules.renderer.regenerateCurrentPage();
         }
       }, 100);
-    },
-
-    // Modal functions - delegate to UICore/ModalManager
-    showElementsModal() {
-      if (window.UICore) {
-        return UICore.showElementsModal();
-      }
-    },
-
-    showEtatsModal() {
-      if (window.UICore) {
-        return UICore.showEtatsModal();
-      }
-    },
-
-    showSpellLinksModal() {
-      if (window.UICore) {
-        return UICore.showSpellLinksModal();
-      }
-    },
-
-    showMonsterLinksModal() {
-      if (window.UICore) {
-        return UICore.showMonsterLinksModal();
-      }
-    },
-
-    showPageLinksModal() {
-      if (window.UICore) {
-        return UICore.showPageLinksModal();
-      }
     }
   };
 

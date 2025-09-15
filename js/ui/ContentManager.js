@@ -78,11 +78,12 @@
           item: defaultItem
         });
         
-        EventBus.emit(Events.PAGE_RENDER, {
-          type: 'category',
-          categoryType: type,
-          category: ContentFactory.getEntity(type).findCategory(categoryName)
-        });
+        // Force regenerate page to ensure proper display
+        setTimeout(() => {
+          if (JdrApp.modules.renderer?.regenerateCurrentPage) {
+            JdrApp.modules.renderer.regenerateCurrentPage();
+          }
+        }, 100);
       }
     },
 
@@ -152,11 +153,12 @@
           item: itemName
         });
         
-        EventBus.emit(Events.PAGE_RENDER, {
-          type: 'category',
-          categoryType: type,
-          category: ContentFactory.getEntity(type).findCategory(categoryName)
-        });
+        // Force regenerate page to ensure proper display
+        setTimeout(() => {
+          if (JdrApp.modules.renderer?.regenerateCurrentPage) {
+            JdrApp.modules.renderer.regenerateCurrentPage();
+          }
+        }, 100);
       }
     },
 
@@ -213,11 +215,12 @@
           direction: direction
         });
         
-        EventBus.emit(Events.PAGE_RENDER, {
-          type: 'category',
-          categoryType: type,
-          category: ContentFactory.getEntity(type).findCategory(categoryName)
-        });
+        // Force regenerate page to ensure proper display
+        setTimeout(() => {
+          if (JdrApp.modules.renderer?.regenerateCurrentPage) {
+            JdrApp.modules.renderer.regenerateCurrentPage();
+          }
+        }, 100);
       }
     },
 

@@ -353,7 +353,7 @@
 <h4>🏃 Agilité</h4><p>Chaque 5 points ajoutent <strong>+1</strong> aux jets d'esquive et de critique physique.
 <br><br>Augmente l'initiative d'autant.</p></div><hr>
 
-<div class="stat-card"><h4>🧠 Intelligence</h4><p>Chaque 5 points ajoutent +1 à la puissance des sorts. <br><br> Augmente les chances de réussir à infliger des alterations. </p></div><hr><div class="stat-card"><h4>⚡ Volonté</h4><p>Le mana maximum est de : <strong>(10 + 2 x Volonté)</strong></p><p>Augmente la Résistance altérations.</p>
+<div class="stat-card"><h4>🧠 Intelligence</h4><p>Détermine la puissance des sorts.</p></div><hr><div class="stat-card"><h4>⚡ Volonté</h4><p>Le mana maximum est de : <strong>(10 + 2 x Volonté)</strong></p><p>Augmente la Résistance altérations.</p>
 
 </div><hr><div class="stat-card"><h4>🍀 Chance</h4><p>Améliore la Fortune d'autant.</p><p>De plus, chaque 5 points ajoutent <strong>+1</strong> aux chances de coup critique avec les sorts et les consommables.</p></div></div></div>
           <button class="edit-btn" type="button" style="background: var(--accent); color: white; border: none; border-radius: 4px; padding: 4px 8px; cursor: pointer; font-size: 12px; margin-left: 8px;">✏️</button>
@@ -382,8 +382,6 @@
 <br><br><hr><br><strong>Armure physique </strong> : Lorsqu'un héros ou monstre reçoit des dégats physiques, ils sont alors réduit de la valeur de l'armure physique pour savoir combien de points de vies sont retirés à la cible. Cette valeur est retiré en dernier sur les degats (aprés avoir éventuellement doublé les dégats si critique etc...)
 
 <br><br><hr><br><strong>Armure élémentaire </strong> : L'armure élémentaire est spécifique pour chaque élément, il y a donc 8 types d'armure élémentaire. Lorsqu'un héros ou monstre subit des dégats élémentaire correspondant à l'armure élémentaire, ils sont alors réduit de la valeur de l'armure pour savoir combien de points de vies sont retirés à la cible. Cette valeur est retiré en dernier sur les degats (aprés avoir éventuellement doublé les dégats si critique etc...).
-
-<br><br><hr><br><strong>Puissance des sorts</strong> : Augmente l'efficacité des sorts, généralement des dégats ou soins. Les sorts indiquent lorsque cette statistique est utilisée. Elle est améliorée par l'intelligence.
 
 <br><br><hr><br><strong>Mana </strong> : Il s'agit de la ressource utilisée pour lancer des sorts. Hors combat, il revient automatiquement au maximum aprés plus d'une heure sans être en combat. En combat, il est consommé aprés le lancement de chaque sort (le coût en mana étant indiqué dans la description de chaque sort). Si un sort devait faire passer le mana d'un héros en dessous de 0, alors le sort n'est pas effectif et le héros devient <span class="etat-link" data-etat="Endormi/assomé/Effrayé" style="color: #ea7332; cursor: pointer; text-decoration: underline;">paralysé</span> pendant 2 tours.
 
@@ -1189,7 +1187,7 @@ Un personnage qui effectue un repos régénère un nombre de points de vie égal
         
         <div style="position:relative;">
           <div class="editable" data-edit-type="generic" data-edit-section="gestion-des-ressources-new-8-1756658008017"><li>Que l'on porte une arme à une main ou à deux mains, il est uniquement possible d'être équipé d'une seule arme.
-</li><li>Lorsque on porte une arme à deux mains, il est impossible de porter un objet en main secondaire (bouclier ou catalyseur).
+</li><li>Lorsque on porte une arme à deux mains, il est impossible de porter un bouclier.
 </li><li>Il est possible via une action secondaire de changer l'arme active en plein combat, mais pas l'armure ou les accessoires, qui ne peuvent être changés que hors combat.</li></div>
           <button class="edit-btn" type="button" style="background: var(--accent); color: white; border: none; border-radius: 4px; padding: 4px 8px; cursor: pointer; font-size: 12px; margin-left: 8px;">✏️</button>
         </div>
@@ -1565,7 +1563,7 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
           </section>
         </article>
       
-        <article class="" data-page="guerrier" data-page-title="Guerrier" style="display: none;">
+        <article class="" data-page="guerrier" data-page-title="Guerrier" style="display: block;">
           <section>
             
         <div style="text-align:center;margin-bottom:2rem;">
@@ -1593,7 +1591,9 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
             <h3>Capacités de classe</h3>
             
         <div class="editable-section" data-section-type="html">
-          <div class="editable" data-edit-type="generic" data-edit-section="Guerrier" data-editing="false" contenteditable="false"><ul><li><em>Expert de l'équipement</em> : Capable d'utiliser toutes les armes (épées, arcs, bâtons, dagues, exotiques, une main et deux mains), armures (robes, légères, lourdes), et boucliers.</li><li><em>Hardiesse</em> : Gagne la compétence Hardiesse rang 1.</li></ul></div>
+          <div class="editable" data-edit-type="generic" data-edit-section="Guerrier">
+            <ul><li><em>Expert de l'équipement</em> : Capable d'utiliser toutes les armes (épées, arcs, batons, dagues, exotiques, une main et deux mains), armures (robes, légères, lourdes), et boucliers.</li><li><em>Hardiesse</em> : Gagne la compétence Hardiesse rang 1.</li></ul>
+          </div>
           <button class="edit-btn" type="button" style="background: var(--accent); color: white; border: none; border-radius: 4px; padding: 4px 8px; cursor: pointer; font-size: 12px; margin-left: 8px;">✏️</button>
         </div>
       
@@ -1655,9 +1655,10 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
           
         <h5>Capacités</h5>
         <div class="editable-section" data-section-type="html">
-          <div class="editable" data-edit-type="generic" data-edit-section="subclass-capacites" data-item-identifier="Nain des montagnes">
-            <ul><li><em>Brise rocher : </em> Gagne 1 de compétence sur les tests de compétence Hardiesse pour une destruction d'objet.</li><li><em>Volonté inflexible :</em> Les nains possèdent une volonté inflexible qui les rendent résistants aux sortilèges (caractéristique Volonté élevée).</li></ul>
-          </div>
+          <div class="editable" data-edit-type="generic" data-edit-section="subclass-capacites" data-item-identifier="Nain des montagnes" data-editing="false" contenteditable="false"><ul><li><em>Brise rocher : </em> Gagne 1 de compétence sur les tests de compétence Hardiesse pour une destruction d'objet.
+</li><li><em>Volonté inflexible :</em> Les nains possèdent une volonté inflexible qui les rendent résistants aux sortilèges (caractéristique Volonté élevée).</li>
+<li><em> Montagne sacrée :</em> Augmente l'armure élémentaire de Terre de 5.</li>
+</ul></div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="list" style="">✏️</button>
         </div>
       
@@ -1920,7 +1921,9 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
             <h3>Capacités de classe</h3>
             
         <div class="editable-section" data-section-type="html">
-          <div class="editable" data-edit-type="generic" data-edit-section="Mage" data-editing="false" contenteditable="false"><ul><li><em>Équipement de mage</em> : bâtons (une et deux mains), catalyseurs, robes.</li><li><em>Sorts de mage</em> : Apprend et lance des sorts de mage.</li></ul></div>
+          <div class="editable" data-edit-type="generic" data-edit-section="Mage">
+            <ul><li><em>Équipement de mage</em> : bâtons (une et deux mains), robes.</li><li><em>Sorts de mage</em> : Apprend et lance des sorts de mage.</li></ul>
+          </div>
           <button class="edit-btn" type="button" style="background: var(--accent); color: white; border: none; border-radius: 4px; padding: 4px 8px; cursor: pointer; font-size: 12px; margin-left: 8px;">✏️</button>
         </div>
       
@@ -2095,14 +2098,16 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
       
             
         <div class="editable-section" data-section-type="class-resume">
-          <p class="lead editable editable-paragraph" data-edit-type="generic" data-edit-section="Prêtre" data-editing="false" contenteditable="false">Spécialiste de la magie de soutien et anti morts-vivants.</p>
+          <p class="lead editable editable-paragraph" data-edit-type="generic" data-edit-section="Prêtre">Spécialiste de la magie de soutien et anti morts-vivants.</p>
           <button class="edit-btn" type="button" style="background: var(--accent); color: white; border: none; border-radius: 4px; padding: 4px 8px; cursor: pointer; font-size: 12px; margin-left: 8px;">✏️</button>
         </div>
       
             <h3>Capacités de classe</h3>
             
         <div class="editable-section" data-section-type="html">
-          <div class="editable" data-edit-type="generic" data-edit-section="Prêtre" data-editing="false" contenteditable="false"><ul><li><em>Équipement de prêtre</em> : bâtons (une et deux mains), catalyseurs , robes.</li><li><em>Sorts de prêtre</em> : Apprend et lance des sorts de Prêtre.</li><li><em>Eloquence</em> : Gagne la compétence Eloquence rang 1.</li></ul></div>
+          <div class="editable" data-edit-type="generic" data-edit-section="Prêtre">
+            <ul><li><em>Équipement de prêtre</em> : bâtons (une et deux mains), robes.</li><li><em>Sorts de prêtre</em> : Apprend et lance des sorts de Prêtre.</li><li><em>Eloquence</em> : Gagne la compétence Eloquence rang 1.</li></ul>
+          </div>
           <button class="edit-btn" type="button" style="background: var(--accent); color: white; border: none; border-radius: 4px; padding: 4px 8px; cursor: pointer; font-size: 12px; margin-left: 8px;">✏️</button>
         </div>
       
@@ -2165,7 +2170,7 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
         <h5>Capacités</h5>
         <div class="editable-section" data-section-type="html">
           <div class="editable" data-edit-type="generic" data-edit-section="subclass-capacites" data-item-identifier="Inquisiteur">
-            <ul><li><em>Equipement d'inquisiteur</em> : Peut s'équiper d'armures légères, de boucliers et d'épées à deux mains.</li><li><em>Fléau des morts-vivants</em> : Les attaques physiques contre les morts-vivants ne ratent jamais.</li><li><em>Lumière purificatrice</em> : Double l'effet de la puissance des sorts sur les dégats des sorts d'élément <span style="color: #ffd700; font-weight: bold;">Lumière</span> ou <span style="color: #f5f5f5; font-weight: bold; background: rgba(100, 100, 100, 0.3); padding: 2px 4px; border-radius: 3px;">Divin</span>.</li></ul>
+            <ul><li><em>Equipement d'inquisiteur</em> : Peut s'équiper d'armures légères et de boucliers.</li><li><em>Fléau des morts-vivants</em> : Les attaques physiques contre les morts-vivants ne ratent jamais.</li><li><em>Lumière purificatrice</em> : Double l'effet de l'intelligence sur les dégats des sorts d'élément <span style="color: #ffd700; font-weight: bold;">Lumière</span> ou <span style="color: #f5f5f5; font-weight: bold; background: rgba(100, 100, 100, 0.3); padding: 2px 4px; border-radius: 3px;">Divin</span>.</li></ul>
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="list" style="">✏️</button>
         </div>
@@ -2235,7 +2240,7 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
         <h5>Capacités</h5>
         <div class="editable-section" data-section-type="html">
           <div class="editable" data-edit-type="generic" data-edit-section="subclass-capacites" data-item-identifier="Clerc Divin">
-            <ul><li><em>Maître des soins</em> : Double l'effet de la puissance des sorts sur les sorts de soins.</li><li><em> Pieu </em>:  Gagne 1 de compétence sur les tests de compétence Reflexion sur un dieu ou une religion.</li><li><em> Protection divine </em>:  Dispose d'une armure élementaire <span style="color: #f5f5f5; font-weight: bold; background: rgba(100, 100, 100, 0.3); padding: 2px 4px; border-radius: 3px;">Divin</span> et <span style="color: #ffd700; font-weight: bold;">Lumière</span> de 10.</li></ul>
+            <ul><li><em>Maître des soins</em> : Double l'effet de l'intelligence sur les sorts de soins.</li><li><em> Pieu </em>:  Gagne 1 de compétence sur les tests de compétence Reflexion sur un dieu ou une religion.</li><li><em> Protection divine </em>:  Dispose d'une armure élementaire <span style="color: #f5f5f5; font-weight: bold; background: rgba(100, 100, 100, 0.3); padding: 2px 4px; border-radius: 3px;">Divin</span> et <span style="color: #ffd700; font-weight: bold;">Lumière</span> de 10.</li></ul>
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="list" style="">✏️</button>
         </div>
@@ -2416,7 +2421,9 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
           
         <h5>Capacités</h5>
         <div class="editable-section" data-section-type="html">
-          <div class="editable" data-edit-type="generic" data-edit-section="subclass-capacites" data-item-identifier="Chasseur" data-editing="false" contenteditable="false"><ul><li><em>Armes du Chasseur</em> : Peut utiliser les arcs et les bâtons.</li><li><em>Cueillette</em> : Une fois par jour, lors d’un repos, le personnage peut récolter 5 plantes locales (au choix du MJ). Leur efficacité dépend de l’Intelligence de l’utilisateur.</li><li><em>Connaissance du milieu naturel</em> : Gagne 1 de compétence sur les tests de Réflexion lié à animal, un monstre, une plante, ou la découverte de passages dérobés en milieu naturel.</li></ul></div>
+          <div class="editable" data-edit-type="generic" data-edit-section="subclass-capacites" data-item-identifier="Chasseur">
+            <ul><li><em>Armes du Chasseur</em> : Peut utiliser les arcs.</li><li><em>Cueillette</em> : Une fois par jour, lors d’un repos, le personnage peut récolter 5 plantes locales (au choix du MJ). Leur efficacité dépend de l’Intelligence de l’utilisateur.</li><li><em>Connaissance du milieu naturel</em> : Gagne 1 de compétence sur les tests de Réflexion lié à animal, un monstre, une plante, ou la découverte de passages dérobés en milieu naturel.</li></ul>
+          </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="list" style="">✏️</button>
         </div>
       
@@ -2434,7 +2441,7 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
           </section>
         </article>
       
-        <article class="" data-page="enchanteur" data-page-title="Enchanteur" style="display: block;">
+        <article class="" data-page="enchanteur" data-page-title="Enchanteur" style="display: none;">
           <section>
             
         <div style="text-align:center;margin-bottom:2rem;">
@@ -2462,7 +2469,9 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
             <h3>Capacités de classe</h3>
             
         <div class="editable-section" data-section-type="html">
-          <div class="editable" data-edit-type="generic" data-edit-section="Enchanteur" data-editing="false" contenteditable="false"><ul><li><em>Équipement d'enchanteur</em> : bâtons (une et deux mains), catalyseurs, Robes.</li><li><em>Sorts d'enchanteur</em> : Apprend et lance des sorts d'Enchanteur.</li></ul></div>
+          <div class="editable" data-edit-type="generic" data-edit-section="Enchanteur">
+            <ul><li><em>Équipement d'enchanteur</em> : bâtons (une et deux mains), dagues, Robes.</li><li><em>Sorts d'enchanteur</em> : Apprend et lance des sorts d'Enchanteur.</li></ul>
+          </div>
           <button class="edit-btn" type="button" style="background: var(--accent); color: white; border: none; border-radius: 4px; padding: 4px 8px; cursor: pointer; font-size: 12px; margin-left: 8px;">✏️</button>
         </div>
       
@@ -2750,7 +2759,7 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
           
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-effect spell-effect-normal" data-edit-type="generic" data-edit-section="spell-effect-normal" data-item-identifier="Boule de Feu" style="margin: 1rem 0;">
-            <strong>Effet:</strong> Inflige (5 + Puiss. Sorts) dégats de <span style="color: #e25822; font-weight: bold;">Feu</span> à la cible.
+            <strong>Effet:</strong> Inflige 5 dégats de <span style="color: #e25822; font-weight: bold;">Feu</span> à la cible.<br>&nbsp;Tous les 5 points d'intelligence, augmente les dégats de 1.
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="effect" style="">✏️</button>
         </div>
@@ -2759,7 +2768,7 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
           
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-effect spell-effect-critical" data-edit-type="generic" data-edit-section="spell-effect-critical" data-item-identifier="Boule de Feu" style="margin: 1rem 0;">
-            <strong>Coup Critique:&nbsp;</strong> La cible s'enflamme, infligeant 5 dégats de feu au prochain tour du lanceur.
+            <strong>Coup Critique:&nbsp;</strong>&nbsp;Les dégats passent à 7 et la cible s'enflamme, infligeant 5 dégats de feu au prochain tour du lanceur.
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="effect" style="">✏️</button>
         </div>
@@ -2867,7 +2876,7 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
           
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-effect spell-effect-normal" data-edit-type="generic" data-edit-section="spell-effect-normal" data-item-identifier="Éclair" style="margin: 1rem 0;">
-            <strong>Effet:</strong> &nbsp;Inflige (5 + Puiss. Sorts) dégats d'<span style="color: #22c55e; font-weight: bold;">Air</span> à la cible.
+            <strong>Effet:</strong> &nbsp;Inflige 5 dégats d'<span style="color: #22c55e; font-weight: bold;">Air</span> à la cible.<br>&nbsp;Tous les 5 points d'intelligence, augmente les dégats de 1.
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="effect" style="">✏️</button>
         </div>
@@ -2876,7 +2885,7 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
           
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-effect spell-effect-critical" data-edit-type="generic" data-edit-section="spell-effect-critical" data-item-identifier="Éclair" style="margin: 1rem 0;">
-            <strong>Coup Critique:&nbsp;</strong> Les dégâts sont aussi infligés à un ennemi à moins de 3m de la cible.
+            <strong>Coup Critique:&nbsp;</strong> Les dégâts passent à 7 et ils sont aussi infligé à un ennemi à moins de 3m de la cible.
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="effect" style="">✏️</button>
         </div>
@@ -2959,7 +2968,7 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
           
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-field spell-mana" data-edit-type="generic" data-edit-section="spell-mana" data-item-identifier="Vague déferlante">
-            🔵 <strong>Coût mana:</strong> 6
+            🔵 <strong>Coût mana:</strong> 8
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="field" style="">✏️</button>
         </div>
@@ -2984,7 +2993,7 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
           
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-effect spell-effect-normal" data-edit-type="generic" data-edit-section="spell-effect-normal" data-item-identifier="Vague déferlante" style="margin: 1rem 0;">
-            <strong>Effet:</strong> &nbsp;Inflige (7 + Puiss. Sorts) dégats d'<span style="color: #2b6cb0; font-weight: bold;">Eau</span> aux créatures devant le lanceur (largeur 3m distance 6m) et les repousse jusqu'à 6m.
+            <strong>Effet:</strong> &nbsp;Inflige 7 dégats d'<span style="color: #2b6cb0; font-weight: bold;">Eau</span> aux créatures devant le lanceur (largeur 3m distance 6m) et les repousse jusqu'à 6m.<br>&nbsp;Tous les 5 points d'intelligence, augmente les dégats de 1.
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="effect" style="">✏️</button>
         </div>
@@ -2993,7 +3002,7 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
           
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-effect spell-effect-critical" data-edit-type="generic" data-edit-section="spell-effect-critical" data-item-identifier="Vague déferlante" style="margin: 1rem 0;">
-            <strong>Coup Critique:&nbsp;</strong> les dégats passent à (10 + Puiss. Sorts) et les créatures ayant une Resistance alération inférieure à l'Intelligence du lanceur sont réduits au <span class="etat-link" data-etat="Silence" style="color: #ea7332; cursor: pointer; text-decoration: underline;">Silence</span> pendant 1 tour.
+            <strong>Coup Critique:&nbsp;</strong> les dégats passent à 12 et les enemis sont touchés/repoussés à 12m.
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="effect" style="">✏️</button>
         </div>
@@ -3076,7 +3085,7 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
           
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-field spell-mana" data-edit-type="generic" data-edit-section="spell-mana" data-item-identifier="Volée de pierres">
-            🔵 <strong>Coût mana:</strong> 6
+            🔵 <strong>Coût mana:</strong> 8
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="field" style="">✏️</button>
         </div>
@@ -3101,7 +3110,7 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
           
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-effect spell-effect-normal" data-edit-type="generic" data-edit-section="spell-effect-normal" data-item-identifier="Volée de pierres" style="margin: 1rem 0;">
-            <strong>Effet:</strong> Inflige (7 + Puiss. Sorts) dégats de <span style="color: #8b4513; font-weight: bold;">Terre</span> aux créatures autour du lanceur (3m). <br>Puis inflige le même montant aux créatures devant le lanceur sur 6m.
+            <strong>Effet:</strong> Inflige 7 dégats de <span style="color: #8b4513; font-weight: bold;">Terre</span> aux créatures autour du lanceur (3m). <br>Puis inflige le même montant aux créatures devant le lanceur sur 6m.<br><br>&nbsp;Tous les 5 points d'intelligence, augmente les dégats de 1.
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="effect" style="">✏️</button>
         </div>
@@ -3110,7 +3119,7 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
           
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-effect spell-effect-critical" data-edit-type="generic" data-edit-section="spell-effect-critical" data-item-identifier="Volée de pierres" style="margin: 1rem 0;">
-            <strong>Coup Critique:&nbsp;</strong>&nbsp;Les dégats passent à (10 + Puiss. Sorts). Les cibles non volantes et de taille moyennes sont <span class="etat-link" data-etat="A terre" style="color: #ea7332; cursor: pointer; text-decoration: underline;">A terre</span> pendant 1 tour.
+            <strong>Coup Critique:&nbsp;</strong>&nbsp;Les dégats passent à 12. Les cibles non volantes et de taille moyennes sont <span class="etat-link" data-etat="A terre" style="color: #ea7332; cursor: pointer; text-decoration: underline;">A terre</span> pendant 1 tour.
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="effect" style="">✏️</button>
         </div>
@@ -3193,7 +3202,7 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
           
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-field spell-mana" data-edit-type="generic" data-edit-section="spell-mana" data-item-identifier="Faisceau lumineux">
-            🔵 <strong>Coût mana:</strong> 8
+            🔵 <strong>Coût mana:</strong> 10
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="field" style="">✏️</button>
         </div>
@@ -3218,8 +3227,11 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
           
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-effect spell-effect-normal" data-edit-type="generic" data-edit-section="spell-effect-normal" data-item-identifier="Faisceau lumineux" style="margin: 1rem 0;">
-            <strong>Effet:</strong> Inflige (10 + Puiss. Sorts) points de dégats de <span style="color: #ffd700; font-weight: bold;">Lumière</span>  aux créatures devant le lanceur (9m).
+            <strong>Effet:</strong> Inflige 10 points de dégats de <span style="color: #ffd700; font-weight: bold;">Lumière</span>  aux créatures devant le lanceur (9m).
 <br><br>Le lanceur peut continuer de <b>canaliser</b> le sort (ne pouvant plus esquiver ou faire d'actions). S'il le fait, n'importe créature qui rendre dans la zone subit les dégats, et toutes les creatures encore dans la zone au prochain tour du lanceur subiront les dégats. A chaque début de tour, le lanceur consomme alors <b>la moitié du coût en mana</b> du sort.
+
+
+<br><br>Tous les 5 points d'intelligence, augmente les dégats de 1.
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="effect" style="">✏️</button>
         </div>
@@ -3228,7 +3240,7 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
           
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-effect spell-effect-critical" data-edit-type="generic" data-edit-section="spell-effect-critical" data-item-identifier="Faisceau lumineux" style="margin: 1rem 0;">
-            <strong>Coup Critique:&nbsp;</strong>&nbsp;Les dégats passent à (15 + Puiss. Sorts), et les créatures ayant une Resistance alération inférieure à l'Intelligence du lanceur sont <span class="etat-link" data-etat="Aveuglé" style="color: #ea7332; cursor: pointer; text-decoration: underline;">Aveuglé</span> pendant 2 tours.
+            <strong>Coup Critique:&nbsp;</strong>&nbsp;Les dégats passent à 15, et les créatures ayant une Resistance alération inférieure à l'Intelligence du lanceur sont <span class="etat-link" data-etat="Aveuglé" style="color: #ea7332; cursor: pointer; text-decoration: underline;">Aveuglé</span> pendant 2 tours.
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="effect" style="">✏️</button>
         </div>
@@ -3311,7 +3323,7 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
           
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-field spell-mana" data-edit-type="generic" data-edit-section="spell-mana" data-item-identifier="Vague sombre">
-            🔵 <strong>Coût mana:</strong> 12
+            🔵 <strong>Coût mana:</strong> 15
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="field" style="">✏️</button>
         </div>
@@ -3336,7 +3348,7 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
           
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-effect spell-effect-normal" data-edit-type="generic" data-edit-section="spell-effect-normal" data-item-identifier="Vague sombre" style="margin: 1rem 0;">
-            <strong>Effet:</strong> &nbsp;Inflige (13 + Puiss. Sorts) dégats de <span style="color: #1a1a1a; font-weight: bold;">Nuit</span> aux créatures dans un cone devant le lanceur (largeur 9m, distance 9m) et les repousse chacune de 3m.
+            <strong>Effet:</strong> &nbsp;Inflige 13 dégats de <span style="color: #1a1a1a; font-weight: bold;">Nuit</span> aux créatures dans un cone devant le lanceur (largeur 9m, distance 9m) et les repousse chacune de 3m.<br>&nbsp;Tous les 5 points d'intelligence, augmente les dégats de 1.
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="effect" style="">✏️</button>
         </div>
@@ -3345,7 +3357,7 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
           
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-effect spell-effect-critical" data-edit-type="generic" data-edit-section="spell-effect-critical" data-item-identifier="Vague sombre" style="margin: 1rem 0;">
-            <strong>Coup Critique:&nbsp;</strong>&nbsp;Les dégats passent à (20 + Puiss. Sorts) et les cibles sont repoussées de 6m.
+            <strong>Coup Critique:&nbsp;</strong>&nbsp;Les dégats passent à 20 et les cibles sont repoussées de 6m.
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="effect" style="">✏️</button>
         </div>
@@ -3453,7 +3465,8 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
           
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-effect spell-effect-normal" data-edit-type="generic" data-edit-section="spell-effect-normal" data-item-identifier="Missile magique" style="margin: 1rem 0;">
-            <strong>Effet:</strong> Inflige (15 + Puiss. Sorts) dégats physiques à la cible. Ces dégats sont réduits par l'armure.
+            <strong>Effet:</strong> Inflige 15 dégats physiques à la cible. Ces dégats sont réduits par l'armure.
+<br>Tous les 5 points d'intelligence, augmente les dégats de 1.
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="effect" style="">✏️</button>
         </div>
@@ -3462,7 +3475,7 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
           
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-effect spell-effect-critical" data-edit-type="generic" data-edit-section="spell-effect-critical" data-item-identifier="Missile magique" style="margin: 1rem 0;">
-            <strong>Coup Critique:&nbsp;</strong>&nbsp;Les dégats passent à (20 + Puiss. Sorts) et la cible (si elle est de taille Moyenne ou moins) subit l'état <span class="etat-link" data-etat="A terre" style="color: #ea7332; cursor: pointer; text-decoration: underline;">A terre</span>.
+            <strong>Coup Critique:&nbsp;</strong>&nbsp;Les dégats passent à 25 et la cible (si elle est de taille Moyenne ou moins) subit l'état <span class="etat-link" data-etat="A terre" style="color: #ea7332; cursor: pointer; text-decoration: underline;">A terre</span>.
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="effect" style="">✏️</button>
         </div>
@@ -3570,9 +3583,11 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
           
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-effect spell-effect-normal" data-edit-type="generic" data-edit-section="spell-effect-normal" data-item-identifier="Nuage toxique" style="margin: 1rem 0;">
-            <strong>Effet:</strong> Crée à la position d'une cible à portée, un nuage toxique qui inflige (15 + Puiss. Sorts) points de dégats de <span style="color: #8b4513; font-weight: bold;">Terre</span>.
+            <strong>Effet:</strong> Crée à la position d'une cible à portée, un nuage toxique qui inflige 15 points de dégats de <span style="color: #8b4513; font-weight: bold;">Terre</span>.
 
 <br>Chaque début de tour, le lanceur peut choisir de dépenser une action principale et 5 points de mana pour que le nuage se déplace inflige ses dégats à une cible à portée du lanceur. Sinon, le nuage disparait.
+
+<br><br>&nbsp;Tous les 5 points d'intelligence, augmente les dégats de 1.
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="effect" style="">✏️</button>
         </div>
@@ -3581,7 +3596,7 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
           
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-effect spell-effect-critical" data-edit-type="generic" data-edit-section="spell-effect-critical" data-item-identifier="Nuage toxique" style="margin: 1rem 0;">
-            <strong>Coup Critique:&nbsp;</strong> Les dégats sont de (20 + Puiss. Sorts) et la cible est <span class="etat-link" data-etat="Ralenti" style="color: #ea7332; cursor: pointer; text-decoration: underline;">Ralenti</span> pendant 1 tour.
+            <strong>Coup Critique:&nbsp;</strong> Les dégats sont de 25 et la cible est <span class="etat-link" data-etat="Ralenti" style="color: #ea7332; cursor: pointer; text-decoration: underline;">Ralenti</span> pendant 1 tour.
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="effect" style="">✏️</button>
         </div>
@@ -3737,7 +3752,7 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
           
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-effect spell-effect-normal" data-edit-type="generic" data-edit-section="spell-effect-normal" data-item-identifier="Refermer les blessures" style="margin: 1rem 0;">
-            <strong>Effet:</strong> Soigne la cible de (5 + Puiss. Sorts) points de vie.
+            <strong>Effet:</strong> Soigne la cible de 5 points de vie. Tous les 5 points d'intelligence, augmente le soin de 1.
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="effect" style="">✏️</button>
         </div>
@@ -3746,7 +3761,7 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
           
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-effect spell-effect-critical" data-edit-type="generic" data-edit-section="spell-effect-critical" data-item-identifier="Refermer les blessures" style="margin: 1rem 0;">
-            <strong>Coup Critique:&nbsp;</strong>Le soin passe à (10 + Puiss. Sorts).
+            <strong>Coup Critique:&nbsp;</strong>Le soin passe à 10.
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="effect" style="">✏️</button>
         </div>
@@ -3854,7 +3869,7 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
           
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-effect spell-effect-normal" data-edit-type="generic" data-edit-section="spell-effect-normal" data-item-identifier="Arme de lumière" style="margin: 1rem 0;">
-            <strong>Effet:</strong> L'arme du prêtre infligera (2 + Puiss. Sorts) dégats de <span style="color: #ffd700; font-weight: bold;">Lumière</span> à chaque coup, pendant 5 tours.
+            <strong>Effet:</strong> L'arme du prêtre infligera 2 dégats de lumière à chaque coup, pendant 4 tours.<br> Tous les 5 d'intelligence, augmente les dégats de 1.
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="effect" style="">✏️</button>
         </div>
@@ -3863,7 +3878,7 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
           
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-effect spell-effect-critical" data-edit-type="generic" data-edit-section="spell-effect-critical" data-item-identifier="Arme de lumière" style="margin: 1rem 0;">
-            <strong>Coup Critique:&nbsp;</strong>&nbsp;Les dégats passent à (4 + Puiss. Sorts).
+            <strong>Coup Critique:&nbsp;</strong>&nbsp;Les dégats passent à 4.
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="effect" style="">✏️</button>
         </div>
@@ -3971,7 +3986,7 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
           
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-effect spell-effect-normal" data-edit-type="generic" data-edit-section="spell-effect-normal" data-item-identifier="Protection" style="margin: 1rem 0;">
-            <strong>Effet:</strong> Augmente l'armure de (2 + Puiss. Sorts) pendant 5 tours.
+            <strong>Effet:</strong> Augmente l'armure de 2 pendant 5 tours.<br> Tous les 5 d'Intelligence, augmente l'armure de 1 supplémentaire.
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="effect" style="">✏️</button>
         </div>
@@ -3980,7 +3995,7 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
           
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-effect spell-effect-critical" data-edit-type="generic" data-edit-section="spell-effect-critical" data-item-identifier="Protection" style="margin: 1rem 0;">
-            <strong>Coup Critique:&nbsp;</strong> L'armure est augmentée de (4 + Puiss. Sorts).
+            <strong>Coup Critique:&nbsp;</strong> L'armure est augmentée de 4.
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="effect" style="">✏️</button>
         </div>
@@ -4205,7 +4220,7 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
           
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-effect spell-effect-normal" data-edit-type="generic" data-edit-section="spell-effect-normal" data-item-identifier="Châtiment" style="margin: 1rem 0;">
-            <strong>Effet:</strong> Inflige (2 x Puiss. Sorts) dégâts <span style="color: #d0d0d0; font-weight: bold; background: rgba(0, 0, 0, 0.4); padding: 2px 4px; border-radius: 3px;">Divin</span> à la cible.
+            <strong>Effet:</strong> Inflige *Intelligence* dégâts <span style="color: #d0d0d0; font-weight: bold; background: rgba(0, 0, 0, 0.4); padding: 2px 4px; border-radius: 3px;">Divin</span> à la cible.
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="effect" style="">✏️</button>
         </div>
@@ -4214,7 +4229,7 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
           
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-effect spell-effect-critical" data-edit-type="generic" data-edit-section="spell-effect-critical" data-item-identifier="Châtiment" style="margin: 1rem 0;">
-            <strong>Coup Critique:&nbsp;</strong> Inflige (4 x Puiss. Sorts) dégats.
+            <strong>Coup Critique:&nbsp;</strong>Double dégâts.
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="effect" style="">✏️</button>
         </div>
@@ -4322,7 +4337,7 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
           
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-effect spell-effect-normal" data-edit-type="generic" data-edit-section="spell-effect-normal" data-item-identifier="Resistance" style="margin: 1rem 0;">
-            <strong>Effet:</strong>  Augmente la Résistance altération de (3 + Puiss. Sorts) pendant 5 tours.<br>
+            <strong>Effet:</strong>  Augmente la Résistance altération de 3 pendant 5 tours.<br> Tous les 5 d'Intelligence, l'augmente de 1 supplémentaire.
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="effect" style="">✏️</button>
         </div>
@@ -4331,7 +4346,7 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
           
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-effect spell-effect-critical" data-edit-type="generic" data-edit-section="spell-effect-critical" data-item-identifier="Resistance" style="margin: 1rem 0;">
-            <strong>Coup Critique:&nbsp;</strong>&nbsp; La Résistance altération est augmentée de (5 + Puiss. Sorts).
+            <strong>Coup Critique:&nbsp;</strong>&nbsp; La Résistance altération est augmentée de 5.
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="effect" style="">✏️</button>
         </div>
@@ -4556,7 +4571,7 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
           
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-effect spell-effect-normal" data-edit-type="generic" data-edit-section="spell-effect-normal" data-item-identifier="Nova lumineuse" style="margin: 1rem 0;">
-            <strong>Effet:</strong> Inflige (5 + Puiss. Sorts) dégats de <span style="color: #ffd700; font-weight: bold;">Lumière</span> à toutes les créatures à moins de 6m du lanceur.
+            <strong>Effet:</strong> Inflige 5 dégats de <span style="color: #ffd700; font-weight: bold;">Lumière</span> à toutes les créatures à moins de 6m du lanceur.<br>&nbsp;Tous les 5 points d'intelligence, augmente les dégats de 1.
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="effect" style="">✏️</button>
         </div>
@@ -4565,7 +4580,7 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
           
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-effect spell-effect-critical" data-edit-type="generic" data-edit-section="spell-effect-critical" data-item-identifier="Nova lumineuse" style="margin: 1rem 0;">
-            <strong>Coup Critique:&nbsp;</strong>&nbsp;Les dégats passent à (8 + Puiss. Sorts), et les créatures ayant une Resistance alération inférieure à l'Intelligence du lanceur sont <span class="etat-link" data-etat="Aveuglé" style="color: #ea7332; cursor: pointer; text-decoration: underline;">Aveuglé</span> pendant 2 tours.
+            <strong>Coup Critique:&nbsp;</strong>&nbsp;Les dégats passent à 8, et les créatures ayant une Resistance alération inférieure à l'Intelligence du lanceur sont <span class="etat-link" data-etat="Aveuglé" style="color: #ea7332; cursor: pointer; text-decoration: underline;">Aveuglé</span> pendant 2 tours.
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="effect" style="">✏️</button>
         </div>
@@ -4674,7 +4689,7 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
           
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-effect spell-effect-normal" data-edit-type="generic" data-edit-section="spell-effect-normal" data-item-identifier="Toucher Lointain" style="margin: 1rem 0;">
-            <strong>Effet:</strong> Soigne la cible de (5 + Puiss. Sorts) points de vie.
+            <strong>Effet:</strong> Soigne la cible de 5 points de vie. Tous les 5 points d'intelligence, augmente le soin de 1.
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="effect" style="">✏️</button>
         </div>
@@ -4683,7 +4698,7 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
           
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-effect spell-effect-critical" data-edit-type="generic" data-edit-section="spell-effect-critical" data-item-identifier="Toucher Lointain" style="margin: 1rem 0;">
-            <strong>Coup Critique:&nbsp;</strong>Le soin passe à (10 + Puiss. Sorts).
+            <strong>Coup Critique:&nbsp;</strong>Le soin passe à 10.
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="effect" style="">✏️</button>
         </div>
@@ -5541,7 +5556,8 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-effect spell-effect-normal" data-edit-type="generic" data-edit-section="spell-effect-normal" data-item-identifier="Imprégnation élémentaire feu terre nuit" style="margin: 1rem 0;">
             <strong>Effet:</strong> Le lanceur choisi un élément au choix entre <span style="color: #ff6b35; font-weight: bold;">Feu</span>, <span style="color: #8b4513; font-weight: bold;">Terre</span>, et <span style="color: #1a1a1a; font-weight: bold;">Nuit</span>. 
-<br>La cible voit son arme imprégnée de cet élement, qui infligera (4 + Puiss. Sorts) points de degats de cet élément à chaque coup. <br>Dure 5 tours. Non cumulable.
+<br>La cible voit son arme imprégnée de cet élement, qui infligera 4 points de degats de cet élément à chaque coup. <br>Dure 5 tours. Non cumulable.
+<br><br> Chaque 5 points d'Intelligence, les dégats élémentaires sont augmentés de 1.
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="effect" style="">✏️</button>
         </div>
@@ -5659,7 +5675,8 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-effect spell-effect-normal" data-edit-type="generic" data-edit-section="spell-effect-normal" data-item-identifier="Imprégnation élémentaire eau air lumière" style="margin: 1rem 0;">
             <strong>Effet:</strong> Le lanceur choisi un élément au choix entre <span style="color: #4682b4; font-weight: bold;">Eau</span>, <span style="color: #22c55e; font-weight: bold;">Air</span>, et <span style="color: #ffd700; font-weight: bold;">Lumière</span>.
-<br>La cible voit son arme imprégnée de cet élement, qui infligera (4 + Puiss. Sorts) points de degats de cet élément à chaque coup. <br>Dure 5 tours. Non cumulable.
+<br>La cible voit son arme imprégnée de cet élement, qui infligera 4 points de degats de cet élément à chaque coup. <br>Dure 5 tours. Non cumulable.
+<br><br> Chaque 5 points d'Intelligence, les dégats élémentaires sont augmentés de 1.
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="effect" style="">✏️</button>
         </div>
@@ -5894,7 +5911,7 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-effect spell-effect-normal" data-edit-type="generic" data-edit-section="spell-effect-normal" data-item-identifier="Puissance magique" style="margin: 1rem 0;">
             Inutilisable Hors combat.           
-<br> <strong>Effet:</strong> Augmente les dégats élémentaires effectués par les sorts de la cible de (3 + Puiss. Sorts). <br>Dure jusqu'au retour hors combat.
+<br> <strong>Effet:</strong> Augmente les dégats élémentaires effectués par les sorts de la cible de 3. <br>Dure jusqu'au retour hors combat.<br><br>&nbsp;Tous les 5 points d'intelligence, augmente les dégats de 1.
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="effect" style="">✏️</button>
         </div>
@@ -6012,7 +6029,7 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-effect spell-effect-normal" data-edit-type="generic" data-edit-section="spell-effect-normal" data-item-identifier="Puissance physique" style="margin: 1rem 0;">
             Inutilisable Hors combat.           
-<br> <strong>Effet:</strong> Augmente la force de la cible de (5 + Puiss. Sorts). <br>Dure jusqu'au retour hors combat.
+<br> <strong>Effet:</strong> Augmente la force de la cible de 5. <br>Dure jusqu'au retour hors combat.<br><br>&nbsp;Tous les 5 points d'intelligence, augmente la force prodiguée de 1.
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="effect" style="">✏️</button>
         </div>
@@ -6247,7 +6264,8 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-effect spell-effect-normal" data-edit-type="generic" data-edit-section="spell-effect-normal" data-item-identifier="Armure élémentaire Feu Terre Nuit" style="margin: 1rem 0;">
             <strong>Effet:</strong> Le lanceur choisi un élément au choix entre <span style="color: #ff6b35; font-weight: bold;">Feu</span>, <span style="color: #8b4513; font-weight: bold;">Terre</span>, et <span style="color: #1a1a1a; font-weight: bold;">Nuit</span>. 
-<br>La cible voit son armure de cet élement, augmentant l'armure élémentaire de cet élément de (5 + Puiss. Sorts). <br>Dure 5 tours. Non cumulable.
+<br>La cible voit son armure de cet élement, augmentant l'armure élémentaire de cet élément de 5. <br>Dure 5 tours. Non cumulable.
+<br><br> Chaque 5 points d'Intelligence, les dégats élémentaires sont augmentés de 1.
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="effect" style="">✏️</button>
         </div>
@@ -6365,7 +6383,8 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-effect spell-effect-normal" data-edit-type="generic" data-edit-section="spell-effect-normal" data-item-identifier="Armure élémentaire Eau Air Lumière" style="margin: 1rem 0;">
             <strong>Effet:</strong> Le lanceur choisi un élément au choix entre <span style="color: #4682b4; font-weight: bold;">Eau</span>, <span style="color: #22c55e; font-weight: bold;">Air</span>, et <span style="color: #ffd700; font-weight: bold;">Lumière</span>.
-<br>La cible voit son armure de cet élement, augmentant l'armure élémentaire de cet élément de (5 + Puiss. Sorts). <br>Dure 5 tours. Non cumulable.
+<br>La cible voit son armure de cet élement, augmentant l'armure élémentaire de cet élément de 5. <br>Dure 5 tours. Non cumulable.
+<br><br> Chaque 5 points d'Intelligence, les dégats élémentaires sont augmentés de 1.
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="effect" style="">✏️</button>
         </div>
@@ -11218,7 +11237,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-field objet-description" data-edit-type="generic" data-edit-section="objet-description" data-item-identifier="Espadon" style="text-align: center; font-style: italic; margin: 1rem 0;">
-            <strong>Dégâts: </strong> Inflige (4  + Force) points de dégats physiques.
+            <i>Longue épée à deux mains, lourde mais puissante.</i>
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="field" style="">✏️</button>
         </div>
@@ -11847,7 +11866,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Armure de cuir" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Armure de cuir" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2F9Hkw2VFb%2FArmure-Cuir1.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Armure de cuir" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2F9Hkw2VFb%2FArmure-Cuir1.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -11928,7 +11947,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Armure en maille" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Armure en maille" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FcXtwzw5b%2FArmure-Lourde1.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Armure en maille" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FcXtwzw5b%2FArmure-Lourde1.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -12009,7 +12028,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Armure de plaque" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Armure de plaque" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FfVg5Fp6h%2FArmure-Lourde2.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Armure de plaque" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FfVg5Fp6h%2FArmure-Lourde2.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -12090,7 +12109,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Petite potion de vie" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Petite potion de vie" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FMw2Qb8Y%2FLifePot1.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Petite potion de vie" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FMw2Qb8Y%2FLifePot1.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -12164,7 +12183,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Petite potion de mana" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Petite potion de mana" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FMkwzbQ3S%2FPotion-Mana1.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Petite potion de mana" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FMkwzbQ3S%2FPotion-Mana1.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -12238,7 +12257,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Baguette de boule de feu" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Baguette de boule de feu" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FJwXs3k2V%2FBaguette-Feu.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Baguette de boule de feu" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FJwXs3k2V%2FBaguette-Feu.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -12313,7 +12332,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Feuilleclaire" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Feuilleclaire" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FbMDstDVV%2FHerb1.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Feuilleclaire" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FbMDstDVV%2FHerb1.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -12388,7 +12407,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Nocteline" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Nocteline" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2F7JpQ7Kr7%2FHerb2.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Nocteline" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2F7JpQ7Kr7%2FHerb2.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -12464,7 +12483,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Baguette de d'accélération" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Baguette de d'accélération" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FzT29mKBd%2FBaguette-Lumiere.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Baguette de d'accélération" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FzT29mKBd%2FBaguette-Lumiere.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -12539,7 +12558,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Baguette de sommeil" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Baguette de sommeil" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FbMXNS4gy%2FBaguette-Nuit.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Baguette de sommeil" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FbMXNS4gy%2FBaguette-Nuit.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -12614,7 +12633,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Ration de nourriture" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Ration de nourriture" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FtT6gW6p0%2FFood1.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Ration de nourriture" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FtT6gW6p0%2FFood1.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -12696,7 +12715,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Ration copieuse de nourriture" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Ration copieuse de nourriture" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2F7JZW2ZZT%2FFood2.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Ration copieuse de nourriture" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2F7JZW2ZZT%2FFood2.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -12779,7 +12798,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Fruits de la forêt" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Fruits de la forêt" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FsvC0cDH6%2Ffood3.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Fruits de la forêt" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FsvC0cDH6%2Ffood3.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -12862,7 +12881,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Ration de survie" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Ration de survie" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FPy57FHy%2FFood0.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Ration de survie" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FPy57FHy%2FFood0.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -12938,7 +12957,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Flèche aiguisée" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Flèche aiguisée" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2F4Z7qKXCx%2FFleche-Aiguis-e.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Flèche aiguisée" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2F4Z7qKXCx%2FFleche-Aiguis-e.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -13014,7 +13033,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Flèche de la terre" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Flèche de la terre" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FZpScRTwS%2FFleche-Terre.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Flèche de la terre" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FZpScRTwS%2FFleche-Terre.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -13090,7 +13109,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Bandage d'urgence" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Bandage d'urgence" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2F4ZPsSM3p%2FBandages.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Bandage d'urgence" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2F4ZPsSM3p%2FBandages.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -13174,7 +13193,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Bracelet médicinal de la forêt" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Bracelet médicinal de la forêt" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2Fk2h292gV%2FBracelet-Foret.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Bracelet médicinal de la forêt" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2Fk2h292gV%2FBracelet-Foret.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -13255,7 +13274,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Dent de Grouink" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Dent de Grouink" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2Fwhc5dwnw%2FDent-Grouik.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Dent de Grouink" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2Fwhc5dwnw%2FDent-Grouik.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -13336,7 +13355,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Echarpe de chaman Groink" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Echarpe de chaman Groink" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FW4tfpFcH%2FEcharpe-Chaman.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Echarpe de chaman Groink" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FW4tfpFcH%2FEcharpe-Chaman.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -13417,7 +13436,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Fourrure d'ours" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Fourrure d'ours" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2F9HhVCqvk%2FFourrure-Ours.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Fourrure d'ours" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2F9HhVCqvk%2FFourrure-Ours.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -13498,7 +13517,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Pierre à aiguiser" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Pierre à aiguiser" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FSX10mS2q%2FBuff01.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Pierre à aiguiser" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FSX10mS2q%2FBuff01.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -13573,7 +13592,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Cristal d'effort" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Cristal d'effort" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2Fk2MHGqhx%2FCristal-Effort.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Cristal d'effort" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2Fk2MHGqhx%2FCristal-Effort.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -13647,7 +13666,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Pince de crabe géant des forêts" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Pince de crabe géant des forêts" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FVWKF2ysm%2FMasse-Foret1.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Pince de crabe géant des forêts" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FVWKF2ysm%2FMasse-Foret1.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -13729,7 +13748,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Clairgivre" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Clairgivre" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2Fs9CJtsPr%2FHerb5.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Clairgivre" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2Fs9CJtsPr%2FHerb5.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -13805,7 +13824,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Auréline des Roches" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Auréline des Roches" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FMy3mcc60%2FHerb3.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Auréline des Roches" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FMy3mcc60%2FHerb3.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -13880,7 +13899,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Nébrelle d’Azur" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Nébrelle d’Azur" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FbMn4mMyK%2FHerb4.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Nébrelle d’Azur" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FbMn4mMyK%2FHerb4.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -13955,7 +13974,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Aile de scarabée géant" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Aile de scarabée géant" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FRGZM6Tfx%2FCape-Scarab.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Aile de scarabée géant" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FRGZM6Tfx%2FCape-Scarab.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -14036,7 +14055,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Bottes en cuir de guêpe géante" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Bottes en cuir de guêpe géante" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2Fk2V6Df2z%2FBotte-Guepe.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Bottes en cuir de guêpe géante" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2Fk2V6Df2z%2FBotte-Guepe.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -14117,7 +14136,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Gants patte d'ours" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Gants patte d'ours" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FKzrZRGcd%2FGants-Patte-Ours.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Gants patte d'ours" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FKzrZRGcd%2FGants-Patte-Ours.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -14199,7 +14218,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Bouclier de la forêt" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Bouclier de la forêt" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FZpkw8qVL%2FBouclier-Foret.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Bouclier de la forêt" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FZpkw8qVL%2FBouclier-Foret.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -14280,7 +14299,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Couronne d'épines" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Couronne d'épines" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2Fd09YYyy8%2FCouronne-Epines.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Couronne d'épines" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2Fd09YYyy8%2FCouronne-Epines.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -14361,7 +14380,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Collier terrestre" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Collier terrestre" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FksxCppN8%2FCollier-Terrestre.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Collier terrestre" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FksxCppN8%2FCollier-Terrestre.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -14442,7 +14461,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Dard de guêpe géante" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Dard de guêpe géante" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FmjcDdck%2FDague2.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Dard de guêpe géante" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FmjcDdck%2FDague2.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -14524,7 +14543,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Arc de chasseur" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Arc de chasseur" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FbRXH0Vwj%2FArc2.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Arc de chasseur" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FbRXH0Vwj%2FArc2.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -14607,7 +14626,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Grande hache de bûcheron" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Grande hache de bûcheron" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FgMbq4QZD%2FHache-Bucheron.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Grande hache de bûcheron" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FgMbq4QZD%2FHache-Bucheron.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -14688,7 +14707,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Tunique d'explorateur" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Tunique d'explorateur" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FKj070KVw%2FRobe2.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Tunique d'explorateur" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FKj070KVw%2FRobe2.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -14770,7 +14789,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Robe de la forêt" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Robe de la forêt" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FZp7bLygX%2FRobe3.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Robe de la forêt" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FZp7bLygX%2FRobe3.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -14851,7 +14870,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Armure en cuir d'ours" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Armure en cuir d'ours" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FC3bVcQkV%2FArmure-Ours.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Armure en cuir d'ours" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FC3bVcQkV%2FArmure-Ours.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -14933,7 +14952,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Rapière elfique" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Rapière elfique" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FZ1FnQ4TH%2FRapi-re-Elfique.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Rapière elfique" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FZ1FnQ4TH%2FRapi-re-Elfique.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -15015,7 +15034,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Armure de cuir de monstre" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Armure de cuir de monstre" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FMyZR8SYt%2FArmure-Cuir-Monstre.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Armure de cuir de monstre" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FMyZR8SYt%2FArmure-Cuir-Monstre.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -15244,7 +15263,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
       
           
           <div class="illus" data-illus-key="monster:Araignée Géante" data-style-type="default" data-bound="1">
-            <img alt="Illustration Araignée Géante" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2Fb0XHjQJ%2FMonstre-For-t-Araign-e.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Araignée Géante" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2Fb0XHjQJ%2FMonstre-For-t-Araign-e.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -15519,7 +15538,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
       
           
           <div class="illus" data-illus-key="monster:Crabe des Bois" data-style-type="default" data-bound="1">
-            <img alt="Illustration Crabe des Bois" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2F7dY3GgJS%2FMonstre-For-t-Crab.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Crabe des Bois" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2F7dY3GgJS%2FMonstre-For-t-Crab.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -15794,7 +15813,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
       
           
           <div class="illus" data-illus-key="monster:Groink" data-style-type="default" data-bound="1">
-            <img alt="Illustration Groink" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FMDngQGcS%2FMonstre-For-t-Groink.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Groink" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FMDngQGcS%2FMonstre-For-t-Groink.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -16069,7 +16088,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
       
           
           <div class="illus" data-illus-key="monster:Groinka" data-style-type="default" data-bound="1">
-            <img alt="Illustration Groinka" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FYThB7Q29%2FMonstre-For-t-Groink-Chaman.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Groinka" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FYThB7Q29%2FMonstre-For-t-Groink-Chaman.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -16345,7 +16364,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
       
           
           <div class="illus" data-illus-key="monster:Guêpe Géante" data-style-type="default" data-bound="1">
-            <img alt="Illustration Guêpe Géante" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FbjSq3pPj%2FMonstre-For-t-Guepe-Geante.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Guêpe Géante" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FbjSq3pPj%2FMonstre-For-t-Guepe-Geante.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -16620,7 +16639,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
       
           
           <div class="illus" data-illus-key="monster:Ours des Bois" data-style-type="default" data-bound="1">
-            <img alt="Illustration Ours des Bois" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FN2NcD6n2%2FMonstre-For-t-Ours.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Ours des Bois" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FN2NcD6n2%2FMonstre-For-t-Ours.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -16895,7 +16914,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
       
           
           <div class="illus" data-illus-key="monster:Pouple de la forêt" data-style-type="default" data-bound="1">
-            <img alt="Illustration Pouple de la forêt" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2F0jG2WLsv%2FMonstre-For-t-Poulpe.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Pouple de la forêt" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2F0jG2WLsv%2FMonstre-For-t-Poulpe.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -17170,7 +17189,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
       
           
           <div class="illus" data-illus-key="monster:Serpent de la forêt" data-style-type="default" data-bound="1">
-            <img alt="Illustration Serpent de la forêt" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FsvhHLvKZ%2FMonstre-For-t-Serpent.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Serpent de la forêt" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FsvhHLvKZ%2FMonstre-For-t-Serpent.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -17445,7 +17464,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
       
           
           <div class="illus" data-illus-key="monster:Scarabée géant" data-style-type="default" data-bound="1">
-            <img alt="Illustration Scarabée géant" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FwF5bRvts%2FMonstre-For-t-Scarabe-Geant.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Scarabée géant" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FwF5bRvts%2FMonstre-For-t-Scarabe-Geant.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -17721,7 +17740,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
       
           
           <div class="illus" data-illus-key="monster:Boss Forêt" data-style-type="default" data-bound="1">
-            <img alt="Illustration Boss Forêt" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2F1JR11CC7%2FMonstre-For-t-Boss.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Boss Forêt" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2F1JR11CC7%2FMonstre-For-t-Boss.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -18374,7 +18393,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-field objet-description" data-edit-type="generic" data-edit-section="objet-description" data-item-identifier="Espadon" style="text-align: center; font-style: italic; margin: 1rem 0;">
-            <strong>Dégâts: </strong> Inflige (4  + Force) points de dégats physiques.
+            <i>Longue épée à deux mains, lourde mais puissante.</i>
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="field" style="">✏️</button>
         </div>
@@ -19003,7 +19022,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Armure de cuir" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Armure de cuir" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2F9Hkw2VFb%2FArmure-Cuir1.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Armure de cuir" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2F9Hkw2VFb%2FArmure-Cuir1.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -19084,7 +19103,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Armure en maille" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Armure en maille" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FcXtwzw5b%2FArmure-Lourde1.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Armure en maille" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FcXtwzw5b%2FArmure-Lourde1.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -19165,7 +19184,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Armure de plaque" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Armure de plaque" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FfVg5Fp6h%2FArmure-Lourde2.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Armure de plaque" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FfVg5Fp6h%2FArmure-Lourde2.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -19246,7 +19265,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Petite potion de vie" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Petite potion de vie" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FMw2Qb8Y%2FLifePot1.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Petite potion de vie" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FMw2Qb8Y%2FLifePot1.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -19320,7 +19339,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Petite potion de mana" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Petite potion de mana" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FMkwzbQ3S%2FPotion-Mana1.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Petite potion de mana" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FMkwzbQ3S%2FPotion-Mana1.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -19394,7 +19413,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Baguette de boule de feu" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Baguette de boule de feu" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FJwXs3k2V%2FBaguette-Feu.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Baguette de boule de feu" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FJwXs3k2V%2FBaguette-Feu.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -19469,7 +19488,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Feuilleclaire" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Feuilleclaire" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FbMDstDVV%2FHerb1.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Feuilleclaire" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FbMDstDVV%2FHerb1.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -19544,7 +19563,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Nocteline" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Nocteline" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2F7JpQ7Kr7%2FHerb2.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Nocteline" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2F7JpQ7Kr7%2FHerb2.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -19620,7 +19639,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Baguette de d'accélération" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Baguette de d'accélération" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FzT29mKBd%2FBaguette-Lumiere.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Baguette de d'accélération" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FzT29mKBd%2FBaguette-Lumiere.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -19695,7 +19714,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Baguette de sommeil" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Baguette de sommeil" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FbMXNS4gy%2FBaguette-Nuit.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Baguette de sommeil" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FbMXNS4gy%2FBaguette-Nuit.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -19770,7 +19789,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Ration de nourriture" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Ration de nourriture" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FtT6gW6p0%2FFood1.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Ration de nourriture" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FtT6gW6p0%2FFood1.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -19852,7 +19871,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Ration copieuse de nourriture" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Ration copieuse de nourriture" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2F7JZW2ZZT%2FFood2.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Ration copieuse de nourriture" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2F7JZW2ZZT%2FFood2.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -19935,7 +19954,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Fruits de la forêt" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Fruits de la forêt" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FsvC0cDH6%2Ffood3.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Fruits de la forêt" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FsvC0cDH6%2Ffood3.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -20018,7 +20037,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Ration de survie" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Ration de survie" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FPy57FHy%2FFood0.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Ration de survie" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FPy57FHy%2FFood0.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -20094,7 +20113,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Flèche aiguisée" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Flèche aiguisée" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2F4Z7qKXCx%2FFleche-Aiguis-e.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Flèche aiguisée" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2F4Z7qKXCx%2FFleche-Aiguis-e.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -20170,7 +20189,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Flèche de la terre" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Flèche de la terre" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FZpScRTwS%2FFleche-Terre.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Flèche de la terre" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FZpScRTwS%2FFleche-Terre.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -20246,7 +20265,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Bandage d'urgence" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Bandage d'urgence" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2F4ZPsSM3p%2FBandages.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Bandage d'urgence" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2F4ZPsSM3p%2FBandages.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -20330,7 +20349,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Bracelet médicinal de la forêt" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Bracelet médicinal de la forêt" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2Fk2h292gV%2FBracelet-Foret.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Bracelet médicinal de la forêt" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2Fk2h292gV%2FBracelet-Foret.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -20411,7 +20430,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Dent de Grouink" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Dent de Grouink" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2Fwhc5dwnw%2FDent-Grouik.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Dent de Grouink" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2Fwhc5dwnw%2FDent-Grouik.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -20492,7 +20511,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Echarpe de chaman Groink" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Echarpe de chaman Groink" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FW4tfpFcH%2FEcharpe-Chaman.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Echarpe de chaman Groink" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FW4tfpFcH%2FEcharpe-Chaman.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -20573,7 +20592,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Fourrure d'ours" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Fourrure d'ours" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2F9HhVCqvk%2FFourrure-Ours.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Fourrure d'ours" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2F9HhVCqvk%2FFourrure-Ours.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -20654,7 +20673,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Pierre à aiguiser" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Pierre à aiguiser" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FSX10mS2q%2FBuff01.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Pierre à aiguiser" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FSX10mS2q%2FBuff01.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -20729,7 +20748,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Cristal d'effort" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Cristal d'effort" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2Fk2MHGqhx%2FCristal-Effort.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Cristal d'effort" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2Fk2MHGqhx%2FCristal-Effort.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -20803,7 +20822,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Pince de crabe géant des forêts" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Pince de crabe géant des forêts" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FVWKF2ysm%2FMasse-Foret1.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Pince de crabe géant des forêts" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FVWKF2ysm%2FMasse-Foret1.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -20885,7 +20904,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Clairgivre" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Clairgivre" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2Fs9CJtsPr%2FHerb5.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Clairgivre" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2Fs9CJtsPr%2FHerb5.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -20961,7 +20980,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Auréline des Roches" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Auréline des Roches" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FMy3mcc60%2FHerb3.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Auréline des Roches" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FMy3mcc60%2FHerb3.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -21036,7 +21055,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Nébrelle d’Azur" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Nébrelle d’Azur" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FbMn4mMyK%2FHerb4.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Nébrelle d’Azur" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FbMn4mMyK%2FHerb4.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -21111,7 +21130,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Aile de scarabée géant" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Aile de scarabée géant" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FRGZM6Tfx%2FCape-Scarab.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Aile de scarabée géant" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FRGZM6Tfx%2FCape-Scarab.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -21192,7 +21211,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Bottes en cuir de guêpe géante" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Bottes en cuir de guêpe géante" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2Fk2V6Df2z%2FBotte-Guepe.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Bottes en cuir de guêpe géante" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2Fk2V6Df2z%2FBotte-Guepe.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -21273,7 +21292,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Gants patte d'ours" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Gants patte d'ours" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FKzrZRGcd%2FGants-Patte-Ours.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Gants patte d'ours" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FKzrZRGcd%2FGants-Patte-Ours.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -21355,7 +21374,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Bouclier de la forêt" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Bouclier de la forêt" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FZpkw8qVL%2FBouclier-Foret.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Bouclier de la forêt" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FZpkw8qVL%2FBouclier-Foret.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -21436,7 +21455,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Couronne d'épines" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Couronne d'épines" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2Fd09YYyy8%2FCouronne-Epines.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Couronne d'épines" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2Fd09YYyy8%2FCouronne-Epines.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -21517,7 +21536,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Collier terrestre" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Collier terrestre" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FksxCppN8%2FCollier-Terrestre.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Collier terrestre" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FksxCppN8%2FCollier-Terrestre.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -21598,7 +21617,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Dard de guêpe géante" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Dard de guêpe géante" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FmjcDdck%2FDague2.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Dard de guêpe géante" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FmjcDdck%2FDague2.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -21680,7 +21699,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Arc de chasseur" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Arc de chasseur" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FbRXH0Vwj%2FArc2.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Arc de chasseur" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FbRXH0Vwj%2FArc2.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -21763,7 +21782,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Grande hache de bûcheron" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Grande hache de bûcheron" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FgMbq4QZD%2FHache-Bucheron.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Grande hache de bûcheron" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FgMbq4QZD%2FHache-Bucheron.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -21844,7 +21863,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Tunique d'explorateur" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Tunique d'explorateur" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FKj070KVw%2FRobe2.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Tunique d'explorateur" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FKj070KVw%2FRobe2.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -21926,7 +21945,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Robe de la forêt" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Robe de la forêt" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FZp7bLygX%2FRobe3.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Robe de la forêt" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FZp7bLygX%2FRobe3.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -22007,7 +22026,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Armure en cuir d'ours" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Armure en cuir d'ours" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FC3bVcQkV%2FArmure-Ours.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Armure en cuir d'ours" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FC3bVcQkV%2FArmure-Ours.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -22089,7 +22108,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Rapière elfique" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Rapière elfique" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FZ1FnQ4TH%2FRapi-re-Elfique.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Rapière elfique" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FZ1FnQ4TH%2FRapi-re-Elfique.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -22171,7 +22190,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
           
           <div class="illus illus-objet" data-illus-key="objet:Armure de cuir de monstre" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Armure de cuir de monstre" class="thumb" style="display: inline-block; cursor: zoom-in; opacity: 1;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FMyZR8SYt%2FArmure-Cuir-Monstre.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
+            <img alt="Illustration Armure de cuir de monstre" class="thumb" style="display: inline-block; opacity: 1; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FMyZR8SYt%2FArmure-Cuir-Monstre.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
@@ -22393,10 +22412,4 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
 
 
 
-<div id="elementsModal" class="modal" style="display: none;">
-          
-        </div><div id="etatsModal" class="modal" style="display: none;">
-          
-        </div><div id="spellLinksModal" class="modal" style="display: none;">
-          
-        </div><div style="position: fixed; top: 20px; right: 20px; background: rgb(59, 130, 246); color: white; padding: 12px 16px; border-radius: 8px; font-weight: 500; z-index: 10000; animation: 0.3s ease 0s 1 normal none running slideIn;">📦 Création de l'archive ZIP...</div></body></html>
+<div style="position: fixed; top: 20px; right: 20px; background: rgb(59, 130, 246); color: white; padding: 12px 16px; border-radius: 8px; font-weight: 500; z-index: 10000; animation: 0.3s ease 0s 1 normal none running slideIn;">📦 Création de l'archive ZIP...</div></body></html>

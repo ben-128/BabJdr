@@ -230,3 +230,4 @@ echo   npm run dev
 echo.
 
 pause
+exit /b 0
