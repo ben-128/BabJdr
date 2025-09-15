@@ -113,7 +113,7 @@
     "dons": [
       {
         "nom": "Croche-patte",
-        "description": "Peut utiliser une action principale pour effectuer un croche- patte :\n\n\n<br><br><b>Sans effet si :</b> \n<br>- Esquive.\n<br>- Volant ou lévitant.\n<br>- Taille supérieure à Moyen.\n\n<br><br><b>Effet :</b> Inflige (Force) dégats Physiques à la cible. Met la cible dans l'état <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">A terre</span>.\n✏️\n<br><br><b>Coup Critique :</b>  Les dégats sont doublés et la cible est <span class=\"etat-link\" data-etat=\"Endormi/assomé/Effrayé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Assomé</span> 1 tour.\n\n<br><br><hr>",
+        "description": "Peut utiliser une action principale pour effectuer un croche- patte :\n\n\n<br><br><b>Sans effet si :</b> \n<br>- Esquive.\n<br>- Volant ou lévitant.\n<br>- Taille supérieure à Moyen.\n\n<br><br><b>Effet :</b> Inflige (Force) dégats Physiques à la cible. Met la cible dans l'état <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">A terre</span>.\n\n<br><br><b>Coup Critique :</b>  Les dégats sont doublés et la cible est <span class=\"etat-link\" data-etat=\"Endormi/assomé/Effrayé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Assomée</span> 1 tour.\n\n<br><br><hr>",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },

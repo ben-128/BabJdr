@@ -356,8 +356,8 @@
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 14",
         "resistance": "<strong>Sans effet si:</strong> -",
-        "effetNormal": "Inutilisable Hors combat.           \n<br> <strong>Effet:</strong> Augmente les dégats élémentaires effectués par les sorts de la cible de (3 + Puiss. Sorts). <br>Dure jusqu'au retour hors combat.",
-        "effetCritique": "<strong>Coup Critique: </strong> Les dégats sont augmentés de 5."
+        "effetNormal": "Inutilisable Hors combat.           \n<br> <strong>Effet:</strong> Augmente les dégats élémentaires effectués par les sorts de la cible de 3 . <br>Dure jusqu'au retour hors combat.",
+        "effetCritique": "<strong>Coup Critique: </strong> La puissance est augmentée de 5."
       },
       {
         "nom": "Puissance physique",

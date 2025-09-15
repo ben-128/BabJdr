@@ -291,8 +291,8 @@
     buildCategoryHeader(category, type) {
       const config = window.ContentTypes[type];
       
-      // Don't show descriptions for spell categories
-      const showDescription = type !== 'spell';
+      // Don't show descriptions for spell and don categories
+      const showDescription = type !== 'spell' && type !== 'don';
       
       return `
         <div style="text-align:center;margin-bottom:2rem;">
@@ -968,7 +968,7 @@
       ).join('');
 
       return `
-        <div style="margin-top: 4rem; padding-top: 3rem; border-top: 3px solid var(--bronze); background: linear-gradient(135deg, rgba(212,175,55,0.05), transparent); border-radius: 12px; padding: 2rem;">
+        <div style="margin-top: 8rem; padding-top: 6rem; border-top: 3px solid var(--bronze); background: linear-gradient(135deg, rgba(212,175,55,0.05), transparent); border-radius: 12px; padding: 2rem;">
           <h3 style="color: var(--bronze); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem; font-size: 1.5em; text-align: center; justify-content: center;">
             🎖️ Dons Généraux
           </h3>

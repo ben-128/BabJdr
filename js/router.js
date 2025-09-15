@@ -2170,14 +2170,14 @@
         viewsContainer.insertAdjacentHTML('beforeend', pageHtml);
       }
       
-      // Trigger favoris display update
-      if (window.FavorisRenderer) {
-        setTimeout(() => window.FavorisRenderer.updateFavorisDisplay(), 100);
-      }
-
-      // Show and activate page
+      // Show and activate page first
       this.show('favoris');
       this.updateActiveStates('favoris');
+      
+      // Trigger favoris display update after page is shown
+      if (window.FavorisRenderer) {
+        setTimeout(() => window.FavorisRenderer.updateFavorisDisplay(), 250);
+      }
       
       return true;
     },

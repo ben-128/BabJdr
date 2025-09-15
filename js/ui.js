@@ -401,6 +401,13 @@
           JdrApp.modules.renderer.regenerateCurrentPage();
         }
       }, 100);
+    },
+
+    // Content management methods - delegate to ContentManager
+    addContent(type, categoryName) {
+      if (window.ContentManager) {
+        return ContentManager.addContent(type, categoryName);
+      }
     }
   };
 

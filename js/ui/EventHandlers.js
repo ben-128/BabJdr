@@ -20,7 +20,22 @@
         const categoryName = e.target.dataset.categoryName;
         
         if (type && categoryName) {
-          this.delegateToUI('addContent', type, categoryName);
+          // Direct call to avoid delegation issues
+          if (JdrApp.modules.ui && typeof JdrApp.modules.ui.addContent === 'function') {
+            JdrApp.modules.ui.addContent(type, categoryName);
+          } else if (window.ContentManager && typeof ContentManager.addContent === 'function') {
+            ContentManager.addContent(type, categoryName);
+          } else {
+            console.warn('No addContent method available');
+            // Retry after a short delay
+            setTimeout(() => {
+              if (JdrApp.modules.ui && typeof JdrApp.modules.ui.addContent === 'function') {
+                JdrApp.modules.ui.addContent(type, categoryName);
+              } else if (window.ContentManager && typeof ContentManager.addContent === 'function') {
+                ContentManager.addContent(type, categoryName);
+              }
+            }, 100);
+          }
         }
       });
 
@@ -228,6 +243,31 @@
     delegateToUI(methodName, ...args) {
       if (JdrApp.modules.ui && typeof JdrApp.modules.ui[methodName] === 'function') {
         return JdrApp.modules.ui[methodName](...args);
+      } else if (methodName === 'addContent') {
+        // Multiple fallback approaches for addContent
+        if (window.ContentManager && typeof ContentManager.addContent === 'function') {
+          return ContentManager.addContent(...args);
+        } else {
+          // Debug what's available
+          console.log('Available modules:', {
+            ui: !!JdrApp.modules.ui,
+            uiAddContent: !!(JdrApp.modules.ui && JdrApp.modules.ui.addContent),
+            contentManager: !!window.ContentManager,
+            contentManagerAdd: !!(window.ContentManager && ContentManager.addContent)
+          });
+          
+          // Last resort: retry after delay
+          setTimeout(() => {
+            if (JdrApp.modules.ui && typeof JdrApp.modules.ui.addContent === 'function') {
+              JdrApp.modules.ui.addContent(...args);
+            } else if (window.ContentManager && typeof ContentManager.addContent === 'function') {
+              ContentManager.addContent(...args);
+            } else {
+              console.error('Unable to add content - no available methods');
+            }
+          }, 100);
+          return;
+        }
       } else {
         console.warn(`UI method ${methodName} not found or not available yet`);
       }

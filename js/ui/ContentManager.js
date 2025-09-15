@@ -80,7 +80,11 @@
         
         // Force regenerate page to ensure proper display
         setTimeout(() => {
-          if (JdrApp.modules.renderer?.regenerateCurrentPage) {
+          // Find the current category to refresh
+          const currentCategory = this.findCurrentCategory(type, categoryName);
+          if (currentCategory && JdrApp.modules.renderer?.renderCategoryPage) {
+            JdrApp.modules.renderer.renderCategoryPage(type, currentCategory);
+          } else if (JdrApp.modules.renderer?.regenerateCurrentPage) {
             JdrApp.modules.renderer.regenerateCurrentPage();
           }
         }, 100);
@@ -155,7 +159,11 @@
         
         // Force regenerate page to ensure proper display
         setTimeout(() => {
-          if (JdrApp.modules.renderer?.regenerateCurrentPage) {
+          // Find the current category to refresh
+          const currentCategory = this.findCurrentCategory(type, categoryName);
+          if (currentCategory && JdrApp.modules.renderer?.renderCategoryPage) {
+            JdrApp.modules.renderer.renderCategoryPage(type, currentCategory);
+          } else if (JdrApp.modules.renderer?.regenerateCurrentPage) {
             JdrApp.modules.renderer.regenerateCurrentPage();
           }
         }, 100);
@@ -217,11 +225,27 @@
         
         // Force regenerate page to ensure proper display
         setTimeout(() => {
-          if (JdrApp.modules.renderer?.regenerateCurrentPage) {
+          // Find the current category to refresh
+          const currentCategory = this.findCurrentCategory(type, categoryName);
+          if (currentCategory && JdrApp.modules.renderer?.renderCategoryPage) {
+            JdrApp.modules.renderer.renderCategoryPage(type, currentCategory);
+          } else if (JdrApp.modules.renderer?.regenerateCurrentPage) {
             JdrApp.modules.renderer.regenerateCurrentPage();
           }
         }, 100);
       }
+    },
+
+    /**
+     * Find the current category object by type and name
+     */
+    findCurrentCategory(type, categoryName) {
+      if (type === 'don' && window.DONS) {
+        return window.DONS.find(cat => cat.nom === categoryName);
+      } else if (type === 'spell' && window.SORTS) {
+        return window.SORTS.find(cat => cat.nom === categoryName);
+      }
+      return null;
     },
 
     /**
