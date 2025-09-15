@@ -23,10 +23,14 @@
     setupEventListeners() {
       // Table tresor filter chips
       document.addEventListener('click', (e) => {
-        if (e.target.matches('.filter-chip') && window.location.hash === '#/tables-tresors') {
-          e.preventDefault();
-          e.stopPropagation();
-          this.toggleTableTresorTag(e.target.dataset.tag);
+        if (e.target.matches('.filter-chip')) {
+          // Check if we're on the tables tresor page
+          const currentPage = window.location.hash.replace('#/', '') || 'creation';
+          if (currentPage === 'tables-tresors') {
+            e.preventDefault();
+            e.stopPropagation();
+            this.toggleTableTresorTag(e.target.dataset.tag);
+          }
         }
       });
     },
@@ -89,7 +93,8 @@
      */
     regenerateTablesTresorPage() {
       // Check if we're on the tables tresor page
-      if (window.location.hash !== '#/tables-tresors') {
+      const currentPage = window.location.hash.replace('#/', '') || 'creation';
+      if (currentPage !== 'tables-tresors') {
         return;
       }
 

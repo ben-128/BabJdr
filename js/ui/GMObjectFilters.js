@@ -67,7 +67,8 @@
      */
     regenerateGMObjectsPage() {
       // Check if we're on the GM objects page
-      if (window.location.hash !== '#/gestion-objets') {
+      const currentPage = window.location.hash.replace('#/', '') || 'creation';
+      if (currentPage !== 'gestion-objets') {
         return;
       }
 

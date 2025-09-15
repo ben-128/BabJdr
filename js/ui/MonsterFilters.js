@@ -23,10 +23,14 @@
     setupEventListeners() {
       // Monster filter chips
       document.addEventListener('click', (e) => {
-        if (e.target.matches('.filter-chip') && window.location.hash === '#/monstres') {
-          e.preventDefault();
-          e.stopPropagation();
-          this.toggleMonsterTag(e.target.dataset.tag);
+        if (e.target.matches('.filter-chip')) {
+          // Check if we're on the monsters page
+          const currentPage = window.location.hash.replace('#/', '') || 'creation';
+          if (currentPage === 'monstres') {
+            e.preventDefault();
+            e.stopPropagation();
+            this.toggleMonsterTag(e.target.dataset.tag);
+          }
         }
       });
     },
@@ -72,7 +76,8 @@
      */
     regenerateMonstersPage() {
       // Check if we're on the monsters page
-      if (window.location.hash !== '#/monstres') {
+      const currentPage = window.location.hash.replace('#/', '') || 'creation';
+      if (currentPage !== 'monstres') {
         return;
       }
 

@@ -11,30 +11,87 @@
     <script>
         function debug(message) {
             const output = document.getElementById('debug-output');
-            output.innerHTML += '<p>' + message + '</p>';
+            output.innerHTML += '<p><strong>' + new Date().toLocaleTimeString() + ':</strong> ' + message + '</p>';
             console.log(message);
         }
         
-        // Test if modules are loaded
-        debug('=== TESTING MODULE LOADING ===');
-        debug('GMObjectFilters available: ' + (typeof window.GMObjectFilters !== 'undefined'));
-        debug('MonsterFilters available: ' + (typeof window.MonsterFilters !== 'undefined'));
-        debug('TableTresorFilters available: ' + (typeof window.TableTresorFilters !== 'undefined'));
+        // Load the main app modules first
+        function loadMainApp() {
+            debug('=== LOADING MAIN APPLICATION ===');
+            
+            // Simulate JdrApp loading
+            window.JdrApp = {
+                modules: {
+                    renderer: {
+                        regenerateCurrentPage: function() {
+                            debug('regenerateCurrentPage called');
+                        }
+                    }
+                }
+            };
+            
+            // Test if modules are loaded
+            debug('=== TESTING MODULE LOADING ===');
+            debug('GMObjectFilters available: ' + (typeof window.GMObjectFilters !== 'undefined'));
+            debug('MonsterFilters available: ' + (typeof window.MonsterFilters !== 'undefined'));
+            debug('TableTresorFilters available: ' + (typeof window.TableTresorFilters !== 'undefined'));
+            
+            // Test if modules have init methods
+            if (window.GMObjectFilters) {
+                debug('GMObjectFilters.init: ' + (typeof window.GMObjectFilters.init === 'function'));
+                if (typeof window.GMObjectFilters.init === 'function') {
+                    debug('Calling GMObjectFilters.init()...');
+                    window.GMObjectFilters.init();
+                    debug('GMObjectFilters initialized');
+                }
+            }
+            
+            if (window.MonsterFilters) {
+                debug('MonsterFilters.init: ' + (typeof window.MonsterFilters.init === 'function'));
+                if (typeof window.MonsterFilters.init === 'function') {
+                    debug('Calling MonsterFilters.init()...');
+                    window.MonsterFilters.init();
+                    debug('MonsterFilters initialized');
+                }
+            }
+            
+            // Test location hash simulation
+            debug('=== TESTING LOCATION SIMULATION ===');
+            Object.defineProperty(window, 'location', {
+                value: {
+                    hash: '#/monstres'
+                },
+                writable: true
+            });
+            debug('Current location.hash: ' + window.location.hash);
+        }
         
         // Test if event listeners are working
         debug('=== TESTING EVENT LISTENERS ===');
         document.addEventListener('click', (e) => {
-            debug('Click detected on: ' + e.target.className + ' with data-tag: ' + e.target.dataset.tag);
+            debug('Click detected on element: ' + e.target.tagName);
+            debug('  - className: "' + e.target.className + '"');
+            debug('  - data-tag: "' + e.target.dataset.tag + '"');
+            debug('  - matches .filter-chip: ' + e.target.matches('.filter-chip'));
+            debug('  - matches .gm-filter-chip: ' + e.target.matches('.gm-filter-chip'));
         });
         
         // Create test buttons
         const testDiv = document.createElement('div');
         testDiv.innerHTML = `
             <h3>Test Buttons:</h3>
-            <button class="filter-chip" data-tag="test-monster">Test Monster Filter</button>
-            <button class="gm-filter-chip" data-tag="test-gm">Test GM Filter</button>
+            <button class="filter-chip" data-tag="test-monster" style="margin: 5px; padding: 10px; background: #6b7280; color: white; border: none; border-radius: 5px;">Test Monster Filter</button>
+            <button class="gm-filter-chip" data-tag="test-gm" style="margin: 5px; padding: 10px; background: #6b7280; color: white; border: none; border-radius: 5px;">Test GM Filter</button>
+            <p><small>Click the buttons above to test event handling</small></p>
         `;
         document.body.appendChild(testDiv);
+        
+        // Load modules after DOM is ready
+        setTimeout(loadMainApp, 100);
     </script>
+    
+    <!-- Load the filter modules -->
+    <script src="js/ui/GMObjectFilters.js"></script>
+    <script src="js/ui/MonsterFilters.js"></script>
 </body>
 </html>
