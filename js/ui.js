@@ -245,6 +245,162 @@
         targetCard.style.display = '';
         targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
+    },
+
+    // Campaign management functions
+    selectCampaign(campaignName) {
+      if (!campaignName) return;
+      
+      // Initialize state if needed
+      if (!window.JdrApp) {
+        window.JdrApp = {};
+      }
+      if (!window.JdrApp.state) {
+        window.JdrApp.state = {};
+      }
+      
+      window.JdrApp.state.selectedCampaign = campaignName;
+      
+      // Clear sub-page selection when changing campaign and set to first available
+      const campaignData = window.CAMPAGNE?.subPages?.[campaignName];
+      if (campaignData?.subPages) {
+        const subPageList = Object.keys(campaignData.subPages);
+        window.JdrApp.state.selectedSubPage = subPageList.length > 0 ? subPageList[0] : null;
+      } else {
+        window.JdrApp.state.selectedSubPage = null;
+      }
+      
+      // Regenerate the page to reflect the new selection
+      if (JdrApp.modules.renderer?.regenerateCurrentPage) {
+        JdrApp.modules.renderer.regenerateCurrentPage();
+      }
+    },
+
+    selectSubPage(subPageName) {
+      if (!subPageName) return;
+      
+      // Initialize state if needed
+      if (!window.JdrApp) {
+        window.JdrApp = {};
+      }
+      if (!window.JdrApp.state) {
+        window.JdrApp.state = {};
+      }
+      
+      window.JdrApp.state.selectedSubPage = subPageName;
+      
+      // Small delay to ensure state is set before regeneration
+      setTimeout(() => {
+        if (JdrApp.modules.renderer?.regenerateCurrentPage) {
+          JdrApp.modules.renderer.regenerateCurrentPage();
+        }
+      }, 10);
+    },
+
+    // Campaign management functions
+    addCampaignSubPage(campaignName) {
+      if (!campaignName) return;
+      
+      const subPageName = prompt('Nom de la nouvelle sous-page :');
+      if (!subPageName || !subPageName.trim()) {
+        return;
+      }
+      
+      const trimmedName = subPageName.trim();
+      
+      // Initialize state if needed
+      if (!window.JdrApp) {
+        window.JdrApp = {};
+      }
+      if (!window.JdrApp.state) {
+        window.JdrApp.state = {};
+      }
+      
+      // Get campaign data
+      const campaignData = window.CAMPAGNE || window.STATIC_PAGES?.campagne;
+      if (!campaignData?.subPages?.[campaignName]) {
+        alert('Erreur : Campagne non trouvée');
+        return;
+      }
+      
+      // Check if sub-page already exists
+      if (campaignData.subPages[campaignName].subPages?.[trimmedName]) {
+        alert(`La sous-page "${trimmedName}" existe déjà`);
+        return;
+      }
+      
+      // Initialize subPages if it doesn't exist
+      if (!campaignData.subPages[campaignName].subPages) {
+        campaignData.subPages[campaignName].subPages = {};
+      }
+      
+      // Add new sub-page
+      campaignData.subPages[campaignName].subPages[trimmedName] = {
+        title: trimmedName,
+        content: '<p>Contenu de la nouvelle sous-page...</p>'
+      };
+      
+      // Update state to select the new sub-page
+      window.JdrApp.state.selectedCampaign = campaignName;
+      window.JdrApp.state.selectedSubPage = trimmedName;
+      
+      // Save and regenerate
+      this.saveCampaignData();
+      this.regenerateCampaignPage();
+      
+      alert(`Sous-page "${trimmedName}" créée avec succès !`);
+    },
+
+    deleteCampaignSubPage(campaignName, subPageName) {
+      if (!campaignName || !subPageName) return;
+      
+      if (!confirm(`Supprimer la sous-page "${subPageName}" ?`)) {
+        return;
+      }
+      
+      // Get campaign data
+      const campaignData = window.CAMPAGNE || window.STATIC_PAGES?.campagne;
+      if (!campaignData?.subPages?.[campaignName]?.subPages?.[subPageName]) {
+        alert('Erreur : Sous-page non trouvée');
+        return;
+      }
+      
+      // Delete the sub-page
+      delete campaignData.subPages[campaignName].subPages[subPageName];
+      
+      // Update state to select first available sub-page or null
+      const remainingSubPages = Object.keys(campaignData.subPages[campaignName].subPages || {});
+      if (!window.JdrApp) {
+        window.JdrApp = {};
+      }
+      if (!window.JdrApp.state) {
+        window.JdrApp.state = {};
+      }
+      
+      window.JdrApp.state.selectedCampaign = campaignName;
+      window.JdrApp.state.selectedSubPage = remainingSubPages.length > 0 ? remainingSubPages[0] : null;
+      
+      // Save and regenerate
+      this.saveCampaignData();
+      this.regenerateCampaignPage();
+      
+      alert(`Sous-page "${subPageName}" supprimée`);
+    },
+
+    saveCampaignData() {
+      // Trigger storage save if available
+      if (window.EventBus && window.Events) {
+        window.EventBus.emit(window.Events.STORAGE_SAVE);
+      }
+    },
+
+    regenerateCampaignPage() {
+      // Use the renderer's regenerateCurrentPage function
+      setTimeout(() => {
+        if (JdrApp.modules.renderer?.regenerateCurrentPage) {
+          JdrApp.modules.renderer.regenerateCurrentPage();
+        }
+      }, 100);
     }
   };
 

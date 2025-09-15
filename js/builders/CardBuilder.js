@@ -392,14 +392,22 @@
         containerClasses += ` illus-${styleType}`;
       }
 
-      // HYBRID APPROACH: Never generate buttons in standalone, always generate in dev mode
+      // HYBRID APPROACH: Never generate buttons in standalone or preview mode, always generate in dev mode
       const isStandalone = window.STANDALONE_VERSION === true;
+      const isPreviewMode = this.isPreview;
       
       if (isStandalone) {
-        // STANDALONE: Never generate image buttons at all
+        // STANDALONE: Never generate image buttons at all, use lazy loading
         return `
           <div class="${containerClasses}" data-illus-key="${illusKey}" data-style-type="${styleType}" data-bound="1">
             <img alt="Illustration ${altText}" class="thumb lazy-load" loading="lazy" style="${imageStyle}"${imageUrl ? ` data-src="${imageUrl}"` : ''} src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjE1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkNoYXJnZW1lbnQuLi48L3RleHQ+PC9zdmc+">
+          </div>
+        `;
+      } else if (isPreviewMode) {
+        // PREVIEW: Show real images without buttons
+        return `
+          <div class="${containerClasses}" data-illus-key="${illusKey}" data-style-type="${styleType}" data-bound="1">
+            <img alt="Illustration ${altText}" class="thumb" style="${imageStyle}"${imageUrl ? ` src="${imageUrl}"` : ''}>
           </div>
         `;
       } else {
@@ -606,10 +614,20 @@
     }
 
     buildEditButton(buttonType) {
+      // Don't show edit buttons in preview mode
+      if (this.isPreview) {
+        return '';
+      }
+      
       return `<button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="${buttonType}">✏️</button>`;
     }
 
     buildDeleteButton(type) {
+      // Don't show delete button in preview mode
+      if (this.isPreview) {
+        return '';
+      }
+      
       const config = this.config;
       const deleteIcon = config?.icons?.delete || '🗑️';
       
@@ -623,7 +641,8 @@
     }
 
     buildMoveButtons(type, index, totalItems) {
-      if (totalItems <= 1) {
+      // Don't show move buttons in preview mode
+      if (this.isPreview || totalItems <= 1) {
         return '';
       }
 
@@ -654,6 +673,11 @@
      * @returns {string} HTML du bouton favoris
      */
     buildFavorisButton(type, nom) {
+      // Don't show favoris button in preview mode
+      if (this.isPreview) {
+        return '';
+      }
+      
       // Vérifier que le FavorisManager est disponible
       if (typeof window.FavorisManager === 'undefined') {
         return '';

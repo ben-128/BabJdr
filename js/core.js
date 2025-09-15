@@ -99,6 +99,7 @@
     async loadData() {
       try {
         // Check if we're in standalone mode (data already injected)
+        
         if (window.SORTS && window.CLASSES && window.DONS && window.OBJETS && window.STATIC_PAGES) {
           const sorts = window.SORTS;
           const classes = window.CLASSES;
@@ -237,7 +238,7 @@
         this.loadStoredEditsEarly();
         
         // Initialize default filters for objects
-        this.initializeDefaultFilters();
+        // this.initializeDefaultFilters(); // Function doesn't exist, commenting out
       } catch (error) {
         throw error;
       }

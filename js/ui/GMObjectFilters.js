@@ -9,12 +9,17 @@
   // GM OBJECT FILTERS - SEPARATE FILTER SYSTEM FOR GM OBJECT PAGE
   // ========================================
   window.GMObjectFilters = {
+    _initialized: false,
 
     /**
      * Initialize GM object filters
      */
     init() {
+      if (this._initialized) {
+        return;
+      }
       this.setupEventListeners();
+      this._initialized = true;
     },
 
     /**
@@ -35,6 +40,7 @@
      * Toggle a GM object tag filter
      */
     toggleGMObjectTag(tagName) {
+      
       if (!window.ACTIVE_GM_OBJECT_TAGS) {
         window.ACTIVE_GM_OBJECT_TAGS = [];
       }
@@ -49,9 +55,9 @@
         // Remove tag
         activeTags.splice(tagIndex, 1);
       }
-
+      
       // Regenerate the GM objects page with new filters
-      this.regenerateGMObjectsPage();
+      this.regenerateGMObjectsPage(tagName);
     },
 
     /**
@@ -65,16 +71,28 @@
     /**
      * Regenerate the GM objects page
      */
-    regenerateGMObjectsPage() {
+    regenerateGMObjectsPage(clickedTag = null) {
       // Check if we're on the GM objects page
       const currentPage = window.location.hash.replace('#/', '') || 'creation';
       if (currentPage !== 'gestion-objets') {
         return;
       }
 
-      // Force regeneration of the page
-      if (JdrApp.modules.renderer?.regenerateCurrentPage) {
-        JdrApp.modules.renderer.regenerateCurrentPage();
+      // Prevent multiple simultaneous regenerations
+      if (this._regenerating) {
+        return;
+      }
+
+      this._regenerating = true;
+
+      // Force regeneration of the page using the router
+      if (JdrApp.modules.router?.renderGMObjectsPage) {
+        JdrApp.modules.router.renderGMObjectsPage();
+        
+        // Reset the regeneration flag immediately after DOM update
+        this._regenerating = false;
+      } else {
+        this._regenerating = false;
       }
     },
 

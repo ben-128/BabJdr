@@ -95,6 +95,409 @@
     },
 
     /**
+     * Show state preview tooltip
+     */
+    showEtatPreview(etatName, etatDescription, triggerElement) {
+      if (!etatName) return;
+      
+      // Remove any existing preview of the same type
+      const existingPreview = document.querySelector('.etat-preview-tooltip');
+      if (existingPreview) {
+        existingPreview.remove();
+      }
+      
+      // Create a simple tooltip-style preview
+      const preview = document.createElement('div');
+      preview.className = 'etat-preview-tooltip';
+      preview.innerHTML = `
+        <div class="etat-preview-header">
+          <strong>${etatName}</strong>
+        </div>
+        <div class="etat-preview-content">
+          ${etatDescription || 'Description non disponible'}
+        </div>
+      `;
+      
+      // Style the preview
+      preview.style.cssText = `
+        position: absolute;
+        background: var(--paper);
+        border: 2px solid var(--accent-ink);
+        border-radius: 8px;
+        padding: 12px;
+        max-width: 300px;
+        box-shadow: 0 4px 12px rgba(0,0,0,1) !important;
+        z-index: 1000;
+        font-size: 14px;
+        line-height: 1.4;
+        color: var(--ink);
+        pointer-events: none;
+        opacity: 1 !important;
+      `;
+      
+      // Force opacity on all child elements
+      preview.addEventListener('mouseenter', () => {
+        preview.style.opacity = '1';
+        preview.style.boxShadow = '0 4px 12px rgba(0,0,0,1)';
+      });
+      preview.addEventListener('mouseleave', () => {
+        preview.style.opacity = '1';
+        preview.style.boxShadow = '0 4px 12px rgba(0,0,0,1)';
+      });
+      
+      // Position near the trigger element
+      const rect = triggerElement.getBoundingClientRect();
+      preview.style.left = (rect.left + window.scrollX) + 'px';
+      preview.style.top = (rect.bottom + window.scrollY + 5) + 'px';
+      
+      // Add to document
+      document.body.appendChild(preview);
+      
+      // Remove on click outside or after delay
+      const removePreview = () => {
+        if (preview.parentNode) {
+          preview.parentNode.removeChild(preview);
+        }
+        // Clean up event listener if it exists
+        if (preview._clickHandler) {
+          document.removeEventListener('click', preview._clickHandler);
+        }
+      };
+      
+      // Store reference to the listener function for états only
+      const clickOutsideHandler = (e) => {
+        // Check if the click is outside the preview and not on a link inside the preview
+        if (!preview.contains(e.target) && e.target !== triggerElement) {
+          removePreview();
+          document.removeEventListener('click', clickOutsideHandler);
+        }
+      };
+      
+      // Add listener that will close on clicks outside (états only)
+      document.addEventListener('click', clickOutsideHandler);
+      
+      // Store the handler on the preview element for cleanup
+      preview._clickHandler = clickOutsideHandler;
+    },
+
+    /**
+     * Show spell preview tooltip
+     */
+    showSpellPreview(spellName, categoryName, triggerElement) {
+      if (!spellName) return;
+      
+      // Only remove existing spell previews, not other types
+      const existingPreview = document.querySelector('.spell-preview-tooltip');
+      if (existingPreview) {
+        existingPreview.remove();
+      }
+      
+      // Find the spell in the data
+      let foundSpell = null;
+      if (window.SORTS) {
+        for (const category of window.SORTS) {
+          const spell = category.sorts?.find(s => s.nom === spellName);
+          if (spell) {
+            foundSpell = spell;
+            break;
+          }
+        }
+      }
+      
+      if (!foundSpell) {
+        this.showEtatPreview(spellName, 'Sort non trouvé', triggerElement);
+        return;
+      }
+      
+      // Find the actual category name for the spell
+      let actualCategoryName = 'preview';
+      if (window.SORTS) {
+        for (const category of window.SORTS) {
+          if (category.sorts?.find(s => s.nom === spellName)) {
+            actualCategoryName = category.nom;
+            break;
+          }
+        }
+      }
+      
+      // Create a temporary CardBuilder that allows preview mode but with real category name
+      const tempBuilder = CardBuilder.create('spell', foundSpell, actualCategoryName);
+      tempBuilder.isPreview = true; // Force preview mode manually
+      const spellCard = tempBuilder.build();
+      
+      // Create and show preview
+      const preview = document.createElement('div');
+      preview.className = 'spell-preview-tooltip';
+      preview.innerHTML = `
+        <style>
+          .spell-preview-tooltip * {
+            opacity: 1 !important;
+            background-color: transparent !important;
+          }
+          .spell-preview-tooltip .card {
+            opacity: 1 !important;
+            background: var(--paper) !important;
+          }
+          .spell-preview-tooltip .card:hover {
+            opacity: 1 !important;
+            background: var(--paper) !important;
+            transform: none !important;
+          }
+          .preview-close-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: #dc2626;
+            color: black;
+            border: 3px solid #ffffff;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.6);
+            transition: all 0.2s ease;
+          }
+          .preview-close-btn:hover {
+            background: #b91c1c;
+            color: black;
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(220, 38, 38, 0.8);
+          }
+        </style>
+        <button class="preview-close-btn" title="Fermer">&times;</button>
+        ${spellCard}
+      `;
+      
+      // Style the preview container
+      preview.style.cssText = `
+        position: absolute;
+        z-index: 1000;
+        max-width: 450px;
+        max-height: 600px;
+        overflow-y: auto;
+        box-shadow: 0 8px 24px rgba(0,0,0,1) !important;
+        border-radius: 12px;
+        pointer-events: auto;
+        opacity: 1 !important;
+        background: var(--paper) !important;
+      `;
+      
+      // Force styles after element is added to DOM
+      setTimeout(() => {
+        preview.style.setProperty('opacity', '1', 'important');
+        preview.style.setProperty('background', 'var(--paper)', 'important');
+        const card = preview.querySelector('.card');
+        if (card) {
+          card.style.setProperty('opacity', '1', 'important');
+          card.style.setProperty('background', 'var(--paper)', 'important');
+        }
+      }, 10);
+      
+      // Position near the trigger element
+      const rect = triggerElement.getBoundingClientRect();
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+      
+      // Calculate position to keep preview in viewport
+      let left = rect.left + window.scrollX;
+      let top = rect.bottom + window.scrollY + 5;
+      
+      // Adjust horizontal position if too far right
+      if (left + 450 > viewportWidth) {
+        left = rect.right + window.scrollX - 450;
+      }
+      if (left < 10) {
+        left = 10;
+      }
+      
+      // Adjust vertical position if too far down
+      if (top + 600 > viewportHeight + window.scrollY) {
+        top = rect.top + window.scrollY - 605;
+      }
+      if (top < 10) {
+        top = 10;
+      }
+      
+      preview.style.left = left + 'px';
+      preview.style.top = top + 'px';
+      
+      // Add to document
+      document.body.appendChild(preview);
+      
+      // Remove on click outside or after delay
+      const removePreview = () => {
+        if (preview.parentNode) {
+          preview.parentNode.removeChild(preview);
+        }
+      };
+      
+      // Add click handler for the close button only
+      setTimeout(() => {
+        const closeBtn = preview.querySelector('.preview-close-btn');
+        if (closeBtn) {
+          closeBtn.addEventListener('click', () => {
+            removePreview();
+          });
+        }
+      }, 10);
+    },
+
+    /**
+     * Show monster preview tooltip
+     */
+    showMonsterPreview(monsterName, triggerElement, event) {
+      if (!monsterName) return;
+      
+      // Only remove existing monster previews, not other types
+      const existingPreview = document.querySelector('.monster-preview-tooltip');
+      if (existingPreview) {
+        existingPreview.remove();
+      }
+      
+      // Find the monster in the data
+      let foundMonster = null;
+      if (window.MONSTRES) {
+        foundMonster = window.MONSTRES.find(m => m.nom === monsterName);
+      }
+      
+      if (!foundMonster) {
+        this.showEtatPreview(monsterName, 'Monstre non trouvé', triggerElement);
+        return;
+      }
+      
+      // Use CardBuilder to create a full monster card in preview mode
+      const monsterCard = CardBuilder.create('monster', foundMonster, 'preview').build();
+      
+      // Create and show preview
+      const preview = document.createElement('div');
+      preview.className = 'monster-preview-tooltip';
+      preview.innerHTML = `
+        <style>
+          .monster-preview-tooltip * {
+            opacity: 1 !important;
+            background-color: transparent !important;
+          }
+          .monster-preview-tooltip .card {
+            opacity: 1 !important;
+            background: var(--paper) !important;
+          }
+          .monster-preview-tooltip .card:hover {
+            opacity: 1 !important;
+            background: var(--paper) !important;
+            transform: none !important;
+          }
+          .preview-close-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: #dc2626;
+            color: black;
+            border: 3px solid #ffffff;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.6);
+            transition: all 0.2s ease;
+          }
+          .preview-close-btn:hover {
+            background: #b91c1c;
+            color: black;
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(220, 38, 38, 0.8);
+          }
+        </style>
+        <button class="preview-close-btn" title="Fermer">&times;</button>
+        ${monsterCard}
+      `;
+      
+      // Style the preview container
+      preview.style.cssText = `
+        position: absolute;
+        z-index: 1000;
+        max-width: 450px;
+        max-height: 700px;
+        overflow-y: auto;
+        box-shadow: 0 8px 24px rgba(0,0,0,1) !important;
+        border-radius: 12px;
+        pointer-events: auto;
+        opacity: 1 !important;
+        background: var(--paper) !important;
+      `;
+      
+      // Force styles after element is added to DOM
+      setTimeout(() => {
+        preview.style.setProperty('opacity', '1', 'important');
+        preview.style.setProperty('background', 'var(--paper)', 'important');
+        const card = preview.querySelector('.card');
+        if (card) {
+          card.style.setProperty('opacity', '1', 'important');
+          card.style.setProperty('background', 'var(--paper)', 'important');
+        }
+      }, 10);
+      
+      // Position near the trigger element
+      const rect = triggerElement.getBoundingClientRect();
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+      
+      // Calculate position to keep preview in viewport
+      let left = rect.left + window.scrollX;
+      let top = rect.bottom + window.scrollY + 5;
+      
+      // Adjust horizontal position if too far right
+      if (left + 450 > viewportWidth) {
+        left = rect.right + window.scrollX - 450;
+      }
+      if (left < 10) {
+        left = 10;
+      }
+      
+      // Adjust vertical position if too far down
+      if (top + 700 > viewportHeight + window.scrollY) {
+        top = rect.top + window.scrollY - 705;
+      }
+      if (top < 10) {
+        top = 10;
+      }
+      
+      preview.style.left = left + 'px';
+      preview.style.top = top + 'px';
+      
+      // Add to document
+      document.body.appendChild(preview);
+      
+      // Remove on click outside or after delay
+      const removePreview = () => {
+        if (preview.parentNode) {
+          preview.parentNode.removeChild(preview);
+        }
+      };
+      
+      // Add click handler for the close button only
+      setTimeout(() => {
+        const closeBtn = preview.querySelector('.preview-close-btn');
+        if (closeBtn) {
+          closeBtn.addEventListener('click', () => {
+            removePreview();
+          });
+        }
+      }, 10);
+    },
+
+    /**
      * Create states modal
      */
     createEtatsModal() {

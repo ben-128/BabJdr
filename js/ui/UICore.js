@@ -25,6 +25,7 @@
       this.setupModals();
       this.setupResponsive();
       this.setupNewPageHandler();
+      this.initializeFilterModules();
       this._initialized = true;
       
     },
@@ -284,20 +285,20 @@
     },
 
     showSpellPreview(spellName, categoryName, triggerElement) {
-      if (JdrApp.modules.ui?.showSpellPreview) {
-        return JdrApp.modules.ui.showSpellPreview(spellName, categoryName, triggerElement);
+      if (window.ModalManager?.showSpellPreview) {
+        return ModalManager.showSpellPreview(spellName, categoryName, triggerElement);
       }
     },
 
     showEtatPreview(etatName, etatDescription, triggerElement) {
-      if (JdrApp.modules.ui?.showEtatPreview) {
-        return JdrApp.modules.ui.showEtatPreview(etatName, etatDescription, triggerElement);
+      if (window.ModalManager?.showEtatPreview) {
+        return ModalManager.showEtatPreview(etatName, etatDescription, triggerElement);
       }
     },
 
     showMonsterPreview(monsterName, triggerElement, event) {
-      if (JdrApp.modules.ui?.showMonsterPreview) {
-        return JdrApp.modules.ui.showMonsterPreview(monsterName, triggerElement, event);
+      if (window.ModalManager?.showMonsterPreview) {
+        return ModalManager.showMonsterPreview(monsterName, triggerElement, event);
       }
     },
 
@@ -325,6 +326,24 @@
       }
       if (JdrApp.modules.ui?.showSectionSelectionModal) {
         return JdrApp.modules.ui.showSectionSelectionModal();
+      }
+    },
+
+    /**
+     * Initialize all filter modules
+     */
+    initializeFilterModules() {
+      // Initialize specialized filter modules
+      if (window.MonsterFilters && MonsterFilters.init) {
+        MonsterFilters.init();
+      }
+      
+      if (window.GMObjectFilters && GMObjectFilters.init) {
+        GMObjectFilters.init();
+      }
+      
+      if (window.TableTresorFilters && TableTresorFilters.init) {
+        TableTresorFilters.init();
       }
     }
   };

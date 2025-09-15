@@ -2396,6 +2396,18 @@
         if (viewsContainer) {
           viewsContainer.insertAdjacentHTML('beforeend', pageHTML);
           gmObjectsArticle = document.querySelector('article[data-page="gestion-objets"]');
+          
+          // Force DOM reflow/repaint after insertAdjacentHTML
+          if (gmObjectsArticle) {
+            // Force layout recalculation by accessing offsetHeight
+            const forceReflow = gmObjectsArticle.offsetHeight;
+            
+            // Use requestAnimationFrame to ensure proper rendering
+            requestAnimationFrame(() => {
+              // Scroll to top to ensure visibility
+              window.scrollTo(0, 0);
+            });
+          }
         }
       } else {
         // Update existing article content
@@ -2404,6 +2416,17 @@
         const newArticleContent = tempDiv.querySelector('article[data-page="gestion-objets"]');
         if (newArticleContent) {
           gmObjectsArticle.innerHTML = newArticleContent.innerHTML;
+          
+          // Force DOM reflow/repaint after innerHTML update
+          // Force layout recalculation by accessing offsetHeight
+          const forceReflow = gmObjectsArticle.offsetHeight;
+          
+          // Use requestAnimationFrame to ensure proper rendering
+          requestAnimationFrame(() => {
+            // Scroll to top to ensure visibility
+            window.scrollTo(0, 0);
+          });
+        } else {
         }
       }
       
@@ -2495,12 +2518,15 @@
           monstersArticle = document.querySelector('article[data-page="monstres"]');
         }
       } else {
-        // Update existing article content
+        // Completely replace the existing article element
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = pageHTML;
-        const newArticleContent = tempDiv.querySelector('article[data-page="monstres"]');
-        if (newArticleContent) {
-          monstersArticle.innerHTML = newArticleContent.innerHTML;
+        const newArticleElement = tempDiv.querySelector('article[data-page="monstres"]');
+        
+        if (newArticleElement) {
+          // Replace the entire article element, not just its innerHTML
+          monstersArticle.parentNode.replaceChild(newArticleElement, monstersArticle);
+          monstersArticle = newArticleElement; // Update the reference
         }
       }
       

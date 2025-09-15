@@ -3,8 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
-<title>JDR‑BAB — Livret de règles (No PWA)</title>
-<meta content="Livret web multipages des règles JDR‑BAB, thème parchemin" name="description">
+<title>JDR‑BAB — Debug Version</title>
 
 <!-- CSS Modulaire -->
 <link rel="stylesheet" href="css/theme.css">
@@ -13,26 +12,62 @@
 <link rel="stylesheet" href="css/layout.css">
 <link rel="stylesheet" href="css/editor.css">
 <link rel="stylesheet" href="css/scroll-optimizations.css">
+
+<!-- Debug styles removed -->
 </head>
 <body class="dev-off">
 
-<!-- Le contenu HTML complet sera injecté ici par le JavaScript -->
+<!-- Debug console removed -->
+
+<!-- Structure HTML de base pour l'application -->
+<div class="shell">
+  <button aria-controls="sidebar" aria-expanded="false" aria-label="Ouvrir le sommaire" class="menu-toggle" id="menuToggle" style="display:none">☰ Sommaire</button>
+  <div class="backdrop" hidden="" id="backdrop"></div>
+  <main class="page">
+    <aside class="sidebar" id="sidebar">
+      <div class="panel">
+        <div class="tools">
+          <button class="btn small" id="devToggle" title="Activer/désactiver le mode développeur">🛠 Dev Mode: OFF</button>
+        </div>
+        <div class="dev-toolbox" id="devToolbox" style="display: none;">
+          <!-- Dev toolbox content will be injected here -->
+        </div>
+        <div class="toc" id="toc">
+          <div class="toc-search">
+            <input autocomplete="off" id="search" placeholder="Rechercher une règle, une classe…">
+            <button class="btn-clear" id="clear" title="Effacer">✖</button>
+          </div>
+          <!-- Table of contents will be injected here -->
+        </div>
+      </div>
+    </aside>
+    <div id="views">
+      <!-- Dynamic content will be injected here -->
+    </div>
+  </main>
+  <footer></footer>
+</div>
+
+<!-- Écran de chargement -->
 <div id="app-loading" class="loading-screen">
   <div class="loading-content">
     <div class="loading-spinner"></div>
-    <h2>JDR-BAB</h2>
-    <p>Chargement en cours...</p>
+    <h2>JDR-BAB DEBUG</h2>
+    <p>Chargement avec debug...</p>
     <div class="loading-progress">
       <div class="loading-bar"></div>
     </div>
   </div>
 </div>
 
-<!-- JavaScript Modulaire -->
+<!-- Debug system removed -->
+
+<!-- JavaScript Modulaire avec debug -->
 <!-- Configuration et classes de base -->
 <script src="js/config/constants.js"></script>
 <script src="js/config/contentTypes.js"></script>
 <script src="js/core/EventBus.js"></script>
+
 <script src="js/core/BaseEntity.js"></script>
 <script src="js/core/UnifiedEditor.js"></script>
 <script src="js/factories/ContentFactory.js"></script>
@@ -48,7 +83,7 @@
 <script src="js/modules/images.js"></script>
 <script src="js/modules/audio.js"></script>
 
-<!-- Features modules (AVANT renderer pour être disponibles au rendu) -->
+<!-- Features modules -->
 <script src="js/features/SpellFilter.js"></script>
 <script src="js/features/TablesTresorsManager.js"></script>
 <script src="js/features/FavorisManager.js"></script>
@@ -61,7 +96,7 @@
 <script src="js/editor.js"></script>
 <script src="js/storage.js"></script>
 
-<!-- UI modules (utilitaires en premier) -->
+<!-- UI modules -->
 <script src="js/ui/UIUtilities.js"></script>
 <script src="js/ui/BaseModal.js"></script>
 <script src="js/ui/EventHandlers.js"></script>
@@ -76,11 +111,14 @@
 <script src="js/ui/TableTresorFilters.js"></script>
 <script src="js/ui/UICore.js"></script>
 
-<!-- UI module principal (doit être en dernier) -->
+<!-- UI module principal -->
 <script src="js/ui.js"></script>
 
 <!-- PDF support -->
 <script src="js/libs/jspdf-loader.js"></script>
+
+<!-- All debug scripts removed -->
+</script>
 
 </body>
 </html>

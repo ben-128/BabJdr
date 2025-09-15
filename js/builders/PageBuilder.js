@@ -114,15 +114,18 @@
       }
       const activeTags = window.ACTIVE_GM_OBJECT_TAGS;
       
+      
       // Filter objects based on active tags
       const filteredObjects = activeTags.length === 0 
         ? allObjects // No tags active = show all objects
         : allObjects.filter(obj => {
             // AND logic - object must have ALL active tags
-            if (!obj.tags || obj.tags.length === 0) return false;
-            return activeTags.every(activeTag => obj.tags.includes(activeTag));
+            if (!obj.tags || obj.tags.length === 0) {
+              return false;
+            }
+            const hasAllTags = activeTags.every(activeTag => obj.tags.includes(activeTag));
+            return hasAllTags;
           });
-      
       
       const result = `
         <article class="" data-page="gestion-objets">
@@ -132,11 +135,7 @@
               ${this.buildIllustration('page:gestion-objets')}
             </div>
             
-            <div style="margin: 1rem 0; padding: 1rem; background: var(--card); border-radius: 8px; border-left: 4px solid var(--bronze);">
-              <p class="lead">Page dédiée au Maître de jeu pour gérer, créer et modifier les objets du jeu. Utilisez les filtres pour organiser votre contenu et les outils de création pour ajouter de nouveaux équipements.</p>
-            </div>
             
-            ${this.buildIdSearchFilter()}
             ${this.buildGMTagFilters(activeTags, availableTags)}
             
             <div style="display: flex; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap;">
@@ -144,7 +143,7 @@
               ${this.buildTagsManagerButton()}
             </div>
             
-            <div class="grid cols-2" id="gestion-objets-container">
+            <div class="collection-items" id="gestion-objets-container">
               ${(() => {
                 try {
                   const cards = filteredObjects.map((item, index) => {
@@ -184,21 +183,26 @@
       }
       
       // Utiliser le state du filtre s'il existe, sinon les tags par défaut
-      const visibleTags = window.MONSTRES_FILTER_STATE?.visibleTags || config.filterConfig.defaultVisibleTags;
+      // IMPORTANT: Empty array [] should be preserved, not fall back to defaults
+      const visibleTags = window.MONSTRES_FILTER_STATE?.visibleTags !== undefined 
+        ? window.MONSTRES_FILTER_STATE.visibleTags 
+        : config.filterConfig.defaultVisibleTags;
+        
       
-      // Filter monsters according to visible tags (AND mode)
+      // Filter monsters according to visible tags (OR mode - more intuitive)
       const filteredMonsters = visibleTags.length === 0 
         ? [] // If no tags are visible, show nothing
         : allMonsters.filter(monster => {
             // Check that the monster has the required tags to be visible
-            if (!monster.tags) return false;
+            if (!monster.tags) {
+              return false;
+            }
             
-            // In AND mode: monster must have ALL visible tags
-            const hasAllVisibleTags = visibleTags.every(tag => monster.tags.includes(tag));
-            if (!hasAllVisibleTags) return false;
-            
-            return true;
+            // In OR mode: monster must have at least ONE visible tag
+            const hasAnyVisibleTag = visibleTags.some(tag => monster.tags.includes(tag));
+            return hasAnyVisibleTag;
           });
+      
       
       return `
         <article class="" data-page="monstres">
@@ -836,6 +840,7 @@
       if (!availableTags || availableTags.length === 0) {
         return '';
       }
+      
 
       const filterTitle = context === 'monster' ? '🎯 Filtrer les monstres par tags :' : 
                          context === 'tableTresor' ? '🎯 Filtrer les tables par tags :' : 
@@ -858,9 +863,13 @@
               const opacity = isActive ? '1' : '0.6';
               const prefix = isActive ? '✓ ' : '';
               
+              const chipClass = context === 'monster' ? 'monster-filter-chip' : 
+                               context === 'tableTresor' ? 'tresor-filter-chip' : 
+                               'filter-chip';
+              
               return `
                 <button 
-                  class="filter-chip" 
+                  class="${chipClass}" 
                   data-tag="${tag}"
                   style="
                     padding: 0.25rem 0.75rem;
@@ -889,15 +898,13 @@
         return '';
       }
 
+
       return `
         <div class="gm-tag-filters" style="margin: 1rem 0; padding: 1rem; background: var(--card); border: 2px solid var(--bronze); border-radius: 12px;">
           <div style="margin-bottom: 1rem;">
             <h4 style="margin: 0 0 0.5rem 0; color: var(--accent-ink); font-size: 1em;">
               🎯 Filtrer les objets par tags (Mode GM) :
             </h4>
-            <p style="margin: 0; font-size: 0.85em; color: var(--paper-muted); font-style: italic;">
-              Cliquez sur les tags pour filtrer les objets. Logique ET (tous les tags sélectionnés requis).
-            </p>
           </div>
           <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
             ${availableTags.map(tag => {
@@ -905,6 +912,7 @@
               const bgColor = isActive ? '#16a34a' : '#6b7280';
               const opacity = isActive ? '1' : '0.6';
               const prefix = isActive ? '✓ ' : '';
+              
               
               return `
                 <button 
@@ -1092,12 +1100,29 @@
       const campaigns = pageData.subPages || {};
       const campaignList = Object.keys(campaigns);
       
+      // Ensure JdrApp and state exist before accessing
+      if (!window.JdrApp) {
+        window.JdrApp = {};
+      }
+      if (!window.JdrApp.state) {
+        window.JdrApp.state = {};
+      }
+      
       // Get current selections (default to first available or empty)
-      const selectedCampaign = window.JdrApp?.state?.selectedCampaign || (campaignList.length > 0 ? campaignList[0] : null);
+      const selectedCampaign = window.JdrApp.state.selectedCampaign || (campaignList.length > 0 ? campaignList[0] : null);
       const currentCampaign = selectedCampaign && campaigns[selectedCampaign] ? campaigns[selectedCampaign] : null;
       const subPageList = currentCampaign ? Object.keys(currentCampaign.subPages || {}) : [];
-      const selectedSubPage = window.JdrApp?.state?.selectedSubPage || (subPageList.length > 0 ? subPageList[0] : null);
+      const selectedSubPage = window.JdrApp.state.selectedSubPage || (subPageList.length > 0 ? subPageList[0] : null);
       const currentSubPage = selectedSubPage && currentCampaign?.subPages?.[selectedSubPage] ? currentCampaign.subPages[selectedSubPage] : null;
+      
+      // Auto-initialize state if it wasn't set by UI functions
+      if (!window.JdrApp.state.selectedCampaign && selectedCampaign) {
+        window.JdrApp.state.selectedCampaign = selectedCampaign;
+      }
+      if (!window.JdrApp.state.selectedSubPage && selectedSubPage) {
+        window.JdrApp.state.selectedSubPage = selectedSubPage;
+      }
+      
       
       return `
         <article class="" data-page="${pageId}" data-static-page="true" data-page-title="${pageData.title}">

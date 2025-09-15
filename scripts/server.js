@@ -8,7 +8,7 @@ process.chdir(path.join(__dirname, '..'));
 
 const server = http.createServer((req, res) => {
   let filePath = '.' + req.url;
-  if (filePath === './') filePath = './dev-modular.html';
+  if (filePath === './') filePath = './dev-debug.html';
   
   const extname = path.extname(filePath);
   let contentType = 'text/html';

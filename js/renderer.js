@@ -13,11 +13,45 @@
     
     init() {
       // Delay content generation to ensure all configurations are loaded
+      // Increased delay to ensure data loading is complete
       setTimeout(() => {
-        this.generateContent();
-        this.autoLoadImages();
-      }, 10);
+        // Verify data is loaded before generating content
+        if (this.isDataReady()) {
+          this.generateContent();
+          this.autoLoadImages();
+        } else {
+          // If data not ready, retry with longer delays
+          this.waitForDataAndGenerate();
+        }
+      }, 100);
       this.setupEventListeners();
+    },
+
+    isDataReady() {
+      // Check if essential data is loaded
+      return window.SORTS && window.CLASSES && window.DONS && 
+             window.OBJETS && window.MONSTRES && window.STATIC_PAGES;
+    },
+
+    waitForDataAndGenerate() {
+      let attempts = 0;
+      const maxAttempts = 20; // Max 10 seconds
+      
+      const checkData = () => {
+        attempts++;
+        if (this.isDataReady()) {
+          this.generateContent();
+          this.autoLoadImages();
+        } else if (attempts < maxAttempts) {
+          setTimeout(checkData, 500); // Check every 500ms
+        } else {
+          // Data loading timeout - generating with available data
+          this.generateContent();
+          this.autoLoadImages();
+        }
+      };
+      
+      checkData();
     },
 
     setupEventListeners() {
@@ -683,7 +717,50 @@
       
       // Mark search as inactive
       window.activeIdSearch = false;
-    }
+    },
+
+    // Add missing regenerateCurrentPage function
+    regenerateCurrentPage() {
+      // Get current page from URL
+      const currentHash = window.location.hash || '#/creation';
+      const currentPage = currentHash.replace('#/', '');
+      
+      // Special handling for static pages like campaign
+      if (currentPage === 'campagne') {
+        const campaignData = window.CAMPAGNE || window.STATIC_PAGES?.campagne;
+        
+        if (campaignData && window.PageBuilder) {
+          const pageHTML = window.PageBuilder.buildStaticPage('campagne', campaignData);
+          const viewsContainer = document.querySelector('#views');
+          
+          if (viewsContainer && pageHTML) {
+            // Remove existing campaign page
+            const existingPage = viewsContainer.querySelector('[data-page="campagne"]');
+            if (existingPage) {
+              existingPage.remove();
+            }
+            
+            // Insert new page HTML
+            viewsContainer.insertAdjacentHTML('beforeend', pageHTML);
+            
+            // Ensure proper visibility
+            const newPage = viewsContainer.querySelector('[data-page="campagne"]');
+            if (newPage) {
+              // Hide all other pages and show the new one
+              viewsContainer.querySelectorAll('article').forEach(article => {
+                article.style.display = article === newPage ? 'block' : 'none';
+              });
+            }
+          }
+        }
+      } else {
+        // For other pages, try to use the router's parseRoute method
+        if (JdrApp.modules.router?.parseRoute) {
+          JdrApp.modules.router.parseRoute();
+        }
+      }
+    },
+
   };
 
 })();
