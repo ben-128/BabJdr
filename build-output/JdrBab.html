@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-09-12T16:03:31.515Z by JdrBab Build System -->
+<!-- Generated on 2025-09-15T12:03:37.132Z by JdrBab Build System -->
 <title>JDR‑BAB — Livret de règles</title>
 <meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -8197,7 +8197,14 @@ article.active .grid {
     
     // Custom page descriptions for collections and other dynamic pages
     window.CUSTOM_PAGE_DESCRIPTIONS = {
-  "collections-objets": "Recherchez et explorez des collections d'objets.\n<br>Par exemple, tapez <b>Départ</b> pour voir les objets disponnibles lors de la création du personnage.\n<br>Les collections sont cachées de base pour éviter le <b>spoil</b>."
+  "page": "custom-page_descriptions",
+  "title": "custom page_descriptions",
+  "sections": [
+    {
+      "type": "intro",
+      "content": "Cette page est en cours de développement."
+    }
+  ]
 };
     
     // TOC Structure for advanced navigation
@@ -9132,6 +9139,7 @@ article.active .grid {
     async loadData() {
       try {
         // Check if we're in standalone mode (data already injected)
+        
         if (window.SORTS && window.CLASSES && window.DONS && window.OBJETS && window.STATIC_PAGES) {
           const sorts = window.SORTS;
           const classes = window.CLASSES;
@@ -9270,7 +9278,7 @@ article.active .grid {
         this.loadStoredEditsEarly();
         
         // Initialize default filters for objects
-        this.initializeDefaultFilters();
+        // this.initializeDefaultFilters(); // Function doesn't exist, commenting out
       } catch (error) {
         throw error;
       }
@@ -9353,202 +9361,12 @@ article.active .grid {
         window.ScrollOptimizer.init();
       }
       
-      // Re-enable filter event handlers with fixed implementation
-      this.initializeFilterEventHandlers();
+      // Filter event handlers are now handled by specialized modules
     },
 
-    initializeFilterEventHandlers() {
-      // Store reference to this for use in event handlers
-      const self = this;
-      
-      // Use event delegation for ALL filter chips (both regular and GM)
-      document.addEventListener('click', (e) => {
-        
-        // Handle regular filter chips (monstres, tables, etc.)
-        if (e.target.classList.contains('filter-chip')) {
-          e.preventDefault();
-          e.stopPropagation();
-          
-          const tag = e.target.dataset.tag;
-          if (!tag) return;
-          
-          // Determine which page we're on based on current route
-          const currentPage = window.location.hash.replace('#/', '') || 'creation';
-          
-          if (currentPage === 'monstres') {
-            this.handleMonsterFilter(tag);
-          } else if (currentPage === 'tables-tresors') {
-            this.handleTableTresorFilter(tag);
-          } else {
-            console.log('Filter not supported on this page:', currentPage);
-          }
-          
-          return;
-        }
-        
-        // Handle GM filter chips (objets page GM)
-        if (e.target.classList.contains('gm-filter-chip')) {
-          e.preventDefault();
-          e.stopPropagation();
-          
-          const tag = e.target.dataset.tag;
-          if (!tag) return;
-          
-          // Only proceed if we're actually on the GM objects page
-          const currentPage = window.location.hash.replace('#/', '') || 'creation';
-          if (currentPage !== 'gestion-objets') {
-            console.log('GM filter clicked but not on gestion-objets page, ignoring');
-            return;
-          }
-          
-          // Initialize GM tags if needed
-          if (!window.ACTIVE_GM_OBJECT_TAGS) {
-            window.ACTIVE_GM_OBJECT_TAGS = [];
-          }
-          
-          // Toggle the tag
-          const index = window.ACTIVE_GM_OBJECT_TAGS.indexOf(tag);
-          if (index > -1) {
-            // Remove tag
-            window.ACTIVE_GM_OBJECT_TAGS.splice(index, 1);
-          } else {
-            // Add tag
-            window.ACTIVE_GM_OBJECT_TAGS.push(tag);
-          }
-          
-          // For GM filters, reload the page via router
-          try {
-            if (window.JdrApp && window.JdrApp.modules && window.JdrApp.modules.router) {
-              window.JdrApp.modules.router.renderGMObjectsPage();
-            }
-          } catch (error) {
-            // Silent error handling
-          }
-        }
-      });
-    },
+    // Filter event handlers removed - now handled by specialized modules
 
-    handleMonsterFilter(tag) {
-      // Initialize filter state if needed
-      if (!window.MONSTRES_FILTER_STATE) {
-        const config = window.ContentTypes?.monster?.filterConfig;
-        window.MONSTRES_FILTER_STATE = {
-          visibleTags: config?.defaultVisibleTags || ['Forêt']
-        };
-      }
-      
-      const state = window.MONSTRES_FILTER_STATE;
-      const index = state.visibleTags.indexOf(tag);
-      
-      if (index > -1) {
-        // Remove tag
-        state.visibleTags.splice(index, 1);
-      } else {
-        // Add tag
-        state.visibleTags.push(tag);
-      }
-      
-      // Reload monsters page to apply filter
-      try {
-        if (window.JdrApp && window.JdrApp.modules && window.JdrApp.modules.router) {
-          window.JdrApp.modules.router.renderMonstersPage();
-        }
-      } catch (error) {
-        console.error('Error reloading monsters page:', error);
-      }
-    },
-
-    handleTableTresorFilter(tag) {
-      // Initialize filter state if needed
-      if (!window.TABLES_TRESORS_FILTER_STATE) {
-        const config = window.ContentTypes?.tableTresor?.filterConfig;
-        window.TABLES_TRESORS_FILTER_STATE = {
-          visibleTags: config?.defaultVisibleTags || ['Commun']
-        };
-      }
-      
-      const state = window.TABLES_TRESORS_FILTER_STATE;
-      const index = state.visibleTags.indexOf(tag);
-      
-      if (index > -1) {
-        // Remove tag
-        state.visibleTags.splice(index, 1);
-      } else {
-        // Add tag
-        state.visibleTags.push(tag);
-      }
-      
-      // Reload tables page to apply filter
-      try {
-        if (window.JdrApp && window.JdrApp.modules && window.JdrApp.modules.router) {
-          window.JdrApp.modules.router.renderTablesTresorsPage();
-        }
-      } catch (error) {
-        // Silent error handling
-      }
-    },
-
-    updateGMObjectsDisplay() {
-      if (!window.OBJETS || !window.ACTIVE_GM_OBJECT_TAGS) {
-        return;
-      }
-      
-      // Only proceed if we're actually on the GM objects page
-      const gmArticle = document.querySelector('article[data-page="gestion-objets"]');
-      if (!gmArticle) {
-        return;
-      }
-      
-      try {
-        const allObjects = window.OBJETS.objets || [];
-        const activeTags = window.ACTIVE_GM_OBJECT_TAGS;
-        
-        // Filter objects based on active tags
-        const filteredObjects = activeTags.length === 0 
-          ? allObjects
-          : allObjects.filter(obj => {
-              if (!obj.tags || obj.tags.length === 0) return false;
-              return activeTags.every(activeTag => obj.tags.includes(activeTag));
-            });
-        
-        // Update ONLY the objects container
-        const objectsContainer = document.getElementById('gestion-objets-container');
-        if (objectsContainer && CardBuilder) {
-          objectsContainer.innerHTML = filteredObjects.map((item, index) => 
-            CardBuilder.create('objet', item, 'objets', index).build()
-          ).join('');
-        }
-        
-        // Update ONLY the filter chips visual state
-        const filterChips = document.querySelectorAll('.gm-filter-chip');
-        filterChips.forEach(chip => {
-          const tag = chip.dataset.tag;
-          const isActive = activeTags.includes(tag);
-          
-          if (isActive) {
-            chip.style.background = '#16a34a';
-            chip.style.opacity = '1';
-            chip.textContent = `✓ ${tag}`;
-            chip.classList.add('active');
-            chip.classList.remove('inactive');
-          } else {
-            chip.style.background = '#6b7280';
-            chip.style.opacity = '0.6';
-            chip.textContent = tag;
-            chip.classList.add('inactive');
-            chip.classList.remove('active');
-          }
-        });
-        
-        // Auto-load images if available
-        if (this.modules.renderer && this.modules.renderer.autoLoadImages) {
-          this.modules.renderer.autoLoadImages();
-        }
-        
-      } catch (error) {
-        // Silent error handling
-      }
-    },
+    // updateGMObjectsDisplay removed - now handled by GMObjectFilters module
 
     // Force reload JSON data (clear localStorage cache)
     forceReloadData() {
@@ -9581,31 +9399,7 @@ article.active .grid {
       this.forceReloadData();
     },
 
-    // Initialize default filters for objects on page load
-    initializeDefaultFilters() {
-      try {
-        // Only initialize if OBJETS exists and ContentTypes is available
-        if (window.OBJETS && window.ContentTypes?.objet?.filterConfig) {
-          const defaultTags = window.ContentTypes.objet.filterConfig.defaultVisibleTags || [];
-          
-          // Initialize filterSettings only if it doesn't exist or is empty
-          if (!window.OBJETS.filterSettings || !window.OBJETS.filterSettings.visibleTags) {
-            window.OBJETS.filterSettings = {
-              visibleTags: [...defaultTags], // Active filters (defaults only)
-              displayedFilterButtons: [...defaultTags] // Displayed filter buttons (defaults initially)
-            };
-          }
-          
-          // Ensure displayedFilterButtons exists even if visibleTags already existed
-          if (!window.OBJETS.filterSettings.displayedFilterButtons) {
-            window.OBJETS.filterSettings.displayedFilterButtons = [...defaultTags];
-          }
-          
-        }
-      } catch (error) {
-        // Silent error handling for filter initialization
-      }
-    },
+    // initializeDefaultFilters removed - now handled by specialized filter modules
 
     // Validate data integrity on application startup
     validateDataIntegrity() {
@@ -10946,7 +10740,7 @@ article.active .grid {
         : '<span style="font-style: italic; color: #666;">Aucun tag</span>';
 
       return `
-        <div class="card editable-section item-card" data-section-type="objet" data-objet-name="${this.data.nom}" data-category-name="${this.categoryName}">
+        <div class="card editable-section item-card" data-section-type="objet" data-objet-name="${this.data.nom}" data-numero="${this.data.numero}" data-object-id="${this.data.numero}" data-category-name="${this.categoryName}">
           ${this.buildFavorisButton('objets', this.data.nom)}
           ${this.buildEditableTitle(this.data.nom, 'objet-name')}
           ${this.buildIllustration(`objet:${this.data.nom}`, this.data.nom)}
@@ -11207,14 +11001,22 @@ article.active .grid {
         containerClasses += ` illus-${styleType}`;
       }
 
-      // HYBRID APPROACH: Never generate buttons in standalone, always generate in dev mode
+      // HYBRID APPROACH: Never generate buttons in standalone or preview mode, always generate in dev mode
       const isStandalone = window.STANDALONE_VERSION === true;
+      const isPreviewMode = this.isPreview;
       
       if (isStandalone) {
-        // STANDALONE: Never generate image buttons at all
+        // STANDALONE: Never generate image buttons at all, use lazy loading
         return `
           <div class="${containerClasses}" data-illus-key="${illusKey}" data-style-type="${styleType}" data-bound="1">
             <img alt="Illustration ${altText}" class="thumb lazy-load" loading="lazy" style="${imageStyle}"${imageUrl ? ` data-src="${imageUrl}"` : ''} src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjE1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkNoYXJnZW1lbnQuLi48L3RleHQ+PC9zdmc+">
+          </div>
+        `;
+      } else if (isPreviewMode) {
+        // PREVIEW: Show real images without buttons
+        return `
+          <div class="${containerClasses}" data-illus-key="${illusKey}" data-style-type="${styleType}" data-bound="1">
+            <img alt="Illustration ${altText}" class="thumb" style="${imageStyle}"${imageUrl ? ` src="${imageUrl}"` : ''}>
           </div>
         `;
       } else {
@@ -11421,10 +11223,20 @@ article.active .grid {
     }
 
     buildEditButton(buttonType) {
+      // Don't show edit buttons in preview mode
+      if (this.isPreview) {
+        return '';
+      }
+      
       return `<button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="${buttonType}">✏️</button>`;
     }
 
     buildDeleteButton(type) {
+      // Don't show delete button in preview mode
+      if (this.isPreview) {
+        return '';
+      }
+      
       const config = this.config;
       const deleteIcon = config?.icons?.delete || '🗑️';
       
@@ -11438,7 +11250,8 @@ article.active .grid {
     }
 
     buildMoveButtons(type, index, totalItems) {
-      if (totalItems <= 1) {
+      // Don't show move buttons in preview mode
+      if (this.isPreview || totalItems <= 1) {
         return '';
       }
 
@@ -11469,6 +11282,11 @@ article.active .grid {
      * @returns {string} HTML du bouton favoris
      */
     buildFavorisButton(type, nom) {
+      // Don't show favoris button in preview mode
+      if (this.isPreview) {
+        return '';
+      }
+      
       // Vérifier que le FavorisManager est disponible
       if (typeof window.FavorisManager === 'undefined') {
         return '';
@@ -11566,8 +11384,17 @@ article.active .grid {
             <div class="grid cols-2" id="objets-container">
               ${allObjects.map((item, index) => {
                 const cardHTML = CardBuilder.create('objet', item, 'objets', index).build();
-                // Hide all objects by default - only ID search will show them
-                return cardHTML.replace('<div class="card', '<div class="card" style="display: none;"');
+                // Show only the searched object if ID search is active
+                if (window.activeIdSearch && window.activeSearchId) {
+                  if (item.numero === window.activeSearchId) {
+                    return cardHTML; // Show this object
+                  } else {
+                    return cardHTML.replace('<div class="card', '<div class="card" style="display: none;"'); // Hide others
+                  }
+                } else {
+                  // Hide all objects by default when no search is active
+                  return cardHTML.replace('<div class="card', '<div class="card" style="display: none;"');
+                }
               }).join('')}
             </div>
             
@@ -11578,10 +11405,8 @@ article.active .grid {
     }
 
     buildGameMasterObjectPage(objectData) {
-      console.log('🔧 DEBUG buildGameMasterObjectPage - objectData:', objectData);
       const config = window.ContentTypes['objet'];
       const allObjects = objectData.objets || [];
-      console.log('🔧 DEBUG buildGameMasterObjectPage - allObjects count:', allObjects.length);
       const availableTags = config?.filterConfig?.availableTags || [];
       
       // Initialize active tags for GM page
@@ -11589,19 +11414,19 @@ article.active .grid {
         window.ACTIVE_GM_OBJECT_TAGS = [];
       }
       const activeTags = window.ACTIVE_GM_OBJECT_TAGS;
-      console.log('🔧 DEBUG buildGameMasterObjectPage - activeTags:', activeTags);
+      
       
       // Filter objects based on active tags
       const filteredObjects = activeTags.length === 0 
         ? allObjects // No tags active = show all objects
         : allObjects.filter(obj => {
             // AND logic - object must have ALL active tags
-            if (!obj.tags || obj.tags.length === 0) return false;
-            return activeTags.every(activeTag => obj.tags.includes(activeTag));
+            if (!obj.tags || obj.tags.length === 0) {
+              return false;
+            }
+            const hasAllTags = activeTags.every(activeTag => obj.tags.includes(activeTag));
+            return hasAllTags;
           });
-          
-      console.log('🔧 DEBUG buildGameMasterObjectPage - filteredObjects count:', filteredObjects.length);
-      
       
       const result = `
         <article class="" data-page="gestion-objets">
@@ -11611,11 +11436,7 @@ article.active .grid {
               ${this.buildIllustration('page:gestion-objets')}
             </div>
             
-            <div style="margin: 1rem 0; padding: 1rem; background: var(--card); border-radius: 8px; border-left: 4px solid var(--bronze);">
-              <p class="lead">Page dédiée au Maître de jeu pour gérer, créer et modifier les objets du jeu. Utilisez les filtres pour organiser votre contenu et les outils de création pour ajouter de nouveaux équipements.</p>
-            </div>
             
-            ${this.buildIdSearchFilter()}
             ${this.buildGMTagFilters(activeTags, availableTags)}
             
             <div style="display: flex; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap;">
@@ -11623,17 +11444,15 @@ article.active .grid {
               ${this.buildTagsManagerButton()}
             </div>
             
-            <div class="grid cols-2" id="gestion-objets-container">
+            <div class="collection-items" id="gestion-objets-container">
               ${(() => {
                 try {
                   const cards = filteredObjects.map((item, index) => {
                     const card = CardBuilder.create('objet', item, 'objets', index).build();
                     return card;
                   }).join('');
-                  console.log('🔧 DEBUG buildGameMasterObjectPage - generated cards length:', cards.length);
                   return cards;
                 } catch (error) {
-                  console.error('🔧 DEBUG buildGameMasterObjectPage - error generating cards:', error);
                   return '<p style="color: red;">Erreur lors de la génération des cartes objets</p>';
                 }
               })()}
@@ -11665,21 +11484,26 @@ article.active .grid {
       }
       
       // Utiliser le state du filtre s'il existe, sinon les tags par défaut
-      const visibleTags = window.MONSTRES_FILTER_STATE?.visibleTags || config.filterConfig.defaultVisibleTags;
+      // IMPORTANT: Empty array [] should be preserved, not fall back to defaults
+      const visibleTags = window.MONSTRES_FILTER_STATE?.visibleTags !== undefined 
+        ? window.MONSTRES_FILTER_STATE.visibleTags 
+        : config.filterConfig.defaultVisibleTags;
+        
       
-      // Filter monsters according to visible tags (AND mode)
+      // Filter monsters according to visible tags (OR mode - more intuitive)
       const filteredMonsters = visibleTags.length === 0 
         ? [] // If no tags are visible, show nothing
         : allMonsters.filter(monster => {
             // Check that the monster has the required tags to be visible
-            if (!monster.tags) return false;
+            if (!monster.tags) {
+              return false;
+            }
             
-            // In AND mode: monster must have ALL visible tags
-            const hasAllVisibleTags = visibleTags.every(tag => monster.tags.includes(tag));
-            if (!hasAllVisibleTags) return false;
-            
-            return true;
+            // In OR mode: monster must have at least ONE visible tag
+            const hasAnyVisibleTag = visibleTags.some(tag => monster.tags.includes(tag));
+            return hasAnyVisibleTag;
           });
+      
       
       return `
         <article class="" data-page="monstres">
@@ -12317,6 +12141,7 @@ article.active .grid {
       if (!availableTags || availableTags.length === 0) {
         return '';
       }
+      
 
       const filterTitle = context === 'monster' ? '🎯 Filtrer les monstres par tags :' : 
                          context === 'tableTresor' ? '🎯 Filtrer les tables par tags :' : 
@@ -12339,9 +12164,13 @@ article.active .grid {
               const opacity = isActive ? '1' : '0.6';
               const prefix = isActive ? '✓ ' : '';
               
+              const chipClass = context === 'monster' ? 'monster-filter-chip' : 
+                               context === 'tableTresor' ? 'tresor-filter-chip' : 
+                               'filter-chip';
+              
               return `
                 <button 
-                  class="filter-chip" 
+                  class="${chipClass}" 
                   data-tag="${tag}"
                   style="
                     padding: 0.25rem 0.75rem;
@@ -12370,15 +12199,13 @@ article.active .grid {
         return '';
       }
 
+
       return `
         <div class="gm-tag-filters" style="margin: 1rem 0; padding: 1rem; background: var(--card); border: 2px solid var(--bronze); border-radius: 12px;">
           <div style="margin-bottom: 1rem;">
             <h4 style="margin: 0 0 0.5rem 0; color: var(--accent-ink); font-size: 1em;">
               🎯 Filtrer les objets par tags (Mode GM) :
             </h4>
-            <p style="margin: 0; font-size: 0.85em; color: var(--paper-muted); font-style: italic;">
-              Cliquez sur les tags pour filtrer les objets. Logique ET (tous les tags sélectionnés requis).
-            </p>
           </div>
           <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
             ${availableTags.map(tag => {
@@ -12386,6 +12213,7 @@ article.active .grid {
               const bgColor = isActive ? '#16a34a' : '#6b7280';
               const opacity = isActive ? '1' : '0.6';
               const prefix = isActive ? '✓ ' : '';
+              
               
               return `
                 <button 
@@ -12573,12 +12401,29 @@ article.active .grid {
       const campaigns = pageData.subPages || {};
       const campaignList = Object.keys(campaigns);
       
+      // Ensure JdrApp and state exist before accessing
+      if (!window.JdrApp) {
+        window.JdrApp = {};
+      }
+      if (!window.JdrApp.state) {
+        window.JdrApp.state = {};
+      }
+      
       // Get current selections (default to first available or empty)
-      const selectedCampaign = window.JdrApp?.state?.selectedCampaign || (campaignList.length > 0 ? campaignList[0] : null);
+      const selectedCampaign = window.JdrApp.state.selectedCampaign || (campaignList.length > 0 ? campaignList[0] : null);
       const currentCampaign = selectedCampaign && campaigns[selectedCampaign] ? campaigns[selectedCampaign] : null;
       const subPageList = currentCampaign ? Object.keys(currentCampaign.subPages || {}) : [];
-      const selectedSubPage = window.JdrApp?.state?.selectedSubPage || (subPageList.length > 0 ? subPageList[0] : null);
+      const selectedSubPage = window.JdrApp.state.selectedSubPage || (subPageList.length > 0 ? subPageList[0] : null);
       const currentSubPage = selectedSubPage && currentCampaign?.subPages?.[selectedSubPage] ? currentCampaign.subPages[selectedSubPage] : null;
+      
+      // Auto-initialize state if it wasn't set by UI functions
+      if (!window.JdrApp.state.selectedCampaign && selectedCampaign) {
+        window.JdrApp.state.selectedCampaign = selectedCampaign;
+      }
+      if (!window.JdrApp.state.selectedSubPage && selectedSubPage) {
+        window.JdrApp.state.selectedSubPage = selectedSubPage;
+      }
+      
       
       return `
         <article class="" data-page="${pageId}" data-static-page="true" data-page-title="${pageData.title}">
@@ -19214,54 +19059,62 @@ article.active .grid {
     },
 
     renderGMObjectsPage() {
-      console.log('🔧 DEBUG renderGMObjectsPage - start');
       if (!window.OBJETS) {
-        // OBJETS data not loaded
-        console.log('🔧 DEBUG renderGMObjectsPage - no OBJETS data');
         return false;
       }
       
       // Generate the GM objects page HTML
       const pageHTML = window.PageBuilder.buildGameMasterObjectPage(window.OBJETS);
-      console.log('🔧 DEBUG renderGMObjectsPage - pageHTML length:', pageHTML.length);
       
       // Update only the specific article instead of wiping entire views container
       let gmObjectsArticle = document.querySelector('article[data-page="gestion-objets"]');
-      console.log('🔧 DEBUG renderGMObjectsPage - existing article:', !!gmObjectsArticle);
       
       if (!gmObjectsArticle) {
         // Create the article if it doesn't exist
         const viewsContainer = document.getElementById('views');
-        console.log('🔧 DEBUG renderGMObjectsPage - views container:', !!viewsContainer);
         if (viewsContainer) {
           viewsContainer.insertAdjacentHTML('beforeend', pageHTML);
           gmObjectsArticle = document.querySelector('article[data-page="gestion-objets"]');
-          console.log('🔧 DEBUG renderGMObjectsPage - article created:', !!gmObjectsArticle);
+          
+          // Force DOM reflow/repaint after insertAdjacentHTML
+          if (gmObjectsArticle) {
+            // Force layout recalculation by accessing offsetHeight
+            const forceReflow = gmObjectsArticle.offsetHeight;
+            
+            // Use requestAnimationFrame to ensure proper rendering
+            requestAnimationFrame(() => {
+              // Scroll to top to ensure visibility
+              window.scrollTo(0, 0);
+            });
+          }
         }
       } else {
         // Update existing article content
-        console.log('🔧 DEBUG renderGMObjectsPage - updating existing article');
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = pageHTML;
         const newArticleContent = tempDiv.querySelector('article[data-page="gestion-objets"]');
-        console.log('🔧 DEBUG renderGMObjectsPage - new content found:', !!newArticleContent);
         if (newArticleContent) {
-          console.log('🔧 DEBUG renderGMObjectsPage - new content HTML length:', newArticleContent.innerHTML.length);
           gmObjectsArticle.innerHTML = newArticleContent.innerHTML;
-          console.log('🔧 DEBUG renderGMObjectsPage - article content updated');
+          
+          // Force DOM reflow/repaint after innerHTML update
+          // Force layout recalculation by accessing offsetHeight
+          const forceReflow = gmObjectsArticle.offsetHeight;
+          
+          // Use requestAnimationFrame to ensure proper rendering
+          requestAnimationFrame(() => {
+            // Scroll to top to ensure visibility
+            window.scrollTo(0, 0);
+          });
+        } else {
         }
       }
       
       if (gmObjectsArticle) {
-        console.log('🔧 DEBUG renderGMObjectsPage - calling updateActiveStates');
         this.updateActiveStates('gestion-objets');
-        console.log('🔧 DEBUG renderGMObjectsPage - calling setupGMObjectSearch');
         this.setupGMObjectSearch();
-        console.log('🔧 DEBUG renderGMObjectsPage - success');
         return true;
       }
       
-      console.log('🔧 DEBUG renderGMObjectsPage - failed');
       return false;
     },
 
@@ -19344,12 +19197,15 @@ article.active .grid {
           monstersArticle = document.querySelector('article[data-page="monstres"]');
         }
       } else {
-        // Update existing article content
+        // Completely replace the existing article element
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = pageHTML;
-        const newArticleContent = tempDiv.querySelector('article[data-page="monstres"]');
-        if (newArticleContent) {
-          monstersArticle.innerHTML = newArticleContent.innerHTML;
+        const newArticleElement = tempDiv.querySelector('article[data-page="monstres"]');
+        
+        if (newArticleElement) {
+          // Replace the entire article element, not just its innerHTML
+          monstersArticle.parentNode.replaceChild(newArticleElement, monstersArticle);
+          monstersArticle = newArticleElement; // Update the reference
         }
       }
       
@@ -19395,6 +19251,33 @@ article.active .grid {
       }
       
       return false;
+    },
+
+    show(page) {
+      // Hide all articles first
+      const allArticles = document.querySelectorAll('#views article');
+      allArticles.forEach(article => {
+        article.style.display = 'none';
+      });
+      
+      // Show the requested page
+      const targetArticle = document.querySelector(`article[data-page="${page}"]`);
+      if (targetArticle) {
+        targetArticle.style.display = 'block';
+      }
+      
+      this.updateActiveStates(page);
+    },
+
+    updateActiveStates(page) {
+      // Update navigation active states
+      const navLinks = document.querySelectorAll('nav a');
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#/${page}`) {
+          link.classList.add('active');
+        }
+      });
     }
   
   };
@@ -19416,11 +19299,45 @@ article.active .grid {
     
     init() {
       // Delay content generation to ensure all configurations are loaded
+      // Increased delay to ensure data loading is complete
       setTimeout(() => {
-        this.generateContent();
-        this.autoLoadImages();
-      }, 10);
+        // Verify data is loaded before generating content
+        if (this.isDataReady()) {
+          this.generateContent();
+          this.autoLoadImages();
+        } else {
+          // If data not ready, retry with longer delays
+          this.waitForDataAndGenerate();
+        }
+      }, 100);
       this.setupEventListeners();
+    },
+
+    isDataReady() {
+      // Check if essential data is loaded
+      return window.SORTS && window.CLASSES && window.DONS && 
+             window.OBJETS && window.MONSTRES && window.STATIC_PAGES;
+    },
+
+    waitForDataAndGenerate() {
+      let attempts = 0;
+      const maxAttempts = 20; // Max 10 seconds
+      
+      const checkData = () => {
+        attempts++;
+        if (this.isDataReady()) {
+          this.generateContent();
+          this.autoLoadImages();
+        } else if (attempts < maxAttempts) {
+          setTimeout(checkData, 500); // Check every 500ms
+        } else {
+          // Data loading timeout - generating with available data
+          this.generateContent();
+          this.autoLoadImages();
+        }
+      };
+      
+      checkData();
     },
 
     setupEventListeners() {
@@ -20086,7 +20003,50 @@ article.active .grid {
       
       // Mark search as inactive
       window.activeIdSearch = false;
-    }
+    },
+
+    // Add missing regenerateCurrentPage function
+    regenerateCurrentPage() {
+      // Get current page from URL
+      const currentHash = window.location.hash || '#/creation';
+      const currentPage = currentHash.replace('#/', '');
+      
+      // Special handling for static pages like campaign
+      if (currentPage === 'campagne') {
+        const campaignData = window.CAMPAGNE || window.STATIC_PAGES?.campagne;
+        
+        if (campaignData && window.PageBuilder) {
+          const pageHTML = window.PageBuilder.buildStaticPage('campagne', campaignData);
+          const viewsContainer = document.querySelector('#views');
+          
+          if (viewsContainer && pageHTML) {
+            // Remove existing campaign page
+            const existingPage = viewsContainer.querySelector('[data-page="campagne"]');
+            if (existingPage) {
+              existingPage.remove();
+            }
+            
+            // Insert new page HTML
+            viewsContainer.insertAdjacentHTML('beforeend', pageHTML);
+            
+            // Ensure proper visibility
+            const newPage = viewsContainer.querySelector('[data-page="campagne"]');
+            if (newPage) {
+              // Hide all other pages and show the new one
+              viewsContainer.querySelectorAll('article').forEach(article => {
+                article.style.display = article === newPage ? 'block' : 'none';
+              });
+            }
+          }
+        }
+      } else {
+        // For other pages, try to use the router's parseRoute method
+        if (JdrApp.modules.router?.parseRoute) {
+          JdrApp.modules.router.parseRoute();
+        }
+      }
+    },
+
   };
 
 })();
@@ -24173,6 +24133,7 @@ article.active .grid {
       this.setupModals();
       this.setupResponsive();
       this.setupNewPageHandler();
+      this.initializeFilterModules();
       this._initialized = true;
       
     },
@@ -24198,6 +24159,17 @@ article.active .grid {
       if (window.EventHandlers) {
         EventHandlers.setupContentHandlers();
         EventHandlers.setupTagsManagement();
+      }
+      
+      // Initialize specialized filter modules
+      if (window.GMObjectFilters && window.GMObjectFilters.init) {
+        window.GMObjectFilters.init();
+      }
+      if (window.MonsterFilters && window.MonsterFilters.init) {
+        window.MonsterFilters.init();
+      }
+      if (window.TableTresorFilters && window.TableTresorFilters.init) {
+        window.TableTresorFilters.init();
       }
     },
 
@@ -24421,20 +24393,20 @@ article.active .grid {
     },
 
     showSpellPreview(spellName, categoryName, triggerElement) {
-      if (JdrApp.modules.ui?.showSpellPreview) {
-        return JdrApp.modules.ui.showSpellPreview(spellName, categoryName, triggerElement);
+      if (window.ModalManager?.showSpellPreview) {
+        return ModalManager.showSpellPreview(spellName, categoryName, triggerElement);
       }
     },
 
     showEtatPreview(etatName, etatDescription, triggerElement) {
-      if (JdrApp.modules.ui?.showEtatPreview) {
-        return JdrApp.modules.ui.showEtatPreview(etatName, etatDescription, triggerElement);
+      if (window.ModalManager?.showEtatPreview) {
+        return ModalManager.showEtatPreview(etatName, etatDescription, triggerElement);
       }
     },
 
     showMonsterPreview(monsterName, triggerElement, event) {
-      if (JdrApp.modules.ui?.showMonsterPreview) {
-        return JdrApp.modules.ui.showMonsterPreview(monsterName, triggerElement, event);
+      if (window.ModalManager?.showMonsterPreview) {
+        return ModalManager.showMonsterPreview(monsterName, triggerElement, event);
       }
     },
 
@@ -24462,6 +24434,24 @@ article.active .grid {
       }
       if (JdrApp.modules.ui?.showSectionSelectionModal) {
         return JdrApp.modules.ui.showSectionSelectionModal();
+      }
+    },
+
+    /**
+     * Initialize all filter modules
+     */
+    initializeFilterModules() {
+      // Initialize specialized filter modules
+      if (window.MonsterFilters && MonsterFilters.init) {
+        MonsterFilters.init();
+      }
+      
+      if (window.GMObjectFilters && GMObjectFilters.init) {
+        GMObjectFilters.init();
+      }
+      
+      if (window.TableTresorFilters && TableTresorFilters.init) {
+        TableTresorFilters.init();
       }
     }
   };
@@ -24553,6 +24543,13 @@ article.active .grid {
         } else if (e.key === 'Escape') {
           e.target.value = '';
           this.delegateToUI('clearIdSearch');
+        }
+      });
+
+      JdrApp.utils.events.register('click', '#search-object-btn', () => {
+        const input = document.querySelector('#id-search-input');
+        if (input) {
+          this.delegateToUI('performIdSearch', input.value);
         }
       });
 
@@ -25793,6 +25790,409 @@ article.active .grid {
     },
 
     /**
+     * Show state preview tooltip
+     */
+    showEtatPreview(etatName, etatDescription, triggerElement) {
+      if (!etatName) return;
+      
+      // Remove any existing preview of the same type
+      const existingPreview = document.querySelector('.etat-preview-tooltip');
+      if (existingPreview) {
+        existingPreview.remove();
+      }
+      
+      // Create a simple tooltip-style preview
+      const preview = document.createElement('div');
+      preview.className = 'etat-preview-tooltip';
+      preview.innerHTML = `
+        <div class="etat-preview-header">
+          <strong>${etatName}</strong>
+        </div>
+        <div class="etat-preview-content">
+          ${etatDescription || 'Description non disponible'}
+        </div>
+      `;
+      
+      // Style the preview
+      preview.style.cssText = `
+        position: absolute;
+        background: var(--paper);
+        border: 2px solid var(--accent-ink);
+        border-radius: 8px;
+        padding: 12px;
+        max-width: 300px;
+        box-shadow: 0 4px 12px rgba(0,0,0,1) !important;
+        z-index: 1000;
+        font-size: 14px;
+        line-height: 1.4;
+        color: var(--ink);
+        pointer-events: none;
+        opacity: 1 !important;
+      `;
+      
+      // Force opacity on all child elements
+      preview.addEventListener('mouseenter', () => {
+        preview.style.opacity = '1';
+        preview.style.boxShadow = '0 4px 12px rgba(0,0,0,1)';
+      });
+      preview.addEventListener('mouseleave', () => {
+        preview.style.opacity = '1';
+        preview.style.boxShadow = '0 4px 12px rgba(0,0,0,1)';
+      });
+      
+      // Position near the trigger element
+      const rect = triggerElement.getBoundingClientRect();
+      preview.style.left = (rect.left + window.scrollX) + 'px';
+      preview.style.top = (rect.bottom + window.scrollY + 5) + 'px';
+      
+      // Add to document
+      document.body.appendChild(preview);
+      
+      // Remove on click outside or after delay
+      const removePreview = () => {
+        if (preview.parentNode) {
+          preview.parentNode.removeChild(preview);
+        }
+        // Clean up event listener if it exists
+        if (preview._clickHandler) {
+          document.removeEventListener('click', preview._clickHandler);
+        }
+      };
+      
+      // Store reference to the listener function for états only
+      const clickOutsideHandler = (e) => {
+        // Check if the click is outside the preview and not on a link inside the preview
+        if (!preview.contains(e.target) && e.target !== triggerElement) {
+          removePreview();
+          document.removeEventListener('click', clickOutsideHandler);
+        }
+      };
+      
+      // Add listener that will close on clicks outside (états only)
+      document.addEventListener('click', clickOutsideHandler);
+      
+      // Store the handler on the preview element for cleanup
+      preview._clickHandler = clickOutsideHandler;
+    },
+
+    /**
+     * Show spell preview tooltip
+     */
+    showSpellPreview(spellName, categoryName, triggerElement) {
+      if (!spellName) return;
+      
+      // Only remove existing spell previews, not other types
+      const existingPreview = document.querySelector('.spell-preview-tooltip');
+      if (existingPreview) {
+        existingPreview.remove();
+      }
+      
+      // Find the spell in the data
+      let foundSpell = null;
+      if (window.SORTS) {
+        for (const category of window.SORTS) {
+          const spell = category.sorts?.find(s => s.nom === spellName);
+          if (spell) {
+            foundSpell = spell;
+            break;
+          }
+        }
+      }
+      
+      if (!foundSpell) {
+        this.showEtatPreview(spellName, 'Sort non trouvé', triggerElement);
+        return;
+      }
+      
+      // Find the actual category name for the spell
+      let actualCategoryName = 'preview';
+      if (window.SORTS) {
+        for (const category of window.SORTS) {
+          if (category.sorts?.find(s => s.nom === spellName)) {
+            actualCategoryName = category.nom;
+            break;
+          }
+        }
+      }
+      
+      // Create a temporary CardBuilder that allows preview mode but with real category name
+      const tempBuilder = CardBuilder.create('spell', foundSpell, actualCategoryName);
+      tempBuilder.isPreview = true; // Force preview mode manually
+      const spellCard = tempBuilder.build();
+      
+      // Create and show preview
+      const preview = document.createElement('div');
+      preview.className = 'spell-preview-tooltip';
+      preview.innerHTML = `
+        <style>
+          .spell-preview-tooltip * {
+            opacity: 1 !important;
+            background-color: transparent !important;
+          }
+          .spell-preview-tooltip .card {
+            opacity: 1 !important;
+            background: var(--paper) !important;
+          }
+          .spell-preview-tooltip .card:hover {
+            opacity: 1 !important;
+            background: var(--paper) !important;
+            transform: none !important;
+          }
+          .preview-close-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: #dc2626;
+            color: black;
+            border: 3px solid #ffffff;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.6);
+            transition: all 0.2s ease;
+          }
+          .preview-close-btn:hover {
+            background: #b91c1c;
+            color: black;
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(220, 38, 38, 0.8);
+          }
+        </style>
+        <button class="preview-close-btn" title="Fermer">&times;</button>
+        ${spellCard}
+      `;
+      
+      // Style the preview container
+      preview.style.cssText = `
+        position: absolute;
+        z-index: 1000;
+        max-width: 450px;
+        max-height: 600px;
+        overflow-y: auto;
+        box-shadow: 0 8px 24px rgba(0,0,0,1) !important;
+        border-radius: 12px;
+        pointer-events: auto;
+        opacity: 1 !important;
+        background: var(--paper) !important;
+      `;
+      
+      // Force styles after element is added to DOM
+      setTimeout(() => {
+        preview.style.setProperty('opacity', '1', 'important');
+        preview.style.setProperty('background', 'var(--paper)', 'important');
+        const card = preview.querySelector('.card');
+        if (card) {
+          card.style.setProperty('opacity', '1', 'important');
+          card.style.setProperty('background', 'var(--paper)', 'important');
+        }
+      }, 10);
+      
+      // Position near the trigger element
+      const rect = triggerElement.getBoundingClientRect();
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+      
+      // Calculate position to keep preview in viewport
+      let left = rect.left + window.scrollX;
+      let top = rect.bottom + window.scrollY + 5;
+      
+      // Adjust horizontal position if too far right
+      if (left + 450 > viewportWidth) {
+        left = rect.right + window.scrollX - 450;
+      }
+      if (left < 10) {
+        left = 10;
+      }
+      
+      // Adjust vertical position if too far down
+      if (top + 600 > viewportHeight + window.scrollY) {
+        top = rect.top + window.scrollY - 605;
+      }
+      if (top < 10) {
+        top = 10;
+      }
+      
+      preview.style.left = left + 'px';
+      preview.style.top = top + 'px';
+      
+      // Add to document
+      document.body.appendChild(preview);
+      
+      // Remove on click outside or after delay
+      const removePreview = () => {
+        if (preview.parentNode) {
+          preview.parentNode.removeChild(preview);
+        }
+      };
+      
+      // Add click handler for the close button only
+      setTimeout(() => {
+        const closeBtn = preview.querySelector('.preview-close-btn');
+        if (closeBtn) {
+          closeBtn.addEventListener('click', () => {
+            removePreview();
+          });
+        }
+      }, 10);
+    },
+
+    /**
+     * Show monster preview tooltip
+     */
+    showMonsterPreview(monsterName, triggerElement, event) {
+      if (!monsterName) return;
+      
+      // Only remove existing monster previews, not other types
+      const existingPreview = document.querySelector('.monster-preview-tooltip');
+      if (existingPreview) {
+        existingPreview.remove();
+      }
+      
+      // Find the monster in the data
+      let foundMonster = null;
+      if (window.MONSTRES) {
+        foundMonster = window.MONSTRES.find(m => m.nom === monsterName);
+      }
+      
+      if (!foundMonster) {
+        this.showEtatPreview(monsterName, 'Monstre non trouvé', triggerElement);
+        return;
+      }
+      
+      // Use CardBuilder to create a full monster card in preview mode
+      const monsterCard = CardBuilder.create('monster', foundMonster, 'preview').build();
+      
+      // Create and show preview
+      const preview = document.createElement('div');
+      preview.className = 'monster-preview-tooltip';
+      preview.innerHTML = `
+        <style>
+          .monster-preview-tooltip * {
+            opacity: 1 !important;
+            background-color: transparent !important;
+          }
+          .monster-preview-tooltip .card {
+            opacity: 1 !important;
+            background: var(--paper) !important;
+          }
+          .monster-preview-tooltip .card:hover {
+            opacity: 1 !important;
+            background: var(--paper) !important;
+            transform: none !important;
+          }
+          .preview-close-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: #dc2626;
+            color: black;
+            border: 3px solid #ffffff;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.6);
+            transition: all 0.2s ease;
+          }
+          .preview-close-btn:hover {
+            background: #b91c1c;
+            color: black;
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(220, 38, 38, 0.8);
+          }
+        </style>
+        <button class="preview-close-btn" title="Fermer">&times;</button>
+        ${monsterCard}
+      `;
+      
+      // Style the preview container
+      preview.style.cssText = `
+        position: absolute;
+        z-index: 1000;
+        max-width: 450px;
+        max-height: 700px;
+        overflow-y: auto;
+        box-shadow: 0 8px 24px rgba(0,0,0,1) !important;
+        border-radius: 12px;
+        pointer-events: auto;
+        opacity: 1 !important;
+        background: var(--paper) !important;
+      `;
+      
+      // Force styles after element is added to DOM
+      setTimeout(() => {
+        preview.style.setProperty('opacity', '1', 'important');
+        preview.style.setProperty('background', 'var(--paper)', 'important');
+        const card = preview.querySelector('.card');
+        if (card) {
+          card.style.setProperty('opacity', '1', 'important');
+          card.style.setProperty('background', 'var(--paper)', 'important');
+        }
+      }, 10);
+      
+      // Position near the trigger element
+      const rect = triggerElement.getBoundingClientRect();
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+      
+      // Calculate position to keep preview in viewport
+      let left = rect.left + window.scrollX;
+      let top = rect.bottom + window.scrollY + 5;
+      
+      // Adjust horizontal position if too far right
+      if (left + 450 > viewportWidth) {
+        left = rect.right + window.scrollX - 450;
+      }
+      if (left < 10) {
+        left = 10;
+      }
+      
+      // Adjust vertical position if too far down
+      if (top + 700 > viewportHeight + window.scrollY) {
+        top = rect.top + window.scrollY - 705;
+      }
+      if (top < 10) {
+        top = 10;
+      }
+      
+      preview.style.left = left + 'px';
+      preview.style.top = top + 'px';
+      
+      // Add to document
+      document.body.appendChild(preview);
+      
+      // Remove on click outside or after delay
+      const removePreview = () => {
+        if (preview.parentNode) {
+          preview.parentNode.removeChild(preview);
+        }
+      };
+      
+      // Add click handler for the close button only
+      setTimeout(() => {
+        const closeBtn = preview.querySelector('.preview-close-btn');
+        if (closeBtn) {
+          closeBtn.addEventListener('click', () => {
+            removePreview();
+          });
+        }
+      }, 10);
+    },
+
+    /**
      * Create states modal
      */
     createEtatsModal() {
@@ -26964,46 +27364,25 @@ article.active .grid {
         return;
       }
 
-      // Set global flag BEFORE regenerating page
+      // Set global flag for ID search BEFORE any regeneration
       window.activeIdSearch = true;
+      window.activeSearchId = searchNumber;
 
-      // Immediately hide the container to prevent flash
-      const container = document.querySelector('#objets-container');
-      if (container) {
-        container.style.visibility = 'hidden';
-      }
-
-      // Show success message immediately
+      // Show success message
       if (resultDiv) {
         resultDiv.innerHTML = `✅ Objet trouvé : "${foundObject.nom}" (ID: ${searchNumber})`;
         resultDiv.style.color = '#16a34a';
       }
 
-      // Force regenerate page with all objects AND visual feedback
+      // Force regenerate page first, then show the object
       if (JdrApp.modules.renderer?.regenerateCurrentPage) {
         JdrApp.modules.renderer.regenerateCurrentPage();
       }
-
-      // After regeneration, configure display and show only target object
-      requestAnimationFrame(() => {
-        const newContainer = document.querySelector('#objets-container');
-        if (newContainer) {
-          // Hide all objects first
-          this.hideAllObjects();
-          
-          // Show only the target object and make container visible again
-          setTimeout(() => {
-            this.showOnlyObjectById(searchNumber);
-            newContainer.style.visibility = 'visible';
-            
-            // Restore the search value in the input field
-            const searchInput = document.querySelector('#id-search-input');
-            if (searchInput) {
-              searchInput.value = searchNumber;
-            }
-          }, 10);
-        }
-      });
+      
+      // After regeneration, show only the target object
+      setTimeout(() => {
+        this.showOnlyObjectById(searchNumber);
+      }, 100);
     },
 
     clearIdSearch() {
@@ -27018,21 +27397,24 @@ article.active .grid {
         resultDiv.innerHTML = '';
       }
       
-      // Clear the global flag
+      // Clear the global flags
       window.activeIdSearch = false;
+      window.activeSearchId = null;
       
-      // Show all objects again
-      this.showAllObjects();
+      // Regenerate page to show all objects hidden again
+      if (JdrApp.modules.renderer?.regenerateCurrentPage) {
+        JdrApp.modules.renderer.regenerateCurrentPage();
+      }
     },
 
     hideAllObjects() {
-      document.querySelectorAll('.card').forEach(card => {
+      document.querySelectorAll('#objets-container .card, #gestion-objets-container .card').forEach(card => {
         card.style.display = 'none';
       });
     },
 
     showAllObjects() {
-      document.querySelectorAll('.card').forEach(card => {
+      document.querySelectorAll('#objets-container .card, #gestion-objets-container .card').forEach(card => {
         card.style.display = '';
       });
     },
@@ -27040,12 +27422,168 @@ article.active .grid {
     showOnlyObjectById(searchNumber) {
       this.hideAllObjects();
       
-      // Show only the target object
-      const targetCard = document.querySelector(`[data-object-id="${searchNumber}"]`);
+      // Show only the target object - check both containers
+      const targetCard = document.querySelector(`[data-object-id="${searchNumber}"], [data-numero="${searchNumber}"]`);
       if (targetCard) {
         targetCard.style.display = '';
         targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
+    },
+
+    // Campaign management functions
+    selectCampaign(campaignName) {
+      if (!campaignName) return;
+      
+      // Initialize state if needed
+      if (!window.JdrApp) {
+        window.JdrApp = {};
+      }
+      if (!window.JdrApp.state) {
+        window.JdrApp.state = {};
+      }
+      
+      window.JdrApp.state.selectedCampaign = campaignName;
+      
+      // Clear sub-page selection when changing campaign and set to first available
+      const campaignData = window.CAMPAGNE?.subPages?.[campaignName];
+      if (campaignData?.subPages) {
+        const subPageList = Object.keys(campaignData.subPages);
+        window.JdrApp.state.selectedSubPage = subPageList.length > 0 ? subPageList[0] : null;
+      } else {
+        window.JdrApp.state.selectedSubPage = null;
+      }
+      
+      // Regenerate the page to reflect the new selection
+      if (JdrApp.modules.renderer?.regenerateCurrentPage) {
+        JdrApp.modules.renderer.regenerateCurrentPage();
+      }
+    },
+
+    selectSubPage(subPageName) {
+      if (!subPageName) return;
+      
+      // Initialize state if needed
+      if (!window.JdrApp) {
+        window.JdrApp = {};
+      }
+      if (!window.JdrApp.state) {
+        window.JdrApp.state = {};
+      }
+      
+      window.JdrApp.state.selectedSubPage = subPageName;
+      
+      // Small delay to ensure state is set before regeneration
+      setTimeout(() => {
+        if (JdrApp.modules.renderer?.regenerateCurrentPage) {
+          JdrApp.modules.renderer.regenerateCurrentPage();
+        }
+      }, 10);
+    },
+
+    // Campaign management functions
+    addCampaignSubPage(campaignName) {
+      if (!campaignName) return;
+      
+      const subPageName = prompt('Nom de la nouvelle sous-page :');
+      if (!subPageName || !subPageName.trim()) {
+        return;
+      }
+      
+      const trimmedName = subPageName.trim();
+      
+      // Initialize state if needed
+      if (!window.JdrApp) {
+        window.JdrApp = {};
+      }
+      if (!window.JdrApp.state) {
+        window.JdrApp.state = {};
+      }
+      
+      // Get campaign data
+      const campaignData = window.CAMPAGNE || window.STATIC_PAGES?.campagne;
+      if (!campaignData?.subPages?.[campaignName]) {
+        alert('Erreur : Campagne non trouvée');
+        return;
+      }
+      
+      // Check if sub-page already exists
+      if (campaignData.subPages[campaignName].subPages?.[trimmedName]) {
+        alert(`La sous-page "${trimmedName}" existe déjà`);
+        return;
+      }
+      
+      // Initialize subPages if it doesn't exist
+      if (!campaignData.subPages[campaignName].subPages) {
+        campaignData.subPages[campaignName].subPages = {};
+      }
+      
+      // Add new sub-page
+      campaignData.subPages[campaignName].subPages[trimmedName] = {
+        title: trimmedName,
+        content: '<p>Contenu de la nouvelle sous-page...</p>'
+      };
+      
+      // Update state to select the new sub-page
+      window.JdrApp.state.selectedCampaign = campaignName;
+      window.JdrApp.state.selectedSubPage = trimmedName;
+      
+      // Save and regenerate
+      this.saveCampaignData();
+      this.regenerateCampaignPage();
+      
+      alert(`Sous-page "${trimmedName}" créée avec succès !`);
+    },
+
+    deleteCampaignSubPage(campaignName, subPageName) {
+      if (!campaignName || !subPageName) return;
+      
+      if (!confirm(`Supprimer la sous-page "${subPageName}" ?`)) {
+        return;
+      }
+      
+      // Get campaign data
+      const campaignData = window.CAMPAGNE || window.STATIC_PAGES?.campagne;
+      if (!campaignData?.subPages?.[campaignName]?.subPages?.[subPageName]) {
+        alert('Erreur : Sous-page non trouvée');
+        return;
+      }
+      
+      // Delete the sub-page
+      delete campaignData.subPages[campaignName].subPages[subPageName];
+      
+      // Update state to select first available sub-page or null
+      const remainingSubPages = Object.keys(campaignData.subPages[campaignName].subPages || {});
+      if (!window.JdrApp) {
+        window.JdrApp = {};
+      }
+      if (!window.JdrApp.state) {
+        window.JdrApp.state = {};
+      }
+      
+      window.JdrApp.state.selectedCampaign = campaignName;
+      window.JdrApp.state.selectedSubPage = remainingSubPages.length > 0 ? remainingSubPages[0] : null;
+      
+      // Save and regenerate
+      this.saveCampaignData();
+      this.regenerateCampaignPage();
+      
+      alert(`Sous-page "${subPageName}" supprimée`);
+    },
+
+    saveCampaignData() {
+      // Trigger storage save if available
+      if (window.EventBus && window.Events) {
+        window.EventBus.emit(window.Events.STORAGE_SAVE);
+      }
+    },
+
+    regenerateCampaignPage() {
+      // Use the renderer's regenerateCurrentPage function
+      setTimeout(() => {
+        if (JdrApp.modules.renderer?.regenerateCurrentPage) {
+          JdrApp.modules.renderer.regenerateCurrentPage();
+        }
+      }, 100);
     }
   };
 
