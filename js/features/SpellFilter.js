@@ -12,22 +12,76 @@
     // Cache for performance
     _cachedCards: null,
     _lastCategoryHash: null,
+    _debugMode: false, // Disable debug logs for cleaner output
+    _initialized: false, // Prevent multiple initializations
+    _filteringInProgress: false, // Prevent concurrent filtering
+    _removedCards: [], // Track removed cards for restoration
+    _domObserver: null, // DOM mutation observer
     
     init() {
+      if (this._initialized) {
+        return;
+      }
+      this.addFilterCSS();
       this.setupEventListeners();
+      this._initialized = true;
+    },
+    
+    addFilterCSS() {
+      // Add CSS rules for filtering if they don't exist
+      const styleId = 'spell-filter-styles';
+      if (!document.getElementById(styleId)) {
+        const style = document.createElement('style');
+        style.id = styleId;
+        style.textContent = `
+          /* Ultra-specific selectors for hiding filtered spells */
+          .card.spell-filtered-hidden,
+          .card[data-filtered="true"],
+          article .card[data-filtered="true"],
+          article.active .card[data-filtered="true"] {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            height: 0 !important;
+            min-height: 0 !important;
+            max-height: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            overflow: hidden !important;
+            position: absolute !important;
+            left: -9999px !important;
+          }
+          
+          /* Ensure visible cards are properly displayed */
+          .card.spell-card:not(.spell-filtered-hidden):not([data-filtered="true"]) {
+            display: block !important;
+            position: relative !important;
+            left: auto !important;
+          }
+        `;
+        document.head.appendChild(style);
+      }
     },
 
     setupEventListeners() {
+      
       // Use throttled event delegation for better performance
       document.addEventListener('input', (e) => {
-        if (e.target && e.target.id === 'spell-level-filter') {
+        if (e.target && (
+          e.target.classList.contains('spell-level-filter-input') ||
+          e.target.id === 'spell-level-filter' ||
+          (e.target.type === 'number' && e.target.closest('.spell-level-filter'))
+        )) {
           // Throttle filter calls for smoother performance
           this.throttledFilter(parseInt(e.target.value, 10));
         }
       });
 
       document.addEventListener('click', (e) => {
-        if (e.target && e.target.id === 'reset-spell-filter') {
+        if (e.target && e.target.classList.contains('reset-spell-filter')) {
+          e.preventDefault();
+          this.resetFilter();
+        } else if (e.target && (e.target.id === 'reset-spell-filter' || e.target.textContent.includes('Tout afficher'))) {
           e.preventDefault();
           this.resetFilter();
         }
@@ -36,25 +90,51 @@
       // Setup when page changes (router events)
       if (window.EventBus && window.Events) {
         EventBus.on(Events.PAGE_RENDER, (payload) => {
+          if (this._filteringInProgress) return; // Prevent loops
           if (payload.type === 'category' && payload.categoryType === 'spell') {
             // Clear cache and re-setup filter after page render
             this.clearCache();
-            setTimeout(() => this.initializeFilter(), 200);
+            // Don't auto-reset filter - preserve user's setting
+            setTimeout(() => {
+              this.initializeFilter();
+            }, 300);
           }
         });
+      } else {
       }
 
-      // Also listen to hash changes for direct navigation
+      // Listen to hash changes for direct navigation - but debounce it
+      let hashChangeTimeout = null;
       window.addEventListener('hashchange', () => {
-        this.clearCache();
-        setTimeout(() => this.initializeFilter(), 200);
+        // Clear any pending hash change handling
+        if (hashChangeTimeout) {
+          clearTimeout(hashChangeTimeout);
+        }
+        
+        hashChangeTimeout = setTimeout(() => {
+          this.clearCache();
+          
+          // Only process spell pages and avoid loops
+          if (window.location.hash.includes('sorts-') && !this._filteringInProgress) {
+            // Don't auto-reset filter - preserve user's setting
+            setTimeout(() => {
+              this.initializeFilter();
+            }, 500);
+          }
+        }, 200); // Increased debounce time
       });
+      
     },
 
     // Clear cache when changing pages
     clearCache() {
-      this._cachedCards = null;
+            this._cachedCards = null;
       this._lastCategoryHash = null;
+      
+      // IMPORTANT: Restore cards before clearing cache to avoid losing them
+      if (this._removedCards && this._removedCards.length > 0) {
+                this.restoreAllCards();
+      }
     },
 
     // Throttled filter function for better performance
@@ -69,21 +149,54 @@
     })(),
 
     initializeFilter() {
-      const filterInput = document.querySelector('#spell-level-filter');
-      if (!filterInput) return;
+      if (this._filteringInProgress) {
+        return;
+      }
       
-      // Set initial value and apply filter
-      const initialValue = parseInt(filterInput.value, 10) || 20;
-      this.filterSpellsByLevel(initialValue);
+      const activeArticle = document.querySelector('article.active');
+      if (!activeArticle) {
+        return;
+      }
+      
+      // Simple approach: just find the filter input
+      let filterInput = activeArticle.querySelector('.spell-level-filter-input') ||
+                       activeArticle.querySelector('#spell-level-filter') ||
+                       activeArticle.querySelector('input[type="number"]');
+      
+      if (!filterInput) {
+        return;
+      }
+      
+      // Get current value but don't auto-apply - let user control it
+      const currentValue = parseInt(filterInput.value, 10) || 20;
+      
+      // Only apply filter if it's not the default AND user has cards to filter
+      if (currentValue !== 20) {
+        this.filterSpellsByLevel(currentValue);
+      } else {
+        // Ensure all cards are visible for default level 20
+        this.restoreAllCards();
+      }
     },
 
     filterSpellsByLevel(maxLevel) {
-      // Get current page from URL hash
-      const currentHash = window.location.hash.replace('#/', '');
-      
-      if (!currentHash.startsWith('sorts-')) {
+      if (this._filteringInProgress) {
         return;
       }
+      
+      this._filteringInProgress = true;
+            // Get current page from URL hash
+      const currentHash = window.location.hash.replace('#/', '');
+            
+      if (!currentHash.startsWith('sorts-')) {
+                return;
+      }
+      
+      // First, restore any cards that were removed from DOM
+      this.restoreAllCards();
+      
+      // FORCE clear cache to get fresh DOM query
+      this.clearCache();
       
       // Extract category name from hash - handle double sorts- prefix
       // URLs like 'sorts-sorts-de-mage' or 'sorts-mage' should both work
@@ -93,49 +206,97 @@
         currentCategoryName = currentCategoryName.replace('sorts-', '');
       }
       
-      // Use cached cards if same category, otherwise refresh cache
-      let spellCards;
-      if (this._lastCategoryHash === currentHash && this._cachedCards) {
-        spellCards = this._cachedCards;
-      } else {
-        // Only query DOM when necessary
-        spellCards = document.querySelectorAll('article.active .card[data-spell-name]');
-        this._cachedCards = spellCards;
-        this._lastCategoryHash = currentHash;
-      }
+      // ALWAYS get fresh DOM query - no cache for debugging
+      const spellCards = document.querySelectorAll('.card[data-spell-name]');
+            
       
-      if (spellCards.length === 0) return;
+      if (spellCards.length === 0) {
+                return;
+      }
 
       let visibleCount = 0;
       let categoryTotalCount = 0;
-
-      spellCards.forEach((card) => {
+      
+      spellCards.forEach((card, index) => {
         const spellName = card.dataset.spellName;
         const categoryName = card.dataset.categoryName;
         
+                
         // More flexible category matching
         const matches = this.categoryMatches(categoryName, currentCategoryName);
-        
+                
         if (matches) {
           categoryTotalCount++;
           
           // Find the spell data to get its level
           const spellLevel = this.getSpellLevel(spellName, categoryName);
-          
+                    
           if (spellLevel <= maxLevel) {
+            // Show the card by ensuring it's in the DOM and visible
+            if (card._originalParent && !card.parentNode) {
+              card._originalParent.appendChild(card);
+            }
             card.style.display = '';
+            card.style.visibility = '';
+            card.classList.remove('spell-filtered-hidden');
+            card.removeAttribute('data-filtered');
+            card.hidden = false;
             visibleCount++;
-          } else {
-            card.style.display = 'none';
+                      } else {
+            // Hide by removing from DOM temporarily and cache properly
+            if (card.parentNode) {
+              // Store detailed restoration info
+              const cardData = {
+                card: card,
+                originalParent: card.parentNode,
+                nextSibling: card.nextSibling,
+                spellName: spellName,
+                category: categoryName
+              };
+              
+              // Initialize cache if needed
+              if (!this._removedCards) this._removedCards = [];
+              
+              // Check if already cached to avoid duplicates
+              const alreadyCached = this._removedCards.find(cached => cached.card === card);
+              if (!alreadyCached) {
+                this._removedCards.push(cardData);
+              }
+              
+              // Also store on the card itself as backup
+              card._originalParent = card.parentNode;
+              card._nextSibling = card.nextSibling;
+              
+              card.parentNode.removeChild(card);
+                          } else {
+              // Fallback: hide with CSS but don't cache since it's already out of DOM
+              card.style.display = 'none';
+              card.style.visibility = 'hidden';
+              card.classList.add('spell-filtered-hidden');
+              card.setAttribute('data-filtered', 'true');
+              card.hidden = true;
+                          }
           }
         } else {
-          // Hide cards from other categories completely
-          card.style.display = 'none';
-        }
+          // Cards from other categories should stay visible but not counted
+          // Show the card but don't count it
+          if (card._originalParent && !card.parentNode) {
+            card._originalParent.appendChild(card);
+          }
+          card.style.display = '';
+          card.style.visibility = '';
+          card.classList.remove('spell-filtered-hidden');
+          card.removeAttribute('data-filtered');
+          card.hidden = false;
+                  }
       });
       
+            
       // Update filter display with count (use category total instead of all spells)
       this.updateFilterDisplay(maxLevel, visibleCount, categoryTotalCount);
+      
+      // Filtering complete
+      this._filteringInProgress = false;
     },
 
     categoryMatches(categoryName, currentCategoryName) {
@@ -224,8 +385,7 @@
         return true;
       }
       
-      
-      return false;
+            return false;
     },
 
     getSpellLevel(spellName, categoryName) {
@@ -255,6 +415,72 @@
       return match ? parseInt(match[1], 10) : 0;
     },
 
+    // Removed monitoring to reduce logs and conflicts
+    
+    // Removed auto-reset to prevent unwanted resets
+    
+    // Simplified approach - removed complex reloading mechanisms
+    
+    restoreAllCards() {
+            
+      // Step 1: Restore cards from removal cache
+      if (this._removedCards && this._removedCards.length > 0) {
+                
+        // Create a new array to avoid modifying while iterating
+        const cardsToRestore = [...this._removedCards];
+        this._removedCards = []; // Clear cache first
+        
+        cardsToRestore.forEach(cardData => {
+          if (cardData.card && cardData.originalParent && !cardData.card.parentNode) {
+            try {
+              // Restore to original position
+              if (cardData.nextSibling && cardData.nextSibling.parentNode === cardData.originalParent) {
+                cardData.originalParent.insertBefore(cardData.card, cardData.nextSibling);
+              } else {
+                cardData.originalParent.appendChild(cardData.card);
+              }
+                          } catch (error) {
+                          }
+          }
+        });
+      }
+      
+      // Step 2: Get ALL cards and ensure they are visible  
+      const allCards = document.querySelectorAll('.card[data-spell-name]');
+            
+      allCards.forEach(card => {
+        // Restore any remaining cards using backup references
+        if (card._originalParent && !card.parentNode) {
+          try {
+            if (card._nextSibling && card._nextSibling.parentNode === card._originalParent) {
+              card._originalParent.insertBefore(card, card._nextSibling);
+            } else {
+              card._originalParent.appendChild(card);
+            }
+                      } catch (error) {
+                      }
+        }
+        
+        // Ensure all cards are visible and clean
+        card.style.display = '';
+        card.style.visibility = '';
+        card.style.opacity = '';
+        card.style.height = '';
+        card.style.maxHeight = '';
+        card.style.overflow = '';
+        card.style.position = '';
+        card.style.left = '';
+        card.classList.remove('spell-filtered-hidden');
+        card.removeAttribute('data-filtered');
+        card.hidden = false;
+        
+        // Clean up backup references
+        delete card._originalParent;
+        delete card._nextSibling;
+      });
+      
+          },
+    
     updateFilterDisplay(maxLevel, visibleCount, totalCount) {
       const activeArticle = document.querySelector('article.active');
       if (!activeArticle) return;
@@ -291,19 +517,34 @@
     },
 
     resetFilter() {
-      const filterInput = document.querySelector('#spell-level-filter');
-      if (filterInput) {
-        filterInput.value = '20';
-        this.filterSpellsByLevel(20);
+            
+      // First restore all cards
+      this.restoreAllCards();
+      
+      // Reset filter input to 20
+      const activeArticle = document.querySelector('article.active');
+      if (activeArticle) {
+        let filterInput = activeArticle.querySelector('.spell-level-filter-input') ||
+                         activeArticle.querySelector('#spell-level-filter') ||
+                         activeArticle.querySelector('input[type="number"]');
+        if (filterInput) {
+          filterInput.value = '20';
+                  }
       }
       
-      // Clear the count display
-      const countContainer = document.querySelector('#spell-filter-count');
-      if (countContainer) {
-        countContainer.textContent = '';
-        countContainer.style.display = 'none';
-      }
-    }
+      // Also try global search for filter inputs
+      const allFilterInputs = document.querySelectorAll('.spell-level-filter-input, #spell-level-filter, input[type="number"][class*="spell"]');
+      allFilterInputs.forEach(input => {
+        if (input && input.closest('.spell-level-filter')) {
+          input.value = '20';
+                  }
+      });
+      
+      // Update display to show all cards are visible
+      const totalCards = document.querySelectorAll('.card[data-spell-name]').length;
+      this.updateFilterDisplay(20, totalCards, totalCards);
+      
+          }
   };
 
   // Initialize the spell filter when the app is ready
@@ -313,6 +554,7 @@
       if (JdrApp.modules) {
         JdrApp.modules.spellFilter = SpellFilter;
       }
+    } else {
     }
     
     // Initialize the filter
@@ -322,8 +564,16 @@
     setTimeout(() => {
       if (window.location.hash.includes('sorts-')) {
         SpellFilter.initializeFilter();
+      } else {
       }
     }, 500);
+    
+    // Also try manual initialization on window load
+    window.addEventListener('load', () => {
+      if (window.location.hash.includes('sorts-')) {
+        setTimeout(() => SpellFilter.initializeFilter(), 100);
+      }
+    });
   }
 
   // Initialize on DOM ready
@@ -334,6 +584,26 @@
     initializeSpellFilter();
   }
 
+  // Make SpellFilter globally available
   window.SpellFilter = SpellFilter;
+  
+  // Additional manual trigger for testing
+  window.testSpellFilter = function() {
+    SpellFilter.initializeFilter();
+  };
+  
+  // Test function to see current DOM state
+  window.checkDOMState = function() {
+    const cards = document.querySelectorAll('.card[data-spell-name]');
+    cards.forEach((card, i) => {
+      const isVisible = card.parentNode && getComputedStyle(card).display !== 'none';
+    });
+  };
+  
+  // Manual reset function for testing
+  window.manualReset = function() {
+    SpellFilter.resetFilter();
+  };
+  
 
 })();
