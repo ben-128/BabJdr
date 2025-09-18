@@ -1,0 +1,9 @@
+Code Quality Improvement Steps
+
+1. Fix orphaned </script> tag in dev-debug.html: remove the extra closing tag near the end of the file so browsers do not terminate the previous script prematurely.
+
+2. Replace renderer data polling: emit a deterministic DATA_READY (or similar) event from the loader and let renderer.js wait on that signal instead of using repeated setTimeout retries.
+
+3. Consolidate dev-mode DOM toggles: move the "show/hide edit buttons" logic into a shared helper inside the editor module and have renderer.js and router.js call that helper after they touch articles, avoiding multiple document.querySelectorAll passes.
+
+4. Extract reusable UI templates: relocate the dev toolbox and MJ toggle markup from long template strings in renderer.js/router.js into shared partials or declarative DOM templates styled via CSS classes.

@@ -1,0 +1,19 @@
+{
+  "entries": [
+    { "type": "json", "file": "sorts.json", "global": "SORTS" },
+    { "type": "json", "file": "classes.json", "global": "CLASSES" },
+    { "type": "json", "file": "dons.json", "global": "DONS" },
+    { "type": "json", "file": "objets.json", "global": "OBJETS" },
+    { "type": "json", "file": "monstres.json", "global": "MONSTRES" },
+    { "type": "json", "file": "tables-tresors.json", "global": "TABLES_TRESORS" },
+    { "type": "json", "file": "collections.json", "global": "COLLECTIONS" },
+    { "type": "json", "file": "toc-structure.json", "global": "TOC_STRUCTURE" },
+    { "type": "json", "file": "static-pages-config.json", "global": "STATIC_PAGES_CONFIG" },
+    { "type": "static-pages" },
+    { "type": "json", "file": "custom-page-descriptions.json", "global": "CUSTOM_PAGE_DESCRIPTIONS", "dataKey": "customPageDescriptions" },
+    { "type": "json", "file": "monstres-page-desc.json", "global": "MONSTRES_PAGE_DESC" },
+    { "type": "json", "file": "tables-tresors-page-desc.json", "global": "TABLES_TRESORS_PAGE_DESC" },
+    { "type": "images", "file": "images.json" },
+    { "type": "json", "file": "audio-config.json", "global": "AUDIO_CONFIG" }
+  ]
+}

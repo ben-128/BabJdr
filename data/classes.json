@@ -8,7 +8,7 @@
         "nom": "Nain des montagnes",
         "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>5</strong></span><span class=\"chip\">🏃 Agilité: <strong>1</strong></span><span class=\"chip\">🛡️ Endurance: <strong>10</strong></span><span class=\"chip\">🧠 Intelligence: <strong>1</strong></span><span class=\"chip\">⚡ Volonté: <strong>5</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +2 Force 💪, +3 Endurance 🛡️, +1 Volonté⚡   <strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Brise rocher : </em> Gagne 1 de compétence sur les tests de compétence Hardiesse pour une destruction d'objet.</li><li><em>Volonté inflexible :</em> Les nains possèdent une volonté inflexible qui les rendent résistants aux sortilèges (caractéristique Volonté élevée).</li></ul>",
+        "capacites": "<ul><li><em>Brise rocher : </em> Gagne 1 de compétence sur les tests de compétence Hardiesse pour une destruction d'objet.</li><li><em>Volonté inflexible :</em> Les nains possèdent une volonté inflexible qui les rendent résistants aux sortilèges (Volonté élevée + par niveau).</li>\n<li><em>Protection de la montagne :</em> Gagne 5 d'armure élémentaire de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> et de <span style=\"color: #1a1a1a; font-weight: bold;\">Nuit</span>.</li></ul>",
         "description": "<i>Race robuste et inflexible, dotée d’une endurance exceptionnelle. Forgés par la roche et les sommets, ils résistent aux épreuves et possèdent une force colossale capable de briser murs, armures et créatures cuirassées.</i>"
       },
       {
