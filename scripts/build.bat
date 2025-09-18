@@ -38,11 +38,11 @@ if errorlevel 1 (
     echo.
     
     :: Vérifier que le fichier a été créé
-    if exist "build\JdrBab.html" (
-        echo [OK] Fichier généré : build\JdrBab.html
+    if exist "build-output\JdrBab.html" (
+        echo [OK] Fichier généré : build-output\JdrBab.html
         
         :: Afficher la taille du fichier
-        for %%A in ("build\JdrBab.html") do (
+        for %%A in ("build-output\JdrBab.html") do (
             set /a sizeKB=%%~zA/1024
         )
         
@@ -51,7 +51,7 @@ if errorlevel 1 (
         echo ========================================
         echo   CHEMIN COMPLET DU FICHIER :
         echo ========================================
-        echo %CD%\build\JdrBab.html
+        echo %CD%\build-output\JdrBab.html
         echo ========================================
         echo.
         echo Le fichier JdrBab.html est prêt à être partagé !
@@ -62,11 +62,11 @@ if errorlevel 1 (
         choice /c ON /n /m "Ouvrir le fichier maintenant ? [O]ui / [N]on "
         if !errorlevel! == 1 (
             echo [INFO] Ouverture du fichier...
-            start "" "%CD%\build\JdrBab.html"
+            start "" "%CD%\build-output\JdrBab.html"
         )
     ) else (
-        echo [ERREUR] Le fichier JdrBab.html n'a pas été trouvé dans build\
-        echo Chemin attendu : %CD%\build\JdrBab.html
+        echo [ERREUR] Le fichier JdrBab.html n'a pas été trouvé dans build-output\
+        echo Chemin attendu : %CD%\build-output\JdrBab.html
     )
 )
 
