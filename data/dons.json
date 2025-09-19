@@ -101,7 +101,7 @@
       },
       {
         "nom": "Premier soin",
-        "description": "<b>En combat :</b>\n\n<br>Les soins provenant des consommables sont augmentés de X points de vie.\n\n<br><br>De plus, en dépensant une action principale, le héros peut soigner une autre cible située à moins de 3 mètres. Si cette cible a moins de X points de vie, elle est immédiatement ramenée à X points de vie.\n\n<br><br>X correspond à 3, plus 1 point supplémentaire tous les 5 points d’Intelligence.",
+        "description": "<b>En combat :</b>\n<br>Les soins provenant des consommables sont augmentés de X points de vie.\n\n<br><br><b>Hors combat :</b>\n<br>Le héros peut dépenser un effort, pour soigner une autre cible de X points de vie. \n\n<br><br>X correspond à 3, plus 1 point supplémentaire tous les 5 points d’Intelligence.",
         "prerequis": "<strong> Prérequis :</strong> 🧠 Intelligence 5. <br>Don unique.",
         "cout": "1 point de don"
       }
