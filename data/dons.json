@@ -12,7 +12,7 @@
       {
         "nom": "Toujours pret",
         "description": "Le maximum d'efforts maximum augmente de 1.",
-        "prerequis": "<strong> Prérequis :</strong> Don unique.",
+        "prerequis": "<strong> Prérequis :</strong> A chaque prise de ce don, son coût en point de don augmente de 1.",
         "cout": "1 point de don"
       },
       {
@@ -30,13 +30,13 @@
       {
         "nom": "Hyperactif",
         "description": "Le héros dispose maintenant de deux actions secondaires par tour.",
-        "prerequis": "<strong> Prérequis :</strong> Niveau 3",
+        "prerequis": "<strong> Prérequis :</strong> Niveau 3.<br>Don unique.",
         "cout": "2 points de don"
       },
       {
         "nom": "Equitation",
         "description": "Permet de monter à cheval ou équivalent.",
-        "prerequis": "<strong> Prérequis :</strong> Niveau 5",
+        "prerequis": "<strong> Prérequis :</strong> Niveau 5.<br>Don unique.",
         "cout": "1 point de don"
       },
       {
@@ -54,19 +54,55 @@
       {
         "nom": "Maitrise de la dague",
         "description": "Le héros est capable d'équiper et d'utiliser des Dagues.",
-        "prerequis": "<strong> Prérequis :</strong> 🏃 Agilité 5.",
+        "prerequis": "<strong> Prérequis :</strong> 🏃 Agilité 5.<br>Don unique.",
         "cout": "1 point de don"
       },
       {
         "nom": "Maitrise de l'arc",
         "description": "Le héros est capable d'équiper et d'utiliser des Arcs.",
-        "prerequis": "<strong> Prérequis :</strong> 🏃 Agilité 10.",
+        "prerequis": "<strong> Prérequis :</strong> 🏃 Agilité 10.\n          <br>Don unique.",
         "cout": "1 point de don"
       },
       {
         "nom": "Sommeil léger",
         "description": "Pendant qu'il dort, le héros est aussi alerte que s'il effectuait un tour de garde.\nDe plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.",
-        "prerequis": "<strong> Prérequis :</strong> -",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Chanceux",
+        "description": "Lors d'un jet de fortune, le héros lance deux dés et prend le meuilleur resultat.",
+        "prerequis": "<strong> Prérequis :</strong> 🍀Chance 5. <br>Don unique.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Attaque d'opportunité",
+        "description": "Lorsqu'un adversaire sort de votre portée d'attaque au corps à corps durant son déplacement, vous pouvez utiliser une action secondaire (non utilisée durant votre tour), pour effectuer un attaque au corps à corps sur l'adversaire.",
+        "prerequis": "<strong> Prérequis :</strong> 🏃 Agilité 10. <br>Don unique.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Rapide",
+        "description": "Augmente votre vitesse de déplacement de 3m.",
+        "prerequis": "<strong> Prérequis :</strong> Hardiesse rang 1.  <br>Don unique.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Statistiques",
+        "description": "Gagne 2 points de statistiques au choix à répartir.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Dur à cuire",
+        "description": "Augmente les points de vie maximum de 3 et la résistance altération de 2.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Premier soin",
+        "description": "<b>En combat :</b>\n\n<br>Les soins provenant des consommables sont augmentés de X points de vie.\n\n<br><br>De plus, en dépensant une action principale, le héros peut soigner une autre cible située à moins de 3 mètres. Si cette cible a moins de X points de vie, elle est immédiatement ramenée à X points de vie.\n\n<br><br>X correspond à 3, plus 1 point supplémentaire tous les 5 points d’Intelligence.",
+        "prerequis": "<strong> Prérequis :</strong> 🧠 Intelligence 5. <br>Don unique.",
         "cout": "1 point de don"
       }
     ]

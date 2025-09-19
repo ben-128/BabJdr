@@ -1,0 +1,260 @@
+[
+  {
+    "nom": "Generaux",
+    "description": "Dons accessibles à toutes les classes.",
+    "dons": [
+      {
+        "nom": "Doué",
+        "description": "Gagne une compétence rang 1.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
+        "cout": "1 points de don"
+      },
+      {
+        "nom": "Toujours pret",
+        "description": "Le maximum d'efforts maximum augmente de 1.",
+        "prerequis": "<strong> Prérequis :</strong> A chaque prise de ce don, son coût en point de don augmente de 1.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Brillant",
+        "description": "Gagne une compétence rang 2.",
+        "prerequis": "<strong> Prérequis :</strong> La compétence rang 1.",
+        "cout": "2 points de don"
+      },
+      {
+        "nom": "Prodigieux",
+        "description": "Gagne une compétence rang 3.",
+        "prerequis": "<strong> Prérequis :</strong> La compétence rang 2.",
+        "cout": "3 point de don"
+      },
+      {
+        "nom": "Hyperactif",
+        "description": "Le héros dispose maintenant de deux actions secondaires par tour.",
+        "prerequis": "<strong> Prérequis :</strong> Niveau 3.<br>Don unique.",
+        "cout": "2 points de don"
+      },
+      {
+        "nom": "Equitation",
+        "description": "Permet de monter à cheval ou équivalent.",
+        "prerequis": "<strong> Prérequis :</strong> Niveau 5.<br>Don unique.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Gros mangeur",
+        "description": "Les points de vie rendus en mangeant de la nourriture sont doublés. De plus, il est possible de consommer 4 rations de nourriture par jour au lieu de 2.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Grand sacs",
+        "description": "Augmente le poid maximum transportable de 3, et le nombre de consommables transportables de 3.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Maitrise de la dague",
+        "description": "Le héros est capable d'équiper et d'utiliser des Dagues.",
+        "prerequis": "<strong> Prérequis :</strong> 🏃 Agilité 5.<br>Don unique.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Maitrise de l'arc",
+        "description": "Le héros est capable d'équiper et d'utiliser des Arcs.",
+        "prerequis": "<strong> Prérequis :</strong> 🏃 Agilité 10.\n          <br>Don unique.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Sommeil léger",
+        "description": "Pendant qu'il dort, le héros est aussi alerte que s'il effectuait un tour de garde.\nDe plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Chanceux",
+        "description": "Lors d'un jet de fortune, le héros lance deux dés et prend le meuilleur resultat.",
+        "prerequis": "<strong> Prérequis :</strong> 🍀Chance 5. <br>Don unique.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Attaque d'opportunité",
+        "description": "Lorsqu'un adversaire sort de votre portée d'attaque au corps à corps durant son déplacement, vous pouvez utiliser une action secondaire (non utilisée durant votre tour), pour effectuer un attaque au corps à corps sur l'adversaire.",
+        "prerequis": "<strong> Prérequis :</strong> 🏃 Agilité 10. <br>Don unique.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Rapide",
+        "description": "Augmente votre vitesse de déplacement de 3m.",
+        "prerequis": "<strong> Prérequis :</strong> Hardiesse rang 1.  <br>Don unique.",
+        "cout": "1 point de don"
+      }
+    ]
+  },
+  {
+    "nom": "Guerrier",
+    "description": "Dons accessibles aux guerriers.",
+    "dons": [
+      {
+        "nom": "Expertise du bouclier",
+        "description": "Si le héros a un bouclier équipé, il peut utiliser une action secondaire pour doubler l'armure physique du bouclier jusqu'au prochain tour.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Charge",
+        "description": "Une fois par combat, peut utiliser une action secondaire pour doubler sa vitesse de déplacement et forcer un coup critique sur la prochaine attaque physique de ce tour (si elle réussie).",
+        "prerequis": "<strong> Prérequis :</strong> 🏃Agilité 5",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Volonté de fer",
+        "description": "Une fois par jour, le héros peut utiliser une action secondaire pour se débarasser de toutes ses alterations magiques.",
+        "prerequis": "<strong> Prérequis :</strong> ⚡Volonté 5",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Coup de bouclier",
+        "description": "Si le héros a un bouclier équipé, lorsque le héros subit des dégats aux corps à corps, il peut choisir d'utiliser une action secondaire pour infliger à l'attaquant des dégats équivalents à l'armure du bouclier.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Coup de pommeau",
+        "description": "Description du don.",
+        "prerequis": "Aucun prérequis",
+        "cout": "1 point de don"
+      }
+    ]
+  },
+  {
+    "nom": "Rôdeur",
+    "description": "Dons accessibles aux rodeurs.",
+    "dons": [
+      {
+        "nom": "Croche-patte",
+        "description": "Peut utiliser une action principale pour effectuer un croche- patte :\n\n\n<br><br><b>Sans effet si :</b> \n<br>- Esquive.\n<br>- Volant ou lévitant.\n<br>- Taille supérieure à Moyen.\n\n<br><br><b>Effet :</b> Inflige (Force) dégats Physiques à la cible. Met la cible dans l'état <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">A terre</span>.\n\n<br><br><b>Coup Critique :</b>  Les dégats sont doublés et la cible est <span class=\"etat-link\" data-etat=\"Endormi/assomé/Effrayé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Assomée</span> 1 tour.\n\n<br><br><hr>",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Chasse et pêche",
+        "description": "Le héros n'as plus besoin de sa ration de nourriture quotidienne.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Attaque d'opportunité",
+        "description": "Description du don.",
+        "prerequis": "Aucun prérequis",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "D",
+        "description": "Description du don.",
+        "prerequis": "Aucun prérequis",
+        "cout": "1 point de don"
+      }
+    ]
+  },
+  {
+    "nom": "Mage",
+    "description": "Description de cette catégorie de dons.",
+    "dons": [
+      {
+        "nom": "Gemme de mana",
+        "description": "Une fois par jour, le héros peut récupérer l'intégralité de son Mana en utilisant une action secondaire.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Resistance élémentaire 1",
+        "description": "Le héros gagne 5 d'armure élémentaire de <span style=\"color: #e25822; font-weight: bold;\">Feu</span>, <span style=\"color: #2b6cb0; font-weight: bold;\">Eau</span>, <span style=\"color: #8b5e34; font-weight: bold;\">Terre</span>, <span style=\"color: #22c55e; font-weight: bold;\">Air</span>.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Resistance magique 1",
+        "description": "Le héros gagne 5 d'armure élémentaire de <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span>, <span style=\"color: #0f172a; font-weight: bold;\">Nuit</span>, <span style=\"color: #d0d0d0; font-weight: bold; background: rgba(0, 0, 0, 0.4); padding: 2px 4px; border-radius: 3px;\">Divin</span>, <span style=\"color: #a855f7; font-weight: bold;\">Maléfique</span>.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Spécialisation élémentaire 1",
+        "description": "Le héros peut choisir un élément et augmenter de 5 les dégats infligés avec les sorts de cet élément.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Infusion élémentaire",
+        "description": "Aprés avoir lancé un sort, le héros peut, en utilisant une action secondaire, imprégner son arme de l'élément du sort. Elle infligera à sa prochaine attaque physique des dégats de cet élément équivalents au niveau du sort.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Polyglotte",
+        "description": "Peut lire et parler toutes les langues.",
+        "prerequis": "<strong> Prérequis :</strong> Reflexion rang 2.",
+        "cout": "1 point de don"
+      }
+    ]
+  },
+  {
+    "nom": "Pretre",
+    "description": "Description de cette catégorie de dons.",
+    "dons": [
+      {
+        "nom": "Mécréants",
+        "description": "Les dégats physiques infligés aux créatures de l'élément <span style=\"color: #0f172a; font-weight: bold;\">Nuit</span> ou <span style=\"color: #a855f7; font-weight: bold;\">Maléfique</span> sont doublés.",
+        "prerequis": "<strong> Prérequis :</strong>-",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Au milieu du combat",
+        "description": "Permet d'utiliser s'équiper de dagues.",
+        "prerequis": "<strong> Prérequis :</strong>🏃Agilité 5",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Jugement éclair",
+        "description": "Si le Prêtre a effectué un sort ce tour ci, il peut effectuer une attaque au corp à corp avec une action secondaire.",
+        "prerequis": "<strong> Prérequis :</strong>💪Force 3",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Musique",
+        "description": "Permet d'apprendre un instrument de musique (ou de savoir chanter) au choix, gagnant 2 de compétences sur les tests de compétence éloquence le nécéssitant.",
+        "prerequis": "<strong> Prérequis :</strong>-",
+        "cout": "1 point de don"
+      }
+    ]
+  },
+  {
+    "nom": "Enchanteur",
+    "description": "Dons accessibles aux enchanteurs.",
+    "dons": [
+      {
+        "nom": "Réparateur de baguettes",
+        "description": "Permet de regagner une charge de baguette, une fois par jour.",
+        "prerequis": "<strong> Prérequis :</strong>-",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Magie aléatoire destructrice",
+        "description": "Permet de choisir et d'apprendre un sort de mage et de pouvoir le lancer à volonté. Le sort ne peut pas être changé par la suite.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Magie aléatoire de soutien",
+        "description": "Permet de choisir et d'apprendre un sort de prêtre et de pouvoir le lancer à volonté. Le sort ne peut pas être changé par la suite.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Alteration risquée",
+        "description": "Lorsque un sort d'alteration magique est effectué alors que la cible est au corps à corps, ses chances de critiques sont doublées.",
+        "prerequis": "<strong> Prérequis :</strong>-",
+        "cout": "1 point de don"
+      }
+    ]
+  }
+]

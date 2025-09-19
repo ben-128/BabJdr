@@ -1,0 +1,15 @@
+{
+  "baseUrl": "data/Musiques",
+  "baseUrlGitHub": "https://raw.githubusercontent.com/ben-128/BabJdr/master/data/Musiques",
+  "folderIcons": {
+    "Auberge": "🍺",
+    "Creation": "🎭", 
+    "Foret": "🌲",
+    "Mine": "⛏️",
+    "Voyage": "🚶",
+    "Autre": "🎼"
+  },
+  "defaultVolume": 0.5,
+  "enableAutoplay": false,
+  "mobileOptimized": true
+}

@@ -1,0 +1,328 @@
+/* ═══════════════════════════════════════════════════════════════════════════════════════
+   🚀 SCROLL PERFORMANCE OPTIMIZATIONS
+   ═══════════════════════════════════════════════════════════════════════════════════════ */
+
+/* Smooth scrolling behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Optimize scroll performance during scrolling */
+.scrolling * {
+  pointer-events: none !important;
+}
+
+.scrolling .card,
+.scrolling .spell-card,
+.scrolling .item-card {
+  transition: none !important;
+  animation: none !important;
+}
+
+/* Content visibility optimizations for modern browsers - ONLY for visible articles */
+/* EXCLUDE collections and filtered content to avoid display conflicts */
+article.active .card:not([style*="display: none"]),
+article.active .spell-card:not([style*="display: none"]), 
+article.active .item-card:not([style*="display: none"]) {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 250px;
+  /* Lighter containment for better compatibility */
+  contain: layout style;
+}
+
+/* Ensure hidden elements stay hidden */
+article.active .card[style*="display: none"],
+article.active .spell-card[style*="display: none"],
+article.active .item-card[style*="display: none"] {
+  display: none !important;
+  content-visibility: hidden;
+}
+
+/* GPU acceleration for visible cards - ONLY in active articles */
+article.active .card.visible,
+article.active .spell-card.visible,
+article.active .item-card.visible {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Virtualized viewport styling */
+.virtualized-viewport {
+  will-change: scroll-position;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--bronze) transparent;
+}
+
+.virtualized-viewport::-webkit-scrollbar {
+  width: 8px;
+}
+
+.virtualized-viewport::-webkit-scrollbar-track {
+  background: rgba(212, 175, 55, 0.1);
+  border-radius: 4px;
+}
+
+.virtualized-viewport::-webkit-scrollbar-thumb {
+  background: var(--bronze);
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.virtualized-viewport::-webkit-scrollbar-thumb:hover {
+  background: var(--gold);
+}
+
+.virtualized-content {
+  overflow: hidden;
+}
+
+/* Lazy loading image optimizations */
+img[loading="lazy"] {
+  filter: blur(0.5px);
+  transition: filter 0.3s ease;
+}
+
+img.lazy-loaded {
+  filter: none;
+}
+
+img.lazy-load {
+  background: linear-gradient(135deg, 
+    rgba(212, 175, 55, 0.1) 0%, 
+    rgba(139, 69, 19, 0.05) 100%);
+  min-height: 120px;
+  border-radius: 8px;
+}
+
+/* Class page specific optimizations - ONLY in active articles */
+article.active .editable-section[data-section-type="subclass"] {
+  contain: layout style;
+}
+
+.editable-section[data-loading-state="deferred"] {
+  background: rgba(212, 175, 55, 0.02);
+  border: 1px dashed rgba(139, 69, 19, 0.1);
+}
+
+.editable-section[data-loading-state="loaded"] {
+  border: 1px solid var(--rule);
+}
+
+/* Optimize subclass images specifically */
+.editable-section[data-section-type="subclass"] img {
+  object-fit: contain;
+  max-width: 100%;
+  height: auto;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* Spell cards specific optimizations - ONLY if not filtered */
+article.active .spell-card:not([style*="display: none"]) {
+  /* More aggressive containment for complex spell cards */
+  contain: layout style paint;
+}
+
+.spell-card[data-loading-state="deferred-spell"] {
+  background: rgba(255, 107, 53, 0.03); /* Subtle fire color */
+  border: 1px dashed rgba(226, 88, 34, 0.2);
+}
+
+.spell-card[data-loading-state="loaded"] {
+  border: 1px solid var(--rule);
+}
+
+/* Optimize spell card internal elements */
+article.active .spell-card hr {
+  contain: layout paint;
+  will-change: auto;
+}
+
+article.active .spell-card [data-edit-type="generic"] {
+  /* Optimize complex text content in spells */
+  contain: layout style;
+}
+
+/* Spell element badges optimization */
+article.active .spell-card .spell-element {
+  transform: translateZ(0);
+  contain: layout paint;
+}
+
+/* Reduce reflow on spell cards during scroll */
+.scrolling .spell-card * {
+  pointer-events: none !important;
+  will-change: auto !important;
+}
+
+/* Spell cards get priority GPU layers when visible */
+article.active .spell-card:nth-child(-n+7) {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Optimize animation performance during scroll */
+@media (prefers-reduced-motion: no-preference) {
+  article.active .card:not(.scrolling *) {
+    transition: transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  
+  article.active .card:not(.scrolling *):hover {
+    transform: translateY(-1px) scale(1.005);
+  }
+}
+
+/* Force hardware acceleration for smooth scrolling */
+article.active {
+  transform: translateZ(0);
+  will-change: scroll-position;
+}
+
+article.active #views,
+article.active .grid {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Critical: Override any optimization for filtered/hidden content */
+.card[style*="display: none"],
+.card[style*="display:none"],
+.spell-card[style*="display: none"],
+.spell-card[style*="display:none"],
+.item-card[style*="display: none"],
+.item-card[style*="display:none"],
+#collection-results[style*="display: none"],
+#available-collections[style*="display: none"] {
+  display: none !important;
+  content-visibility: hidden !important;
+  contain: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  left: -9999px !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: none !important;
+}
+
+/* Ensure ID search works properly */
+#objets-container .card[style*="display: none"] {
+  display: none !important;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  .card,
+  .spell-card,
+  .item-card {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* Mobile scroll optimizations */
+@media (max-width: 768px) {
+  .card,
+  .spell-card,
+  .item-card {
+    contain-intrinsic-size: 0 200px;
+  }
+  
+  .virtualized-viewport {
+    height: 60vh !important;
+  }
+  
+  /* Prevent scroll bounce on iOS */
+  body {
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* High DPI display optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx) {
+  .card,
+  .spell-card,
+  .item-card {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Container query optimizations for modern browsers */
+@supports (container-type: inline-size) {
+  #views {
+    container-type: inline-size;
+  }
+  
+  @container (max-width: 600px) {
+    .card,
+    .spell-card,
+    .item-card {
+      contain-intrinsic-size: 0 180px;
+    }
+  }
+}
+
+/* Focus management during scroll */
+.scrolling :focus {
+  outline: none;
+}
+
+/* Intersection Observer loading states */
+.card[data-loading="true"] {
+  background: linear-gradient(135deg, 
+    rgba(212, 175, 55, 0.05) 0%, 
+    rgba(139, 69, 19, 0.02) 100%);
+  opacity: 0.7;
+}
+
+.card[data-loading="false"] {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+/* Performance hints for browsers */
+.card,
+.spell-card,
+.item-card {
+  /* Hint that this element will change */
+  will-change: auto;
+}
+
+.card:hover,
+.spell-card:hover,
+.item-card:hover {
+  will-change: transform;
+}
+
+/* Print optimizations */
+@media print {
+  .virtualized-viewport {
+    height: auto !important;
+    overflow: visible !important;
+  }
+  
+  .virtualized-content {
+    position: static !important;
+    height: auto !important;
+  }
+  
+  .card,
+  .spell-card,
+  .item-card {
+    content-visibility: visible;
+    contain: none;
+    transform: none !important;
+    position: static !important;
+  }
+}
