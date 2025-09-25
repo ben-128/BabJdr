@@ -209,7 +209,7 @@
     "armureDivin": 0,
     "armureMalefique": 0,
     "abilites": "<strong>Morsure venimeuse:</strong> Inflige 5 dégâts Physiques. <br> Si (resistance altérations &lt; 4)  + <span title=\"Des dégats sont appliqués à chaque début de tour du lanceur, réduits ni par l'armure physique ni par l'armure élémentaire.\">Empoisonné</span>2 pendant 5 tours.<br><br>",
-    "butin": "<strong>Butin:</strong>",
+    "butin": "<strong>Butin:</strong> <span class=\"treasure-table-link\" data-table-name=\"Serpent Foret\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Serpent Foret]</span>",
     "monster-initiative": "4"
   },
   {
@@ -235,7 +235,7 @@
     "armureDivin": 0,
     "armureMalefique": 0,
     "abilites": "<strong>Volant</strong>: Necessite de sauter pour attaque au corps à corps.<br><strong>Morsure: </strong> inflige 5 physique.\n<br><strong>Vent aveuglant: </strong> Portée 6m, esquivable, inflige 5 <span style=\"color: #22c55e; font-weight: bold;\">Air</span>. Si (Res Alt &lt; 4) <span class=\"etat-link\" data-etat=\"Aveuglé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Aveuglé</span>",
-    "butin": "<strong>Butin:</strong>",
+    "butin": "<strong>Butin:</strong>  <span class=\"treasure-table-link\" data-table-name=\"Scarabée géant\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Scarabée géant]</span>",
     "monster-initiative": "5"
   },
   {

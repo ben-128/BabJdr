@@ -17,6 +17,47 @@
 </head>
 <body class="mj-on dev-on">
 
+<script>
+window.ObjectReferencesModal = {
+  show: function(objectNumero) {
+    console.log('Modal show called for:', objectNumero);
+    alert('Références pour objet ' + objectNumero + ' - Modal fonctionnel !');
+  }
+};
+
+// Observer pour les changements de mode MJ avec protection contre les boucles
+let lastMJState = document.body.classList.contains('mj-on');
+let mjObserverTimeout = null;
+
+const observer = new MutationObserver(function(mutations) {
+  // Éviter les boucles infinies en utilisant un debounce
+  if (mjObserverTimeout) {
+    clearTimeout(mjObserverTimeout);
+  }
+  
+  mjObserverTimeout = setTimeout(() => {
+    const hasMJMode = document.body.classList.contains('mj-on');
+    
+    // Ne traiter que si l'état a vraiment changé
+    if (hasMJMode !== lastMJState) {
+      lastMJState = hasMJMode;
+      
+      // Vérifier qu'on est sur la bonne page avant de rafraîchir
+      const currentPage = window.location.hash.replace('#/', '') || 'creation';
+      if (currentPage === 'gestion-objets') {
+        const objectCards = document.querySelectorAll('.objet-card');
+        if (objectCards.length > 0) {
+          // Déclencher un événement personnalisé pour les cartes
+          window.dispatchEvent(new CustomEvent('mjModeChanged', { detail: { mjMode: hasMJMode } }));
+        }
+      }
+    }
+  }, 100); // Debounce de 100ms
+});
+
+observer.observe(document.body, { attributes: true });
+</script>
+
 <!-- Debug console removed -->
 
 <!-- Structure HTML de base pour l'application -->

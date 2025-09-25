@@ -1,0 +1,239 @@
+{
+  "tables": [
+    {
+      "nom": "Serpent Foret",
+      "description": "feffez",
+      "tags": [
+        "Forêt"
+      ],
+      "fourchettes": [
+        {
+          "min": 1,
+          "max": 5,
+          "objet": {
+            "type": "reference",
+            "numero": 56,
+            "nom": "Viande de monstre"
+          }
+        },
+        {
+          "min": 6,
+          "max": 8,
+          "eclats": 20
+        },
+        {
+          "min": 9,
+          "max": 11,
+          "objet": {
+            "type": "reference",
+            "numero": 31,
+            "nom": "Cristal d'effort"
+          }
+        },
+        {
+          "min": 12,
+          "max": 14,
+          "objet": {
+            "type": "reference",
+            "numero": 24,
+            "nom": "Flèche de la terre"
+          }
+        },
+        {
+          "min": 15,
+          "max": 18,
+          "objet": {
+            "type": "reference",
+            "numero": 52,
+            "nom": "Branche magique"
+          }
+        },
+        {
+          "min": 19,
+          "max": 30,
+          "objet": {
+            "type": "reference",
+            "numero": 55,
+            "nom": "Ceinture en peau de serpent"
+          }
+        }
+      ]
+    },
+    {
+      "nom": "Scarabée géant",
+      "description": "Table de butin pour une situation spécifique.",
+      "tags": [
+        "Forêt"
+      ],
+      "fourchettes": [
+        {
+          "min": 1,
+          "max": 5,
+          "objet": {
+            "type": "reference",
+            "numero": 56,
+            "nom": "Viande de monstre"
+          }
+        },
+        {
+          "min": 9,
+          "max": 12,
+          "eclats": 30
+        },
+        {
+          "min": 9,
+          "max": 12,
+          "objet": {
+            "type": "reference",
+            "numero": 17,
+            "nom": "Baguette de d'accélération"
+          }
+        },
+        {
+          "min": 13,
+          "max": 16,
+          "objet": {
+            "type": "reference",
+            "numero": 54,
+            "nom": "Rameau d’Azur"
+          }
+        },
+        {
+          "min": 17,
+          "max": 30,
+          "objet": {
+            "type": "reference",
+            "numero": 36,
+            "nom": "Aile de scarabée géant"
+          }
+        }
+      ]
+    },
+    {
+      "nom": "Boss forêt",
+      "description": "BBB",
+      "tags": [
+        "Forêt",
+        "Boss"
+      ],
+      "fourchettes": [
+        {
+          "min": 1,
+          "max": 3,
+          "objet": {
+            "type": "reference",
+            "numero": 21,
+            "nom": "Fruits de la forêt"
+          }
+        },
+        {
+          "min": 4,
+          "max": 8,
+          "objet": {
+            "type": "reference",
+            "numero": 11,
+            "nom": "Armure de plaque"
+          }
+        },
+        {
+          "min": 9,
+          "max": 12,
+          "objet": {
+            "type": "reference",
+            "numero": 18,
+            "nom": "Baguette de sommeil"
+          }
+        },
+        {
+          "min": 13,
+          "max": 16,
+          "objet": {
+            "type": "reference",
+            "numero": 8,
+            "nom": "Robe simple"
+          }
+        },
+        {
+          "min": 17,
+          "max": 20,
+          "objet": {
+            "type": "reference",
+            "numero": 4,
+            "nom": "Bâton en bois"
+          }
+        }
+      ]
+    },
+    {
+      "nom": "ProvisionAuberge",
+      "description": "Table de butin pour une situation spécifique.",
+      "tags": [
+        "Auberge"
+      ],
+      "fourchettes": [
+        {
+          "min": 1,
+          "max": 5,
+          "objet": {
+            "type": "reference",
+            "numero": 22,
+            "nom": "Ration de survie"
+          }
+        },
+        {
+          "min": 5,
+          "max": 8,
+          "objet": {
+            "type": "reference",
+            "numero": 19,
+            "nom": "Ration de nourriture"
+          }
+        },
+        {
+          "min": 9,
+          "max": 12,
+          "objet": {
+            "type": "reference",
+            "numero": 15,
+            "nom": "Feuilleclaire"
+          }
+        },
+        {
+          "min": 13,
+          "max": 17,
+          "objet": {
+            "type": "reference",
+            "numero": 25,
+            "nom": "Bandage d'urgence"
+          }
+        },
+        {
+          "min": 18,
+          "max": 21,
+          "objet": {
+            "type": "reference",
+            "numero": 12,
+            "nom": "Petite potion de vie"
+          }
+        },
+        {
+          "min": 22,
+          "max": 30,
+          "objet": {
+            "type": "reference",
+            "numero": 20,
+            "nom": "Ration copieuse de nourriture"
+          }
+        }
+      ]
+    }
+  ],
+  "_metadata": {
+    "availableTags": [
+      "Forêt",
+      "Boss",
+      "Coffre",
+      "Auberge"
+    ]
+  }
+}
