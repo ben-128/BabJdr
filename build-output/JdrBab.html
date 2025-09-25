@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-09-19T11:33:42.641Z by JdrBab Build System -->
+<!-- Generated on 2025-09-25T09:32:51.692Z by JdrBab Build System -->
 <title>JDR‑BAB — Livret de règles</title>
 <meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -6602,7 +6602,7 @@ article.active .grid {
   {
     "nom": "Guerrier",
     "resume": "Héros sans égal au combat au corp à corp.",
-    "capacites": "<ul><li><em>Expert de l'équipement</em> : Capable d'utiliser toutes les armes (épées, arcs, bâtons, dagues, exotiques, une main et deux mains), armures (robes, légères, lourdes), et boucliers.</li><li><em>Hardiesse</em> : Gagne la compétence Hardiesse rang 1.</li></ul>",
+    "capacites": "<ul><li><em>Expert de l'équipement</em> : Capable d'utiliser toutes les armes (épées, arcs, bâtons, dagues, exotiques, une main et deux mains), armures (robes, légères, lourdes), et boucliers.</li><li><em>Hardiesse</em> : Gagne la compétence Hardiesse rang 1.</li><li>\n<em>Doué</em> : Gagne un point de Don supplémentaire par niveau.</li></ul>",
     "sousClasses": [
       {
         "nom": "Nain des montagnes",
@@ -6679,7 +6679,7 @@ article.active .grid {
   {
     "nom": "Rôdeur",
     "resume": "Héros très agile.",
-    "capacites": "<ul><li><em>Équipement de rôdeur</em> : Dagues, robes, armures légères.</li><li><em>Coordination</em> : Gagne la compétence Coordination rang 1.</li></ul>",
+    "capacites": "<ul><li><em>Équipement de rôdeur</em> : Dagues, robes, armures légères.</li><li><em>Coordination</em> : Gagne la compétence Coordination rang 1.</li><li>\n<em>Doué</em> : Gagne un point de Don supplémentaire par niveau.</li></ul>",
     "sousClasses": [
       {
         "nom": "Voleur",
@@ -6751,13 +6751,13 @@ article.active .grid {
       {
         "nom": "Hyperactif",
         "description": "Le héros dispose maintenant de deux actions secondaires par tour.",
-        "prerequis": "<strong> Prérequis :</strong> Niveau 3",
+        "prerequis": "<strong> Prérequis :</strong> Niveau 3.<br>Don unique.",
         "cout": "2 points de don"
       },
       {
         "nom": "Equitation",
         "description": "Permet de monter à cheval ou équivalent.",
-        "prerequis": "<strong> Prérequis :</strong> Niveau 5",
+        "prerequis": "<strong> Prérequis :</strong> Niveau 5.<br>Don unique.",
         "cout": "1 point de don"
       },
       {
@@ -6775,25 +6775,55 @@ article.active .grid {
       {
         "nom": "Maitrise de la dague",
         "description": "Le héros est capable d'équiper et d'utiliser des Dagues.",
-        "prerequis": "<strong> Prérequis :</strong> 🏃 Agilité 5.",
+        "prerequis": "<strong> Prérequis :</strong> 🏃 Agilité 5.<br>Don unique.",
         "cout": "1 point de don"
       },
       {
         "nom": "Maitrise de l'arc",
         "description": "Le héros est capable d'équiper et d'utiliser des Arcs.",
-        "prerequis": "<strong> Prérequis :</strong> 🏃 Agilité 10.",
+        "prerequis": "<strong> Prérequis :</strong> 🏃 Agilité 10.\n          <br>Don unique.",
         "cout": "1 point de don"
       },
       {
         "nom": "Sommeil léger",
         "description": "Pendant qu'il dort, le héros est aussi alerte que s'il effectuait un tour de garde.\nDe plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.",
-        "prerequis": "<strong> Prérequis :</strong> -",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
       {
         "nom": "Chanceux",
         "description": "Lors d'un jet de fortune, le héros lance deux dés et prend le meuilleur resultat.",
+        "prerequis": "<strong> Prérequis :</strong> 🍀Chance 5. <br>Don unique.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Attaque d'opportunité",
+        "description": "Lorsqu'un adversaire sort de votre portée d'attaque au corps à corps durant son déplacement, vous pouvez utiliser une action secondaire (non utilisée durant votre tour), pour effectuer un attaque au corps à corps sur l'adversaire.",
+        "prerequis": "<strong> Prérequis :</strong> 🏃 Agilité 10. <br>Don unique.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Rapide",
+        "description": "Augmente votre vitesse de déplacement de 3m.",
+        "prerequis": "<strong> Prérequis :</strong> Hardiesse rang 1.  <br>Don unique.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Statistiques",
+        "description": "Gagne 2 points de statistiques au choix à répartir.",
         "prerequis": "<strong> Prérequis :</strong> Don unique.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Dur à cuire",
+        "description": "Augmente les points de vie maximum de 3 et la résistance altération de 2.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Premier soin",
+        "description": "<b>En combat :</b>\n<br>Les soins provenant des consommables sont augmentés de X points de vie.\n\n<br><br><b>Hors combat :</b>\n<br>Le héros peut dépenser un effort, pour soigner une autre cible de X points de vie. \n\n<br><br>X correspond à 3, plus 1 point supplémentaire tous les 5 points d’Intelligence.",
+        "prerequis": "<strong> Prérequis :</strong> 🧠 Intelligence 5. <br>Don unique.",
         "cout": "1 point de don"
       }
     ]
@@ -8917,7 +8947,7 @@ article.active .grid {
       "type": "card",
       "id": "gestion-des-ressources-new-7-1756634178476",
       "title": "Experience et niveau",
-      "content": "<p>Lorsqu’un groupe trouve et utilise un <b>cristal d’expérience</b>, tous les membres du groupe <b>gagnent</b> des points d’expérience.</p>\n<p>Les <b>cristaux d’expérience</b> provenant d’un même type de monstre sont de moins en moins efficaces, car la magie qu’ils renferment a déjà été assimilée.</p>\n\n\n<p>Lorsqu’un héros atteint <b>10 points d’expérience</b>, il gagne un niveau et son expérience revient à <b>0</b>. Il obtient alors :</p>\n<ul>\n  <li><b>1 point de don</b> (qu’il peut dépenser ou cumuler).</li>\n  <li>Des <b>statistiques fixes</b> (selon la sous-classe).</li>\n  <li><b>2 points de statistiques</b> à répartir.</li>\n  <li>L’<b>accès à de nouveaux sorts</b> (pour les classes qui le peuvent).</li>\n</ul>",
+      "content": "<p>Lorsqu’un groupe trouve et utilise un <b>cristal d’expérience</b>, tous les membres du groupe <b>gagnent</b> des points d’expérience.</p>\n<p>Les <b>cristaux d’expérience</b> provenant d’un même type de monstre sont de moins en moins efficaces, car la magie qu’ils renferment a déjà été assimilée.</p>\n\n\n<p>Lorsqu’un héros atteint <b>10 points d’expérience</b>, il gagne un niveau et son expérience revient à <b>0</b>. Il obtient alors :</p>\n<ul>\n  <li><b>1</b> (<b>ou 2</b> pour les guerriers/rodeurs) point de <b>don</b> (qu’il peut dépenser ou cumuler).</li>\n  <li>Des <b>statistiques fixes</b> (selon la sous-classe).</li>\n  <li><b>2 points de statistiques</b> à répartir.</li>\n  <li>L’<b>accès à de nouveaux sorts</b> (pour les classes qui le peuvent).</li>\n</ul>",
       "deletable": true,
       "sectionName": "Nouvelle section"
     },
