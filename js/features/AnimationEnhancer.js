@@ -191,16 +191,12 @@
             const distanceFromCenter = imgCenter - windowCenter;
             const maxDistance = windowHeight / 2;
 
-            // Rotate based on vertical position
-            const rotateX = (distanceFromCenter / maxDistance) * 15; // Max 15 degrees
-            const rotateY = Math.sin(scrollY * 0.001) * 8; // Gentle wave effect
-
             // Scale based on proximity to center
             const scale = 1 + (0.2 * (1 - Math.abs(distanceFromCenter) / maxDistance));
 
-            // Apply transform
+            // Apply transform (without rotation)
             img.style.setProperty('transform',
-              `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(${scale})`,
+              `scale(${scale})`,
               'important'
             );
 
@@ -265,21 +261,9 @@
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
 
-            // Calculate rotation
-            const rotateX = (y - centerY) / 6;
-            const rotateY = (centerX - x) / 6;
-
-            // Calculate depth
-            const translateZ = Math.min(60, Math.abs(rotateX) * 3 + Math.abs(rotateY) * 3);
-
-            // Apply limits
-            const maxRotate = 20;
-            const clampedRotateX = Math.max(-maxRotate, Math.min(maxRotate, rotateX));
-            const clampedRotateY = Math.max(-maxRotate, Math.min(maxRotate, rotateY));
-
-            // Apply transform
+            // Apply transform (without rotation)
             img.style.setProperty('transform',
-              `perspective(1000px) rotateX(${clampedRotateX}deg) rotateY(${clampedRotateY}deg) translateZ(${translateZ}px) scale(1.15)`,
+              `scale(1.15)`,
               'important'
             );
 
