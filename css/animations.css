@@ -708,10 +708,19 @@ input:focus, textarea:focus, select:focus {
     0 0 20px rgba(212,175,55,0.2);
 }
 
-.illus-class img, .illus-subclass img {
-  box-shadow:
-    var(--image-shadow),
-    0 0 15px rgba(139,69,19,0.3);
+/* Class images completely excluded from 3D effects */
+.illus-class img,
+.illus-subclass img,
+article[data-page="guerrier"] .illus img,
+article[data-page="mage"] .illus img,
+article[data-page="pretre"] .illus img,
+article[data-page="rodeur"] .illus img,
+article[data-page="enchanteur"] .illus img,
+.illus[data-illus-key^="class:"] img,
+.illus[data-illus-key^="subclass:"] img {
+  transform: none !important;
+  filter: none !important;
+  transition: box-shadow 0.3s ease !important;
 }
 
 .illus-don img {

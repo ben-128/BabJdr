@@ -163,9 +163,23 @@
       document.addEventListener('mousemove', (e) => {
         // Track images except in class sections to avoid rotating entire sections
         document.querySelectorAll('.illus img').forEach(img => {
-          // Skip images in class sections to prevent section rotation
+          // Skip ALL class and subclass related images completely
           if (img.closest('article[data-page="guerrier"], article[data-page="mage"], article[data-page="pretre"], article[data-page="rodeur"], article[data-page="enchanteur"]')) {
             return;
+          }
+
+          // Also skip illus-class and illus-subclass anywhere
+          if (img.closest('.illus-class, .illus-subclass')) {
+            return;
+          }
+
+          // Skip images with class-related data attributes
+          const illusContainer = img.closest('.illus');
+          if (illusContainer) {
+            const illusKey = illusContainer.getAttribute('data-illus-key');
+            if (illusKey && (illusKey.startsWith('class:') || illusKey.startsWith('subclass:'))) {
+              return;
+            }
           }
           const rect = img.getBoundingClientRect();
 
