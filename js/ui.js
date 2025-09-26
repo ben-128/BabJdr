@@ -191,15 +191,8 @@
         resultDiv.style.color = '#16a34a';
       }
 
-      // Force regenerate page first, then show the object
-      if (JdrApp.modules.renderer?.regenerateCurrentPage) {
-        JdrApp.modules.renderer.regenerateCurrentPage();
-      }
-      
-      // After regeneration, show only the target object
-      setTimeout(() => {
-        this.showOnlyObjectById(searchNumber);
-      }, 100);
+      // Show the object immediately without regenerating the page
+      this.showOnlyObjectById(searchNumber);
     },
 
     clearIdSearch() {
@@ -238,12 +231,35 @@
 
     showOnlyObjectById(searchNumber) {
       this.hideAllObjects();
-      
-      // Show only the target object - check both containers
-      const targetCard = document.querySelector(`[data-object-id="${searchNumber}"], [data-numero="${searchNumber}"]`);
+
+      // Show only the target object - check multiple selectors
+      const selectors = [
+        `[data-object-id="${searchNumber}"]`,
+        `[data-numero="${searchNumber}"]`,
+        `[data-objet-numero="${searchNumber}"]`,
+        `.objet-card[data-numero="${searchNumber}"]`
+      ];
+
+      let targetCard = null;
+      for (const selector of selectors) {
+        targetCard = document.querySelector(selector);
+        if (targetCard) break;
+      }
+
       if (targetCard) {
         targetCard.style.display = '';
-        targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        // Ensure parent containers are also visible
+        let parent = targetCard.parentElement;
+        while (parent && parent !== document.body) {
+          if (parent.style.display === 'none') {
+            parent.style.display = '';
+          }
+          parent = parent.parentElement;
+        }
+        // Scroll into view after a small delay to ensure rendering
+        requestAnimationFrame(() => {
+          targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
       }
     },
 

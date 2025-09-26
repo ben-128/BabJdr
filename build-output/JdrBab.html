@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-09-26T15:40:35.222Z by JdrBab Build System -->
+<!-- Generated on 2025-09-26T15:44:46.412Z by JdrBab Build System -->
 <title>JDR‑BAB — Livret de règles</title>
 <meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13841,17 +13841,19 @@ article.active .grid {
                 placeholder="Numéro d'objet (ex: 42)"
                 style="padding: 0.2rem; border: 1px solid ${searchBorderColor}; border-radius: 6px; font-size: 0.95em; width: 150px; height: 2rem; display: flex; align-items: center;"
               >
-              <button 
-                id="search-object-btn" 
-                class="btn small" 
+              <button
+                type="button"
+                id="search-object-btn"
+                class="btn small"
                 style="background: var(--primary-color); color: white; padding: 0.2rem 0.4rem; white-space: nowrap; font-size: 0.9em; display: flex; align-items: center; height: 2rem; justify-content: center;"
                 title="Rechercher cet objet"
               >
                 🔍 Chercher
               </button>
-              <button 
-                id="clear-id-search" 
-                class="btn small" 
+              <button
+                type="button"
+                id="clear-id-search"
+                class="btn small"
                 style="background: var(--bronze); color: white; padding: 0.2rem 0.4rem; white-space: nowrap; font-size: 0.9em; display: ${!isDevMode ? 'none' : 'flex'}; align-items: center; height: 2rem; justify-content: center;"
                 title="${buttonTitle}"
               >
@@ -28062,7 +28064,9 @@ article.active .grid {
         }
       });
 
-      JdrApp.utils.events.register('click', '#search-object-btn', () => {
+      JdrApp.utils.events.register('click', '#search-object-btn', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         const input = document.querySelector('#id-search-input');
         if (input && JdrApp.modules.ui && typeof JdrApp.modules.ui.performIdSearch === 'function') {
           JdrApp.modules.ui.performIdSearch(input.value);
@@ -32336,15 +32340,8 @@ article.active .grid {
         resultDiv.style.color = '#16a34a';
       }
 
-      // Force regenerate page first, then show the object
-      if (JdrApp.modules.renderer?.regenerateCurrentPage) {
-        JdrApp.modules.renderer.regenerateCurrentPage();
-      }
-      
-      // After regeneration, show only the target object
-      setTimeout(() => {
-        this.showOnlyObjectById(searchNumber);
-      }, 100);
+      // Show the object immediately without regenerating the page
+      this.showOnlyObjectById(searchNumber);
     },
 
     clearIdSearch() {
@@ -32383,12 +32380,35 @@ article.active .grid {
 
     showOnlyObjectById(searchNumber) {
       this.hideAllObjects();
-      
-      // Show only the target object - check both containers
-      const targetCard = document.querySelector(`[data-object-id="${searchNumber}"], [data-numero="${searchNumber}"]`);
+
+      // Show only the target object - check multiple selectors
+      const selectors = [
+        `[data-object-id="${searchNumber}"]`,
+        `[data-numero="${searchNumber}"]`,
+        `[data-objet-numero="${searchNumber}"]`,
+        `.objet-card[data-numero="${searchNumber}"]`
+      ];
+
+      let targetCard = null;
+      for (const selector of selectors) {
+        targetCard = document.querySelector(selector);
+        if (targetCard) break;
+      }
+
       if (targetCard) {
         targetCard.style.display = '';
-        targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        // Ensure parent containers are also visible
+        let parent = targetCard.parentElement;
+        while (parent && parent !== document.body) {
+          if (parent.style.display === 'none') {
+            parent.style.display = '';
+          }
+          parent = parent.parentElement;
+        }
+        // Scroll into view after a small delay to ensure rendering
+        requestAnimationFrame(() => {
+          targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
       }
     },
 

@@ -102,7 +102,9 @@
         }
       });
 
-      JdrApp.utils.events.register('click', '#search-object-btn', () => {
+      JdrApp.utils.events.register('click', '#search-object-btn', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         const input = document.querySelector('#id-search-input');
         if (input && JdrApp.modules.ui && typeof JdrApp.modules.ui.performIdSearch === 'function') {
           JdrApp.modules.ui.performIdSearch(input.value);
