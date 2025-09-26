@@ -84,9 +84,10 @@ window.MANIFEST_DATA = ${fs.readFileSync(path.join(rootDir, 'config', 'manifest.
   // Read all CSS files
   const cssFiles = [
     'css/theme.css',
-    'css/utilities.css', 
+    'css/utilities.css',
     'css/layout.css',
     'css/components.css',
+    'css/animations.css',  // 3D animation styles
     'css/editor.css',
     'css/scroll-optimizations.css'
   ];
@@ -124,6 +125,7 @@ window.MANIFEST_DATA = ${fs.readFileSync(path.join(rootDir, 'config', 'manifest.
     'js/features/TablesTresorsManager.js', // Tables de trésors manager
     'js/features/FavorisManager.js', // Favoris manager - AVANT renderer
     'js/features/FavorisRenderer.js', // Favoris renderer - AVANT renderer
+    'js/features/AnimationEnhancer.js', // 3D animation effects
     'js/features/ScrollOptimizer.js', // Scroll performance optimizations
     'js/features/DynamicCentering.js', // Dynamic centering system
     
