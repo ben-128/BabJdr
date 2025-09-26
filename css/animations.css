@@ -574,18 +574,7 @@ input:focus, textarea:focus, select:focus {
     0 0 80px rgba(212,175,55,0.3);
 }
 
-.illus-class img:hover:not(.js-3d-active), .illus-subclass img:hover:not(.js-3d-active) {
-  transform:
-    perspective(1000px)
-    rotateX(-10deg)
-    rotateY(8deg)
-    translateZ(35px)
-    scale(1.1);
-  box-shadow:
-    0 30px 60px rgba(0,0,0,0.4),
-    0 0 50px rgba(139,69,19,0.5),
-    inset 0 2px 6px rgba(255,255,255,0.3);
-}
+/* Removed class image 3D effects to prevent section rotation */
 
 .illus-don img:hover:not(.js-3d-active) {
   transform:
@@ -622,12 +611,7 @@ input:focus, textarea:focus, select:focus {
     0 0 80px rgba(212,175,55,0.3);
 }
 
-.illus-class img.js-3d-active, .illus-subclass img.js-3d-active {
-  box-shadow:
-    0 30px 60px rgba(0,0,0,0.4),
-    0 0 50px rgba(139,69,19,0.5),
-    inset 0 2px 6px rgba(255,255,255,0.3);
-}
+/* Removed class image JS effects to prevent section rotation */
 
 .illus-don img.js-3d-active {
   box-shadow:

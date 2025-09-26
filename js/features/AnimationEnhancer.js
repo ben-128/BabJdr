@@ -161,8 +161,12 @@
 
       // Simplified and more reliable mouse tracking
       document.addEventListener('mousemove', (e) => {
-        // Track all images
+        // Track images except in class sections to avoid rotating entire sections
         document.querySelectorAll('.illus img').forEach(img => {
+          // Skip images in class sections to prevent section rotation
+          if (img.closest('article[data-page="guerrier"], article[data-page="mage"], article[data-page="pretre"], article[data-page="rodeur"], article[data-page="enchanteur"]')) {
+            return;
+          }
           const rect = img.getBoundingClientRect();
 
           // Check if mouse is actually over the image
