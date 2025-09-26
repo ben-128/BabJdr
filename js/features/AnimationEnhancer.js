@@ -60,6 +60,36 @@
         }
       });
 
+      // Special observer for images with 3D entrance effects
+      const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            const delay = Math.random() * 300; // Random delay up to 300ms
+
+            setTimeout(() => {
+              img.classList.add('image-revealed');
+              img.style.opacity = '1';
+              img.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px) scale(1)';
+            }, delay);
+
+            imageObserver.unobserve(img);
+          }
+        });
+      }, {
+        root: null,
+        rootMargin: '0px 0px -10% 0px',
+        threshold: 0.3
+      });
+
+      // Observe all images for reveal animation
+      document.querySelectorAll('.illus img').forEach(img => {
+        img.style.opacity = '0';
+        img.style.transform = 'perspective(1000px) rotateX(-30deg) rotateY(45deg) translateZ(-50px) scale(0.8)';
+        img.style.transition = 'opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1)';
+        imageObserver.observe(img);
+      });
+
       // Special handling for treasure table links
       document.querySelectorAll('.treasure-table-link').forEach(link => {
         link.addEventListener('click', (e) => {
@@ -149,11 +179,60 @@
             `;
           }
         });
+
+        // Enhanced 3D tracking for images
+        document.querySelectorAll('.illus img').forEach(img => {
+          if (img.matches(':hover') && !img.closest('.card')) {
+            const rect = img.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            // More dramatic rotation for standalone images
+            const rotateX = (y - centerY) / 6;
+            const rotateY = (centerX - x) / 6;
+            const translateZ = Math.max(20, Math.min(60, Math.abs(rotateX) + Math.abs(rotateY)));
+
+            // Determine image type for specialized effects
+            const isSpellImage = img.closest('.illus-spell');
+            const isClassImage = img.closest('.illus-class, .illus-subclass');
+            const isDonImage = img.closest('.illus-don');
+
+            let scale = 1.08;
+            let maxRotate = 15;
+
+            if (isSpellImage) {
+              scale = 1.12;
+              maxRotate = 10;
+            } else if (isClassImage) {
+              scale = 1.1;
+              maxRotate = 12;
+            } else if (isDonImage) {
+              scale = 1.06;
+              maxRotate = 18;
+            }
+
+            const clampedRotateX = Math.max(-maxRotate, Math.min(maxRotate, rotateX));
+            const clampedRotateY = Math.max(-maxRotate, Math.min(maxRotate, rotateY));
+
+            img.style.transform = `
+              perspective(1200px)
+              rotateX(${clampedRotateX}deg)
+              rotateY(${clampedRotateY}deg)
+              translateZ(${translateZ}px)
+              scale(${scale})
+            `;
+          }
+        });
       });
 
       // Reset transform when not hovering
       document.addEventListener('mouseleave', (e) => {
         if (e.target.classList.contains('card')) {
+          e.target.style.transform = '';
+        }
+        if (e.target.tagName === 'IMG' && e.target.closest('.illus')) {
           e.target.style.transform = '';
         }
       }, true);
