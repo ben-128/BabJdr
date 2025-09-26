@@ -114,9 +114,10 @@
      */
     toggleFavoris(type, nom) {
       if (this.isFavoris(type, nom)) {
-        return this.removeFavoris(type, nom);
+        this.removeFavoris(type, nom);
+        return false; // Supprimé, pas ajouté
       } else {
-        return this.addFavoris(type, nom);
+        return this.addFavoris(type, nom); // Retourne true si ajouté
       }
     }
 
@@ -173,8 +174,13 @@
           const type = starBtn.dataset.type;
           const nom = starBtn.dataset.nom;
           
-          this.toggleFavoris(type, nom);
+          const wasAdded = this.toggleFavoris(type, nom);
           this.updateStarDisplay(starBtn, type, nom);
+
+          // Créer l'effet de particules si l'élément a été ajouté aux favoris
+          if (wasAdded) {
+            this.createStarParticleEffect(starBtn);
+          }
         }
       });
     }
@@ -255,6 +261,91 @@
           ${isFav ? '⭐' : '☆'}
         </button>
       `;
+    }
+
+    /**
+     * Crée un effet de particules d'étoiles jaunes
+     * @param {Element} sourceElement - Élément source pour l'effet
+     */
+    createStarParticleEffect(sourceElement) {
+      const rect = sourceElement.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+
+      // Créer 8 particules d'étoiles
+      for (let i = 0; i < 8; i++) {
+        const particle = document.createElement('div');
+        particle.innerHTML = '⭐';
+        particle.style.cssText = `
+          position: fixed;
+          left: ${centerX}px;
+          top: ${centerY}px;
+          font-size: 16px;
+          color: #FFD700;
+          pointer-events: none;
+          z-index: 10000;
+          transform: translate(-50%, -50%);
+          animation: starParticle${i} 1.2s ease-out forwards;
+        `;
+
+        document.body.appendChild(particle);
+
+        // Nettoyer la particule après l'animation
+        setTimeout(() => {
+          if (particle.parentNode) {
+            particle.parentNode.removeChild(particle);
+          }
+        }, 1200);
+      }
+
+      // Ajouter les animations CSS dynamiquement
+      if (!document.getElementById('star-particle-animations')) {
+        const style = document.createElement('style');
+        style.id = 'star-particle-animations';
+        style.textContent = `
+          @keyframes starParticle0 {
+            0% { transform: translate(-50%, -50%) scale(0) rotate(0deg); opacity: 1; }
+            50% { transform: translate(-50%, -50%) scale(1.2) rotate(180deg); opacity: 1; }
+            100% { transform: translate(-50%, -100px) scale(0.8) rotate(360deg); opacity: 0; }
+          }
+          @keyframes starParticle1 {
+            0% { transform: translate(-50%, -50%) scale(0) rotate(0deg); opacity: 1; }
+            50% { transform: translate(-50%, -50%) scale(1.2) rotate(180deg); opacity: 1; }
+            100% { transform: translate(20px, -80px) scale(0.8) rotate(360deg); opacity: 0; }
+          }
+          @keyframes starParticle2 {
+            0% { transform: translate(-50%, -50%) scale(0) rotate(0deg); opacity: 1; }
+            50% { transform: translate(-50%, -50%) scale(1.2) rotate(180deg); opacity: 1; }
+            100% { transform: translate(40px, -50px) scale(0.8) rotate(360deg); opacity: 0; }
+          }
+          @keyframes starParticle3 {
+            0% { transform: translate(-50%, -50%) scale(0) rotate(0deg); opacity: 1; }
+            50% { transform: translate(-50%, -50%) scale(1.2) rotate(180deg); opacity: 1; }
+            100% { transform: translate(20px, -20px) scale(0.8) rotate(360deg); opacity: 0; }
+          }
+          @keyframes starParticle4 {
+            0% { transform: translate(-50%, -50%) scale(0) rotate(0deg); opacity: 1; }
+            50% { transform: translate(-50%, -50%) scale(1.2) rotate(180deg); opacity: 1; }
+            100% { transform: translate(-50%, 20px) scale(0.8) rotate(360deg); opacity: 0; }
+          }
+          @keyframes starParticle5 {
+            0% { transform: translate(-50%, -50%) scale(0) rotate(0deg); opacity: 1; }
+            50% { transform: translate(-50%, -50%) scale(1.2) rotate(180deg); opacity: 1; }
+            100% { transform: translate(-120px, -20px) scale(0.8) rotate(360deg); opacity: 0; }
+          }
+          @keyframes starParticle6 {
+            0% { transform: translate(-50%, -50%) scale(0) rotate(0deg); opacity: 1; }
+            50% { transform: translate(-50%, -50%) scale(1.2) rotate(180deg); opacity: 1; }
+            100% { transform: translate(-140px, -50px) scale(0.8) rotate(360deg); opacity: 0; }
+          }
+          @keyframes starParticle7 {
+            0% { transform: translate(-50%, -50%) scale(0) rotate(0deg); opacity: 1; }
+            50% { transform: translate(-50%, -50%) scale(1.2) rotate(180deg); opacity: 1; }
+            100% { transform: translate(-120px, -80px) scale(0.8) rotate(360deg); opacity: 0; }
+          }
+        `;
+        document.head.appendChild(style);
+      }
     }
   }
 
