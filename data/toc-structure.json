@@ -36,6 +36,13 @@
           "items": "DONS"
         },
         {
+          "type": "category",
+          "id": "sorts",
+          "title": "Sorts",
+          "icon": "🔮",
+          "items": "SORTS"
+        },
+        {
           "type": "page",
           "id": "feuille-personnage",
           "title": "Feuille de personnage",
@@ -47,16 +54,9 @@
       "id": "arsenal",
       "title": "⚔️ Arsenal",
       "icon": "⚔️",
-      "description": "Sorts, objets et équipements",
+      "description": "Objets et équipements",
       "collapsed": false,
       "items": [
-        {
-          "type": "category",
-          "id": "sorts",
-          "title": "Sorts",
-          "icon": "🔮",
-          "items": "SORTS"
-        },
         {
           "type": "page",
           "id": "objets",

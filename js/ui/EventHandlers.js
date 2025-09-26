@@ -102,14 +102,32 @@
         }
       });
 
-      JdrApp.utils.events.register('click', '#search-object-btn', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const input = document.querySelector('#id-search-input');
-        if (input && JdrApp.modules.ui && typeof JdrApp.modules.ui.performIdSearch === 'function') {
-          JdrApp.modules.ui.performIdSearch(input.value);
+      // Setup search button with single event listener
+      const setupSearchButton = () => {
+        const btn = document.querySelector('#search-object-btn');
+
+        if (btn && !btn.hasAttribute('data-listener-added')) {
+          btn.setAttribute('data-listener-added', 'true');
+
+          btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            const input = document.querySelector('#id-search-input');
+            if (input && JdrApp.modules.ui && typeof JdrApp.modules.ui.performIdSearch === 'function') {
+              JdrApp.modules.ui.performIdSearch(input.value);
+            }
+          });
         }
+      };
+
+      // Setup when DOM is ready and on navigation
+      setTimeout(setupSearchButton, 1000);
+      window.addEventListener('hashchange', () => {
+        setTimeout(setupSearchButton, 500);
       });
+
+      // Legacy event listeners removed to prevent duplicates
 
       JdrApp.utils.events.register('click', '#clear-id-search', () => {
         if (JdrApp.modules.ui && typeof JdrApp.modules.ui.clearIdSearch === 'function') {
