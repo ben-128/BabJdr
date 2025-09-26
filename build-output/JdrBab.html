@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-09-26T15:37:35.782Z by JdrBab Build System -->
+<!-- Generated on 2025-09-26T15:40:35.222Z by JdrBab Build System -->
 <title>JDR‑BAB — Livret de règles</title>
 <meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -4370,6 +4370,30 @@ article[data-page="enchanteur"] .illus img:hover,
   }
 }
 
+@keyframes imageGlow {
+  0% {
+    filter: brightness(1.1) contrast(1.1);
+    box-shadow:
+      0 15px 30px rgba(0,0,0,0.3),
+      0 0 20px rgba(212,175,55,0.4);
+    transform: scale(1.05);
+  }
+  50% {
+    filter: brightness(1.25) contrast(1.25);
+    box-shadow:
+      0 25px 50px rgba(0,0,0,0.4),
+      0 0 40px rgba(212,175,55,0.7);
+    transform: scale(1.1);
+  }
+  100% {
+    filter: brightness(1.1) contrast(1.1);
+    box-shadow:
+      0 15px 30px rgba(0,0,0,0.3),
+      0 0 20px rgba(212,175,55,0.4);
+    transform: scale(1.05);
+  }
+}
+
 @keyframes fadeInScale {
   from {
     opacity: 0;
@@ -4859,6 +4883,11 @@ input:focus, textarea:focus, select:focus {
     0 10px 20px rgba(139,69,19,0.2),
     0 0 30px rgba(212,175,55,0.4),
     inset 0 2px 4px rgba(255,255,255,0.2);
+}
+
+/* Animation de glow en boucle */
+.illus img.image-glow-active {
+  animation: imageGlow 2s ease-in-out infinite;
 }
 
 /* Specialized 3D effects for different image types - only when JS not active */
@@ -18802,7 +18831,7 @@ article.active .grid {
       this.setupIntersectionObserver();
       this.setupScrollAnimations();
       this.setupHoverEnhancements();
-      this.setupParallaxEffects();
+      // this.setupParallaxEffects(); // Disabled to avoid conflicts with glow animations
       this.setupStaggeredAnimations();
       this.setupPerformanceOptimizations();
     },
@@ -18958,47 +18987,30 @@ article.active .grid {
      */
     setupMobileScrollAnimation() {
       let ticking = false;
+      const imageStates = new Map(); // Track state of each image
 
       const updateMobileAnimations = () => {
-        const scrollY = window.pageYOffset;
         const windowHeight = window.innerHeight;
         const windowCenter = windowHeight / 2;
+        const activationZone = 150; // Zone around center for activation
 
         document.querySelectorAll('.illus img').forEach(img => {
           const rect = img.getBoundingClientRect();
           const imgCenter = rect.top + rect.height / 2;
+          const distanceFromCenter = Math.abs(imgCenter - windowCenter);
+          const isInViewport = rect.top < windowHeight && rect.bottom > 0;
+          const isInActiveZone = isInViewport && distanceFromCenter < activationZone;
 
-          // Check if image is in viewport
-          if (rect.top < windowHeight && rect.bottom > 0) {
-            img.classList.add('js-3d-active');
+          const currentState = imageStates.get(img);
 
-            // Calculate rotation based on position relative to screen center
-            const distanceFromCenter = imgCenter - windowCenter;
-            const maxDistance = windowHeight / 2;
-
-            // Scale based on proximity to center
-            const scale = 1 + (0.2 * (1 - Math.abs(distanceFromCenter) / maxDistance));
-
-            // Apply transform (without rotation)
-            img.style.setProperty('transform',
-              `scale(${scale})`,
-              'important'
-            );
-
-            // Enhanced effects when near center
-            if (Math.abs(distanceFromCenter) < 100) {
-              img.style.setProperty('filter', 'brightness(1.25) contrast(1.25)', 'important');
-              img.style.setProperty('box-shadow', '0 25px 50px rgba(0,0,0,0.4), 0 0 40px rgba(212,175,55,0.7)', 'important');
-            } else {
-              img.style.setProperty('filter', 'brightness(1.1) contrast(1.1)', 'important');
-              img.style.setProperty('box-shadow', '0 15px 30px rgba(0,0,0,0.3), 0 0 20px rgba(212,175,55,0.4)', 'important');
-            }
-          } else {
-            // Reset when out of viewport
-            img.classList.remove('js-3d-active');
-            img.style.removeProperty('transform');
-            img.style.removeProperty('filter');
-            img.style.removeProperty('box-shadow');
+          if (isInActiveZone && !currentState) {
+            // Enter active zone - start glow animation
+            img.classList.add('js-3d-active', 'image-glow-active');
+            imageStates.set(img, true);
+          } else if (!isInActiveZone && currentState) {
+            // Exit active zone - stop glow animation cleanly
+            img.classList.remove('js-3d-active', 'image-glow-active');
+            imageStates.set(img, false);
           }
         });
 
@@ -19023,59 +19035,22 @@ article.active .grid {
      * Desktop mouse tracking (existing code)
      */
     setupDesktopMouseTracking() {
-      document.addEventListener('mousemove', (e) => {
-        // Track all images normally
-        document.querySelectorAll('.illus img').forEach(img => {
-          const rect = img.getBoundingClientRect();
-
-          // Check if mouse is actually over the image
-          const isHovering = (
-            e.clientX >= rect.left &&
-            e.clientX <= rect.right &&
-            e.clientY >= rect.top &&
-            e.clientY <= rect.bottom
-          );
-
-          if (isHovering) {
-            // Mark as JS-controlled
-            img.classList.add('js-3d-active');
-
-            // Calculate mouse position relative to image center
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-
-            // Apply transform (without rotation)
-            img.style.setProperty('transform',
-              `scale(1.15)`,
-              'important'
-            );
-
-            // Apply visual effects
-            img.style.setProperty('filter', 'brightness(1.2) contrast(1.2)', 'important');
-            img.style.setProperty('box-shadow', '0 20px 40px rgba(0,0,0,0.4), 0 0 30px rgba(212,175,55,0.6)', 'important');
-
-          } else {
-            // Reset when not hovering
-            img.classList.remove('js-3d-active');
-            img.style.removeProperty('transform');
-            img.style.removeProperty('filter');
-            img.style.removeProperty('box-shadow');
-          }
-        });
-      });
-
-      // Clean reset on mouse leave - only for images
-      document.addEventListener('mouseleave', (e) => {
+      // Use mouseenter/mouseleave for clean zone-based triggers
+      document.addEventListener('mouseenter', (e) => {
         if (e.target && e.target.tagName === 'IMG' && e.target.closest('.illus')) {
-          e.target.classList.remove('js-3d-active');
-          e.target.style.removeProperty('transform');
-          e.target.style.removeProperty('filter');
-          e.target.style.removeProperty('box-shadow');
+          const img = e.target;
+          // Enter hover zone - start glow animation
+          img.classList.add('js-3d-active', 'image-glow-active');
         }
       }, true);
 
+      document.addEventListener('mouseleave', (e) => {
+        if (e.target && e.target.tagName === 'IMG' && e.target.closest('.illus')) {
+          const img = e.target;
+          // Exit hover zone - stop glow animation cleanly
+          img.classList.remove('js-3d-active', 'image-glow-active');
+        }
+      }, true);
     },
 
     /**

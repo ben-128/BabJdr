@@ -49,6 +49,30 @@
   }
 }
 
+@keyframes imageGlow {
+  0% {
+    filter: brightness(1.1) contrast(1.1);
+    box-shadow:
+      0 15px 30px rgba(0,0,0,0.3),
+      0 0 20px rgba(212,175,55,0.4);
+    transform: scale(1.05);
+  }
+  50% {
+    filter: brightness(1.25) contrast(1.25);
+    box-shadow:
+      0 25px 50px rgba(0,0,0,0.4),
+      0 0 40px rgba(212,175,55,0.7);
+    transform: scale(1.1);
+  }
+  100% {
+    filter: brightness(1.1) contrast(1.1);
+    box-shadow:
+      0 15px 30px rgba(0,0,0,0.3),
+      0 0 20px rgba(212,175,55,0.4);
+    transform: scale(1.05);
+  }
+}
+
 @keyframes fadeInScale {
   from {
     opacity: 0;
@@ -538,6 +562,11 @@ input:focus, textarea:focus, select:focus {
     0 10px 20px rgba(139,69,19,0.2),
     0 0 30px rgba(212,175,55,0.4),
     inset 0 2px 4px rgba(255,255,255,0.2);
+}
+
+/* Animation de glow en boucle */
+.illus img.image-glow-active {
+  animation: imageGlow 2s ease-in-out infinite;
 }
 
 /* Specialized 3D effects for different image types - only when JS not active */
