@@ -182,35 +182,42 @@
 
         // Enhanced 3D tracking for images
         document.querySelectorAll('.illus img').forEach(img => {
-          if (img.matches(':hover') && !img.closest('.card')) {
+          if (img.matches(':hover')) {
+            // Mark as JS-controlled to override CSS hover
+            img.classList.add('js-3d-active');
+
             const rect = img.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
 
-            // More dramatic rotation for standalone images
-            const rotateX = (y - centerY) / 6;
-            const rotateY = (centerX - x) / 6;
-            const translateZ = Math.max(20, Math.min(60, Math.abs(rotateX) + Math.abs(rotateY)));
+            // More dramatic rotation for all images
+            const rotateX = (y - centerY) / 8;
+            const rotateY = (centerX - x) / 8;
+            const translateZ = Math.max(20, Math.min(80, Math.abs(rotateX) * 2 + Math.abs(rotateY) * 2));
 
             // Determine image type for specialized effects
             const isSpellImage = img.closest('.illus-spell');
             const isClassImage = img.closest('.illus-class, .illus-subclass');
             const isDonImage = img.closest('.illus-don');
+            const isCardImage = img.closest('.card');
 
             let scale = 1.08;
             let maxRotate = 15;
 
             if (isSpellImage) {
-              scale = 1.12;
-              maxRotate = 10;
-            } else if (isClassImage) {
-              scale = 1.1;
+              scale = 1.15;
               maxRotate = 12;
+            } else if (isClassImage) {
+              scale = 1.12;
+              maxRotate = 14;
             } else if (isDonImage) {
               scale = 1.06;
               maxRotate = 18;
+            } else if (isCardImage) {
+              scale = 1.18;
+              maxRotate = 10;
             }
 
             const clampedRotateX = Math.max(-maxRotate, Math.min(maxRotate, rotateX));
@@ -223,6 +230,9 @@
               translateZ(${translateZ}px)
               scale(${scale})
             `;
+          } else {
+            // Remove JS control when not hovering
+            img.classList.remove('js-3d-active');
           }
         });
       });
@@ -233,7 +243,15 @@
           e.target.style.transform = '';
         }
         if (e.target.tagName === 'IMG' && e.target.closest('.illus')) {
+          e.target.classList.remove('js-3d-active');
           e.target.style.transform = '';
+        }
+      }, true);
+
+      // Also handle mouseenter for images to ensure proper setup
+      document.addEventListener('mouseenter', (e) => {
+        if (e.target.tagName === 'IMG' && e.target.closest('.illus')) {
+          e.target.classList.add('js-3d-active');
         }
       }, true);
     },
