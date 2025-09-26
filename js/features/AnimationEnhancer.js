@@ -157,7 +157,6 @@
      * Enhanced hover effects with dynamic calculations
      */
     setupHoverEnhancements() {
-      console.log('AnimationEnhancer: Setting up hover enhancements...');
 
       // Simplified and more reliable mouse tracking
       document.addEventListener('mousemove', (e) => {
@@ -174,12 +173,6 @@
           );
 
           if (isHovering) {
-            // Log first hover for debugging
-            if (!img.dataset.debugLogged) {
-              console.log('🎯 3D tracking active for image:', img.src || img.alt || 'No identifier');
-              img.dataset.debugLogged = 'true';
-            }
-
             // Mark as JS-controlled
             img.classList.add('js-3d-active');
 
@@ -264,7 +257,6 @@
         }
       }, true);
 
-      console.log('✅ 3D hover effects setup complete!');
     },
 
     /**
@@ -582,23 +574,10 @@
   // Initialize when DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
-      console.log('AnimationEnhancer: DOMContentLoaded - initializing...');
       window.AnimationEnhancer.init();
     });
   } else {
-    console.log('AnimationEnhancer: DOM already ready - initializing...');
     window.AnimationEnhancer.init();
   }
-
-  // Also add a simple global test function
-  window.testImageTracking = function() {
-    console.log('Testing image tracking...');
-    const images = document.querySelectorAll('.illus img');
-    console.log('Found', images.length, 'images');
-
-    images.forEach((img, index) => {
-      console.log(`Image ${index}:`, img.src || 'No src', img.getBoundingClientRect());
-    });
-  };
 
 })();

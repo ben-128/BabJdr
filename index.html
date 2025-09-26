@@ -26346,60 +26346,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
 <script src="js/features/FavorisRenderer.js"></script>
 <script src="js/features/AnimationEnhancer.js"></script>
 
-<!-- Test direct des effets 3D -->
-<script>
-// Test ultra-basique d'abord
-alert('ALERTE: JavaScript fonctionne !');
-document.write('<div style="background:red;color:white;padding:10px;">JAVASCRIPT ACTIF</div>');
-console.log('🔥 TEST DIRECT - Script inline chargé');
-
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('🔥 TEST DIRECT - DOM ready');
-
-    // Test simple
-    setTimeout(function() {
-        const images = document.querySelectorAll('.illus img');
-        console.log('🔥 TEST DIRECT - Images trouvées:', images.length);
-
-        if (images.length > 0) {
-            console.log('🔥 TEST DIRECT - Première image:', images[0].src || images[0].alt);
-
-            // Ajouter l'effet directement
-            document.addEventListener('mousemove', function(e) {
-                images.forEach(function(img) {
-                    const rect = img.getBoundingClientRect();
-                    const isHover = e.clientX >= rect.left && e.clientX <= rect.right &&
-                                   e.clientY >= rect.top && e.clientY <= rect.bottom;
-
-                    if (isHover) {
-                        if (!img.dataset.testLogged) {
-                            console.log('🔥 TEST DIRECT - Survol détecté sur:', img.src || img.alt);
-                            img.dataset.testLogged = 'true';
-                        }
-
-                        const x = e.clientX - rect.left;
-                        const y = e.clientY - rect.top;
-                        const centerX = rect.width / 2;
-                        const centerY = rect.height / 2;
-
-                        const rotateX = (y - centerY) / 5;
-                        const rotateY = (centerX - x) / 5;
-
-                        img.style.transform = 'perspective(1000px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) scale(1.2)';
-                        img.style.filter = 'brightness(1.3)';
-                    } else {
-                        img.style.transform = '';
-                        img.style.filter = '';
-                        img.dataset.testLogged = '';
-                    }
-                });
-            });
-
-            console.log('🔥 TEST DIRECT - Tracking configuré');
-        }
-    }, 1000); // Attendre 1 seconde
-});
-</script>
+<!-- 3D effects handled by AnimationEnhancer.js -->
 
 <script src="js/features/ScrollOptimizer.js"></script>
 
