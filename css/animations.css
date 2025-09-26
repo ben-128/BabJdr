@@ -801,18 +801,24 @@ input:focus, textarea:focus, select:focus {
 
 /* Mobile-specific optimizations */
 @media (max-width: 768px) {
-  /* Reduce motion intensity on mobile for performance */
-  .card:hover {
-    transform: translateY(-4px) scale(1.01);
+  /* Mobile images use scroll-based animations */
+  .illus img {
+    transition:
+      transform var(--duration-fast) var(--ease-out-quart),
+      filter var(--duration-fast) ease,
+      box-shadow var(--duration-fast) ease !important;
   }
 
-  .spell-card:hover, .monster-card:hover, .objet-card:hover {
-    transform: translateY(-6px) scale(1.02);
-  }
-
-  /* Faster transitions on mobile */
+  /* Smoother animations on mobile for performance */
   .card {
     transition-duration: var(--duration-fast);
+  }
+
+  /* Reduce motion for very small screens */
+  @media (max-width: 480px) {
+    .illus img {
+      transition-duration: var(--duration-instant) !important;
+    }
   }
 }
 

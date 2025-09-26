@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-09-26T14:40:57.131Z by JdrBab Build System -->
+<!-- Generated on 2025-09-26T15:16:46.412Z by JdrBab Build System -->
 <title>JDR‑BAB — Livret de règles</title>
 <meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -5122,18 +5122,24 @@ input:focus, textarea:focus, select:focus {
 
 /* Mobile-specific optimizations */
 @media (max-width: 768px) {
-  /* Reduce motion intensity on mobile for performance */
-  .card:hover {
-    transform: translateY(-4px) scale(1.01);
+  /* Mobile images use scroll-based animations */
+  .illus img {
+    transition:
+      transform var(--duration-fast) var(--ease-out-quart),
+      filter var(--duration-fast) ease,
+      box-shadow var(--duration-fast) ease !important;
   }
 
-  .spell-card:hover, .monster-card:hover, .objet-card:hover {
-    transform: translateY(-6px) scale(1.02);
-  }
-
-  /* Faster transitions on mobile */
+  /* Smoother animations on mobile for performance */
   .card {
     transition-duration: var(--duration-fast);
+  }
+
+  /* Reduce motion for very small screens */
+  @media (max-width: 480px) {
+    .illus img {
+      transition-duration: var(--duration-instant) !important;
+    }
   }
 }
 
@@ -18845,8 +18851,91 @@ article.active .grid {
      * Enhanced hover effects with dynamic calculations
      */
     setupHoverEnhancements() {
+      const isMobile = window.matchMedia('(max-width: 768px)').matches || 'ontouchstart' in window;
 
-      // Simplified and more reliable mouse tracking
+      if (isMobile) {
+        // Mobile: Use scroll position for Y-axis animation
+        this.setupMobileScrollAnimation();
+      } else {
+        // Desktop: Use mouse tracking
+        this.setupDesktopMouseTracking();
+      }
+    },
+
+    /**
+     * Mobile animation based on scroll position
+     */
+    setupMobileScrollAnimation() {
+      let ticking = false;
+
+      const updateMobileAnimations = () => {
+        const scrollY = window.pageYOffset;
+        const windowHeight = window.innerHeight;
+        const windowCenter = windowHeight / 2;
+
+        document.querySelectorAll('.illus img').forEach(img => {
+          const rect = img.getBoundingClientRect();
+          const imgCenter = rect.top + rect.height / 2;
+
+          // Check if image is in viewport
+          if (rect.top < windowHeight && rect.bottom > 0) {
+            img.classList.add('js-3d-active');
+
+            // Calculate rotation based on position relative to screen center
+            const distanceFromCenter = imgCenter - windowCenter;
+            const maxDistance = windowHeight / 2;
+
+            // Rotate based on vertical position
+            const rotateX = (distanceFromCenter / maxDistance) * 15; // Max 15 degrees
+            const rotateY = Math.sin(scrollY * 0.001) * 8; // Gentle wave effect
+
+            // Scale based on proximity to center
+            const scale = 1 + (0.2 * (1 - Math.abs(distanceFromCenter) / maxDistance));
+
+            // Apply transform
+            img.style.setProperty('transform',
+              `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(${scale})`,
+              'important'
+            );
+
+            // Enhanced effects when near center
+            if (Math.abs(distanceFromCenter) < 100) {
+              img.style.setProperty('filter', 'brightness(1.25) contrast(1.25)', 'important');
+              img.style.setProperty('box-shadow', '0 25px 50px rgba(0,0,0,0.4), 0 0 40px rgba(212,175,55,0.7)', 'important');
+            } else {
+              img.style.setProperty('filter', 'brightness(1.1) contrast(1.1)', 'important');
+              img.style.setProperty('box-shadow', '0 15px 30px rgba(0,0,0,0.3), 0 0 20px rgba(212,175,55,0.4)', 'important');
+            }
+          } else {
+            // Reset when out of viewport
+            img.classList.remove('js-3d-active');
+            img.style.removeProperty('transform');
+            img.style.removeProperty('filter');
+            img.style.removeProperty('box-shadow');
+          }
+        });
+
+        ticking = false;
+      };
+
+      // Listen to scroll and touch events
+      ['scroll', 'touchmove'].forEach(eventType => {
+        window.addEventListener(eventType, () => {
+          if (!ticking) {
+            requestAnimationFrame(updateMobileAnimations);
+            ticking = true;
+          }
+        }, { passive: true });
+      });
+
+      // Initial update
+      updateMobileAnimations();
+    },
+
+    /**
+     * Desktop mouse tracking (existing code)
+     */
+    setupDesktopMouseTracking() {
       document.addEventListener('mousemove', (e) => {
         // Track all images normally
         document.querySelectorAll('.illus img').forEach(img => {
@@ -18870,25 +18959,25 @@ article.active .grid {
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
 
-            // Calculate rotation (more sensitive for better visibility)
-            const rotateX = (y - centerY) / 6; // Increased sensitivity
-            const rotateY = (centerX - x) / 6; // Increased sensitivity
+            // Calculate rotation
+            const rotateX = (y - centerY) / 6;
+            const rotateY = (centerX - x) / 6;
 
             // Calculate depth
             const translateZ = Math.min(60, Math.abs(rotateX) * 3 + Math.abs(rotateY) * 3);
 
             // Apply limits
-            const maxRotate = 20; // Increased for better visibility
+            const maxRotate = 20;
             const clampedRotateX = Math.max(-maxRotate, Math.min(maxRotate, rotateX));
             const clampedRotateY = Math.max(-maxRotate, Math.min(maxRotate, rotateY));
 
-            // Apply transform with !important to override CSS
+            // Apply transform
             img.style.setProperty('transform',
               `perspective(1000px) rotateX(${clampedRotateX}deg) rotateY(${clampedRotateY}deg) translateZ(${translateZ}px) scale(1.15)`,
               'important'
             );
 
-            // Also apply enhanced visual effects
+            // Apply visual effects
             img.style.setProperty('filter', 'brightness(1.2) contrast(1.2)', 'important');
             img.style.setProperty('box-shadow', '0 20px 40px rgba(0,0,0,0.4), 0 0 30px rgba(212,175,55,0.6)', 'important');
 
@@ -18900,8 +18989,6 @@ article.active .grid {
             img.style.removeProperty('box-shadow');
           }
         });
-
-        // REMOVED: No 3D effects on any cards/sections to prevent unwanted rotation
       });
 
       // Clean reset on mouse leave - only for images
