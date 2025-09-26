@@ -84,11 +84,6 @@
         return this.renderTablesTresorsPage();
       }
       
-      // Handle feuille-personnage page
-      if (page === 'feuille-personnage') {
-        return this.renderFeuillePersonnagePage();
-      }
-      
       // Handle favoris page
       if (page === 'favoris') {
         return this.renderFavorisPage();
@@ -160,15 +155,42 @@
         }
       }
       
-      // Set active link in TOC
-      const activeLink = document.querySelector(`a[href="#/${page}"]`);
+      // Set active link in TOC - try multiple selectors
+      let activeLink = document.querySelector(`a[href="#/${page}"]`);
+      if (!activeLink) {
+        // Try alternative selector with data-route
+        activeLink = document.querySelector(`a[data-route="${page}"]`);
+      }
+
       if (activeLink) {
         activeLink.classList.add('active');
-        
+
         // Expand parent category if needed
         const category = activeLink.closest('.toc-category');
         if (category) {
           category.classList.remove('collapsed');
+
+          // Also expand the parent section (super category)
+          const parentSection = category.closest('.toc-section');
+          if (parentSection) {
+            parentSection.classList.remove('collapsed');
+
+            // Update the toggle icon
+            const toggle = parentSection.querySelector('.toc-section-toggle');
+            if (toggle) {
+              toggle.textContent = '▼';
+            }
+
+            // Update dynamic height for the opened section
+            const content = parentSection.querySelector('.toc-section-content');
+            if (content) {
+              const childCount = content.querySelectorAll('a, .toc-category').length;
+              const itemHeight = 50;
+              const baseHeight = 100;
+              const dynamicHeight = Math.max(500, (childCount * itemHeight) + baseHeight);
+              content.style.maxHeight = `${dynamicHeight}px`;
+            }
+          }
         }
       }
     },
@@ -263,12 +285,19 @@
       
       // Attacher les événements directement aux éléments après création
       this.attachFoldoutEvents();
-      
+
       // Initialiser les hauteurs dynamiques pour toutes les sections ouvertes
       this.initializeDynamicHeights();
-      
+
       // Ajouter l'event listener pour le bouton MJ
       this.setupMJToggle();
+
+      // Appliquer les états actifs après génération de la TOC
+      const currentHash = window.location.hash.replace('#/', '');
+      const currentPage = currentHash || 'creation';
+      setTimeout(() => {
+        this.updateActiveStates(currentPage);
+      }, 100);
     },
 
     initializeDynamicHeights() {
@@ -520,10 +549,10 @@
     },
 
     generateTOCSection(section) {
-      // Make all sections collapsed by default (ignoring section.collapsed from data)
+      // All sections collapsed by default (as before)
       const sectionClass = 'toc-section collapsed';
       const toggleIcon = '▶';
-      
+
       return `
         <div class="${sectionClass}" data-section="${section.id}">
           <div class="toc-section-header">
@@ -563,10 +592,10 @@
         `;
       } else if (item.id === 'sorts') {
         return `
-          <div class="toc-category">
+          <div class="toc-category collapsed">
             <a data-route="sorts" href="#/sorts">${item.icon} ${item.title}</a>
             <div class="toc-sub">
-              ${dataSource.map(category => 
+              ${dataSource.map(category =>
                 `<a data-route="sorts-${JdrApp.utils.data.sanitizeId(category.nom)}" href="#/sorts-${JdrApp.utils.data.sanitizeId(category.nom)}" class="">${this.getSortCategoryIcon(category.nom)} ${category.nom}</a>`
               ).join('')}
             </div>
@@ -1957,195 +1986,6 @@
       }
     },
 
-    renderFeuillePersonnagePage() {
-      // Create or find the page element
-      let pageElement = document.getElementById('feuille-personnage');
-      
-      // If the page doesn't exist, create it
-      if (!pageElement) {
-        pageElement = document.createElement('article');
-        pageElement.id = 'feuille-personnage';
-        pageElement.setAttribute('data-page', 'feuille-personnage');
-        pageElement.className = 'page';
-        
-        // Insert it into the views container
-        const viewsContainer = document.querySelector('#views');
-        
-        if (viewsContainer) {
-          viewsContainer.appendChild(pageElement);
-        } else {
-          console.error('Views container not found');
-          return false;
-        }
-      }
-      
-      // Create full PDF content for all versions  
-      const feuillePersonnageContent = `
-        <div class="page-header">
-          <h1>📋 Feuille de personnage</h1>
-        </div>
-        
-          
-          
-          <!-- PDF Info and Actions -->
-          <div class="pdf-info-container" style="width: 100%; margin: 1rem 0; padding: 2rem; border: 2px solid var(--bronze); border-radius: 12px; background: var(--card); text-align: center;">
-            <h3 style="color: var(--gold); font-family: 'Cinzel', serif; margin: 0 0 1rem 0;">📄 Feuille de personnage PDF</h3>
-            <p style="color: var(--text); margin: 1rem 0;">Feuille de personnage complète de 3 pages pour vos aventures BabJDR</p>
-            
-            <div class="pdf-preview-actions" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem;">
-              <button id="open-pdf-new-tab" class="btn-base" style="background: var(--bronze); color: white;">
-                📖 Voir le PDF
-              </button>
-              <button id="download-pdf-direct" class="btn-base" style="background: var(--emerald); color: white;">
-                📥 Télécharger
-              </button>
-              <button id="print-pdf-direct" class="btn-base" style="background: var(--gold); color: white;">
-                🖨️ Imprimer
-              </button>
-            </div>
-            
-            <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 1rem;">
-              💡 Astuce : Cliquez sur "Voir le PDF" pour l'ouvrir dans un nouvel onglet
-            </p>
-          </div>
-          
-          <div class="pdf-fallback" style="display: none; text-align: center; padding: 2rem; background: var(--accent-bg); border-radius: 8px; margin: 1rem 0;">
-            <h3 style="color: var(--bronze);">📄 Feuille de personnage BabJDR</h3>
-            <p style="color: var(--accent-ink); margin: 1rem 0;">
-              Votre navigateur ne peut pas afficher le PDF directement. Utilisez les boutons ci-dessous:
-            </p>
-            
-            <div class="pdf-info" style="background: white; border: 1px solid var(--rule); border-radius: 8px; padding: 1.5rem; margin: 1rem 0; text-align: left;">
-              <h4 style="color: var(--bronze); margin-top: 0;">📝 Contenu de la feuille:</h4>
-              <ul style="color: var(--accent-ink); line-height: 1.8;">
-                <li><strong>Informations du personnage:</strong> Nom, classe, niveau, expérience</li>
-                <li><strong>Caractéristiques:</strong> Force, Endurance, Agilité, Intelligence, Volonté, Chance</li>
-                <li><strong>Statistiques dérivées:</strong> Vie, Mana, Initiative, Fortune, Armure, Esquive</li>
-                <li><strong>Compétences:</strong> Hardiesse, Finesse, Coordination, Réflexion, Éloquence</li>
-                <li><strong>Éléments:</strong> Armure élémentaire (Feu, Eau, Terre, Air, Lumière, Nuit, Divin, Maléfique)</li>
-                <li><strong>Sorts et capacités:</strong> Liste des sorts connus et dons acquis</li>
-                <li><strong>Inventaire:</strong> Consommables et sac général</li>
-                <li><strong>Background:</strong> Histoire, apparence et personnalité du personnage</li>
-              </ul>
-            </div>
-          </div>
-          
-        </div>
-        
-        <div class="character-sheet-info" style="margin-top: 1rem; text-align: center; color: var(--accent-ink);">
-          <p><strong>💡 Info:</strong> La feuille de personnage est un PDF imprimable de 3 pages contenant tous les champs nécessaires pour votre personnage.</p>
-        </div>
-      `;
-      
-      // Insert content into the page
-      pageElement.innerHTML = feuillePersonnageContent;
-      
-      // Setup event listeners for print and download functionality
-      this.setupCharacterSheetActions();
-      
-      
-      // Show and activate page
-      this.show('feuille-personnage');
-      this.updateActiveStates('feuille-personnage');
-      
-      return true;
-    },
-
-    setupCharacterSheetActions() {
-      const pdfUrl = 'https://github.com/ben-128/BabJdr/raw/master/data/feuille-personnage.pdf';
-      
-      // Setup main action buttons
-      const openBtn = document.getElementById('open-character-sheet');
-      const printBtn = document.getElementById('print-character-sheet');
-      const downloadBtn = document.getElementById('download-character-sheet');
-      
-      // Setup preview action buttons
-      const openTabBtn = document.getElementById('open-pdf-new-tab');
-      const printDirectBtn = document.getElementById('print-pdf-direct');
-      const downloadDirectBtn = document.getElementById('download-pdf-direct');
-      
-      // Check if PDF embed is supported and handle fallback
-      const pdfEmbed = document.getElementById('pdf-embed');
-      const pdfFallback = document.querySelector('.pdf-fallback');
-      
-      if (pdfEmbed) {
-        // Add load error handler for PDF embed
-        pdfEmbed.addEventListener('error', () => {
-          // Hide embed and show fallback
-          pdfEmbed.style.display = 'none';
-          if (pdfFallback) {
-            pdfFallback.style.display = 'block';
-          }
-        });
-        
-        // Test if PDF can be loaded after a delay
-        setTimeout(() => {
-          // Check if the embed has loaded properly
-          try {
-            const embedDoc = pdfEmbed.contentDocument || pdfEmbed.contentWindow.document;
-            if (!embedDoc || embedDoc.body.innerHTML.includes('%PDF')) {
-              // PDF is showing as raw text, use fallback
-              pdfEmbed.style.display = 'none';
-              if (pdfFallback) {
-                pdfFallback.style.display = 'block';
-              }
-            }
-          } catch (e) {
-            // Can't access content, probably loaded correctly
-          }
-        }, 1000);
-      }
-      
-      // Open PDF in new tab
-      const openPDF = () => {
-        window.open(pdfUrl, '_blank');
-        if (JdrApp.modules.storage && JdrApp.modules.storage.showNotification) {
-          JdrApp.modules.storage.showNotification('📖 PDF ouvert dans un nouvel onglet', 'success');
-        }
-      };
-      
-      // Print PDF
-      const printPDF = () => {
-        const printWindow = window.open(pdfUrl, '_blank');
-        if (printWindow) {
-          printWindow.focus();
-          setTimeout(() => {
-            try {
-              printWindow.print();
-            } catch (e) {
-              alert('PDF ouvert. Utilisez Ctrl+P pour imprimer.');
-            }
-          }, 1000);
-        } else {
-          alert('Impossible d\'ouvrir le PDF. Vérifiez que les popups ne sont pas bloqués.');
-        }
-      };
-      
-      // Download PDF
-      const downloadPDF = () => {
-        const link = document.createElement('a');
-        link.href = pdfUrl;
-        link.download = 'Feuille-Personnage-BabJDR.pdf';
-        link.style.display = 'none';
-        
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        
-        if (JdrApp.modules.storage && JdrApp.modules.storage.showNotification) {
-          JdrApp.modules.storage.showNotification('📥 Téléchargement en cours...', 'success');
-        }
-      };
-      
-      // Attach event listeners
-      if (openBtn) openBtn.addEventListener('click', openPDF);
-      if (printBtn) printBtn.addEventListener('click', printPDF);
-      if (downloadBtn) downloadBtn.addEventListener('click', downloadPDF);
-      
-      if (openTabBtn) openTabBtn.addEventListener('click', openPDF);
-      if (printDirectBtn) printDirectBtn.addEventListener('click', printPDF);
-      if (downloadDirectBtn) downloadDirectBtn.addEventListener('click', downloadPDF);
-    },
 
     renderFavorisPage() {
       // Use the unified PageBuilder to render the favoris page  

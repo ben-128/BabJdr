@@ -41,12 +41,6 @@
           "title": "Sorts",
           "icon": "🔮",
           "items": "SORTS"
-        },
-        {
-          "type": "page",
-          "id": "feuille-personnage",
-          "title": "Feuille de personnage",
-          "icon": "📋"
         }
       ]
     },
