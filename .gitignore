@@ -1,1 +1,23 @@
 BabJdr/
+
+# Backup directories
+Backups/
+backup-*/
+
+# Node modules
+node_modules/
+
+# Temporary files
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
