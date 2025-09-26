@@ -513,7 +513,7 @@
       }
 
       const cols = gridSection.cols || 2;
-      let gridHTML = `<div class="grid" style="display: grid; grid-template-columns: repeat(${cols}, 1fr); gap: 1rem;">`;
+      let gridHTML = `<div class="grid cols-${cols}">`;
       
       items.forEach((item, itemIndex) => {
         gridHTML += this.buildCardSection(item, `${sectionIndex}-${itemIndex}`);

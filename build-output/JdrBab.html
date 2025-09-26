@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-09-26T15:23:29.506Z by JdrBab Build System -->
+<!-- Generated on 2025-09-26T15:33:04.674Z by JdrBab Build System -->
 <title>JDR‑BAB — Livret de règles</title>
 <meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13550,7 +13550,7 @@ article.active .grid {
       }
 
       const cols = gridSection.cols || 2;
-      let gridHTML = `<div class="grid" style="display: grid; grid-template-columns: repeat(${cols}, 1fr); gap: 1rem;">`;
+      let gridHTML = `<div class="grid cols-${cols}">`;
       
       items.forEach((item, itemIndex) => {
         gridHTML += this.buildCardSection(item, `${sectionIndex}-${itemIndex}`);
