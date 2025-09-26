@@ -245,10 +245,10 @@
 
       // Clean reset on mouse leave
       document.addEventListener('mouseleave', (e) => {
-        if (e.target.classList.contains('card')) {
+        if (e.target && e.target.classList && e.target.classList.contains('card')) {
           e.target.style.transform = '';
         }
-        if (e.target.tagName === 'IMG' && e.target.closest('.illus')) {
+        if (e.target && e.target.tagName === 'IMG' && e.target.closest('.illus')) {
           e.target.classList.remove('js-3d-active');
           e.target.style.removeProperty('transform');
           e.target.style.removeProperty('filter');
