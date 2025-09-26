@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Test Simple 3D</title>
+    <style>
+        body { padding: 50px; background: #f4f1ea; }
+        .illus { margin: 20px; }
+        .illus img {
+            max-width: 300px;
+            border: 3px solid #8b4513;
+            border-radius: 12px;
+            transition: transform 0.1s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test Simple 3D - Debug</h1>
+    <div id="log"></div>
+
+    <div class="illus">
+        <img src="https://picsum.photos/300/200" alt="Test">
+    </div>
+
+    <script>
+        function log(msg) {
+            console.log(msg);
+            document.getElementById('log').innerHTML += '<div>' + msg + '</div>';
+        }
+
+        log('🚀 Script started');
+
+        document.addEventListener('DOMContentLoaded', function() {
+            log('📄 DOM loaded');
+
+            const images = document.querySelectorAll('.illus img');
+            log('🖼️ Found ' + images.length + ' images');
+
+            document.addEventListener('mousemove', function(e) {
+                images.forEach(function(img) {
+                    const rect = img.getBoundingClientRect();
+                    const isHover = e.clientX >= rect.left && e.clientX <= rect.right &&
+                                   e.clientY >= rect.top && e.clientY <= rect.bottom;
+
+                    if (isHover) {
+                        if (!img.hasAttribute('data-logged')) {
+                            log('✨ Mouse over image at ' + e.clientX + ',' + e.clientY);
+                            img.setAttribute('data-logged', 'true');
+                        }
+
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+                        const centerX = rect.width / 2;
+                        const centerY = rect.height / 2;
+
+                        const rotateX = (y - centerY) / 5;
+                        const rotateY = (centerX - x) / 5;
+
+                        img.style.transform = 'perspective(1000px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) scale(1.1)';
+                    } else {
+                        img.style.transform = '';
+                        img.removeAttribute('data-logged');
+                    }
+                });
+            });
+
+            log('✅ Mouse tracking setup complete');
+        });
+    </script>
+</body>
+</html>
