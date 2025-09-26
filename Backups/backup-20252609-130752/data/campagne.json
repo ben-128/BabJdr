@@ -1,0 +1,43 @@
+{
+  "id": "campagne",
+  "title": "Campagne",
+  "icon": "📖",
+  "sections": [
+    {
+      "type": "intro",
+      "content": "<strong>🎭 Espace Campagne</strong><br>Créez et gérez vos campagnes avec leurs sous-pages personnalisées. Cette section est uniquement visible en mode Maître de Jeu."
+    },
+    {
+      "type": "campaign-manager",
+      "content": {
+        "title": "Gestionnaire de Campagnes",
+        "campaigns": {}
+      }
+    }
+  ],
+  "subPages": {
+    "Classique": {
+      "name": "Classique",
+      "description": "",
+      "subPages": {
+        "Long terme": {
+          "title": "Long terme",
+          "content": "<b> Le Dieu Maléfique</b>\n\n<br><br>Nerhaz, le Sépulcral (Symbole : un cristal noir fendu, entouré de chaînes)\n\n\n<br><br> Histoire : banni par l’Empire des Anciens, il fut scellé dans leurs temples. Mais les cristaux magiques, instables, ont servi de réceptacles à ses murmures.\n\n<br><br>Particularité : Nerhaz attire les ambitieux et les désespérés, promettant pouvoir en échange de sacrifices. Son retour progressif est lié à l’altération des créatures par les cristaux."
+        },
+        "Auberge": {
+          "title": "Auberge",
+          "content": "<hr>\nAvant de partir la femme de l'aubergiste qui a entendu les héros, leur propose de piocher dans le sac a provision, mais leur demande de n'en prendre que un par personne maximum. Table de loot <i>ProvisionAuberge</i> <a href=\"#/tables-tresors\" style=\"color: var(--accent); text-decoration: underline;\">Tables de trésors</a>."
+        },
+        "Forêt": {
+          "title": "Forêt",
+          "content": "combat <span class=\"monster-link\" data-monster=\"Groink\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Groink</span>  <span class=\"monster-link\" data-monster=\"Groinka\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Groinka</span>\n<hr>\npierre a pousser pour reveler TP\nchemins différents avec un qui mene a pierre qui revele la puissance de chacun\n<hr>\nautre chemins avec platforme/pieges/ passage secret\nCombat groinks énervés + porte en metal\n<hr>\nport avec bateau pas dispo\nCombat <span class=\"monster-link\" data-monster=\"Crabe des Bois\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Crabe des Bois</span>   <span class=\"monster-link\" data-monster=\"Pouple de la forêt\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Pouple de la forêt</span>\n<hr>\n\nnuit attaque de  <span class=\"monster-link\" data-monster=\"Araignée Géante\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Araignée Géante</span>\n<hr>\nriviere avec tronc , pont qui casse...\ncombat  <span class=\"monster-link\" data-monster=\"Serpent de la forêt\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Serpent de la forêt</span>  <span class=\"monster-link\" data-monster=\"Scarabée géant\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Scarabée géant</span>  \n<hr>\nmaison bucheron avec jeu du tonneau, portes fermés mais loot bucheron \n<span class=\"monster-link\" data-monster=\"Ours des Bois\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ours des Bois</span>   + <span class=\"monster-link\" data-monster=\"Guêpe Géante\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Guêpe Géante</span>\n<hr>\nDialogue bucheron\ncombat  <span class=\"monster-link\" data-monster=\"Boss Forêt\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Boss Forêt</span>\n<hr>\nretourner camp bucheron, reveler tablette\nTP"
+        }
+      }
+    }
+  },
+  "meta": {
+    "requiresMJ": true,
+    "allowSubPages": true,
+    "lastModified": "2025-01-01T00:00:00.000Z"
+  }
+}

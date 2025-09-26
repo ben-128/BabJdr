@@ -1,0 +1,26 @@
+{
+  "page": "traumas",
+  "title": "Traumas",
+  "sections": [
+    {
+      "type": "intro",
+      "content": ""
+    },
+    {
+      "type": "card",
+      "id": "traumas-new-2-1756809368468",
+      "title": "<p><b>Traumas — Normaux</b></p>",
+      "content": "<ul>\n  <li><b>Cicatrice profonde</b> : –1 en compétence Éloquence.</li>\n  <li><b>Entaille au bras</b> : –5 Force.</li>\n  <li><b>Claudication légère</b> : vitesse de déplacement réduite de 3 m.</li>\n  <li><b>Côte fêlée</b> : –5 Points de vie maximum.</li>\n  <li><b>Ame fêlée</b> : –10 mana maximum.</li>\n  <li><b>Vision troublée</b> : Portée maximale des sorts et attaques à 18m.</li>\n  <li><b>Main tremblante</b> : Les échecs critiques viennent d'un 1 ou 2</li>\n  <li><b>Brûlure ancienne</b> : +10  dégats reçu de l'élément x. </li>\n  <li><b>Regeneration partielle</b> : ne récupère que 50&nbsp;% de sa régénération de PV lors du repas.</li>\n  <li><b>Marque affaiblissante</b> : –3 en Résistance à l’altération.</li>\n</ul>",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
+    },
+    {
+      "type": "card",
+      "id": "traumas-new-3-1756809759515",
+      "title": "Traumas — Difficiles",
+      "content": "<ul>\n  <li><b>Bras invalide</b> : impossible d’utiliser les armes à deux mains ou un bouclier.</li>\n  <li><b>Commotion tenace</b> : –5 en Intelligence et –1 compétence Réflexion.</li>\n  <li><b>Âme fêlée</b> : les attaques et sorts contre le héros gagnent +2 aux chances de coup critique.</li>\n  <li><b>Cicatrice élémentaire</b> : –10 à toutes les armures élémentaires.</li>\n  <li><b>Amnésie majeure</b> : Perd définitivement des sort connu.</li>\n</ul>",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
+    }
+  ]
+}

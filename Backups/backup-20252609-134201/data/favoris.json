@@ -1,0 +1,21 @@
+{
+  "page": "favoris",
+  "title": "⭐ Favoris",
+  "static": true,
+  "sections": [
+    {
+      "type": "intro",
+      "content": "Retrouvez ici vos sorts et objets préférés. Cliquez sur l'étoile ⭐ à côté des éléments pour les ajouter à vos favoris."
+    },
+    {
+      "type": "favoris-sorts",
+      "title": "🔮 Sorts favoris",
+      "content": "Vos sorts préférés apparaîtront ici."
+    },
+    {
+      "type": "favoris-objets",
+      "title": "📦 Objets favoris",
+      "content": "Vos objets préférés apparaîtront ici."
+    }
+  ]
+}

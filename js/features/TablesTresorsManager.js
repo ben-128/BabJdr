@@ -48,14 +48,7 @@
         }
       });
 
-      // Suppression de fourchette
-      document.addEventListener('click', (e) => {
-        if (e.target.matches('.delete-fourchette-btn')) {
-          const tableName = e.target.dataset.tableName;
-          const fourchetteIndex = parseInt(e.target.dataset.fourchetteIndex);
-          this.deleteFourchette(tableName, fourchetteIndex);
-        }
-      });
+      // Suppression de fourchette - Handled by EventHandlers.js
 
       // Ajout de nouvelle fourchette
       document.addEventListener('click', (e) => {
@@ -87,21 +80,43 @@
           this.showTablePreview(tableName);
         }
       });
+
+      // Object references counter click
+      document.addEventListener('click', (e) => {
+        if (e.target.matches('.object-references-counter')) {
+          e.preventDefault();
+          e.stopPropagation();
+          const objectNumero = e.target.dataset.objectNumero;
+          this.showObjectReferencesModal(objectNumero);
+        }
+      });
+
+      // Select object from preview button
+      document.addEventListener('click', (e) => {
+        if (e.target.matches('.select-object-from-preview-btn')) {
+          e.preventDefault();
+          e.stopPropagation();
+          const objectId = e.target.dataset.objectId;
+          this.selectObjectFromPreview(objectId);
+        }
+      });
     }
 
     showObjectPreview(numeroObjet) {
       try {
         // Trouver l'objet par son numéro
         const objet = window.OBJETS?.objets?.find(obj => obj.numero == numeroObjet);
-        
+
         if (!objet) {
           console.error('Objet non trouvé:', numeroObjet);
           return;
         }
 
-        const previewHtml = this.generateObjectPreviewHtml(objet);
+        // Check if we're in fourchette editing mode by looking for the edit form
+        const isInEditMode = document.getElementById('edit-fourchette-form') !== null;
+        const previewHtml = this.generateObjectPreviewHtml(objet, isInEditMode);
         this.showModal(previewHtml, 'object-preview');
-        
+
       } catch (error) {
         console.error('Erreur lors de l\'affichage de la preview:', error);
       }
@@ -139,17 +154,136 @@
       }
     }
 
-    generateObjectPreviewHtml(objet) {
+    generateObjectPreviewHtml(objet, showSelectButton = false) {
       // Utiliser le CardBuilder pour générer la card d'objet standard
       const cardHtml = CardBuilder.create('objet', objet, 'preview').build();
-      
+
+      // Bouton sélectionner conditionnel
+      const selectButtonHtml = showSelectButton ? `
+        <button class="btn select-object-from-preview-btn" data-object-id="${objet.numero}" style="background: #059669; color: white; margin-left: 0.5rem;">
+          ✅ Sélectionner
+        </button>
+      ` : '';
+
       // Wrapper la card dans un conteneur de preview avec les boutons
       return `
         <div class="object-preview-content">
           <div style="margin-bottom: 1.5rem;">
             ${cardHtml}
           </div>
-          
+
+          <div style="text-align: center; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--rule);">
+            <button class="btn" onclick="window.TablesTresorsManager.closeAllModals()" style="background: var(--accent); color: white;">
+              ✓ Fermer
+            </button>
+            <button class="btn" onclick="window.TablesTresorsManager.goToObject(${objet.numero})" style="background: var(--bronze); color: white; margin-left: 0.5rem;">
+              🔗 Aller à la page objets
+            </button>
+            ${selectButtonHtml}
+          </div>
+        </div>
+      `;
+    }
+
+    showObjectReferencesModal(objectNumero) {
+      try {
+        // Trouver l'objet par son numéro
+        const objet = window.OBJETS?.objets?.find(obj => obj.numero == objectNumero);
+        if (!objet) {
+          console.error('Objet non trouvé:', objectNumero);
+          return;
+        }
+
+        // Utiliser la méthode du CardBuilder pour obtenir les références
+        const references = CardBuilder.prototype.getObjectReferences.call({}, objectNumero);
+
+        // Générer le HTML pour afficher les références
+        const referencesHtml = this.generateObjectReferencesHtml(objet, references);
+        this.showModal(referencesHtml, 'object-references');
+
+      } catch (error) {
+        console.error('Erreur lors de l\'affichage des références:', error);
+      }
+    }
+
+    generateObjectReferencesHtml(objet, references) {
+      const tablesHtml = references.tables.length > 0 ? `
+        <div style="margin-bottom: 1.5rem;">
+          <h4 style="color: var(--accent); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem;">
+            💎 Tables de trésors (${references.tables.length})
+          </h4>
+          <div style="display: grid; gap: 0.5rem;">
+            ${references.tables.map(table => `
+              <div style="border: 1px solid var(--rule); border-radius: 6px; padding: 0.8rem; background: var(--paper-light);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.3rem;">
+                  <strong style="color: var(--accent);">${table.nom}</strong>
+                  <span style="background: var(--bronze); color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.8em;">🎲 ${table.range}</span>
+                </div>
+                ${table.tags.length > 0 ? `
+                  <div style="margin-top: 0.3rem;">
+                    ${table.tags.map(tag => `<span style="background: var(--accent); color: white; padding: 1px 4px; border-radius: 3px; font-size: 0.7em; margin-right: 3px;">${tag}</span>`).join('')}
+                  </div>
+                ` : ''}
+                <div style="margin-top: 0.5rem;">
+                  <button class="btn small" onclick="window.TablesTresorsManager.showTablePreview('${table.nom}')" style="background: var(--bronze); color: white; font-size: 0.8em;">
+                    👁️ Voir la table
+                  </button>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      ` : '';
+
+      const collectionsHtml = references.collections.length > 0 ? `
+        <div style="margin-bottom: 1.5rem;">
+          <h4 style="color: var(--accent); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem;">
+            📦 Collections d'objets (${references.collections.length})
+          </h4>
+          <div style="display: grid; gap: 0.5rem;">
+            ${references.collections.map(collection => `
+              <div style="border: 1px solid var(--rule); border-radius: 6px; padding: 0.8rem; background: var(--paper-light);">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.3rem;">
+                  <span style="font-size: 1.2em;">${collection.icon}</span>
+                  <strong style="color: var(--accent);">${collection.nom}</strong>
+                </div>
+                ${collection.description ? `<div style="font-size: 0.9em; color: var(--paper-muted); margin-bottom: 0.5rem;">${collection.description}</div>` : ''}
+                <div>
+                  <button class="btn small" onclick="JdrApp.modules.router.navigate('collections-objets')" style="background: var(--bronze); color: white; font-size: 0.8em;">
+                    📚 Voir les collections
+                  </button>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      ` : '';
+
+      const noReferencesHtml = references.total === 0 ? `
+        <div style="text-align: center; padding: 2rem; color: var(--paper-muted);">
+          <div style="font-size: 2em; margin-bottom: 1rem;">🔍</div>
+          <div>Cet objet n'est référencé dans aucune table de trésors ou collection.</div>
+        </div>
+      ` : '';
+
+      return `
+        <div class="object-references-content">
+          <div style="margin-bottom: 1.5rem; text-align: center; border-bottom: 2px solid var(--rule); padding-bottom: 1rem;">
+            <h3 style="margin: 0; color: var(--accent); display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+              🔗 Références de l'objet
+            </h3>
+            <div style="margin-top: 0.5rem; font-size: 1.1em;">
+              <strong>N°${objet.numero} - ${objet.nom}</strong>
+            </div>
+            <div style="margin-top: 0.3rem; color: var(--paper-muted); font-size: 0.9em;">
+              Trouvé dans ${references.total} table(s)/collection(s)
+            </div>
+          </div>
+
+          ${tablesHtml}
+          ${collectionsHtml}
+          ${noReferencesHtml}
+
           <div style="text-align: center; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--rule);">
             <button class="btn" onclick="window.TablesTresorsManager.closeAllModals()" style="background: var(--accent); color: white;">
               ✓ Fermer
@@ -618,11 +752,18 @@
     }
 
     selectObject(objectId) {
+      // Ensure allObjects is available
+      if (!this.allObjects) {
+        this.allObjects = window.OBJETS?.objets || [];
+      }
+
       const obj = this.allObjects.find(o => o.numero == objectId);
-      if (!obj) return;
-      
+      if (!obj) {
+        return;
+      }
+
       this.selectedObjectId = objectId;
-      
+
       // Mettre à jour l'affichage de l'objet sélectionné
       const display = document.getElementById('selected-object-display');
       if (display) {
@@ -633,6 +774,73 @@
             ${obj.tags ? `<div style="font-size: 0.7em; color: var(--paper-muted); margin-left: auto;">${obj.tags.join(', ')}</div>` : ''}
           </div>
         `;
+      }
+    }
+
+    selectObjectFromPreview(objectId) {
+      console.log('selectObjectFromPreview called with objectId:', objectId);
+
+      // Store the selection for later use
+      this.selectedObjectId = objectId;
+
+      // Check modal state before closing
+      const allModalsBefore = document.querySelectorAll('.modal-overlay');
+      const editModalBefore = document.querySelector('.modal-overlay.edit-fourchette');
+      console.log('Modals before closing preview:', allModalsBefore.length);
+      console.log('Edit modal exists before:', !!editModalBefore);
+
+      // Close only the object preview modal, not the fourchette edit modal
+      const previewModal = document.querySelector('.modal-overlay.object-preview');
+      if (previewModal) {
+        previewModal.remove();
+        console.log('Removed preview modal');
+      }
+
+      // Check modal state after closing preview
+      const allModalsAfter = document.querySelectorAll('.modal-overlay');
+      const editModalAfter = document.querySelector('.modal-overlay.edit-fourchette');
+      console.log('Modals after closing preview:', allModalsAfter.length);
+      console.log('Edit modal exists after:', !!editModalAfter);
+
+      // Hide the objects preview if it's open
+      const preview = document.getElementById('objects-preview');
+      if (preview) {
+        preview.style.display = 'none';
+      }
+
+      // Wait a bit for the DOM to settle, then try to update the display
+      setTimeout(() => {
+        const allModalsDelayed = document.querySelectorAll('.modal-overlay');
+        console.log('Modals after timeout:', allModalsDelayed.length);
+        this.selectObject(objectId);
+      }, 100);
+    }
+
+    updateSelectedObjectDisplay(objectId) {
+      // Ensure allObjects is available
+      if (!this.allObjects) {
+        this.allObjects = window.OBJETS?.objets || [];
+      }
+
+      const obj = this.allObjects.find(o => o.numero == objectId);
+      if (!obj) {
+        console.error('Object not found for display update:', objectId);
+        return;
+      }
+
+      // Update the selected object display
+      const display = document.getElementById('selected-object-display');
+      if (display) {
+        display.innerHTML = `
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span style="font-weight: bold; color: var(--accent);">N°${obj.numero}</span>
+            <span>${obj.nom}</span>
+            ${obj.tags ? `<div style="font-size: 0.7em; color: var(--paper-muted); margin-left: auto;">${obj.tags.join(', ')}</div>` : ''}
+          </div>
+        `;
+        console.log('Updated selected object display for:', obj.nom);
+      } else {
+        console.error('selected-object-display element not found');
       }
     }
 
@@ -871,10 +1079,7 @@
     }
 
     deleteFourchette(tableName, fourchetteIndex) {
-      if (!confirm('Êtes-vous sûr de vouloir supprimer cette fourchette ?')) {
-        return;
-      }
-
+      // Note: Confirmation is handled by EventHandlers.js when called from UI
       try {
         const table = window.TABLES_TRESORS?.tables?.find(t => t.nom === tableName);
         if (!table) {
@@ -967,24 +1172,12 @@
     refreshTablesTresorsDisplay() {
       // Rafraîchir seulement l'affichage des cartes sans recharger la page
       if (JdrApp.modules.router && JdrApp.modules.router.getCurrentRoute() === 'tables-tresors') {
-        const container = document.getElementById('tables-tresors-container');
-        if (container && window.TABLES_TRESORS?.tables) {
-          // Regénérer le contenu des cartes
-          const tables = window.TABLES_TRESORS.tables;
-          const newHTML = tables.map((table, index) => {
-            if (window.CardBuilder) {
-              return CardBuilder.create('tableTresor', table, 'tables', index).build();
-            }
-            return '';
-          }).join('');
-          
-          container.innerHTML = newHTML;
-          
-          // Recharger les images si nécessaire
-          if (JdrApp.modules.renderer && JdrApp.modules.renderer.autoLoadImages) {
-            JdrApp.modules.renderer.autoLoadImages();
-          }
-          
+        // Au lieu de rafraîchir manuellement, utiliser la méthode du router qui respecte les filtres
+        if (JdrApp.modules.router?.renderTablesTresorsPage) {
+          JdrApp.modules.router.renderTablesTresorsPage();
+        } else {
+          // Fallback: regénérer la page complète si la méthode n'existe pas
+          JdrApp.modules.renderer?.regenerateCurrentPage();
         }
       }
     }

@@ -318,13 +318,15 @@
     buildEditableField(content, editType, label, options = {}) {
       const style = options.style ? `style="${options.style}"` : '';
       const className = options.className || 'editable-field';
-      
+
       // Add the editType as a class for reliable detection
       const editTypeClass = editType ? ` ${editType}` : '';
-      
-      // In preview mode, just return the simple content
+
+      // In preview mode, return with proper spacing
       if (this.isPreview) {
-        return `<div class="${className}${editTypeClass}" ${style}>${content}</div>`;
+        const defaultStyle = 'margin: 0.5rem 0; line-height: 1.4;';
+        const finalStyle = style ? `style="${options.style}"` : `style="${defaultStyle}"`;
+        return `<div class="${className}${editTypeClass}" ${finalStyle}>${content}</div>`;
       }
       
       // Use the editType directly instead of creating compound identifier
@@ -387,10 +389,10 @@
 
     buildEditableEffect(content, editType, label) {
       const editTypeClass = editType ? ` ${editType}` : '';
-      
-      // In preview mode, just return the simple content
+
+      // In preview mode, return with proper spacing and line height
       if (this.isPreview) {
-        return `<div class="editable-effect${editTypeClass}" style="margin: 1rem 0;">${content}</div>`;
+        return `<div class="editable-effect${editTypeClass}" style="margin: 1rem 0; line-height: 1.4;">${content}</div>`;
       }
       
       // Use the editType directly instead of creating compound identifier

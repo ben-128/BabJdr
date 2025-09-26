@@ -344,7 +344,7 @@
         }
       }
       
-      // Create a temporary CardBuilder that allows preview mode but with real category name
+      // Use CardBuilder for proper spell rendering with the actual category name
       const tempBuilder = CardBuilder.create('spell', foundSpell, actualCategoryName);
       tempBuilder.isPreview = true; // Force preview mode manually
       const spellCard = tempBuilder.build();
@@ -352,63 +352,78 @@
       // Create and show preview
       const preview = document.createElement('div');
       preview.className = 'spell-preview-tooltip';
-      preview.innerHTML = `
-        <style>
-          .spell-preview-tooltip,
-          .spell-preview-tooltip *,
-          .spell-preview-tooltip *::before,
-          .spell-preview-tooltip *::after {
-            opacity: 1 !important;
-            background-color: rgba(248, 246, 240, 1) !important;
-          }
-          .spell-preview-tooltip .card,
-          .spell-preview-tooltip .card *,
-          .spell-preview-tooltip div,
-          .spell-preview-tooltip span,
-          .spell-preview-tooltip p,
-          .spell-preview-tooltip section,
-          .spell-preview-tooltip article,
-          .spell-preview-tooltip header,
-          .spell-preview-tooltip footer {
-            opacity: 1 !important;
-            background-color: rgba(248, 246, 240, 1) !important;
-            background: rgba(248, 246, 240, 1) !important;
-          }
-          .spell-preview-tooltip .card:hover {
-            opacity: 1 !important;
-            background: rgba(248, 246, 240, 1) !important;
-            transform: none !important;
-          }
-          .preview-close-btn {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            background: #dc2626;
-            color: black;
-            border: 3px solid #ffffff;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-            font-size: 24px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1001;
-            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.6);
-            transition: all 0.2s ease;
-          }
-          .preview-close-btn:hover {
-            background: #b91c1c;
-            color: black;
-            transform: scale(1.1);
-            box-shadow: 0 6px 16px rgba(220, 38, 38, 0.8);
-          }
-        </style>
-        <button class="preview-close-btn" title="Fermer">&times;</button>
-        ${spellCard}
+
+      // Create close button
+      const closeBtn = document.createElement('button');
+      closeBtn.className = 'preview-close-btn';
+      closeBtn.innerHTML = '&times;';
+      closeBtn.title = 'Fermer';
+      closeBtn.style.cssText = `
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background: #dc2626;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1001;
       `;
+
+      // Create card container
+      const cardContainer = document.createElement('div');
+      cardContainer.innerHTML = spellCard;
+
+      // Add a style element to the document head (not to the preview) to avoid visible CSS
+      let existingStyle = document.querySelector('#spell-preview-styles');
+      if (!existingStyle) {
+        const style = document.createElement('style');
+        style.id = 'spell-preview-styles';
+        style.textContent = `
+          .spell-preview-tooltip .editable-field,
+          .spell-preview-tooltip .editable-effect {
+            display: block !important;
+            margin: 0.5rem 0 !important;
+            line-height: 1.4 !important;
+            white-space: normal !important;
+            word-wrap: break-word !important;
+          }
+          .spell-preview-tooltip img {
+            max-width: 200px !important;
+            height: auto !important;
+            display: block !important;
+            margin: 0.5rem auto !important;
+          }
+          .spell-preview-tooltip hr {
+            margin: 1rem 0 !important;
+            border: none !important;
+            border-top: 1px solid var(--rule) !important;
+          }
+        `;
+        document.head.appendChild(style);
+      }
+
+      // Add elements to preview
+      preview.appendChild(closeBtn);
+      preview.appendChild(cardContainer);
+
+      // Force display of images after DOM insertion
+      setTimeout(() => {
+        const images = preview.querySelectorAll('img[style*="display: none"]');
+        images.forEach(img => {
+          img.style.display = 'block';
+          img.style.maxWidth = '200px';
+          img.style.height = 'auto';
+          img.style.margin = '0.5rem auto';
+        });
+      }, 100);
       
       // Style the preview container
       preview.style.cssText = `
@@ -417,30 +432,14 @@
         max-width: 450px;
         max-height: 600px;
         overflow-y: auto;
-        box-shadow: 0 8px 24px rgba(0,0,0,1) !important;
-        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        border-radius: 8px;
         pointer-events: auto;
-        opacity: 1 !important;
-        background: rgb(248, 246, 240) !important;
-        background-color: rgb(248, 246, 240) !important;
+        background: var(--paper);
+        border: 1px solid var(--rule);
+        font-family: inherit;
+        color: var(--text);
       `;
-      
-      // Force styles after element is added to DOM
-      setTimeout(() => {
-        preview.style.setProperty('opacity', '1', 'important');
-        preview.style.setProperty('background', 'rgb(248, 246, 240)', 'important');
-        preview.style.setProperty('background-color', 'rgb(248, 246, 240)', 'important');
-        
-        // Force background on all child elements
-        const allElements = preview.querySelectorAll('*');
-        allElements.forEach(el => {
-          el.style.setProperty('opacity', '1', 'important');
-          el.style.setProperty('background-color', 'rgb(248, 246, 240)', 'important');
-          el.style.setProperty('background', 'rgb(248, 246, 240)', 'important');
-          el.style.setProperty('display', 'initial', 'important');
-          el.style.setProperty('visibility', 'visible', 'important');
-        });
-      }, 10);
       
       // Position near the trigger element
       const rect = triggerElement.getBoundingClientRect();
@@ -480,15 +479,10 @@
         }
       };
       
-      // Add click handler for the close button only
-      setTimeout(() => {
-        const closeBtn = preview.querySelector('.preview-close-btn');
-        if (closeBtn) {
-          closeBtn.addEventListener('click', () => {
-            removePreview();
-          });
-        }
-      }, 10);
+      // Add click handler for the close button
+      closeBtn.addEventListener('click', () => {
+        removePreview();
+      });
     },
 
     /**

@@ -1,0 +1,193 @@
+{
+  "directPages": [
+    {
+      "type": "page",
+      "id": "favoris",
+      "title": "⭐ Favoris",
+      "icon": "⭐"
+    }
+  ],
+  "sections": [
+    {
+      "id": "heros",
+      "title": "🦸 Héros",
+      "icon": "🦸",
+      "description": "Création et développement des personnages",
+      "collapsed": false,
+      "items": [
+        {
+          "type": "page",
+          "id": "creation",
+          "title": "Création d'un personnage",
+          "icon": "🎭"
+        },
+        {
+          "type": "category",
+          "id": "classes",
+          "title": "Classes",
+          "icon": "⚔️",
+          "items": "CLASSES"
+        },
+        {
+          "type": "category",
+          "id": "dons",
+          "title": "Dons",
+          "icon": "🎖️",
+          "items": "DONS"
+        },
+        {
+          "type": "page",
+          "id": "feuille-personnage",
+          "title": "Feuille de personnage",
+          "icon": "📋"
+        }
+      ]
+    },
+    {
+      "id": "arsenal",
+      "title": "⚔️ Arsenal",
+      "icon": "⚔️",
+      "description": "Sorts, objets et équipements",
+      "collapsed": false,
+      "items": [
+        {
+          "type": "category",
+          "id": "sorts",
+          "title": "Sorts",
+          "icon": "🔮",
+          "items": "SORTS"
+        },
+        {
+          "type": "page",
+          "id": "objets",
+          "title": "Objets",
+          "icon": "📦"
+        },
+        {
+          "type": "page",
+          "id": "collections-objets",
+          "title": "Collections d'Objets",
+          "icon": "📚"
+        }
+      ]
+    },
+    {
+      "id": "regles",
+      "title": "📚 Règles",
+      "icon": "📚",
+      "description": "Mécaniques de jeu et références",
+      "collapsed": false,
+      "items": [
+        {
+          "type": "page",
+          "id": "elements",
+          "title": "Éléments",
+          "icon": "🌟"
+        },
+        {
+          "type": "page",
+          "id": "stats",
+          "title": "Statistiques",
+          "icon": "📊"
+        },
+        {
+          "type": "page",
+          "id": "competences-tests",
+          "title": "Compétences & Tests",
+          "icon": "🎯"
+        },
+        {
+          "type": "page",
+          "id": "etats",
+          "title": "États",
+          "icon": "⚡"
+        },
+        {
+          "type": "page",
+          "id": "combat",
+          "title": "Combat",
+          "icon": "⚔️"
+        },
+        {
+          "type": "page",
+          "id": "gestion-des-ressources",
+          "title": "Gestion des ressources",
+          "icon": "💎"
+        }
+      ]
+    },
+    {
+      "id": "maitre-de-jeu",
+      "title": "🎭 Maître de jeu",
+      "icon": "🎭",
+      "description": "Outils et ressources pour le Maître de jeu",
+      "collapsed": false,
+      "requiresMJ": true,
+      "items": [
+        {
+          "type": "page",
+          "id": "monstres",
+          "title": "Monstres",
+          "icon": "👹"
+        },
+        {
+          "type": "page",
+          "id": "tables-tresors",
+          "title": "Tables de trésors",
+          "icon": "💎"
+        },
+        {
+          "type": "page",
+          "id": "audio",
+          "title": "Musiques d'ambiance",
+          "icon": "🎵"
+        },
+        {
+          "type": "page",
+          "id": "traumas",
+          "title": "Traumas",
+          "icon": "🩹"
+        },
+        {
+          "type": "page",
+          "id": "campagne",
+          "title": "Campagne",
+          "icon": "📖"
+        },
+        {
+          "type": "page",
+          "id": "gestion-objets",
+          "title": "Gestion des Objets",
+          "icon": "⚔️"
+        }
+      ]
+    },
+    {
+      "id": "monde",
+      "title": "🌍 Monde",
+      "icon": "🌍",
+      "description": "Univers et connaissances du monde",
+      "collapsed": false,
+      "items": [
+        {
+          "type": "page",
+          "id": "histoire",
+          "title": "Histoire",
+          "icon": "📜"
+        },
+        {
+          "type": "page",
+          "id": "dieux",
+          "title": "Dieux",
+          "icon": "🏛️"
+        },
+        {
+          "type": "page",
+          "id": "geographie",
+          "title": "Geographie",
+          "icon": "📜"
+        }
+      ]
+    }
+  ]
+}
