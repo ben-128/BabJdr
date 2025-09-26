@@ -210,34 +210,36 @@
       // Clear the global flags
       window.activeIdSearch = false;
       window.activeSearchId = null;
-      
-      // Regenerate page to show all objects hidden again
-      if (JdrApp.modules.renderer?.regenerateCurrentPage) {
-        JdrApp.modules.renderer.regenerateCurrentPage();
-      }
+
+      // Clear search result markers and show all objects
+      this.showAllObjects();
     },
 
     hideAllObjects() {
       document.querySelectorAll('#objets-container .card, #gestion-objets-container .card').forEach(card => {
-        card.style.display = 'none';
+        if (!card.hasAttribute('data-search-result')) {
+          card.style.display = 'none';
+        }
       });
     },
 
     showAllObjects() {
       document.querySelectorAll('#objets-container .card, #gestion-objets-container .card').forEach(card => {
         card.style.display = '';
+        card.removeAttribute('data-search-result');
       });
     },
 
     showOnlyObjectById(searchNumber) {
       this.hideAllObjects();
 
-      // Show only the target object - check multiple selectors
+      // Show only the target object
       const selectors = [
-        `[data-object-id="${searchNumber}"]`,
+        `[data-object-numero="${searchNumber}"]`,
         `[data-numero="${searchNumber}"]`,
-        `[data-objet-numero="${searchNumber}"]`,
-        `.objet-card[data-numero="${searchNumber}"]`
+        `.objet-card[data-numero="${searchNumber}"]`,
+        `.card[data-numero="${searchNumber}"]`,
+        `.card[data-object-numero="${searchNumber}"]`
       ];
 
       let targetCard = null;
@@ -247,7 +249,11 @@
       }
 
       if (targetCard) {
-        targetCard.style.display = '';
+        // Force display and ensure it stays visible
+        targetCard.style.display = 'block';
+        targetCard.style.visibility = 'visible';
+        targetCard.style.opacity = '1';
+
         // Ensure parent containers are also visible
         let parent = targetCard.parentElement;
         while (parent && parent !== document.body) {
@@ -256,9 +262,20 @@
           }
           parent = parent.parentElement;
         }
-        // Scroll into view after a small delay to ensure rendering
+
+        // Add a marker to prevent it from being hidden again
+        targetCard.setAttribute('data-search-result', 'true');
+
+        // Scroll into view
         requestAnimationFrame(() => {
           targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+          // Double-check visibility after scroll
+          setTimeout(() => {
+            if (targetCard.style.display === 'none') {
+              targetCard.style.display = 'block';
+            }
+          }, 500);
         });
       }
     },
