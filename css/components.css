@@ -29,6 +29,13 @@
   height: 2px;
   background: linear-gradient(90deg, transparent, var(--gold), transparent);
   opacity: 0.7;
+  transition: width var(--duration-normal) var(--ease-out-quart),
+              opacity var(--duration-normal) ease;
+}
+
+.spell-title:hover::after {
+  width: 80px;
+  opacity: 1;
 }
 
 /* ─────────────────────────── Image Optimization Components ─────────────────────────── */
