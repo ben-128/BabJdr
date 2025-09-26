@@ -213,42 +213,11 @@
           }
         });
 
-        // Track cards BUT NOT class/subclass cards which are too large
-        document.querySelectorAll('.card').forEach(card => {
-          // Skip class and subclass cards to prevent entire section rotation
-          if (card.classList.contains('class-card') ||
-              card.classList.contains('subclass-card') ||
-              card.closest('article[data-page="guerrier"], article[data-page="mage"], article[data-page="pretre"], article[data-page="rodeur"], article[data-page="enchanteur"]') ||
-              card.querySelector('.subclass-images')) {
-            return;
-          }
-
-          if (card.matches(':hover')) {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-
-            const rotateX = (y - centerY) / 15;
-            const rotateY = (centerX - x) / 15;
-
-            card.style.transform = `
-              perspective(1000px)
-              rotateX(${rotateX}deg)
-              rotateY(${rotateY}deg)
-              translateY(-8px)
-              scale(1.02)
-            `;
-          }
-        });
+        // REMOVED: No 3D effects on any cards/sections to prevent unwanted rotation
       });
 
-      // Clean reset on mouse leave
+      // Clean reset on mouse leave - only for images
       document.addEventListener('mouseleave', (e) => {
-        if (e.target && e.target.classList && e.target.classList.contains('card')) {
-          e.target.style.transform = '';
-        }
         if (e.target && e.target.tagName === 'IMG' && e.target.closest('.illus')) {
           e.target.classList.remove('js-3d-active');
           e.target.style.removeProperty('transform');
