@@ -157,8 +157,70 @@
      * Enhanced hover effects with dynamic calculations
      */
     setupHoverEnhancements() {
+      console.log('AnimationEnhancer: Setting up hover enhancements...');
+
+      // Simplified and more reliable mouse tracking
       document.addEventListener('mousemove', (e) => {
-        // Dynamic hover effects for cards
+        // Track all images
+        document.querySelectorAll('.illus img').forEach(img => {
+          const rect = img.getBoundingClientRect();
+
+          // Check if mouse is actually over the image
+          const isHovering = (
+            e.clientX >= rect.left &&
+            e.clientX <= rect.right &&
+            e.clientY >= rect.top &&
+            e.clientY <= rect.bottom
+          );
+
+          if (isHovering) {
+            // Log first hover for debugging
+            if (!img.dataset.debugLogged) {
+              console.log('🎯 3D tracking active for image:', img.src || img.alt || 'No identifier');
+              img.dataset.debugLogged = 'true';
+            }
+
+            // Mark as JS-controlled
+            img.classList.add('js-3d-active');
+
+            // Calculate mouse position relative to image center
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            // Calculate rotation (more sensitive for better visibility)
+            const rotateX = (y - centerY) / 6; // Increased sensitivity
+            const rotateY = (centerX - x) / 6; // Increased sensitivity
+
+            // Calculate depth
+            const translateZ = Math.min(60, Math.abs(rotateX) * 3 + Math.abs(rotateY) * 3);
+
+            // Apply limits
+            const maxRotate = 20; // Increased for better visibility
+            const clampedRotateX = Math.max(-maxRotate, Math.min(maxRotate, rotateX));
+            const clampedRotateY = Math.max(-maxRotate, Math.min(maxRotate, rotateY));
+
+            // Apply transform with !important to override CSS
+            img.style.setProperty('transform',
+              `perspective(1000px) rotateX(${clampedRotateX}deg) rotateY(${clampedRotateY}deg) translateZ(${translateZ}px) scale(1.15)`,
+              'important'
+            );
+
+            // Also apply enhanced visual effects
+            img.style.setProperty('filter', 'brightness(1.2) contrast(1.2)', 'important');
+            img.style.setProperty('box-shadow', '0 20px 40px rgba(0,0,0,0.4), 0 0 30px rgba(212,175,55,0.6)', 'important');
+
+          } else {
+            // Reset when not hovering
+            img.classList.remove('js-3d-active');
+            img.style.removeProperty('transform');
+            img.style.removeProperty('filter');
+            img.style.removeProperty('box-shadow');
+          }
+        });
+
+        // Also track cards
         document.querySelectorAll('.card').forEach(card => {
           if (card.matches(':hover')) {
             const rect = card.getBoundingClientRect();
@@ -167,8 +229,8 @@
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
 
-            const rotateX = (y - centerY) / 10;
-            const rotateY = (centerX - x) / 10;
+            const rotateX = (y - centerY) / 15;
+            const rotateY = (centerX - x) / 15;
 
             card.style.transform = `
               perspective(1000px)
@@ -179,81 +241,22 @@
             `;
           }
         });
-
-        // Enhanced 3D tracking for images
-        document.querySelectorAll('.illus img').forEach(img => {
-          if (img.matches(':hover')) {
-            // Mark as JS-controlled to override CSS hover
-            img.classList.add('js-3d-active');
-
-            const rect = img.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-
-            // More dramatic rotation for all images
-            const rotateX = (y - centerY) / 8;
-            const rotateY = (centerX - x) / 8;
-            const translateZ = Math.max(20, Math.min(80, Math.abs(rotateX) * 2 + Math.abs(rotateY) * 2));
-
-            // Determine image type for specialized effects
-            const isSpellImage = img.closest('.illus-spell');
-            const isClassImage = img.closest('.illus-class, .illus-subclass');
-            const isDonImage = img.closest('.illus-don');
-            const isCardImage = img.closest('.card');
-
-            let scale = 1.08;
-            let maxRotate = 15;
-
-            if (isSpellImage) {
-              scale = 1.15;
-              maxRotate = 12;
-            } else if (isClassImage) {
-              scale = 1.12;
-              maxRotate = 14;
-            } else if (isDonImage) {
-              scale = 1.06;
-              maxRotate = 18;
-            } else if (isCardImage) {
-              scale = 1.18;
-              maxRotate = 10;
-            }
-
-            const clampedRotateX = Math.max(-maxRotate, Math.min(maxRotate, rotateX));
-            const clampedRotateY = Math.max(-maxRotate, Math.min(maxRotate, rotateY));
-
-            img.style.transform = `
-              perspective(1200px)
-              rotateX(${clampedRotateX}deg)
-              rotateY(${clampedRotateY}deg)
-              translateZ(${translateZ}px)
-              scale(${scale})
-            `;
-          } else {
-            // Remove JS control when not hovering
-            img.classList.remove('js-3d-active');
-          }
-        });
       });
 
-      // Reset transform when not hovering
+      // Clean reset on mouse leave
       document.addEventListener('mouseleave', (e) => {
         if (e.target.classList.contains('card')) {
           e.target.style.transform = '';
         }
         if (e.target.tagName === 'IMG' && e.target.closest('.illus')) {
           e.target.classList.remove('js-3d-active');
-          e.target.style.transform = '';
+          e.target.style.removeProperty('transform');
+          e.target.style.removeProperty('filter');
+          e.target.style.removeProperty('box-shadow');
         }
       }, true);
 
-      // Also handle mouseenter for images to ensure proper setup
-      document.addEventListener('mouseenter', (e) => {
-        if (e.target.tagName === 'IMG' && e.target.closest('.illus')) {
-          e.target.classList.add('js-3d-active');
-        }
-      }, true);
+      console.log('✅ 3D hover effects setup complete!');
     },
 
     /**
@@ -571,10 +574,23 @@
   // Initialize when DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
+      console.log('AnimationEnhancer: DOMContentLoaded - initializing...');
       window.AnimationEnhancer.init();
     });
   } else {
+    console.log('AnimationEnhancer: DOM already ready - initializing...');
     window.AnimationEnhancer.init();
   }
+
+  // Also add a simple global test function
+  window.testImageTracking = function() {
+    console.log('Testing image tracking...');
+    const images = document.querySelectorAll('.illus img');
+    console.log('Found', images.length, 'images');
+
+    images.forEach((img, index) => {
+      console.log(`Image ${index}:`, img.src || 'No src', img.getBoundingClientRect());
+    });
+  };
 
 })();
