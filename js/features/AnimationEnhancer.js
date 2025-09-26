@@ -161,26 +161,8 @@
 
       // Simplified and more reliable mouse tracking
       document.addEventListener('mousemove', (e) => {
-        // Track images except in class sections to avoid rotating entire sections
+        // Track all images normally
         document.querySelectorAll('.illus img').forEach(img => {
-          // Skip ALL class and subclass related images completely
-          if (img.closest('article[data-page="guerrier"], article[data-page="mage"], article[data-page="pretre"], article[data-page="rodeur"], article[data-page="enchanteur"]')) {
-            return;
-          }
-
-          // Also skip illus-class and illus-subclass anywhere
-          if (img.closest('.illus-class, .illus-subclass')) {
-            return;
-          }
-
-          // Skip images with class-related data attributes
-          const illusContainer = img.closest('.illus');
-          if (illusContainer) {
-            const illusKey = illusContainer.getAttribute('data-illus-key');
-            if (illusKey && (illusKey.startsWith('class:') || illusKey.startsWith('subclass:'))) {
-              return;
-            }
-          }
           const rect = img.getBoundingClientRect();
 
           // Check if mouse is actually over the image
@@ -238,8 +220,16 @@
           }
         });
 
-        // Also track cards
+        // Track cards BUT NOT class/subclass cards which are too large
         document.querySelectorAll('.card').forEach(card => {
+          // Skip class and subclass cards to prevent entire section rotation
+          if (card.classList.contains('class-card') ||
+              card.classList.contains('subclass-card') ||
+              card.closest('article[data-page="guerrier"], article[data-page="mage"], article[data-page="pretre"], article[data-page="rodeur"], article[data-page="enchanteur"]') ||
+              card.querySelector('.subclass-images')) {
+            return;
+          }
+
           if (card.matches(':hover')) {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;

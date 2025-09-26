@@ -574,7 +574,18 @@ input:focus, textarea:focus, select:focus {
     0 0 80px rgba(212,175,55,0.3);
 }
 
-/* Removed class image 3D effects to prevent section rotation */
+.illus-class img:hover:not(.js-3d-active), .illus-subclass img:hover:not(.js-3d-active) {
+  transform:
+    perspective(1000px)
+    rotateX(-10deg)
+    rotateY(8deg)
+    translateZ(35px)
+    scale(1.1);
+  box-shadow:
+    0 30px 60px rgba(0,0,0,0.4),
+    0 0 50px rgba(139,69,19,0.5),
+    inset 0 2px 6px rgba(255,255,255,0.3);
+}
 
 .illus-don img:hover:not(.js-3d-active) {
   transform:
@@ -708,19 +719,11 @@ input:focus, textarea:focus, select:focus {
     0 0 20px rgba(212,175,55,0.2);
 }
 
-/* Class images completely excluded from 3D effects */
-.illus-class img,
-.illus-subclass img,
-article[data-page="guerrier"] .illus img,
-article[data-page="mage"] .illus img,
-article[data-page="pretre"] .illus img,
-article[data-page="rodeur"] .illus img,
-article[data-page="enchanteur"] .illus img,
-.illus[data-illus-key^="class:"] img,
-.illus[data-illus-key^="subclass:"] img {
-  transform: none !important;
-  filter: none !important;
-  transition: box-shadow 0.3s ease !important;
+/* Class and subclass images get 3D effects */
+.illus-class img, .illus-subclass img {
+  box-shadow:
+    var(--image-shadow),
+    0 0 15px rgba(139,69,19,0.3);
 }
 
 .illus-don img {
