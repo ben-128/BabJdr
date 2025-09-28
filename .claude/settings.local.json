@@ -55,7 +55,8 @@
       "Bash(# Remove redundant files and simplify\nrm github-index.html landing.html\n\n# Rename for clarity  \nmv index.html dev-modular.html)",
       "Bash(python:*)",
       "Bash(pkill:*)",
-      "Bash(git restore:*)"
+      "Bash(git restore:*)",
+      "Bash(awk:*)"
     ],
     "deny": []
   }

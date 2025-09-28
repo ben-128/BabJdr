@@ -36,8 +36,8 @@
           "max": 14,
           "objet": {
             "type": "reference",
-            "numero": 24,
-            "nom": "Flèche de la terre"
+            "numero": 57,
+            "nom": "Fouet de lianes"
           }
         },
         {
@@ -675,6 +675,52 @@
             "type": "reference",
             "numero": 20,
             "nom": "Ration copieuse de nourriture"
+          }
+        }
+      ]
+    },
+    {
+      "nom": "Coffre jeu du tonneau",
+      "description": "Table de butin pour une situation spécifique.",
+      "tags": [
+        "Forêt",
+        "Coffre"
+      ],
+      "fourchettes": [
+        {
+          "min": 1,
+          "max": 5,
+          "objet": {
+            "type": "reference",
+            "numero": 46,
+            "nom": "Robe de la forêt"
+          }
+        },
+        {
+          "min": 6,
+          "max": 10,
+          "objet": {
+            "type": "reference",
+            "numero": 57,
+            "nom": "Fouet de lianes"
+          }
+        },
+        {
+          "min": 11,
+          "max": 16,
+          "objet": {
+            "type": "reference",
+            "numero": 40,
+            "nom": "Couronne d'épines"
+          }
+        },
+        {
+          "min": 17,
+          "max": 30,
+          "objet": {
+            "type": "reference",
+            "numero": 39,
+            "nom": "Bouclier de la forêt"
           }
         }
       ]
