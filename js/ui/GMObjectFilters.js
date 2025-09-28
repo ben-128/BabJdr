@@ -40,7 +40,6 @@
      * Toggle a GM object tag filter
      */
     toggleGMObjectTag(tagName) {
-      
       if (!window.ACTIVE_GM_OBJECT_TAGS) {
         window.ACTIVE_GM_OBJECT_TAGS = [];
       }
@@ -49,10 +48,8 @@
       const tagIndex = activeTags.indexOf(tagName);
 
       if (tagIndex === -1) {
-        // Add tag
         activeTags.push(tagName);
       } else {
-        // Remove tag
         activeTags.splice(tagIndex, 1);
       }
       
@@ -74,6 +71,7 @@
     regenerateGMObjectsPage(clickedTag = null) {
       // Check if we're on the GM objects page
       const currentPage = window.location.hash.replace('#/', '') || 'creation';
+      
       if (currentPage !== 'gestion-objets') {
         return;
       }
@@ -87,13 +85,7 @@
 
       // Force regeneration of the page using the router
       if (JdrApp.modules.router?.renderGMObjectsPage) {
-        // Set a flag to indicate this is a filter-triggered regeneration
-        JdrApp.modules.router._skipAutoRefresh = true;
         JdrApp.modules.router.renderGMObjectsPage();
-        // Remove the flag after a short delay
-        setTimeout(() => {
-          JdrApp.modules.router._skipAutoRefresh = false;
-        }, 50);
         
         // Reset the regeneration flag immediately after DOM update
         this._regenerating = false;

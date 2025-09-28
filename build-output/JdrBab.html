@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-09-28T15:17:05.928Z by JdrBab Build System -->
+<!-- Generated on 2025-09-28T19:31:54.708Z by JdrBab Build System -->
 <title>JDR‑BAB — Livret de règles</title>
 <meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1051,6 +1051,39 @@ h5, h6 {
 /* Article and section layout */
 article{display:none}
 article.active{display:block}
+
+/* CRITICAL: Hide all grid containers in non-active articles to prevent duplicate rendering */
+article:not(.active) .grid,
+article:not(.active) .collection-items,
+article:not(.active) [class*="container"],
+article:not(.active) [id*="container"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* ADDITIONAL: Force hide favoris containers even in active articles when not on favoris page */
+article[data-page="gestion-objets"] #favoris-objets-container,
+article[data-page="gestion-objets"] #favoris-sorts-container,
+article[data-page="gestion-objets"] #objets-container,
+article[data-page="gestion-objets"] .favoris-section,
+article[data-page="gestion-objets"] .favoris-grid {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* NUCLEAR: Hide any objet-card not inside gestion-objets-container when on GM page */
+article[data-page="gestion-objets"] .objet-card:not(#gestion-objets-container .objet-card) {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  left: -9999px !important;
+}
 section{background:var(--card);border:1px solid var(--rule);border-radius:14px;box-shadow:var(--shadow);padding:18px;margin:0 0 14px}
 
 /* Footer */
@@ -6738,13 +6771,28 @@ html {
 
 /* Content visibility optimizations for modern browsers - ONLY for visible articles */
 /* EXCLUDE collections and filtered content to avoid display conflicts */
-article.active .card:not([style*="display: none"]),
+article.active .card:not([style*="display: none"]):not(.objet-card),
 article.active .spell-card:not([style*="display: none"]), 
 article.active .item-card:not([style*="display: none"]) {
   content-visibility: auto;
   contain-intrinsic-size: 0 250px;
   /* Lighter containment for better compatibility */
   contain: layout style;
+}
+
+/* Disable ALL optimizations for GM Objects page to prevent grid collapse */
+article[data-page="gestion-objets"] *,
+article[data-page="gestion-objets"] .card,
+article[data-page="gestion-objets"] .objet-card,
+article[data-page="gestion-objets"] .editable-section,
+article[data-page="gestion-objets"] .illus {
+  content-visibility: visible !important;
+  contain: none !important;
+  /* Disable problematic animations that cause grid collapse */
+  animation: none !important;
+  /* Ensure normal layout flow */
+  transform: none !important;
+  will-change: auto !important;
 }
 
 /* Ensure hidden elements stay hidden */
@@ -7196,14 +7244,14 @@ article.active .grid {
       {
         "nom": "Châtiment",
         "element": "Divin",
-        "description": "Invoque un magie divine qui blesse les morts-vivants",
+        "description": "Invoque un magie divine qui blesse les créatures maléfiques.",
         "categorie": "Anti-mort-vivant",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 3",
         "portee": "🎯 <strong>Portée:</strong> 18m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 6",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
-        "resistance": "<strong>Sans effet si:</strong> &nbsp;<br>- Non mort-vivant <br>- Esquive.",
+        "resistance": "<strong>Sans effet si:</strong>  <br>- Elément d'assignation autre que <span style=\"color: #8b5cf6; font-weight: bold;\">Maléfique</span> <br>- Esquive.",
         "effetNormal": "<strong>Effet:</strong> Inflige (2 x Puiss. Sorts) dégâts <span style=\"color: #d0d0d0; font-weight: bold; background: rgba(0, 0, 0, 0.4); padding: 2px 4px; border-radius: 3px;\">Divin</span> à la cible.",
         "effetCritique": "<strong>Coup Critique: </strong> Inflige (4 x Puiss. Sorts) dégats."
       },
@@ -7400,7 +7448,7 @@ article.active .grid {
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 6",
         "resistance": "<strong>Sans effet si:</strong> -",
-        "effetNormal": "<strong>Effet:</strong> La cible lévite pendant 5 tours. Elle ignore les dégâts/ralentissements venant du sol, ainsi que l'état <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">A terre</span>.",
+        "effetNormal": "<strong>Effet:</strong> La cible obtient l'état <span class=\"etat-link\" data-etat=\"Lévitation\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Lévitation</span> pendant 5 tours.",
         "effetCritique": "<strong>Coup Critique: </strong> La cible a également sa vitesse de déplacement augmentée de 3m."
       },
       {
@@ -7545,14 +7593,14 @@ article.active .grid {
     "sousClasses": [
       {
         "nom": "Érudit",
-        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>1</strong></span><span class=\"chip\">🏃 Agilité: <strong>1</strong></span><span class=\"chip\">🛡️ Endurance: <strong>4</strong></span><span class=\"chip\">🧠 Intelligence: <strong>6</strong></span><span class=\"chip\">⚡ Volonté: <strong>3</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
+        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>1</strong></span><span class=\"chip\">🏃 Agilité: <strong>1</strong></span><span class=\"chip\">🛡️ Endurance: <strong>4</strong></span><span class=\"chip\">🧠 Intelligence: <strong>8</strong></span><span class=\"chip\">⚡ Volonté: <strong>3</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +3 Intelligence 🧠, +2 Volonté ⚡<strong> +2 Au choix</strong>",
         "capacites": "<ul><li><em>Instruit</em> : Gagne la compétence Réflexion rang 1.</li><li><em>Apprentissage accéléré</em> : Le niveau de l'érudit est considéré plus élevé d'un niveau pour les prérequis d'apprentissage de sorts.</li>\n<li><em>Mana inépuisable</em> : Chaque point de volonté augmente le mana de 3 au lieu de 2.</li>\n<li><em>Magie interdite</em> : Capable d'utiliser ses lectures (s'il les comprends) pour apprendre de nouveaux sorts.</li></ul>",
         "description": "<i>Mage avide de savoir, doté d’une mémoire prodigieuse. Il assimile les arcanes avec une rapidité fulgurante et maîtrise de nouveaux sorts bien plus vite que ses pairs.</i>"
       },
       {
         "nom": "Elfe",
-        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>2</strong></span><span class=\"chip\">🏃 Agilité: <strong>2</strong></span><span class=\"chip\">🛡️ Endurance: <strong>6</strong></span><span class=\"chip\">🧠 Intelligence: <strong>3</strong></span><span class=\"chip\">⚡ Volonté: <strong>2</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
+        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>3</strong></span><span class=\"chip\">🏃 Agilité: <strong>3</strong></span><span class=\"chip\">🛡️ Endurance: <strong>6</strong></span><span class=\"chip\">🧠 Intelligence: <strong>4</strong></span><span class=\"chip\">⚡ Volonté: <strong>3</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +1 Force 💪, +1 Agilité 🏃, +1 Endurance 🛡️, +1 Intelligence 🧠, +1 Volonté ⚡<strong> +2 Au choix</strong>",
         "capacites": "<ul><li><em>Instinct elfique</em> : Gagne la compétence Coordination rang 1.</li><li><em>Équipement d'elfe</em> : Epées à une main, armures légères.</li><li><em>Briseur de sceaux</em> : Gagne 1 de compétence sur les tests de compétence pour comprendre ou ouvrir une porte scellée magiquement</li></ul>",
         "description": "<i>Guerrier-mage polyvalent, aussi agile qu’élégant. Maître des arcanes comme du combat rapproché, il allie puissance magique et adresse martiale avec une grâce inégalée.</i>"
@@ -7562,13 +7610,13 @@ article.active .grid {
   {
     "nom": "Prêtre",
     "resume": "Spécialiste de la magie de soutien et anti morts-vivants.",
-    "capacites": "<ul><li><em>Équipement de prêtre</em> : bâtons (une et deux mains), catalyseurs , robes.</li><li><em>Sorts de prêtre</em> : Apprend et lance des sorts de Prêtre.</li><li><em>Eloquence</em> : Gagne la compétence Eloquence rang 1.</li></ul>",
+    "capacites": "Spécialiste de la magie de soutien et de purafication du maléfique.",
     "sousClasses": [
       {
         "nom": "Inquisiteur",
         "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>3</strong></span><span class=\"chip\">🏃 Agilité: <strong>1</strong></span><span class=\"chip\">🛡️ Endurance: <strong>7</strong></span><span class=\"chip\">🧠 Intelligence: <strong>3</strong></span><span class=\"chip\">⚡ Volonté: <strong>5</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +1 Force 💪, +1 Intelligence 🧠, +2 Volonté ⚡, +1 Endurance 🛡️<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Equipement d'inquisiteur</em> : Peut s'équiper d'armures légères, de boucliers et d'épées à deux mains.</li><li><em>Fléau des morts-vivants</em> : Les attaques physiques contre les morts-vivants ne ratent jamais.</li><li><em>Lumière purificatrice</em> : Double l'effet de la puissance des sorts sur les dégats des sorts d'élément <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span> ou <span style=\"color: #f5f5f5; font-weight: bold; background: rgba(100, 100, 100, 0.3); padding: 2px 4px; border-radius: 3px;\">Divin</span>.</li></ul>",
+        "capacites": "<ul><li><em>Equipement d'inquisiteur</em> : Peut s'équiper d'armures légères, de boucliers et d'épées à deux mains.</li><li><em>Fléau du maléfique</em> : Les attaques physiques contre le adversaire d'élément maléfique ne ratent jamais.</li><li><em>Lumière purificatrice</em> : Double l'effet de la puissance des sorts sur les dégats des sorts d'élément <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span> ou <span style=\"color: #f5f5f5; font-weight: bold; background: rgba(100, 100, 100, 0.3); padding: 2px 4px; border-radius: 3px;\">Divin</span>.</li></ul>",
         "description": "<i>Champion de la foi, il renforce ses alliés par la magie sacrée et traque sans relâche les morts-vivants. Quand la lumière seule ne suffit plus, il n’hésite pas à prendre les armes et combattre en première ligne.</i>"
       },
       {
@@ -7604,20 +7652,20 @@ article.active .grid {
   {
     "nom": "Enchanteur",
     "resume": "Détenteur d'une magie singulière, qui fait de lui un allié précieux.",
-    "capacites": "<ul><li><em>Équipement d'enchanteur</em> : bâtons (une et deux mains), catalyseurs, Robes.</li><li><em>Sorts d'enchanteur</em> : Apprend et lance des sorts d'Enchanteur.</li></ul>",
+    "capacites": "<ul><li><em>Équipement d'enchanteur</em> : bâtons (une et deux mains), catalyseurs, Robes.</li>\n<li><em>Sorts d'enchanteur</em> : Apprend et lance des sorts d'Enchanteur.</li>\n<li><em>Armes enchantés</em> : Les attaques au corps à corps ont une portée de 6m.</li></ul>",
     "sousClasses": [
       {
         "nom": "Esprit de la grande Fée",
-        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>1</strong></span><span class=\"chip\">🏃 Agilité: <strong>5</strong></span><span class=\"chip\">🛡️ Endurance: <strong>5</strong></span><span class=\"chip\">🧠 Intelligence: <strong>5</strong></span><span class=\"chip\">⚡ Volonté: <strong>2</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
-        "progression": "<strong>📈 Progression par niveau:</strong> +1 Agilité 🏃, +1 Intelligence 🧠, +1 Endurance 🛡️, +1 Volonté ⚡, +1 Chance 🍀<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Tatillon</em> : Gagne la compétence Finesse rang 1.</li><li><em>Lévitation</em> : Ignore dégâts/ralentissements venant du sol, ainsi que l'état <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">A terre</span>.</li><li><em>Rayon de l'Amitié</em> : Par une action secondaire, peut répéter sur une autre cible à portée un sort bénéfique qui a ciblé un allié se tour ci, sans coût en mana supplémentaire.</li></ul>",
+        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>1</strong></span><span class=\"chip\">🏃 Agilité: <strong>5</strong></span><span class=\"chip\">🛡️ Endurance: <strong>5</strong></span><span class=\"chip\">🧠 Intelligence: <strong>3</strong></span><span class=\"chip\">⚡ Volonté: <strong>3</strong></span><span class=\"chip\">🍀 Chance: <strong>3</strong></span></div>",
+        "progression": "<strong>📈 Progression par niveau:</strong> +1 Agilité 🏃, +1 Intelligence 🧠, +1 Volonté ⚡, +2 Chance 🍀<strong> +2 Au choix</strong>",
+        "capacites": "<ul><li><em>Tatillon</em> : Gagne la compétence Finesse rang 1.</li><li><em>Lévitation</em> : Est de manière permanante dans l'état <span class=\"etat-link\" data-etat=\"Lévitation\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Lévitation</span>.</li><li><em>Rayon de l'Amitié</em> : Par une action secondaire, peut répéter sur une autre cible à portée un sort bénéfique qui a ciblé un allié se tour ci, sans coût en mana supplémentaire.</li></ul>",
         "description": "<i>Être mystique qui flotte au-dessus du sol, il invoque des sorts imprévisibles pour soutenir ses alliés.</i>"
       },
       {
         "nom": "Lutin",
-        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>1</strong></span><span class=\"chip\">🏃 Agilité: <strong>1</strong></span><span class=\"chip\">🛡️ Endurance: <strong>5</strong></span><span class=\"chip\">🧠 Intelligence: <strong>5</strong></span><span class=\"chip\">⚡ Volonté: <strong>2</strong></span><span class=\"chip\">🍀 Chance: <strong>5</strong></span></div>",
-        "progression": "<strong>📈 Progression par niveau:</strong> +1 Intelligence 🧠, +2 Volonté ⚡, +2 Chance 🍀<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Secrets bien gardés</em> : Gagne la compétence Reflexion rang 1.\n</li><li><em>Fouineur</em> : Augmente la Fortune de 5.\n</li><li><em>Rire malicieux</em> : Par une action secondaire, peut répéter sur une autre cible à portée un sort d'altération qui a ciblé un enemi ce tour ci, sans coût en mana supplémentaire.</li></ul>",
+        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>2</strong></span><span class=\"chip\">🏃 Agilité: <strong>1</strong></span><span class=\"chip\">🛡️ Endurance: <strong>5</strong></span><span class=\"chip\">🧠 Intelligence: <strong>5</strong></span><span class=\"chip\">⚡ Volonté: <strong>3</strong></span><span class=\"chip\">🍀 Chance: <strong>5</strong></span></div>",
+        "progression": "<strong>📈 Progression par niveau:</strong> 💪 +1 Force, +1 Intelligence 🧠, +2 Volonté ⚡, +1 Chance 🍀<strong> +2 Au choix</strong>",
+        "capacites": "<ul><li><em>Secrets bien gardés</em> : Gagne la compétence Reflexion rang 1.\n</li><li><em>Fouineur</em> : Augmente la Fortune de 5.\n</li><li><em>Rire malicieux</em> : Aprés une attaque au corps à corps réussie, la cible du Lutin voit son armure réduite de la valeur des dégats infligés, jusqu'a la fin du prochain tour du héros.</li></ul>",
         "description": "<i>Esprit espiègle et rusé, passé maître dans l’art des altérations magiques. </i>"
       }
     ]
@@ -7882,7 +7930,7 @@ article.active .grid {
     "dons": [
       {
         "nom": "Mécréants",
-        "description": "Les dégats physiques infligés aux créatures de l'élément <span style=\"color: #0f172a; font-weight: bold;\">Nuit</span> ou <span style=\"color: #a855f7; font-weight: bold;\">Maléfique</span> sont doublés.",
+        "description": "Les dégats physiques infligés aux créatures de l'élément  <span style=\"color: #a855f7; font-weight: bold;\">Maléfique</span> sont doublés.",
         "prerequis": "<strong> Prérequis :</strong>-",
         "cout": "1 point de don"
       },
@@ -7932,6 +7980,12 @@ article.active .grid {
         "nom": "Alteration risquée",
         "description": "Lorsque un sort d'alteration magique est effectué alors que la cible est au corps à corps, ses chances de critiques sont doublées.",
         "prerequis": "<strong> Prérequis :</strong>-",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Spécialiste de l'étrange",
+        "description": "Permet d'équiper les armes exotiques à une main.",
+        "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       }
     ]
@@ -9845,7 +9899,7 @@ article.active .grid {
   },
   "meta": {
     "total_images": 139,
-    "exported_date": "2025-09-26",
+    "exported_date": "2025-09-28",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
 };
@@ -10301,6 +10355,12 @@ article.active .grid {
       "content": "Toutes les attaques et sorts ont une portée maximum de 3m. Incapable d'esquiver.",
       "deletable": true,
       "sectionName": "Nouvelle section"
+    },
+    {
+      "id": "section-1759073633821-nfyggh",
+      "type": "card",
+      "title": "Lévitation",
+      "content": "Ignore dégâts/ralentissements venant du sol.\n<br><br>Ignore l'état <span class=\"etat-link\" data-etat=\"à terre\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">à terre</span>.\n<br><br>Permet d'attaquer les adversaires volants au corps à corps sans sauter."
     }
   ]
 },
@@ -10548,7 +10608,7 @@ article.active .grid {
         },
         "Auberge": {
           "title": "Auberge",
-          "content": "<hr>\nUn vendeur noble (mais pauvre), qui vend les objets de départ.\n     <hr>\nUn expert en objet, peut analyser un objet magique pour 20 eclat, et un equipement pour 50 eclat. pour des objets exeptionnels, 200 eclats.\n     <hr>\nUn facteur qui veut faire livrer une lettre au bucheron de la forêt, quete principale\n     <hr>                       \nUn homme bourré, une chanteuse, un mec fort\n <hr>\nChambre des héros (laissé par l'aubergiste, un des membres de la famille des PJs est un ami). il y a de quoi dormir et un coffre ou metter n'importe quels objets.\n\n   <hr>\nAvant de partir la femme de l'aubergiste qui a entendu les héros, leur propose de piocher dans le sac a provision, mais leur demande de n'en prendre que un par personne maximum. Table de loot <i>ProvisionAuberge</i> <a href=\"#/tables-tresors\" style=\"color: var(--accent); text-decoration: underline;\">Tables de trésors</a>."
+          "content": "<hr>\nUn vendeur noble (mais pauvre), qui vend les objets de départ.\n     <hr>\nUn expert en objet, peut analyser un objet magique pour 20 eclat, et un equipement pour 50 eclat. pour des objets exeptionnels, 200 eclats.\n     <hr>\nUn facteur qui veut faire livrer une lettre au bucheron de la forêt, quete principale\n     <hr>                       \nUn homme bourré, une chanteuse, un mec fort\n <hr>\nChambre des héros (laissé par l'aubergiste, un des membres de la famille des PJs est un ami). \nPlus tard, aubergistre propose contre 100 eclat un coffre ou metter n'importe quels objets.\n\n   <hr>\nAvant de partir la femme de l'aubergiste qui a entendu les héros, leur propose de piocher dans le sac a provision, mais leur demande de n'en prendre que un par personne maximum. Table de loot <i>ProvisionAuberge</i> <a href=\"#/tables-tresors\" style=\"color: var(--accent); text-decoration: underline;\">Tables de trésors</a>.\n            \n <hr>\nAprés avoir terminé la foret, un voyageur propose contre 100 eclats de partir en expedition chercher les objets oubliés par les joueurs. Il leur vendra a bon prix.\n\n <hr>\nAprés foret, aubergiste parle de vieille tour ou mine comme prochain lieu, les joueurs decident"
         },
         "Forêt": {
           "title": "Forêt",
@@ -19471,10 +19531,24 @@ article.active .grid {
       
       // Skip optimization for collections pages and filtered content
       const targetElement = activeArticle || element;
+      const pageId = targetElement.getAttribute('data-page');
+      
+      // Pages that should be excluded from virtualization
+      const excludedPages = [
+        'guerrier', 'mage', 'pr-tre', 'r-deur', 'enchanteur', // Class pages
+        'gestion-objets', 'objets', 'monstres', 'tables-tresors' // Special content pages
+      ];
+      
       if (targetElement.id === 'collections-objets' || 
           targetElement.querySelector('#collection-results') ||
-          targetElement.querySelector('.objects-tag-display')) {
-        return; // Skip collections and filtered object pages
+          targetElement.querySelector('.objects-tag-display') ||
+          targetElement.querySelector('#gestion-objets-container') ||
+          excludedPages.includes(pageId) ||
+          pageId?.startsWith('dons-') ||
+          pageId?.startsWith('sorts-') ||
+          targetElement.querySelector('[id*="dons-container"]') ||
+          targetElement.querySelector('[id*="sorts-container"]')) {
+        return; // Skip all problematic pages from virtualization
       }
       
       const cards = targetElement.querySelectorAll('.card:not([style*="display: none"]), .spell-card:not([style*="display: none"]), .item-card:not([style*="display: none"])');
@@ -19905,6 +19979,28 @@ article.active .grid {
       }
     },
 
+    // Clean up specific virtualization containers
+    cleanupVirtualization(container) {
+      if (!container) return;
+      
+      const virtualizedViewports = container.querySelectorAll('.virtualized-viewport');
+      virtualizedViewports.forEach(viewport => {
+        const parent = viewport.parentNode;
+        const hiddenContainer = viewport.nextElementSibling;
+        
+        // Restore original container if it exists and is hidden
+        if (hiddenContainer && hiddenContainer.style.display === 'none') {
+          hiddenContainer.style.display = '';
+          parent.insertBefore(hiddenContainer, viewport);
+        }
+        
+        // Remove virtualization container
+        viewport.remove();
+      });
+      
+      this._virtualizationEnabled = false;
+    },
+
     // Clean up optimizations
     cleanup() {
       this._observers.forEach(observer => observer.disconnect());
@@ -20194,6 +20290,7 @@ article.active .grid {
     },
 
     updateActiveStates(page) {
+      
       // Remove active class from all articles and hide them
       document.querySelectorAll('article').forEach(a => {
         a.classList.remove('active');
@@ -20205,9 +20302,166 @@ article.active .grid {
       
       // Show the current page article
       const currentArticle = document.querySelector(`article[data-page="${page}"]`);
+      
       if (currentArticle) {
         currentArticle.classList.add('active');
-        currentArticle.style.display = 'block'; // Force show current article
+        currentArticle.style.display = 'block'; // Force show current article - this overrides any inline display:none
+        
+        // Check if this is the gestion-objets page specifically
+        if (page === 'gestion-objets') {
+          
+          // CRITICAL FIX: Hide all other object containers when on GM Objects page
+          const favorisObjectsContainer = document.getElementById('favoris-objets-container');
+          const favorisSortsContainer = document.getElementById('favoris-sorts-container');
+          const regularObjectsContainer = document.getElementById('objets-container');
+          
+          if (favorisObjectsContainer) {
+            favorisObjectsContainer.style.display = 'none';
+          }
+          
+          if (favorisSortsContainer) {
+            favorisSortsContainer.style.display = 'none';
+          }
+          
+          if (regularObjectsContainer) {
+            regularObjectsContainer.style.display = 'none';
+          }
+          
+          // CRITICAL FIX: Hide the entire favoris article's section that contains object cards
+          const favorisArticle = document.querySelector('article[data-page="favoris"]');
+          if (favorisArticle) {
+            const favorisSection = favorisArticle.querySelector('section');
+            if (favorisSection && favorisSection.querySelectorAll('.objet-card').length > 0) {
+              favorisSection.style.display = 'none';
+            }
+          }
+          
+          // EXTRA PROTECTION: Force hide any other potential object containers
+          const allPotentialObjectContainers = document.querySelectorAll('#objets-container, [id*="objets"], [class*="objets"]:not(#gestion-objets-container)');
+          allPotentialObjectContainers.forEach((container, index) => {
+            if (container.id !== 'gestion-objets-container' && container.querySelectorAll('.objet-card').length > 0) {
+              container.style.display = 'none';
+            }
+          });
+          
+          // NUCLEAR OPTION: Force hide every individual object card that's not in gestion-objets-container
+          const allObjectCards = document.querySelectorAll('.objet-card');
+          const gestionObjetsContainer = document.getElementById('gestion-objets-container');
+          let hiddenCount = 0;
+          
+          allObjectCards.forEach((card, index) => {
+            const isInGestionObjets = gestionObjetsContainer && gestionObjetsContainer.contains(card);
+            if (!isInGestionObjets) {
+              card.style.display = 'none';
+              hiddenCount++;
+            }
+          });
+          
+          
+          // CRITICAL: Set up mutation observer to track and PREVENT style changes
+          const observerId = Math.random().toString(36).substr(2, 9);
+          console.log(`🔄 DOUBLE RENDER DEBUG: Creating mutation observer [${observerId}]`);
+          const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+              if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                
+                // FORCE IT BACK TO VISIBLE IF SOMETHING HIDES IT
+                if (currentArticle.style.display === 'none') {
+                  currentArticle.style.display = 'block';
+                }
+              }
+            });
+          });
+          
+          observer.observe(currentArticle, { 
+            attributes: true, 
+            attributeFilter: ['style'] 
+          });
+          
+          // Clean up observer after 2 seconds
+          setTimeout(() => {
+            observer.disconnect();
+            
+            // DIAGNOSTIC: Check for duplicate content or multiple active articles
+            const diagnosticId = Math.random().toString(36).substr(2, 9);
+            const allActiveArticles = document.querySelectorAll('article.active');
+            allActiveArticles.forEach((art, index) => {
+            });
+            
+            const allContainers = document.querySelectorAll('#gestion-objets-container, .collection-items');
+            allContainers.forEach((container, index) => {
+              
+              // DETAILED: Log each child to see what's in each container
+              if (container.children.length > 0) {
+                Array.from(container.children).forEach((child, childIndex) => {
+                });
+              }
+            });
+            
+            // MORE SPECIFIC: Look for ANY visible grid containers
+            const allGridContainers = document.querySelectorAll('[style*="display: grid"], .collection-items, .grid');
+            allGridContainers.forEach((container, index) => {
+              const computedDisplay = window.getComputedStyle(container).display;
+              if (computedDisplay === 'grid' || computedDisplay === 'block') {
+              }
+            });
+            
+            // CHECK: Look for duplicate objet-card elements 
+            const allObjectCards = document.querySelectorAll('.objet-card');
+            
+            // Group by parent container
+            const cardsByContainer = {};
+            allObjectCards.forEach(card => {
+              const parentContainer = card.closest('.collection-items, .grid, #gestion-objets-container');
+              const containerKey = parentContainer ? (parentContainer.id || parentContainer.className) : 'unknown';
+              if (!cardsByContainer[containerKey]) cardsByContainer[containerKey] = [];
+              cardsByContainer[containerKey].push(card);
+            });
+            
+            Object.entries(cardsByContainer).forEach(([containerKey, cards]) => {
+              
+              // LOG the first few cards in each container to see what they are
+              cards.slice(0, 3).forEach((card, cardIndex) => {
+                const cardTitle = card.querySelector('h3, .object-title, [data-edit-type="titre"]')?.textContent?.trim() || 'No title';
+                const cardNumber = card.querySelector('.object-id, [class*="numero"]')?.textContent?.trim() || 'No number';
+                
+                // SPECIAL: Log parent hierarchy for unknown cards
+                if (containerKey === 'unknown') {
+                  let parentChain = '';
+                  let currentElement = card.parentElement;
+                  let depth = 0;
+                  while (currentElement && depth < 5) {
+                    parentChain += `${currentElement.tagName}`;
+                    if (currentElement.id) parentChain += `#${currentElement.id}`;
+                    if (currentElement.className) parentChain += `.${currentElement.className.split(' ').join('.')}`;
+                    parentChain += ' > ';
+                    currentElement = currentElement.parentElement;
+                    depth++;
+                  }
+                }
+              });
+            });
+            
+            // CRITICAL: Check for containers that might be visible but not properly tracked
+            const allSections = document.querySelectorAll('section');
+            allSections.forEach((section, index) => {
+              const sectionDisplay = window.getComputedStyle(section).display;
+              const hasObjectCards = section.querySelectorAll('.objet-card').length;
+              const hasCollectionItems = section.querySelectorAll('.collection-items').length;
+              if (sectionDisplay !== 'none' && (hasObjectCards > 0 || hasCollectionItems > 0)) {
+              }
+            });
+            
+            // EXTRA: Check if there are any articles that are accidentally visible
+            const allArticles = document.querySelectorAll('article');
+            allArticles.forEach((article, index) => {
+              const articleDisplay = window.getComputedStyle(article).display;
+              const hasObjectCards = article.querySelectorAll('.objet-card').length;
+              if (articleDisplay !== 'none' && hasObjectCards > 0) {
+              }
+            });
+          }, 2000);
+        }
         
         // IMPORTANT: Reset the activeIdSearch state when navigating to Objects page
         if (page === 'objets') {
@@ -20265,9 +20519,17 @@ article.active .grid {
           }
         }
       }
+      
+      // Final state logging
+      if (page === 'gestion-objets') {
+        const finalArticle = document.querySelector(`article[data-page="${page}"]`);
+        if (finalArticle) {
+        }
+      }
     },
     
     show(page) {
+      
       // Hide all articles and remove active class
       document.querySelectorAll('article').forEach(a => {
         a.classList.remove('active');
@@ -22310,6 +22572,12 @@ article.active .grid {
     },
 
     renderGMObjectsPage() {
+      // CRITICAL FIX: Clean up any existing virtualization containers before regenerating
+      const existingGMArticle = document.querySelector('article[data-page="gestion-objets"]');
+      if (existingGMArticle && window.ScrollOptimizer && window.ScrollOptimizer.cleanupVirtualization) {
+        window.ScrollOptimizer.cleanupVirtualization(existingGMArticle);
+      }
+      
       if (!window.OBJETS) {
         return false;
       }
@@ -22326,69 +22594,32 @@ article.active .grid {
         if (viewsContainer) {
           viewsContainer.insertAdjacentHTML('beforeend', pageHTML);
           gmObjectsArticle = document.querySelector('article[data-page="gestion-objets"]');
-          
-          // Force DOM reflow/repaint after insertAdjacentHTML
-          if (gmObjectsArticle) {
-            // Force layout recalculation by accessing offsetHeight
-            const forceReflow = gmObjectsArticle.offsetHeight;
-            
-            // Use requestAnimationFrame to ensure proper rendering
-            requestAnimationFrame(() => {
-              // Scroll to top to ensure visibility
-              window.scrollTo(0, 0);
-            });
-          }
         }
       } else {
         // Update existing article content
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = pageHTML;
         const newArticleContent = tempDiv.querySelector('article[data-page="gestion-objets"]');
+        
         if (newArticleContent) {
-          gmObjectsArticle.innerHTML = newArticleContent.innerHTML;
+          // Clear existing content and replace with new content
+          gmObjectsArticle.innerHTML = '';
           
-          // Force DOM reflow/repaint after innerHTML update
-          // Force layout recalculation by accessing offsetHeight
-          const forceReflow = gmObjectsArticle.offsetHeight;
-          
-          // Use requestAnimationFrame to ensure proper rendering
           requestAnimationFrame(() => {
-            // Scroll to top to ensure visibility
-            window.scrollTo(0, 0);
+            // Extract only the section content to avoid nesting issues
+            const sectionContent = newArticleContent.querySelector('section');
+            if (sectionContent) {
+              gmObjectsArticle.innerHTML = sectionContent.outerHTML;
+            } else {
+              gmObjectsArticle.innerHTML = newArticleContent.innerHTML;
+            }
           });
-        } else {
         }
       }
       
       if (gmObjectsArticle) {
         this.updateActiveStates('gestion-objets');
         this.setupGMObjectSearch();
-        
-        // Trigger refresh to ensure reference counters appear
-        // Skip auto-refresh only when called from filter regeneration to avoid loops
-        if (!this._skipAutoRefresh && window.GMObjectFilters?.regenerateGMObjectsPage) {
-          // Listen for MJ mode changes and refresh when MJ mode becomes true
-          const handleMJChange = (event) => {
-            const mjMode = event.detail.mjMode;
-            
-            if (mjMode === true) {
-              window.removeEventListener('mjModeChanged', handleMJChange);
-              setTimeout(() => {
-                window.GMObjectFilters.regenerateGMObjectsPage();
-              }, 100);
-            }
-          };
-          
-          window.addEventListener('mjModeChanged', handleMJChange);
-          
-          // Also set a fallback timeout in case the event doesn't fire
-          setTimeout(() => {
-            window.removeEventListener('mjModeChanged', handleMJChange);
-            if (document.body.classList.contains('mj-on')) {
-              window.GMObjectFilters.regenerateGMObjectsPage();
-            }
-          }, 1000);
-        }
         
         return true;
       }
@@ -22807,6 +23038,11 @@ article.active .grid {
       const newArticle = newDoc.querySelector('article');
       
       if (newArticle) {
+        // Clean up any existing virtualization before updating content
+        if (window.ScrollOptimizer && window.ScrollOptimizer.cleanupVirtualization) {
+          window.ScrollOptimizer.cleanupVirtualization(article);
+        }
+        
         article.innerHTML = newArticle.innerHTML;
         
         // Make sure only this article is active
@@ -22934,6 +23170,11 @@ article.active .grid {
         // For class pages, static pages, etc. - regenerate the specific content
         const newHTML = this.generatePageContent(pageId);
         if (newHTML) {
+          // Clean up any existing virtualization before updating content
+          if (window.ScrollOptimizer && window.ScrollOptimizer.cleanupVirtualization) {
+            window.ScrollOptimizer.cleanupVirtualization(activeArticle);
+          }
+          
           activeArticle.innerHTML = newHTML;
           this.autoLoadImages();
           
@@ -23028,6 +23269,10 @@ article.active .grid {
           // Remove existing article for this page if it exists
           const existingArticle = document.querySelector(`article[data-page="${pageId}"]`);
           if (existingArticle) {
+            // Clean up any existing virtualization before removing
+            if (window.ScrollOptimizer && window.ScrollOptimizer.cleanupVirtualization) {
+              window.ScrollOptimizer.cleanupVirtualization(existingArticle);
+            }
             existingArticle.remove();
           }
           
@@ -28195,7 +28440,7 @@ article.active .grid {
       }
       
       window.MONSTRES.push(defaultItem);
-      UIUtilities.refreshMonstersPage();
+      this.addNewMonsterDirectly(defaultItem);
     },
 
     /**
@@ -28446,6 +28691,70 @@ article.active .grid {
      */
     handleContentMove(type, category, itemName, direction) {
       // Additional handling after content is moved
+    },
+
+    /**
+     * Add new monster card directly to DOM without full page refresh
+     */
+    addNewMonsterDirectly(newMonster) {
+      try {
+        // Check if we're on the monsters page
+        if (window.location.hash !== '#/monstres') {
+          return false;
+        }
+
+        // Find the monsters container (using the correct ID from the page structure)
+        const monstersContainer = document.getElementById('monstres-container');
+        if (!monstersContainer) {
+          // Fallback to refresh if container not found
+          UIUtilities.refreshMonstersPage();
+          return false;
+        }
+
+        // Create the new monster card HTML using the existing builder pattern
+        const monsterIndex = window.MONSTRES.length - 1; // Last added monster
+        let newCardHTML = '';
+        
+        // Try to use existing card builder if available
+        if (window.CardBuilder?.create) {
+          const card = window.CardBuilder.create('monster', newMonster, 'monsters', monsterIndex);
+          newCardHTML = card?.build();
+        }
+        
+        // Fallback: create basic monster card HTML
+        if (!newCardHTML) {
+          newCardHTML = `
+            <div class="card monster-card" data-monster="${newMonster.nom}">
+              <div class="card-header">
+                <h3>${newMonster.nom || 'Nouveau Monstre'}</h3>
+                <div class="card-actions">
+                  <button onclick="ContentManager.deleteContent('monster', '', '${newMonster.nom}')" title="Supprimer">🗑️</button>
+                </div>
+              </div>
+              <div class="card-body">
+                <p><strong>Type:</strong> ${newMonster.type || 'Non défini'}</p>
+                <p><strong>Challenge:</strong> ${newMonster.challenge || 'Non défini'}</p>
+                ${newMonster.description ? `<p>${newMonster.description}</p>` : ''}
+              </div>
+            </div>
+          `;
+        }
+
+        // Add the card to the container
+        monstersContainer.insertAdjacentHTML('beforeend', newCardHTML);
+
+        // Load images for the new card if the system supports it
+        if (JdrApp.modules.renderer?.autoLoadImages) {
+          JdrApp.modules.renderer.autoLoadImages();
+        }
+
+        return true;
+      } catch (error) {
+        console.warn('Erreur lors de l\'ajout direct du monstre:', error);
+        // Fallback to full page refresh
+        UIUtilities.refreshMonstersPage();
+        return false;
+      }
     }
   };
 
@@ -31545,7 +31854,6 @@ article.active .grid {
      * Toggle a GM object tag filter
      */
     toggleGMObjectTag(tagName) {
-      
       if (!window.ACTIVE_GM_OBJECT_TAGS) {
         window.ACTIVE_GM_OBJECT_TAGS = [];
       }
@@ -31554,10 +31862,8 @@ article.active .grid {
       const tagIndex = activeTags.indexOf(tagName);
 
       if (tagIndex === -1) {
-        // Add tag
         activeTags.push(tagName);
       } else {
-        // Remove tag
         activeTags.splice(tagIndex, 1);
       }
       
@@ -31579,6 +31885,7 @@ article.active .grid {
     regenerateGMObjectsPage(clickedTag = null) {
       // Check if we're on the GM objects page
       const currentPage = window.location.hash.replace('#/', '') || 'creation';
+      
       if (currentPage !== 'gestion-objets') {
         return;
       }
@@ -31592,13 +31899,7 @@ article.active .grid {
 
       // Force regeneration of the page using the router
       if (JdrApp.modules.router?.renderGMObjectsPage) {
-        // Set a flag to indicate this is a filter-triggered regeneration
-        JdrApp.modules.router._skipAutoRefresh = true;
         JdrApp.modules.router.renderGMObjectsPage();
-        // Remove the flag after a short delay
-        setTimeout(() => {
-          JdrApp.modules.router._skipAutoRefresh = false;
-        }, 50);
         
         // Reset the regeneration flag immediately after DOM update
         this._regenerating = false;

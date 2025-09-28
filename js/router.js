@@ -122,6 +122,7 @@
     },
 
     updateActiveStates(page) {
+      
       // Remove active class from all articles and hide them
       document.querySelectorAll('article').forEach(a => {
         a.classList.remove('active');
@@ -133,9 +134,166 @@
       
       // Show the current page article
       const currentArticle = document.querySelector(`article[data-page="${page}"]`);
+      
       if (currentArticle) {
         currentArticle.classList.add('active');
-        currentArticle.style.display = 'block'; // Force show current article
+        currentArticle.style.display = 'block'; // Force show current article - this overrides any inline display:none
+        
+        // Check if this is the gestion-objets page specifically
+        if (page === 'gestion-objets') {
+          
+          // CRITICAL FIX: Hide all other object containers when on GM Objects page
+          const favorisObjectsContainer = document.getElementById('favoris-objets-container');
+          const favorisSortsContainer = document.getElementById('favoris-sorts-container');
+          const regularObjectsContainer = document.getElementById('objets-container');
+          
+          if (favorisObjectsContainer) {
+            favorisObjectsContainer.style.display = 'none';
+          }
+          
+          if (favorisSortsContainer) {
+            favorisSortsContainer.style.display = 'none';
+          }
+          
+          if (regularObjectsContainer) {
+            regularObjectsContainer.style.display = 'none';
+          }
+          
+          // CRITICAL FIX: Hide the entire favoris article's section that contains object cards
+          const favorisArticle = document.querySelector('article[data-page="favoris"]');
+          if (favorisArticle) {
+            const favorisSection = favorisArticle.querySelector('section');
+            if (favorisSection && favorisSection.querySelectorAll('.objet-card').length > 0) {
+              favorisSection.style.display = 'none';
+            }
+          }
+          
+          // EXTRA PROTECTION: Force hide any other potential object containers
+          const allPotentialObjectContainers = document.querySelectorAll('#objets-container, [id*="objets"], [class*="objets"]:not(#gestion-objets-container)');
+          allPotentialObjectContainers.forEach((container, index) => {
+            if (container.id !== 'gestion-objets-container' && container.querySelectorAll('.objet-card').length > 0) {
+              container.style.display = 'none';
+            }
+          });
+          
+          // NUCLEAR OPTION: Force hide every individual object card that's not in gestion-objets-container
+          const allObjectCards = document.querySelectorAll('.objet-card');
+          const gestionObjetsContainer = document.getElementById('gestion-objets-container');
+          let hiddenCount = 0;
+          
+          allObjectCards.forEach((card, index) => {
+            const isInGestionObjets = gestionObjetsContainer && gestionObjetsContainer.contains(card);
+            if (!isInGestionObjets) {
+              card.style.display = 'none';
+              hiddenCount++;
+            }
+          });
+          
+          
+          // CRITICAL: Set up mutation observer to track and PREVENT style changes
+          const observerId = Math.random().toString(36).substr(2, 9);
+          console.log(`🔄 DOUBLE RENDER DEBUG: Creating mutation observer [${observerId}]`);
+          const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+              if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                
+                // FORCE IT BACK TO VISIBLE IF SOMETHING HIDES IT
+                if (currentArticle.style.display === 'none') {
+                  currentArticle.style.display = 'block';
+                }
+              }
+            });
+          });
+          
+          observer.observe(currentArticle, { 
+            attributes: true, 
+            attributeFilter: ['style'] 
+          });
+          
+          // Clean up observer after 2 seconds
+          setTimeout(() => {
+            observer.disconnect();
+            
+            // DIAGNOSTIC: Check for duplicate content or multiple active articles
+            const diagnosticId = Math.random().toString(36).substr(2, 9);
+            const allActiveArticles = document.querySelectorAll('article.active');
+            allActiveArticles.forEach((art, index) => {
+            });
+            
+            const allContainers = document.querySelectorAll('#gestion-objets-container, .collection-items');
+            allContainers.forEach((container, index) => {
+              
+              // DETAILED: Log each child to see what's in each container
+              if (container.children.length > 0) {
+                Array.from(container.children).forEach((child, childIndex) => {
+                });
+              }
+            });
+            
+            // MORE SPECIFIC: Look for ANY visible grid containers
+            const allGridContainers = document.querySelectorAll('[style*="display: grid"], .collection-items, .grid');
+            allGridContainers.forEach((container, index) => {
+              const computedDisplay = window.getComputedStyle(container).display;
+              if (computedDisplay === 'grid' || computedDisplay === 'block') {
+              }
+            });
+            
+            // CHECK: Look for duplicate objet-card elements 
+            const allObjectCards = document.querySelectorAll('.objet-card');
+            
+            // Group by parent container
+            const cardsByContainer = {};
+            allObjectCards.forEach(card => {
+              const parentContainer = card.closest('.collection-items, .grid, #gestion-objets-container');
+              const containerKey = parentContainer ? (parentContainer.id || parentContainer.className) : 'unknown';
+              if (!cardsByContainer[containerKey]) cardsByContainer[containerKey] = [];
+              cardsByContainer[containerKey].push(card);
+            });
+            
+            Object.entries(cardsByContainer).forEach(([containerKey, cards]) => {
+              
+              // LOG the first few cards in each container to see what they are
+              cards.slice(0, 3).forEach((card, cardIndex) => {
+                const cardTitle = card.querySelector('h3, .object-title, [data-edit-type="titre"]')?.textContent?.trim() || 'No title';
+                const cardNumber = card.querySelector('.object-id, [class*="numero"]')?.textContent?.trim() || 'No number';
+                
+                // SPECIAL: Log parent hierarchy for unknown cards
+                if (containerKey === 'unknown') {
+                  let parentChain = '';
+                  let currentElement = card.parentElement;
+                  let depth = 0;
+                  while (currentElement && depth < 5) {
+                    parentChain += `${currentElement.tagName}`;
+                    if (currentElement.id) parentChain += `#${currentElement.id}`;
+                    if (currentElement.className) parentChain += `.${currentElement.className.split(' ').join('.')}`;
+                    parentChain += ' > ';
+                    currentElement = currentElement.parentElement;
+                    depth++;
+                  }
+                }
+              });
+            });
+            
+            // CRITICAL: Check for containers that might be visible but not properly tracked
+            const allSections = document.querySelectorAll('section');
+            allSections.forEach((section, index) => {
+              const sectionDisplay = window.getComputedStyle(section).display;
+              const hasObjectCards = section.querySelectorAll('.objet-card').length;
+              const hasCollectionItems = section.querySelectorAll('.collection-items').length;
+              if (sectionDisplay !== 'none' && (hasObjectCards > 0 || hasCollectionItems > 0)) {
+              }
+            });
+            
+            // EXTRA: Check if there are any articles that are accidentally visible
+            const allArticles = document.querySelectorAll('article');
+            allArticles.forEach((article, index) => {
+              const articleDisplay = window.getComputedStyle(article).display;
+              const hasObjectCards = article.querySelectorAll('.objet-card').length;
+              if (articleDisplay !== 'none' && hasObjectCards > 0) {
+              }
+            });
+          }, 2000);
+        }
         
         // IMPORTANT: Reset the activeIdSearch state when navigating to Objects page
         if (page === 'objets') {
@@ -193,9 +351,17 @@
           }
         }
       }
+      
+      // Final state logging
+      if (page === 'gestion-objets') {
+        const finalArticle = document.querySelector(`article[data-page="${page}"]`);
+        if (finalArticle) {
+        }
+      }
     },
     
     show(page) {
+      
       // Hide all articles and remove active class
       document.querySelectorAll('article').forEach(a => {
         a.classList.remove('active');
@@ -2238,6 +2404,12 @@
     },
 
     renderGMObjectsPage() {
+      // CRITICAL FIX: Clean up any existing virtualization containers before regenerating
+      const existingGMArticle = document.querySelector('article[data-page="gestion-objets"]');
+      if (existingGMArticle && window.ScrollOptimizer && window.ScrollOptimizer.cleanupVirtualization) {
+        window.ScrollOptimizer.cleanupVirtualization(existingGMArticle);
+      }
+      
       if (!window.OBJETS) {
         return false;
       }
@@ -2254,69 +2426,32 @@
         if (viewsContainer) {
           viewsContainer.insertAdjacentHTML('beforeend', pageHTML);
           gmObjectsArticle = document.querySelector('article[data-page="gestion-objets"]');
-          
-          // Force DOM reflow/repaint after insertAdjacentHTML
-          if (gmObjectsArticle) {
-            // Force layout recalculation by accessing offsetHeight
-            const forceReflow = gmObjectsArticle.offsetHeight;
-            
-            // Use requestAnimationFrame to ensure proper rendering
-            requestAnimationFrame(() => {
-              // Scroll to top to ensure visibility
-              window.scrollTo(0, 0);
-            });
-          }
         }
       } else {
         // Update existing article content
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = pageHTML;
         const newArticleContent = tempDiv.querySelector('article[data-page="gestion-objets"]');
+        
         if (newArticleContent) {
-          gmObjectsArticle.innerHTML = newArticleContent.innerHTML;
+          // Clear existing content and replace with new content
+          gmObjectsArticle.innerHTML = '';
           
-          // Force DOM reflow/repaint after innerHTML update
-          // Force layout recalculation by accessing offsetHeight
-          const forceReflow = gmObjectsArticle.offsetHeight;
-          
-          // Use requestAnimationFrame to ensure proper rendering
           requestAnimationFrame(() => {
-            // Scroll to top to ensure visibility
-            window.scrollTo(0, 0);
+            // Extract only the section content to avoid nesting issues
+            const sectionContent = newArticleContent.querySelector('section');
+            if (sectionContent) {
+              gmObjectsArticle.innerHTML = sectionContent.outerHTML;
+            } else {
+              gmObjectsArticle.innerHTML = newArticleContent.innerHTML;
+            }
           });
-        } else {
         }
       }
       
       if (gmObjectsArticle) {
         this.updateActiveStates('gestion-objets');
         this.setupGMObjectSearch();
-        
-        // Trigger refresh to ensure reference counters appear
-        // Skip auto-refresh only when called from filter regeneration to avoid loops
-        if (!this._skipAutoRefresh && window.GMObjectFilters?.regenerateGMObjectsPage) {
-          // Listen for MJ mode changes and refresh when MJ mode becomes true
-          const handleMJChange = (event) => {
-            const mjMode = event.detail.mjMode;
-            
-            if (mjMode === true) {
-              window.removeEventListener('mjModeChanged', handleMJChange);
-              setTimeout(() => {
-                window.GMObjectFilters.regenerateGMObjectsPage();
-              }, 100);
-            }
-          };
-          
-          window.addEventListener('mjModeChanged', handleMJChange);
-          
-          // Also set a fallback timeout in case the event doesn't fire
-          setTimeout(() => {
-            window.removeEventListener('mjModeChanged', handleMJChange);
-            if (document.body.classList.contains('mj-on')) {
-              window.GMObjectFilters.regenerateGMObjectsPage();
-            }
-          }, 1000);
-        }
         
         return true;
       }

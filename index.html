@@ -59,6 +59,8 @@ let lastMJState = document.body.classList.contains('mj-on');
 let mjObserverTimeout = null;
 
 const observer = new MutationObserver(function(mutations) {
+  console.log('🔄 OBSERVER DEBUG: MutationObserver triggered, mutations:', mutations.length);
+  
   // Éviter les boucles infinies en utilisant un debounce
   if (mjObserverTimeout) {
     clearTimeout(mjObserverTimeout);
@@ -66,17 +68,29 @@ const observer = new MutationObserver(function(mutations) {
   
   mjObserverTimeout = setTimeout(() => {
     const hasMJMode = document.body.classList.contains('mj-on');
+    const hasDevMode = document.body.classList.contains('dev-on');
+    console.log('🔄 OBSERVER DEBUG: MJ mode:', hasMJMode, 'Dev mode:', hasDevMode);
     
     // Ne traiter que si l'état a vraiment changé
     if (hasMJMode !== lastMJState) {
+      console.log('🔄 OBSERVER DEBUG: MJ state changed from', lastMJState, 'to', hasMJMode);
       lastMJState = hasMJMode;
+      
+      // Log body scroll state
+      console.log('🔄 OBSERVER DEBUG: Body scroll state - scrollHeight vs clientHeight:', document.body.scrollHeight, 'vs', document.body.clientHeight);
+      console.log('🔄 OBSERVER DEBUG: Body classList:', document.body.className);
       
       // Vérifier qu'on est sur la bonne page avant de rafraîchir
       const currentPage = window.location.hash.replace('#/', '') || 'creation';
+      console.log('🔄 OBSERVER DEBUG: Current page:', currentPage);
+      
       if (currentPage === 'gestion-objets') {
         const objectCards = document.querySelectorAll('.objet-card');
+        console.log('🔄 OBSERVER DEBUG: Found', objectCards.length, 'object cards');
+        
         if (objectCards.length > 0) {
           // Déclencher un événement personnalisé pour les cartes
+          console.log('🔄 OBSERVER DEBUG: Dispatching mjModeChanged event');
           window.dispatchEvent(new CustomEvent('mjModeChanged', { detail: { mjMode: hasMJMode } }));
         }
       }

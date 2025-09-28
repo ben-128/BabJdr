@@ -21,13 +21,28 @@ html {
 
 /* Content visibility optimizations for modern browsers - ONLY for visible articles */
 /* EXCLUDE collections and filtered content to avoid display conflicts */
-article.active .card:not([style*="display: none"]),
+article.active .card:not([style*="display: none"]):not(.objet-card),
 article.active .spell-card:not([style*="display: none"]), 
 article.active .item-card:not([style*="display: none"]) {
   content-visibility: auto;
   contain-intrinsic-size: 0 250px;
   /* Lighter containment for better compatibility */
   contain: layout style;
+}
+
+/* Disable ALL optimizations for GM Objects page to prevent grid collapse */
+article[data-page="gestion-objets"] *,
+article[data-page="gestion-objets"] .card,
+article[data-page="gestion-objets"] .objet-card,
+article[data-page="gestion-objets"] .editable-section,
+article[data-page="gestion-objets"] .illus {
+  content-visibility: visible !important;
+  contain: none !important;
+  /* Disable problematic animations that cause grid collapse */
+  animation: none !important;
+  /* Ensure normal layout flow */
+  transform: none !important;
+  will-change: auto !important;
 }
 
 /* Ensure hidden elements stay hidden */

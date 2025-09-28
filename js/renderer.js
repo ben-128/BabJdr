@@ -268,6 +268,11 @@
       const newArticle = newDoc.querySelector('article');
       
       if (newArticle) {
+        // Clean up any existing virtualization before updating content
+        if (window.ScrollOptimizer && window.ScrollOptimizer.cleanupVirtualization) {
+          window.ScrollOptimizer.cleanupVirtualization(article);
+        }
+        
         article.innerHTML = newArticle.innerHTML;
         
         // Make sure only this article is active
@@ -395,6 +400,11 @@
         // For class pages, static pages, etc. - regenerate the specific content
         const newHTML = this.generatePageContent(pageId);
         if (newHTML) {
+          // Clean up any existing virtualization before updating content
+          if (window.ScrollOptimizer && window.ScrollOptimizer.cleanupVirtualization) {
+            window.ScrollOptimizer.cleanupVirtualization(activeArticle);
+          }
+          
           activeArticle.innerHTML = newHTML;
           this.autoLoadImages();
           
@@ -489,6 +499,10 @@
           // Remove existing article for this page if it exists
           const existingArticle = document.querySelector(`article[data-page="${pageId}"]`);
           if (existingArticle) {
+            // Clean up any existing virtualization before removing
+            if (window.ScrollOptimizer && window.ScrollOptimizer.cleanupVirtualization) {
+              window.ScrollOptimizer.cleanupVirtualization(existingArticle);
+            }
             existingArticle.remove();
           }
           

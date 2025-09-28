@@ -63,7 +63,7 @@
       }
       
       window.MONSTRES.push(defaultItem);
-      UIUtilities.refreshMonstersPage();
+      this.addNewMonsterDirectly(defaultItem);
     },
 
     /**
@@ -314,6 +314,70 @@
      */
     handleContentMove(type, category, itemName, direction) {
       // Additional handling after content is moved
+    },
+
+    /**
+     * Add new monster card directly to DOM without full page refresh
+     */
+    addNewMonsterDirectly(newMonster) {
+      try {
+        // Check if we're on the monsters page
+        if (window.location.hash !== '#/monstres') {
+          return false;
+        }
+
+        // Find the monsters container (using the correct ID from the page structure)
+        const monstersContainer = document.getElementById('monstres-container');
+        if (!monstersContainer) {
+          // Fallback to refresh if container not found
+          UIUtilities.refreshMonstersPage();
+          return false;
+        }
+
+        // Create the new monster card HTML using the existing builder pattern
+        const monsterIndex = window.MONSTRES.length - 1; // Last added monster
+        let newCardHTML = '';
+        
+        // Try to use existing card builder if available
+        if (window.CardBuilder?.create) {
+          const card = window.CardBuilder.create('monster', newMonster, 'monsters', monsterIndex);
+          newCardHTML = card?.build();
+        }
+        
+        // Fallback: create basic monster card HTML
+        if (!newCardHTML) {
+          newCardHTML = `
+            <div class="card monster-card" data-monster="${newMonster.nom}">
+              <div class="card-header">
+                <h3>${newMonster.nom || 'Nouveau Monstre'}</h3>
+                <div class="card-actions">
+                  <button onclick="ContentManager.deleteContent('monster', '', '${newMonster.nom}')" title="Supprimer">🗑️</button>
+                </div>
+              </div>
+              <div class="card-body">
+                <p><strong>Type:</strong> ${newMonster.type || 'Non défini'}</p>
+                <p><strong>Challenge:</strong> ${newMonster.challenge || 'Non défini'}</p>
+                ${newMonster.description ? `<p>${newMonster.description}</p>` : ''}
+              </div>
+            </div>
+          `;
+        }
+
+        // Add the card to the container
+        monstersContainer.insertAdjacentHTML('beforeend', newCardHTML);
+
+        // Load images for the new card if the system supports it
+        if (JdrApp.modules.renderer?.autoLoadImages) {
+          JdrApp.modules.renderer.autoLoadImages();
+        }
+
+        return true;
+      } catch (error) {
+        console.warn('Erreur lors de l\'ajout direct du monstre:', error);
+        // Fallback to full page refresh
+        UIUtilities.refreshMonstersPage();
+        return false;
+      }
     }
   };
 

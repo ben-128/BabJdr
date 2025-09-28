@@ -494,6 +494,39 @@
 /* Article and section layout */
 article{display:none}
 article.active{display:block}
+
+/* CRITICAL: Hide all grid containers in non-active articles to prevent duplicate rendering */
+article:not(.active) .grid,
+article:not(.active) .collection-items,
+article:not(.active) [class*="container"],
+article:not(.active) [id*="container"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* ADDITIONAL: Force hide favoris containers even in active articles when not on favoris page */
+article[data-page="gestion-objets"] #favoris-objets-container,
+article[data-page="gestion-objets"] #favoris-sorts-container,
+article[data-page="gestion-objets"] #objets-container,
+article[data-page="gestion-objets"] .favoris-section,
+article[data-page="gestion-objets"] .favoris-grid {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* NUCLEAR: Hide any objet-card not inside gestion-objets-container when on GM page */
+article[data-page="gestion-objets"] .objet-card:not(#gestion-objets-container .objet-card) {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  left: -9999px !important;
+}
 section{background:var(--card);border:1px solid var(--rule);border-radius:14px;box-shadow:var(--shadow);padding:18px;margin:0 0 14px}
 
 /* Footer */

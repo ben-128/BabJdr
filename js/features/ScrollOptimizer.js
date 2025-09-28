@@ -90,10 +90,24 @@
       
       // Skip optimization for collections pages and filtered content
       const targetElement = activeArticle || element;
+      const pageId = targetElement.getAttribute('data-page');
+      
+      // Pages that should be excluded from virtualization
+      const excludedPages = [
+        'guerrier', 'mage', 'pr-tre', 'r-deur', 'enchanteur', // Class pages
+        'gestion-objets', 'objets', 'monstres', 'tables-tresors' // Special content pages
+      ];
+      
       if (targetElement.id === 'collections-objets' || 
           targetElement.querySelector('#collection-results') ||
-          targetElement.querySelector('.objects-tag-display')) {
-        return; // Skip collections and filtered object pages
+          targetElement.querySelector('.objects-tag-display') ||
+          targetElement.querySelector('#gestion-objets-container') ||
+          excludedPages.includes(pageId) ||
+          pageId?.startsWith('dons-') ||
+          pageId?.startsWith('sorts-') ||
+          targetElement.querySelector('[id*="dons-container"]') ||
+          targetElement.querySelector('[id*="sorts-container"]')) {
+        return; // Skip all problematic pages from virtualization
       }
       
       const cards = targetElement.querySelectorAll('.card:not([style*="display: none"]), .spell-card:not([style*="display: none"]), .item-card:not([style*="display: none"])');
@@ -522,6 +536,28 @@
           setTimeout(() => inThrottle = false, limit);
         }
       }
+    },
+
+    // Clean up specific virtualization containers
+    cleanupVirtualization(container) {
+      if (!container) return;
+      
+      const virtualizedViewports = container.querySelectorAll('.virtualized-viewport');
+      virtualizedViewports.forEach(viewport => {
+        const parent = viewport.parentNode;
+        const hiddenContainer = viewport.nextElementSibling;
+        
+        // Restore original container if it exists and is hidden
+        if (hiddenContainer && hiddenContainer.style.display === 'none') {
+          hiddenContainer.style.display = '';
+          parent.insertBefore(hiddenContainer, viewport);
+        }
+        
+        // Remove virtualization container
+        viewport.remove();
+      });
+      
+      this._virtualizationEnabled = false;
     },
 
     // Clean up optimizations
