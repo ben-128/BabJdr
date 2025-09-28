@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-09-26T16:10:58.993Z by JdrBab Build System -->
+<!-- Generated on 2025-09-28T15:17:05.928Z by JdrBab Build System -->
 <title>JDR‑BAB — Livret de règles</title>
 <meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20241,27 +20241,27 @@ article.active .grid {
         const category = activeLink.closest('.toc-category');
         if (category) {
           category.classList.remove('collapsed');
+        }
 
-          // Also expand the parent section (super category)
-          const parentSection = category.closest('.toc-section');
-          if (parentSection) {
-            parentSection.classList.remove('collapsed');
+        // Always check for parent section (whether the link is in a category or directly in section)
+        const parentSection = activeLink.closest('.toc-section');
+        if (parentSection) {
+          parentSection.classList.remove('collapsed');
 
-            // Update the toggle icon
-            const toggle = parentSection.querySelector('.toc-section-toggle');
-            if (toggle) {
-              toggle.textContent = '▼';
-            }
+          // Update the toggle icon
+          const toggle = parentSection.querySelector('.toc-section-toggle');
+          if (toggle) {
+            toggle.textContent = '▼';
+          }
 
-            // Update dynamic height for the opened section
-            const content = parentSection.querySelector('.toc-section-content');
-            if (content) {
-              const childCount = content.querySelectorAll('a, .toc-category').length;
-              const itemHeight = 50;
-              const baseHeight = 100;
-              const dynamicHeight = Math.max(500, (childCount * itemHeight) + baseHeight);
-              content.style.maxHeight = `${dynamicHeight}px`;
-            }
+          // Update dynamic height for the opened section
+          const content = parentSection.querySelector('.toc-section-content');
+          if (content) {
+            const childCount = content.querySelectorAll('a, .toc-category').length;
+            const itemHeight = 50;
+            const baseHeight = 100;
+            const dynamicHeight = Math.max(500, (childCount * itemHeight) + baseHeight);
+            content.style.maxHeight = `${dynamicHeight}px`;
           }
         }
       }
@@ -20296,10 +20296,8 @@ article.active .grid {
         }
       }
       
-      // Update TOC active states
-      document.querySelectorAll('.toc a').forEach(a => a.classList.remove('active'));
-      const activeLink = document.querySelector(`a[href="#/${page}"]`);
-      if (activeLink) activeLink.classList.add('active');
+      // Update TOC active states using the complete function
+      this.updateActiveStates(page);
 
       
       // Ensure edit buttons state is properly applied after navigation
@@ -22533,32 +22531,7 @@ article.active .grid {
       return false;
     },
 
-    show(page) {
-      // Hide all articles first
-      const allArticles = document.querySelectorAll('#views article');
-      allArticles.forEach(article => {
-        article.style.display = 'none';
-      });
-      
-      // Show the requested page
-      const targetArticle = document.querySelector(`article[data-page="${page}"]`);
-      if (targetArticle) {
-        targetArticle.style.display = 'block';
-      }
-      
-      this.updateActiveStates(page);
-    },
 
-    updateActiveStates(page) {
-      // Update navigation active states
-      const navLinks = document.querySelectorAll('nav a');
-      navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#/${page}`) {
-          link.classList.add('active');
-        }
-      });
-    }
   
   };
 

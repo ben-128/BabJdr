@@ -169,27 +169,27 @@
         const category = activeLink.closest('.toc-category');
         if (category) {
           category.classList.remove('collapsed');
+        }
 
-          // Also expand the parent section (super category)
-          const parentSection = category.closest('.toc-section');
-          if (parentSection) {
-            parentSection.classList.remove('collapsed');
+        // Always check for parent section (whether the link is in a category or directly in section)
+        const parentSection = activeLink.closest('.toc-section');
+        if (parentSection) {
+          parentSection.classList.remove('collapsed');
 
-            // Update the toggle icon
-            const toggle = parentSection.querySelector('.toc-section-toggle');
-            if (toggle) {
-              toggle.textContent = '▼';
-            }
+          // Update the toggle icon
+          const toggle = parentSection.querySelector('.toc-section-toggle');
+          if (toggle) {
+            toggle.textContent = '▼';
+          }
 
-            // Update dynamic height for the opened section
-            const content = parentSection.querySelector('.toc-section-content');
-            if (content) {
-              const childCount = content.querySelectorAll('a, .toc-category').length;
-              const itemHeight = 50;
-              const baseHeight = 100;
-              const dynamicHeight = Math.max(500, (childCount * itemHeight) + baseHeight);
-              content.style.maxHeight = `${dynamicHeight}px`;
-            }
+          // Update dynamic height for the opened section
+          const content = parentSection.querySelector('.toc-section-content');
+          if (content) {
+            const childCount = content.querySelectorAll('a, .toc-category').length;
+            const itemHeight = 50;
+            const baseHeight = 100;
+            const dynamicHeight = Math.max(500, (childCount * itemHeight) + baseHeight);
+            content.style.maxHeight = `${dynamicHeight}px`;
           }
         }
       }
@@ -224,10 +224,8 @@
         }
       }
       
-      // Update TOC active states
-      document.querySelectorAll('.toc a').forEach(a => a.classList.remove('active'));
-      const activeLink = document.querySelector(`a[href="#/${page}"]`);
-      if (activeLink) activeLink.classList.add('active');
+      // Update TOC active states using the complete function
+      this.updateActiveStates(page);
 
       
       // Ensure edit buttons state is properly applied after navigation
@@ -2461,32 +2459,7 @@
       return false;
     },
 
-    show(page) {
-      // Hide all articles first
-      const allArticles = document.querySelectorAll('#views article');
-      allArticles.forEach(article => {
-        article.style.display = 'none';
-      });
-      
-      // Show the requested page
-      const targetArticle = document.querySelector(`article[data-page="${page}"]`);
-      if (targetArticle) {
-        targetArticle.style.display = 'block';
-      }
-      
-      this.updateActiveStates(page);
-    },
 
-    updateActiveStates(page) {
-      // Update navigation active states
-      const navLinks = document.querySelectorAll('nav a');
-      navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#/${page}`) {
-          link.classList.add('active');
-        }
-      });
-    }
   
   };
 
