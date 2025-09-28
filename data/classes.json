@@ -41,14 +41,14 @@
     "sousClasses": [
       {
         "nom": "Érudit",
-        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>1</strong></span><span class=\"chip\">🏃 Agilité: <strong>1</strong></span><span class=\"chip\">🛡️ Endurance: <strong>4</strong></span><span class=\"chip\">🧠 Intelligence: <strong>6</strong></span><span class=\"chip\">⚡ Volonté: <strong>3</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
+        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>1</strong></span><span class=\"chip\">🏃 Agilité: <strong>1</strong></span><span class=\"chip\">🛡️ Endurance: <strong>4</strong></span><span class=\"chip\">🧠 Intelligence: <strong>8</strong></span><span class=\"chip\">⚡ Volonté: <strong>3</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +3 Intelligence 🧠, +2 Volonté ⚡<strong> +2 Au choix</strong>",
         "capacites": "<ul><li><em>Instruit</em> : Gagne la compétence Réflexion rang 1.</li><li><em>Apprentissage accéléré</em> : Le niveau de l'érudit est considéré plus élevé d'un niveau pour les prérequis d'apprentissage de sorts.</li>\n<li><em>Mana inépuisable</em> : Chaque point de volonté augmente le mana de 3 au lieu de 2.</li>\n<li><em>Magie interdite</em> : Capable d'utiliser ses lectures (s'il les comprends) pour apprendre de nouveaux sorts.</li></ul>",
         "description": "<i>Mage avide de savoir, doté d’une mémoire prodigieuse. Il assimile les arcanes avec une rapidité fulgurante et maîtrise de nouveaux sorts bien plus vite que ses pairs.</i>"
       },
       {
         "nom": "Elfe",
-        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>2</strong></span><span class=\"chip\">🏃 Agilité: <strong>2</strong></span><span class=\"chip\">🛡️ Endurance: <strong>6</strong></span><span class=\"chip\">🧠 Intelligence: <strong>3</strong></span><span class=\"chip\">⚡ Volonté: <strong>2</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
+        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>3</strong></span><span class=\"chip\">🏃 Agilité: <strong>3</strong></span><span class=\"chip\">🛡️ Endurance: <strong>6</strong></span><span class=\"chip\">🧠 Intelligence: <strong>4</strong></span><span class=\"chip\">⚡ Volonté: <strong>3</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +1 Force 💪, +1 Agilité 🏃, +1 Endurance 🛡️, +1 Intelligence 🧠, +1 Volonté ⚡<strong> +2 Au choix</strong>",
         "capacites": "<ul><li><em>Instinct elfique</em> : Gagne la compétence Coordination rang 1.</li><li><em>Équipement d'elfe</em> : Epées à une main, armures légères.</li><li><em>Briseur de sceaux</em> : Gagne 1 de compétence sur les tests de compétence pour comprendre ou ouvrir une porte scellée magiquement</li></ul>",
         "description": "<i>Guerrier-mage polyvalent, aussi agile qu’élégant. Maître des arcanes comme du combat rapproché, il allie puissance magique et adresse martiale avec une grâce inégalée.</i>"
@@ -58,13 +58,13 @@
   {
     "nom": "Prêtre",
     "resume": "Spécialiste de la magie de soutien et anti morts-vivants.",
-    "capacites": "<ul><li><em>Équipement de prêtre</em> : bâtons (une et deux mains), catalyseurs , robes.</li><li><em>Sorts de prêtre</em> : Apprend et lance des sorts de Prêtre.</li><li><em>Eloquence</em> : Gagne la compétence Eloquence rang 1.</li></ul>",
+    "capacites": "Spécialiste de la magie de soutien et de purafication du maléfique.",
     "sousClasses": [
       {
         "nom": "Inquisiteur",
         "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>3</strong></span><span class=\"chip\">🏃 Agilité: <strong>1</strong></span><span class=\"chip\">🛡️ Endurance: <strong>7</strong></span><span class=\"chip\">🧠 Intelligence: <strong>3</strong></span><span class=\"chip\">⚡ Volonté: <strong>5</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +1 Force 💪, +1 Intelligence 🧠, +2 Volonté ⚡, +1 Endurance 🛡️<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Equipement d'inquisiteur</em> : Peut s'équiper d'armures légères, de boucliers et d'épées à deux mains.</li><li><em>Fléau des morts-vivants</em> : Les attaques physiques contre les morts-vivants ne ratent jamais.</li><li><em>Lumière purificatrice</em> : Double l'effet de la puissance des sorts sur les dégats des sorts d'élément <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span> ou <span style=\"color: #f5f5f5; font-weight: bold; background: rgba(100, 100, 100, 0.3); padding: 2px 4px; border-radius: 3px;\">Divin</span>.</li></ul>",
+        "capacites": "<ul><li><em>Equipement d'inquisiteur</em> : Peut s'équiper d'armures légères, de boucliers et d'épées à deux mains.</li><li><em>Fléau du maléfique</em> : Les attaques physiques contre le adversaire d'élément maléfique ne ratent jamais.</li><li><em>Lumière purificatrice</em> : Double l'effet de la puissance des sorts sur les dégats des sorts d'élément <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span> ou <span style=\"color: #f5f5f5; font-weight: bold; background: rgba(100, 100, 100, 0.3); padding: 2px 4px; border-radius: 3px;\">Divin</span>.</li></ul>",
         "description": "<i>Champion de la foi, il renforce ses alliés par la magie sacrée et traque sans relâche les morts-vivants. Quand la lumière seule ne suffit plus, il n’hésite pas à prendre les armes et combattre en première ligne.</i>"
       },
       {
@@ -100,20 +100,20 @@
   {
     "nom": "Enchanteur",
     "resume": "Détenteur d'une magie singulière, qui fait de lui un allié précieux.",
-    "capacites": "<ul><li><em>Équipement d'enchanteur</em> : bâtons (une et deux mains), catalyseurs, Robes.</li><li><em>Sorts d'enchanteur</em> : Apprend et lance des sorts d'Enchanteur.</li></ul>",
+    "capacites": "<ul><li><em>Équipement d'enchanteur</em> : bâtons (une et deux mains), catalyseurs, Robes.</li>\n<li><em>Sorts d'enchanteur</em> : Apprend et lance des sorts d'Enchanteur.</li>\n<li><em>Armes enchantés</em> : Les attaques au corps à corps ont une portée de 6m.</li></ul>",
     "sousClasses": [
       {
         "nom": "Esprit de la grande Fée",
-        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>1</strong></span><span class=\"chip\">🏃 Agilité: <strong>5</strong></span><span class=\"chip\">🛡️ Endurance: <strong>5</strong></span><span class=\"chip\">🧠 Intelligence: <strong>5</strong></span><span class=\"chip\">⚡ Volonté: <strong>2</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
-        "progression": "<strong>📈 Progression par niveau:</strong> +1 Agilité 🏃, +1 Intelligence 🧠, +1 Endurance 🛡️, +1 Volonté ⚡, +1 Chance 🍀<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Tatillon</em> : Gagne la compétence Finesse rang 1.</li><li><em>Lévitation</em> : Ignore dégâts/ralentissements venant du sol, ainsi que l'état <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">A terre</span>.</li><li><em>Rayon de l'Amitié</em> : Par une action secondaire, peut répéter sur une autre cible à portée un sort bénéfique qui a ciblé un allié se tour ci, sans coût en mana supplémentaire.</li></ul>",
+        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>1</strong></span><span class=\"chip\">🏃 Agilité: <strong>5</strong></span><span class=\"chip\">🛡️ Endurance: <strong>5</strong></span><span class=\"chip\">🧠 Intelligence: <strong>3</strong></span><span class=\"chip\">⚡ Volonté: <strong>3</strong></span><span class=\"chip\">🍀 Chance: <strong>3</strong></span></div>",
+        "progression": "<strong>📈 Progression par niveau:</strong> +1 Agilité 🏃, +1 Intelligence 🧠, +1 Volonté ⚡, +2 Chance 🍀<strong> +2 Au choix</strong>",
+        "capacites": "<ul><li><em>Tatillon</em> : Gagne la compétence Finesse rang 1.</li><li><em>Lévitation</em> : Est de manière permanante dans l'état <span class=\"etat-link\" data-etat=\"Lévitation\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Lévitation</span>.</li><li><em>Rayon de l'Amitié</em> : Par une action secondaire, peut répéter sur une autre cible à portée un sort bénéfique qui a ciblé un allié se tour ci, sans coût en mana supplémentaire.</li></ul>",
         "description": "<i>Être mystique qui flotte au-dessus du sol, il invoque des sorts imprévisibles pour soutenir ses alliés.</i>"
       },
       {
         "nom": "Lutin",
-        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>1</strong></span><span class=\"chip\">🏃 Agilité: <strong>1</strong></span><span class=\"chip\">🛡️ Endurance: <strong>5</strong></span><span class=\"chip\">🧠 Intelligence: <strong>5</strong></span><span class=\"chip\">⚡ Volonté: <strong>2</strong></span><span class=\"chip\">🍀 Chance: <strong>5</strong></span></div>",
-        "progression": "<strong>📈 Progression par niveau:</strong> +1 Intelligence 🧠, +2 Volonté ⚡, +2 Chance 🍀<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Secrets bien gardés</em> : Gagne la compétence Reflexion rang 1.\n</li><li><em>Fouineur</em> : Augmente la Fortune de 5.\n</li><li><em>Rire malicieux</em> : Par une action secondaire, peut répéter sur une autre cible à portée un sort d'altération qui a ciblé un enemi ce tour ci, sans coût en mana supplémentaire.</li></ul>",
+        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>2</strong></span><span class=\"chip\">🏃 Agilité: <strong>1</strong></span><span class=\"chip\">🛡️ Endurance: <strong>5</strong></span><span class=\"chip\">🧠 Intelligence: <strong>5</strong></span><span class=\"chip\">⚡ Volonté: <strong>3</strong></span><span class=\"chip\">🍀 Chance: <strong>5</strong></span></div>",
+        "progression": "<strong>📈 Progression par niveau:</strong> 💪 +1 Force, +1 Intelligence 🧠, +2 Volonté ⚡, +1 Chance 🍀<strong> +2 Au choix</strong>",
+        "capacites": "<ul><li><em>Secrets bien gardés</em> : Gagne la compétence Reflexion rang 1.\n</li><li><em>Fouineur</em> : Augmente la Fortune de 5.\n</li><li><em>Rire malicieux</em> : Aprés une attaque au corps à corps réussie, la cible du Lutin voit son armure réduite de la valeur des dégats infligés, jusqu'a la fin du prochain tour du héros.</li></ul>",
         "description": "<i>Esprit espiègle et rusé, passé maître dans l’art des altérations magiques. </i>"
       }
     ]

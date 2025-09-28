@@ -257,7 +257,7 @@
     "dons": [
       {
         "nom": "Mécréants",
-        "description": "Les dégats physiques infligés aux créatures de l'élément <span style=\"color: #0f172a; font-weight: bold;\">Nuit</span> ou <span style=\"color: #a855f7; font-weight: bold;\">Maléfique</span> sont doublés.",
+        "description": "Les dégats physiques infligés aux créatures de l'élément  <span style=\"color: #a855f7; font-weight: bold;\">Maléfique</span> sont doublés.",
         "prerequis": "<strong> Prérequis :</strong>-",
         "cout": "1 point de don"
       },
@@ -307,6 +307,12 @@
         "nom": "Alteration risquée",
         "description": "Lorsque un sort d'alteration magique est effectué alors que la cible est au corps à corps, ses chances de critiques sont doublées.",
         "prerequis": "<strong> Prérequis :</strong>-",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Spécialiste de l'étrange",
+        "description": "Permet d'équiper les armes exotiques à une main.",
+        "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       }
     ]

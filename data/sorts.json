@@ -116,14 +116,14 @@
       {
         "nom": "Châtiment",
         "element": "Divin",
-        "description": "Invoque un magie divine qui blesse les morts-vivants",
+        "description": "Invoque un magie divine qui blesse les créatures maléfiques.",
         "categorie": "Anti-mort-vivant",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 3",
         "portee": "🎯 <strong>Portée:</strong> 18m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 6",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
-        "resistance": "<strong>Sans effet si:</strong> &nbsp;<br>- Non mort-vivant <br>- Esquive.",
+        "resistance": "<strong>Sans effet si:</strong>  <br>- Elément d'assignation autre que <span style=\"color: #8b5cf6; font-weight: bold;\">Maléfique</span> <br>- Esquive.",
         "effetNormal": "<strong>Effet:</strong> Inflige (2 x Puiss. Sorts) dégâts <span style=\"color: #d0d0d0; font-weight: bold; background: rgba(0, 0, 0, 0.4); padding: 2px 4px; border-radius: 3px;\">Divin</span> à la cible.",
         "effetCritique": "<strong>Coup Critique: </strong> Inflige (4 x Puiss. Sorts) dégats."
       },
@@ -320,7 +320,7 @@
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 6",
         "resistance": "<strong>Sans effet si:</strong> -",
-        "effetNormal": "<strong>Effet:</strong> La cible lévite pendant 5 tours. Elle ignore les dégâts/ralentissements venant du sol, ainsi que l'état <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">A terre</span>.",
+        "effetNormal": "<strong>Effet:</strong> La cible obtient l'état <span class=\"etat-link\" data-etat=\"Lévitation\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Lévitation</span> pendant 5 tours.",
         "effetCritique": "<strong>Coup Critique: </strong> La cible a également sa vitesse de déplacement augmentée de 3m."
       },
       {

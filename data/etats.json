@@ -110,6 +110,12 @@
       "content": "Toutes les attaques et sorts ont une portée maximum de 3m. Incapable d'esquiver.",
       "deletable": true,
       "sectionName": "Nouvelle section"
+    },
+    {
+      "id": "section-1759073633821-nfyggh",
+      "type": "card",
+      "title": "Lévitation",
+      "content": "Ignore dégâts/ralentissements venant du sol.\n<br><br>Ignore l'état <span class=\"etat-link\" data-etat=\"à terre\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">à terre</span>.\n<br><br>Permet d'attaquer les adversaires volants au corps à corps sans sauter."
     }
   ]
 }
