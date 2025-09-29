@@ -71,7 +71,7 @@
         "nom": "Clerc Divin",
         "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>1</strong></span><span class=\"chip\">🏃 Agilité: <strong>1</strong></span><span class=\"chip\">🛡️ Endurance: <strong>5</strong></span><span class=\"chip\">🧠 Intelligence: <strong>5</strong></span><span class=\"chip\">⚡ Volonté: <strong>5</strong></span><span class=\"chip\">🍀 Chance: <strong>4</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +2 Intelligence 🧠, +2 Volonté ⚡, +1 Chance 🍀<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Maître des soins</em> : Double l'effet de la puissance des sorts sur les sorts de soins.</li><li><em> Pieu </em>:  Gagne 1 de compétence sur les tests de compétence Reflexion sur un dieu ou une religion.</li><li><em> Prière </em>:  Peut utiliser une action principale pour donner à une cible à moins de 3m un d4 (non cumlable), qu'il pourra utiliser dans le combat au choix pour un bonus de dégats physique ou d'armure physique.</li></ul>",
+        "capacites": "<ul><li><em>Maître des soins</em> : Double l'effet de la puissance des sorts sur les sorts de soins.</li><li><em> Pieu </em>:  Gagne 1 de compétence sur les tests de compétence Reflexion sur un dieu ou une religion.</li><li><em> Prière </em>:  Peut utiliser une action principale pour donner à une cible à moins de 3m un d4 (non cumlable, passe à d8 après le niveau 10), qu'il pourra utiliser dans le combat au choix pour un bonus de dégats physique ou d'armure physique.</li></ul>",
         "description": "<i>Serviteur sacré, maître des arts de guérison. Sa puissante magie de soins protège ses alliés et les relève même aux portes de la mort.</i>"
       }
     ]
