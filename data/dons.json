@@ -119,7 +119,7 @@
       },
       {
         "nom": "Charge",
-        "description": "Une fois par combat, peut utiliser une action secondaire pour doubler sa vitesse de déplacement et forcer un coup critique sur la prochaine attaque physique de ce tour (si elle réussie).",
+        "description": "Une fois par combat, peut utiliser une action secondaire pour doubler sa vitesse de déplacement et doubler les chances de coup critique sur la prochaine attaque physique de ce tour.",
         "prerequis": "<strong> Prérequis :</strong> 🏃Agilité 5",
         "cout": "1 point de don"
       },
@@ -139,6 +139,12 @@
         "nom": "Attaque délayée",
         "description": "Si le héros n'a effectuée action principale pendant son tour, il peut utiliser une action secondaire pour gagner une action principale supplémentaire au prochain tour.",
         "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Increvable",
+        "description": "Une fois par jour, peut dépenser un effort pour rester à 1 points de vie s'il devait descendre en dessous.",
+        "prerequis": "<strong> Prérequis :</strong> 🛡️ Endurance 10 , ⚡Volonté 5",
         "cout": "1 point de don"
       }
     ]
@@ -205,7 +211,7 @@
         "nom": "Avantage",
         "description": "Une fois par combat, lors d'une attaque esquivée ou en echec critique, permet de lancer une nouvelle fois le dé.",
         "prerequis": "<strong> Prérequis :</strong> -",
-        "cout": "2 point de don"
+        "cout": "1 point de don"
       }
     ]
   },
@@ -250,13 +256,13 @@
         "cout": "1 point de don"
       },
       {
-        "nom": "Sacrifice rituel",
-        "description": "Permet d'utiliser une action secondaire pour sacrifier un nombre de points de vie, de 1 jusqu'à la volonté du héros. Le héros gagne un nombre de point de mana équivalent.",
-        "prerequis": "<strong> Prérequis :</strong> -",
+        "nom": "Spécialisation élémentaire 2",
+        "description": "Le héros peut choisir un élément et réduire le coup en mana des sorts de cet élément, d'un montant équivalent au niveau du sort.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
       {
-        "nom": "Sacrifice rituel",
+        "nom": "Spécialisation élémentaire 2",
         "description": "Description du don.",
         "prerequis": "Aucun prérequis",
         "cout": "1 point de don"
@@ -359,13 +365,19 @@
       },
       {
         "nom": "Enchantement de force permanante",
-        "description": "Augmente la Force de 4.",
+        "description": "Augmente la 💪 Force de 4.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
       {
         "nom": "Teleportation amicale",
         "description": "Une fois par combat, peut utiliser une action secondaire pour se téléporter à 3m d'un allié consentant.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Enchantement d'agilité permanante",
+        "description": "Augmente 🏃 l'Agilité de 4.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       }

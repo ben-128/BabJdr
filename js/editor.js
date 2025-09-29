@@ -252,7 +252,7 @@
         this.addNewSubclass(e.target);
       });
 
-      JdrApp.utils.events.register('click', '.delete-subclass-btn', (e) => {
+      JdrApp.utils.events.register('click', '.subclass-delete', (e) => {
         if (!this.isDevMode) return;
         this.deleteSubclass(e.target);
       });
@@ -299,7 +299,7 @@
     },
 
     deleteSubclass(button) {
-      const className = button.dataset.className;
+      const className = button.dataset.categoryName;
       const subclassName = button.dataset.subclassName;
       
       if (!className || !subclassName) return;

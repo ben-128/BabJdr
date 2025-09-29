@@ -21,16 +21,9 @@
       {
         "nom": "Aventurier",
         "description": "<i>Héros polyvalent et ingénieux, il affronte l’inconnu avec courage, et manie tous les outils à sa portée pour triompher.</i>",
-        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>5</strong></span><span class=\"chip\">🏃 Agilité: <strong>2</strong></span><span class=\"chip\">🛡️ Endurance: <strong>8</strong></span><span class=\"chip\">🧠 Intelligence: <strong>1</strong></span><span class=\"chip\">⚡ Volonté: <strong>1</strong></span><span class=\"chip\">🍀 Chance: <strong>5</strong></span></div>",
-        "progression": "<strong>📈 Progression par niveau:</strong> +2 Force 💪, +2 Endurance 🛡️, +1 Chance 🍀, <strong> +2 Au choix</strong>",
+        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>5</strong></span><span class=\"chip\">🏃 Agilité: <strong>2</strong></span><span class=\"chip\">🛡️ Endurance: <strong>8</strong></span><span class=\"chip\">🧠 Intelligence: <strong>1</strong></span><span class=\"chip\">⚡ Volonté: <strong>2</strong></span><span class=\"chip\">🍀 Chance: <strong>5</strong></span></div>",
+        "progression": "<strong>📈 Progression par niveau:</strong> +2 Force 💪, +2 Endurance 🛡️, +1 Volonté ⚡, <strong> +2 Au choix</strong>",
         "capacites": "<ul><em>Passé glorieux : </em>  Gagne la compétence Eloquence rang 1.<br><em>Sans failles :</em>  Dispose d'un Effort maximum supplémentaire .<br><em>Polyvalent : </em> Dispose d'un point de Don supplémentaire.</ul>"
-      },
-      {
-        "nom": "Maître d’armes",
-        "description": "<i>Guerrier érudit et redoutable, il manie avec aisance toutes les armes, des plus communes aux plus exotiques, transformant chaque outil de guerre en prolongement de son bras.</i>",
-        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>5</strong></span><span class=\"chip\">🏃 Agilité: <strong>2</strong></span><span class=\"chip\">🛡️ Endurance: <strong>8</strong></span><span class=\"chip\">🧠 Intelligence: <strong>1</strong></span><span class=\"chip\">⚡ Volonté: <strong>3</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
-        "progression": "<strong>📈 Progression par niveau:</strong> +3 Force 💪, +2 Endurance 🛡️<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Volte d’armes :</em> Peut changer d'arme sans utiliser d'action secondaire.\n</li>\n               <li><em>Expert martial :</em> Lorsqu'il utilise une arme exotique, relance le dé en cas d'echec critique.\n</li>\n   <li><em>Erudit des lames :</em> Gagne 1 de compétence sur les tests de compétence Réflexion sur l'effet ou la provenance d'une arme.\n</li>\n\n</ul>"
       }
     ]
   },
@@ -58,13 +51,13 @@
   {
     "nom": "Prêtre",
     "resume": "Spécialiste de la magie de soutien et anti morts-vivants.",
-    "capacites": "Spécialiste de la magie de soutien et de purafication du maléfique.",
+    "capacites": "<ul>\n    <li><em>Équipement de prêtre</em> : bâtons (une et deux mains), catalyseurs, robes.</li>\n    <li><em>Sorts de prêtre</em> : Apprend et lance des sorts de Prêtre.</li>\n    <li><em>Eloquence</em> : Gagne la compétence Eloquence rang 1.</li>\n  </ul>",
     "sousClasses": [
       {
         "nom": "Inquisiteur",
         "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>3</strong></span><span class=\"chip\">🏃 Agilité: <strong>1</strong></span><span class=\"chip\">🛡️ Endurance: <strong>7</strong></span><span class=\"chip\">🧠 Intelligence: <strong>3</strong></span><span class=\"chip\">⚡ Volonté: <strong>5</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +1 Force 💪, +1 Intelligence 🧠, +2 Volonté ⚡, +1 Endurance 🛡️<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Equipement d'inquisiteur</em> : Peut s'équiper d'armures légères, de boucliers et d'épées à deux mains.</li><li><em>Fléau du maléfique</em> : Les attaques physiques contre le adversaire d'élément maléfique ne ratent jamais.</li><li><em>Lumière purificatrice</em> : Double l'effet de la puissance des sorts sur les dégats des sorts d'élément <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span> ou <span style=\"color: #f5f5f5; font-weight: bold; background: rgba(100, 100, 100, 0.3); padding: 2px 4px; border-radius: 3px;\">Divin</span>.</li></ul>",
+        "capacites": "<ul><li><em>Equipement d'inquisiteur</em> : Peut s'équiper d'armures légères, de boucliers et d'épées à deux mains.</li><li><em>Fléau du maléfique</em> : Les attaques physiques contre les adversaire d'élément <span style=\"color: #8b5cf6; font-weight: bold;\">Maléfique</span> ne ratent jamais.</li><li><em>Lumière purificatrice</em> : Double l'effet de la puissance des sorts sur les <b>dégats</b> des sorts d'élément <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span> ou <span style=\"color: #f5f5f5; font-weight: bold; background: rgba(100, 100, 100, 0.3); padding: 2px 4px; border-radius: 3px;\">Divin</span>.</li></ul>",
         "description": "<i>Champion de la foi, il renforce ses alliés par la magie sacrée et traque sans relâche les morts-vivants. Quand la lumière seule ne suffit plus, il n’hésite pas à prendre les armes et combattre en première ligne.</i>"
       },
       {
@@ -92,7 +85,7 @@
         "nom": "Chasseur",
         "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>3</strong></span><span class=\"chip\">🏃 Agilité: <strong>5</strong></span><span class=\"chip\">🛡️ Endurance: <strong>5</strong></span><span class=\"chip\">🧠 Intelligence: <strong>4</strong></span><span class=\"chip\">⚡ Volonté: <strong>2</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +1 Force 💪, +2 Agilité 🏃,  +1 Endurance 🛡️, +1 Intelligence 🧠<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Armes du Chasseur</em> : Peut utiliser les arcs et les bâtons.</li><li><em>Cueillette</em> : Une fois par jour, hors combat, le personnage peut passer 15 minutes à récolter 5 plantes locales (au choix du MJ). Leur efficacité dépend de l’Intelligence de l’utilisateur.</li><li><em>Connaissance du milieu naturel</em> : Gagne 1 de compétence sur les tests de Réflexion lié à animal, un monstre, une plante, ou la découverte de passages dérobés en milieu naturel.</li></ul>",
+        "capacites": "<ul>\n<li><em>Armes du Chasseur</em> : Peut utiliser les arcs et les bâtons à deux mains.</li>\n<li><em>Spécialiste de l'arc</em> : Augmente les dégats physiques infligés à l'arc d'une valeur égale au niveau du héros.</li>\n<li><em>Cueillette</em> : Une fois par jour, hors combat, le personnage peut passer 15 minutes à récolter 5 plantes locales (au choix du MJ). Leur efficacité dépend de l’Intelligence de l’utilisateur.</li>\n<li><em>Connaissance du milieu naturel</em> : Gagne 1 de compétence sur les tests de Réflexion lié à animal, un monstre, une plante, ou la découverte de passages dérobés en milieu naturel.</li>\n\n</ul>",
         "description": "<i>Précis et agile, il complète son art de l’arc par la science des herbes anciennes.</i>"
       }
     ]
@@ -112,8 +105,8 @@
       {
         "nom": "Lutin",
         "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>2</strong></span><span class=\"chip\">🏃 Agilité: <strong>1</strong></span><span class=\"chip\">🛡️ Endurance: <strong>5</strong></span><span class=\"chip\">🧠 Intelligence: <strong>5</strong></span><span class=\"chip\">⚡ Volonté: <strong>3</strong></span><span class=\"chip\">🍀 Chance: <strong>5</strong></span></div>",
-        "progression": "<strong>📈 Progression par niveau:</strong> 💪 +1 Force, +1 Intelligence 🧠, +2 Volonté ⚡, +1 Chance 🍀<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Secrets bien gardés</em> : Gagne la compétence Reflexion rang 1.\n</li><li><em>Fouineur</em> : Augmente la Fortune de 5.\n</li><li><em>Rire malicieux</em> : Aprés une attaque au corps à corps réussie, la cible du Lutin voit son armure réduite de la valeur des dégats infligés, jusqu'a la fin du prochain tour du héros.</li></ul>",
+        "progression": "<strong>📈 Progression par niveau:</strong> 💪 +1 Force, +2 Intelligence 🧠, +1 Volonté ⚡, +1 Chance 🍀<strong> +2 Au choix</strong>",
+        "capacites": "<ul><li><em>Secrets bien gardés</em> : Gagne la compétence Reflexion rang 1.\n</li><li><em>Fouineur</em> : Augmente la Fortune de 5.\n</li><li><em>Malice corrosive</em> : Aprés une attaque au corps à corps réussie, la cible du Lutin voit son armure physique réduite de la valeur des dégats infligés, jusqu'a la fin du prochain tour du héros.</li>\n<li><em>Rire malicieux</em> : Aprés avoir infligé une altération magique à une cible, regagne un montant de mana équivalent au niveau du héros.</li>\n</ul>",
         "description": "<i>Esprit espiègle et rusé, passé maître dans l’art des altérations magiques. </i>"
       }
     ]
