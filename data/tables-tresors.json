@@ -652,7 +652,7 @@
       "fourchettes": [
         {
           "min": 1,
-          "max": 10,
+          "max": 7,
           "objet": {
             "type": "reference",
             "numero": 20,
@@ -660,8 +660,17 @@
           }
         },
         {
-          "min": 11,
-          "max": 16,
+          "min": 8,
+          "max": 12,
+          "objet": {
+            "type": "reference",
+            "numero": 21,
+            "nom": "Fruits de la forêt"
+          }
+        },
+        {
+          "min": 13,
+          "max": 17,
           "objet": {
             "type": "reference",
             "numero": 50,

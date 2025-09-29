@@ -84,7 +84,17 @@
           from { transform: translateX(100%); opacity: 0; }
           to { transform: translateX(0); opacity: 1; }
         }
-      </style><script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script></head>
+      </style><script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script><style>
+        @keyframes slideIn {
+          from { transform: translateX(100%); opacity: 0; }
+          to { transform: translateX(0); opacity: 1; }
+        }
+      </style><style>
+        @keyframes slideIn {
+          from { transform: translateX(100%); opacity: 0; }
+          to { transform: translateX(0); opacity: 1; }
+        }
+      </style></head>
 <body class="mj-on dev-on">
 
 <script>
@@ -227,7 +237,7 @@ observer.observe(document.body, { attributes: true });
             <span class="toc-section-toggle">▼</span>
           </div>
           <div class="toc-section-content" style="max-height: 500px; opacity: 1; overflow: visible;">
-            <a data-route="monstres" href="#/monstres" class="">👹 Monstres</a><a data-route="tables-tresors" href="#/tables-tresors" class="">💎 Tables de trésors</a><a data-route="audio" href="#/audio" class="">🎵 Musiques d'ambiance</a><a data-route="traumas" href="#/traumas" class="">🩹 Traumas</a><a data-route="campagne" href="#/campagne" class="">📖 Campagne</a><a data-route="gestion-objets" href="#/gestion-objets" class="active">⚔️ Gestion des Objets</a>
+            <a data-route="monstres" href="#/monstres" class="">👹 Monstres</a><a data-route="tables-tresors" href="#/tables-tresors" class="active">💎 Tables de trésors</a><a data-route="audio" href="#/audio" class="">🎵 Musiques d'ambiance</a><a data-route="traumas" href="#/traumas" class="">🩹 Traumas</a><a data-route="campagne" href="#/campagne" class="">📖 Campagne</a><a data-route="gestion-objets" href="#/gestion-objets" class="">⚔️ Gestion des Objets</a>
           </div>
         </div>
       
@@ -23436,7 +23446,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           </section>
         </article>
       
-        <article class="active" data-page="gestion-objets" style="display: block;"><section>
+        <article class="" data-page="gestion-objets" style="display: none;"><section>
             <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
               <h2>📦 Gestion des Objets</h2>
               
@@ -24398,7 +24408,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
             
           </section></article>
       
-        <article class="" data-page="tables-tresors" style="display: none;">
+        <article class="active" data-page="tables-tresors" style="display: block;">
           <section>
             <header class="page-header">
               <h1 class="page-title" style="display: flex; align-items: center; gap: 0.5rem;">
@@ -24494,9 +24504,9 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
         </div>
       
             
-            <div data-dev-only="" class="dev-buttons-container" style="display: block;">
+            <div data-dev-only="" class="dev-buttons-container">
               <button class="tableTresor-add btn" data-category-name="tables" type="button" style="background: var(--accent); color: white;">➕ Ajouter un élément</button>
-              <button class="tags-manager-btn btn" type="button" style="background: rgb(220, 38, 38); color: white; border: 2px solid rgb(185, 28, 28);">🏷️ Gérer les tags</button>
+              <button class="tags-manager-btn btn" type="button" style="background: #dc2626; color: white; border: 2px solid #b91c1c;">🏷️ Gérer les tags</button>
             </div>
             
             
@@ -24506,7 +24516,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           
         <div class="editable-section" data-section-type="html">
           <h4 style="margin: 0 0 1rem 0; text-align: center;" class="editable editable-title table-tresor-name" data-edit-type="generic" data-edit-section="table-tresor-name" data-item-identifier="Coffre bucheron">Coffre bucheron</h4>
-          <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="title" style="">✏️</button>
+          <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="title">✏️</button>
         </div>
       
           <div style="text-align: center; margin: 0.5rem 0;">
@@ -24515,7 +24525,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           <div class="editable editable-tags" data-edit-type="tags" data-edit-section="table-tresor-tags" data-item-identifier="Coffre bucheron">
             <span class="tag-chip" style="background: var(--bronze); color: white; padding: 2px 6px; border-radius: 8px; font-size: 0.8em; margin-right: 4px;">Forêt</span><span class="tag-chip" style="background: var(--bronze); color: white; padding: 2px 6px; border-radius: 8px; font-size: 0.8em; margin-right: 4px;">Coffre</span>
           </div>
-          <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="field" style="">✏️</button>
+          <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="field">✏️</button>
         </div>
       
           </div>
@@ -24606,10 +24616,10 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
               </button>
               
         <div class="move-buttons" style="display: flex; gap: 0.5rem; justify-content: center; margin-top: 1rem;">
-          <button class="table-tresor-move-up btn small" data-table-tresor-name="Coffre bucheron" data-category-name="tables" type="button" style="background: rgb(59, 130, 246); color: white; padding: 4px 8px; font-size: 0.8em;">
+          <button class="table-tresor-move-up btn small" data-table-tresor-name="Coffre bucheron" data-category-name="tables" type="button" style="background: #3b82f6; color: white; padding: 4px 8px; font-size: 0.8em;">
             ↑ Haut
           </button>
-          <button class="table-tresor-move-down btn small" data-table-tresor-name="Coffre bucheron" data-category-name="tables" type="button" style="background: rgb(59, 130, 246); color: white; padding: 4px 8px; font-size: 0.8em;">
+          <button class="table-tresor-move-down btn small" data-table-tresor-name="Coffre bucheron" data-category-name="tables" type="button" style="background: #3b82f6; color: white; padding: 4px 8px; font-size: 0.8em;">
             ↓ Bas
           </button>
         </div>
@@ -24623,13 +24633,13 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
         </div>
       
           
-        <div style="margin-top: 1rem; text-align: center;"><button class="section-delete btn small" data-section-name="Section 290" type="button" style="background: rgb(255, 107, 107); color: white;">🗑 Supprimer section</button></div></div>
+        </div>
       
         <div class="card editable-section" data-section-type="tableTresor" data-table-tresor-name="Sac Provision Port Foret" data-category-name="tables">
           
         <div class="editable-section" data-section-type="html">
           <h4 style="margin: 0 0 1rem 0; text-align: center;" class="editable editable-title table-tresor-name" data-edit-type="generic" data-edit-section="table-tresor-name" data-item-identifier="Sac Provision Port Foret">Sac Provision Port Foret</h4>
-          <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="title" style="">✏️</button>
+          <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="title">✏️</button>
         </div>
       
           <div style="text-align: center; margin: 0.5rem 0;">
@@ -24638,7 +24648,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           <div class="editable editable-tags" data-edit-type="tags" data-edit-section="table-tresor-tags" data-item-identifier="Sac Provision Port Foret">
             <span class="tag-chip" style="background: var(--bronze); color: white; padding: 2px 6px; border-radius: 8px; font-size: 0.8em; margin-right: 4px;">Forêt</span><span class="tag-chip" style="background: var(--bronze); color: white; padding: 2px 6px; border-radius: 8px; font-size: 0.8em; margin-right: 4px;">Coffre</span>
           </div>
-          <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="field" style="">✏️</button>
+          <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="field">✏️</button>
         </div>
       
           </div>
@@ -24653,7 +24663,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
               
           <div class="fourchette-row" style="display: flex; justify-content: space-between; align-items: center; padding: 8px; margin: 4px 0; background: rgba(139, 92, 23, 0.1); border-radius: 6px; border-left: 3px solid var(--bronze);">
             <div class="fourchette-range" style="font-weight: bold; color: var(--bronze); min-width: 80px;">
-              🎲 1-10
+              🎲 1-7
             </div>
             <div class="fourchette-objet" style="flex: 1; margin-left: 12px;">
               <a href="#" class="object-preview-link" data-object-numero="20" style="color: var(--accent); text-decoration: none;" title="Cliquer pour prévisualiser l'objet #20">📦 Ration copieuse de nourriture (N°20)</a>
@@ -24670,10 +24680,10 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
         
           <div class="fourchette-row" style="display: flex; justify-content: space-between; align-items: center; padding: 8px; margin: 4px 0; background: rgba(139, 92, 23, 0.1); border-radius: 6px; border-left: 3px solid var(--bronze);">
             <div class="fourchette-range" style="font-weight: bold; color: var(--bronze); min-width: 80px;">
-              🎲 11-16
+              🎲 8-12
             </div>
             <div class="fourchette-objet" style="flex: 1; margin-left: 12px;">
-              <a href="#" class="object-preview-link" data-object-numero="50" style="color: var(--accent); text-decoration: none;" title="Cliquer pour prévisualiser l'objet #50">📦 Cristal de Sel (N°50)</a>
+              <a href="#" class="object-preview-link" data-object-numero="21" style="color: var(--accent); text-decoration: none;" title="Cliquer pour prévisualiser l'objet #21">📦 Fruits de la forêt (N°21)</a>
             </div>
             
           <div class="fourchette-actions" style="margin-left: 8px; display: flex; gap: 4px;">
@@ -24687,6 +24697,23 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
         
           <div class="fourchette-row" style="display: flex; justify-content: space-between; align-items: center; padding: 8px; margin: 4px 0; background: rgba(139, 92, 23, 0.1); border-radius: 6px; border-left: 3px solid var(--bronze);">
             <div class="fourchette-range" style="font-weight: bold; color: var(--bronze); min-width: 80px;">
+              🎲 13-17
+            </div>
+            <div class="fourchette-objet" style="flex: 1; margin-left: 12px;">
+              <a href="#" class="object-preview-link" data-object-numero="50" style="color: var(--accent); text-decoration: none;" title="Cliquer pour prévisualiser l'objet #50">📦 Cristal de Sel (N°50)</a>
+            </div>
+            
+          <div class="fourchette-actions" style="margin-left: 8px; display: flex; gap: 4px;">
+            <button class="move-fourchette-up-btn" data-table-name="Sac Provision Port Foret" data-fourchette-index="2" title="Déplacer vers le haut" style="background: #059669; color: white; border: none; border-radius: 4px; padding: 2px 6px; font-size: 0.8em; cursor: pointer;">⬆️</button>
+            <button class="move-fourchette-down-btn" data-table-name="Sac Provision Port Foret" data-fourchette-index="2" title="Déplacer vers le bas" style="background: #059669; color: white; border: none; border-radius: 4px; padding: 2px 6px; font-size: 0.8em; cursor: pointer;">⬇️</button>
+            <button class="edit-fourchette-btn" data-table-name="Sac Provision Port Foret" data-fourchette-index="2" title="Éditer cette fourchette" style="background: #3b82f6; color: white; border-none; border-radius: 4px; padding: 2px 6px; font-size: 0.8em; cursor: pointer;">✏️</button>
+            <button class="delete-fourchette-btn" data-table-name="Sac Provision Port Foret" data-fourchette-index="2" title="Supprimer cette fourchette" style="background: #dc2626; color: white; border: none; border-radius: 4px; padding: 2px 6px; font-size: 0.8em; cursor: pointer;">🗑️</button>
+          </div>
+        
+          </div>
+        
+          <div class="fourchette-row" style="display: flex; justify-content: space-between; align-items: center; padding: 8px; margin: 4px 0; background: rgba(139, 92, 23, 0.1); border-radius: 6px; border-left: 3px solid var(--bronze);">
+            <div class="fourchette-range" style="font-weight: bold; color: var(--bronze); min-width: 80px;">
               🎲 17-30
             </div>
             <div class="fourchette-objet" style="flex: 1; margin-left: 12px;">
@@ -24694,10 +24721,10 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
             </div>
             
           <div class="fourchette-actions" style="margin-left: 8px; display: flex; gap: 4px;">
-            <button class="move-fourchette-up-btn" data-table-name="Sac Provision Port Foret" data-fourchette-index="2" title="Déplacer vers le haut" style="background: #059669; color: white; border: none; border-radius: 4px; padding: 2px 6px; font-size: 0.8em; cursor: pointer;">⬆️</button>
+            <button class="move-fourchette-up-btn" data-table-name="Sac Provision Port Foret" data-fourchette-index="3" title="Déplacer vers le haut" style="background: #059669; color: white; border: none; border-radius: 4px; padding: 2px 6px; font-size: 0.8em; cursor: pointer;">⬆️</button>
             
-            <button class="edit-fourchette-btn" data-table-name="Sac Provision Port Foret" data-fourchette-index="2" title="Éditer cette fourchette" style="background: #3b82f6; color: white; border-none; border-radius: 4px; padding: 2px 6px; font-size: 0.8em; cursor: pointer;">✏️</button>
-            <button class="delete-fourchette-btn" data-table-name="Sac Provision Port Foret" data-fourchette-index="2" title="Supprimer cette fourchette" style="background: #dc2626; color: white; border: none; border-radius: 4px; padding: 2px 6px; font-size: 0.8em; cursor: pointer;">🗑️</button>
+            <button class="edit-fourchette-btn" data-table-name="Sac Provision Port Foret" data-fourchette-index="3" title="Éditer cette fourchette" style="background: #3b82f6; color: white; border-none; border-radius: 4px; padding: 2px 6px; font-size: 0.8em; cursor: pointer;">✏️</button>
+            <button class="delete-fourchette-btn" data-table-name="Sac Provision Port Foret" data-fourchette-index="3" title="Supprimer cette fourchette" style="background: #dc2626; color: white; border: none; border-radius: 4px; padding: 2px 6px; font-size: 0.8em; cursor: pointer;">🗑️</button>
           </div>
         
           </div>
@@ -24712,10 +24739,10 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
               </button>
               
         <div class="move-buttons" style="display: flex; gap: 0.5rem; justify-content: center; margin-top: 1rem;">
-          <button class="table-tresor-move-up btn small" data-table-tresor-name="Sac Provision Port Foret" data-category-name="tables" type="button" style="background: rgb(59, 130, 246); color: white; padding: 4px 8px; font-size: 0.8em;">
+          <button class="table-tresor-move-up btn small" data-table-tresor-name="Sac Provision Port Foret" data-category-name="tables" type="button" style="background: #3b82f6; color: white; padding: 4px 8px; font-size: 0.8em;">
             ↑ Haut
           </button>
-          <button class="table-tresor-move-down btn small" data-table-tresor-name="Sac Provision Port Foret" data-category-name="tables" type="button" style="background: rgb(59, 130, 246); color: white; padding: 4px 8px; font-size: 0.8em;">
+          <button class="table-tresor-move-down btn small" data-table-tresor-name="Sac Provision Port Foret" data-category-name="tables" type="button" style="background: #3b82f6; color: white; padding: 4px 8px; font-size: 0.8em;">
             ↓ Bas
           </button>
         </div>
@@ -24729,13 +24756,13 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
         </div>
       
           
-        <div style="margin-top: 1rem; text-align: center;"><button class="section-delete btn small" data-section-name="Section 291" type="button" style="background: rgb(255, 107, 107); color: white;">🗑 Supprimer section</button></div></div>
+        </div>
       
         <div class="card editable-section" data-section-type="tableTresor" data-table-tresor-name="Coffre jeu du tonneau" data-category-name="tables">
           
         <div class="editable-section" data-section-type="html">
           <h4 style="margin: 0 0 1rem 0; text-align: center;" class="editable editable-title table-tresor-name" data-edit-type="generic" data-edit-section="table-tresor-name" data-item-identifier="Coffre jeu du tonneau">Coffre jeu du tonneau</h4>
-          <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="title" style="">✏️</button>
+          <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="title">✏️</button>
         </div>
       
           <div style="text-align: center; margin: 0.5rem 0;">
@@ -24744,7 +24771,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
           <div class="editable editable-tags" data-edit-type="tags" data-edit-section="table-tresor-tags" data-item-identifier="Coffre jeu du tonneau">
             <span class="tag-chip" style="background: var(--bronze); color: white; padding: 2px 6px; border-radius: 8px; font-size: 0.8em; margin-right: 4px;">Forêt</span><span class="tag-chip" style="background: var(--bronze); color: white; padding: 2px 6px; border-radius: 8px; font-size: 0.8em; margin-right: 4px;">Coffre</span>
           </div>
-          <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="field" style="">✏️</button>
+          <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="field">✏️</button>
         </div>
       
           </div>
@@ -24835,10 +24862,10 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
               </button>
               
         <div class="move-buttons" style="display: flex; gap: 0.5rem; justify-content: center; margin-top: 1rem;">
-          <button class="table-tresor-move-up btn small" data-table-tresor-name="Coffre jeu du tonneau" data-category-name="tables" type="button" style="background: rgb(59, 130, 246); color: white; padding: 4px 8px; font-size: 0.8em;">
+          <button class="table-tresor-move-up btn small" data-table-tresor-name="Coffre jeu du tonneau" data-category-name="tables" type="button" style="background: #3b82f6; color: white; padding: 4px 8px; font-size: 0.8em;">
             ↑ Haut
           </button>
-          <button class="table-tresor-move-down btn small" data-table-tresor-name="Coffre jeu du tonneau" data-category-name="tables" type="button" style="background: rgb(59, 130, 246); color: white; padding: 4px 8px; font-size: 0.8em;" disabled="">
+          <button class="table-tresor-move-down btn small" data-table-tresor-name="Coffre jeu du tonneau" data-category-name="tables" type="button" style="background: #3b82f6; color: white; padding: 4px 8px; font-size: 0.8em;" disabled="">
             ↓ Bas
           </button>
         </div>
@@ -24852,7 +24879,7 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
         </div>
       
           
-        <div style="margin-top: 1rem; text-align: center;"><button class="section-delete btn small" data-section-name="Section 292" type="button" style="background: rgb(255, 107, 107); color: white;">🗑 Supprimer section</button></div></div>
+        </div>
       
             </div>
             
@@ -24938,6 +24965,14 @@ De plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span
 
 
 
+        
+      
+        
+      
+        
+      
+        
+      
         
       
         
