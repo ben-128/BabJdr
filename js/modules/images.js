@@ -128,10 +128,11 @@
       img.style.display = 'inline-block';
       img.style.opacity = '1'; // Reset opacity after upload
       
-      // Show remove button if it exists
+      // Show remove button if it exists and dev mode is on
       const removeBtn = illusElement.querySelector('.rm');
       if (removeBtn) {
-        removeBtn.style.display = 'inline-flex';
+        const isDevMode = document.body.classList.contains('dev-on');
+        removeBtn.style.display = isDevMode ? 'inline-flex' : 'none';
       }
 
     },

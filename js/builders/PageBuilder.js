@@ -554,12 +554,16 @@
           </div>
         `;
       } else {
-        // DEV MODE: Always generate buttons, let CSS handle visibility
+        // Check dev mode before generating buttons
+        const isDevMode = document.body.classList.contains('dev-on');
+        const buttonHTML = isDevMode ? `
+            <label class="up">📷 Ajouter<input accept="image/*" hidden="" type="file"></label>
+            <button class="rm" type="button" style="${removeStyle}">🗑 Retirer</button>` : '';
+        
         return `
           <div class="illus" data-illus-key="${illusKey}" data-bound="1">
             <img alt="Illustration ${altText}" class="thumb" style="${imageStyle}"${imageUrl ? ` src="${imageUrl}"` : ''}>
-            <label class="up">📷 Ajouter<input accept="image/*" hidden="" type="file"></label>
-            <button class="rm" type="button" style="${removeStyle}">🗑 Retirer</button>
+            ${buttonHTML}
           </div>
         `;
       }

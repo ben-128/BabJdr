@@ -106,7 +106,7 @@
         "nom": "Lutin",
         "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>2</strong></span><span class=\"chip\">🏃 Agilité: <strong>1</strong></span><span class=\"chip\">🛡️ Endurance: <strong>5</strong></span><span class=\"chip\">🧠 Intelligence: <strong>5</strong></span><span class=\"chip\">⚡ Volonté: <strong>3</strong></span><span class=\"chip\">🍀 Chance: <strong>5</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> 💪 +1 Force, +2 Intelligence 🧠, +1 Volonté ⚡, +1 Chance 🍀<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Secrets bien gardés</em> : Gagne la compétence Reflexion rang 1.\n</li><li><em>Fouineur</em> : Augmente la Fortune de 5.\n</li><li><em>Malice corrosive</em> : Aprés une attaque au corps à corps réussie, la cible du Lutin voit son armure physique réduite de la valeur des dégats infligés, jusqu'a la fin du prochain tour du héros.</li>\n<li><em>Rire malicieux</em> : Aprés avoir infligé une altération magique à une cible, regagne un montant de mana équivalent au niveau du héros.</li>\n</ul>",
+        "capacites": "<ul><li><em>Secrets bien gardés</em> : Gagne la compétence Reflexion rang 1.\n</li><li><em>Fouineur</em> : Augmente la Fortune de 5.\n</li><li><em>Malice corrosive</em> : Aprés une attaque au corps à corps réussie, la cible du Lutin voit son armure physique réduite de la valeur des dégats infligés, jusqu'a la fin du prochain tour du héros.</li>\n<li><em>Rire malicieux</em> : Aprés avoir infligé une altération magique à une cible, regagne un montant de mana équivalent au niveau du sort.</li>\n</ul>",
         "description": "<i>Esprit espiègle et rusé, passé maître dans l’art des altérations magiques. </i>"
       }
     ]

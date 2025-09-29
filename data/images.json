@@ -139,10 +139,11 @@
     "objet:Ceinture en peau de serpent": "https://i.ibb.co/LhrtCHpW/Ceinture-Serpent.png",
     "objet:Cristal de Sel": "https://i.ibb.co/n8PhpFY6/Sel.png",
     "objet:Viande de monstre": "https://i.ibb.co/YBYZ7KKz/Viande-Monstre.png",
-    "objet:Fouet de lianes": "https://i.ibb.co/fV9FdbzF/Fouet-Foret.png"
+    "objet:Fouet de lianes": "https://i.ibb.co/fV9FdbzF/Fouet-Foret.png",
+    "objet:Plat épicé": "https://i.ibb.co/Vc934Q9b/Epice.png"
   },
   "meta": {
-    "total_images": 140,
+    "total_images": 141,
     "exported_date": "2025-09-29",
     "note": "Ces images incluent les nouvelles images uploadées"
   }

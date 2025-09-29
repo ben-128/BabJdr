@@ -246,7 +246,7 @@
       "tags": [
         "Nourriture"
       ],
-      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore 5 points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.",
+      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore 6 points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.",
       "prix": "🔷 <strong>Prix:</strong> 5",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -258,7 +258,7 @@
       "tags": [
         "Nourriture"
       ],
-      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore 8 points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.\n<br><b>Charges :</b> 3",
+      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore 9 points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.\n<br><b>Charges :</b> 3",
       "prix": "🔷 <strong>Prix:</strong> 15",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -270,8 +270,8 @@
       "tags": [
         "Nourriture"
       ],
-      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore 5 points de vie. <br>Couplé à un sommeil, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>. <br>De plus, lorsque consommé, le mangeur ne neccessite plus que 4 heures de sommeil ce jour-ci.\n<br><br><b>Charges :</b> 3",
-      "prix": "🔷 <strong>Prix:</strong> 20",
+      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore 6 points de vie. <br>Couplé à un sommeil, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>. <br>De plus, lorsque consommé, le mangeur ne neccessite plus que 4 heures de sommeil ce jour-ci.\n<br><br><b>Charges :</b> 4",
+      "prix": "🔷 <strong>Prix:</strong> 25",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
@@ -644,7 +644,7 @@
       "tags": [
         "Nourriture"
       ],
-      "effet": "<strong>Effet:</strong> Double les soins prodigués par une nourriture.\n\n<br>          <strong>Charges:</strong> 5.",
+      "effet": "<strong>Effet:</strong> Double les soins prodigués par une nourriture.\n\n<br>          <strong>Charges:</strong> 10.",
       "prix": "🔷 <strong>Prix:</strong> 50",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -723,7 +723,7 @@
       "tags": [
         "Nourriture"
       ],
-      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore 5 points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.\n          <br> <strong>Charges : </strong>2.",
+      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore 6 points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.\n          <br> <strong>Charges : </strong>2.",
       "prix": "🔷 <strong>Prix:</strong> 30",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -739,6 +739,18 @@
       ],
       "effet": "<strong>Dégâts: </strong> Inflige (3  + Force) points de dégats physiques.\n<br>  <strong>Effet:</strong> Augmente la portée d'attaque au corps à corps  de 3m.",
       "prix": "🔷 <strong>Prix:</strong> ?",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Plat épicé",
+      "numero": 58,
+      "image": "https://i.ibb.co/fV9FdbzF/Fouet-Foret.png",
+      "description": "<i>Ce ragoût rougeoyant, saturé d’épices brûlantes, exige une véritable hardiesse pour être avalé, mais récompense l’audacieux d’une saveur inoubliable</i>",
+      "tags": [
+        "Nourriture"
+      ],
+      "effet": "Inutilisable en combat.\n<br><strong>Prérequis:</strong> Test de compétence Hardiesse 1.\n<br><strong>Effet:</strong> Restore 15 points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.\n          <br> <strong>Charges : </strong>3.",
+      "prix": "🔷 <strong>Prix:</strong> 50",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     }
   ],

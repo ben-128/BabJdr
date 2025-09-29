@@ -655,8 +655,8 @@
           "max": 10,
           "objet": {
             "type": "reference",
-            "numero": 50,
-            "nom": "Cristal de Sel"
+            "numero": 20,
+            "nom": "Ration copieuse de nourriture"
           }
         },
         {
@@ -664,8 +664,8 @@
           "max": 16,
           "objet": {
             "type": "reference",
-            "numero": 34,
-            "nom": "Auréline des Roches"
+            "numero": 50,
+            "nom": "Cristal de Sel"
           }
         },
         {
@@ -673,8 +673,8 @@
           "max": 30,
           "objet": {
             "type": "reference",
-            "numero": 20,
-            "nom": "Ration copieuse de nourriture"
+            "numero": 58,
+            "nom": "Plat épicé"
           }
         }
       ]
