@@ -54,13 +54,13 @@
       {
         "nom": "Maitrise de la dague",
         "description": "Le héros est capable d'équiper et d'utiliser des Dagues.",
-        "prerequis": "<strong> Prérequis :</strong> 🏃 Agilité 5.<br>Don unique.",
+        "prerequis": "<strong> Prérequis :</strong> 🏃 Agilité 5.",
         "cout": "1 point de don"
       },
       {
         "nom": "Maitrise de l'arc",
         "description": "Le héros est capable d'équiper et d'utiliser des Arcs.",
-        "prerequis": "<strong> Prérequis :</strong> 🏃 Agilité 10.\n          <br>Don unique.",
+        "prerequis": "<strong> Prérequis :</strong> 🏃 Agilité 10.",
         "cout": "1 point de don"
       },
       {
@@ -103,6 +103,12 @@
         "nom": "Premier soin",
         "description": "<b>En combat :</b>\n<br>Les soins provenant des consommables sont augmentés de X points de vie.\n\n<br><br><b>Hors combat :</b>\n<br>Le héros peut dépenser un effort, pour soigner une autre cible de X points de vie. \n\n<br><br>X correspond à 3, plus 1 point supplémentaire tous les 5 points d’Intelligence.",
         "prerequis": "<strong> Prérequis :</strong> 🧠 Intelligence 5. <br>Don unique.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Toujours prêt",
+        "description": "Augmente l'iniative de 5. Lors du premier tour de combat, la vitesse de déplacement est doublée.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       }
     ]
@@ -148,33 +154,33 @@
         "cout": "1 point de don"
       },
       {
+        "nom": "Attaque surpuissante",
+        "description": "En dépensant une action secondaire, le héros peut concentrer toute sa puissance pour une attaque au corps à corps ce tour ci: les dégâts sont alors doublés. En contrepartie, il n'a pas d'action principale durant son prochain tour.",
+        "prerequis": "<strong> Prérequis :</strong> 💪Force 12",
+        "cout": "1 point de don"
+      },
+      {
         "nom": "Provocation",
-        "description": "Le héros peut utiliser une action principale pour provoquer toutes  les cibles à moins de 12m, qui cibleront alors le lanceur à leur prochain tour.\n\n<br><br>Ne fonctionne pas sur les cibles ayant une résistance altération supérieure à 5.\nCe chiffre peut être augmenté par un test  de compétence Eloquence, qui augmente la valeur de 10 par point de compétence/effort.",
+        "description": "Le guerrier peut utiliser une action principale, pour provoquer toutes les cibles à moins de 12m, qui le cibleront alors au prochain tour.<br><br>Sans effet sur les cibles ayant une Résistance altération &gt; à 5.<br> Ce chiffre peut être augmenté via un test de compétence éloquence, de 10 par point/effort.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
       {
-        "nom": "Provocation",
-        "description": "Description du don.",
-        "prerequis": "Aucun prérequis",
-        "cout": "1 point de don"
-      },
-      {
-        "nom": "Agilité du guerrier",
-        "description": "Augmente l'agilité de 4.",
+        "nom": "Infatiguable",
+        "description": "Augmente la ⚡ volonté de 4.",
         "prerequis": "<strong> Prérequis :</strong> Don Unique.",
         "cout": "1 point de don"
       },
       {
         "nom": "Agilité du guerrier",
-        "description": "Description du don.",
-        "prerequis": "Aucun prérequis",
+        "description": "Augmente 🏃 l'agilité de 4.",
+        "prerequis": "<strong> Prérequis :</strong> Don Unique.",
         "cout": "1 point de don"
       },
       {
         "nom": "Rage sanglante",
         "description": "Lorsque le guerrier a la moitié ou moins de ses points de vie, les chances de coup critique sont augmentées de 2.",
-        "prerequis": "<strong> Prérequis :</strong> Don Unique.",
+        "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
       {
@@ -188,6 +194,24 @@
         "description": "Permet, avec une action principale et une action secondaire, de lancer une arme à une main (équipée ou de l'inventaire) jusqu'a 12m (touche également les cibles volantes). \n<br>Même rêgles qu'une attaque au corps à corps (jet et dégats). <br>L'arme n'est alors plus équipée. Elle peut être récupérée avec une action secondaire, à moins de 3m de la cible.",
         "prerequis": "<strong> Prérequis :</strong> 🏃Agilité 5.",
         "cout": "1 point de don"
+      },
+      {
+        "nom": "Imperturbable",
+        "description": "Permet de retirer un traumas du héros.",
+        "prerequis": "<strong> Prérequis :</strong> Don Unique.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Cri de guerre",
+        "description": "Une fois par combat, peut utiliser une action secondaire pour faire un cri de guerre, qui augmente les dégats physiques infligés par tous les héros d'une valeur du niveau du héros, jusqu'a la fin du prochain tour.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Cri intimidant",
+        "description": "Le guerrier peut utiliser une action principale, pour effrayer toutes les cibles à moins de 12m, qui passeront dans l'état <span class=\"etat-link\" data-etat=\"Endormi/assomé/Effrayé\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">effrayé</span> pendant 1 tour.<br><br>Sans effet sur les cibles ayant une Résistance altération > à 5.<br> Ce chiffre peut être augmenté via un test de compétence éloquence, de 10 par point/effort.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
       }
     ]
   },
@@ -197,7 +221,7 @@
     "dons": [
       {
         "nom": "Croche-patte",
-        "description": "Une fois par combat, peut utiliser une action secondaire pour effectuer un croche- patte à une cible au corps à corps (jet de dé) :\n\n\n<br><br><b>Sans effet si :</b> \n<br>- Esquive.\n<br>- Volant ou lévitant.\n<br>- Taille supérieure à Moyen.\n\n<br><br><b>Effet :</b> Inflige (Force) dégats Physiques à la cible. Met la cible dans l'état <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">A terre</span>.\n\n<br><br><b>Coup Critique :</b>  Les dégats sont doublés et la cible est <span class=\"etat-link\" data-etat=\"Endormi/assomé/Effrayé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Assomée</span> 1 tour.",
+        "description": "Une fois par combat, peut utiliser une action secondaire pour effectuer un croche- patte à une cible au corps à corps (jet de dé) :\n\n\n<br><br><b>Sans effet si :</b> \n<br>- Esquive.\n<br>- Volant ou lévitant.\n<br>- Taille supérieure à Moyen.\n\n<br><br><b>Effet :</b> Met la cible dans l'état <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">A terre</span>.\n\n<br><br><b>Coup Critique :</b>  La cible est <span class=\"etat-link\" data-etat=\"Endormi/assomé/Effrayé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Assomée</span> 1 tour.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -254,6 +278,42 @@
         "description": "Une fois par combat, lors d'une attaque esquivée ou en echec critique, permet de lancer une nouvelle fois le dé.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
+      },
+      {
+        "nom": "Adrénaline",
+        "description": "Aprés avoir subit des dégâts critiques (sort ou physique), le héros bénéficiera d'une action principale supplémentaire à son prochain tour (non cumulable).",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Brise genou",
+        "description": "Une fois par combat, peut utiliser une action secondaire pour améliorer sa prochaine attaque physique. <br>Si elle réussi, met la cible dans l'état <span class=\"etat-link\" data-etat=\"Ralenti\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ralenti</span> pendant 5 tours. <br> Sans effet sur les créatures de Taille supérieure à Moyenne.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Roi de l'esquive",
+        "description": "Une fois par jour, permet d'utiliser une action secondaire pour augmenter son esquive de 5 pendant 3 tours.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Combo",
+        "description": "Une fois par tour, après avoir réussi un coup critique physique, gagne une action secondaire.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Poison",
+        "description": "Peut utiliser une action secondaire pour rajouter du poison à la prochaine attaque physique.\n<br><br> En cas d'attaque réussie, si la cible a une Résistance altération < 2 x N, alors la cible subira <span class=\"etat-link\" data-etat=\"Empoisonné\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Empoisonné</span> N pendant 3 tours, où N est le niveau du héros.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "2 point de don"
+      },
+      {
+        "nom": "Main heureuse",
+        "description": "Augmente la 🍀 Chance de 4.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
+        "cout": "1 point de don"
       }
     ]
   },
@@ -304,9 +364,9 @@
         "cout": "1 point de don"
       },
       {
-        "nom": "Spécialisation élémentaire 2",
-        "description": "Description du don.",
-        "prerequis": "Aucun prérequis",
+        "nom": "Apprentissage par l'échec",
+        "description": "Le mage regagne le coût en mana des sorts ayant fait un échec critique.",
+        "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
       {
@@ -325,11 +385,11 @@
   },
   {
     "nom": "Pretre",
-    "description": "Description de cette catégorie de dons.",
+    "description": "Dons accessibles aux prêtres.",
     "dons": [
       {
         "nom": "Mécréants",
-        "description": "Les dégats physiques infligés aux créatures de l'élément  <span style=\"color: #a855f7; font-weight: bold;\">Maléfique</span> sont doublés.",
+        "description": "Les dégats physiques infligés aux créatures de l'élément  <span style=\"color: #a855f7; font-weight: bold;\">Maléfique</span> sont doublés (la multiplication est appliquée avant l'application de l'armure physique).",
         "prerequis": "<strong> Prérequis :</strong>-",
         "cout": "1 point de don"
       },
@@ -341,7 +401,7 @@
       },
       {
         "nom": "Jugement éclair",
-        "description": "Si le Prêtre a effectué un sort ce tour ci, il peut effectuer une attaque au corp à corp avec une action secondaire.",
+        "description": "Si le Prêtre a effectué un sort de dégats ce tour ci, il peut effectuer une attaque au corp à corp avec une action secondaire.",
         "prerequis": "<strong> Prérequis :</strong>💪Force 5",
         "cout": "1 point de don"
       },
@@ -365,8 +425,32 @@
       },
       {
         "nom": "Tentation maléfique",
-        "description": "Description du don.",
+        "description": "Permet de modifier les dégats des sorts et effets infligés, d'élément <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span> ou <span style=\"color: #f5f5f5; font-weight: bold;\">Divin</span>, pour en faire des dégats d'élément <span style=\"color: #8b5cf6; font-weight: bold;\">Maléfique</span>.",
         "prerequis": "<strong> Prérequis :</strong>-",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Méditation érudite",
+        "description": "Augmente 🧠 l'intelligence de 4.",
+        "prerequis": "<strong> Prérequis :</strong>-",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Élan béni",
+        "description": "Après avoir effectué un sort de soins ou de soutien, les dégâts de la prochaine attaque physique du combat sont augmentés de la valeur du niveau du héros.",
+        "prerequis": "<strong> Prérequis :</strong>-",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Martyr",
+        "description": "Une fois par tour, aprés avoir reçu des dégats, peut utiliser une action secondaire pour soigner une cible autre que le héros à moins de 6m, d'une valeur du niveau du héros.",
+        "prerequis": "<strong> Prérequis :</strong>-",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Chair consacrée",
+        "description": "Augmente 🛡️ l'endurance de 4.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       }
     ]
@@ -382,13 +466,13 @@
         "cout": "1 point de don"
       },
       {
-        "nom": "Magie aléatoire destructrice",
+        "nom": "Magie destructrice",
         "description": "Permet de choisir et d'apprendre un sort de mage et de pouvoir le lancer à volonté. Le sort peut être changé par la suite.",
         "prerequis": "<strong> Prérequis :</strong> Choisir un nouveau sort écrase l'ancien.",
         "cout": "1 point de don"
       },
       {
-        "nom": "Magie aléatoire de soutien",
+        "nom": "Magie de soutien",
         "description": "Permet de choisir et d'apprendre un sort de prêtre et de pouvoir le lancer à volonté. Le sort peut être changé par la suite.",
         "prerequis": "<strong> Prérequis :</strong> Choisir un nouveau sort écrase l'ancien.",
         "cout": "1 point de don"
@@ -420,6 +504,18 @@
       {
         "nom": "Enchantement d'agilité permanante",
         "description": "Augmente 🏃 l'Agilité de 4.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Duplicateur de nourriture",
+        "description": "Lors de la consommation de nourriture, un héros allié peut également profiter de ses effets.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Magie aléatoire",
+        "description": "Peut dépenser une action principale et secondaire pour tenter de lancer un sort d'altération magique et un sort de soutien sur des cibles à portée, le même tour.\n<br><br> Lancez un d20.\n<br> Si le dé fait 10 ou plus, les deux sorts sont lancés sur leurs cibles respectives.\n<br> Si le dé fait 9 ou moins, les deux sorts sont lancés sur les cibles inverses (peu importe la portée).\n\n<br><br> Dans les deux cas, seul le mana du sort le plus cher est dépensé.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       }

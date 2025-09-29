@@ -119,13 +119,13 @@
         "description": "Invoque un magie divine qui blesse les créatures maléfiques.",
         "categorie": "Anti-mort-vivant",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 3",
-        "portee": "🎯 <strong>Portée:</strong> 18m",
+        "portee": "🎯 <strong>Portée:</strong> 15m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 6",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
-        "resistance": "<strong>Sans effet si:</strong>  <br>- Elément d'assignation autre que <span style=\"color: #8b5cf6; font-weight: bold;\">Maléfique</span> <br>- Esquive.",
-        "effetNormal": "<strong>Effet:</strong> Inflige (2 x Puiss. Sorts) dégâts <span style=\"color: #d0d0d0; font-weight: bold; background: rgba(0, 0, 0, 0.4); padding: 2px 4px; border-radius: 3px;\">Divin</span> à la cible.",
-        "effetCritique": "<strong>Coup Critique: </strong> Inflige (4 x Puiss. Sorts) dégats."
+        "resistance": "<strong>Sans effet si:</strong> Esquive.",
+        "effetNormal": "<strong>Effet:</strong> Inflige (5 + Puiss. Sorts) dégâts <span style=\"color: #d0d0d0; font-weight: bold; background: rgba(0, 0, 0, 0.4); padding: 2px 4px; border-radius: 3px;\">Divin</span> à la cible.\n<br> Le sort ne peut pas être raté ou esquivé si la cible est d'élément <span style=\"color: #8b5cf6; font-weight: bold;\">Maléfique</span>.",
+        "effetCritique": "<strong>Coup Critique: </strong> Inflige (10 + Puiss. Sorts)  dégats."
       },
       {
         "nom": "Refermer les blessures",

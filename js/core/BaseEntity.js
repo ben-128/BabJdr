@@ -63,6 +63,19 @@
       }
 
       const defaultValues = this.config?.defaultValues || {};
+      
+      // Generate unique name if using default name
+      if (!itemData.nom && defaultValues.nom) {
+        const existingNames = category[itemsProperty].map(item => item.nom);
+        let counter = 1;
+        let uniqueName = defaultValues.nom;
+        while (existingNames.includes(uniqueName)) {
+          uniqueName = `${defaultValues.nom} ${counter}`;
+          counter++;
+        }
+        defaultValues.nom = uniqueName;
+      }
+      
       const newItem = { ...defaultValues, ...itemData };
       category[itemsProperty].push(newItem);
 
