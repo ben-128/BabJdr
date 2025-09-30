@@ -106,6 +106,30 @@
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Crée à la position d'une cible à portée, un nuage toxique qui inflige (15 + Puiss. Sorts) points de dégats de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>.\n\n<br>Chaque début de tour, le lanceur peut choisir de dépenser une action principale et 5 points de mana pour que le nuage se déplace inflige ses dégats à une cible à portée du lanceur. Sinon, le nuage disparait.",
         "effetCritique": "<strong>Coup Critique: </strong> Les dégats sont de (20 + Puiss. Sorts) et la cible est <span class=\"etat-link\" data-etat=\"Ralenti\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Ralenti</span> pendant 1 tour."
+      },
+      {
+        "nom": "Teleportation",
+        "element": "Air",
+        "description": "Dans un souffle de lumière distordue, ton corps se dissout et réapparaît instantanément à l’endroit désiré.",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 3",
+        "portee": "🎯 <strong>Portée:</strong> 12m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 10",
+        "resistance": "<strong>Sans effet si:</strong> -",
+        "effetNormal": "<strong>Effet:</strong> Téléporte le héros jusqu'a une zone à portée. La portée est augmentée d'un mètre par puissance des sorts du lanceur.",
+        "effetCritique": "<strong>Coup Critique: </strong> Augmente la portée de 6m."
+      },
+      {
+        "nom": "Absorption magique",
+        "element": "Nuit",
+        "description": "Les ténèbres enveloppent le lanceur d’un voile d’ombre, absorbant les assauts élémentaires.",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 4",
+        "portee": "🎯 <strong>Portée:</strong> -",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 10",
+        "resistance": "<strong>Sans effet si:</strong> -",
+        "effetNormal": "<strong>Effet:</strong> Pendant les 3 prochains tours, si le lanceur subit des dégats élémentaires, ils seront réduits de (Puiss. Sorts). Pour chaque dommage absorbé, le lanceur regagne 1 point de mana.",
+        "effetCritique": "<strong>Coup Critique: </strong> Les dégats sont réduits de 2 x (Puiss. Sorts)."
       }
     ]
   },

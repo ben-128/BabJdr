@@ -511,7 +511,7 @@
       // HYBRID APPROACH: Never generate buttons in standalone or preview mode, always generate in dev mode
       const isStandalone = window.STANDALONE_VERSION === true;
       const isPreviewMode = this.isPreview;
-      
+
       if (isStandalone) {
         // STANDALONE: Never generate image buttons at all, use lazy loading
         return `
@@ -527,12 +527,12 @@
           </div>
         `;
       } else {
-        // Check dev mode before generating buttons
-        const isDevMode = document.body.classList.contains('dev-on');
-        const buttonHTML = isDevMode ? `
+        // DEV MODE: Always generate buttons in dev environment, CSS will control visibility
+        // This ensures buttons are in the DOM and can be shown/hidden when dev mode toggles
+        const buttonHTML = `
             <label class="up">📷 Ajouter<input accept="image/*" hidden="" type="file"></label>
-            <button class="rm" type="button" style="${removeStyle}">🗑 Retirer</button>` : '';
-        
+            <button class="rm" type="button" style="${removeStyle}">🗑 Retirer</button>`;
+
         return `
           <div class="${containerClasses}" data-illus-key="${illusKey}" data-style-type="${styleType}" data-bound="1">
             <img alt="Illustration ${altText}" class="thumb" style="${imageStyle}"${imageUrl ? ` src="${imageUrl}"` : ''}>
