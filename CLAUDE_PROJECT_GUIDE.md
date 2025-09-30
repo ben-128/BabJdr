@@ -1,6 +1,6 @@
-# 🎯 Claude Project Feature Guide - JDR BAB Application
+# 🎯 Claude Project Feature Guide - Foresia Application
 
-> **Purpose**: This guide helps Claude (AI assistant) efficiently navigate and understand the JDR BAB tabletop RPG application's features and architecture.
+> **Purpose**: This guide helps Claude (AI assistant) efficiently navigate and understand the Foresia tabletop RPG application's features and architecture.
 
 ## 📋 Quick Reference Map
 

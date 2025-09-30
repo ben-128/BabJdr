@@ -11,7 +11,7 @@
 - `npm install` prepares local dependencies (Node 14+).
 - `npm run dev` launches `live-server` on port 3000 and opens `index.html`; use `npm run serve` when you only need the server.
 - `npm run dev-clean` starts `scripts/server.js` for a quieter development server.
-- `npm run build` (or `node scripts/build-simple.js`) produces `build-output/JdrBab.html` from the modular sources.
+- `npm run build` (or `node scripts/build-simple.js`) produces `build-output/Foresia.html` from the modular sources.
 - `npm run pwa-test` serves the build over HTTPS for service-worker checks; `node scripts/generate-pwa-icons.js` refreshes manifest icons.
 
 ## Coding Style & Naming Conventions
@@ -23,7 +23,7 @@
 ## Testing Guidelines
 - There is no automated suite; manually validate new work.
 - After UI changes, load `dev-debug.html` via `npm run dev` and exercise responsive breakpoints.
-- For release validation, run `npm run build`, open `build-output/JdrBab.html`, and verify offline caching plus search and filter flows.
+- For release validation, run `npm run build`, open `build-output/Foresia.html`, and verify offline caching plus search and filter flows.
 - When touching PWA assets, run `npm run pwa-test` and check the browser console for service-worker warnings before opening a PR.
 
 ## Commit & Pull Request Guidelines

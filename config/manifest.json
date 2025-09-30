@@ -1,7 +1,7 @@
 {
-  "name": "JDR-BAB - Livret de règles",
-  "short_name": "JDR-BAB",
-  "description": "Livret web multipages des règles JDR-BAB, thème parchemin, illustrations par catégorie/classe/sous-classe",
+  "name": "Foresia - Livret de règles",
+  "short_name": "Foresia",
+  "description": "Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous-classe",
   "version": "1.0.0",
   "start_url": "/",
   "display": "standalone",

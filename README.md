@@ -1,11 +1,11 @@
-# JDR-BAB - Livret de règles ⚔️📜
+# Foresia - Livret de règles ⚔️📜
 
-Progressive Web App pour le système de jeu de rôle JDR-BAB avec thème médiéval-fantasy.
+Progressive Web App pour le système de jeu de rôle Foresia avec thème médiéval-fantasy.
 
 ## 🚀 Accès direct
 
 ### 📱 **Version PWA (GitHub Pages)**
-- **URL**: https://ben-128.github.io/BabJdr/build/JdrBab.html
+- **URL**: https://ben-128.github.io/BabJdr/build/Foresia.html
 - **Fonctionnalités**: Installation native, cache offline, optimisé mobile
 - **Idéal pour**: Parties de JDR, usage mobile/tablette
 
@@ -60,7 +60,7 @@ git push origin master
 
 ## 📱 Installation mobile
 
-1. Aller sur https://ben-128.github.io/BabJdr/build/JdrBab.html
+1. Aller sur https://ben-128.github.io/BabJdr/build/Foresia.html
 2. **Chrome Android**: Icône "Installer" ou Menu → "Ajouter à l'écran d'accueil"
 3. **Safari iOS**: Partager → "Sur l'écran d'accueil"
 

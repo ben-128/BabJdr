@@ -1,7 +1,7 @@
 {
   "name": "jdr-bab-refacto",
   "version": "1.0.0",
-  "description": "JDR-BAB refactored modular version",
+  "description": "Foresia refactored modular version",
   "main": "index.html",
   "scripts": {
     "dev": "live-server --port=3000 --open=/index.html --quiet --no-css-inject --entry-file=index.html",
@@ -18,7 +18,7 @@
     "webapp",
     "modular"
   ],
-  "author": "JDR-BAB Team",
+  "author": "Benjamin Maurin",
   "license": "ISC",
   "devDependencies": {
     "canvas": "^3.2.0",
