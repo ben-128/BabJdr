@@ -769,20 +769,36 @@
         <div class="spell-level-filter" style="margin: 1rem 0; padding: 1rem; background: var(--card); border: 2px solid var(--rule); border-radius: 12px;">
           <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
             <label style="font-weight: 600; color: var(--accent-ink);">
-              🎯 Filtrer par niveau maximum :
+              🎯 Filtrer par niveau :
             </label>
             <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
-              <input 
-                type="number" 
-                id="spell-level-filter" 
-                min="0" 
-                max="20" 
-                value="20"
-                style="width: 80px; padding: 0.5rem; border: 1px solid var(--rule); border-radius: 6px; text-align: center; font-weight: 600;"
-              >
-              <button 
-                id="reset-spell-filter" 
-                class="btn small" 
+              <div style="display: flex; align-items: center; gap: 0.25rem;">
+                <label style="font-size: 0.85rem; color: var(--accent-ink);">Min :</label>
+                <input
+                  type="number"
+                  id="spell-level-filter-min"
+                  class="spell-level-filter-input-min"
+                  min="0"
+                  max="20"
+                  value="1"
+                  style="width: 60px; padding: 0.5rem; border: 1px solid var(--rule); border-radius: 6px; text-align: center; font-weight: 600;"
+                >
+              </div>
+              <div style="display: flex; align-items: center; gap: 0.25rem;">
+                <label style="font-size: 0.85rem; color: var(--accent-ink);">Max :</label>
+                <input
+                  type="number"
+                  id="spell-level-filter-max"
+                  class="spell-level-filter-input"
+                  min="0"
+                  max="20"
+                  value="20"
+                  style="width: 60px; padding: 0.5rem; border: 1px solid var(--rule); border-radius: 6px; text-align: center; font-weight: 600;"
+                >
+              </div>
+              <button
+                id="reset-spell-filter"
+                class="btn small"
                 style="background: var(--bronze); color: white; padding: 0.5rem 1rem;"
                 title="Réinitialiser le filtre"
               >

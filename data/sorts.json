@@ -80,7 +80,7 @@
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 12",
         "resistance": "<strong>Sans effet si:</strong> -",
-        "effetNormal": "<strong>Effet:</strong>  Inflige (13 + Puiss. Sorts) dégats de <span style=\"color: #1a1a1a; font-weight: bold;\">Nuit</span> aux créatures dans un cone devant le lanceur (largeur 9m, distance 9m) et les repousse chacune de 3m.",
+        "effetNormal": "<strong>Effet:</strong>  Inflige (13 + Puiss. Sorts) dégats de <span style=\"color: #1a1a1a; font-weight: bold;\">Nuit</span> aux créatures dans un cone devant le lanceur (largeur 3m puis 6m puis 9m, distance 9m) et les repousse chacune de 3m.",
         "effetCritique": "<strong>Coup Critique: </strong> Les dégats passent à (20 + Puiss. Sorts) et les cibles sont repoussées de 6m."
       },
       {
@@ -93,7 +93,7 @@
         "coutMana": "🔵 <strong>Coût mana:</strong> 10",
         "resistance": "<strong>Sans effet si:</strong> Esquive.",
         "effetNormal": "<strong>Effet:</strong> Inflige (15 + Puiss. Sorts) dégats physiques à la cible. Ces dégats sont réduits par l'armure.",
-        "effetCritique": "<strong>Coup Critique: </strong> Les dégats passent à (20 + Puiss. Sorts) et la cible (si elle est de taille Moyenne ou moins) subit l'état <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">A terre</span>."
+        "effetCritique": "<strong>Coup Critique: </strong> Les dégats passent à (22 + Puiss. Sorts) et la cible (si elle est de taille Moyenne ou moins) subit l'état <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">A terre</span>."
       },
       {
         "nom": "Nuage toxique",
@@ -105,7 +105,7 @@
         "coutMana": "🔵 <strong>Coût mana:</strong> 20",
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Crée à la position d'une cible à portée, un nuage toxique qui inflige (15 + Puiss. Sorts) points de dégats de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>.\n\n<br>Chaque début de tour, le lanceur peut choisir de dépenser une action principale et 5 points de mana pour que le nuage se déplace inflige ses dégats à une cible à portée du lanceur. Sinon, le nuage disparait.",
-        "effetCritique": "<strong>Coup Critique: </strong> Les dégats sont de (20 + Puiss. Sorts) et la cible est <span class=\"etat-link\" data-etat=\"Ralenti\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Ralenti</span> pendant 1 tour."
+        "effetCritique": "<strong>Coup Critique: </strong> Les dégats sont de (22 + Puiss. Sorts) et la cible est <span class=\"etat-link\" data-etat=\"Ralenti\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Ralenti</span> pendant 1 tour."
       },
       {
         "nom": "Teleportation",
@@ -130,6 +130,30 @@
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Pendant les 3 prochains tours, si le lanceur subit des dégats élémentaires, ils seront réduits de (Puiss. Sorts). Pour chaque dommage absorbé, le lanceur regagne 1 point de mana.",
         "effetCritique": "<strong>Coup Critique: </strong> Les dégats sont réduits de 2 x (Puiss. Sorts)."
+      },
+      {
+        "nom": "Armure de glace",
+        "element": "Eau",
+        "description": "Une carapace translucide de glace hérissée de pics se forme, infligeant des dégâts glacés à quiconque ose l’attaquer.",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 5",
+        "portee": "🎯 <strong>Portée:</strong> -",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 10",
+        "resistance": "<strong>Sans effet si:</strong> -",
+        "effetNormal": "<strong>Effet:</strong> Le mage s'entoure d'une armure de glace qui inflige 2 x (Puiss. Sort) dégats d'<span style=\"color: #4682b4; font-weight: bold;\">Eau</span> à quiconque l'attaque au corps à corps.\n<br> Dure 5 tours.",
+        "effetCritique": "<strong>Coup Critique: </strong> L'armure physique est également augmentée de (Puiss. Sorts)."
+      },
+      {
+        "nom": "Sables mouvants",
+        "element": "Terre",
+        "description": "Le sol se liquéfie en traîtres sables mouvants, engloutissant peu à peu les imprudents qui s’y engagent, les ralentissant tout en les meurtrissant.",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 6",
+        "portee": "🎯 <strong>Portée:</strong> 12m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 20",
+        "resistance": "<strong>Sans effet si:</strong> -",
+        "effetNormal": "<strong>Effet:</strong> Trois zones de 3mx3m à portée deviennent du sable mouvant.\n<br> Elles sont considérées comme terrain difficile, ralentissant le deplacement de ceux qui y passe de moitié.\n<br> De plus, ceux qui rentrent dans ces zones ou commencent leur tour dedans subissent (10 + Puiss. Sorts) points de dégats de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>.\n\n<br>Dure 5 tour.",
+        "effetCritique": "<strong>Coup Critique: </strong> Les dégats passent à (15 + Puiss. Sorts) et les zones restent jusqu'a la fin du combat."
       }
     ]
   },

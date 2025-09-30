@@ -69,11 +69,21 @@
       document.addEventListener('input', (e) => {
         if (e.target && (
           e.target.classList.contains('spell-level-filter-input') ||
-          e.target.id === 'spell-level-filter' ||
+          e.target.classList.contains('spell-level-filter-input-min') ||
+          e.target.id === 'spell-level-filter-max' ||
+          e.target.id === 'spell-level-filter-min' ||
           (e.target.type === 'number' && e.target.closest('.spell-level-filter'))
         )) {
-          // Throttle filter calls for smoother performance
-          this.throttledFilter(parseInt(e.target.value, 10));
+          // Get both min and max values
+          const activeArticle = document.querySelector('article.active');
+          if (activeArticle) {
+            const minInput = activeArticle.querySelector('#spell-level-filter-min');
+            const maxInput = activeArticle.querySelector('#spell-level-filter-max');
+            const minLevel = minInput ? parseInt(minInput.value, 10) || 1 : 1;
+            const maxLevel = maxInput ? parseInt(maxInput.value, 10) || 20 : 20;
+            // Throttle filter calls for smoother performance
+            this.throttledFilter(minLevel, maxLevel);
+          }
         }
       });
 
@@ -140,10 +150,10 @@
     // Throttled filter function for better performance
     throttledFilter: (function() {
       let timeout = null;
-      return function(maxLevel) {
+      return function(minLevel, maxLevel) {
         clearTimeout(timeout);
         timeout = setTimeout(() => {
-          this.filterSpellsByLevel(maxLevel);
+          this.filterSpellsByLevel(minLevel, maxLevel);
         }, 100); // 100ms throttle
       };
     })(),
@@ -152,52 +162,55 @@
       if (this._filteringInProgress) {
         return;
       }
-      
+
       const activeArticle = document.querySelector('article.active');
       if (!activeArticle) {
         return;
       }
-      
-      // Simple approach: just find the filter input
-      let filterInput = activeArticle.querySelector('.spell-level-filter-input') ||
-                       activeArticle.querySelector('#spell-level-filter') ||
-                       activeArticle.querySelector('input[type="number"]');
-      
-      if (!filterInput) {
+
+      // Find both min and max filter inputs
+      const minInput = activeArticle.querySelector('#spell-level-filter-min');
+      const maxInput = activeArticle.querySelector('#spell-level-filter-max') ||
+                      activeArticle.querySelector('.spell-level-filter-input') ||
+                      activeArticle.querySelector('#spell-level-filter');
+
+      if (!maxInput) {
         return;
       }
-      
-      // Get current value but don't auto-apply - let user control it
-      const currentValue = parseInt(filterInput.value, 10) || 20;
-      
+
+      // Get current values
+      const minLevel = minInput ? parseInt(minInput.value, 10) || 1 : 1;
+      const maxLevel = parseInt(maxInput.value, 10) || 20;
+
       // Only apply filter if it's not the default AND user has cards to filter
-      if (currentValue !== 20) {
-        this.filterSpellsByLevel(currentValue);
+      if (minLevel !== 1 || maxLevel !== 20) {
+        this.filterSpellsByLevel(minLevel, maxLevel);
       } else {
-        // Ensure all cards are visible for default level 20
+        // Ensure all cards are visible for default values
         this.restoreAllCards();
       }
     },
 
-    filterSpellsByLevel(maxLevel) {
+    filterSpellsByLevel(minLevel, maxLevel) {
       if (this._filteringInProgress) {
         return;
       }
-      
+
       this._filteringInProgress = true;
-            // Get current page from URL hash
+      // Get current page from URL hash
       const currentHash = window.location.hash.replace('#/', '');
-            
+
       if (!currentHash.startsWith('sorts-')) {
-                return;
+        this._filteringInProgress = false;
+        return;
       }
-      
+
       // First, restore any cards that were removed from DOM
       this.restoreAllCards();
-      
+
       // FORCE clear cache to get fresh DOM query
       this.clearCache();
-      
+
       // Extract category name from hash - handle double sorts- prefix
       // URLs like 'sorts-sorts-de-mage' or 'sorts-mage' should both work
       let currentCategoryName = currentHash.replace('sorts-', '');
@@ -205,33 +218,39 @@
         // Handle double prefix case: 'sorts-sorts-de-mage' -> 'sorts-de-mage'
         currentCategoryName = currentCategoryName.replace('sorts-', '');
       }
-      
+
       // ALWAYS get fresh DOM query - no cache for debugging
       const spellCards = document.querySelectorAll('.card[data-spell-name]');
-            
-      
+
       if (spellCards.length === 0) {
-                return;
+        this._filteringInProgress = false;
+        return;
       }
 
       let visibleCount = 0;
       let categoryTotalCount = 0;
-      
+      const countedSpells = new Set(); // Track counted spells to avoid duplicates
+
       spellCards.forEach((card, index) => {
         const spellName = card.dataset.spellName;
         const categoryName = card.dataset.categoryName;
-        
-                
+
         // More flexible category matching
         const matches = this.categoryMatches(categoryName, currentCategoryName);
-                
+
         if (matches) {
-          categoryTotalCount++;
-          
           // Find the spell data to get its level
           const spellLevel = this.getSpellLevel(spellName, categoryName);
-                    
-          if (spellLevel <= maxLevel) {
+
+          // Only count spells with valid level (> 0) in the total, and avoid duplicates
+          const spellKey = `${categoryName}:${spellName}`;
+          if (spellLevel > 0 && !countedSpells.has(spellKey)) {
+            categoryTotalCount++;
+            countedSpells.add(spellKey);
+          }
+
+          // Show spell if it's in the level range AND has a valid level (> 0)
+          if (spellLevel > 0 && spellLevel >= minLevel && spellLevel <= maxLevel) {
             // Show the card by ensuring it's in the DOM and visible
             if (card._originalParent && !card.parentNode) {
               card._originalParent.appendChild(card);
@@ -242,7 +261,7 @@
             card.removeAttribute('data-filtered');
             card.hidden = false;
             visibleCount++;
-                      } else {
+          } else {
             // Hide by removing from DOM temporarily and cache properly
             if (card.parentNode) {
               // Store detailed restoration info
@@ -253,29 +272,29 @@
                 spellName: spellName,
                 category: categoryName
               };
-              
+
               // Initialize cache if needed
               if (!this._removedCards) this._removedCards = [];
-              
+
               // Check if already cached to avoid duplicates
               const alreadyCached = this._removedCards.find(cached => cached.card === card);
               if (!alreadyCached) {
                 this._removedCards.push(cardData);
               }
-              
+
               // Also store on the card itself as backup
               card._originalParent = card.parentNode;
               card._nextSibling = card.nextSibling;
-              
+
               card.parentNode.removeChild(card);
-                          } else {
+            } else {
               // Fallback: hide with CSS but don't cache since it's already out of DOM
               card.style.display = 'none';
               card.style.visibility = 'hidden';
               card.classList.add('spell-filtered-hidden');
               card.setAttribute('data-filtered', 'true');
               card.hidden = true;
-                          }
+            }
           }
         } else {
           // Cards from other categories should stay visible but not counted
@@ -288,13 +307,12 @@
           card.classList.remove('spell-filtered-hidden');
           card.removeAttribute('data-filtered');
           card.hidden = false;
-                  }
+        }
       });
-      
-            
+
       // Update filter display with count (use category total instead of all spells)
-      this.updateFilterDisplay(maxLevel, visibleCount, categoryTotalCount);
-      
+      this.updateFilterDisplay(minLevel, maxLevel, visibleCount, categoryTotalCount);
+
       // Filtering complete
       this._filteringInProgress = false;
     },
@@ -481,25 +499,31 @@
       
           },
     
-    updateFilterDisplay(maxLevel, visibleCount, totalCount) {
+    updateFilterDisplay(minLevel, maxLevel, visibleCount, totalCount) {
       const activeArticle = document.querySelector('article.active');
       if (!activeArticle) return;
-      
+
       const filterContainer = activeArticle.querySelector('.spell-level-filter');
       if (!filterContainer) return;
-      
+
       // Chercher le container des contrôles (avec input et bouton)
       const controlsContainer = filterContainer.querySelector('div[style*="flex-wrap"]');
       if (!controlsContainer) return;
-      
+
       // Supprimer les anciens textes
       const allOldTexts = filterContainer.querySelectorAll('.filter-result-text');
       allOldTexts.forEach(old => old.remove());
-      
+
       // Créer le nouveau texte
       const resultText = document.createElement('span');
       resultText.className = 'filter-result-text';
-      resultText.textContent = `📊 ${visibleCount}/${totalCount} sorts affichés (niveau ≤ ${maxLevel})`;
+      if (minLevel === 1 && maxLevel === 20) {
+        resultText.textContent = `📊 ${visibleCount}/${totalCount} sorts affichés`;
+      } else if (minLevel === maxLevel) {
+        resultText.textContent = `📊 ${visibleCount}/${totalCount} sorts affichés (niveau ${minLevel})`;
+      } else {
+        resultText.textContent = `📊 ${visibleCount}/${totalCount} sorts affichés (niveau ${minLevel}-${maxLevel})`;
+      }
       resultText.style.cssText = `
         padding: 0.5rem 1rem !important;
         background-color: #e8f4f8 !important;
@@ -511,40 +535,49 @@
         white-space: nowrap !important;
         display: inline-block !important;
       `;
-      
+
       // L'ajouter dans le container des contrôles
       controlsContainer.appendChild(resultText);
     },
 
     resetFilter() {
-            
       // First restore all cards
       this.restoreAllCards();
-      
-      // Reset filter input to 20
+
+      // Reset filter inputs to default values
       const activeArticle = document.querySelector('article.active');
       if (activeArticle) {
-        let filterInput = activeArticle.querySelector('.spell-level-filter-input') ||
-                         activeArticle.querySelector('#spell-level-filter') ||
-                         activeArticle.querySelector('input[type="number"]');
-        if (filterInput) {
-          filterInput.value = '20';
-                  }
+        const minInput = activeArticle.querySelector('#spell-level-filter-min');
+        const maxInput = activeArticle.querySelector('#spell-level-filter-max') ||
+                        activeArticle.querySelector('.spell-level-filter-input') ||
+                        activeArticle.querySelector('#spell-level-filter');
+        if (minInput) {
+          minInput.value = '1';
+        }
+        if (maxInput) {
+          maxInput.value = '20';
+        }
       }
-      
+
       // Also try global search for filter inputs
-      const allFilterInputs = document.querySelectorAll('.spell-level-filter-input, #spell-level-filter, input[type="number"][class*="spell"]');
-      allFilterInputs.forEach(input => {
+      const allMinInputs = document.querySelectorAll('#spell-level-filter-min, .spell-level-filter-input-min');
+      allMinInputs.forEach(input => {
+        if (input && input.closest('.spell-level-filter')) {
+          input.value = '1';
+        }
+      });
+
+      const allMaxInputs = document.querySelectorAll('#spell-level-filter-max, .spell-level-filter-input, #spell-level-filter');
+      allMaxInputs.forEach(input => {
         if (input && input.closest('.spell-level-filter')) {
           input.value = '20';
-                  }
+        }
       });
-      
+
       // Update display to show all cards are visible
       const totalCards = document.querySelectorAll('.card[data-spell-name]').length;
-      this.updateFilterDisplay(20, totalCards, totalCards);
-      
-          }
+      this.updateFilterDisplay(1, 20, totalCards, totalCards);
+    }
   };
 
   // Initialize the spell filter when the app is ready

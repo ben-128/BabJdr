@@ -140,10 +140,14 @@
     "objet:Cristal de Sel": "https://i.ibb.co/n8PhpFY6/Sel.png",
     "objet:Viande de monstre": "https://i.ibb.co/YBYZ7KKz/Viande-Monstre.png",
     "objet:Fouet de lianes": "https://i.ibb.co/fV9FdbzF/Fouet-Foret.png",
-    "objet:Plat épicé": "https://i.ibb.co/Vc934Q9b/Epice.png"
+    "objet:Plat épicé": "https://i.ibb.co/Vc934Q9b/Epice.png",
+    "sort:Sorts de Mage:Teleportation": "https://i.ibb.co/wN2tpb2f/teleportation.png",
+    "sort:Sorts de Mage:Absorption magique": "https://i.ibb.co/3KkL252/Absorption.png",
+    "sort:Sorts de Mage:Armure de glace": "https://i.ibb.co/39DGsF7W/ArmureG.png",
+    "sort:Sorts de Mage:Sables mouvants": "https://i.ibb.co/5WjvQMWZ/Sable-Mouvant.png"
   },
   "meta": {
-    "total_images": 141,
+    "total_images": 145,
     "exported_date": "2025-09-30",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
