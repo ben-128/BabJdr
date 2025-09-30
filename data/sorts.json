@@ -281,7 +281,7 @@
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> <br>- Résistance altérations &gt;= Intelligence du lanceur<br>- Lévitation ou Volant.",
         "effetNormal": "<strong>Effet:</strong>&nbsp;La cible contracte l'état <span class=\"etat-link\" data-etat=\"Ralenti\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Ralenti</span> pendant 5 tours.",
-        "effetCritique": "<strong>Coup Critique:&nbsp;</strong>La cible ne peut plus effectuer de déplacement pendant la durée du sort."
+        "effetCritique": "<strong>Coup Critique :&nbsp;</strong>La cible ne peut plus effectuer de déplacement pendant la durée du sort."
       },
       {
         "nom": "Accélération",
@@ -295,7 +295,7 @@
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> Aucune",
         "effetNormal": "<strong>Effet:</strong> &nbsp;La vitesse de déplacement de la cible est augmentée de 3m pendant 5 tours. Non Cumulable.",
-        "effetCritique": "<strong>Coup Critique:&nbsp;</strong> La vitesse est augmentée de 6m."
+        "effetCritique": "<strong>Coup Critique :&nbsp;</strong> La vitesse est augmentée de 6m."
       },
       {
         "nom": "Sommeil",
@@ -309,7 +309,7 @@
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> <br>- Résistance altérations &gt;= Intelligence du lanceur<br>- Element <span style=\"color: #0f172a; font-weight: bold;\">Nuit</span>",
         "effetNormal": "<strong>Effet:</strong> La cible passe dans l'état <span class=\"etat-link\" data-etat=\"Endormi/assomé/Effrayé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Endormi</span> pendant ses 2 prochains tours.",
-        "effetCritique": "<strong>Coup Critique:&nbsp;</strong> L'effet dure 4 tours."
+        "effetCritique": "<strong>Coup Critique :&nbsp;</strong> L'effet dure 4 tours."
       },
       {
         "nom": "Lévitation",

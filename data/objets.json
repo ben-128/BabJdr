@@ -254,7 +254,7 @@
       "nom": "Ration copieuse de nourriture",
       "numero": 20,
       "image": "https://i.ibb.co/7JZW2ZZT/Food2.png",
-      "description": "<i>Un coffret garni de mets fins et de vin épicé, offrant réconfort et vigueur bien au-delà de la simple survie</i>",
+      "description": "<i>Un coffret garni de mets fins et de vin épicé, offrant réconfort et vigueur bien au-delà de la simple survie.</i>",
       "tags": [
         "Nourriture"
       ],
@@ -270,7 +270,7 @@
       "tags": [
         "Nourriture"
       ],
-      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore 6 points de vie. <br>Couplé à un sommeil, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>. <br>De plus, lorsque consommé, le mangeur ne neccessite plus que 4 heures de sommeil ce jour-ci.\n<br><br><b>Charges :</b> 4",
+      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore 6 points de vie. <br>Couplé à un sommeil, permet d'éviter l'état <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>. <br>De plus, lorsque consommé, le mangeur ne nécessite plus que 4 heures de sommeil ce jour-ci.\n<br><br><b>Charges :</b> 4",
       "prix": "🔷 <strong>Prix:</strong> 25",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -282,7 +282,7 @@
       "tags": [
         "Nourriture"
       ],
-      "effet": "Inutilisable en combat.\n<br>\n<br><strong>Effet:</strong> Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.",
+      "effet": "Inutilisable en combat.\n<br>\n<br><strong>Effet:</strong> Couplé à un sommeil de 8h, permet d'éviter l'état <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.",
       "prix": "",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -448,7 +448,7 @@
         "Plante",
         "Non identifié"
       ],
-      "effet": "<b>Effet:</b> Rend au héros ou à une cible proche une quantitée de mana équilavent au niveau d'Intelligence du héros.\n<br><b>Ciritique :</b> Mana rendu augmenté de 5.",
+      "effet": "<b>Effet:</b> Rend au héros ou à une cible proche une quantité de mana équivalent au niveau d'Intelligence du héros.\n<br><b>Critique :</b> Mana rendu augmenté de 5.",
       "prix": "🔷 <strong>Prix:</strong> 25",
       "poids": ""
     },
@@ -484,7 +484,7 @@
       "tags": [
         "Accessoire"
       ],
-      "effet": "<strong>Effet:</strong> En cas de coup critique physique sur une attaque au corp à corp, l'adversaire sera mis dans l'état <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">A terre</span>.\n<br><strong>Sans effet si :</strong> <br>- Adversaire de taille Grand ou supérieur <br>- Adversaire volant ou lévitant.",
+      "effet": "<strong>Effet:</strong> En cas de coup critique physique sur une attaque au corps à corps, l'adversaire sera mis dans l'état <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">À terre</span>.\n<br><strong>Sans effet si :</strong> <br>- Adversaire de taille Grand ou supérieur <br>- Adversaire volant ou lévitant.",
       "prix": "🔷 <strong>Prix:</strong> ?",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -522,7 +522,7 @@
         "Non identifié",
         "Accessoire"
       ],
-      "effet": "<strong>Effet:</strong> Les attaques physiques sont imprégnés d'une force élémentaire, qui inflige 4 dégats de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>.",
+      "effet": "<strong>Effet:</strong> Les attaques physiques sont imprégnées d'une force élémentaire, qui inflige 4 dégâts de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>.",
       "prix": "🔷 <strong>Prix:</strong> ?",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -591,7 +591,7 @@
         "Robe",
         "Non identifié"
       ],
-      "effet": "<strong>Effet:</strong> Augmente les dégats élémentaires de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> et d'<span style=\"color: #4682b4; font-weight: bold;\">Eau</span> infligés par les sorts de 5.",
+      "effet": "<strong>Effet:</strong> Augmente les dégâts élémentaires de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> et d'<span style=\"color: #4682b4; font-weight: bold;\">Eau</span> infligés par les sorts de 5.",
       "prix": "🔷 <strong>Prix:</strong> ?",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -619,7 +619,7 @@
         "Une main",
         "Non identifié"
       ],
-      "effet": "<strong>Dégats:</strong> Inflige (4 + Force) points de dégats physiques.\n<br><strong>Effet:</strong> Augmente la Puissance des sorts de 2.",
+      "effet": "<strong>Dégâts:</strong> Inflige (4 + Force) points de dégâts physiques.\n<br><strong>Effet:</strong> Augmente la Puissance des sorts de 2.",
       "prix": "🔷 <strong>Prix:</strong> ?",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },

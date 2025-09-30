@@ -10,8 +10,8 @@
         "cout": "1 points de don"
       },
       {
-        "nom": "Toujours pret",
-        "description": "Le maximum d'efforts maximum augmente de 1.",
+        "nom": "Toujours prêt",
+        "description": "Le maximum d'efforts augmente de 1.",
         "prerequis": "<strong> Prérequis :</strong> A chaque prise de ce don, son coût en point de don augmente de 1.",
         "cout": "1 point de don"
       },
@@ -46,8 +46,8 @@
         "cout": "1 point de don"
       },
       {
-        "nom": "Grand sacs",
-        "description": "Augmente le poid maximum transportable de 3, et le nombre de consommables transportables de 3.",
+        "nom": "Grand sac",
+        "description": "Augmente le poids maximum transportable de 3, et le nombre de consommables transportables de 3.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -65,19 +65,19 @@
       },
       {
         "nom": "Sommeil léger",
-        "description": "Pendant qu'il dort, le héros est aussi alerte que s'il effectuait un tour de garde.\nDe plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span> et est soigné pendant son sommeil d'un nombre de points de vie d'une valeur égale à sa volonté.",
+        "description": "Pendant qu'il dort, le héros est aussi alerte que s'il effectuait un tour de garde.\nDe plus, le héros ne nécessite que 4 heures par nuit pour éviter l'état <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span> et est soigné pendant son sommeil d'un nombre de points de vie d'une valeur égale à sa volonté.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
       {
         "nom": "Chanceux",
-        "description": "Lors d'un jet de fortune, le héros lance deux dés et prend le meuilleur resultat.",
+        "description": "Lors d'un jet de fortune, le héros lance deux dés et prend le meilleur résultat.",
         "prerequis": "<strong> Prérequis :</strong> 🍀Chance 5. <br>Don unique.",
         "cout": "1 point de don"
       },
       {
         "nom": "Attaque d'opportunité",
-        "description": "Lorsqu'un adversaire sort de votre portée d'attaque au corps à corps durant son déplacement, vous pouvez utiliser une action secondaire (non utilisée durant votre tour), pour effectuer un attaque au corps à corps sur l'adversaire.",
+        "description": "Lorsqu'un adversaire sort de votre portée d'attaque au corps à corps durant son déplacement, vous pouvez utiliser une action secondaire (non utilisée durant votre tour), pour effectuer une attaque au corps à corps sur l'adversaire.",
         "prerequis": "<strong> Prérequis :</strong> 🏃 Agilité 10. <br>Don unique.",
         "cout": "1 point de don"
       },
@@ -143,13 +143,13 @@
       },
       {
         "nom": "Attaque délayée",
-        "description": "Si le héros n'a effectuée action principale pendant son tour, il peut utiliser une action secondaire pour gagner une action principale supplémentaire au prochain tour.",
+        "description": "Si le héros n'a effectué aucune action principale pendant son tour, il peut utiliser une action secondaire pour gagner une action principale supplémentaire au prochain tour.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
       {
         "nom": "Increvable",
-        "description": "Une fois par jour, peut dépenser un effort pour rester à 1 points de vie s'il devait descendre en dessous.",
+        "description": "Une fois par jour, peut dépenser un effort pour rester à 1 point de vie s'il devait descendre en dessous.",
         "prerequis": "<strong> Prérequis :</strong> 🛡️ Endurance 10 , ⚡Volonté 5",
         "cout": "1 point de don"
       },
@@ -191,19 +191,19 @@
       },
       {
         "nom": "Lancer d'arme",
-        "description": "Permet, avec une action principale et une action secondaire, de lancer une arme à une main (équipée ou de l'inventaire) jusqu'a 12m (touche également les cibles volantes). \n<br>Même rêgles qu'une attaque au corps à corps (jet et dégats). <br>L'arme n'est alors plus équipée. Elle peut être récupérée avec une action secondaire, à moins de 3m de la cible.",
+        "description": "Permet, avec une action principale et une action secondaire, de lancer une arme à une main (équipée ou de l'inventaire) jusqu'à 12m (touche également les cibles volantes). \n<br>Mêmes règles qu'une attaque au corps à corps (jet et dégâts). <br>L'arme n'est alors plus équipée. Elle peut être récupérée avec une action secondaire, à moins de 3m de la cible.",
         "prerequis": "<strong> Prérequis :</strong> 🏃Agilité 5.",
         "cout": "1 point de don"
       },
       {
         "nom": "Imperturbable",
-        "description": "Permet de retirer un traumas du héros.",
+        "description": "Permet de retirer un trauma du héros.",
         "prerequis": "<strong> Prérequis :</strong> Don Unique.",
         "cout": "1 point de don"
       },
       {
         "nom": "Cri de guerre",
-        "description": "Une fois par combat, peut utiliser une action secondaire pour faire un cri de guerre, qui augmente les dégats physiques infligés par tous les héros d'une valeur du niveau du héros, jusqu'a la fin du prochain tour.",
+        "description": "Une fois par combat, peut utiliser une action secondaire pour faire un cri de guerre, qui augmente les dégâts physiques infligés par tous les héros d'une valeur du niveau du héros, jusqu'à la fin du prochain tour.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -227,7 +227,7 @@
       },
       {
         "nom": "Chasse et pêche",
-        "description": "Le héros n'as plus besoin de sa ration de nourriture quotidienne.",
+        "description": "Le héros n'a plus besoin de sa ration de nourriture quotidienne.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -239,13 +239,13 @@
       },
       {
         "nom": "Attaque double",
-        "description": "Permet d'utiliser une action secondaire lors d'une attaque au corp à corp pour attaquer avec les deux armes à la fois (un seul jet de dé), infligeant les dégats des deux armes.",
+        "description": "Permet d'utiliser une action secondaire lors d'une attaque au corps à corps pour attaquer avec les deux armes à la fois (un seul jet de dé), infligeant les dégâts des deux armes.",
         "prerequis": "<strong> Prérequis :</strong> Ambidextre",
         "cout": "2 point de don"
       },
       {
         "nom": "Retrait",
-        "description": "Aprés avoir subit une attaque au corps à corps (esquivée ou non), le héros peut utiliser une action secondaire pour reculer de 6m par rapport à l'attaquant.",
+        "description": "Après avoir subi une attaque au corps à corps (esquivée ou non), le héros peut utiliser une action secondaire pour reculer de 6m par rapport à l'attaquant.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -256,7 +256,7 @@
         "cout": "1 point de don"
       },
       {
-        "nom": "Reflèxes surhumains",
+        "nom": "Réflexes surhumains",
         "description": "Une fois par combat, permet de forcer une esquive sur une attaque ou un sort esquivable.",
         "prerequis": "<strong> Prérequis :</strong> 🏃 Agilité 10",
         "cout": "1 point de don"
@@ -268,26 +268,26 @@
         "cout": "1 point de don"
       },
       {
-        "nom": "Eventail de couteaux",
+        "nom": "Éventail de couteaux",
         "description": "Une fois par combat, peut utiliser une action secondaire pour améliorer sa prochaine attaque ce tour ci. Elle attaquera tous les adversaires à moins de 3m.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
       {
         "nom": "Avantage",
-        "description": "Une fois par combat, lors d'une attaque esquivée ou en echec critique, permet de lancer une nouvelle fois le dé.",
+        "description": "Une fois par combat, lors d'une attaque esquivée ou en échec critique, permet de lancer une nouvelle fois le dé.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
       {
         "nom": "Adrénaline",
-        "description": "Aprés avoir subit des dégâts critiques (sort ou physique), le héros bénéficiera d'une action principale supplémentaire à son prochain tour (non cumulable).",
+        "description": "Après avoir subi des dégâts critiques (sort ou physique), le héros bénéficiera d'une action principale supplémentaire à son prochain tour (non cumulable).",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
       {
-        "nom": "Brise genou",
-        "description": "Une fois par combat, peut utiliser une action secondaire pour améliorer sa prochaine attaque physique. <br>Si elle réussi, met la cible dans l'état <span class=\"etat-link\" data-etat=\"Ralenti\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ralenti</span> pendant 5 tours. <br> Sans effet sur les créatures de Taille supérieure à Moyenne.",
+        "nom": "Brise-genou",
+        "description": "Une fois par combat, peut utiliser une action secondaire pour améliorer sa prochaine attaque physique. <br>Si elle réussit, met la cible dans l'état <span class=\"etat-link\" data-etat=\"Ralenti\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ralenti</span> pendant 5 tours. <br> Sans effet sur les créatures de Taille supérieure à Moyenne.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -407,7 +407,7 @@
       },
       {
         "nom": "Musique",
-        "description": "Permet d'apprendre un instrument de musique (ou de savoir chanter) au choix, gagnant 2 de compétences sur les tests de compétence éloquence le nécéssitant.",
+        "description": "Permet d'apprendre un instrument de musique (ou de savoir chanter) au choix, gagnant 2 de compétences sur les tests de compétence éloquence le nécessitant.",
         "prerequis": "<strong> Prérequis :</strong>-",
         "cout": "1 point de don"
       },

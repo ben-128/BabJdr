@@ -18,7 +18,7 @@
       "type": "card",
       "id": "combat-new-3-1756401384086",
       "title": "Actions",
-      "content": "Chaque tour, un héros dispose d'une <b>action principale</b>, pour effectuer une attaque physique ou un sort.\nElle est perdue si elle n'est pas utilisé pendant son tour. Elle permet également de faire toute action qui nécéssite un test de compétence (ouvrir une porte, casser un rocher...).\n\n<br><br>Il dispose également d'une <b>action secondaire</b>, qui permet de faire un certains nombre de choses :\n<br>- Sauter.\n<br>- Utiliser un objet.\n<br>- Changer d'arme.\n<br>Certains dons ou abilités permettent également d'effectuer d'autres choses en utilisant l'action secondaire.\n\n<br><br> Les héros peuvent effectuer leur déplacement, action principale et secondaire dans l'ordre qui leur plait.",
+      "content": "Chaque tour, un héros dispose d'une <b>action principale</b>, pour effectuer une attaque physique ou un sort.\nElle est perdue si elle n'est pas utilisée pendant son tour. Elle permet également de faire toute action qui nécessite un test de compétence (ouvrir une porte, casser un rocher...).\n\n<br><br>Il dispose également d'une <b>action secondaire</b>, qui permet de faire un certain nombre de choses :\n<br>- Sauter.\n<br>- Utiliser un objet.\n<br>- Changer d'arme.\n<br>Certains dons ou abilités permettent également d'effectuer d'autres choses en utilisant l'action secondaire.\n\n<br><br> Les héros peuvent effectuer leur déplacement, action principale et secondaire dans l'ordre qui leur plaît.",
       "deletable": true,
       "sectionName": "Nouvelle section"
     },
@@ -50,7 +50,7 @@
       "type": "card",
       "id": "combat-new-7-1756407955417",
       "title": "Incantation sur plusieurs tours",
-      "content": "Certains sorts ont un effet qui dure plusieurs tours.\n<br> Dans ce cas, le dé qui determine si l'effet est critique doit être relancé à chaque tour (l'effet \"critique\" d'un sort ne dure qu'un seul tour).<br>  <br>\n\n<hr>\n\n<br>Certains sorts puissants nécéssitent plusieurs tours d'incantation.\n\n<br><br>Aprés avoir commencé une incantation, aucun déplacement/action n'est possible. Les effets du sort sont effectués au dernier tour de l'incantation, tour où la créature pourra de nouveau effectuer des actions/déplacement.\n<br> Les dégâts subis n’interrompent pas l’incantation, sauf en cas de mort ou d’effet empechant d'effectuer des actions (exemple : <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">A terre</span>).\n<br><hr>",
+      "content": "Certains sorts ont un effet qui dure plusieurs tours.\n<br> Dans ce cas, le dé qui détermine si l'effet est critique doit être relancé à chaque tour (l'effet \"critique\" d'un sort ne dure qu'un seul tour).<br>  <br>\n\n<hr>\n\n<br>Certains sorts puissants nécessitent plusieurs tours d'incantation.\n\n<br><br>Après avoir commencé une incantation, aucun déplacement/action n'est possible. Les effets du sort sont effectués au dernier tour de l'incantation, tour où la créature pourra de nouveau effectuer des actions/déplacement.\n<br> Les dégâts subis n'interrompent pas l'incantation, sauf en cas de mort ou d'effet empêchant d'effectuer des actions (exemple : <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">À terre</span>).\n<br><hr>",
       "deletable": true,
       "sectionName": "Nouvelle section"
     },

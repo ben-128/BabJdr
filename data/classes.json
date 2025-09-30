@@ -1,7 +1,7 @@
 [
   {
     "nom": "Guerrier",
-    "resume": "Héros sans égal au combat au corp à corp.",
+    "resume": "Héros sans égal au combat au corps à corps.",
     "capacites": "<ul><li><em>Expert de l'équipement</em> : Capable d'utiliser toutes les armes (épées, arcs, bâtons, dagues, exotiques, une main et deux mains), armures (robes, légères, lourdes), et boucliers.</li><li><em>Hardiesse</em> : Gagne la compétence Hardiesse rang 1.</li><li>\n<em>Doué</em> : Gagne un point de Don supplémentaire par niveau.</li></ul>",
     "sousClasses": [
       {
@@ -36,7 +36,7 @@
         "nom": "Érudit",
         "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>1</strong></span><span class=\"chip\">🏃 Agilité: <strong>1</strong></span><span class=\"chip\">🛡️ Endurance: <strong>4</strong></span><span class=\"chip\">🧠 Intelligence: <strong>8</strong></span><span class=\"chip\">⚡ Volonté: <strong>3</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +3 Intelligence 🧠, +2 Volonté ⚡<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Instruit</em> : Gagne la compétence Réflexion rang 1.</li><li><em>Apprentissage accéléré</em> : Le niveau de l'érudit est considéré plus élevé d'un niveau pour les prérequis d'apprentissage de sorts.</li>\n<li><em>Mana inépuisable</em> : Chaque point de volonté augmente le mana de 3 au lieu de 2.</li>\n<li><em>Magie interdite</em> : Capable d'utiliser ses lectures (s'il les comprends) pour apprendre de nouveaux sorts.</li></ul>",
+        "capacites": "<ul><li><em>Instruit</em> : Gagne la compétence Réflexion rang 1.</li><li><em>Apprentissage accéléré</em> : Le niveau de l'érudit est considéré plus élevé d'un niveau pour les prérequis d'apprentissage de sorts.</li>\n<li><em>Mana inépuisable</em> : Chaque point de volonté augmente le mana de 3 au lieu de 2.</li>\n<li><em>Magie interdite</em> : Capable d'utiliser ses lectures (s'il les comprend) pour apprendre de nouveaux sorts.</li></ul>",
         "description": "<i>Mage avide de savoir, doté d’une mémoire prodigieuse. Il assimile les arcanes avec une rapidité fulgurante et maîtrise de nouveaux sorts bien plus vite que ses pairs.</i>"
       },
       {
@@ -64,7 +64,7 @@
         "nom": "Clerc Divin",
         "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>1</strong></span><span class=\"chip\">🏃 Agilité: <strong>1</strong></span><span class=\"chip\">🛡️ Endurance: <strong>5</strong></span><span class=\"chip\">🧠 Intelligence: <strong>5</strong></span><span class=\"chip\">⚡ Volonté: <strong>5</strong></span><span class=\"chip\">🍀 Chance: <strong>4</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +2 Intelligence 🧠, +2 Volonté ⚡, +1 Chance 🍀<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Maître des soins</em> : Double l'effet de la puissance des sorts sur les sorts de soins.</li><li><em> Pieu </em>:  Gagne 1 de compétence sur les tests de compétence Reflexion sur un dieu ou une religion.</li><li><em> Prière </em>:  Peut utiliser une action principale pour donner à une cible à moins de 3m un d4 (non cumlable, passe à d8 après le niveau 10), qu'il pourra utiliser dans le combat au choix pour un bonus de dégats physique ou d'armure physique.</li></ul>",
+        "capacites": "<ul><li><em>Maître des soins</em> : Double l'effet de la puissance des sorts sur les sorts de soins.</li><li><em> Pieux </em>:  Gagne 1 de compétence sur les tests de compétence Réflexion sur un dieu ou une religion.</li><li><em> Prière </em>:  Peut utiliser une action principale pour donner à une cible à moins de 3m un d4 (non cumulable, passe à d8 après le niveau 10), qu'il pourra utiliser dans le combat au choix pour un bonus de dégâts physiques ou d'armure physique.</li></ul>",
         "description": "<i>Serviteur sacré, maître des arts de guérison. Sa puissante magie de soins protège ses alliés et les relève même aux portes de la mort.</i>"
       }
     ]
@@ -99,14 +99,14 @@
         "nom": "Esprit de la grande Fée",
         "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>1</strong></span><span class=\"chip\">🏃 Agilité: <strong>5</strong></span><span class=\"chip\">🛡️ Endurance: <strong>5</strong></span><span class=\"chip\">🧠 Intelligence: <strong>3</strong></span><span class=\"chip\">⚡ Volonté: <strong>3</strong></span><span class=\"chip\">🍀 Chance: <strong>3</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +1 Agilité 🏃, +1 Intelligence 🧠, +1 Volonté ⚡, +2 Chance 🍀<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Tatillon</em> : Gagne la compétence Finesse rang 1.</li><li><em>Lévitation</em> : Est de manière permanante dans l'état <span class=\"etat-link\" data-etat=\"Lévitation\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Lévitation</span>.</li><li><em>Rayon de l'Amitié</em> : Par une action secondaire, peut répéter sur une autre cible à portée un sort bénéfique qui a ciblé un allié se tour ci, sans coût en mana supplémentaire.</li></ul>",
+        "capacites": "<ul><li><em>Tatillon</em> : Gagne la compétence Finesse rang 1.</li><li><em>Lévitation</em> : Est de manière permanente dans l'état <span class=\"etat-link\" data-etat=\"Lévitation\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Lévitation</span>.</li><li><em>Rayon de l'Amitié</em> : Par une action secondaire, peut répéter sur une autre cible à portée un sort bénéfique qui a ciblé un allié ce tour-ci, sans coût en mana supplémentaire.</li></ul>",
         "description": "<i>Être mystique qui flotte au-dessus du sol, il invoque des sorts imprévisibles pour soutenir ses alliés.</i>"
       },
       {
         "nom": "Lutin",
         "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>2</strong></span><span class=\"chip\">🏃 Agilité: <strong>1</strong></span><span class=\"chip\">🛡️ Endurance: <strong>5</strong></span><span class=\"chip\">🧠 Intelligence: <strong>5</strong></span><span class=\"chip\">⚡ Volonté: <strong>3</strong></span><span class=\"chip\">🍀 Chance: <strong>5</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> 💪 +1 Force, +2 Intelligence 🧠, +1 Volonté ⚡, +1 Chance 🍀<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Secrets bien gardés</em> : Gagne la compétence Reflexion rang 1.\n</li><li><em>Fouineur</em> : Augmente la Fortune de 5.\n</li><li><em>Malice corrosive</em> : Aprés une attaque au corps à corps réussie, la cible du Lutin voit son armure physique réduite de la valeur des dégats infligés, jusqu'a la fin du prochain tour du héros.</li>\n<li><em>Rire malicieux</em> : Aprés avoir infligé une altération magique à une cible, regagne un montant de mana équivalent au niveau du sort.</li>\n</ul>",
+        "capacites": "<ul><li><em>Secrets bien gardés</em> : Gagne la compétence Réflexion rang 1.\n</li><li><em>Fouineur</em> : Augmente la Fortune de 5.\n</li><li><em>Malice corrosive</em> : Après une attaque au corps à corps réussie, la cible du Lutin voit son armure physique réduite de la valeur des dégâts infligés, jusqu'à la fin du prochain tour du héros.</li>\n<li><em>Rire malicieux</em> : Après avoir infligé une altération magique à une cible, regagne un montant de mana équivalent au niveau du sort.</li>\n</ul>",
         "description": "<i>Esprit espiègle et rusé, passé maître dans l’art des altérations magiques. </i>"
       }
     ]

@@ -10,7 +10,7 @@
       "type": "card",
       "id": "gestion-des-ressources-new-2-1756401478745",
       "title": "Inventaire",
-      "content": "<p>Chaque héros dispose de <b>quatre inventaires</b> :</p>\n\n<ul>\n  <li>\n    <b>Équipement</b> : Toujours porté et actif, il est constitué d’une arme, d’une armure, \n    d’un éventuel bouclier et de <b>3 accessoires</b>.\n  </li>\n  <li>\n    <b>Sac de consommables</b> : Peut contenir jusqu’à <b>10 consommables</b>. Même si un héro possède plusieur fois le même consommable, ils prendront chacun une place.\n  </li>\n  <li>\n    <b>Sac général</b> : Dispose d’une capacité maximale de <b>10 points de poids</b>. \n    Chaque objet entreposé y possède une valeur de poids indiquée dans sa description.\n  </li>\n <li>\n    <b>Objets de quête</b> : Aucune limite pour ces objets, utiles pour l'aventure (clés, cartes...).\n  </li>\n</ul>",
+      "content": "<p>Chaque héros dispose de <b>quatre inventaires</b> :</p>\n\n<ul>\n  <li>\n    <b>Équipement</b> : Toujours porté et actif, il est constitué d’une arme, d’une armure, \n    d’un éventuel bouclier et de <b>3 accessoires</b>.\n  </li>\n  <li>\n    <b>Sac de consommables</b> : Peut contenir jusqu'à <b>10 consommables</b>. Même si un héros possède plusieurs fois le même consommable, ils prendront chacun une place.\n  </li>\n  <li>\n    <b>Sac général</b> : Dispose d’une capacité maximale de <b>10 points de poids</b>. \n    Chaque objet entreposé y possède une valeur de poids indiquée dans sa description.\n  </li>\n <li>\n    <b>Objets de quête</b> : Aucune limite pour ces objets, utiles pour l'aventure (clés, cartes...).\n  </li>\n</ul>",
       "deletable": true,
       "sectionName": "Nouvelle section"
     },
