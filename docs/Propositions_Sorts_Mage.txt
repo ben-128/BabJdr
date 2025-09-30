@@ -1,0 +1,112 @@
+PROPOSITIONS DE SORTS POUR LE MAGE
+===================================
+
+Sorts différents des simples dégâts, sans empiéter sur le Prêtre (soin/buff défensif/révélation)
+ou l'Enchanteur (buff/debuff classiques).
+
+═══════════════════════════════════════════════════════════════════════════
+
+CONTRÔLE DE TERRAIN & MANIPULATION SPATIALE
+───────────────────────────────────────────
+
+1. MUR DE FLAMMES (Feu, Niveau 3)
+   - Crée un mur de feu de 6m qui bloque le passage et inflige des dégâts à quiconque le traverse
+   - Dure 3 tours
+
+2. TÉLÉPORTATION (Air, Niveau 4)
+   - Se téléporte à un endroit visible dans un rayon de 12m
+   - Critique : peut emmener un allié adjacent
+
+3. PIÈGE DE GLACE (Eau, Niveau 3)
+   - Place une zone gelée au sol (3m de rayon)
+   - Les ennemis qui y entrent doivent réussir un jet ou être immobilisés 1 tour
+
+4. PORTAIL ÉLÉMENTAIRE (Lumière, Niveau 6)
+   - Crée 2 portails pendant 5 tours
+   - Traverser l'un mène à l'autre instantanément
+
+5. SABLES MOUVANTS (Terre, Niveau 4)
+   - Transforme le sol sous les pieds d'ennemis (6m de rayon)
+   - Les cibles s'enfoncent et ont leur vitesse réduite de moitié + malus à l'esquive
+
+═══════════════════════════════════════════════════════════════════════════
+
+MANIPULATION MAGIQUE & RÉACTION
+────────────────────────────────
+
+6. ABSORPTION MAGIQUE (Lumière, Niveau 5)
+   - Prochaine attaque magique ciblant le lanceur est absorbée
+   - Restore du mana au lanceur (moitié du coût du sort ennemi)
+
+7. MIROIR ARCANIQUE (Eau, Niveau 6)
+   - Renvoie le prochain sort ciblé sur le lanceur vers son expéditeur
+
+8. DISSIPATION (Air, Niveau 3)
+   - Enlève 1 effet magique (buff ou debuff) d'une cible à 12m
+
+9. VOL DE MANA (Nuit, Niveau 5)
+   - Draine (8 + Puiss. Sorts) points de mana d'un ennemi
+   - Récupère la moitié pour le lanceur
+
+═══════════════════════════════════════════════════════════════════════════
+
+INVOCATION & TRANSFORMATION
+────────────────────────────
+
+10. SERVITEUR ÉLÉMENTAIRE (Au choix, Niveau 7)
+    - Invoque un petit élémental qui combat pendant 3 tours
+    - Stats basées sur l'Intelligence du lanceur
+
+11. TRANSMUTATION MINEURE (Terre, Niveau 4)
+    - Transforme un petit objet en un autre (ex: corde en serpent, pierre en eau)
+    - Utilisation créative en RP
+
+12. FORME ÉTHÉRÉE (Air, Niveau 8)
+    - Le lanceur devient intangible pendant 2 tours
+    - Immunité aux dégâts physiques mais ne peut pas attaquer
+    - Peut traverser les murs
+
+═══════════════════════════════════════════════════════════════════════════
+
+MANIPULATION ÉLÉMENTAIRE AVANCÉE
+─────────────────────────────────
+
+13. CHAÎNES DE FOUDRE (Air, Niveau 5)
+    - L'éclair rebondit entre 3 ennemis proches
+    - Inflige des dégâts décroissants à chacun
+
+14. PRISON DE GLACE (Eau, Niveau 6)
+    - Emprisonne une cible dans un bloc de glace
+    - La cible ne peut plus agir mais est immunisée aux attaques
+    - Dure jusqu'à destruction du bloc (PV du bloc = Intelligence du lanceur × 3)
+
+15. VOLATILISATION (Feu, Niveau 5)
+    - Le prochain sort de dégâts du lanceur a sa portée doublée
+    - Traverse les obstacles non-magiques
+
+16. GRAVITÉ INVERSÉE (Air, Niveau 7)
+    - Les ennemis dans une zone (6m) flottent vers le haut pendant 2 tours
+    - Puis chutent en subissant des dégâts
+
+17. FONTAINE DE LAVE (Feu/Terre, Niveau 8)
+    - Fait jaillir de la lave à un endroit qui persiste 4 tours
+    - Zone dangereuse qui inflige des dégâts continus
+
+18. BRUME AVEUGLANTE (Eau/Air, Niveau 4)
+    - Crée un brouillard dense (9m de rayon)
+    - Réduit drastiquement la précision de tous (alliés compris)
+    - Dure 3 tours
+
+═══════════════════════════════════════════════════════════════════════════
+
+IDENTITÉ DU MAGE
+────────────────
+Ces sorts donnent au mage des options tactiques :
+- Contrôle de zone
+- Mobilité
+- Contre-magie
+- Manipulation des forces élémentaires brutes
+
+Sans empiéter sur :
+- Le rôle de support du Prêtre
+- Les buffs/debuffs de l'Enchanteur
