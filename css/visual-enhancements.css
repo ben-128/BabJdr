@@ -1,0 +1,474 @@
+/* ═══════════════════════════════════════════════════════════════════════════════════════
+   ✨ VISUAL ENHANCEMENTS - Medieval Fantasy Aesthetic Improvements
+   ═══════════════════════════════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────── Enhanced Color Variables ─────────────────────────── */
+:root {
+  /* Richer color palette */
+  --gold-rich: #FFD700;
+  --gold-deep: #B8860B;
+  --bronze-light: #E8A87C;
+  --bronze-deep: #A0522D;
+  --parchment-light: #FFF8DC;
+  --ink-dark: #1a0f0a;
+  --accent-glow: rgba(212, 175, 55, 0.4);
+  --shadow-deep: rgba(44, 24, 16, 0.3);
+
+  /* Enhanced gradients */
+  --gradient-gold: linear-gradient(135deg, #FFD700 0%, #D4AF37 50%, #B8860B 100%);
+  --gradient-bronze: linear-gradient(135deg, #E8A87C 0%, #CD7F32 50%, #A0522D 100%);
+  --gradient-parchment: linear-gradient(145deg, #FFF8DC 0%, #F4F0E6 50%, #F0E8D8 100%);
+  --gradient-depth: linear-gradient(180deg, rgba(255,255,255,0.2) 0%, transparent 50%, rgba(0,0,0,0.1) 100%);
+}
+
+/* ─────────────────────────── Enhanced Card System ─────────────────────────── */
+.card,
+.card-base {
+  /* Richer background with depth */
+  background:
+    radial-gradient(circle at 10% 20%, rgba(255, 216, 0, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 90% 80%, rgba(139, 69, 19, 0.04) 0%, transparent 50%),
+    var(--parchment-texture),
+    var(--gradient-parchment);
+
+  /* Enhanced border with ornamental style */
+  border: 3px solid transparent;
+  border-image: linear-gradient(
+    145deg,
+    var(--bronze-deep) 0%,
+    var(--gold) 25%,
+    var(--bronze) 50%,
+    var(--gold-deep) 75%,
+    var(--bronze-deep) 100%
+  ) 1;
+
+  /* Deeper shadows for more depth */
+  box-shadow:
+    0 10px 40px rgba(139, 69, 19, 0.25),
+    0 4px 12px rgba(139, 69, 19, 0.18),
+    0 2px 6px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 2px 4px rgba(255, 248, 220, 0.5),
+    inset 0 -2px 4px rgba(139, 69, 19, 0.1);
+
+  /* Smooth transitions */
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  /* Ornamental corners */
+  position: relative;
+}
+
+/* Decorative corner ornaments */
+.card::before,
+.card-base::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 24px;
+  height: 24px;
+  border-top: 2px solid var(--gold);
+  border-left: 2px solid var(--gold);
+  border-top-left-radius: 4px;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.card::after,
+.card-base::after {
+  content: '';
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  border-bottom: 2px solid var(--gold);
+  border-right: 2px solid var(--gold);
+  border-bottom-right-radius: 4px;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+/* Additional corner decorations */
+.card .corner-ornament-tr,
+.card-base .corner-ornament-tr {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  border-top: 2px solid var(--bronze);
+  border-right: 2px solid var(--bronze);
+  border-top-right-radius: 4px;
+  opacity: 0.6;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.card .corner-ornament-bl,
+.card-base .corner-ornament-bl {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  width: 24px;
+  height: 24px;
+  border-bottom: 2px solid var(--bronze);
+  border-left: 2px solid var(--bronze);
+  border-bottom-left-radius: 4px;
+  opacity: 0.6;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* Enhanced hover state */
+.card:hover,
+.card-base:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow:
+    0 20px 60px rgba(139, 69, 19, 0.3),
+    0 8px 20px rgba(139, 69, 19, 0.22),
+    0 4px 10px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 3px 6px rgba(255, 248, 220, 0.6),
+    inset 0 -3px 6px rgba(139, 69, 19, 0.12),
+    0 0 30px var(--accent-glow);
+
+  border-image: linear-gradient(
+    145deg,
+    var(--gold-rich) 0%,
+    var(--bronze-light) 25%,
+    var(--gold) 50%,
+    var(--bronze-light) 75%,
+    var(--gold-rich) 100%
+  ) 1;
+}
+
+.card:hover::before,
+.card:hover::after,
+.card-base:hover::before,
+.card-base:hover::after {
+  opacity: 1;
+}
+
+/* ─────────────────────────── Enhanced Button System ─────────────────────────── */
+.btn-base {
+  /* Rich gradient background */
+  background:
+    linear-gradient(145deg,
+      rgba(255, 216, 0, 0.15) 0%,
+      rgba(212, 175, 55, 0.1) 50%,
+      rgba(205, 127, 50, 0.15) 100%
+    ),
+    var(--gradient-parchment);
+
+  /* Ornamental border */
+  border: 2px solid var(--gold);
+  border-radius: 10px;
+
+  /* Enhanced shadows */
+  box-shadow:
+    0 6px 20px rgba(212, 175, 55, 0.25),
+    0 2px 8px rgba(139, 69, 19, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 2px 4px rgba(255, 248, 220, 0.3);
+
+  /* Typography */
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+  color: var(--ink-dark);
+  letter-spacing: 0.5px;
+
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Shimmer effect on hover */
+.btn-base::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 100%
+  );
+  transition: left 0.6s ease;
+}
+
+.btn-base:hover::before {
+  left: 150%;
+}
+
+.btn-base:hover {
+  background:
+    linear-gradient(145deg,
+      rgba(255, 216, 0, 0.25) 0%,
+      rgba(212, 175, 55, 0.2) 50%,
+      rgba(205, 127, 50, 0.25) 100%
+    ),
+    var(--gradient-parchment);
+
+  border-color: var(--gold-rich);
+
+  box-shadow:
+    0 8px 30px rgba(212, 175, 55, 0.35),
+    0 4px 12px rgba(139, 69, 19, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 3px 6px rgba(255, 248, 220, 0.4),
+    0 0 20px var(--accent-glow);
+
+  transform: translateY(-2px) scale(1.02);
+}
+
+.btn-base:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow:
+    0 4px 12px rgba(212, 175, 55, 0.2),
+    0 2px 6px rgba(139, 69, 19, 0.15),
+    inset 0 2px 4px rgba(139, 69, 19, 0.2);
+}
+
+/* ─────────────────────────── Enhanced Typography ─────────────────────────── */
+h1, h2, h3 {
+  /* Richer text shadow */
+  text-shadow:
+    2px 2px 4px rgba(0, 0, 0, 0.15),
+    0 0 20px rgba(212, 175, 55, 0.2);
+}
+
+h1 {
+  /* Enhanced gold gradient */
+  background: linear-gradient(
+    135deg,
+    #FFD700 0%,
+    #F4C430 15%,
+    #D4AF37 35%,
+    #CD7F32 65%,
+    #D4AF37 85%,
+    #FFD700 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 2px 4px rgba(212, 175, 55, 0.3));
+}
+
+/* ─────────────────────────── Decorative Elements ─────────────────────────── */
+.ornamental-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem auto;
+  gap: 1rem;
+  opacity: 0.8;
+}
+
+.ornamental-divider::before,
+.ornamental-divider::after {
+  content: '';
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--bronze) 20%,
+    var(--gold) 50%,
+    var(--bronze) 80%,
+    transparent 100%
+  );
+  max-width: 200px;
+}
+
+.ornamental-divider::before {
+  margin-right: auto;
+}
+
+.ornamental-divider::after {
+  margin-left: auto;
+}
+
+/* Decorative corner flourishes for special cards */
+.card-featured,
+.card-premium {
+  border-image: linear-gradient(
+    145deg,
+    var(--gold-rich) 0%,
+    var(--bronze-light) 25%,
+    var(--gold-deep) 50%,
+    var(--bronze-light) 75%,
+    var(--gold-rich) 100%
+  ) 1;
+
+  box-shadow:
+    0 12px 50px rgba(212, 175, 55, 0.3),
+    0 6px 18px rgba(139, 69, 19, 0.2),
+    inset 0 2px 0 rgba(255, 255, 255, 0.4),
+    inset 0 4px 8px rgba(255, 248, 220, 0.5),
+    0 0 40px var(--accent-glow);
+}
+
+/* ─────────────────────────── Enhanced Scrollbar ─────────────────────────── */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--gradient-parchment);
+  border-radius: 6px;
+  border: 1px solid var(--bronze);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gradient-bronze);
+  border-radius: 6px;
+  border: 2px solid var(--paper);
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gradient-gold);
+}
+
+/* ─────────────────────────── Enhanced Input Fields ─────────────────────────── */
+input[type="text"],
+input[type="search"],
+textarea,
+select {
+  background:
+    var(--gradient-parchment);
+  border: 2px solid var(--bronze);
+  border-radius: 8px;
+  padding: 10px 14px;
+  box-shadow:
+    inset 0 2px 4px rgba(139, 69, 19, 0.1),
+    0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  font-family: "Source Serif Pro", serif;
+  color: var(--ink-dark);
+}
+
+input[type="text"]:focus,
+input[type="search"]:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--gold);
+  box-shadow:
+    inset 0 2px 4px rgba(139, 69, 19, 0.15),
+    0 4px 12px rgba(212, 175, 55, 0.2),
+    0 0 20px var(--accent-glow);
+  outline: none;
+  background: var(--parchment-light);
+}
+
+/* ─────────────────────────── Glow Effects for Interactive Elements ─────────────────────────── */
+.glow-on-hover {
+  transition: all 0.3s ease;
+}
+
+.glow-on-hover:hover {
+  filter: drop-shadow(0 0 10px var(--accent-glow));
+}
+
+/* ─────────────────────────── Enhanced Animations ─────────────────────────── */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow:
+      0 0 20px rgba(212, 175, 55, 0.3),
+      0 0 40px rgba(212, 175, 55, 0.2);
+  }
+  50% {
+    box-shadow:
+      0 0 30px rgba(212, 175, 55, 0.4),
+      0 0 60px rgba(212, 175, 55, 0.3);
+  }
+}
+
+/* Apply fade in animation to cards */
+.card,
+.card-base {
+  animation: fadeInUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Stagger animation for multiple cards */
+.card:nth-child(1),
+.card-base:nth-child(1) { animation-delay: 0.05s; }
+.card:nth-child(2),
+.card-base:nth-child(2) { animation-delay: 0.1s; }
+.card:nth-child(3),
+.card-base:nth-child(3) { animation-delay: 0.15s; }
+.card:nth-child(4),
+.card-base:nth-child(4) { animation-delay: 0.2s; }
+.card:nth-child(5),
+.card-base:nth-child(5) { animation-delay: 0.25s; }
+.card:nth-child(6),
+.card-base:nth-child(6) { animation-delay: 0.3s; }
+
+/* ─────────────────────────── Mobile Optimizations ─────────────────────────── */
+@media (max-width: 768px) {
+  /* Reduce animation intensity on mobile */
+  .card:hover,
+  .card-base:hover {
+    transform: translateY(-3px) scale(1.01);
+  }
+
+  .btn-base:hover {
+    transform: translateY(-1px) scale(1.01);
+  }
+
+  /* Disable complex shadows on mobile for performance */
+  .card,
+  .card-base {
+    box-shadow:
+      0 6px 20px rgba(139, 69, 19, 0.2),
+      0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .btn-base {
+    box-shadow:
+      0 4px 12px rgba(212, 175, 55, 0.2),
+      0 2px 4px rgba(139, 69, 19, 0.15);
+  }
+}
+
+/* ─────────────────────────── Print Styles ─────────────────────────── */
+@media print {
+  .card,
+  .card-base,
+  .btn-base {
+    box-shadow: none;
+    border: 2px solid var(--bronze);
+  }
+
+  .card::before,
+  .card::after,
+  .card-base::before,
+  .card-base::after {
+    display: none;
+  }
+}

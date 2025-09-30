@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-09-28T20:27:59.633Z by JdrBab Build System -->
+<!-- Generated on 2025-09-30T08:30:20.070Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -118,8 +118,8 @@ window.MANIFEST_DATA = {
 <meta name="theme-color" content="#8b4513">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Foresia">
-<meta name="application-name" content="Foresia">
+<meta name="apple-mobile-web-app-title" content="JDR-BAB">
+<meta name="application-name" content="JDR-BAB">
 <meta name="msapplication-TileColor" content="#8b4513">
 
 <!-- Favicon (embedded SVG) -->
@@ -4353,7 +4353,7 @@ article[data-page="enchanteur"] .illus img:hover,
 
 
 /* ============================================================================ */
-/* Foresia APPLICATION - COMPREHENSIVE ANIMATION SYSTEM                        */
+/* JDR-BAB APPLICATION - COMPREHENSIVE ANIMATION SYSTEM                        */
 /* ============================================================================ */
 
 /* =========================== CORE ANIMATION VARIABLES ==================== */
@@ -4570,24 +4570,12 @@ article[data-page="enchanteur"] .illus img:hover,
       0 10px 20px rgba(0,0,0,0.12),
       0 0 12px rgba(212,175,55,0.25);
     position: relative;
+    overflow: hidden;
   }
 
   .objet-card:hover::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -200px;
-    width: 200px;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(212,175,55,0.3),
-      transparent
-    );
-    animation: shimmer 1.5s infinite;
-    pointer-events: none;
-    z-index: 1;
+    /* Shimmer effect disabled to prevent overlap on adjacent cards */
+    display: none;
   }
 }
 
@@ -5216,12 +5204,8 @@ input:focus, textarea:focus, select:focus {
   }
 
   .objet-card:hover::before {
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(212,175,55,0.5),
-      transparent
-    );
+    /* Shimmer effect disabled in dark mode to prevent overlap */
+    display: none;
   }
 }
 
@@ -7091,6 +7075,480 @@ article.active .grid {
     position: static !important;
   }
 }
+/* ═══════════════════════════════════════════════════════════════════════════════════════
+   ✨ VISUAL ENHANCEMENTS - Medieval Fantasy Aesthetic Improvements
+   ═══════════════════════════════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────── Enhanced Color Variables ─────────────────────────── */
+:root {
+  /* Richer color palette */
+  --gold-rich: #FFD700;
+  --gold-deep: #B8860B;
+  --bronze-light: #E8A87C;
+  --bronze-deep: #A0522D;
+  --parchment-light: #FFF8DC;
+  --ink-dark: #1a0f0a;
+  --accent-glow: rgba(212, 175, 55, 0.4);
+  --shadow-deep: rgba(44, 24, 16, 0.3);
+
+  /* Enhanced gradients */
+  --gradient-gold: linear-gradient(135deg, #FFD700 0%, #D4AF37 50%, #B8860B 100%);
+  --gradient-bronze: linear-gradient(135deg, #E8A87C 0%, #CD7F32 50%, #A0522D 100%);
+  --gradient-parchment: linear-gradient(145deg, #FFF8DC 0%, #F4F0E6 50%, #F0E8D8 100%);
+  --gradient-depth: linear-gradient(180deg, rgba(255,255,255,0.2) 0%, transparent 50%, rgba(0,0,0,0.1) 100%);
+}
+
+/* ─────────────────────────── Enhanced Card System ─────────────────────────── */
+.card,
+.card-base {
+  /* Richer background with depth */
+  background:
+    radial-gradient(circle at 10% 20%, rgba(255, 216, 0, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 90% 80%, rgba(139, 69, 19, 0.04) 0%, transparent 50%),
+    var(--parchment-texture),
+    var(--gradient-parchment);
+
+  /* Enhanced border with ornamental style */
+  border: 3px solid transparent;
+  border-image: linear-gradient(
+    145deg,
+    var(--bronze-deep) 0%,
+    var(--gold) 25%,
+    var(--bronze) 50%,
+    var(--gold-deep) 75%,
+    var(--bronze-deep) 100%
+  ) 1;
+
+  /* Deeper shadows for more depth */
+  box-shadow:
+    0 10px 40px rgba(139, 69, 19, 0.25),
+    0 4px 12px rgba(139, 69, 19, 0.18),
+    0 2px 6px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 2px 4px rgba(255, 248, 220, 0.5),
+    inset 0 -2px 4px rgba(139, 69, 19, 0.1);
+
+  /* Smooth transitions */
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  /* Ornamental corners */
+  position: relative;
+}
+
+/* Decorative corner ornaments */
+.card::before,
+.card-base::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 24px;
+  height: 24px;
+  border-top: 2px solid var(--gold);
+  border-left: 2px solid var(--gold);
+  border-top-left-radius: 4px;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.card::after,
+.card-base::after {
+  content: '';
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  border-bottom: 2px solid var(--gold);
+  border-right: 2px solid var(--gold);
+  border-bottom-right-radius: 4px;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+/* Additional corner decorations */
+.card .corner-ornament-tr,
+.card-base .corner-ornament-tr {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  border-top: 2px solid var(--bronze);
+  border-right: 2px solid var(--bronze);
+  border-top-right-radius: 4px;
+  opacity: 0.6;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.card .corner-ornament-bl,
+.card-base .corner-ornament-bl {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  width: 24px;
+  height: 24px;
+  border-bottom: 2px solid var(--bronze);
+  border-left: 2px solid var(--bronze);
+  border-bottom-left-radius: 4px;
+  opacity: 0.6;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* Enhanced hover state */
+.card:hover,
+.card-base:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow:
+    0 20px 60px rgba(139, 69, 19, 0.3),
+    0 8px 20px rgba(139, 69, 19, 0.22),
+    0 4px 10px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 3px 6px rgba(255, 248, 220, 0.6),
+    inset 0 -3px 6px rgba(139, 69, 19, 0.12),
+    0 0 30px var(--accent-glow);
+
+  border-image: linear-gradient(
+    145deg,
+    var(--gold-rich) 0%,
+    var(--bronze-light) 25%,
+    var(--gold) 50%,
+    var(--bronze-light) 75%,
+    var(--gold-rich) 100%
+  ) 1;
+}
+
+.card:hover::before,
+.card:hover::after,
+.card-base:hover::before,
+.card-base:hover::after {
+  opacity: 1;
+}
+
+/* ─────────────────────────── Enhanced Button System ─────────────────────────── */
+.btn-base {
+  /* Rich gradient background */
+  background:
+    linear-gradient(145deg,
+      rgba(255, 216, 0, 0.15) 0%,
+      rgba(212, 175, 55, 0.1) 50%,
+      rgba(205, 127, 50, 0.15) 100%
+    ),
+    var(--gradient-parchment);
+
+  /* Ornamental border */
+  border: 2px solid var(--gold);
+  border-radius: 10px;
+
+  /* Enhanced shadows */
+  box-shadow:
+    0 6px 20px rgba(212, 175, 55, 0.25),
+    0 2px 8px rgba(139, 69, 19, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 2px 4px rgba(255, 248, 220, 0.3);
+
+  /* Typography */
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+  color: var(--ink-dark);
+  letter-spacing: 0.5px;
+
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Shimmer effect on hover */
+.btn-base::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 100%
+  );
+  transition: left 0.6s ease;
+}
+
+.btn-base:hover::before {
+  left: 150%;
+}
+
+.btn-base:hover {
+  background:
+    linear-gradient(145deg,
+      rgba(255, 216, 0, 0.25) 0%,
+      rgba(212, 175, 55, 0.2) 50%,
+      rgba(205, 127, 50, 0.25) 100%
+    ),
+    var(--gradient-parchment);
+
+  border-color: var(--gold-rich);
+
+  box-shadow:
+    0 8px 30px rgba(212, 175, 55, 0.35),
+    0 4px 12px rgba(139, 69, 19, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 3px 6px rgba(255, 248, 220, 0.4),
+    0 0 20px var(--accent-glow);
+
+  transform: translateY(-2px) scale(1.02);
+}
+
+.btn-base:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow:
+    0 4px 12px rgba(212, 175, 55, 0.2),
+    0 2px 6px rgba(139, 69, 19, 0.15),
+    inset 0 2px 4px rgba(139, 69, 19, 0.2);
+}
+
+/* ─────────────────────────── Enhanced Typography ─────────────────────────── */
+h1, h2, h3 {
+  /* Richer text shadow */
+  text-shadow:
+    2px 2px 4px rgba(0, 0, 0, 0.15),
+    0 0 20px rgba(212, 175, 55, 0.2);
+}
+
+h1 {
+  /* Enhanced gold gradient */
+  background: linear-gradient(
+    135deg,
+    #FFD700 0%,
+    #F4C430 15%,
+    #D4AF37 35%,
+    #CD7F32 65%,
+    #D4AF37 85%,
+    #FFD700 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 2px 4px rgba(212, 175, 55, 0.3));
+}
+
+/* ─────────────────────────── Decorative Elements ─────────────────────────── */
+.ornamental-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem auto;
+  gap: 1rem;
+  opacity: 0.8;
+}
+
+.ornamental-divider::before,
+.ornamental-divider::after {
+  content: '';
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--bronze) 20%,
+    var(--gold) 50%,
+    var(--bronze) 80%,
+    transparent 100%
+  );
+  max-width: 200px;
+}
+
+.ornamental-divider::before {
+  margin-right: auto;
+}
+
+.ornamental-divider::after {
+  margin-left: auto;
+}
+
+/* Decorative corner flourishes for special cards */
+.card-featured,
+.card-premium {
+  border-image: linear-gradient(
+    145deg,
+    var(--gold-rich) 0%,
+    var(--bronze-light) 25%,
+    var(--gold-deep) 50%,
+    var(--bronze-light) 75%,
+    var(--gold-rich) 100%
+  ) 1;
+
+  box-shadow:
+    0 12px 50px rgba(212, 175, 55, 0.3),
+    0 6px 18px rgba(139, 69, 19, 0.2),
+    inset 0 2px 0 rgba(255, 255, 255, 0.4),
+    inset 0 4px 8px rgba(255, 248, 220, 0.5),
+    0 0 40px var(--accent-glow);
+}
+
+/* ─────────────────────────── Enhanced Scrollbar ─────────────────────────── */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--gradient-parchment);
+  border-radius: 6px;
+  border: 1px solid var(--bronze);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gradient-bronze);
+  border-radius: 6px;
+  border: 2px solid var(--paper);
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gradient-gold);
+}
+
+/* ─────────────────────────── Enhanced Input Fields ─────────────────────────── */
+input[type="text"],
+input[type="search"],
+textarea,
+select {
+  background:
+    var(--gradient-parchment);
+  border: 2px solid var(--bronze);
+  border-radius: 8px;
+  padding: 10px 14px;
+  box-shadow:
+    inset 0 2px 4px rgba(139, 69, 19, 0.1),
+    0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  font-family: "Source Serif Pro", serif;
+  color: var(--ink-dark);
+}
+
+input[type="text"]:focus,
+input[type="search"]:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--gold);
+  box-shadow:
+    inset 0 2px 4px rgba(139, 69, 19, 0.15),
+    0 4px 12px rgba(212, 175, 55, 0.2),
+    0 0 20px var(--accent-glow);
+  outline: none;
+  background: var(--parchment-light);
+}
+
+/* ─────────────────────────── Glow Effects for Interactive Elements ─────────────────────────── */
+.glow-on-hover {
+  transition: all 0.3s ease;
+}
+
+.glow-on-hover:hover {
+  filter: drop-shadow(0 0 10px var(--accent-glow));
+}
+
+/* ─────────────────────────── Enhanced Animations ─────────────────────────── */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow:
+      0 0 20px rgba(212, 175, 55, 0.3),
+      0 0 40px rgba(212, 175, 55, 0.2);
+  }
+  50% {
+    box-shadow:
+      0 0 30px rgba(212, 175, 55, 0.4),
+      0 0 60px rgba(212, 175, 55, 0.3);
+  }
+}
+
+/* Apply fade in animation to cards */
+.card,
+.card-base {
+  animation: fadeInUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Stagger animation for multiple cards */
+.card:nth-child(1),
+.card-base:nth-child(1) { animation-delay: 0.05s; }
+.card:nth-child(2),
+.card-base:nth-child(2) { animation-delay: 0.1s; }
+.card:nth-child(3),
+.card-base:nth-child(3) { animation-delay: 0.15s; }
+.card:nth-child(4),
+.card-base:nth-child(4) { animation-delay: 0.2s; }
+.card:nth-child(5),
+.card-base:nth-child(5) { animation-delay: 0.25s; }
+.card:nth-child(6),
+.card-base:nth-child(6) { animation-delay: 0.3s; }
+
+/* ─────────────────────────── Mobile Optimizations ─────────────────────────── */
+@media (max-width: 768px) {
+  /* Reduce animation intensity on mobile */
+  .card:hover,
+  .card-base:hover {
+    transform: translateY(-3px) scale(1.01);
+  }
+
+  .btn-base:hover {
+    transform: translateY(-1px) scale(1.01);
+  }
+
+  /* Disable complex shadows on mobile for performance */
+  .card,
+  .card-base {
+    box-shadow:
+      0 6px 20px rgba(139, 69, 19, 0.2),
+      0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .btn-base {
+    box-shadow:
+      0 4px 12px rgba(212, 175, 55, 0.2),
+      0 2px 4px rgba(139, 69, 19, 0.15);
+  }
+}
+
+/* ─────────────────────────── Print Styles ─────────────────────────── */
+@media print {
+  .card,
+  .card-base,
+  .btn-base {
+    box-shadow: none;
+    border: 2px solid var(--bronze);
+  }
+
+  .card::before,
+  .card::after,
+  .card-base::before,
+  .card-base::after {
+    display: none;
+  }
+}
 </style>
 </head>
 <body class="dev-off">
@@ -7247,13 +7705,13 @@ article.active .grid {
         "description": "Invoque un magie divine qui blesse les créatures maléfiques.",
         "categorie": "Anti-mort-vivant",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 3",
-        "portee": "🎯 <strong>Portée:</strong> 18m",
+        "portee": "🎯 <strong>Portée:</strong> 15m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 6",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
-        "resistance": "<strong>Sans effet si:</strong>  <br>- Elément d'assignation autre que <span style=\"color: #8b5cf6; font-weight: bold;\">Maléfique</span> <br>- Esquive.",
-        "effetNormal": "<strong>Effet:</strong> Inflige (2 x Puiss. Sorts) dégâts <span style=\"color: #d0d0d0; font-weight: bold; background: rgba(0, 0, 0, 0.4); padding: 2px 4px; border-radius: 3px;\">Divin</span> à la cible.",
-        "effetCritique": "<strong>Coup Critique: </strong> Inflige (4 x Puiss. Sorts) dégats."
+        "resistance": "<strong>Sans effet si:</strong> Esquive.",
+        "effetNormal": "<strong>Effet:</strong> Inflige (5 + Puiss. Sorts) dégâts <span style=\"color: #d0d0d0; font-weight: bold; background: rgba(0, 0, 0, 0.4); padding: 2px 4px; border-radius: 3px;\">Divin</span> à la cible.\n<br> Le sort ne peut pas être raté ou esquivé si la cible est d'élément <span style=\"color: #8b5cf6; font-weight: bold;\">Maléfique</span>.",
+        "effetCritique": "<strong>Coup Critique: </strong> Inflige (10 + Puiss. Sorts)  dégats."
       },
       {
         "nom": "Refermer les blessures",
@@ -7409,7 +7867,7 @@ article.active .grid {
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> <br>- Résistance altérations &gt;= Intelligence du lanceur<br>- Lévitation ou Volant.",
         "effetNormal": "<strong>Effet:</strong>&nbsp;La cible contracte l'état <span class=\"etat-link\" data-etat=\"Ralenti\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Ralenti</span> pendant 5 tours.",
-        "effetCritique": "<strong>Coup Critique:&nbsp;</strong>La cible ne peut plus effectuer de déplacement pendant la durée du sort."
+        "effetCritique": "<strong>Coup Critique :&nbsp;</strong>La cible ne peut plus effectuer de déplacement pendant la durée du sort."
       },
       {
         "nom": "Accélération",
@@ -7423,7 +7881,7 @@ article.active .grid {
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> Aucune",
         "effetNormal": "<strong>Effet:</strong> &nbsp;La vitesse de déplacement de la cible est augmentée de 3m pendant 5 tours. Non Cumulable.",
-        "effetCritique": "<strong>Coup Critique:&nbsp;</strong> La vitesse est augmentée de 6m."
+        "effetCritique": "<strong>Coup Critique :&nbsp;</strong> La vitesse est augmentée de 6m."
       },
       {
         "nom": "Sommeil",
@@ -7437,7 +7895,7 @@ article.active .grid {
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> <br>- Résistance altérations &gt;= Intelligence du lanceur<br>- Element <span style=\"color: #0f172a; font-weight: bold;\">Nuit</span>",
         "effetNormal": "<strong>Effet:</strong> La cible passe dans l'état <span class=\"etat-link\" data-etat=\"Endormi/assomé/Effrayé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Endormi</span> pendant ses 2 prochains tours.",
-        "effetCritique": "<strong>Coup Critique:&nbsp;</strong> L'effet dure 4 tours."
+        "effetCritique": "<strong>Coup Critique :&nbsp;</strong> L'effet dure 4 tours."
       },
       {
         "nom": "Lévitation",
@@ -7491,7 +7949,7 @@ article.active .grid {
         "nom": "Puissance magique",
         "element": "Feu",
         "description": "Le corps de la cible s’illumine d’arcanes, décuplant la force de ses sorts.",
-        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 5",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 4",
         "portee": "🎯 <strong>Portée:</strong> 3m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 14",
@@ -7503,7 +7961,7 @@ article.active .grid {
         "nom": "Puissance physique",
         "element": "Terre",
         "description": "Une vigueur surnaturelle envahit les muscles, augmentant chaque coup porté.",
-        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 6",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 5",
         "portee": "🎯 <strong>Portée:</strong> 3m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 14",
@@ -7515,10 +7973,10 @@ article.active .grid {
         "nom": "Confusion",
         "element": "Maléfique",
         "description": "Un voile d’illusions trouble l’esprit de la cible, la rendant incapable de distinguer alliés et ennemis.",
-        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 7",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 5",
         "portee": "🎯 <strong>Portée:</strong> 12m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 15",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 14",
         "resistance": "<strong>Sans effet si:</strong> <br>- Résistance altérations >= Intelligence du lanceur<br>- Element <span style=\"color: #8b5cf6; font-weight: bold;\">Maléfique</span>",
         "effetNormal": "<strong>Effet:</strong> La cible passe dans l'état <span class=\"etat-link\" data-etat=\"Confus\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Confus</span>, pendant 4 tours.",
         "effetCritique": "<strong>Coup Critique: </strong> L'effet dure 6 tours."
@@ -7527,7 +7985,7 @@ article.active .grid {
         "nom": "Armure élémentaire Feu Terre Nuit",
         "element": "Feu",
         "description": "Un voile protecteur d’énergie enveloppe la cible, renforçant son armure élémentaire.",
-        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 8",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 6",
         "portee": "🎯 <strong>Portée:</strong> 3m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 14",
@@ -7539,7 +7997,7 @@ article.active .grid {
         "nom": "Armure élémentaire Eau Air Lumière",
         "element": "Eau",
         "description": "Un voile protecteur d’énergie enveloppe la cible, renforçant son armure élémentaire.",
-        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 8",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 6",
         "portee": "🎯 <strong>Portée:</strong> 3m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 14",
@@ -7553,7 +8011,7 @@ article.active .grid {
     window.CLASSES = [
   {
     "nom": "Guerrier",
-    "resume": "Héros sans égal au combat au corp à corp.",
+    "resume": "Héros sans égal au combat au corps à corps.",
     "capacites": "<ul><li><em>Expert de l'équipement</em> : Capable d'utiliser toutes les armes (épées, arcs, bâtons, dagues, exotiques, une main et deux mains), armures (robes, légères, lourdes), et boucliers.</li><li><em>Hardiesse</em> : Gagne la compétence Hardiesse rang 1.</li><li>\n<em>Doué</em> : Gagne un point de Don supplémentaire par niveau.</li></ul>",
     "sousClasses": [
       {
@@ -7573,16 +8031,9 @@ article.active .grid {
       {
         "nom": "Aventurier",
         "description": "<i>Héros polyvalent et ingénieux, il affronte l’inconnu avec courage, et manie tous les outils à sa portée pour triompher.</i>",
-        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>5</strong></span><span class=\"chip\">🏃 Agilité: <strong>2</strong></span><span class=\"chip\">🛡️ Endurance: <strong>8</strong></span><span class=\"chip\">🧠 Intelligence: <strong>1</strong></span><span class=\"chip\">⚡ Volonté: <strong>1</strong></span><span class=\"chip\">🍀 Chance: <strong>5</strong></span></div>",
-        "progression": "<strong>📈 Progression par niveau:</strong> +2 Force 💪, +2 Endurance 🛡️, +1 Chance 🍀, <strong> +2 Au choix</strong>",
+        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>5</strong></span><span class=\"chip\">🏃 Agilité: <strong>2</strong></span><span class=\"chip\">🛡️ Endurance: <strong>8</strong></span><span class=\"chip\">🧠 Intelligence: <strong>1</strong></span><span class=\"chip\">⚡ Volonté: <strong>2</strong></span><span class=\"chip\">🍀 Chance: <strong>5</strong></span></div>",
+        "progression": "<strong>📈 Progression par niveau:</strong> +2 Force 💪, +2 Endurance 🛡️, +1 Volonté ⚡, <strong> +2 Au choix</strong>",
         "capacites": "<ul><em>Passé glorieux : </em>  Gagne la compétence Eloquence rang 1.<br><em>Sans failles :</em>  Dispose d'un Effort maximum supplémentaire .<br><em>Polyvalent : </em> Dispose d'un point de Don supplémentaire.</ul>"
-      },
-      {
-        "nom": "Maître d’armes",
-        "description": "<i>Guerrier érudit et redoutable, il manie avec aisance toutes les armes, des plus communes aux plus exotiques, transformant chaque outil de guerre en prolongement de son bras.</i>",
-        "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>5</strong></span><span class=\"chip\">🏃 Agilité: <strong>2</strong></span><span class=\"chip\">🛡️ Endurance: <strong>8</strong></span><span class=\"chip\">🧠 Intelligence: <strong>1</strong></span><span class=\"chip\">⚡ Volonté: <strong>3</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
-        "progression": "<strong>📈 Progression par niveau:</strong> +3 Force 💪, +2 Endurance 🛡️<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Volte d’armes :</em> Peut changer d'arme sans utiliser d'action secondaire.\n</li>\n               <li><em>Expert martial :</em> Lorsqu'il utilise une arme exotique, relance le dé en cas d'echec critique.\n</li>\n   <li><em>Erudit des lames :</em> Gagne 1 de compétence sur les tests de compétence Réflexion sur l'effet ou la provenance d'une arme.\n</li>\n\n</ul>"
       }
     ]
   },
@@ -7595,7 +8046,7 @@ article.active .grid {
         "nom": "Érudit",
         "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>1</strong></span><span class=\"chip\">🏃 Agilité: <strong>1</strong></span><span class=\"chip\">🛡️ Endurance: <strong>4</strong></span><span class=\"chip\">🧠 Intelligence: <strong>8</strong></span><span class=\"chip\">⚡ Volonté: <strong>3</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +3 Intelligence 🧠, +2 Volonté ⚡<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Instruit</em> : Gagne la compétence Réflexion rang 1.</li><li><em>Apprentissage accéléré</em> : Le niveau de l'érudit est considéré plus élevé d'un niveau pour les prérequis d'apprentissage de sorts.</li>\n<li><em>Mana inépuisable</em> : Chaque point de volonté augmente le mana de 3 au lieu de 2.</li>\n<li><em>Magie interdite</em> : Capable d'utiliser ses lectures (s'il les comprends) pour apprendre de nouveaux sorts.</li></ul>",
+        "capacites": "<ul><li><em>Instruit</em> : Gagne la compétence Réflexion rang 1.</li><li><em>Apprentissage accéléré</em> : Le niveau de l'érudit est considéré plus élevé d'un niveau pour les prérequis d'apprentissage de sorts.</li>\n<li><em>Mana inépuisable</em> : Chaque point de volonté augmente le mana de 3 au lieu de 2.</li>\n<li><em>Magie interdite</em> : Capable d'utiliser ses lectures (s'il les comprend) pour apprendre de nouveaux sorts.</li></ul>",
         "description": "<i>Mage avide de savoir, doté d’une mémoire prodigieuse. Il assimile les arcanes avec une rapidité fulgurante et maîtrise de nouveaux sorts bien plus vite que ses pairs.</i>"
       },
       {
@@ -7610,20 +8061,20 @@ article.active .grid {
   {
     "nom": "Prêtre",
     "resume": "Spécialiste de la magie de soutien et anti morts-vivants.",
-    "capacites": "Spécialiste de la magie de soutien et de purafication du maléfique.",
+    "capacites": "<ul>\n    <li><em>Équipement de prêtre</em> : bâtons (une et deux mains), catalyseurs, robes.</li>\n    <li><em>Sorts de prêtre</em> : Apprend et lance des sorts de Prêtre.</li>\n    <li><em>Eloquence</em> : Gagne la compétence Eloquence rang 1.</li>\n  </ul>",
     "sousClasses": [
       {
         "nom": "Inquisiteur",
         "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>3</strong></span><span class=\"chip\">🏃 Agilité: <strong>1</strong></span><span class=\"chip\">🛡️ Endurance: <strong>7</strong></span><span class=\"chip\">🧠 Intelligence: <strong>3</strong></span><span class=\"chip\">⚡ Volonté: <strong>5</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +1 Force 💪, +1 Intelligence 🧠, +2 Volonté ⚡, +1 Endurance 🛡️<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Equipement d'inquisiteur</em> : Peut s'équiper d'armures légères, de boucliers et d'épées à deux mains.</li><li><em>Fléau du maléfique</em> : Les attaques physiques contre le adversaire d'élément maléfique ne ratent jamais.</li><li><em>Lumière purificatrice</em> : Double l'effet de la puissance des sorts sur les dégats des sorts d'élément <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span> ou <span style=\"color: #f5f5f5; font-weight: bold; background: rgba(100, 100, 100, 0.3); padding: 2px 4px; border-radius: 3px;\">Divin</span>.</li></ul>",
+        "capacites": "<ul><li><em>Equipement d'inquisiteur</em> : Peut s'équiper d'armures légères, de boucliers et d'épées à deux mains.</li><li><em>Fléau du maléfique</em> : Les attaques physiques contre les adversaire d'élément <span style=\"color: #8b5cf6; font-weight: bold;\">Maléfique</span> ne ratent jamais.</li><li><em>Lumière purificatrice</em> : Double l'effet de la puissance des sorts sur les <b>dégats</b> des sorts d'élément <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span> ou <span style=\"color: #f5f5f5; font-weight: bold; background: rgba(100, 100, 100, 0.3); padding: 2px 4px; border-radius: 3px;\">Divin</span>.</li></ul>",
         "description": "<i>Champion de la foi, il renforce ses alliés par la magie sacrée et traque sans relâche les morts-vivants. Quand la lumière seule ne suffit plus, il n’hésite pas à prendre les armes et combattre en première ligne.</i>"
       },
       {
         "nom": "Clerc Divin",
         "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>1</strong></span><span class=\"chip\">🏃 Agilité: <strong>1</strong></span><span class=\"chip\">🛡️ Endurance: <strong>5</strong></span><span class=\"chip\">🧠 Intelligence: <strong>5</strong></span><span class=\"chip\">⚡ Volonté: <strong>5</strong></span><span class=\"chip\">🍀 Chance: <strong>4</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +2 Intelligence 🧠, +2 Volonté ⚡, +1 Chance 🍀<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Maître des soins</em> : Double l'effet de la puissance des sorts sur les sorts de soins.</li><li><em> Pieu </em>:  Gagne 1 de compétence sur les tests de compétence Reflexion sur un dieu ou une religion.</li><li><em> Prière </em>:  Peut utiliser une action principale pour donner à une cible à moins de 3m un d4 (non cumlable, passe à d8 après le niveau 10), qu'il pourra utiliser dans le combat au choix pour un bonus de dégats physique ou d'armure physique.</li></ul>",
+        "capacites": "<ul><li><em>Maître des soins</em> : Double l'effet de la puissance des sorts sur les sorts de soins.</li><li><em> Pieux </em>:  Gagne 1 de compétence sur les tests de compétence Réflexion sur un dieu ou une religion.</li><li><em> Prière </em>:  Peut utiliser une action principale pour donner à une cible à moins de 3m un d4 (non cumulable, passe à d8 après le niveau 10), qu'il pourra utiliser dans le combat au choix pour un bonus de dégâts physiques ou d'armure physique.</li></ul>",
         "description": "<i>Serviteur sacré, maître des arts de guérison. Sa puissante magie de soins protège ses alliés et les relève même aux portes de la mort.</i>"
       }
     ]
@@ -7637,14 +8088,14 @@ article.active .grid {
         "nom": "Voleur",
         "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>4</strong></span><span class=\"chip\">🏃 Agilité: <strong>5</strong></span><span class=\"chip\">🛡️ Endurance: <strong>5</strong></span><span class=\"chip\">🧠 Intelligence: <strong>1</strong></span><span class=\"chip\">⚡ Volonté: <strong>2</strong></span><span class=\"chip\">🍀 Chance: <strong>5</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong>  +2 Force 💪, +2 Agilité 🏃, +1 Endurance 🛡️<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Mains expertes :</em> Gagne la compétence Finesse rang 1.</li><li><em>Sprint :</em> Peut utiliser une action secondaire pour doubler sa vitesse de déplacement.</li><li><em>Vicieux :</em> Double les chances de critiques physiques au corps à corps sur les cibles subissant un état qui les empeche d'esquiver.</li></ul>",
+        "capacites": "<ul><li><em>Mains expertes :</em> Gagne la compétence Finesse rang 1.</li><li><em>Sprint :</em> Peut utiliser une action secondaire pour doubler sa vitesse de déplacement.</li><li><em>Vicieux :</em> Double les chances de critiques physiques au corps à corps sur les cibles subissant un état qui les empeche d'esquiver (Exemple : <span class=\"etat-link\" data-etat=\"Ralenti\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">ralenti</span>, <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">à terre</span>, <span class=\"etat-link\" data-etat=\"Endormi/assomé/Effrayé\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">assomé</span>, etc...).</li></ul>",
         "description": "<i>Maître de la finesse et de l’agilité, il se déplace avec rapidité fulgurante et frappe là où ça fait le plus mal. </i>"
       },
       {
         "nom": "Chasseur",
         "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>3</strong></span><span class=\"chip\">🏃 Agilité: <strong>5</strong></span><span class=\"chip\">🛡️ Endurance: <strong>5</strong></span><span class=\"chip\">🧠 Intelligence: <strong>4</strong></span><span class=\"chip\">⚡ Volonté: <strong>2</strong></span><span class=\"chip\">🍀 Chance: <strong>1</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +1 Force 💪, +2 Agilité 🏃,  +1 Endurance 🛡️, +1 Intelligence 🧠<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Armes du Chasseur</em> : Peut utiliser les arcs et les bâtons.</li><li><em>Cueillette</em> : Une fois par jour, hors combat, le personnage peut passer 15 minutes à récolter 5 plantes locales (au choix du MJ). Leur efficacité dépend de l’Intelligence de l’utilisateur.</li><li><em>Connaissance du milieu naturel</em> : Gagne 1 de compétence sur les tests de Réflexion lié à animal, un monstre, une plante, ou la découverte de passages dérobés en milieu naturel.</li></ul>",
+        "capacites": "<ul>\n<li><em>Armes du Chasseur</em> : Peut utiliser les arcs et les bâtons à deux mains.</li>\n<li><em>Spécialiste de l'arc</em> : Augmente les dégats physiques infligés à l'arc d'une valeur égale au niveau du héros.</li>\n<li><em>Cueillette</em> : Une fois par jour, hors combat, le personnage peut passer 15 minutes à récolter 5 plantes locales (au choix du MJ). Leur efficacité dépend de l’Intelligence de l’utilisateur.</li>\n<li><em>Connaissance du milieu naturel</em> : Gagne 1 de compétence sur les tests de Réflexion lié à animal, un monstre, une plante, ou la découverte de passages dérobés en milieu naturel.</li>\n\n</ul>",
         "description": "<i>Précis et agile, il complète son art de l’arc par la science des herbes anciennes.</i>"
       }
     ]
@@ -7658,14 +8109,14 @@ article.active .grid {
         "nom": "Esprit de la grande Fée",
         "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>1</strong></span><span class=\"chip\">🏃 Agilité: <strong>5</strong></span><span class=\"chip\">🛡️ Endurance: <strong>5</strong></span><span class=\"chip\">🧠 Intelligence: <strong>3</strong></span><span class=\"chip\">⚡ Volonté: <strong>3</strong></span><span class=\"chip\">🍀 Chance: <strong>3</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +1 Agilité 🏃, +1 Intelligence 🧠, +1 Volonté ⚡, +2 Chance 🍀<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Tatillon</em> : Gagne la compétence Finesse rang 1.</li><li><em>Lévitation</em> : Est de manière permanante dans l'état <span class=\"etat-link\" data-etat=\"Lévitation\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Lévitation</span>.</li><li><em>Rayon de l'Amitié</em> : Par une action secondaire, peut répéter sur une autre cible à portée un sort bénéfique qui a ciblé un allié se tour ci, sans coût en mana supplémentaire.</li></ul>",
+        "capacites": "<ul><li><em>Tatillon</em> : Gagne la compétence Finesse rang 1.</li><li><em>Lévitation</em> : Est de manière permanente dans l'état <span class=\"etat-link\" data-etat=\"Lévitation\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Lévitation</span>.</li><li><em>Rayon de l'Amitié</em> : Par une action secondaire, peut répéter sur une autre cible à portée un sort bénéfique qui a ciblé un allié ce tour-ci, sans coût en mana supplémentaire.</li></ul>",
         "description": "<i>Être mystique qui flotte au-dessus du sol, il invoque des sorts imprévisibles pour soutenir ses alliés.</i>"
       },
       {
         "nom": "Lutin",
         "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>2</strong></span><span class=\"chip\">🏃 Agilité: <strong>1</strong></span><span class=\"chip\">🛡️ Endurance: <strong>5</strong></span><span class=\"chip\">🧠 Intelligence: <strong>5</strong></span><span class=\"chip\">⚡ Volonté: <strong>3</strong></span><span class=\"chip\">🍀 Chance: <strong>5</strong></span></div>",
-        "progression": "<strong>📈 Progression par niveau:</strong> 💪 +1 Force, +1 Intelligence 🧠, +2 Volonté ⚡, +1 Chance 🍀<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Secrets bien gardés</em> : Gagne la compétence Reflexion rang 1.\n</li><li><em>Fouineur</em> : Augmente la Fortune de 5.\n</li><li><em>Rire malicieux</em> : Aprés une attaque au corps à corps réussie, la cible du Lutin voit son armure réduite de la valeur des dégats infligés, jusqu'a la fin du prochain tour du héros.</li></ul>",
+        "progression": "<strong>📈 Progression par niveau:</strong> 💪 +1 Force, +2 Intelligence 🧠, +1 Volonté ⚡, +1 Chance 🍀<strong> +2 Au choix</strong>",
+        "capacites": "<ul><li><em>Secrets bien gardés</em> : Gagne la compétence Réflexion rang 1.\n</li><li><em>Fouineur</em> : Augmente la Fortune de 5.\n</li><li><em>Malice corrosive</em> : Après une attaque au corps à corps réussie, la cible du Lutin voit son armure physique réduite de la valeur des dégâts infligés, jusqu'à la fin du prochain tour du héros.</li>\n<li><em>Rire malicieux</em> : Après avoir infligé une altération magique à une cible, regagne un montant de mana équivalent au niveau du sort.</li>\n</ul>",
         "description": "<i>Esprit espiègle et rusé, passé maître dans l’art des altérations magiques. </i>"
       }
     ]
@@ -7683,8 +8134,8 @@ article.active .grid {
         "cout": "1 points de don"
       },
       {
-        "nom": "Toujours pret",
-        "description": "Le maximum d'efforts maximum augmente de 1.",
+        "nom": "Toujours prêt",
+        "description": "Le maximum d'efforts augmente de 1.",
         "prerequis": "<strong> Prérequis :</strong> A chaque prise de ce don, son coût en point de don augmente de 1.",
         "cout": "1 point de don"
       },
@@ -7719,38 +8170,38 @@ article.active .grid {
         "cout": "1 point de don"
       },
       {
-        "nom": "Grand sacs",
-        "description": "Augmente le poid maximum transportable de 3, et le nombre de consommables transportables de 3.",
+        "nom": "Grand sac",
+        "description": "Augmente le poids maximum transportable de 3, et le nombre de consommables transportables de 3.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
       {
         "nom": "Maitrise de la dague",
         "description": "Le héros est capable d'équiper et d'utiliser des Dagues.",
-        "prerequis": "<strong> Prérequis :</strong> 🏃 Agilité 5.<br>Don unique.",
+        "prerequis": "<strong> Prérequis :</strong> 🏃 Agilité 5.",
         "cout": "1 point de don"
       },
       {
         "nom": "Maitrise de l'arc",
         "description": "Le héros est capable d'équiper et d'utiliser des Arcs.",
-        "prerequis": "<strong> Prérequis :</strong> 🏃 Agilité 10.\n          <br>Don unique.",
+        "prerequis": "<strong> Prérequis :</strong> 🏃 Agilité 10.",
         "cout": "1 point de don"
       },
       {
         "nom": "Sommeil léger",
-        "description": "Pendant qu'il dort, le héros est aussi alerte que s'il effectuait un tour de garde.\nDe plus, le héros ne necessite que 4 heures par nuit pour éviter l'état <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span> et est soigné pendant son sommeil d'un nombre de points de vie d'une valeur égale à sa volonté.",
+        "description": "Pendant qu'il dort, le héros est aussi alerte que s'il effectuait un tour de garde.\nDe plus, le héros ne nécessite que 4 heures par nuit pour éviter l'état <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span> et est soigné pendant son sommeil d'un nombre de points de vie d'une valeur égale à sa volonté.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
       {
         "nom": "Chanceux",
-        "description": "Lors d'un jet de fortune, le héros lance deux dés et prend le meuilleur resultat.",
+        "description": "Lors d'un jet de fortune, le héros lance deux dés et prend le meilleur résultat.",
         "prerequis": "<strong> Prérequis :</strong> 🍀Chance 5. <br>Don unique.",
         "cout": "1 point de don"
       },
       {
         "nom": "Attaque d'opportunité",
-        "description": "Lorsqu'un adversaire sort de votre portée d'attaque au corps à corps durant son déplacement, vous pouvez utiliser une action secondaire (non utilisée durant votre tour), pour effectuer un attaque au corps à corps sur l'adversaire.",
+        "description": "Lorsqu'un adversaire sort de votre portée d'attaque au corps à corps durant son déplacement, vous pouvez utiliser une action secondaire (non utilisée durant votre tour), pour effectuer une attaque au corps à corps sur l'adversaire.",
         "prerequis": "<strong> Prérequis :</strong> 🏃 Agilité 10. <br>Don unique.",
         "cout": "1 point de don"
       },
@@ -7777,6 +8228,12 @@ article.active .grid {
         "description": "<b>En combat :</b>\n<br>Les soins provenant des consommables sont augmentés de X points de vie.\n\n<br><br><b>Hors combat :</b>\n<br>Le héros peut dépenser un effort, pour soigner une autre cible de X points de vie. \n\n<br><br>X correspond à 3, plus 1 point supplémentaire tous les 5 points d’Intelligence.",
         "prerequis": "<strong> Prérequis :</strong> 🧠 Intelligence 5. <br>Don unique.",
         "cout": "1 point de don"
+      },
+      {
+        "nom": "Toujours prêt",
+        "description": "Augmente l'iniative de 5. Lors du premier tour de combat, la vitesse de déplacement est doublée.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
+        "cout": "1 point de don"
       }
     ]
   },
@@ -7792,7 +8249,7 @@ article.active .grid {
       },
       {
         "nom": "Charge",
-        "description": "Une fois par combat, peut utiliser une action secondaire pour doubler sa vitesse de déplacement et forcer un coup critique sur la prochaine attaque physique de ce tour (si elle réussie).",
+        "description": "Une fois par combat, peut utiliser une action secondaire pour doubler sa vitesse de déplacement et doubler les chances de coup critique sur la prochaine attaque physique de ce tour.",
         "prerequis": "<strong> Prérequis :</strong> 🏃Agilité 5",
         "cout": "1 point de don"
       },
@@ -7810,7 +8267,73 @@ article.active .grid {
       },
       {
         "nom": "Attaque délayée",
-        "description": "Si le héros n'a effectuée action principale pendant son tour, il peut utiliser une action secondaire pour gagner une action principale supplémentaire au prochain tour.",
+        "description": "Si le héros n'a effectué aucune action principale pendant son tour, il peut utiliser une action secondaire pour gagner une action principale supplémentaire au prochain tour.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Increvable",
+        "description": "Une fois par jour, peut dépenser un effort pour rester à 1 point de vie s'il devait descendre en dessous.",
+        "prerequis": "<strong> Prérequis :</strong> 🛡️ Endurance 10 , ⚡Volonté 5",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Attaque surpuissante",
+        "description": "En dépensant une action secondaire, le héros peut concentrer toute sa puissance pour une attaque au corps à corps ce tour ci: les dégâts sont alors doublés. En contrepartie, il n'a pas d'action principale durant son prochain tour.",
+        "prerequis": "<strong> Prérequis :</strong> 💪Force 12",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Provocation",
+        "description": "Le guerrier peut utiliser une action principale, pour provoquer toutes les cibles à moins de 12m, qui le cibleront alors au prochain tour.<br><br>Sans effet sur les cibles ayant une Résistance altération &gt; à 5.<br> Ce chiffre peut être augmenté via un test de compétence éloquence, de 10 par point/effort.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Infatiguable",
+        "description": "Augmente la ⚡ volonté de 4.",
+        "prerequis": "<strong> Prérequis :</strong> Don Unique.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Agilité du guerrier",
+        "description": "Augmente 🏃 l'agilité de 4.",
+        "prerequis": "<strong> Prérequis :</strong> Don Unique.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Rage sanglante",
+        "description": "Lorsque le guerrier a la moitié ou moins de ses points de vie, les chances de coup critique sont augmentées de 2.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Second souffle",
+        "description": "Une fois par jour, permet d'utiliser une action secondaire pour regagner un nombre de points de vie égal à l'endurance du héros.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Lancer d'arme",
+        "description": "Permet, avec une action principale et une action secondaire, de lancer une arme à une main (équipée ou de l'inventaire) jusqu'à 12m (touche également les cibles volantes). \n<br>Mêmes règles qu'une attaque au corps à corps (jet et dégâts). <br>L'arme n'est alors plus équipée. Elle peut être récupérée avec une action secondaire, à moins de 3m de la cible.",
+        "prerequis": "<strong> Prérequis :</strong> 🏃Agilité 5.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Imperturbable",
+        "description": "Permet de retirer un trauma du héros.",
+        "prerequis": "<strong> Prérequis :</strong> Don Unique.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Cri de guerre",
+        "description": "Une fois par combat, peut utiliser une action secondaire pour faire un cri de guerre, qui augmente les dégâts physiques infligés par tous les héros d'une valeur du niveau du héros, jusqu'à la fin du prochain tour.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Cri intimidant",
+        "description": "Le guerrier peut utiliser une action principale, pour effrayer toutes les cibles à moins de 12m, qui passeront dans l'état <span class=\"etat-link\" data-etat=\"Endormi/assomé/Effrayé\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">effrayé</span> pendant 1 tour.<br><br>Sans effet sur les cibles ayant une Résistance altération > à 5.<br> Ce chiffre peut être augmenté via un test de compétence éloquence, de 10 par point/effort.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       }
@@ -7822,13 +8345,13 @@ article.active .grid {
     "dons": [
       {
         "nom": "Croche-patte",
-        "description": "Une fois par combat, peut utiliser une action secondaire pour effectuer un croche- patte à une cible au corps à corps (jet de dé) :\n\n\n<br><br><b>Sans effet si :</b> \n<br>- Esquive.\n<br>- Volant ou lévitant.\n<br>- Taille supérieure à Moyen.\n\n<br><br><b>Effet :</b> Inflige (Force) dégats Physiques à la cible. Met la cible dans l'état <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">A terre</span>.\n\n<br><br><b>Coup Critique :</b>  Les dégats sont doublés et la cible est <span class=\"etat-link\" data-etat=\"Endormi/assomé/Effrayé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Assomée</span> 1 tour.",
+        "description": "Une fois par combat, peut utiliser une action secondaire pour effectuer un croche- patte à une cible au corps à corps (jet de dé) :\n\n\n<br><br><b>Sans effet si :</b> \n<br>- Esquive.\n<br>- Volant ou lévitant.\n<br>- Taille supérieure à Moyen.\n\n<br><br><b>Effet :</b> Met la cible dans l'état <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">A terre</span>.\n\n<br><br><b>Coup Critique :</b>  La cible est <span class=\"etat-link\" data-etat=\"Endormi/assomé/Effrayé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Assomée</span> 1 tour.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
       {
         "nom": "Chasse et pêche",
-        "description": "Le héros n'as plus besoin de sa ration de nourriture quotidienne.",
+        "description": "Le héros n'a plus besoin de sa ration de nourriture quotidienne.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -7840,13 +8363,13 @@ article.active .grid {
       },
       {
         "nom": "Attaque double",
-        "description": "Permet d'utiliser une action secondaire lors d'une attaque au corp à corp pour attaquer avec les deux armes à la fois (un seul jet de dé), infligeant les dégats des deux armes.",
+        "description": "Permet d'utiliser une action secondaire lors d'une attaque au corps à corps pour attaquer avec les deux armes à la fois (un seul jet de dé), infligeant les dégâts des deux armes.",
         "prerequis": "<strong> Prérequis :</strong> Ambidextre",
         "cout": "2 point de don"
       },
       {
         "nom": "Retrait",
-        "description": "Aprés avoir subit une attaque au corps à corps (esquivée ou non), le héros peut utiliser une action secondaire pour reculer de 6m par rapport à l'attaquant.",
+        "description": "Après avoir subi une attaque au corps à corps (esquivée ou non), le héros peut utiliser une action secondaire pour reculer de 6m par rapport à l'attaquant.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -7857,7 +8380,7 @@ article.active .grid {
         "cout": "1 point de don"
       },
       {
-        "nom": "Reflèxes surhumains",
+        "nom": "Réflexes surhumains",
         "description": "Une fois par combat, permet de forcer une esquive sur une attaque ou un sort esquivable.",
         "prerequis": "<strong> Prérequis :</strong> 🏃 Agilité 10",
         "cout": "1 point de don"
@@ -7869,16 +8392,52 @@ article.active .grid {
         "cout": "1 point de don"
       },
       {
-        "nom": "Eventail de couteaux",
+        "nom": "Éventail de couteaux",
         "description": "Une fois par combat, peut utiliser une action secondaire pour améliorer sa prochaine attaque ce tour ci. Elle attaquera tous les adversaires à moins de 3m.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
       {
         "nom": "Avantage",
-        "description": "Une fois par combat, lors d'une attaque esquivée ou en echec critique, permet de lancer une nouvelle fois le dé.",
+        "description": "Une fois par combat, lors d'une attaque esquivée ou en échec critique, permet de lancer une nouvelle fois le dé.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Adrénaline",
+        "description": "Après avoir subi des dégâts critiques (sort ou physique), le héros bénéficiera d'une action principale supplémentaire à son prochain tour (non cumulable).",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Brise-genou",
+        "description": "Une fois par combat, peut utiliser une action secondaire pour améliorer sa prochaine attaque physique. <br>Si elle réussit, met la cible dans l'état <span class=\"etat-link\" data-etat=\"Ralenti\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ralenti</span> pendant 5 tours. <br> Sans effet sur les créatures de Taille supérieure à Moyenne.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Roi de l'esquive",
+        "description": "Une fois par jour, permet d'utiliser une action secondaire pour augmenter son esquive de 5 pendant 3 tours.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Combo",
+        "description": "Une fois par tour, après avoir réussi un coup critique physique, gagne une action secondaire.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Poison",
+        "description": "Peut utiliser une action secondaire pour rajouter du poison à la prochaine attaque physique.\n<br><br> En cas d'attaque réussie, si la cible a une Résistance altération < 2 x N, alors la cible subira <span class=\"etat-link\" data-etat=\"Empoisonné\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Empoisonné</span> N pendant 3 tours, où N est le niveau du héros.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "2 point de don"
+      },
+      {
+        "nom": "Main heureuse",
+        "description": "Augmente la 🍀 Chance de 4.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
+        "cout": "1 point de don"
       }
     ]
   },
@@ -7923,15 +8482,15 @@ article.active .grid {
         "cout": "1 point de don"
       },
       {
-        "nom": "Sacrifice rituel",
-        "description": "Permet d'utiliser une action secondaire pour sacrifier un nombre de points de vie, de 1 jusqu'à la volonté du héros. Le héros gagne un nombre de point de mana équivalent.",
-        "prerequis": "<strong> Prérequis :</strong> -",
+        "nom": "Spécialisation élémentaire 2",
+        "description": "Le héros peut choisir un élément et réduire le coup en mana des sorts de cet élément, d'un montant équivalent au niveau du sort.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
       {
-        "nom": "Sacrifice rituel",
-        "description": "Description du don.",
-        "prerequis": "Aucun prérequis",
+        "nom": "Apprentissage par l'échec",
+        "description": "Le mage regagne le coût en mana des sorts ayant fait un échec critique.",
+        "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
       {
@@ -7950,11 +8509,11 @@ article.active .grid {
   },
   {
     "nom": "Pretre",
-    "description": "Description de cette catégorie de dons.",
+    "description": "Dons accessibles aux prêtres.",
     "dons": [
       {
         "nom": "Mécréants",
-        "description": "Les dégats physiques infligés aux créatures de l'élément  <span style=\"color: #a855f7; font-weight: bold;\">Maléfique</span> sont doublés.",
+        "description": "Les dégats physiques infligés aux créatures de l'élément  <span style=\"color: #a855f7; font-weight: bold;\">Maléfique</span> sont doublés (la multiplication est appliquée avant l'application de l'armure physique).",
         "prerequis": "<strong> Prérequis :</strong>-",
         "cout": "1 point de don"
       },
@@ -7966,13 +8525,13 @@ article.active .grid {
       },
       {
         "nom": "Jugement éclair",
-        "description": "Si le Prêtre a effectué un sort ce tour ci, il peut effectuer une attaque au corp à corp avec une action secondaire.",
+        "description": "Si le Prêtre a effectué un sort de dégats ce tour ci, il peut effectuer une attaque au corp à corp avec une action secondaire.",
         "prerequis": "<strong> Prérequis :</strong>💪Force 5",
         "cout": "1 point de don"
       },
       {
         "nom": "Musique",
-        "description": "Permet d'apprendre un instrument de musique (ou de savoir chanter) au choix, gagnant 2 de compétences sur les tests de compétence éloquence le nécéssitant.",
+        "description": "Permet d'apprendre un instrument de musique (ou de savoir chanter) au choix, gagnant 2 de compétences sur les tests de compétence éloquence le nécessitant.",
         "prerequis": "<strong> Prérequis :</strong>-",
         "cout": "1 point de don"
       },
@@ -7990,8 +8549,32 @@ article.active .grid {
       },
       {
         "nom": "Tentation maléfique",
-        "description": "Description du don.",
+        "description": "Permet de modifier les dégats des sorts et effets infligés, d'élément <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span> ou <span style=\"color: #f5f5f5; font-weight: bold;\">Divin</span>, pour en faire des dégats d'élément <span style=\"color: #8b5cf6; font-weight: bold;\">Maléfique</span>.",
         "prerequis": "<strong> Prérequis :</strong>-",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Méditation érudite",
+        "description": "Augmente 🧠 l'intelligence de 4.",
+        "prerequis": "<strong> Prérequis :</strong>-",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Élan béni",
+        "description": "Après avoir effectué un sort de soins ou de soutien, les dégâts de la prochaine attaque physique du combat sont augmentés de la valeur du niveau du héros.",
+        "prerequis": "<strong> Prérequis :</strong>-",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Martyr",
+        "description": "Une fois par tour, aprés avoir reçu des dégats, peut utiliser une action secondaire pour soigner une cible autre que le héros à moins de 6m, d'une valeur du niveau du héros.",
+        "prerequis": "<strong> Prérequis :</strong>-",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Chair consacrée",
+        "description": "Augmente 🛡️ l'endurance de 4.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       }
     ]
@@ -8007,13 +8590,13 @@ article.active .grid {
         "cout": "1 point de don"
       },
       {
-        "nom": "Magie aléatoire destructrice",
+        "nom": "Magie destructrice",
         "description": "Permet de choisir et d'apprendre un sort de mage et de pouvoir le lancer à volonté. Le sort peut être changé par la suite.",
         "prerequis": "<strong> Prérequis :</strong> Choisir un nouveau sort écrase l'ancien.",
         "cout": "1 point de don"
       },
       {
-        "nom": "Magie aléatoire de soutien",
+        "nom": "Magie de soutien",
         "description": "Permet de choisir et d'apprendre un sort de prêtre et de pouvoir le lancer à volonté. Le sort peut être changé par la suite.",
         "prerequis": "<strong> Prérequis :</strong> Choisir un nouveau sort écrase l'ancien.",
         "cout": "1 point de don"
@@ -8032,13 +8615,31 @@ article.active .grid {
       },
       {
         "nom": "Enchantement de force permanante",
-        "description": "Augmente la Force de 4.",
+        "description": "Augmente la 💪 Force de 4.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
       {
         "nom": "Teleportation amicale",
         "description": "Une fois par combat, peut utiliser une action secondaire pour se téléporter à 3m d'un allié consentant.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Enchantement d'agilité permanante",
+        "description": "Augmente 🏃 l'Agilité de 4.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Duplicateur de nourriture",
+        "description": "Lors de la consommation de nourriture, un héros allié peut également profiter de ses effets.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Magie aléatoire",
+        "description": "Peut dépenser une action principale et secondaire pour tenter de lancer un sort d'altération magique et un sort de soutien sur des cibles à portée, le même tour.\n<br><br> Lancez un d20.\n<br> Si le dé fait 10 ou plus, les deux sorts sont lancés sur leurs cibles respectives.\n<br> Si le dé fait 9 ou moins, les deux sorts sont lancés sur les cibles inverses (peu importe la portée).\n\n<br><br> Dans les deux cas, seul le mana du sort le plus cher est dépensé.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       }
@@ -8293,7 +8894,7 @@ article.active .grid {
       "tags": [
         "Nourriture"
       ],
-      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore 5 points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.",
+      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore 6 points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.",
       "prix": "🔷 <strong>Prix:</strong> 5",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -8301,11 +8902,11 @@ article.active .grid {
       "nom": "Ration copieuse de nourriture",
       "numero": 20,
       "image": "https://i.ibb.co/7JZW2ZZT/Food2.png",
-      "description": "<i>Un coffret garni de mets fins et de vin épicé, offrant réconfort et vigueur bien au-delà de la simple survie</i>",
+      "description": "<i>Un coffret garni de mets fins et de vin épicé, offrant réconfort et vigueur bien au-delà de la simple survie.</i>",
       "tags": [
         "Nourriture"
       ],
-      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore 8 points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.\n<br><b>Charges :</b> 3",
+      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore 9 points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.\n<br><b>Charges :</b> 3",
       "prix": "🔷 <strong>Prix:</strong> 15",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -8317,8 +8918,8 @@ article.active .grid {
       "tags": [
         "Nourriture"
       ],
-      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore 5 points de vie. <br>Couplé à un sommeil, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>. <br>De plus, lorsque consommé, le mangeur ne neccessite plus que 4 heures de sommeil ce jour-ci.\n<br><br><b>Charges :</b> 3",
-      "prix": "🔷 <strong>Prix:</strong> 20",
+      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore 6 points de vie. <br>Couplé à un sommeil, permet d'éviter l'état <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>. <br>De plus, lorsque consommé, le mangeur ne nécessite plus que 4 heures de sommeil ce jour-ci.\n<br><br><b>Charges :</b> 4",
+      "prix": "🔷 <strong>Prix:</strong> 25",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
@@ -8329,7 +8930,7 @@ article.active .grid {
       "tags": [
         "Nourriture"
       ],
-      "effet": "Inutilisable en combat.\n<br>\n<br><strong>Effet:</strong> Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.",
+      "effet": "Inutilisable en combat.\n<br>\n<br><strong>Effet:</strong> Couplé à un sommeil de 8h, permet d'éviter l'état <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.",
       "prix": "",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -8495,7 +9096,7 @@ article.active .grid {
         "Plante",
         "Non identifié"
       ],
-      "effet": "<b>Effet:</b> Rend au héros ou à une cible proche une quantitée de mana équilavent au niveau d'Intelligence du héros.\n<br><b>Ciritique :</b> Mana rendu augmenté de 5.",
+      "effet": "<b>Effet:</b> Rend au héros ou à une cible proche une quantité de mana équivalent au niveau d'Intelligence du héros.\n<br><b>Critique :</b> Mana rendu augmenté de 5.",
       "prix": "🔷 <strong>Prix:</strong> 25",
       "poids": ""
     },
@@ -8531,7 +9132,7 @@ article.active .grid {
       "tags": [
         "Accessoire"
       ],
-      "effet": "<strong>Effet:</strong> En cas de coup critique physique sur une attaque au corp à corp, l'adversaire sera mis dans l'état <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">A terre</span>.\n<br><strong>Sans effet si :</strong> <br>- Adversaire de taille Grand ou supérieur <br>- Adversaire volant ou lévitant.",
+      "effet": "<strong>Effet:</strong> En cas de coup critique physique sur une attaque au corps à corps, l'adversaire sera mis dans l'état <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">À terre</span>.\n<br><strong>Sans effet si :</strong> <br>- Adversaire de taille Grand ou supérieur <br>- Adversaire volant ou lévitant.",
       "prix": "🔷 <strong>Prix:</strong> ?",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -8569,7 +9170,7 @@ article.active .grid {
         "Non identifié",
         "Accessoire"
       ],
-      "effet": "<strong>Effet:</strong> Les attaques physiques sont imprégnés d'une force élémentaire, qui inflige 4 dégats de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>.",
+      "effet": "<strong>Effet:</strong> Les attaques physiques sont imprégnées d'une force élémentaire, qui inflige 4 dégâts de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>.",
       "prix": "🔷 <strong>Prix:</strong> ?",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -8638,7 +9239,7 @@ article.active .grid {
         "Robe",
         "Non identifié"
       ],
-      "effet": "<strong>Effet:</strong> Augmente les dégats élémentaires de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> et d'<span style=\"color: #4682b4; font-weight: bold;\">Eau</span> infligés par les sorts de 5.",
+      "effet": "<strong>Effet:</strong> Augmente les dégâts élémentaires de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> et d'<span style=\"color: #4682b4; font-weight: bold;\">Eau</span> infligés par les sorts de 5.",
       "prix": "🔷 <strong>Prix:</strong> ?",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -8666,7 +9267,7 @@ article.active .grid {
         "Une main",
         "Non identifié"
       ],
-      "effet": "<strong>Dégats:</strong> Inflige (4 + Force) points de dégats physiques.\n<br><strong>Effet:</strong> Augmente la Puissance des sorts de 2.",
+      "effet": "<strong>Dégâts:</strong> Inflige (4 + Force) points de dégâts physiques.\n<br><strong>Effet:</strong> Augmente la Puissance des sorts de 2.",
       "prix": "🔷 <strong>Prix:</strong> ?",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -8691,7 +9292,7 @@ article.active .grid {
       "tags": [
         "Nourriture"
       ],
-      "effet": "<strong>Effet:</strong> Double les soins prodigués par une nourriture.\n\n<br>          <strong>Charges:</strong> 5.",
+      "effet": "<strong>Effet:</strong> Double les soins prodigués par une nourriture.\n\n<br>          <strong>Charges:</strong> 10.",
       "prix": "🔷 <strong>Prix:</strong> 50",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -8770,7 +9371,7 @@ article.active .grid {
       "tags": [
         "Nourriture"
       ],
-      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore 5 points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.\n          <br> <strong>Charges : </strong>2.",
+      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore 6 points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.\n          <br> <strong>Charges : </strong>2.",
       "prix": "🔷 <strong>Prix:</strong> 30",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -8786,6 +9387,18 @@ article.active .grid {
       ],
       "effet": "<strong>Dégâts: </strong> Inflige (3  + Force) points de dégats physiques.\n<br>  <strong>Effet:</strong> Augmente la portée d'attaque au corps à corps  de 3m.",
       "prix": "🔷 <strong>Prix:</strong> ?",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Plat épicé",
+      "numero": 58,
+      "image": "https://i.ibb.co/fV9FdbzF/Fouet-Foret.png",
+      "description": "<i>Ce ragoût rougeoyant, saturé d’épices brûlantes, exige une véritable hardiesse pour être avalé, mais récompense l’audacieux d’une saveur inoubliable</i>",
+      "tags": [
+        "Nourriture"
+      ],
+      "effet": "Inutilisable en combat.\n<br><strong>Prérequis:</strong> Test de compétence Hardiesse 1.\n<br><strong>Effet:</strong> Restore 15 points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.\n          <br> <strong>Charges : </strong>3.",
+      "prix": "🔷 <strong>Prix:</strong> 50",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     }
   ],
@@ -9753,7 +10366,25 @@ article.active .grid {
       "fourchettes": [
         {
           "min": 1,
-          "max": 10,
+          "max": 7,
+          "objet": {
+            "type": "reference",
+            "numero": 20,
+            "nom": "Ration copieuse de nourriture"
+          }
+        },
+        {
+          "min": 8,
+          "max": 12,
+          "objet": {
+            "type": "reference",
+            "numero": 21,
+            "nom": "Fruits de la forêt"
+          }
+        },
+        {
+          "min": 13,
+          "max": 17,
           "objet": {
             "type": "reference",
             "numero": 50,
@@ -9761,21 +10392,12 @@ article.active .grid {
           }
         },
         {
-          "min": 11,
-          "max": 16,
-          "objet": {
-            "type": "reference",
-            "numero": 34,
-            "nom": "Auréline des Roches"
-          }
-        },
-        {
           "min": 17,
           "max": 30,
           "objet": {
             "type": "reference",
-            "numero": 20,
-            "nom": "Ration copieuse de nourriture"
+            "numero": 58,
+            "nom": "Plat épicé"
           }
         }
       ]
@@ -10010,11 +10632,12 @@ article.active .grid {
     "objet:Ceinture en peau de serpent": "https://i.ibb.co/LhrtCHpW/Ceinture-Serpent.png",
     "objet:Cristal de Sel": "https://i.ibb.co/n8PhpFY6/Sel.png",
     "objet:Viande de monstre": "https://i.ibb.co/YBYZ7KKz/Viande-Monstre.png",
-    "objet:Fouet de lianes": "https://i.ibb.co/fV9FdbzF/Fouet-Foret.png"
+    "objet:Fouet de lianes": "https://i.ibb.co/fV9FdbzF/Fouet-Foret.png",
+    "objet:Plat épicé": "https://i.ibb.co/Vc934Q9b/Epice.png"
   },
   "meta": {
-    "total_images": 140,
-    "exported_date": "2025-09-28",
+    "total_images": 141,
+    "exported_date": "2025-09-29",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
 };
@@ -10352,7 +10975,7 @@ article.active .grid {
       "type": "card",
       "id": "tests",
       "title": "Tests de compétences",
-      "content": "<p>Quand un MJ annonce un test de compétence, un héros peut choisir de dépenser des efforts pour booster sa compétence. La difficulté d'un test est seule connue du MJ, et est entre 1 et 5 (Exigeant, Complexe , Éprouvant, Prodigieux , <strong>Impossible</strong>).</p><p>Une fois le test résolu, le Maître de Jeu annonce le résultat. Si le joueur a dépensé plus d'Efforts que nécessaire, l'excédent est perdu.</p><br> A noter que certaines actions sont impossibles à réaliser et un héros peut alors s'épuiser pour rien, s'il n'a pas bien évalué la difficulté de la tâche. A l'inverse, les tâches simples ne demandent pas de test de compétences.",
+      "content": "<p>Quand un MJ annonce un test de compétence, un héros peut choisir de dépenser des efforts pour booster sa compétence. La difficulté d'un test est seule connue du MJ, et est entre 0 et 5 (<strong>Simple</strong>, Exigeant, Complexe , Éprouvant, Prodigieux , <strong>Impossible</strong>).</p><p>Une fois le test résolu, le Maître de Jeu annonce le résultat. Si le joueur a dépensé plus d'Efforts que nécessaire, l'excédent est perdu.</p><br> A noter que certaines actions sont impossibles à réaliser et un héros peut alors s'épuiser pour rien, s'il n'a pas bien évalué la difficulté de la tâche. A l'inverse, les tâches simples ne demandent aucun niveau de compétence ou effort.",
       "deletable": true,
       "sectionName": "Tests de compétences"
     }
@@ -10379,7 +11002,7 @@ article.active .grid {
       "type": "card",
       "id": "endormi-effraye",
       "title": "Endormi/assomé/Effrayé",
-      "content": "<p>Ne peut plus faire d'actions.</p><p> Ne peut plus esquiver.</p><p> Des dégats infligés à la créature la sort de son état.</p>",
+      "content": "<p>Ne peut plus faire d'actions.</p><p> Ne peut plus esquiver.</p><p> Des dégâts infligés à la créature la sortent de son état.</p>",
       "deletable": true,
       "sectionName": "Endormi/assomé/Effrayé"
     },
@@ -10395,7 +11018,7 @@ article.active .grid {
       "type": "card",
       "id": "etats-new-5-1755762657383",
       "title": "Empoisonné",
-      "content": "Des dégats sont appliqués à chaque début de tour, réduits ni par l'armure physique ni par l'armure élémentaire.",
+      "content": "Des dégâts sont appliqués à chaque début de tour, réduits ni par l'armure physique ni par l'armure élémentaire.",
       "deletable": true,
       "sectionName": "Nouvelle section"
     },
@@ -10411,7 +11034,7 @@ article.active .grid {
       "type": "card",
       "id": "etats-new-7-1755762977439",
       "title": "Affaibli",
-      "content": "Les dégats physiques effectués sont réduits de moitiés. Les tests de hardiesse ont une difficulté de 2 plus élevés.",
+      "content": "Les dégâts physiques effectués sont réduits de moitié. Les tests de hardiesse ont une difficulté de 2 plus élevée.",
       "deletable": true,
       "sectionName": "Nouvelle section"
     },
@@ -10427,7 +11050,7 @@ article.active .grid {
       "type": "card",
       "id": "etats-new-9-1756400691334",
       "title": "Vulnérable",
-      "content": "Plus aucune protection apporté par l'armure physique ou élémentaire.",
+      "content": "Plus aucune protection apportée par l'armure physique ou élémentaire.",
       "deletable": true,
       "sectionName": "Nouvelle section"
     },
@@ -10435,7 +11058,7 @@ article.active .grid {
       "type": "card",
       "id": "etats-new-10-1756400890785",
       "title": "Confus",
-      "content": "A chaque début de tour, lancez un d20. si le resultat est de 10 ou moins, passe sont tour à se déplacer et attaquer au corp à corp la cible la plus proche.",
+      "content": "À chaque début de tour, lancez un d20. Si le résultat est de 10 ou moins, passe son tour à se déplacer et attaquer au corps à corps la cible la plus proche.",
       "deletable": true,
       "sectionName": "Nouvelle section"
     },
@@ -10443,7 +11066,7 @@ article.active .grid {
       "type": "card",
       "id": "etats-new-11-1756401053782",
       "title": "Maudit",
-      "content": "Impossible d'effectuer des coups critiques (physiques ou magiques), et la resistance altération est divisé par 2.",
+      "content": "Impossible d'effectuer des coups critiques (physiques ou magiques), et la résistance altération est divisée par 2.",
       "deletable": true,
       "sectionName": "Nouvelle section"
     },
@@ -10451,7 +11074,7 @@ article.active .grid {
       "type": "card",
       "id": "etats-new-12-1756401063266",
       "title": "Débilité",
-      "content": "La cible est incpable d'effectuer la moindre action ou d'esquiver. A chaque début de tour, elle perd des points de vie, réduits ni par l'armure physique ni par l'armure élémentaire.",
+      "content": "La cible est incapable d'effectuer la moindre action ou d'esquiver. À chaque début de tour, elle perd des points de vie, réduits ni par l'armure physique ni par l'armure élémentaire.",
       "deletable": true,
       "sectionName": "Nouvelle section"
     },
@@ -10459,7 +11082,7 @@ article.active .grid {
       "type": "card",
       "id": "etats-new-13-1756408622987",
       "title": "Fatigué",
-      "content": "Incapable d'utiliser des efforts. Coût en mana des sorts doublés. Dégats physiques infligés réduits de moitié.",
+      "content": "Incapable d'utiliser des efforts. Coût en mana des sorts doublé. Dégâts physiques infligés réduits de moitié.",
       "deletable": true,
       "sectionName": "Nouvelle section"
     },
@@ -10499,7 +11122,7 @@ article.active .grid {
       "type": "card",
       "id": "combat-new-3-1756401384086",
       "title": "Actions",
-      "content": "Chaque tour, un héros dispose d'une <b>action principale</b>, pour effectuer une attaque physique ou un sort.\nElle est perdue si elle n'est pas utilisé pendant son tour. Elle permet également de faire toute action qui nécéssite un test de compétence (ouvrir une porte, casser un rocher...).\n\n<br><br>Il dispose également d'une <b>action secondaire</b>, qui permet de faire un certains nombre de choses :\n<br>- Sauter.\n<br>- Utiliser un objet.\n<br>- Changer d'arme.\n<br>Certains dons ou abilités permettent également d'effectuer d'autres choses en utilisant l'action secondaire.\n\n<br><br> Les héros peuvent effectuer leur déplacement, action principale et secondaire dans l'ordre qui leur plait.",
+      "content": "Chaque tour, un héros dispose d'une <b>action principale</b>, pour effectuer une attaque physique ou un sort.\nElle est perdue si elle n'est pas utilisée pendant son tour. Elle permet également de faire toute action qui nécessite un test de compétence (ouvrir une porte, casser un rocher...).\n\n<br><br>Il dispose également d'une <b>action secondaire</b>, qui permet de faire un certain nombre de choses :\n<br>- Sauter.\n<br>- Utiliser un objet.\n<br>- Changer d'arme.\n<br>Certains dons ou abilités permettent également d'effectuer d'autres choses en utilisant l'action secondaire.\n\n<br><br> Les héros peuvent effectuer leur déplacement, action principale et secondaire dans l'ordre qui leur plaît.",
       "deletable": true,
       "sectionName": "Nouvelle section"
     },
@@ -10531,7 +11154,7 @@ article.active .grid {
       "type": "card",
       "id": "combat-new-7-1756407955417",
       "title": "Incantation sur plusieurs tours",
-      "content": "Certains sorts ont un effet qui dure plusieurs tours.\n<br> Dans ce cas, le dé qui determine si l'effet est critique doit être relancé à chaque tour (l'effet \"critique\" d'un sort ne dure qu'un seul tour).<br>  <br>\n\n<hr>\n\n<br>Certains sorts puissants nécéssitent plusieurs tours d'incantation.\n\n<br><br>Aprés avoir commencé une incantation, aucun déplacement/action n'est possible. Les effets du sort sont effectués au dernier tour de l'incantation, tour où la créature pourra de nouveau effectuer des actions/déplacement.\n<br> Les dégâts subis n’interrompent pas l’incantation, sauf en cas de mort ou d’effet empechant d'effectuer des actions (exemple : <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">A terre</span>).\n<br><hr>",
+      "content": "Certains sorts ont un effet qui dure plusieurs tours.\n<br> Dans ce cas, le dé qui détermine si l'effet est critique doit être relancé à chaque tour (l'effet \"critique\" d'un sort ne dure qu'un seul tour).<br>  <br>\n\n<hr>\n\n<br>Certains sorts puissants nécessitent plusieurs tours d'incantation.\n\n<br><br>Après avoir commencé une incantation, aucun déplacement/action n'est possible. Les effets du sort sont effectués au dernier tour de l'incantation, tour où la créature pourra de nouveau effectuer des actions/déplacement.\n<br> Les dégâts subis n'interrompent pas l'incantation, sauf en cas de mort ou d'effet empêchant d'effectuer des actions (exemple : <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">À terre</span>).\n<br><hr>",
       "deletable": true,
       "sectionName": "Nouvelle section"
     },
@@ -10557,7 +11180,7 @@ article.active .grid {
       "type": "card",
       "id": "gestion-des-ressources-new-2-1756401478745",
       "title": "Inventaire",
-      "content": "<p>Chaque héros dispose de <b>quatre inventaires</b> :</p>\n\n<ul>\n  <li>\n    <b>Équipement</b> : Toujours porté et actif, il est constitué d’une arme, d’une armure, \n    d’un éventuel bouclier et de <b>3 accessoires</b>.\n  </li>\n  <li>\n    <b>Sac de consommables</b> : Peut contenir jusqu’à <b>10 consommables</b>. Même si un héro possède plusieur fois le même consommable, ils prendront chacun une place.\n  </li>\n  <li>\n    <b>Sac général</b> : Dispose d’une capacité maximale de <b>10 points de poids</b>. \n    Chaque objet entreposé y possède une valeur de poids indiquée dans sa description.\n  </li>\n <li>\n    <b>Objets de quête</b> : Aucune limite pour ces objets, utiles pour l'aventure (clés, cartes...).\n  </li>\n</ul>",
+      "content": "<p>Chaque héros dispose de <b>quatre inventaires</b> :</p>\n\n<ul>\n  <li>\n    <b>Équipement</b> : Toujours porté et actif, il est constitué d’une arme, d’une armure, \n    d’un éventuel bouclier et de <b>3 accessoires</b>.\n  </li>\n  <li>\n    <b>Sac de consommables</b> : Peut contenir jusqu'à <b>10 consommables</b>. Même si un héros possède plusieurs fois le même consommable, ils prendront chacun une place.\n  </li>\n  <li>\n    <b>Sac général</b> : Dispose d’une capacité maximale de <b>10 points de poids</b>. \n    Chaque objet entreposé y possède une valeur de poids indiquée dans sa description.\n  </li>\n <li>\n    <b>Objets de quête</b> : Aucune limite pour ces objets, utiles pour l'aventure (clés, cartes...).\n  </li>\n</ul>",
       "deletable": true,
       "sectionName": "Nouvelle section"
     },
@@ -10723,7 +11346,7 @@ article.active .grid {
         },
         "Auberge": {
           "title": "Auberge",
-          "content": "<hr>\nUn vendeur noble (mais pauvre), qui vend les objets de départ.\n     <hr>\nUn expert en objet, peut analyser un objet magique pour 20 eclat, et un equipement pour 50 eclat. pour des objets exeptionnels, 200 eclats.\n     <hr>\nUn facteur qui veut faire livrer une lettre au bucheron de la forêt, quete principale\n     <hr>                       \nUn homme bourré, une chanteuse, un mec fort\n <hr>\nChambre des héros (laissé par l'aubergiste, un des membres de la famille des PJs est un ami). \nPlus tard, aubergistre propose contre 100 eclat un coffre ou metter n'importe quels objets.\n\n   <hr>\nAvant de partir la femme de l'aubergiste qui a entendu les héros, leur propose de piocher dans le sac a provision, mais leur demande de n'en prendre que un par personne maximum. Table de loot <i>ProvisionAuberge</i> <a href=\"#/tables-tresors\" style=\"color: var(--accent); text-decoration: underline;\">Tables de trésors</a>.\n            \n <hr>\nAprés avoir terminé la foret, un voyageur propose contre 100 eclats de partir en expedition chercher les objets oubliés par les joueurs. Il leur vendra a bon prix.\n\n <hr>\nAprés foret, aubergiste parle de vieille tour ou mine comme prochain lieu, les joueurs decident"
+          "content": "<hr>\nUn vendeur noble (mais pauvre), qui vend les objets de départ.\n     <hr>\nUn expert en objet, peut analyser un objet magique pour 20 éclats, et un équipement pour 50 éclats. Pour des objets exceptionnels, 200 éclats.\n     <hr>\nUn facteur qui veut faire livrer une lettre au bûcheron de la forêt, quête principale\n     <hr>                       \nUn homme bourré, une chanteuse, un mec fort\n <hr>\nChambre des héros (laissée par l'aubergiste, un des membres de la famille des PJs est un ami). \nPlus tard, aubergiste propose contre 100 éclats un coffre où mettre n'importe quels objets.\n\n   <hr>\nAvant de partir la femme de l'aubergiste qui a entendu les héros, leur propose de piocher dans le sac à provision, mais leur demande de n'en prendre qu'un par personne maximum. Table de loot <i>ProvisionAuberge</i> <a href=\"#/tables-tresors\" style=\"color: var(--accent); text-decoration: underline;\">Tables de trésors</a>.\n            \n <hr>\nAprès avoir terminé la forêt, un voyageur propose contre 100 éclats de partir en expédition chercher les objets oubliés par les joueurs. Il leur vendra à bon prix.\n\n <hr>\nAprès la forêt, aubergiste parle de vieille tour ou mine comme prochain lieu, les joueurs décident"
         },
         "Forêt": {
           "title": "Forêt",
@@ -10878,7 +11501,7 @@ article.active .grid {
     });
   
 // ============================================================================
-// Foresia APPLICATION - CORE MODULE
+// JDR-BAB APPLICATION - CORE MODULE
 // ============================================================================
 
 (() => {
@@ -11224,25 +11847,25 @@ article.active .grid {
     // Force reload JSON data (clear localStorage cache)
     forceReloadData() {
       // Effacer seulement les éditions temporaires
-      localStorage.removeItem('foresia-edits');
-      localStorage.removeItem('foresia-last-modified');
+      localStorage.removeItem('jdr-bab-edits');
+      localStorage.removeItem('jdr-bab-last-modified');
       window.location.reload();
     },
 
     // Clear corrupted localStorage data specifically for monsters
     clearCorruptedMonsterData() {
-      const edits = JSON.parse(localStorage.getItem('foresia-edits') || '{}');
+      const edits = JSON.parse(localStorage.getItem('jdr-bab-edits') || '{}');
       
       // Remove any MONSTRES data that might be corrupted
       if (edits.MONSTRES) {
         delete edits.MONSTRES;
-        localStorage.setItem('foresia-edits', JSON.stringify(edits));
+        localStorage.setItem('jdr-bab-edits', JSON.stringify(edits));
       }
       
       // Also clear any other monster-related storage
       if (edits.monster) {
         delete edits.monster;
-        localStorage.setItem('foresia-edits', JSON.stringify(edits));
+        localStorage.setItem('jdr-bab-edits', JSON.stringify(edits));
       }
     },
 
@@ -11325,7 +11948,7 @@ article.active .grid {
 
 })();
 // ============================================================================
-// Foresia APPLICATION - CONSTANTS
+// JDR-BAB APPLICATION - CONSTANTS
 // ============================================================================
 
 (() => {
@@ -11379,11 +12002,11 @@ article.active .grid {
   // STORAGE KEYS
   // ========================================
   window.STORAGE_KEYS = {
-    EDITS: 'foresia-edits',
-    LAST_MODIFIED: 'foresia-last-modified',
-    MONSTER_BACKUPS: 'foresia-monster-backups',
-    FILTER_SETTINGS: 'foresia-filter-settings',
-    FAVORIS: 'foresia-favoris'
+    EDITS: 'jdr-bab-edits',
+    LAST_MODIFIED: 'jdr-bab-last-modified',
+    MONSTER_BACKUPS: 'jdr-bab-monster-backups',
+    FILTER_SETTINGS: 'jdr-bab-filter-settings',
+    FAVORIS: 'jdr-bab-favoris'
   };
 
   // ========================================
@@ -11416,7 +12039,7 @@ article.active .grid {
 
 })();
 // ============================================================================
-// Foresia APPLICATION - CONTENT TYPES CONFIGURATION
+// JDR-BAB APPLICATION - CONTENT TYPES CONFIGURATION
 // ============================================================================
 
 (() => {
@@ -11865,7 +12488,7 @@ article.active .grid {
 
 })();
 // ============================================================================
-// Foresia APPLICATION - EVENT BUS
+// JDR-BAB APPLICATION - EVENT BUS
 // ============================================================================
 
 (() => {
@@ -11943,7 +12566,7 @@ article.active .grid {
 
 })();
 // ============================================================================
-// Foresia APPLICATION - BASE ENTITY
+// JDR-BAB APPLICATION - BASE ENTITY
 // ============================================================================
 
 (() => {
@@ -12007,6 +12630,19 @@ article.active .grid {
       }
 
       const defaultValues = this.config?.defaultValues || {};
+      
+      // Generate unique name if using default name
+      if (!itemData.nom && defaultValues.nom) {
+        const existingNames = category[itemsProperty].map(item => item.nom);
+        let counter = 1;
+        let uniqueName = defaultValues.nom;
+        while (existingNames.includes(uniqueName)) {
+          uniqueName = `${defaultValues.nom} ${counter}`;
+          counter++;
+        }
+        defaultValues.nom = uniqueName;
+      }
+      
       const newItem = { ...defaultValues, ...itemData };
       category[itemsProperty].push(newItem);
 
@@ -12174,7 +12810,7 @@ article.active .grid {
 
 })();
 // ============================================================================
-// Foresia APPLICATION - CONTENT FACTORY
+// JDR-BAB APPLICATION - CONTENT FACTORY
 // ============================================================================
 
 (() => {
@@ -12462,7 +13098,7 @@ article.active .grid {
 
 })();
 // ============================================================================
-// Foresia APPLICATION - CARD BUILDER
+// JDR-BAB APPLICATION - CARD BUILDER
 // ============================================================================
 
 (() => {
@@ -12990,12 +13626,16 @@ article.active .grid {
           </div>
         `;
       } else {
-        // DEV MODE: Always generate buttons, let CSS handle visibility
+        // Check dev mode before generating buttons
+        const isDevMode = document.body.classList.contains('dev-on');
+        const buttonHTML = isDevMode ? `
+            <label class="up">📷 Ajouter<input accept="image/*" hidden="" type="file"></label>
+            <button class="rm" type="button" style="${removeStyle}">🗑 Retirer</button>` : '';
+        
         return `
           <div class="${containerClasses}" data-illus-key="${illusKey}" data-style-type="${styleType}" data-bound="1">
             <img alt="Illustration ${altText}" class="thumb" style="${imageStyle}"${imageUrl ? ` src="${imageUrl}"` : ''}>
-            <label class="up">📷 Ajouter<input accept="image/*" hidden="" type="file"></label>
-            <button class="rm" type="button" style="${removeStyle}">🗑 Retirer</button>
+            ${buttonHTML}
           </div>
         `;
       }
@@ -13242,7 +13882,7 @@ article.active .grid {
 
 })();
 // ============================================================================
-// Foresia APPLICATION - PAGE BUILDER
+// JDR-BAB APPLICATION - PAGE BUILDER
 // ============================================================================
 
 (() => {
@@ -13797,12 +14437,16 @@ article.active .grid {
           </div>
         `;
       } else {
-        // DEV MODE: Always generate buttons, let CSS handle visibility
+        // Check dev mode before generating buttons
+        const isDevMode = document.body.classList.contains('dev-on');
+        const buttonHTML = isDevMode ? `
+            <label class="up">📷 Ajouter<input accept="image/*" hidden="" type="file"></label>
+            <button class="rm" type="button" style="${removeStyle}">🗑 Retirer</button>` : '';
+        
         return `
           <div class="illus" data-illus-key="${illusKey}" data-bound="1">
             <img alt="Illustration ${altText}" class="thumb" style="${imageStyle}"${imageUrl ? ` src="${imageUrl}"` : ''}>
-            <label class="up">📷 Ajouter<input accept="image/*" hidden="" type="file"></label>
-            <button class="rm" type="button" style="${removeStyle}">🗑 Retirer</button>
+            ${buttonHTML}
           </div>
         `;
       }
@@ -14607,7 +15251,7 @@ article.active .grid {
 
 })();
 // ============================================================================
-// Foresia APPLICATION - UTILITIES MODULE
+// JDR-BAB APPLICATION - UTILITIES MODULE
 // ============================================================================
 
 (() => {
@@ -15049,7 +15693,7 @@ article.active .grid {
 
 })();
 // ============================================================================
-// Foresia APPLICATION - IMAGES MODULE
+// JDR-BAB APPLICATION - IMAGES MODULE
 // ============================================================================
 
 (() => {
@@ -15178,10 +15822,11 @@ article.active .grid {
       img.style.display = 'inline-block';
       img.style.opacity = '1'; // Reset opacity after upload
       
-      // Show remove button if it exists
+      // Show remove button if it exists and dev mode is on
       const removeBtn = illusElement.querySelector('.rm');
       if (removeBtn) {
-        removeBtn.style.display = 'inline-flex';
+        const isDevMode = document.body.classList.contains('dev-on');
+        removeBtn.style.display = isDevMode ? 'inline-flex' : 'none';
       }
 
     },
@@ -15528,7 +16173,7 @@ article.active .grid {
 
 })();
 // ============================================================================
-// Foresia APPLICATION - STORAGE MODULE
+// JDR-BAB APPLICATION - STORAGE MODULE
 // ============================================================================
 
 (() => {
@@ -15563,9 +16208,9 @@ article.active .grid {
 
     clearStorageOnStartup() {
       // Clear all localStorage data on page load - JSON files are source of truth
-      localStorage.removeItem('foresia-edits');
-      localStorage.removeItem('foresia-static-pages');
-      localStorage.removeItem('foresia-last-modified');
+      localStorage.removeItem('jdr-bab-edits');
+      localStorage.removeItem('jdr-bab-static-pages');
+      localStorage.removeItem('jdr-bab-last-modified');
     },
 
     saveChanges(silent = false) {
@@ -15751,7 +16396,7 @@ article.active .grid {
       const monsterDefaultVisibleTags = contentTypes.monster?.filterConfig?.defaultVisibleTags || [];
       
       return `// ============================================================================
-// Foresia APPLICATION - CONTENT TYPES CONFIGURATION
+// JDR-BAB APPLICATION - CONTENT TYPES CONFIGURATION
 // ============================================================================
 
 (() => {
@@ -16261,14 +16906,14 @@ article.active .grid {
     // Load edits from localStorage on startup
     loadStoredEdits() {
       try {
-        const storedEdits = localStorage.getItem('foresia-edits');
+        const storedEdits = localStorage.getItem('jdr-bab-edits');
         
         if (storedEdits && JdrApp.modules.editor) {
           JdrApp.modules.editor.editedData = JSON.parse(storedEdits);
         }
         
         // Load stored static pages data (includes dynamically created sections)
-        const storedStaticPages = localStorage.getItem('foresia-static-pages');
+        const storedStaticPages = localStorage.getItem('jdr-bab-static-pages');
         if (storedStaticPages) {
           const staticPagesData = JSON.parse(storedStaticPages);
           
@@ -16282,7 +16927,7 @@ article.active .grid {
           console.log('Restored static pages data from localStorage:', Object.keys(staticPagesData));
         }
         
-        // Ne plus charger foresia-data - laisser les JSON être la source de vérité
+        // Ne plus charger jdr-bab-data - laisser les JSON être la source de vérité
         
       } catch (error) {
         console.warn('Failed to load stored edits:', error);
@@ -16411,7 +17056,7 @@ article.active .grid {
 
 })();
 // ============================================================================
-// Foresia APPLICATION - SPELL FILTER MODULE
+// JDR-BAB APPLICATION - SPELL FILTER MODULE
 // ============================================================================
 
 (() => {
@@ -17020,7 +17665,7 @@ article.active .grid {
 
 })();
 // ============================================================================
-// Foresia APPLICATION - TABLES DE TRESORS MANAGER
+// JDR-BAB APPLICATION - TABLES DE TRESORS MANAGER
 // ============================================================================
 
 (() => {
@@ -18357,7 +19002,7 @@ article.active .grid {
 
 })();
 // ============================================================================
-// Foresia APPLICATION - FAVORIS MANAGER
+// JDR-BAB APPLICATION - FAVORIS MANAGER
 // ============================================================================
 
 (() => {
@@ -18721,7 +19366,7 @@ article.active .grid {
 
 })();
 // ============================================================================
-// Foresia APPLICATION - FAVORIS RENDERER
+// JDR-BAB APPLICATION - FAVORIS RENDERER
 // ============================================================================
 
 (() => {
@@ -18992,7 +19637,7 @@ article.active .grid {
 
 })();
 // ============================================================================
-// Foresia APPLICATION - ANIMATION ENHANCER MODULE
+// JDR-BAB APPLICATION - ANIMATION ENHANCER MODULE
 // ============================================================================
 
 (() => {
@@ -19555,7 +20200,7 @@ article.active .grid {
 
 })();
 // ============================================================================
-// Foresia APPLICATION - SCROLL OPTIMIZER
+// JDR-BAB APPLICATION - SCROLL OPTIMIZER
 // ============================================================================
 
 (() => {
@@ -20282,7 +20927,7 @@ article.active .grid {
 
 })();
 // ============================================================================
-// Foresia APPLICATION - ROUTER MODULE
+// JDR-BAB APPLICATION - ROUTER MODULE
 // ============================================================================
 
 (() => {
@@ -22884,7 +23529,7 @@ article.active .grid {
 })();
 
 // ============================================================================
-// Foresia APPLICATION - RENDERER MODULE
+// JDR-BAB APPLICATION - RENDERER MODULE
 // ============================================================================
 
 (() => {
@@ -23664,7 +24309,7 @@ article.active .grid {
 
 })();
 // ============================================================================
-// Foresia APPLICATION - UNIFIED EDITOR SYSTEM
+// JDR-BAB APPLICATION - UNIFIED EDITOR SYSTEM
 // ============================================================================
 
 (() => {
@@ -26581,7 +27226,7 @@ article.active .grid {
 
 })();
 // ============================================================================
-// Foresia APPLICATION - EDITOR MODULE (REFACTORED)
+// JDR-BAB APPLICATION - EDITOR MODULE (REFACTORED)
 // ============================================================================
 
 (() => {
@@ -26834,7 +27479,7 @@ article.active .grid {
         this.addNewSubclass(e.target);
       });
 
-      JdrApp.utils.events.register('click', '.delete-subclass-btn', (e) => {
+      JdrApp.utils.events.register('click', '.subclass-delete', (e) => {
         if (!this.isDevMode) return;
         this.deleteSubclass(e.target);
       });
@@ -26881,7 +27526,7 @@ article.active .grid {
     },
 
     deleteSubclass(button) {
-      const className = button.dataset.className;
+      const className = button.dataset.categoryName;
       const subclassName = button.dataset.subclassName;
       
       if (!className || !subclassName) return;
@@ -27200,8 +27845,8 @@ article.active .grid {
 
     saveChangesToStorage() {
       try {
-        localStorage.setItem('foresia-edits', JSON.stringify(this.editedData));
-        localStorage.setItem('foresia-last-modified', Date.now().toString());
+        localStorage.setItem('jdr-bab-edits', JSON.stringify(this.editedData));
+        localStorage.setItem('jdr-bab-last-modified', Date.now().toString());
         EventBus.emit(Events.STORAGE_SAVE);
       } catch (error) {
         // Failed to save changes
@@ -27286,7 +27931,7 @@ article.active .grid {
 
 })();
 // ============================================================================
-// Foresia APPLICATION - UI UTILITIES MODULE
+// JDR-BAB APPLICATION - UI UTILITIES MODULE
 // ============================================================================
 
 (() => {
@@ -27497,7 +28142,7 @@ article.active .grid {
 
 })();
 // ============================================================================
-// Foresia APPLICATION - BASE MODAL CLASS
+// JDR-BAB APPLICATION - BASE MODAL CLASS
 // ============================================================================
 
 (() => {
@@ -27777,7 +28422,7 @@ article.active .grid {
 
 })();
 // ============================================================================
-// Foresia APPLICATION - UI CORE MODULE
+// JDR-BAB APPLICATION - UI CORE MODULE
 // ============================================================================
 
 (() => {
@@ -28136,7 +28781,7 @@ article.active .grid {
 
 })();
 // ============================================================================
-// Foresia APPLICATION - EVENT HANDLERS MODULE
+// JDR-BAB APPLICATION - EVENT HANDLERS MODULE
 // ============================================================================
 
 (() => {
@@ -28491,7 +29136,7 @@ article.active .grid {
 
 })();
 // ============================================================================
-// Foresia APPLICATION - CONTENT MANAGER MODULE
+// JDR-BAB APPLICATION - CONTENT MANAGER MODULE
 // ============================================================================
 
 (() => {
@@ -28875,7 +29520,7 @@ article.active .grid {
 
 })();
 // ============================================================================
-// Foresia APPLICATION - TAGS MANAGER MODULE
+// JDR-BAB APPLICATION - TAGS MANAGER MODULE
 // ============================================================================
 
 (() => {
@@ -29508,7 +30153,7 @@ article.active .grid {
 
 })();
 // ============================================================================
-// Foresia APPLICATION - SEARCH MANAGER MODULE
+// JDR-BAB APPLICATION - SEARCH MANAGER MODULE
 // ============================================================================
 
 (() => {
@@ -29862,7 +30507,7 @@ article.active .grid {
 
 })();
 // ============================================================================
-// Foresia APPLICATION - MODAL MANAGER MODULE
+// JDR-BAB APPLICATION - MODAL MANAGER MODULE
 // ============================================================================
 
 (() => {
@@ -30880,7 +31525,7 @@ article.active .grid {
 
 })();
 // ============================================================================
-// Foresia APPLICATION - RESPONSIVE MANAGER MODULE
+// JDR-BAB APPLICATION - RESPONSIVE MANAGER MODULE
 // ============================================================================
 
 (() => {
@@ -31238,7 +31883,7 @@ article.active .grid {
 
 })();
 // ============================================================================
-// Foresia APPLICATION - PAGE MANAGER MODULE
+// JDR-BAB APPLICATION - PAGE MANAGER MODULE
 // ============================================================================
 
 (() => {
@@ -31928,7 +32573,7 @@ article.active .grid {
 
 })();
 // ============================================================================
-// Foresia APPLICATION - GM OBJECT FILTERS MODULE
+// JDR-BAB APPLICATION - GM OBJECT FILTERS MODULE
 // ============================================================================
 
 (() => {
@@ -32050,7 +32695,7 @@ article.active .grid {
 
 })();
 // ============================================================================
-// Foresia APPLICATION - MONSTER FILTERS MODULE
+// JDR-BAB APPLICATION - MONSTER FILTERS MODULE
 // ============================================================================
 
 (() => {
@@ -32242,7 +32887,7 @@ article.active .grid {
 
 })();
 // ============================================================================
-// Foresia APPLICATION - TABLE TRESOR FILTERS MODULE
+// JDR-BAB APPLICATION - TABLE TRESOR FILTERS MODULE
 // ============================================================================
 
 (() => {
@@ -32397,7 +33042,7 @@ article.active .grid {
 
 })();
 // ============================================================================
-// Foresia APPLICATION - UI MODULE
+// JDR-BAB APPLICATION - UI MODULE
 // ============================================================================
 
 (() => {
@@ -33050,7 +33695,7 @@ if (canUseServiceWorker) {
     
     // Show install button or notification
     if (window.JdrApp && JdrApp.modules && JdrApp.modules.ui) {
-      JdrApp.modules.ui.showNotification('📱 Installer Foresia sur votre appareil ?', 'info');
+      JdrApp.modules.ui.showNotification('📱 Installer JDR-BAB sur votre appareil ?', 'info');
     }
   });
 
@@ -33058,7 +33703,7 @@ if (canUseServiceWorker) {
   window.addEventListener('appinstalled', (e) => {
     console.log('✅ PWA was installed successfully');
     if (window.JdrApp && JdrApp.modules && JdrApp.modules.ui) {
-      JdrApp.modules.ui.showNotification('✅ Foresia installé avec succès !', 'success');
+      JdrApp.modules.ui.showNotification('✅ JDR-BAB installé avec succès !', 'success');
     }
     deferredPrompt = null;
   });

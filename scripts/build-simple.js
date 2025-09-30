@@ -30,8 +30,8 @@ function buildStandalone() {
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<title>JDR‑BAB — Livret de règles</title>
-<meta content="Livret web multipages des règles JDR‑BAB, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
+<title>Foresia — Livret de règles</title>
+<meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&amp;family=Source+Serif+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600&amp;display=swap" rel="stylesheet">
@@ -89,7 +89,8 @@ window.MANIFEST_DATA = ${fs.readFileSync(path.join(rootDir, 'config', 'manifest.
     'css/components.css',
     'css/animations.css',  // 3D animation styles
     'css/editor.css',
-    'css/scroll-optimizations.css'
+    'css/scroll-optimizations.css',
+    'css/visual-enhancements.css'
   ];
   
   let allCSS = '';
