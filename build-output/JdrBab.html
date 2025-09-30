@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-09-30T08:36:08.367Z by JdrBab Build System -->
+<!-- Generated on 2025-09-30T10:51:53.739Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -8437,6 +8437,12 @@ select:focus {
         "description": "Les sorts pouvant être esquivés, voient leur dégats infligés augmenter, d'un montant équivalent au niveau du sort.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
+      },
+      {
+        "nom": "Résonance Élémentaire",
+        "description": "Lorsque le héros lance un sort d'un élément, si il avait lancé un sort du même élément au tour précendent, alors les degats sont augmentés de la valeur du niveau du sort.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
       }
     ]
   },
@@ -8574,6 +8580,18 @@ select:focus {
         "nom": "Magie aléatoire",
         "description": "Peut dépenser une action principale et secondaire pour tenter de lancer un sort d'altération magique et un sort de soutien sur des cibles à portée, le même tour.\n<br><br> Lancez un d20.\n<br> Si le dé fait 10 ou plus, les deux sorts sont lancés sur leurs cibles respectives.\n<br> Si le dé fait 9 ou moins, les deux sorts sont lancés sur les cibles inverses (peu importe la portée).\n\n<br><br> Dans les deux cas, seul le mana du sort le plus cher est dépensé.",
         "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Instabilité Contrôlée",
+        "description": "Une fois par jour, lorsqu'un sort ou attaque de nimporte quel héros du groupe fait un échec critique, le héros peut dépenser une action secondaire pour relancer le dé.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Renvoi de Sort",
+        "description": "Une fois par combat, lorsque le héros est ciblé par un sort d'altération magique, il peut utiliser une action secondaire pour tenter de le renvoyer à l'expéditeur. <br><br>Intelligence contre Résistance altération de la cible. En cas de succès, le sort affecte l'expéditeur au lieu du héros.",
+        "prerequis": "<strong> Prérequis :</strong> 🧠 Intelligence 10.",
         "cout": "1 point de don"
       }
     ]
@@ -10570,7 +10588,7 @@ select:focus {
   },
   "meta": {
     "total_images": 141,
-    "exported_date": "2025-09-29",
+    "exported_date": "2025-09-30",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
 };
@@ -12563,20 +12581,26 @@ select:focus {
       }
 
       const defaultValues = this.config?.defaultValues || {};
-      
-      // Generate unique name if using default name
-      if (!itemData.nom && defaultValues.nom) {
-        const existingNames = category[itemsProperty].map(item => item.nom);
+
+      // Create the item first
+      const newItem = { ...defaultValues, ...itemData };
+
+      // Generate unique name if using default name or if name already exists
+      const existingNames = category[itemsProperty].map(item => item.nom);
+      if (!newItem.nom || existingNames.includes(newItem.nom) || newItem.nom === defaultValues.nom) {
+        const baseName = newItem.nom || defaultValues.nom || 'Nouvel élément';
         let counter = 1;
-        let uniqueName = defaultValues.nom;
+        let uniqueName = baseName;
+
+        // Keep incrementing until we find a unique name
         while (existingNames.includes(uniqueName)) {
-          uniqueName = `${defaultValues.nom} ${counter}`;
+          uniqueName = `${baseName} ${counter}`;
           counter++;
         }
-        defaultValues.nom = uniqueName;
+
+        newItem.nom = uniqueName;
       }
-      
-      const newItem = { ...defaultValues, ...itemData };
+
       category[itemsProperty].push(newItem);
 
       // Sync back to original objects data if needed

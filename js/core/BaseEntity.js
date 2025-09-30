@@ -63,20 +63,26 @@
       }
 
       const defaultValues = this.config?.defaultValues || {};
-      
-      // Generate unique name if using default name
-      if (!itemData.nom && defaultValues.nom) {
-        const existingNames = category[itemsProperty].map(item => item.nom);
+
+      // Create the item first
+      const newItem = { ...defaultValues, ...itemData };
+
+      // Generate unique name if using default name or if name already exists
+      const existingNames = category[itemsProperty].map(item => item.nom);
+      if (!newItem.nom || existingNames.includes(newItem.nom) || newItem.nom === defaultValues.nom) {
+        const baseName = newItem.nom || defaultValues.nom || 'Nouvel élément';
         let counter = 1;
-        let uniqueName = defaultValues.nom;
+        let uniqueName = baseName;
+
+        // Keep incrementing until we find a unique name
         while (existingNames.includes(uniqueName)) {
-          uniqueName = `${defaultValues.nom} ${counter}`;
+          uniqueName = `${baseName} ${counter}`;
           counter++;
         }
-        defaultValues.nom = uniqueName;
+
+        newItem.nom = uniqueName;
       }
-      
-      const newItem = { ...defaultValues, ...itemData };
+
       category[itemsProperty].push(newItem);
 
       // Sync back to original objects data if needed
