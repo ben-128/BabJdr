@@ -24,24 +24,26 @@
 
     buildCategoryPage(type, category) {
       const config = window.ContentTypes[type];
-      
+
       // Gestion spéciale pour les objets (page unique avec filtres)
       if (type === 'objet' && config.pageType === 'single') {
         return this.buildSingleObjectPage(category);
       }
-      
+
       // Gestion spéciale pour les tables de trésors (page unique)
       if (type === 'tableTresor' && config.pageType === 'single') {
         return this.buildSingleTableTresorPage(category);
       }
-      
+
       const pageId = `${config.container}-${this.sanitizeId(category.nom || 'unknown')}`;
       const itemsProperty = this.getItemsProperty(type);
-      
-      // Get items and sort them for spells
+
+      // Get items and sort them
       let items = category[itemsProperty] || [];
       if (type === 'spell') {
         items = this.sortSpellsByLevel([...items]);
+      } else if (type === 'don') {
+        items = this.sortDonsByPrerequisites([...items]);
       }
 
       return `
@@ -724,6 +726,43 @@
       });
     }
 
+    sortDonsByPrerequisites(dons) {
+      return dons.sort((a, b) => {
+        const prereqA = a.prerequis || '';
+        const prereqB = b.prerequis || '';
+
+        // Fonction helper pour déterminer la catégorie de prérequis
+        const getPrereqCategory = (prereq) => {
+          // Nettoyer le prérequis du HTML
+          const cleanPrereq = prereq.replace(/<[^>]*>/g, '').trim();
+
+          // Catégorie 1 : Prérequis "-" (seul ou avec "Prérequis :" avant)
+          if (cleanPrereq === '-' || cleanPrereq === 'Prérequis : -' || cleanPrereq === 'Prérequis: -') {
+            return 1;
+          }
+
+          // Catégorie 2 : Prérequis contenant "Don unique" ou "Don Unique"
+          if (cleanPrereq.toLowerCase().includes('don unique')) {
+            return 2;
+          }
+
+          // Catégorie 3 : Tous les autres prérequis
+          return 3;
+        };
+
+        const catA = getPrereqCategory(prereqA);
+        const catB = getPrereqCategory(prereqB);
+
+        // Trier par catégorie d'abord
+        if (catA !== catB) {
+          return catA - catB;
+        }
+
+        // Si même catégorie, garder l'ordre alphabétique par nom
+        return (a.nom || '').localeCompare(b.nom || '');
+      });
+    }
+
     // Build spell level filter UI
     buildSpellLevelFilter() {
       return `
@@ -998,8 +1037,11 @@
         return '';
       }
 
+      // Sort general dons by prerequisites
+      const sortedGeneralDons = this.sortDonsByPrerequisites([...generalCategory.dons]);
+
       // Generate cards for all general dons
-      const generalDonsCards = generalCategory.dons.map((don, index) => 
+      const generalDonsCards = sortedGeneralDons.map((don, index) =>
         CardBuilder.create('don', don, 'Generaux', index).build()
       ).join('');
 
