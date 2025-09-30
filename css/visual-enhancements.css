@@ -58,67 +58,7 @@
   position: relative;
 }
 
-/* Decorative corner ornaments */
-.card::before,
-.card-base::before {
-  content: '';
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  width: 24px;
-  height: 24px;
-  border-top: 2px solid var(--gold);
-  border-left: 2px solid var(--gold);
-  border-top-left-radius: 4px;
-  opacity: 0.6;
-  transition: opacity 0.3s ease;
-}
-
-.card::after,
-.card-base::after {
-  content: '';
-  position: absolute;
-  bottom: 8px;
-  right: 8px;
-  width: 24px;
-  height: 24px;
-  border-bottom: 2px solid var(--gold);
-  border-right: 2px solid var(--gold);
-  border-bottom-right-radius: 4px;
-  opacity: 0.6;
-  transition: opacity 0.3s ease;
-}
-
-/* Additional corner decorations */
-.card .corner-ornament-tr,
-.card-base .corner-ornament-tr {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  width: 24px;
-  height: 24px;
-  border-top: 2px solid var(--bronze);
-  border-right: 2px solid var(--bronze);
-  border-top-right-radius: 4px;
-  opacity: 0.6;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-}
-
-.card .corner-ornament-bl,
-.card-base .corner-ornament-bl {
-  position: absolute;
-  bottom: 8px;
-  left: 8px;
-  width: 24px;
-  height: 24px;
-  border-bottom: 2px solid var(--bronze);
-  border-left: 2px solid var(--bronze);
-  border-bottom-left-radius: 4px;
-  opacity: 0.6;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-}
+/* Decorative corner ornaments - Removed per user request */
 
 /* Enhanced hover state */
 .card:hover,
@@ -141,13 +81,6 @@
     var(--bronze-light) 75%,
     var(--gold-rich) 100%
   ) 1;
-}
-
-.card:hover::before,
-.card:hover::after,
-.card-base:hover::before,
-.card-base:hover::after {
-  opacity: 1;
 }
 
 /* ─────────────────────────── Enhanced Button System ─────────────────────────── */
