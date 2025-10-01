@@ -4,7 +4,7 @@
   "sections": [
     {
       "type": "intro",
-      "content": "Lorsqu'un combat commence, on compare l'Initiative de tous les participants (héros et monstres), et on détermine alors un ordre de tour. Celui qui a la plus grande initiative commence, puis c'est au tour du second avec la plus grande initiative , etc...\n\n<br><br>Chaque participant joue son tour (déplacement et actions), puis on passe au suivant. Lorsque tous les monstres ou tous les héros sont morts ou hors d'état de se battre, le combat s'arrète."
+      "content": "Lorsqu'un combat commence, on compare l'Initiative de tous les participants (héros et monstres), et on détermine alors un ordre de tour. Celui qui a la plus grande initiative commence, puis c'est au tour du second avec la plus grande initiative, etc.\n\n<br><br>Chaque participant joue son tour (déplacement et actions), puis on passe au suivant. Lorsque tous les monstres ou tous les héros sont morts ou hors d'état de se battre, le combat s'arrête."
     },
     {
       "type": "card",

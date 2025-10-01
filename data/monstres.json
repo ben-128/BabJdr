@@ -1,6 +1,6 @@
 [
   {
-    "nom": "Araignée Géante",
+    "nom": "Araignée géante",
     "tags": [
       "Forêt"
     ],
@@ -22,7 +22,7 @@
     "armureDivin": 0,
     "armureMalefique": 0,
     "abilites": "<strong>Morsure venimeuse:</strong> Inflige 5 dégâts Physiques. <br> Si (résistance altérations &lt; 3)  + <span class=\"etat-link\" data-etat=\"Empoisonné\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Empoisonné</span> 1 pendant 5 tours.<br><br><strong>Toile:</strong> Portée 9m, esquivable, <span class=\"etat-link\" data-etat=\"Entravé/Entoilé/Embourbé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Entoilé</span> la cible pendant 2 tour.",
-    "butin": "<strong>Butin:</strong> <span class=\"treasure-table-link\" data-table-name=\"Araignée Géante\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Araignée Géante]</span>",
+    "butin": "<strong>Butin:</strong> <span class=\"treasure-table-link\" data-table-name=\"Araignée géante\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Araignée géante]</span>",
     "monster-abilites": "AAAAAAAA",
     "monster-armurephysique": "0",
     "monster-coupcritique": "1",
@@ -109,7 +109,7 @@
     "butin": "<strong>Butin:</strong> <span class=\"treasure-table-link\" data-table-name=\"Groinka\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Groinka]</span>"
   },
   {
-    "nom": "Guêpe Géante",
+    "nom": "Guêpe géante",
     "tags": [
       "Forêt"
     ],
@@ -131,7 +131,7 @@
     "armureDivin": 0,
     "armureMalefique": 0,
     "abilites": "<strong>Volant</strong>: Nécessite de sauter pour attaque au corps à corps.<br><strong>Dard: </strong> Inflige 5 dégâts physiques + 3 <span style=\"color: #22c55e; font-weight: bold;\">Air</span>. Critique : <span class=\"etat-link\" data-etat=\"Empoisonné\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Empoisonné</span> 1 , 5 tours",
-    "butin": "<strong>Butin:</strong> <span class=\"treasure-table-link\" data-table-name=\"Guêpe Géante\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Guêpe Géante]</span>",
+    "butin": "<strong>Butin:</strong> <span class=\"treasure-table-link\" data-table-name=\"Guêpe géante\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Guêpe géante]</span>",
     "monster-initiative": "5"
   },
   {

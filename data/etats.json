@@ -10,10 +10,10 @@
     {
       "type": "card",
       "id": "a-terre",
-      "title": "A terre",
+      "title": "À terre",
       "content": "<p>Ne peut plus faire d'actions.</p><p> Ne peut plus esquiver.</p><p> Doit dépenser une action secondaire et son déplacement pour se relever.</p>",
       "deletable": true,
-      "sectionName": "A terre"
+      "sectionName": "À terre"
     },
     {
       "type": "card",

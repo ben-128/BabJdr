@@ -23,7 +23,7 @@
         "description": "<i>Héros polyvalent et ingénieux, il affronte l’inconnu avec courage, et manie tous les outils à sa portée pour triompher.</i>",
         "base": "<div class=\"chips\"><span class=\"chip\">💪 Force: <strong>5</strong></span><span class=\"chip\">🏃 Agilité: <strong>2</strong></span><span class=\"chip\">🛡️ Endurance: <strong>8</strong></span><span class=\"chip\">🧠 Intelligence: <strong>1</strong></span><span class=\"chip\">⚡ Volonté: <strong>2</strong></span><span class=\"chip\">🍀 Chance: <strong>5</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +2 Force 💪, +2 Endurance 🛡️, +1 Volonté ⚡, <strong> +2 Au choix</strong>",
-        "capacites": "<ul><em>Passé glorieux : </em>  Gagne la compétence Eloquence rang 1.<br><em>Sans failles :</em>  Dispose d'un Effort maximum supplémentaire .<br><em>Polyvalent : </em> Dispose d'un point de Don supplémentaire.</ul>"
+        "capacites": "<ul><em>Passé glorieux : </em>  Gagne la compétence Éloquence rang 1.<br><em>Sans failles :</em>  Dispose d'un Effort maximum supplémentaire.<br><em>Polyvalent : </em> Dispose d'un point de Don supplémentaire.</ul>"
       }
     ]
   },
@@ -51,7 +51,7 @@
   {
     "nom": "Prêtre",
     "resume": "Spécialiste de la magie de soutien et anti morts-vivants.",
-    "capacites": "<ul>\n    <li><em>Équipement de prêtre</em> : bâtons (une et deux mains), catalyseurs, robes.</li>\n    <li><em>Sorts de prêtre</em> : Apprend et lance des sorts de Prêtre.</li>\n    <li><em>Eloquence</em> : Gagne la compétence Eloquence rang 1.</li>\n  </ul>",
+    "capacites": "<ul>\n    <li><em>Équipement de prêtre</em> : bâtons (une et deux mains), catalyseurs, robes.</li>\n    <li><em>Sorts de prêtre</em> : Apprend et lance des sorts de Prêtre.</li>\n    <li><em>Éloquence</em> : Gagne la compétence Éloquence rang 1.</li>\n  </ul>",
     "sousClasses": [
       {
         "nom": "Inquisiteur",

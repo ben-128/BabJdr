@@ -25,7 +25,7 @@
         "nom": "Prodigieux",
         "description": "Gagne une compétence rang 3.",
         "prerequis": "<strong> Prérequis :</strong> La compétence rang 2.",
-        "cout": "3 point de don"
+        "cout": "3 points de don"
       },
       {
         "nom": "Hyperactif",
@@ -34,7 +34,7 @@
         "cout": "2 points de don"
       },
       {
-        "nom": "Equitation",
+        "nom": "Équitation",
         "description": "Permet de monter à cheval ou équivalent.",
         "prerequis": "<strong> Prérequis :</strong> Niveau 5.",
         "cout": "1 point de don"
@@ -52,13 +52,13 @@
         "cout": "1 point de don"
       },
       {
-        "nom": "Maitrise de la dague",
+        "nom": "Maîtrise de la dague",
         "description": "Le héros est capable d'équiper et d'utiliser des Dagues.",
         "prerequis": "<strong> Prérequis :</strong> 🏃 Agilité 5.",
         "cout": "1 point de don"
       },
       {
-        "nom": "Maitrise de l'arc",
+        "nom": "Maîtrise de l'arc",
         "description": "Le héros est capable d'équiper et d'utiliser des Arcs.",
         "prerequis": "<strong> Prérequis :</strong> 🏃 Agilité 10.",
         "cout": "1 point de don"
@@ -112,19 +112,19 @@
         "cout": "1 point de don"
       },
       {
-        "nom": "Marchand Astucieux",
+        "nom": "Marchand astucieux",
         "description": "Les prix des consommables et de la nourriture est réduit de moitié.",
         "prerequis": "<strong> Prérequis :</strong> Eloquence niveau 1",
         "cout": "1 point de don"
       },
       {
-        "nom": "Maître des Consommables",
+        "nom": "Maître des consommables",
         "description": "Lors de l'utilisation d'un consomable, si le dé fait 15 ou plus, sa charge n'est pas consommée.",
         "prerequis": "<strong> Prérequis :</strong> 🍀Chance 5.",
         "cout": "1 point de don"
       },
       {
-        "nom": "Meditation régénératrice",
+        "nom": "Méditation régénératrice",
         "description": "Une fois par jour, hors combat, permet de passer 30 minutes en méditation pour regagner tous ses points de vie.",
         "prerequis": "<strong> Prérequis :</strong> 🧠 Intelligence 5.",
         "cout": "1 point de don"
@@ -256,7 +256,7 @@
         "cout": "1 point de don"
       },
       {
-        "nom": "Maitre d'arme",
+        "nom": "Maître d'arme",
         "description": "Changer d'arme ne coûte plus d'action secondaire.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
@@ -406,13 +406,13 @@
         "cout": "1 point de don"
       },
       {
-        "nom": "Resistance élémentaire 1",
+        "nom": "Résistance élémentaire 1",
         "description": "Le héros gagne 5 d'armure élémentaire de <span style=\"color: #e25822; font-weight: bold;\">Feu</span>, <span style=\"color: #2b6cb0; font-weight: bold;\">Eau</span>, <span style=\"color: #8b5e34; font-weight: bold;\">Terre</span>, <span style=\"color: #22c55e; font-weight: bold;\">Air</span>.",
         "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
       {
-        "nom": "Resistance magique 1",
+        "nom": "Résistance magique 1",
         "description": "Le héros gagne 5 d'armure élémentaire de <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span>, <span style=\"color: #0f172a; font-weight: bold;\">Nuit</span>, <span style=\"color: #d0d0d0; font-weight: bold; background: rgba(0, 0, 0, 0.4); padding: 2px 4px; border-radius: 3px;\">Divin</span>, <span style=\"color: #a855f7; font-weight: bold;\">Maléfique</span>.",
         "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
@@ -437,7 +437,7 @@
       },
       {
         "nom": "Spécialisation élémentaire 2",
-        "description": "Le héros peut choisir un élément et réduire le coup en mana des sorts de cet élément, d'un montant équivalent au niveau du sort.",
+        "description": "Le héros peut choisir un élément et réduire le coût en mana des sorts de cet élément, d'un montant équivalent au niveau du sort.",
         "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
@@ -485,7 +485,7 @@
       },
       {
         "nom": "Jugement éclair",
-        "description": "Si le Prêtre a effectué un sort de dégâts ce tour ci, il peut effectuer une attaque au corp à corp avec une action secondaire.",
+        "description": "Si le Prêtre a effectué un sort de dégâts ce tour ci, il peut effectuer une attaque au corps à corps avec une action secondaire.",
         "prerequis": "<strong> Prérequis :</strong>💪Force 5",
         "cout": "1 point de don"
       },
@@ -611,7 +611,7 @@
       },
       {
         "nom": "Instabilité Contrôlée",
-        "description": "Une fois par jour, lorsqu'un sort ou attaque de nimporte quel héros du groupe fait un échec critique, le héros peut dépenser une action secondaire pour relancer le dé.",
+        "description": "Une fois par jour, lorsqu'un sort ou attaque de n'importe quel héros du groupe fait un échec critique, le héros peut dépenser une action secondaire pour relancer le dé.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
