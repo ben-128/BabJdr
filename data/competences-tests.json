@@ -33,7 +33,7 @@
       "type": "card",
       "id": "tests",
       "title": "Tests de compétences",
-      "content": "<p>Quand un MJ annonce un test de compétence, un héros peut choisir de dépenser des efforts pour booster sa compétence. La difficulté d'un test est seule connue du MJ, et est entre 0 et 5 (<strong>Simple</strong>, Exigeant, Complexe , Éprouvant, Prodigieux , <strong>Impossible</strong>).</p><p>Une fois le test résolu, le Maître de Jeu annonce le résultat. Si le joueur a dépensé plus d'Efforts que nécessaire, l'excédent est perdu.</p><br> A noter que certaines actions sont impossibles à réaliser et un héros peut alors s'épuiser pour rien, s'il n'a pas bien évalué la difficulté de la tâche. A l'inverse, les tâches simples ne demandent aucun niveau de compétence ou effort.",
+      "content": "<p>Quand un MJ annonce un test de compétence, un héros peut choisir de dépenser des efforts pour booster sa compétence. La difficulté d'un test est seule connue du MJ, et est entre 0 et 5 (<strong>Simple</strong>, Exigeant, Complexe , Éprouvant, Prodigieux , <strong>Impossible</strong>).</p><p>Une fois le test résolu, le Maître de Jeu annonce le résultat. Si le joueur a dépensé plus d'Efforts que nécessaire, l'excédent est perdu.</p><br> À noter que certaines actions sont impossibles à réaliser et un héros peut alors s'épuiser pour rien, s'il n'a pas bien évalué la difficulté de la tâche. À l'inverse, les tâches simples ne demandent aucun niveau de compétence ou effort.",
       "deletable": true,
       "sectionName": "Tests de compétences"
     }
