@@ -1,6 +1,6 @@
 [
   {
-    "nom": "Generaux",
+    "nom": "Généraux",
     "description": "Dons accessibles à toutes les classes.",
     "dons": [
       {
@@ -161,13 +161,13 @@
       },
       {
         "nom": "Volonté de fer",
-        "description": "Une fois par jour, le héros peut utiliser une action secondaire pour se débarasser de toutes ses alterations magiques.",
+        "description": "Une fois par jour, le héros peut utiliser une action secondaire pour se débarasser de toutes ses altérations magiques.",
         "prerequis": "<strong> Prérequis :</strong> ⚡Volonté 5",
         "cout": "1 point de don"
       },
       {
         "nom": "Coup de bouclier",
-        "description": "Si le héros a un bouclier équipé, lorsque le héros subit des dégats aux corps à corps, il peut choisir d'utiliser une action secondaire pour infliger à l'attaquant des dégats équivalents à l'armure du bouclier.",
+        "description": "Si le héros a un bouclier équipé, lorsque le héros subit des dégâts aux corps à corps, il peut choisir d'utiliser une action secondaire pour infliger à l'attaquant des dégâts équivalents à l'armure du bouclier.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -239,7 +239,7 @@
       },
       {
         "nom": "Cri intimidant",
-        "description": "Le guerrier peut utiliser une action principale, pour effrayer toutes les cibles à moins de 12m, qui passeront dans l'état <span class=\"etat-link\" data-etat=\"Endormi/assomé/Effrayé\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">effrayé</span> pendant 1 tour.<br><br>Sans effet sur les cibles ayant une Résistance altération > à 5.<br> Ce chiffre peut être augmenté via un test de compétence éloquence, de 10 par point/effort.",
+        "description": "Le guerrier peut utiliser une action principale, pour effrayer toutes les cibles à moins de 12m, qui passeront dans l'état <span class=\"etat-link\" data-etat=\"Endormi/assommé/Effrayé\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">effrayé</span> pendant 1 tour.<br><br>Sans effet sur les cibles ayant une Résistance altération > à 5.<br> Ce chiffre peut être augmenté via un test de compétence éloquence, de 10 par point/effort.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -251,7 +251,7 @@
       },
       {
         "nom": "Expert martial",
-        "description": "une fois par tour, lorsque le guerrie fait un echec critique lors d'une attaque au corps à corps, il peut relancer le dé.",
+        "description": "une fois par tour, lorsque le guerrier fait un échec critique lors d'une attaque au corps à corps, il peut relancer le dé.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -275,7 +275,7 @@
     "dons": [
       {
         "nom": "Croche-patte",
-        "description": "Une fois par combat, peut utiliser une action secondaire pour effectuer un croche- patte à une cible au corps à corps (jet de dé) :\n\n\n<br><br><b>Sans effet si :</b> \n<br>- Esquive.\n<br>- Volant ou lévitant.\n<br>- Taille supérieure à Moyen.\n\n<br><br><b>Effet :</b> Met la cible dans l'état <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">A terre</span>.\n\n<br><br><b>Coup Critique :</b>  La cible est <span class=\"etat-link\" data-etat=\"Endormi/assomé/Effrayé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Assomée</span> 1 tour.",
+        "description": "Une fois par combat, peut utiliser une action secondaire pour effectuer un croche- patte à une cible au corps à corps (jet de dé) :\n\n\n<br><br><b>Sans effet si :</b> \n<br>- Esquive.\n<br>- Volant ou lévitant.\n<br>- Taille supérieure à Moyen.\n\n<br><br><b>Effet :</b> Met la cible dans l'état <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">A terre</span>.\n\n<br><br><b>Coup Critique :</b>  La cible est <span class=\"etat-link\" data-etat=\"Endormi/assommé/Effrayé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Assommée</span> 1 tour.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -371,7 +371,7 @@
       },
       {
         "nom": "Frappe de l'Ombre",
-        "description": "Une fois par tour, si le rôdeur attaque une cible qui n'a pas encore agi dans ce combat, ou qui est dans un état\n  qui l'empeche de faire des actions, les dégâts sont forcement critiques.",
+        "description": "Une fois par tour, si le rôdeur attaque une cible qui n'a pas encore agi dans ce combat, ou qui est dans un état\n  qui l'empêche de faire des actions, les dégâts sont forcement critiques.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -419,13 +419,13 @@
       },
       {
         "nom": "Spécialisation élémentaire 1",
-        "description": "Le héros peut choisir un élément et augmenter les dégats infligés par les sorts de cet élément, d'un montant équivalent au niveau du sort.",
+        "description": "Le héros peut choisir un élément et augmenter les dégâts infligés par les sorts de cet élément, d'un montant équivalent au niveau du sort.",
         "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
       {
         "nom": "Infusion élémentaire",
-        "description": "Aprés avoir lancé un sort, le héros peut, en utilisant une action secondaire, imprégner son arme de l'élément du sort. Elle infligera à sa prochaine attaque physique des dégats de cet élément équivalents au niveau du sort.",
+        "description": "Aprés avoir lancé un sort, le héros peut, en utilisant une action secondaire, imprégner son arme de l'élément du sort. Elle infligera à sa prochaine attaque physique des dégâts de cet élément équivalents au niveau du sort.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -455,13 +455,13 @@
       },
       {
         "nom": "Puissance monocible",
-        "description": "Les sorts pouvant être esquivés, voient leur dégats infligés augmenter, d'un montant équivalent au niveau du sort.",
+        "description": "Les sorts pouvant être esquivés, voient leur dégâts infligés augmenter, d'un montant équivalent au niveau du sort.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
       {
         "nom": "Résonance Élémentaire",
-        "description": "Lorsque le héros lance un sort d'un élément, si il avait lancé un sort du même élément au tour précendent, alors les degats sont augmentés de la valeur du niveau du sort.",
+        "description": "Lorsque le héros lance un sort d'un élément, si il avait lancé un sort du même élément au tour précédent, alors les dégâts sont augmentés de la valeur du niveau du sort.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       }
@@ -473,7 +473,7 @@
     "dons": [
       {
         "nom": "Mécréants",
-        "description": "Les dégats physiques infligés aux créatures de l'élément  <span style=\"color: #a855f7; font-weight: bold;\">Maléfique</span> sont doublés (la multiplication est appliquée avant l'application de l'armure physique).",
+        "description": "Les dégâts physiques infligés aux créatures de l'élément  <span style=\"color: #a855f7; font-weight: bold;\">Maléfique</span> sont doublés (la multiplication est appliquée avant l'application de l'armure physique).",
         "prerequis": "<strong> Prérequis :</strong>-",
         "cout": "1 point de don"
       },
@@ -485,7 +485,7 @@
       },
       {
         "nom": "Jugement éclair",
-        "description": "Si le Prêtre a effectué un sort de dégats ce tour ci, il peut effectuer une attaque au corp à corp avec une action secondaire.",
+        "description": "Si le Prêtre a effectué un sort de dégâts ce tour ci, il peut effectuer une attaque au corp à corp avec une action secondaire.",
         "prerequis": "<strong> Prérequis :</strong>💪Force 5",
         "cout": "1 point de don"
       },
@@ -509,7 +509,7 @@
       },
       {
         "nom": "Tentation maléfique",
-        "description": "Permet de modifier les dégats des sorts et effets infligés, d'élément <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span> ou <span style=\"color: #f5f5f5; font-weight: bold;\">Divin</span>, pour en faire des dégats d'élément <span style=\"color: #8b5cf6; font-weight: bold;\">Maléfique</span>.",
+        "description": "Permet de modifier les dégâts des sorts et effets infligés, d'élément <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span> ou <span style=\"color: #f5f5f5; font-weight: bold;\">Divin</span>, pour en faire des dégâts d'élément <span style=\"color: #8b5cf6; font-weight: bold;\">Maléfique</span>.",
         "prerequis": "<strong> Prérequis :</strong>-",
         "cout": "1 point de don"
       },
@@ -527,7 +527,7 @@
       },
       {
         "nom": "Martyr",
-        "description": "Une fois par tour, aprés avoir reçu des dégats, peut utiliser une action secondaire pour soigner une cible autre que le héros à moins de 6m, d'une valeur du niveau du héros.",
+        "description": "Une fois par tour, après avoir reçu des dégâts, peut utiliser une action secondaire pour soigner une cible autre que le héros à moins de 6m, d'une valeur du niveau du héros.",
         "prerequis": "<strong> Prérequis :</strong>-",
         "cout": "1 point de don"
       },
@@ -539,7 +539,7 @@
       },
       {
         "nom": "Purification sublimée",
-        "description": "Après avoir supprimé un état via un sort, le héros et la cible recoivent un nombre de point de vie égal au niveau du sort.",
+        "description": "Après avoir supprimé un état via un sort, le héros et la cible reçoivent un nombre de point de vie égal au niveau du sort.",
         "prerequis": "<strong> Prérequis :</strong>-",
         "cout": "1 point de don"
       }
@@ -568,8 +568,8 @@
         "cout": "1 point de don"
       },
       {
-        "nom": "Alteration risquée",
-        "description": "Lorsque un sort d'alteration magique est effectué alors que la cible est 3m, ses chances de critiques sont doublées.",
+        "nom": "Altération risquée",
+        "description": "Lorsque un sort d'altération magique est effectué alors que la cible est 3m, ses chances de critiques sont doublées.",
         "prerequis": "<strong> Prérequis :</strong>-",
         "cout": "1 point de don"
       },

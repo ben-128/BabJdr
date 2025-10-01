@@ -276,7 +276,7 @@
         tempsIncantation: "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         coutMana: "🔵 <strong>Coût mana:</strong> 3",
         resistance: "<strong>Sans effet si:</strong> Esquive.",
-        effetNormal: "<strong>Effet:</strong> Inflige 5 dégats de <span style='color: #e25822; font-weight: bold;'>Feu</span> à la cible.<br>&nbsp;Tous les 5 points d'intelligence, augmente les dégats de 1.",
+        effetNormal: "<strong>Effet:</strong> Inflige 5 dégâts de <span style='color: #e25822; font-weight: bold;'>Feu</span> à la cible.<br>&nbsp;Tous les 5 points d'intelligence, augmente les dégâts de 1.",
         effetCritique: "<strong>Coup Critique:&nbsp;</strong>&nbsp;Double les dégâts et enflamme la cible."
       }
     },
@@ -471,7 +471,7 @@
         armureObscurite: { type: 'number', label: 'Armure Obscurité', required: true },
         armureDivin: { type: 'number', label: 'Armure Divin', required: true },
         armureMalefique: { type: 'number', label: 'Armure Maléfique', required: true },
-        abilites: { type: 'richtext', label: 'Abilités', required: false },
+        abilites: { type: 'richtext', label: 'Capacités', required: false },
         butin: { type: 'richtext', label: 'Butin', required: false }
       },
       editMapping: {

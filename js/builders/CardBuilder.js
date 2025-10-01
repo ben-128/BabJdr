@@ -282,7 +282,7 @@
 
           ${this.data.abilites ? `
             <hr style="margin: 1rem 0; border: none; border-top: 1px solid var(--rule);">
-            ${this.buildEditableField(this.data.abilites, 'monster-abilites', 'Abilités', { style: 'margin-top: 0.5rem;' })}
+            ${this.buildEditableField(this.data.abilites, 'monster-abilites', 'Capacités', { style: 'margin-top: 0.5rem;' })}
           ` : ''}
 
           ${this.data.butin ? `

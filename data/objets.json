@@ -10,7 +10,7 @@
         "Épée",
         "Deux mains"
       ],
-      "effet": "<strong>Dégâts: </strong> Inflige (4  + Force) points de dégats physiques.",
+      "effet": "<strong>Dégâts: </strong> Inflige (4  + Force) points de dégâts physiques.",
       "prix": "🔷 <strong>Prix:</strong> 35",
       "poids": "⚖️ <strong>Poids:</strong> 2"
     },
@@ -24,7 +24,7 @@
         "Épée",
         "Une main"
       ],
-      "effet": "<span style=\"font-weight: 700; font-family: \" source=\"\" serif=\"\" pro\",=\"\" serif;=\"\" color:=\"\" rgb(74,=\"\" 44,=\"\" 23);=\"\" text-shadow:=\"\" rgba(0,=\"\" 0,=\"\" 0.05)=\"\" 0px=\"\" 1px=\"\" 2px;\"=\"\">Dégâts: </span> Inflige (2  + Force) points de dégats physiques.",
+      "effet": "<span style=\"font-weight: 700; font-family: \" source=\"\" serif=\"\" pro\",=\"\" serif;=\"\" color:=\"\" rgb(74,=\"\" 44,=\"\" 23);=\"\" text-shadow:=\"\" rgba(0,=\"\" 0,=\"\" 0.05)=\"\" 0px=\"\" 1px=\"\" 2px;\"=\"\">Dégâts: </span> Inflige (2  + Force) points de dégâts physiques.",
       "prix": "🔷 <strong>Prix:</strong> 20",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -38,7 +38,7 @@
         "Une main",
         "Dague"
       ],
-      "effet": "<strong>Dégâts: </strong> Inflige (1  + Force) points de dégats physiques.",
+      "effet": "<strong>Dégâts: </strong> Inflige (1  + Force) points de dégâts physiques.",
       "prix": "🔷 <strong>Prix:</strong> 10",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -52,7 +52,7 @@
         "Deux mains",
         "Baton"
       ],
-      "effet": "<strong>Dégâts: </strong> Inflige (2  + Force) points de dégats physiques.\n<br> <strong>Effet: </strong> Si le bâton a été porté toute la journée, permet de récupérer 5 points de vie lors d'un repos long.",
+      "effet": "<strong>Dégâts: </strong> Inflige (2  + Force) points de dégâts physiques.\n<br> <strong>Effet: </strong> Si le bâton a été porté toute la journée, permet de récupérer 5 points de vie lors d'un repos long.",
       "prix": "🔷 <strong>Prix:</strong> 5",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -66,7 +66,7 @@
         "Une main",
         "Baton"
       ],
-      "effet": "<strong>Dégâts: </strong> Inflige (Force) points de dégats physiques.",
+      "effet": "<strong>Dégâts: </strong> Inflige (Force) points de dégâts physiques.",
       "prix": "🔷 <strong>Prix:</strong> 10",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -80,7 +80,7 @@
         "Deux mains",
         "Arc"
       ],
-      "effet": "<strong>Portée: </strong> 12m.<br>\n<strong>Dégâts: </strong> Inflige (Force) points de dégats physiques.",
+      "effet": "<strong>Portée: </strong> 12m.<br>\n<strong>Dégâts: </strong> Inflige (Force) points de dégâts physiques.",
       "prix": "🔷 <strong>Prix:</strong> 30",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -295,7 +295,7 @@
         "Consommable",
         "Flèche"
       ],
-      "effet": "<b>Effet :</b> Renforce la prochaine attaque à l'arc et lui rajoute +3 (critique : +5) points de dégats physiques en cas de réussite de l'attaque.\n\n<br><br><b>Charges :</b> 3",
+      "effet": "<b>Effet :</b> Renforce la prochaine attaque à l'arc et lui rajoute +3 (critique : +5) points de dégâts physiques en cas de réussite de l'attaque.\n\n<br><br><b>Charges :</b> 3",
       "prix": "🔷 <strong>Prix:</strong> 10",
       "poids": ""
     },
@@ -308,7 +308,7 @@
         "Consommable",
         "Flèche"
       ],
-      "effet": "<b>Effet :</b> Renforce la prochaine attaque à l'arc et lui rajoute +5 (critique : +10) points de dégats élémentaire de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> en cas de réussite de l'attaque.\n\n<br><br><b>Charges :</b> 3",
+      "effet": "<b>Effet :</b> Renforce la prochaine attaque à l'arc et lui rajoute +5 (critique : +10) points de dégâts élémentaire de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> en cas de réussite de l'attaque.\n\n<br><br><b>Charges :</b> 3",
       "prix": "🔷 <strong>Prix:</strong> 20",
       "poids": ""
     },
@@ -356,7 +356,7 @@
       "tags": [
         "Accessoire"
       ],
-      "effet": "<strong>Effet:</strong> Augmente de 3m la portée des sorts d'alterations magiques et d'améliorations temporaires.",
+      "effet": "<strong>Effet:</strong> Augmente de 3m la portée des sorts d'altérations magiques et d'améliorations temporaires.",
       "prix": "🔷 <strong>Prix:</strong> ?",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -380,7 +380,7 @@
       "tags": [
         "Consommable"
       ],
-      "effet": "<strong>Effet:</strong> Augmente les dégats de la prochaine attaque physique de 3.\n  <br><strong>Charges:</strong> 3.",
+      "effet": "<strong>Effet:</strong> Augmente les dégâts de la prochaine attaque physique de 3.\n  <br><strong>Charges:</strong> 3.",
       "prix": "🔷 <strong>Prix:</strong> 20",
       "poids": ""
     },
@@ -406,7 +406,7 @@
         "Une main",
         "Baton"
       ],
-      "effet": "<strong>Dégâts: </strong> Inflige (3  + Force) points de dégats physiques.\n<br> L'arme est imprégnée de 5 points de dégats d'élément <span style=\"color: #4682b4; font-weight: bold;\">Eau</span>.",
+      "effet": "<strong>Dégâts: </strong> Inflige (3  + Force) points de dégâts physiques.\n<br> L'arme est imprégnée de 5 points de dégâts d'élément <span style=\"color: #4682b4; font-weight: bold;\">Eau</span>.",
       "prix": "🔷 <strong>Prix:</strong> ?",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -536,7 +536,7 @@
         "Une main",
         "Dague"
       ],
-      "effet": "<strong>Dégâts: </strong> Inflige (4  + Force) points de dégats physiques.\n<br> Si la cible a une résistance alteration inférieure à 5, elle subit l'état <span class=\"etat-link\" data-etat=\"Empoisonné\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Empoisonné</span> 2, pendant 5 tours.",
+      "effet": "<strong>Dégâts: </strong> Inflige (4  + Force) points de dégâts physiques.\n<br> Si la cible a une résistance altération inférieure à 5, elle subit l'état <span class=\"etat-link\" data-etat=\"Empoisonné\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Empoisonné</span> 2, pendant 5 tours.",
       "prix": "🔷 <strong>Prix:</strong> ?",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -550,7 +550,7 @@
         "Deux mains",
         "Arc"
       ],
-      "effet": "<strong>Portée: </strong> 15m.<br>\n<strong>Dégâts: </strong> Inflige (Force) points de dégats physiques.\n<br> En cas de coup critique, si une charge de consomable flèche avait été utilisée, elle est récupérée.",
+      "effet": "<strong>Portée: </strong> 15m.<br>\n<strong>Dégâts: </strong> Inflige (Force) points de dégâts physiques.\n<br> En cas de coup critique, si une charge de consomable flèche avait été utilisée, elle est récupérée.",
       "prix": "🔷 <strong>Prix:</strong> 100",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -564,7 +564,7 @@
         "Arme exotique",
         "Deux mains"
       ],
-      "effet": "<strong>Dégâts: </strong> Inflige (7  + Force) points de dégats physiques.",
+      "effet": "<strong>Dégâts: </strong> Inflige (7  + Force) points de dégâts physiques.",
       "prix": "🔷 <strong>Prix:</strong> 100",
       "poids": "⚖️ <strong>Poids:</strong> 2"
     },
@@ -685,7 +685,7 @@
         "Baton",
         "Non identifié"
       ],
-      "effet": "<strong>Dégâts: </strong> Inflige (4  + Force) points de dégats physiques.\n                      \n<br><br><strong>Effet:</strong> À la fin de chaque tour, si le porteur a incanté avec succès un sort d’élément <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>, <span style=\"color: #22c55e; font-weight: bold;\">Air</span> ou <span style=\"color: #4682b4; font-weight: bold;\">Eau</span>, il récupère 2 points de vie.",
+      "effet": "<strong>Dégâts: </strong> Inflige (4  + Force) points de dégâts physiques.\n                      \n<br><br><strong>Effet:</strong> À la fin de chaque tour, si le porteur a incanté avec succès un sort d’élément <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>, <span style=\"color: #22c55e; font-weight: bold;\">Air</span> ou <span style=\"color: #4682b4; font-weight: bold;\">Eau</span>, il récupère 2 points de vie.",
       "prix": "🔷 <strong>Prix:</strong> ?",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -699,7 +699,7 @@
         "Une main",
         "Baton"
       ],
-      "effet": "<strong>Dégâts: </strong> Inflige (2 + Force) points de dégats physiques.\n<br>   <strong>Effet:</strong> Si le porteur ne lance aucun sort pendant son tour, alors le prochain sort qu’il lance coûte 1 mana de moins (non cumulable).",
+      "effet": "<strong>Dégâts: </strong> Inflige (2 + Force) points de dégâts physiques.\n<br>   <strong>Effet:</strong> Si le porteur ne lance aucun sort pendant son tour, alors le prochain sort qu’il lance coûte 1 mana de moins (non cumulable).",
       "prix": "🔷 <strong>Prix:</strong> 100",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -737,7 +737,7 @@
         "Arme exotique",
         "Une main"
       ],
-      "effet": "<strong>Dégâts: </strong> Inflige (3  + Force) points de dégats physiques.\n<br>  <strong>Effet:</strong> Augmente la portée d'attaque au corps à corps  de 3m.",
+      "effet": "<strong>Dégâts: </strong> Inflige (3  + Force) points de dégâts physiques.\n<br>  <strong>Effet:</strong> Augmente la portée d'attaque au corps à corps  de 3m.",
       "prix": "🔷 <strong>Prix:</strong> ?",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },

@@ -18,7 +18,7 @@
       "type": "card",
       "id": "gestion-des-ressources-new-3-1756401493443",
       "title": "Mana",
-      "content": "Il s'agit de la ressource utilisée pour lancer des sorts. Hors combat, il revient automatiquement quand le héros passe hors combat (c'est à dire aprés 10 minutes sans être en combat). En combat, il est consommé aprés le lancement de chaque sort (le coût en mana étant indiqué dans la description de chaque sort). Si un sort devait faire passer le mana d'un héros en dessous de 0, alors le sort n'est pas effectif et le héros devient <span class=\"etat-link\" data-etat=\"Endormi/assomé/Effrayé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">paralysé</span> pendant 2 tours.",
+      "content": "Il s'agit de la ressource utilisée pour lancer des sorts. Hors combat, il revient automatiquement quand le héros passe hors combat (c'est à dire après 10 minutes sans être en combat). En combat, il est consommé après le lancement de chaque sort (le coût en mana étant indiqué dans la description de chaque sort). Si un sort devait faire passer le mana d'un héros en dessous de 0, alors le sort n'est pas effectué et le héros devient <span class=\"etat-link\" data-etat=\"Endormi/assommé/Effrayé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">paralysé</span> pendant 2 tours.",
       "deletable": true,
       "sectionName": "Nouvelle section"
     },
@@ -57,7 +57,7 @@
     {
       "type": "card",
       "id": "gestion-des-ressources-new-8-1756658008017",
-      "title": "Equipements",
+      "title": "Équipements",
       "content": "<li>Que l'on porte une arme à une main ou à deux mains, il est uniquement possible d'être équipé d'une seule arme.\n</li><li>Lorsque on porte une arme à deux mains, il est impossible de porter un objet en main secondaire (bouclier ou catalyseur).\n</li><li>Il est possible via une action secondaire de changer l'arme active en plein combat, mais pas l'armure ou les accessoires, qui ne peuvent être changés que hors combat.</li>",
       "deletable": true,
       "sectionName": "Nouvelle section"

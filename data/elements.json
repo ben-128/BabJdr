@@ -11,7 +11,7 @@
       "type": "card",
       "id": "elements-system",
       "title": "Système d'éléments",
-      "content": "<p>Il existe huit éléments, chacun ayant un opposé. Chaqué Héros où monstre possède un élément d'affiliation.<br><br> Une créature affiliée à un élément :<br> - Reçoit <strong>deux fois moins </strong> (arrondi inférieur) de dégats venant des sorts et attaques de cet élément, et ne peut pas recevoir d'effet critique d'une alteration magique de cet élément.<br>- Recevra systématiquement des <strong>effets critiques</strong> venant des sorts et altérations de l'élément opposé. Les dégats élémentaires rattachés à une attaque physique (venant d'un objet ou sort) voit ses dégats doublés s'il est d'un élément opposé.</p>"
+      "content": "<p>Il existe huit éléments, chacun ayant un opposé. Chaque Héros où monstre possède un élément d'affiliation.<br><br> Une créature affiliée à un élément :<br> - Reçoit <strong>deux fois moins </strong> (arrondi inférieur) de dégâts venant des sorts et attaques de cet élément, et ne peut pas recevoir d'effet critique d'une altération magique de cet élément.<br>- Recevra systématiquement des <strong>effets critiques</strong> venant des sorts et altérations de l'élément opposé. Les dégâts élémentaires rattachés à une attaque physique (venant d'un objet ou sort) voit ses dégâts doublés s'il est d'un élément opposé.</p>"
     },
     {
       "type": "card",
@@ -23,7 +23,7 @@
       "type": "card",
       "id": "element-defense",
       "title": "Défense",
-      "content": "<p>Certaines armures/objets/bonus peuvent procurer une armure spécifique à un élément. Il faudra alors déduire au resultat final. Le calcul de dégats se fait dans cet ordre :</p><div><strong>Dégats → critique → ×0.5 si affiliation élément → réduction de l'armure</strong></div>",
+      "content": "<p>Certaines armures/objets/bonus peuvent procurer une armure spécifique à un élément. Il faudra alors déduire au résultat final. Le calcul de dégâts se fait dans cet ordre :</p><div><strong>Dégâts → critique → ×0.5 si affiliation élément → réduction de l'armure</strong></div>",
       "deletable": true,
       "sectionName": "Défense"
     },
@@ -31,7 +31,7 @@
       "type": "card",
       "id": "element-attack",
       "title": "Attaque",
-      "content": "<p>Une attaque ne peut avoir qu'<strong>un seul élément</strong> (en plus d'éventuels dégats physiques). Si plusieurs sorts/équipements/bonus donnent un élément à l'attaque, le héros devra choisir quel est l'élément utilisé.</p> Plusieurs bonus d'un même élément peuvent se cumuler.\n<br><br> Si l'élément rattaché à une attaque physiques est opposé à l'élément d'affiliation de la cible, alors les dégats élémentaires sont doublés.",
+      "content": "<p>Une attaque ne peut avoir qu'<strong>un seul élément</strong> (en plus d'éventuels dégâts physiques). Si plusieurs sorts/équipements/bonus donnent un élément à l'attaque, le héros devra choisir quel est l'élément utilisé.</p> Plusieurs bonus d'un même élément peuvent se cumuler.\n<br><br> Si l'élément rattaché à une attaque physiques est opposé à l'élément d'affiliation de la cible, alors les dégâts élémentaires sont doublés.",
       "deletable": true,
       "sectionName": "Attaque"
     }
