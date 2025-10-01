@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur de Prompts Heroic Fantasy - BabJdr</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            color: #333;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        .server-status {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+
+        .server-status.online {
+            background: #28a745;
+            color: white;
+        }
+
+        .server-status.offline {
+            background: #dc3545;
+            color: white;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 30px;
+        }
+
+        .section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid #e9ecef;
+        }
+
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1em;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+        }
+
+        .btn-success {
+            background: #28a745;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+        }
+
+        .prompt-output {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            min-height: 150px;
+            max-height: 400px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .copy-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .copy-notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .element-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .element-tag {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .element-tag.feu { background: #ff6b6b; color: white; }
+        .element-tag.eau { background: #4dabf7; color: white; }
+        .element-tag.terre { background: #8b4513; color: white; }
+        .element-tag.air { background: #51cf66; color: white; }
+        .element-tag.lumiere { background: #ffd43b; color: #333; }
+        .element-tag.nuit { background: #6741d9; color: white; }
+
+        .element-tag:hover {
+            transform: scale(1.05);
+            border-color: #667eea;
+        }
+
+        .list-item {
+            padding: 10px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 8px;
+        }
+
+        .list-item:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .list-item.selected {
+            border-color: #667eea;
+            background: #e3f2fd;
+        }
+
+        .list-container {
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        @media (max-width: 900px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .image-preview {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 8px;
+            margin-top: 15px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .upload-area {
+            border: 3px dashed #667eea;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            background: #f8f9ff;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .upload-area:hover {
+            background: #f0f4ff;
+            border-color: #764ba2;
+        }
+
+        .upload-area.dragover {
+            background: #e3f2fd;
+            border-color: #28a745;
+        }
+
+        .upload-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #e9ecef;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .progress-bar.active {
+            display: block;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚔️ Générateur de Prompts Heroic Fantasy</h1>
+            <p>Créez et uploadez automatiquement des images pour vos sorts et dons</p>
+            <div class="server-status offline" id="serverStatus">🔴 Serveur déconnecté</div>
+        </div>
+
+        <div class="content">
+            <!-- Section de sélection -->
+            <div class="section">
+                <h2>📋 Sélection</h2>
+
+                <div class="form-group">
+                    <label>Type de contenu</label>
+                    <select id="contentType">
+                        <option value="sort">Sort</option>
+                        <option value="don">Don</option>
+                        <option value="objet">Objet</option>
+                        <option value="custom">Personnalisé</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="sortSelection">
+                    <label>Charger depuis les données</label>
+                    <button class="btn btn-secondary" onclick="loadSorts()">📥 Charger les sorts</button>
+                    <div class="list-container" id="sortsList"></div>
+                </div>
+
+                <div class="form-group" id="donSelection" style="display: none;">
+                    <label>Charger depuis les données</label>
+                    <button class="btn btn-secondary" onclick="loadDons()">📥 Charger les dons</button>
+                    <div class="list-container" id="donsList"></div>
+                </div>
+
+                <div class="form-group" id="objetSelection" style="display: none;">
+                    <label>Charger depuis les données</label>
+                    <button class="btn btn-secondary" onclick="loadObjets()">📥 Charger les objets</button>
+                    <div class="list-container" id="objetsList"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>Nom</label>
+                    <input type="text" id="nomInput" placeholder="Ex: Boule de Feu">
+                </div>
+
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="descInput" placeholder="Description du sort/don..."></textarea>
+                    <button class="btn btn-secondary" id="generateDescBtn" onclick="generateVisualDescription()" style="margin-top: 10px;">
+                        ✨ Générer description lore/flavor
+                    </button>
+                </div>
+
+                <div class="form-group">
+                    <label>Phrase lore/flavor générée</label>
+                    <textarea id="loreFlavor" placeholder="Collez ici la phrase de lore/flavor générée par Claude/ChatGPT..."></textarea>
+                    <button class="btn btn-success" onclick="integrateLoreFlavor()" style="margin-top: 10px;">
+                        📝 Intégrer comme description dans le JSON
+                    </button>
+                </div>
+
+                <div class="form-group" id="elementGroup">
+                    <label>Élément</label>
+                    <div id="elementDisplay" style="padding: 10px; background: #f0f0f0; border-radius: 8px; font-weight: 600; color: #555;">
+                        Aucun élément sélectionné
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section de génération -->
+            <div class="section">
+                <h2>🎨 Génération de Prompt</h2>
+
+                <div class="info-box">
+                    <strong>Style:</strong> Heroic Fantasy épique et détaillé
+                </div>
+
+                <button class="btn" onclick="generatePrompt()">✨ Générer le prompt</button>
+
+                <div class="form-group" style="margin-top: 20px;">
+                    <label>Prompt généré</label>
+                    <div class="prompt-output" id="promptOutput">Le prompt apparaîtra ici...</div>
+                    <button class="btn btn-success" onclick="copyPrompt()">📋 Copier le prompt</button>
+                </div>
+
+                <div class="form-group">
+                    <label>Instructions d'utilisation</label>
+                    <div style="background: #fff3cd; padding: 15px; border-radius: 8px; font-size: 0.9em;">
+                        <ol style="margin-left: 20px;">
+                            <li>Cliquez sur "Générer le prompt"</li>
+                            <li>Copiez le prompt généré</li>
+                            <li>Collez-le dans ChatGPT Plus (avec DALL-E)</li>
+                            <li>Téléchargez l'image générée</li>
+                            <li>Uploadez-la ci-dessous (automatique !)</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section d'upload automatique -->
+            <div class="section full-width">
+                <h2>🚀 Upload Automatique d'Image</h2>
+
+                <div id="serverWarning" class="warning-box" style="display: none;">
+                    <strong>⚠️ Serveur non disponible</strong><br>
+                    Pour activer l'upload automatique:
+                    <ol style="margin: 10px 0 0 20px;">
+                        <li>Ouvrez un terminal dans le dossier du projet</li>
+                        <li>Exécutez: <code>node tools/image-upload-server.js</code></li>
+                        <li>Configurez votre clé API ImgBB dans le fichier</li>
+                    </ol>
+                </div>
+
+                <div class="form-group">
+                    <label>Clé pour images.json (auto-généré)</label>
+                    <input type="text" id="imageKey" readonly placeholder="Sélectionnez un sort/don d'abord">
+                </div>
+
+                <div class="form-group">
+                    <input type="file" id="fileInput" class="file-input" accept="image/*" onchange="handleFileSelect(event)">
+                    <div class="upload-area" id="uploadArea" onclick="document.getElementById('fileInput').click()">
+                        <div class="upload-icon">📤</div>
+                        <p style="font-size: 1.2em; font-weight: 600; margin-bottom: 10px;">
+                            Cliquez ou glissez votre image ici
+                        </p>
+                        <p style="color: #666; font-size: 0.9em;">
+                            PNG, JPG ou GIF - Max 32MB
+                        </p>
+                    </div>
+                    <div class="progress-bar" id="progressBar">
+                        <div class="progress-fill" id="progressFill">0%</div>
+                    </div>
+                </div>
+
+                <div class="form-group" id="previewContainer" style="display: none;">
+                    <label>Aperçu</label>
+                    <img id="imagePreview" class="image-preview">
+                    <div style="text-align: center; margin-top: 10px;">
+                        <button class="btn btn-success" id="uploadBtn" onclick="uploadImage()" disabled>
+                            🚀 Uploader et Ajouter à images.json
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group" id="resultContainer" style="display: none; margin-top: 20px;">
+                    <label>✅ Upload réussi !</label>
+                    <div class="prompt-output" id="uploadResult"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="copy-notification" id="copyNotification">✅ Copié dans le presse-papier !</div>
+
+    <script>
+        let selectedElement = null;
+        let currentType = 'sort';
+        let currentCategorie = '';
+        let sortsData = [];
+        let donsData = [];
+        let objetsData = [];
+        let selectedFile = null;
+        let serverOnline = false;
+        let currentEffet = '';
+        let currentTags = [];
+
+        // Vérifier le statut du serveur
+        async function checkServerStatus() {
+            try {
+                const response = await fetch('http://localhost:3001/status');
+                const data = await response.json();
+                serverOnline = data.status === 'running';
+
+                const statusEl = document.getElementById('serverStatus');
+                const warningEl = document.getElementById('serverWarning');
+
+                if (serverOnline) {
+                    statusEl.className = 'server-status online';
+                    statusEl.textContent = data.apiConfigured ?
+                        '🟢 Serveur en ligne' :
+                        '🟡 Serveur en ligne (API non configurée)';
+                    warningEl.style.display = data.apiConfigured ? 'none' : 'block';
+                    if (!data.apiConfigured) {
+                        warningEl.innerHTML = `
+                            <strong>⚠️ Configuration requise</strong><br>
+                            Clé API ImgBB manquante. Éditez <code>tools/image-upload-server.js</code>
+                            et ajoutez votre clé API gratuite depuis <a href="https://api.imgbb.com/" target="_blank">api.imgbb.com</a>
+                        `;
+                    }
+                } else {
+                    statusEl.className = 'server-status offline';
+                    statusEl.textContent = '🔴 Serveur déconnecté';
+                    warningEl.style.display = 'block';
+                }
+            } catch (error) {
+                serverOnline = false;
+                document.getElementById('serverStatus').className = 'server-status offline';
+                document.getElementById('serverStatus').textContent = '🔴 Serveur déconnecté';
+                document.getElementById('serverWarning').style.display = 'block';
+            }
+        }
+
+        // Vérifier toutes les 5 secondes
+        setInterval(checkServerStatus, 5000);
+        checkServerStatus();
+
+        // Charger les données
+        async function loadSorts() {
+            try {
+                const response = await fetch('http://localhost:3001/data/sorts.json');
+                sortsData = await response.json();
+                displaySorts();
+            } catch (error) {
+                alert('Erreur de chargement des sorts: ' + error.message);
+            }
+        }
+
+        async function loadDons() {
+            try {
+                const response = await fetch('http://localhost:3001/data/dons.json');
+                donsData = await response.json();
+                displayDons();
+            } catch (error) {
+                alert('Erreur de chargement des dons: ' + error.message);
+            }
+        }
+
+        async function loadObjets() {
+            try {
+                const response = await fetch('http://localhost:3001/data/objets.json');
+                const data = await response.json();
+                objetsData = data.objets;
+                displayObjets();
+            } catch (error) {
+                alert('Erreur de chargement des objets: ' + error.message);
+            }
+        }
+
+        function displaySorts() {
+            const container = document.getElementById('sortsList');
+            container.innerHTML = '';
+
+            sortsData.forEach(category => {
+                category.sorts.forEach(sort => {
+                    const item = document.createElement('div');
+                    item.className = 'list-item';
+                    item.innerHTML = `
+                        <strong>${sort.nom}</strong>
+                        ${sort.element ? `<span style="font-size: 0.8em; color: #666;"> (${sort.element})</span>` : ''}
+                        <div style="font-size: 0.85em; color: #888; margin-top: 5px;">${sort.description}</div>
+                    `;
+                    item.onclick = () => selectSort(sort, category.nom, item);
+                    container.appendChild(item);
+                });
+            });
+        }
+
+        function displayDons() {
+            const container = document.getElementById('donsList');
+            container.innerHTML = '';
+
+            donsData.forEach(category => {
+                category.dons.forEach(don => {
+                    const item = document.createElement('div');
+                    item.className = 'list-item';
+                    item.innerHTML = `
+                        <strong>${don.nom}</strong>
+                        <div style="font-size: 0.85em; color: #888; margin-top: 5px;">${don.description}</div>
+                    `;
+                    item.onclick = () => selectDon(don, category.nom, item);
+                    container.appendChild(item);
+                });
+            });
+        }
+
+        function displayObjets() {
+            const container = document.getElementById('objetsList');
+            container.innerHTML = '';
+
+            objetsData.forEach(objet => {
+                const item = document.createElement('div');
+                item.className = 'list-item';
+                const tags = objet.tags ? objet.tags.join(', ') : '';
+                item.innerHTML = `
+                    <strong>${objet.nom}</strong>
+                    ${tags ? `<span style="font-size: 0.8em; color: #666;"> (${tags})</span>` : ''}
+                    <div style="font-size: 0.85em; color: #888; margin-top: 5px;">${objet.description.replace(/<[^>]*>/g, '')}</div>
+                `;
+                item.onclick = () => selectObjet(objet, item);
+                container.appendChild(item);
+            });
+        }
+
+        function selectSort(sort, categorie, element) {
+            document.querySelectorAll('#sortsList .list-item').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+
+            document.getElementById('nomInput').value = sort.nom;
+            document.getElementById('descInput').value = sort.description;
+            currentCategorie = categorie;
+            currentEffet = sort.effetNormal || '';
+            currentTags = [];
+
+            // Récupérer et afficher l'élément du sort
+            if (sort.element) {
+                selectedElement = sort.element.toLowerCase();
+                updateElementDisplay(sort.element);
+            } else {
+                selectedElement = null;
+                updateElementDisplay(null);
+            }
+
+            updateImageKey();
+        }
+
+        function selectDon(don, categorie, element) {
+            document.querySelectorAll('#donsList .list-item').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+
+            document.getElementById('nomInput').value = don.nom;
+            document.getElementById('descInput').value = don.description;
+            currentCategorie = categorie;
+
+            updateImageKey();
+        }
+
+        function selectObjet(objet, element) {
+            document.querySelectorAll('#objetsList .list-item').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+
+            document.getElementById('nomInput').value = objet.nom;
+            document.getElementById('descInput').value = objet.description.replace(/<[^>]*>/g, '');
+            currentCategorie = '';
+            currentEffet = objet.effet || '';
+            currentTags = objet.tags || [];
+
+            updateImageKey();
+        }
+
+        // Mettre à jour l'affichage de l'élément
+        function updateElementDisplay(element) {
+            const display = document.getElementById('elementDisplay');
+
+            if (!element) {
+                display.textContent = 'Aucun élément';
+                display.style.background = '#f0f0f0';
+                display.style.color = '#555';
+                return;
+            }
+
+            const elementInfo = {
+                'Feu': { emoji: '🔥', color: '#ff6b6b', text: 'Feu' },
+                'Eau': { emoji: '💧', color: '#4dabf7', text: 'Eau' },
+                'Terre': { emoji: '🌍', color: '#8b4513', text: 'Terre' },
+                'Air': { emoji: '💨', color: '#51cf66', text: 'Air' },
+                'Lumière': { emoji: '✨', color: '#ffd43b', text: 'Lumière' },
+                'Nuit': { emoji: '🌙', color: '#6741d9', text: 'Nuit' }
+            };
+
+            const info = elementInfo[element] || { emoji: '⚡', color: '#667eea', text: element };
+            display.innerHTML = `${info.emoji} ${info.text}`;
+            display.style.background = info.color;
+            display.style.color = 'white';
+        }
+
+        // Changement de type de contenu
+        document.getElementById('contentType').addEventListener('change', (e) => {
+            currentType = e.target.value;
+            document.getElementById('sortSelection').style.display = currentType === 'sort' ? 'block' : 'none';
+            document.getElementById('donSelection').style.display = currentType === 'don' ? 'block' : 'none';
+            document.getElementById('objetSelection').style.display = currentType === 'objet' ? 'block' : 'none';
+            document.getElementById('elementGroup').style.display = currentType === 'sort' ? 'block' : 'none';
+            updateImageKey();
+        });
+
+        // Mise à jour de la clé d'image
+        function updateImageKey() {
+            const nom = document.getElementById('nomInput').value;
+            if (currentType === 'sort' && currentCategorie && nom) {
+                document.getElementById('imageKey').value = `sort:${currentCategorie}:${nom}`;
+            } else if (currentType === 'don' && nom) {
+                // Pour les dons, la clé est simplement "don:NomDuDon" (sans catégorie)
+                document.getElementById('imageKey').value = `don:${nom}`;
+            } else if (currentType === 'objet' && nom) {
+                document.getElementById('imageKey').value = `objet:${nom}`;
+            } else if (nom) {
+                document.getElementById('imageKey').value = `${currentType}:${nom}`;
+            }
+        }
+
+        document.getElementById('nomInput').addEventListener('input', updateImageKey);
+
+        // Copier les infos pour Claude/ChatGPT
+        function generateVisualDescription() {
+            const nom = document.getElementById('nomInput').value;
+            const descInput = document.getElementById('descInput');
+
+            if (!nom) {
+                alert('Veuillez d\'abord sélectionner ou entrer un nom');
+                return;
+            }
+
+            // Construire le prompt pour Claude/ChatGPT
+            let prompt = `Écris UNE SEULE phrase de description lore/flavor EN FRANÇAIS pour : "${nom}"\n\n`;
+
+            if (currentType === 'sort') {
+                prompt += `Type: Sort magique\n`;
+                if (selectedElement) prompt += `Élément: ${selectedElement}\n`;
+                if (currentEffet) prompt += `Effet: ${currentEffet}\n`;
+                if (descInput.value) prompt += `Description existante: ${descInput.value}\n`;
+                prompt += `\nÉcris une phrase évocatrice qui capture l'essence et la nature de ce sort dans un style heroic fantasy. La phrase doit faire rêver les joueurs et leur donner envie d'utiliser ce sort.`;
+            } else if (currentType === 'objet') {
+                prompt += `Type: Objet\n`;
+                if (currentTags.length > 0) prompt += `Catégories: ${currentTags.join(', ')}\n`;
+                if (currentEffet) prompt += `Effet: ${currentEffet}\n`;
+                if (descInput.value) prompt += `Description existante: ${descInput.value}\n`;
+                prompt += `\nÉcris une phrase évocatrice qui décrit cet objet de manière immersive, en capturant son histoire, son apparence, ou son pouvoir dans un style heroic fantasy.`;
+            } else if (currentType === 'don') {
+                prompt += `Type: Don/Capacité\n`;
+                if (descInput.value) prompt += `Description: ${descInput.value}\n`;
+                prompt += `\nÉcris une phrase évocatrice qui capture l'essence de cette capacité de manière héroïque et épique.`;
+            }
+
+            prompt += `\n\nRéponds UNIQUEMENT avec la phrase de description lore, sans préambule ni explication. Pas de guillemets autour de la phrase.`;
+
+            // Copier dans le presse-papier
+            navigator.clipboard.writeText(prompt).then(() => {
+                showNotification('📋 Instructions copiées ! Collez dans Claude Code ou ChatGPT');
+            }).catch(() => {
+                alert('Erreur lors de la copie. Voici les instructions:\n\n' + prompt);
+            });
+        }
+
+        // Génération du prompt
+        function generatePrompt() {
+            const nom = document.getElementById('nomInput').value;
+            const desc = document.getElementById('descInput').value;
+
+            if (!nom) {
+                alert('Veuillez entrer un nom');
+                return;
+            }
+
+            let prompt = '';
+
+            if (currentType === 'sort') {
+                prompt = generateSpellPrompt(nom, desc, selectedElement);
+            } else if (currentType === 'don') {
+                prompt = generateFeatPrompt(nom, desc);
+            } else if (currentType === 'objet') {
+                prompt = generateObjectPrompt(nom, desc);
+            } else {
+                prompt = generateCustomPrompt(nom, desc);
+            }
+
+            document.getElementById('promptOutput').textContent = prompt;
+        }
+
+        function generateSpellPrompt(nom, desc, element) {
+            const elementDescriptions = {
+                feu: 'with vivid flames, burning embers, and fiery particles',
+                eau: 'with flowing water, splashing waves, and aquatic energy',
+                terre: 'with rocky formations, earth fragments, and grounded power',
+                air: 'with swirling winds, lightning sparks, and aerial energy',
+                lumiere: 'with radiant light, golden rays, and holy radiance',
+                nuit: 'with dark energy, purple mist, and shadowy aura'
+            };
+
+            const elementDesc = element ? elementDescriptions[element] || '' : 'with powerful magical energy';
+
+            return `Create an epic heroic fantasy spell illustration for "${nom}". ${desc}
+
+The image should show ${elementDesc}, magical runes and symbols, mystical particles and energy flows. The spell should appear powerful and dramatic with a dark atmospheric background.
+
+Art style: Professional fantasy game concept art, highly detailed, dramatic lighting, vibrant magical effects, cinematic composition. The focus should be entirely on the magical spell effect itself, not on any character casting it.
+
+Format: Square image, centered composition, suitable for a card game icon.`;
+        }
+
+        function generateFeatPrompt(nom, desc) {
+            return `Create an epic heroic fantasy feat/ability illustration for "${nom}". ${desc}
+
+The image should represent this ability with symbolic and powerful imagery in heroic fantasy style. Include dramatic lighting, heroic composition, and iconic elements that represent the feat's nature.
+
+Art style: Professional fantasy game concept art, highly detailed, dramatic and heroic atmosphere, rich colors, cinematic composition. Focus on symbolic representation of the ability.
+
+Format: Square image, centered composition, suitable for a card game icon.`;
+        }
+
+        function generateObjectPrompt(nom, desc) {
+            return `Create an epic heroic fantasy item illustration for "${nom}". ${desc}
+
+The image should show a detailed and iconic representation of this item with dramatic presentation. Include intricate details, magical properties if applicable, and professional lighting.
+
+Art style: Professional fantasy game item art, highly detailed, dramatic presentation, rich textures, suitable for inventory icon.
+
+Format: Square image, centered composition, neutral or atmospheric background.`;
+        }
+
+        function generateCustomPrompt(nom, desc) {
+            return `Create an epic heroic fantasy illustration for "${nom}". ${desc}
+
+Art style: Professional fantasy game concept art, highly detailed, dramatic lighting, heroic atmosphere, vibrant colors, cinematic composition.
+
+Format: Square image, centered composition, suitable for a card game icon.`;
+        }
+
+        // Copie du prompt
+        function copyPrompt() {
+            const text = document.getElementById('promptOutput').textContent;
+            if (text === 'Le prompt apparaîtra ici...') {
+                alert('Générez d\'abord un prompt');
+                return;
+            }
+            navigator.clipboard.writeText(text);
+            showNotification();
+        }
+
+        // Gestion du fichier
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (file) {
+                selectedFile = file;
+                previewFile(file);
+            }
+        }
+
+        function previewFile(file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                document.getElementById('imagePreview').src = e.target.result;
+                document.getElementById('previewContainer').style.display = 'block';
+                document.getElementById('uploadBtn').disabled = !serverOnline || !document.getElementById('imageKey').value;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Drag and drop
+        const uploadArea = document.getElementById('uploadArea');
+
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('image/')) {
+                selectedFile = file;
+                previewFile(file);
+            }
+        });
+
+        // Upload de l'image
+        async function uploadImage() {
+            if (!selectedFile) {
+                alert('Sélectionnez d\'abord une image');
+                return;
+            }
+
+            if (!serverOnline) {
+                alert('Le serveur d\'upload n\'est pas disponible. Lancez-le avec: node tools/image-upload-server.js');
+                return;
+            }
+
+            const key = document.getElementById('imageKey').value;
+            if (!key) {
+                alert('Sélectionnez un sort/don pour générer la clé');
+                return;
+            }
+
+            const uploadBtn = document.getElementById('uploadBtn');
+            uploadBtn.disabled = true;
+            uploadBtn.innerHTML = '<span class="loading"></span> Upload en cours...';
+
+            const progressBar = document.getElementById('progressBar');
+            const progressFill = document.getElementById('progressFill');
+            progressBar.classList.add('active');
+            progressFill.style.width = '30%';
+            progressFill.textContent = '30%';
+
+            try {
+                // Convertir en base64
+                const base64 = await fileToBase64(selectedFile);
+                const base64Data = base64.split(',')[1]; // Retirer le préfixe data:image/...
+
+                progressFill.style.width = '50%';
+                progressFill.textContent = '50%';
+
+                // Envoyer au serveur
+                const response = await fetch('http://localhost:3001/upload', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        key: key,
+                        image: base64Data
+                    })
+                });
+
+                const result = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(result.error || 'Upload failed');
+                }
+
+                progressFill.style.width = '100%';
+                progressFill.textContent = '100%';
+
+                // Afficher le résultat
+                document.getElementById('uploadResult').innerHTML =
+                    `✅ Image uploadée et ajoutée à images.json!\n\nClé: ${result.key}\nURL: ${result.url}\n\n⚠️ Pour voir l'image sur votre site:\n1. Allez sur votre site web BabJdr\n2. Ouvrez la console (F12)\n3. Tapez: <code style="background: #333; padding: 2px 6px; border-radius: 3px;">JdrApp.modules.images.loadImageData().then(() => JdrApp.modules.images.autoLoadImages())</code>\n4. Ou rafraîchissez simplement la page (F5)`;
+                document.getElementById('resultContainer').style.display = 'block';
+
+                showNotification('Image uploadée avec succès !');
+
+                // Réinitialiser
+                setTimeout(() => {
+                    selectedFile = null;
+                    document.getElementById('fileInput').value = '';
+                    document.getElementById('previewContainer').style.display = 'none';
+                    progressBar.classList.remove('active');
+                    progressFill.style.width = '0%';
+                    uploadBtn.innerHTML = '🚀 Uploader et Ajouter à images.json';
+                    uploadBtn.disabled = false;
+                }, 2000);
+
+            } catch (error) {
+                alert('Erreur lors de l\'upload: ' + error.message);
+                uploadBtn.innerHTML = '🚀 Uploader et Ajouter à images.json';
+                uploadBtn.disabled = false;
+                progressBar.classList.remove('active');
+                progressFill.style.width = '0%';
+            }
+        }
+
+        function fileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // Notification
+        function showNotification(message = '✅ Copié dans le presse-papier !') {
+            const notif = document.getElementById('copyNotification');
+            notif.textContent = message;
+            notif.classList.add('show');
+            setTimeout(() => notif.classList.remove('show'), 2000);
+        }
+
+        // Intégration du lore/flavor dans le JSON
+        async function integrateLoreFlavor() {
+            const loreText = document.getElementById('loreFlavor').value.trim();
+            const nom = document.getElementById('nomInput').value;
+
+            if (!loreText) {
+                alert('Veuillez coller la phrase de lore/flavor générée');
+                return;
+            }
+
+            if (!nom) {
+                alert('Veuillez sélectionner un sort/don/objet');
+                return;
+            }
+
+            if (!serverOnline) {
+                alert('Le serveur n\'est pas disponible. Lancez-le avec: node tools/image-upload-server.js');
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:3001/update-lore', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        type: currentType,
+                        categorie: currentCategorie,
+                        nom: nom,
+                        lore: loreText
+                    })
+                });
+
+                const result = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(result.error || 'Échec de la mise à jour');
+                }
+
+                showNotification('✅ Description mise à jour avec succès !');
+
+                // Afficher un message de confirmation
+                alert(`✅ Description mise à jour pour "${nom}"\n\nFichier mis à jour: ${result.file}\nRafraîchissez la page de votre site pour voir les changements.`);
+
+                // Vider le champ lore
+                document.getElementById('loreFlavor').value = '';
+
+            } catch (error) {
+                alert('Erreur lors de l\'intégration du lore: ' + error.message);
+            }
+        }
+    </script>
+</body>
+</html>

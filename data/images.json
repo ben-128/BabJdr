@@ -147,10 +147,12 @@
     "sort:Sorts de Mage:Sables mouvants": "https://i.ibb.co/5WjvQMWZ/Sable-Mouvant.png",
     "sort:Sorts de Prêtre:Guérison mentale": "https://i.ibb.co/Wvc2D4Vr/Purifi-Mentale.png",
     "sort:Sorts de Prêtre:Puification physique": "https://i.ibb.co/ksnZMxGJ/Purifi-Physique.png",
-    "sort:Sorts de Prêtre:Guérison physique": "https://i.ibb.co/ksnZMxGJ/Purifi-Physique.png"
+    "sort:Sorts de Prêtre:Guérison physique": "https://i.ibb.co/ksnZMxGJ/Purifi-Physique.png",
+    "monster:Araignée géante": "data/images/Monstres/foret/Monstre_Forêt_Araignée.png",
+    "monster:Guêpe géante": "data/images/Monstres/foret/Monstre_Forêt_GuepeGeante.png"
   },
   "meta": {
-    "total_images": 148,
+    "total_images": 150,
     "exported_date": "2025-10-01",
     "note": "Ces images incluent les nouvelles images uploadées"
   }

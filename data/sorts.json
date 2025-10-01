@@ -6,7 +6,7 @@
       {
         "nom": "Boule de Feu",
         "element": "Feu",
-        "description": "Lance une boule de feu sur un adversaire, qui peut s'enflammer.",
+        "description": "Une sphère incandescente fuse vers l’ennemi pour l’engloutir dans une éruption ardente.",
         "categorie": "Mage",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 1",
         "portee": "🎯 <strong>Portée:</strong> 15m",
@@ -34,7 +34,7 @@
       {
         "nom": "Vague déferlante",
         "element": "Eau",
-        "description": "Une puissante vague d'eau s'abat sur vos ennemis et les repousse.",
+        "description": "Une vague déferlante engloutit les ennemis dans sa fureur liquide et les rejette loin de sa marée impétueuse.",
         "categorie": "Sorts de Mage",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 2",
         "portee": "🎯 <strong>Portée:</strong> 6m",
@@ -192,7 +192,7 @@
       {
         "nom": "Protection",
         "element": "Lumière",
-        "description": "Protège le lanceur ou un allié.",
+        "description": "Un halo radieux se déploie comme un rempart sacré, enveloppant l’allié choisi d’une armure de lumière impénétrable.",
         "categorie": "Sorts de Prêtre",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 2",
         "portee": "🎯 <strong>Portée:</strong> 3m",
@@ -358,7 +358,7 @@
       {
         "nom": "Accélération",
         "element": "Air",
-        "description": "Une magie des vents accélère un allié ou le lanceur.",
+        "description": "Portée par la bénédiction des vents célestes, la cible s’élance avec la rapidité fulgurante d’une bourrasque indomptable.",
         "categorie": "Sorts d'Enchanteur",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 1",
         "portee": "🎯 <strong>Portée:</strong> 6m",
