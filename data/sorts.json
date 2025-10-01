@@ -310,6 +310,30 @@
         "resistance": "<strong>Sans effet si:</strong> <br>- Esquive.\n<br>- Element <span style=\"color: #8b5cf6; font-weight: bold;\">Maléfique</span>.",
         "effetNormal": "<strong>Effet:</strong> Inflige (10 + Puiss. Sorts) dégats de <span style=\"color: #8b5cf6; font-weight: bold;\">Maléfique</span>.\n<br> Si Résistance altérations &lt; Intelligence du lanceur, alors la cible est <span class=\"etat-link\" data-etat=\"Maudit\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Maudite</span> pendant 5 tours.",
         "effetCritique": "<strong>Coup Critique: </strong> Les dégats passent à (15 + Puiss. Sorts), et l'altération applique également <span class=\"etat-link\" data-etat=\"Vulnérable\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Vulnérable</span>."
+      },
+      {
+        "nom": "Guérison mentale",
+        "element": "Divin",
+        "description": "Une lueur douce et argentée entoure la tête de la cible, dissipant les ombres de la malédiction et restaurant la clarté de son esprit.",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 5",
+        "portee": "🎯 <strong>Portée:</strong> 3m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 14",
+        "resistance": "<strong>Sans effet si:</strong> -",
+        "effetNormal": "<strong>Effet:</strong> Enlève l'état <span class=\"etat-link\" data-etat=\"Maudit\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Maudit</span> ou  <span class=\"etat-link\" data-etat=\"Silence\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Silence</span> ou <span class=\"etat-link\" data-etat=\"Confus\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Confus</span> de la cible.",
+        "effetCritique": "<strong>Coup Critique:&nbsp;</strong>&nbsp;La cible est également soignée de 10 points de vie."
+      },
+      {
+        "nom": "Guérison physique",
+        "element": "Divin",
+        "description": "Un éclat lumineux parcourt le corps de la cible, balayant ses faiblesses et rendant vigueur à chacun de ses mouvements.",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 6",
+        "portee": "🎯 <strong>Portée:</strong> 3m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 16",
+        "resistance": "<strong>Sans effet si:</strong> -",
+        "effetNormal": "<strong>Effet:</strong> Enlève l'état <span class=\"etat-link\" data-etat=\"Ralenti\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ralenti</span> ou <span class=\"etat-link\" data-etat=\"Vulnérable\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Vulnérable</span> ou <span class=\"etat-link\" data-etat=\"Débilité\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Débilité</span> ou <span class=\"etat-link\" data-etat=\"Affaibli\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Affaibli</span> de la cible.",
+        "effetCritique": "<strong>Coup Critique:&nbsp;</strong>&nbsp;La cible est également soignée de 10 points de vie."
       }
     ]
   },

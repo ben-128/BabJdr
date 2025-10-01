@@ -144,11 +144,14 @@
     "sort:Sorts de Mage:Teleportation": "https://i.ibb.co/wN2tpb2f/teleportation.png",
     "sort:Sorts de Mage:Absorption magique": "https://i.ibb.co/3KkL252/Absorption.png",
     "sort:Sorts de Mage:Armure de glace": "https://i.ibb.co/39DGsF7W/ArmureG.png",
-    "sort:Sorts de Mage:Sables mouvants": "https://i.ibb.co/5WjvQMWZ/Sable-Mouvant.png"
+    "sort:Sorts de Mage:Sables mouvants": "https://i.ibb.co/5WjvQMWZ/Sable-Mouvant.png",
+    "sort:Sorts de Prêtre:Guérison mentale": "https://i.ibb.co/Wvc2D4Vr/Purifi-Mentale.png",
+    "sort:Sorts de Prêtre:Puification physique": "https://i.ibb.co/ksnZMxGJ/Purifi-Physique.png",
+    "sort:Sorts de Prêtre:Guérison physique": "https://i.ibb.co/ksnZMxGJ/Purifi-Physique.png"
   },
   "meta": {
-    "total_images": 145,
-    "exported_date": "2025-09-30",
+    "total_images": 148,
+    "exported_date": "2025-10-01",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
 }

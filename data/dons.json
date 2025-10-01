@@ -536,6 +536,12 @@
         "description": "Augmente 🛡️ l'endurance de 4.",
         "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
+      },
+      {
+        "nom": "Purification sublimée",
+        "description": "Après avoir supprimé un état via un sort, le héros et la cible recoivent un nombre de point de vie égal au niveau du sort.",
+        "prerequis": "<strong> Prérequis :</strong>-",
+        "cout": "1 point de don"
       }
     ]
   },
