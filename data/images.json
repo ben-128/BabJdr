@@ -178,10 +178,14 @@
     "don:Volonté de fer": "https://i.ibb.co/wNr9crbW/abfbd1a02861.png",
     "don:Provocation": "https://i.ibb.co/gMfR1Lwd/b552562a21d5.png",
     "don:Infatiguable": "https://i.ibb.co/9HNwpd4G/841c85da5ae2.png",
-    "don:Agilité du guerrier": "https://i.ibb.co/5hYqtJBt/63344bb2f9b3.png"
+    "don:Agilité du guerrier": "https://i.ibb.co/5hYqtJBt/63344bb2f9b3.png",
+    "don:Increvable": "https://i.ibb.co/mFS565jk/183f41947f40.png",
+    "don:Coup de bouclier": "https://i.ibb.co/RpkpbpLJ/f57d3378f0f5.png",
+    "don:Attaque délayée": "https://i.ibb.co/GvSHSFPV/de1920c963ad.png",
+    "don:Attaque surpuissante": "https://i.ibb.co/GfkdS33W/e26fc85a1498.png"
   },
   "meta": {
-    "total_images": 179,
+    "total_images": 183,
     "exported_date": "2025-10-02",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
