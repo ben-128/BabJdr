@@ -47,7 +47,7 @@
       },
       {
         "nom": "Grand sac",
-        "description": "Augmente le poids maximum transportable de 3, et le nombre de consommables transportables de 3.",
+        "description": "Augmente le poids maximum transportable de 5, et le nombre de consommables transportables de 5.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -65,7 +65,7 @@
       },
       {
         "nom": "Sommeil léger",
-        "description": "Pendant qu'il dort, le héros est aussi alerte que s'il effectuait un tour de garde.\nDe plus, le héros ne nécessite que 4 heures par nuit pour éviter l'état <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span> et est soigné pendant son sommeil d'un nombre de points de vie d'une valeur égale à sa volonté.",
+        "description": "Pendant qu'il dort, le héros est aussi alerte que s'il effectuait un tour de garde.\n<br>De plus, est soigné pendant son sommeil d'un nombre de points de vie d'une valeur égale à son endurance.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -90,7 +90,7 @@
       {
         "nom": "Statistiques",
         "description": "Gagne 2 points de statistiques au choix à répartir.",
-        "prerequis": "<strong> Prérequis :</strong> -",
+        "prerequis": "<strong> Prérequis :</strong> Don Unique.",
         "cout": "1 point de don"
       },
       {
@@ -107,7 +107,7 @@
       },
       {
         "nom": "Toujours prêt",
-        "description": "Augmente l'iniative de 5. Lors du premier tour de combat, la vitesse de déplacement est doublée.",
+        "description": "Augmente l'iniative de 10. Lors du premier tour de combat, la vitesse de déplacement est doublée.",
         "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
@@ -265,6 +265,12 @@
         "nom": "Porteur de charge lourde",
         "description": "Augmente le poids maximum transportable de 5. De plus, les armures lourdes augmente l'armure de 1 tous les 5 points de force du héros.",
         "prerequis": "<strong> Prérequis :</strong> 💪 Force 15",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Spécialiste des armures légères",
+        "description": "Tant que le guerrier ne porte pas d'armure lourde, il gagne 6 🏃Agilité.",
+        "prerequis": "<strong> Prérequis :</strong> Don Unique.",
         "cout": "1 point de don"
       }
     ]
