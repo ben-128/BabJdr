@@ -10,9 +10,9 @@
         "cout": "1 points de don"
       },
       {
-        "nom": "Toujours prêt",
+        "nom": "Endurant",
         "description": "Le maximum d'efforts augmente de 1.",
-        "prerequis": "<strong> Prérequis :</strong> A chaque prise de ce don, son coût en point de don augmente de 1.",
+        "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
       {
@@ -41,8 +41,8 @@
       },
       {
         "nom": "Gros mangeur",
-        "description": "Les points de vie rendus en mangeant de la nourriture sont doublés. De plus, il est possible de consommer 4 rations de nourriture par jour au lieu de 2.",
-        "prerequis": "<strong> Prérequis :</strong> -",
+        "description": "Les points de vie rendus en mangeant de la nourriture sont doublés.",
+        "prerequis": "<strong> Prérequis :</strong> Don Unique.",
         "cout": "1 point de don"
       },
       {

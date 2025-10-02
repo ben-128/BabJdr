@@ -1,7 +1,7 @@
 [
   {
     "nom": "Guerrier",
-    "resume": "Héros sans égal au combat au corps à corps.",
+    "resume": "Maître incontesté du combat rapproché, capable d'utiliser toutes les armes et armures du royaume, accumulant une expérience martiale sans égale grâce à ses nombreux dons de combat.",
     "capacites": "<ul><li><em>Expert de l'équipement</em> : Capable d'utiliser toutes les armes (épées, arcs, bâtons, dagues, exotiques, une main et deux mains), armures (robes, légères, lourdes), et boucliers.</li><li><em>Hardiesse</em> : Gagne la compétence Hardiesse rang 1.</li><li>\n<em>Doué</em> : Gagne un point de Don supplémentaire par niveau.</li></ul>",
     "sousClasses": [
       {
@@ -29,7 +29,7 @@
   },
   {
     "nom": "Mage",
-    "resume": "Spécialiste de la magie destructrice.",
+    "resume": "Lanceur de sorts destructeurs spécialisé dans les magies élémentaires, capable de déchaîner des vagues dévastatrices et des volées de projectiles magiques ravageurs.",
     "capacites": "<ul><li><em>Équipement de mage</em> : bâtons (une et deux mains), catalyseurs, robes.</li><li><em>Sorts de mage</em> : Apprend et lance des sorts de mage.</li></ul>",
     "sousClasses": [
       {
@@ -50,7 +50,7 @@
   },
   {
     "nom": "Prêtre",
-    "resume": "Spécialiste de la magie de soutien et anti morts-vivants.",
+    "resume": "Serviteur divin maniant la magie de soutien et de lumière, spécialiste des soins et de la protection de ses alliés, redoutable chasseur du mal grâce à ses sorts sacrés purificateurs.",
     "capacites": "<ul>\n    <li><em>Équipement de prêtre</em> : bâtons (une et deux mains), catalyseurs, robes.</li>\n    <li><em>Sorts de prêtre</em> : Apprend et lance des sorts de Prêtre.</li>\n    <li><em>Éloquence</em> : Gagne la compétence Éloquence rang 1.</li>\n  </ul>",
     "sousClasses": [
       {
@@ -71,7 +71,7 @@
   },
   {
     "nom": "Rôdeur",
-    "resume": "Héros très agile.",
+    "resume": " Combattant polyvalent qui excelle dans la coordination et la mobilité, maîtrisant les attaques rapides avec une agilité surnaturelle.",
     "capacites": "<ul><li><em>Équipement de rôdeur</em> : Dagues, robes, armures légères.</li><li><em>Coordination</em> : Gagne la compétence Coordination rang 1.</li><li>\n<em>Doué</em> : Gagne un point de Don supplémentaire par niveau.</li></ul>",
     "sousClasses": [
       {
@@ -92,7 +92,7 @@
   },
   {
     "nom": "Enchanteur",
-    "resume": "Détenteur d'une magie singulière, qui fait de lui un allié précieux.",
+    "resume": "Détenteur d'une magie singulière de soutien et d'altération, il affaiblit ses ennemis tout en amplifiant les capacités de ses alliés",
     "capacites": "<ul><li><em>Équipement d'enchanteur</em> : bâtons (une et deux mains), catalyseurs, Robes.</li>\n<li><em>Sorts d'enchanteur</em> : Apprend et lance des sorts d'Enchanteur.</li>\n<li><em>Armes enchantés</em> : Les attaques au corps à corps ont une portée de 6m.</li></ul>",
     "sousClasses": [
       {

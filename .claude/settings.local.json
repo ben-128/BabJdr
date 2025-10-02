@@ -56,7 +56,8 @@
       "Bash(python:*)",
       "Bash(pkill:*)",
       "Bash(git restore:*)",
-      "Bash(awk:*)"
+      "Bash(awk:*)",
+      "Bash(netstat:*)"
     ],
     "deny": []
   }

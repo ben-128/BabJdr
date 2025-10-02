@@ -7,12 +7,34 @@ const { exec } = require('child_process');
 process.chdir(path.join(__dirname, '..'));
 
 const server = http.createServer((req, res) => {
+  // Add CORS headers
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  // Handle OPTIONS preflight
+  if (req.method === 'OPTIONS') {
+    res.writeHead(200);
+    res.end();
+    return;
+  }
+
+  // Handle /status endpoint
+  if (req.url === '/status') {
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({
+      status: 'running',
+      apiConfigured: false // This simple server doesn't have upload functionality
+    }));
+    return;
+  }
+
   let filePath = '.' + req.url;
   if (filePath === './') filePath = './dev-debug.html';
-  
+
   const extname = path.extname(filePath);
   let contentType = 'text/html';
-  
+
   switch(extname) {
     case '.js': contentType = 'text/javascript'; break;
     case '.css': contentType = 'text/css'; break;
@@ -26,7 +48,7 @@ const server = http.createServer((req, res) => {
     case '.pdf': contentType = 'application/pdf'; break;
     case '.mp3': contentType = 'audio/mpeg'; break;
   }
-  
+
   fs.readFile(filePath, (err, content) => {
     if (err) {
       res.writeHead(404, { 'Content-Type': 'text/plain' });

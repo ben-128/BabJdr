@@ -2,8 +2,9 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
+const { exec } = require('child_process');
 
-const PORT = 3001;
+const PORT = 3000;
 const IMAGES_JSON_PATH = path.join(__dirname, '..', 'data', 'images.json');
 
 // Configuration ImgBB
@@ -270,6 +271,41 @@ const server = http.createServer(async (req, res) => {
             res.writeHead(200, { 'Content-Type': 'application/json' });
             res.end(data);
         });
+    } else if (req.method === 'GET') {
+        // Servir les fichiers statiques (HTML, CSS, JS, images, etc.)
+        let filePath = '.' + req.url;
+        if (filePath === './') filePath = './dev-debug.html';
+
+        const extname = path.extname(filePath);
+        let contentType = 'text/html';
+
+        switch(extname) {
+            case '.js': contentType = 'text/javascript'; break;
+            case '.css': contentType = 'text/css'; break;
+            case '.json': contentType = 'application/json'; break;
+            case '.png': contentType = 'image/png'; break;
+            case '.jpg': contentType = 'image/jpeg'; break;
+            case '.jpeg': contentType = 'image/jpeg'; break;
+            case '.gif': contentType = 'image/gif'; break;
+            case '.svg': contentType = 'image/svg+xml'; break;
+            case '.ico': contentType = 'image/x-icon'; break;
+            case '.pdf': contentType = 'application/pdf'; break;
+            case '.mp3': contentType = 'audio/mpeg'; break;
+            case '.html': contentType = 'text/html'; break;
+        }
+
+        // Résoudre le chemin relatif au répertoire parent (racine du projet)
+        const fullPath = path.join(__dirname, '..', filePath);
+
+        fs.readFile(fullPath, (err, content) => {
+            if (err) {
+                res.writeHead(404, { 'Content-Type': 'text/plain' });
+                res.end('File not found');
+            } else {
+                res.writeHead(200, { 'Content-Type': contentType });
+                res.end(content);
+            }
+        });
     } else {
         res.writeHead(404);
         res.end();
@@ -301,7 +337,13 @@ ${IMGBB_API_KEY === 'VOTRE_CLE_API_IMGBB' ? `
    - POST /upload      : Upload d'image
    - POST /update-lore : Ajouter lore/flavor au JSON
    - GET  /data/*.json : Servir les fichiers JSON
+   - GET  /*           : Servir fichiers statiques (HTML, CSS, JS)
 
 Pour arrêter le serveur: Ctrl+C
     `);
+
+    // Open browser automatically on Windows
+    if (process.platform === 'win32') {
+        exec(`start http://localhost:${PORT}`);
+    }
 });

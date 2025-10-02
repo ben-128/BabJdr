@@ -377,19 +377,37 @@
 
                 <div class="form-group" id="sortSelection">
                     <label>Charger depuis les données</label>
-                    <button class="btn btn-secondary" onclick="loadSorts()">📥 Charger les sorts</button>
+                    <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 10px;">
+                        <button class="btn btn-secondary" onclick="loadSorts()">📥 Charger les sorts</button>
+                        <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                            <input type="checkbox" id="filterSortsWithImage" onchange="displaySorts()">
+                            <span>Masquer avec image</span>
+                        </label>
+                    </div>
                     <div class="list-container" id="sortsList"></div>
                 </div>
 
                 <div class="form-group" id="donSelection" style="display: none;">
                     <label>Charger depuis les données</label>
-                    <button class="btn btn-secondary" onclick="loadDons()">📥 Charger les dons</button>
+                    <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 10px;">
+                        <button class="btn btn-secondary" onclick="loadDons()">📥 Charger les dons</button>
+                        <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                            <input type="checkbox" id="filterDonsWithImage" onchange="displayDons()">
+                            <span>Masquer avec image</span>
+                        </label>
+                    </div>
                     <div class="list-container" id="donsList"></div>
                 </div>
 
                 <div class="form-group" id="objetSelection" style="display: none;">
                     <label>Charger depuis les données</label>
-                    <button class="btn btn-secondary" onclick="loadObjets()">📥 Charger les objets</button>
+                    <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 10px;">
+                        <button class="btn btn-secondary" onclick="loadObjets()">📥 Charger les objets</button>
+                        <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                            <input type="checkbox" id="filterObjetsWithImage" onchange="displayObjets()">
+                            <span>Masquer avec image</span>
+                        </label>
+                    </div>
                     <div class="list-container" id="objetsList"></div>
                 </div>
 
@@ -439,7 +457,23 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Instructions d'utilisation</label>
+                    <label>🎨 Génération d'image automatique (Gratuit !)</label>
+                    <div style="background: #e7f3ff; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                        <p style="margin: 0 0 10px 0; font-size: 0.9em;">
+                            <strong>Nouveau !</strong> Générez automatiquement l'image avec Stable Diffusion XL (gratuit)
+                        </p>
+                        <input type="text" id="hfApiKey" class="form-control" placeholder="Clé API Hugging Face (gratuite sur huggingface.co/settings/tokens)" style="margin-bottom: 10px;">
+                        <button id="autoGenBtn" class="btn btn-primary" onclick="generateImageAuto()" style="width: 100%;">
+                            🎨 Générer l'image automatiquement
+                        </button>
+                        <p style="margin: 10px 0 0 0; font-size: 0.85em; color: #666;">
+                            ℹ️ Obtenez votre clé API gratuite sur <a href="https://huggingface.co/settings/tokens" target="_blank">huggingface.co/settings/tokens</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Instructions d'utilisation (méthode manuelle)</label>
                     <div style="background: #fff3cd; padding: 15px; border-radius: 8px; font-size: 0.9em;">
                         <ol style="margin-left: 20px;">
                             <li>Cliquez sur "Générer le prompt"</li>
@@ -514,56 +548,236 @@
         let sortsData = [];
         let donsData = [];
         let objetsData = [];
+        let imagesData = {};
         let selectedFile = null;
         let serverOnline = false;
         let currentEffet = '';
         let currentTags = [];
+        let generatedImageBlob = null;
 
-        // Vérifier le statut du serveur
-        async function checkServerStatus() {
+        // Génération automatique d'image avec Hugging Face
+        async function generateImageAuto() {
+            const apiKey = document.getElementById('hfApiKey').value.trim();
+            const nom = document.getElementById('nomInput').value;
+
+            if (!nom) {
+                alert('Veuillez sélectionner ou entrer un nom d\'abord');
+                return;
+            }
+
+            if (!apiKey) {
+                alert('Veuillez entrer votre clé API Hugging Face.\n\nObtenez-en une gratuitement sur: https://huggingface.co/settings/tokens');
+                return;
+            }
+
+            // Générer le prompt d'abord
+            generatePrompt();
+            const promptFr = document.getElementById('promptOutput').textContent;
+
+            if (promptFr === 'Le prompt apparaîtra ici...') {
+                alert('Erreur lors de la génération du prompt');
+                return;
+            }
+
+            const autoGenBtn = document.getElementById('autoGenBtn');
+            autoGenBtn.disabled = true;
+            autoGenBtn.innerHTML = '<span class="loading"></span> Traduction et génération en cours...';
+
+            // Traduire le prompt en anglais via l'API Hugging Face
+            let promptEn = promptFr;
             try {
-                const response = await fetch('http://localhost:3001/status');
-                const data = await response.json();
-                serverOnline = data.status === 'running';
+                autoGenBtn.innerHTML = '<span class="loading"></span> Traduction en cours...';
+                const translateResponse = await fetch(
+                    'https://api-inference.huggingface.co/models/Helsinki-NLP/opus-mt-fr-en',
+                    {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${apiKey}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            inputs: promptFr
+                        })
+                    }
+                );
 
-                const statusEl = document.getElementById('serverStatus');
-                const warningEl = document.getElementById('serverWarning');
-
-                if (serverOnline) {
-                    statusEl.className = 'server-status online';
-                    statusEl.textContent = data.apiConfigured ?
-                        '🟢 Serveur en ligne' :
-                        '🟡 Serveur en ligne (API non configurée)';
-                    warningEl.style.display = data.apiConfigured ? 'none' : 'block';
-                    if (!data.apiConfigured) {
-                        warningEl.innerHTML = `
-                            <strong>⚠️ Configuration requise</strong><br>
-                            Clé API ImgBB manquante. Éditez <code>tools/image-upload-server.js</code>
-                            et ajoutez votre clé API gratuite depuis <a href="https://api.imgbb.com/" target="_blank">api.imgbb.com</a>
-                        `;
+                if (translateResponse.ok) {
+                    const translateData = await translateResponse.json();
+                    if (translateData && translateData[0] && translateData[0].translation_text) {
+                        promptEn = translateData[0].translation_text;
+                        console.log('Prompt traduit:', promptEn);
                     }
                 } else {
-                    statusEl.className = 'server-status offline';
-                    statusEl.textContent = '🔴 Serveur déconnecté';
-                    warningEl.style.display = 'block';
+                    console.warn('Traduction échouée, utilisation du prompt français');
                 }
             } catch (error) {
-                serverOnline = false;
-                document.getElementById('serverStatus').className = 'server-status offline';
-                document.getElementById('serverStatus').textContent = '🔴 Serveur déconnecté';
-                document.getElementById('serverWarning').style.display = 'block';
+                console.warn('Erreur de traduction, utilisation du prompt français:', error);
             }
+
+            autoGenBtn.innerHTML = '<span class="loading"></span> Génération de l\'image (peut prendre 1-2 min)...';
+
+            // Fonction pour faire une tentative avec retry
+            async function attemptGeneration(retryCount = 0) {
+                try {
+                    // Utiliser FLUX.1-dev pour meilleure qualité (plus lent mais bien meilleur)
+                    const response = await fetch(
+                        'https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-dev',
+                        {
+                            method: 'POST',
+                            headers: {
+                                'Authorization': `Bearer ${apiKey}`,
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                inputs: promptEn + ", no text, no letters, no words, no writing, pure illustration, drawing only",
+                                parameters: {
+                                    num_inference_steps: 20,
+                                    guidance_scale: 3.5
+                                }
+                            })
+                        }
+                    );
+
+                    // Si le modèle est en cours de chargement (503), retry
+                    if (response.status === 503) {
+                        const errorData = await response.json().catch(() => ({}));
+                        const estimatedTime = errorData.estimated_time || 20;
+
+                        if (retryCount < 3) {
+                            autoGenBtn.innerHTML = `<span class="loading"></span> Modèle en chargement... Retry ${retryCount + 1}/3 dans ${estimatedTime}s`;
+                            await new Promise(resolve => setTimeout(resolve, estimatedTime * 1000));
+                            return attemptGeneration(retryCount + 1);
+                        } else {
+                            throw new Error('Le modèle met trop de temps à se charger. Réessayez dans quelques minutes.');
+                        }
+                    }
+
+                    if (!response.ok) {
+                        const errorText = await response.text();
+                        throw new Error(`Erreur API: ${response.status} - ${errorText}`);
+                    }
+
+                    // Récupérer l'image générée
+                    const blob = await response.blob();
+
+                    // Vérifier que c'est bien une image
+                    if (!blob.type.startsWith('image/')) {
+                        throw new Error('La réponse n\'est pas une image valide');
+                    }
+
+                    generatedImageBlob = blob;
+
+                    // Afficher l'aperçu
+                    const imageUrl = URL.createObjectURL(blob);
+                    document.getElementById('imagePreview').src = imageUrl;
+                    document.getElementById('previewContainer').style.display = 'block';
+                    document.getElementById('uploadBtn').disabled = !serverOnline || !document.getElementById('imageKey').value;
+
+                    // Convertir le blob en fichier pour l'upload
+                    selectedFile = new File([blob], `${nom}.png`, { type: 'image/png' });
+
+                    showNotification('✅ Image générée avec succès !');
+                    autoGenBtn.innerHTML = '🎨 Générer l\'image automatiquement';
+                    autoGenBtn.disabled = false;
+
+                } catch (error) {
+                    throw error;
+                }
+            }
+
+            try {
+                await attemptGeneration();
+            } catch (error) {
+                console.error('Erreur:', error);
+                let errorMsg = 'Erreur lors de la génération: ' + error.message;
+
+                if (error.message.includes('401') || error.message.includes('403')) {
+                    errorMsg = '❌ Clé API invalide ou expirée.\n\nVérifiez votre clé sur: https://huggingface.co/settings/tokens';
+                } else if (error.message.includes('503')) {
+                    errorMsg = '⏳ Le modèle est en cours de chargement. Réessayez dans 30 secondes.';
+                } else if (error.message.includes('429')) {
+                    errorMsg = '⚠️ Limite d\'utilisation atteinte. Attendez quelques minutes.';
+                } else if (error.message.includes('Failed to fetch')) {
+                    errorMsg = '❌ Erreur de connexion. Vérifiez votre connexion internet et réessayez.';
+                }
+
+                alert(errorMsg);
+                autoGenBtn.innerHTML = '🎨 Générer l\'image automatiquement';
+                autoGenBtn.disabled = false;
+            }
+        }
+
+        // Variable globale pour stocker le port du serveur
+        let serverPort = null;
+
+        // Vérifier le statut du serveur (essaie les ports 3000 et 3001)
+        async function checkServerStatus() {
+            const ports = [3000, 3001];
+
+            for (const port of ports) {
+                try {
+                    const response = await fetch(`http://localhost:${port}/status`);
+                    const data = await response.json();
+
+                    if (data.status === 'running') {
+                        serverOnline = true;
+                        serverPort = port;
+
+                        const statusEl = document.getElementById('serverStatus');
+                        const warningEl = document.getElementById('serverWarning');
+
+                        statusEl.className = 'server-status online';
+                        statusEl.textContent = data.apiConfigured ?
+                            `🟢 Serveur en ligne (port ${port})` :
+                            `🟡 Serveur en ligne (port ${port}, API non configurée)`;
+                        warningEl.style.display = data.apiConfigured ? 'none' : 'block';
+                        if (!data.apiConfigured) {
+                            warningEl.innerHTML = `
+                                <strong>⚠️ Configuration requise</strong><br>
+                                Clé API ImgBB manquante. Éditez <code>tools/image-upload-server.js</code>
+                                et ajoutez votre clé API gratuite depuis <a href="https://api.imgbb.com/" target="_blank">api.imgbb.com</a>
+                            `;
+                        }
+                        return; // Serveur trouvé, on sort
+                    }
+                } catch (error) {
+                    // Ce port ne fonctionne pas, on essaie le suivant
+                    continue;
+                }
+            }
+
+            // Aucun serveur trouvé
+            serverOnline = false;
+            serverPort = null;
+            document.getElementById('serverStatus').className = 'server-status offline';
+            document.getElementById('serverStatus').textContent = '🔴 Serveur déconnecté';
+            document.getElementById('serverWarning').style.display = 'block';
         }
 
         // Vérifier toutes les 5 secondes
         setInterval(checkServerStatus, 5000);
         checkServerStatus();
 
+        // Charger images.json
+        async function loadImages() {
+            try {
+                const port = serverPort || 3000;
+                const response = await fetch(`http://localhost:${port}/data/images.json`);
+                const data = await response.json();
+                imagesData = data.images || {};
+            } catch (error) {
+                console.warn('Impossible de charger images.json:', error);
+                imagesData = {};
+            }
+        }
+
         // Charger les données
         async function loadSorts() {
             try {
-                const response = await fetch('http://localhost:3001/data/sorts.json');
+                const port = serverPort || 3000;
+                const response = await fetch(`http://localhost:${port}/data/sorts.json`);
                 sortsData = await response.json();
+                await loadImages();
                 displaySorts();
             } catch (error) {
                 alert('Erreur de chargement des sorts: ' + error.message);
@@ -572,8 +786,10 @@
 
         async function loadDons() {
             try {
-                const response = await fetch('http://localhost:3001/data/dons.json');
+                const port = serverPort || 3000;
+                const response = await fetch(`http://localhost:${port}/data/dons.json`);
                 donsData = await response.json();
+                await loadImages();
                 displayDons();
             } catch (error) {
                 alert('Erreur de chargement des dons: ' + error.message);
@@ -582,9 +798,11 @@
 
         async function loadObjets() {
             try {
-                const response = await fetch('http://localhost:3001/data/objets.json');
+                const port = serverPort || 3000;
+                const response = await fetch(`http://localhost:${port}/data/objets.json`);
                 const data = await response.json();
                 objetsData = data.objets;
+                await loadImages();
                 displayObjets();
             } catch (error) {
                 alert('Erreur de chargement des objets: ' + error.message);
@@ -594,14 +812,25 @@
         function displaySorts() {
             const container = document.getElementById('sortsList');
             container.innerHTML = '';
+            const filterWithImage = document.getElementById('filterSortsWithImage').checked;
 
             sortsData.forEach(category => {
                 category.sorts.forEach(sort => {
+                    // Générer la clé de l'image
+                    const imageKey = `sort:${category.nom}:${sort.nom}`;
+                    const hasImage = imagesData[imageKey] && imagesData[imageKey].trim() !== '';
+
+                    // Filtrer si nécessaire
+                    if (filterWithImage && hasImage) {
+                        return;
+                    }
+
                     const item = document.createElement('div');
                     item.className = 'list-item';
                     item.innerHTML = `
                         <strong>${sort.nom}</strong>
                         ${sort.element ? `<span style="font-size: 0.8em; color: #666;"> (${sort.element})</span>` : ''}
+                        ${hasImage ? '<span style="color: green; margin-left: 5px;">✓</span>' : ''}
                         <div style="font-size: 0.85em; color: #888; margin-top: 5px;">${sort.description}</div>
                     `;
                     item.onclick = () => selectSort(sort, category.nom, item);
@@ -613,13 +842,24 @@
         function displayDons() {
             const container = document.getElementById('donsList');
             container.innerHTML = '';
+            const filterWithImage = document.getElementById('filterDonsWithImage').checked;
 
             donsData.forEach(category => {
                 category.dons.forEach(don => {
+                    // Générer la clé de l'image
+                    const imageKey = `don:${don.nom}`;
+                    const hasImage = imagesData[imageKey] && imagesData[imageKey].trim() !== '';
+
+                    // Filtrer si nécessaire
+                    if (filterWithImage && hasImage) {
+                        return;
+                    }
+
                     const item = document.createElement('div');
                     item.className = 'list-item';
                     item.innerHTML = `
                         <strong>${don.nom}</strong>
+                        ${hasImage ? '<span style="color: green; margin-left: 5px;">✓</span>' : ''}
                         <div style="font-size: 0.85em; color: #888; margin-top: 5px;">${don.description}</div>
                     `;
                     item.onclick = () => selectDon(don, category.nom, item);
@@ -631,14 +871,25 @@
         function displayObjets() {
             const container = document.getElementById('objetsList');
             container.innerHTML = '';
+            const filterWithImage = document.getElementById('filterObjetsWithImage').checked;
 
             objetsData.forEach(objet => {
+                // Générer la clé de l'image
+                const imageKey = `objet:${objet.nom}`;
+                const hasImage = imagesData[imageKey] && imagesData[imageKey].trim() !== '';
+
+                // Filtrer si nécessaire
+                if (filterWithImage && hasImage) {
+                    return;
+                }
+
                 const item = document.createElement('div');
                 item.className = 'list-item';
                 const tags = objet.tags ? objet.tags.join(', ') : '';
                 item.innerHTML = `
                     <strong>${objet.nom}</strong>
                     ${tags ? `<span style="font-size: 0.8em; color: #666;"> (${tags})</span>` : ''}
+                    ${hasImage ? '<span style="color: green; margin-left: 5px;">✓</span>' : ''}
                     <div style="font-size: 0.85em; color: #888; margin-top: 5px;">${objet.description.replace(/<[^>]*>/g, '')}</div>
                 `;
                 item.onclick = () => selectObjet(objet, item);
@@ -812,52 +1063,30 @@
         }
 
         function generateSpellPrompt(nom, desc, element) {
-            const elementDescriptions = {
-                feu: 'with vivid flames, burning embers, and fiery particles',
-                eau: 'with flowing water, splashing waves, and aquatic energy',
-                terre: 'with rocky formations, earth fragments, and grounded power',
-                air: 'with swirling winds, lightning sparks, and aerial energy',
-                lumiere: 'with radiant light, golden rays, and holy radiance',
-                nuit: 'with dark energy, purple mist, and shadowy aura'
+            const elementVisuals = {
+                feu: 'fire flames burning embers',
+                eau: 'water waves flowing liquid',
+                terre: 'earth rocks stone ground',
+                air: 'wind lightning storm clouds',
+                lumiere: 'holy light golden radiance',
+                nuit: 'dark shadow purple energy'
             };
 
-            const elementDesc = element ? elementDescriptions[element] || '' : 'with powerful magical energy';
+            const elementVis = element ? elementVisuals[element] : 'magical energy';
 
-            return `Create an epic heroic fantasy spell illustration for "${nom}". ${desc}
-
-The image should show ${elementDesc}, magical runes and symbols, mystical particles and energy flows. The spell should appear powerful and dramatic with a dark atmospheric background.
-
-Art style: Professional fantasy game concept art, highly detailed, dramatic lighting, vibrant magical effects, cinematic composition. The focus should be entirely on the magical spell effect itself, not on any character casting it.
-
-Format: Square image, centered composition, suitable for a card game icon.`;
+            return `Fantasy magic spell ${nom}: ${desc}. ${elementVis} magical effect, mystical energy. Focus on the spell effect itself, not the caster. Realistic fantasy RPG spell art. No text, no letters, no words, pure illustration.`;
         }
 
         function generateFeatPrompt(nom, desc) {
-            return `Create an epic heroic fantasy feat/ability illustration for "${nom}". ${desc}
-
-The image should represent this ability with symbolic and powerful imagery in heroic fantasy style. Include dramatic lighting, heroic composition, and iconic elements that represent the feat's nature.
-
-Art style: Professional fantasy game concept art, highly detailed, dramatic and heroic atmosphere, rich colors, cinematic composition. Focus on symbolic representation of the ability.
-
-Format: Square image, centered composition, suitable for a card game icon.`;
+            return `Fantasy RPG ability ${nom}: ${desc}. Symbolic illustration showing this specific ability in action. Realistic heroic fantasy game art, dramatic composition, focused visual representation of the ability's core effect. No text, no letters, no words, pure illustration.`;
         }
 
         function generateObjectPrompt(nom, desc) {
-            return `Create an epic heroic fantasy item illustration for "${nom}". ${desc}
-
-The image should show a detailed and iconic representation of this item with dramatic presentation. Include intricate details, magical properties if applicable, and professional lighting.
-
-Art style: Professional fantasy game item art, highly detailed, dramatic presentation, rich textures, suitable for inventory icon.
-
-Format: Square image, centered composition, neutral or atmospheric background.`;
+            return `Fantasy RPG item ${nom}: ${desc}. Detailed object illustration, centered view, iconic presentation. Realistic fantasy game inventory art. No text, no letters, no words, pure illustration.`;
         }
 
         function generateCustomPrompt(nom, desc) {
-            return `Create an epic heroic fantasy illustration for "${nom}". ${desc}
-
-Art style: Professional fantasy game concept art, highly detailed, dramatic lighting, heroic atmosphere, vibrant colors, cinematic composition.
-
-Format: Square image, centered composition, suitable for a card game icon.`;
+            return `Fantasy RPG ${nom}: ${desc}. Realistic heroic fantasy game art. No text, no letters, no words, pure illustration.`;
         }
 
         // Copie du prompt
@@ -950,7 +1179,8 @@ Format: Square image, centered composition, suitable for a card game icon.`;
                 progressFill.textContent = '50%';
 
                 // Envoyer au serveur
-                const response = await fetch('http://localhost:3001/upload', {
+                const port = serverPort || 3000;
+                const response = await fetch(`http://localhost:${port}/upload`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -1035,7 +1265,8 @@ Format: Square image, centered composition, suitable for a card game icon.`;
             }
 
             try {
-                const response = await fetch('http://localhost:3001/update-lore', {
+                const port = serverPort || 3000;
+                const response = await fetch(`http://localhost:${port}/update-lore`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
