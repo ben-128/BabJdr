@@ -57,7 +57,8 @@
       "Bash(pkill:*)",
       "Bash(git restore:*)",
       "Bash(awk:*)",
-      "Bash(netstat:*)"
+      "Bash(netstat:*)",
+      "WebSearch"
     ],
     "deny": []
   }
