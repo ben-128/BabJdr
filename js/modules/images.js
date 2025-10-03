@@ -26,29 +26,45 @@
     // Initialize lazy loading with Intersection Observer
     initLazyLoading() {
       if ('IntersectionObserver' in window) {
+        // Improved loading margins for better perceived performance
+        // Load images 300px before they enter viewport (was 50px)
         this.lazyImageObserver = new IntersectionObserver((entries, observer) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
               const img = entry.target;
               const dataSrc = img.getAttribute('data-src');
               if (dataSrc) {
+                // Set src to start loading
                 img.src = dataSrc;
                 img.removeAttribute('data-src');
                 img.classList.remove('lazy-load');
-                img.classList.add('lazy-loaded');
-                
-                // Une fois l'image chargée, s'assurer que les événements d'agrandissement sont attachés
+
+                // Add loading class for CSS animations
+                img.classList.add('lazy-loading');
+
+                // Une fois l'image chargée
                 img.addEventListener('load', () => {
+                  img.classList.remove('lazy-loading');
+                  img.classList.add('lazy-loaded');
+
+                  // S'assurer que les événements d'agrandissement sont attachés
                   if (JdrApp.modules.editor && JdrApp.modules.editor.attachImageEvents) {
                     JdrApp.modules.editor.attachImageEvents();
                   }
+                }, { once: true });
+
+                // Gérer les erreurs de chargement
+                img.addEventListener('error', () => {
+                  img.classList.remove('lazy-loading');
+                  img.classList.add('lazy-error');
+                  console.warn('Failed to load image:', dataSrc);
                 }, { once: true });
               }
               observer.unobserve(img);
             }
           });
         }, {
-          rootMargin: '50px 0px', // Start loading 50px before image comes into view
+          rootMargin: '300px 0px', // Start loading 300px before image comes into view (optimized)
           threshold: 0.01
         });
       } else {

@@ -3,6 +3,10 @@
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <title>Foresia — Version Développement</title>
 
+<!-- Performance: Preconnect to image CDN -->
+<link rel="preconnect" href="https://i.ibb.co" crossorigin>
+<link rel="dns-prefetch" href="https://i.ibb.co">
+
 <!-- CSS Modulaire -->
 <link rel="stylesheet" href="css/theme.css">
 <link rel="stylesheet" href="css/utilities.css">
@@ -38,6 +42,27 @@
     .animate-out {
       opacity: 0 !important;
       transform: translateY(-20px) !important;
+    }
+
+    /* Lazy loading states */
+    img.lazy-load {
+      opacity: 0.3;
+      background: #f0f0f0;
+    }
+
+    img.lazy-loading {
+      opacity: 0.6;
+      transition: opacity 0.3s ease-in;
+    }
+
+    img.lazy-loaded {
+      opacity: 1;
+      transition: opacity 0.3s ease-in;
+    }
+
+    img.lazy-error {
+      opacity: 0.2;
+      filter: grayscale(100%);
     }
 
     /* Performance optimizations */
@@ -7921,7 +7946,7 @@ Particularité : ses fidèles accordent beaucoup d’importance aux fêtes, à l
           
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-field don-description" data-edit-type="generic" data-edit-section="don-description" data-item-identifier="Polyvalence ultime">
-            Gagne 1 💪Force, 🏃 Agilité, 🛡️ Endurance, ������ Intelligence, ⚡ Volonté, 🍀 Chance.
+            Gagne 1 💪Force, 🏃 Agilité, 🛡️ Endurance, ������ Intelligence, ⚡ Volonté, 🍀 Chance.
           </div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="field" style="">✏️</button>
         </div>
