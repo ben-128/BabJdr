@@ -652,12 +652,19 @@
             autoGenBtn.innerHTML = '<span class="loading"></span> Génération en cours...';
 
             try {
-                // Générer le prompt d'abord
-                generatePrompt();
-                const promptFr = document.getElementById('promptOutput').textContent;
+                // Générer le prompt d'abord (sans enrichissement Groq ici)
+                const nom = document.getElementById('nomInput').value;
+                const desc = document.getElementById('descInput').value;
 
-                if (promptFr === 'Le prompt apparaîtra ici...') {
-                    throw new Error('Erreur lors de la génération du prompt');
+                let promptFr = '';
+                if (currentType === 'sort') {
+                    promptFr = generateSpellPrompt(nom, desc, selectedElement);
+                } else if (currentType === 'don') {
+                    promptFr = generateFeatPrompt(nom, desc);
+                } else if (currentType === 'objet') {
+                    promptFr = generateObjectPrompt(nom, desc);
+                } else {
+                    promptFr = generateCustomPrompt(nom, desc);
                 }
 
                 // Traduire/enrichir avec Groq (avec fallback)
@@ -717,13 +724,18 @@
                 return;
             }
 
-            // Générer le prompt d'abord
-            generatePrompt();
-            const promptFr = document.getElementById('promptOutput').textContent;
+            // Générer le prompt d'abord (sans enrichissement Groq ici)
+            const desc = document.getElementById('descInput').value;
 
-            if (promptFr === 'Le prompt apparaîtra ici...') {
-                alert('Erreur lors de la génération du prompt');
-                return;
+            let promptFr = '';
+            if (currentType === 'sort') {
+                promptFr = generateSpellPrompt(nom, desc, selectedElement);
+            } else if (currentType === 'don') {
+                promptFr = generateFeatPrompt(nom, desc);
+            } else if (currentType === 'objet') {
+                promptFr = generateObjectPrompt(nom, desc);
+            } else {
+                promptFr = generateCustomPrompt(nom, desc);
             }
 
             const autoGenBtn = document.getElementById('autoGenBtn');
@@ -1372,8 +1384,8 @@
             });
         }
 
-        // Génération du prompt
-        function generatePrompt() {
+        // Génération du prompt (avec enrichissement Groq optionnel)
+        async function generatePrompt() {
             const nom = document.getElementById('nomInput').value;
             const desc = document.getElementById('descInput').value;
 
@@ -1382,6 +1394,7 @@
                 return;
             }
 
+            // Générer le prompt basique d'abord
             let prompt = '';
 
             if (currentType === 'sort') {
@@ -1394,7 +1407,32 @@
                 prompt = generateCustomPrompt(nom, desc);
             }
 
+            // Afficher le prompt basique immédiatement
             document.getElementById('promptOutput').textContent = prompt;
+
+            // Essayer d'enrichir avec Groq (optionnel, ne bloque pas)
+            const groqApiKey = document.getElementById('groqApiKey').value.trim();
+            if (groqApiKey) {
+                try {
+                    // Indiquer qu'on enrichit
+                    document.getElementById('promptOutput').textContent = prompt + '\n\n⏳ Enrichissement avec Groq...';
+
+                    const enrichedPrompt = await translatePromptWithGroq(prompt);
+
+                    // Si Groq a enrichi (différent du prompt original)
+                    if (enrichedPrompt !== prompt) {
+                        document.getElementById('promptOutput').textContent = enrichedPrompt;
+                        console.log('✅ Prompt enrichi avec Groq pour méthode manuelle');
+                    } else {
+                        // Groq n'a pas fonctionné, garder le prompt basique
+                        document.getElementById('promptOutput').textContent = prompt;
+                    }
+                } catch (error) {
+                    // En cas d'erreur, garder le prompt basique
+                    console.warn('⚠️ Erreur enrichissement Groq, utilisation prompt basique:', error);
+                    document.getElementById('promptOutput').textContent = prompt;
+                }
+            }
         }
 
         function generateSpellPrompt(nom, desc, element) {
