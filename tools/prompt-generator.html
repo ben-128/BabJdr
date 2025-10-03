@@ -453,7 +453,13 @@
                     <strong>Style:</strong> Heroic Fantasy épique et détaillé
                 </div>
 
-                <button class="btn" onclick="generatePrompt()">✨ Générer le prompt</button>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+                    <button class="btn" onclick="generatePrompt()">✨ Générer avec Groq</button>
+                    <button class="btn btn-secondary" onclick="generatePromptBasic()">📝 Générer sans Groq</button>
+                </div>
+                <p style="font-size: 0.85em; color: #666; text-align: center; margin-top: 5px;">
+                    💡 Groq enrichit automatiquement le prompt pour de meilleurs résultats
+                </p>
 
                 <div class="form-group" style="margin-top: 20px;">
                     <label>Prompt généré</label>
@@ -497,9 +503,9 @@
                     <label>Instructions d'utilisation (méthode manuelle)</label>
                     <div style="background: #fff3cd; padding: 15px; border-radius: 8px; font-size: 0.9em;">
                         <ol style="margin-left: 20px;">
-                            <li>Cliquez sur "Générer le prompt"</li>
+                            <li>Cliquez sur "<strong>✨ Générer avec Groq</strong>" (recommandé) ou "<strong>📝 Générer sans Groq</strong>"</li>
                             <li>Copiez le prompt généré</li>
-                            <li>Collez-le dans ChatGPT Plus (avec DALL-E)</li>
+                            <li>Collez-le dans ChatGPT Plus (avec DALL-E) ou Sora</li>
                             <li>Téléchargez l'image générée</li>
                             <li>Uploadez-la ci-dessous (automatique !)</li>
                         </ol>
@@ -1382,6 +1388,34 @@
             }).catch(() => {
                 alert('Erreur lors de la copie. Voici les instructions:\n\n' + prompt);
             });
+        }
+
+        // Génération du prompt SANS Groq (basique uniquement)
+        function generatePromptBasic() {
+            const nom = document.getElementById('nomInput').value;
+            const desc = document.getElementById('descInput').value;
+
+            if (!nom) {
+                alert('Veuillez entrer un nom');
+                return;
+            }
+
+            // Générer le prompt basique uniquement
+            let prompt = '';
+
+            if (currentType === 'sort') {
+                prompt = generateSpellPrompt(nom, desc, selectedElement);
+            } else if (currentType === 'don') {
+                prompt = generateFeatPrompt(nom, desc);
+            } else if (currentType === 'objet') {
+                prompt = generateObjectPrompt(nom, desc);
+            } else {
+                prompt = generateCustomPrompt(nom, desc);
+            }
+
+            // Afficher le prompt basique
+            document.getElementById('promptOutput').textContent = prompt;
+            console.log('✅ Prompt basique généré (sans Groq)');
         }
 
         // Génération du prompt (avec enrichissement Groq optionnel)
