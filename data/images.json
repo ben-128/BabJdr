@@ -195,10 +195,14 @@
     "don:Porteur de charge lourde": "https://i.ibb.co/9HwSYDkL/b1443ce729a0.png",
     "don:Spécialiste des armures légères": "https://i.ibb.co/W4jF0Qdy/f8370d8e43e3.png",
     "don:Croche-patte": "https://i.ibb.co/gFBHyS4R/2e796f4dbf00.png",
-    "don:Chasse et pêche": "https://i.ibb.co/LzQjTk3Y/3a054c77416a.png"
+    "don:Chasse et pêche": "https://i.ibb.co/LzQjTk3Y/3a054c77416a.png",
+    "don:Ambidextre": "https://i.ibb.co/mCbcvWfP/b3296226e097.png",
+    "don:Attaque double": "https://i.ibb.co/KjpN3v9f/0a1bae3d1dc3.png",
+    "don:Retrait": "https://i.ibb.co/XZtmDsVS/f25bd4a165db.png",
+    "don:Point faible": "https://i.ibb.co/HTLNxQDR/f8fe4fda8a7e.png"
   },
   "meta": {
-    "total_images": 196,
+    "total_images": 200,
     "exported_date": "2025-10-03",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
