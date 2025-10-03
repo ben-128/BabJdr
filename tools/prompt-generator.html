@@ -594,6 +594,55 @@
             }
         }
 
+        // Traduire/enrichir le prompt avec Groq (avec fallback)
+        async function translatePromptWithGroq(promptFr) {
+            const groqApiKey = document.getElementById('groqApiKey').value.trim();
+
+            // Si pas de clé Groq, retourner le prompt original
+            if (!groqApiKey) {
+                console.log('ℹ️ Pas de clé Groq, utilisation du prompt français direct');
+                return promptFr;
+            }
+
+            try {
+                const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${groqApiKey}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        model: 'llama-3.3-70b-versatile',
+                        messages: [
+                            {
+                                role: 'system',
+                                content: 'You are an expert prompt engineer for AI image generation (FLUX, Stable Diffusion). Your job: translate French RPG descriptions to English and create EXCEPTIONAL prompts that generate stunning fantasy art. Include: artistic style, lighting, composition, mood, details. Make it vivid and specific. Max 3 sentences.'
+                            },
+                            {
+                                role: 'user',
+                                content: `Create a SUPERIOR English prompt for generating a fantasy RPG illustration from this French description:\n\n${promptFr}\n\nGenerate a detailed, artistic prompt that will create a beautiful image. Include style (digital art, concept art, etc), mood, lighting, composition. CRITICAL: NO text, NO letters, NO words in the image - pure visual illustration only.`
+                            }
+                        ],
+                        temperature: 0.7,
+                        max_tokens: 200
+                    })
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    const translatedPrompt = result.choices[0].message.content.trim();
+                    console.log('✅ Prompt traduit/enrichi avec Groq:', translatedPrompt);
+                    return translatedPrompt;
+                } else {
+                    console.warn('⚠️ Groq translation failed, using original prompt');
+                    return promptFr;
+                }
+            } catch (error) {
+                console.warn('⚠️ Groq error, fallback to original prompt:', error);
+                return promptFr;
+            }
+        }
+
         // Génération avec Pollinations.ai (gratuit illimité, pas de clé)
         async function generateWithPollinations() {
             const nom = document.getElementById('nomInput').value;
@@ -611,8 +660,13 @@
                     throw new Error('Erreur lors de la génération du prompt');
                 }
 
-                // Pollinations.ai accepte les prompts en français
-                const pollinationsUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(promptFr)}?width=1024&height=1024&model=flux&nologo=true&enhance=true&seed=${Math.floor(Math.random() * 1000000)}`;
+                // Traduire/enrichir avec Groq (avec fallback)
+                autoGenBtn.innerHTML = '<span class="loading"></span> Traduction avec Groq...';
+                const promptEn = await translatePromptWithGroq(promptFr);
+
+                // Pollinations.ai - utiliser le prompt enrichi
+                autoGenBtn.innerHTML = '<span class="loading"></span> Génération Pollinations.ai...';
+                const pollinationsUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(promptEn)}?width=1024&height=1024&model=flux&nologo=true&enhance=true&seed=${Math.floor(Math.random() * 1000000)}`;
 
                 console.log('URL Pollinations:', pollinationsUrl);
 
@@ -676,35 +730,43 @@
             autoGenBtn.disabled = true;
             autoGenBtn.innerHTML = '<span class="loading"></span> Traduction et génération en cours...';
 
-            // Traduire le prompt en anglais via l'API Hugging Face
+            // Traduire/enrichir avec Groq d'abord (avec fallback sur Helsinki-NLP)
             let promptEn = promptFr;
-            try {
-                autoGenBtn.innerHTML = '<span class="loading"></span> Traduction en cours...';
-                const translateResponse = await fetch(
-                    'https://api-inference.huggingface.co/models/Helsinki-NLP/opus-mt-fr-en',
-                    {
-                        method: 'POST',
-                        headers: {
-                            'Authorization': `Bearer ${apiKey}`,
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            inputs: promptFr
-                        })
-                    }
-                );
 
-                if (translateResponse.ok) {
-                    const translateData = await translateResponse.json();
-                    if (translateData && translateData[0] && translateData[0].translation_text) {
-                        promptEn = translateData[0].translation_text;
-                        console.log('Prompt traduit:', promptEn);
+            // Essayer Groq en premier
+            autoGenBtn.innerHTML = '<span class="loading"></span> Traduction avec Groq...';
+            promptEn = await translatePromptWithGroq(promptFr);
+
+            // Si Groq a retourné le prompt français (pas de clé ou erreur), essayer Helsinki-NLP
+            if (promptEn === promptFr) {
+                try {
+                    autoGenBtn.innerHTML = '<span class="loading"></span> Traduction Helsinki-NLP...';
+                    const translateResponse = await fetch(
+                        'https://api-inference.huggingface.co/models/Helsinki-NLP/opus-mt-fr-en',
+                        {
+                            method: 'POST',
+                            headers: {
+                                'Authorization': `Bearer ${apiKey}`,
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                inputs: promptFr
+                            })
+                        }
+                    );
+
+                    if (translateResponse.ok) {
+                        const translateData = await translateResponse.json();
+                        if (translateData && translateData[0] && translateData[0].translation_text) {
+                            promptEn = translateData[0].translation_text;
+                            console.log('✅ Prompt traduit avec Helsinki-NLP:', promptEn);
+                        }
+                    } else {
+                        console.warn('⚠️ Traduction Helsinki-NLP échouée, utilisation du prompt français');
                     }
-                } else {
-                    console.warn('Traduction échouée, utilisation du prompt français');
+                } catch (error) {
+                    console.warn('⚠️ Erreur Helsinki-NLP, utilisation du prompt français:', error);
                 }
-            } catch (error) {
-                console.warn('Erreur de traduction, utilisation du prompt français:', error);
             }
 
             autoGenBtn.innerHTML = '<span class="loading"></span> Génération de l\'image (peut prendre 1-2 min)...';
