@@ -466,20 +466,31 @@
                     <div style="background: #f0f8ff; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
                         <label style="font-size: 0.9em; font-weight: 600; margin-bottom: 5px; display: block;">Groq API (génération de texte)</label>
                         <input type="text" id="groqApiKey" class="form-control" placeholder="Clé API Groq (gratuite sur console.groq.com)" style="margin-bottom: 15px;">
-                        <p style="margin: 0 0 10px 0; font-size: 0.85em; color: #666;">
+                        <p style="margin: 0 0 15px 0; font-size: 0.85em; color: #666;">
                             ℹ️ Obtenez votre clé gratuite sur <a href="https://console.groq.com/keys" target="_blank">console.groq.com/keys</a>
                         </p>
 
                         <label style="font-size: 0.9em; font-weight: 600; margin-bottom: 5px; display: block;">Hugging Face API (génération d'images)</label>
                         <input type="text" id="hfApiKey" class="form-control" placeholder="Clé API Hugging Face (gratuite sur huggingface.co/settings/tokens)" style="margin-bottom: 10px;">
-                        <p style="margin: 0; font-size: 0.85em; color: #666;">
+                        <p style="margin: 0 0 15px 0; font-size: 0.85em; color: #666;">
                             ℹ️ Obtenez votre clé gratuite sur <a href="https://huggingface.co/settings/tokens" target="_blank">huggingface.co/settings/tokens</a>
+                        </p>
+
+                        <label style="font-size: 0.9em; font-weight: 600; margin-bottom: 5px; display: block;">Fal.ai API (génération d'images premium)</label>
+                        <input type="text" id="falApiKey" class="form-control" placeholder="Clé API Fal.ai (gratuite sur fal.ai)" style="margin-bottom: 10px;">
+                        <p style="margin: 0; font-size: 0.85em; color: #666;">
+                            ℹ️ Obtenez votre clé gratuite sur <a href="https://fal.ai/dashboard/keys" target="_blank">fal.ai/dashboard/keys</a>
                         </p>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label>🎨 Génération d'image automatique</label>
+                    <select id="imageServiceSelect" style="width: 100%; padding: 10px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1em; margin-bottom: 10px;">
+                        <option value="pollinations">🆓 Pollinations.ai (Gratuit illimité, pas de clé)</option>
+                        <option value="huggingface">🤗 Hugging Face FLUX.1 (Gratuit, avec clé)</option>
+                        <option value="fal">⭐ Fal.ai (Meilleure qualité, avec clé)</option>
+                    </select>
                     <button id="autoGenBtn" class="btn btn-primary" onclick="generateImageAuto()" style="width: 100%;">
                         🎨 Générer l'image automatiquement
                     </button>
@@ -568,15 +579,207 @@
         let currentTags = [];
         let generatedImageBlob = null;
 
-        // Génération automatique d'image avec Hugging Face
+        // Génération automatique d'image - Dispatcher
         async function generateImageAuto() {
-            const apiKey = document.getElementById('hfApiKey').value.trim();
+            const service = document.getElementById('imageServiceSelect').value;
             const nom = document.getElementById('nomInput').value;
 
             if (!nom) {
                 alert('Veuillez sélectionner ou entrer un nom d\'abord');
                 return;
             }
+
+            // Dispatcher vers le bon service
+            if (service === 'pollinations') {
+                return await generateWithPollinations();
+            } else if (service === 'huggingface') {
+                return await generateWithHuggingFace();
+            } else if (service === 'fal') {
+                return await generateWithFal();
+            }
+        }
+
+        // Génération avec Pollinations.ai (gratuit illimité, pas de clé)
+        async function generateWithPollinations() {
+            const nom = document.getElementById('nomInput').value;
+            const autoGenBtn = document.getElementById('autoGenBtn');
+
+            autoGenBtn.disabled = true;
+            autoGenBtn.innerHTML = '<span class="loading"></span> Génération en cours...';
+
+            try {
+                // Générer le prompt d'abord
+                generatePrompt();
+                const promptFr = document.getElementById('promptOutput').textContent;
+
+                if (promptFr === 'Le prompt apparaîtra ici...') {
+                    throw new Error('Erreur lors de la génération du prompt');
+                }
+
+                // Pollinations.ai accepte les prompts en français
+                const pollinationsUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(promptFr)}?width=1024&height=1024&model=flux&nologo=true&enhance=true&seed=${Math.floor(Math.random() * 1000000)}`;
+
+                console.log('URL Pollinations:', pollinationsUrl);
+
+                // Fetch l'image
+                const response = await fetch(pollinationsUrl);
+
+                if (!response.ok) {
+                    throw new Error(`Erreur API Pollinations: ${response.status}`);
+                }
+
+                const blob = await response.blob();
+
+                // Vérifier que c'est bien une image
+                if (!blob.type.startsWith('image/')) {
+                    throw new Error('La réponse n\'est pas une image valide');
+                }
+
+                generatedImageBlob = blob;
+
+                // Afficher l'aperçu
+                const imageUrl = URL.createObjectURL(blob);
+                document.getElementById('imagePreview').src = imageUrl;
+                document.getElementById('previewContainer').style.display = 'block';
+                document.getElementById('uploadBtn').disabled = !serverOnline || !document.getElementById('imageKey').value;
+
+                // Convertir le blob en fichier pour l'upload
+                selectedFile = new File([blob], `${nom}.png`, { type: 'image/png' });
+
+                showNotification('✅ Image générée avec Pollinations.ai !');
+                autoGenBtn.innerHTML = '🎨 Générer l\'image automatiquement';
+                autoGenBtn.disabled = false;
+
+            } catch (error) {
+                console.error('Erreur Pollinations:', error);
+                alert('Erreur lors de la génération avec Pollinations.ai: ' + error.message);
+                autoGenBtn.innerHTML = '🎨 Générer l\'image automatiquement';
+                autoGenBtn.disabled = false;
+            }
+        }
+
+        // Génération avec Fal.ai (premium)
+        async function generateWithFal() {
+            const apiKey = document.getElementById('falApiKey').value.trim();
+            const nom = document.getElementById('nomInput').value;
+
+            if (!apiKey) {
+                alert('Veuillez entrer votre clé API Fal.ai.\n\nObtenez-en une gratuitement sur: https://fal.ai/dashboard/keys');
+                return;
+            }
+
+            const autoGenBtn = document.getElementById('autoGenBtn');
+            autoGenBtn.disabled = true;
+            autoGenBtn.innerHTML = '<span class="loading"></span> Génération en cours...';
+
+            try {
+                // Générer le prompt d'abord
+                generatePrompt();
+                const promptFr = document.getElementById('promptOutput').textContent;
+
+                if (promptFr === 'Le prompt apparaîtra ici...') {
+                    throw new Error('Erreur lors de la génération du prompt');
+                }
+
+                // Traduire en anglais (Fal.ai fonctionne mieux en anglais)
+                autoGenBtn.innerHTML = '<span class="loading"></span> Traduction en cours...';
+                let promptEn = promptFr;
+
+                try {
+                    const hfKey = document.getElementById('hfApiKey').value.trim();
+                    if (hfKey) {
+                        const translateResponse = await fetch(
+                            'https://api-inference.huggingface.co/models/Helsinki-NLP/opus-mt-fr-en',
+                            {
+                                method: 'POST',
+                                headers: {
+                                    'Authorization': `Bearer ${hfKey}`,
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({ inputs: promptFr })
+                            }
+                        );
+
+                        if (translateResponse.ok) {
+                            const translateData = await translateResponse.json();
+                            if (translateData && translateData[0] && translateData[0].translation_text) {
+                                promptEn = translateData[0].translation_text;
+                            }
+                        }
+                    }
+                } catch (error) {
+                    console.warn('Traduction échouée, utilisation du prompt français');
+                }
+
+                autoGenBtn.innerHTML = '<span class="loading"></span> Génération avec Fal.ai...';
+
+                // Appel à Fal.ai API
+                const response = await fetch('https://fal.run/fal-ai/flux/schnell', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Key ${apiKey}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        prompt: promptEn + ", no text, no letters, no words, pure illustration",
+                        image_size: "square_hd",
+                        num_inference_steps: 4,
+                        num_images: 1
+                    })
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`Erreur API Fal.ai: ${response.status} - ${errorText}`);
+                }
+
+                const result = await response.json();
+                console.log('Réponse Fal.ai:', result);
+
+                // Récupérer l'URL de l'image
+                const imageUrl = result.images && result.images[0] ? result.images[0].url : null;
+
+                if (!imageUrl) {
+                    throw new Error('Aucune image retournée par Fal.ai');
+                }
+
+                // Fetch l'image depuis l'URL
+                const imageResponse = await fetch(imageUrl);
+                const blob = await imageResponse.blob();
+
+                generatedImageBlob = blob;
+
+                // Afficher l'aperçu
+                const localImageUrl = URL.createObjectURL(blob);
+                document.getElementById('imagePreview').src = localImageUrl;
+                document.getElementById('previewContainer').style.display = 'block';
+                document.getElementById('uploadBtn').disabled = !serverOnline || !document.getElementById('imageKey').value;
+
+                // Convertir le blob en fichier pour l'upload
+                selectedFile = new File([blob], `${nom}.png`, { type: 'image/png' });
+
+                showNotification('✅ Image générée avec Fal.ai !');
+                autoGenBtn.innerHTML = '🎨 Générer l\'image automatiquement';
+                autoGenBtn.disabled = false;
+
+            } catch (error) {
+                console.error('Erreur Fal.ai:', error);
+                let errorMsg = 'Erreur lors de la génération avec Fal.ai: ' + error.message;
+
+                if (error.message.includes('401') || error.message.includes('403')) {
+                    errorMsg = '❌ Clé API Fal.ai invalide.\n\nVérifiez votre clé sur: https://fal.ai/dashboard/keys';
+                }
+
+                alert(errorMsg);
+                autoGenBtn.innerHTML = '🎨 Générer l\'image automatiquement';
+                autoGenBtn.disabled = false;
+            }
+        }
+
+        // Génération avec Hugging Face (existant)
+        async function generateWithHuggingFace() {
+            const apiKey = document.getElementById('hfApiKey').value.trim();
+            const nom = document.getElementById('nomInput').value;
 
             if (!apiKey) {
                 alert('Veuillez entrer votre clé API Hugging Face.\n\nObtenez-en une gratuitement sur: https://huggingface.co/settings/tokens');
@@ -813,6 +1016,25 @@
                     }
                 } catch (error) {
                     console.log('ℹ️ Fichier huggingface-api-key.txt non trouvé. Saisissez la clé manuellement.');
+                }
+
+                // Charger la clé Fal.ai
+                try {
+                    const falResponse = await fetch(`http://localhost:${port}/docs/fal-api-key.txt`);
+                    if (falResponse.ok) {
+                        const falKey = await falResponse.text();
+                        const trimmedFalKey = falKey.trim();
+                        if (trimmedFalKey && trimmedFalKey !== 'votre_cle_api_fal_ici') {
+                            // Décoder la clé inversée
+                            const decodedKey = decodeApiKey(trimmedFalKey);
+                            document.getElementById('falApiKey').value = decodedKey;
+                            console.log('✅ API key Fal.ai chargée et décodée depuis docs/fal-api-key.txt');
+                        } else {
+                            console.log('⚠️ Clé Fal.ai non configurée. Ajoutez votre clé dans docs/fal-api-key.txt');
+                        }
+                    }
+                } catch (error) {
+                    console.log('ℹ️ Fichier fal-api-key.txt non trouvé. Saisissez la clé manuellement.');
                 }
             } catch (error) {
                 console.log('ℹ️ Impossible de charger les API keys. Vous pouvez les saisir manuellement.');
