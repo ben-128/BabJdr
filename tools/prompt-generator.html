@@ -771,6 +771,11 @@
         setInterval(checkServerStatus, 5000);
         checkServerStatus();
 
+        // Fonction pour décoder les clés API stockées à l'envers
+        function decodeApiKey(reversedKey) {
+            return reversedKey.split('').reverse().join('');
+        }
+
         // Charger les API keys depuis les fichiers
         async function loadApiKeys() {
             try {
@@ -783,8 +788,10 @@
                         const groqKey = await groqResponse.text();
                         const trimmedGroqKey = groqKey.trim();
                         if (trimmedGroqKey && trimmedGroqKey !== 'votre_cle_api_groq_ici') {
-                            document.getElementById('groqApiKey').value = trimmedGroqKey;
-                            console.log('✅ API key Groq chargée depuis docs/groq-api-key.txt');
+                            // Décoder la clé inversée
+                            const decodedKey = decodeApiKey(trimmedGroqKey);
+                            document.getElementById('groqApiKey').value = decodedKey;
+                            console.log('✅ API key Groq chargée et décodée depuis docs/groq-api-key.txt');
                         } else {
                             console.log('⚠️ Clé Groq non configurée. Ajoutez votre clé dans docs/groq-api-key.txt');
                         }
@@ -798,8 +805,11 @@
                     const hfResponse = await fetch(`http://localhost:${port}/docs/huggingface-api-key.txt`);
                     if (hfResponse.ok) {
                         const hfKey = await hfResponse.text();
-                        document.getElementById('hfApiKey').value = hfKey.trim();
-                        console.log('✅ API key Hugging Face chargée depuis docs/huggingface-api-key.txt');
+                        const trimmedHfKey = hfKey.trim();
+                        // Décoder la clé inversée
+                        const decodedKey = decodeApiKey(trimmedHfKey);
+                        document.getElementById('hfApiKey').value = decodedKey;
+                        console.log('✅ API key Hugging Face chargée et décodée depuis docs/huggingface-api-key.txt');
                     }
                 } catch (error) {
                     console.log('ℹ️ Fichier huggingface-api-key.txt non trouvé. Saisissez la clé manuellement.');
