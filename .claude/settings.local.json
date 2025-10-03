@@ -58,7 +58,8 @@
       "Bash(git restore:*)",
       "Bash(awk:*)",
       "Bash(netstat:*)",
-      "WebSearch"
+      "WebSearch",
+      "WebFetch(domain:www.freepublicapis.com)"
     ],
     "deny": []
   }
