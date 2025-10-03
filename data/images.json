@@ -204,10 +204,13 @@
     "don:Exposer l'armure": "https://i.ibb.co/7x9z45jz/de5f90b2e39f.png",
     "don:Éventail de couteaux": "https://i.ibb.co/KJWmY1r/3de7a7409d8f.png",
     "don:Avantage": "https://i.ibb.co/ks4LWgJ6/ec342b035ad3.png",
-    "don:Adrénaline": "https://i.ibb.co/PGbwQ4V7/2ced0737a3d0.png"
+    "don:Adrénaline": "https://i.ibb.co/PGbwQ4V7/2ced0737a3d0.png",
+    "don:Brise-genou": "https://i.ibb.co/Q7HXVPHX/b05f39959b76.png",
+    "don:Roi de l'esquive": "https://i.ibb.co/Mkf13hRk/44e970c2c270.png",
+    "don:Combo": "https://i.ibb.co/QvvjgmFC/9086c7218552.png"
   },
   "meta": {
-    "total_images": 205,
+    "total_images": 208,
     "exported_date": "2025-10-03",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
