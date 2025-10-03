@@ -155,7 +155,7 @@
       },
       {
         "nom": "Charge",
-        "description": "Une fois par combat, peut utiliser une action secondaire pour doubler sa vitesse de déplacement et doubler les chances de coup critique sur la prochaine attaque physique de ce tour.",
+        "description": "Une fois par combat, peut utiliser une action secondaire pour tripler sa vitesse de déplacement et une fois le déplacement terminé une cible à 3m passe dans l'état <span class=\"etat-link\" data-etat=\"À terre\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">À terre</span>.\n\n<br><br><b>Sans effet si :</b> \n<br>- Volant/Lévitant\n<br>- Taille supérieure à Moyen.",
         "prerequis": "<strong> Prérequis :</strong> 🏃Agilité 5",
         "cout": "1 point de don"
       },
@@ -251,7 +251,7 @@
       },
       {
         "nom": "Expert martial",
-        "description": "une fois par tour, lorsque le guerrier fait un échec critique lors d'une attaque au corps à corps, il peut relancer le dé.",
+        "description": "Une fois par tour, lorsque le guerrier fait un échec critique lors d'une attaque au corps à corps, il peut relancer le dé.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -263,7 +263,7 @@
       },
       {
         "nom": "Porteur de charge lourde",
-        "description": "Augmente le poids maximum transportable de 5. De plus, les armures lourdes augmente l'armure de 1 tous les 5 points de force du héros.",
+        "description": "Augmente le poids maximum transportable de 5. \n<br>De plus, les armures lourdes augmente l'armure physique de 1 tous les 5 points de force du héros.",
         "prerequis": "<strong> Prérequis :</strong> 💪 Force 15",
         "cout": "1 point de don"
       },
@@ -287,7 +287,7 @@
       },
       {
         "nom": "Chasse et pêche",
-        "description": "Le héros n'a plus besoin de sa ration de nourriture quotidienne.",
+        "description": "Les héros dans votre groupe n'ont plus besoin de consommer une ration de nourriture quotidienne pour éviter l'état <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Fatigué</span>.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },

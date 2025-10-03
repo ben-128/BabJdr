@@ -59,7 +59,8 @@
       "Bash(awk:*)",
       "Bash(netstat:*)",
       "WebSearch",
-      "WebFetch(domain:www.freepublicapis.com)"
+      "WebFetch(domain:www.freepublicapis.com)",
+      "WebFetch(domain:deepai.org)"
     ],
     "deny": []
   }
