@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-10-04T23:12:58.944Z by JdrBab Build System -->
+<!-- Generated on 2025-10-04T23:18:30.080Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -536,6 +536,7 @@ h5, h6 {
 .grid{display:grid;gap:var(--space-lg)}
 .cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
 .cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (min-width: 1400px){ .cols-2{grid-template-columns:repeat(3,minmax(0,1fr))} }
 @media (max-width: 900px){ .cols-3{grid-template-columns:1fr} }
 @media (max-width: 768px){ .cols-2{grid-template-columns:1fr !important} }
 
