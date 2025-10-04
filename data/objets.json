@@ -752,6 +752,20 @@
       "effet": "Inutilisable en combat.\n<br><strong>Prérequis:</strong> Test de compétence Hardiesse 1.\n<br><strong>Effet:</strong> Restore 15 points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.\n          <br> <strong>Charges : </strong>3.",
       "prix": "🔷 <strong>Prix:</strong> 50",
       "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Bâton de rodeur",
+      "numero": 59,
+      "image": "",
+      "description": "<i>Forgé dans le bois noueux des forêts anciennes, ce bâton semble murmurer la route à suivre à ceux qui marchent sans détourner le regard de l’horizon.</i>",
+      "tags": [
+        "Arme",
+        "Deux mains",
+        "Baton"
+      ],
+      "effet": "<strong>Dégâts: </strong> Inflige (5  + Force) points de dégâts physiques.\n<br> <strong>Effet: </strong> Permet de traverser les terrains difficiles sans pénalité de vitesse.",
+      "prix": "🔷 <strong>Prix:</strong> 90",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     }
   ],
   "filterSettings": {

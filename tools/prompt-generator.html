@@ -61,7 +61,7 @@
 
         .content {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(3, 1fr);
             gap: 30px;
             padding: 30px;
         }
@@ -266,6 +266,12 @@
             grid-column: 1 / -1;
         }
 
+        @media (max-width: 1400px) {
+            .content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
         @media (max-width: 900px) {
             .content {
                 grid-template-columns: 1fr;
@@ -417,7 +423,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Description</label>
+                    <label id="descLabel">Description</label>
                     <textarea id="descInput" placeholder="Description du sort/don..."></textarea>
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px;">
                         <button class="btn btn-secondary" id="generateDescBtn" onclick="generateVisualDescription()" style="margin: 0;">
@@ -1126,8 +1132,11 @@
             document.querySelectorAll('#sortsList .list-item').forEach(el => el.classList.remove('selected'));
             element.classList.add('selected');
 
+            const descInput = document.getElementById('descInput');
             document.getElementById('nomInput').value = sort.nom;
-            document.getElementById('descInput').value = sort.description;
+            descInput.value = sort.effetNormal || '';
+            descInput.placeholder = 'Effet du sort...';
+            document.getElementById('descLabel').textContent = 'Effet';
             currentCategorie = categorie;
             currentEffet = sort.effetNormal || '';
             currentTags = [];
@@ -1148,9 +1157,14 @@
             document.querySelectorAll('#donsList .list-item').forEach(el => el.classList.remove('selected'));
             element.classList.add('selected');
 
+            const descInput = document.getElementById('descInput');
             document.getElementById('nomInput').value = don.nom;
-            document.getElementById('descInput').value = don.description;
+            descInput.value = don.description;
+            descInput.placeholder = 'Effet du don...';
+            document.getElementById('descLabel').textContent = 'Effet';
             currentCategorie = categorie;
+            currentEffet = don.description || '';
+            currentTags = [];
 
             updateImageKey();
         }
@@ -1159,8 +1173,11 @@
             document.querySelectorAll('#objetsList .list-item').forEach(el => el.classList.remove('selected'));
             element.classList.add('selected');
 
+            const descInput = document.getElementById('descInput');
             document.getElementById('nomInput').value = objet.nom;
-            document.getElementById('descInput').value = objet.description.replace(/<[^>]*>/g, '');
+            descInput.value = objet.effet || '';
+            descInput.placeholder = 'Effet de l\'objet...';
+            document.getElementById('descLabel').textContent = 'Effet';
             currentCategorie = '';
             currentEffet = objet.effet || '';
             currentTags = objet.tags || [];
@@ -1201,6 +1218,18 @@
             document.getElementById('donSelection').style.display = currentType === 'don' ? 'block' : 'none';
             document.getElementById('objetSelection').style.display = currentType === 'objet' ? 'block' : 'none';
             document.getElementById('elementGroup').style.display = currentType === 'sort' ? 'block' : 'none';
+
+            // Mettre à jour le label et placeholder du champ description/effet
+            const descLabel = document.getElementById('descLabel');
+            const descInput = document.getElementById('descInput');
+            if (currentType === 'custom') {
+                descLabel.textContent = 'Description';
+                descInput.placeholder = 'Description...';
+            } else {
+                descLabel.textContent = 'Effet';
+                descInput.placeholder = 'Effet...';
+            }
+
             updateImageKey();
         });
 
@@ -1246,17 +1275,15 @@
                 userPrompt += `Type: Sort magique\n`;
                 if (selectedElement) userPrompt += `Élément: ${selectedElement}\n`;
                 if (currentEffet) userPrompt += `Effet: ${currentEffet}\n`;
-                if (descInput.value) userPrompt += `Description existante: ${descInput.value}\n`;
                 userPrompt += `\nÉcris une phrase évocatrice qui capture l'essence et la nature de ce sort dans un style heroic fantasy. La phrase doit faire rêver les joueurs et leur donner envie d'utiliser ce sort.`;
             } else if (currentType === 'objet') {
                 userPrompt += `Type: Objet\n`;
                 if (currentTags.length > 0) userPrompt += `Catégories: ${currentTags.join(', ')}\n`;
                 if (currentEffet) userPrompt += `Effet: ${currentEffet}\n`;
-                if (descInput.value) userPrompt += `Description existante: ${descInput.value}\n`;
                 userPrompt += `\nÉcris une phrase évocatrice qui décrit cet objet de manière immersive, en capturant son histoire, son apparence, ou son pouvoir dans un style heroic fantasy.`;
             } else if (currentType === 'don') {
                 userPrompt += `Type: Don/Capacité\n`;
-                if (descInput.value) userPrompt += `Description: ${descInput.value}\n`;
+                if (currentEffet) userPrompt += `Effet: ${currentEffet}\n`;
                 userPrompt += `\nÉcris une phrase évocatrice qui capture l'essence de cette capacité de manière héroïque et épique.`;
             }
 
@@ -1366,17 +1393,15 @@
                 prompt += `Type: Sort magique\n`;
                 if (selectedElement) prompt += `Élément: ${selectedElement}\n`;
                 if (currentEffet) prompt += `Effet: ${currentEffet}\n`;
-                if (descInput.value) prompt += `Description existante: ${descInput.value}\n`;
                 prompt += `\nÉcris une phrase évocatrice qui capture l'essence et la nature de ce sort dans un style heroic fantasy. La phrase doit faire rêver les joueurs et leur donner envie d'utiliser ce sort.`;
             } else if (currentType === 'objet') {
                 prompt += `Type: Objet\n`;
                 if (currentTags.length > 0) prompt += `Catégories: ${currentTags.join(', ')}\n`;
                 if (currentEffet) prompt += `Effet: ${currentEffet}\n`;
-                if (descInput.value) prompt += `Description existante: ${descInput.value}\n`;
                 prompt += `\nÉcris une phrase évocatrice qui décrit cet objet de manière immersive, en capturant son histoire, son apparence, ou son pouvoir dans un style heroic fantasy.`;
             } else if (currentType === 'don') {
                 prompt += `Type: Don/Capacité\n`;
-                if (descInput.value) prompt += `Description: ${descInput.value}\n`;
+                if (currentEffet) prompt += `Effet: ${currentEffet}\n`;
                 prompt += `\nÉcris une phrase évocatrice qui capture l'essence de cette capacité de manière héroïque et épique.`;
             }
 

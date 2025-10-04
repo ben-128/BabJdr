@@ -48,7 +48,7 @@
       {
         "nom": "Grand sac",
         "description": "Augmente le poids maximum transportable de 5, et le nombre de consommables transportables de 5.",
-        "prerequis": "<strong> Prérequis :</strong> -",
+        "prerequis": "<strong> Prérequis :</strong> Hardiesse 1.",
         "cout": "1 point de don"
       },
       {
@@ -383,7 +383,7 @@
       },
       {
         "nom": "Piège Improvisé",
-        "description": "Une fois par combat, le rôdeur peut créer et placer un piège sur une zone de 3mx3m, à moins de 3m du héros.\n  <br><br>Lorsqu'un ennemi entre dans la zone, il subit (Agilité du rôdeur) points de dégâts physiques si sa résistance altération est inférieure à la moitié de l'agilité du héros, il subit l'état <span class=\"etat-link\" data-etat=\"Ralenti\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ralenti</span> pendant 5 tours.\n<br>Le piège est alors détruit.",
+        "description": "Une fois par combat, le rôdeur peut créer et placer un piège sur une zone de 3mx3m, à moins de 3m du héros.\n  <br><br>Lorsqu'un ennemi entre dans la zone, il subit (Agilité du rôdeur) points de dégâts physiques.<br>Si sa résistance altération est inférieure à l'intelligence du héros, il subit l'état <span class=\"etat-link\" data-etat=\"Ralenti\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ralenti</span> pendant 5 tours.\n<br>Le piège est alors détruit.",
         "prerequis": "<strong> Prérequis :</strong> 🧠 Intelligence 5",
         "cout": "1 point de don"
       },
@@ -426,7 +426,7 @@
       {
         "nom": "Spécialisation élémentaire 1",
         "description": "Le héros peut choisir un élément et augmenter les dégâts infligés par les sorts de cet élément, d'un montant équivalent au niveau du sort.",
-        "prerequis": "<strong> Prérequis :</strong> Don unique.",
+        "prerequis": "<strong> Prérequis :</strong> Choisir un nouvel élément écrase l'ancien.",
         "cout": "1 point de don"
       },
       {
@@ -444,12 +444,12 @@
       {
         "nom": "Spécialisation élémentaire 2",
         "description": "Le héros peut choisir un élément et réduire le coût en mana des sorts de cet élément, d'un montant équivalent au niveau du sort.",
-        "prerequis": "<strong> Prérequis :</strong> Don unique.",
+        "prerequis": "<strong> Prérequis :</strong> Choisir un nouvel élément écrase l'ancien.",
         "cout": "1 point de don"
       },
       {
         "nom": "Apprentissage par l'échec",
-        "description": "Le mage regagne le coût en mana des sorts ayant fait un échec critique.",
+        "description": "Le mage regagne le coût en mana des sorts ayant fait un échec critique ou ayant été esquivés.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -545,7 +545,7 @@
       },
       {
         "nom": "Purification sublimée",
-        "description": "Après avoir supprimé un état via un sort, le héros et la cible reçoivent un nombre de point de vie égal au niveau du sort.",
+        "description": "Après avoir supprimé un état via un sort, le héros et la cible reçoivent un nombre de point de vie égal au niveau du prêtre.",
         "prerequis": "<strong> Prérequis :</strong>-",
         "cout": "1 point de don"
       }
