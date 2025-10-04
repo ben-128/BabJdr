@@ -575,7 +575,7 @@
       },
       {
         "nom": "Altération risquée",
-        "description": "Lorsque un sort d'altération magique est effectué alors que la cible est 3m, ses chances de critiques sont doublées.",
+        "description": "Lorsque un sort d'altération magique est effectué alors que la cible est à 3m, ses chances de critiques sont doublées.",
         "prerequis": "<strong> Prérequis :</strong>-",
         "cout": "1 point de don"
       },

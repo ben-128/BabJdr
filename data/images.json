@@ -237,10 +237,22 @@
     "don:Musique": "https://i.ibb.co/DfvnD4ct/Musique.png",
     "don:Purification sublimée": "https://i.ibb.co/FLZKH6sK/purification.png",
     "don:Tentation maléfique": "https://i.ibb.co/NdgKWwXD/Tentation.png",
-    "objet:Bâton de rodeur": "https://i.ibb.co/6Kk6Svm/28225038a687.png"
+    "objet:Bâton de rodeur": "https://i.ibb.co/6Kk6Svm/28225038a687.png",
+    "don:Réparateur de baguettes": "https://i.ibb.co/BHwGqvmw/0ce4313862cc.png",
+    "don:Magie destructrice": "https://i.ibb.co/C385NjF1/a769b17241d4.png",
+    "don:Magie de soutien": "https://i.ibb.co/3YhkpCNS/13b4e1a9f490.png",
+    "don:Altération risquée": "https://i.ibb.co/ds7ZP48Y/9c28f2293614.png",
+    "don:Spécialiste de l'étrange": "https://i.ibb.co/SXBqxfGz/9374ce4287de.png",
+    "don:Enchantement de force permanante": "https://i.ibb.co/fc96wtJ/0d0f93f8dd70.png",
+    "don:Enchantement d'agilité permanante": "https://i.ibb.co/hF1PXK7Z/Agilit.png",
+    "don:Duplicateur de nourriture": "https://i.ibb.co/ZpNBGk0W/Duplication.png",
+    "don:Instabilité Contrôlée": "https://i.ibb.co/6cN4dXxV/Instabilit.png",
+    "don:Magie aléatoire": "https://i.ibb.co/NgXk4vG3/Magie-Al-atoire.png",
+    "don:Teleportation amicale": "https://i.ibb.co/FbCQpghH/teleportation.png",
+    "don:Renvoi de Sort": "https://i.ibb.co/XrLT3jZV/Renvoi.png"
   },
   "meta": {
-    "total_images": 238,
+    "total_images": 250,
     "exported_date": "2025-10-04",
     "note": "Ces images incluent les nouvelles images uploadées"
   }

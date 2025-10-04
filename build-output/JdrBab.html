@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-10-03T15:54:47.753Z by JdrBab Build System -->
+<!-- Generated on 2025-10-04T23:12:58.944Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -8177,7 +8177,7 @@ select:focus {
       {
         "nom": "Grand sac",
         "description": "Augmente le poids maximum transportable de 5, et le nombre de consommables transportables de 5.",
-        "prerequis": "<strong> Prérequis :</strong> -",
+        "prerequis": "<strong> Prérequis :</strong> Hardiesse 1.",
         "cout": "1 point de don"
       },
       {
@@ -8512,7 +8512,7 @@ select:focus {
       },
       {
         "nom": "Piège Improvisé",
-        "description": "Une fois par combat, le rôdeur peut créer et placer un piège sur une zone de 3mx3m, à moins de 3m du héros.\n  <br><br>Lorsqu'un ennemi entre dans la zone, il subit (Agilité du rôdeur) points de dégâts physiques si sa résistance altération est inférieure à la moitié de l'agilité du héros, il subit l'état <span class=\"etat-link\" data-etat=\"Ralenti\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ralenti</span> pendant 5 tours.\n<br>Le piège est alors détruit.",
+        "description": "Une fois par combat, le rôdeur peut créer et placer un piège sur une zone de 3mx3m, à moins de 3m du héros.\n  <br><br>Lorsqu'un ennemi entre dans la zone, il subit (Agilité du rôdeur) points de dégâts physiques.<br>Si sa résistance altération est inférieure à l'intelligence du héros, il subit l'état <span class=\"etat-link\" data-etat=\"Ralenti\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ralenti</span> pendant 5 tours.\n<br>Le piège est alors détruit.",
         "prerequis": "<strong> Prérequis :</strong> 🧠 Intelligence 5",
         "cout": "1 point de don"
       },
@@ -8555,7 +8555,7 @@ select:focus {
       {
         "nom": "Spécialisation élémentaire 1",
         "description": "Le héros peut choisir un élément et augmenter les dégâts infligés par les sorts de cet élément, d'un montant équivalent au niveau du sort.",
-        "prerequis": "<strong> Prérequis :</strong> Don unique.",
+        "prerequis": "<strong> Prérequis :</strong> Choisir un nouvel élément écrase l'ancien.",
         "cout": "1 point de don"
       },
       {
@@ -8573,12 +8573,12 @@ select:focus {
       {
         "nom": "Spécialisation élémentaire 2",
         "description": "Le héros peut choisir un élément et réduire le coût en mana des sorts de cet élément, d'un montant équivalent au niveau du sort.",
-        "prerequis": "<strong> Prérequis :</strong> Don unique.",
+        "prerequis": "<strong> Prérequis :</strong> Choisir un nouvel élément écrase l'ancien.",
         "cout": "1 point de don"
       },
       {
         "nom": "Apprentissage par l'échec",
-        "description": "Le mage regagne le coût en mana des sorts ayant fait un échec critique.",
+        "description": "Le mage regagne le coût en mana des sorts ayant fait un échec critique ou ayant été esquivés.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -8674,7 +8674,7 @@ select:focus {
       },
       {
         "nom": "Purification sublimée",
-        "description": "Après avoir supprimé un état via un sort, le héros et la cible reçoivent un nombre de point de vie égal au niveau du sort.",
+        "description": "Après avoir supprimé un état via un sort, le héros et la cible reçoivent un nombre de point de vie égal au niveau du prêtre.",
         "prerequis": "<strong> Prérequis :</strong>-",
         "cout": "1 point de don"
       }
@@ -8704,7 +8704,7 @@ select:focus {
       },
       {
         "nom": "Altération risquée",
-        "description": "Lorsque un sort d'altération magique est effectué alors que la cible est 3m, ses chances de critiques sont doublées.",
+        "description": "Lorsque un sort d'altération magique est effectué alors que la cible est à 3m, ses chances de critiques sont doublées.",
         "prerequis": "<strong> Prérequis :</strong>-",
         "cout": "1 point de don"
       },
@@ -9512,6 +9512,20 @@ select:focus {
       ],
       "effet": "Inutilisable en combat.\n<br><strong>Prérequis:</strong> Test de compétence Hardiesse 1.\n<br><strong>Effet:</strong> Restore 15 points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.\n          <br> <strong>Charges : </strong>3.",
       "prix": "🔷 <strong>Prix:</strong> 50",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Bâton de rodeur",
+      "numero": 59,
+      "image": "https://i.ibb.co/6Kk6Svm/28225038a687.png",
+      "description": "<i>Forgé dans le bois noueux des forêts anciennes, ce bâton semble murmurer la route à suivre à ceux qui marchent sans détourner le regard de l’horizon.</i>",
+      "tags": [
+        "Arme",
+        "Deux mains",
+        "Baton"
+      ],
+      "effet": "<strong>Dégâts: </strong> Inflige (5  + Force) points de dégâts physiques.\n<br> <strong>Effet: </strong> Permet de traverser les terrains difficiles sans pénalité de vitesse.",
+      "prix": "🔷 <strong>Prix:</strong> 90",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     }
   ],
@@ -10815,11 +10829,51 @@ select:focus {
     "don:Roi de l'esquive": "https://i.ibb.co/Mkf13hRk/44e970c2c270.png",
     "don:Combo": "https://i.ibb.co/QvvjgmFC/9086c7218552.png",
     "don:Poison": "https://i.ibb.co/tMyBzr4K/5e914f06d094.png",
-    "don:Main heureuse": "https://i.ibb.co/Xx9qkMy0/7ece6d8c9ca3.png"
+    "don:Main heureuse": "https://i.ibb.co/Xx9qkMy0/7ece6d8c9ca3.png",
+    "don:Acrobate": "https://i.ibb.co/PZbT7vDh/Acrobate.png",
+    "don:Frappe de l'Ombre": "https://i.ibb.co/bM9wHXC5/frappe-Ombre.png",
+    "don:Piège Improvisé": "https://i.ibb.co/twpC54C5/Piege.png",
+    "don:Tir rapide": "https://i.ibb.co/Ng1yMDjX/Tir-Rapide.png",
+    "don:Apprentissage par l'échec": "https://i.ibb.co/xSGYdRzw/Apprentissage-Echec.png",
+    "don:Gemme de mana": "https://i.ibb.co/RkKq9H2D/Gemme-Mana.png",
+    "don:Infusion élémentaire": "https://i.ibb.co/bMZNWYRf/Infusion.png",
+    "don:Puissance monocible": "https://i.ibb.co/TV9WtYC/Monocible.png",
+    "don:Résonance Élémentaire": "https://i.ibb.co/39zh4P5v/Resonance.png",
+    "don:Résistance élémentaire 1": "https://i.ibb.co/v4LKPR9v/resistance1.png",
+    "don:Résistance magique 1": "https://i.ibb.co/nWcYFLv/resistance2.png",
+    "don:Spécialisation élémentaire 1": "https://i.ibb.co/gZWm6txM/Specialisation1.png",
+    "don:Spécialisation élémentaire 2": "https://i.ibb.co/N2cKdDZn/Specialisation2.png",
+    "don:Extraction de mana": "https://i.ibb.co/CKWW2tS9/Extraction.png",
+    "don:Polyglotte": "https://i.ibb.co/xtNT8g03/Polyglotte.png",
+    "don:Chair consacrée": "https://i.ibb.co/SwLgMrVV/Chair-Consacr-e.png",
+    "don:Au milieu du combat": "https://i.ibb.co/KjN9qHJ7/Milieu-Combat.png",
+    "don:Dernier recours": "https://i.ibb.co/1YJBypSM/Dernier-Recours.png",
+    "don:Élan béni": "https://i.ibb.co/6cnFGt0D/ElanB-ni.png",
+    "don:Jugement éclair": "https://i.ibb.co/WWSzSn80/Jugement-Eclair.png",
+    "don:La nuit tous les chats sont gris": "https://i.ibb.co/xt5pt1g7/LaNuit.png",
+    "don:Mécréants": "https://i.ibb.co/sp7FVvQZ/7367d00205df.png",
+    "don:Martyr": "https://i.ibb.co/mLvQW3L/Martyr.png",
+    "don:Méditation érudite": "https://i.ibb.co/S7sZW5bG/Meditation-Erudite.png",
+    "don:Musique": "https://i.ibb.co/DfvnD4ct/Musique.png",
+    "don:Purification sublimée": "https://i.ibb.co/FLZKH6sK/purification.png",
+    "don:Tentation maléfique": "https://i.ibb.co/NdgKWwXD/Tentation.png",
+    "objet:Bâton de rodeur": "https://i.ibb.co/6Kk6Svm/28225038a687.png",
+    "don:Réparateur de baguettes": "https://i.ibb.co/BHwGqvmw/0ce4313862cc.png",
+    "don:Magie destructrice": "https://i.ibb.co/C385NjF1/a769b17241d4.png",
+    "don:Magie de soutien": "https://i.ibb.co/3YhkpCNS/13b4e1a9f490.png",
+    "don:Altération risquée": "https://i.ibb.co/ds7ZP48Y/9c28f2293614.png",
+    "don:Spécialiste de l'étrange": "https://i.ibb.co/SXBqxfGz/9374ce4287de.png",
+    "don:Enchantement de force permanante": "https://i.ibb.co/fc96wtJ/0d0f93f8dd70.png",
+    "don:Enchantement d'agilité permanante": "https://i.ibb.co/hF1PXK7Z/Agilit.png",
+    "don:Duplicateur de nourriture": "https://i.ibb.co/ZpNBGk0W/Duplication.png",
+    "don:Instabilité Contrôlée": "https://i.ibb.co/6cN4dXxV/Instabilit.png",
+    "don:Magie aléatoire": "https://i.ibb.co/NgXk4vG3/Magie-Al-atoire.png",
+    "don:Teleportation amicale": "https://i.ibb.co/FbCQpghH/teleportation.png",
+    "don:Renvoi de Sort": "https://i.ibb.co/XrLT3jZV/Renvoi.png"
   },
   "meta": {
-    "total_images": 210,
-    "exported_date": "2025-10-03",
+    "total_images": 250,
+    "exported_date": "2025-10-04",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
 };
