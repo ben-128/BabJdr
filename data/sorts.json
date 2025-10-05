@@ -303,7 +303,7 @@
         "nom": "Putréfaction de l’âme",
         "element": "Maléfique",
         "description": "Corrompt la cible d’une énergie sombre, lui infligeant des dégâts et la maudissant.",
-        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 6",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 7",
         "portee": "🎯 <strong>Portée:</strong> 6m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 12",
@@ -334,6 +334,18 @@
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Enlève l'état <span class=\"etat-link\" data-etat=\"Ralenti\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ralenti</span> ou <span class=\"etat-link\" data-etat=\"Vulnérable\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Vulnérable</span> ou <span class=\"etat-link\" data-etat=\"Débilité\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Débilité</span> ou <span class=\"etat-link\" data-etat=\"Affaibli\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Affaibli</span> de la cible.",
         "effetCritique": "<strong>Coup Critique:&nbsp;</strong>&nbsp;La cible est également soignée de 10 points de vie."
+      },
+      {
+        "nom": "Jugement",
+        "element": "Divin",
+        "description": "Une lumière céleste s’abat sur l’ennemi, brûlant sa chair impure et enchaînant les êtres du mal.",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 6",
+        "portee": "🎯 <strong>Portée:</strong> 12m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 12",
+        "resistance": "<strong>Sans effet si:</strong> -",
+        "effetNormal": "<strong>Effet:</strong> La cible subit 10 + (Puiss. Sort) dégats de <span style=\"color: #f5f5f5; font-weight: bold;\">Divin</span>.<br><br> Si la cible est d'élément <span style=\"color: #8b5cf6; font-weight: bold;\">Maléfique</span>, et que sa Résistance altération < Intelligence du lanceur, alors elle est alors <span class=\"etat-link\" data-etat=\"Entravé/Entoilé/Embourbé\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Entravé</span> pendant 2 tours.",
+        "effetCritique": "<strong>Coup Critique: </strong> Les dégats passent à 15 + (Puiss. Sort), et l'entravement à 4 tours."
       }
     ]
   },

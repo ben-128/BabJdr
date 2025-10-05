@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-10-04T23:18:30.080Z by JdrBab Build System -->
+<!-- Generated on 2025-10-05T13:32:13.532Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -7823,7 +7823,7 @@ select:focus {
         "nom": "Putréfaction de l’âme",
         "element": "Maléfique",
         "description": "Corrompt la cible d’une énergie sombre, lui infligeant des dégâts et la maudissant.",
-        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 6",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 7",
         "portee": "🎯 <strong>Portée:</strong> 6m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 12",
@@ -7854,6 +7854,18 @@ select:focus {
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Enlève l'état <span class=\"etat-link\" data-etat=\"Ralenti\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ralenti</span> ou <span class=\"etat-link\" data-etat=\"Vulnérable\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Vulnérable</span> ou <span class=\"etat-link\" data-etat=\"Débilité\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Débilité</span> ou <span class=\"etat-link\" data-etat=\"Affaibli\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Affaibli</span> de la cible.",
         "effetCritique": "<strong>Coup Critique:&nbsp;</strong>&nbsp;La cible est également soignée de 10 points de vie."
+      },
+      {
+        "nom": "Jugement",
+        "element": "Divin",
+        "description": "Une lumière céleste s’abat sur l’ennemi, brûlant sa chair impure et enchaînant les êtres du mal.",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 6",
+        "portee": "🎯 <strong>Portée:</strong> 12m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 12",
+        "resistance": "<strong>Sans effet si:</strong> -",
+        "effetNormal": "<strong>Effet:</strong> La cible subit 10 + (Puiss. Sort) dégats de <span style=\"color: #f5f5f5; font-weight: bold;\">Divin</span>.<br><br> Si la cible est d'élément <span style=\"color: #8b5cf6; font-weight: bold;\">Maléfique</span>, et que sa Résistance altération < Intelligence du lanceur, alors elle est alors <span class=\"etat-link\" data-etat=\"Entravé/Entoilé/Embourbé\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Entravé</span> pendant 2 tours.",
+        "effetCritique": "<strong>Coup Critique: </strong> Les dégats passent à 15 + (Puiss. Sort), et l'entravement à 4 tours."
       }
     ]
   },
@@ -8693,13 +8705,13 @@ select:focus {
       },
       {
         "nom": "Magie destructrice",
-        "description": "Permet de choisir et d'apprendre un sort de mage et de pouvoir le lancer à volonté. Le sort peut être changé par la suite.",
+        "description": "Permet de choisir et d'apprendre un sort de mage et de pouvoir le lancer à volonté. Le sort peut être changé par la suite en dépensant un nouveau point de don.",
         "prerequis": "<strong> Prérequis :</strong> Choisir un nouveau sort écrase l'ancien.",
         "cout": "1 point de don"
       },
       {
         "nom": "Magie de soutien",
-        "description": "Permet de choisir et d'apprendre un sort de prêtre et de pouvoir le lancer à volonté. Le sort peut être changé par la suite.",
+        "description": "Permet de choisir et d'apprendre un sort de prêtre et de pouvoir le lancer à volonté. Le sort peut être changé par la suite en dépensant un nouveau point de don.",
         "prerequis": "<strong> Prérequis :</strong> Choisir un nouveau sort écrase l'ancien.",
         "cout": "1 point de don"
       },
@@ -10850,7 +10862,7 @@ select:focus {
     "don:Au milieu du combat": "https://i.ibb.co/KjN9qHJ7/Milieu-Combat.png",
     "don:Dernier recours": "https://i.ibb.co/1YJBypSM/Dernier-Recours.png",
     "don:Élan béni": "https://i.ibb.co/6cnFGt0D/ElanB-ni.png",
-    "don:Jugement éclair": "https://i.ibb.co/WWSzSn80/Jugement-Eclair.png",
+    "don:Jugement éclair": "https://i.ibb.co/vxjkQ4nv/Jugement-Eclair.png",
     "don:La nuit tous les chats sont gris": "https://i.ibb.co/xt5pt1g7/LaNuit.png",
     "don:Mécréants": "https://i.ibb.co/sp7FVvQZ/7367d00205df.png",
     "don:Martyr": "https://i.ibb.co/mLvQW3L/Martyr.png",
@@ -10874,7 +10886,7 @@ select:focus {
   },
   "meta": {
     "total_images": 250,
-    "exported_date": "2025-10-04",
+    "exported_date": "2025-10-05",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
 };

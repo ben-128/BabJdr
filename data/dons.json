@@ -563,13 +563,13 @@
       },
       {
         "nom": "Magie destructrice",
-        "description": "Permet de choisir et d'apprendre un sort de mage et de pouvoir le lancer à volonté. Le sort peut être changé par la suite.",
+        "description": "Permet de choisir et d'apprendre un sort de mage et de pouvoir le lancer à volonté. Le sort peut être changé par la suite en dépensant un nouveau point de don.",
         "prerequis": "<strong> Prérequis :</strong> Choisir un nouveau sort écrase l'ancien.",
         "cout": "1 point de don"
       },
       {
         "nom": "Magie de soutien",
-        "description": "Permet de choisir et d'apprendre un sort de prêtre et de pouvoir le lancer à volonté. Le sort peut être changé par la suite.",
+        "description": "Permet de choisir et d'apprendre un sort de prêtre et de pouvoir le lancer à volonté. Le sort peut être changé par la suite en dépensant un nouveau point de don.",
         "prerequis": "<strong> Prérequis :</strong> Choisir un nouveau sort écrase l'ancien.",
         "cout": "1 point de don"
       },
