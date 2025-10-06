@@ -778,9 +778,24 @@ const CampaignSchemas = {
     // Générer un ID unique pour le schéma
     const schemaId = 'schema_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
 
-    // Stocker l'image dans localStorage
+    // Stocker l'image dans la structure de données campagne
     try {
-      localStorage.setItem(schemaId, dataURL);
+      if (!window.STATIC_PAGES) {
+        window.STATIC_PAGES = {};
+      }
+      if (!window.STATIC_PAGES.campagne) {
+        window.STATIC_PAGES.campagne = {};
+      }
+      if (!window.STATIC_PAGES.campagne.schemas) {
+        window.STATIC_PAGES.campagne.schemas = {};
+      }
+
+      window.STATIC_PAGES.campagne.schemas[schemaId] = dataURL;
+
+      // Sauvegarder dans le storage
+      if (window.EventBus && window.Events) {
+        window.EventBus.emit(window.Events.STORAGE_SAVE);
+      }
     } catch (e) {
       console.error('Erreur lors de la sauvegarde du schéma:', e);
       alert('Erreur: le schéma est trop volumineux pour être sauvegardé.');
@@ -856,7 +871,27 @@ const CampaignSchemas = {
     if (!html || typeof html !== 'string') return html;
 
     return html.replace(/\[schema:(schema_[^\]]+)\]/g, (match, schemaId) => {
-      const dataURL = localStorage.getItem(schemaId);
+      // Chercher d'abord dans la structure de données
+      let dataURL = window.STATIC_PAGES?.campagne?.schemas?.[schemaId];
+
+      // Fallback: chercher dans localStorage (pour migration)
+      if (!dataURL) {
+        dataURL = localStorage.getItem(schemaId);
+        // Si trouvé dans localStorage, migrer vers la structure de données
+        if (dataURL) {
+          if (!window.STATIC_PAGES) window.STATIC_PAGES = {};
+          if (!window.STATIC_PAGES.campagne) window.STATIC_PAGES.campagne = {};
+          if (!window.STATIC_PAGES.campagne.schemas) window.STATIC_PAGES.campagne.schemas = {};
+          window.STATIC_PAGES.campagne.schemas[schemaId] = dataURL;
+          // Supprimer de localStorage pour éviter la duplication
+          localStorage.removeItem(schemaId);
+          // Sauvegarder
+          if (window.EventBus && window.Events) {
+            window.EventBus.emit(window.Events.STORAGE_SAVE);
+          }
+        }
+      }
+
       if (dataURL) {
         return `
 <div class="campaign-schema" style="margin: 1.5rem 0; text-align: center; background: white; padding: 1rem; border-radius: 8px; border: 2px solid var(--rule);">
