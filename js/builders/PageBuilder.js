@@ -1336,24 +1336,30 @@
     }
 
     buildSelectedSubPageContent(campaignName, subPageName, subPage) {
+      // Expand schema markers in content
+      let content = subPage.content || '<p>Contenu de la sous-page...</p>';
+      if (window.CampaignSchemas && typeof window.CampaignSchemas.expandSchemaMarkers === 'function') {
+        content = window.CampaignSchemas.expandSchemaMarkers(content);
+      }
+
       return `
         <div class="selected-subpage" style="background: var(--paper-light); border-radius: 8px; padding: 1.5rem; border: 2px solid var(--rule);">
           <!-- Sub-page Header -->
           <div class="subpage-header" style="margin-bottom: 1rem; border-bottom: 1px solid var(--rule); padding-bottom: 0.75rem;">
             <div style="display: flex; align-items: center;">
-              <h5 class="editable" data-edit-type="generic" data-edit-section="subpage-${campaignName}-${subPageName}-title" 
+              <h5 class="editable" data-edit-type="generic" data-edit-section="subpage-${campaignName}-${subPageName}-title"
                   style="margin: 0; color: var(--accent-ink); font-size: 1.2em; flex: 1;">
                 📄 ${subPage.title || subPageName}
               </h5>
               ${this.buildEditButton('title')}
             </div>
           </div>
-          
+
           <!-- Sub-page Content -->
           <div style="display: flex; align-items: flex-start;">
-            <div class="subpage-content editable" data-edit-type="generic" data-edit-section="subpage-${campaignName}-${subPageName}-content" 
+            <div class="subpage-content editable" data-edit-type="generic" data-edit-section="subpage-${campaignName}-${subPageName}-content"
                  style="line-height: 1.6; min-height: 200px; flex: 1;">
-              ${subPage.content || '<p>Contenu de la sous-page...</p>'}
+              ${content}
             </div>
             ${this.buildEditButton('section')}
           </div>

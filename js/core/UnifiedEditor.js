@@ -849,6 +849,45 @@
       return true;
     }
 
+    // Get content from data structure - retrieves the stored content with markers (not expanded HTML)
+    getContentFromDataStructure(session) {
+      try {
+        switch (session.contentType) {
+          case 'campaignSubPage': {
+            const campagneData = window.STATIC_PAGES?.campagne;
+            if (!campagneData || !campagneData.subPages) return null;
+
+            const campaignName = session.categoryName;
+            const subPageName = session.itemIdentifier.split(':')[1];
+            const property = session.editSection; // 'title' or 'content'
+
+            const subPage = campagneData.subPages[campaignName]?.subPages?.[subPageName];
+            if (!subPage) return null;
+
+            return subPage[property] || null;
+          }
+          case 'campaign': {
+            const campagneData = window.STATIC_PAGES?.campagne;
+            if (!campagneData || !campagneData.subPages) return null;
+
+            const campaignName = session.itemIdentifier;
+            const property = session.editSection; // 'name' or 'description'
+
+            const campaign = campagneData.subPages[campaignName];
+            if (!campaign) return null;
+
+            return campaign[property] || null;
+          }
+          // Add other content types as needed
+          default:
+            return null;
+        }
+      } catch (error) {
+        console.error('Error getting content from data structure:', error, session);
+        return null;
+      }
+    }
+
     // Update content in data structure - unified method for all content types
     updateContentInDataStructure(session, content) {
       try {
@@ -1520,11 +1559,16 @@
     // This method ensures that HTML content is always properly rendered
     // and prevents HTML tags from being displayed as visible text
     restoreElementContent(session, content) {
+      // Expand schema markers if CampaignSchemas is available
+      if (window.CampaignSchemas && typeof window.CampaignSchemas.expandSchemaMarkers === 'function') {
+        content = window.CampaignSchemas.expandSchemaMarkers(content);
+      }
+
       // IMPORTANT: Always use innerHTML to render HTML content properly
       // Never use textContent for edited content as it will show HTML tags
       session.element.innerHTML = content;
-      
-      // NOTE FOR DEVELOPERS: 
+
+      // NOTE FOR DEVELOPERS:
       // - For ANY new content type, use this method instead of direct innerHTML assignment
       // - This prevents the recurring issue of visible HTML tags after editing
       // - ALL content types (static pages, spells, classes, dons) go through this
@@ -1755,9 +1799,14 @@
       const element = context.element;
       const container = context.container;
 
-      // Store original content
-      const originalContent = element.innerHTML;
-      
+      // Try to get content from data structure first (contains markers, not expanded HTML)
+      let originalContent = this.getContentFromDataStructure(context);
+
+      // Fallback to element.innerHTML if not found in data structure
+      if (originalContent === null) {
+        originalContent = element.innerHTML;
+      }
+
       // Create edit session
       this.currentEditSession = {
         ...context,
@@ -1767,11 +1816,11 @@
       // Set up editing state
       container.dataset.editing = 'true';
       container.dataset.originalContent = originalContent;
-      
+
       // Decode any encoded HTML before showing for editing
       const decodedHtml = this.decodeHtmlEntities(originalContent);
       element.innerHTML = decodedHtml;
-      
+
       // Always use modal editing for consistency
       // Force modal editing for all content types to ensure uniform behavior
       this.showHTMLEditModal(element, decodedHtml);
@@ -1817,6 +1866,12 @@
     showHTMLEditModal(element, htmlContent) {
       // Store the current edit session for later use
       const editSession = this.currentEditSession;
+
+      // Prepare preview content with expanded schemas
+      let previewContent = htmlContent;
+      if (window.CampaignSchemas && typeof window.CampaignSchemas.expandSchemaMarkers === 'function') {
+        previewContent = window.CampaignSchemas.expandSchemaMarkers(previewContent);
+      }
       
       const modal = document.createElement('dialog');
       modal.style.cssText = `
@@ -1854,14 +1909,14 @@
           <div style="margin-bottom: 1rem; flex-shrink: 0;">
             <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Aperçu du rendu:</label>
             <div id="preview" style="border: 1px solid var(--rule); padding: 1rem; border-radius: 6px; background: var(--card); min-height: 60px; max-height: 150px; overflow-y: auto;">
-              ${htmlContent}
+              ${previewContent}
             </div>
           </div>
-          
+
           <div style="margin-bottom: 1rem; flex: 1; min-height: 0; display: flex; flex-direction: column;">
             <label for="htmlEditor" style="display: block; margin-bottom: 0.5rem; font-weight: 600; flex-shrink: 0;">Code HTML:</label>
-            <textarea 
-              id="htmlEditor" 
+            <textarea
+              id="htmlEditor"
               style="width: 100%; flex: 1; min-height: 200px; padding: 1rem; border: 1px solid var(--rule); border-radius: 6px; font-family: monospace; font-size: 14px; resize: vertical;"
               placeholder="Entrez le HTML ici..."
             >${htmlContent}</textarea>
@@ -1876,9 +1931,10 @@
               <button id="editorPageLinksBtn" class="btn" style="background: #1d4ed8; color: white; font-size: 12px;">🔗 Liens Pages</button>
               <button id="editorMonsterLinksBtn" class="btn" style="background: #dc2626; color: white; font-size: 12px;">🐲 Liens Monstres</button>
               <button id="editorTreasureTablesBtn" class="btn" style="background: #b45309; color: white; font-size: 12px;">🎲 Tables Trésors</button>
+              <button id="editorSchemaBtn" class="btn" style="background: #8b5cf6; color: white; font-size: 12px;">🎨 Schéma</button>
             </div>
             <div style="font-size: 12px; color: var(--paper-muted); line-height: 1.4;">
-              💡 <strong>Astuce:</strong> Utilisez ces boutons pour insérer rapidement des éléments, états, liens vers les sorts, les pages, les monstres et les tables de trésors dans votre contenu HTML.
+              💡 <strong>Astuce:</strong> Utilisez ces boutons pour insérer rapidement des éléments, états, liens, tables de trésors et schémas dans votre contenu HTML.
             </div>
           </div>
           
@@ -1904,20 +1960,26 @@
       const pageLinksBtn = modal.querySelector('#editorPageLinksBtn');
       const monsterLinksBtn = modal.querySelector('#editorMonsterLinksBtn');
       const treasureTablesBtn = modal.querySelector('#editorTreasureTablesBtn');
+      const schemaBtn = modal.querySelector('#editorSchemaBtn');
 
       // Helper function to insert text at cursor position in textarea
       const insertTextAtCursor = (text) => {
         const start = textarea.selectionStart;
         const end = textarea.selectionEnd;
         const currentValue = textarea.value;
-        
+
         textarea.value = currentValue.substring(0, start) + text + currentValue.substring(end);
         textarea.selectionStart = textarea.selectionEnd = start + text.length;
         textarea.focus();
-        
+
         // Update preview
         try {
-          preview.innerHTML = textarea.value;
+          let previewContent = textarea.value;
+          // Expand schema markers for preview
+          if (window.CampaignSchemas && typeof window.CampaignSchemas.expandSchemaMarkers === 'function') {
+            previewContent = window.CampaignSchemas.expandSchemaMarkers(previewContent);
+          }
+          preview.innerHTML = previewContent;
         } catch (e) {
           preview.textContent = 'Aperçu invalide: ' + e.message;
         }
@@ -1975,13 +2037,32 @@
         });
       }
 
+      if (schemaBtn) {
+        schemaBtn.addEventListener('click', () => {
+          if (window.CampaignSchemas) {
+            // Store the textarea and insertTextAtCursor function for later use
+            window.CampaignSchemas.editorTextarea = textarea;
+            window.CampaignSchemas.editorInsertFunction = insertTextAtCursor;
+            window.CampaignSchemas.openSchemaEditor();
+          } else {
+            console.error('CampaignSchemas not available!');
+            alert('Erreur: Le module de schémas n\'est pas chargé.');
+          }
+        });
+      }
+
       // Live preview update with debounce to prevent performance issues
       let previewUpdateTimeout;
       textarea.addEventListener('input', () => {
         clearTimeout(previewUpdateTimeout);
         previewUpdateTimeout = setTimeout(() => {
           try {
-            preview.innerHTML = textarea.value;
+            let previewContent = textarea.value;
+            // Expand schema markers for preview
+            if (window.CampaignSchemas && typeof window.CampaignSchemas.expandSchemaMarkers === 'function') {
+              previewContent = window.CampaignSchemas.expandSchemaMarkers(previewContent);
+            }
+            preview.innerHTML = previewContent;
           } catch (e) {
             preview.textContent = 'Aperçu invalide: ' + e.message;
           }
@@ -1992,20 +2073,24 @@
       saveBtn.addEventListener('click', () => {
         const newContent = textarea.value.trim();
         const normalizedContent = this.normalizeHTMLContent(newContent);
-        
-        // Update the element content
-        element.innerHTML = normalizedContent;
-        
-        // Update in data structure using stored session
+
+        // Update in data structure using stored session (save with markers)
         const success = this.updateContentInDataStructure(editSession, normalizedContent);
-        
+
         if (success) {
+          // Update the element content with expanded schemas for display
+          let displayContent = normalizedContent;
+          if (window.CampaignSchemas && typeof window.CampaignSchemas.expandSchemaMarkers === 'function') {
+            displayContent = window.CampaignSchemas.expandSchemaMarkers(displayContent);
+          }
+          element.innerHTML = displayContent;
+
           EventBus.emit(Events.STORAGE_SAVE);
           if (JdrApp.modules.ui?.showNotification) {
             JdrApp.modules.ui.showNotification('💾 Modification sauvegardée', 'success');
           }
         }
-        
+
         // Clean up
         this.resetEditingState(editSession.container);
         this.currentEditSession = null;
@@ -2570,7 +2655,7 @@
 
     addEditingControls(container, editableElement) {
       // Remove any existing editing controls
-      const existingControls = container.querySelector('.editing-controls');
+      const existingControls = document.querySelector('.editing-controls');
       if (existingControls) {
         existingControls.remove();
       }
@@ -2579,43 +2664,45 @@
       const controlsDiv = document.createElement('div');
       controlsDiv.className = 'editing-controls';
       controlsDiv.style.cssText = `
-        position: absolute;
-        top: -40px;
-        right: 0;
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
         background: var(--paper);
-        border: 1px solid var(--bronze);
-        border-radius: 6px;
-        padding: 4px;
+        border: 2px solid var(--bronze);
+        border-radius: 8px;
+        padding: 8px;
         display: flex;
-        gap: 4px;
-        z-index: 1000;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        gap: 6px;
+        z-index: 10000;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.3);
       `;
 
       // Get available treasure tables for the dropdown
       const availableTables = window.TABLES_TRESORS?.tables || [];
       let treasureControls = '';
-      
+
       if (availableTables.length > 0) {
-        const tableOptions = availableTables.map(table => 
+        const tableOptions = availableTables.map(table =>
           `<option value="${table.nom}">${table.nom}</option>`
         ).join('');
 
         treasureControls = `
-          <div class="treasure-table-controls" style="display: flex; align-items: center; gap: 2px; border-right: 1px solid var(--rule); padding-right: 4px; margin-right: 4px;">
-            <select class="treasure-table-select" style="font-size: 11px; padding: 2px; border: 1px solid var(--rule); border-radius: 3px;">
+          <div class="treasure-table-controls" style="display: flex; align-items: center; gap: 4px; border-right: 1px solid var(--rule); padding-right: 8px; margin-right: 8px;">
+            <select class="treasure-table-select" style="font-size: 12px; padding: 4px 8px; border: 1px solid var(--rule); border-radius: 4px;">
               <option value="">Choisir table</option>
               ${tableOptions}
             </select>
             <button type="button" class="copy-treasure-link-btn btn" style="
-              background: var(--bronze); 
-              color: white; 
-              border: none; 
-              padding: 2px 6px; 
-              border-radius: 3px; 
-              cursor: pointer; 
-              font-size: 10px;
+              background: var(--bronze);
+              color: white;
+              border: none;
+              padding: 4px 10px;
+              border-radius: 4px;
+              cursor: pointer;
+              font-size: 12px;
               white-space: nowrap;
+              font-weight: bold;
             " title="Copier le lien HTML de la table sélectionnée">
               📋 Table
             </button>
@@ -2626,32 +2713,33 @@
       controlsDiv.innerHTML = `
         ${treasureControls}
         <button type="button" class="save-edit-btn btn" style="
-          background: var(--accent); 
-          color: white; 
-          border: none; 
-          padding: 2px 6px; 
-          border-radius: 3px; 
-          cursor: pointer; 
-          font-size: 11px;
+          background: var(--accent);
+          color: white;
+          border: none;
+          padding: 6px 12px;
+          border-radius: 4px;
+          cursor: pointer;
+          font-size: 13px;
+          font-weight: bold;
         ">
           ✓ Sauver
         </button>
         <button type="button" class="cancel-edit-btn btn" style="
-          background: #666; 
-          color: white; 
-          border: none; 
-          padding: 2px 6px; 
-          border-radius: 3px; 
-          cursor: pointer; 
-          font-size: 11px;
+          background: #666;
+          color: white;
+          border: none;
+          padding: 6px 12px;
+          border-radius: 4px;
+          cursor: pointer;
+          font-size: 13px;
+          font-weight: bold;
         ">
           ✕ Annuler
         </button>
       `;
 
-      // Position the container relatively for absolute positioning of controls
-      container.style.position = 'relative';
-      container.appendChild(controlsDiv);
+      // Append to body for fixed positioning
+      document.body.appendChild(controlsDiv);
 
       // Set up event listeners
       this.setupEditingControlsListeners(controlsDiv, container, editableElement);
@@ -2702,13 +2790,13 @@
       // Copy treasure table link button
       const copyBtn = controlsDiv.querySelector('.copy-treasure-link-btn');
       const tableSelect = controlsDiv.querySelector('.treasure-table-select');
-      
+
       if (copyBtn && tableSelect) {
         copyBtn.addEventListener('click', () => {
           const selectedTable = tableSelect.value;
           if (selectedTable && window.TablesTresorsManager) {
             const htmlLink = window.TablesTresorsManager.generateTreasureTableHtmlLink(selectedTable);
-            
+
             // Insert the link at cursor position
             if (editableElement.contentEditable === 'true') {
               const selection = window.getSelection();
@@ -2717,7 +2805,7 @@
                 range.deleteContents();
                 const linkNode = document.createTextNode(htmlLink);
                 range.insertNode(linkNode);
-                
+
                 // Move cursor after the inserted text
                 range.setStartAfter(linkNode);
                 range.setEndAfter(linkNode);
@@ -2727,7 +2815,7 @@
                 // Fallback: append at the end
                 editableElement.innerHTML += htmlLink;
               }
-              
+
               // Show notification
               if (window.TablesTresorsManager.showNotification) {
                 window.TablesTresorsManager.showNotification('✓ Lien de table inséré!', 'success');
@@ -2773,7 +2861,7 @@
     }
 
     removeEditingControls(container) {
-      const controls = container.querySelector('.editing-controls');
+      const controls = document.querySelector('.editing-controls');
       if (controls) {
         controls.remove();
       }

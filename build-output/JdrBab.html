@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-10-05T13:32:13.532Z by JdrBab Build System -->
+<!-- Generated on 2025-10-06T09:44:31.987Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -10886,7 +10886,7 @@ select:focus {
   },
   "meta": {
     "total_images": 250,
-    "exported_date": "2025-10-05",
+    "exported_date": "2025-10-06",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
 };
@@ -11591,7 +11591,7 @@ select:focus {
       "subPages": {
         "Long terme": {
           "title": "Long terme",
-          "content": "<b> Le Dieu Maléfique</b>\n\n<br><br>Nerhaz, le Sépulcral (Symbole : un cristal noir fendu, entouré de chaînes)\n\n\n<br><br> Histoire : banni par l’Empire des Anciens, il fut scellé dans leurs temples. Mais les cristaux magiques, instables, ont servi de réceptacles à ses murmures.\n\n<br><br>Particularité : Nerhaz attire les ambitieux et les désespérés, promettant pouvoir en échange de sacrifices. Son retour progressif est lié à l’altération des créatures par les cristaux."
+          "content": "<b> Le Dieu Maléfique</b>\n\n<br><br>Nerhaz, le Sépulcral (Symbole : un cristal noir fendu, entouré de chaînes)\n\n[schema:schema_1759743685952_jtd31aw89]\n\n\n<br><br> Histoire : banni par l’Empire des Anciens, il fut scellé dans leurs temples. Mais les cristaux magiques, instables, ont servi de réceptacles à ses murmures.\n\n\n[schema:schema_1759743697192_5pjxll3h2]\n\n\n<br><br>Particularité : Nerhaz attire les ambitieux et les désespérés, promettant pouvoir en échange de sacrifices. Son retour progressif est lié à l’altération des créatures par les cristaux."
         },
         "Auberge": {
           "title": "Auberge",
@@ -15476,24 +15476,30 @@ select:focus {
     }
 
     buildSelectedSubPageContent(campaignName, subPageName, subPage) {
+      // Expand schema markers in content
+      let content = subPage.content || '<p>Contenu de la sous-page...</p>';
+      if (window.CampaignSchemas && typeof window.CampaignSchemas.expandSchemaMarkers === 'function') {
+        content = window.CampaignSchemas.expandSchemaMarkers(content);
+      }
+
       return `
         <div class="selected-subpage" style="background: var(--paper-light); border-radius: 8px; padding: 1.5rem; border: 2px solid var(--rule);">
           <!-- Sub-page Header -->
           <div class="subpage-header" style="margin-bottom: 1rem; border-bottom: 1px solid var(--rule); padding-bottom: 0.75rem;">
             <div style="display: flex; align-items: center;">
-              <h5 class="editable" data-edit-type="generic" data-edit-section="subpage-${campaignName}-${subPageName}-title" 
+              <h5 class="editable" data-edit-type="generic" data-edit-section="subpage-${campaignName}-${subPageName}-title"
                   style="margin: 0; color: var(--accent-ink); font-size: 1.2em; flex: 1;">
                 📄 ${subPage.title || subPageName}
               </h5>
               ${this.buildEditButton('title')}
             </div>
           </div>
-          
+
           <!-- Sub-page Content -->
           <div style="display: flex; align-items: flex-start;">
-            <div class="subpage-content editable" data-edit-type="generic" data-edit-section="subpage-${campaignName}-${subPageName}-content" 
+            <div class="subpage-content editable" data-edit-type="generic" data-edit-section="subpage-${campaignName}-${subPageName}-content"
                  style="line-height: 1.6; min-height: 200px; flex: 1;">
-              ${subPage.content || '<p>Contenu de la sous-page...</p>'}
+              ${content}
             </div>
             ${this.buildEditButton('section')}
           </div>
@@ -25523,6 +25529,45 @@ select:focus {
       return true;
     }
 
+    // Get content from data structure - retrieves the stored content with markers (not expanded HTML)
+    getContentFromDataStructure(session) {
+      try {
+        switch (session.contentType) {
+          case 'campaignSubPage': {
+            const campagneData = window.STATIC_PAGES?.campagne;
+            if (!campagneData || !campagneData.subPages) return null;
+
+            const campaignName = session.categoryName;
+            const subPageName = session.itemIdentifier.split(':')[1];
+            const property = session.editSection; // 'title' or 'content'
+
+            const subPage = campagneData.subPages[campaignName]?.subPages?.[subPageName];
+            if (!subPage) return null;
+
+            return subPage[property] || null;
+          }
+          case 'campaign': {
+            const campagneData = window.STATIC_PAGES?.campagne;
+            if (!campagneData || !campagneData.subPages) return null;
+
+            const campaignName = session.itemIdentifier;
+            const property = session.editSection; // 'name' or 'description'
+
+            const campaign = campagneData.subPages[campaignName];
+            if (!campaign) return null;
+
+            return campaign[property] || null;
+          }
+          // Add other content types as needed
+          default:
+            return null;
+        }
+      } catch (error) {
+        console.error('Error getting content from data structure:', error, session);
+        return null;
+      }
+    }
+
     // Update content in data structure - unified method for all content types
     updateContentInDataStructure(session, content) {
       try {
@@ -26194,11 +26239,16 @@ select:focus {
     // This method ensures that HTML content is always properly rendered
     // and prevents HTML tags from being displayed as visible text
     restoreElementContent(session, content) {
+      // Expand schema markers if CampaignSchemas is available
+      if (window.CampaignSchemas && typeof window.CampaignSchemas.expandSchemaMarkers === 'function') {
+        content = window.CampaignSchemas.expandSchemaMarkers(content);
+      }
+
       // IMPORTANT: Always use innerHTML to render HTML content properly
       // Never use textContent for edited content as it will show HTML tags
       session.element.innerHTML = content;
-      
-      // NOTE FOR DEVELOPERS: 
+
+      // NOTE FOR DEVELOPERS:
       // - For ANY new content type, use this method instead of direct innerHTML assignment
       // - This prevents the recurring issue of visible HTML tags after editing
       // - ALL content types (static pages, spells, classes, dons) go through this
@@ -26429,9 +26479,14 @@ select:focus {
       const element = context.element;
       const container = context.container;
 
-      // Store original content
-      const originalContent = element.innerHTML;
-      
+      // Try to get content from data structure first (contains markers, not expanded HTML)
+      let originalContent = this.getContentFromDataStructure(context);
+
+      // Fallback to element.innerHTML if not found in data structure
+      if (originalContent === null) {
+        originalContent = element.innerHTML;
+      }
+
       // Create edit session
       this.currentEditSession = {
         ...context,
@@ -26441,11 +26496,11 @@ select:focus {
       // Set up editing state
       container.dataset.editing = 'true';
       container.dataset.originalContent = originalContent;
-      
+
       // Decode any encoded HTML before showing for editing
       const decodedHtml = this.decodeHtmlEntities(originalContent);
       element.innerHTML = decodedHtml;
-      
+
       // Always use modal editing for consistency
       // Force modal editing for all content types to ensure uniform behavior
       this.showHTMLEditModal(element, decodedHtml);
@@ -26491,6 +26546,12 @@ select:focus {
     showHTMLEditModal(element, htmlContent) {
       // Store the current edit session for later use
       const editSession = this.currentEditSession;
+
+      // Prepare preview content with expanded schemas
+      let previewContent = htmlContent;
+      if (window.CampaignSchemas && typeof window.CampaignSchemas.expandSchemaMarkers === 'function') {
+        previewContent = window.CampaignSchemas.expandSchemaMarkers(previewContent);
+      }
       
       const modal = document.createElement('dialog');
       modal.style.cssText = `
@@ -26528,14 +26589,14 @@ select:focus {
           <div style="margin-bottom: 1rem; flex-shrink: 0;">
             <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Aperçu du rendu:</label>
             <div id="preview" style="border: 1px solid var(--rule); padding: 1rem; border-radius: 6px; background: var(--card); min-height: 60px; max-height: 150px; overflow-y: auto;">
-              ${htmlContent}
+              ${previewContent}
             </div>
           </div>
-          
+
           <div style="margin-bottom: 1rem; flex: 1; min-height: 0; display: flex; flex-direction: column;">
             <label for="htmlEditor" style="display: block; margin-bottom: 0.5rem; font-weight: 600; flex-shrink: 0;">Code HTML:</label>
-            <textarea 
-              id="htmlEditor" 
+            <textarea
+              id="htmlEditor"
               style="width: 100%; flex: 1; min-height: 200px; padding: 1rem; border: 1px solid var(--rule); border-radius: 6px; font-family: monospace; font-size: 14px; resize: vertical;"
               placeholder="Entrez le HTML ici..."
             >${htmlContent}</textarea>
@@ -26550,9 +26611,10 @@ select:focus {
               <button id="editorPageLinksBtn" class="btn" style="background: #1d4ed8; color: white; font-size: 12px;">🔗 Liens Pages</button>
               <button id="editorMonsterLinksBtn" class="btn" style="background: #dc2626; color: white; font-size: 12px;">🐲 Liens Monstres</button>
               <button id="editorTreasureTablesBtn" class="btn" style="background: #b45309; color: white; font-size: 12px;">🎲 Tables Trésors</button>
+              <button id="editorSchemaBtn" class="btn" style="background: #8b5cf6; color: white; font-size: 12px;">🎨 Schéma</button>
             </div>
             <div style="font-size: 12px; color: var(--paper-muted); line-height: 1.4;">
-              💡 <strong>Astuce:</strong> Utilisez ces boutons pour insérer rapidement des éléments, états, liens vers les sorts, les pages, les monstres et les tables de trésors dans votre contenu HTML.
+              💡 <strong>Astuce:</strong> Utilisez ces boutons pour insérer rapidement des éléments, états, liens, tables de trésors et schémas dans votre contenu HTML.
             </div>
           </div>
           
@@ -26578,20 +26640,26 @@ select:focus {
       const pageLinksBtn = modal.querySelector('#editorPageLinksBtn');
       const monsterLinksBtn = modal.querySelector('#editorMonsterLinksBtn');
       const treasureTablesBtn = modal.querySelector('#editorTreasureTablesBtn');
+      const schemaBtn = modal.querySelector('#editorSchemaBtn');
 
       // Helper function to insert text at cursor position in textarea
       const insertTextAtCursor = (text) => {
         const start = textarea.selectionStart;
         const end = textarea.selectionEnd;
         const currentValue = textarea.value;
-        
+
         textarea.value = currentValue.substring(0, start) + text + currentValue.substring(end);
         textarea.selectionStart = textarea.selectionEnd = start + text.length;
         textarea.focus();
-        
+
         // Update preview
         try {
-          preview.innerHTML = textarea.value;
+          let previewContent = textarea.value;
+          // Expand schema markers for preview
+          if (window.CampaignSchemas && typeof window.CampaignSchemas.expandSchemaMarkers === 'function') {
+            previewContent = window.CampaignSchemas.expandSchemaMarkers(previewContent);
+          }
+          preview.innerHTML = previewContent;
         } catch (e) {
           preview.textContent = 'Aperçu invalide: ' + e.message;
         }
@@ -26649,13 +26717,32 @@ select:focus {
         });
       }
 
+      if (schemaBtn) {
+        schemaBtn.addEventListener('click', () => {
+          if (window.CampaignSchemas) {
+            // Store the textarea and insertTextAtCursor function for later use
+            window.CampaignSchemas.editorTextarea = textarea;
+            window.CampaignSchemas.editorInsertFunction = insertTextAtCursor;
+            window.CampaignSchemas.openSchemaEditor();
+          } else {
+            console.error('CampaignSchemas not available!');
+            alert('Erreur: Le module de schémas n\'est pas chargé.');
+          }
+        });
+      }
+
       // Live preview update with debounce to prevent performance issues
       let previewUpdateTimeout;
       textarea.addEventListener('input', () => {
         clearTimeout(previewUpdateTimeout);
         previewUpdateTimeout = setTimeout(() => {
           try {
-            preview.innerHTML = textarea.value;
+            let previewContent = textarea.value;
+            // Expand schema markers for preview
+            if (window.CampaignSchemas && typeof window.CampaignSchemas.expandSchemaMarkers === 'function') {
+              previewContent = window.CampaignSchemas.expandSchemaMarkers(previewContent);
+            }
+            preview.innerHTML = previewContent;
           } catch (e) {
             preview.textContent = 'Aperçu invalide: ' + e.message;
           }
@@ -26666,20 +26753,24 @@ select:focus {
       saveBtn.addEventListener('click', () => {
         const newContent = textarea.value.trim();
         const normalizedContent = this.normalizeHTMLContent(newContent);
-        
-        // Update the element content
-        element.innerHTML = normalizedContent;
-        
-        // Update in data structure using stored session
+
+        // Update in data structure using stored session (save with markers)
         const success = this.updateContentInDataStructure(editSession, normalizedContent);
-        
+
         if (success) {
+          // Update the element content with expanded schemas for display
+          let displayContent = normalizedContent;
+          if (window.CampaignSchemas && typeof window.CampaignSchemas.expandSchemaMarkers === 'function') {
+            displayContent = window.CampaignSchemas.expandSchemaMarkers(displayContent);
+          }
+          element.innerHTML = displayContent;
+
           EventBus.emit(Events.STORAGE_SAVE);
           if (JdrApp.modules.ui?.showNotification) {
             JdrApp.modules.ui.showNotification('💾 Modification sauvegardée', 'success');
           }
         }
-        
+
         // Clean up
         this.resetEditingState(editSession.container);
         this.currentEditSession = null;
@@ -27244,7 +27335,7 @@ select:focus {
 
     addEditingControls(container, editableElement) {
       // Remove any existing editing controls
-      const existingControls = container.querySelector('.editing-controls');
+      const existingControls = document.querySelector('.editing-controls');
       if (existingControls) {
         existingControls.remove();
       }
@@ -27253,43 +27344,45 @@ select:focus {
       const controlsDiv = document.createElement('div');
       controlsDiv.className = 'editing-controls';
       controlsDiv.style.cssText = `
-        position: absolute;
-        top: -40px;
-        right: 0;
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
         background: var(--paper);
-        border: 1px solid var(--bronze);
-        border-radius: 6px;
-        padding: 4px;
+        border: 2px solid var(--bronze);
+        border-radius: 8px;
+        padding: 8px;
         display: flex;
-        gap: 4px;
-        z-index: 1000;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        gap: 6px;
+        z-index: 10000;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.3);
       `;
 
       // Get available treasure tables for the dropdown
       const availableTables = window.TABLES_TRESORS?.tables || [];
       let treasureControls = '';
-      
+
       if (availableTables.length > 0) {
-        const tableOptions = availableTables.map(table => 
+        const tableOptions = availableTables.map(table =>
           `<option value="${table.nom}">${table.nom}</option>`
         ).join('');
 
         treasureControls = `
-          <div class="treasure-table-controls" style="display: flex; align-items: center; gap: 2px; border-right: 1px solid var(--rule); padding-right: 4px; margin-right: 4px;">
-            <select class="treasure-table-select" style="font-size: 11px; padding: 2px; border: 1px solid var(--rule); border-radius: 3px;">
+          <div class="treasure-table-controls" style="display: flex; align-items: center; gap: 4px; border-right: 1px solid var(--rule); padding-right: 8px; margin-right: 8px;">
+            <select class="treasure-table-select" style="font-size: 12px; padding: 4px 8px; border: 1px solid var(--rule); border-radius: 4px;">
               <option value="">Choisir table</option>
               ${tableOptions}
             </select>
             <button type="button" class="copy-treasure-link-btn btn" style="
-              background: var(--bronze); 
-              color: white; 
-              border: none; 
-              padding: 2px 6px; 
-              border-radius: 3px; 
-              cursor: pointer; 
-              font-size: 10px;
+              background: var(--bronze);
+              color: white;
+              border: none;
+              padding: 4px 10px;
+              border-radius: 4px;
+              cursor: pointer;
+              font-size: 12px;
               white-space: nowrap;
+              font-weight: bold;
             " title="Copier le lien HTML de la table sélectionnée">
               📋 Table
             </button>
@@ -27300,32 +27393,33 @@ select:focus {
       controlsDiv.innerHTML = `
         ${treasureControls}
         <button type="button" class="save-edit-btn btn" style="
-          background: var(--accent); 
-          color: white; 
-          border: none; 
-          padding: 2px 6px; 
-          border-radius: 3px; 
-          cursor: pointer; 
-          font-size: 11px;
+          background: var(--accent);
+          color: white;
+          border: none;
+          padding: 6px 12px;
+          border-radius: 4px;
+          cursor: pointer;
+          font-size: 13px;
+          font-weight: bold;
         ">
           ✓ Sauver
         </button>
         <button type="button" class="cancel-edit-btn btn" style="
-          background: #666; 
-          color: white; 
-          border: none; 
-          padding: 2px 6px; 
-          border-radius: 3px; 
-          cursor: pointer; 
-          font-size: 11px;
+          background: #666;
+          color: white;
+          border: none;
+          padding: 6px 12px;
+          border-radius: 4px;
+          cursor: pointer;
+          font-size: 13px;
+          font-weight: bold;
         ">
           ✕ Annuler
         </button>
       `;
 
-      // Position the container relatively for absolute positioning of controls
-      container.style.position = 'relative';
-      container.appendChild(controlsDiv);
+      // Append to body for fixed positioning
+      document.body.appendChild(controlsDiv);
 
       // Set up event listeners
       this.setupEditingControlsListeners(controlsDiv, container, editableElement);
@@ -27376,13 +27470,13 @@ select:focus {
       // Copy treasure table link button
       const copyBtn = controlsDiv.querySelector('.copy-treasure-link-btn');
       const tableSelect = controlsDiv.querySelector('.treasure-table-select');
-      
+
       if (copyBtn && tableSelect) {
         copyBtn.addEventListener('click', () => {
           const selectedTable = tableSelect.value;
           if (selectedTable && window.TablesTresorsManager) {
             const htmlLink = window.TablesTresorsManager.generateTreasureTableHtmlLink(selectedTable);
-            
+
             // Insert the link at cursor position
             if (editableElement.contentEditable === 'true') {
               const selection = window.getSelection();
@@ -27391,7 +27485,7 @@ select:focus {
                 range.deleteContents();
                 const linkNode = document.createTextNode(htmlLink);
                 range.insertNode(linkNode);
-                
+
                 // Move cursor after the inserted text
                 range.setStartAfter(linkNode);
                 range.setEndAfter(linkNode);
@@ -27401,7 +27495,7 @@ select:focus {
                 // Fallback: append at the end
                 editableElement.innerHTML += htmlLink;
               }
-              
+
               // Show notification
               if (window.TablesTresorsManager.showNotification) {
                 window.TablesTresorsManager.showNotification('✓ Lien de table inséré!', 'success');
@@ -27447,7 +27541,7 @@ select:focus {
     }
 
     removeEditingControls(container) {
-      const controls = container.querySelector('.editing-controls');
+      const controls = document.querySelector('.editing-controls');
       if (controls) {
         controls.remove();
       }
@@ -33904,6 +33998,388 @@ select:focus {
   }
 
 })();
+
+// ============================================================================
+// CAMPAIGN SCHEMAS EDITOR
+// ============================================================================
+
+const CampaignSchemas = {
+  canvas: null,
+  ctx: null,
+  isDrawing: false,
+  currentTool: 'pen',
+  currentColor: '#000000',
+  lineWidth: 2,
+  startX: 0,
+  startY: 0,
+  history: [],
+  currentState: null,
+
+  init() {
+    this.canvas = document.getElementById('schemaCanvas');
+    if (!this.canvas) {
+      return;
+    }
+
+    this.ctx = this.canvas.getContext('2d');
+    this.ctx.lineCap = 'round';
+    this.ctx.lineJoin = 'round';
+
+    // Event listeners
+    this.canvas.addEventListener('mousedown', this.handleMouseDown.bind(this));
+    this.canvas.addEventListener('mousemove', this.handleMouseMove.bind(this));
+    this.canvas.addEventListener('mouseup', this.handleMouseUp.bind(this));
+    this.canvas.addEventListener('mouseout', this.handleMouseUp.bind(this));
+
+    // Color picker
+    const colorPicker = document.getElementById('schemaColorPicker');
+    if (colorPicker) {
+      colorPicker.addEventListener('change', (e) => {
+        this.currentColor = e.target.value;
+      });
+    }
+
+    // Line width
+    const lineWidth = document.getElementById('schemaLineWidth');
+    if (lineWidth) {
+      lineWidth.addEventListener('input', (e) => {
+        this.lineWidth = e.target.value;
+        document.getElementById('lineWidthDisplay').textContent = e.target.value + 'px';
+      });
+    }
+
+    // Save initial state
+    this.saveState();
+  },
+
+  openSchemaEditor() {
+    let modal = document.getElementById('schemaEditorModal');
+
+    // Create modal if it doesn't exist
+    if (!modal) {
+      modal = this.createSchemaEditorModal();
+    }
+
+    if (modal) {
+      modal.style.display = 'block';
+
+      if (!this.canvas) {
+        this.init();
+      }
+      // Clear canvas with white background
+      this.ctx.fillStyle = 'white';
+      this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+      this.history = [];
+      this.saveState();
+      this.setTool('pen');
+    } else {
+      console.error('Failed to create schema editor modal!');
+    }
+  },
+
+  createSchemaEditorModal() {
+    const modalHTML = `
+<div id="schemaEditorModal" class="modal" style="display: none;">
+  <div class="modal-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 9999;">
+    <div class="modal-content" style="position: relative; max-width: 900px; margin: 2rem auto; background: var(--paper); border-radius: 12px; padding: 1.5rem; max-height: 90vh; overflow-y: auto;">
+      <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; border-bottom: 2px solid var(--rule); padding-bottom: 1rem;">
+        <h3 style="margin: 0;">🎨 Éditeur de schéma</h3>
+        <button class="modal-close" onclick="CampaignSchemas.closeSchemaEditor()" type="button" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; padding: 0; width: 30px; height: 30px;">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; padding: 0.75rem; background: var(--card); border-radius: 8px;">
+          <div style="display: flex; gap: 0.5rem; align-items: center;">
+            <label style="font-weight: bold; margin-right: 0.5rem;">Outil:</label>
+            <button onclick="CampaignSchemas.setTool('pen')" class="tool-btn" data-tool="pen" style="padding: 0.5rem; border: 2px solid var(--rule); background: var(--paper); cursor: pointer; border-radius: 4px;">✏️ Crayon</button>
+            <button onclick="CampaignSchemas.setTool('line')" class="tool-btn" data-tool="line" style="padding: 0.5rem; border: 2px solid var(--rule); background: var(--paper); cursor: pointer; border-radius: 4px;">📏 Ligne</button>
+            <button onclick="CampaignSchemas.setTool('rect')" class="tool-btn" data-tool="rect" style="padding: 0.5rem; border: 2px solid var(--rule); background: var(--paper); cursor: pointer; border-radius: 4px;">⬜ Rectangle</button>
+            <button onclick="CampaignSchemas.setTool('circle')" class="tool-btn" data-tool="circle" style="padding: 0.5rem; border: 2px solid var(--rule); background: var(--paper); cursor: pointer; border-radius: 4px;">⭕ Cercle</button>
+            <button onclick="CampaignSchemas.setTool('text')" class="tool-btn" data-tool="text" style="padding: 0.5rem; border: 2px solid var(--rule); background: var(--paper); cursor: pointer; border-radius: 4px;">📝 Texte</button>
+            <button onclick="CampaignSchemas.setTool('eraser')" class="tool-btn" data-tool="eraser" style="padding: 0.5rem; border: 2px solid var(--rule); background: var(--paper); cursor: pointer; border-radius: 4px;">🧹 Gomme</button>
+          </div>
+
+          <div style="display: flex; gap: 0.5rem; align-items: center; margin-left: auto;">
+            <label style="font-weight: bold;">Couleur:</label>
+            <input type="color" id="schemaColorPicker" value="#000000" style="width: 50px; height: 35px; border: 2px solid var(--rule); cursor: pointer; border-radius: 4px;">
+
+            <label style="font-weight: bold; margin-left: 1rem;">Épaisseur:</label>
+            <input type="range" id="schemaLineWidth" min="1" max="10" value="2" style="width: 100px;">
+            <span id="lineWidthDisplay" style="min-width: 30px;">2px</span>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+          <button onclick="CampaignSchemas.clearCanvas()" class="btn" style="background: #ef4444; color: white; padding: 0.5rem 1rem; border: none; border-radius: 4px; cursor: pointer;">🗑️ Effacer tout</button>
+          <button onclick="CampaignSchemas.undo()" class="btn" style="background: var(--accent); color: white; padding: 0.5rem 1rem; border: none; border-radius: 4px; cursor: pointer;">↶ Annuler</button>
+        </div>
+
+        <div style="border: 2px solid var(--rule); border-radius: 8px; overflow: hidden; background: white; margin-bottom: 1rem;">
+          <canvas id="schemaCanvas" width="800" height="600" style="display: block; cursor: crosshair;"></canvas>
+        </div>
+
+        <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+          <button onclick="CampaignSchemas.closeSchemaEditor()" class="btn" style="background: var(--rule); color: var(--text); padding: 0.75rem 1.5rem; border: none; border-radius: 6px; cursor: pointer; font-weight: bold;">Annuler</button>
+          <button onclick="CampaignSchemas.saveSchema()" class="btn primary" style="background: var(--accent); color: white; padding: 0.75rem 1.5rem; border: none; border-radius: 6px; cursor: pointer; font-weight: bold;">💾 Insérer le schéma</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    `;
+
+    const div = document.createElement('div');
+    div.innerHTML = modalHTML;
+    const modalElement = div.firstElementChild;
+    document.body.appendChild(modalElement);
+
+    // Empêcher la propagation des clics depuis le contenu de la modal
+    const modalContent = modalElement.querySelector('.modal-content');
+    if (modalContent) {
+      modalContent.addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
+    }
+
+    // Fermer la modal uniquement si on clique sur l'overlay (en dehors du contenu)
+    const modalOverlay = modalElement.querySelector('.modal-overlay');
+    if (modalOverlay) {
+      modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) {
+          this.closeSchemaEditor();
+        }
+      });
+    }
+
+    return modalElement;
+  },
+
+  closeSchemaEditor() {
+    const modal = document.getElementById('schemaEditorModal');
+    if (modal) {
+      modal.style.display = 'none';
+    }
+  },
+
+  setTool(tool) {
+    this.currentTool = tool;
+    // Update button styles
+    document.querySelectorAll('.tool-btn').forEach(btn => {
+      if (btn.dataset.tool === tool) {
+        btn.style.background = 'var(--accent)';
+        btn.style.color = 'white';
+        btn.style.borderColor = 'var(--accent)';
+      } else {
+        btn.style.background = 'var(--paper)';
+        btn.style.color = 'var(--text)';
+        btn.style.borderColor = 'var(--rule)';
+      }
+    });
+  },
+
+  handleMouseDown(e) {
+    this.isDrawing = true;
+    const rect = this.canvas.getBoundingClientRect();
+    this.startX = e.clientX - rect.left;
+    this.startY = e.clientY - rect.top;
+
+    if (this.currentTool === 'pen' || this.currentTool === 'eraser') {
+      this.ctx.beginPath();
+      this.ctx.moveTo(this.startX, this.startY);
+    } else if (this.currentTool === 'text') {
+      this.addText();
+    } else {
+      // Save current canvas state for preview
+      this.currentState = this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height);
+    }
+  },
+
+  handleMouseMove(e) {
+    if (!this.isDrawing) return;
+
+    const rect = this.canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    this.ctx.strokeStyle = this.currentTool === 'eraser' ? 'white' : this.currentColor;
+    this.ctx.lineWidth = this.currentTool === 'eraser' ? this.lineWidth * 3 : this.lineWidth;
+
+    if (this.currentTool === 'pen' || this.currentTool === 'eraser') {
+      this.ctx.lineTo(x, y);
+      this.ctx.stroke();
+    } else if (this.currentTool === 'line' || this.currentTool === 'rect' || this.currentTool === 'circle') {
+      // Restore canvas state and draw preview
+      if (this.currentState) {
+        this.ctx.putImageData(this.currentState, 0, 0);
+      }
+
+      this.ctx.beginPath();
+      if (this.currentTool === 'line') {
+        this.ctx.moveTo(this.startX, this.startY);
+        this.ctx.lineTo(x, y);
+        this.ctx.stroke();
+      } else if (this.currentTool === 'rect') {
+        this.ctx.strokeRect(this.startX, this.startY, x - this.startX, y - this.startY);
+      } else if (this.currentTool === 'circle') {
+        const radius = Math.sqrt(Math.pow(x - this.startX, 2) + Math.pow(y - this.startY, 2));
+        this.ctx.arc(this.startX, this.startY, radius, 0, 2 * Math.PI);
+        this.ctx.stroke();
+      }
+    }
+  },
+
+  handleMouseUp(e) {
+    if (this.isDrawing) {
+      this.isDrawing = false;
+      this.saveState();
+    }
+  },
+
+  addText() {
+    const text = prompt('Entrez le texte à ajouter:');
+    if (text) {
+      this.ctx.font = (this.lineWidth * 8) + 'px Arial';
+      this.ctx.fillStyle = this.currentColor;
+      this.ctx.fillText(text, this.startX, this.startY);
+      this.saveState();
+    }
+    this.isDrawing = false;
+  },
+
+  clearCanvas() {
+    if (confirm('Êtes-vous sûr de vouloir effacer tout le schéma ?')) {
+      this.ctx.fillStyle = 'white';
+      this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+      this.saveState();
+    }
+  },
+
+  saveState() {
+    this.history.push(this.canvas.toDataURL());
+    if (this.history.length > 20) {
+      this.history.shift();
+    }
+  },
+
+  undo() {
+    if (this.history.length > 1) {
+      this.history.pop();
+      const img = new Image();
+      img.onload = () => {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.drawImage(img, 0, 0);
+      };
+      img.src = this.history[this.history.length - 1];
+    }
+  },
+
+  saveSchema() {
+    const dataURL = this.canvas.toDataURL('image/png');
+
+    // Générer un ID unique pour le schéma
+    const schemaId = 'schema_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+
+    // Stocker l'image dans localStorage
+    try {
+      localStorage.setItem(schemaId, dataURL);
+    } catch (e) {
+      console.error('Erreur lors de la sauvegarde du schéma:', e);
+      alert('Erreur: le schéma est trop volumineux pour être sauvegardé.');
+      return;
+    }
+
+    // Créer un marqueur court
+    const schemaMarker = `[schema:${schemaId}]`;
+
+    // Check if we're in the HTML editor modal (textarea mode)
+    if (this.editorInsertFunction && typeof this.editorInsertFunction === 'function') {
+      // Insert into the textarea using the editor's insert function
+      this.editorInsertFunction('\n' + schemaMarker + '\n');
+
+      // Show notification
+      if (JdrApp?.modules?.ui?.showNotification) {
+        JdrApp.modules.ui.showNotification('🎨 Schéma inséré dans l\'éditeur !', 'success');
+      }
+    } else {
+      // Fallback: direct insertion into content (legacy mode) - utilise le HTML complet
+      const editableElement = this.currentEditableElement || document.querySelector('.subpage-content.editable');
+
+      if (editableElement) {
+        const schemaHTML = `
+<div class="campaign-schema" style="margin: 1.5rem 0; text-align: center; background: white; padding: 1rem; border-radius: 8px; border: 2px solid var(--rule);">
+  <img src="${dataURL}" style="max-width: 100%; height: auto; border-radius: 4px;" alt="Schéma de campagne">
+</div>`;
+
+        // Insert at cursor position if in edit mode
+        if (editableElement.contentEditable === 'true') {
+          const selection = window.getSelection();
+          if (selection.rangeCount > 0) {
+            const range = selection.getRangeAt(0);
+            range.deleteContents();
+
+            // Create a temporary div to parse the HTML
+            const temp = document.createElement('div');
+            temp.innerHTML = schemaHTML;
+            const schemaNode = temp.firstElementChild;
+
+            range.insertNode(schemaNode);
+
+            // Move cursor after the inserted schema
+            range.setStartAfter(schemaNode);
+            range.setEndAfter(schemaNode);
+            selection.removeAllRanges();
+            selection.addRange(range);
+          } else {
+            // Fallback: append at the end
+            editableElement.innerHTML += '<br>' + schemaHTML;
+          }
+        } else {
+          // Not in edit mode: append at the end
+          editableElement.innerHTML += '<br>' + schemaHTML;
+        }
+
+        // Show notification
+        if (JdrApp?.modules?.ui?.showNotification) {
+          JdrApp.modules.ui.showNotification('🎨 Schéma inséré avec succès !', 'success');
+        }
+      }
+    }
+
+    // Clear the stored references
+    this.currentEditableElement = null;
+    this.editorTextarea = null;
+    this.editorInsertFunction = null;
+    this.closeSchemaEditor();
+  },
+
+  // Fonction pour remplacer les marqueurs [schema:id] par les vraies images
+  expandSchemaMarkers(html) {
+    if (!html || typeof html !== 'string') return html;
+
+    return html.replace(/\[schema:(schema_[^\]]+)\]/g, (match, schemaId) => {
+      const dataURL = localStorage.getItem(schemaId);
+      if (dataURL) {
+        return `
+<div class="campaign-schema" style="margin: 1.5rem 0; text-align: center; background: white; padding: 1rem; border-radius: 8px; border: 2px solid var(--rule);">
+  <img src="${dataURL}" style="max-width: 100%; height: auto; border-radius: 4px;" alt="Schéma de campagne">
+</div>`;
+      }
+      return match; // Si l'image n'est pas trouvée, garder le marqueur
+    });
+  }
+};
+
+// Make it globally accessible immediately
+window.CampaignSchemas = CampaignSchemas;
+
+// Initialize when DOM is ready (for canvas setup)
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    CampaignSchemas.init();
+  });
+} else {
+  CampaignSchemas.init();
+}
 // ============================================================================
 // JSPDF LOADER - Character Sheet PDF Generation Support
 // ============================================================================

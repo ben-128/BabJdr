@@ -497,3 +497,385 @@
   }
 
 })();
+
+// ============================================================================
+// CAMPAIGN SCHEMAS EDITOR
+// ============================================================================
+
+const CampaignSchemas = {
+  canvas: null,
+  ctx: null,
+  isDrawing: false,
+  currentTool: 'pen',
+  currentColor: '#000000',
+  lineWidth: 2,
+  startX: 0,
+  startY: 0,
+  history: [],
+  currentState: null,
+
+  init() {
+    this.canvas = document.getElementById('schemaCanvas');
+    if (!this.canvas) {
+      return;
+    }
+
+    this.ctx = this.canvas.getContext('2d');
+    this.ctx.lineCap = 'round';
+    this.ctx.lineJoin = 'round';
+
+    // Event listeners
+    this.canvas.addEventListener('mousedown', this.handleMouseDown.bind(this));
+    this.canvas.addEventListener('mousemove', this.handleMouseMove.bind(this));
+    this.canvas.addEventListener('mouseup', this.handleMouseUp.bind(this));
+    this.canvas.addEventListener('mouseout', this.handleMouseUp.bind(this));
+
+    // Color picker
+    const colorPicker = document.getElementById('schemaColorPicker');
+    if (colorPicker) {
+      colorPicker.addEventListener('change', (e) => {
+        this.currentColor = e.target.value;
+      });
+    }
+
+    // Line width
+    const lineWidth = document.getElementById('schemaLineWidth');
+    if (lineWidth) {
+      lineWidth.addEventListener('input', (e) => {
+        this.lineWidth = e.target.value;
+        document.getElementById('lineWidthDisplay').textContent = e.target.value + 'px';
+      });
+    }
+
+    // Save initial state
+    this.saveState();
+  },
+
+  openSchemaEditor() {
+    let modal = document.getElementById('schemaEditorModal');
+
+    // Create modal if it doesn't exist
+    if (!modal) {
+      modal = this.createSchemaEditorModal();
+    }
+
+    if (modal) {
+      modal.style.display = 'block';
+
+      if (!this.canvas) {
+        this.init();
+      }
+      // Clear canvas with white background
+      this.ctx.fillStyle = 'white';
+      this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+      this.history = [];
+      this.saveState();
+      this.setTool('pen');
+    } else {
+      console.error('Failed to create schema editor modal!');
+    }
+  },
+
+  createSchemaEditorModal() {
+    const modalHTML = `
+<div id="schemaEditorModal" class="modal" style="display: none;">
+  <div class="modal-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 9999;">
+    <div class="modal-content" style="position: relative; max-width: 900px; margin: 2rem auto; background: var(--paper); border-radius: 12px; padding: 1.5rem; max-height: 90vh; overflow-y: auto;">
+      <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; border-bottom: 2px solid var(--rule); padding-bottom: 1rem;">
+        <h3 style="margin: 0;">🎨 Éditeur de schéma</h3>
+        <button class="modal-close" onclick="CampaignSchemas.closeSchemaEditor()" type="button" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; padding: 0; width: 30px; height: 30px;">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; padding: 0.75rem; background: var(--card); border-radius: 8px;">
+          <div style="display: flex; gap: 0.5rem; align-items: center;">
+            <label style="font-weight: bold; margin-right: 0.5rem;">Outil:</label>
+            <button onclick="CampaignSchemas.setTool('pen')" class="tool-btn" data-tool="pen" style="padding: 0.5rem; border: 2px solid var(--rule); background: var(--paper); cursor: pointer; border-radius: 4px;">✏️ Crayon</button>
+            <button onclick="CampaignSchemas.setTool('line')" class="tool-btn" data-tool="line" style="padding: 0.5rem; border: 2px solid var(--rule); background: var(--paper); cursor: pointer; border-radius: 4px;">📏 Ligne</button>
+            <button onclick="CampaignSchemas.setTool('rect')" class="tool-btn" data-tool="rect" style="padding: 0.5rem; border: 2px solid var(--rule); background: var(--paper); cursor: pointer; border-radius: 4px;">⬜ Rectangle</button>
+            <button onclick="CampaignSchemas.setTool('circle')" class="tool-btn" data-tool="circle" style="padding: 0.5rem; border: 2px solid var(--rule); background: var(--paper); cursor: pointer; border-radius: 4px;">⭕ Cercle</button>
+            <button onclick="CampaignSchemas.setTool('text')" class="tool-btn" data-tool="text" style="padding: 0.5rem; border: 2px solid var(--rule); background: var(--paper); cursor: pointer; border-radius: 4px;">📝 Texte</button>
+            <button onclick="CampaignSchemas.setTool('eraser')" class="tool-btn" data-tool="eraser" style="padding: 0.5rem; border: 2px solid var(--rule); background: var(--paper); cursor: pointer; border-radius: 4px;">🧹 Gomme</button>
+          </div>
+
+          <div style="display: flex; gap: 0.5rem; align-items: center; margin-left: auto;">
+            <label style="font-weight: bold;">Couleur:</label>
+            <input type="color" id="schemaColorPicker" value="#000000" style="width: 50px; height: 35px; border: 2px solid var(--rule); cursor: pointer; border-radius: 4px;">
+
+            <label style="font-weight: bold; margin-left: 1rem;">Épaisseur:</label>
+            <input type="range" id="schemaLineWidth" min="1" max="10" value="2" style="width: 100px;">
+            <span id="lineWidthDisplay" style="min-width: 30px;">2px</span>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+          <button onclick="CampaignSchemas.clearCanvas()" class="btn" style="background: #ef4444; color: white; padding: 0.5rem 1rem; border: none; border-radius: 4px; cursor: pointer;">🗑️ Effacer tout</button>
+          <button onclick="CampaignSchemas.undo()" class="btn" style="background: var(--accent); color: white; padding: 0.5rem 1rem; border: none; border-radius: 4px; cursor: pointer;">↶ Annuler</button>
+        </div>
+
+        <div style="border: 2px solid var(--rule); border-radius: 8px; overflow: hidden; background: white; margin-bottom: 1rem;">
+          <canvas id="schemaCanvas" width="800" height="600" style="display: block; cursor: crosshair;"></canvas>
+        </div>
+
+        <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+          <button onclick="CampaignSchemas.closeSchemaEditor()" class="btn" style="background: var(--rule); color: var(--text); padding: 0.75rem 1.5rem; border: none; border-radius: 6px; cursor: pointer; font-weight: bold;">Annuler</button>
+          <button onclick="CampaignSchemas.saveSchema()" class="btn primary" style="background: var(--accent); color: white; padding: 0.75rem 1.5rem; border: none; border-radius: 6px; cursor: pointer; font-weight: bold;">💾 Insérer le schéma</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    `;
+
+    const div = document.createElement('div');
+    div.innerHTML = modalHTML;
+    const modalElement = div.firstElementChild;
+    document.body.appendChild(modalElement);
+
+    // Empêcher la propagation des clics depuis le contenu de la modal
+    const modalContent = modalElement.querySelector('.modal-content');
+    if (modalContent) {
+      modalContent.addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
+    }
+
+    // Fermer la modal uniquement si on clique sur l'overlay (en dehors du contenu)
+    const modalOverlay = modalElement.querySelector('.modal-overlay');
+    if (modalOverlay) {
+      modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) {
+          this.closeSchemaEditor();
+        }
+      });
+    }
+
+    return modalElement;
+  },
+
+  closeSchemaEditor() {
+    const modal = document.getElementById('schemaEditorModal');
+    if (modal) {
+      modal.style.display = 'none';
+    }
+  },
+
+  setTool(tool) {
+    this.currentTool = tool;
+    // Update button styles
+    document.querySelectorAll('.tool-btn').forEach(btn => {
+      if (btn.dataset.tool === tool) {
+        btn.style.background = 'var(--accent)';
+        btn.style.color = 'white';
+        btn.style.borderColor = 'var(--accent)';
+      } else {
+        btn.style.background = 'var(--paper)';
+        btn.style.color = 'var(--text)';
+        btn.style.borderColor = 'var(--rule)';
+      }
+    });
+  },
+
+  handleMouseDown(e) {
+    this.isDrawing = true;
+    const rect = this.canvas.getBoundingClientRect();
+    this.startX = e.clientX - rect.left;
+    this.startY = e.clientY - rect.top;
+
+    if (this.currentTool === 'pen' || this.currentTool === 'eraser') {
+      this.ctx.beginPath();
+      this.ctx.moveTo(this.startX, this.startY);
+    } else if (this.currentTool === 'text') {
+      this.addText();
+    } else {
+      // Save current canvas state for preview
+      this.currentState = this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height);
+    }
+  },
+
+  handleMouseMove(e) {
+    if (!this.isDrawing) return;
+
+    const rect = this.canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    this.ctx.strokeStyle = this.currentTool === 'eraser' ? 'white' : this.currentColor;
+    this.ctx.lineWidth = this.currentTool === 'eraser' ? this.lineWidth * 3 : this.lineWidth;
+
+    if (this.currentTool === 'pen' || this.currentTool === 'eraser') {
+      this.ctx.lineTo(x, y);
+      this.ctx.stroke();
+    } else if (this.currentTool === 'line' || this.currentTool === 'rect' || this.currentTool === 'circle') {
+      // Restore canvas state and draw preview
+      if (this.currentState) {
+        this.ctx.putImageData(this.currentState, 0, 0);
+      }
+
+      this.ctx.beginPath();
+      if (this.currentTool === 'line') {
+        this.ctx.moveTo(this.startX, this.startY);
+        this.ctx.lineTo(x, y);
+        this.ctx.stroke();
+      } else if (this.currentTool === 'rect') {
+        this.ctx.strokeRect(this.startX, this.startY, x - this.startX, y - this.startY);
+      } else if (this.currentTool === 'circle') {
+        const radius = Math.sqrt(Math.pow(x - this.startX, 2) + Math.pow(y - this.startY, 2));
+        this.ctx.arc(this.startX, this.startY, radius, 0, 2 * Math.PI);
+        this.ctx.stroke();
+      }
+    }
+  },
+
+  handleMouseUp(e) {
+    if (this.isDrawing) {
+      this.isDrawing = false;
+      this.saveState();
+    }
+  },
+
+  addText() {
+    const text = prompt('Entrez le texte à ajouter:');
+    if (text) {
+      this.ctx.font = (this.lineWidth * 8) + 'px Arial';
+      this.ctx.fillStyle = this.currentColor;
+      this.ctx.fillText(text, this.startX, this.startY);
+      this.saveState();
+    }
+    this.isDrawing = false;
+  },
+
+  clearCanvas() {
+    if (confirm('Êtes-vous sûr de vouloir effacer tout le schéma ?')) {
+      this.ctx.fillStyle = 'white';
+      this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+      this.saveState();
+    }
+  },
+
+  saveState() {
+    this.history.push(this.canvas.toDataURL());
+    if (this.history.length > 20) {
+      this.history.shift();
+    }
+  },
+
+  undo() {
+    if (this.history.length > 1) {
+      this.history.pop();
+      const img = new Image();
+      img.onload = () => {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.drawImage(img, 0, 0);
+      };
+      img.src = this.history[this.history.length - 1];
+    }
+  },
+
+  saveSchema() {
+    const dataURL = this.canvas.toDataURL('image/png');
+
+    // Générer un ID unique pour le schéma
+    const schemaId = 'schema_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+
+    // Stocker l'image dans localStorage
+    try {
+      localStorage.setItem(schemaId, dataURL);
+    } catch (e) {
+      console.error('Erreur lors de la sauvegarde du schéma:', e);
+      alert('Erreur: le schéma est trop volumineux pour être sauvegardé.');
+      return;
+    }
+
+    // Créer un marqueur court
+    const schemaMarker = `[schema:${schemaId}]`;
+
+    // Check if we're in the HTML editor modal (textarea mode)
+    if (this.editorInsertFunction && typeof this.editorInsertFunction === 'function') {
+      // Insert into the textarea using the editor's insert function
+      this.editorInsertFunction('\n' + schemaMarker + '\n');
+
+      // Show notification
+      if (JdrApp?.modules?.ui?.showNotification) {
+        JdrApp.modules.ui.showNotification('🎨 Schéma inséré dans l\'éditeur !', 'success');
+      }
+    } else {
+      // Fallback: direct insertion into content (legacy mode) - utilise le HTML complet
+      const editableElement = this.currentEditableElement || document.querySelector('.subpage-content.editable');
+
+      if (editableElement) {
+        const schemaHTML = `
+<div class="campaign-schema" style="margin: 1.5rem 0; text-align: center; background: white; padding: 1rem; border-radius: 8px; border: 2px solid var(--rule);">
+  <img src="${dataURL}" style="max-width: 100%; height: auto; border-radius: 4px;" alt="Schéma de campagne">
+</div>`;
+
+        // Insert at cursor position if in edit mode
+        if (editableElement.contentEditable === 'true') {
+          const selection = window.getSelection();
+          if (selection.rangeCount > 0) {
+            const range = selection.getRangeAt(0);
+            range.deleteContents();
+
+            // Create a temporary div to parse the HTML
+            const temp = document.createElement('div');
+            temp.innerHTML = schemaHTML;
+            const schemaNode = temp.firstElementChild;
+
+            range.insertNode(schemaNode);
+
+            // Move cursor after the inserted schema
+            range.setStartAfter(schemaNode);
+            range.setEndAfter(schemaNode);
+            selection.removeAllRanges();
+            selection.addRange(range);
+          } else {
+            // Fallback: append at the end
+            editableElement.innerHTML += '<br>' + schemaHTML;
+          }
+        } else {
+          // Not in edit mode: append at the end
+          editableElement.innerHTML += '<br>' + schemaHTML;
+        }
+
+        // Show notification
+        if (JdrApp?.modules?.ui?.showNotification) {
+          JdrApp.modules.ui.showNotification('🎨 Schéma inséré avec succès !', 'success');
+        }
+      }
+    }
+
+    // Clear the stored references
+    this.currentEditableElement = null;
+    this.editorTextarea = null;
+    this.editorInsertFunction = null;
+    this.closeSchemaEditor();
+  },
+
+  // Fonction pour remplacer les marqueurs [schema:id] par les vraies images
+  expandSchemaMarkers(html) {
+    if (!html || typeof html !== 'string') return html;
+
+    return html.replace(/\[schema:(schema_[^\]]+)\]/g, (match, schemaId) => {
+      const dataURL = localStorage.getItem(schemaId);
+      if (dataURL) {
+        return `
+<div class="campaign-schema" style="margin: 1.5rem 0; text-align: center; background: white; padding: 1rem; border-radius: 8px; border: 2px solid var(--rule);">
+  <img src="${dataURL}" style="max-width: 100%; height: auto; border-radius: 4px;" alt="Schéma de campagne">
+</div>`;
+      }
+      return match; // Si l'image n'est pas trouvée, garder le marqueur
+    });
+  }
+};
+
+// Make it globally accessible immediately
+window.CampaignSchemas = CampaignSchemas;
+
+// Initialize when DOM is ready (for canvas setup)
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    CampaignSchemas.init();
+  });
+} else {
+  CampaignSchemas.init();
+}
