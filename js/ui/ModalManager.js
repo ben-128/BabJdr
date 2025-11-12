@@ -510,99 +510,145 @@
       
       // Use CardBuilder to create a full monster card in preview mode
       const monsterCard = CardBuilder.create('monster', foundMonster, 'preview').build();
-      
+
+      // Debug: Check what we're getting
+      console.log('Monster card type:', typeof monsterCard);
+      console.log('Monster card first 200 chars:', monsterCard.substring(0, 200));
+      console.log('Contains < character:', monsterCard.includes('<'));
+      console.log('Contains &lt;:', monsterCard.includes('&lt;'));
+
+      // Add minimal styles for the preview tooltip
+      if (!document.getElementById('monster-preview-styles')) {
+        const styleElement = document.createElement('style');
+        styleElement.id = 'monster-preview-styles';
+        styleElement.textContent = `
+          .monster-preview-tooltip {
+            background: var(--paper) !important;
+            position: fixed !important;
+            z-index: 2147483647 !important;
+            max-width: 450px !important;
+            max-height: 700px !important;
+            overflow-y: auto !important;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5) !important;
+            border-radius: 12px !important;
+            border: 2px solid var(--rule) !important;
+            padding: 1rem !important;
+          }
+          .monster-preview-tooltip .preview-close-btn {
+            position: absolute !important;
+            top: 5px !important;
+            right: 5px !important;
+            background: #dc2626 !important;
+            color: white !important;
+            border: 3px solid #ffffff !important;
+            border-radius: 50% !important;
+            width: 40px !important;
+            height: 40px !important;
+            cursor: pointer !important;
+            font-size: 24px !important;
+            font-weight: bold !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            z-index: 1 !important;
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.6) !important;
+            transition: all 0.2s ease !important;
+          }
+          .monster-preview-tooltip .preview-close-btn:hover {
+            background: #b91c1c !important;
+            transform: scale(1.1) !important;
+            box-shadow: 0 6px 16px rgba(220, 38, 38, 0.8) !important;
+          }
+          /* Force image to display above title with proper spacing */
+          .monster-preview-tooltip .card h4 {
+            clear: both !important;
+            display: block !important;
+            width: 100% !important;
+            margin-bottom: 1rem !important;
+          }
+          .monster-preview-tooltip .card .illus {
+            display: block !important;
+            clear: both !important;
+            width: 100% !important;
+            text-align: center !important;
+            margin: 0 auto 1.5rem !important;
+          }
+          .monster-preview-tooltip .card .illus img {
+            display: block !important;
+            margin: 0 auto !important;
+          }
+          /* Add spacing between sections */
+          .monster-preview-tooltip .card > div:not(:first-child) {
+            margin-top: 1rem !important;
+          }
+          .monster-preview-tooltip .card hr {
+            margin: 1.5rem 0 !important;
+          }
+          /* Add spacing after tags/element section */
+          .monster-preview-tooltip .card > div[style*="display: flex"] {
+            margin-bottom: 1.5rem !important;
+          }
+          /* Add extra spacing after elemental armors section */
+          .monster-preview-tooltip .card .monster-elemental-grid {
+            margin-bottom: 2rem !important;
+          }
+          .monster-preview-tooltip .card div:has(.monster-elemental-grid) {
+            margin-bottom: 2.5rem !important;
+          }
+          /* Target the div containing "Armures Élémentaires" text */
+          .monster-preview-tooltip .card > div > strong:first-child {
+            display: block !important;
+            margin-bottom: 0.5rem !important;
+          }
+          /* Add spacing to the parent div that contains the elemental armors */
+          .monster-preview-tooltip .card > div:has(strong:first-child) {
+            margin-bottom: 2.5rem !important;
+          }
+          /* Increase margin of hr that comes after elemental armors */
+          .monster-preview-tooltip .card .monster-elemental-grid + hr,
+          .monster-preview-tooltip .card > div:has(.monster-elemental-grid) + hr {
+            margin-top: 2rem !important;
+            margin-bottom: 1.5rem !important;
+          }
+        `;
+        document.head.appendChild(styleElement);
+      }
+
       // Create and show preview
       const preview = document.createElement('div');
       preview.className = 'monster-preview-tooltip';
-      preview.innerHTML = `
-        <style>
-          .monster-preview-tooltip,
-          .monster-preview-tooltip *,
-          .monster-preview-tooltip *::before,
-          .monster-preview-tooltip *::after {
-            opacity: 1 !important;
-            background-color: rgba(248, 246, 240, 1) !important;
-          }
-          .monster-preview-tooltip .card,
-          .monster-preview-tooltip .card *,
-          .monster-preview-tooltip div,
-          .monster-preview-tooltip span,
-          .monster-preview-tooltip p,
-          .monster-preview-tooltip section,
-          .monster-preview-tooltip article,
-          .monster-preview-tooltip header,
-          .monster-preview-tooltip footer {
-            opacity: 1 !important;
-            background-color: rgba(248, 246, 240, 1) !important;
-            background: rgba(248, 246, 240, 1) !important;
-          }
-          .monster-preview-tooltip .card:hover {
-            opacity: 1 !important;
-            background: rgba(248, 246, 240, 1) !important;
-            transform: none !important;
-          }
-          .preview-close-btn {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            background: #dc2626;
-            color: black;
-            border: 3px solid #ffffff;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-            font-size: 24px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1001;
-            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.6);
-            transition: all 0.2s ease;
-          }
-          .preview-close-btn:hover {
-            background: #b91c1c;
-            color: black;
-            transform: scale(1.1);
-            box-shadow: 0 6px 16px rgba(220, 38, 38, 0.8);
-          }
-        </style>
-        <button class="preview-close-btn" title="Fermer">&times;</button>
-        ${monsterCard}
-      `;
+
+      // Add close button
+      const closeBtn = document.createElement('button');
+      closeBtn.className = 'preview-close-btn';
+      closeBtn.title = 'Fermer';
+      closeBtn.textContent = '×';
+      preview.appendChild(closeBtn);
+
+      // Decode HTML entities before using
+      const decodeHTML = (html) => {
+        const textarea = document.createElement('textarea');
+        textarea.innerHTML = html;
+        return textarea.value;
+      };
+
+      // Decode the monster card HTML
+      const decodedCard = decodeHTML(monsterCard);
+      console.log('Decoded card first 200 chars:', decodedCard.substring(0, 200));
+
+      // Add monster card - DIRECTLY set innerHTML with decoded HTML
+      const cardContainer = document.createElement('div');
+      cardContainer.innerHTML = decodedCard;
+
+      console.log('Card container children:', cardContainer.children.length);
+      console.log('Card container HTML preview:', cardContainer.innerHTML.substring(0, 100));
+
+      // Move all children from card container to preview
+      while (cardContainer.firstChild) {
+        preview.appendChild(cardContainer.firstChild);
+      }
       
-      // Style the preview container
-      preview.style.cssText = `
-        position: absolute;
-        z-index: 2147483647;
-        max-width: 450px;
-        max-height: 700px;
-        overflow-y: auto;
-        box-shadow: 0 8px 24px rgba(0,0,0,1) !important;
-        border-radius: 12px;
-        pointer-events: auto;
-        opacity: 1 !important;
-        background: rgb(248, 246, 240) !important;
-        background-color: rgb(248, 246, 240) !important;
-      `;
-      
-      // Force styles after element is added to DOM
-      setTimeout(() => {
-        preview.style.setProperty('opacity', '1', 'important');
-        preview.style.setProperty('background', 'rgb(248, 246, 240)', 'important');
-        preview.style.setProperty('background-color', 'rgb(248, 246, 240)', 'important');
-        
-        // Force background on all child elements
-        const allElements = preview.querySelectorAll('*');
-        allElements.forEach(el => {
-          el.style.setProperty('opacity', '1', 'important');
-          el.style.setProperty('background-color', 'rgb(248, 246, 240)', 'important');
-          el.style.setProperty('background', 'rgb(248, 246, 240)', 'important');
-          el.style.setProperty('display', 'initial', 'important');
-          el.style.setProperty('visibility', 'visible', 'important');
-        });
-      }, 10);
+      // The styles are now applied via CSS in the head, no need for inline styles here
       
       // Position near the trigger element
       const rect = triggerElement.getBoundingClientRect();

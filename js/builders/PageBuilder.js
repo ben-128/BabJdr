@@ -1335,11 +1335,91 @@
       `;
     }
 
+    convertToGoogleDocEmbedLink(link) {
+      // Convert various Google Doc link formats to embed format
+      // Format: https://docs.google.com/document/d/DOCUMENT_ID/edit -> /preview or /pub?embedded=true
+
+      if (!link) return '';
+
+      // Extract document ID from various Google Doc URL formats
+      const patterns = [
+        /docs\.google\.com\/document\/d\/([a-zA-Z0-9_-]+)/,
+        /drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/
+      ];
+
+      for (const pattern of patterns) {
+        const match = link.match(pattern);
+        if (match && match[1]) {
+          const docId = match[1];
+          // Use preview mode for better embedding
+          return `https://docs.google.com/document/d/${docId}/preview`;
+        }
+      }
+
+      // If already an embed link or unknown format, return as is
+      return link;
+    }
+
     buildSelectedSubPageContent(campaignName, subPageName, subPage) {
-      // Expand schema markers in content
+      // Check if there's a Google Doc link
+      const hasGoogleDocLink = subPage.googleDocLink && subPage.googleDocLink.trim();
+
+      // Always display the text content
       let content = subPage.content || '<p>Contenu de la sous-page...</p>';
       if (window.CampaignSchemas && typeof window.CampaignSchemas.expandSchemaMarkers === 'function') {
         content = window.CampaignSchemas.expandSchemaMarkers(content);
+      }
+
+      let contentHtml = `
+        <div class="subpage-content editable" data-edit-type="generic" data-edit-section="subpage-${campaignName}-${subPageName}-content"
+             style="line-height: 1.6; min-height: 200px; flex: 1;">
+          ${content}
+        </div>`;
+
+      // If there's a Google Doc link, add the iframe ABOVE the text content
+      if (hasGoogleDocLink) {
+        const docLink = subPage.googleDocLink.trim();
+        const embedLink = this.convertToGoogleDocEmbedLink(docLink);
+
+        return `
+          <div class="selected-subpage" style="background: var(--paper-light); border-radius: 8px; padding: 1.5rem; border: 2px solid var(--rule);">
+            <!-- Sub-page Header -->
+            <div class="subpage-header" style="margin-bottom: 1rem; border-bottom: 1px solid var(--rule); padding-bottom: 0.75rem;">
+              <div style="display: flex; align-items: center;">
+                <h5 class="editable" data-edit-type="generic" data-edit-section="subpage-${campaignName}-${subPageName}-title"
+                    style="margin: 0; color: var(--accent-ink); font-size: 1.2em; flex: 1;">
+                  📄 ${subPage.title || subPageName}
+                </h5>
+                ${this.buildEditButton('title')}
+              </div>
+            </div>
+
+            <!-- Google Doc iframe Section -->
+            <div style="margin-bottom: 1.5rem;">
+              <div style="display: flex; align-items: flex-start; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <div style="flex: 1; padding: 0.5rem; background: var(--card); border-radius: 4px; font-size: 0.9em; color: var(--text-muted); border: 1px solid var(--rule);">
+                  📎 Document Google: <a href="${docLink}" target="_blank" style="color: var(--accent); text-decoration: underline; font-weight: 600;">${docLink}</a>
+                </div>
+                ${this.buildGoogleDocButton(campaignName, subPageName)}
+              </div>
+              <iframe src="${embedLink}"
+                      style="width: 100%; height: 600px; border: 2px solid var(--rule); border-radius: 8px;"
+                      frameborder="0"></iframe>
+            </div>
+
+            <!-- Separator -->
+            <hr style="margin: 1rem 0; border: none; border-top: 2px solid var(--rule); opacity: 0.5;">
+
+            <!-- Text content Section -->
+            <div style="display: flex; align-items: flex-start; gap: 0.5rem;">
+              <div class="subpage-content editable" data-edit-type="generic" data-edit-section="subpage-${campaignName}-${subPageName}-content"
+                   style="line-height: 1.6; min-height: 200px; flex: 1;">
+                ${content}
+              </div>
+              ${this.buildEditButton('section')}
+            </div>
+          </div>
+        `;
       }
 
       return `
@@ -1356,12 +1436,12 @@
           </div>
 
           <!-- Sub-page Content -->
-          <div style="display: flex; align-items: flex-start;">
-            <div class="subpage-content editable" data-edit-type="generic" data-edit-section="subpage-${campaignName}-${subPageName}-content"
-                 style="line-height: 1.6; min-height: 200px; flex: 1;">
-              ${content}
+          <div style="display: flex; align-items: flex-start; gap: 0.5rem;">
+            ${contentHtml}
+            <div style="display: flex; flex-direction: column; gap: 0.25rem;">
+              ${this.buildEditButton('section')}
+              ${this.buildGoogleDocButton(campaignName, subPageName)}
             </div>
-            ${this.buildEditButton('section')}
           </div>
         </div>
       `;
@@ -1370,6 +1450,21 @@
     buildEditButton(buttonType) {
       // Always generate the button - CSS will control visibility based on body.dev-on/dev-off
       return `<button class="edit-btn" type="button" style="background: var(--accent); color: white; border: none; border-radius: 4px; padding: 4px 8px; cursor: pointer; font-size: 12px; margin-left: 8px;">✏️</button>`;
+    }
+
+    buildGoogleDocButton(campaignName, subPageName) {
+      // Button to manage Google Doc link for campaign sub-pages
+      // CSS will control visibility based on body.dev-on/dev-off
+      return `<button class="edit-btn googledoc-btn"
+                      data-edit-type="googledoc"
+                      data-edit-section="subpage-${campaignName}-${subPageName}-googleDocLink"
+                      data-campaign-name="${campaignName}"
+                      data-subpage-name="${subPageName}"
+                      type="button"
+                      title="Gérer le lien Google Doc"
+                      style="background: #059669; color: white; border: none; border-radius: 4px; padding: 4px 8px; cursor: pointer; font-size: 12px; margin-left: 8px;">
+                📎
+              </button>`;
     }
     
 

@@ -733,6 +733,57 @@
           }
         }
       ]
+    },
+    {
+      "nom": "Aqua Lezo",
+      "description": "Table de butin pour une situation spécifique.",
+      "tags": [
+        "Forêt",
+        "Monstre"
+      ],
+      "fourchettes": [
+        {
+          "min": 1,
+          "max": 4,
+          "objet": {
+            "type": "reference",
+            "numero": 56,
+            "nom": "Viande de monstre"
+          }
+        },
+        {
+          "min": 5,
+          "max": 7,
+          "eclats": 40
+        },
+        {
+          "min": 8,
+          "max": 12,
+          "objet": {
+            "type": "reference",
+            "numero": 12,
+            "nom": "Petite potion de vie"
+          }
+        },
+        {
+          "min": 13,
+          "max": 19,
+          "objet": {
+            "type": "reference",
+            "numero": 59,
+            "nom": "Bâton de rodeur"
+          }
+        },
+        {
+          "min": 20,
+          "max": 30,
+          "objet": {
+            "type": "reference",
+            "numero": 39,
+            "nom": "Bouclier de la forêt"
+          }
+        }
+      ]
     }
   ],
   "_metadata": {

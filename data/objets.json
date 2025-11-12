@@ -699,7 +699,7 @@
         "Une main",
         "Baton"
       ],
-      "effet": "<strong>Dégâts: </strong> Inflige (2 + Force) points de dégâts physiques.\n<br>   <strong>Effet:</strong> Si le porteur ne lance aucun sort pendant son tour, alors le prochain sort qu’il lance coûte 1 mana de moins (non cumulable).",
+      "effet": "<strong>Dégâts: </strong> Inflige (2 + Force) points de dégâts physiques.\n<br>   <strong>Effet:</strong> Si le porteur ne lance aucun sort pendant son tour, alors le prochain sort qu’il lance coûte 2 mana de moins (non cumulable).",
       "prix": "🔷 <strong>Prix:</strong> 100",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },

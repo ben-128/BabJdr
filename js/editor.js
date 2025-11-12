@@ -164,30 +164,57 @@
       JdrApp.utils.events.register('click', '.edit-btn', (e) => {
         e.preventDefault();
         e.stopPropagation();
-        
+
         if (!this.isDevMode) return;
-        
+
         // Prevent multiple edit sessions
         if (UnifiedEditor.currentEditSession) {
           console.warn('Another edit session is already active');
           return;
         }
-        
+
+        // Special handling for Google Doc button
+        if (e.target.classList.contains('googledoc-btn')) {
+          const campaignName = e.target.dataset.campaignName;
+          const subPageName = e.target.dataset.subpageName;
+          const editSection = e.target.dataset.editSection;
+
+          if (!campaignName || !subPageName) {
+            console.error('Missing campaign or subpage name for Google Doc button');
+            return;
+          }
+
+          // Create a virtual editable element for Google Doc editing
+          const virtualElement = document.createElement('div');
+          virtualElement.classList.add('editable');
+          virtualElement.dataset.editType = 'googledoc';
+          virtualElement.dataset.editSection = editSection;
+
+          // Parse the context and start editing
+          const context = UnifiedEditor.parseEditContext(virtualElement);
+          if (context) {
+            UnifiedEditor.startGoogleDocEdit(context);
+          } else {
+            console.error('Failed to parse Google Doc edit context');
+          }
+          return;
+        }
+
         // Find the editable element near the button
         let editableElement = e.target.previousElementSibling;
-        
+
         // If not found as previous sibling, look in parent
         if (!editableElement || !editableElement.classList.contains('editable')) {
           const parent = e.target.parentElement;
           editableElement = parent.querySelector('.editable');
         }
-        
+
         // Fallback: look for closest editable element
         if (!editableElement || !editableElement.classList.contains('editable')) {
           editableElement = e.target.closest('.editable-section')?.querySelector('.editable') ||
                            e.target.closest('.card')?.querySelector('.editable');
         }
-        
+
         if (editableElement && editableElement.classList.contains('editable')) {
           UnifiedEditor.startEdit(editableElement);
         } else {

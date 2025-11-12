@@ -62,6 +62,11 @@
         return this.parseSelectEditContext(element, editSection);
       }
 
+      // Google Doc link editing
+      if (editType === 'googledoc') {
+        return this.parseGoogleDocEditContext(element, editSection);
+      }
+
       // All legacy edit types have been migrated to 'generic'
       return null;
     }
@@ -548,7 +553,7 @@
       if (monsterCard) {
         const monsterName = monsterCard.dataset.monsterName;
         const categoryName = monsterCard.dataset.categoryName;
-        
+
         return {
           contentType: 'monster',
           itemIdentifier: monsterName,
@@ -561,14 +566,14 @@
           container: element.closest('.monster-element-section')
         };
       }
-      
+
       // Check if we're in a spell card
       const spellCard = element.closest('.card[data-spell-name]');
       if (spellCard) {
         const spellName = spellCard.dataset.spellName;
         const spellIndex = spellCard.dataset.spellIndex;
         const categoryName = spellCard.dataset.categoryName;
-        
+
         return {
           contentType: 'spell',
           itemIdentifier: spellName,
@@ -582,8 +587,69 @@
           container: element.closest('.spell-element-section')
         };
       }
-      
+
       return null;
+    }
+
+    parseGoogleDocEditContext(element, editSection) {
+      // Parse the editSection to extract campaign and subpage names
+      // Format: "subpage-{campaignName}-{subPageName}-googleDocLink"
+      const editableElement = element.classList.contains('editable') ? element : element.querySelector('.editable');
+
+      if (!editSection || !editSection.startsWith('subpage-')) {
+        return null;
+      }
+
+      // Extract parts from editSection
+      const parts = editSection.split('-');
+      if (parts.length < 4) return null;
+
+      // Remove 'subpage' prefix
+      parts.shift();
+
+      // Last part is 'googleDocLink'
+      const property = parts.pop();
+
+      // What remains is the campaign and subpage names (may contain dashes)
+      // We need to find the split point between campaign name and subpage name
+      // Strategy: check window.STATIC_PAGES.campagne.subPages to find valid campaign
+      const campagneData = window.STATIC_PAGES?.campagne;
+      if (!campagneData?.subPages) return null;
+
+      let campaignName = null;
+      let subPageName = null;
+
+      // Try different split points
+      for (let i = 1; i < parts.length; i++) {
+        const testCampaign = parts.slice(0, i).join('-');
+        const testSubPage = parts.slice(i).join('-');
+
+        if (campagneData.subPages[testCampaign]?.subPages?.[testSubPage]) {
+          campaignName = testCampaign;
+          subPageName = testSubPage;
+          break;
+        }
+      }
+
+      if (!campaignName || !subPageName) return null;
+
+      return {
+        contentType: 'campaignSubPage',
+        itemIdentifier: `${campaignName}:${subPageName}`,
+        categoryName: campaignName,
+        property: property,
+        editType: 'googledoc',
+        editSection: property,
+        element: editableElement,
+        container: element,
+        applyEdit: (newLink) => {
+          const subPage = campagneData.subPages[campaignName]?.subPages?.[subPageName];
+          if (!subPage) return false;
+
+          subPage.googleDocLink = newLink;
+          return true;
+        }
+      };
     }
 
     makeElementEditable(editableElement, container) {
@@ -1790,6 +1856,12 @@
         return true;
       }
 
+      // Handle Google Doc link editing - show simple input modal
+      if (context.editType === 'googledoc') {
+        this.startGoogleDocEdit(context);
+        return true;
+      }
+
       // Start normal inline editing
       return this.startInlineEdit(context);
     }
@@ -2428,6 +2500,149 @@
       modal.remove();
       
       JdrApp.modules.ui.showNotification(`💾 Tags sauvegardés pour "${obj.nom}"`, 'success');
+    }
+
+    // Start Google Doc link editing
+    startGoogleDocEdit(context) {
+      // Show modal to edit Google Doc link
+      this.showGoogleDocModal(context);
+    }
+
+    // Show Google Doc link editing modal
+    showGoogleDocModal(context) {
+      // Get current Google Doc link from data structure
+      let currentLink = this.getContentFromDataStructure(context) || '';
+
+      // Remove existing modal if any
+      const existingModal = document.querySelector('#googleDocEditModal');
+      if (existingModal) {
+        existingModal.remove();
+      }
+
+      // Create modal
+      const modal = document.createElement('dialog');
+      modal.id = 'googleDocEditModal';
+      modal.style.cssText = `
+        max-width: 600px;
+        width: 90%;
+        padding: 0;
+        border: none;
+        border-radius: 12px;
+        background: transparent;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      `;
+
+      modal.innerHTML = `
+        <div style="background: var(--paper); border-radius: 12px; padding: 1.5rem; border: 2px solid var(--rule);">
+          <h3 style="margin: 0 0 1rem 0; color: var(--accent-ink);">📎 Lien Google Doc</h3>
+          <p style="margin: 0 0 1rem 0; color: var(--paper-muted); font-size: 0.9em;">
+            Collez le lien de partage de votre Google Doc. Le document sera affiché dans une iframe.
+          </p>
+          <div style="margin: 1rem 0;">
+            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Lien du document:</label>
+            <input
+              type="url"
+              id="googleDocLinkInput"
+              value="${currentLink}"
+              placeholder="https://docs.google.com/document/d/..."
+              style="width: 100%; padding: 0.75rem; border: 2px solid var(--rule); border-radius: 8px; font-size: 1em; font-family: inherit;"
+            >
+            <p style="margin: 0.5rem 0 0 0; font-size: 0.85em; color: var(--paper-muted);">
+              💡 Astuce: Assurez-vous que le document est partagé en "Tout le monde avec le lien peut consulter"
+            </p>
+          </div>
+          <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 1.5rem;">
+            <button class="btn modal-close" style="background: #666; color: white; padding: 0.75rem 1.5rem; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">
+              ❌ Annuler
+            </button>
+            <button id="saveGoogleDocBtn" class="btn" style="background: var(--accent); color: white; padding: 0.75rem 1.5rem; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">
+              💾 Sauvegarder
+            </button>
+          </div>
+        </div>
+      `;
+
+      // Add event listeners
+      modal.addEventListener('click', (e) => {
+        if (e.target.id === 'saveGoogleDocBtn') {
+          this.saveGoogleDocFromModal(modal, context);
+        } else if (e.target.classList.contains('modal-close')) {
+          modal.close();
+          modal.remove();
+        }
+      });
+
+      // Handle dialog close events
+      modal.addEventListener('cancel', () => {
+        modal.close();
+        modal.remove();
+      });
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.close();
+          modal.remove();
+        }
+      });
+
+      // Handle Enter key in input
+      const input = modal.querySelector('#googleDocLinkInput');
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          this.saveGoogleDocFromModal(modal, context);
+        }
+      });
+
+      document.body.appendChild(modal);
+      modal.showModal();
+
+      // Focus the input
+      setTimeout(() => input.focus(), 100);
+    }
+
+    // Save Google Doc link from modal
+    saveGoogleDocFromModal(modal, context) {
+      console.log('saveGoogleDocFromModal called with context:', context);
+
+      const input = modal.querySelector('#googleDocLinkInput');
+      const newLink = input.value.trim();
+
+      console.log('New link:', newLink);
+
+      // Validate the link (optional - allow empty to remove the link)
+      if (newLink && !newLink.match(/^https?:\/\//)) {
+        console.error('Invalid link format');
+        JdrApp.modules.ui.showNotification('❌ Le lien doit commencer par http:// ou https://', 'error');
+        return;
+      }
+
+      // Update the content in data structure
+      console.log('Calling updateContentInDataStructure...');
+      const success = this.updateContentInDataStructure(context, newLink);
+      console.log('Update result:', success);
+
+      if (success) {
+        // Trigger save to storage
+        console.log('Emitting storage save event...');
+        EventBus.emit(Events.STORAGE_SAVE);
+
+        // Regenerate the page to show the new iframe or content
+        console.log('Regenerating page...');
+        if (JdrApp.modules.renderer?.regenerateCurrentPage) {
+          JdrApp.modules.renderer.regenerateCurrentPage();
+        }
+
+        // Close modal
+        modal.close();
+        modal.remove();
+
+        const message = newLink ? '💾 Lien Google Doc sauvegardé' : '💾 Lien Google Doc supprimé';
+        JdrApp.modules.ui.showNotification(message, 'success');
+      } else {
+        console.error('Failed to update content in data structure');
+        JdrApp.modules.ui.showNotification('❌ Erreur lors de la sauvegarde', 'error');
+      }
     }
 
     // Create backup of monster data for recovery

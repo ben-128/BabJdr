@@ -148,8 +148,8 @@
     "sort:Sorts de Prêtre:Guérison mentale": "https://i.ibb.co/Wvc2D4Vr/Purifi-Mentale.png",
     "sort:Sorts de Prêtre:Puification physique": "https://i.ibb.co/ksnZMxGJ/Purifi-Physique.png",
     "sort:Sorts de Prêtre:Guérison physique": "https://i.ibb.co/ksnZMxGJ/Purifi-Physique.png",
-    "monster:Araignée géante": "data/images/Monstres/foret/Monstre_Forêt_Araignée.png",
-    "monster:Guêpe géante": "data/images/Monstres/foret/Monstre_Forêt_GuepeGeante.png",
+    "monster:Araignée géante": "https://i.ibb.co/MxQGw4r0/Monstre-For-t-Araign-e.png",
+    "monster:Guêpe géante": "https://i.ibb.co/nNxFr9XS/Monstre-For-t-Guepe-Geante.png",
     "don:Grand sac": "https://i.ibb.co/sddsRpFc/bd9dd0a06d6b.png",
     "don:Doué": "https://i.ibb.co/7xYjJ17R/7686a924519c.png",
     "don:Brillant": "https://i.ibb.co/nNjKtVhR/6a7f5122b2f1.png",
@@ -249,11 +249,12 @@
     "don:Instabilité Contrôlée": "https://i.ibb.co/6cN4dXxV/Instabilit.png",
     "don:Magie aléatoire": "https://i.ibb.co/NgXk4vG3/Magie-Al-atoire.png",
     "don:Teleportation amicale": "https://i.ibb.co/FbCQpghH/teleportation.png",
-    "don:Renvoi de Sort": "https://i.ibb.co/XrLT3jZV/Renvoi.png"
+    "don:Renvoi de Sort": "https://i.ibb.co/XrLT3jZV/Renvoi.png",
+    "sort:Sorts de Prêtre:Jugement": "https://i.ibb.co/sv0PvJ1R/Jugement.png"
   },
   "meta": {
-    "total_images": 250,
-    "exported_date": "2025-10-06",
+    "total_images": 251,
+    "exported_date": "2025-11-12",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
 }

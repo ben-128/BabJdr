@@ -513,6 +513,7 @@ const CampaignSchemas = {
   startY: 0,
   history: [],
   currentState: null,
+  editingSchemaId: null,  // ID du schéma en cours d'édition (null si nouveau schéma)
 
   init() {
     this.canvas = document.getElementById('schemaCanvas');
@@ -551,7 +552,49 @@ const CampaignSchemas = {
     this.saveState();
   },
 
-  openSchemaEditor() {
+  // Obtenir la liste des schémas existants
+  getSchemaList() {
+    const schemas = window.STATIC_PAGES?.campagne?.schemas || {};
+    return Object.keys(schemas).map(id => ({
+      id: id,
+      dataURL: schemas[id]
+    }));
+  },
+
+  // Charger un schéma existant dans le canvas
+  loadSchema(schemaId) {
+    const schemas = window.STATIC_PAGES?.campagne?.schemas || {};
+    const dataURL = schemas[schemaId];
+
+    if (!dataURL) {
+      console.error('Schéma non trouvé:', schemaId);
+      return false;
+    }
+
+    // Charger l'image dans le canvas
+    const img = new Image();
+    img.onload = () => {
+      // Effacer le canvas
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      // Remplir avec du blanc
+      this.ctx.fillStyle = 'white';
+      this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+      // Dessiner l'image
+      this.ctx.drawImage(img, 0, 0);
+      // Sauvegarder l'état
+      this.history = [];
+      this.saveState();
+    };
+    img.onerror = () => {
+      console.error('Erreur lors du chargement de l\'image du schéma');
+      alert('Erreur lors du chargement du schéma');
+    };
+    img.src = dataURL;
+
+    return true;
+  },
+
+  openSchemaEditor(schemaId = null) {
     let modal = document.getElementById('schemaEditorModal');
 
     // Create modal if it doesn't exist
@@ -565,12 +608,42 @@ const CampaignSchemas = {
       if (!this.canvas) {
         this.init();
       }
-      // Clear canvas with white background
-      this.ctx.fillStyle = 'white';
-      this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-      this.history = [];
-      this.saveState();
+
+      // Si un schemaId est fourni, charger le schéma existant
+      if (schemaId) {
+        this.editingSchemaId = schemaId;
+        this.loadSchema(schemaId);
+        // Mettre à jour le titre
+        const title = modal.querySelector('.modal-header h3');
+        if (title) {
+          title.textContent = '🎨 Édition de schéma';
+        }
+        // Mettre à jour le texte du bouton
+        const saveBtn = modal.querySelector('.btn.primary');
+        if (saveBtn) {
+          saveBtn.textContent = '💾 Sauvegarder les modifications';
+        }
+      } else {
+        // Nouveau schéma : canvas vierge
+        this.editingSchemaId = null;
+        this.ctx.fillStyle = 'white';
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        this.history = [];
+        this.saveState();
+        // Restaurer le titre par défaut
+        const title = modal.querySelector('.modal-header h3');
+        if (title) {
+          title.textContent = '🎨 Éditeur de schéma';
+        }
+        // Restaurer le texte du bouton par défaut
+        const saveBtn = modal.querySelector('.btn.primary');
+        if (saveBtn) {
+          saveBtn.textContent = '💾 Insérer le schéma';
+        }
+      }
+
       this.setTool('pen');
+      this.updateSchemaSelector();
     } else {
       console.error('Failed to create schema editor modal!');
     }
@@ -587,6 +660,17 @@ const CampaignSchemas = {
       </div>
 
       <div class="modal-body">
+        <!-- Section de sélection de schéma existant -->
+        <div id="schemaSelector" style="margin-bottom: 1rem; padding: 0.75rem; background: var(--card); border-radius: 8px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <label style="font-weight: bold;">📋 Schémas existants:</label>
+            <button onclick="CampaignSchemas.openSchemaEditor(null)" class="btn" style="padding: 0.25rem 0.5rem; border: 1px solid var(--rule); background: var(--paper); cursor: pointer; border-radius: 4px; font-size: 0.9rem;">➕ Nouveau schéma</button>
+          </div>
+          <div id="schemaList" style="display: flex; gap: 0.5rem; flex-wrap: wrap; max-height: 150px; overflow-y: auto;">
+            <!-- Les schémas seront ajoutés ici dynamiquement -->
+          </div>
+        </div>
+
         <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; padding: 0.75rem; background: var(--card); border-radius: 8px;">
           <div style="display: flex; gap: 0.5rem; align-items: center;">
             <label style="font-weight: bold; margin-right: 0.5rem;">Outil:</label>
@@ -658,6 +742,96 @@ const CampaignSchemas = {
     if (modal) {
       modal.style.display = 'none';
     }
+  },
+
+  // Supprimer un schéma
+  deleteSchema(schemaId) {
+    if (!confirm('Êtes-vous sûr de vouloir supprimer ce schéma ? Cette action est irréversible.')) {
+      return;
+    }
+
+    try {
+      if (window.STATIC_PAGES?.campagne?.schemas?.[schemaId]) {
+        delete window.STATIC_PAGES.campagne.schemas[schemaId];
+
+        // Sauvegarder dans le storage
+        if (window.EventBus && window.Events) {
+          window.EventBus.emit(window.Events.STORAGE_SAVE);
+        }
+
+        // Mettre à jour l'affichage
+        this.updateSchemaSelector();
+
+        // Notification
+        if (JdrApp?.modules?.ui?.showNotification) {
+          JdrApp.modules.ui.showNotification('🗑️ Schéma supprimé', 'info');
+        }
+      }
+    } catch (e) {
+      console.error('Erreur lors de la suppression du schéma:', e);
+      alert('Erreur lors de la suppression du schéma');
+    }
+  },
+
+  // Mettre à jour l'affichage des schémas dans le sélecteur
+  updateSchemaSelector() {
+    const schemaList = document.getElementById('schemaList');
+    if (!schemaList) return;
+
+    const schemas = this.getSchemaList();
+
+    if (schemas.length === 0) {
+      schemaList.innerHTML = '<p style="color: var(--text-muted); font-style: italic; margin: 0;">Aucun schéma existant</p>';
+      return;
+    }
+
+    schemaList.innerHTML = '';
+    schemas.forEach(schema => {
+      const schemaItem = document.createElement('div');
+      schemaItem.style.cssText = 'position: relative; cursor: pointer; border: 2px solid var(--rule); border-radius: 4px; overflow: hidden; width: 120px; height: 90px;';
+
+      // Mettre en évidence le schéma en cours d'édition
+      if (this.editingSchemaId === schema.id) {
+        schemaItem.style.borderColor = 'var(--accent)';
+        schemaItem.style.boxShadow = '0 0 0 2px var(--accent)';
+      }
+
+      const img = document.createElement('img');
+      img.src = schema.dataURL;
+      img.style.cssText = 'width: 100%; height: 100%; object-fit: cover;';
+      img.title = 'Cliquer pour éditer ce schéma';
+
+      const overlay = document.createElement('div');
+      overlay.style.cssText = 'position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: none; align-items: center; justify-content: center; color: white; font-size: 2rem;';
+      overlay.innerHTML = '✏️';
+
+      // Bouton de suppression
+      const deleteBtn = document.createElement('button');
+      deleteBtn.textContent = '🗑️';
+      deleteBtn.style.cssText = 'position: absolute; top: 4px; right: 4px; background: #ef4444; color: white; border: none; border-radius: 4px; padding: 4px 8px; cursor: pointer; font-size: 1rem; z-index: 10;';
+      deleteBtn.title = 'Supprimer ce schéma';
+      deleteBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.deleteSchema(schema.id);
+      });
+
+      schemaItem.appendChild(img);
+      schemaItem.appendChild(overlay);
+      schemaItem.appendChild(deleteBtn);
+
+      schemaItem.addEventListener('mouseenter', () => {
+        overlay.style.display = 'flex';
+      });
+      schemaItem.addEventListener('mouseleave', () => {
+        overlay.style.display = 'none';
+      });
+
+      schemaItem.addEventListener('click', () => {
+        this.openSchemaEditor(schema.id);
+      });
+
+      schemaList.appendChild(schemaItem);
+    });
   },
 
   setTool(tool) {
@@ -775,8 +949,9 @@ const CampaignSchemas = {
   saveSchema() {
     const dataURL = this.canvas.toDataURL('image/png');
 
-    // Générer un ID unique pour le schéma
-    const schemaId = 'schema_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    // Utiliser l'ID existant si on édite un schéma, sinon générer un nouvel ID
+    const schemaId = this.editingSchemaId || ('schema_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9));
+    const isEditing = this.editingSchemaId !== null;
 
     // Stocker l'image dans la structure de données campagne
     try {
@@ -804,6 +979,19 @@ const CampaignSchemas = {
 
     // Créer un marqueur court
     const schemaMarker = `[schema:${schemaId}]`;
+
+    // Si on est en mode édition, ne pas insérer de marqueur, juste sauvegarder
+    if (isEditing) {
+      // Show notification
+      if (JdrApp?.modules?.ui?.showNotification) {
+        JdrApp.modules.ui.showNotification('🎨 Schéma mis à jour avec succès !', 'success');
+      }
+
+      // Réinitialiser l'ID d'édition
+      this.editingSchemaId = null;
+      this.closeSchemaEditor();
+      return;
+    }
 
     // Check if we're in the HTML editor modal (textarea mode)
     if (this.editorInsertFunction && typeof this.editorInsertFunction === 'function') {
