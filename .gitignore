@@ -4,6 +4,14 @@ BabJdr/
 Backups/
 backup-*/
 
+# Build output (obsolete, use build/ instead)
+build-output/
+
+# Dev files (index.html is the dev version)
+dev.html
+dev-debug.html
+dev-*.html
+
 # Node modules
 node_modules/
 
