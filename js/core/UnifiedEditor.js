@@ -1202,7 +1202,9 @@
           // Use ContentFactory to ensure proper data synchronization
           contentFactory.updateItem('tableTresor', 'tables', table.nom, propertyName, content);
         }
-        
+
+        // Don't refresh the card - the visual update is already done
+        // Only save to storage will be triggered by CONTENT_UPDATE event
         return true;
         
       } catch (error) {

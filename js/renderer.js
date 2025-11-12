@@ -480,7 +480,7 @@
       // using the PageBuilder with the appropriate build method
       let content = '';
       let pageId = '';
-      
+
       if (contentType === 'objet' && data) {
         content = PageBuilder.buildSingleObjectPage(data);
         pageId = 'objets';
@@ -491,7 +491,7 @@
         content = PageBuilder.buildSingleTableTresorPage(data);
         pageId = 'tables-tresors';
       }
-      
+
       if (content && pageId) {
         // Find or create the specific article element in #views
         const viewsContainer = document.querySelector('#views');
@@ -505,10 +505,10 @@
             }
             existingArticle.remove();
           }
-          
+
           // Add the new content to the views container
           viewsContainer.insertAdjacentHTML('beforeend', content);
-          
+
           this.autoLoadImages();
           
           // Apply dev mode state with slight delay to ensure DOM is processed

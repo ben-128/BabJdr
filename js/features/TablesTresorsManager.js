@@ -980,9 +980,9 @@
         this.saveToStorage();
         // Fermer la modal
         this.closeAllModals();
-        
-        // Mettre à jour l'affichage sans recharger la page
-        this.refreshTablesTresorsDisplay();
+
+        // Refresh only the specific table card
+        this.refreshSingleTableCard(tableName);
         
 
       } catch (error) {
@@ -1014,10 +1014,10 @@
           table.fourchettes = [];
         }
         table.fourchettes.push(newFourchette);
-        
+
         this.saveToStorage();
-        // Mettre à jour l'affichage sans recharger la page
-        this.refreshTablesTresorsDisplay();
+        // Refresh only the specific table card
+        this.refreshSingleTableCard(tableName);
         
         // Fourchette ajoutée avec succès
 
@@ -1065,10 +1065,10 @@
         // Échanger les fourchettes
         const fourchette = table.fourchettes.splice(fromIndex, 1)[0];
         table.fourchettes.splice(toIndex, 0, fourchette);
-        
+
         this.saveToStorage();
-        // Mettre à jour l'affichage sans recharger la page
-        this.refreshTablesTresorsDisplay();
+        // Refresh only the specific table card
+        this.refreshSingleTableCard(tableName);
         
         // Fourchette déplacée avec succès
 
@@ -1093,10 +1093,10 @@
         }
 
         table.fourchettes.splice(fourchetteIndex, 1);
-        
+
         this.saveToStorage();
-        // Mettre à jour l'affichage sans recharger la page
-        this.refreshTablesTresorsDisplay();
+        // Refresh only the specific table card
+        this.refreshSingleTableCard(tableName);
         
         // Fourchette supprimée avec succès
 
@@ -1170,14 +1170,43 @@
     }
 
     refreshTablesTresorsDisplay() {
-      // Rafraîchir seulement l'affichage des cartes sans recharger la page
-      if (JdrApp.modules.router && JdrApp.modules.router.getCurrentRoute() === 'tables-tresors') {
-        // Au lieu de rafraîchir manuellement, utiliser la méthode du router qui respecte les filtres
-        if (JdrApp.modules.router?.renderTablesTresorsPage) {
-          JdrApp.modules.router.renderTablesTresorsPage();
-        } else {
-          // Fallback: regénérer la page complète si la méthode n'existe pas
-          JdrApp.modules.renderer?.regenerateCurrentPage();
+      // Don't refresh - individual card updates are handled by refreshSingleTableCard
+      // This prevents full page regeneration and scroll reset
+    }
+
+    refreshSingleTableCard(tableName) {
+      // Refresh only the specific table card that was edited
+      const tableCard = document.querySelector(`.card[data-table-tresor-name="${tableName}"]`);
+      if (!tableCard) return;
+
+      const table = window.TABLES_TRESORS?.tables?.find(t => t.nom === tableName);
+      if (!table) return;
+
+      // Build the updated card HTML - correct parameter order: (type, data, categoryName, index)
+      const cardBuilder = new window.CardBuilder('tableTresor', table, null, null);
+      const newCardHTML = cardBuilder.build();
+
+      // Parse the new HTML
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(newCardHTML, 'text/html');
+      const newCard = doc.querySelector('.card');
+
+      if (newCard) {
+        // Replace the old card with the new one
+        tableCard.replaceWith(newCard);
+
+        // Reapply images
+        if (JdrApp.modules.renderer?.autoLoadImages) {
+          JdrApp.modules.renderer.autoLoadImages();
+        }
+
+        // Reapply dev mode state
+        if (!window.STANDALONE_VERSION && JdrApp.modules.editor) {
+          if (JdrApp.modules.editor.isDevMode) {
+            JdrApp.modules.editor.forceShowAllEditButtons();
+          } else {
+            JdrApp.modules.editor.forceHideAllEditButtons();
+          }
         }
       }
     }
