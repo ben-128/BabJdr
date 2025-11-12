@@ -239,6 +239,31 @@
     "monster-initiative": "5"
   },
   {
+    "nom": "AquaLezo",
+    "tags": [
+      "Forêt"
+    ],
+    "image": "data/images/Monstres/foret/AquaLezo.png",
+    "element": "Eau",
+    "pointsDeVie": 25,
+    "armurePhysique": "6",
+    "esquive": "1",
+    "initiative": 2,
+    "coupCritique": "1",
+    "coupCritiqueSorts": "1",
+    "resistanceAlterations": "4",
+    "armureFeu": 0,
+    "armureEau": "6",
+    "armureTerre": "2",
+    "armureAir": 0,
+    "armureLumiere": 0,
+    "armureObscurite": 0,
+    "armureDivin": 0,
+    "armureMalefique": 0,
+    "abilites": "<strong>Vague déferlante:</strong> Attaque au corps à corps qui inflige 6 dégâts physiques et repousse la cible de 6m.<br><strong>Jet d'eau:</strong> Portée 12m, inflige 5 dégâts <span style=\"color: #3b82f6; font-weight: bold;\">Eau</span>.",
+    "butin": "<strong>Butin:</strong> <span class=\"treasure-table-link\" data-table-name=\"Aqua Lezo\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Aqua Lezo]</span>"
+  },
+  {
     "nom": "Boss Forêt",
     "tags": [
       "Forêt",
