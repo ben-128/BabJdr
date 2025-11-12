@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1" name="viewport">
+<title>Foresia — Version Développement</title>
+
+<!-- CSS Modulaire -->
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/utilities.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/editor.css">
+<link rel="stylesheet" href="css/scroll-optimizations.css">
+<link rel="stylesheet" href="css/visual-enhancements.css">
+
+<!-- Debug styles removed -->
+</head>
+<body class="mj-on">
+
+<script>
+window.ObjectReferencesModal = {
+  show: function(objectNumero) {
+    console.log('Modal show called for:', objectNumero);
+    alert('Références pour objet ' + objectNumero + ' - Modal fonctionnel !');
+  }
+};
+
+// Observer pour les changements de mode MJ avec protection contre les boucles
+let lastMJState = document.body.classList.contains('mj-on');
+let mjObserverTimeout = null;
+
+const observer = new MutationObserver(function(mutations) {
+  // Éviter les boucles infinies en utilisant un debounce
+  if (mjObserverTimeout) {
+    clearTimeout(mjObserverTimeout);
+  }
+  
+  mjObserverTimeout = setTimeout(() => {
+    const hasMJMode = document.body.classList.contains('mj-on');
+    
+    // Ne traiter que si l'état a vraiment changé
+    if (hasMJMode !== lastMJState) {
+      lastMJState = hasMJMode;
+      
+      // Vérifier qu'on est sur la bonne page avant de rafraîchir
+      const currentPage = window.location.hash.replace('#/', '') || 'creation';
+      if (currentPage === 'gestion-objets') {
+        const objectCards = document.querySelectorAll('.objet-card');
+        if (objectCards.length > 0) {
+          // Déclencher un événement personnalisé pour les cartes
+          window.dispatchEvent(new CustomEvent('mjModeChanged', { detail: { mjMode: hasMJMode } }));
+        }
+      }
+    }
+  }, 100); // Debounce de 100ms
+});
+
+observer.observe(document.body, { attributes: true });
+</script>
+
+<!-- Debug console removed -->
+
+<!-- Structure HTML de base pour l'application -->
+<div class="shell">
+  <button aria-controls="sidebar" aria-expanded="false" aria-label="Ouvrir le sommaire" class="menu-toggle" id="menuToggle" style="display:none">☰ Sommaire</button>
+  <div class="backdrop" hidden="" id="backdrop"></div>
+  <main class="page">
+    <aside class="sidebar" id="sidebar">
+      <div class="panel">
+        <div class="tools">
+          <button class="btn small" id="devToggle" title="Activer/désactiver le mode développeur">🛠 Dev Mode: OFF</button>
+        </div>
+        <div class="dev-toolbox" id="devToolbox" style="display: none;">
+          <!-- Dev toolbox content will be injected here -->
+        </div>
+        <div class="toc" id="toc">
+          <div class="toc-search">
+            <input autocomplete="off" id="search" placeholder="Rechercher une règle, une classe…">
+            <button class="btn-clear" id="clear" title="Effacer">✖</button>
+          </div>
+          <!-- Table of contents will be injected here -->
+        </div>
+      </div>
+    </aside>
+    <div id="views">
+      <!-- Dynamic content will be injected here -->
+    </div>
+  </main>
+  <footer></footer>
+</div>
+
+<!-- Écran de chargement -->
+<div id="app-loading" class="loading-screen">
+  <div class="loading-content">
+    <div class="loading-spinner"></div>
+    <h2>Foresia DEBUG</h2>
+    <p>Chargement avec debug...</p>
+    <div class="loading-progress">
+      <div class="loading-bar"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Debug system removed -->
+
+<!-- JavaScript Modulaire avec debug -->
+<!-- Configuration et classes de base -->
+<script src="js/config/constants.js"></script>
+<script src="js/config/contentTypes.js"></script>
+<script src="js/core/EventBus.js"></script>
+
+<script src="js/core/BaseEntity.js"></script>
+<script src="js/core/UnifiedEditor.js"></script>
+<script src="js/factories/ContentFactory.js"></script>
+
+<!-- Builders et templates -->
+<script src="js/builders/CardBuilder.js"></script>
+<script src="js/builders/PageBuilder.js"></script>
+
+<!-- Modules principaux -->
+<script src="js/core.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/utils/device-detection.js"></script>
+<script src="js/modules/images.js"></script>
+<script src="js/modules/audio.js"></script>
+
+<!-- Features modules -->
+<script src="js/features/SpellFilter.js"></script>
+<script src="js/features/TablesTresorsManager.js"></script>
+<script src="js/features/FavorisManager.js"></script>
+<script src="js/features/FavorisRenderer.js"></script>
+<script src="js/features/AnimationEnhancer.js"></script>
+<script src="js/features/ScrollOptimizer.js"></script>
+
+<!-- 3D effects handled by AnimationEnhancer.js -->
+
+<!-- Modules qui dépendent des features -->
+<script src="js/router.js"></script>
+<script src="js/renderer.js"></script>
+<script src="js/editor.js"></script>
+<script src="js/storage.js"></script>
+
+<!-- UI modules -->
+<script src="js/ui/UIUtilities.js"></script>
+<script src="js/ui/BaseModal.js"></script>
+<script src="js/ui/EventHandlers.js"></script>
+<script src="js/ui/ContentManager.js"></script>
+<script src="js/ui/SearchManager.js"></script>
+<script src="js/ui/ModalManager.js"></script>
+<script src="js/ui/ResponsiveManager.js"></script>
+<script src="js/ui/PageManager.js"></script>
+<script src="js/ui/TagsManager.js"></script>
+<script src="js/ui/GMObjectFilters.js"></script>
+<script src="js/ui/MonsterFilters.js"></script>
+<script src="js/ui/TableTresorFilters.js"></script>
+<script src="js/ui/UICore.js"></script>
+
+<!-- UI module principal -->
+<script src="js/ui.js"></script>
+
+<!-- PDF support -->
+<script src="js/libs/jspdf-loader.js"></script>
+
+<!-- External Libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+<!-- All debug scripts removed -->
+
+<!-- Initialize app -->
+<script>
+// Mark as modular version
+window.STANDALONE_VERSION = false;
+
+// Initialize app when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('🚀 Initializing Foresia (Dev Mode)');
+
+  // Initialize JdrApp if it exists
+  if (window.JdrApp && window.JdrApp.init) {
+    window.JdrApp.init();
+  } else {
+    console.error('❌ JdrApp not found!', window.JdrApp);
+  }
+});
+</script>
+
+</body>
+</html>
