@@ -13,7 +13,7 @@ function buildStandalone() {
   console.log('🔨 Building standalone version from modular files...');
   
   const rootDir = path.resolve(__dirname, '..');
-  const outputDir = path.join(rootDir, 'build-output');
+  const outputDir = path.join(rootDir, 'build');
   
   // Create output directory
   if (!fs.existsSync(outputDir)) {
@@ -446,7 +446,7 @@ if (!canUseServiceWorker && window.MANIFEST_DATA) {
   console.log('🔒 Dev mode disabled in standalone version');
   
   // Write to output
-  const outputPath = path.join(outputDir, 'JdrBab.html');
+  const outputPath = path.join(outputDir, 'Foresia.html');
   fs.writeFileSync(outputPath, htmlContent, 'utf-8');
   
   // Also copy landing page as index.html for GitHub Pages
