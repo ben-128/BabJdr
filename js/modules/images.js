@@ -383,52 +383,8 @@
 
     // Validate and fix monster image paths
     validateMonsterImagePath(monster) {
-      if (!monster.image || !monster.nom) {
-        return false;
-      }
-
-      // Extract filename from current path
-      const currentPath = monster.image;
-      const filename = currentPath.split('/').pop();
-      
-      // Check if path follows correct format
-      const expectedPattern = /^data\/images\/Monstres\/foret\/Monstre_Forêt_\w+\.png$/;
-      
-      if (!expectedPattern.test(currentPath)) {
-        // Try to fix common issues
-        let correctedPath = null;
-        
-        // Map common filename patterns to correct paths
-        const filenameMap = {
-          'araignee-geante.png': 'Monstre_Forêt_Araignée.png',
-          'crabe-des-bois.png': 'Monstre_Forêt_Crab.png',  
-          'groink.png': 'Monstre_Forêt_Groink.png',
-          'groink-chaman.png': 'Monstre_Forêt_Groink_Chaman.png',
-          'guepe-geante.png': 'Monstre_Forêt_GuepeGeante.png',
-          'ours-des-bois.png': 'Monstre_Forêt_Ours.png'
-        };
-
-        if (filenameMap[filename]) {
-          correctedPath = `data/images/Monstres/foret/${filenameMap[filename]}`;
-        } else if (!filename.startsWith('Monstre_Forêt_')) {
-          // Try to construct path from monster name
-          const safeName = monster.nom.replace(/[^a-zA-Z0-9àâäéèêëïîôùûüÿçÀÂÄÉÈÊËÏÎÔÙÛÜŸÇ_]/g, '');
-          correctedPath = `data/images/Monstres/foret/Monstre_Forêt_${safeName}.png`;
-        }
-
-        if (correctedPath && correctedPath !== currentPath) {
-          
-          // Update monster data
-          monster.image = correctedPath;
-          
-          // Update image mapping
-          const imageKey = `monster:${monster.nom}`;
-          this.imageStore[imageKey] = correctedPath;
-          
-          return true;
-        }
-      }
-      
+      // DISABLED: This function was causing issues by "correcting" paths that were already correct
+      // The monster.image field in monstres.json is now the source of truth
       return false;
     },
 

@@ -250,10 +250,11 @@
     "don:Magie aléatoire": "https://i.ibb.co/NgXk4vG3/Magie-Al-atoire.png",
     "don:Teleportation amicale": "https://i.ibb.co/FbCQpghH/teleportation.png",
     "don:Renvoi de Sort": "https://i.ibb.co/XrLT3jZV/Renvoi.png",
-    "sort:Sorts de Prêtre:Jugement": "https://i.ibb.co/sv0PvJ1R/Jugement.png"
+    "sort:Sorts de Prêtre:Jugement": "https://i.ibb.co/sv0PvJ1R/Jugement.png",
+    "monster:AquaLezo": "https://i.ibb.co/Kp4WNJNZ/AquaLezo.png"
   },
   "meta": {
-    "total_images": 251,
+    "total_images": 252,
     "exported_date": "2025-11-12",
     "note": "Ces images incluent les nouvelles images uploadées"
   }

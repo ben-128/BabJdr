@@ -11,6 +11,7 @@
   JdrApp.modules.editor = {
     editedData: {},
     isDevMode: false,
+    _devToggleHandlerAttached: false,
 
     init() {
       this.setupEventListeners();
@@ -21,7 +22,18 @@
     },
 
     setupEventListeners() {
-      JdrApp.utils.events.register('click', '#devToggle', () => this.toggleDevMode());
+      // Direct event listener instead of using the utils.events system
+      // Only attach once to prevent double-firing
+      if (!this._devToggleHandlerAttached) {
+        document.addEventListener('click', (e) => {
+          if (e.target.id === 'devToggle' || e.target.closest('#devToggle')) {
+            e.preventDefault();
+            e.stopPropagation();
+            this.toggleDevMode();
+          }
+        }, { capture: true });
+        this._devToggleHandlerAttached = true;
+      }
 
       EventBus.on(Events.EDITOR_TOGGLE, (payload) => {
         this.isDevMode = payload.enabled;
@@ -35,9 +47,11 @@
     },
 
     toggleDevMode() {
+      console.log('toggleDevMode called, STANDALONE_VERSION:', window.STANDALONE_VERSION);
       if (window.STANDALONE_VERSION) return;
-      
+
       this.isDevMode = !this.isDevMode;
+      console.log('Dev mode toggled to:', this.isDevMode);
       EventBus.emit(Events.EDITOR_TOGGLE, { enabled: this.isDevMode });
     },
 

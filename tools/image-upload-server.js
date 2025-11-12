@@ -274,7 +274,7 @@ const server = http.createServer(async (req, res) => {
     } else if (req.method === 'GET') {
         // Servir les fichiers statiques (HTML, CSS, JS, images, etc.)
         let filePath = '.' + req.url;
-        if (filePath === './') filePath = './dev-debug.html';
+        if (filePath === './') filePath = './dev.html';
 
         const extname = path.extname(filePath);
         let contentType = 'text/html';
