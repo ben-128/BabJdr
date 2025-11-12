@@ -10,19 +10,18 @@ Progressive Web App pour le système de jeu de rôle Foresia avec thème médié
 - **Idéal pour**: Parties de JDR, usage mobile/tablette
 
 ### 🛠️ **Développement local**
-- **Fichier**: `dev.html`
+- **Fichier**: `index.html`
 - **Fonctionnalités**: Version modulaire, outils de développement
 - **Idéal pour**: Développement, ajout de contenu
 
 ## 📁 Structure du projet
 
 ```
-├── 📄 dev.html                 # Version développement (modular)
-├── 📄 index.html               # Page d'accueil GitHub Pages
+├── 📄 index.html               # Version développement modulaire
+├── 📁 build/                   # Build standalone (Foresia.html)
 ├── 📁 config/                  # Configuration PWA et app
 ├── 📁 docs/                    # Documentation (CLAUDE.md, etc.)
 ├── 📁 tools/                   # Outils de développement
-├── 📁 build/                   # Build standalone (Foresia.html)
 ├── 📁 assets/pwa/              # Icônes PWA
 ├── 📁 css/                     # Styles modulaires
 ├── 📁 js/                      # JavaScript modulaire
@@ -35,10 +34,11 @@ Progressive Web App pour le système de jeu de rôle Foresia avec thème médié
 ### Démarrage rapide
 ```bash
 # Développement local
-ouvrir dev.html dans le navigateur
+ouvrir index.html dans le navigateur
 
 # Build standalone
-tools/menu.bat → Option 2 (Build)
+npm run build
+# ou tools/menu.bat → Option 2 (Build)
 
 # Mise à jour GitHub Pages
 git push origin master
