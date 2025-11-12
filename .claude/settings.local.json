@@ -60,7 +60,10 @@
       "Bash(netstat:*)",
       "WebSearch",
       "WebFetch(domain:www.freepublicapis.com)",
-      "WebFetch(domain:deepai.org)"
+      "WebFetch(domain:deepai.org)",
+      "WebFetch(domain:ben-128.github.io)",
+      "Bash(git ls-tree:*)",
+      "Bash(index.html)"
     ],
     "deny": []
   }
