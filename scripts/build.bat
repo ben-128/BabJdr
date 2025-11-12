@@ -38,35 +38,35 @@ if errorlevel 1 (
     echo.
     
     :: Vérifier que le fichier a été créé
-    if exist "build-output\JdrBab.html" (
-        echo [OK] Fichier généré : build-output\JdrBab.html
-        
+    if exist "build\Foresia.html" (
+        echo [OK] Fichier généré : build\Foresia.html
+
         :: Afficher la taille du fichier
-        for %%A in ("build-output\JdrBab.html") do (
+        for %%A in ("build\Foresia.html") do (
             set /a sizeKB=%%~zA/1024
         )
-        
+
         echo [INFO] Taille du fichier : !sizeKB! KB
         echo.
         echo ========================================
         echo   CHEMIN COMPLET DU FICHIER :
         echo ========================================
-        echo %CD%\build-output\JdrBab.html
+        echo %CD%\build\Foresia.html
         echo ========================================
         echo.
-        echo Le fichier JdrBab.html est prêt à être partagé !
+        echo Le fichier Foresia.html est prêt à être partagé !
         echo Il contient toutes les données et fonctionne sans serveur.
         echo.
-        
+
         :: Proposer d'ouvrir le fichier
         choice /c ON /n /m "Ouvrir le fichier maintenant ? [O]ui / [N]on "
         if !errorlevel! == 1 (
             echo [INFO] Ouverture du fichier...
-            start "" "%CD%\build-output\JdrBab.html"
+            start "" "%CD%\build\Foresia.html"
         )
     ) else (
-        echo [ERREUR] Le fichier JdrBab.html n'a pas été trouvé dans build-output\
-        echo Chemin attendu : %CD%\build-output\JdrBab.html
+        echo [ERREUR] Le fichier Foresia.html n'a pas été trouvé dans build\
+        echo Chemin attendu : %CD%\build\Foresia.html
     )
 )
 
