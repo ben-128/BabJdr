@@ -663,10 +663,12 @@
 
           // Add click-to-enlarge functionality
           img.style.cursor = 'pointer';
-          img.title = 'Cliquer pour agrandir';
+          img.setAttribute('data-click-action', 'enlarge');
+          img.removeAttribute('title'); // Remove title to avoid native tooltip
 
           // Use capture phase to intercept before any other handlers
           img.addEventListener('click', (e) => {
+            console.log('🖱️ Image clicked in preview, opening modal for:', src);
             e.preventDefault();
             e.stopPropagation();
             e.stopImmediatePropagation();
@@ -877,10 +879,12 @@
 
           // Add click-to-enlarge functionality
           img.style.cursor = 'pointer';
-          img.title = 'Cliquer pour agrandir';
+          img.setAttribute('data-click-action', 'enlarge');
+          img.removeAttribute('title'); // Remove title to avoid native tooltip
 
           // Use capture phase to intercept before any other handlers
           img.addEventListener('click', (e) => {
+            console.log('🖱️ Image clicked in preview, opening modal for:', src);
             e.preventDefault();
             e.stopPropagation();
             e.stopImmediatePropagation();
@@ -943,9 +947,12 @@
      * Show enlarged image modal
      */
     showImageModal(imageUrl) {
+      console.log('🖼️ showImageModal called with URL:', imageUrl);
+
       // Remove any existing image modal
       const existingModal = document.querySelector('.image-enlarge-modal');
       if (existingModal) {
+        console.log('  - Removing existing modal');
         existingModal.remove();
       }
 
