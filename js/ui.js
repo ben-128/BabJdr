@@ -311,7 +311,7 @@
 
     selectSubPage(subPageName) {
       if (!subPageName) return;
-      
+
       // Initialize state if needed
       if (!window.JdrApp) {
         window.JdrApp = {};
@@ -319,9 +319,14 @@
       if (!window.JdrApp.state) {
         window.JdrApp.state = {};
       }
-      
+
+      // Check if we're already on this subpage
+      if (window.JdrApp.state.selectedSubPage === subPageName) {
+        return; // No need to regenerate
+      }
+
       window.JdrApp.state.selectedSubPage = subPageName;
-      
+
       // Small delay to ensure state is set before regeneration
       setTimeout(() => {
         if (JdrApp.modules.renderer?.regenerateCurrentPage) {
