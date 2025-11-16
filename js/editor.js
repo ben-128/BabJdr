@@ -145,10 +145,10 @@
       // Force reset all CSS properties that might be causing 0x0 dimensions
       const selectors = [
         '.edit-btn', '[class$="-add"]', '[class$="-delete"]', '[class*="-move-"]',
-        '.section-delete', '.remove-section-btn', '.add-paragraph-btn', 
+        '.section-delete', '.remove-section-btn', '.add-paragraph-btn',
         '.add-subclass-btn', '.delete-subclass-btn',
         '.spell-delete', '.don-delete', '.objet-delete',
-        '.spell-add', '.don-add', '.objet-add',
+        '.spell-add', '.don-add', '.objet-add', '.npc-add', '.monster-add',
         '.illus .up', '.illus .rm', '.illus label', '.illus input[type="file"]',
         '.tags-manager-btn', '.filter-manager-btn' // Tags and filter manager buttons
       ];

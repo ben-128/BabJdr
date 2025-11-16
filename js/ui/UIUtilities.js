@@ -151,7 +151,7 @@
      */
     extractTypeFromClass(className) {
       // Handle both formats: table-tresor-move-up and tableTresor-move-up
-      const matches = className.match(/(spell|don|objet|monster|tableTresor|table-tresor|class)-/);
+      const matches = className.match(/(spell|don|objet|monster|npc|tableTresor|table-tresor|class)-/);
       if (matches) {
         // Normalize table-tresor to tableTresor for consistency
         return matches[1] === 'table-tresor' ? 'tableTresor' : matches[1];
