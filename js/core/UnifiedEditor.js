@@ -1126,12 +1126,15 @@
         if (propertyName === 'nom') {
           const oldName = monster.nom;
           monster[propertyName] = content;
-          
+
           // Update the data-monster-name attribute on the card container
           const monsterCard = session.container.closest('.card[data-monster-name]');
           if (monsterCard && monsterCard.dataset.monsterName === oldName) {
             monsterCard.dataset.monsterName = content;
           }
+
+          // CRITICAL: Update session itemIdentifier to the new name
+          session.itemIdentifier = content;
         } else {
           // Update the monster property
           monster[propertyName] = content;
@@ -1189,6 +1192,9 @@
           if (npcCard && npcCard.dataset.npcName === oldName) {
             npcCard.dataset.npcName = content;
           }
+
+          // CRITICAL: Update session itemIdentifier to the new name
+          session.itemIdentifier = content;
         } else {
           // Update the npc property
           npc[propertyName] = content;
