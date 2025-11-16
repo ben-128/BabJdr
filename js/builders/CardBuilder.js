@@ -535,7 +535,7 @@
       }
 
       let containerClasses = 'illus';
-      if (['spell', 'class', 'subclass', 'don', 'objet', 'monster'].includes(styleType)) {
+      if (['spell', 'class', 'subclass', 'don', 'objet', 'monster', 'npc'].includes(styleType)) {
         containerClasses += ` illus-${styleType}`;
       }
 

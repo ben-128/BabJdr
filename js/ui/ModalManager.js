@@ -680,14 +680,26 @@
       
       // Add to document
       document.body.appendChild(preview);
-      
+
+      // Load lazy images in the preview
+      setTimeout(() => {
+        const lazyImages = preview.querySelectorAll('img.lazy-load[data-src]');
+        lazyImages.forEach(img => {
+          const src = img.getAttribute('data-src');
+          if (src) {
+            img.src = src;
+            img.style.display = 'inline-block';
+          }
+        });
+      }, 10);
+
       // Remove on click outside or after delay
       const removePreview = () => {
         if (preview.parentNode) {
           preview.parentNode.removeChild(preview);
         }
       };
-      
+
       // Add click handler for the close button only
       setTimeout(() => {
         const closeBtn = preview.querySelector('.preview-close-btn');
@@ -854,6 +866,18 @@
 
       // Add to document
       document.body.appendChild(preview);
+
+      // Load lazy images in the preview
+      setTimeout(() => {
+        const lazyImages = preview.querySelectorAll('img.lazy-load[data-src]');
+        lazyImages.forEach(img => {
+          const src = img.getAttribute('data-src');
+          if (src) {
+            img.src = src;
+            img.style.display = 'inline-block';
+          }
+        });
+      }, 10);
 
       // Remove on click outside or after delay
       const removePreview = () => {
