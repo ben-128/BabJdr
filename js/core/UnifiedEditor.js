@@ -192,28 +192,55 @@
       if (monsterCard) {
         const monsterName = monsterCard.dataset.monsterName;
         const categoryName = monsterCard.dataset.categoryName;
-        
+
         const editableElement = element.classList.contains('editable') ? element : element.querySelector('.editable');
-        
+
         // Use data-item-identifier if available, otherwise fall back to monsterName
         const itemIdentifier = editableElement?.dataset?.itemIdentifier || monsterName;
-        
+
         // Use editSection directly (new format: "monster-fieldName")
         const editSection = editableElement?.dataset?.editSection || 'abilites';
-        
+
         return {
           contentType: 'monster',
           itemIdentifier: itemIdentifier,
           categoryName: categoryName || 'monstres',
           property: 'html',
-          editType: 'html', 
+          editType: 'html',
           editSection: editSection,
           config: window.ContentTypes.monster,
           element: editableElement,
           container: element
         };
       }
-      
+
+      // Check if we're in a NPC card
+      const npcCard = element.closest('.card[data-npc-name]');
+      if (npcCard) {
+        const npcName = npcCard.dataset.npcName;
+        const categoryName = npcCard.dataset.categoryName;
+
+        const editableElement = element.classList.contains('editable') ? element : element.querySelector('.editable');
+
+        // Use data-item-identifier if available, otherwise fall back to npcName
+        const itemIdentifier = editableElement?.dataset?.itemIdentifier || npcName;
+
+        // Use editSection directly (new format: "npc-fieldName")
+        const editSection = editableElement?.dataset?.editSection || 'description';
+
+        return {
+          contentType: 'npc',
+          itemIdentifier: itemIdentifier,
+          categoryName: categoryName || 'npcs',
+          property: 'html',
+          editType: 'html',
+          editSection: editSection,
+          config: window.ContentTypes.npc,
+          element: editableElement,
+          container: element
+        };
+      }
+
       // Check if we're in a table-tresor card
       const tableTresorCard = element.closest('.card[data-table-tresor-name]');
       if (tableTresorCard) {
@@ -966,6 +993,8 @@
             return this.updateObjetData(session, content);
           case 'monster':
             return this.updateMonsterData(session, content);
+          case 'npc':
+            return this.updateNPCData(session, content);
           case 'category':
             return this.updateCategoryData(session, content);
           case 'subclass':
@@ -1130,6 +1159,60 @@
         // Rollback on error
         console.error('❌ Error updating monster, rolling back:', error);
         monster[propertyName] = originalValue;
+        return false;
+      }
+    }
+
+    // Update NPC data
+    updateNPCData(session, content) {
+      const npc = window.NPCS?.find(n => n.nom === session.itemIdentifier);
+      if (!npc) {
+        console.error('NPC not found:', session.itemIdentifier, 'Available NPCs:', window.NPCS?.map(n => n.nom));
+        return false;
+      }
+
+      // Use editMapping if available, otherwise use editSection directly
+      const config = session.config || window.ContentTypes.npc;
+      const propertyName = config.editMapping?.[session.editSection] || session.editSection;
+
+      // Backup current value for rollback capability
+      const originalValue = npc[propertyName];
+
+      try {
+        // If we're updating the name, we need to update the container's data-npc-name attribute
+        if (propertyName === 'nom') {
+          const oldName = npc.nom;
+          npc[propertyName] = content;
+
+          // Update the data-npc-name attribute on the card container
+          const npcCard = session.container.closest('.card[data-npc-name]');
+          if (npcCard && npcCard.dataset.npcName === oldName) {
+            npcCard.dataset.npcName = content;
+          }
+        } else {
+          // Update the npc property
+          npc[propertyName] = content;
+        }
+
+        // Force synchronization using ContentFactory to prevent data reversion
+        const contentFactory = window.ContentFactory?.getInstance ? window.ContentFactory.getInstance() : null;
+        if (contentFactory && contentFactory.updateItem) {
+          // Use ContentFactory to ensure proper data synchronization
+          contentFactory.updateItem('npc', null, npc.nom, propertyName, content);
+        }
+
+        // Additional safety: ensure image mapping is maintained
+        if (propertyName === 'image' && JdrApp.modules.images) {
+          const imageKey = `npc:${npc.nom}`;
+          JdrApp.modules.images.setImage(imageKey, content);
+        }
+
+        return true;
+
+      } catch (error) {
+        // Rollback on error
+        console.error('❌ Error updating NPC, rolling back:', error);
+        npc[propertyName] = originalValue;
         return false;
       }
     }
