@@ -647,18 +647,39 @@
       while (cardContainer.firstChild) {
         preview.appendChild(cardContainer.firstChild);
       }
-      
-      // The styles are now applied via CSS in the head, no need for inline styles here
-      
+
+      // Load lazy images BEFORE adding to document to avoid flicker
+      const lazyImages = preview.querySelectorAll('img.lazy-load, img.thumb, img[data-src]');
+      console.log('🖼️ Found lazy images in monster preview:', lazyImages.length);
+
+      lazyImages.forEach(img => {
+        const src = img.getAttribute('data-src') || img.src;
+        console.log('  - Image src:', src);
+
+        if (src && src !== 'data:image/svg+xml' && !src.includes('svg+xml')) {
+          img.src = src;
+          img.style.display = 'inline-block';
+          img.classList.remove('lazy-load');
+
+          // Add click-to-enlarge functionality
+          img.style.cursor = 'pointer';
+          img.title = 'Cliquer pour agrandir';
+          img.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.showImageModal(src);
+          });
+        }
+      });
+
       // Position near the trigger element
       const rect = triggerElement.getBoundingClientRect();
       const viewportWidth = window.innerWidth;
       const viewportHeight = window.innerHeight;
-      
+
       // Calculate position to keep preview in viewport
       let left = rect.left + window.scrollX;
       let top = rect.bottom + window.scrollY + 5;
-      
+
       // Adjust horizontal position if too far right
       if (left + 450 > viewportWidth) {
         left = rect.right + window.scrollX - 450;
@@ -666,7 +687,7 @@
       if (left < 10) {
         left = 10;
       }
-      
+
       // Adjust vertical position if too far down
       if (top + 700 > viewportHeight + window.scrollY) {
         top = rect.top + window.scrollY - 705;
@@ -674,38 +695,12 @@
       if (top < 10) {
         top = 10;
       }
-      
+
       preview.style.left = left + 'px';
       preview.style.top = top + 'px';
-      
-      // Add to document
+
+      // Add to document - images already loaded
       document.body.appendChild(preview);
-
-      // Load lazy images in the preview AND add click-to-enlarge
-      // Use setTimeout to ensure DOM is ready and query all possible image selectors
-      setTimeout(() => {
-        const lazyImages = preview.querySelectorAll('img.lazy-load, img.thumb, img[data-src]');
-        console.log('🖼️ Found lazy images in preview:', lazyImages.length);
-
-        lazyImages.forEach(img => {
-          const src = img.getAttribute('data-src') || img.src;
-          console.log('  - Image src:', src);
-
-          if (src && src !== 'data:image/svg+xml' && !src.includes('svg+xml')) {
-            img.src = src;
-            img.style.display = 'inline-block';
-            img.classList.remove('lazy-load'); // Remove lazy-load class to prevent re-triggering
-
-            // Add click-to-enlarge functionality
-            img.style.cursor = 'pointer';
-            img.title = 'Cliquer pour agrandir';
-            img.addEventListener('click', (e) => {
-              e.stopPropagation();
-              this.showImageModal(src);
-            });
-          }
-        });
-      }, 50);
 
       // Remove on click outside or after delay
       const removePreview = () => {
@@ -850,6 +845,29 @@
         preview.appendChild(cardContainer.firstChild);
       }
 
+      // Load lazy images BEFORE adding to document to avoid flicker
+      const lazyImages = preview.querySelectorAll('img.lazy-load, img.thumb, img[data-src]');
+      console.log('🖼️ Found lazy images in NPC preview:', lazyImages.length);
+
+      lazyImages.forEach(img => {
+        const src = img.getAttribute('data-src') || img.src;
+        console.log('  - NPC Image src:', src);
+
+        if (src && src !== 'data:image/svg+xml' && !src.includes('svg+xml')) {
+          img.src = src;
+          img.style.display = 'inline-block';
+          img.classList.remove('lazy-load');
+
+          // Add click-to-enlarge functionality
+          img.style.cursor = 'pointer';
+          img.title = 'Cliquer pour agrandir';
+          img.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.showImageModal(src);
+          });
+        }
+      });
+
       // Position near the trigger element
       const rect = triggerElement.getBoundingClientRect();
       const viewportWidth = window.innerWidth;
@@ -878,34 +896,8 @@
       preview.style.left = left + 'px';
       preview.style.top = top + 'px';
 
-      // Add to document
+      // Add to document - images already loaded
       document.body.appendChild(preview);
-
-      // Load lazy images in the preview AND add click-to-enlarge
-      // Use setTimeout to ensure DOM is ready and query all possible image selectors
-      setTimeout(() => {
-        const lazyImages = preview.querySelectorAll('img.lazy-load, img.thumb, img[data-src]');
-        console.log('🖼️ Found lazy images in preview:', lazyImages.length);
-
-        lazyImages.forEach(img => {
-          const src = img.getAttribute('data-src') || img.src;
-          console.log('  - Image src:', src);
-
-          if (src && src !== 'data:image/svg+xml' && !src.includes('svg+xml')) {
-            img.src = src;
-            img.style.display = 'inline-block';
-            img.classList.remove('lazy-load'); // Remove lazy-load class to prevent re-triggering
-
-            // Add click-to-enlarge functionality
-            img.style.cursor = 'pointer';
-            img.title = 'Cliquer pour agrandir';
-            img.addEventListener('click', (e) => {
-              e.stopPropagation();
-              this.showImageModal(src);
-            });
-          }
-        });
-      }, 50);
 
       // Remove on click outside or after delay
       const removePreview = () => {
