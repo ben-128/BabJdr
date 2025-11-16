@@ -318,6 +318,12 @@
       }
     },
 
+    showNPCPreview(npcName, triggerElement, event) {
+      if (window.ModalManager?.showNPCPreview) {
+        return ModalManager.showNPCPreview(npcName, triggerElement, event);
+      }
+    },
+
     setupMobileNavigation() {
       if (window.ResponsiveManager) {
         return ResponsiveManager.setupMobileNavigation();
