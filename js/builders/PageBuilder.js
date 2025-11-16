@@ -181,6 +181,36 @@
       return result;
     }
 
+    buildSingleNPCPage(npcData) {
+      const allNPCs = npcData || [];
+      const instance = PageBuilder.getInstance();
+
+      return `
+        <article class="" data-page="npcs">
+          <section>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
+              <h2>👥 NPCs</h2>
+              ${instance.buildIllustration('page:npcs')}
+            </div>
+
+            ${instance.buildPageDescription('npc')}
+
+            <div style="display: flex; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap;">
+              ${instance.buildAddButton('npc', 'npcs')}
+            </div>
+
+            <div class="grid cols-2" id="npcs-container">
+              ${allNPCs.map((item, index) =>
+                CardBuilder.create('npc', item, 'npcs', index).build()
+              ).join('')}
+            </div>
+
+            ${allNPCs.length === 0 ? '<p style="text-align: center; color: #666; margin: 2rem 0;">Aucun NPC pour le moment. Utilisez le mode développement pour en créer.</p>' : ''}
+          </section>
+        </article>
+      `;
+    }
+
     buildSingleMonsterPage(monsterData) {
       let config = window.ContentTypes?.['monster'];
       const allMonsters = monsterData || [];

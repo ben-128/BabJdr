@@ -78,8 +78,13 @@
       if (page === 'monstres') {
         return this.renderMonstersPage();
       }
-      
-      // Handle single tables-tresors page  
+
+      // Handle single npcs page
+      if (page === 'npcs') {
+        return this.renderNPCsPage();
+      }
+
+      // Handle single tables-tresors page
       if (page === 'tables-tresors') {
         return this.renderTablesTresorsPage();
       }
@@ -980,7 +985,15 @@
       this.show('monstres'); // Activer la page
       return true;
     },
-    
+
+    renderNPCsPage() {
+      // Use PageBuilder to generate the npcs page dynamically
+      JdrApp.modules.renderer.renderUnifiedContentPage('npc', window.NPCS || []);
+      this.updateActiveStates('npcs');
+      this.show('npcs'); // Activer la page
+      return true;
+    },
+
     renderTablesTresorsPage() {
       // Use PageBuilder to generate the tables-tresors page dynamically
       JdrApp.modules.renderer.renderUnifiedContentPage('tableTresor', window.TABLES_TRESORS || { tables: [] });

@@ -487,6 +487,9 @@
       } else if (contentType === 'monster' && data) {
         content = PageBuilder.buildSingleMonsterPage(data);
         pageId = 'monstres';
+      } else if (contentType === 'npc' && data) {
+        content = PageBuilder.buildSingleNPCPage(data);
+        pageId = 'npcs';
       } else if (contentType === 'tableTresor' && data) {
         content = PageBuilder.buildSingleTableTresorPage(data);
         pageId = 'tables-tresors';
