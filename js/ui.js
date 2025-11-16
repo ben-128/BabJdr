@@ -336,8 +336,18 @@
       // Small delay to ensure state is set before regeneration
       setTimeout(() => {
         console.log('📄 Calling regenerateCurrentPage');
+        console.log('📄 JdrApp.modules.renderer exists?', !!JdrApp.modules.renderer);
+        console.log('📄 regenerateCurrentPage exists?', !!JdrApp.modules.renderer?.regenerateCurrentPage);
+
         if (JdrApp.modules.renderer?.regenerateCurrentPage) {
           JdrApp.modules.renderer.regenerateCurrentPage();
+        } else {
+          console.error('❌ regenerateCurrentPage not available!');
+          // Fallback: force page reload
+          console.log('📄 Falling back to router.handleRoute()');
+          if (JdrApp.modules.router?.handleRoute) {
+            JdrApp.modules.router.handleRoute();
+          }
         }
       }, 10);
     },
