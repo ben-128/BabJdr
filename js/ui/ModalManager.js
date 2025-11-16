@@ -681,17 +681,31 @@
       // Add to document
       document.body.appendChild(preview);
 
-      // Load lazy images in the preview
+      // Load lazy images in the preview AND add click-to-enlarge
+      // Use setTimeout to ensure DOM is ready and query all possible image selectors
       setTimeout(() => {
-        const lazyImages = preview.querySelectorAll('img.lazy-load[data-src]');
+        const lazyImages = preview.querySelectorAll('img.lazy-load, img.thumb, img[data-src]');
+        console.log('🖼️ Found lazy images in preview:', lazyImages.length);
+
         lazyImages.forEach(img => {
-          const src = img.getAttribute('data-src');
-          if (src) {
+          const src = img.getAttribute('data-src') || img.src;
+          console.log('  - Image src:', src);
+
+          if (src && src !== 'data:image/svg+xml' && !src.includes('svg+xml')) {
             img.src = src;
             img.style.display = 'inline-block';
+            img.classList.remove('lazy-load'); // Remove lazy-load class to prevent re-triggering
+
+            // Add click-to-enlarge functionality
+            img.style.cursor = 'pointer';
+            img.title = 'Cliquer pour agrandir';
+            img.addEventListener('click', (e) => {
+              e.stopPropagation();
+              this.showImageModal(src);
+            });
           }
         });
-      }, 10);
+      }, 50);
 
       // Remove on click outside or after delay
       const removePreview = () => {
@@ -867,17 +881,31 @@
       // Add to document
       document.body.appendChild(preview);
 
-      // Load lazy images in the preview
+      // Load lazy images in the preview AND add click-to-enlarge
+      // Use setTimeout to ensure DOM is ready and query all possible image selectors
       setTimeout(() => {
-        const lazyImages = preview.querySelectorAll('img.lazy-load[data-src]');
+        const lazyImages = preview.querySelectorAll('img.lazy-load, img.thumb, img[data-src]');
+        console.log('🖼️ Found lazy images in preview:', lazyImages.length);
+
         lazyImages.forEach(img => {
-          const src = img.getAttribute('data-src');
-          if (src) {
+          const src = img.getAttribute('data-src') || img.src;
+          console.log('  - Image src:', src);
+
+          if (src && src !== 'data:image/svg+xml' && !src.includes('svg+xml')) {
             img.src = src;
             img.style.display = 'inline-block';
+            img.classList.remove('lazy-load'); // Remove lazy-load class to prevent re-triggering
+
+            // Add click-to-enlarge functionality
+            img.style.cursor = 'pointer';
+            img.title = 'Cliquer pour agrandir';
+            img.addEventListener('click', (e) => {
+              e.stopPropagation();
+              this.showImageModal(src);
+            });
           }
         });
-      }, 10);
+      }, 50);
 
       // Remove on click outside or after delay
       const removePreview = () => {
@@ -895,6 +923,102 @@
           });
         }
       }, 10);
+    },
+
+    /**
+     * Show enlarged image modal
+     */
+    showImageModal(imageUrl) {
+      // Remove any existing image modal
+      const existingModal = document.querySelector('.image-enlarge-modal');
+      if (existingModal) {
+        existingModal.remove();
+      }
+
+      // Create modal overlay
+      const modal = document.createElement('div');
+      modal.className = 'image-enlarge-modal';
+      modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 2147483647;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      `;
+
+      // Create image container
+      const imgContainer = document.createElement('div');
+      imgContainer.style.cssText = `
+        max-width: 90%;
+        max-height: 90%;
+        position: relative;
+      `;
+
+      // Create the image
+      const img = document.createElement('img');
+      img.src = imageUrl;
+      img.style.cssText = `
+        max-width: 100%;
+        max-height: 90vh;
+        object-fit: contain;
+        display: block;
+      `;
+
+      // Create close button
+      const closeBtn = document.createElement('button');
+      closeBtn.textContent = '×';
+      closeBtn.style.cssText = `
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #dc2626;
+        color: white;
+        border: 3px solid white;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        font-size: 32px;
+        font-weight: bold;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        z-index: 1;
+      `;
+
+      imgContainer.appendChild(img);
+      imgContainer.appendChild(closeBtn);
+      modal.appendChild(imgContainer);
+      document.body.appendChild(modal);
+
+      // Close on click
+      const closeModal = () => {
+        modal.remove();
+      };
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal || e.target === closeBtn) {
+          closeModal();
+        }
+      });
+
+      closeBtn.addEventListener('click', closeModal);
+
+      // Close on Escape key
+      const handleEscape = (e) => {
+        if (e.key === 'Escape') {
+          closeModal();
+          document.removeEventListener('keydown', handleEscape);
+        }
+      };
+      document.addEventListener('keydown', handleEscape);
     },
 
     /**
