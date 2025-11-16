@@ -835,6 +835,7 @@
 
       // Decode the NPC card HTML
       const decodedCard = decodeHTML(npcCard);
+      console.log('📋 Decoded NPC card HTML (first 500 chars):', decodedCard.substring(0, 500));
 
       // Add NPC card - DIRECTLY set innerHTML with decoded HTML
       const cardContainer = document.createElement('div');
@@ -846,12 +847,23 @@
       }
 
       // Load lazy images BEFORE adding to document to avoid flicker
+      const allImages = preview.querySelectorAll('img');
       const lazyImages = preview.querySelectorAll('img.lazy-load, img.thumb, img[data-src]');
-      console.log('🖼️ Found lazy images in NPC preview:', lazyImages.length);
+      console.log('🖼️ Total images in NPC preview:', allImages.length);
+      console.log('🖼️ Lazy-load images in NPC preview:', lazyImages.length);
+
+      allImages.forEach((img, idx) => {
+        console.log(`  Image ${idx}:`, {
+          classes: img.className,
+          src: img.src,
+          dataSrc: img.getAttribute('data-src'),
+          style: img.style.cssText
+        });
+      });
 
       lazyImages.forEach(img => {
         const src = img.getAttribute('data-src') || img.src;
-        console.log('  - NPC Image src:', src);
+        console.log('  - Processing NPC Image src:', src);
 
         if (src && src !== 'data:image/svg+xml' && !src.includes('svg+xml')) {
           img.src = src;
