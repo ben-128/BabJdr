@@ -661,15 +661,12 @@
           img.style.display = 'inline-block';
           img.classList.remove('lazy-load');
 
-          // Add click-to-enlarge functionality with aggressive event prevention
+          // Add click-to-enlarge functionality
           img.style.cursor = 'pointer';
           img.title = 'Cliquer pour agrandir';
 
-          // Remove any existing click handlers
-          const newImg = img.cloneNode(true);
-          img.parentNode.replaceChild(newImg, img);
-
-          newImg.addEventListener('click', (e) => {
+          // Use capture phase to intercept before any other handlers
+          img.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
             e.stopImmediatePropagation();
@@ -878,15 +875,12 @@
           img.style.display = 'inline-block';
           img.classList.remove('lazy-load');
 
-          // Add click-to-enlarge functionality with aggressive event prevention
+          // Add click-to-enlarge functionality
           img.style.cursor = 'pointer';
           img.title = 'Cliquer pour agrandir';
 
-          // Remove any existing click handlers
-          const newImg = img.cloneNode(true);
-          img.parentNode.replaceChild(newImg, img);
-
-          newImg.addEventListener('click', (e) => {
+          // Use capture phase to intercept before any other handlers
+          img.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
             e.stopImmediatePropagation();
