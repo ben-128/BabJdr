@@ -353,12 +353,17 @@
     },
 
     regenerateCurrentPage() {
+      console.log('🔄 regenerateCurrentPage called');
+      console.trace('Stack trace:');
+
       // Find the currently active article
       const activeArticle = document.querySelector('article.active');
       if (!activeArticle) return;
 
       const pageId = activeArticle.dataset.page;
       if (!pageId) return;
+
+      console.log('🔄 Regenerating page:', pageId);
 
       // Determine what type of page it is and regenerate only that page
       if (pageId.startsWith('sorts-')) {
