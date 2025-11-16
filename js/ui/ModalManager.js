@@ -661,13 +661,21 @@
           img.style.display = 'inline-block';
           img.classList.remove('lazy-load');
 
-          // Add click-to-enlarge functionality
+          // Add click-to-enlarge functionality with aggressive event prevention
           img.style.cursor = 'pointer';
           img.title = 'Cliquer pour agrandir';
-          img.addEventListener('click', (e) => {
+
+          // Remove any existing click handlers
+          const newImg = img.cloneNode(true);
+          img.parentNode.replaceChild(newImg, img);
+
+          newImg.addEventListener('click', (e) => {
+            e.preventDefault();
             e.stopPropagation();
+            e.stopImmediatePropagation();
             this.showImageModal(src);
-          });
+            return false;
+          }, true);
         }
       });
 
@@ -870,13 +878,21 @@
           img.style.display = 'inline-block';
           img.classList.remove('lazy-load');
 
-          // Add click-to-enlarge functionality
+          // Add click-to-enlarge functionality with aggressive event prevention
           img.style.cursor = 'pointer';
           img.title = 'Cliquer pour agrandir';
-          img.addEventListener('click', (e) => {
+
+          // Remove any existing click handlers
+          const newImg = img.cloneNode(true);
+          img.parentNode.replaceChild(newImg, img);
+
+          newImg.addEventListener('click', (e) => {
+            e.preventDefault();
             e.stopPropagation();
+            e.stopImmediatePropagation();
             this.showImageModal(src);
-          });
+            return false;
+          }, true);
         }
       });
 
