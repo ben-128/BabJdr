@@ -653,13 +653,25 @@
       console.log('🖼️ Found lazy images in monster preview:', lazyImages.length);
 
       lazyImages.forEach(img => {
-        const src = img.getAttribute('data-src') || img.src;
-        console.log('  - Image src:', src);
+        const optimizedSrc = img.getAttribute('data-src') || img.src;
+        console.log('  - Image optimized src:', optimizedSrc);
 
-        if (src && src !== 'data:image/svg+xml' && !src.includes('svg+xml')) {
-          img.src = src;
+        if (optimizedSrc && optimizedSrc !== 'data:image/svg+xml' && !optimizedSrc.includes('svg+xml')) {
+          img.src = optimizedSrc;
           img.style.display = 'inline-block';
           img.classList.remove('lazy-load');
+
+          // Get original URL from image store using illus-key
+          const illusKey = img.closest('[data-illus-key]')?.dataset.illusKey;
+          let originalUrl = optimizedSrc;
+
+          if (illusKey && window.JdrApp?.modules?.images?.getImageUrl) {
+            const rawUrl = window.JdrApp.modules.images.getImageUrl(illusKey);
+            if (rawUrl) {
+              originalUrl = rawUrl;
+              console.log('  - Found original URL from illus-key:', originalUrl);
+            }
+          }
 
           // Add click-to-enlarge functionality
           img.style.cursor = 'pointer';
@@ -668,11 +680,11 @@
 
           // Use capture phase to intercept before any other handlers
           img.addEventListener('click', (e) => {
-            console.log('🖱️ Image clicked in preview, opening modal for:', src);
+            console.log('🖱️ Image clicked in preview, opening modal with original URL:', originalUrl);
             e.preventDefault();
             e.stopPropagation();
             e.stopImmediatePropagation();
-            this.showImageModal(src);
+            this.showImageModal(originalUrl);
             return false;
           }, true);
         }
@@ -869,13 +881,25 @@
       });
 
       lazyImages.forEach(img => {
-        const src = img.getAttribute('data-src') || img.src;
-        console.log('  - Processing NPC Image src:', src);
+        const optimizedSrc = img.getAttribute('data-src') || img.src;
+        console.log('  - Processing NPC Image optimized src:', optimizedSrc);
 
-        if (src && src !== 'data:image/svg+xml' && !src.includes('svg+xml')) {
-          img.src = src;
+        if (optimizedSrc && optimizedSrc !== 'data:image/svg+xml' && !optimizedSrc.includes('svg+xml')) {
+          img.src = optimizedSrc;
           img.style.display = 'inline-block';
           img.classList.remove('lazy-load');
+
+          // Get original URL from image store using illus-key
+          const illusKey = img.closest('[data-illus-key]')?.dataset.illusKey;
+          let originalUrl = optimizedSrc;
+
+          if (illusKey && window.JdrApp?.modules?.images?.getImageUrl) {
+            const rawUrl = window.JdrApp.modules.images.getImageUrl(illusKey);
+            if (rawUrl) {
+              originalUrl = rawUrl;
+              console.log('  - Found original URL from illus-key:', originalUrl);
+            }
+          }
 
           // Add click-to-enlarge functionality
           img.style.cursor = 'pointer';
@@ -884,11 +908,11 @@
 
           // Use capture phase to intercept before any other handlers
           img.addEventListener('click', (e) => {
-            console.log('🖱️ Image clicked in preview, opening modal for:', src);
+            console.log('🖱️ NPC Image clicked in preview, opening modal with original URL:', originalUrl);
             e.preventDefault();
             e.stopPropagation();
             e.stopImmediatePropagation();
-            this.showImageModal(src);
+            this.showImageModal(originalUrl);
             return false;
           }, true);
         }
