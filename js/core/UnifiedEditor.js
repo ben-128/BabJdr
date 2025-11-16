@@ -195,8 +195,9 @@
 
         const editableElement = element.classList.contains('editable') ? element : element.querySelector('.editable');
 
-        // Use data-item-identifier if available, otherwise fall back to monsterName
-        const itemIdentifier = editableElement?.dataset?.itemIdentifier || monsterName;
+        // ALWAYS use monsterName from card (data-monster-name is the source of truth)
+        // This ensures we use the updated name after renaming
+        const itemIdentifier = monsterName;
 
         // Use editSection directly (new format: "monster-fieldName")
         const editSection = editableElement?.dataset?.editSection || 'abilites';
@@ -222,8 +223,9 @@
 
         const editableElement = element.classList.contains('editable') ? element : element.querySelector('.editable');
 
-        // Use data-item-identifier if available, otherwise fall back to npcName
-        const itemIdentifier = editableElement?.dataset?.itemIdentifier || npcName;
+        // ALWAYS use npcName from card (data-npc-name is the source of truth)
+        // This ensures we use the updated name after renaming
+        const itemIdentifier = npcName;
 
         // Use editSection directly (new format: "npc-fieldName")
         const editSection = editableElement?.dataset?.editSection || 'description';
