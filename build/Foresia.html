@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-11-12T15:19:23.619Z by JdrBab Build System -->
+<!-- Generated on 2025-11-16T14:22:39.388Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -10964,11 +10964,12 @@ select:focus {
     "don:Magie aléatoire": "https://i.ibb.co/NgXk4vG3/Magie-Al-atoire.png",
     "don:Teleportation amicale": "https://i.ibb.co/FbCQpghH/teleportation.png",
     "don:Renvoi de Sort": "https://i.ibb.co/XrLT3jZV/Renvoi.png",
-    "sort:Sorts de Prêtre:Jugement": "https://i.ibb.co/sv0PvJ1R/Jugement.png"
+    "sort:Sorts de Prêtre:Jugement": "https://i.ibb.co/sv0PvJ1R/Jugement.png",
+    "monster:AquaLezo": "https://i.ibb.co/Kp4WNJNZ/AquaLezo.png"
   },
   "meta": {
-    "total_images": 251,
-    "exported_date": "2025-11-12",
+    "total_images": 252,
+    "exported_date": "2025-11-16",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
 };
@@ -11191,7 +11192,7 @@ select:focus {
       "type": "card",
       "id": "etapes-creation",
       "title": "Étapes de création",
-      "content": "<ol><li>Choisir une <strong>classe</strong> puis une <strong>sous‑classe</strong> : <a href=\"#/guerrier\" style=\"color: var(--accent); text-decoration: underline;\">Guerrier</a>.</li><li>Choisir un <strong>élément</strong> d'affiliation : <a href=\"#/elements\" style=\"color: var(--accent); text-decoration: underline;\">Éléments</a>.</li><li>Choisir les <strong>dons</strong> (avec 2 points de dons) : <a href=\"#/dons-generaux\" style=\"color: var(--accent); text-decoration: underline;\">Généraux (dons)</a>.</li><li>Choisir l'<strong>équipement</strong> de départ (avec 100 éclats) : <a href=\"#/collections-objets\" style=\"color: var(--accent); text-decoration: underline;\">Collections d'Objets</a>.</li><li>Définir le <strong>nom</strong>, l'<strong>histoire</strong> et l'<strong>apparence</strong>.</li><li>Remplir sa feuille de personnage (voir section ci-dessous).</li></ol>",
+      "content": "<ol><li>Choisir une <strong>classe</strong> puis une <strong>sous‑classe</strong> : <a href=\"#/guerrier\" style=\"color: var(--accent); text-decoration: underline;\">Guerrier</a>.\n</li><li>Tirer au sort (avec un d6) une carte du destin (voir section ci-dessous)                                                                    \n</li><li>Choisir un <strong>élément</strong> d'affiliation : <a href=\"#/elements\" style=\"color: var(--accent); text-decoration: underline;\">Éléments</a>.\n</li><li>Choisir les <strong>dons</strong> (avec 2 points de dons) : <a href=\"#/dons-generaux\" style=\"color: var(--accent); text-decoration: underline;\">Généraux (dons)</a>.\n</li><li>Choisir l'<strong>équipement</strong> de départ (avec 100 éclats) : <a href=\"#/collections-objets\" style=\"color: var(--accent); text-decoration: underline;\">Collections d'Objets</a>.\n</li><li>Définir le <strong>nom</strong>, l'<strong>histoire</strong> et l'<strong>apparence</strong>.</li><li>Remplir sa feuille de personnage (voir section ci-dessous).</li></ol>",
       "deletable": true,
       "sectionName": "Étapes de création"
     },
@@ -11202,6 +11203,12 @@ select:focus {
       "content": "<div class=\"pdf-info-container\" style=\"max-width: 100%; margin: 1rem 0; padding: 1.5rem; border: 2px solid var(--bronze); border-radius: 12px; background: var(--card); text-align: center; box-sizing: border-box; overflow: hidden;\"><p style=\"color: var(--text); margin: 1rem 0;\">Feuille de personnage complète de 3 pages pour vos aventures.</p><div class=\"pdf-preview-actions\" style=\"display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem;\"><button onclick=\"window.open('https://github.com/ben-128/BabJdr/raw/master/data/feuille-personnage.pdf', '_blank')\" class=\"btn-base\" style=\"background: var(--bronze); color: white;\">📖 Voir le PDF</button><button onclick=\"const link = document.createElement('a'); link.href = 'https://github.com/ben-128/BabJdr/raw/master/data/feuille-personnage.pdf'; link.download = 'Feuille-Personnage-Foresia.pdf'; link.click();\" class=\"btn-base\" style=\"background: var(--emerald); color: white;\">📥 Télécharger</button><button onclick=\"const printWindow = window.open('https://github.com/ben-128/BabJdr/raw/master/data/feuille-personnage.pdf', '_blank'); if (printWindow) { printWindow.focus(); setTimeout(() => { try { printWindow.print(); } catch (e) { alert('PDF ouvert. Utilisez Ctrl+P pour imprimer.'); } }, 1000); }\" class=\"btn-base\" style=\"background: var(--gold); color: white;\">🖨️ Imprimer</button></div></div>",
       "deletable": true,
       "sectionName": "Feuille de personnage"
+    },
+    {
+      "id": "section-1763298721371-zkuj4q",
+      "type": "card",
+      "title": "Cartes du destin",
+      "content": "<ol>\n<li>\nAu choix, 250 éclats ou 4 Fortune.                                                          \n</li>\n<li>\nA répartir:  2 points de statistiques dans une statitistique qui n'a pas la valeur la plus élevée.\n</li>\n<li>\nAu choix, 4 points de vie maximum ou 6 points de mana maximum.\n</li>\n<li>\nUne compétence rang 1 au choix.\n</li>\n<li>\n5 d'armure élémentaire dans 2 éléments au choix.\n</li>\n<li>\nUn point de Dons.\n</li>\n</ol>"
     }
   ]
 },
@@ -16585,52 +16592,8 @@ select:focus {
 
     // Validate and fix monster image paths
     validateMonsterImagePath(monster) {
-      if (!monster.image || !monster.nom) {
-        return false;
-      }
-
-      // Extract filename from current path
-      const currentPath = monster.image;
-      const filename = currentPath.split('/').pop();
-      
-      // Check if path follows correct format
-      const expectedPattern = /^data\/images\/Monstres\/foret\/Monstre_Forêt_\w+\.png$/;
-      
-      if (!expectedPattern.test(currentPath)) {
-        // Try to fix common issues
-        let correctedPath = null;
-        
-        // Map common filename patterns to correct paths
-        const filenameMap = {
-          'araignee-geante.png': 'Monstre_Forêt_Araignée.png',
-          'crabe-des-bois.png': 'Monstre_Forêt_Crab.png',  
-          'groink.png': 'Monstre_Forêt_Groink.png',
-          'groink-chaman.png': 'Monstre_Forêt_Groink_Chaman.png',
-          'guepe-geante.png': 'Monstre_Forêt_GuepeGeante.png',
-          'ours-des-bois.png': 'Monstre_Forêt_Ours.png'
-        };
-
-        if (filenameMap[filename]) {
-          correctedPath = `data/images/Monstres/foret/${filenameMap[filename]}`;
-        } else if (!filename.startsWith('Monstre_Forêt_')) {
-          // Try to construct path from monster name
-          const safeName = monster.nom.replace(/[^a-zA-Z0-9àâäéèêëïîôùûüÿçÀÂÄÉÈÊËÏÎÔÙÛÜŸÇ_]/g, '');
-          correctedPath = `data/images/Monstres/foret/Monstre_Forêt_${safeName}.png`;
-        }
-
-        if (correctedPath && correctedPath !== currentPath) {
-          
-          // Update monster data
-          monster.image = correctedPath;
-          
-          // Update image mapping
-          const imageKey = `monster:${monster.nom}`;
-          this.imageStore[imageKey] = correctedPath;
-          
-          return true;
-        }
-      }
-      
+      // DISABLED: This function was causing issues by "correcting" paths that were already correct
+      // The monster.image field in monstres.json is now the source of truth
       return false;
     },
 
@@ -19203,9 +19166,9 @@ select:focus {
         this.saveToStorage();
         // Fermer la modal
         this.closeAllModals();
-        
-        // Mettre à jour l'affichage sans recharger la page
-        this.refreshTablesTresorsDisplay();
+
+        // Refresh only the specific table card
+        this.refreshSingleTableCard(tableName);
         
 
       } catch (error) {
@@ -19237,10 +19200,10 @@ select:focus {
           table.fourchettes = [];
         }
         table.fourchettes.push(newFourchette);
-        
+
         this.saveToStorage();
-        // Mettre à jour l'affichage sans recharger la page
-        this.refreshTablesTresorsDisplay();
+        // Refresh only the specific table card
+        this.refreshSingleTableCard(tableName);
         
         // Fourchette ajoutée avec succès
 
@@ -19288,10 +19251,10 @@ select:focus {
         // Échanger les fourchettes
         const fourchette = table.fourchettes.splice(fromIndex, 1)[0];
         table.fourchettes.splice(toIndex, 0, fourchette);
-        
+
         this.saveToStorage();
-        // Mettre à jour l'affichage sans recharger la page
-        this.refreshTablesTresorsDisplay();
+        // Refresh only the specific table card
+        this.refreshSingleTableCard(tableName);
         
         // Fourchette déplacée avec succès
 
@@ -19316,10 +19279,10 @@ select:focus {
         }
 
         table.fourchettes.splice(fourchetteIndex, 1);
-        
+
         this.saveToStorage();
-        // Mettre à jour l'affichage sans recharger la page
-        this.refreshTablesTresorsDisplay();
+        // Refresh only the specific table card
+        this.refreshSingleTableCard(tableName);
         
         // Fourchette supprimée avec succès
 
@@ -19393,14 +19356,43 @@ select:focus {
     }
 
     refreshTablesTresorsDisplay() {
-      // Rafraîchir seulement l'affichage des cartes sans recharger la page
-      if (JdrApp.modules.router && JdrApp.modules.router.getCurrentRoute() === 'tables-tresors') {
-        // Au lieu de rafraîchir manuellement, utiliser la méthode du router qui respecte les filtres
-        if (JdrApp.modules.router?.renderTablesTresorsPage) {
-          JdrApp.modules.router.renderTablesTresorsPage();
-        } else {
-          // Fallback: regénérer la page complète si la méthode n'existe pas
-          JdrApp.modules.renderer?.regenerateCurrentPage();
+      // Don't refresh - individual card updates are handled by refreshSingleTableCard
+      // This prevents full page regeneration and scroll reset
+    }
+
+    refreshSingleTableCard(tableName) {
+      // Refresh only the specific table card that was edited
+      const tableCard = document.querySelector(`.card[data-table-tresor-name="${tableName}"]`);
+      if (!tableCard) return;
+
+      const table = window.TABLES_TRESORS?.tables?.find(t => t.nom === tableName);
+      if (!table) return;
+
+      // Build the updated card HTML - correct parameter order: (type, data, categoryName, index)
+      const cardBuilder = new window.CardBuilder('tableTresor', table, null, null);
+      const newCardHTML = cardBuilder.build();
+
+      // Parse the new HTML
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(newCardHTML, 'text/html');
+      const newCard = doc.querySelector('.card');
+
+      if (newCard) {
+        // Replace the old card with the new one
+        tableCard.replaceWith(newCard);
+
+        // Reapply images
+        if (JdrApp.modules.renderer?.autoLoadImages) {
+          JdrApp.modules.renderer.autoLoadImages();
+        }
+
+        // Reapply dev mode state
+        if (!window.STANDALONE_VERSION && JdrApp.modules.editor) {
+          if (JdrApp.modules.editor.isDevMode) {
+            JdrApp.modules.editor.forceShowAllEditButtons();
+          } else {
+            JdrApp.modules.editor.forceHideAllEditButtons();
+          }
         }
       }
     }
@@ -24567,7 +24559,7 @@ select:focus {
       // using the PageBuilder with the appropriate build method
       let content = '';
       let pageId = '';
-      
+
       if (contentType === 'objet' && data) {
         content = PageBuilder.buildSingleObjectPage(data);
         pageId = 'objets';
@@ -24578,7 +24570,7 @@ select:focus {
         content = PageBuilder.buildSingleTableTresorPage(data);
         pageId = 'tables-tresors';
       }
-      
+
       if (content && pageId) {
         // Find or create the specific article element in #views
         const viewsContainer = document.querySelector('#views');
@@ -24592,10 +24584,10 @@ select:focus {
             }
             existingArticle.remove();
           }
-          
+
           // Add the new content to the views container
           viewsContainer.insertAdjacentHTML('beforeend', content);
-          
+
           this.autoLoadImages();
           
           // Apply dev mode state with slight delay to ensure DOM is processed
@@ -26069,7 +26061,9 @@ select:focus {
           // Use ContentFactory to ensure proper data synchronization
           contentFactory.updateItem('tableTresor', 'tables', table.nom, propertyName, content);
         }
-        
+
+        // Don't refresh the card - the visual update is already done
+        // Only save to storage will be triggered by CONTENT_UPDATE event
         return true;
         
       } catch (error) {
@@ -28098,6 +28092,7 @@ select:focus {
   JdrApp.modules.editor = {
     editedData: {},
     isDevMode: false,
+    _devToggleHandlerAttached: false,
 
     init() {
       this.setupEventListeners();
@@ -28108,7 +28103,18 @@ select:focus {
     },
 
     setupEventListeners() {
-      JdrApp.utils.events.register('click', '#devToggle', () => this.toggleDevMode());
+      // Direct event listener instead of using the utils.events system
+      // Only attach once to prevent double-firing
+      if (!this._devToggleHandlerAttached) {
+        document.addEventListener('click', (e) => {
+          if (e.target.id === 'devToggle' || e.target.closest('#devToggle')) {
+            e.preventDefault();
+            e.stopPropagation();
+            this.toggleDevMode();
+          }
+        }, { capture: true });
+        this._devToggleHandlerAttached = true;
+      }
 
       EventBus.on(Events.EDITOR_TOGGLE, (payload) => {
         this.isDevMode = payload.enabled;
@@ -28122,9 +28128,11 @@ select:focus {
     },
 
     toggleDevMode() {
+      console.log('toggleDevMode called, STANDALONE_VERSION:', window.STANDALONE_VERSION);
       if (window.STANDALONE_VERSION) return;
-      
+
       this.isDevMode = !this.isDevMode;
+      console.log('Dev mode toggled to:', this.isDevMode);
       EventBus.emit(Events.EDITOR_TOGGLE, { enabled: this.isDevMode });
     },
 
