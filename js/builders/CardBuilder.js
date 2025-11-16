@@ -94,6 +94,9 @@
         case 'monster':
           html = this.buildMonsterCard();
           break;
+        case 'npc':
+          html = this.buildNPCCard();
+          break;
         case 'tableTresor':
           html = this.buildTableTresorCard();
           break;
@@ -291,6 +294,34 @@
           ` : ''}
 
           ${this.buildDeleteButton('monster')}
+        </div>
+      `;
+    }
+
+    buildNPCCard() {
+      const allNPCs = window.NPCS || [];
+      const index = allNPCs.indexOf(this.data) || 0;
+      const totalItems = allNPCs.length;
+
+      return `
+        <div class="card editable-section npc-card" data-section-type="npc" data-npc-name="${this.data.nom}">
+          ${this.buildEditableTitle(this.data.nom, 'npc-name')}
+          ${this.buildIllustration(`npc:${this.data.nom}`, this.data.nom, 'npc')}
+
+          ${this.data.description ? `
+            <hr style="margin: 1rem 0; border: none; border-top: 1px solid var(--rule);">
+            ${this.buildEditableField(this.data.description, 'npc-description', 'Description', { style: 'margin-top: 0.5rem;' })}
+          ` : ''}
+
+          ${this.data.interactions ? `
+            <hr style="margin: 1rem 0; border: none; border-top: 1px solid var(--rule);">
+            <div style="margin-top: 0.5rem;">
+              <strong>💬 Interactions possibles:</strong>
+              ${this.buildEditableField(this.data.interactions, 'npc-interactions', 'Interactions', { style: 'margin-top: 0.5rem;' })}
+            </div>
+          ` : ''}
+
+          ${this.buildDeleteButton('npc')}
         </div>
       `;
     }

@@ -350,6 +350,40 @@
       }
     },
 
+    npc: {
+      fields: {
+        nom: { type: 'text', label: 'Nom', required: true },
+        image: { type: 'text', label: 'Image', required: false },
+        description: { type: 'richtext', label: 'Description', required: false },
+        interactions: { type: 'richtext', label: 'Interactions possibles', required: false }
+      },
+      editMapping: {
+        'npc-name': 'nom',
+        'npc-description': 'description',
+        'npc-interactions': 'interactions'
+      },
+      identifiers: {
+        name: 'nom',
+        category: 'npcs'
+      },
+      template: 'npc-card',
+      container: 'npcs',
+      dataKey: 'NPCS',
+      pageType: 'single',
+      icons: {
+        category: '👥',
+        item: '👤',
+        add: '➕',
+        delete: '🗑️'
+      },
+      defaultValues: {
+        nom: "Nouveau PNJ",
+        image: "",
+        description: "Description du personnage non-joueur, son apparence, sa personnalité...",
+        interactions: "Liste des interactions possibles avec ce PNJ : dialogues, quêtes, services proposés, etc."
+      }
+    },
+
     tableTresor: {
       fields: {
         nom: { type: 'text', label: 'Nom', required: true },

@@ -118,7 +118,12 @@
         if (window.MONSTRES) {
           zip.file('data/monstres.json', JSON.stringify(window.MONSTRES, null, 2));
         }
-        
+
+        // Add NPCs data
+        if (window.NPCS) {
+          zip.file('data/npcs.json', JSON.stringify(window.NPCS, null, 2));
+        }
+
         // Add tables tresors data with current edits  
         if (window.TABLES_TRESORS) {
           console.log('📦 Exporting TABLES_TRESORS:', {

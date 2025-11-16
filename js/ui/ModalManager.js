@@ -700,6 +700,180 @@
     },
 
     /**
+     * Show NPC preview tooltip
+     */
+    showNPCPreview(npcName, triggerElement, event) {
+      if (!npcName) return;
+
+      // Only remove existing NPC previews, not other types
+      const existingPreview = document.querySelector('.npc-preview-tooltip');
+      if (existingPreview) {
+        existingPreview.remove();
+      }
+
+      // Find the NPC in the data
+      let foundNPC = null;
+      if (window.NPCS) {
+        foundNPC = window.NPCS.find(n => n.nom === npcName);
+      }
+
+      if (!foundNPC) {
+        this.showEtatPreview(npcName, 'NPC non trouvé', triggerElement);
+        return;
+      }
+
+      // Use CardBuilder to create a full NPC card in preview mode
+      const npcCard = CardBuilder.create('npc', foundNPC, 'preview').build();
+
+      // Add minimal styles for the preview tooltip
+      if (!document.getElementById('npc-preview-styles')) {
+        const styleElement = document.createElement('style');
+        styleElement.id = 'npc-preview-styles';
+        styleElement.textContent = `
+          .npc-preview-tooltip {
+            background: var(--paper) !important;
+            position: fixed !important;
+            z-index: 2147483647 !important;
+            max-width: 450px !important;
+            max-height: 600px !important;
+            overflow-y: auto !important;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5) !important;
+            border-radius: 12px !important;
+            border: 2px solid var(--rule) !important;
+            padding: 1rem !important;
+          }
+          .npc-preview-tooltip .preview-close-btn {
+            position: absolute !important;
+            top: 5px !important;
+            right: 5px !important;
+            background: #0891b2 !important;
+            color: white !important;
+            border: 3px solid #ffffff !important;
+            border-radius: 50% !important;
+            width: 40px !important;
+            height: 40px !important;
+            cursor: pointer !important;
+            font-size: 24px !important;
+            font-weight: bold !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            z-index: 1 !important;
+            box-shadow: 0 4px 12px rgba(8, 145, 178, 0.6) !important;
+            transition: all 0.2s ease !important;
+          }
+          .npc-preview-tooltip .preview-close-btn:hover {
+            background: #0e7490 !important;
+            transform: scale(1.1) !important;
+            box-shadow: 0 6px 16px rgba(8, 145, 178, 0.8) !important;
+          }
+          .npc-preview-tooltip .card h4 {
+            clear: both !important;
+            display: block !important;
+            width: 100% !important;
+            margin-bottom: 1rem !important;
+          }
+          .npc-preview-tooltip .card .illus {
+            display: block !important;
+            clear: both !important;
+            width: 100% !important;
+            text-align: center !important;
+            margin: 0 auto 1.5rem !important;
+          }
+          .npc-preview-tooltip .card .illus img {
+            display: block !important;
+            margin: 0 auto !important;
+          }
+          .npc-preview-tooltip .card > div:not(:first-child) {
+            margin-top: 1rem !important;
+          }
+          .npc-preview-tooltip .card hr {
+            margin: 1.5rem 0 !important;
+          }
+        `;
+        document.head.appendChild(styleElement);
+      }
+
+      // Create and show preview
+      const preview = document.createElement('div');
+      preview.className = 'npc-preview-tooltip';
+
+      // Add close button
+      const closeBtn = document.createElement('button');
+      closeBtn.className = 'preview-close-btn';
+      closeBtn.title = 'Fermer';
+      closeBtn.textContent = '×';
+      preview.appendChild(closeBtn);
+
+      // Decode HTML entities before using
+      const decodeHTML = (html) => {
+        const textarea = document.createElement('textarea');
+        textarea.innerHTML = html;
+        return textarea.value;
+      };
+
+      // Decode the NPC card HTML
+      const decodedCard = decodeHTML(npcCard);
+
+      // Add NPC card - DIRECTLY set innerHTML with decoded HTML
+      const cardContainer = document.createElement('div');
+      cardContainer.innerHTML = decodedCard;
+
+      // Move all children from card container to preview
+      while (cardContainer.firstChild) {
+        preview.appendChild(cardContainer.firstChild);
+      }
+
+      // Position near the trigger element
+      const rect = triggerElement.getBoundingClientRect();
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+
+      // Calculate position to keep preview in viewport
+      let left = rect.left + window.scrollX;
+      let top = rect.bottom + window.scrollY + 5;
+
+      // Adjust horizontal position if too far right
+      if (left + 450 > viewportWidth) {
+        left = rect.right + window.scrollX - 450;
+      }
+      if (left < 10) {
+        left = 10;
+      }
+
+      // Adjust vertical position if too far down
+      if (top + 600 > viewportHeight + window.scrollY) {
+        top = rect.top + window.scrollY - 605;
+      }
+      if (top < 10) {
+        top = 10;
+      }
+
+      preview.style.left = left + 'px';
+      preview.style.top = top + 'px';
+
+      // Add to document
+      document.body.appendChild(preview);
+
+      // Remove on click outside or after delay
+      const removePreview = () => {
+        if (preview.parentNode) {
+          preview.parentNode.removeChild(preview);
+        }
+      };
+
+      // Add click handler for the close button only
+      setTimeout(() => {
+        const closeBtn = preview.querySelector('.preview-close-btn');
+        if (closeBtn) {
+          closeBtn.addEventListener('click', () => {
+            removePreview();
+          });
+        }
+      }, 10);
+    },
+
+    /**
      * Create states modal
      */
     createEtatsModal() {

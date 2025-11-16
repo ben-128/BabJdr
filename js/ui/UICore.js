@@ -174,6 +174,14 @@
         const monsterName = e.target.dataset.monster;
         this.showMonsterPreview(monsterName, e.target, e);
       });
+
+      // Gestionnaire pour les liens de NPCs dans le contenu
+      JdrApp.utils.events.register('click', '.npc-link', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const npcName = e.target.dataset.npc;
+        this.showNPCPreview(npcName, e.target, e);
+      });
     },
 
     /**

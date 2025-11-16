@@ -154,12 +154,13 @@
         }
         
         // Development mode - fetch files
-        const [sorts, classes, dons, objets, monstres, tablesTresors, collections, staticPagesConfig, tocStructure, audioConfig] = await Promise.all([
+        const [sorts, classes, dons, objets, monstres, npcs, tablesTresors, collections, staticPagesConfig, tocStructure, audioConfig] = await Promise.all([
           fetch('data/sorts.json').then(r => r.json()),
           fetch('data/classes.json').then(r => r.json()),
           fetch('data/dons.json').then(r => r.json()),
           fetch('data/objets.json').then(r => r.json()),
           fetch('data/monstres.json').then(r => r.json()),
+          fetch('data/npcs.json').then(r => r.json()),
           fetch('data/tables-tresors.json').then(r => r.json()),
           fetch('data/collections.json').then(r => r.json()),
           fetch('data/static-pages-config.json').then(r => r.json()),
@@ -214,6 +215,7 @@
         this.data.DONS = dons;
         this.data.OBJETS = objets;
         this.data.MONSTRES = monstres;
+        this.data.NPCS = npcs;
         this.data.TABLES_TRESORS = tablesTresors;
         this.data.COLLECTIONS = collections;
         this.data.STATIC_PAGES = staticPagesData;
@@ -226,6 +228,7 @@
         window.DONS = dons;
         window.OBJETS = objets;
         window.MONSTRES = monstres;
+        window.NPCS = npcs;
         window.TABLES_TRESORS = tablesTresors;
         window.COLLECTIONS = collections;
         window.STATIC_PAGES = this.data.STATIC_PAGES;

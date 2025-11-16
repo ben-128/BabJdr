@@ -2004,6 +2004,7 @@
               <button id="editorSpellLinksBtn" class="btn" style="background: #6b21a8; color: white; font-size: 12px;">🔗 Liens Sorts</button>
               <button id="editorPageLinksBtn" class="btn" style="background: #1d4ed8; color: white; font-size: 12px;">🔗 Liens Pages</button>
               <button id="editorMonsterLinksBtn" class="btn" style="background: #dc2626; color: white; font-size: 12px;">🐲 Liens Monstres</button>
+              <button id="editorNPCLinksBtn" class="btn" style="background: #0891b2; color: white; font-size: 12px;">👥 Liens NPCs</button>
               <button id="editorTreasureTablesBtn" class="btn" style="background: #b45309; color: white; font-size: 12px;">🎲 Tables Trésors</button>
               <button id="editorSchemaBtn" class="btn" style="background: #8b5cf6; color: white; font-size: 12px;">🎨 Schéma</button>
             </div>
@@ -2033,6 +2034,7 @@
       const spellLinksBtn = modal.querySelector('#editorSpellLinksBtn');
       const pageLinksBtn = modal.querySelector('#editorPageLinksBtn');
       const monsterLinksBtn = modal.querySelector('#editorMonsterLinksBtn');
+      const npcLinksBtn = modal.querySelector('#editorNPCLinksBtn');
       const treasureTablesBtn = modal.querySelector('#editorTreasureTablesBtn');
       const schemaBtn = modal.querySelector('#editorSchemaBtn');
 
@@ -2108,6 +2110,18 @@
           if (JdrApp.modules.ui?.showMonsterLinksModal) {
             JdrApp.modules.ui.showMonsterLinksModal();
           }
+        });
+      }
+
+      if (npcLinksBtn) {
+        npcLinksBtn.addEventListener('click', () => {
+          this.showNPCLinksModal(insertTextAtCursor);
+        });
+      }
+
+      if (treasureTablesBtn) {
+        treasureTablesBtn.addEventListener('click', () => {
+          this.showTreasureTablesModal(insertTextAtCursor);
         });
       }
 
@@ -3082,6 +3096,158 @@
       if (controls) {
         controls.remove();
       }
+    }
+
+    // Show NPCs selection modal
+    showNPCLinksModal(insertTextAtCursor) {
+      const availableNPCs = window.NPCS || [];
+
+      if (availableNPCs.length === 0) {
+        if (JdrApp.modules.ui?.showNotification) {
+          JdrApp.modules.ui.showNotification('❌ Aucun NPC disponible', 'error');
+        }
+        return;
+      }
+
+      // Create modal
+      const modal = document.createElement('dialog');
+      modal.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 0;
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        max-width: 600px;
+        width: 90%;
+        z-index: 1000001 !important;
+        background: transparent;
+      `;
+
+      // Create backdrop
+      const backdrop = document.createElement('div');
+      backdrop.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000000 !important;
+        backdrop-filter: blur(4px);
+      `;
+
+      const npcOptions = availableNPCs.map(npc =>
+        `<option value="${npc.nom}">${npc.nom}</option>`
+      ).join('');
+
+      modal.innerHTML = `
+        <div style="background: var(--paper); border-radius: 12px; padding: 1.5rem; border: 2px solid var(--rule);">
+          <h3 style="margin: 0 0 1rem 0; color: var(--accent-ink);">👥 Insérer un lien vers un NPC</h3>
+
+          <div style="margin-bottom: 1rem;">
+            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Choisir un NPC:</label>
+            <select id="npcSelect" style="width: 100%; padding: 0.5rem; border: 1px solid var(--rule); border-radius: 6px; font-size: 14px;">
+              <option value="">-- Sélectionner un NPC --</option>
+              ${npcOptions}
+            </select>
+          </div>
+
+          <div style="margin-bottom: 1rem;">
+            <div id="npcPreview" style="border: 1px solid var(--rule); padding: 1rem; border-radius: 6px; background: var(--card); min-height: 100px; max-height: 300px; overflow-y: auto; font-size: 13px;">
+              <div style="color: var(--paper-muted); font-style: italic;">Sélectionnez un NPC pour voir l'aperçu</div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+            <button id="cancelNPCModal" class="btn" style="background: #6b7280; color: white;">Annuler</button>
+            <button id="insertNPCLink" class="btn" style="background: var(--accent); color: white;" disabled>👥 Insérer le lien</button>
+          </div>
+        </div>
+      `;
+
+      document.body.appendChild(backdrop);
+      document.body.appendChild(modal);
+      modal.show();
+
+      // Get elements
+      const select = modal.querySelector('#npcSelect');
+      const preview = modal.querySelector('#npcPreview');
+      const insertBtn = modal.querySelector('#insertNPCLink');
+      const cancelBtn = modal.querySelector('#cancelNPCModal');
+
+      // Handle NPC selection
+      select.addEventListener('change', () => {
+        const selectedNPCName = select.value;
+        if (selectedNPCName) {
+          insertBtn.disabled = false;
+
+          const selectedNPC = availableNPCs.find(n => n.nom === selectedNPCName);
+          if (selectedNPC) {
+            // Create preview HTML
+            const imageHtml = selectedNPC.image ?
+              `<img src="${selectedNPC.image}" alt="${selectedNPC.nom}" style="max-width: 150px; max-height: 150px; float: right; margin-left: 1rem; border-radius: 8px;">` :
+              '';
+
+            const descriptionHtml = selectedNPC.description ?
+              `<div style="margin-top: 0.5rem; line-height: 1.4;">${selectedNPC.description}</div>` :
+              '';
+
+            const interactionsHtml = selectedNPC.interactions ?
+              `<div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--rule);">
+                <strong>💬 Interactions possibles:</strong>
+                <div style="margin-top: 0.5rem; line-height: 1.4;">${selectedNPC.interactions}</div>
+              </div>` :
+              '';
+
+            preview.innerHTML = `
+              ${imageHtml}
+              <h4 style="margin: 0 0 0.5rem 0; color: var(--accent-ink);">${selectedNPC.nom}</h4>
+              ${descriptionHtml}
+              ${interactionsHtml}
+            `;
+          }
+        } else {
+          insertBtn.disabled = true;
+          preview.innerHTML = '<div style="color: var(--paper-muted); font-style: italic;">Sélectionnez un NPC pour voir l\'aperçu</div>';
+        }
+      });
+
+      // Handle insert
+      insertBtn.addEventListener('click', () => {
+        const selectedNPCName = select.value;
+        if (selectedNPCName) {
+          const htmlLink = `<span class="npc-link" data-npc="${selectedNPCName}" style="color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;" title="Cliquer pour voir la fiche du NPC">[NPC: ${selectedNPCName}]</span>`;
+          insertTextAtCursor(htmlLink);
+
+          if (JdrApp.modules.ui?.showNotification) {
+            JdrApp.modules.ui.showNotification('✓ Lien NPC inséré!', 'success');
+          }
+        }
+
+        modal.close();
+        modal.remove();
+        backdrop.remove();
+      });
+
+      // Handle cancel
+      cancelBtn.addEventListener('click', () => {
+        modal.close();
+        modal.remove();
+        backdrop.remove();
+      });
+
+      // Handle backdrop click
+      backdrop.addEventListener('click', () => {
+        modal.close();
+        modal.remove();
+        backdrop.remove();
+      });
+
+      // Focus select
+      select.focus();
     }
 
     // Show treasure tables selection modal

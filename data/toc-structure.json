@@ -126,6 +126,12 @@
         },
         {
           "type": "page",
+          "id": "npcs",
+          "title": "NPCs",
+          "icon": "👥"
+        },
+        {
+          "type": "page",
           "id": "tables-tresors",
           "title": "Tables de trésors",
           "icon": "💎"

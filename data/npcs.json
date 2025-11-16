@@ -1,0 +1,8 @@
+[
+  {
+    "nom": "Exemple de PNJ",
+    "image": "",
+    "description": "Description du personnage non-joueur, son apparence, sa personnalité...",
+    "interactions": "Liste des interactions possibles avec ce PNJ : dialogues, quêtes, services proposés, etc."
+  }
+]
