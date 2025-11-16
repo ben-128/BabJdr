@@ -23,11 +23,13 @@
       // Create new item with default values
       const defaultItem = ContentFactory.createDefaultItem(type);
       
-      // Special handling for objects and monsters (add to single array)
+      // Special handling for objects, monsters, and NPCs (add to single array)
       if (type === 'objet') {
         this.addObject(defaultItem);
       } else if (type === 'monster') {
         this.addMonster(defaultItem);
+      } else if (type === 'npc') {
+        this.addNPC(defaultItem);
       } else {
         // Standard category-based addition
         this.addStandardContent(type, categoryName, defaultItem);
@@ -61,9 +63,21 @@
       if (!window.MONSTRES) {
         window.MONSTRES = [];
       }
-      
+
       window.MONSTRES.push(defaultItem);
       this.addNewMonsterDirectly(defaultItem);
+    },
+
+    /**
+     * Add NPC to NPCs array
+     */
+    addNPC(defaultItem) {
+      if (!window.NPCS) {
+        window.NPCS = [];
+      }
+
+      window.NPCS.push(defaultItem);
+      this.addNewNPCDirectly(defaultItem);
     },
 
     /**
@@ -99,11 +113,13 @@
         return;
       }
 
-      // Special handling for objects and monsters
+      // Special handling for objects, monsters, and NPCs
       if (type === 'objet') {
         this.deleteObject(itemName);
       } else if (type === 'monster') {
         this.deleteMonster(itemName);
+      } else if (type === 'npc') {
+        this.deleteNPC(itemName);
       } else {
         // Standard category-based deletion
         this.deleteStandardContent(type, categoryName, itemName);
@@ -135,6 +151,19 @@
         if (itemIndex >= 0) {
           window.MONSTRES.splice(itemIndex, 1);
           UIUtilities.refreshMonstersPage();
+        }
+      }
+    },
+
+    /**
+     * Delete NPC from NPCs array
+     */
+    deleteNPC(itemName) {
+      if (window.NPCS) {
+        const itemIndex = window.NPCS.findIndex(npc => npc.nom === itemName);
+        if (itemIndex >= 0) {
+          window.NPCS.splice(itemIndex, 1);
+          UIUtilities.refreshNPCsPage();
         }
       }
     },
@@ -376,6 +405,69 @@
         console.warn('Erreur lors de l\'ajout direct du monstre:', error);
         // Fallback to full page refresh
         UIUtilities.refreshMonstersPage();
+        return false;
+      }
+    },
+
+    /**
+     * Add new NPC card directly to the page without full refresh
+     */
+    addNewNPCDirectly(newNPC) {
+      try {
+        // Check if we're on the NPCs page
+        if (window.location.hash !== '#/npcs') {
+          return false;
+        }
+
+        // Find the NPCs container
+        const npcsContainer = document.getElementById('npcs-container');
+        if (!npcsContainer) {
+          // Fallback to refresh if container not found
+          UIUtilities.refreshNPCsPage();
+          return false;
+        }
+
+        // Create the new NPC card HTML using the existing builder pattern
+        const npcIndex = window.NPCS.length - 1; // Last added NPC
+        let newCardHTML = '';
+
+        // Try to use existing card builder if available
+        if (window.CardBuilder?.create) {
+          const card = window.CardBuilder.create('npc', newNPC, 'npcs', npcIndex);
+          newCardHTML = card?.build();
+        }
+
+        // Fallback: create basic NPC card HTML
+        if (!newCardHTML) {
+          newCardHTML = `
+            <div class="card npc-card" data-npc-name="${newNPC.nom}">
+              <div class="card-header">
+                <h3>${newNPC.nom || 'Nouveau PNJ'}</h3>
+                <div class="card-actions">
+                  <button onclick="ContentManager.deleteContent('npc', '', '${newNPC.nom}')" title="Supprimer">🗑️</button>
+                </div>
+              </div>
+              <div class="card-body">
+                ${newNPC.description ? `<p>${newNPC.description}</p>` : ''}
+                ${newNPC.interactions ? `<p><strong>Interactions:</strong> ${newNPC.interactions}</p>` : ''}
+              </div>
+            </div>
+          `;
+        }
+
+        // Add the card to the container
+        npcsContainer.insertAdjacentHTML('beforeend', newCardHTML);
+
+        // Load images for the new card if the system supports it
+        if (JdrApp.modules.renderer?.autoLoadImages) {
+          JdrApp.modules.renderer.autoLoadImages();
+        }
+
+        return true;
+      } catch (error) {
+        console.warn('Erreur lors de l\'ajout direct du NPC:', error);
+        // Fallback to full page refresh
+        UIUtilities.refreshNPCsPage();
         return false;
       }
     }

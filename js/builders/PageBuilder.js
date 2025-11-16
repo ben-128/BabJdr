@@ -697,9 +697,16 @@
     buildAddButton(type, categoryName) {
       const config = window.ContentTypes[type];
       const icon = config?.icons?.add || '➕';
-      
+
+      // Get friendly name for the type
+      let typeName = 'élément';
+      if (type === 'spell') typeName = 'sort';
+      else if (type === 'don') typeName = 'don';
+      else if (type === 'monster') typeName = 'monstre';
+      else if (type === 'npc') typeName = 'NPC';
+
       // ALWAYS generate the button - CSS will control visibility based on body.dev-on/dev-off
-      return `<button class="${type}-add btn" data-category-name="${categoryName}" type="button" style="background: var(--accent); color: white;">${icon} Ajouter un ${type === 'spell' ? 'sort' : type === 'don' ? 'don' : type === 'monster' ? 'monstre' : 'élément'}</button>`;
+      return `<button class="${type}-add btn" data-category-name="${categoryName}" type="button" style="background: var(--accent); color: white;">${icon} Ajouter un ${typeName}</button>`;
     }
 
     buildDeleteCategoryButton(type, categoryName) {

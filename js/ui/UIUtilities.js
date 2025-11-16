@@ -174,6 +174,12 @@
       }
     },
 
+    refreshNPCsPage() {
+      if (window.location.hash === '#/npcs') {
+        this.forcePageRefresh();
+      }
+    },
+
     refreshTablesPage() {
       if (window.location.hash === '#/tables-tresors') {
         this.forcePageRefresh();
