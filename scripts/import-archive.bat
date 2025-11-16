@@ -111,23 +111,16 @@ set "BACKUP_DIR=%BACKUP_DIR: =0%"
 :: Créer le dossier de sauvegarde avec permissions normales
 mkdir "%BACKUP_DIR%" 2>nul
 
-:: Copier les fichiers avec attributs normaux
+:: Copier uniquement les fichiers data (plus rapide)
+echo [INFO] Sauvegarde du dossier data...
 if exist "data" (
-    xcopy "data" "%BACKUP_DIR%\data\" /E /I /Q >nul 2>&1
-    :: Retirer les attributs en lecture seule/système pour faciliter la suppression
-    attrib -R -S -H "%BACKUP_DIR%\data\*.*" /S >nul 2>&1
+    xcopy "data" "%BACKUP_DIR%\data\" /E /I /Q /Y
+    if errorlevel 1 (
+        echo [ATTENTION] Erreur lors de la sauvegarde
+    ) else (
+        echo [OK] Sauvegarde du dossier data terminée
+    )
 )
-if exist "css" (
-    xcopy "css" "%BACKUP_DIR%\css\" /E /I /Q >nul 2>&1
-    attrib -R -S -H "%BACKUP_DIR%\css\*.*" /S >nul 2>&1
-)
-if exist "js" (
-    xcopy "js" "%BACKUP_DIR%\js\" /E /I /Q >nul 2>&1
-    attrib -R -S -H "%BACKUP_DIR%\js\*.*" /S >nul 2>&1
-)
-
-:: Retirer les attributs du dossier principal de sauvegarde
-attrib -R -S -H "%BACKUP_DIR%" >nul 2>&1
 
 echo [OK] Sauvegarde créée dans : %BACKUP_DIR%
 echo.
