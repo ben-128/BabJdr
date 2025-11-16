@@ -312,6 +312,8 @@
     selectSubPage(subPageName) {
       if (!subPageName) return;
 
+      console.log('📄 selectSubPage called with:', subPageName);
+
       // Initialize state if needed
       if (!window.JdrApp) {
         window.JdrApp = {};
@@ -320,15 +322,20 @@
         window.JdrApp.state = {};
       }
 
+      console.log('📄 Current selectedSubPage state:', window.JdrApp.state.selectedSubPage);
+
       // Check if we're already on this subpage
       if (window.JdrApp.state.selectedSubPage === subPageName) {
+        console.log('📄 Already on this subpage, skipping regeneration');
         return; // No need to regenerate
       }
 
+      console.log('📄 Setting selectedSubPage to:', subPageName);
       window.JdrApp.state.selectedSubPage = subPageName;
 
       // Small delay to ensure state is set before regeneration
       setTimeout(() => {
+        console.log('📄 Calling regenerateCurrentPage');
         if (JdrApp.modules.renderer?.regenerateCurrentPage) {
           JdrApp.modules.renderer.regenerateCurrentPage();
         }

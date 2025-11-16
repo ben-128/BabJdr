@@ -1243,14 +1243,21 @@
       const selectedCampaign = window.JdrApp.state.selectedCampaign || (campaignList.length > 0 ? campaignList[0] : null);
       const currentCampaign = selectedCampaign && campaigns[selectedCampaign] ? campaigns[selectedCampaign] : null;
       const subPageList = currentCampaign ? Object.keys(currentCampaign.subPages || {}) : [];
+
+      console.log('📄 PageBuilder: state.selectedSubPage =', window.JdrApp.state.selectedSubPage);
+      console.log('📄 PageBuilder: subPageList =', subPageList);
+
       const selectedSubPage = window.JdrApp.state.selectedSubPage || (subPageList.length > 0 ? subPageList[0] : null);
       const currentSubPage = selectedSubPage && currentCampaign?.subPages?.[selectedSubPage] ? currentCampaign.subPages[selectedSubPage] : null;
-      
+
+      console.log('📄 PageBuilder: calculated selectedSubPage =', selectedSubPage);
+
       // Auto-initialize state if it wasn't set by UI functions
       if (!window.JdrApp.state.selectedCampaign && selectedCampaign) {
         window.JdrApp.state.selectedCampaign = selectedCampaign;
       }
       if (!window.JdrApp.state.selectedSubPage && selectedSubPage) {
+        console.log('📄 PageBuilder: Auto-initializing selectedSubPage to', selectedSubPage);
         window.JdrApp.state.selectedSubPage = selectedSubPage;
       }
       
