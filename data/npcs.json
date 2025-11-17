@@ -1,8 +1,26 @@
 [
   {
-    "nom": "Exemple de PNJ",
+    "nom": "Mirella la receptionniste",
     "image": "",
-    "description": "Description du personnage non-joueur, son apparence, sa personnalité...",
-    "interactions": "Liste des interactions possibles avec ce PNJ : dialogues, quêtes, services proposés, etc."
+    "description": "Habits simples, acceuillante. S'énerve si on pique dans les réserves.",
+    "interactions": "- Indique la chambre des joueurs\n<br>\n<br>\n- Propose si les PJs partent de piocher dans <span class=\"treasure-table-link\" data-table-name=\"ProvisionAuberge\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: ProvisionAuberge]</span>"
+  },
+  {
+    "nom": "Tavin le Facteur",
+    "image": "",
+    "description": "Sympa, toujours l'air préssé, connait beaucoup de choses",
+    "interactions": "- Indique au joueurs que les livraisons dans le camp de la forêt n'est plus possibles, des monstres sont apparus. Il donne une lettre apparament urgente à livrer pour Branor le bucheron."
+  },
+  {
+    "nom": "Branor le Bucheron",
+    "image": "",
+    "description": "Costaud, mourant",
+    "interactions": "- Indique qu'on monstre a volé son sac avec un baume de soin et ses clés\n<br>\n<br>\n- Indique a joueur  de mettre en sécurité la tablette (chez lui)"
+  },
+  {
+    "nom": "Grufin l'aubergiste",
+    "image": "",
+    "description": "Connais bien ses clients, partages des histoires.",
+    "interactions": "- Indique la position des autres NPC\n<br><br>\n\n- Vend aux PJs (forêt finis) un coffre pour 100 eclats pour mettre n'importe quel objet, sécurisé.\n<br><br>\n\n-Après la forêt, parle de vieille tour ou mine comme prochain lieu, les joueurs décident"
   }
 ]
