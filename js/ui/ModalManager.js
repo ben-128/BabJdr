@@ -1457,14 +1457,92 @@
         .map(carte => `<li>${carte}</li>`)
         .join('\n          ');
 
+      // Get image URL from images store if available
+      const imageUrl = window.JdrApp?.modules?.images?.getImageUrl('other:CartesDestin') || 'data/images/Autre/CartesDestin.png';
+
       const cartesContent = `
-        <p style="margin-bottom: 1rem;">${creationData.introduction}</p>
-        <ol style="padding-left: 1.5rem; line-height: 1.8;">
-          ${cartesListHTML}
-        </ol>
+        <div style="position: relative; min-height: 400px; border-radius: 12px; overflow: hidden;">
+          <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(139, 69, 19, 0.1), rgba(218, 165, 32, 0.1)); pointer-events: none;"></div>
+          <div style="position: relative; z-index: 1; padding: 1.5rem;">
+            <div style="text-align: center; margin-bottom: 1.5rem;">
+              <img src="${imageUrl}" alt="Cartes du Destin" style="max-width: 350px; width: 100%; height: auto; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); border: 3px solid rgba(218, 165, 32, 0.3);" onerror="this.style.display='none'">
+            </div>
+            <p style="margin-bottom: 1.5rem; font-size: 1.15em; text-align: center; font-weight: 500; color: var(--ink); line-height: 1.6;">${creationData.introduction}</p>
+            <ol style="padding: 1.5rem 1.5rem 1.5rem 2.5rem; line-height: 2.2; font-size: 1.05em; background: rgba(248, 246, 240, 0.95); border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); border: 2px solid rgba(139, 69, 19, 0.2); list-style-position: outside;">
+              ${cartesListHTML}
+            </ol>
+          </div>
+        </div>
       `;
 
       const modal = BaseModal.createModal('cartesDestinModal', creationData.titre, cartesContent);
+
+      // Add custom styles for this modal
+      if (!document.getElementById('cartes-destin-modal-styles')) {
+        const styleElement = document.createElement('style');
+        styleElement.id = 'cartes-destin-modal-styles';
+        styleElement.textContent = `
+          #cartesDestinModal .modal-content {
+            max-width: 750px !important;
+            background: var(--paper) !important;
+            border-radius: 16px !important;
+            overflow: hidden;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.3) !important;
+          }
+          #cartesDestinModal .modal-header {
+            background: linear-gradient(135deg, #8b4513, #daa520) !important;
+            color: white !important;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.4) !important;
+            padding: 1.5rem !important;
+            border-radius: 16px 16px 0 0 !important;
+            font-size: 1.3em;
+            text-align: center;
+          }
+          #cartesDestinModal .modal-header h3 {
+            margin: 0;
+            font-weight: 700;
+          }
+          #cartesDestinModal .modal-body {
+            padding: 0 !important;
+            border-radius: 0 0 16px 16px !important;
+          }
+          #cartesDestinModal ol {
+            list-style-position: outside;
+            list-style-type: decimal;
+          }
+          #cartesDestinModal ol li {
+            margin-bottom: 1rem;
+            padding: 0.5rem 0.8rem;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            position: relative;
+          }
+          #cartesDestinModal ol li:hover {
+            background: rgba(218, 165, 32, 0.15);
+            transform: translateX(4px);
+            box-shadow: 0 2px 8px rgba(139, 69, 19, 0.1);
+          }
+          #cartesDestinModal .modal-close {
+            background: rgba(255, 255, 255, 0.9) !important;
+            color: #8b4513 !important;
+            font-weight: bold;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            transition: all 0.2s ease;
+          }
+          #cartesDestinModal .modal-close:hover {
+            background: white !important;
+            transform: rotate(90deg) scale(1.1);
+          }
+        `;
+        document.head.appendChild(styleElement);
+      }
+
       return modal;
     }
   };
