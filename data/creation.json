@@ -2,6 +2,18 @@
   "page": "creation",
   "title": "Création d'un personnage",
   "static": true,
+  "cartesDestin": {
+    "titre": "🎴 Cartes du destin",
+    "introduction": "Tirez au sort une carte du destin avec un d6 :",
+    "cartes": [
+      "Au choix, 250 éclats ou 4 Fortune.",
+      "A répartir: 2 points de statistiques dans une statistique qui n'a pas la valeur la plus élevée.",
+      "Au choix, 4 points de vie maximum ou 6 points de mana maximum.",
+      "Une compétence rang 1 au choix.",
+      "5 d'armure élémentaire dans 2 éléments au choix.",
+      "Un point de Dons."
+    ]
+  },
   "sections": [
     {
       "type": "intro",
@@ -12,7 +24,7 @@
       "type": "card",
       "id": "etapes-creation",
       "title": "Étapes de création",
-      "content": "<ol><li>Choisir une <strong>classe</strong> puis une <strong>sous‑classe</strong> : <a href=\"#/guerrier\" style=\"color: var(--accent); text-decoration: underline;\">Guerrier</a>.\n</li><li>Tirer au sort (avec un d6) une carte du destin (voir section ci-dessous)                                                                    \n</li><li>Choisir un <strong>élément</strong> d'affiliation : <a href=\"#/elements\" style=\"color: var(--accent); text-decoration: underline;\">Éléments</a>.\n</li><li>Choisir les <strong>dons</strong> (avec 2 points de dons) : <a href=\"#/dons-generaux\" style=\"color: var(--accent); text-decoration: underline;\">Généraux (dons)</a>.\n</li><li>Choisir l'<strong>équipement</strong> de départ (avec 100 éclats) : <a href=\"#/collections-objets\" style=\"color: var(--accent); text-decoration: underline;\">Collections d'Objets</a>.\n</li><li>Définir le <strong>nom</strong>, l'<strong>histoire</strong> et l'<strong>apparence</strong>.</li><li>Remplir sa feuille de personnage (voir section ci-dessous).</li></ol>",
+      "content": "<ol><li>Choisir une <strong>classe</strong> puis une <strong>sous‑classe</strong> : <a href=\"#/guerrier\" style=\"color: var(--accent); text-decoration: underline;\">Guerrier</a>.\n</li><li>Tirer au sort (avec un d6) une carte du destin (<a href=\"#\" onclick=\"event.preventDefault(); ModalManager.showCartesDestinModal(); return false;\" style=\"color: var(--accent); text-decoration: underline;\">Lien ici</a>)\n</li><li>Choisir un <strong>élément</strong> d'affiliation : <a href=\"#/elements\" style=\"color: var(--accent); text-decoration: underline;\">Éléments</a>.\n</li><li>Choisir les <strong>dons</strong> (avec 2 points de dons) : <a href=\"#/dons-generaux\" style=\"color: var(--accent); text-decoration: underline;\">Généraux (dons)</a>.\n</li><li>Choisir l'<strong>équipement</strong> de départ (avec 100 éclats) : <a href=\"#/collections-objets\" style=\"color: var(--accent); text-decoration: underline;\">Collections d'Objets</a>.\n</li><li>Définir le <strong>nom</strong>, l'<strong>histoire</strong> et l'<strong>apparence</strong>.</li><li>Remplir sa feuille de personnage (voir section ci-dessous).</li></ol>",
       "deletable": true,
       "sectionName": "Étapes de création"
     },
@@ -23,12 +35,6 @@
       "content": "<div class=\"pdf-info-container\" style=\"max-width: 100%; margin: 1rem 0; padding: 1.5rem; border: 2px solid var(--bronze); border-radius: 12px; background: var(--card); text-align: center; box-sizing: border-box; overflow: hidden;\"><p style=\"color: var(--text); margin: 1rem 0;\">Feuille de personnage complète de 3 pages pour vos aventures.</p><div class=\"pdf-preview-actions\" style=\"display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem;\"><button onclick=\"window.open('https://github.com/ben-128/BabJdr/raw/master/data/feuille-personnage.pdf', '_blank')\" class=\"btn-base\" style=\"background: var(--bronze); color: white;\">📖 Voir le PDF</button><button onclick=\"const link = document.createElement('a'); link.href = 'https://github.com/ben-128/BabJdr/raw/master/data/feuille-personnage.pdf'; link.download = 'Feuille-Personnage-Foresia.pdf'; link.click();\" class=\"btn-base\" style=\"background: var(--emerald); color: white;\">📥 Télécharger</button><button onclick=\"const printWindow = window.open('https://github.com/ben-128/BabJdr/raw/master/data/feuille-personnage.pdf', '_blank'); if (printWindow) { printWindow.focus(); setTimeout(() => { try { printWindow.print(); } catch (e) { alert('PDF ouvert. Utilisez Ctrl+P pour imprimer.'); } }, 1000); }\" class=\"btn-base\" style=\"background: var(--gold); color: white;\">🖨️ Imprimer</button></div></div>",
       "deletable": true,
       "sectionName": "Feuille de personnage"
-    },
-    {
-      "id": "section-1763298721371-zkuj4q",
-      "type": "card",
-      "title": "Cartes du destin",
-      "content": "<ol>\n<li>\nAu choix, 250 éclats ou 4 Fortune.                                                          \n</li>\n<li>\nA répartir:  2 points de statistiques dans une statitistique qui n'a pas la valeur la plus élevée.\n</li>\n<li>\nAu choix, 4 points de vie maximum ou 6 points de mana maximum.\n</li>\n<li>\nUne compétence rang 1 au choix.\n</li>\n<li>\n5 d'armure élémentaire dans 2 éléments au choix.\n</li>\n<li>\nUn point de Dons.\n</li>\n</ol>"
     }
   ]
 }

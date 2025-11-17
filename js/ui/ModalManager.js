@@ -1425,6 +1425,47 @@
       });
 
       return modal;
+    },
+
+    /**
+     * Show cartes du destin modal
+     */
+    showCartesDestinModal() {
+      let modal = JdrApp.utils.dom.$('#cartesDestinModal');
+      if (!modal) {
+        modal = this.createCartesDestinModal();
+        document.body.appendChild(modal);
+      }
+
+      BaseModal.openModal('cartesDestinModal');
+    },
+
+    /**
+     * Create cartes du destin modal
+     */
+    createCartesDestinModal() {
+      // Récupérer les données depuis le JSON de la page création
+      const creationData = window.STATIC_PAGES?.creation?.cartesDestin;
+
+      if (!creationData) {
+        console.error('Données des cartes du destin non trouvées');
+        return null;
+      }
+
+      // Construire la liste des cartes
+      const cartesListHTML = creationData.cartes
+        .map(carte => `<li>${carte}</li>`)
+        .join('\n          ');
+
+      const cartesContent = `
+        <p style="margin-bottom: 1rem;">${creationData.introduction}</p>
+        <ol style="padding-left: 1.5rem; line-height: 1.8;">
+          ${cartesListHTML}
+        </ol>
+      `;
+
+      const modal = BaseModal.createModal('cartesDestinModal', creationData.titre, cartesContent);
+      return modal;
     }
   };
 
