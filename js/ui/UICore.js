@@ -46,12 +46,21 @@
         this.handleContentMove(payload.type, payload.category, payload.itemName, payload.direction);
       });
 
+      // Campaign subpage selector - use delegated event to handle dynamic content
+      document.addEventListener('change', (event) => {
+        if (event.target.id === 'subPageSelector') {
+          if (JdrApp.modules.ui?.selectSubPage) {
+            JdrApp.modules.ui.selectSubPage(event.target.value);
+          }
+        }
+      });
+
       // Delegate UI event handlers to specialized modules
       if (window.EventHandlers) {
         EventHandlers.setupContentHandlers();
         EventHandlers.setupTagsManagement();
       }
-      
+
       // Initialize specialized filter modules
       if (window.GMObjectFilters && window.GMObjectFilters.init) {
         window.GMObjectFilters.init();

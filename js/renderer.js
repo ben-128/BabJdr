@@ -353,17 +353,12 @@
     },
 
     regenerateCurrentPage() {
-      console.log('🔄 regenerateCurrentPage called');
-      console.trace('Stack trace:');
-
       // Find the currently active article
       const activeArticle = document.querySelector('article.active');
       if (!activeArticle) return;
 
       const pageId = activeArticle.dataset.page;
       if (!pageId) return;
-
-      console.log('🔄 Regenerating page:', pageId);
 
       // Determine what type of page it is and regenerate only that page
       if (pageId.startsWith('sorts-')) {
@@ -409,10 +404,22 @@
           if (window.ScrollOptimizer && window.ScrollOptimizer.cleanupVirtualization) {
             window.ScrollOptimizer.cleanupVirtualization(activeArticle);
           }
-          
+
           activeArticle.innerHTML = newHTML;
           this.autoLoadImages();
-          
+
+          // Restore subpage selector value if on campaign page
+          // Use requestAnimationFrame to ensure it runs after browser's autofill
+          if (pageId === 'campagne' && window.JdrApp?.state?.selectedSubPage) {
+            const targetSubPage = window.JdrApp.state.selectedSubPage;
+            requestAnimationFrame(() => {
+              const subPageSelector = document.getElementById('subPageSelector');
+              if (subPageSelector) {
+                subPageSelector.value = targetSubPage;
+              }
+            });
+          }
+
           // Apply dev mode state immediately
           if (!window.STANDALONE_VERSION && JdrApp.modules.editor) {
             if (JdrApp.modules.editor.isDevMode) {
@@ -452,6 +459,15 @@
       // Handle objects page
       if (pageId === 'objets' && window.OBJETS) {
         const content = PageBuilder.buildSingleObjectPage(window.OBJETS);
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(content, 'text/html');
+        const article = doc.querySelector('article');
+        return article ? article.innerHTML : null;
+      }
+
+      // Handle campaign page
+      if (pageId === 'campagne' && window.STATIC_PAGES && window.STATIC_PAGES[pageId]) {
+        const content = PageBuilder.buildCampaignPage(pageId, window.STATIC_PAGES[pageId]);
         const parser = new DOMParser();
         const doc = parser.parseFromString(content, 'text/html');
         const article = doc.querySelector('article');
@@ -741,47 +757,6 @@
       window.activeIdSearch = false;
     },
 
-    // Add missing regenerateCurrentPage function
-    regenerateCurrentPage() {
-      // Get current page from URL
-      const currentHash = window.location.hash || '#/creation';
-      const currentPage = currentHash.replace('#/', '');
-      
-      // Special handling for static pages like campaign
-      if (currentPage === 'campagne') {
-        const campaignData = window.CAMPAGNE || window.STATIC_PAGES?.campagne;
-        
-        if (campaignData && window.PageBuilder) {
-          const pageHTML = window.PageBuilder.buildStaticPage('campagne', campaignData);
-          const viewsContainer = document.querySelector('#views');
-          
-          if (viewsContainer && pageHTML) {
-            // Remove existing campaign page
-            const existingPage = viewsContainer.querySelector('[data-page="campagne"]');
-            if (existingPage) {
-              existingPage.remove();
-            }
-            
-            // Insert new page HTML
-            viewsContainer.insertAdjacentHTML('beforeend', pageHTML);
-            
-            // Ensure proper visibility
-            const newPage = viewsContainer.querySelector('[data-page="campagne"]');
-            if (newPage) {
-              // Hide all other pages and show the new one
-              viewsContainer.querySelectorAll('article').forEach(article => {
-                article.style.display = article === newPage ? 'block' : 'none';
-              });
-            }
-          }
-        }
-      } else {
-        // For other pages, try to use the router's parseRoute method
-        if (JdrApp.modules.router?.parseRoute) {
-          JdrApp.modules.router.parseRoute();
-        }
-      }
-    },
 
   };
 

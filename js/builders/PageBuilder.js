@@ -1244,20 +1244,14 @@
       const currentCampaign = selectedCampaign && campaigns[selectedCampaign] ? campaigns[selectedCampaign] : null;
       const subPageList = currentCampaign ? Object.keys(currentCampaign.subPages || {}) : [];
 
-      console.log('📄 PageBuilder: state.selectedSubPage =', window.JdrApp.state.selectedSubPage);
-      console.log('📄 PageBuilder: subPageList =', subPageList);
-
       const selectedSubPage = window.JdrApp.state.selectedSubPage || (subPageList.length > 0 ? subPageList[0] : null);
       const currentSubPage = selectedSubPage && currentCampaign?.subPages?.[selectedSubPage] ? currentCampaign.subPages[selectedSubPage] : null;
-
-      console.log('📄 PageBuilder: calculated selectedSubPage =', selectedSubPage);
 
       // Auto-initialize state if it wasn't set by UI functions
       if (!window.JdrApp.state.selectedCampaign && selectedCampaign) {
         window.JdrApp.state.selectedCampaign = selectedCampaign;
       }
       if (!window.JdrApp.state.selectedSubPage && selectedSubPage) {
-        console.log('📄 PageBuilder: Auto-initializing selectedSubPage to', selectedSubPage);
         window.JdrApp.state.selectedSubPage = selectedSubPage;
       }
       
@@ -1322,13 +1316,13 @@
 
     buildSelectedCampaignContent(campaignName, campaign, selectedSubPage, currentSubPage) {
       const subPageList = campaign.subPages ? Object.keys(campaign.subPages) : [];
-      
+
       return `
         <div class="selected-campaign" style="background: var(--card); border-radius: 12px; padding: 1.5rem; border-left: 4px solid var(--bronze);">
           <!-- Campaign Header -->
           <div class="campaign-header" style="margin-bottom: 1.5rem; border-bottom: 2px solid var(--rule); padding-bottom: 1rem;">
             <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
-              <h3 class="editable" data-edit-type="generic" data-edit-section="campaign-${campaignName}-name" 
+              <h3 class="editable" data-edit-type="generic" data-edit-section="campaign-${campaignName}-name"
                   style="margin: 0; color: var(--accent-ink); flex: 1;">
                 ${campaignName}
               </h3>
@@ -1359,13 +1353,13 @@
                 <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--accent-ink);">
                   📝 Sous-page Active:
                 </label>
-                <select id="subPageSelector" onchange="JdrApp.modules.ui.selectSubPage(this.value)" 
+                <select id="subPageSelector" data-campaign="${campaignName}"
                         style="padding: 8px; border-radius: 6px; border: 2px solid var(--rule); background: var(--paper); font-family: inherit;">
-                  ${subPageList.map(name => 
+                  ${subPageList.map(name =>
                     `<option value="${name}" ${name === selectedSubPage ? 'selected' : ''}>${name}</option>`
                   ).join('')}
                 </select>
-                <button class="btn danger small dev-only" onclick="JdrApp.modules.ui.deleteCampaignSubPage('${campaignName}', '${selectedSubPage}')" 
+                <button class="btn danger small dev-only" onclick="JdrApp.modules.ui.deleteCampaignSubPage('${campaignName}', '${selectedSubPage}')"
                         style="margin-left: 8px; display: none;" ${!selectedSubPage ? 'disabled' : ''}>
                   🗑️ Supprimer
                 </button>

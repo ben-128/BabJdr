@@ -323,8 +323,6 @@
     selectSubPage(subPageName) {
       if (!subPageName) return;
 
-      console.log('📄 selectSubPage called with:', subPageName);
-
       // Initialize state if needed
       if (!window.JdrApp) {
         window.JdrApp = {};
@@ -333,34 +331,34 @@
         window.JdrApp.state = {};
       }
 
-      console.log('📄 Current selectedSubPage state:', window.JdrApp.state.selectedSubPage);
-
-      // Check if we're already on this subpage
-      if (window.JdrApp.state.selectedSubPage === subPageName) {
-        console.log('📄 Already on this subpage, skipping regeneration');
-        return; // No need to regenerate
+      // If a regeneration is already pending, clear it
+      const hadPendingRegeneration = !!this._subPageRegenerationTimeout;
+      if (hadPendingRegeneration) {
+        clearTimeout(this._subPageRegenerationTimeout);
+        this._subPageRegenerationTimeout = null;
       }
 
-      console.log('📄 Setting selectedSubPage to:', subPageName);
+      // Only skip if we're already on this subpage AND no regeneration was pending
+      if (window.JdrApp.state.selectedSubPage === subPageName && !hadPendingRegeneration) {
+        return;
+      }
+
       window.JdrApp.state.selectedSubPage = subPageName;
 
-      // Small delay to ensure state is set before regeneration
-      setTimeout(() => {
-        console.log('📄 Calling regenerateCurrentPage');
-        console.log('📄 JdrApp.modules.renderer exists?', !!JdrApp.modules.renderer);
-        console.log('📄 regenerateCurrentPage exists?', !!JdrApp.modules.renderer?.regenerateCurrentPage);
+      // Schedule regeneration with debouncing
+      this._subPageRegenerationTimeout = setTimeout(() => {
+        this._subPageRegenerationTimeout = null;
 
         if (JdrApp.modules.renderer?.regenerateCurrentPage) {
           JdrApp.modules.renderer.regenerateCurrentPage();
         } else {
           console.error('❌ regenerateCurrentPage not available!');
           // Fallback: force page reload
-          console.log('📄 Falling back to router.handleRoute()');
           if (JdrApp.modules.router?.handleRoute) {
             JdrApp.modules.router.handleRoute();
           }
         }
-      }, 10);
+      }, 50);
     },
 
     // Campaign management functions
