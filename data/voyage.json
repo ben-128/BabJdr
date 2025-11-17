@@ -1,0 +1,44 @@
+{
+  "page": "voyage",
+  "title": "Voyage",
+  "static": true,
+  "sections": [
+    {
+      "type": "intro",
+      "content": "",
+      "id": "section-0"
+    },
+    {
+      "type": "card",
+      "id": "regles-voyage",
+      "title": "Règles de voyage",
+      "content": "<p>Les voyages sont une partie importante de l'aventure. Voici les règles pour gérer les déplacements de vos personnages.</p><p>Un voyage se déroule en plusieurs étapes :</p><ol><li><strong>Préparation</strong> : Les joueurs préparent leur équipement et leurs provisions.</li><li><strong>Déplacement</strong> : Le groupe se déplace sur la carte.</li><li><strong>Événements</strong> : Des événements peuvent survenir pendant le voyage (rencontres, découvertes, etc.).</li><li><strong>Repos</strong> : Le groupe se repose pour récupérer ses forces.</li></ol>",
+      "deletable": true,
+      "sectionName": "Règles de voyage"
+    },
+    {
+      "type": "card",
+      "id": "distances",
+      "title": "Distances et temps de voyage",
+      "content": "<p>Les distances sont mesurées en <strong>kilomètres</strong> et le temps en <strong>heures</strong>.</p><h4>Vitesse de déplacement</h4><ul><li><strong>À pied</strong> : 5 km/h (terrain normal), 3 km/h (terrain difficile)</li><li><strong>À cheval</strong> : 10 km/h (terrain normal), 6 km/h (terrain difficile)</li><li><strong>En chariot</strong> : 6 km/h (terrain normal), 4 km/h (terrain difficile)</li></ul><h4>Fatigue</h4><p>Après 8 heures de marche, les personnages doivent faire un test de <strong>Constitution (DC 12)</strong> ou subir un niveau de fatigue.</p>",
+      "deletable": true,
+      "sectionName": "Distances et temps de voyage"
+    },
+    {
+      "type": "card",
+      "id": "evenements-voyage",
+      "title": "Événements de voyage",
+      "content": "<p>Lancez 1d6 chaque jour de voyage :</p><table style='width: 100%; border-collapse: collapse; margin: 1rem 0;'><thead><tr style='background: var(--rule);'><th style='padding: 0.5rem; border: 1px solid var(--rule); text-align: left;'>D6</th><th style='padding: 0.5rem; border: 1px solid var(--rule); text-align: left;'>Événement</th></tr></thead><tbody><tr><td style='padding: 0.5rem; border: 1px solid var(--rule);'>1</td><td style='padding: 0.5rem; border: 1px solid var(--rule);'>Rencontre hostile</td></tr><tr><td style='padding: 0.5rem; border: 1px solid var(--rule);'>2</td><td style='padding: 0.5rem; border: 1px solid var(--rule);'>Rencontre neutre</td></tr><tr><td style='padding: 0.5rem; border: 1px solid var(--rule);'>3</td><td style='padding: 0.5rem; border: 1px solid var(--rule);'>Découverte (lieu, objet)</td></tr><tr><td style='padding: 0.5rem; border: 1px solid var(--rule);'>4</td><td style='padding: 0.5rem; border: 1px solid var(--rule);'>Météo défavorable</td></tr><tr><td style='padding: 0.5rem; border: 1px solid var(--rule);'>5-6</td><td style='padding: 0.5rem; border: 1px solid var(--rule);'>Rien de spécial</td></tr></tbody></table>",
+      "deletable": true,
+      "sectionName": "Événements de voyage"
+    },
+    {
+      "type": "card",
+      "id": "provisions",
+      "title": "Provisions et ravitaillement",
+      "content": "<p>Chaque personnage consomme <strong>1 ration de nourriture</strong> et <strong>2 litres d'eau</strong> par jour.</p><h4>Prix des provisions</h4><ul><li><strong>Ration de nourriture</strong> : 5 éclats</li><li><strong>Outre d'eau (5 litres)</strong> : 2 éclats</li><li><strong>Torche</strong> : 1 éclat</li><li><strong>Corde (15 mètres)</strong> : 10 éclats</li></ul><h4>Chasse et cueillette</h4><p>Les personnages peuvent chasser ou cueillir pendant le voyage. Test de <strong>Survie (DC 15)</strong> pour trouver de la nourriture pour 1d4 personnes.</p>",
+      "deletable": true,
+      "sectionName": "Provisions et ravitaillement"
+    }
+  ]
+}

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-11-16T14:22:39.388Z by JdrBab Build System -->
+<!-- Generated on 2025-11-17T13:03:07.980Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11116,6 +11116,12 @@ select:focus {
         },
         {
           "type": "page",
+          "id": "npcs",
+          "title": "NPCs",
+          "icon": "👥"
+        },
+        {
+          "type": "page",
           "id": "tables-tresors",
           "title": "Tables de trésors",
           "icon": "💎"
@@ -11125,6 +11131,12 @@ select:focus {
           "id": "audio",
           "title": "Musiques d'ambiance",
           "icon": "🎵"
+        },
+        {
+          "type": "page",
+          "id": "voyage",
+          "title": "Voyage",
+          "icon": "🗺️"
         },
         {
           "type": "page",
@@ -11182,6 +11194,18 @@ select:focus {
   "page": "creation",
   "title": "Création d'un personnage",
   "static": true,
+  "cartesDestin": {
+    "titre": "🎴 Cartes du destin",
+    "introduction": "Tirez au sort une carte du destin avec un d6 :",
+    "cartes": [
+      "Au choix, 250 éclats ou 4 Fortune.",
+      "A répartir: 2 points de statistiques dans une statistique qui n'a pas la valeur la plus élevée.",
+      "Au choix, 4 points de vie maximum ou 6 points de mana maximum.",
+      "Une compétence rang 1 au choix.",
+      "5 d'armure élémentaire dans 2 éléments au choix.",
+      "Un point de Dons."
+    ]
+  },
   "sections": [
     {
       "type": "intro",
@@ -11192,7 +11216,7 @@ select:focus {
       "type": "card",
       "id": "etapes-creation",
       "title": "Étapes de création",
-      "content": "<ol><li>Choisir une <strong>classe</strong> puis une <strong>sous‑classe</strong> : <a href=\"#/guerrier\" style=\"color: var(--accent); text-decoration: underline;\">Guerrier</a>.\n</li><li>Tirer au sort (avec un d6) une carte du destin (voir section ci-dessous)                                                                    \n</li><li>Choisir un <strong>élément</strong> d'affiliation : <a href=\"#/elements\" style=\"color: var(--accent); text-decoration: underline;\">Éléments</a>.\n</li><li>Choisir les <strong>dons</strong> (avec 2 points de dons) : <a href=\"#/dons-generaux\" style=\"color: var(--accent); text-decoration: underline;\">Généraux (dons)</a>.\n</li><li>Choisir l'<strong>équipement</strong> de départ (avec 100 éclats) : <a href=\"#/collections-objets\" style=\"color: var(--accent); text-decoration: underline;\">Collections d'Objets</a>.\n</li><li>Définir le <strong>nom</strong>, l'<strong>histoire</strong> et l'<strong>apparence</strong>.</li><li>Remplir sa feuille de personnage (voir section ci-dessous).</li></ol>",
+      "content": "<ol><li>Choisir une <strong>classe</strong> puis une <strong>sous‑classe</strong> : <a href=\"#/guerrier\" style=\"color: var(--accent); text-decoration: underline;\">Guerrier</a>.\n</li><li>Tirer au sort (avec un d6) une carte du destin (<a href=\"#\" onclick=\"event.preventDefault(); ModalManager.showCartesDestinModal(); return false;\" style=\"color: var(--accent); text-decoration: underline;\">Lien ici</a>)\n</li><li>Choisir un <strong>élément</strong> d'affiliation : <a href=\"#/elements\" style=\"color: var(--accent); text-decoration: underline;\">Éléments</a>.\n</li><li>Choisir les <strong>dons</strong> (avec 2 points de dons) : <a href=\"#/dons-generaux\" style=\"color: var(--accent); text-decoration: underline;\">Généraux (dons)</a>.\n</li><li>Choisir l'<strong>équipement</strong> de départ (avec 100 éclats) : <a href=\"#/collections-objets\" style=\"color: var(--accent); text-decoration: underline;\">Collections d'Objets</a>.\n</li><li>Définir le <strong>nom</strong>, l'<strong>histoire</strong> et l'<strong>apparence</strong>.</li><li>Remplir sa feuille de personnage (voir section ci-dessous).</li></ol>",
       "deletable": true,
       "sectionName": "Étapes de création"
     },
@@ -11203,12 +11227,6 @@ select:focus {
       "content": "<div class=\"pdf-info-container\" style=\"max-width: 100%; margin: 1rem 0; padding: 1.5rem; border: 2px solid var(--bronze); border-radius: 12px; background: var(--card); text-align: center; box-sizing: border-box; overflow: hidden;\"><p style=\"color: var(--text); margin: 1rem 0;\">Feuille de personnage complète de 3 pages pour vos aventures.</p><div class=\"pdf-preview-actions\" style=\"display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem;\"><button onclick=\"window.open('https://github.com/ben-128/BabJdr/raw/master/data/feuille-personnage.pdf', '_blank')\" class=\"btn-base\" style=\"background: var(--bronze); color: white;\">📖 Voir le PDF</button><button onclick=\"const link = document.createElement('a'); link.href = 'https://github.com/ben-128/BabJdr/raw/master/data/feuille-personnage.pdf'; link.download = 'Feuille-Personnage-Foresia.pdf'; link.click();\" class=\"btn-base\" style=\"background: var(--emerald); color: white;\">📥 Télécharger</button><button onclick=\"const printWindow = window.open('https://github.com/ben-128/BabJdr/raw/master/data/feuille-personnage.pdf', '_blank'); if (printWindow) { printWindow.focus(); setTimeout(() => { try { printWindow.print(); } catch (e) { alert('PDF ouvert. Utilisez Ctrl+P pour imprimer.'); } }, 1000); }\" class=\"btn-base\" style=\"background: var(--gold); color: white;\">🖨️ Imprimer</button></div></div>",
       "deletable": true,
       "sectionName": "Feuille de personnage"
-    },
-    {
-      "id": "section-1763298721371-zkuj4q",
-      "type": "card",
-      "title": "Cartes du destin",
-      "content": "<ol>\n<li>\nAu choix, 250 éclats ou 4 Fortune.                                                          \n</li>\n<li>\nA répartir:  2 points de statistiques dans une statitistique qui n'a pas la valeur la plus élevée.\n</li>\n<li>\nAu choix, 4 points de vie maximum ou 6 points de mana maximum.\n</li>\n<li>\nUne compétence rang 1 au choix.\n</li>\n<li>\n5 d'armure élémentaire dans 2 éléments au choix.\n</li>\n<li>\nUn point de Dons.\n</li>\n</ol>"
     }
   ]
 },
@@ -11708,6 +11726,50 @@ select:focus {
     "allowSubPages": true,
     "lastModified": "2025-01-01T00:00:00.000Z"
   }
+},
+      'voyage': {
+  "page": "voyage",
+  "title": "Voyage",
+  "static": true,
+  "sections": [
+    {
+      "type": "intro",
+      "content": "",
+      "id": "section-0"
+    },
+    {
+      "type": "card",
+      "id": "regles-voyage",
+      "title": "Règles de voyage",
+      "content": "<p>Les voyages sont une partie importante de l'aventure. Voici les règles pour gérer les déplacements de vos personnages.</p><p>Un voyage se déroule en plusieurs étapes :</p><ol><li><strong>Préparation</strong> : Les joueurs préparent leur équipement et leurs provisions.</li><li><strong>Déplacement</strong> : Le groupe se déplace sur la carte.</li><li><strong>Événements</strong> : Des événements peuvent survenir pendant le voyage (rencontres, découvertes, etc.).</li><li><strong>Repos</strong> : Le groupe se repose pour récupérer ses forces.</li></ol>",
+      "deletable": true,
+      "sectionName": "Règles de voyage"
+    },
+    {
+      "type": "card",
+      "id": "distances",
+      "title": "Distances et temps de voyage",
+      "content": "<p>Les distances sont mesurées en <strong>kilomètres</strong> et le temps en <strong>heures</strong>.</p><h4>Vitesse de déplacement</h4><ul><li><strong>À pied</strong> : 5 km/h (terrain normal), 3 km/h (terrain difficile)</li><li><strong>À cheval</strong> : 10 km/h (terrain normal), 6 km/h (terrain difficile)</li><li><strong>En chariot</strong> : 6 km/h (terrain normal), 4 km/h (terrain difficile)</li></ul><h4>Fatigue</h4><p>Après 8 heures de marche, les personnages doivent faire un test de <strong>Constitution (DC 12)</strong> ou subir un niveau de fatigue.</p>",
+      "deletable": true,
+      "sectionName": "Distances et temps de voyage"
+    },
+    {
+      "type": "card",
+      "id": "evenements-voyage",
+      "title": "Événements de voyage",
+      "content": "<p>Lancez 1d6 chaque jour de voyage :</p><table style='width: 100%; border-collapse: collapse; margin: 1rem 0;'><thead><tr style='background: var(--rule);'><th style='padding: 0.5rem; border: 1px solid var(--rule); text-align: left;'>D6</th><th style='padding: 0.5rem; border: 1px solid var(--rule); text-align: left;'>Événement</th></tr></thead><tbody><tr><td style='padding: 0.5rem; border: 1px solid var(--rule);'>1</td><td style='padding: 0.5rem; border: 1px solid var(--rule);'>Rencontre hostile</td></tr><tr><td style='padding: 0.5rem; border: 1px solid var(--rule);'>2</td><td style='padding: 0.5rem; border: 1px solid var(--rule);'>Rencontre neutre</td></tr><tr><td style='padding: 0.5rem; border: 1px solid var(--rule);'>3</td><td style='padding: 0.5rem; border: 1px solid var(--rule);'>Découverte (lieu, objet)</td></tr><tr><td style='padding: 0.5rem; border: 1px solid var(--rule);'>4</td><td style='padding: 0.5rem; border: 1px solid var(--rule);'>Météo défavorable</td></tr><tr><td style='padding: 0.5rem; border: 1px solid var(--rule);'>5-6</td><td style='padding: 0.5rem; border: 1px solid var(--rule);'>Rien de spécial</td></tr></tbody></table>",
+      "deletable": true,
+      "sectionName": "Événements de voyage"
+    },
+    {
+      "type": "card",
+      "id": "provisions",
+      "title": "Provisions et ravitaillement",
+      "content": "<p>Chaque personnage consomme <strong>1 ration de nourriture</strong> et <strong>2 litres d'eau</strong> par jour.</p><h4>Prix des provisions</h4><ul><li><strong>Ration de nourriture</strong> : 5 éclats</li><li><strong>Outre d'eau (5 litres)</strong> : 2 éclats</li><li><strong>Torche</strong> : 1 éclat</li><li><strong>Corde (15 mètres)</strong> : 10 éclats</li></ul><h4>Chasse et cueillette</h4><p>Les personnages peuvent chasser ou cueillir pendant le voyage. Test de <strong>Survie (DC 15)</strong> pour trouver de la nourriture pour 1d4 personnes.</p>",
+      "deletable": true,
+      "sectionName": "Provisions et ravitaillement"
+    }
+  ]
 }
     };
     
@@ -11799,18 +11861,26 @@ select:focus {
       "order": 11
     },
     {
+      "id": "voyage",
+      "title": "Voyage",
+      "file": "voyage.json",
+      "active": true,
+      "order": 12,
+      "requiresMJ": true
+    },
+    {
       "id": "traumas",
       "title": "Traumas",
       "file": "traumas.json",
       "active": true,
-      "order": 12
+      "order": 13
     },
     {
       "id": "campagne",
       "title": "Campagne",
       "file": "campagne.json",
       "active": true,
-      "order": 13,
+      "order": 14,
       "requiresMJ": true
     }
   ],
@@ -12004,12 +12074,13 @@ select:focus {
         }
         
         // Development mode - fetch files
-        const [sorts, classes, dons, objets, monstres, tablesTresors, collections, staticPagesConfig, tocStructure, audioConfig] = await Promise.all([
+        const [sorts, classes, dons, objets, monstres, npcs, tablesTresors, collections, staticPagesConfig, tocStructure, audioConfig] = await Promise.all([
           fetch('data/sorts.json').then(r => r.json()),
           fetch('data/classes.json').then(r => r.json()),
           fetch('data/dons.json').then(r => r.json()),
           fetch('data/objets.json').then(r => r.json()),
           fetch('data/monstres.json').then(r => r.json()),
+          fetch('data/npcs.json').then(r => r.json()),
           fetch('data/tables-tresors.json').then(r => r.json()),
           fetch('data/collections.json').then(r => r.json()),
           fetch('data/static-pages-config.json').then(r => r.json()),
@@ -12064,6 +12135,7 @@ select:focus {
         this.data.DONS = dons;
         this.data.OBJETS = objets;
         this.data.MONSTRES = monstres;
+        this.data.NPCS = npcs;
         this.data.TABLES_TRESORS = tablesTresors;
         this.data.COLLECTIONS = collections;
         this.data.STATIC_PAGES = staticPagesData;
@@ -12076,6 +12148,7 @@ select:focus {
         window.DONS = dons;
         window.OBJETS = objets;
         window.MONSTRES = monstres;
+        window.NPCS = npcs;
         window.TABLES_TRESORS = tablesTresors;
         window.COLLECTIONS = collections;
         window.STATIC_PAGES = this.data.STATIC_PAGES;
@@ -12735,6 +12808,40 @@ select:focus {
         armureMalefique: 0,
         abilites: "<strong>Attaque basique:</strong> Inflige 5 dégâts physiques.",
         butin: "<strong>Butin:</strong> 10-50 pièces d'or."
+      }
+    },
+
+    npc: {
+      fields: {
+        nom: { type: 'text', label: 'Nom', required: true },
+        image: { type: 'text', label: 'Image', required: false },
+        description: { type: 'richtext', label: 'Description', required: false },
+        interactions: { type: 'richtext', label: 'Interactions possibles', required: false }
+      },
+      editMapping: {
+        'npc-name': 'nom',
+        'npc-description': 'description',
+        'npc-interactions': 'interactions'
+      },
+      identifiers: {
+        name: 'nom',
+        category: 'npcs'
+      },
+      template: 'npc-card',
+      container: 'npcs',
+      dataKey: 'NPCS',
+      pageType: 'single',
+      icons: {
+        category: '👥',
+        item: '👤',
+        add: '➕',
+        delete: '🗑️'
+      },
+      defaultValues: {
+        nom: "Nouveau PNJ",
+        image: "",
+        description: "Description du personnage non-joueur, son apparence, sa personnalité...",
+        interactions: "Liste des interactions possibles avec ce PNJ : dialogues, quêtes, services proposés, etc."
       }
     },
 
@@ -13547,6 +13654,9 @@ select:focus {
         case 'monster':
           html = this.buildMonsterCard();
           break;
+        case 'npc':
+          html = this.buildNPCCard();
+          break;
         case 'tableTresor':
           html = this.buildTableTresorCard();
           break;
@@ -13744,6 +13854,34 @@ select:focus {
           ` : ''}
 
           ${this.buildDeleteButton('monster')}
+        </div>
+      `;
+    }
+
+    buildNPCCard() {
+      const allNPCs = window.NPCS || [];
+      const index = allNPCs.indexOf(this.data) || 0;
+      const totalItems = allNPCs.length;
+
+      return `
+        <div class="card editable-section npc-card" data-section-type="npc" data-npc-name="${this.data.nom}">
+          ${this.buildEditableTitle(this.data.nom, 'npc-name')}
+          ${this.buildIllustration(`npc:${this.data.nom}`, this.data.nom, 'npc')}
+
+          ${this.data.description ? `
+            <hr style="margin: 1rem 0; border: none; border-top: 1px solid var(--rule);">
+            ${this.buildEditableField(this.data.description, 'npc-description', 'Description', { style: 'margin-top: 0.5rem;' })}
+          ` : ''}
+
+          ${this.data.interactions ? `
+            <hr style="margin: 1rem 0; border: none; border-top: 1px solid var(--rule);">
+            <div style="margin-top: 0.5rem;">
+              <strong>💬 Interactions possibles:</strong>
+              ${this.buildEditableField(this.data.interactions, 'npc-interactions', 'Interactions', { style: 'margin-top: 0.5rem;' })}
+            </div>
+          ` : ''}
+
+          ${this.buildDeleteButton('npc')}
         </div>
       `;
     }
@@ -13957,7 +14095,7 @@ select:focus {
       }
 
       let containerClasses = 'illus';
-      if (['spell', 'class', 'subclass', 'don', 'objet', 'monster'].includes(styleType)) {
+      if (['spell', 'class', 'subclass', 'don', 'objet', 'monster', 'npc'].includes(styleType)) {
         containerClasses += ` illus-${styleType}`;
       }
 
@@ -14418,6 +14556,36 @@ select:focus {
       `;
       
       return result;
+    }
+
+    buildSingleNPCPage(npcData) {
+      const allNPCs = npcData || [];
+      const instance = PageBuilder.getInstance();
+
+      return `
+        <article class="" data-page="npcs">
+          <section>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
+              <h2>👥 NPCs</h2>
+              ${instance.buildIllustration('page:npcs')}
+            </div>
+
+            ${instance.buildPageDescription('npc')}
+
+            <div style="display: flex; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap;">
+              ${instance.buildAddButton('npc', 'npcs')}
+            </div>
+
+            <div class="grid cols-2" id="npcs-container">
+              ${allNPCs.map((item, index) =>
+                CardBuilder.create('npc', item, 'npcs', index).build()
+              ).join('')}
+            </div>
+
+            ${allNPCs.length === 0 ? '<p style="text-align: center; color: #666; margin: 2rem 0;">Aucun NPC pour le moment. Utilisez le mode développement pour en créer.</p>' : ''}
+          </section>
+        </article>
+      `;
     }
 
     buildSingleMonsterPage(monsterData) {
@@ -14906,9 +15074,16 @@ select:focus {
     buildAddButton(type, categoryName) {
       const config = window.ContentTypes[type];
       const icon = config?.icons?.add || '➕';
-      
+
+      // Get friendly name for the type
+      let typeName = 'élément';
+      if (type === 'spell') typeName = 'sort';
+      else if (type === 'don') typeName = 'don';
+      else if (type === 'monster') typeName = 'monstre';
+      else if (type === 'npc') typeName = 'NPC';
+
       // ALWAYS generate the button - CSS will control visibility based on body.dev-on/dev-off
-      return `<button class="${type}-add btn" data-category-name="${categoryName}" type="button" style="background: var(--accent); color: white;">${icon} Ajouter un ${type === 'spell' ? 'sort' : type === 'don' ? 'don' : type === 'monster' ? 'monstre' : 'élément'}</button>`;
+      return `<button class="${type}-add btn" data-category-name="${categoryName}" type="button" style="background: var(--accent); color: white;">${icon} Ajouter un ${typeName}</button>`;
     }
 
     buildDeleteCategoryButton(type, categoryName) {
@@ -15445,9 +15620,10 @@ select:focus {
       const selectedCampaign = window.JdrApp.state.selectedCampaign || (campaignList.length > 0 ? campaignList[0] : null);
       const currentCampaign = selectedCampaign && campaigns[selectedCampaign] ? campaigns[selectedCampaign] : null;
       const subPageList = currentCampaign ? Object.keys(currentCampaign.subPages || {}) : [];
+
       const selectedSubPage = window.JdrApp.state.selectedSubPage || (subPageList.length > 0 ? subPageList[0] : null);
       const currentSubPage = selectedSubPage && currentCampaign?.subPages?.[selectedSubPage] ? currentCampaign.subPages[selectedSubPage] : null;
-      
+
       // Auto-initialize state if it wasn't set by UI functions
       if (!window.JdrApp.state.selectedCampaign && selectedCampaign) {
         window.JdrApp.state.selectedCampaign = selectedCampaign;
@@ -15517,13 +15693,13 @@ select:focus {
 
     buildSelectedCampaignContent(campaignName, campaign, selectedSubPage, currentSubPage) {
       const subPageList = campaign.subPages ? Object.keys(campaign.subPages) : [];
-      
+
       return `
         <div class="selected-campaign" style="background: var(--card); border-radius: 12px; padding: 1.5rem; border-left: 4px solid var(--bronze);">
           <!-- Campaign Header -->
           <div class="campaign-header" style="margin-bottom: 1.5rem; border-bottom: 2px solid var(--rule); padding-bottom: 1rem;">
             <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
-              <h3 class="editable" data-edit-type="generic" data-edit-section="campaign-${campaignName}-name" 
+              <h3 class="editable" data-edit-type="generic" data-edit-section="campaign-${campaignName}-name"
                   style="margin: 0; color: var(--accent-ink); flex: 1;">
                 ${campaignName}
               </h3>
@@ -15554,13 +15730,13 @@ select:focus {
                 <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--accent-ink);">
                   📝 Sous-page Active:
                 </label>
-                <select id="subPageSelector" onchange="JdrApp.modules.ui.selectSubPage(this.value)" 
+                <select id="subPageSelector" data-campaign="${campaignName}"
                         style="padding: 8px; border-radius: 6px; border: 2px solid var(--rule); background: var(--paper); font-family: inherit;">
-                  ${subPageList.map(name => 
+                  ${subPageList.map(name =>
                     `<option value="${name}" ${name === selectedSubPage ? 'selected' : ''}>${name}</option>`
                   ).join('')}
                 </select>
-                <button class="btn danger small dev-only" onclick="JdrApp.modules.ui.deleteCampaignSubPage('${campaignName}', '${selectedSubPage}')" 
+                <button class="btn danger small dev-only" onclick="JdrApp.modules.ui.deleteCampaignSubPage('${campaignName}', '${selectedSubPage}')"
                         style="margin-left: 8px; display: none;" ${!selectedSubPage ? 'disabled' : ''}>
                   🗑️ Supprimer
                 </button>
@@ -16779,7 +16955,12 @@ select:focus {
         if (window.MONSTRES) {
           zip.file('data/monstres.json', JSON.stringify(window.MONSTRES, null, 2));
         }
-        
+
+        // Add NPCs data
+        if (window.NPCS) {
+          zip.file('data/npcs.json', JSON.stringify(window.NPCS, null, 2));
+        }
+
         // Add tables tresors data with current edits  
         if (window.TABLES_TRESORS) {
           console.log('📦 Exporting TABLES_TRESORS:', {
@@ -21555,8 +21736,13 @@ select:focus {
       if (page === 'monstres') {
         return this.renderMonstersPage();
       }
-      
-      // Handle single tables-tresors page  
+
+      // Handle single npcs page
+      if (page === 'npcs') {
+        return this.renderNPCsPage();
+      }
+
+      // Handle single tables-tresors page
       if (page === 'tables-tresors') {
         return this.renderTablesTresorsPage();
       }
@@ -22457,7 +22643,15 @@ select:focus {
       this.show('monstres'); // Activer la page
       return true;
     },
-    
+
+    renderNPCsPage() {
+      // Use PageBuilder to generate the npcs page dynamically
+      JdrApp.modules.renderer.renderUnifiedContentPage('npc', window.NPCS || []);
+      this.updateActiveStates('npcs');
+      this.show('npcs'); // Activer la page
+      return true;
+    },
+
     renderTablesTresorsPage() {
       // Use PageBuilder to generate the tables-tresors page dynamically
       JdrApp.modules.renderer.renderUnifiedContentPage('tableTresor', window.TABLES_TRESORS || { tables: [] });
@@ -24413,7 +24607,6 @@ select:focus {
         <div style="margin-bottom: 12px;">
           <div style="font-size: 12px; color: var(--paper-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">📝 Création</div>
           <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-            <button class="btn small" id="addCategory" title="Créer une nouvelle catégorie/page">📄 Nouvelle page</button>
             <button class="btn small" id="addSpellCategory" title="Créer une nouvelle catégorie de sorts">🔮 Catégorie de sorts</button>
             <button class="btn small" id="addDonCategory" title="Créer une nouvelle catégorie de dons">🎖️ Catégorie de dons</button>
           </div>
@@ -24483,10 +24676,22 @@ select:focus {
           if (window.ScrollOptimizer && window.ScrollOptimizer.cleanupVirtualization) {
             window.ScrollOptimizer.cleanupVirtualization(activeArticle);
           }
-          
+
           activeArticle.innerHTML = newHTML;
           this.autoLoadImages();
-          
+
+          // Restore subpage selector value if on campaign page
+          // Use requestAnimationFrame to ensure it runs after browser's autofill
+          if (pageId === 'campagne' && window.JdrApp?.state?.selectedSubPage) {
+            const targetSubPage = window.JdrApp.state.selectedSubPage;
+            requestAnimationFrame(() => {
+              const subPageSelector = document.getElementById('subPageSelector');
+              if (subPageSelector) {
+                subPageSelector.value = targetSubPage;
+              }
+            });
+          }
+
           // Apply dev mode state immediately
           if (!window.STANDALONE_VERSION && JdrApp.modules.editor) {
             if (JdrApp.modules.editor.isDevMode) {
@@ -24532,6 +24737,15 @@ select:focus {
         return article ? article.innerHTML : null;
       }
 
+      // Handle campaign page
+      if (pageId === 'campagne' && window.STATIC_PAGES && window.STATIC_PAGES[pageId]) {
+        const content = PageBuilder.buildCampaignPage(pageId, window.STATIC_PAGES[pageId]);
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(content, 'text/html');
+        const article = doc.querySelector('article');
+        return article ? article.innerHTML : null;
+      }
+
       return null;
     },
 
@@ -24566,6 +24780,9 @@ select:focus {
       } else if (contentType === 'monster' && data) {
         content = PageBuilder.buildSingleMonsterPage(data);
         pageId = 'monstres';
+      } else if (contentType === 'npc' && data) {
+        content = PageBuilder.buildSingleNPCPage(data);
+        pageId = 'npcs';
       } else if (contentType === 'tableTresor' && data) {
         content = PageBuilder.buildSingleTableTresorPage(data);
         pageId = 'tables-tresors';
@@ -24812,47 +25029,6 @@ select:focus {
       window.activeIdSearch = false;
     },
 
-    // Add missing regenerateCurrentPage function
-    regenerateCurrentPage() {
-      // Get current page from URL
-      const currentHash = window.location.hash || '#/creation';
-      const currentPage = currentHash.replace('#/', '');
-      
-      // Special handling for static pages like campaign
-      if (currentPage === 'campagne') {
-        const campaignData = window.CAMPAGNE || window.STATIC_PAGES?.campagne;
-        
-        if (campaignData && window.PageBuilder) {
-          const pageHTML = window.PageBuilder.buildStaticPage('campagne', campaignData);
-          const viewsContainer = document.querySelector('#views');
-          
-          if (viewsContainer && pageHTML) {
-            // Remove existing campaign page
-            const existingPage = viewsContainer.querySelector('[data-page="campagne"]');
-            if (existingPage) {
-              existingPage.remove();
-            }
-            
-            // Insert new page HTML
-            viewsContainer.insertAdjacentHTML('beforeend', pageHTML);
-            
-            // Ensure proper visibility
-            const newPage = viewsContainer.querySelector('[data-page="campagne"]');
-            if (newPage) {
-              // Hide all other pages and show the new one
-              viewsContainer.querySelectorAll('article').forEach(article => {
-                article.style.display = article === newPage ? 'block' : 'none';
-              });
-            }
-          }
-        }
-      } else {
-        // For other pages, try to use the router's parseRoute method
-        if (JdrApp.modules.router?.parseRoute) {
-          JdrApp.modules.router.parseRoute();
-        }
-      }
-    },
 
   };
 
@@ -25051,28 +25227,57 @@ select:focus {
       if (monsterCard) {
         const monsterName = monsterCard.dataset.monsterName;
         const categoryName = monsterCard.dataset.categoryName;
-        
+
         const editableElement = element.classList.contains('editable') ? element : element.querySelector('.editable');
-        
-        // Use data-item-identifier if available, otherwise fall back to monsterName
-        const itemIdentifier = editableElement?.dataset?.itemIdentifier || monsterName;
-        
+
+        // ALWAYS use monsterName from card (data-monster-name is the source of truth)
+        // This ensures we use the updated name after renaming
+        const itemIdentifier = monsterName;
+
         // Use editSection directly (new format: "monster-fieldName")
         const editSection = editableElement?.dataset?.editSection || 'abilites';
-        
+
         return {
           contentType: 'monster',
           itemIdentifier: itemIdentifier,
           categoryName: categoryName || 'monstres',
           property: 'html',
-          editType: 'html', 
+          editType: 'html',
           editSection: editSection,
           config: window.ContentTypes.monster,
           element: editableElement,
           container: element
         };
       }
-      
+
+      // Check if we're in a NPC card
+      const npcCard = element.closest('.card[data-npc-name]');
+      if (npcCard) {
+        const npcName = npcCard.dataset.npcName;
+        const categoryName = npcCard.dataset.categoryName;
+
+        const editableElement = element.classList.contains('editable') ? element : element.querySelector('.editable');
+
+        // ALWAYS use npcName from card (data-npc-name is the source of truth)
+        // This ensures we use the updated name after renaming
+        const itemIdentifier = npcName;
+
+        // Use editSection directly (new format: "npc-fieldName")
+        const editSection = editableElement?.dataset?.editSection || 'description';
+
+        return {
+          contentType: 'npc',
+          itemIdentifier: itemIdentifier,
+          categoryName: categoryName || 'npcs',
+          property: 'html',
+          editType: 'html',
+          editSection: editSection,
+          config: window.ContentTypes.npc,
+          element: editableElement,
+          container: element
+        };
+      }
+
       // Check if we're in a table-tresor card
       const tableTresorCard = element.closest('.card[data-table-tresor-name]');
       if (tableTresorCard) {
@@ -25825,6 +26030,8 @@ select:focus {
             return this.updateObjetData(session, content);
           case 'monster':
             return this.updateMonsterData(session, content);
+          case 'npc':
+            return this.updateNPCData(session, content);
           case 'category':
             return this.updateCategoryData(session, content);
           case 'subclass':
@@ -25956,12 +26163,15 @@ select:focus {
         if (propertyName === 'nom') {
           const oldName = monster.nom;
           monster[propertyName] = content;
-          
+
           // Update the data-monster-name attribute on the card container
           const monsterCard = session.container.closest('.card[data-monster-name]');
           if (monsterCard && monsterCard.dataset.monsterName === oldName) {
             monsterCard.dataset.monsterName = content;
           }
+
+          // CRITICAL: Update session itemIdentifier to the new name
+          session.itemIdentifier = content;
         } else {
           // Update the monster property
           monster[propertyName] = content;
@@ -25989,6 +26199,63 @@ select:focus {
         // Rollback on error
         console.error('❌ Error updating monster, rolling back:', error);
         monster[propertyName] = originalValue;
+        return false;
+      }
+    }
+
+    // Update NPC data
+    updateNPCData(session, content) {
+      const npc = window.NPCS?.find(n => n.nom === session.itemIdentifier);
+      if (!npc) {
+        console.error('NPC not found:', session.itemIdentifier, 'Available NPCs:', window.NPCS?.map(n => n.nom));
+        return false;
+      }
+
+      // Use editMapping if available, otherwise use editSection directly
+      const config = session.config || window.ContentTypes.npc;
+      const propertyName = config.editMapping?.[session.editSection] || session.editSection;
+
+      // Backup current value for rollback capability
+      const originalValue = npc[propertyName];
+
+      try {
+        // If we're updating the name, we need to update the container's data-npc-name attribute
+        if (propertyName === 'nom') {
+          const oldName = npc.nom;
+          npc[propertyName] = content;
+
+          // Update the data-npc-name attribute on the card container
+          const npcCard = session.container.closest('.card[data-npc-name]');
+          if (npcCard && npcCard.dataset.npcName === oldName) {
+            npcCard.dataset.npcName = content;
+          }
+
+          // CRITICAL: Update session itemIdentifier to the new name
+          session.itemIdentifier = content;
+        } else {
+          // Update the npc property
+          npc[propertyName] = content;
+        }
+
+        // Force synchronization using ContentFactory to prevent data reversion
+        const contentFactory = window.ContentFactory?.getInstance ? window.ContentFactory.getInstance() : null;
+        if (contentFactory && contentFactory.updateItem) {
+          // Use ContentFactory to ensure proper data synchronization
+          contentFactory.updateItem('npc', null, npc.nom, propertyName, content);
+        }
+
+        // Additional safety: ensure image mapping is maintained
+        if (propertyName === 'image' && JdrApp.modules.images) {
+          const imageKey = `npc:${npc.nom}`;
+          JdrApp.modules.images.setImage(imageKey, content);
+        }
+
+        return true;
+
+      } catch (error) {
+        // Rollback on error
+        console.error('❌ Error updating NPC, rolling back:', error);
+        npc[propertyName] = originalValue;
         return false;
       }
     }
@@ -26863,6 +27130,7 @@ select:focus {
               <button id="editorSpellLinksBtn" class="btn" style="background: #6b21a8; color: white; font-size: 12px;">🔗 Liens Sorts</button>
               <button id="editorPageLinksBtn" class="btn" style="background: #1d4ed8; color: white; font-size: 12px;">🔗 Liens Pages</button>
               <button id="editorMonsterLinksBtn" class="btn" style="background: #dc2626; color: white; font-size: 12px;">🐲 Liens Monstres</button>
+              <button id="editorNPCLinksBtn" class="btn" style="background: #0891b2; color: white; font-size: 12px;">👥 Liens NPCs</button>
               <button id="editorTreasureTablesBtn" class="btn" style="background: #b45309; color: white; font-size: 12px;">🎲 Tables Trésors</button>
               <button id="editorSchemaBtn" class="btn" style="background: #8b5cf6; color: white; font-size: 12px;">🎨 Schéma</button>
             </div>
@@ -26892,6 +27160,7 @@ select:focus {
       const spellLinksBtn = modal.querySelector('#editorSpellLinksBtn');
       const pageLinksBtn = modal.querySelector('#editorPageLinksBtn');
       const monsterLinksBtn = modal.querySelector('#editorMonsterLinksBtn');
+      const npcLinksBtn = modal.querySelector('#editorNPCLinksBtn');
       const treasureTablesBtn = modal.querySelector('#editorTreasureTablesBtn');
       const schemaBtn = modal.querySelector('#editorSchemaBtn');
 
@@ -26967,6 +27236,18 @@ select:focus {
           if (JdrApp.modules.ui?.showMonsterLinksModal) {
             JdrApp.modules.ui.showMonsterLinksModal();
           }
+        });
+      }
+
+      if (npcLinksBtn) {
+        npcLinksBtn.addEventListener('click', () => {
+          this.showNPCLinksModal(insertTextAtCursor);
+        });
+      }
+
+      if (treasureTablesBtn) {
+        treasureTablesBtn.addEventListener('click', () => {
+          this.showTreasureTablesModal(insertTextAtCursor);
         });
       }
 
@@ -27943,6 +28224,158 @@ select:focus {
       }
     }
 
+    // Show NPCs selection modal
+    showNPCLinksModal(insertTextAtCursor) {
+      const availableNPCs = window.NPCS || [];
+
+      if (availableNPCs.length === 0) {
+        if (JdrApp.modules.ui?.showNotification) {
+          JdrApp.modules.ui.showNotification('❌ Aucun NPC disponible', 'error');
+        }
+        return;
+      }
+
+      // Create modal
+      const modal = document.createElement('dialog');
+      modal.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 0;
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        max-width: 600px;
+        width: 90%;
+        z-index: 1000001 !important;
+        background: transparent;
+      `;
+
+      // Create backdrop
+      const backdrop = document.createElement('div');
+      backdrop.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000000 !important;
+        backdrop-filter: blur(4px);
+      `;
+
+      const npcOptions = availableNPCs.map(npc =>
+        `<option value="${npc.nom}">${npc.nom}</option>`
+      ).join('');
+
+      modal.innerHTML = `
+        <div style="background: var(--paper); border-radius: 12px; padding: 1.5rem; border: 2px solid var(--rule);">
+          <h3 style="margin: 0 0 1rem 0; color: var(--accent-ink);">👥 Insérer un lien vers un NPC</h3>
+
+          <div style="margin-bottom: 1rem;">
+            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Choisir un NPC:</label>
+            <select id="npcSelect" style="width: 100%; padding: 0.5rem; border: 1px solid var(--rule); border-radius: 6px; font-size: 14px;">
+              <option value="">-- Sélectionner un NPC --</option>
+              ${npcOptions}
+            </select>
+          </div>
+
+          <div style="margin-bottom: 1rem;">
+            <div id="npcPreview" style="border: 1px solid var(--rule); padding: 1rem; border-radius: 6px; background: var(--card); min-height: 100px; max-height: 300px; overflow-y: auto; font-size: 13px;">
+              <div style="color: var(--paper-muted); font-style: italic;">Sélectionnez un NPC pour voir l'aperçu</div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+            <button id="cancelNPCModal" class="btn" style="background: #6b7280; color: white;">Annuler</button>
+            <button id="insertNPCLink" class="btn" style="background: var(--accent); color: white;" disabled>👥 Insérer le lien</button>
+          </div>
+        </div>
+      `;
+
+      document.body.appendChild(backdrop);
+      document.body.appendChild(modal);
+      modal.show();
+
+      // Get elements
+      const select = modal.querySelector('#npcSelect');
+      const preview = modal.querySelector('#npcPreview');
+      const insertBtn = modal.querySelector('#insertNPCLink');
+      const cancelBtn = modal.querySelector('#cancelNPCModal');
+
+      // Handle NPC selection
+      select.addEventListener('change', () => {
+        const selectedNPCName = select.value;
+        if (selectedNPCName) {
+          insertBtn.disabled = false;
+
+          const selectedNPC = availableNPCs.find(n => n.nom === selectedNPCName);
+          if (selectedNPC) {
+            // Create preview HTML
+            const imageHtml = selectedNPC.image ?
+              `<img src="${selectedNPC.image}" alt="${selectedNPC.nom}" style="max-width: 150px; max-height: 150px; float: right; margin-left: 1rem; border-radius: 8px;">` :
+              '';
+
+            const descriptionHtml = selectedNPC.description ?
+              `<div style="margin-top: 0.5rem; line-height: 1.4;">${selectedNPC.description}</div>` :
+              '';
+
+            const interactionsHtml = selectedNPC.interactions ?
+              `<div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--rule);">
+                <strong>💬 Interactions possibles:</strong>
+                <div style="margin-top: 0.5rem; line-height: 1.4;">${selectedNPC.interactions}</div>
+              </div>` :
+              '';
+
+            preview.innerHTML = `
+              ${imageHtml}
+              <h4 style="margin: 0 0 0.5rem 0; color: var(--accent-ink);">${selectedNPC.nom}</h4>
+              ${descriptionHtml}
+              ${interactionsHtml}
+            `;
+          }
+        } else {
+          insertBtn.disabled = true;
+          preview.innerHTML = '<div style="color: var(--paper-muted); font-style: italic;">Sélectionnez un NPC pour voir l\'aperçu</div>';
+        }
+      });
+
+      // Handle insert
+      insertBtn.addEventListener('click', () => {
+        const selectedNPCName = select.value;
+        if (selectedNPCName) {
+          const htmlLink = `<span class="npc-link" data-npc="${selectedNPCName}" style="color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;" title="Cliquer pour voir la fiche du NPC">[NPC: ${selectedNPCName}]</span>`;
+          insertTextAtCursor(htmlLink);
+
+          if (JdrApp.modules.ui?.showNotification) {
+            JdrApp.modules.ui.showNotification('✓ Lien NPC inséré!', 'success');
+          }
+        }
+
+        modal.close();
+        modal.remove();
+        backdrop.remove();
+      });
+
+      // Handle cancel
+      cancelBtn.addEventListener('click', () => {
+        modal.close();
+        modal.remove();
+        backdrop.remove();
+      });
+
+      // Handle backdrop click
+      backdrop.addEventListener('click', () => {
+        modal.close();
+        modal.remove();
+        backdrop.remove();
+      });
+
+      // Focus select
+      select.focus();
+    }
+
     // Show treasure tables selection modal
     showTreasureTablesModal(insertTextAtCursor) {
       const availableTables = window.TABLES_TRESORS?.tables || [];
@@ -28226,10 +28659,10 @@ select:focus {
       // Force reset all CSS properties that might be causing 0x0 dimensions
       const selectors = [
         '.edit-btn', '[class$="-add"]', '[class$="-delete"]', '[class*="-move-"]',
-        '.section-delete', '.remove-section-btn', '.add-paragraph-btn', 
+        '.section-delete', '.remove-section-btn', '.add-paragraph-btn',
         '.add-subclass-btn', '.delete-subclass-btn',
         '.spell-delete', '.don-delete', '.objet-delete',
-        '.spell-add', '.don-add', '.objet-add',
+        '.spell-add', '.don-add', '.objet-add', '.npc-add', '.monster-add',
         '.illus .up', '.illus .rm', '.illus label', '.illus input[type="file"]',
         '.tags-manager-btn', '.filter-manager-btn' // Tags and filter manager buttons
       ];
@@ -28978,7 +29411,7 @@ select:focus {
      */
     extractTypeFromClass(className) {
       // Handle both formats: table-tresor-move-up and tableTresor-move-up
-      const matches = className.match(/(spell|don|objet|monster|tableTresor|table-tresor|class)-/);
+      const matches = className.match(/(spell|don|objet|monster|npc|tableTresor|table-tresor|class)-/);
       if (matches) {
         // Normalize table-tresor to tableTresor for consistency
         return matches[1] === 'table-tresor' ? 'tableTresor' : matches[1];
@@ -28997,6 +29430,12 @@ select:focus {
 
     refreshMonstersPage() {
       if (window.location.hash === '#/monstres') {
+        this.forcePageRefresh();
+      }
+    },
+
+    refreshNPCsPage() {
+      if (window.location.hash === '#/npcs') {
         this.forcePageRefresh();
       }
     },
@@ -29364,12 +29803,21 @@ select:focus {
         this.handleContentMove(payload.type, payload.category, payload.itemName, payload.direction);
       });
 
+      // Campaign subpage selector - use delegated event to handle dynamic content
+      document.addEventListener('change', (event) => {
+        if (event.target.id === 'subPageSelector') {
+          if (JdrApp.modules.ui?.selectSubPage) {
+            JdrApp.modules.ui.selectSubPage(event.target.value);
+          }
+        }
+      });
+
       // Delegate UI event handlers to specialized modules
       if (window.EventHandlers) {
         EventHandlers.setupContentHandlers();
         EventHandlers.setupTagsManagement();
       }
-      
+
       // Initialize specialized filter modules
       if (window.GMObjectFilters && window.GMObjectFilters.init) {
         window.GMObjectFilters.init();
@@ -29491,6 +29939,14 @@ select:focus {
         e.stopPropagation();
         const monsterName = e.target.dataset.monster;
         this.showMonsterPreview(monsterName, e.target, e);
+      });
+
+      // Gestionnaire pour les liens de NPCs dans le contenu
+      JdrApp.utils.events.register('click', '.npc-link', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const npcName = e.target.dataset.npc;
+        this.showNPCPreview(npcName, e.target, e);
       });
     },
 
@@ -29625,6 +30081,12 @@ select:focus {
     showMonsterPreview(monsterName, triggerElement, event) {
       if (window.ModalManager?.showMonsterPreview) {
         return ModalManager.showMonsterPreview(monsterName, triggerElement, event);
+      }
+    },
+
+    showNPCPreview(npcName, triggerElement, event) {
+      if (window.ModalManager?.showNPCPreview) {
+        return ModalManager.showNPCPreview(npcName, triggerElement, event);
       }
     },
 
@@ -30037,11 +30499,13 @@ select:focus {
       // Create new item with default values
       const defaultItem = ContentFactory.createDefaultItem(type);
       
-      // Special handling for objects and monsters (add to single array)
+      // Special handling for objects, monsters, and NPCs (add to single array)
       if (type === 'objet') {
         this.addObject(defaultItem);
       } else if (type === 'monster') {
         this.addMonster(defaultItem);
+      } else if (type === 'npc') {
+        this.addNPC(defaultItem);
       } else {
         // Standard category-based addition
         this.addStandardContent(type, categoryName, defaultItem);
@@ -30075,9 +30539,21 @@ select:focus {
       if (!window.MONSTRES) {
         window.MONSTRES = [];
       }
-      
+
       window.MONSTRES.push(defaultItem);
       this.addNewMonsterDirectly(defaultItem);
+    },
+
+    /**
+     * Add NPC to NPCs array
+     */
+    addNPC(defaultItem) {
+      if (!window.NPCS) {
+        window.NPCS = [];
+      }
+
+      window.NPCS.push(defaultItem);
+      this.addNewNPCDirectly(defaultItem);
     },
 
     /**
@@ -30113,11 +30589,13 @@ select:focus {
         return;
       }
 
-      // Special handling for objects and monsters
+      // Special handling for objects, monsters, and NPCs
       if (type === 'objet') {
         this.deleteObject(itemName);
       } else if (type === 'monster') {
         this.deleteMonster(itemName);
+      } else if (type === 'npc') {
+        this.deleteNPC(itemName);
       } else {
         // Standard category-based deletion
         this.deleteStandardContent(type, categoryName, itemName);
@@ -30149,6 +30627,19 @@ select:focus {
         if (itemIndex >= 0) {
           window.MONSTRES.splice(itemIndex, 1);
           UIUtilities.refreshMonstersPage();
+        }
+      }
+    },
+
+    /**
+     * Delete NPC from NPCs array
+     */
+    deleteNPC(itemName) {
+      if (window.NPCS) {
+        const itemIndex = window.NPCS.findIndex(npc => npc.nom === itemName);
+        if (itemIndex >= 0) {
+          window.NPCS.splice(itemIndex, 1);
+          UIUtilities.refreshNPCsPage();
         }
       }
     },
@@ -30390,6 +30881,69 @@ select:focus {
         console.warn('Erreur lors de l\'ajout direct du monstre:', error);
         // Fallback to full page refresh
         UIUtilities.refreshMonstersPage();
+        return false;
+      }
+    },
+
+    /**
+     * Add new NPC card directly to the page without full refresh
+     */
+    addNewNPCDirectly(newNPC) {
+      try {
+        // Check if we're on the NPCs page
+        if (window.location.hash !== '#/npcs') {
+          return false;
+        }
+
+        // Find the NPCs container
+        const npcsContainer = document.getElementById('npcs-container');
+        if (!npcsContainer) {
+          // Fallback to refresh if container not found
+          UIUtilities.refreshNPCsPage();
+          return false;
+        }
+
+        // Create the new NPC card HTML using the existing builder pattern
+        const npcIndex = window.NPCS.length - 1; // Last added NPC
+        let newCardHTML = '';
+
+        // Try to use existing card builder if available
+        if (window.CardBuilder?.create) {
+          const card = window.CardBuilder.create('npc', newNPC, 'npcs', npcIndex);
+          newCardHTML = card?.build();
+        }
+
+        // Fallback: create basic NPC card HTML
+        if (!newCardHTML) {
+          newCardHTML = `
+            <div class="card npc-card" data-npc-name="${newNPC.nom}">
+              <div class="card-header">
+                <h3>${newNPC.nom || 'Nouveau PNJ'}</h3>
+                <div class="card-actions">
+                  <button onclick="ContentManager.deleteContent('npc', '', '${newNPC.nom}')" title="Supprimer">🗑️</button>
+                </div>
+              </div>
+              <div class="card-body">
+                ${newNPC.description ? `<p>${newNPC.description}</p>` : ''}
+                ${newNPC.interactions ? `<p><strong>Interactions:</strong> ${newNPC.interactions}</p>` : ''}
+              </div>
+            </div>
+          `;
+        }
+
+        // Add the card to the container
+        npcsContainer.insertAdjacentHTML('beforeend', newCardHTML);
+
+        // Load images for the new card if the system supports it
+        if (JdrApp.modules.renderer?.autoLoadImages) {
+          JdrApp.modules.renderer.autoLoadImages();
+        }
+
+        return true;
+      } catch (error) {
+        console.warn('Erreur lors de l\'ajout direct du NPC:', error);
+        // Fallback to full page refresh
+        UIUtilities.refreshNPCsPage();
         return false;
       }
     }
@@ -32032,18 +32586,58 @@ select:focus {
       while (cardContainer.firstChild) {
         preview.appendChild(cardContainer.firstChild);
       }
-      
-      // The styles are now applied via CSS in the head, no need for inline styles here
-      
+
+      // Load lazy images BEFORE adding to document to avoid flicker
+      const lazyImages = preview.querySelectorAll('img.lazy-load, img.thumb, img[data-src]');
+      console.log('🖼️ Found lazy images in monster preview:', lazyImages.length);
+
+      lazyImages.forEach(img => {
+        const optimizedSrc = img.getAttribute('data-src') || img.src;
+        console.log('  - Image optimized src:', optimizedSrc);
+
+        if (optimizedSrc && optimizedSrc !== 'data:image/svg+xml' && !optimizedSrc.includes('svg+xml')) {
+          img.src = optimizedSrc;
+          img.style.display = 'inline-block';
+          img.classList.remove('lazy-load');
+
+          // Get original URL from image store using illus-key
+          const illusKey = img.closest('[data-illus-key]')?.dataset.illusKey;
+          let originalUrl = optimizedSrc;
+
+          if (illusKey && window.JdrApp?.modules?.images?.getImageUrl) {
+            const rawUrl = window.JdrApp.modules.images.getImageUrl(illusKey);
+            if (rawUrl) {
+              originalUrl = rawUrl;
+              console.log('  - Found original URL from illus-key:', originalUrl);
+            }
+          }
+
+          // Add click-to-enlarge functionality
+          img.style.cursor = 'pointer';
+          img.setAttribute('data-click-action', 'enlarge');
+          img.removeAttribute('title'); // Remove title to avoid native tooltip
+
+          // Use capture phase to intercept before any other handlers
+          img.addEventListener('click', (e) => {
+            console.log('🖱️ Image clicked in preview, opening modal with original URL:', originalUrl);
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            this.showImageModal(originalUrl);
+            return false;
+          }, true);
+        }
+      });
+
       // Position near the trigger element
       const rect = triggerElement.getBoundingClientRect();
       const viewportWidth = window.innerWidth;
       const viewportHeight = window.innerHeight;
-      
+
       // Calculate position to keep preview in viewport
       let left = rect.left + window.scrollX;
       let top = rect.bottom + window.scrollY + 5;
-      
+
       // Adjust horizontal position if too far right
       if (left + 450 > viewportWidth) {
         left = rect.right + window.scrollX - 450;
@@ -32051,7 +32645,7 @@ select:focus {
       if (left < 10) {
         left = 10;
       }
-      
+
       // Adjust vertical position if too far down
       if (top + 700 > viewportHeight + window.scrollY) {
         top = rect.top + window.scrollY - 705;
@@ -32059,20 +32653,20 @@ select:focus {
       if (top < 10) {
         top = 10;
       }
-      
+
       preview.style.left = left + 'px';
       preview.style.top = top + 'px';
-      
-      // Add to document
+
+      // Add to document - images already loaded
       document.body.appendChild(preview);
-      
+
       // Remove on click outside or after delay
       const removePreview = () => {
         if (preview.parentNode) {
           preview.parentNode.removeChild(preview);
         }
       };
-      
+
       // Add click handler for the close button only
       setTimeout(() => {
         const closeBtn = preview.querySelector('.preview-close-btn');
@@ -32082,6 +32676,333 @@ select:focus {
           });
         }
       }, 10);
+    },
+
+    /**
+     * Show NPC preview tooltip
+     */
+    showNPCPreview(npcName, triggerElement, event) {
+      if (!npcName) return;
+
+      // Only remove existing NPC previews, not other types
+      const existingPreview = document.querySelector('.npc-preview-tooltip');
+      if (existingPreview) {
+        existingPreview.remove();
+      }
+
+      // Find the NPC in the data
+      let foundNPC = null;
+      if (window.NPCS) {
+        foundNPC = window.NPCS.find(n => n.nom === npcName);
+      }
+
+      if (!foundNPC) {
+        this.showEtatPreview(npcName, 'NPC non trouvé', triggerElement);
+        return;
+      }
+
+      // Use CardBuilder to create a full NPC card in preview mode
+      const npcCard = CardBuilder.create('npc', foundNPC, 'preview').build();
+
+      // Add minimal styles for the preview tooltip
+      if (!document.getElementById('npc-preview-styles')) {
+        const styleElement = document.createElement('style');
+        styleElement.id = 'npc-preview-styles';
+        styleElement.textContent = `
+          .npc-preview-tooltip {
+            background: var(--paper) !important;
+            position: fixed !important;
+            z-index: 2147483647 !important;
+            max-width: 450px !important;
+            max-height: 600px !important;
+            overflow-y: auto !important;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5) !important;
+            border-radius: 12px !important;
+            border: 2px solid var(--rule) !important;
+            padding: 1rem !important;
+          }
+          .npc-preview-tooltip .preview-close-btn {
+            position: absolute !important;
+            top: 5px !important;
+            right: 5px !important;
+            background: #0891b2 !important;
+            color: white !important;
+            border: 3px solid #ffffff !important;
+            border-radius: 50% !important;
+            width: 40px !important;
+            height: 40px !important;
+            cursor: pointer !important;
+            font-size: 24px !important;
+            font-weight: bold !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            z-index: 1 !important;
+            box-shadow: 0 4px 12px rgba(8, 145, 178, 0.6) !important;
+            transition: all 0.2s ease !important;
+          }
+          .npc-preview-tooltip .preview-close-btn:hover {
+            background: #0e7490 !important;
+            transform: scale(1.1) !important;
+            box-shadow: 0 6px 16px rgba(8, 145, 178, 0.8) !important;
+          }
+          .npc-preview-tooltip .card h4 {
+            clear: both !important;
+            display: block !important;
+            width: 100% !important;
+            margin-bottom: 1rem !important;
+          }
+          .npc-preview-tooltip .card .illus {
+            display: block !important;
+            clear: both !important;
+            width: 100% !important;
+            text-align: center !important;
+            margin: 0 auto 1.5rem !important;
+          }
+          .npc-preview-tooltip .card .illus img {
+            display: block !important;
+            margin: 0 auto !important;
+          }
+          .npc-preview-tooltip .card > div:not(:first-child) {
+            margin-top: 1rem !important;
+          }
+          .npc-preview-tooltip .card hr {
+            margin: 1.5rem 0 !important;
+          }
+        `;
+        document.head.appendChild(styleElement);
+      }
+
+      // Create and show preview
+      const preview = document.createElement('div');
+      preview.className = 'npc-preview-tooltip';
+
+      // Add close button
+      const closeBtn = document.createElement('button');
+      closeBtn.className = 'preview-close-btn';
+      closeBtn.title = 'Fermer';
+      closeBtn.textContent = '×';
+      preview.appendChild(closeBtn);
+
+      // Decode HTML entities before using
+      const decodeHTML = (html) => {
+        const textarea = document.createElement('textarea');
+        textarea.innerHTML = html;
+        return textarea.value;
+      };
+
+      // Decode the NPC card HTML
+      const decodedCard = decodeHTML(npcCard);
+      console.log('📋 Decoded NPC card HTML (first 500 chars):', decodedCard.substring(0, 500));
+
+      // Add NPC card - DIRECTLY set innerHTML with decoded HTML
+      const cardContainer = document.createElement('div');
+      cardContainer.innerHTML = decodedCard;
+
+      // Move all children from card container to preview
+      while (cardContainer.firstChild) {
+        preview.appendChild(cardContainer.firstChild);
+      }
+
+      // Load lazy images BEFORE adding to document to avoid flicker
+      const allImages = preview.querySelectorAll('img');
+      const lazyImages = preview.querySelectorAll('img.lazy-load, img.thumb, img[data-src]');
+      console.log('🖼️ Total images in NPC preview:', allImages.length);
+      console.log('🖼️ Lazy-load images in NPC preview:', lazyImages.length);
+
+      allImages.forEach((img, idx) => {
+        console.log(`  Image ${idx}:`, {
+          classes: img.className,
+          src: img.src,
+          dataSrc: img.getAttribute('data-src'),
+          style: img.style.cssText
+        });
+      });
+
+      lazyImages.forEach(img => {
+        const optimizedSrc = img.getAttribute('data-src') || img.src;
+        console.log('  - Processing NPC Image optimized src:', optimizedSrc);
+
+        if (optimizedSrc && optimizedSrc !== 'data:image/svg+xml' && !optimizedSrc.includes('svg+xml')) {
+          img.src = optimizedSrc;
+          img.style.display = 'inline-block';
+          img.classList.remove('lazy-load');
+
+          // Get original URL from image store using illus-key
+          const illusKey = img.closest('[data-illus-key]')?.dataset.illusKey;
+          let originalUrl = optimizedSrc;
+
+          if (illusKey && window.JdrApp?.modules?.images?.getImageUrl) {
+            const rawUrl = window.JdrApp.modules.images.getImageUrl(illusKey);
+            if (rawUrl) {
+              originalUrl = rawUrl;
+              console.log('  - Found original URL from illus-key:', originalUrl);
+            }
+          }
+
+          // Add click-to-enlarge functionality
+          img.style.cursor = 'pointer';
+          img.setAttribute('data-click-action', 'enlarge');
+          img.removeAttribute('title'); // Remove title to avoid native tooltip
+
+          // Use capture phase to intercept before any other handlers
+          img.addEventListener('click', (e) => {
+            console.log('🖱️ NPC Image clicked in preview, opening modal with original URL:', originalUrl);
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            this.showImageModal(originalUrl);
+            return false;
+          }, true);
+        }
+      });
+
+      // Position near the trigger element
+      const rect = triggerElement.getBoundingClientRect();
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+
+      // Calculate position to keep preview in viewport
+      let left = rect.left + window.scrollX;
+      let top = rect.bottom + window.scrollY + 5;
+
+      // Adjust horizontal position if too far right
+      if (left + 450 > viewportWidth) {
+        left = rect.right + window.scrollX - 450;
+      }
+      if (left < 10) {
+        left = 10;
+      }
+
+      // Adjust vertical position if too far down
+      if (top + 600 > viewportHeight + window.scrollY) {
+        top = rect.top + window.scrollY - 605;
+      }
+      if (top < 10) {
+        top = 10;
+      }
+
+      preview.style.left = left + 'px';
+      preview.style.top = top + 'px';
+
+      // Add to document - images already loaded
+      document.body.appendChild(preview);
+
+      // Remove on click outside or after delay
+      const removePreview = () => {
+        if (preview.parentNode) {
+          preview.parentNode.removeChild(preview);
+        }
+      };
+
+      // Add click handler for the close button only
+      setTimeout(() => {
+        const closeBtn = preview.querySelector('.preview-close-btn');
+        if (closeBtn) {
+          closeBtn.addEventListener('click', () => {
+            removePreview();
+          });
+        }
+      }, 10);
+    },
+
+    /**
+     * Show enlarged image modal
+     */
+    showImageModal(imageUrl) {
+      console.log('🖼️ showImageModal called with URL:', imageUrl);
+
+      // Remove any existing image modal
+      const existingModal = document.querySelector('.image-enlarge-modal');
+      if (existingModal) {
+        console.log('  - Removing existing modal');
+        existingModal.remove();
+      }
+
+      // Create modal overlay
+      const modal = document.createElement('div');
+      modal.className = 'image-enlarge-modal';
+      modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 2147483647;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      `;
+
+      // Create image container
+      const imgContainer = document.createElement('div');
+      imgContainer.style.cssText = `
+        max-width: 90%;
+        max-height: 90%;
+        position: relative;
+      `;
+
+      // Create the image
+      const img = document.createElement('img');
+      img.src = imageUrl;
+      img.style.cssText = `
+        max-width: 100%;
+        max-height: 90vh;
+        object-fit: contain;
+        display: block;
+      `;
+
+      // Create close button
+      const closeBtn = document.createElement('button');
+      closeBtn.textContent = '×';
+      closeBtn.style.cssText = `
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #dc2626;
+        color: white;
+        border: 3px solid white;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        font-size: 32px;
+        font-weight: bold;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        z-index: 1;
+      `;
+
+      imgContainer.appendChild(img);
+      imgContainer.appendChild(closeBtn);
+      modal.appendChild(imgContainer);
+      document.body.appendChild(modal);
+
+      // Close on click
+      const closeModal = () => {
+        modal.remove();
+      };
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal || e.target === closeBtn) {
+          closeModal();
+        }
+      });
+
+      closeBtn.addEventListener('click', closeModal);
+
+      // Close on Escape key
+      const handleEscape = (e) => {
+        if (e.key === 'Escape') {
+          closeModal();
+          document.removeEventListener('keydown', handleEscape);
+        }
+      };
+      document.addEventListener('keydown', handleEscape);
     },
 
     /**
@@ -32442,6 +33363,47 @@ select:focus {
         }
       });
 
+      return modal;
+    },
+
+    /**
+     * Show cartes du destin modal
+     */
+    showCartesDestinModal() {
+      let modal = JdrApp.utils.dom.$('#cartesDestinModal');
+      if (!modal) {
+        modal = this.createCartesDestinModal();
+        document.body.appendChild(modal);
+      }
+
+      BaseModal.openModal('cartesDestinModal');
+    },
+
+    /**
+     * Create cartes du destin modal
+     */
+    createCartesDestinModal() {
+      // Récupérer les données depuis le JSON de la page création
+      const creationData = window.STATIC_PAGES?.creation?.cartesDestin;
+
+      if (!creationData) {
+        console.error('Données des cartes du destin non trouvées');
+        return null;
+      }
+
+      // Construire la liste des cartes
+      const cartesListHTML = creationData.cartes
+        .map(carte => `<li>${carte}</li>`)
+        .join('\n          ');
+
+      const cartesContent = `
+        <p style="margin-bottom: 1rem;">${creationData.introduction}</p>
+        <ol style="padding-left: 1.5rem; line-height: 1.8;">
+          ${cartesListHTML}
+        </ol>
+      `;
+
+      const modal = BaseModal.createModal('cartesDestinModal', creationData.titre, cartesContent);
       return modal;
     }
   };
@@ -34249,7 +35211,9 @@ select:focus {
     // Campaign management functions
     selectCampaign(campaignName) {
       if (!campaignName) return;
-      
+
+      console.log('📄 selectCampaign called with:', campaignName);
+
       // Initialize state if needed
       if (!window.JdrApp) {
         window.JdrApp = {};
@@ -34257,18 +35221,27 @@ select:focus {
       if (!window.JdrApp.state) {
         window.JdrApp.state = {};
       }
-      
+
+      console.log('📄 Current selectedCampaign:', window.JdrApp.state.selectedCampaign);
+
+      // Check if we're already on this campaign
+      if (window.JdrApp.state.selectedCampaign === campaignName) {
+        console.log('📄 Already on this campaign, skipping regeneration and state reset');
+        return; // No need to regenerate or reset subpage
+      }
+
       window.JdrApp.state.selectedCampaign = campaignName;
-      
+
       // Clear sub-page selection when changing campaign and set to first available
       const campaignData = window.CAMPAGNE?.subPages?.[campaignName];
       if (campaignData?.subPages) {
         const subPageList = Object.keys(campaignData.subPages);
+        console.log('📄 Resetting selectedSubPage to first:', subPageList[0]);
         window.JdrApp.state.selectedSubPage = subPageList.length > 0 ? subPageList[0] : null;
       } else {
         window.JdrApp.state.selectedSubPage = null;
       }
-      
+
       // Regenerate the page to reflect the new selection
       if (JdrApp.modules.renderer?.regenerateCurrentPage) {
         JdrApp.modules.renderer.regenerateCurrentPage();
@@ -34277,7 +35250,7 @@ select:focus {
 
     selectSubPage(subPageName) {
       if (!subPageName) return;
-      
+
       // Initialize state if needed
       if (!window.JdrApp) {
         window.JdrApp = {};
@@ -34285,15 +35258,35 @@ select:focus {
       if (!window.JdrApp.state) {
         window.JdrApp.state = {};
       }
-      
+
+      // If a regeneration is already pending, clear it
+      const hadPendingRegeneration = !!this._subPageRegenerationTimeout;
+      if (hadPendingRegeneration) {
+        clearTimeout(this._subPageRegenerationTimeout);
+        this._subPageRegenerationTimeout = null;
+      }
+
+      // Only skip if we're already on this subpage AND no regeneration was pending
+      if (window.JdrApp.state.selectedSubPage === subPageName && !hadPendingRegeneration) {
+        return;
+      }
+
       window.JdrApp.state.selectedSubPage = subPageName;
-      
-      // Small delay to ensure state is set before regeneration
-      setTimeout(() => {
+
+      // Schedule regeneration with debouncing
+      this._subPageRegenerationTimeout = setTimeout(() => {
+        this._subPageRegenerationTimeout = null;
+
         if (JdrApp.modules.renderer?.regenerateCurrentPage) {
           JdrApp.modules.renderer.regenerateCurrentPage();
+        } else {
+          console.error('❌ regenerateCurrentPage not available!');
+          // Fallback: force page reload
+          if (JdrApp.modules.router?.handleRoute) {
+            JdrApp.modules.router.handleRoute();
+          }
         }
-      }, 10);
+      }, 50);
     },
 
     // Campaign management functions

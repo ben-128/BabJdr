@@ -85,18 +85,26 @@
       "order": 11
     },
     {
+      "id": "voyage",
+      "title": "Voyage",
+      "file": "voyage.json",
+      "active": true,
+      "order": 12,
+      "requiresMJ": true
+    },
+    {
       "id": "traumas",
       "title": "Traumas",
       "file": "traumas.json",
       "active": true,
-      "order": 12
+      "order": 13
     },
     {
       "id": "campagne",
       "title": "Campagne",
       "file": "campagne.json",
       "active": true,
-      "order": 13,
+      "order": 14,
       "requiresMJ": true
     }
   ],

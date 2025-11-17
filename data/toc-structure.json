@@ -144,6 +144,12 @@
         },
         {
           "type": "page",
+          "id": "voyage",
+          "title": "Voyage",
+          "icon": "🗺️"
+        },
+        {
+          "type": "page",
           "id": "traumas",
           "title": "Traumas",
           "icon": "🩹"
