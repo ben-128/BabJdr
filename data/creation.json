@@ -3,14 +3,14 @@
   "title": "Création d'un personnage",
   "static": true,
   "cartesDestin": {
-    "titre": "🎴 Cartes du destin",
+    "titre": "Cartes du destin",
     "introduction": "Tirez au sort une carte du destin avec un d6 :",
     "cartes": [
       "Au choix, 250 éclats ou 4 Fortune.",
       "A répartir: 2 points de statistiques dans une statistique qui n'a pas la valeur la plus élevée.",
       "Au choix, 4 points de vie maximum ou 6 points de mana maximum.",
       "Une compétence rang 1 au choix.",
-      "5 d'armure élémentaire dans 2 éléments au choix.",
+      "Deux éléments au choix gagnent 5 points d'armure élémentaire.",
       "Un point de Dons."
     ]
   },
