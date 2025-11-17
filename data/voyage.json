@@ -10,35 +10,11 @@
     },
     {
       "type": "card",
-      "id": "regles-voyage",
-      "title": "Règles de voyage",
-      "content": "<p>Les voyages sont une partie importante de l'aventure. Voici les règles pour gérer les déplacements de vos personnages.</p><p>Un voyage se déroule en plusieurs étapes :</p><ol><li><strong>Préparation</strong> : Les joueurs préparent leur équipement et leurs provisions.</li><li><strong>Déplacement</strong> : Le groupe se déplace sur la carte.</li><li><strong>Événements</strong> : Des événements peuvent survenir pendant le voyage (rencontres, découvertes, etc.).</li><li><strong>Repos</strong> : Le groupe se repose pour récupérer ses forces.</li></ol>",
-      "deletable": true,
-      "sectionName": "Règles de voyage"
-    },
-    {
-      "type": "card",
       "id": "distances",
-      "title": "Distances et temps de voyage",
-      "content": "<p>Les distances sont mesurées en <strong>kilomètres</strong> et le temps en <strong>heures</strong>.</p><h4>Vitesse de déplacement</h4><ul><li><strong>À pied</strong> : 5 km/h (terrain normal), 3 km/h (terrain difficile)</li><li><strong>À cheval</strong> : 10 km/h (terrain normal), 6 km/h (terrain difficile)</li><li><strong>En chariot</strong> : 6 km/h (terrain normal), 4 km/h (terrain difficile)</li></ul><h4>Fatigue</h4><p>Après 8 heures de marche, les personnages doivent faire un test de <strong>Constitution (DC 12)</strong> ou subir un niveau de fatigue.</p>",
+      "title": "SYSTÈME DE VOYAGE À RÔLES",
+      "content": "<b>Concept</b><br>\nÀ chaque déplacement entre deux zones, les joueurs prennent des rôles de voyage. Chaque rôle implique un test obligatoire. Le MJ peut ajouter 1 à 3 tests optionnels selon le terrain ou les dangers.<br>\nUn voyage = 3 à 6 tests max, tous rapides.<br><br>\n\n<b>1. RÔLES DE VOYAGE (tests obligatoires)</b><br>\nAu minimum, choisir 4 rôles (un par type d’action de base, plus la météo). Un joueur peut prendre plusieurs rôles, ou les répartir entre joueurs.<br><br>\n\n<b>A. L’Éclaireur (Coordination)</b><br>\nIl va devant, surveille, écoute, repère les dangers.<br>\n<b>Test obligatoire :</b> Coordination<br>\n<b>Résultats :</b><br>\n• 20+ : rien à signaler<br>\n• 13–19 : progression normale<br>\n• 7–12 : perte de temps / détour<br>\n• 1–6 : rencontre hostile courte (combat 1–3 rounds)<br><br>\n\n<b>B. Le Guide (Réflexion)</b><br>\nIl lit la carte, interprète les traces, comprend l’environnement.<br>\n<b>Test obligatoire :</b> Réflexion<br>\n<b>Résultats :</b><br>\n• 20+ : orientation parfaite<br>\n• 13–19 : arrivée normale<br>\n• 7–12 : petit retard / mauvais choix de chemin<br>\n• 1–6 : arrivée dans un endroit moins favorable (terrain difficile, malus léger immédiat)<br><br>\n\n<b>C. Le Porte-Fardeau / Protecteur (Hardiesse)</b><br>\nIl ouvre les passages, gère les obstacles physiques.<br>\n<b>Test obligatoire :</b> Hardiesse<br>\n<b>Résultats :</b><br>\n• 20+ : franchissement net<br>\n• 13–19 : fatigue (-1 aux actions physiques sur la scène d’arrivée)<br>\n• 7–12 : petite blessure (1d4 dégâts)<br>\n• 1–6 : gros obstacle : 1d6 dégâts + perte d’un objet mineur<br><br>\n\n<b>D. L’Interprète des Cieux (Fortune)</b><br>\nIl observe le ciel, ressent les signes du climat, prédit les conditions à venir.<br>\n<b>Test obligatoire :</b> Fortune<br>\n<b>Résultats (déterminent la météo du voyage) :</b><br>\n• 20+ : conditions idéales (météo claire, bonus léger au prochain test du groupe)<br>\n• 13–19 : météo normale<br>\n• 7–12 : météo gênante (vent/pluie légère : -1 au prochain test du groupe)<br>\n• 1–6 : mauvais temps (pluie forte, chaleur extrême, tempête légère : -2 au prochain test du groupe et progression ralentie)<br><br>\n\n<b>2. TESTS OPTIONNELS (selon le terrain)</b><br>\nLe MJ peut en choisir 0 à 3 pour ajouter du réalisme sans rallonger le voyage.<br><br>\n\n<b>Option 1. Passages étroits, ruines, terrains piégés → Finesse</b><br>\n<b>Résultats :</b><br>\n• 20+ : contournement propre<br>\n• 13–19 : petit retard<br>\n• 7–12 : perte d'une ressource (flèche, ration, outil)<br>\n• 1–6 : déclenchement d’un piège (1d6 dégâts à une cible au hasard)<br><br>\n\n<b>Option 2. Négocier un passage, caravane, route habitée → Éloquence</b><br>\n<b>Résultats :</b><br>\n• 20+ : on vous rend service immédiatement (info utile, réparation mineure, ration offerte)<br>\n• 13–19 : interaction neutre<br>\n• 7–12 : perte de temps (bavard, marchand insistant)<br>\n• 1–6 : tentative d’escroquerie ou accrochage verbal → perte d’une ressource ou mini-échauffourée (1 round)<br>",
       "deletable": true,
       "sectionName": "Distances et temps de voyage"
-    },
-    {
-      "type": "card",
-      "id": "evenements-voyage",
-      "title": "Événements de voyage",
-      "content": "<p>Lancez 1d6 chaque jour de voyage :</p><table style='width: 100%; border-collapse: collapse; margin: 1rem 0;'><thead><tr style='background: var(--rule);'><th style='padding: 0.5rem; border: 1px solid var(--rule); text-align: left;'>D6</th><th style='padding: 0.5rem; border: 1px solid var(--rule); text-align: left;'>Événement</th></tr></thead><tbody><tr><td style='padding: 0.5rem; border: 1px solid var(--rule);'>1</td><td style='padding: 0.5rem; border: 1px solid var(--rule);'>Rencontre hostile</td></tr><tr><td style='padding: 0.5rem; border: 1px solid var(--rule);'>2</td><td style='padding: 0.5rem; border: 1px solid var(--rule);'>Rencontre neutre</td></tr><tr><td style='padding: 0.5rem; border: 1px solid var(--rule);'>3</td><td style='padding: 0.5rem; border: 1px solid var(--rule);'>Découverte (lieu, objet)</td></tr><tr><td style='padding: 0.5rem; border: 1px solid var(--rule);'>4</td><td style='padding: 0.5rem; border: 1px solid var(--rule);'>Météo défavorable</td></tr><tr><td style='padding: 0.5rem; border: 1px solid var(--rule);'>5-6</td><td style='padding: 0.5rem; border: 1px solid var(--rule);'>Rien de spécial</td></tr></tbody></table>",
-      "deletable": true,
-      "sectionName": "Événements de voyage"
-    },
-    {
-      "type": "card",
-      "id": "provisions",
-      "title": "Provisions et ravitaillement",
-      "content": "<p>Chaque personnage consomme <strong>1 ration de nourriture</strong> et <strong>2 litres d'eau</strong> par jour.</p><h4>Prix des provisions</h4><ul><li><strong>Ration de nourriture</strong> : 5 éclats</li><li><strong>Outre d'eau (5 litres)</strong> : 2 éclats</li><li><strong>Torche</strong> : 1 éclat</li><li><strong>Corde (15 mètres)</strong> : 10 éclats</li></ul><h4>Chasse et cueillette</h4><p>Les personnages peuvent chasser ou cueillir pendant le voyage. Test de <strong>Survie (DC 15)</strong> pour trouver de la nourriture pour 1d4 personnes.</p>",
-      "deletable": true,
-      "sectionName": "Provisions et ravitaillement"
     }
   ]
 }
