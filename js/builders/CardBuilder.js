@@ -543,8 +543,8 @@
       const isStandalone = window.STANDALONE_VERSION === true;
       const isPreviewMode = this.isPreview;
 
-      // Lightweight SVG placeholder (optimized size)
-      const placeholder = 'data:image/svg+xml,%3Csvg width="200" height="150" xmlns="http://www.w3.org/2000/svg"%3E%3Crect width="100%25" height="100%25" fill="%23f0f0f0"/%3E%3C/svg%3E';
+      // Lightweight SVG placeholder (optimized size) - using single quotes to avoid HTML attribute conflicts
+      const placeholder = 'data:image/svg+xml,%3Csvg width=%27200%27 height=%27150%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Crect width=%27100%25%27 height=%27100%25%27 fill=%27%23f0f0f0%27/%3E%3C/svg%3E';
 
       if (isStandalone) {
         // STANDALONE: Never generate image buttons at all, use lazy loading
