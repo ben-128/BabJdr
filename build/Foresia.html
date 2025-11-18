@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-11-18T12:23:35.637Z by JdrBab Build System -->
+<!-- Generated on 2025-11-18T12:25:09.692Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11250,7 +11250,7 @@ select:focus {
       "type": "card",
       "id": "etapes-creation",
       "title": "Étapes de création",
-      "content": "<ol><li>Choisir une <strong>classe</strong> puis une <strong>sous‑classe</strong> : <a href=\"#/guerrier\" style=\"color: var(--accent); text-decoration: underline;\">Guerrier</a>.\n</li><li>Tirer au sort (avec un d6) une carte du destin (<a href=\"#\" onclick=\"event.preventDefault(); ModalManager.showCartesDestinModal(); return false;\" style=\"color: var(--accent); text-decoration: underline;\">Lien ici</a>)\n</li><li>Choisir un <strong>élément</strong> d'affiliation : <a href=\"#/elements\" style=\"color: var(--accent); text-decoration: underline;\">Éléments</a>.\n</li><li>Choisir les <strong>dons</strong> (avec 2 points de dons, généraux et/ou spécifique à la classe) : <a href=\"#/dons-g-n-raux\" style=\"color: var(--accent); text-decoration: underline;\">Généraux (dons)</a>.\n</li><li>Choisir l'<strong>équipement</strong> de départ (avec 100 éclats) : <a href=\"#/collections-objets\" style=\"color: var(--accent); text-decoration: underline;\">Collections d'Objets</a>.\n</li><li>Définir le <strong>nom</strong>, l'<strong>histoire</strong> et l'<strong>apparence</strong>.</li><li>Remplir sa feuille de personnage (voir section ci-dessous).</li></ol>",
+      "content": "<ol><li>Choisir une <strong>classe</strong> puis une <strong>sous‑classe</strong> : <a href=\"#/guerrier\" style=\"color: var(--accent); text-decoration: underline;\">Guerrier</a>.\n</li><li>Tirer au sort (avec un d6) une carte du destin (<a href=\"#\" onclick=\"console.log('🎴 Click sur cartes du destin'); console.log('ModalManager existe?', typeof ModalManager); console.log('window.ModalManager existe?', typeof window.ModalManager); console.log('Méthode showCartesDestinModal?', typeof ModalManager?.showCartesDestinModal); event.preventDefault(); if (window.ModalManager && typeof window.ModalManager.showCartesDestinModal === 'function') { console.log('✅ Appel de showCartesDestinModal'); window.ModalManager.showCartesDestinModal(); } else { console.error('❌ ModalManager ou showCartesDestinModal non disponible'); } return false;\" style=\"color: var(--accent); text-decoration: underline; cursor: pointer;\">Lien ici</a>)\n</li><li>Choisir un <strong>élément</strong> d'affiliation : <a href=\"#/elements\" style=\"color: var(--accent); text-decoration: underline;\">Éléments</a>.\n</li><li>Choisir les <strong>dons</strong> (avec 2 points de dons, généraux et/ou spécifique à la classe) : <a href=\"#/dons-g-n-raux\" style=\"color: var(--accent); text-decoration: underline;\">Généraux (dons)</a>.\n</li><li>Choisir l'<strong>équipement</strong> de départ (avec 100 éclats) : <a href=\"#/collections-objets\" style=\"color: var(--accent); text-decoration: underline;\">Collections d'Objets</a>.\n</li><li>Définir le <strong>nom</strong>, l'<strong>histoire</strong> et l'<strong>apparence</strong>.</li><li>Remplir sa feuille de personnage (voir section ci-dessous).</li></ol>",
       "deletable": true,
       "sectionName": "Étapes de création"
     },
@@ -16980,6 +16980,7 @@ select:focus {
     volume: 0.3,
     config: null,
     isEnabled: false,
+    isPopulating: false, // Flag pour éviter les appels multiples de populateAudioPage
     
     async init() {
       try {
@@ -17584,35 +17585,45 @@ select:focus {
         `;
 
         // Ajouter les event listeners APRÈS avoir créé le HTML
+        // Utiliser { once: false } n'est pas suffisant, il faut cloner les boutons pour retirer tous les listeners
         setTimeout(() => {
           const toggleBtn = document.getElementById('toggle-btn');
           const playPauseBtn = document.getElementById('play-pause-btn');
           const nextBtn = document.getElementById('next-btn');
           const volumeSlider = document.getElementById('volume-slider');
 
+          // Cloner et remplacer pour retirer tous les event listeners existants
           if (toggleBtn) {
-            toggleBtn.addEventListener('click', (e) => {
+            const newToggleBtn = toggleBtn.cloneNode(true);
+            toggleBtn.parentNode.replaceChild(newToggleBtn, toggleBtn);
+            newToggleBtn.addEventListener('click', (e) => {
               e.preventDefault();
               window.audioToggle();
             });
           }
 
           if (playPauseBtn) {
-            playPauseBtn.addEventListener('click', (e) => {
+            const newPlayPauseBtn = playPauseBtn.cloneNode(true);
+            playPauseBtn.parentNode.replaceChild(newPlayPauseBtn, playPauseBtn);
+            newPlayPauseBtn.addEventListener('click', (e) => {
               e.preventDefault();
               window.audioPlayPause();
             });
           }
 
           if (nextBtn) {
-            nextBtn.addEventListener('click', (e) => {
+            const newNextBtn = nextBtn.cloneNode(true);
+            nextBtn.parentNode.replaceChild(newNextBtn, nextBtn);
+            newNextBtn.addEventListener('click', (e) => {
               e.preventDefault();
               window.audioNext();
             });
           }
 
           if (volumeSlider) {
-            volumeSlider.addEventListener('input', (e) => {
+            const newVolumeSlider = volumeSlider.cloneNode(true);
+            volumeSlider.parentNode.replaceChild(newVolumeSlider, volumeSlider);
+            newVolumeSlider.addEventListener('input', (e) => {
               window.audioVolume(e.target.value);
             });
           }
