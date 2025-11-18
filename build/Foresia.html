@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-11-18T12:28:30.261Z by JdrBab Build System -->
+<!-- Generated on 2025-11-18T12:32:51.413Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17677,7 +17677,6 @@ select:focus {
       // Libérer le flag après un court délai pour s'assurer que tous les setTimeout sont terminés
       setTimeout(() => {
         this.isPopulating = false;
-        console.log('✅ populateAudioPage() completed');
       }, 100);
     },
 
@@ -34329,54 +34328,31 @@ select:focus {
      * Show cartes du destin modal
      */
     showCartesDestinModal() {
-      console.log('🎴 showCartesDestinModal() appelée');
-      console.log('JdrApp.utils.dom existe?', typeof JdrApp.utils.dom);
-      console.log('JdrApp.utils.dom.$ existe?', typeof JdrApp.utils.dom?.$);
+      // Utiliser querySelector directement pour éviter les problèmes de NodeList
+      let modal = document.querySelector('#cartesDestinModal');
 
-      let modal = JdrApp.utils.dom.$('#cartesDestinModal');
-      console.log('Modal existant trouvé?', !!modal);
-
-      if (!modal) {
-        console.log('Création du modal...');
+      // Vérifier que c'est un vrai élément DOM avec classList
+      if (!modal || !modal.classList) {
         modal = this.createCartesDestinModal();
-        console.log('Modal créé?', !!modal);
-
         if (!modal) {
           console.error('Impossible de créer le modal des cartes du destin');
           return;
         }
         document.body.appendChild(modal);
-        console.log('Modal ajouté au body');
       }
 
-      console.log('BaseModal existe?', typeof BaseModal);
-      console.log('BaseModal.openModal existe?', typeof BaseModal?.openModal);
-
-      if (BaseModal && typeof BaseModal.openModal === 'function') {
-        console.log('Appel de BaseModal.openModal()');
-        BaseModal.openModal(modal);
-        console.log('BaseModal.openModal() terminé');
-      } else {
-        console.error('❌ BaseModal ou BaseModal.openModal non disponible');
-      }
+      BaseModal.openModal(modal);
     },
 
     /**
      * Create cartes du destin modal
      */
     createCartesDestinModal() {
-      console.log('📝 createCartesDestinModal() appelée');
-      console.log('window.STATIC_PAGES existe?', !!window.STATIC_PAGES);
-      console.log('window.STATIC_PAGES.creation existe?', !!window.STATIC_PAGES?.creation);
-
       // Récupérer les données depuis le JSON de la page création
       const creationData = window.STATIC_PAGES?.creation?.cartesDestin;
-      console.log('creationData trouvé?', !!creationData);
-      console.log('creationData:', creationData);
 
       if (!creationData) {
         console.error('Données des cartes du destin non trouvées');
-        console.error('window.STATIC_PAGES.creation:', window.STATIC_PAGES?.creation);
         return null;
       }
 
@@ -34475,10 +34451,6 @@ select:focus {
         `;
         document.head.appendChild(styleElement);
       }
-
-      console.log('Modal créé par BaseModal.createModal:', modal);
-      console.log('Modal ID:', modal?.id);
-      console.log('Modal className:', modal?.className);
 
       return modal;
     }
