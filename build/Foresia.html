@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-11-18T12:32:51.413Z by JdrBab Build System -->
+<!-- Generated on 2025-11-18T12:34:17.024Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11250,7 +11250,7 @@ select:focus {
       "type": "card",
       "id": "etapes-creation",
       "title": "Étapes de création",
-      "content": "<ol><li>Choisir une <strong>classe</strong> puis une <strong>sous‑classe</strong> : <a href=\"#/guerrier\" style=\"color: var(--accent); text-decoration: underline;\">Guerrier</a>.\n</li><li>Tirer au sort (avec un d6) une carte du destin (<a href=\"#\" onclick=\"console.log('🎴 Click sur cartes du destin'); console.log('ModalManager existe?', typeof ModalManager); console.log('window.ModalManager existe?', typeof window.ModalManager); console.log('Méthode showCartesDestinModal?', typeof ModalManager?.showCartesDestinModal); event.preventDefault(); if (window.ModalManager && typeof window.ModalManager.showCartesDestinModal === 'function') { console.log('✅ Appel de showCartesDestinModal'); window.ModalManager.showCartesDestinModal(); } else { console.error('❌ ModalManager ou showCartesDestinModal non disponible'); } return false;\" style=\"color: var(--accent); text-decoration: underline; cursor: pointer;\">Lien ici</a>)\n</li><li>Choisir un <strong>élément</strong> d'affiliation : <a href=\"#/elements\" style=\"color: var(--accent); text-decoration: underline;\">Éléments</a>.\n</li><li>Choisir les <strong>dons</strong> (avec 2 points de dons, généraux et/ou spécifique à la classe) : <a href=\"#/dons-g-n-raux\" style=\"color: var(--accent); text-decoration: underline;\">Généraux (dons)</a>.\n</li><li>Choisir l'<strong>équipement</strong> de départ (avec 100 éclats) : <a href=\"#/collections-objets\" style=\"color: var(--accent); text-decoration: underline;\">Collections d'Objets</a>.\n</li><li>Définir le <strong>nom</strong>, l'<strong>histoire</strong> et l'<strong>apparence</strong>.</li><li>Remplir sa feuille de personnage (voir section ci-dessous).</li></ol>",
+      "content": "<ol><li>Choisir une <strong>classe</strong> puis une <strong>sous‑classe</strong> : <a href=\"#/guerrier\" style=\"color: var(--accent); text-decoration: underline;\">Guerrier</a>.\n</li><li>Tirer au sort (avec un d6) une carte du destin (<a href=\"#\" onclick=\"event.preventDefault(); ModalManager.showCartesDestinModal(); return false;\" style=\"color: var(--accent); text-decoration: underline;\">Lien ici</a>)\n</li><li>Choisir un <strong>élément</strong> d'affiliation : <a href=\"#/elements\" style=\"color: var(--accent); text-decoration: underline;\">Éléments</a>.\n</li><li>Choisir les <strong>dons</strong> (avec 2 points de dons, généraux et/ou spécifique à la classe) : <a href=\"#/dons-g-n-raux\" style=\"color: var(--accent); text-decoration: underline;\">Généraux (dons)</a>.\n</li><li>Choisir l'<strong>équipement</strong> de départ (avec 100 éclats) : <a href=\"#/collections-objets\" style=\"color: var(--accent); text-decoration: underline;\">Collections d'Objets</a>.\n</li><li>Définir le <strong>nom</strong>, l'<strong>histoire</strong> et l'<strong>apparence</strong>.</li><li>Remplir sa feuille de personnage (voir section ci-dessous).</li></ol>",
       "deletable": true,
       "sectionName": "Étapes de création"
     },
@@ -30499,52 +30499,33 @@ select:focus {
      * Open modal by ID or element
      */
     openModal(modalId) {
-      console.log('🔓 BaseModal.openModal() appelée avec:', modalId);
-      console.log('Type de modalId:', typeof modalId);
-
       let modal;
 
       if (typeof modalId === 'string') {
         // Try using JdrApp utils first, fallback to native querySelector
         modal = (JdrApp?.utils?.dom?.$ && JdrApp.utils.dom.$(`#${modalId}`))
           || document.querySelector(`#${modalId}`);
-        console.log('Modal trouvé par ID:', !!modal);
       } else {
         modal = modalId;
-        console.log('Modal passé directement:', !!modal);
       }
-
-      console.log('Modal:', modal);
-      console.log('Modal.classList existe?', !!modal?.classList);
-      console.log('Modal.tagName:', modal?.tagName);
-      console.log('Modal ID:', modal?.id);
-      console.log('Modal current display:', modal?.style?.display);
-      console.log('Modal current classes:', modal?.className);
 
       if (modal && modal.classList) {
         if (modal.tagName === 'DIALOG') {
-          console.log('→ Modal est un DIALOG, appel de showModal()');
           modal.showModal();
         } else {
-          console.log('→ Modal est un DIV, ajout de visible et flex');
           modal.classList.add('visible');
           modal.style.display = 'flex';
-          console.log('→ Classes après ajout:', modal.className);
-          console.log('→ Display après ajout:', modal.style.display);
         }
 
         // Force background and opacity on modal
         modal.style.setProperty('background', 'rgba(0, 0, 0, 0.7)', 'important');
         modal.style.setProperty('opacity', '1', 'important');
-        console.log('→ Background et opacity forcés sur modal');
 
         // Force background on modal content
         const modalContent = modal.querySelector('.modal-content, .modal-body');
-        console.log('→ modalContent trouvé?', !!modalContent);
         if (modalContent) {
           modalContent.style.setProperty('background', 'rgb(248, 246, 240)', 'important');
           modalContent.style.setProperty('opacity', '1', 'important');
-          console.log('→ Background et opacity forcés sur modalContent');
         }
 
         // Focus first input element
@@ -30554,11 +30535,7 @@ select:focus {
         }
 
         // Emit event
-        console.log('→ Émission de l\'événement MODAL_OPENED');
         EventBus.emit(Events.MODAL_OPENED, { modal, modalId });
-        console.log('✅ BaseModal.openModal() terminé avec succès');
-      } else {
-        console.error('❌ Modal non trouvé ou sans classList');
       }
     },
 
