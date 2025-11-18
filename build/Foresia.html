@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-11-17T21:45:13.391Z by JdrBab Build System -->
+<!-- Generated on 2025-11-18T11:54:42.480Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -9882,6 +9882,32 @@ select:focus {
     "monster-initiative": "3"
   }
 ];
+    window.NPCS = [
+  {
+    "nom": "Mirella la receptionniste",
+    "image": "",
+    "description": "Habits simples, acceuillante. S'énerve si on pique dans les réserves.",
+    "interactions": "- Indique la chambre des joueurs\n<br>\n<br>\n- Propose si les PJs partent de piocher dans <span class=\"treasure-table-link\" data-table-name=\"ProvisionAuberge\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: ProvisionAuberge]</span>"
+  },
+  {
+    "nom": "Tavin le Facteur",
+    "image": "",
+    "description": "Sympa, toujours l'air préssé, connait beaucoup de choses",
+    "interactions": "- Indique au joueurs que les livraisons dans le camp de la forêt n'est plus possibles, des monstres sont apparus. Il donne une lettre apparament urgente à livrer pour Branor le bucheron."
+  },
+  {
+    "nom": "Branor le Bucheron",
+    "image": "",
+    "description": "Costaud, mourant",
+    "interactions": "- Indique qu'on monstre a volé son sac avec un baume de soin et ses clés\n<br>\n<br>\n- Indique a joueur  de mettre en sécurité la tablette (chez lui)"
+  },
+  {
+    "nom": "Grufin l'aubergiste",
+    "image": "",
+    "description": "Connais bien ses clients, partages des histoires.",
+    "interactions": "- Indique la position des autres NPC\n<br><br>\n\n- Vend aux PJs (forêt finis) un coffre pour 100 eclats pour mettre n'importe quel objet, sécurisé.\n<br><br>\n\n-Après la forêt, parle de vieille tour ou mine comme prochain lieu, les joueurs décident"
+  }
+];
     window.TABLES_TRESORS = {
   "tables": [
     {
@@ -11224,7 +11250,7 @@ select:focus {
       "type": "card",
       "id": "etapes-creation",
       "title": "Étapes de création",
-      "content": "<ol><li>Choisir une <strong>classe</strong> puis une <strong>sous‑classe</strong> : <a href=\"#/guerrier\" style=\"color: var(--accent); text-decoration: underline;\">Guerrier</a>.\n</li><li>Tirer au sort (avec un d6) une carte du destin (<a href=\"#\" onclick=\"event.preventDefault(); ModalManager.showCartesDestinModal(); return false;\" style=\"color: var(--accent); text-decoration: underline;\">Lien ici</a>)\n</li><li>Choisir un <strong>élément</strong> d'affiliation : <a href=\"#/elements\" style=\"color: var(--accent); text-decoration: underline;\">Éléments</a>.\n</li><li>Choisir les <strong>dons</strong> (avec 2 points de dons, généraux et/ou spécifique à la classe) : <a href=\"#/dons-g-n-raux\" style=\"color: var(--accent); text-decoration: underline;\">Généraux (dons)</a>.\n</li><li>Choisir l'<strong>équipement</strong> de départ (avec 100 éclats) : <a href=\"#/collections-objets\" style=\"color: var(--accent); text-decoration: underline;\">Collections d'Objets</a>.\n</li><li>Définir le <strong>nom</strong>, l'<strong>histoire</strong> et l'<strong>apparence</strong>.</li><li>Remplir sa feuille de personnage (voir section ci-dessous).</li></ol>",
+      "content": "<ol><li>Choisir une <strong>classe</strong> puis une <strong>sous‑classe</strong> : <a href=\"#/guerrier\" style=\"color: var(--accent); text-decoration: underline;\">Guerrier</a>.\n</li><li>Tirer au sort (avec un d6) une carte du destin (<a href=\"javascript:void(0);\" onclick=\"window.ModalManager.showCartesDestinModal(); return false;\" style=\"color: var(--accent); text-decoration: underline;\">Lien ici</a>)\n</li><li>Choisir un <strong>élément</strong> d'affiliation : <a href=\"#/elements\" style=\"color: var(--accent); text-decoration: underline;\">Éléments</a>.\n</li><li>Choisir les <strong>dons</strong> (avec 2 points de dons, généraux et/ou spécifique à la classe) : <a href=\"#/dons-g-n-raux\" style=\"color: var(--accent); text-decoration: underline;\">Généraux (dons)</a>.\n</li><li>Choisir l'<strong>équipement</strong> de départ (avec 100 éclats) : <a href=\"#/collections-objets\" style=\"color: var(--accent); text-decoration: underline;\">Collections d'Objets</a>.\n</li><li>Définir le <strong>nom</strong>, l'<strong>histoire</strong> et l'<strong>apparence</strong>.</li><li>Remplir sa feuille de personnage (voir section ci-dessous).</li></ol>",
       "deletable": true,
       "sectionName": "Étapes de création"
     },
@@ -11749,9 +11775,58 @@ select:focus {
       "type": "card",
       "id": "distances",
       "title": "SYSTÈME DE VOYAGE À RÔLES",
-      "content": "<b>Concept</b><br>\nÀ chaque déplacement entre deux zones, les joueurs prennent des rôles de voyage. Chaque rôle implique un test obligatoire. Le MJ peut ajouter 1 à 3 tests optionnels selon le terrain ou les dangers.<br>\nUn voyage = 3 à 6 tests max, tous rapides.<br><br>\n\n<b>1. RÔLES DE VOYAGE (tests obligatoires)</b><br>\nAu minimum, choisir 4 rôles (un par type d’action de base, plus la météo). Un joueur peut prendre plusieurs rôles, ou les répartir entre joueurs.<br><br>\n\n<b>A. L’Éclaireur (Coordination)</b><br>\nIl va devant, surveille, écoute, repère les dangers.<br>\n<b>Test obligatoire :</b> Coordination<br>\n<b>Résultats :</b><br>\n• 20+ : rien à signaler<br>\n• 13–19 : progression normale<br>\n• 7–12 : perte de temps / détour<br>\n• 1–6 : rencontre hostile courte (combat 1–3 rounds)<br><br>\n\n<b>B. Le Guide (Réflexion)</b><br>\nIl lit la carte, interprète les traces, comprend l’environnement.<br>\n<b>Test obligatoire :</b> Réflexion<br>\n<b>Résultats :</b><br>\n• 20+ : orientation parfaite<br>\n• 13–19 : arrivée normale<br>\n• 7–12 : petit retard / mauvais choix de chemin<br>\n• 1–6 : arrivée dans un endroit moins favorable (terrain difficile, malus léger immédiat)<br><br>\n\n<b>C. Le Porte-Fardeau / Protecteur (Hardiesse)</b><br>\nIl ouvre les passages, gère les obstacles physiques.<br>\n<b>Test obligatoire :</b> Hardiesse<br>\n<b>Résultats :</b><br>\n• 20+ : franchissement net<br>\n• 13–19 : fatigue (-1 aux actions physiques sur la scène d’arrivée)<br>\n• 7–12 : petite blessure (1d4 dégâts)<br>\n• 1–6 : gros obstacle : 1d6 dégâts + perte d’un objet mineur<br><br>\n\n<b>D. L’Interprète des Cieux (Fortune)</b><br>\nIl observe le ciel, ressent les signes du climat, prédit les conditions à venir.<br>\n<b>Test obligatoire :</b> Fortune<br>\n<b>Résultats (déterminent la météo du voyage) :</b><br>\n• 20+ : conditions idéales (météo claire, bonus léger au prochain test du groupe)<br>\n• 13–19 : météo normale<br>\n• 7–12 : météo gênante (vent/pluie légère : -1 au prochain test du groupe)<br>\n• 1–6 : mauvais temps (pluie forte, chaleur extrême, tempête légère : -2 au prochain test du groupe et progression ralentie)<br><br>\n\n<b>2. TESTS OPTIONNELS (selon le terrain)</b><br>\nLe MJ peut en choisir 0 à 3 pour ajouter du réalisme sans rallonger le voyage.<br><br>\n\n<b>Option 1. Passages étroits, ruines, terrains piégés → Finesse</b><br>\n<b>Résultats :</b><br>\n• 20+ : contournement propre<br>\n• 13–19 : petit retard<br>\n• 7–12 : perte d'une ressource (flèche, ration, outil)<br>\n• 1–6 : déclenchement d’un piège (1d6 dégâts à une cible au hasard)<br><br>\n\n<b>Option 2. Négocier un passage, caravane, route habitée → Éloquence</b><br>\n<b>Résultats :</b><br>\n• 20+ : on vous rend service immédiatement (info utile, réparation mineure, ration offerte)<br>\n• 13–19 : interaction neutre<br>\n• 7–12 : perte de temps (bavard, marchand insistant)<br>\n• 1–6 : tentative d’escroquerie ou accrochage verbal → perte d’une ressource ou mini-échauffourée (1 round)<br>",
+      "content": "<b>Concept</b><br>\nÀ chaque déplacement entre deux zones, les joueurs prennent des rôles de voyage. Chaque rôle implique un test de compétence (selon Foresia).<br>\nLe MJ fixe la difficulté (Simple à Prodigieux) comme pour n’importe quel test, et les héros peuvent dépenser des Efforts normalement.<br>\nLe MJ peut ajouter 1 à 3 tests optionnels selon le terrain ou les dangers.<br>\nUn voyage = 3 à 6 tests max, tous rapides.<br><br>\n\n<b>Lecture des résultats d’un test</b><br>\nPour chaque test (quel que soit le rôle) :<br>\n• <b>Réussite éclatante</b> : le héros dépasse largement la difficulté (et/ou obtient un 20 naturel).<br>\n• <b>Réussite nette</b> : le test est réussi normalement.<br>\n• <b>Réussite mitigée</b> : le test est juste au-dessus de la difficulté ou le MJ juge que c’est “limite”.<br>\n• <b>Échec intéressant</b> : le test est raté sans être catastrophique.<br>\n• <b>Échec dramatique</b> : le test est largement raté ou le héros obtient un 1 naturel.<br><br>\n\n<b>1. RÔLES DE VOYAGE (tests obligatoires)</b><br>\nÀ chaque voyage, choisir au moins ces 4 rôles. Un même joueur peut en remplir plusieurs.<br><br>\n\n<b>A. L’Éclaireur (Coordination)</b><br>\nIl va devant, surveille, écoute, repère les dangers et les opportunités.<br>\n<b>Test :</b> Coordination (difficulté au choix du MJ).<br>\n<b>Résultats :</b><br>\n• <b>Réussite éclatante</b> : l’Éclaireur repère à l’avance un danger, une patrouille ou une créature.\nLe groupe choisit :<br>\n&nbsp;&nbsp;– éviter complètement la rencontre,<br>\n&nbsp;&nbsp;– tendre une embuscade dans une position très favorable,<br>\n&nbsp;&nbsp;– ou suivre de loin pour obtenir une information ou un butin facile (petit test de Fortune possible).<br>\n• <b>Réussite nette</b> : progrès normal. S’il y a un combat, ni surprise ni désavantage de placement.<br>\n• <b>Réussite mitigée</b> : l’Éclaireur voit le problème tard. Le groupe doit choisir :<br>\n&nbsp;&nbsp;– perdre du temps (détour, contourner la zone),<br>\n&nbsp;&nbsp;– ou accepter une petite complication à la scène suivante (terrain gênant, couverts médiocres, distance mal choisie…).<br>\n• <b>Échec intéressant</b> : l’Éclaireur tombe directement sur une situation délicate (garde, animal, piège naturel). La prochaine scène (sociale ou combat) commence dans une configuration peu favorable (mauvais couvert, distance subie, ligne de vue médiocre).<br>\n• <b>Échec dramatique</b> : embuscade ou faux pas sérieux. La scène suivante commence avec :<br>\n&nbsp;&nbsp;– une partie du groupe séparée,<br>\n&nbsp;&nbsp;– ou les ennemis déjà au contact / au bon endroit,<br>\n&nbsp;&nbsp;– ou une première salve gratuite des adversaires.<br><br>\n\n<b>B. Le Guide (Réflexion)</b><br>\nIl gère la carte, les repères, les chemins, les gués, les cols, etc.<br>\n<b>Test :</b> Réflexion.<br>\n<b>Résultats :</b><br>\n• <b>Réussite éclatante</b> : itinéraire idéal. Le voyage est plus court et le groupe arrive dans un endroit avantageux : surplomb, campement parfait, village accueillant ou bon point d’observation. Le MJ peut annuler 1 test optionnel prévu pour ce voyage.<br>\n• <b>Réussite nette</b> : arrivée normale là où prévu, au bon moment (ni trop tard ni trop tôt).<br>\n• <b>Réussite mitigée</b> : on arrive à destination, mais :<br>\n&nbsp;&nbsp;– à un mauvais moment (tombée de la nuit, début de pluie),<br>\n&nbsp;&nbsp;– ou en ratant un point d’eau / une ressource potentielle.<br>\nLe MJ peut ajouter une petite contrainte (moins de temps pour se préparer, bivouac moins confortable…).<br>\n• <b>Échec intéressant</b> : erreur d’orientation. On aboutit dans un lieu jouable, mais non prévu : ruines, hameau bizarre, camp abandonné, ravin, etc. La destination finale demandera un nouveau court voyage plus tard ou une négociation/échange d’informations.<br>\n• <b>Échec dramatique</b> : gros raté. On débouche dans un endroit vraiment problématique : territoire d’un monstre, village hostile, zone maudite, pont effondré. Le voyage n’est pas “perdu”, mais il crée une scène forte à résoudre avant de continuer.<br><br>\n\n<b>C. Le Porte-Fardeau / Protecteur (Hardiesse)</b><br>\nIl encaisse, porte, pousse, ouvre la marche dans les passages physiques difficiles.<br>\n<b>Test :</b> Hardiesse.<br>\n<b>Résultats :</b><br>\n• <b>Réussite éclatante</b> : les obstacles sont franchis sans forcer, et le groupe trouve au passage un avantage :<br>\n&nbsp;&nbsp;– un abri pour un futur camp,<br>\n&nbsp;&nbsp;– un raccourci sûr,<br>\n&nbsp;&nbsp;– ou un équipement improvisé (corde, poutre, branche solide…).<br>\n• <b>Réussite nette</b> : le groupe passe, mais tout le monde est bien couvert de poussière, de boue ou en nage. Effet surtout narratif.<br>\n• <b>Réussite mitigée</b> : ça passe, mais :<br>\n&nbsp;&nbsp;– une petite blessure pour quelqu’un (quelques PV perdus),<br>\n&nbsp;&nbsp;– ou la perte/casse d’un objet mineur (outil, flèche, morceau d’équipement non vital),<br>\n&nbsp;&nbsp;– ou l’obligation de laisser derrière soi quelque chose de volumineux.<br>\n• <b>Échec intéressant</b> : un obstacle se referme sur eux (tronc coincé, escalier brisé, rocher instable). Le groupe est ralenti, ou temporairement bloqué/sectionné, et il faut un nouveau choix : rebrousser chemin, chercher un contournement, ou prendre un risque (autre test de Hardiesse ou Finesse, au choix du MJ).<br>\n• <b>Échec dramatique</b> : incident sérieux (pont qui lâche, corniche qui s’effrite). La scène suivante commence sur un sauvetage :<br>\n&nbsp;&nbsp;– un héros suspendu dans le vide,<br>\n&nbsp;&nbsp;– quelqu’un coincé sous des débris,<br>\n&nbsp;&nbsp;– ou une partie du groupe isolée de l’autre.<br><br>\n\n<b>D. L’Interprète des Cieux (Fortune)</b><br>\nIl lit le ciel, les vents, l’ambiance générale du voyage. On utilise ici la <b>Fortune</b> telle que définie dans Foresia (d20 + valeur de Fortune). <br>\n<b>Test :</b> Fortune.<br>\n<b>Résultats (météo + “chance du voyage”) :</b><br>\n• <b>Réussite éclatante</b> : conditions parfaites au bon moment (éclaircie, vent favorable, nuit calme). Le MJ peut offrir :<br>\n&nbsp;&nbsp;– un repos particulièrement efficace (meilleur soin narratif, pas d’ennuis),<br>\n&nbsp;&nbsp;– ou un petit événement positif : rencontre amicale, ressource trouvée, rumeur utile.<br>\n• <b>Réussite nette</b> : météo normale ou désagréable mais anticipée. Le groupe a le temps de se préparer (capes, feu, itinéraire abrité).<br>\n• <b>Réussite mitigée</b> : le temps devient un obstacle léger (pluie gênante, chaleur lourde, vent pénible). La scène suivante commence avec une petite complication narrative : briquet qui marche mal, visibilité réduite, montures plus nerveuses, etc.<br>\n• <b>Échec intéressant</b> : la météo bascule au mauvais moment (orage pendant un passage dangereux, brouillard avant une rencontre, nuit glaciale au bivouac). La prochaine scène est directement compliquée par ça (négociation plus tendue sous la pluie, combat dans la boue, tir difficile…).<br>\n• <b>Échec dramatique</b> : phénomène marqué (mini-tempête, crue, bourrasque violente, chaleur écrasante). La prochaine scène commence par gérer cette urgence : se mettre à l’abri, sauver une monture, ne pas se faire emporter, etc.<br><br>\n\n<b>2. TESTS OPTIONNELS (selon le terrain)</b><br>\nLe MJ peut choisir 0 à 3 tests parmi ceux-ci. Même mécanique de lecture (éclatant / net / mitigé / intéressant / dramatique).<br><br>\n\n<b>Option 1. Passages étroits, ruines, terrains piégés → Finesse</b><br>\n<b>Test :</b> Finesse.<br>\n<b>Idées de résultats :</b><br>\n• Réussite éclatante : le groupe traverse proprement et découvre au passage un détail utile (cachette, mécanisme, angle de tir, petit butin).<br>\n• Réussite nette : on passe sans incident notable.<br>\n• Réussite mitigée : on perd un peu de temps ou une ressource mineure (flèche, ration, outil).<br>\n• Échec intéressant : un piège se déclenche, un passage se referme, une partie de la zone devient dangereuse (petites pertes de PV ou terrain difficile dans la scène suivante).<br>\n• Échec dramatique : piège sérieux ou effondrement partiel, qui ouvre une vraie scène (sauvetage, fuite, combat).<br><br>\n\n<b>Option 2. Négocier un passage, caravane, route habitée → Éloquence</b><br>\n<b>Test :</b> Éloquence.<br>\n<b>Idées de résultats :</b><br>\n• Réussite éclatante : les PNJ rendent service (infos claires, réparation mineure, ration, hébergement, escorte ponctuelle…).<br>\n• Réussite nette : interaction neutre, on passe comme prévu.<br>\n• Réussite mitigée : on perd du temps (marchand trop bavard, formalités, incompréhension), ou on doit céder une petite faveur.<br>\n• Échec intéressant : tentative d’arnaque, malentendu, tension verbale. Le groupe choisit : accepter une perte légère (quelques pièces, petite ressource) ou risquer une mini-échauffourée sociale ou physique.<br>\n• Échec dramatique : accrochage franc (appel de la garde, duel, refus de passage) qui devient une scène à part entière (sociale ou combat).<br>",
       "deletable": true,
       "sectionName": "Distances et temps de voyage"
+    }
+  ]
+},
+      'traumas': {
+  "page": "traumas",
+  "title": "Traumas",
+  "sections": [
+    {
+      "type": "intro",
+      "content": ""
+    },
+    {
+      "type": "card",
+      "id": "traumas-new-2-1756809368468",
+      "title": "<p><b>Traumas — Normaux</b></p>",
+      "content": "<ul>\n  <li><b>Cicatrice profonde</b> : –1 en compétence Éloquence.</li>\n  <li><b>Entaille au bras</b> : –5 Force.</li>\n  <li><b>Claudication légère</b> : vitesse de déplacement réduite de 3 m.</li>\n  <li><b>Côte fêlée</b> : –5 Points de vie maximum.</li>\n  <li><b>Ame fêlée</b> : –10 mana maximum.</li>\n  <li><b>Vision troublée</b> : Portée maximale des sorts et attaques à 18m.</li>\n  <li><b>Main tremblante</b> : Les échecs critiques viennent d'un 1 ou 2</li>\n  <li><b>Brûlure ancienne</b> : +10 dégâts reçus de l'élément x. </li>\n  <li><b>Régénération partielle</b> : ne récupère que 50&nbsp;% de sa régénération de PV lors du repas.</li>\n  <li><b>Marque affaiblissante</b> : –3 en Résistance à l’altération.</li>\n</ul>",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
+    },
+    {
+      "type": "card",
+      "id": "traumas-new-3-1756809759515",
+      "title": "Traumas — Difficiles",
+      "content": "<ul>\n  <li><b>Bras invalide</b> : impossible d’utiliser les armes à deux mains ou un bouclier.</li>\n  <li><b>Commotion tenace</b> : –5 en Intelligence et –1 compétence Réflexion.</li>\n  <li><b>Âme fêlée</b> : les attaques et sorts contre le héros gagnent +2 aux chances de coup critique.</li>\n  <li><b>Cicatrice élémentaire</b> : –10 à toutes les armures élémentaires.</li>\n  <li><b>Amnésie majeure</b> : Perd définitivement des sorts connus.</li>\n</ul>",
+      "deletable": true,
+      "sectionName": "Nouvelle section"
+    }
+  ]
+},
+      'audio': {
+  "page": "audio",
+  "title": "🎵 Musiques d'ambiance",
+  "static": true,
+  "sections": [
+    {
+      "type": "intro",
+      "content": "Gestion des musiques d'ambiance pour enrichir vos parties de JDR.<br><br><strong>💡 Important :</strong> La plupart des navigateurs bloquent l'audio automatique. Cliquez sur le bouton 'Lecture' pour démarrer la musique. Une fois autorisée, la musique continuera automatiquement."
+    },
+    {
+      "type": "card",
+      "id": "audio-controls-card",
+      "title": "Contrôles audio",
+      "content": "<div id='audio-controls-page'><p>Les contrôles audio se chargent automatiquement...</p></div>"
+    },
+    {
+      "type": "card",
+      "id": "playlists-card",
+      "title": "Playlists disponibles",
+      "content": "<div id='playlists-list'><p>Les playlists se chargent automatiquement...</p></div>"
     }
   ]
 }
@@ -11880,7 +11955,24 @@ select:focus {
     ]
   }
 };
-    
+
+    // Audio configuration
+    window.AUDIO_CONFIG = {
+  "baseUrl": "data/Musiques",
+  "baseUrlGitHub": "https://raw.githubusercontent.com/ben-128/BabJdr/master/data/Musiques",
+  "folderIcons": {
+    "Auberge": "🍺",
+    "Creation": "🎭",
+    "Foret": "🌲",
+    "Mine": "⛏️",
+    "Voyage": "🚶",
+    "Autre": "🎼"
+  },
+  "defaultVolume": 0.5,
+  "enableAutoplay": false,
+  "mobileOptimized": true
+};
+
     // Mark as standalone version for renderer
     window.STANDALONE_VERSION = true;
     
@@ -33357,6 +33449,10 @@ select:focus {
       let modal = JdrApp.utils.dom.$('#cartesDestinModal');
       if (!modal) {
         modal = this.createCartesDestinModal();
+        if (!modal) {
+          console.error('Impossible de créer le modal des cartes du destin');
+          return;
+        }
         document.body.appendChild(modal);
       }
 

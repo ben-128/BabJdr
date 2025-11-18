@@ -1434,6 +1434,10 @@
       let modal = JdrApp.utils.dom.$('#cartesDestinModal');
       if (!modal) {
         modal = this.createCartesDestinModal();
+        if (!modal) {
+          console.error('Impossible de créer le modal des cartes du destin');
+          return;
+        }
         document.body.appendChild(modal);
       }
 

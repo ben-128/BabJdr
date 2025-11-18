@@ -174,8 +174,8 @@ window.MANIFEST_DATA = ${fs.readFileSync(path.join(rootDir, 'config', 'manifest.
     'sorts.json', 'classes.json', 'competences-tests.json',
     'creation.json', 'dons.json', 'objets.json', 'elements.json', 'etats.json',
     'images.json', 'static-pages-config.json', 'stats.json', 'toc-structure.json',
-    'monstres.json', 'tables-tresors.json', 'collections.json', 'monstres-page-desc.json', 'tables-tresors-page-desc.json', 'custom-page-descriptions.json',
-    'combat.json', 'gestion-des-ressources.json', 'histoire.json', 'dieux.json', 'geographie.json', 'campagne.json', 'favoris.json', 'voyage.json'
+    'monstres.json', 'npcs.json', 'tables-tresors.json', 'collections.json', 'monstres-page-desc.json', 'tables-tresors-page-desc.json', 'custom-page-descriptions.json',
+    'combat.json', 'gestion-des-ressources.json', 'histoire.json', 'dieux.json', 'geographie.json', 'campagne.json', 'favoris.json', 'voyage.json', 'traumas.json', 'audio.json', 'audio-config.json'
   ];
   
   let dataObject = {};
@@ -234,6 +234,7 @@ window.MANIFEST_DATA = ${fs.readFileSync(path.join(rootDir, 'config', 'manifest.
     window.DONS = ${JSON.stringify(dataObject.dons || {}, null, 2)};
     window.OBJETS = ${JSON.stringify(dataObject.objets || {}, null, 2)};
     window.MONSTRES = ${JSON.stringify(dataObject.monstres || [], null, 2)};
+    window.NPCS = ${JSON.stringify(dataObject.npcs || [], null, 2)};
     window.TABLES_TRESORS = ${JSON.stringify(dataObject.tables_tresors || { tables: [] }, null, 2)};
     window.COLLECTIONS = ${JSON.stringify(dataObject.collections || { collections: [] }, null, 2)};
     window.IMAGES = ${JSON.stringify(dataObject.images || {}, null, 2)};
@@ -267,12 +268,17 @@ window.MANIFEST_DATA = ${fs.readFileSync(path.join(rootDir, 'config', 'manifest.
       'dieux': ${JSON.stringify(dataObject.dieux || {}, null, 2)},
       'geographie': ${JSON.stringify(dataObject.geographie || {}, null, 2)},
       'campagne': ${JSON.stringify(dataObject.campagne || {}, null, 2)},
-      'voyage': ${JSON.stringify(dataObject.voyage || {}, null, 2)}
+      'voyage': ${JSON.stringify(dataObject.voyage || {}, null, 2)},
+      'traumas': ${JSON.stringify(dataObject.traumas || {}, null, 2)},
+      'audio': ${JSON.stringify(dataObject.audio || {}, null, 2)}
     };
     
     // Static pages configuration
     window.STATIC_PAGES_CONFIG = ${JSON.stringify(dataObject.static_pages_config || {}, null, 2)};
-    
+
+    // Audio configuration
+    window.AUDIO_CONFIG = ${JSON.stringify(dataObject.audio_config || null, null, 2)};
+
     // Mark as standalone version for renderer
     window.STANDALONE_VERSION = true;
     
