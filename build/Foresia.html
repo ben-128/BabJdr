@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-11-18T12:22:34.397Z by JdrBab Build System -->
+<!-- Generated on 2025-11-18T12:23:35.637Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17492,11 +17492,8 @@ select:focus {
         this.volume = parseFloat(savedVolume);
       }
 
-      // Restaurer l'état activé/désactivé
-      const savedEnabled = localStorage.getItem('jdr-audio-enabled');
-      if (savedEnabled !== null) {
-        this.isEnabled = savedEnabled === 'true';
-      }
+      // Restaurer l'état activé/désactivé (déjà fait dans loadAudioConfig)
+      // Ne pas écraser la valeur par défaut
     },
 
     // Méthodes publiques pour les contrôles externes

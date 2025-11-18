@@ -528,11 +528,8 @@
         this.volume = parseFloat(savedVolume);
       }
 
-      // Restaurer l'état activé/désactivé
-      const savedEnabled = localStorage.getItem('jdr-audio-enabled');
-      if (savedEnabled !== null) {
-        this.isEnabled = savedEnabled === 'true';
-      }
+      // Restaurer l'état activé/désactivé (déjà fait dans loadAudioConfig)
+      // Ne pas écraser la valeur par défaut
     },
 
     // Méthodes publiques pour les contrôles externes
