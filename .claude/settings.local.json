@@ -65,7 +65,8 @@
       "Bash(git ls-tree:*)",
       "Bash(index.html)",
       "Bash(dev.html)",
-      "WebFetch(domain:ibb.co)"
+      "WebFetch(domain:ibb.co)",
+      "WebFetch(domain:i.ibb.co)"
     ],
     "deny": []
   }

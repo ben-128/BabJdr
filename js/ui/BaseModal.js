@@ -103,11 +103,17 @@
      * Open modal by ID or element
      */
     openModal(modalId) {
-      const modal = typeof modalId === 'string' 
-        ? JdrApp.utils.dom.$(`#${modalId}`) 
-        : modalId;
-        
-      if (modal) {
+      let modal;
+
+      if (typeof modalId === 'string') {
+        // Try using JdrApp utils first, fallback to native querySelector
+        modal = (JdrApp?.utils?.dom?.$ && JdrApp.utils.dom.$(`#${modalId}`))
+          || document.querySelector(`#${modalId}`);
+      } else {
+        modal = modalId;
+      }
+
+      if (modal && modal.classList) {
         if (modal.tagName === 'DIALOG') {
           modal.showModal();
         } else {
@@ -141,7 +147,7 @@
      * Close modal
      */
     closeModal(modal) {
-      if (modal) {
+      if (modal && modal.classList) {
         if (modal.tagName === 'DIALOG') {
           modal.close();
         } else {

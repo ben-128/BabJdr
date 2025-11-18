@@ -124,6 +124,7 @@ window.MANIFEST_DATA = ${fs.readFileSync(path.join(rootDir, 'config', 'manifest.
     
     // Feature modules
     'js/modules/images.js',       // Image module
+    'js/modules/audio.js',        // Audio module
     'js/storage.js',              // Storage functions
     
     // Features modules (AVANT renderer pour être disponibles au rendu)

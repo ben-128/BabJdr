@@ -1441,7 +1441,7 @@
         document.body.appendChild(modal);
       }
 
-      BaseModal.openModal('cartesDestinModal');
+      BaseModal.openModal(modal);
     },
 
     /**
@@ -1488,10 +1488,13 @@
         styleElement.textContent = `
           #cartesDestinModal .modal-content {
             max-width: 750px !important;
+            max-height: 90vh !important;
             background: var(--paper) !important;
             border-radius: 16px !important;
             overflow: hidden;
             box-shadow: 0 12px 40px rgba(0,0,0,0.3) !important;
+            display: flex !important;
+            flex-direction: column !important;
           }
           #cartesDestinModal .modal-header {
             background: linear-gradient(135deg, #8b4513, #daa520) !important;
@@ -1509,6 +1512,8 @@
           #cartesDestinModal .modal-body {
             padding: 0 !important;
             border-radius: 0 0 16px 16px !important;
+            overflow-y: auto !important;
+            flex: 1 !important;
           }
           #cartesDestinModal ol {
             list-style-position: outside;

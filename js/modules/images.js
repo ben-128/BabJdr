@@ -53,9 +53,21 @@
                   }
                 }, { once: true });
 
-                // Gérer les erreurs de chargement
+                // Gérer les erreurs de chargement avec fallback automatique
                 img.addEventListener('error', () => {
                   img.classList.remove('lazy-loading');
+
+                  // Si l'image utilise weserv.nl et échoue, réessayer avec l'URL originale
+                  if (dataSrc.includes('images.weserv.nl')) {
+                    console.warn('weserv.nl proxy failed, trying original URL:', dataSrc);
+                    const originalUrl = this.extractOriginalUrl(dataSrc);
+                    if (originalUrl && originalUrl !== dataSrc) {
+                      img.src = originalUrl;
+                      console.log('Fallback to original URL:', originalUrl);
+                      return; // Don't add error class yet, give original URL a chance
+                    }
+                  }
+
                   img.classList.add('lazy-error');
                   console.warn('Failed to load image:', dataSrc);
                 }, { once: true });
@@ -86,12 +98,29 @@
               img.removeAttribute('data-src');
               img.classList.remove('lazy-load');
               img.classList.add('lazy-loaded');
-              
+
               // Une fois l'image chargée, s'assurer que les événements d'agrandissement sont attachés
               img.addEventListener('load', () => {
                 if (JdrApp.modules.editor && JdrApp.modules.editor.attachImageEvents) {
                   JdrApp.modules.editor.attachImageEvents();
                 }
+              }, { once: true });
+
+              // Gérer les erreurs de chargement avec fallback automatique
+              img.addEventListener('error', () => {
+                // Si l'image utilise weserv.nl et échoue, réessayer avec l'URL originale
+                if (dataSrc.includes('images.weserv.nl')) {
+                  console.warn('weserv.nl proxy failed, trying original URL:', dataSrc);
+                  const originalUrl = this.extractOriginalUrl(dataSrc);
+                  if (originalUrl && originalUrl !== dataSrc) {
+                    img.src = originalUrl;
+                    console.log('Fallback to original URL:', originalUrl);
+                    return; // Don't add error class yet
+                  }
+                }
+
+                img.classList.add('lazy-error');
+                console.warn('Failed to load image:', dataSrc);
               }, { once: true });
             }
           }
@@ -161,7 +190,7 @@
         const quality = this.getOptimalQuality();
         return `https://images.weserv.nl/?url=${encodeURIComponent(originalUrl)}&we&output=${format}&q=${quality}&w=400&h=300&fit=inside`;
       }
-      
+
       // For local monster paths, encode only the filename to handle French characters properly
       if (originalUrl.startsWith('data/images/Monstres/')) {
         const pathParts = originalUrl.split('/');
@@ -169,8 +198,30 @@
         const pathWithoutFilename = pathParts.slice(0, -1).join('/');
         return `${pathWithoutFilename}/${encodeURIComponent(filename)}`;
       }
-      
+
       return originalUrl;
+    },
+
+    // Extract original URL from weserv.nl proxy URL
+    extractOriginalUrl(weservUrl) {
+      try {
+        if (!weservUrl.includes('images.weserv.nl')) {
+          return weservUrl;
+        }
+
+        // Parse the URL to extract the 'url' parameter
+        const urlObj = new URL(weservUrl);
+        const originalUrl = urlObj.searchParams.get('url');
+
+        if (originalUrl) {
+          return decodeURIComponent(originalUrl);
+        }
+
+        return null;
+      } catch (error) {
+        console.error('Error extracting original URL from weserv:', error);
+        return null;
+      }
     },
 
     // Detect WebP support

@@ -91,6 +91,16 @@
         this.delegateToUI('selectNoTags');
       });
 
+      // Cartes du destin modal trigger
+      JdrApp.utils.events.register('click', '[data-action="show-cartes-destin"]', (e) => {
+        e.preventDefault();
+        if (window.ModalManager && typeof ModalManager.showCartesDestinModal === 'function') {
+          ModalManager.showCartesDestinModal();
+        } else {
+          console.error('ModalManager.showCartesDestinModal not available');
+        }
+      });
+
       // ID search functionality (only on Enter key or button click)
       JdrApp.utils.events.register('keydown', '#id-search-input', (e) => {
         if (e.key === 'Enter') {
