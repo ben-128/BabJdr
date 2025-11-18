@@ -255,15 +255,17 @@
     "monster:AquaLezo": "https://i.ibb.co/Kp4WNJNZ/AquaLezo.png",
     "npc:Exemple de PNJ": "https://i.ibb.co/nqv7MnfN/Mirella-Aubergiste.png",
     "npc:Mirella l'Aubergiste": "https://i.ibb.co/gZDZyGzw/Mirella-Aubergiste.png",
-    "npc:Nouveau PNJ": "https://i.ibb.co/p6fdMqxJ/Grufin-Aubergiste.png",
+    "npc:Nouveau PNJ": "https://i.ibb.co/KxK3wNqr/Lord-Erathian-Velorme.png",
     "npc:Tavin le Facteur": "https://i.ibb.co/tMqM1dtC/Tavin-Facteur.png",
     "npc:Mirella la receptionniste": "https://i.ibb.co/gZDZyGzw/Mirella-Aubergiste.png",
     "npc:Branor le Bucheron": "https://i.ibb.co/5tyK5Pr/Branor-Bucheron.png",
-    "npc:Grufin l'aubergiste": "https://i.ibb.co/rfzH9w1S/Grufin-Aubergiste.png"
+    "npc:Grufin l'aubergiste": "https://i.ibb.co/rfzH9w1S/Grufin-Aubergiste.png",
+    "npc:Grolban Pisse-Tonneau": "https://i.ibb.co/wv8K1SB/Grolban-Pisse-Tonneau.png",
+    "npc:Lord Erathian Velorme": "https://i.ibb.co/7JC98YYB/Lord-Erathian-Velorme.png"
   },
   "meta": {
-    "total_images": 260,
-    "exported_date": "2025-11-17",
+    "total_images": 262,
+    "exported_date": "2025-11-18",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
 }

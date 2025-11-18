@@ -22,5 +22,17 @@
     "image": "",
     "description": "Connais bien ses clients, partages des histoires.",
     "interactions": "- Indique la position des autres NPC\n<br><br>\n\n- Vend aux PJs (forêt finis) un coffre pour 100 eclats pour mettre n'importe quel objet, sécurisé.\n<br><br>\n\n-Après la forêt, parle de vieille tour ou mine comme prochain lieu, les joueurs décident"
+  },
+  {
+    "nom": "Grolban Pisse-Tonneau",
+    "image": "",
+    "description": "Toujours soul, incohérent",
+    "interactions": "« Les elfes… hips… y boivent jamais. C’est pour ça qu’y sont si tristes ! » <br>\n« L’aubergiste me doit cinq pintes… hips… ou j’lui dois cinq pièces… mais personne n’a envie de faire les comptes. »<br>\n« Le monde tourne… hips… ou alors c’est moi… ou alors c’est la table… ou alors laisse-moi tranquille. »"
+  },
+  {
+    "nom": "Lord Erathian Velorme",
+    "image": "",
+    "description": "Une coupe de vin à la main, l'air hautin, riche",
+    "interactions": "- Vend les objets de base / rachetes les objets<br><br>\n\n- Une fois foret terminé, permet de faire des commandes auprés de l'amazone, son employée."
   }
 ]
