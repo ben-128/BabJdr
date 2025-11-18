@@ -103,35 +103,54 @@
      * Open modal by ID or element
      */
     openModal(modalId) {
+      console.log('🔓 BaseModal.openModal() appelée avec:', modalId);
+      console.log('Type de modalId:', typeof modalId);
+
       let modal;
 
       if (typeof modalId === 'string') {
         // Try using JdrApp utils first, fallback to native querySelector
         modal = (JdrApp?.utils?.dom?.$ && JdrApp.utils.dom.$(`#${modalId}`))
           || document.querySelector(`#${modalId}`);
+        console.log('Modal trouvé par ID:', !!modal);
       } else {
         modal = modalId;
+        console.log('Modal passé directement:', !!modal);
       }
+
+      console.log('Modal:', modal);
+      console.log('Modal.classList existe?', !!modal?.classList);
+      console.log('Modal.tagName:', modal?.tagName);
+      console.log('Modal ID:', modal?.id);
+      console.log('Modal current display:', modal?.style?.display);
+      console.log('Modal current classes:', modal?.className);
 
       if (modal && modal.classList) {
         if (modal.tagName === 'DIALOG') {
+          console.log('→ Modal est un DIALOG, appel de showModal()');
           modal.showModal();
         } else {
+          console.log('→ Modal est un DIV, ajout de visible et flex');
           modal.classList.add('visible');
           modal.style.display = 'flex';
+          console.log('→ Classes après ajout:', modal.className);
+          console.log('→ Display après ajout:', modal.style.display);
         }
-        
+
         // Force background and opacity on modal
         modal.style.setProperty('background', 'rgba(0, 0, 0, 0.7)', 'important');
         modal.style.setProperty('opacity', '1', 'important');
-        
+        console.log('→ Background et opacity forcés sur modal');
+
         // Force background on modal content
         const modalContent = modal.querySelector('.modal-content, .modal-body');
+        console.log('→ modalContent trouvé?', !!modalContent);
         if (modalContent) {
           modalContent.style.setProperty('background', 'rgb(248, 246, 240)', 'important');
           modalContent.style.setProperty('opacity', '1', 'important');
+          console.log('→ Background et opacity forcés sur modalContent');
         }
-        
+
         // Focus first input element
         const firstInput = modal.querySelector('input, textarea, select');
         if (firstInput) {
@@ -139,7 +158,11 @@
         }
 
         // Emit event
+        console.log('→ Émission de l\'événement MODAL_OPENED');
         EventBus.emit(Events.MODAL_OPENED, { modal, modalId });
+        console.log('✅ BaseModal.openModal() terminé avec succès');
+      } else {
+        console.error('❌ Modal non trouvé ou sans classList');
       }
     },
 

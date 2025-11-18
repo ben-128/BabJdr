@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-11-18T12:26:51.368Z by JdrBab Build System -->
+<!-- Generated on 2025-11-18T12:28:30.261Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17137,7 +17137,6 @@ select:focus {
     },
 
     async switchToPlaylist(playlistId) {
-      console.log('🎵 Switching to playlist:', playlistId);
       if (this.currentPlaylist === playlistId) return;
 
       this.stop();
@@ -17145,8 +17144,6 @@ select:focus {
       this.currentTrackIndex = 0;
 
       const playlist = this.config.playlists[playlistId];
-      console.log('📋 Playlist:', playlist);
-      console.log('📋 Tracks:', playlist?.tracks);
 
       if (playlist && this.isEnabled) {
         await this.loadTrack(playlist.tracks[0]);
@@ -17174,28 +17171,24 @@ select:focus {
 
         // Gestion des événements audio
         this.currentAudio.addEventListener('ended', () => {
-          console.log('🏁 Audio ended - moving to next track');
           this.isPlaying = false;
           this.playNext();
         });
 
         this.currentAudio.addEventListener('play', () => {
-          console.log('▶️ Audio play event fired');
           this.isPlaying = true;
           this.updateUI();
           this.updateAudioPageUI();
         });
 
         this.currentAudio.addEventListener('pause', () => {
-          console.log('⏸️ Audio pause event fired');
           this.isPlaying = false;
           this.updateUI();
           this.updateAudioPageUI();
         });
 
         this.currentAudio.addEventListener('error', (e) => {
-          console.error('🚫 Audio loading failed:', fullUrl, e);
-          console.error('Error details:', e.target.error);
+          console.error('Audio loading failed:', fullUrl, e);
           this.isPlaying = false;
           this.playNext();
         });
@@ -17314,7 +17307,6 @@ select:focus {
     },
 
     pause() {
-      console.log('⏸️ pause() called - isPlaying:', this.isPlaying);
       if (this.currentAudio) {
         this.currentAudio.pause();
         this.isPlaying = false;
@@ -17324,7 +17316,6 @@ select:focus {
     },
 
     stop() {
-      console.log('⏹️ stop() called');
       if (this.currentAudio) {
         this.currentAudio.pause();
         this.currentAudio.currentTime = 0;
@@ -17335,7 +17326,6 @@ select:focus {
     },
 
     toggle() {
-      console.log('🔄 toggle() called - isPlaying:', this.isPlaying);
       if (this.isPlaying) {
         this.pause();
       } else {
@@ -17349,14 +17339,8 @@ select:focus {
       const playlist = this.config.playlists[this.currentPlaylist];
       if (!playlist || !playlist.tracks.length) return;
 
-      console.log('🔊 playNext() - Current index:', this.currentTrackIndex);
-      console.log('🔊 Playlist tracks:', playlist.tracks);
-
       // Toujours passer à la piste suivante en ordre séquentiel
       this.currentTrackIndex = (this.currentTrackIndex + 1) % playlist.tracks.length;
-
-      console.log('🔊 New index:', this.currentTrackIndex);
-      console.log('🔊 Loading track:', playlist.tracks[this.currentTrackIndex]);
 
       this.loadTrack(playlist.tracks[this.currentTrackIndex]);
       this.updateAudioPageUI(); // Mettre à jour l'affichage du titre
@@ -17524,12 +17508,10 @@ select:focus {
 
       // Éviter les appels multiples simultanés
       if (this.isPopulating) {
-        console.log('⚠️ populateAudioPage() already running, skipping');
         return;
       }
 
       this.isPopulating = true;
-      console.log('🎨 populateAudioPage() starting');
 
       // Fonctions globales simples
       window.audioToggle = () => {
@@ -30518,35 +30500,54 @@ select:focus {
      * Open modal by ID or element
      */
     openModal(modalId) {
+      console.log('🔓 BaseModal.openModal() appelée avec:', modalId);
+      console.log('Type de modalId:', typeof modalId);
+
       let modal;
 
       if (typeof modalId === 'string') {
         // Try using JdrApp utils first, fallback to native querySelector
         modal = (JdrApp?.utils?.dom?.$ && JdrApp.utils.dom.$(`#${modalId}`))
           || document.querySelector(`#${modalId}`);
+        console.log('Modal trouvé par ID:', !!modal);
       } else {
         modal = modalId;
+        console.log('Modal passé directement:', !!modal);
       }
+
+      console.log('Modal:', modal);
+      console.log('Modal.classList existe?', !!modal?.classList);
+      console.log('Modal.tagName:', modal?.tagName);
+      console.log('Modal ID:', modal?.id);
+      console.log('Modal current display:', modal?.style?.display);
+      console.log('Modal current classes:', modal?.className);
 
       if (modal && modal.classList) {
         if (modal.tagName === 'DIALOG') {
+          console.log('→ Modal est un DIALOG, appel de showModal()');
           modal.showModal();
         } else {
+          console.log('→ Modal est un DIV, ajout de visible et flex');
           modal.classList.add('visible');
           modal.style.display = 'flex';
+          console.log('→ Classes après ajout:', modal.className);
+          console.log('→ Display après ajout:', modal.style.display);
         }
-        
+
         // Force background and opacity on modal
         modal.style.setProperty('background', 'rgba(0, 0, 0, 0.7)', 'important');
         modal.style.setProperty('opacity', '1', 'important');
-        
+        console.log('→ Background et opacity forcés sur modal');
+
         // Force background on modal content
         const modalContent = modal.querySelector('.modal-content, .modal-body');
+        console.log('→ modalContent trouvé?', !!modalContent);
         if (modalContent) {
           modalContent.style.setProperty('background', 'rgb(248, 246, 240)', 'important');
           modalContent.style.setProperty('opacity', '1', 'important');
+          console.log('→ Background et opacity forcés sur modalContent');
         }
-        
+
         // Focus first input element
         const firstInput = modal.querySelector('input, textarea, select');
         if (firstInput) {
@@ -30554,7 +30555,11 @@ select:focus {
         }
 
         // Emit event
+        console.log('→ Émission de l\'événement MODAL_OPENED');
         EventBus.emit(Events.MODAL_OPENED, { modal, modalId });
+        console.log('✅ BaseModal.openModal() terminé avec succès');
+      } else {
+        console.error('❌ Modal non trouvé ou sans classList');
       }
     },
 
