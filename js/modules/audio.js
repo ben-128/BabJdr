@@ -16,6 +16,7 @@
     volume: 0.3,
     config: null,
     isEnabled: false,
+    isPopulating: false, // Flag pour éviter les appels multiples de populateAudioPage
     
     async init() {
       try {
@@ -172,7 +173,6 @@
     },
 
     async switchToPlaylist(playlistId) {
-      console.log('🎵 Switching to playlist:', playlistId);
       if (this.currentPlaylist === playlistId) return;
 
       this.stop();
@@ -180,8 +180,6 @@
       this.currentTrackIndex = 0;
 
       const playlist = this.config.playlists[playlistId];
-      console.log('📋 Playlist:', playlist);
-      console.log('📋 Tracks:', playlist?.tracks);
 
       if (playlist && this.isEnabled) {
         await this.loadTrack(playlist.tracks[0]);
@@ -209,28 +207,24 @@
 
         // Gestion des événements audio
         this.currentAudio.addEventListener('ended', () => {
-          console.log('🏁 Audio ended - moving to next track');
           this.isPlaying = false;
           this.playNext();
         });
 
         this.currentAudio.addEventListener('play', () => {
-          console.log('▶️ Audio play event fired');
           this.isPlaying = true;
           this.updateUI();
           this.updateAudioPageUI();
         });
 
         this.currentAudio.addEventListener('pause', () => {
-          console.log('⏸️ Audio pause event fired');
           this.isPlaying = false;
           this.updateUI();
           this.updateAudioPageUI();
         });
 
         this.currentAudio.addEventListener('error', (e) => {
-          console.error('🚫 Audio loading failed:', fullUrl, e);
-          console.error('Error details:', e.target.error);
+          console.error('Audio loading failed:', fullUrl, e);
           this.isPlaying = false;
           this.playNext();
         });
@@ -349,7 +343,6 @@
     },
 
     pause() {
-      console.log('⏸️ pause() called - isPlaying:', this.isPlaying);
       if (this.currentAudio) {
         this.currentAudio.pause();
         this.isPlaying = false;
@@ -359,7 +352,6 @@
     },
 
     stop() {
-      console.log('⏹️ stop() called');
       if (this.currentAudio) {
         this.currentAudio.pause();
         this.currentAudio.currentTime = 0;
@@ -370,7 +362,6 @@
     },
 
     toggle() {
-      console.log('🔄 toggle() called - isPlaying:', this.isPlaying);
       if (this.isPlaying) {
         this.pause();
       } else {
@@ -384,14 +375,8 @@
       const playlist = this.config.playlists[this.currentPlaylist];
       if (!playlist || !playlist.tracks.length) return;
 
-      console.log('🔊 playNext() - Current index:', this.currentTrackIndex);
-      console.log('🔊 Playlist tracks:', playlist.tracks);
-
       // Toujours passer à la piste suivante en ordre séquentiel
       this.currentTrackIndex = (this.currentTrackIndex + 1) % playlist.tracks.length;
-
-      console.log('🔊 New index:', this.currentTrackIndex);
-      console.log('🔊 Loading track:', playlist.tracks[this.currentTrackIndex]);
 
       this.loadTrack(playlist.tracks[this.currentTrackIndex]);
       this.updateAudioPageUI(); // Mettre à jour l'affichage du titre
@@ -557,6 +542,13 @@
         return;
       }
 
+      // Éviter les appels multiples simultanés
+      if (this.isPopulating) {
+        return;
+      }
+
+      this.isPopulating = true;
+
       // Fonctions globales simples
       window.audioToggle = () => {
         this.toggleEnabled();
@@ -620,35 +612,45 @@
         `;
 
         // Ajouter les event listeners APRÈS avoir créé le HTML
+        // Utiliser { once: false } n'est pas suffisant, il faut cloner les boutons pour retirer tous les listeners
         setTimeout(() => {
           const toggleBtn = document.getElementById('toggle-btn');
           const playPauseBtn = document.getElementById('play-pause-btn');
           const nextBtn = document.getElementById('next-btn');
           const volumeSlider = document.getElementById('volume-slider');
 
+          // Cloner et remplacer pour retirer tous les event listeners existants
           if (toggleBtn) {
-            toggleBtn.addEventListener('click', (e) => {
+            const newToggleBtn = toggleBtn.cloneNode(true);
+            toggleBtn.parentNode.replaceChild(newToggleBtn, toggleBtn);
+            newToggleBtn.addEventListener('click', (e) => {
               e.preventDefault();
               window.audioToggle();
             });
           }
 
           if (playPauseBtn) {
-            playPauseBtn.addEventListener('click', (e) => {
+            const newPlayPauseBtn = playPauseBtn.cloneNode(true);
+            playPauseBtn.parentNode.replaceChild(newPlayPauseBtn, playPauseBtn);
+            newPlayPauseBtn.addEventListener('click', (e) => {
               e.preventDefault();
               window.audioPlayPause();
             });
           }
 
           if (nextBtn) {
-            nextBtn.addEventListener('click', (e) => {
+            const newNextBtn = nextBtn.cloneNode(true);
+            nextBtn.parentNode.replaceChild(newNextBtn, nextBtn);
+            newNextBtn.addEventListener('click', (e) => {
               e.preventDefault();
               window.audioNext();
             });
           }
 
           if (volumeSlider) {
-            volumeSlider.addEventListener('input', (e) => {
+            const newVolumeSlider = volumeSlider.cloneNode(true);
+            volumeSlider.parentNode.replaceChild(newVolumeSlider, volumeSlider);
+            newVolumeSlider.addEventListener('input', (e) => {
               window.audioVolume(e.target.value);
             });
           }
@@ -708,6 +710,10 @@
         }, 50);
       }
 
+      // Libérer le flag après un court délai pour s'assurer que tous les setTimeout sont terminés
+      setTimeout(() => {
+        this.isPopulating = false;
+      }, 100);
     },
 
     // Obtenir le nom de la piste actuelle
