@@ -85,8 +85,7 @@
                 return `${folder}/${file}`;
               }
             }),
-            loop: true,
-            shuffle: ['Auberge', 'Voyage', 'Autre'].includes(folder)
+            loop: true
           };
         });
         
@@ -173,13 +172,17 @@
     },
 
     async switchToPlaylist(playlistId) {
+      console.log('🎵 Switching to playlist:', playlistId);
       if (this.currentPlaylist === playlistId) return;
-      
+
       this.stop();
       this.currentPlaylist = playlistId;
       this.currentTrackIndex = 0;
-      
+
       const playlist = this.config.playlists[playlistId];
+      console.log('📋 Playlist:', playlist);
+      console.log('📋 Tracks:', playlist?.tracks);
+
       if (playlist && this.isEnabled) {
         await this.loadTrack(playlist.tracks[0]);
         this.updateUI();
@@ -202,15 +205,33 @@
         this.currentAudio.volume = this.volume;
         this.currentAudio.preload = 'auto';
         this.currentAudio.crossOrigin = 'anonymous';
-        
+        this.currentAudio.loop = false; // S'assurer que l'audio ne boucle pas
+
         // Gestion des événements audio
         this.currentAudio.addEventListener('ended', () => {
+          console.log('🏁 Audio ended - moving to next track');
+          this.isPlaying = false;
           this.playNext();
         });
-        
+
+        this.currentAudio.addEventListener('play', () => {
+          console.log('▶️ Audio play event fired');
+          this.isPlaying = true;
+          this.updateUI();
+          this.updateAudioPageUI();
+        });
+
+        this.currentAudio.addEventListener('pause', () => {
+          console.log('⏸️ Audio pause event fired');
+          this.isPlaying = false;
+          this.updateUI();
+          this.updateAudioPageUI();
+        });
+
         this.currentAudio.addEventListener('error', (e) => {
           console.error('🚫 Audio loading failed:', fullUrl, e);
           console.error('Error details:', e.target.error);
+          this.isPlaying = false;
           this.playNext();
         });
 
@@ -328,23 +349,28 @@
     },
 
     pause() {
+      console.log('⏸️ pause() called - isPlaying:', this.isPlaying);
       if (this.currentAudio) {
         this.currentAudio.pause();
         this.isPlaying = false;
         this.updateUI();
+        this.updateAudioPageUI();
       }
     },
 
     stop() {
+      console.log('⏹️ stop() called');
       if (this.currentAudio) {
         this.currentAudio.pause();
         this.currentAudio.currentTime = 0;
         this.isPlaying = false;
         this.updateUI();
+        this.updateAudioPageUI();
       }
     },
 
     toggle() {
+      console.log('🔄 toggle() called - isPlaying:', this.isPlaying);
       if (this.isPlaying) {
         this.pause();
       } else {
@@ -354,15 +380,18 @@
 
     playNext() {
       if (!this.currentPlaylist) return;
-      
+
       const playlist = this.config.playlists[this.currentPlaylist];
       if (!playlist || !playlist.tracks.length) return;
 
-      if (playlist.shuffle) {
-        this.currentTrackIndex = Math.floor(Math.random() * playlist.tracks.length);
-      } else {
-        this.currentTrackIndex = (this.currentTrackIndex + 1) % playlist.tracks.length;
-      }
+      console.log('🔊 playNext() - Current index:', this.currentTrackIndex);
+      console.log('🔊 Playlist tracks:', playlist.tracks);
+
+      // Toujours passer à la piste suivante en ordre séquentiel
+      this.currentTrackIndex = (this.currentTrackIndex + 1) % playlist.tracks.length;
+
+      console.log('🔊 New index:', this.currentTrackIndex);
+      console.log('🔊 Loading track:', playlist.tracks[this.currentTrackIndex]);
 
       this.loadTrack(playlist.tracks[this.currentTrackIndex]);
       this.updateAudioPageUI(); // Mettre à jour l'affichage du titre
@@ -370,15 +399,12 @@
 
     playPrevious() {
       if (!this.currentPlaylist) return;
-      
+
       const playlist = this.config.playlists[this.currentPlaylist];
       if (!playlist || !playlist.tracks.length) return;
 
-      if (playlist.shuffle) {
-        this.currentTrackIndex = Math.floor(Math.random() * playlist.tracks.length);
-      } else {
-        this.currentTrackIndex = this.currentTrackIndex > 0 ? this.currentTrackIndex - 1 : playlist.tracks.length - 1;
-      }
+      // Toujours passer à la piste précédente en ordre séquentiel
+      this.currentTrackIndex = this.currentTrackIndex > 0 ? this.currentTrackIndex - 1 : playlist.tracks.length - 1;
 
       this.loadTrack(playlist.tracks[this.currentTrackIndex]);
       this.updateAudioPageUI(); // Mettre à jour l'affichage du titre

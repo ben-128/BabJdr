@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-11-18T12:08:05.546Z by JdrBab Build System -->
+<!-- Generated on 2025-11-18T12:21:04.816Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11250,7 +11250,7 @@ select:focus {
       "type": "card",
       "id": "etapes-creation",
       "title": "Étapes de création",
-      "content": "<ol><li>Choisir une <strong>classe</strong> puis une <strong>sous‑classe</strong> : <a href=\"#/guerrier\" style=\"color: var(--accent); text-decoration: underline;\">Guerrier</a>.\n</li><li>Tirer au sort (avec un d6) une carte du destin (<a href=\"javascript:void(0);\" data-action=\"show-cartes-destin\" style=\"color: var(--accent); text-decoration: underline; cursor: pointer;\">Lien ici</a>)\n</li><li>Choisir un <strong>élément</strong> d'affiliation : <a href=\"#/elements\" style=\"color: var(--accent); text-decoration: underline;\">Éléments</a>.\n</li><li>Choisir les <strong>dons</strong> (avec 2 points de dons, généraux et/ou spécifique à la classe) : <a href=\"#/dons-g-n-raux\" style=\"color: var(--accent); text-decoration: underline;\">Généraux (dons)</a>.\n</li><li>Choisir l'<strong>équipement</strong> de départ (avec 100 éclats) : <a href=\"#/collections-objets\" style=\"color: var(--accent); text-decoration: underline;\">Collections d'Objets</a>.\n</li><li>Définir le <strong>nom</strong>, l'<strong>histoire</strong> et l'<strong>apparence</strong>.</li><li>Remplir sa feuille de personnage (voir section ci-dessous).</li></ol>",
+      "content": "<ol><li>Choisir une <strong>classe</strong> puis une <strong>sous‑classe</strong> : <a href=\"#/guerrier\" style=\"color: var(--accent); text-decoration: underline;\">Guerrier</a>.\n</li><li>Tirer au sort (avec un d6) une carte du destin (<a href=\"#\" onclick=\"event.preventDefault(); ModalManager.showCartesDestinModal(); return false;\" style=\"color: var(--accent); text-decoration: underline;\">Lien ici</a>)\n</li><li>Choisir un <strong>élément</strong> d'affiliation : <a href=\"#/elements\" style=\"color: var(--accent); text-decoration: underline;\">Éléments</a>.\n</li><li>Choisir les <strong>dons</strong> (avec 2 points de dons, généraux et/ou spécifique à la classe) : <a href=\"#/dons-g-n-raux\" style=\"color: var(--accent); text-decoration: underline;\">Généraux (dons)</a>.\n</li><li>Choisir l'<strong>équipement</strong> de départ (avec 100 éclats) : <a href=\"#/collections-objets\" style=\"color: var(--accent); text-decoration: underline;\">Collections d'Objets</a>.\n</li><li>Définir le <strong>nom</strong>, l'<strong>histoire</strong> et l'<strong>apparence</strong>.</li><li>Remplir sa feuille de personnage (voir section ci-dessous).</li></ol>",
       "deletable": true,
       "sectionName": "Étapes de création"
     },
@@ -17049,8 +17049,7 @@ select:focus {
                 return `${folder}/${file}`;
               }
             }),
-            loop: true,
-            shuffle: ['Auberge', 'Voyage', 'Autre'].includes(folder)
+            loop: true
           };
         });
         
@@ -17137,13 +17136,17 @@ select:focus {
     },
 
     async switchToPlaylist(playlistId) {
+      console.log('🎵 Switching to playlist:', playlistId);
       if (this.currentPlaylist === playlistId) return;
-      
+
       this.stop();
       this.currentPlaylist = playlistId;
       this.currentTrackIndex = 0;
-      
+
       const playlist = this.config.playlists[playlistId];
+      console.log('📋 Playlist:', playlist);
+      console.log('📋 Tracks:', playlist?.tracks);
+
       if (playlist && this.isEnabled) {
         await this.loadTrack(playlist.tracks[0]);
         this.updateUI();
@@ -17166,15 +17169,33 @@ select:focus {
         this.currentAudio.volume = this.volume;
         this.currentAudio.preload = 'auto';
         this.currentAudio.crossOrigin = 'anonymous';
-        
+        this.currentAudio.loop = false; // S'assurer que l'audio ne boucle pas
+
         // Gestion des événements audio
         this.currentAudio.addEventListener('ended', () => {
+          console.log('🏁 Audio ended - moving to next track');
+          this.isPlaying = false;
           this.playNext();
         });
-        
+
+        this.currentAudio.addEventListener('play', () => {
+          console.log('▶️ Audio play event fired');
+          this.isPlaying = true;
+          this.updateUI();
+          this.updateAudioPageUI();
+        });
+
+        this.currentAudio.addEventListener('pause', () => {
+          console.log('⏸️ Audio pause event fired');
+          this.isPlaying = false;
+          this.updateUI();
+          this.updateAudioPageUI();
+        });
+
         this.currentAudio.addEventListener('error', (e) => {
           console.error('🚫 Audio loading failed:', fullUrl, e);
           console.error('Error details:', e.target.error);
+          this.isPlaying = false;
           this.playNext();
         });
 
@@ -17292,23 +17313,28 @@ select:focus {
     },
 
     pause() {
+      console.log('⏸️ pause() called - isPlaying:', this.isPlaying);
       if (this.currentAudio) {
         this.currentAudio.pause();
         this.isPlaying = false;
         this.updateUI();
+        this.updateAudioPageUI();
       }
     },
 
     stop() {
+      console.log('⏹️ stop() called');
       if (this.currentAudio) {
         this.currentAudio.pause();
         this.currentAudio.currentTime = 0;
         this.isPlaying = false;
         this.updateUI();
+        this.updateAudioPageUI();
       }
     },
 
     toggle() {
+      console.log('🔄 toggle() called - isPlaying:', this.isPlaying);
       if (this.isPlaying) {
         this.pause();
       } else {
@@ -17318,15 +17344,18 @@ select:focus {
 
     playNext() {
       if (!this.currentPlaylist) return;
-      
+
       const playlist = this.config.playlists[this.currentPlaylist];
       if (!playlist || !playlist.tracks.length) return;
 
-      if (playlist.shuffle) {
-        this.currentTrackIndex = Math.floor(Math.random() * playlist.tracks.length);
-      } else {
-        this.currentTrackIndex = (this.currentTrackIndex + 1) % playlist.tracks.length;
-      }
+      console.log('🔊 playNext() - Current index:', this.currentTrackIndex);
+      console.log('🔊 Playlist tracks:', playlist.tracks);
+
+      // Toujours passer à la piste suivante en ordre séquentiel
+      this.currentTrackIndex = (this.currentTrackIndex + 1) % playlist.tracks.length;
+
+      console.log('🔊 New index:', this.currentTrackIndex);
+      console.log('🔊 Loading track:', playlist.tracks[this.currentTrackIndex]);
 
       this.loadTrack(playlist.tracks[this.currentTrackIndex]);
       this.updateAudioPageUI(); // Mettre à jour l'affichage du titre
@@ -17334,15 +17363,12 @@ select:focus {
 
     playPrevious() {
       if (!this.currentPlaylist) return;
-      
+
       const playlist = this.config.playlists[this.currentPlaylist];
       if (!playlist || !playlist.tracks.length) return;
 
-      if (playlist.shuffle) {
-        this.currentTrackIndex = Math.floor(Math.random() * playlist.tracks.length);
-      } else {
-        this.currentTrackIndex = this.currentTrackIndex > 0 ? this.currentTrackIndex - 1 : playlist.tracks.length - 1;
-      }
+      // Toujours passer à la piste précédente en ordre séquentiel
+      this.currentTrackIndex = this.currentTrackIndex > 0 ? this.currentTrackIndex - 1 : playlist.tracks.length - 1;
 
       this.loadTrack(playlist.tracks[this.currentTrackIndex]);
       this.updateAudioPageUI(); // Mettre à jour l'affichage du titre
