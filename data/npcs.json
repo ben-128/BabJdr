@@ -64,5 +64,11 @@
     "image": "",
     "description": "Un silencieux, grand et fort. L'autre argneux, petit",
     "interactions": "???"
+  },
+  {
+    "nom": "Isara Cœur-de-Roc",
+    "image": "",
+    "description": "Peu locace, fiere, village décimé",
+    "interactions": "- Demande de parler avec Lord Erathian Velorme pour requetes dans zone précises.<br>\n- Parle de son village décimé, et de ses besoins en resources pour retrouver ses soeurs et leur venir en aide."
   }
 ]
