@@ -34,5 +34,35 @@
     "image": "",
     "description": "Une coupe de vin à la main, l'air hautin, riche",
     "interactions": "- Vend les objets de base / rachetes les objets<br><br>\n\n- Une fois foret terminé, permet de faire des commandes auprés de l'amazone, son employée."
+  },
+  {
+    "nom": "Lyrielle Vent-d’Aurore",
+    "image": "",
+    "description": "Calme, gentille",
+    "interactions": "Propose de changer la musique. <br>Prend les pourboires."
+  },
+  {
+    "nom": "Kael Fenraven",
+    "image": "",
+    "description": "Mysterieux, silencieux",
+    "interactions": "Donne des conseils de combat : \n\n<br><br>\n- Un enemis volant esquive souvent vos attaques. Mais certaines magies ou compétences permettent d'éviter cela.\n\n<br><br>\n\n-« Si tu ne connais pas l’élément de ton adversaire… frappe prudemment. Si tu le connais… frappe intelligemment. »\n\n<br><br>\n\n- « Si tu caches du pain, de l’eau et un couteau… tu vivras toujours un jour de plus que celui qui a caché un trésor. »\n\n<br><br>\n\n-« La potion que tu ne bois jamais est celle qui restera dans ton sac quand tu mourras. »"
+  },
+  {
+    "nom": "Bramousse Tournicorne",
+    "image": "",
+    "description": "Sage, seul, puit de connaissance historique",
+    "interactions": "<br>\n- Indique que son frère Filibert est dans une chambre à l'étage, qu'il peut analyser les objets communs dont ils ne connaissent pas la portée.\n\n<br><br>\n- donner tablette indique que ca vient des 12 sages. L’Empire des Anciens maîtrisait une magie colossale. Il semble y manquer des cristaux. Cela permettrait peut être de vaincre les créatures térifiantes qui ont surgis?"
+  },
+  {
+    "nom": "Filibert Tournicorne",
+    "image": "",
+    "description": "Joyeux, intéréssé par les objets en tout genre.",
+    "interactions": "Donner un objet inconnu =&gt; il donne sa fonction. Demande un pourboire (libre au joueur)"
+  },
+  {
+    "nom": "Borag et Snik",
+    "image": "",
+    "description": "Un silencieux, grand et fort. L'autre argneux, petit",
+    "interactions": "???"
   }
 ]

@@ -255,17 +255,22 @@
     "monster:AquaLezo": "https://i.ibb.co/Kp4WNJNZ/AquaLezo.png",
     "npc:Exemple de PNJ": "https://i.ibb.co/nqv7MnfN/Mirella-Aubergiste.png",
     "npc:Mirella l'Aubergiste": "https://i.ibb.co/gZDZyGzw/Mirella-Aubergiste.png",
-    "npc:Nouveau PNJ": "https://i.ibb.co/KxK3wNqr/Lord-Erathian-Velorme.png",
+    "npc:Nouveau PNJ": "https://i.ibb.co/Cp1f1Swj/Borag-et-Snik.png",
     "npc:Tavin le Facteur": "https://i.ibb.co/tMqM1dtC/Tavin-Facteur.png",
     "npc:Mirella la receptionniste": "https://i.ibb.co/gZDZyGzw/Mirella-Aubergiste.png",
     "npc:Branor le Bucheron": "https://i.ibb.co/5tyK5Pr/Branor-Bucheron.png",
     "npc:Grufin l'aubergiste": "https://i.ibb.co/rfzH9w1S/Grufin-Aubergiste.png",
     "npc:Grolban Pisse-Tonneau": "https://i.ibb.co/wv8K1SB/Grolban-Pisse-Tonneau.png",
-    "npc:Lord Erathian Velorme": "https://i.ibb.co/7JC98YYB/Lord-Erathian-Velorme.png"
+    "npc:Lord Erathian Velorme": "https://i.ibb.co/7JC98YYB/Lord-Erathian-Velorme.png",
+    "npc:Lyrielle Vent-d’Aurore": "https://i.ibb.co/9xsxxjt/Lyrielle-Vent-d-Aurore.png",
+    "npc:Kael Fenraven": "https://i.ibb.co/hFrHFP10/Kael-Fenraven.png",
+    "npc:Bramousse Tournicorne": "https://i.ibb.co/YTK7jfy9/Bramousse-Tournicorne.png",
+    "npc:Filibert Tournicorne": "https://i.ibb.co/yB66SHRc/Filibert-Tournicorne.png",
+    "npc:Borag et Snik": "https://i.ibb.co/Cp1f1Swj/Borag-et-Snik.png"
   },
   "meta": {
-    "total_images": 262,
-    "exported_date": "2025-11-18",
+    "total_images": 267,
+    "exported_date": "2025-11-19",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
 }
