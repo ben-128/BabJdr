@@ -245,19 +245,19 @@
         nom: { type: 'text', label: 'Nom', required: true },
         tags: { type: 'tags', label: 'Tags', required: true },
         image: { type: 'text', label: 'Image', required: false },
-        element: { 
-          type: 'select', 
-          label: "Élément d'affiliation", 
+        element: {
+          type: 'select',
+          label: "Élément d'affiliation",
           required: true,
           options: [
-            { value: 'Feu', label: '🔥 Feu' },
-            { value: 'Eau', label: '💧 Eau' },
-            { value: 'Terre', label: '🤎 Terre' },
-            { value: 'Air', label: '🟢 Air' },
-            { value: 'Lumiere', label: '☀️ Lumière' },
-            { value: 'Nuit', label: '⚫ Nuit' },
-            { value: 'Divin', label: '⚪ Divin' },
-            { value: 'Malefique', label: '🟣 Maléfique' }
+            { value: 'Feu', label: 'Feu' },
+            { value: 'Eau', label: 'Eau' },
+            { value: 'Terre', label: 'Terre' },
+            { value: 'Air', label: 'Air' },
+            { value: 'Lumière', label: 'Lumière' },
+            { value: 'Nuit', label: 'Nuit' },
+            { value: 'Divin', label: 'Divin' },
+            { value: 'Maléfique', label: 'Maléfique' }
           ]
         },
         pointsDeVie: { type: 'number', label: 'Points de vie', required: true },
@@ -470,14 +470,14 @@
   };
 
   window.ElementIcons = {
-    'Feu': '🔥',
-    'Eau': '💧',
-    'Terre': '🤎',
-    'Air': '🟢',
-    'Lumière': '☀️',
-    'Nuit': '⚫',
-    'Divin': '⚪',
-    'Maléfique': '🟣'
+    'Feu': '<img src="https://i.ibb.co/VWfKvNCL/element-Feu.png" alt="Feu" class="element-icon" style="width: 20px; height: 20px; vertical-align: middle;">',
+    'Eau': '<img src="https://i.ibb.co/bMVKwNQP/element-Eau.png" alt="Eau" class="element-icon" style="width: 20px; height: 20px; vertical-align: middle;">',
+    'Terre': '<img src="https://i.ibb.co/gLxnsvfg/element-Terre.png" alt="Terre" class="element-icon" style="width: 20px; height: 20px; vertical-align: middle;">',
+    'Air': '<img src="https://i.ibb.co/W484kM90/element-Air.png" alt="Air" class="element-icon" style="width: 20px; height: 20px; vertical-align: middle;">',
+    'Lumière': '<img src="https://i.ibb.co/pjmcYV72/element-Lumi-re.png" alt="Lumière" class="element-icon" style="width: 20px; height: 20px; vertical-align: middle;">',
+    'Nuit': '<img src="https://i.ibb.co/b5qK7czM/element-Nuit.png" alt="Nuit" class="element-icon" style="width: 20px; height: 20px; vertical-align: middle;">',
+    'Divin': '<img src="https://i.ibb.co/rKYgZ4Yp/element-Divin.png" alt="Divin" class="element-icon" style="width: 20px; height: 20px; vertical-align: middle;">',
+    'Maléfique': '<img src="https://i.ibb.co/SDD5KX34/element-Mal-fique.png" alt="Maléfique" class="element-icon" style="width: 20px; height: 20px; vertical-align: middle;">'
   };
 
 })();
