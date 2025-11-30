@@ -590,8 +590,8 @@
           "max": 30,
           "objet": {
             "type": "reference",
-            "numero": 41,
-            "nom": "Collier terrestre"
+            "numero": 60,
+            "nom": "Sceptre de Durnak, dieu de la terre"
           }
         }
       ]
@@ -728,8 +728,8 @@
           "max": 30,
           "objet": {
             "type": "reference",
-            "numero": 39,
-            "nom": "Bouclier de la forêt"
+            "numero": 41,
+            "nom": "Collier terrestre"
           }
         }
       ]

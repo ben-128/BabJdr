@@ -52,7 +52,7 @@
         "Deux mains",
         "Baton"
       ],
-      "effet": "<strong>Dégâts: </strong> Inflige (2  + Force) points de dégâts physiques.\n<br> <strong>Effet: </strong> Si le bâton a été porté toute la journée, permet de récupérer 5 points de vie lors d'un repos long.",
+      "effet": "<strong>Dégâts: </strong> Inflige (2  + Force) points de dégâts physiques.\n<br> <strong>Effet: </strong> Si le bâton a été porté toute la journée (sanschangement), permet de récupérer 5 points de vie lors d'un repos long.",
       "prix": "🔷 <strong>Prix:</strong> 5",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -766,6 +766,21 @@
       "effet": "<strong>Dégâts: </strong> Inflige (5  + Force) points de dégâts physiques.\n<br> <strong>Effet: </strong> Permet de traverser les terrains difficiles sans pénalité de vitesse.",
       "prix": "🔷 <strong>Prix:</strong> 90",
       "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Sceptre de Durnak, dieu de la terre",
+      "numero": 60,
+      "image": "",
+      "description": "Description de l'objet.",
+      "tags": [
+        "Arme",
+        "Une main",
+        "Baton",
+        "Légendaire"
+      ],
+      "effet": "<strong>Dégâts: </strong> Inflige (5  + Force) points de dégâts physiques. <br>\nL'arme est imprégnée de 5 points de dégâts d'élément <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>.\n<br><br>\n <strong>Effet: </strong> Chaque coup effectué avec l'arme restaure 2 points de vie et 3 points de mana.",
+      "prix": "🔷 <strong>Prix:</strong> ?",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     }
   ],
   "filterSettings": {
@@ -806,7 +821,8 @@
       "Accessoire",
       "Composant",
       "Magie",
-      "Main secondaire"
+      "Main secondaire",
+      "Légendaire"
     ]
   }
 }
