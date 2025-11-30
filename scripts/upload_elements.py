@@ -7,7 +7,9 @@ import os
 import json
 
 API_KEY = '06a98f5c0c2dad952e6ab94b03040f36'
-ELEMENTS_DIR = os.path.join(os.path.dirname(__file__), 'elements')
+PROJECT_ROOT = os.path.dirname(os.path.dirname(__file__))
+ELEMENTS_DIR = os.path.join(PROJECT_ROOT, 'data', 'images', 'Autre', 'elements')
+OUTPUT_JSON = os.path.join(PROJECT_ROOT, 'data', 'element_urls.json')
 
 # Mapping des fichiers vers les noms d'éléments
 elements = {
@@ -62,6 +64,6 @@ for element, url in uploaded_urls.items():
 print("};")
 
 # Sauvegarder les URLs
-with open(os.path.join(os.path.dirname(__file__), 'element_urls.json'), 'w', encoding='utf-8') as f:
+with open(OUTPUT_JSON, 'w', encoding='utf-8') as f:
     json.dump(uploaded_urls, f, ensure_ascii=False, indent=2)
-print(f"\nURLs sauvegardées dans element_urls.json")
+print(f"\nURLs sauvegardees dans {OUTPUT_JSON}")
