@@ -114,8 +114,12 @@
         { name: 'Critique', icon: '⚡', description: 'Chances de coup critique' }
       ];
 
+      // Store icons in a map for retrieval on click
+      const iconsMap = {};
+      statsIcons.forEach(stat => { iconsMap[stat.name] = stat.icon; });
+
       const statsHTML = statsIcons.map(stat => `
-        <div class="stat-icon-item" data-stat-name="${stat.name}" data-stat-icon="${stat.icon}">
+        <div class="stat-icon-item" data-stat-name="${stat.name}">
           <div class="stat-icon-display">${stat.icon}</div>
           <div class="stat-icon-info">
             <div class="stat-icon-name">${stat.name}</div>
@@ -188,7 +192,8 @@
       modal.addEventListener('click', (e) => {
         const statItem = e.target.closest('.stat-icon-item');
         if (statItem) {
-          const statIcon = statItem.dataset.statIcon;
+          const statName = statItem.dataset.statName;
+          const statIcon = iconsMap[statName];
 
           // Copy just the icon to clipboard
           UIUtilities.copyToClipboard(statIcon);
