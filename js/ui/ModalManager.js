@@ -99,12 +99,12 @@
      */
     createStatsIconsModal() {
       const statsIcons = [
-        { name: 'Force', icon: '<img src="https://i.ibb.co/23cGYFvZ/stat-Force.png" alt="Force" style="width: 18px; height: 18px; vertical-align: middle;">', description: 'Améliore les dégâts physiques' },
-        { name: 'Endurance', icon: '<img src="https://i.ibb.co/67ZW01Q7/stat-Endurance.png" alt="Endurance" style="width: 18px; height: 18px; vertical-align: middle;">', description: 'Détermine les points de vie maximum' },
-        { name: 'Agilité', icon: '<img src="https://i.ibb.co/Ng9TzjZL/stat-Agilit.png" alt="Agilité" style="width: 18px; height: 18px; vertical-align: middle;">', description: 'Améliore esquive, critique et initiative' },
-        { name: 'Intelligence', icon: '<img src="https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png" alt="Intelligence" style="width: 18px; height: 18px; vertical-align: middle;">', description: 'Augmente la puissance des sorts' },
-        { name: 'Volonté', icon: '<img src="https://i.ibb.co/B2BCGP6T/stat-Volont.png" alt="Volonté" style="width: 18px; height: 18px; vertical-align: middle;">', description: 'Détermine le mana maximum' },
-        { name: 'Chance', icon: '<img src="https://i.ibb.co/HfthhzSF/stat-Chance.png" alt="Chance" style="width: 18px; height: 18px; vertical-align: middle;">', description: 'Améliore la fortune et les critiques' },
+        { name: 'Force', icon: '<img src="https://i.ibb.co/23cGYFvZ/stat-Force.png" alt="Force" style="width: 24px; height: 24px; vertical-align: middle;">', description: 'Améliore les dégâts physiques' },
+        { name: 'Endurance', icon: '<img src="https://i.ibb.co/67ZW01Q7/stat-Endurance.png" alt="Endurance" style="width: 24px; height: 24px; vertical-align: middle;">', description: 'Détermine les points de vie maximum' },
+        { name: 'Agilité', icon: '<img src="https://i.ibb.co/Ng9TzjZL/stat-Agilit.png" alt="Agilité" style="width: 24px; height: 24px; vertical-align: middle;">', description: 'Améliore esquive, critique et initiative' },
+        { name: 'Intelligence', icon: '<img src="https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png" alt="Intelligence" style="width: 24px; height: 24px; vertical-align: middle;">', description: 'Augmente la puissance des sorts' },
+        { name: 'Volonté', icon: '<img src="https://i.ibb.co/B2BCGP6T/stat-Volont.png" alt="Volonté" style="width: 24px; height: 24px; vertical-align: middle;">', description: 'Détermine le mana maximum' },
+        { name: 'Chance', icon: '<img src="https://i.ibb.co/HfthhzSF/stat-Chance.png" alt="Chance" style="width: 24px; height: 24px; vertical-align: middle;">', description: 'Améliore la fortune et les critiques' },
         { name: 'Initiative', icon: '⚡', description: 'Ordre des tours de combat' },
         { name: 'Fortune', icon: '🍀', description: 'Améliore les événements de chance' },
         { name: 'Vie', icon: '❤️', description: 'Points de vie actuels' },
