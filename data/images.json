@@ -267,10 +267,11 @@
     "npc:Bramousse Tournicorne": "https://i.ibb.co/YTK7jfy9/Bramousse-Tournicorne.png",
     "npc:Filibert Tournicorne": "https://i.ibb.co/yB66SHRc/Filibert-Tournicorne.png",
     "npc:Borag et Snik": "https://i.ibb.co/Cp1f1Swj/Borag-et-Snik.png",
-    "npc:Isara Cœur-de-Roc": "https://i.ibb.co/BVHskdpD/Isara-C-ur-de-Roc.png"
+    "npc:Isara Cœur-de-Roc": "https://i.ibb.co/BVHskdpD/Isara-C-ur-de-Roc.png",
+    "objet:Sceptre de Durnak, dieu de la terre": "https://i.ibb.co/VpkzCM9V/Sceptre-de-Durnak-dieu-de-la-terre.png"
   },
   "meta": {
-    "total_images": 268,
+    "total_images": 269,
     "exported_date": "2025-11-30",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
