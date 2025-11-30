@@ -613,12 +613,12 @@
   };
 
   window.StatIcons = {
-    'Force': '💪',
-    'Agilité': '🏃',
-    'Endurance': '🛡️',
-    'Intelligence': '🧠',
-    'Volonté': '⚡',
-    'Chance': '🍀'
+    'Force': '<img src="https://i.ibb.co/23cGYFvZ/stat-Force.png" alt="Force" class="stat-icon" style="width: 20px; height: 20px; vertical-align: middle;">',
+    'Agilité': '<img src="https://i.ibb.co/Ng9TzjZL/stat-Agilit.png" alt="Agilité" class="stat-icon" style="width: 20px; height: 20px; vertical-align: middle;">',
+    'Endurance': '<img src="https://i.ibb.co/67ZW01Q7/stat-Endurance.png" alt="Endurance" class="stat-icon" style="width: 20px; height: 20px; vertical-align: middle;">',
+    'Intelligence': '<img src="https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png" alt="Intelligence" class="stat-icon" style="width: 20px; height: 20px; vertical-align: middle;">',
+    'Volonté': '<img src="https://i.ibb.co/B2BCGP6T/stat-Volont.png" alt="Volonté" class="stat-icon" style="width: 20px; height: 20px; vertical-align: middle;">',
+    'Chance': '<img src="https://i.ibb.co/HfthhzSF/stat-Chance.png" alt="Chance" class="stat-icon" style="width: 20px; height: 20px; vertical-align: middle;">'
   };
 
   window.ElementColors = {
