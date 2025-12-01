@@ -83,7 +83,7 @@
       "type": "card",
       "id": "etats-new-11-1756401053782",
       "title": "Maudit",
-      "content": "Impossible d'effectuer des coups critiques (physiques ou magiques), et la résistance altération est divisée par 2.",
+      "content": "Impossible d'effectuer des attaques physiques.",
       "deletable": true,
       "sectionName": "Nouvelle section"
     },

@@ -155,7 +155,7 @@
       },
       {
         "nom": "Charge",
-        "description": "Une fois par combat, peut utiliser une action secondaire pour tripler sa vitesse de déplacement et une fois le déplacement terminé une cible à 3m passe dans l'état <span class=\"etat-link\" data-etat=\"À terre\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">À terre</span>.\n\n<br><br><b>Sans effet si :</b> \n<br>- Volant/Lévitant\n<br>- Taille supérieure à Moyen.",
+        "description": "Une fois par combat, peut utiliser une action secondaire pour tripler sa vitesse de déplacement.<br>Une fois le déplacement terminé, la prochaine cible ce tour ci d'une attaque au corp à corp réussie, passe dans l'état <span class=\"etat-link\" data-etat=\"À terre\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">À terre</span>.\n\n<br><br><b>Sans effet si :</b> \n<br>- Volant/Lévitant\n<br>- Taille supérieure à Moyen.",
         "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Agilité 5",
         "cout": "1 point de don"
       },
@@ -281,7 +281,7 @@
     "dons": [
       {
         "nom": "Croche-patte",
-        "description": "Une fois par combat, peut utiliser une action secondaire pour effectuer un croche- patte à une cible au corps à corps (jet de dé) :\n\n\n<br><br><b>Sans effet si :</b> \n<br>- Esquive.\n<br>- Volant ou lévitant.\n<br>- Taille supérieure à Moyen.\n\n<br><br><b>Effet :</b> Met la cible dans l'état <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">A terre</span>.\n\n<br><br><b>Coup Critique :</b>  La cible est <span class=\"etat-link\" data-etat=\"Endormi/assommé/Effrayé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Assommée</span> 1 tour.",
+        "description": "Une fois par combat, peut utiliser une action secondaire pour effectuer un croche- patte à une cible au corps à corps (jet de dé) :\n\n\n<br><br><b>Sans effet si :</b> \n<br>- Esquive.\n<br>- Volant ou lévitant.\n<br>- Taille supérieure à Moyen.\n\n<br><br><b>Effet :</b> Met la cible dans l'état <span class=\"etat-link\" data-etat=\"À terre\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">À terre</span>.<br>\n\n<br><br><b>Coup Critique :</b>  La cible est <span class=\"etat-link\" data-etat=\"Endormi/assommé/Effrayé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Assommée</span> 1 tour.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -311,7 +311,7 @@
       },
       {
         "nom": "Point faible",
-        "description": "Si le héros a la connaissance d'un point faible sur un adversaire, il peut tenter de l'atteindre, pour augmenter les chances de coup critique de 3 et les chances d'esquive de 2.",
+        "description": "Si le héros a la connaissance d'un point faible sur un adversaire, il peut tenter de l'atteindre, pour augmenter les chances de coup critique de 3 et les chances d'esquive de la cible de 2.",
         "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Intelligence 5",
         "cout": "1 point de don"
       },
@@ -371,7 +371,7 @@
       },
       {
         "nom": "Main heureuse",
-        "description": "Augmente la <img src=\"https://i.ibb.co/HfthhzSF/stat-Chance.png\" alt=\"Chance\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Chance de 4.",
+        "description": "Augmente la <img src=\"https://i.ibb.co/HfthhzSF/stat-Chance.png\" alt=\"Chance\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\" data-events-attached=\"true\"> Chance de 5.",
         "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
@@ -418,7 +418,7 @@
         "cout": "1 point de don"
       },
       {
-        "nom": "Résistance magique 1",
+        "nom": "Résistance élémentaire 2",
         "description": "Le héros gagne 5 d'armure élémentaire de <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span>, <span style=\"color: #0f172a; font-weight: bold;\">Nuit</span>, <span style=\"color: #d0d0d0; font-weight: bold; background: rgba(0, 0, 0, 0.4); padding: 2px 4px; border-radius: 3px;\">Divin</span>, <span style=\"color: #a855f7; font-weight: bold;\">Maléfique</span>.",
         "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
@@ -623,7 +623,7 @@
       },
       {
         "nom": "Renvoi de Sort",
-        "description": "Une fois par combat, lorsque le héros est ciblé par un sort d'altération magique, il peut utiliser une action secondaire pour tenter de le renvoyer à l'expéditeur. <br><br>Intelligence contre Résistance altération de la cible. En cas de succès, le sort affecte l'expéditeur au lieu du héros.",
+        "description": "Une fois par combat, lorsque le héros est ciblé par un sort d'altération magique, ou un sort pouvant être esquivé, il peut utiliser une action secondaire pour tenter de le renvoyer à l'expéditeur. <br><br>Intelligence contre Résistance altération de la cible. En cas de succès (strictement supérieur), le sort affecte l'expéditeur au lieu du héros.",
         "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Intelligence 10.",
         "cout": "1 point de don"
       }

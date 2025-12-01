@@ -41,7 +41,7 @@
     "subclass:Enchanteur:Lutin:2": "https://i.ibb.co/qLbjJhxw/LutinF.png",
     "subclass:Prêtre:Inquisiteur:2": "https://i.ibb.co/bj6YKkLm/Inquisiteur-F.png",
     "subclass:Prêtre:Clerc Divin:2": "https://i.ibb.co/HfBVNLM3/PretreF.png",
-    "sort:Sorts de Prêtre:Arme de lumière": "https://i.ibb.co/cXh57Pdn/ArmeLum.png",
+    "sort:Sorts de Prêtre:Arme de lumière": "https://i.ibb.co/pvSjy55N/ArmeLum.png",
     "objet:Épée Longue": "https://i.ibb.co/35rpP6ZS/Epee2M1.png",
     "objet:Espadon": "https://i.ibb.co/35rpP6ZS/Epee2M1.png",
     "objet:Simple épée": "https://i.ibb.co/PsSXvSXx/Epee1.png",
@@ -272,7 +272,7 @@
   },
   "meta": {
     "total_images": 269,
-    "exported_date": "2025-11-30",
+    "exported_date": "2025-12-01",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
 }
