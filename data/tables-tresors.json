@@ -678,7 +678,7 @@
           }
         },
         {
-          "min": 17,
+          "min": 18,
           "max": 30,
           "objet": {
             "type": "reference",

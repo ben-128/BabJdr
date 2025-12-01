@@ -2,13 +2,13 @@
   {
     "nom": "Mirella la receptionniste",
     "image": "",
-    "description": "Habits simples, acceuillante. S'énerve si on pique dans les réserves.",
+    "description": "Habits simples, accueillante. S'énerve si on pique dans les réserves.",
     "interactions": "- Indique la chambre des joueurs\n<br>\n<br>\n- Propose si les PJs partent de piocher dans <span class=\"treasure-table-link\" data-table-name=\"ProvisionAuberge\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: ProvisionAuberge]</span>"
   },
   {
     "nom": "Tavin le Facteur",
     "image": "",
-    "description": "Sympa, toujours l'air préssé, connait beaucoup de choses",
+    "description": "Sympa, toujours l'air pressé, connaît beaucoup de choses",
     "interactions": "- Indique au joueurs que les livraisons dans le camp de la forêt n'est plus possibles, des monstres sont apparus. Il donne une lettre apparemment urgente à livrer pour Branor le bucheron."
   },
   {
@@ -56,7 +56,7 @@
   {
     "nom": "Filibert Tournicorne",
     "image": "",
-    "description": "Joyeux, intéréssé par les objets en tout genre.",
+    "description": "Joyeux, intéressé par les objets en tout genre.",
     "interactions": "Donner un objet inconnu =&gt; il donne sa fonction. Demande un pourboire (libre au joueur)"
   },
   {
@@ -68,7 +68,7 @@
   {
     "nom": "Isara Cœur-de-Roc",
     "image": "",
-    "description": "Peu locace, fiere, village décimé",
+    "description": "Peu loquace, fière, village décimé",
     "interactions": "- Demande de parler avec Lord Erathian Velorme pour requetes dans zone précises.<br>\n- Parle de son village décimé, et de ses besoins en resources pour retrouver ses soeurs et leur venir en aide."
   }
 ]
