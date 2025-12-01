@@ -504,5 +504,23 @@
         "effetCritique": "<strong>Coup Critique:&nbsp;</strong>&nbsp;Rend la moitié du coût en mana."
       }
     ]
+  },
+  {
+    "nom": "Sorts de Monstres",
+    "description": "Sorts utilisés par les monstres et créatures.",
+    "sorts": [
+      {
+        "nom": "Soin mineur",
+        "element": "Lumière",
+        "description": "Une lueur apaisante referme les blessures légères.",
+        "prerequis": "📋 <strong>Prérequis:</strong> -",
+        "portee": "🎯 <strong>Portée:</strong> 3m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 4",
+        "resistance": "<strong>Sans effet si:</strong> -",
+        "effetNormal": "<strong>Effet:</strong> Rend (5 + Puiss. Sorts) points de vie à la cible.",
+        "effetCritique": "<strong>Coup Critique:</strong> Rend (8 + Puiss. Sorts) points de vie."
+      }
+    ]
   }
 ]

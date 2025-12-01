@@ -165,6 +165,12 @@
           "id": "gestion-objets",
           "title": "Gestion des Objets",
           "icon": "⚔️"
+        },
+        {
+          "type": "page",
+          "id": "sorts-sorts-de-monstres",
+          "title": "Sorts de Monstres",
+          "icon": "🔮"
         }
       ]
     },
