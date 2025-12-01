@@ -7,7 +7,7 @@
         "nom": "Doué",
         "description": "Gagne une compétence rang 1.",
         "prerequis": "<strong> Prérequis :</strong> Don unique.",
-        "cout": "1 points de don"
+        "cout": "1 point de don"
       },
       {
         "nom": "Endurant",
@@ -155,7 +155,7 @@
       },
       {
         "nom": "Charge",
-        "description": "Une fois par combat, peut utiliser une action secondaire pour tripler sa vitesse de déplacement.<br>Une fois le déplacement terminé, la prochaine cible ce tour ci d'une attaque au corp à corp réussie, passe dans l'état <span class=\"etat-link\" data-etat=\"À terre\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">À terre</span>.\n\n<br><br><b>Sans effet si :</b> \n<br>- Volant/Lévitant\n<br>- Taille supérieure à Moyen.",
+        "description": "Une fois par combat, peut utiliser une action secondaire pour tripler sa vitesse de déplacement.<br>Une fois le déplacement terminé, la prochaine cible ce tour ci d'une attaque au corps à corps réussie, passe dans l'état <span class=\"etat-link\" data-etat=\"À terre\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">À terre</span>.\n\n<br><br><b>Sans effet si :</b> \n<br>- Volant/Lévitant\n<br>- Taille supérieure à Moyen.",
         "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Agilité 5",
         "cout": "1 point de don"
       },
@@ -438,7 +438,7 @@
       {
         "nom": "Polyglotte",
         "description": "Peut lire et parler toutes les langues.",
-        "prerequis": "<strong> Prérequis :</strong> Reflexion rang 2.",
+        "prerequis": "<strong> Prérequis :</strong> Réflexion rang 2.",
         "cout": "1 point de don"
       },
       {
@@ -474,7 +474,7 @@
     ]
   },
   {
-    "nom": "Pretre",
+    "nom": "Prêtre",
     "description": "Dons accessibles aux prêtres.",
     "dons": [
       {

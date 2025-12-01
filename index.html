@@ -97,6 +97,26 @@ body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relati
           from { transform: translateX(100%); opacity: 0; }
           to { transform: translateX(0); opacity: 1; }
         }
+      </style><style>
+        @keyframes slideIn {
+          from { transform: translateX(100%); opacity: 0; }
+          to { transform: translateX(0); opacity: 1; }
+        }
+      </style><style>
+        @keyframes slideIn {
+          from { transform: translateX(100%); opacity: 0; }
+          to { transform: translateX(0); opacity: 1; }
+        }
+      </style><style>
+        @keyframes slideIn {
+          from { transform: translateX(100%); opacity: 0; }
+          to { transform: translateX(0); opacity: 1; }
+        }
+      </style><style>
+        @keyframes slideIn {
+          from { transform: translateX(100%); opacity: 0; }
+          to { transform: translateX(0); opacity: 1; }
+        }
       </style></head>
 <body class="mj-on dev-on">
 
@@ -199,7 +219,7 @@ observer.observe(document.body, { attributes: true });
           <div class="toc-category">
             <a data-route="dons" href="#/dons" class="">🎖️ Dons</a>
             <div class="toc-sub">
-              <a data-route="dons-g-n-raux" href="#/dons-g-n-raux" class="">🎖️ Généraux</a><a data-route="dons-guerrier" href="#/dons-guerrier" class="active">🗡️ Guerrier</a><a data-route="dons-r-deur" href="#/dons-r-deur" class="">🏃 Rôdeur</a><a data-route="dons-mage" href="#/dons-mage" class="">🔮 Mage</a><a data-route="dons-pretre" href="#/dons-pretre" class="">⛪ Pretre</a><a data-route="dons-enchanteur" href="#/dons-enchanteur" class="">✨ Enchanteur</a>
+              <a data-route="dons-g-n-raux" href="#/dons-g-n-raux" class="">🎖️ Généraux</a><a data-route="dons-guerrier" href="#/dons-guerrier" class="">🗡️ Guerrier</a><a data-route="dons-r-deur" href="#/dons-r-deur" class="">🏃 Rôdeur</a><a data-route="dons-mage" href="#/dons-mage" class="">🔮 Mage</a><a data-route="dons-pretre" href="#/dons-pretre" class="">⛪ Pretre</a><a data-route="dons-enchanteur" href="#/dons-enchanteur" class="">✨ Enchanteur</a>
             </div>
           </div>
         
@@ -213,13 +233,13 @@ observer.observe(document.body, { attributes: true });
           </div>
         </div>
       
-        <div class="toc-section collapsed" data-section="arsenal">
+        <div class="toc-section" data-section="arsenal">
           <div class="toc-section-header">
             <span class="toc-section-title">⚔️ Arsenal</span>
-            <span class="toc-section-toggle">▶</span>
+            <span class="toc-section-toggle">▼</span>
           </div>
-          <div class="toc-section-content">
-            <a data-route="objets" href="#/objets" class="">📦 Objets</a><a data-route="collections-objets" href="#/collections-objets" class="">📚 Collections d'Objets</a>
+          <div class="toc-section-content" style="max-height: 500px; opacity: 1; overflow: visible;">
+            <a data-route="objets" href="#/objets" class="active">📦 Objets</a><a data-route="collections-objets" href="#/collections-objets" class="">📚 Collections d'Objets</a>
           </div>
         </div>
       
@@ -9082,7 +9102,7 @@ Le MJ peut choisir 0 à 3 tests parmi ceux-ci. Même mécanique de lecture (écl
           </section>
         </article>
       
-        <article class="active" data-page="dons-guerrier" style="display: block;">
+        <article class="" data-page="dons-guerrier" style="display: none;">
           <section>
             
         <div style="text-align:center;margin-bottom:2rem;">
@@ -13137,7 +13157,7 @@ Le MJ peut choisir 0 à 3 tests parmi ceux-ci. Même mécanique de lecture (écl
           </section>
         </article>
       
-        <article class="" data-page="objets" style="display: none;">
+        <article class="active" data-page="objets" style="display: block;">
           <section>
             <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
               <h2>📦 Objets</h2>
@@ -13167,9 +13187,7 @@ Le MJ peut choisir 0 à 3 tests parmi ceux-ci. Même mécanique de lecture (écl
               </button>
             </div>
           </div>
-          <div id="id-search-result" style="padding: 0 0.375rem 0.375rem; font-size: 0.85em; color: var(--paper-muted); min-height: 0.5em; line-height: 1.2; text-align: center;">
-            <!-- Résultat de la recherche affiché ici -->
-          </div>
+          <div id="id-search-result" style="padding: 0 0.375rem 0.375rem; font-size: 0.85em; color: var(--paper-muted); min-height: 0.5em; line-height: 1.2; text-align: center;"><span style="color: #16a34a;">✅ Objet #60 trouvé: Sceptre de Durnak, dieu de la terre</span></div>
         </div>
       
             
@@ -13258,7 +13276,7 @@ Le MJ peut choisir 0 à 3 tests parmi ceux-ci. Même mécanique de lecture (écl
       
         </div>
       
-        <div class="card" style="display: none;" editable-section="" objet-card"="" data-section-type="objet" data-objet-name="Simple épée" data-numero="2" data-object-numero="2" data-category-name="objets">
+        <div class="card" style="display: none; border: 3px solid rgb(22, 163, 74); box-shadow: rgba(22, 163, 74, 0.5) 0px 0px 15px; grid-column: 1 / -1; justify-self: center; max-width: 500px;" editable-section="" objet-card"="" data-section-type="objet" data-objet-name="Simple épée" data-numero="2" data-object-numero="2" data-category-name="objets">
           
           
         <button class="favoris-star " data-type="objets" data-nom="Simple épée" title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
@@ -13275,7 +13293,7 @@ Le MJ peut choisir 0 à 3 tests parmi ceux-ci. Même mécanique de lecture (écl
           
           
           <div class="illus illus-objet" data-illus-key="objet:Simple épée" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Simple épée" class="thumb lazy-load" width="200" height="150" loading="lazy" style="display: inline-block;" data-src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FPsSXvSXx%2FEpee1.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" src="data:image/svg+xml,%3Csvg width=%27200%27 height=%27150%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Crect width=%27100%25%27 height=%27100%25%27 fill=%27%23f0f0f0%27/%3E%3C/svg%3E" data-events-attached="true">
+            <img alt="Illustration Simple épée" class="thumb lazy-loaded" width="200" height="150" loading="lazy" style="display: inline-block; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FPsSXvSXx%2FEpee1.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
@@ -17171,7 +17189,7 @@ Le MJ peut choisir 0 à 3 tests parmi ceux-ci. Même mécanique de lecture (écl
       
         </div>
       
-        <div class="card" style="display: none;" editable-section="" objet-card"="" data-section-type="objet" data-objet-name="Cristal de Sel" data-numero="50" data-object-numero="50" data-category-name="objets">
+        <div class="card" style="display: none; border: 3px solid rgb(22, 163, 74); box-shadow: rgba(22, 163, 74, 0.5) 0px 0px 15px; grid-column: 1 / -1; justify-self: center; max-width: 500px;" editable-section="" objet-card"="" data-section-type="objet" data-objet-name="Cristal de Sel" data-numero="50" data-object-numero="50" data-category-name="objets">
           
           
         <button class="favoris-star " data-type="objets" data-nom="Cristal de Sel" title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
@@ -17188,7 +17206,7 @@ Le MJ peut choisir 0 à 3 tests parmi ceux-ci. Même mécanique de lecture (écl
           
           
           <div class="illus illus-objet" data-illus-key="objet:Cristal de Sel" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Cristal de Sel" class="thumb lazy-load" width="200" height="150" loading="lazy" style="display: inline-block;" data-src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2Fn8PhpFY6%2FSel.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" src="data:image/svg+xml,%3Csvg width=%27200%27 height=%27150%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Crect width=%27100%25%27 height=%27100%25%27 fill=%27%23f0f0f0%27/%3E%3C/svg%3E" data-events-attached="true">
+            <img alt="Illustration Cristal de Sel" class="thumb lazy-loaded" width="200" height="150" loading="lazy" style="display: inline-block; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2Fn8PhpFY6%2FSel.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
@@ -18013,7 +18031,7 @@ Le MJ peut choisir 0 à 3 tests parmi ceux-ci. Même mécanique de lecture (écl
       
         </div>
       
-        <div class="card" style="display: none;" editable-section="" objet-card"="" data-section-type="objet" data-objet-name="Sceptre de Durnak, dieu de la terre" data-numero="60" data-object-numero="60" data-category-name="objets">
+        <div class="card" style="display: block; border: 3px solid rgb(22, 163, 74); box-shadow: rgba(22, 163, 74, 0.5) 0px 0px 15px; grid-column: 1 / -1; justify-self: center; max-width: 500px;" editable-section="" objet-card"="" data-section-type="objet" data-objet-name="Sceptre de Durnak, dieu de la terre" data-numero="60" data-object-numero="60" data-category-name="objets">
           
           
         <button class="favoris-star " data-type="objets" data-nom="Sceptre de Durnak, dieu de la terre" title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
@@ -18030,7 +18048,7 @@ Le MJ peut choisir 0 à 3 tests parmi ceux-ci. Même mécanique de lecture (écl
           
           
           <div class="illus illus-objet" data-illus-key="objet:Sceptre de Durnak, dieu de la terre" data-style-type="objet" data-bound="1">
-            <img alt="Illustration Sceptre de Durnak, dieu de la terre" class="thumb lazy-load" width="200" height="150" loading="lazy" style="display: inline-block;" data-src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FVpkzCM9V%2FSceptre-de-Durnak-dieu-de-la-terre.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" src="data:image/svg+xml,%3Csvg width=%27200%27 height=%27150%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Crect width=%27100%25%27 height=%27100%25%27 fill=%27%23f0f0f0%27/%3E%3C/svg%3E" data-events-attached="true">
+            <img alt="Illustration Sceptre de Durnak, dieu de la terre" class="thumb lazy-loaded" width="200" height="150" loading="lazy" style="display: inline-block; cursor: zoom-in;" src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FVpkzCM9V%2FSceptre-de-Durnak-dieu-de-la-terre.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" data-events-attached="true">
             
             <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
@@ -18050,9 +18068,7 @@ Le MJ peut choisir 0 à 3 tests parmi ceux-ci. Même mécanique de lecture (écl
           
           
         <div class="editable-section" data-section-type="html">
-          <div class="editable editable-field objet-description" data-edit-type="generic" data-edit-section="objet-description" data-item-identifier="Sceptre de Durnak, dieu de la terre" style="text-align: center; font-style: italic; margin: 1rem 0;">
-            <i>Forgé dans les entrailles des forêts sacrées, ce sceptre battant au rythme du cœur de Durnak pulse d’une puissance tellurique capable de nourrir la chair, d’éveiller l’esprit et d’ébranler la terre elle-même.</i>
-          </div>
+          <div class="editable editable-field objet-description" data-edit-type="generic" data-edit-section="objet-description" data-item-identifier="Sceptre de Durnak, dieu de la terre" style="text-align: center; font-style: italic; margin: 1rem 0;" data-editing="false" contenteditable="false"><i>Ce sceptre battant au rythme du cœur de Durnak pulse d’une puissance tellurique capable de nourrir la chair, d’éveiller l’esprit et d’ébranler la terre elle-même.</i></div>
           <button class="edit-btn" type="button" title="✏️ Éditer" data-button-type="field" style="">✏️</button>
         </div>
       
@@ -19114,7 +19130,7 @@ L'arme est imprégnée de 5 points de dégâts d'élément <span style="color: #
           
         <div class="editable-section" data-section-type="html">
           <div class="editable editable-field subclass-progression" data-edit-type="generic" data-edit-section="subclass-progression" data-item-identifier="Lutin">
-            <strong>������ Progression par niveau:</strong> +1 Force<img src="https://i.ibb.co/23cGYFvZ/stat-Force.png" alt="Force" style="width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;" data-events-attached="true">|
+            <strong>📈 Progression par niveau:</strong> +1 Force<img src="https://i.ibb.co/23cGYFvZ/stat-Force.png" alt="Force" style="width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;" data-events-attached="true">|
  +2 Intelligence <img src="https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png" alt="Intelligence" style="width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;" data-events-attached="true">|
  +1 Volonté <img src="https://i.ibb.co/B2BCGP6T/stat-Volont.png" alt="Volonté" style="width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;" data-events-attached="true">|
  +1 Chance <img src="https://i.ibb.co/HfthhzSF/stat-Chance.png" alt="Chance" style="width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;" data-events-attached="true">|
@@ -49528,7 +49544,7 @@ L'arme est imprégnée de 5 points de dégâts d'élément <span style="color: #
           <div class="illus illus-objet" data-illus-key="objet:Arc de chasseur" data-style-type="objet" data-bound="1">
             <img alt="Illustration Arc de chasseur" class="thumb lazy-load" width="200" height="150" loading="lazy" style="display: inline-block;" data-src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FbRXH0Vwj%2FArc2.png&amp;we&amp;output=webp&amp;q=85&amp;w=400&amp;h=300&amp;fit=inside" src="data:image/svg+xml,%3Csvg width=%27200%27 height=%27150%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Crect width=%27100%25%27 height=%27100%25%27 fill=%27%23f0f0f0%27/%3E%3C/svg%3E" data-events-attached="true">
             
-            <label class="up" style="">������ Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
+            <label class="up" style="">📷 Ajouter<input accept="image/*" hidden="" type="file" data-events-attached="true" style=""></label>
             <button class="rm" type="button" style="" data-events-attached="true">🗑 Retirer</button>
           </div>
         

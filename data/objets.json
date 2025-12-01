@@ -52,7 +52,7 @@
         "Deux mains",
         "Baton"
       ],
-      "effet": "<strong>Dégâts: </strong> Inflige (2  + Force) points de dégâts physiques.\n<br> <strong>Effet: </strong> Si le bâton a été porté toute la journée (sanschangement), permet de récupérer 5 points de vie lors d'un repos long.",
+      "effet": "<strong>Dégâts: </strong> Inflige (2  + Force) points de dégâts physiques.\n<br> <strong>Effet: </strong> Si le bâton a été porté toute la journée (sans changement), permet de récupérer 5 points de vie lors d'un repos long.",
       "prix": "🔷 <strong>Prix:</strong> 5",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -246,7 +246,7 @@
       "tags": [
         "Nourriture"
       ],
-      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore 6 points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.",
+      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Rend 6 points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.",
       "prix": "🔷 <strong>Prix:</strong> 5",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -258,7 +258,7 @@
       "tags": [
         "Nourriture"
       ],
-      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore 9 points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.\n<br><b>Charges :</b> 3",
+      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Rend 9 points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.\n<br><b>Charges :</b> 3",
       "prix": "🔷 <strong>Prix:</strong> 15",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -270,7 +270,7 @@
       "tags": [
         "Nourriture"
       ],
-      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore 6 points de vie. <br>Couplé à un sommeil, permet d'éviter l'état <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>. <br>De plus, lorsque consommé, le mangeur ne nécessite plus que 4 heures de sommeil ce jour-ci.\n<br><br><b>Charges :</b> 4",
+      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Rend 6 points de vie. <br>Couplé à un sommeil, permet d'éviter l'état <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>. <br>De plus, lorsque consommé, le mangeur ne nécessite plus que 4 heures de sommeil ce jour-ci.\n<br><br><b>Charges :</b> 4",
       "prix": "🔷 <strong>Prix:</strong> 25",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -723,7 +723,7 @@
       "tags": [
         "Nourriture"
       ],
-      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Restore 6 points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.\n          <br> <strong>Charges : </strong>2.",
+      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Rend 6 points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.\n          <br> <strong>Charges : </strong>2.",
       "prix": "🔷 <strong>Prix:</strong> 30",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -749,7 +749,7 @@
       "tags": [
         "Nourriture"
       ],
-      "effet": "Inutilisable en combat.\n<br><strong>Prérequis:</strong> Test de compétence Hardiesse 1.\n<br><strong>Effet:</strong> Restore 15 points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.\n          <br> <strong>Charges : </strong>3.",
+      "effet": "Inutilisable en combat.\n<br><strong>Prérequis:</strong> Test de compétence Hardiesse 1.\n<br><strong>Effet:</strong> Rend 15 points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.\n          <br> <strong>Charges : </strong>3.",
       "prix": "🔷 <strong>Prix:</strong> 50",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -771,7 +771,7 @@
       "nom": "Sceptre de Durnak, dieu de la terre",
       "numero": 60,
       "image": "https://i.ibb.co/XfVYGy2T/Sceptre-de-Durnak-dieu-de-la-terre.png",
-      "description": "<i>Forgé dans les entrailles des forêts sacrées, ce sceptre battant au rythme du cœur de Durnak pulse d’une puissance tellurique capable de nourrir la chair, d’éveiller l’esprit et d’ébranler la terre elle-même.</i>",
+      "description": "<i>Ce sceptre battant au rythme du cœur de Durnak pulse d’une puissance tellurique capable de nourrir la chair, d’éveiller l’esprit et d’ébranler la terre elle-même.</i>",
       "tags": [
         "Arme",
         "Une main",
