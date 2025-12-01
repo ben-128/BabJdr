@@ -9,13 +9,13 @@
     "nom": "Tavin le Facteur",
     "image": "",
     "description": "Sympa, toujours l'air préssé, connait beaucoup de choses",
-    "interactions": "- Indique au joueurs que les livraisons dans le camp de la forêt n'est plus possibles, des monstres sont apparus. Il donne une lettre apparament urgente à livrer pour Branor le bucheron."
+    "interactions": "- Indique au joueurs que les livraisons dans le camp de la forêt n'est plus possibles, des monstres sont apparus. Il donne une lettre apparemment urgente à livrer pour Branor le bucheron."
   },
   {
     "nom": "Branor le Bucheron",
     "image": "",
     "description": "Costaud, mourant",
-    "interactions": "- Indique qu'on monstre a volé son sac avec un baume de soin et ses clés\n<br>\n<br>\n- Indique a joueur  de mettre en sécurité la tablette (chez lui)"
+    "interactions": "- Indique qu'un monstre a volé son sac avec un baume de soin et ses clés\n<br>\n<br>\n- Indique au joueur  de mettre en sécurité la tablette (chez lui)"
   },
   {
     "nom": "Grufin l'aubergiste",

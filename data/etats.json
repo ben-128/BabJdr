@@ -5,7 +5,7 @@
   "sections": [
     {
       "type": "intro",
-      "content": "Lorsque un joueur subit un état, vous pouvez prendre une carte ou note pour avoir un rappel de l'effet. De plus, si c'est un état à durée limité, vous pouvez prendre un dé et le placer face au nombre de tour restant (en oubliant pas de changer sa valeur chaque début de tour).<br> Quand vous infligez des effets/altérations à un monstre, vous pouvez également utiliser un dé pour rappel (potentiellement d'une autre couleur, pour aider).\n<br>"
+      "content": "Lorsque un joueur subit un état, vous pouvez prendre une carte ou note pour avoir un rappel de l'effet. De plus, si c'est un état à durée limité, vous pouvez prendre un dé et le placer face au nombre de tour restant (en n'oubliant pas de changer sa valeur chaque début de tour).<br> Quand vous infligez des effets/altérations à un monstre, vous pouvez également utiliser un dé pour rappel (potentiellement d'une autre couleur, pour aider).\n<br>"
     },
     {
       "type": "card",

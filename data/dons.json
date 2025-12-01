@@ -107,7 +107,7 @@
       },
       {
         "nom": "Toujours prêt",
-        "description": "Augmente l'iniative de 10. Lors du premier tour de combat, la vitesse de déplacement est doublée.",
+        "description": "Augmente l'initiative de 10. Lors du premier tour de combat, la vitesse de déplacement est doublée.",
         "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
@@ -155,7 +155,7 @@
       },
       {
         "nom": "Charge",
-        "description": "Une fois par combat, peut utiliser une action secondaire pour tripler sa vitesse de déplacement.<br>Une fois le déplacement terminé, la prochaine cible ce tour ci d'une attaque au corps à corps réussie, passe dans l'état <span class=\"etat-link\" data-etat=\"À terre\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">À terre</span>.\n\n<br><br><b>Sans effet si :</b> \n<br>- Volant/Lévitant\n<br>- Taille supérieure à Moyen.",
+        "description": "Une fois par combat, peut utiliser une action secondaire pour tripler sa vitesse de déplacement.<br>Une fois le déplacement terminé, la prochaine cible ce tour-ci d'une attaque au corps à corps réussie, passe dans l'état <span class=\"etat-link\" data-etat=\"À terre\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">À terre</span>.\n\n<br><br><b>Sans effet si :</b> \n<br>- Volant/Lévitant\n<br>- Taille supérieure à Moyen.",
         "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Agilité 5",
         "cout": "1 point de don"
       },
@@ -167,7 +167,7 @@
       },
       {
         "nom": "Coup de bouclier",
-        "description": "Si le héros a un bouclier équipé, lorsque le héros subit des dégâts aux corps à corps, il peut choisir d'utiliser une action secondaire pour infliger à l'attaquant des dégâts équivalents à l'armure du bouclier.",
+        "description": "Si le héros a un bouclier équipé, lorsque le héros subit des dégâts au corps à corps, il peut choisir d'utiliser une action secondaire pour infliger à l'attaquant des dégâts équivalents à l'armure du bouclier.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -185,7 +185,7 @@
       },
       {
         "nom": "Attaque surpuissante",
-        "description": "En dépensant une action secondaire, le héros peut concentrer toute sa puissance pour une attaque au corps à corps ce tour ci: les dégâts sont alors doublés. En contrepartie, il n'a pas d'action principale durant son prochain tour.",
+        "description": "En dépensant une action secondaire, le héros peut concentrer toute sa puissance pour une attaque au corps à corps ce tour-ci: les dégâts sont alors doublés. En contrepartie, il n'a pas d'action principale durant son prochain tour.",
         "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/23cGYFvZ/stat-Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Force 12",
         "cout": "1 point de don"
       },
@@ -329,7 +329,7 @@
       },
       {
         "nom": "Éventail de couteaux",
-        "description": "Une fois par combat, peut utiliser une action secondaire pour améliorer sa prochaine attaque ce tour ci. Elle attaquera tous les adversaires à moins de 3m.",
+        "description": "Une fois par combat, peut utiliser une action secondaire pour améliorer sa prochaine attaque ce tour-ci. Elle attaquera tous les adversaires à moins de 3m.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -431,7 +431,7 @@
       },
       {
         "nom": "Infusion élémentaire",
-        "description": "Aprés avoir lancé un sort, le héros peut, en utilisant une action secondaire, imprégner son arme de l'élément du sort. Elle infligera à sa prochaine attaque physique des dégâts de cet élément équivalents au niveau du sort.",
+        "description": "Après avoir lancé un sort, le héros peut, en utilisant une action secondaire, imprégner son arme de l'élément du sort. Elle infligera à sa prochaine attaque physique des dégâts de cet élément équivalents au niveau du sort.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -491,7 +491,7 @@
       },
       {
         "nom": "Jugement éclair",
-        "description": "Si le Prêtre a effectué un sort de dégâts ce tour ci, il peut effectuer une attaque au corps à corps avec une action secondaire.",
+        "description": "Si le Prêtre a effectué un sort de dégâts ce tour-ci, il peut effectuer une attaque au corps à corps avec une action secondaire.",
         "prerequis": "<strong> Prérequis :</strong><img src=\"https://i.ibb.co/23cGYFvZ/stat-Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Force 5",
         "cout": "1 point de don"
       },
@@ -592,7 +592,7 @@
         "cout": "1 point de don"
       },
       {
-        "nom": "Teleportation amicale",
+        "nom": "Téléportation amicale",
         "description": "Une fois par combat, peut utiliser une action secondaire pour se téléporter à 3m d'un allié consentant.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
