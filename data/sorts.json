@@ -465,7 +465,7 @@
         "coutMana": "🔵 <strong>Coût mana:</strong> 14",
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "Inutilisable Hors combat.           \n<br> <strong>Effet:</strong> Augmente la force de la cible de (5 + Puiss. Sorts). <br>Dure jusqu'au retour hors combat.",
-        "effetCritique": "<strong>Coup Critique: </strong> La force prodiguée passe à 8."
+        "effetCritique": "<strong>Coup Critique: </strong> La force prodiguée passe à (8 + Puiss. Sorts)."
       },
       {
         "nom": "Confusion",

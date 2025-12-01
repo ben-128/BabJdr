@@ -10,7 +10,7 @@
       "type": "card",
       "id": "combat-new-2-1756401371776",
       "title": "Déplacement",
-      "content": "À chaque tour, un héros peut se déplacer de 9 mètres (plus s’il bénéficie de bonus), en plus de ses actions.\n<br><br>Certains terrains, comme la boue ou le sable, sont considérés comme des terrains difficiles : la vitesse y est alors réduite de moitié.\n<br><br>Un héros ou un monstre ne peut pas traverser un adversaire occupant une largeur de 3 mètres. Si plusieurs ennemis se tiennent côte à côte, ils forment un véritable mur infranchissable.",
+      "content": "À chaque tour, un héros peut se déplacer de 9m (plus s'il bénéficie de bonus), en plus de ses actions.\n<br><br>Certains terrains, comme la boue ou le sable, sont considérés comme des terrains difficiles : la vitesse y est alors réduite de moitié.\n<br><br>Un héros ou un monstre ne peut pas traverser un adversaire occupant une largeur de 3m. Si plusieurs ennemis se tiennent côte à côte, ils forment un véritable mur infranchissable.",
       "deletable": true,
       "sectionName": "Nouvelle section"
     },
