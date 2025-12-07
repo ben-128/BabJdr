@@ -1615,7 +1615,7 @@
 
           <div id="imagePreviewContainer" style="display: none; margin-bottom: 20px; text-align: center;">
             <label style="display: block; margin-bottom: 8px; font-weight: 600;">Aperçu :</label>
-            <img id="imagePreview" style="max-width: 100%; max-height: 200px; border-radius: 8px; border: 1px solid var(--rule);">
+            <img id="imagePreview" style="max-width: 100%; max-height: 400px; border-radius: 8px; border: 1px solid var(--rule);">
           </div>
 
           <div style="margin-bottom: 20px;">
