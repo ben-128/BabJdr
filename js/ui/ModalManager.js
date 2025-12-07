@@ -411,14 +411,13 @@
             border: none !important;
             border-top: 1px solid var(--rule) !important;
           }
-          .spell-preview-tooltip .element-badge {
-            font-size: 0.6em !important;
-            padding: 2px 8px !important;
+          .spell-preview-tooltip .element-icon {
+            width: 20px !important;
+            height: 20px !important;
           }
-          .spell-preview-tooltip .spell-element-section {
-            transform: scale(0.4) !important;
-            transform-origin: center !important;
-            margin: -1rem 0 !important;
+          .spell-preview-tooltip .element-badge {
+            font-size: 0.85em !important;
+            padding: 3px 10px !important;
           }
         `;
         document.head.appendChild(style);
