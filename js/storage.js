@@ -671,8 +671,14 @@
     },
 
     async getMainHTML() {
-      // Return the current document HTML to avoid double body tags
-      return document.documentElement.outerHTML;
+      // Clone the document to avoid modifying the live DOM
+      const clone = document.documentElement.cloneNode(true);
+
+      // Remove all temporary elements (notifications, etc.)
+      const tempElements = clone.querySelectorAll('[data-temp], .temp-notification');
+      tempElements.forEach(el => el.remove());
+
+      return clone.outerHTML;
     },
 
 
@@ -700,6 +706,8 @@
     showNotification(message, type = 'info') {
       // Simple notification system
       const notification = document.createElement('div');
+      notification.className = 'temp-notification'; // Mark as temporary - excluded from HTML saves
+      notification.setAttribute('data-temp', 'true'); // Additional marker for exclusion
       notification.style.cssText = `
         position: fixed;
         top: 20px;
@@ -712,17 +720,20 @@
         z-index: 10000;
         animation: slideIn 0.3s ease;
       `;
-      
-      // Add animation
-      const style = document.createElement('style');
-      style.textContent = `
-        @keyframes slideIn {
-          from { transform: translateX(100%); opacity: 0; }
-          to { transform: translateX(0); opacity: 1; }
-        }
-      `;
-      document.head.appendChild(style);
-      
+
+      // Add animation style only once
+      if (!document.getElementById('notification-animation-style')) {
+        const style = document.createElement('style');
+        style.id = 'notification-animation-style';
+        style.textContent = `
+          @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+          }
+        `;
+        document.head.appendChild(style);
+      }
+
       notification.textContent = message;
       document.body.appendChild(notification);
       
