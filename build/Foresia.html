@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-12-07T21:43:00.041Z by JdrBab Build System -->
+<!-- Generated on 2025-12-07T23:02:27.787Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -3036,13 +3036,9 @@ body.dev-off .new-collection-card {
   }
 }
 
-/* Content Animation */
-article {
-  animation: pageSlideIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-article.active {
-  animation: pageSlideInFromTop 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+/* Content Animation - Disabled to prevent double animation issues */
+article, article.active {
+  animation: none !important;
 }
 
 /* Staggered Entry Animation for Lists */
@@ -11267,7 +11263,7 @@ select:focus {
         {
           "type": "page",
           "id": "traumas",
-          "title": "Traumas",
+          "title": "Titres et Traumas",
           "icon": "🩹"
         },
         {
@@ -11330,12 +11326,12 @@ select:focus {
     "titre": "Cartes du destin",
     "introduction": "Tirez au sort une carte du destin avec un d6 :",
     "cartes": [
-      "Au choix, 250 éclats ou 4 Fortune.",
-      "A répartir: 2 points de statistiques dans une statistique qui n'a pas la valeur la plus élevée.",
+      "Au choix, 5 Initiative ou 3 Fortune.",
+      "A répartir: 2 points de statistiques parmis celles qui n'ont pas la valeur la plus élevée.",
       "Au choix, 4 points de vie maximum ou 6 points de mana maximum.",
       "Une compétence rang 1 au choix.",
       "Deux éléments au choix gagnent 5 points d'armure élémentaire.",
-      "Un point de Dons."
+      "Un point de Dons, seulement utilisable dans les dons généraux."
     ]
   },
   "sections": [
@@ -11887,7 +11883,7 @@ select:focus {
 },
       'traumas': {
   "page": "traumas",
-  "title": "Traumas",
+  "title": "Titres et Traumas",
   "sections": [
     {
       "type": "intro",
@@ -11908,6 +11904,12 @@ select:focus {
       "content": "<ul>\n  <li><b>Bras invalide</b> : impossible d’utiliser les armes à deux mains ou un bouclier.</li>\n  <li><b>Commotion tenace</b> : –5 en Intelligence et –1 compétence Réflexion.</li>\n  <li><b>Âme fêlée</b> : les attaques et sorts contre le héros gagnent +2 aux chances de coup critique.</li>\n  <li><b>Cicatrice élémentaire</b> : –10 à toutes les armures élémentaires.</li>\n  <li><b>Amnésie majeure</b> : Perd définitivement des sorts connus.</li>\n</ul>",
       "deletable": true,
       "sectionName": "Nouvelle section"
+    },
+    {
+      "id": "section-1765145766366-l0s3v9",
+      "type": "card",
+      "title": "Titres :",
+      "content": "Vagabond <br>\n\nNovice <br>\n\nTraqueur <br>\n\nPourfendeur <br>\n\nTueur <br>\n\nDestructeur <br>\n\nExterminateur <br>\n\nChampion <br>\n\nMaître <br>\n\nGrand Maître <br>\n\nInvaincu du Ciel et de la Terre <br>"
     }
   ]
 },
@@ -12033,7 +12035,7 @@ select:focus {
     },
     {
       "id": "traumas",
-      "title": "Traumas",
+      "title": "Titres et Traumas",
       "file": "traumas.json",
       "active": true,
       "order": 13
@@ -17082,6 +17084,7 @@ select:focus {
     currentPlaylist: null,
     currentTrackIndex: 0,
     isPlaying: false,
+    isLooping: false, // Loop la piste en cours
     volume: 0.3,
     config: null,
     isEnabled: false,
@@ -17276,8 +17279,14 @@ select:focus {
 
         // Gestion des événements audio
         this.currentAudio.addEventListener('ended', () => {
-          this.isPlaying = false;
-          this.playNext();
+          if (this.isLooping) {
+            // Rejouer la même piste
+            this.currentAudio.currentTime = 0;
+            this.currentAudio.play();
+          } else {
+            this.isPlaying = false;
+            this.playNext();
+          }
         });
 
         this.currentAudio.addEventListener('play', () => {
@@ -17640,6 +17649,11 @@ select:focus {
         this.updateAudioPageUI();
       };
 
+      window.audioToggleLoop = () => {
+        this.isLooping = !this.isLooping;
+        this.updateAudioPageUI();
+      };
+
       // Contrôles audio principaux
       const audioControlsContainer = document.getElementById('audio-controls-page');
       if (audioControlsContainer) {
@@ -17661,7 +17675,12 @@ select:focus {
                     style="display: block; width: 100%; padding: 1.5rem; margin-bottom: 1rem; background: var(--bronze); color: white; border: none; border-radius: 8px; font-size: 1.3rem; cursor: pointer; font-weight: bold;">
               ⏭️ MUSIQUE SUIVANTE
             </button>
-            
+
+            <button id="loop-btn"
+                    style="display: block; width: 100%; padding: 1.5rem; margin-bottom: 1rem; background: ${this.isLooping ? '#8b5cf6' : '#6b7280'}; color: white; border: none; border-radius: 8px; font-size: 1.3rem; cursor: pointer; font-weight: bold;">
+              ${this.isLooping ? '🔂 BOUCLE ACTIVÉE' : '🔁 BOUCLE DÉSACTIVÉE'}
+            </button>
+
             <div style="margin-bottom: 1rem;">
               <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">🔊 Volume: <span id="vol-display">${Math.round(this.volume * 100)}%</span></label>
               <input type="range" id="volume-slider"
@@ -17713,6 +17732,16 @@ select:focus {
             newNextBtn.addEventListener('click', (e) => {
               e.preventDefault();
               window.audioNext();
+            });
+          }
+
+          const loopBtn = document.getElementById('loop-btn');
+          if (loopBtn) {
+            const newLoopBtn = loopBtn.cloneNode(true);
+            loopBtn.parentNode.replaceChild(newLoopBtn, loopBtn);
+            newLoopBtn.addEventListener('click', (e) => {
+              e.preventDefault();
+              window.audioToggleLoop();
             });
           }
 
@@ -17813,6 +17842,13 @@ select:focus {
       const playPauseBtn = document.getElementById('play-pause-btn');
       if (playPauseBtn) {
         playPauseBtn.textContent = this.isPlaying ? '⏸️ PAUSE' : '▶️ LECTURE';
+      }
+
+      // Mettre à jour le bouton loop
+      const loopBtn = document.getElementById('loop-btn');
+      if (loopBtn) {
+        loopBtn.style.background = this.isLooping ? '#8b5cf6' : '#6b7280';
+        loopBtn.textContent = this.isLooping ? '🔂 BOUCLE ACTIVÉE' : '🔁 BOUCLE DÉSACTIVÉE';
       }
 
       // Mettre à jour le volume
@@ -21455,9 +21491,9 @@ select:focus {
         });
       }, observerOptions);
 
-      // Observe all cards and major elements (except treasure tables which have their own animation)
-      document.querySelectorAll('.card:not(#tables-tresors-container .card), .panel, .toc-section').forEach(el => {
-        if (!el.closest('#tables-tresors-container')) {
+      // Observe all cards and major elements (except treasure tables and TOC which have their own behavior)
+      document.querySelectorAll('.card:not(#tables-tresors-container .card), .panel').forEach(el => {
+        if (!el.closest('#tables-tresors-container') && !el.closest('.toc')) {
           el.style.opacity = '0';
           observer.observe(el);
         }
@@ -23791,13 +23827,7 @@ select:focus {
       
       // Show and activate page after content is inserted
       this.show('collections-objets');
-      this.updateActiveStates('collections-objets');
-      
-      // Ensure the page is visible regardless of dev mode
-      if (pageElement) {
-        pageElement.classList.add('active');
-      }
-      
+
       return true;
     },
 
@@ -25580,12 +25610,10 @@ select:focus {
         if (window.ScrollOptimizer && window.ScrollOptimizer.cleanupVirtualization) {
           window.ScrollOptimizer.cleanupVirtualization(article);
         }
-        
+
         article.innerHTML = newArticle.innerHTML;
-        
-        // Make sure only this article is active
-        document.querySelectorAll('article').forEach(a => a.classList.remove('active'));
-        article.classList.add('active');
+
+        // Note: Don't add .active here - let updateActiveStates handle it to avoid double animation
         
         // Plus simple et plus fiable
         this.autoLoadImages();

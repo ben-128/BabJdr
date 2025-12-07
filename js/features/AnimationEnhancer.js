@@ -52,9 +52,9 @@
         });
       }, observerOptions);
 
-      // Observe all cards and major elements (except treasure tables which have their own animation)
-      document.querySelectorAll('.card:not(#tables-tresors-container .card), .panel, .toc-section').forEach(el => {
-        if (!el.closest('#tables-tresors-container')) {
+      // Observe all cards and major elements (except treasure tables and TOC which have their own behavior)
+      document.querySelectorAll('.card:not(#tables-tresors-container .card), .panel').forEach(el => {
+        if (!el.closest('#tables-tresors-container') && !el.closest('.toc')) {
           el.style.opacity = '0';
           observer.observe(el);
         }
