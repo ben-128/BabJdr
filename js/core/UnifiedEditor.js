@@ -1722,6 +1722,10 @@
       if (window.CampaignSchemas && typeof window.CampaignSchemas.expandSchemaMarkers === 'function') {
         content = window.CampaignSchemas.expandSchemaMarkers(content);
       }
+      // Expand image markers [img:id] if ModalManager is available
+      if (window.ModalManager && typeof window.ModalManager.expandImageMarkers === 'function') {
+        content = window.ModalManager.expandImageMarkers(content);
+      }
 
       // IMPORTANT: Always use innerHTML to render HTML content properly
       // Never use textContent for edited content as it will show HTML tags
@@ -2148,6 +2152,10 @@
           if (window.CampaignSchemas && typeof window.CampaignSchemas.expandSchemaMarkers === 'function') {
             previewContent = window.CampaignSchemas.expandSchemaMarkers(previewContent);
           }
+          // Expand image markers for preview
+          if (window.ModalManager && typeof window.ModalManager.expandImageMarkers === 'function') {
+            previewContent = window.ModalManager.expandImageMarkers(previewContent);
+          }
           preview.innerHTML = previewContent;
         } catch (e) {
           preview.textContent = 'Aperçu invalide: ' + e.message;
@@ -2253,6 +2261,10 @@
             if (window.CampaignSchemas && typeof window.CampaignSchemas.expandSchemaMarkers === 'function') {
               previewContent = window.CampaignSchemas.expandSchemaMarkers(previewContent);
             }
+            // Expand image markers for preview
+            if (window.ModalManager && typeof window.ModalManager.expandImageMarkers === 'function') {
+              previewContent = window.ModalManager.expandImageMarkers(previewContent);
+            }
             preview.innerHTML = previewContent;
           } catch (e) {
             preview.textContent = 'Aperçu invalide: ' + e.message;
@@ -2269,10 +2281,13 @@
         const success = this.updateContentInDataStructure(editSession, normalizedContent);
 
         if (success) {
-          // Update the element content with expanded schemas for display
+          // Update the element content with expanded schemas and images for display
           let displayContent = normalizedContent;
           if (window.CampaignSchemas && typeof window.CampaignSchemas.expandSchemaMarkers === 'function') {
             displayContent = window.CampaignSchemas.expandSchemaMarkers(displayContent);
+          }
+          if (window.ModalManager && typeof window.ModalManager.expandImageMarkers === 'function') {
+            displayContent = window.ModalManager.expandImageMarkers(displayContent);
           }
           element.innerHTML = displayContent;
 
