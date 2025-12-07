@@ -773,6 +773,13 @@
         playPauseBtn.textContent = this.isPlaying ? '⏸️ PAUSE' : '▶️ LECTURE';
       }
 
+      // Mettre à jour le bouton loop
+      const loopBtn = document.getElementById('loop-btn');
+      if (loopBtn) {
+        loopBtn.style.background = this.isLooping ? '#8b5cf6' : '#6b7280';
+        loopBtn.textContent = this.isLooping ? '🔂 BOUCLE ACTIVÉE' : '🔁 BOUCLE DÉSACTIVÉE';
+      }
+
       // Mettre à jour le volume
       const volDisplay = document.getElementById('vol-display');
       if (volDisplay) {
