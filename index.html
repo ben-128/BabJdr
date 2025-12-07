@@ -4,6 +4,8 @@ body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relati
 body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relative; } 
 </style><style>body {transition: opacity ease-in 0.2s; } 
 body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relative; } 
+</style><style>body {transition: opacity ease-in 0.2s; } 
+body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relative; } 
 </style>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
@@ -168,6 +170,57 @@ body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relati
           to { transform: translateX(0); opacity: 1; }
         }
       </style><style>
+        @keyframes slideIn {
+          from { transform: translateX(100%); opacity: 0; }
+          to { transform: translateX(0); opacity: 1; }
+        }
+      </style><style>
+        @keyframes slideIn {
+          from { transform: translateX(100%); opacity: 0; }
+          to { transform: translateX(0); opacity: 1; }
+        }
+      </style><style>
+    @keyframes ripple {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+
+    .shake-animation {
+      animation: wiggle 0.5s ease-in-out;
+    }
+
+    .pulse-animation {
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .animate-in {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+
+    .animate-out {
+      opacity: 0 !important;
+      transform: translateY(-20px) !important;
+    }
+
+    /* Performance optimizations */
+    .reduce-animations * {
+      animation-duration: 0.1s !important;
+      transition-duration: 0.1s !important;
+    }
+
+    .battery-save-mode * {
+      animation: none !important;
+      transition: none !important;
+    }
+
+    .slow-connection * {
+      animation-duration: 0.2s !important;
+      transition-duration: 0.2s !important;
+    }
+  </style><script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script><style>
         @keyframes slideIn {
           from { transform: translateX(100%); opacity: 0; }
           to { transform: translateX(0); opacity: 1; }
@@ -17904,17 +17957,16 @@ Le MJ peut choisir 0 à 3 tests parmi ceux-ci. Même mécanique de lecture (écl
               </div>
             </div>
 
-            <!-- Google Doc iframe Section -->
-            <div style="margin-bottom: 1.5rem;">
-              <div style="display: flex; align-items: flex-start; gap: 0.5rem; margin-bottom: 0.5rem;">
-                <div style="flex: 1; padding: 0.5rem; background: var(--card); border-radius: 4px; font-size: 0.9em; color: var(--text-muted); border: 1px solid var(--rule);">
-                  📎 Document Google: <a href="https://docs.google.com/document/d/1mTPTeXEzwgYoOG2xz-sC9autyT-rbd43jBns8f_Hycg/edit?usp=sharing" target="_blank" style="color: var(--accent); text-decoration: underline; font-weight: 600;">https://docs.google.com/document/d/1mTPTeXEzwgYoOG2xz-sC9autyT-rbd43jBns8f_Hycg/edit?usp=sharing</a>
-                </div>
+            <!-- Google Doc Link Section -->
+            <div style="margin-bottom: 1rem;">
+              <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <a href="https://docs.google.com/document/d/1mTPTeXEzwgYoOG2xz-sC9autyT-rbd43jBns8f_Hycg/edit?usp=sharing" target="_blank" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; background: var(--card); border-radius: 6px; font-size: 0.95em; color: var(--accent); text-decoration: none; border: 1px solid var(--rule); transition: all 0.2s;">
+                  📎 <span style="text-decoration: underline;">Ouvrir le Document Google</span>
+                </a>
                 <button class="edit-btn googledoc-btn" data-edit-type="googledoc" data-edit-section="subpage-Classique-Auberge-googleDocLink" data-campaign-name="Classique" data-subpage-name="Auberge" type="button" title="Gérer le lien Google Doc" style="background: rgb(5, 150, 105); color: white; border: none; border-radius: 4px; padding: 4px 8px; cursor: pointer; font-size: 12px; margin-left: 8px;">
                 📎
               </button>
               </div>
-              <iframe src="https://docs.google.com/document/d/1mTPTeXEzwgYoOG2xz-sC9autyT-rbd43jBns8f_Hycg/preview" style="width: 100%; height: 600px; border: 2px solid var(--rule); border-radius: 8px;" frameborder="0"></iframe>
             </div>
 
             <!-- Separator -->
@@ -17928,8 +17980,25 @@ Le MJ peut choisir 0 à 3 tests parmi ceux-ci. Même mécanique de lecture (écl
 <span class="npc-link" data-npc="Tavin le Facteur" style="color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;" title="Cliquer pour voir la fiche du NPC">[NPC: Tavin le Facteur]</span>
 
 <br>
-
+<span class="npc-link" data-npc="Mirella la receptionniste" style="color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;" title="Cliquer pour voir la fiche du NPC">[NPC: Mirella la receptionniste]</span>
+<br>
+<span class="npc-link" data-npc="Filibert Tournicorne" style="color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;" title="Cliquer pour voir la fiche du NPC">[NPC: Filibert Tournicorne]</span>
+<br>
+<span class="npc-link" data-npc="Lord Erathian Velorme" style="color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;" title="Cliquer pour voir la fiche du NPC">[NPC: Lord Erathian Velorme]</span>
+<br>
+<span class="npc-link" data-npc="Isara Cœur-de-Roc" style="color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;" title="Cliquer pour voir la fiche du NPC">[NPC: Isara Cœur-de-Roc]</span>
+<br>
 <span class="npc-link" data-npc="Grufin l'aubergiste" style="color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;" title="Cliquer pour voir la fiche du NPC">[NPC: Grufin l'aubergiste]</span>
+<br>
+<span class="npc-link" data-npc="Grolban Pisse-Tonneau" style="color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;" title="Cliquer pour voir la fiche du NPC">[NPC: Grolban Pisse-Tonneau]</span>
+<br>
+<span class="npc-link" data-npc="Kael Fenraven" style="color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;" title="Cliquer pour voir la fiche du NPC">[NPC: Kael Fenraven]</span>
+<br>
+<span class="npc-link" data-npc="Bramousse Tournicorne" style="color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;" title="Cliquer pour voir la fiche du NPC">[NPC: Bramousse Tournicorne]</span>
+<br>
+<span class="npc-link" data-npc="Borag et Snik" style="color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;" title="Cliquer pour voir la fiche du NPC">[NPC: Borag et Snik]</span>
+<br>
+<span class="npc-link" data-npc="Lyrielle Vent-d’Aurore" style="color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;" title="Cliquer pour voir la fiche du NPC">[NPC: Lyrielle Vent-d’Aurore]</span>
 <br>
 
 Provision <span class="treasure-table-link" data-table-name="ProvisionAuberge" style="color: var(--accent); cursor: pointer; text-decoration: underline;" title="Cliquer pour voir la table des trésors">[Table: ProvisionAuberge]</span>.
@@ -51286,6 +51355,203 @@ document.addEventListener('DOMContentLoaded', function() {
             <button id="cancelImageInsert" class="btn" style="background: #6b7280; color: white;">Annuler</button>
             <button id="confirmImageInsert" class="btn" style="background: var(--accent); color: white;">✓ Insérer</button>
           </div>
+        </div>
+      
+              </div>
+              
+            </div>
+          </div>
+        </div><div id="pageLinksModal" class="modal" style="display: none; background: rgba(0, 0, 0, 0.7) !important; opacity: 1 !important;">
+          <div class="modal-overlay">
+            <div class="modal-content" style="background: rgb(248, 246, 240) !important; opacity: 1 !important;">
+              <div class="modal-header">
+                <h3>📄 Liens de Pages</h3>
+                <button class="modal-close" type="button">✕</button>
+              </div>
+              <div class="modal-body">
+                
+        <p>Cliquez sur une page pour copier son lien HTML dans le presse-papiers :</p>
+        <div style="margin: 15px 0;">
+          <input type="text" id="page-search-input" placeholder="🔍 Rechercher une page..." style="width: 100%; padding: 8px 12px; border: 2px solid var(--rule); border-radius: 8px; font-size: 14px;">
+        </div>
+        <div class="pages-grid" id="pages-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; margin: 20px 0; max-height: 400px; overflow-y: auto;">
+          
+        <div class="page-item" data-page-id="favoris">
+          <div class="page-info">
+            <div class="page-name">⭐ ⭐ Favoris</div>
+            <div class="page-section" style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Pages directes</div>
+          </div>
+          <div class="copy-indicator">Copié!</div>
+        </div>
+      
+        <div class="page-item" data-page-id="creation">
+          <div class="page-info">
+            <div class="page-name">🎭 Création d'un personnage</div>
+            <div class="page-section" style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">🦸 Héros</div>
+          </div>
+          <div class="copy-indicator">Copié!</div>
+        </div>
+      
+        <div class="page-item" data-page-id="objets">
+          <div class="page-info">
+            <div class="page-name">📦 Objets</div>
+            <div class="page-section" style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">⚔️ Arsenal</div>
+          </div>
+          <div class="copy-indicator">Copié!</div>
+        </div>
+      
+        <div class="page-item" data-page-id="collections-objets">
+          <div class="page-info">
+            <div class="page-name">📚 Collections d'Objets</div>
+            <div class="page-section" style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">⚔️ Arsenal</div>
+          </div>
+          <div class="copy-indicator">Copié!</div>
+        </div>
+      
+        <div class="page-item" data-page-id="elements">
+          <div class="page-info">
+            <div class="page-name">🌟 Éléments</div>
+            <div class="page-section" style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">📚 Règles</div>
+          </div>
+          <div class="copy-indicator">Copié!</div>
+        </div>
+      
+        <div class="page-item" data-page-id="stats">
+          <div class="page-info">
+            <div class="page-name">📊 Statistiques</div>
+            <div class="page-section" style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">📚 Règles</div>
+          </div>
+          <div class="copy-indicator">Copié!</div>
+        </div>
+      
+        <div class="page-item" data-page-id="competences-tests">
+          <div class="page-info">
+            <div class="page-name">🎯 Compétences &amp; Tests</div>
+            <div class="page-section" style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">📚 Règles</div>
+          </div>
+          <div class="copy-indicator">Copié!</div>
+        </div>
+      
+        <div class="page-item" data-page-id="etats">
+          <div class="page-info">
+            <div class="page-name">⚡ États</div>
+            <div class="page-section" style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">📚 Règles</div>
+          </div>
+          <div class="copy-indicator">Copié!</div>
+        </div>
+      
+        <div class="page-item" data-page-id="combat">
+          <div class="page-info">
+            <div class="page-name">⚔️ Combat</div>
+            <div class="page-section" style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">📚 Règles</div>
+          </div>
+          <div class="copy-indicator">Copié!</div>
+        </div>
+      
+        <div class="page-item" data-page-id="gestion-des-ressources">
+          <div class="page-info">
+            <div class="page-name">💎 Gestion des ressources</div>
+            <div class="page-section" style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">📚 Règles</div>
+          </div>
+          <div class="copy-indicator">Copié!</div>
+        </div>
+      
+        <div class="page-item" data-page-id="monstres">
+          <div class="page-info">
+            <div class="page-name">👹 Monstres</div>
+            <div class="page-section" style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">🎭 Maître de jeu</div>
+          </div>
+          <div class="copy-indicator">Copié!</div>
+        </div>
+      
+        <div class="page-item" data-page-id="npcs">
+          <div class="page-info">
+            <div class="page-name">👥 NPCs</div>
+            <div class="page-section" style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">🎭 Maître de jeu</div>
+          </div>
+          <div class="copy-indicator">Copié!</div>
+        </div>
+      
+        <div class="page-item" data-page-id="tables-tresors">
+          <div class="page-info">
+            <div class="page-name">💎 Tables de trésors</div>
+            <div class="page-section" style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">🎭 Maître de jeu</div>
+          </div>
+          <div class="copy-indicator">Copié!</div>
+        </div>
+      
+        <div class="page-item" data-page-id="audio">
+          <div class="page-info">
+            <div class="page-name">🎵 Musiques d'ambiance</div>
+            <div class="page-section" style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">🎭 Maître de jeu</div>
+          </div>
+          <div class="copy-indicator">Copié!</div>
+        </div>
+      
+        <div class="page-item" data-page-id="voyage">
+          <div class="page-info">
+            <div class="page-name">🗺️ Voyage</div>
+            <div class="page-section" style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">🎭 Maître de jeu</div>
+          </div>
+          <div class="copy-indicator">Copié!</div>
+        </div>
+      
+        <div class="page-item" data-page-id="traumas">
+          <div class="page-info">
+            <div class="page-name">🩹 Traumas</div>
+            <div class="page-section" style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">🎭 Maître de jeu</div>
+          </div>
+          <div class="copy-indicator">Copié!</div>
+        </div>
+      
+        <div class="page-item" data-page-id="campagne">
+          <div class="page-info">
+            <div class="page-name">📖 Campagne</div>
+            <div class="page-section" style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">🎭 Maître de jeu</div>
+          </div>
+          <div class="copy-indicator">Copié!</div>
+        </div>
+      
+        <div class="page-item" data-page-id="gestion-objets">
+          <div class="page-info">
+            <div class="page-name">⚔️ Gestion des Objets</div>
+            <div class="page-section" style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">🎭 Maître de jeu</div>
+          </div>
+          <div class="copy-indicator">Copié!</div>
+        </div>
+      
+        <div class="page-item" data-page-id="sorts-sorts-de-monstres">
+          <div class="page-info">
+            <div class="page-name">🔮 Sorts de Monstres</div>
+            <div class="page-section" style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">🎭 Maître de jeu</div>
+          </div>
+          <div class="copy-indicator">Copié!</div>
+        </div>
+      
+        <div class="page-item" data-page-id="histoire">
+          <div class="page-info">
+            <div class="page-name">📜 Histoire</div>
+            <div class="page-section" style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">🌍 Monde</div>
+          </div>
+          <div class="copy-indicator">Copié!</div>
+        </div>
+      
+        <div class="page-item" data-page-id="dieux">
+          <div class="page-info">
+            <div class="page-name">🏛️ Dieux</div>
+            <div class="page-section" style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">🌍 Monde</div>
+          </div>
+          <div class="copy-indicator">Copié!</div>
+        </div>
+      
+        <div class="page-item" data-page-id="geographie">
+          <div class="page-info">
+            <div class="page-name">📜 Geographie</div>
+            <div class="page-section" style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">🌍 Monde</div>
+          </div>
+          <div class="copy-indicator">Copié!</div>
+        </div>
+      
         </div>
       
               </div>
