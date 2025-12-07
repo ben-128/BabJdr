@@ -323,7 +323,7 @@ server.listen(PORT, () => {
 ${IMGBB_API_KEY === 'VOTRE_CLE_API_IMGBB' ? `
 ⚠️  CONFIGURATION REQUISE:
    1. Obtenez une clé API gratuite sur https://api.imgbb.com/
-   2. Éditez le fichier tools/image-upload-server.js
+   2. Éditez le fichier scripts/utils/image-upload-server.js
    3. Remplacez 'VOTRE_CLE_API_IMGBB' par votre clé
    4. Redémarrez le serveur
 ` : `

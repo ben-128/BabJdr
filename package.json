@@ -7,10 +7,12 @@
     "dev": "live-server --port=3000 --open=/index.html --quiet --no-css-inject --entry-file=index.html",
     "build": "node scripts/build-simple.js",
     "serve": "live-server --port=3000 --no-browser --quiet --no-css-inject",
-    "dev-clean": "node tools/image-upload-server.js",
+    "dev-clean": "node scripts/utils/image-upload-server.js",
     "pwa-test": "node scripts/serve-https-fixed.js",
     "icons": "node scripts/generate-pwa-icons.js",
-    "icons-png": "node scripts/generate-png-icons.js"
+    "icons-png": "node scripts/generate-png-icons.js",
+    "monster-icons": "node scripts/monster-icons/generate-icons.js",
+    "npc-icons": "node scripts/npc-icons/generate-icons.js"
   },
   "keywords": [
     "jdr",
@@ -24,6 +26,7 @@
     "canvas": "^3.2.0",
     "live-server": "^1.2.2",
     "nodemon": "^3.0.1",
+    "pdfkit": "^0.15.2",
     "selfsigned": "^3.0.1"
   },
   "engines": {

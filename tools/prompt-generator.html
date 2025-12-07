@@ -530,7 +530,7 @@
                     Pour activer l'upload automatique:
                     <ol style="margin: 10px 0 0 20px;">
                         <li>Ouvrez un terminal dans le dossier du projet</li>
-                        <li>Exécutez: <code>node tools/image-upload-server.js</code></li>
+                        <li>Exécutez: <code>node scripts/utils/image-upload-server.js</code></li>
                         <li>Configurez votre clé API ImgBB dans le fichier</li>
                     </ol>
                 </div>
@@ -915,7 +915,7 @@
                         if (!data.apiConfigured) {
                             warningEl.innerHTML = `
                                 <strong>⚠️ Configuration requise</strong><br>
-                                Clé API ImgBB manquante. Éditez <code>tools/image-upload-server.js</code>
+                                Clé API ImgBB manquante. Éditez <code>scripts/utils/image-upload-server.js</code>
                                 et ajoutez votre clé API gratuite depuis <a href="https://api.imgbb.com/" target="_blank">api.imgbb.com</a>
                             `;
                         }
@@ -1584,7 +1584,7 @@
             }
 
             if (!serverOnline) {
-                alert('Le serveur d\'upload n\'est pas disponible. Lancez-le avec: node tools/image-upload-server.js');
+                alert('Le serveur d\'upload n\'est pas disponible. Lancez-le avec: node scripts/utils/image-upload-server.js');
                 return;
             }
 
@@ -1694,7 +1694,7 @@
             }
 
             if (!serverOnline) {
-                alert('Le serveur n\'est pas disponible. Lancez-le avec: node tools/image-upload-server.js');
+                alert('Le serveur n\'est pas disponible. Lancez-le avec: node scripts/utils/image-upload-server.js');
                 return;
             }
 
