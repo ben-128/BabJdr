@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-12-07T23:16:54.972Z by JdrBab Build System -->
+<!-- Generated on 2025-12-07T23:18:26.479Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14870,12 +14870,13 @@ select:focus {
     }
 
     buildStaticPage(pageId, pageData) {
-      const isActive = pageId === 'creation' ? 'active' : '';
-      
+      // Don't mark any page as active - let the router handle it based on URL
+      const isActive = '';
+
       // Defense against missing or malformed pageData
       if (!pageData || typeof pageData !== 'object') {
         console.warn('buildStaticPage: invalid pageData', pageData);
-        return `<article class="${isActive}" data-page="${pageId}"><section><h2>Page non disponible</h2><p>Les données de cette page ne sont pas disponibles.</p></section></article>`;
+        return `<article class="${isActive}" data-page="${pageId}" style="display: none;"><section><h2>Page non disponible</h2><p>Les données de cette page ne sont pas disponibles.</p></section></article>`;
       }
       
       const title = pageData.title || pageId;
@@ -14892,7 +14893,7 @@ select:focus {
       }
       
       return `
-        <article class="${isActive}" data-page="${page}" data-static-page="true" data-page-title="${title}">
+        <article class="${isActive}" data-page="${page}" data-static-page="true" data-page-title="${title}" style="display: none;">
           <section>
             ${this.buildStaticPageHeader(pageData)}
             ${this.buildSections(pageData.sections)}

@@ -302,12 +302,13 @@
     }
 
     buildStaticPage(pageId, pageData) {
-      const isActive = pageId === 'creation' ? 'active' : '';
-      
+      // Don't mark any page as active - let the router handle it based on URL
+      const isActive = '';
+
       // Defense against missing or malformed pageData
       if (!pageData || typeof pageData !== 'object') {
         console.warn('buildStaticPage: invalid pageData', pageData);
-        return `<article class="${isActive}" data-page="${pageId}"><section><h2>Page non disponible</h2><p>Les données de cette page ne sont pas disponibles.</p></section></article>`;
+        return `<article class="${isActive}" data-page="${pageId}" style="display: none;"><section><h2>Page non disponible</h2><p>Les données de cette page ne sont pas disponibles.</p></section></article>`;
       }
       
       const title = pageData.title || pageId;
@@ -324,7 +325,7 @@
       }
       
       return `
-        <article class="${isActive}" data-page="${page}" data-static-page="true" data-page-title="${title}">
+        <article class="${isActive}" data-page="${page}" data-static-page="true" data-page-title="${title}" style="display: none;">
           <section>
             ${this.buildStaticPageHeader(pageData)}
             ${this.buildSections(pageData.sections)}
