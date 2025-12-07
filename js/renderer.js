@@ -67,7 +67,13 @@
     },
 
     generateContent() {
-      JdrApp.modules.router.generateTOC.call(JdrApp.modules.router);
+      // Skip TOC regeneration if it already exists (loaded from static HTML)
+      const tocContainer = document.querySelector('.toc');
+      const existingTocSections = tocContainer ? tocContainer.querySelectorAll('.toc-section') : [];
+      if (existingTocSections.length < 3) {
+        JdrApp.modules.router.generateTOC.call(JdrApp.modules.router);
+      }
+
       this.generateArticles();
       this.generateDevToolbox();
       

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-12-07T23:22:01.681Z by JdrBab Build System -->
+<!-- Generated on 2025-12-07T23:23:47.334Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25428,7 +25428,13 @@ select:focus {
     },
 
     generateContent() {
-      JdrApp.modules.router.generateTOC.call(JdrApp.modules.router);
+      // Skip TOC regeneration if it already exists (loaded from static HTML)
+      const tocContainer = document.querySelector('.toc');
+      const existingTocSections = tocContainer ? tocContainer.querySelectorAll('.toc-section') : [];
+      if (existingTocSections.length < 3) {
+        JdrApp.modules.router.generateTOC.call(JdrApp.modules.router);
+      }
+
       this.generateArticles();
       this.generateDevToolbox();
       
