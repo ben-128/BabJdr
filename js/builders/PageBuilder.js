@@ -1408,6 +1408,10 @@
       if (window.CampaignSchemas && typeof window.CampaignSchemas.expandSchemaMarkers === 'function') {
         content = window.CampaignSchemas.expandSchemaMarkers(content);
       }
+      // Expand image markers [img:id] to actual HTML
+      if (window.ModalManager && typeof window.ModalManager.expandImageMarkers === 'function') {
+        content = window.ModalManager.expandImageMarkers(content);
+      }
 
       let contentHtml = `
         <div class="subpage-content editable" data-edit-type="generic" data-edit-section="subpage-${campaignName}-${subPageName}-content"
