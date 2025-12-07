@@ -13,6 +13,7 @@
     currentPlaylist: null,
     currentTrackIndex: 0,
     isPlaying: false,
+    isLooping: false, // Loop la piste en cours
     volume: 0.3,
     config: null,
     isEnabled: false,
@@ -207,8 +208,14 @@
 
         // Gestion des événements audio
         this.currentAudio.addEventListener('ended', () => {
-          this.isPlaying = false;
-          this.playNext();
+          if (this.isLooping) {
+            // Rejouer la même piste
+            this.currentAudio.currentTime = 0;
+            this.currentAudio.play();
+          } else {
+            this.isPlaying = false;
+            this.playNext();
+          }
         });
 
         this.currentAudio.addEventListener('play', () => {
@@ -571,6 +578,11 @@
         this.updateAudioPageUI();
       };
 
+      window.audioToggleLoop = () => {
+        this.isLooping = !this.isLooping;
+        this.updateAudioPageUI();
+      };
+
       // Contrôles audio principaux
       const audioControlsContainer = document.getElementById('audio-controls-page');
       if (audioControlsContainer) {
@@ -592,7 +604,12 @@
                     style="display: block; width: 100%; padding: 1.5rem; margin-bottom: 1rem; background: var(--bronze); color: white; border: none; border-radius: 8px; font-size: 1.3rem; cursor: pointer; font-weight: bold;">
               ⏭️ MUSIQUE SUIVANTE
             </button>
-            
+
+            <button id="loop-btn"
+                    style="display: block; width: 100%; padding: 1.5rem; margin-bottom: 1rem; background: ${this.isLooping ? '#8b5cf6' : '#6b7280'}; color: white; border: none; border-radius: 8px; font-size: 1.3rem; cursor: pointer; font-weight: bold;">
+              ${this.isLooping ? '🔂 BOUCLE ACTIVÉE' : '🔁 BOUCLE DÉSACTIVÉE'}
+            </button>
+
             <div style="margin-bottom: 1rem;">
               <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">🔊 Volume: <span id="vol-display">${Math.round(this.volume * 100)}%</span></label>
               <input type="range" id="volume-slider"
@@ -644,6 +661,16 @@
             newNextBtn.addEventListener('click', (e) => {
               e.preventDefault();
               window.audioNext();
+            });
+          }
+
+          const loopBtn = document.getElementById('loop-btn');
+          if (loopBtn) {
+            const newLoopBtn = loopBtn.cloneNode(true);
+            loopBtn.parentNode.replaceChild(newLoopBtn, loopBtn);
+            newLoopBtn.addEventListener('click', (e) => {
+              e.preventDefault();
+              window.audioToggleLoop();
             });
           }
 
