@@ -428,16 +428,22 @@
       preview.appendChild(closeBtn);
       preview.appendChild(cardContainer);
 
-      // Force display of images after DOM insertion
+      // Force load lazy images in preview (they won't be observed by IntersectionObserver)
       setTimeout(() => {
-        const images = preview.querySelectorAll('img[style*="display: none"]');
+        const images = preview.querySelectorAll('img.lazy-load[data-src]');
         images.forEach(img => {
-          img.style.display = 'block';
-          img.style.maxWidth = '200px';
-          img.style.height = 'auto';
-          img.style.margin = '0.5rem auto';
+          const dataSrc = img.getAttribute('data-src');
+          if (dataSrc) {
+            img.src = dataSrc;
+            img.removeAttribute('data-src');
+            img.classList.remove('lazy-load');
+            img.style.display = 'block';
+            img.style.maxWidth = '200px';
+            img.style.height = 'auto';
+            img.style.margin = '0.5rem auto';
+          }
         });
-      }, 100);
+      }, 50);
       
       // Style the preview container
       preview.style.cssText = `
