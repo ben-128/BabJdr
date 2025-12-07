@@ -405,6 +405,12 @@
   transition: max-height var(--transition-normal), opacity var(--transition-normal);
 }
 
+/* Disable TOC transitions on initial page load */
+html.initial-load .toc-section-content,
+html.initial-load .toc-section-toggle {
+  transition: none !important;
+}
+
 .toc-section-content .toc-category {
   /* Remove scroll limits - let everything be visible naturally */
   max-height: none;

@@ -10,9 +10,12 @@
   // ========================================
   JdrApp.modules.router = {
     currentRoute: '',
-    
+    _isInitialLoad: true,
+
     init() {
-      
+      // Add initial-load class to prevent TOC transition animation on first load
+      document.documentElement.classList.add('initial-load');
+
       // Set up route change listeners
       JdrApp.utils.events.onHashChange(() => this.parseRoute());
       JdrApp.utils.events.onDOMReady(() => this.parseRoute());
@@ -37,20 +40,33 @@
       const hash = location.hash.replace('#/', '');
       const page = hash || 'creation';
       const exists = JdrApp.utils.dom.$(`article[data-page="${page}"]`);
-      
+
       this.currentRoute = page;
-      
+
       // Handle dynamic category routing
       // Fix: check if exists is falsy OR empty NodeList
       const shouldUseRouter = !exists || (exists.length === 0);
-      
+
       if (shouldUseRouter) {
         if (this.handleDynamicRoute(page)) {
+          this._removeInitialLoadClass();
           return; // Route was handled dynamically
         }
       }
-      
+
       this.show(exists ? page : 'creation');
+      this._removeInitialLoadClass();
+    },
+
+    _removeInitialLoadClass() {
+      // Remove initial-load class after first route to enable TOC transitions
+      if (this._isInitialLoad) {
+        this._isInitialLoad = false;
+        // Use requestAnimationFrame to ensure DOM is updated before enabling transitions
+        requestAnimationFrame(() => {
+          document.documentElement.classList.remove('initial-load');
+        });
+      }
     },
 
     handleDynamicRoute(page) {
