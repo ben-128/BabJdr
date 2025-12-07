@@ -272,12 +272,10 @@
         if (window.ScrollOptimizer && window.ScrollOptimizer.cleanupVirtualization) {
           window.ScrollOptimizer.cleanupVirtualization(article);
         }
-        
+
         article.innerHTML = newArticle.innerHTML;
-        
-        // Make sure only this article is active
-        document.querySelectorAll('article').forEach(a => a.classList.remove('active'));
-        article.classList.add('active');
+
+        // Note: Don't add .active here - let updateActiveStates handle it to avoid double animation
         
         // Plus simple et plus fiable
         this.autoLoadImages();
