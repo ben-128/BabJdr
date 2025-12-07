@@ -57,7 +57,7 @@
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Inflige (7 + Puiss. Sorts) dégâts de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> aux créatures autour du lanceur (3m). <br>Puis inflige le même montant aux autres créatures devant le lanceur sur 6m.",
-        "effetCritique": "<strong>Coup Critique: </strong> Les dégâts passent à (10 + Puiss. Sorts). Les cibles non volantes et de taille moyennes sont <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">A terre</span> pendant 1 tour."
+        "effetCritique": "<strong>Coup Critique: </strong> Les dégâts passent à (10 + Puiss. Sorts). Les cibles non volantes et de taille moyennes sont <span class=\"etat-link\" data-etat=\"À terre\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">À terre</span> pendant 1 tour."
       },
       {
         "nom": "Faisceau lumineux",
@@ -516,10 +516,10 @@
         "prerequis": "📋 <strong>Prérequis:</strong> -",
         "portee": "🎯 <strong>Portée:</strong> 3m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 4",
+        "coutMana": "🔵 <strong>Coût mana:</strong> -",
         "resistance": "<strong>Sans effet si:</strong> -",
-        "effetNormal": "<strong>Effet:</strong> Rend (5 + Puiss. Sorts) points de vie à la cible.",
-        "effetCritique": "<strong>Coup Critique:</strong> Rend (8 + Puiss. Sorts) points de vie."
+        "effetNormal": "<strong>Effet:</strong> Rend 7 points de vie à la cible.",
+        "effetCritique": "<strong>Coup Critique:</strong> Rend 12 points de vie."
       }
     ]
   }

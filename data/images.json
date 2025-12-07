@@ -268,11 +268,12 @@
     "npc:Filibert Tournicorne": "https://i.ibb.co/yB66SHRc/Filibert-Tournicorne.png",
     "npc:Borag et Snik": "https://i.ibb.co/Cp1f1Swj/Borag-et-Snik.png",
     "npc:Isara Cœur-de-Roc": "https://i.ibb.co/BVHskdpD/Isara-C-ur-de-Roc.png",
-    "objet:Sceptre de Durnak, dieu de la terre": "https://i.ibb.co/VpkzCM9V/Sceptre-de-Durnak-dieu-de-la-terre.png"
+    "objet:Sceptre de Durnak, dieu de la terre": "https://i.ibb.co/VpkzCM9V/Sceptre-de-Durnak-dieu-de-la-terre.png",
+    "sort:Sorts de Mage:Téléportation": "https://i.ibb.co/wbZHjnF/teleportation.png"
   },
   "meta": {
-    "total_images": 269,
-    "exported_date": "2025-12-02",
+    "total_images": 270,
+    "exported_date": "2025-12-07",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
 }
