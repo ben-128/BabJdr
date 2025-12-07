@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-12-07T23:06:20.212Z by JdrBab Build System -->
+<!-- Generated on 2025-12-07T23:09:39.520Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22797,10 +22797,10 @@ select:focus {
       // Remove initial-load class after first route to enable TOC transitions
       if (this._isInitialLoad) {
         this._isInitialLoad = false;
-        // Use requestAnimationFrame to ensure DOM is updated before enabling transitions
-        requestAnimationFrame(() => {
+        // Wait 500ms to ensure all async initialization (renderer etc.) is complete
+        setTimeout(() => {
           document.documentElement.classList.remove('initial-load');
-        });
+        }, 500);
       }
     },
 

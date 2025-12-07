@@ -62,10 +62,10 @@
       // Remove initial-load class after first route to enable TOC transitions
       if (this._isInitialLoad) {
         this._isInitialLoad = false;
-        // Use requestAnimationFrame to ensure DOM is updated before enabling transitions
-        requestAnimationFrame(() => {
+        // Wait 500ms to ensure all async initialization (renderer etc.) is complete
+        setTimeout(() => {
           document.documentElement.classList.remove('initial-load');
-        });
+        }, 500);
       }
     },
 
