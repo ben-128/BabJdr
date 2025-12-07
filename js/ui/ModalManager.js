@@ -1575,6 +1575,207 @@
       }
 
       return modal;
+    },
+
+    /**
+     * Show image insert modal
+     */
+    showImageInsertModal(insertCallback) {
+      let modal = JdrApp.utils.dom.$('#imageInsertModal');
+      if (modal) {
+        modal.remove();
+      }
+      modal = this.createImageInsertModal(insertCallback);
+      document.body.appendChild(modal);
+      BaseModal.openModal('imageInsertModal');
+    },
+
+    /**
+     * Create image insert modal
+     */
+    createImageInsertModal(insertCallback) {
+      const modal = BaseModal.createModal('imageInsertModal', '📷 Insérer une Image', `
+        <div style="padding: 10px 0;">
+          <div style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 8px; font-weight: 600;">URL de l'image :</label>
+            <input type="text" id="imageUrlInput" placeholder="https://exemple.com/image.png"
+              style="width: 100%; padding: 10px 12px; border: 2px solid var(--rule); border-radius: 8px; font-size: 14px;">
+          </div>
+
+          <div style="text-align: center; margin: 15px 0; color: var(--paper-muted);">— ou —</div>
+
+          <div style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 8px; font-weight: 600;">Uploader une image :</label>
+            <div id="imageDropZone" style="border: 2px dashed var(--rule); border-radius: 8px; padding: 30px; text-align: center; cursor: pointer; transition: all 0.2s;">
+              <div style="font-size: 2rem; margin-bottom: 10px;">📤</div>
+              <p style="margin: 0; color: var(--paper-muted);">Cliquez ou glissez une image ici</p>
+              <input type="file" id="imageFileInput" accept="image/*" style="display: none;">
+            </div>
+          </div>
+
+          <div id="imagePreviewContainer" style="display: none; margin-bottom: 20px; text-align: center;">
+            <label style="display: block; margin-bottom: 8px; font-weight: 600;">Aperçu :</label>
+            <img id="imagePreview" style="max-width: 100%; max-height: 200px; border-radius: 8px; border: 1px solid var(--rule);">
+          </div>
+
+          <div style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 8px; font-weight: 600;">Taille (optionnel) :</label>
+            <div style="display: flex; gap: 10px; align-items: center;">
+              <input type="number" id="imageWidth" placeholder="Largeur" style="flex: 1; padding: 8px; border: 1px solid var(--rule); border-radius: 6px;">
+              <span>×</span>
+              <input type="number" id="imageHeight" placeholder="Hauteur" style="flex: 1; padding: 8px; border: 1px solid var(--rule); border-radius: 6px;">
+              <span style="color: var(--paper-muted);">px</span>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 8px; font-weight: 600;">Style d'affichage :</label>
+            <select id="imageStyle" style="width: 100%; padding: 10px; border: 1px solid var(--rule); border-radius: 6px;">
+              <option value="inline">En ligne (dans le texte)</option>
+              <option value="block">Bloc (centré)</option>
+              <option value="float-left">Flottant à gauche</option>
+              <option value="float-right">Flottant à droite</option>
+            </select>
+          </div>
+
+          <div style="display: flex; gap: 10px; justify-content: flex-end;">
+            <button id="cancelImageInsert" class="btn" style="background: #6b7280; color: white;">Annuler</button>
+            <button id="confirmImageInsert" class="btn" style="background: var(--accent); color: white;">✓ Insérer</button>
+          </div>
+        </div>
+      `);
+
+      const urlInput = modal.querySelector('#imageUrlInput');
+      const fileInput = modal.querySelector('#imageFileInput');
+      const dropZone = modal.querySelector('#imageDropZone');
+      const previewContainer = modal.querySelector('#imagePreviewContainer');
+      const previewImg = modal.querySelector('#imagePreview');
+      const widthInput = modal.querySelector('#imageWidth');
+      const heightInput = modal.querySelector('#imageHeight');
+      const styleSelect = modal.querySelector('#imageStyle');
+      const cancelBtn = modal.querySelector('#cancelImageInsert');
+      const confirmBtn = modal.querySelector('#confirmImageInsert');
+
+      let currentImageUrl = '';
+
+      // Show preview
+      const showPreview = (url) => {
+        currentImageUrl = url;
+        previewImg.src = url;
+        previewContainer.style.display = 'block';
+      };
+
+      // URL input change
+      urlInput.addEventListener('input', (e) => {
+        const url = e.target.value.trim();
+        if (url) {
+          showPreview(url);
+        } else {
+          previewContainer.style.display = 'none';
+          currentImageUrl = '';
+        }
+      });
+
+      // Drop zone click
+      dropZone.addEventListener('click', () => fileInput.click());
+
+      // Drag and drop
+      dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.style.borderColor = 'var(--accent)';
+        dropZone.style.background = 'rgba(var(--accent-rgb), 0.1)';
+      });
+
+      dropZone.addEventListener('dragleave', () => {
+        dropZone.style.borderColor = 'var(--rule)';
+        dropZone.style.background = 'transparent';
+      });
+
+      dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.style.borderColor = 'var(--rule)';
+        dropZone.style.background = 'transparent';
+
+        const file = e.dataTransfer.files[0];
+        if (file && file.type.startsWith('image/')) {
+          handleFile(file);
+        }
+      });
+
+      // File input change
+      fileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          handleFile(file);
+        }
+      });
+
+      // Handle file (convert to base64 for preview, or upload to ImgBB)
+      const handleFile = async (file) => {
+        // Convert to base64 for preview
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const base64 = e.target.result;
+          showPreview(base64);
+          urlInput.value = '';
+        };
+        reader.readAsDataURL(file);
+      };
+
+      // Cancel button
+      cancelBtn.addEventListener('click', () => {
+        BaseModal.closeModal(modal);
+      });
+
+      // Confirm button
+      confirmBtn.addEventListener('click', () => {
+        if (!currentImageUrl) {
+          alert('Veuillez entrer une URL ou sélectionner une image.');
+          return;
+        }
+
+        const width = widthInput.value;
+        const height = heightInput.value;
+        const style = styleSelect.value;
+
+        let imgHtml = '<img src="' + currentImageUrl + '"';
+
+        // Add dimensions if specified
+        if (width) imgHtml += ' width="' + width + '"';
+        if (height) imgHtml += ' height="' + height + '"';
+
+        // Add style based on selection
+        let styleAttr = '';
+        switch (style) {
+          case 'block':
+            styleAttr = 'display: block; margin: 1rem auto; max-width: 100%;';
+            break;
+          case 'float-left':
+            styleAttr = 'float: left; margin: 0 1rem 1rem 0; max-width: 50%;';
+            break;
+          case 'float-right':
+            styleAttr = 'float: right; margin: 0 0 1rem 1rem; max-width: 50%;';
+            break;
+          case 'inline':
+          default:
+            styleAttr = 'vertical-align: middle; max-height: 1.5em;';
+            break;
+        }
+
+        imgHtml += ' style="' + styleAttr + '"';
+        imgHtml += ' alt="Image">';
+
+        // Insert into editor
+        if (insertCallback) {
+          insertCallback(imgHtml);
+        } else if (window.editorInsertTextAtCursor) {
+          window.editorInsertTextAtCursor(imgHtml);
+        }
+
+        BaseModal.closeModal(modal);
+      });
+
+      return modal;
     }
   };
 

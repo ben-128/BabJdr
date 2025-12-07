@@ -2098,6 +2098,7 @@
               <button id="editorNPCLinksBtn" class="btn" style="background: #0891b2; color: white; font-size: 12px;">👥 Liens NPCs</button>
               <button id="editorTreasureTablesBtn" class="btn" style="background: #b45309; color: white; font-size: 12px;">🎲 Tables Trésors</button>
               <button id="editorSchemaBtn" class="btn" style="background: #8b5cf6; color: white; font-size: 12px;">🎨 Schéma</button>
+              <button id="editorImageBtn" class="btn" style="background: #be185d; color: white; font-size: 12px;">📷 Image</button>
             </div>
             <div style="font-size: 12px; color: var(--paper-muted); line-height: 1.4;">
               💡 <strong>Astuce:</strong> Utilisez ces boutons pour insérer rapidement des éléments, états, liens, tables de trésors et schémas dans votre contenu HTML.
@@ -2128,6 +2129,7 @@
       const npcLinksBtn = modal.querySelector('#editorNPCLinksBtn');
       const treasureTablesBtn = modal.querySelector('#editorTreasureTablesBtn');
       const schemaBtn = modal.querySelector('#editorSchemaBtn');
+      const imageBtn = modal.querySelector('#editorImageBtn');
 
       // Helper function to insert text at cursor position in textarea
       const insertTextAtCursor = (text) => {
@@ -2226,6 +2228,16 @@
           } else {
             console.error('CampaignSchemas not available!');
             alert('Erreur: Le module de schémas n\'est pas chargé.');
+          }
+        });
+      }
+
+      if (imageBtn) {
+        imageBtn.addEventListener('click', () => {
+          if (JdrApp.modules.ui?.showImageInsertModal) {
+            JdrApp.modules.ui.showImageInsertModal(insertTextAtCursor);
+          } else if (ModalManager?.showImageInsertModal) {
+            ModalManager.showImageInsertModal(insertTextAtCursor);
           }
         });
       }
