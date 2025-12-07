@@ -1098,13 +1098,7 @@
       
       // Show and activate page after content is inserted
       this.show('collections-objets');
-      this.updateActiveStates('collections-objets');
-      
-      // Ensure the page is visible regardless of dev mode
-      if (pageElement) {
-        pageElement.classList.add('active');
-      }
-      
+
       return true;
     },
 

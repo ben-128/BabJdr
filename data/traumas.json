@@ -21,6 +21,12 @@
       "content": "<ul>\n  <li><b>Bras invalide</b> : impossible d’utiliser les armes à deux mains ou un bouclier.</li>\n  <li><b>Commotion tenace</b> : –5 en Intelligence et –1 compétence Réflexion.</li>\n  <li><b>Âme fêlée</b> : les attaques et sorts contre le héros gagnent +2 aux chances de coup critique.</li>\n  <li><b>Cicatrice élémentaire</b> : –10 à toutes les armures élémentaires.</li>\n  <li><b>Amnésie majeure</b> : Perd définitivement des sorts connus.</li>\n</ul>",
       "deletable": true,
       "sectionName": "Nouvelle section"
+    },
+    {
+      "id": "section-1765145766366-l0s3v9",
+      "type": "card",
+      "title": "Titres :",
+      "content": "Vagabond <br>\n\nNovice <br>\n\nTraqueur <br>\n\nPourfendeur <br>\n\nTueur <br>\n\nDestructeur <br>\n\nExterminateur <br>\n\nChampion <br>\n\nMaître <br>\n\nGrand Maître <br>\n\nInvaincu du Ciel et de la Terre <br>"
     }
   ]
 }
