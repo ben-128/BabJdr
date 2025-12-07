@@ -5,7 +5,7 @@ const https = require('https');
 const { exec } = require('child_process');
 
 const PORT = 3000;
-const IMAGES_JSON_PATH = path.join(__dirname, '..', 'data', 'images.json');
+const IMAGES_JSON_PATH = path.join(__dirname, '..', '..', 'data', 'images.json');
 
 // Configuration ImgBB
 const IMGBB_API_KEY = '06a98f5c0c2dad952e6ab94b03040f36';
@@ -181,7 +181,7 @@ const server = http.createServer(async (req, res) => {
                     return;
                 }
 
-                const filePath = path.join(__dirname, '..', 'data', fileName);
+                const filePath = path.join(__dirname, '..', '..', 'data', fileName);
 
                 fs.readFile(filePath, 'utf8', (err, fileData) => {
                     if (err) {
@@ -259,7 +259,7 @@ const server = http.createServer(async (req, res) => {
     } else if (req.method === 'GET' && req.url.startsWith('/data/')) {
         // Servir les fichiers JSON du dossier data
         const fileName = req.url.replace('/data/', '');
-        const filePath = path.join(__dirname, '..', 'data', fileName);
+        const filePath = path.join(__dirname, '..', '..', 'data', fileName);
 
         fs.readFile(filePath, 'utf8', (err, data) => {
             if (err) {
@@ -274,7 +274,7 @@ const server = http.createServer(async (req, res) => {
     } else if (req.method === 'GET') {
         // Servir les fichiers statiques (HTML, CSS, JS, images, etc.)
         let filePath = '.' + req.url;
-        if (filePath === './') filePath = './dev.html';
+        if (filePath === './') filePath = './index.html';
 
         const extname = path.extname(filePath);
         let contentType = 'text/html';
@@ -294,8 +294,8 @@ const server = http.createServer(async (req, res) => {
             case '.html': contentType = 'text/html'; break;
         }
 
-        // Résoudre le chemin relatif au répertoire parent (racine du projet)
-        const fullPath = path.join(__dirname, '..', filePath);
+        // Résoudre le chemin relatif à la racine du projet (2 niveaux au-dessus de scripts/utils)
+        const fullPath = path.join(__dirname, '..', '..', filePath);
 
         fs.readFile(fullPath, (err, content) => {
             if (err) {
