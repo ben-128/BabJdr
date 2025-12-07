@@ -1432,17 +1432,14 @@
               </div>
             </div>
 
-            <!-- Google Doc iframe Section -->
-            <div style="margin-bottom: 1.5rem;">
-              <div style="display: flex; align-items: flex-start; gap: 0.5rem; margin-bottom: 0.5rem;">
-                <div style="flex: 1; padding: 0.5rem; background: var(--card); border-radius: 4px; font-size: 0.9em; color: var(--text-muted); border: 1px solid var(--rule);">
-                  📎 Document Google: <a href="${docLink}" target="_blank" style="color: var(--accent); text-decoration: underline; font-weight: 600;">${docLink}</a>
-                </div>
+            <!-- Google Doc Link Section -->
+            <div style="margin-bottom: 1rem;">
+              <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <a href="${docLink}" target="_blank" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; background: var(--card); border-radius: 6px; font-size: 0.95em; color: var(--accent); text-decoration: none; border: 1px solid var(--rule); transition: all 0.2s;">
+                  📎 <span style="text-decoration: underline;">Ouvrir le Document Google</span>
+                </a>
                 ${this.buildGoogleDocButton(campaignName, subPageName)}
               </div>
-              <iframe src="${embedLink}"
-                      style="width: 100%; height: 600px; border: 2px solid var(--rule); border-radius: 8px;"
-                      frameborder="0"></iframe>
             </div>
 
             <!-- Separator -->
