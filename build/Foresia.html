@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-12-07T23:28:57.007Z by JdrBab Build System -->
+<!-- Generated on 2025-12-07T23:30:34.473Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34818,17 +34818,17 @@ select:focus {
         let styleAttr = '';
         switch (style) {
           case 'block':
-            styleAttr = 'display: block; margin: 1rem auto; max-width: 100%;';
+            styleAttr = 'display: block; margin: 1rem auto; max-width: 100%; min-width: 200px;';
             break;
           case 'float-left':
-            styleAttr = 'float: left; margin: 0 1rem 1rem 0; max-width: 50%;';
+            styleAttr = 'float: left; margin: 0 1rem 1rem 0; max-width: 50%; min-width: 150px;';
             break;
           case 'float-right':
-            styleAttr = 'float: right; margin: 0 0 1rem 1rem; max-width: 50%;';
+            styleAttr = 'float: right; margin: 0 0 1rem 1rem; max-width: 50%; min-width: 150px;';
             break;
           case 'inline':
           default:
-            styleAttr = 'vertical-align: middle; max-height: 1.5em;';
+            styleAttr = 'vertical-align: middle; max-height: 150px;';
             break;
         }
 

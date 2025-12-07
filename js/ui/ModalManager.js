@@ -1748,17 +1748,17 @@
         let styleAttr = '';
         switch (style) {
           case 'block':
-            styleAttr = 'display: block; margin: 1rem auto; max-width: 100%;';
+            styleAttr = 'display: block; margin: 1rem auto; max-width: 100%; min-width: 200px;';
             break;
           case 'float-left':
-            styleAttr = 'float: left; margin: 0 1rem 1rem 0; max-width: 50%;';
+            styleAttr = 'float: left; margin: 0 1rem 1rem 0; max-width: 50%; min-width: 150px;';
             break;
           case 'float-right':
-            styleAttr = 'float: right; margin: 0 0 1rem 1rem; max-width: 50%;';
+            styleAttr = 'float: right; margin: 0 0 1rem 1rem; max-width: 50%; min-width: 150px;';
             break;
           case 'inline':
           default:
-            styleAttr = 'vertical-align: middle; max-height: 1.5em;';
+            styleAttr = 'vertical-align: middle; max-height: 150px;';
             break;
         }
 
