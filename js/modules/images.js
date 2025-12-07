@@ -184,12 +184,13 @@
 
     // Process image URL to handle proxying for mobile compatibility
     processImageUrl(originalUrl) {
-      // If it's an i.ibb.co URL, use proxy for better mobile compatibility
-      if (originalUrl.includes('i.ibb.co') && !originalUrl.includes('images.weserv.nl')) {
-        const format = this.supportsWebP() ? 'webp' : 'jpeg';
-        const quality = this.getOptimalQuality();
-        return `https://images.weserv.nl/?url=${encodeURIComponent(originalUrl)}&we&output=${format}&q=${quality}&w=400&h=300&fit=inside`;
-      }
+      // Disabled weserv.nl proxy for faster loading - load directly from i.ibb.co
+      // The proxy was adding latency. ImgBB is fast enough on its own.
+      // if (originalUrl.includes('i.ibb.co') && !originalUrl.includes('images.weserv.nl')) {
+      //   const format = this.supportsWebP() ? 'webp' : 'jpeg';
+      //   const quality = this.getOptimalQuality();
+      //   return `https://images.weserv.nl/?url=${encodeURIComponent(originalUrl)}&we&output=${format}&q=${quality}&w=400&h=300&fit=inside`;
+      // }
 
       // For local monster paths, encode only the filename to handle French characters properly
       if (originalUrl.startsWith('data/images/Monstres/')) {
