@@ -554,10 +554,13 @@
           </div>
         `;
       } else if (isPreviewMode) {
-        // PREVIEW: Use lazy loading without buttons
+        // PREVIEW: Only show image if there's actually an image URL
+        if (!imageUrl) {
+          return ''; // Don't render anything if no image in preview mode
+        }
         return `
           <div class="${containerClasses}" data-illus-key="${illusKey}" data-style-type="${styleType}" data-bound="1">
-            <img alt="Illustration ${altText}" class="thumb lazy-load" width="200" height="150" loading="lazy" style="${imageStyle}"${imageUrl ? ` data-src="${imageUrl}"` : ''} src="${placeholder}">
+            <img alt="Illustration ${altText}" class="thumb lazy-load" width="200" height="150" loading="lazy" style="${imageStyle}" data-src="${imageUrl}" src="${placeholder}">
           </div>
         `;
       } else {
