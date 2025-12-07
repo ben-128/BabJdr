@@ -1594,53 +1594,56 @@
      * Create image insert modal
      */
     createImageInsertModal(insertCallback) {
-      const modal = BaseModal.createModal('imageInsertModal', '📷 Insérer une Image', `
-        <div style="padding: 5px 0; font-size: 12px;">
-          <div style="margin-bottom: 10px;">
-            <label style="display: block; margin-bottom: 4px; font-weight: 600; font-size: 11px;">URL de l'image :</label>
-            <input type="text" id="imageUrlInput" placeholder="https://exemple.com/image.png"
-              style="width: 100%; padding: 6px 8px; border: 1px solid var(--rule); border-radius: 4px; font-size: 11px;">
+      const modal = BaseModal.createModal('imageInsertModal', '📷 Image', `
+        <style>
+          #imageInsertModal .modal-content { max-width: 320px !important; }
+          #imageInsertModal .modal-header { padding: 8px 12px !important; font-size: 13px !important; }
+          #imageInsertModal .modal-body { padding: 8px 12px !important; }
+        </style>
+        <div style="font-size: 11px; line-height: 1.3;">
+          <div style="margin-bottom: 6px;">
+            <label style="display: block; margin-bottom: 2px; font-weight: 600; font-size: 10px; color: var(--ink);">URL :</label>
+            <input type="text" id="imageUrlInput" placeholder="https://..."
+              style="width: 100%; padding: 4px 6px; border: 1px solid var(--rule); border-radius: 3px; font-size: 10px;">
           </div>
 
-          <div style="text-align: center; margin: 8px 0; color: var(--paper-muted); font-size: 10px;">— ou —</div>
+          <div style="text-align: center; margin: 4px 0; color: var(--paper-muted); font-size: 9px;">— ou —</div>
 
-          <div style="margin-bottom: 10px;">
-            <label style="display: block; margin-bottom: 4px; font-weight: 600; font-size: 11px;">Uploader :</label>
-            <div id="imageDropZone" style="border: 1px dashed var(--rule); border-radius: 4px; padding: 12px; text-align: center; cursor: pointer; transition: all 0.2s;">
-              <div style="font-size: 1.2rem; margin-bottom: 4px;">📤</div>
-              <p style="margin: 0; color: var(--paper-muted); font-size: 10px;">Cliquez ou glissez une image</p>
+          <div style="margin-bottom: 6px;">
+            <div id="imageDropZone" style="border: 1px dashed var(--rule); border-radius: 3px; padding: 6px; text-align: center; cursor: pointer;">
+              <span style="font-size: 14px;">📤</span>
+              <span style="color: var(--paper-muted); font-size: 9px; margin-left: 4px;">Glisser ou cliquer</span>
               <input type="file" id="imageFileInput" accept="image/*" style="display: none;">
             </div>
           </div>
 
-          <div id="imagePreviewContainer" style="display: none; margin-bottom: 10px; text-align: center;">
-            <label style="display: block; margin-bottom: 4px; font-weight: 600; font-size: 11px;">Aperçu :</label>
-            <img id="imagePreview" style="max-width: 100%; max-height: 150px; border-radius: 4px; border: 1px solid var(--rule);">
+          <div id="imagePreviewContainer" style="display: none; margin-bottom: 6px; text-align: center;">
+            <img id="imagePreview" style="max-width: 100%; max-height: 100px; border-radius: 3px; border: 1px solid var(--rule);">
           </div>
 
-          <div style="margin-bottom: 10px;">
-            <label style="display: block; margin-bottom: 4px; font-weight: 600; font-size: 11px;">Taille (optionnel) :</label>
-            <div style="display: flex; gap: 6px; align-items: center;">
-              <input type="number" id="imageWidth" placeholder="L" style="flex: 1; padding: 4px; border: 1px solid var(--rule); border-radius: 4px; font-size: 11px;">
-              <span style="font-size: 10px;">×</span>
-              <input type="number" id="imageHeight" placeholder="H" style="flex: 1; padding: 4px; border: 1px solid var(--rule); border-radius: 4px; font-size: 11px;">
-              <span style="color: var(--paper-muted); font-size: 10px;">px</span>
+          <div style="display: flex; gap: 6px; margin-bottom: 6px;">
+            <div style="flex: 1;">
+              <label style="display: block; margin-bottom: 2px; font-weight: 600; font-size: 10px;">Taille :</label>
+              <div style="display: flex; gap: 3px; align-items: center;">
+                <input type="number" id="imageWidth" placeholder="L" style="width: 45px; padding: 3px; border: 1px solid var(--rule); border-radius: 3px; font-size: 10px;">
+                <span style="font-size: 9px;">×</span>
+                <input type="number" id="imageHeight" placeholder="H" style="width: 45px; padding: 3px; border: 1px solid var(--rule); border-radius: 3px; font-size: 10px;">
+              </div>
+            </div>
+            <div style="flex: 1;">
+              <label style="display: block; margin-bottom: 2px; font-weight: 600; font-size: 10px;">Style :</label>
+              <select id="imageStyle" style="width: 100%; padding: 3px; border: 1px solid var(--rule); border-radius: 3px; font-size: 10px;">
+                <option value="block">Centré</option>
+                <option value="inline">En ligne</option>
+                <option value="float-left">← Gauche</option>
+                <option value="float-right">Droite →</option>
+              </select>
             </div>
           </div>
 
-          <div style="margin-bottom: 10px;">
-            <label style="display: block; margin-bottom: 4px; font-weight: 600; font-size: 11px;">Style :</label>
-            <select id="imageStyle" style="width: 100%; padding: 5px; border: 1px solid var(--rule); border-radius: 4px; font-size: 11px;">
-              <option value="block">Bloc (centré)</option>
-              <option value="inline">En ligne</option>
-              <option value="float-left">Flottant gauche</option>
-              <option value="float-right">Flottant droite</option>
-            </select>
-          </div>
-
-          <div style="display: flex; gap: 6px; justify-content: flex-end;">
-            <button id="cancelImageInsert" class="btn" style="background: #6b7280; color: white; padding: 4px 10px; font-size: 11px;">Annuler</button>
-            <button id="confirmImageInsert" class="btn" style="background: var(--accent); color: white; padding: 4px 10px; font-size: 11px;">✓ Insérer</button>
+          <div style="display: flex; gap: 4px; justify-content: flex-end; margin-top: 8px;">
+            <button id="cancelImageInsert" style="background: #888; color: white; padding: 3px 8px; font-size: 10px; border: none; border-radius: 3px; cursor: pointer;">Annuler</button>
+            <button id="confirmImageInsert" style="background: var(--accent); color: white; padding: 3px 8px; font-size: 10px; border: none; border-radius: 3px; cursor: pointer;">✓ OK</button>
           </div>
         </div>
       `);
