@@ -1609,13 +1609,9 @@ body.dev-off .new-collection-card {
   }
 }
 
-/* Content Animation - Only animate when active */
-article {
-  animation: none;
-}
-
-article.active {
-  animation: pageSlideInFromTop 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+/* Content Animation - Disabled to prevent double animation issues */
+article, article.active {
+  animation: none !important;
 }
 
 /* Staggered Entry Animation for Lists */
