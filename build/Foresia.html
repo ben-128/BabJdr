@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-12-07T23:18:26.479Z by JdrBab Build System -->
+<!-- Generated on 2025-12-07T23:22:01.681Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25447,6 +25447,14 @@ select:focus {
       const viewsContainer = document.querySelector('#views');
       if (!viewsContainer) return;
 
+      // Skip regeneration if articles already exist (loaded from static HTML)
+      const existingArticles = viewsContainer.querySelectorAll('article[data-page]');
+      if (existingArticles.length > 5) {
+        // Content already exists, just run post-render operations
+        this.batchPostRenderOperations();
+        return;
+      }
+
       // Use progressive rendering to avoid blocking the main thread
       this.progressiveRender([
         { fn: () => this.generateStaticPages(), name: 'static' },
@@ -25488,7 +25496,11 @@ select:focus {
       // Post-render operations with improved batching
       requestAnimationFrame(() => {
         this.batchPostRenderOperations();
-        
+
+        // After regenerating all content, re-trigger router to show correct page
+        if (JdrApp.modules.router && JdrApp.modules.router.parseRoute) {
+          JdrApp.modules.router.parseRoute();
+        }
       });
     },
 

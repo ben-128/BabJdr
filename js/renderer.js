@@ -86,6 +86,14 @@
       const viewsContainer = document.querySelector('#views');
       if (!viewsContainer) return;
 
+      // Skip regeneration if articles already exist (loaded from static HTML)
+      const existingArticles = viewsContainer.querySelectorAll('article[data-page]');
+      if (existingArticles.length > 5) {
+        // Content already exists, just run post-render operations
+        this.batchPostRenderOperations();
+        return;
+      }
+
       // Use progressive rendering to avoid blocking the main thread
       this.progressiveRender([
         { fn: () => this.generateStaticPages(), name: 'static' },
@@ -127,7 +135,11 @@
       // Post-render operations with improved batching
       requestAnimationFrame(() => {
         this.batchPostRenderOperations();
-        
+
+        // After regenerating all content, re-trigger router to show correct page
+        if (JdrApp.modules.router && JdrApp.modules.router.parseRoute) {
+          JdrApp.modules.router.parseRoute();
+        }
       });
     },
 
