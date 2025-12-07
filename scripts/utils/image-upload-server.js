@@ -256,8 +256,8 @@ const server = http.createServer(async (req, res) => {
             status: 'running',
             apiConfigured: true
         }));
-    } else if (req.method === 'GET' && req.url.startsWith('/data/')) {
-        // Servir les fichiers JSON du dossier data
+    } else if (req.method === 'GET' && req.url.startsWith('/data/') && req.url.endsWith('.json')) {
+        // Servir les fichiers JSON du dossier data (uniquement .json)
         const fileName = req.url.replace('/data/', '');
         const filePath = path.join(__dirname, '..', '..', 'data', fileName);
 
