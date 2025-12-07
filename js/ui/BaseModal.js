@@ -22,15 +22,14 @@
     setupModalEventListeners() {
       // Close modal on overlay click or close button
       JdrApp.utils.events.register('click', '.modal-overlay, .modal-close', (e) => {
+        // Don't close if clicking inside modal-content (unless it's the close button)
+        if (e.target.closest('.modal-content') && !e.target.closest('.modal-close')) {
+          return;
+        }
         const modal = e.target.closest('.modal') || document.querySelector('.modal.visible');
         if (modal) {
           this.closeModal(modal);
         }
-      });
-
-      // Prevent modal content clicks from closing modal
-      JdrApp.utils.events.register('click', '.modal-content', (e) => {
-        e.stopPropagation();
       });
 
       // Close modal on Escape key
