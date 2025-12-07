@@ -94,7 +94,7 @@
     },
     {
       "id": "traumas",
-      "title": "Traumas",
+      "title": "Titres et Traumas",
       "file": "traumas.json",
       "active": true,
       "order": 13
