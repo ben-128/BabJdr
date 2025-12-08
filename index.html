@@ -12,6 +12,8 @@ body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relati
 body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relative; } 
 </style><style>body {transition: opacity ease-in 0.2s; } 
 body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relative; } 
+</style><style>body {transition: opacity ease-in 0.2s; } 
+body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relative; } 
 </style>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
@@ -334,6 +336,47 @@ body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relati
             to { transform: translateX(0); opacity: 1; }
           }
         </style><style>
+    @keyframes ripple {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+
+    .shake-animation {
+      animation: wiggle 0.5s ease-in-out;
+    }
+
+    .pulse-animation {
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .animate-in {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+
+    .animate-out {
+      opacity: 0 !important;
+      transform: translateY(-20px) !important;
+    }
+
+    /* Performance optimizations */
+    .reduce-animations * {
+      animation-duration: 0.1s !important;
+      transition-duration: 0.1s !important;
+    }
+
+    .battery-save-mode * {
+      animation: none !important;
+      transition: none !important;
+    }
+
+    .slow-connection * {
+      animation-duration: 0.2s !important;
+      transition-duration: 0.2s !important;
+    }
+  </style><script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script><style>
     @keyframes ripple {
       to {
         transform: scale(4);
@@ -1109,7 +1152,7 @@ observer.observe(document.body, { attributes: true });
               </div>
               <div class="favoris-content">
                 <div id="favoris-sorts-container" class="favoris-grid collection-items" style="display: none; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); justify-content: center;">
-        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Volée de pierres" data-spell-index="null" data-category-name="Sorts de Mage" style="width: 100%; margin: 0px; box-sizing: border-box;">
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Volée de pierres" data-spell-index="null" data-category-name="Sorts de Mage" style="width: 100%; margin: 0px; box-sizing: border-box; opacity: 0;">
           
         <button class="favoris-star favoris-active" data-type="sorts" data-nom="Volée de pierres" title="Retirer des favoris" aria-label="Retirer des favoris">
           ⭐
@@ -1227,7 +1270,7 @@ observer.observe(document.body, { attributes: true });
       
         <div style="margin-top: 1rem; text-align: center;"><button class="section-delete btn small" data-section-name="Section 7" type="button" style="background: rgb(255, 107, 107); color: white;">🗑 Supprimer section</button></div></div>
       
-        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Arme de lumière" data-spell-index="null" data-category-name="Sorts de Prêtre" style="width: 100%; margin: 0px; box-sizing: border-box;">
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Arme de lumière" data-spell-index="null" data-category-name="Sorts de Prêtre" style="width: 100%; margin: 0px; box-sizing: border-box; opacity: 0;">
           
         <button class="favoris-star favoris-active" data-type="sorts" data-nom="Arme de lumière" title="Retirer des favoris" aria-label="Retirer des favoris">
           ⭐
@@ -2879,9 +2922,9 @@ Invaincu du Ciel et de la Terre <br></div>
                   📝 Sous-page Active:
                 </label>
                 <select id="subPageSelector" data-campaign="Classique" style="padding: 8px; border-radius: 6px; border: 2px solid var(--rule); background: var(--paper); font-family: inherit;">
-                  <option value="Long terme">Long terme</option><option value="Auberge" selected="">Auberge</option><option value="Forêt">Forêt</option>
+                  <option value="Long terme">Long terme</option><option value="Auberge">Auberge</option><option value="Forêt" selected="">Forêt</option>
                 </select>
-                <button class="btn danger small dev-only" onclick="JdrApp.modules.ui.deleteCampaignSubPage('Classique', 'Auberge')" style="margin-left: 8px; display: none;">
+                <button class="btn danger small dev-only" onclick="JdrApp.modules.ui.deleteCampaignSubPage('Classique', 'Forêt')" style="margin-left: 8px; display: none;">
                   🗑️ Supprimer
                 </button>
               </div>
@@ -2892,8 +2935,8 @@ Invaincu du Ciel et de la Terre <br></div>
             <!-- Sub-page Header -->
             <div class="subpage-header" style="margin-bottom: 1rem; border-bottom: 1px solid var(--rule); padding-bottom: 0.75rem;">
               <div style="display: flex; align-items: center;">
-                <h5 class="editable" data-edit-type="generic" data-edit-section="subpage-Classique-Auberge-title" style="margin: 0; color: var(--accent-ink); font-size: 1.2em; flex: 1;">
-                  📄 Auberge
+                <h5 class="editable" data-edit-type="generic" data-edit-section="subpage-Classique-Forêt-title" style="margin: 0; color: var(--accent-ink); font-size: 1.2em; flex: 1;">
+                  📄 Forêt
                 </h5>
                 <button class="edit-btn" type="button" style="background: var(--accent); color: white; border: none; border-radius: 4px; padding: 4px 8px; cursor: pointer; font-size: 12px; margin-left: 8px;">✏️</button>
               </div>
@@ -2902,10 +2945,10 @@ Invaincu du Ciel et de la Terre <br></div>
             <!-- Google Doc Link Section -->
             <div style="margin-bottom: 1rem;">
               <div style="display: flex; align-items: center; gap: 0.5rem;">
-                <a href="https://docs.google.com/document/d/1mTPTeXEzwgYoOG2xz-sC9autyT-rbd43jBns8f_Hycg/edit?usp=sharing" target="_blank" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; background: var(--card); border-radius: 6px; font-size: 0.95em; color: var(--accent); text-decoration: none; border: 1px solid var(--rule); transition: all 0.2s;">
+                <a href="https://docs.google.com/document/d/1ib4D5CJdvgBZ-5VC2xAF-0nkow7X17gPKWwqKGP65AY/edit?usp=sharing" target="_blank" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; background: var(--card); border-radius: 6px; font-size: 0.95em; color: var(--accent); text-decoration: none; border: 1px solid var(--rule); transition: all 0.2s;">
                   📎 <span style="text-decoration: underline;">Ouvrir le Document Google</span>
                 </a>
-                <button class="edit-btn googledoc-btn" data-edit-type="googledoc" data-edit-section="subpage-Classique-Auberge-googleDocLink" data-campaign-name="Classique" data-subpage-name="Auberge" type="button" title="Gérer le lien Google Doc" style="background: rgb(5, 150, 105); color: white; border: none; border-radius: 4px; padding: 4px 8px; cursor: pointer; font-size: 12px; margin-left: 8px;">
+                <button class="edit-btn googledoc-btn" data-edit-type="googledoc" data-edit-section="subpage-Classique-Forêt-googleDocLink" data-campaign-name="Classique" data-subpage-name="Forêt" type="button" title="Gérer le lien Google Doc" style="background: rgb(5, 150, 105); color: white; border: none; border-radius: 4px; padding: 4px 8px; cursor: pointer; font-size: 12px; margin-left: 8px;">
                 📎
               </button>
               </div>
@@ -2916,38 +2959,19 @@ Invaincu du Ciel et de la Terre <br></div>
 
             <!-- Text content Section -->
             <div style="display: flex; align-items: flex-start; gap: 0.5rem;">
-              <div class="subpage-content editable" data-edit-type="generic" data-edit-section="subpage-Classique-Auberge-content" style="line-height: 1.6; min-height: 200px; flex: 1;" data-editing="false" contenteditable="false">[img:img_1765151129650_0cl8mli0b]
+              <div class="subpage-content editable" data-edit-type="generic" data-edit-section="subpage-Classique-Forêt-content" style="line-height: 1.6; min-height: 200px; flex: 1;" data-editing="false" contenteditable="false">Panneau qui avertit les joueurs du danger. suivent un cours d'eau large et pas traversable.
+<br>
+<br>
+Choix gauche(nord) ou droite (sud). <br>
+Droite :  petits ilots de terre avec une statue qui donne les titres. "METTRE TEXTE"
+Gauche : 
 
-<br>
-<span class="npc-link" data-npc="Tavin le Facteur" style="color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;" title="Cliquer pour voir la fiche du NPC">[NPC: Tavin le Facteur]</span>
-
-<br>
-<span class="npc-link" data-npc="Mirella la receptionniste" style="color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;" title="Cliquer pour voir la fiche du NPC">[NPC: Mirella la receptionniste]</span>
-<br>
-<span class="npc-link" data-npc="Filibert Tournicorne" style="color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;" title="Cliquer pour voir la fiche du NPC">[NPC: Filibert Tournicorne]</span>
-<br>
-<span class="npc-link" data-npc="Lord Erathian Velorme" style="color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;" title="Cliquer pour voir la fiche du NPC">[NPC: Lord Erathian Velorme]</span>
-<br>
-<span class="npc-link" data-npc="Isara Cœur-de-Roc" style="color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;" title="Cliquer pour voir la fiche du NPC">[NPC: Isara Cœur-de-Roc]</span>
-<br>
-<span class="npc-link" data-npc="Grufin l'aubergiste" style="color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;" title="Cliquer pour voir la fiche du NPC">[NPC: Grufin l'aubergiste]</span>
-<br>
-<span class="npc-link" data-npc="Grolban Pisse-Tonneau" style="color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;" title="Cliquer pour voir la fiche du NPC">[NPC: Grolban Pisse-Tonneau]</span>
-<br>
-<span class="npc-link" data-npc="Kael Fenraven" style="color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;" title="Cliquer pour voir la fiche du NPC">[NPC: Kael Fenraven]</span>
-<br>
-<span class="npc-link" data-npc="Bramousse Tournicorne" style="color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;" title="Cliquer pour voir la fiche du NPC">[NPC: Bramousse Tournicorne]</span>
-<br>
-<span class="npc-link" data-npc="Borag et Snik" style="color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;" title="Cliquer pour voir la fiche du NPC">[NPC: Borag et Snik]</span>
-<br>
-<span class="npc-link" data-npc="Lyrielle Vent-d’Aurore" style="color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;" title="Cliquer pour voir la fiche du NPC">[NPC: Lyrielle Vent-d’Aurore]</span>
-<br>
-
-Provision <span class="treasure-table-link" data-table-name="ProvisionAuberge" style="color: var(--accent); cursor: pointer; text-decoration: underline;" title="Cliquer pour voir la table des trésors">[Table: ProvisionAuberge]</span>.
+<hr> 
+             combat  <span class="monster-link" data-monster="Serpent de la forêt" style="color: var(--accent); cursor: pointer; text-decoration: underline;">Serpent de la forêt</span>  <span class="monster-link" data-monster="Scarabée géant" style="color: var(--accent); cursor: pointer; text-decoration: underline;">Scarabée géant</span>  
 
 <hr>
-<br>
-Vendeur depart :  <a href="#/collections-objets" style="color: var(--accent); text-decoration: underline;">📚 Collections d'Objets</a> Départ</div>
+pierre a pousser pour reveler TP
+<hr></div>
               <button class="edit-btn" type="button" style="background: var(--accent); color: white; border: none; border-radius: 4px; padding: 4px 8px; cursor: pointer; font-size: 12px; margin-left: 8px;">✏️</button>
             </div>
           </div>
@@ -12481,7 +12505,7 @@ L'arme est imprégnée de 5 points de dégâts d'élément <span style="color: #
             </div>
             <div class="grid cols-2" id="sorts-container-sorts-de-mage">
               
-        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Boule de Feu" data-spell-index="0" data-category-name="Sorts de Mage" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Boule de Feu" data-spell-index="0" data-category-name="Sorts de Mage" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); opacity: 0;">
           
         <button class="favoris-star " data-type="sorts" data-nom="Boule de Feu" title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
           ☆
@@ -12599,7 +12623,7 @@ L'arme est imprégnée de 5 points de dégâts d'élément <span style="color: #
       
         <div style="margin-top: 1rem; text-align: center;"><button class="section-delete btn small" data-section-name="Section 144" type="button" style="background: rgb(255, 107, 107); color: white;">🗑 Supprimer section</button></div></div>
       
-        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Éclair" data-spell-index="1" data-category-name="Sorts de Mage" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Éclair" data-spell-index="1" data-category-name="Sorts de Mage" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); opacity: 0;">
           
         <button class="favoris-star " data-type="sorts" data-nom="Éclair" title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
           ☆
@@ -12717,7 +12741,7 @@ L'arme est imprégnée de 5 points de dégâts d'élément <span style="color: #
       
         <div style="margin-top: 1rem; text-align: center;"><button class="section-delete btn small" data-section-name="Section 145" type="button" style="background: rgb(255, 107, 107); color: white;">🗑 Supprimer section</button></div></div>
       
-        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Vague déferlante" data-spell-index="2" data-category-name="Sorts de Mage" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Vague déferlante" data-spell-index="2" data-category-name="Sorts de Mage" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); opacity: 0;">
           
         <button class="favoris-star " data-type="sorts" data-nom="Vague déferlante" title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
           ☆
@@ -12835,7 +12859,7 @@ L'arme est imprégnée de 5 points de dégâts d'élément <span style="color: #
       
         <div style="margin-top: 1rem; text-align: center;"><button class="section-delete btn small" data-section-name="Section 146" type="button" style="background: rgb(255, 107, 107); color: white;">🗑 Supprimer section</button></div></div>
       
-        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Volée de pierres" data-spell-index="3" data-category-name="Sorts de Mage" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Volée de pierres" data-spell-index="3" data-category-name="Sorts de Mage" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); opacity: 0;">
           
         <button class="favoris-star favoris-active" data-type="sorts" data-nom="Volée de pierres" title="Retirer des favoris" aria-label="Retirer des favoris">
           ⭐
@@ -12953,7 +12977,7 @@ L'arme est imprégnée de 5 points de dégâts d'élément <span style="color: #
       
         <div style="margin-top: 1rem; text-align: center;"><button class="section-delete btn small" data-section-name="Section 147" type="button" style="background: rgb(255, 107, 107); color: white;">🗑 Supprimer section</button></div></div>
       
-        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Faisceau lumineux" data-spell-index="4" data-category-name="Sorts de Mage" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Faisceau lumineux" data-spell-index="4" data-category-name="Sorts de Mage" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); opacity: 0;">
           
         <button class="favoris-star " data-type="sorts" data-nom="Faisceau lumineux" title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
           ☆
@@ -13072,7 +13096,7 @@ L'arme est imprégnée de 5 points de dégâts d'élément <span style="color: #
       
         <div style="margin-top: 1rem; text-align: center;"><button class="section-delete btn small" data-section-name="Section 148" type="button" style="background: rgb(255, 107, 107); color: white;">🗑 Supprimer section</button></div></div>
       
-        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Téléportation" data-spell-index="5" data-category-name="Sorts de Mage" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Téléportation" data-spell-index="5" data-category-name="Sorts de Mage" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); opacity: 0;">
           
         <button class="favoris-star " data-type="sorts" data-nom="Téléportation" title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
           ☆
@@ -13190,7 +13214,7 @@ L'arme est imprégnée de 5 points de dégâts d'élément <span style="color: #
       
         <div style="margin-top: 1rem; text-align: center;"><button class="section-delete btn small" data-section-name="Section 149" type="button" style="background: rgb(255, 107, 107); color: white;">🗑 Supprimer section</button></div></div>
       
-        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Vague sombre" data-spell-index="6" data-category-name="Sorts de Mage" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Vague sombre" data-spell-index="6" data-category-name="Sorts de Mage" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); opacity: 0;">
           
         <button class="favoris-star " data-type="sorts" data-nom="Vague sombre" title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
           ☆
@@ -13308,7 +13332,7 @@ L'arme est imprégnée de 5 points de dégâts d'élément <span style="color: #
       
         <div style="margin-top: 1rem; text-align: center;"><button class="section-delete btn small" data-section-name="Section 150" type="button" style="background: rgb(255, 107, 107); color: white;">🗑 Supprimer section</button></div></div>
       
-        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Absorption magique" data-spell-index="7" data-category-name="Sorts de Mage" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Absorption magique" data-spell-index="7" data-category-name="Sorts de Mage" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); opacity: 0;">
           
         <button class="favoris-star " data-type="sorts" data-nom="Absorption magique" title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
           ☆
@@ -13426,7 +13450,7 @@ L'arme est imprégnée de 5 points de dégâts d'élément <span style="color: #
       
         <div style="margin-top: 1rem; text-align: center;"><button class="section-delete btn small" data-section-name="Section 151" type="button" style="background: rgb(255, 107, 107); color: white;">🗑 Supprimer section</button></div></div>
       
-        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Missile magique" data-spell-index="8" data-category-name="Sorts de Mage" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Missile magique" data-spell-index="8" data-category-name="Sorts de Mage" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); opacity: 0;">
           
         <button class="favoris-star " data-type="sorts" data-nom="Missile magique" title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
           ☆
@@ -13544,7 +13568,7 @@ L'arme est imprégnée de 5 points de dégâts d'élément <span style="color: #
       
         <div style="margin-top: 1rem; text-align: center;"><button class="section-delete btn small" data-section-name="Section 152" type="button" style="background: rgb(255, 107, 107); color: white;">🗑 Supprimer section</button></div></div>
       
-        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Armure de glace" data-spell-index="9" data-category-name="Sorts de Mage" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Armure de glace" data-spell-index="9" data-category-name="Sorts de Mage" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); opacity: 0;">
           
         <button class="favoris-star " data-type="sorts" data-nom="Armure de glace" title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
           ☆
@@ -13663,7 +13687,7 @@ L'arme est imprégnée de 5 points de dégâts d'élément <span style="color: #
       
         <div style="margin-top: 1rem; text-align: center;"><button class="section-delete btn small" data-section-name="Section 153" type="button" style="background: rgb(255, 107, 107); color: white;">🗑 Supprimer section</button></div></div>
       
-        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Nuage toxique" data-spell-index="10" data-category-name="Sorts de Mage" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Nuage toxique" data-spell-index="10" data-category-name="Sorts de Mage" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); opacity: 0;">
           
         <button class="favoris-star " data-type="sorts" data-nom="Nuage toxique" title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
           ☆
@@ -13783,7 +13807,7 @@ L'arme est imprégnée de 5 points de dégâts d'élément <span style="color: #
       
         <div style="margin-top: 1rem; text-align: center;"><button class="section-delete btn small" data-section-name="Section 154" type="button" style="background: rgb(255, 107, 107); color: white;">🗑 Supprimer section</button></div></div>
       
-        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Sables mouvants" data-spell-index="11" data-category-name="Sorts de Mage" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Sables mouvants" data-spell-index="11" data-category-name="Sorts de Mage" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); opacity: 0;">
           
         <button class="favoris-star " data-type="sorts" data-nom="Sables mouvants" title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
           ☆
@@ -13958,7 +13982,7 @@ L'arme est imprégnée de 5 points de dégâts d'élément <span style="color: #
             </div>
             <div class="grid cols-2" id="sorts-container-sorts-de-pr-tre">
               
-        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Refermer les blessures" data-spell-index="0" data-category-name="Sorts de Prêtre" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Refermer les blessures" data-spell-index="0" data-category-name="Sorts de Prêtre" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); opacity: 0;">
           
         <button class="favoris-star " data-type="sorts" data-nom="Refermer les blessures" title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
           ☆
@@ -14077,7 +14101,7 @@ L'arme est imprégnée de 5 points de dégâts d'élément <span style="color: #
       
         <div style="margin-top: 1rem; text-align: center;"><button class="section-delete btn small" data-section-name="Section 156" type="button" style="background: rgb(255, 107, 107); color: white;">🗑 Supprimer section</button></div></div>
       
-        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Arme de lumière" data-spell-index="1" data-category-name="Sorts de Prêtre" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Arme de lumière" data-spell-index="1" data-category-name="Sorts de Prêtre" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); opacity: 0;">
           
         <button class="favoris-star favoris-active" data-type="sorts" data-nom="Arme de lumière" title="Retirer des favoris" aria-label="Retirer des favoris">
           ⭐
@@ -14195,7 +14219,7 @@ L'arme est imprégnée de 5 points de dégâts d'élément <span style="color: #
       
         <div style="margin-top: 1rem; text-align: center;"><button class="section-delete btn small" data-section-name="Section 157" type="button" style="background: rgb(255, 107, 107); color: white;">🗑 Supprimer section</button></div></div>
       
-        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Protection" data-spell-index="2" data-category-name="Sorts de Prêtre" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Protection" data-spell-index="2" data-category-name="Sorts de Prêtre" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); opacity: 0;">
           
         <button class="favoris-star " data-type="sorts" data-nom="Protection" title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
           ☆
@@ -14313,7 +14337,7 @@ L'arme est imprégnée de 5 points de dégâts d'élément <span style="color: #
       
         <div style="margin-top: 1rem; text-align: center;"><button class="section-delete btn small" data-section-name="Section 158" type="button" style="background: rgb(255, 107, 107); color: white;">🗑 Supprimer section</button></div></div>
       
-        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Révélation mineure" data-spell-index="3" data-category-name="Sorts de Prêtre" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Révélation mineure" data-spell-index="3" data-category-name="Sorts de Prêtre" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); opacity: 0;">
           
         <button class="favoris-star " data-type="sorts" data-nom="Révélation mineure" title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
           ☆
@@ -14431,7 +14455,7 @@ L'arme est imprégnée de 5 points de dégâts d'élément <span style="color: #
       
         <div style="margin-top: 1rem; text-align: center;"><button class="section-delete btn small" data-section-name="Section 159" type="button" style="background: rgb(255, 107, 107); color: white;">🗑 Supprimer section</button></div></div>
       
-        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Châtiment" data-spell-index="4" data-category-name="Sorts de Prêtre" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Châtiment" data-spell-index="4" data-category-name="Sorts de Prêtre" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); opacity: 0;">
           
         <button class="favoris-star " data-type="sorts" data-nom="Châtiment" title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
           ☆
@@ -14550,7 +14574,7 @@ L'arme est imprégnée de 5 points de dégâts d'élément <span style="color: #
       
         <div style="margin-top: 1rem; text-align: center;"><button class="section-delete btn small" data-section-name="Section 160" type="button" style="background: rgb(255, 107, 107); color: white;">🗑 Supprimer section</button></div></div>
       
-        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Resistance" data-spell-index="5" data-category-name="Sorts de Prêtre" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Resistance" data-spell-index="5" data-category-name="Sorts de Prêtre" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); opacity: 0;">
           
         <button class="favoris-star " data-type="sorts" data-nom="Resistance" title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
           ☆
@@ -14668,7 +14692,7 @@ L'arme est imprégnée de 5 points de dégâts d'élément <span style="color: #
       
         <div style="margin-top: 1rem; text-align: center;"><button class="section-delete btn small" data-section-name="Section 161" type="button" style="background: rgb(255, 107, 107); color: white;">🗑 Supprimer section</button></div></div>
       
-        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Guérison du poison" data-spell-index="6" data-category-name="Sorts de Prêtre" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Guérison du poison" data-spell-index="6" data-category-name="Sorts de Prêtre" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); opacity: 0;">
           
         <button class="favoris-star " data-type="sorts" data-nom="Guérison du poison" title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
           ☆
@@ -14786,7 +14810,7 @@ L'arme est imprégnée de 5 points de dégâts d'élément <span style="color: #
       
         <div style="margin-top: 1rem; text-align: center;"><button class="section-delete btn small" data-section-name="Section 162" type="button" style="background: rgb(255, 107, 107); color: white;">🗑 Supprimer section</button></div></div>
       
-        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Nova lumineuse" data-spell-index="7" data-category-name="Sorts de Prêtre" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Nova lumineuse" data-spell-index="7" data-category-name="Sorts de Prêtre" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); opacity: 0;">
           
         <button class="favoris-star " data-type="sorts" data-nom="Nova lumineuse" title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
           ☆
@@ -14904,7 +14928,7 @@ L'arme est imprégnée de 5 points de dégâts d'élément <span style="color: #
       
         <div style="margin-top: 1rem; text-align: center;"><button class="section-delete btn small" data-section-name="Section 163" type="button" style="background: rgb(255, 107, 107); color: white;">🗑 Supprimer section</button></div></div>
       
-        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Toucher Lointain" data-spell-index="8" data-category-name="Sorts de Prêtre" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Toucher Lointain" data-spell-index="8" data-category-name="Sorts de Prêtre" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); opacity: 0;">
           
         <button class="favoris-star " data-type="sorts" data-nom="Toucher Lointain" title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
           ☆
@@ -15023,7 +15047,7 @@ L'arme est imprégnée de 5 points de dégâts d'élément <span style="color: #
       
         <div style="margin-top: 1rem; text-align: center;"><button class="section-delete btn small" data-section-name="Section 164" type="button" style="background: rgb(255, 107, 107); color: white;">🗑 Supprimer section</button></div></div>
       
-        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Révélation majeure" data-spell-index="9" data-category-name="Sorts de Prêtre" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Révélation majeure" data-spell-index="9" data-category-name="Sorts de Prêtre" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); opacity: 0;">
           
         <button class="favoris-star " data-type="sorts" data-nom="Révélation majeure" title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
           ☆
@@ -15141,7 +15165,7 @@ L'arme est imprégnée de 5 points de dégâts d'élément <span style="color: #
       
         <div style="margin-top: 1rem; text-align: center;"><button class="section-delete btn small" data-section-name="Section 165" type="button" style="background: rgb(255, 107, 107); color: white;">🗑 Supprimer section</button></div></div>
       
-        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Guérison mentale" data-spell-index="10" data-category-name="Sorts de Prêtre" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Guérison mentale" data-spell-index="10" data-category-name="Sorts de Prêtre" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); opacity: 0;">
           
         <button class="favoris-star " data-type="sorts" data-nom="Guérison mentale" title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
           ☆
@@ -15259,7 +15283,7 @@ L'arme est imprégnée de 5 points de dégâts d'élément <span style="color: #
       
         <div style="margin-top: 1rem; text-align: center;"><button class="section-delete btn small" data-section-name="Section 166" type="button" style="background: rgb(255, 107, 107); color: white;">🗑 Supprimer section</button></div></div>
       
-        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Guérison physique" data-spell-index="11" data-category-name="Sorts de Prêtre" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Guérison physique" data-spell-index="11" data-category-name="Sorts de Prêtre" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); opacity: 0;">
           
         <button class="favoris-star " data-type="sorts" data-nom="Guérison physique" title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
           ☆
@@ -15377,7 +15401,7 @@ L'arme est imprégnée de 5 points de dégâts d'élément <span style="color: #
       
         <div style="margin-top: 1rem; text-align: center;"><button class="section-delete btn small" data-section-name="Section 167" type="button" style="background: rgb(255, 107, 107); color: white;">🗑 Supprimer section</button></div></div>
       
-        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Jugement" data-spell-index="12" data-category-name="Sorts de Prêtre" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Jugement" data-spell-index="12" data-category-name="Sorts de Prêtre" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); opacity: 0;">
           
         <button class="favoris-star " data-type="sorts" data-nom="Jugement" title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
           ☆
@@ -15495,7 +15519,7 @@ L'arme est imprégnée de 5 points de dégâts d'élément <span style="color: #
       
         <div style="margin-top: 1rem; text-align: center;"><button class="section-delete btn small" data-section-name="Section 168" type="button" style="background: rgb(255, 107, 107); color: white;">🗑 Supprimer section</button></div></div>
       
-        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Putréfaction de l’âme" data-spell-index="13" data-category-name="Sorts de Prêtre" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Putréfaction de l’âme" data-spell-index="13" data-category-name="Sorts de Prêtre" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); opacity: 0;">
           
         <button class="favoris-star " data-type="sorts" data-nom="Putréfaction de l’âme" title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
           ☆
@@ -15615,7 +15639,7 @@ L'arme est imprégnée de 5 points de dégâts d'élément <span style="color: #
       
         <div style="margin-top: 1rem; text-align: center;"><button class="section-delete btn small" data-section-name="Section 169" type="button" style="background: rgb(255, 107, 107); color: white;">🗑 Supprimer section</button></div></div>
       
-        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Révélation ultime" data-spell-index="14" data-category-name="Sorts de Prêtre" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Révélation ultime" data-spell-index="14" data-category-name="Sorts de Prêtre" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); opacity: 0;">
           
         <button class="favoris-star " data-type="sorts" data-nom="Révélation ultime" title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
           ☆
@@ -15786,7 +15810,7 @@ L'arme est imprégnée de 5 points de dégâts d'élément <span style="color: #
             </div>
             <div class="grid cols-2" id="sorts-container-sorts-d-enchanteur">
               
-        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Accroche terrestre" data-spell-index="0" data-category-name="Sorts d'Enchanteur" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Accroche terrestre" data-spell-index="0" data-category-name="Sorts d'Enchanteur" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); opacity: 0;">
           
         <button class="favoris-star " data-type="sorts" data-nom="Accroche terrestre" title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
           ☆
@@ -15904,7 +15928,7 @@ L'arme est imprégnée de 5 points de dégâts d'élément <span style="color: #
       
         <div style="margin-top: 1rem; text-align: center;"><button class="section-delete btn small" data-section-name="Section 171" type="button" style="background: rgb(255, 107, 107); color: white;">🗑 Supprimer section</button></div></div>
       
-        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Accélération" data-spell-index="1" data-category-name="Sorts d'Enchanteur" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Accélération" data-spell-index="1" data-category-name="Sorts d'Enchanteur" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); opacity: 0;">
           
         <button class="favoris-star " data-type="sorts" data-nom="Accélération" title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
           ☆
@@ -16022,7 +16046,7 @@ L'arme est imprégnée de 5 points de dégâts d'élément <span style="color: #
       
         <div style="margin-top: 1rem; text-align: center;"><button class="section-delete btn small" data-section-name="Section 172" type="button" style="background: rgb(255, 107, 107); color: white;">🗑 Supprimer section</button></div></div>
       
-        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Sommeil" data-spell-index="2" data-category-name="Sorts d'Enchanteur" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Sommeil" data-spell-index="2" data-category-name="Sorts d'Enchanteur" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); opacity: 0;">
           
         <button class="favoris-star " data-type="sorts" data-nom="Sommeil" title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
           ☆
@@ -16140,7 +16164,7 @@ L'arme est imprégnée de 5 points de dégâts d'élément <span style="color: #
       
         <div style="margin-top: 1rem; text-align: center;"><button class="section-delete btn small" data-section-name="Section 173" type="button" style="background: rgb(255, 107, 107); color: white;">🗑 Supprimer section</button></div></div>
       
-        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Lévitation" data-spell-index="3" data-category-name="Sorts d'Enchanteur" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Lévitation" data-spell-index="3" data-category-name="Sorts d'Enchanteur" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); opacity: 0;">
           
         <button class="favoris-star " data-type="sorts" data-nom="Lévitation" title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
           ☆
@@ -16258,7 +16282,7 @@ L'arme est imprégnée de 5 points de dégâts d'élément <span style="color: #
       
         <div style="margin-top: 1rem; text-align: center;"><button class="section-delete btn small" data-section-name="Section 174" type="button" style="background: rgb(255, 107, 107); color: white;">🗑 Supprimer section</button></div></div>
       
-        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Imprégnation élémentaire feu terre nuit" data-spell-index="4" data-category-name="Sorts d'Enchanteur" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Imprégnation élémentaire feu terre nuit" data-spell-index="4" data-category-name="Sorts d'Enchanteur" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); opacity: 0;">
           
         <button class="favoris-star " data-type="sorts" data-nom="Imprégnation élémentaire feu terre nuit" title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
           ☆
@@ -16377,7 +16401,7 @@ L'arme est imprégnée de 5 points de dégâts d'élément <span style="color: #
       
         <div style="margin-top: 1rem; text-align: center;"><button class="section-delete btn small" data-section-name="Section 175" type="button" style="background: rgb(255, 107, 107); color: white;">🗑 Supprimer section</button></div></div>
       
-        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Imprégnation élémentaire eau air lumière" data-spell-index="5" data-category-name="Sorts d'Enchanteur" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Imprégnation élémentaire eau air lumière" data-spell-index="5" data-category-name="Sorts d'Enchanteur" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); opacity: 0;">
           
         <button class="favoris-star " data-type="sorts" data-nom="Imprégnation élémentaire eau air lumière" title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
           ☆
@@ -16496,7 +16520,7 @@ L'arme est imprégnée de 5 points de dégâts d'élément <span style="color: #
       
         <div style="margin-top: 1rem; text-align: center;"><button class="section-delete btn small" data-section-name="Section 176" type="button" style="background: rgb(255, 107, 107); color: white;">🗑 Supprimer section</button></div></div>
       
-        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Silence" data-spell-index="6" data-category-name="Sorts d'Enchanteur" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Silence" data-spell-index="6" data-category-name="Sorts d'Enchanteur" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); opacity: 0;">
           
         <button class="favoris-star " data-type="sorts" data-nom="Silence" title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
           ☆
@@ -16614,7 +16638,7 @@ L'arme est imprégnée de 5 points de dégâts d'élément <span style="color: #
       
         <div style="margin-top: 1rem; text-align: center;"><button class="section-delete btn small" data-section-name="Section 177" type="button" style="background: rgb(255, 107, 107); color: white;">🗑 Supprimer section</button></div></div>
       
-        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Puissance magique" data-spell-index="7" data-category-name="Sorts d'Enchanteur" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Puissance magique" data-spell-index="7" data-category-name="Sorts d'Enchanteur" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); opacity: 0;">
           
         <button class="favoris-star " data-type="sorts" data-nom="Puissance magique" title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
           ☆
@@ -16733,7 +16757,7 @@ L'arme est imprégnée de 5 points de dégâts d'élément <span style="color: #
       
         <div style="margin-top: 1rem; text-align: center;"><button class="section-delete btn small" data-section-name="Section 178" type="button" style="background: rgb(255, 107, 107); color: white;">🗑 Supprimer section</button></div></div>
       
-        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Puissance physique" data-spell-index="8" data-category-name="Sorts d'Enchanteur" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Puissance physique" data-spell-index="8" data-category-name="Sorts d'Enchanteur" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); opacity: 0;">
           
         <button class="favoris-star " data-type="sorts" data-nom="Puissance physique" title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
           ☆
@@ -16852,7 +16876,7 @@ L'arme est imprégnée de 5 points de dégâts d'élément <span style="color: #
       
         <div style="margin-top: 1rem; text-align: center;"><button class="section-delete btn small" data-section-name="Section 179" type="button" style="background: rgb(255, 107, 107); color: white;">🗑 Supprimer section</button></div></div>
       
-        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Confusion" data-spell-index="9" data-category-name="Sorts d'Enchanteur" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Confusion" data-spell-index="9" data-category-name="Sorts d'Enchanteur" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); opacity: 0;">
           
         <button class="favoris-star " data-type="sorts" data-nom="Confusion" title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
           ☆
@@ -16970,7 +16994,7 @@ L'arme est imprégnée de 5 points de dégâts d'élément <span style="color: #
       
         <div style="margin-top: 1rem; text-align: center;"><button class="section-delete btn small" data-section-name="Section 180" type="button" style="background: rgb(255, 107, 107); color: white;">🗑 Supprimer section</button></div></div>
       
-        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Armure élémentaire Feu Terre Nuit" data-spell-index="10" data-category-name="Sorts d'Enchanteur" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Armure élémentaire Feu Terre Nuit" data-spell-index="10" data-category-name="Sorts d'Enchanteur" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); opacity: 0;">
           
         <button class="favoris-star " data-type="sorts" data-nom="Armure élémentaire Feu Terre Nuit" title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
           ☆
@@ -17089,7 +17113,7 @@ L'arme est imprégnée de 5 points de dégâts d'élément <span style="color: #
       
         <div style="margin-top: 1rem; text-align: center;"><button class="section-delete btn small" data-section-name="Section 181" type="button" style="background: rgb(255, 107, 107); color: white;">🗑 Supprimer section</button></div></div>
       
-        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Armure élémentaire Eau Air Lumière" data-spell-index="11" data-category-name="Sorts d'Enchanteur" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Armure élémentaire Eau Air Lumière" data-spell-index="11" data-category-name="Sorts d'Enchanteur" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); opacity: 0;">
           
         <button class="favoris-star " data-type="sorts" data-nom="Armure élémentaire Eau Air Lumière" title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
           ☆
@@ -17261,7 +17285,7 @@ L'arme est imprégnée de 5 points de dégâts d'élément <span style="color: #
             </div>
             <div class="grid cols-2" id="sorts-container-sorts-de-monstres">
               
-        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Soin mineur" data-spell-index="0" data-category-name="Sorts de Monstres" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+        <div class="card editable-section spell-card" data-section-type="spell" data-spell-name="Soin mineur" data-spell-index="0" data-category-name="Sorts de Monstres" style="transform: translateY(30px); transition: opacity 0.6s, transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); opacity: 0;">
           
         <button class="favoris-star " data-type="sorts" data-nom="Soin mineur" title="Ajouter aux favoris" aria-label="Ajouter aux favoris">
           ☆
