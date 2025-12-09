@@ -362,6 +362,11 @@
 
     autoLoadImages() {
       if (JdrApp.modules.images) {
+        // If data not loaded yet, wait and retry
+        if (!JdrApp.modules.images.dataLoaded) {
+          setTimeout(() => this.autoLoadImages(), 50);
+          return 0;
+        }
         return JdrApp.modules.images.autoLoadImages();
       }
       return 0;

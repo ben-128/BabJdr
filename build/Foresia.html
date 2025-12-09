@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-12-08T00:02:50.085Z by JdrBab Build System -->
+<!-- Generated on 2025-12-09T00:14:23.052Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1481,6 +1481,53 @@ footer{padding:24px;text-align:center;color:var(--paper-muted)}
 
 .lazy-loaded {
   opacity: 1;
+}
+
+/* Loading state with spinner animation */
+.lazy-loading {
+  opacity: 0.5;
+}
+
+.illus {
+  position: relative;
+}
+
+.illus:has(.lazy-loading)::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  margin: -15px 0 0 -15px;
+  border: 3px solid rgba(139, 92, 23, 0.3);
+  border-top-color: var(--bronze, #8b5c17);
+  border-radius: 50%;
+  animation: spinner 0.8s linear infinite;
+  z-index: 10;
+}
+
+@keyframes spinner {
+  to { transform: rotate(360deg); }
+}
+
+/* Error state for failed images */
+.lazy-error {
+  opacity: 0.3;
+  filter: grayscale(100%);
+}
+
+.image-error-placeholder {
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
+}
+
+/* Retry button hover effect */
+.retry-image-btn:hover {
+  background: #dc2626 !important;
+  transform: scale(1.05);
+  transition: all 0.2s ease;
 }
 
 /* Improve image rendering performance */
@@ -11416,7 +11463,7 @@ select:focus {
       "type": "card",
       "id": "stats-base",
       "title": "Statistiques de base",
-      "content": "<hr><div class=\"stats-grid\"><div class=\"stat-card\"><h4><img src=\"https://i.ibb.co/23cGYFvZ/stat-Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Force</h4><p>Améliore les dégâts physiques.</p></div><hr>\n\n<div class=\"stat-card\"><h4><img src=\"https://i.ibb.co/67ZW01Q7/stat-Endurance.png\" alt=\"Endurance\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Endurance</h4><p>Les points de vie maximum sont de : <strong>(2 x Endurance)</strong></p><p></p></div>\n\n<hr><div class=\"stat-card\">\n<h4><img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Agilité</h4><p>Chaque 5 points ajoutent <strong>+1</strong> aux jets d'esquive et de critique physique.\n<br><br>Augmente l'initiative d'autant.</p></div><hr>\n\n<div class=\"stat-card\"><h4><img src=\"https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Intelligence</h4><p>Chaque 5 points ajoutent +1 à la puissance des sorts. <br><br> Augmente les chances de réussir à infliger des altérations. </p></div><hr><div class=\"stat-card\"><h4><img src=\"https://i.ibb.co/B2BCGP6T/stat-Volont.png\" alt=\"Volonté\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Volonté</h4><p>Le mana maximum est de : <strong>(10 + 2 x Volonté)</strong></p><p>Augmente la Résistance altérations.</p>\n\n</div><hr><div class=\"stat-card\"><h4><img src=\"https://i.ibb.co/HfthhzSF/stat-Chance.png\" alt=\"Chance\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Chance</h4><p>Améliore la Fortune d'autant.</p><p>De plus, chaque 5 points ajoutent <strong>+1</strong> aux chances de coup critique avec les sorts et les consommables.</p></div></div>",
+      "content": "<hr><div class=\"stats-grid\"><div class=\"stat-card\"><h4><img src=\"https://i.ibb.co/23cGYFvZ/stat-Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\" data-events-attached=\"true\" loading=\"lazy\" decoding=\"async\"> Force</h4><p>Améliore les dégâts physiques.</p></div><hr>\n\n<div class=\"stat-card\"><h4><img src=\"https://i.ibb.co/67ZW01Q7/stat-Endurance.png\" alt=\"Endurance\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\" data-events-attached=\"true\" loading=\"lazy\" decoding=\"async\"> Endurance</h4><p>Les points de vie maximum sont de : <strong>(2 x Endurance)</strong></p><p></p></div>\n\n<hr><div class=\"stat-card\">\n<h4><img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\" data-events-attached=\"true\" loading=\"lazy\" decoding=\"async\"> Agilité</h4><p>Chaque 5 points ajoutent <strong>+1</strong> aux jets d'esquive et de critique physique.\n<br><br>Augmente l'initiative d'autant.</p></div><hr>\n\n<div class=\"stat-card\"><h4><img src=\"https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\" data-events-attached=\"true\" loading=\"lazy\" decoding=\"async\"> Intelligence</h4><p>Chaque 3 points ajoutent +1 à la puissance des sorts. <br><br> Augmente les chances de réussir à infliger des altérations. </p></div><hr><div class=\"stat-card\"><h4><img src=\"https://i.ibb.co/B2BCGP6T/stat-Volont.png\" alt=\"Volonté\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\" data-events-attached=\"true\" loading=\"lazy\" decoding=\"async\"> Volonté</h4><p>Le mana maximum est de : <strong>(10 + 2 x Volonté)</strong></p><p>Augmente la Résistance altérations.</p>\n\n</div><hr><div class=\"stat-card\"><h4><img src=\"https://i.ibb.co/HfthhzSF/stat-Chance.png\" alt=\"Chance\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\" data-events-attached=\"true\" loading=\"lazy\" decoding=\"async\"> Chance</h4><p>Améliore la Fortune d'autant.</p><p>De plus, chaque 5 points ajoutent <strong>+1</strong> aux chances de coup critique avec les sorts et les consommables.</p></div></div>",
       "deletable": true,
       "sectionName": "Statistiques de base"
     },
@@ -11850,7 +11897,7 @@ select:focus {
         },
         "Auberge": {
           "title": "Auberge",
-          "content": "[img:img_1765151129650_0cl8mli0b]\n\n<br>\n<span class=\"npc-link\" data-npc=\"Tavin le Facteur\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;\" title=\"Cliquer pour voir la fiche du NPC\">[NPC: Tavin le Facteur]</span>\n\n<br>\n<span class=\"npc-link\" data-npc=\"Mirella la receptionniste\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;\" title=\"Cliquer pour voir la fiche du NPC\">[NPC: Mirella la receptionniste]</span>\n<br>\n<span class=\"npc-link\" data-npc=\"Filibert Tournicorne\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;\" title=\"Cliquer pour voir la fiche du NPC\">[NPC: Filibert Tournicorne]</span>\n<br>\n<span class=\"npc-link\" data-npc=\"Lord Erathian Velorme\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;\" title=\"Cliquer pour voir la fiche du NPC\">[NPC: Lord Erathian Velorme]</span>\n<br>\n<span class=\"npc-link\" data-npc=\"Isara Cœur-de-Roc\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;\" title=\"Cliquer pour voir la fiche du NPC\">[NPC: Isara Cœur-de-Roc]</span>\n<br>\n<span class=\"npc-link\" data-npc=\"Grufin l'aubergiste\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;\" title=\"Cliquer pour voir la fiche du NPC\">[NPC: Grufin l'aubergiste]</span>\n<br>\n<span class=\"npc-link\" data-npc=\"Grolban Pisse-Tonneau\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;\" title=\"Cliquer pour voir la fiche du NPC\">[NPC: Grolban Pisse-Tonneau]</span>\n<br>\n<span class=\"npc-link\" data-npc=\"Kael Fenraven\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;\" title=\"Cliquer pour voir la fiche du NPC\">[NPC: Kael Fenraven]</span>\n<br>\n<span class=\"npc-link\" data-npc=\"Bramousse Tournicorne\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;\" title=\"Cliquer pour voir la fiche du NPC\">[NPC: Bramousse Tournicorne]</span>\n<br>\n<span class=\"npc-link\" data-npc=\"Borag et Snik\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;\" title=\"Cliquer pour voir la fiche du NPC\">[NPC: Borag et Snik]</span>\n<br>\n<span class=\"npc-link\" data-npc=\"Lyrielle Vent-d’Aurore\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;\" title=\"Cliquer pour voir la fiche du NPC\">[NPC: Lyrielle Vent-d’Aurore]</span>\n<br>\n\nProvision <span class=\"treasure-table-link\" data-table-name=\"ProvisionAuberge\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: ProvisionAuberge]</span>.\n\n<hr>\n<br>\nVendeur depart :  <a href=\"#/collections-objets\" style=\"color: var(--accent); text-decoration: underline;\">📚 Collections d'Objets</a> Départ",
+          "content": "[img:img_1765151129650_0cl8mli0b]\n\n<br>\n<span class=\"npc-link\" data-npc=\"Tavin le Facteur\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;\" title=\"Cliquer pour voir la fiche du NPC\">[NPC: Tavin le Facteur]</span>\n\n<br>\n<span class=\"npc-link\" data-npc=\"Mirella la receptionniste\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;\" title=\"Cliquer pour voir la fiche du NPC\">[NPC: Mirella la receptionniste]</span>\n<br>\n<span class=\"npc-link\" data-npc=\"Filibert Tournicorne\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;\" title=\"Cliquer pour voir la fiche du NPC\">[NPC: Filibert Tournicorne]</span>\n<br>\n<span class=\"npc-link\" data-npc=\"Lord Erathian Velorme\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;\" title=\"Cliquer pour voir la fiche du NPC\">[NPC: Lord Erathian Velorme]</span>\n<br>\n<span class=\"npc-link\" data-npc=\"Isara Cœur-de-Roc\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;\" title=\"Cliquer pour voir la fiche du NPC\">[NPC: Isara Cœur-de-Roc]</span>\n<br>\n<span class=\"npc-link\" data-npc=\"Grufin l'aubergiste\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;\" title=\"Cliquer pour voir la fiche du NPC\">[NPC: Grufin l'aubergiste]</span>\n<br>\n<span class=\"npc-link\" data-npc=\"Grolban Pisse-Tonneau\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;\" title=\"Cliquer pour voir la fiche du NPC\">[NPC: Grolban Pisse-Tonneau]</span>\n<br>\n<span class=\"npc-link\" data-npc=\"Kael Fenraven\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;\" title=\"Cliquer pour voir la fiche du NPC\">[NPC: Kael Fenraven]</span>\n<br>\n<span class=\"npc-link\" data-npc=\"Bramousse Tournicorne\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;\" title=\"Cliquer pour voir la fiche du NPC\">[NPC: Bramousse Tournicorne]</span>\n<br>\n<span class=\"npc-link\" data-npc=\"Borag et Snik\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;\" title=\"Cliquer pour voir la fiche du NPC\">[NPC: Borag et Snik]</span>\n<br>\n<span class=\"npc-link\" data-npc=\"Lyrielle Vent-d’Aurore\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;\" title=\"Cliquer pour voir la fiche du NPC\">[NPC: Lyrielle Vent-d’Aurore]</span>\n<br>\n\nProvision <span class=\"treasure-table-link\" data-table-name=\"ProvisionAuberge\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: ProvisionAuberge]</span>.\n\n<hr>\n<br>\nVendeur depart :  <a href=\"#/collections-objets\" style=\"color: var(--accent); text-decoration: underline;\">📚 Collections d'Objets</a> Départ\n\n<hr>\n<br>\n<i>Lettre confiée par le facteur :</i> <br><br>\nBranor,<br>\n\nTa dernière lettre m’a profondément intrigué. Si l’artefact que tu as déniché est réellement celui que tu m’as décrit, alors il s’agit d’une découverte d’importance majeure pour toute Mabresia. Je te prie de le rapporter au plus vite à l’Auberge Centrale du Sud, où je séjourne actuellement. Je souhaite l’examiner moi-même : son histoire, ses gravures et l’énergie qu’il renferme pourraient éclairer des pans entiers de notre passé. Ta trouvaille est précieuse, Branor, et je te saurais gré de la confier à mes soins pour analyse.<br>\n<br>\nBramousse Tournicorne\n<br>",
           "googleDocLink": "https://docs.google.com/document/d/1mTPTeXEzwgYoOG2xz-sC9autyT-rbd43jBns8f_Hycg/edit?usp=sharing"
         },
         "Forêt": {
@@ -16597,16 +16644,32 @@ select:focus {
   JdrApp.modules.images = {
     // Store for preloaded images
     imageStore: {},
-    
+
+    // Flag to indicate data is loaded
+    dataLoaded: false,
+
     async init() {
       await this.loadImageData();
       this.initImageHandlers();
       this.initLazyLoading();
-      
+
+      // Auto-load images after data is ready and DOM is rendered
+      // Uses a small delay to ensure pages are rendered first
+      setTimeout(() => {
+        this.autoLoadImages();
+      }, 100);
+
       // Auto-sync monster images on startup to ensure consistency
       setTimeout(() => {
         this.ensureMonsterImageMappings();
       }, 1000);
+    },
+
+    // Configuration for image loading
+    imageLoadConfig: {
+      timeout: 15000,      // 15 seconds timeout
+      maxRetries: 2,       // Retry up to 2 times for temporary errors
+      retryDelay: 2000     // Wait 2 seconds between retries
     },
 
     // Initialize lazy loading with Intersection Observer
@@ -16620,43 +16683,7 @@ select:focus {
               const img = entry.target;
               const dataSrc = img.getAttribute('data-src');
               if (dataSrc) {
-                // Set src to start loading
-                img.src = dataSrc;
-                img.removeAttribute('data-src');
-                img.classList.remove('lazy-load');
-
-                // Add loading class for CSS animations
-                img.classList.add('lazy-loading');
-
-                // Une fois l'image chargée
-                img.addEventListener('load', () => {
-                  img.classList.remove('lazy-loading');
-                  img.classList.add('lazy-loaded');
-
-                  // S'assurer que les événements d'agrandissement sont attachés
-                  if (JdrApp.modules.editor && JdrApp.modules.editor.attachImageEvents) {
-                    JdrApp.modules.editor.attachImageEvents();
-                  }
-                }, { once: true });
-
-                // Gérer les erreurs de chargement avec fallback automatique
-                img.addEventListener('error', () => {
-                  img.classList.remove('lazy-loading');
-
-                  // Si l'image utilise weserv.nl et échoue, réessayer avec l'URL originale
-                  if (dataSrc.includes('images.weserv.nl')) {
-                    console.warn('weserv.nl proxy failed, trying original URL:', dataSrc);
-                    const originalUrl = this.extractOriginalUrl(dataSrc);
-                    if (originalUrl && originalUrl !== dataSrc) {
-                      img.src = originalUrl;
-                      console.log('Fallback to original URL:', originalUrl);
-                      return; // Don't add error class yet, give original URL a chance
-                    }
-                  }
-
-                  img.classList.add('lazy-error');
-                  console.warn('Failed to load image:', dataSrc);
-                }, { once: true });
+                this.loadImageWithRetry(img, dataSrc);
               }
               observer.unobserve(img);
             }
@@ -16671,6 +16698,125 @@ select:focus {
       }
     },
 
+    // Load image with timeout and retry mechanism
+    loadImageWithRetry(img, url, retryCount = 0) {
+      img.removeAttribute('data-src');
+      img.classList.remove('lazy-load');
+      img.classList.add('lazy-loading');
+
+      // Store original URL for retry
+      if (!img.dataset.originalSrc) {
+        img.dataset.originalSrc = url;
+      }
+
+      // Set up timeout
+      const timeoutId = setTimeout(() => {
+        if (img.classList.contains('lazy-loading')) {
+          console.warn(`Image timeout after ${this.imageLoadConfig.timeout}ms:`, url);
+          this.handleImageLoadFailure(img, url, retryCount, 'timeout');
+        }
+      }, this.imageLoadConfig.timeout);
+
+      // Success handler
+      const onLoad = () => {
+        clearTimeout(timeoutId);
+        img.classList.remove('lazy-loading');
+        img.classList.add('lazy-loaded');
+        delete img.dataset.retryCount;
+
+        // Remove flag to force re-attachment of click events now that image is loaded
+        img.removeAttribute('data-events-attached');
+
+        // S'assurer que les événements d'agrandissement sont attachés
+        if (JdrApp.modules.editor && JdrApp.modules.editor.attachImageEvents) {
+          JdrApp.modules.editor.attachImageEvents();
+        }
+      };
+
+      // Error handler
+      const onError = () => {
+        clearTimeout(timeoutId);
+        this.handleImageLoadFailure(img, url, retryCount, 'error');
+      };
+
+      img.addEventListener('load', onLoad, { once: true });
+      img.addEventListener('error', onError, { once: true });
+
+      // Start loading
+      img.src = url;
+    },
+
+    // Handle image load failure with retry logic
+    handleImageLoadFailure(img, url, retryCount, reason) {
+      img.classList.remove('lazy-loading');
+
+      // Si l'image utilise weserv.nl et échoue, réessayer avec l'URL originale
+      if (url.includes('images.weserv.nl')) {
+        console.warn('weserv.nl proxy failed, trying original URL:', url);
+        const originalUrl = this.extractOriginalUrl(url);
+        if (originalUrl && originalUrl !== url) {
+          this.loadImageWithRetry(img, originalUrl, 0);
+          return;
+        }
+      }
+
+      // Retry logic for temporary failures
+      if (retryCount < this.imageLoadConfig.maxRetries) {
+        const nextRetry = retryCount + 1;
+        console.log(`Retrying image load (${nextRetry}/${this.imageLoadConfig.maxRetries}):`, url);
+
+        setTimeout(() => {
+          img.classList.add('lazy-loading');
+          this.loadImageWithRetry(img, img.dataset.originalSrc || url, nextRetry);
+        }, this.imageLoadConfig.retryDelay);
+        return;
+      }
+
+      // Final failure - show error state
+      console.warn(`Failed to load image after ${this.imageLoadConfig.maxRetries} retries (${reason}):`, url);
+      img.classList.add('lazy-error');
+      this.showImageErrorPlaceholder(img);
+    },
+
+    // Show a visible error placeholder for failed images
+    showImageErrorPlaceholder(img) {
+      const container = img.closest('.illus');
+      if (!container) return;
+
+      // Check if placeholder already exists
+      if (container.querySelector('.image-error-placeholder')) return;
+
+      // Create error placeholder
+      const placeholder = document.createElement('div');
+      placeholder.className = 'image-error-placeholder';
+      placeholder.innerHTML = `
+        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;
+                    padding: 1rem; background: rgba(239, 68, 68, 0.1); border: 2px dashed #ef4444;
+                    border-radius: 8px; color: #ef4444; text-align: center; min-height: 100px;">
+          <span style="font-size: 2em; margin-bottom: 0.5rem;">🖼️❌</span>
+          <span style="font-size: 0.85em; font-weight: 500;">Image indisponible</span>
+          <button class="retry-image-btn" style="margin-top: 0.5rem; padding: 4px 12px;
+                  background: #ef4444; color: white; border: none; border-radius: 4px;
+                  cursor: pointer; font-size: 0.8em;">🔄 Réessayer</button>
+        </div>
+      `;
+
+      // Add retry button functionality
+      const retryBtn = placeholder.querySelector('.retry-image-btn');
+      retryBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        placeholder.remove();
+        img.classList.remove('lazy-error');
+        const originalUrl = img.dataset.originalSrc || img.src;
+        this.loadImageWithRetry(img, originalUrl, 0);
+      });
+
+      // Hide the broken image and show placeholder
+      img.style.display = 'none';
+      container.appendChild(placeholder);
+    },
+
     // Fallback lazy loading for older browsers
     initFallbackLazyLoading() {
       const lazyLoad = () => {
@@ -16680,43 +16826,17 @@ select:focus {
           if (rect.top < window.innerHeight + 50 && rect.bottom > -50) {
             const dataSrc = img.getAttribute('data-src');
             if (dataSrc) {
-              img.src = dataSrc;
-              img.removeAttribute('data-src');
-              img.classList.remove('lazy-load');
-              img.classList.add('lazy-loaded');
-
-              // Une fois l'image chargée, s'assurer que les événements d'agrandissement sont attachés
-              img.addEventListener('load', () => {
-                if (JdrApp.modules.editor && JdrApp.modules.editor.attachImageEvents) {
-                  JdrApp.modules.editor.attachImageEvents();
-                }
-              }, { once: true });
-
-              // Gérer les erreurs de chargement avec fallback automatique
-              img.addEventListener('error', () => {
-                // Si l'image utilise weserv.nl et échoue, réessayer avec l'URL originale
-                if (dataSrc.includes('images.weserv.nl')) {
-                  console.warn('weserv.nl proxy failed, trying original URL:', dataSrc);
-                  const originalUrl = this.extractOriginalUrl(dataSrc);
-                  if (originalUrl && originalUrl !== dataSrc) {
-                    img.src = originalUrl;
-                    console.log('Fallback to original URL:', originalUrl);
-                    return; // Don't add error class yet
-                  }
-                }
-
-                img.classList.add('lazy-error');
-                console.warn('Failed to load image:', dataSrc);
-              }, { once: true });
+              // Use the same retry mechanism as IntersectionObserver
+              this.loadImageWithRetry(img, dataSrc);
             }
           }
         });
       };
-      
+
       // Use throttled scroll events for better performance
       const throttledLazyLoad = JdrApp.utils.throttle(lazyLoad, 100);
       const debouncedLazyLoad = JdrApp.utils.debounce(lazyLoad, 250);
-      
+
       window.addEventListener('scroll', throttledLazyLoad, { passive: true });
       window.addEventListener('resize', debouncedLazyLoad, { passive: true });
       lazyLoad(); // Initial check
@@ -16727,9 +16847,10 @@ select:focus {
       try {
         if (window.IMAGES) {
           this.imageStore = window.IMAGES.images || window.IMAGES || {};
+          this.dataLoaded = true;
           return;
         }
-        
+
         const response = await fetch('./data/images.json');
         if (response.ok) {
           const data = await response.json();
@@ -16740,6 +16861,7 @@ select:focus {
       } catch (error) {
         this.imageStore = {};
       }
+      this.dataLoaded = true;
     },
 
     // Get image URL for a given key
@@ -16845,21 +16967,29 @@ select:focus {
       illusElements.forEach(illusElement => {
         const illusKey = illusElement.dataset.illusKey;
         const imageUrl = this.getImageUrl(illusKey);
-        
+
         if (imageUrl) {
           const img = illusElement.querySelector('img');
-          if (img && img.classList.contains('lazy-load')) {
-            // For lazy loading, set data-src and observe
+          if (img) {
             const processedUrl = this.processImageUrl(imageUrl);
-            img.setAttribute('data-src', processedUrl);
-            if (this.lazyImageObserver) {
-              this.lazyImageObserver.observe(img);
+
+            // Make image visible (it may have been hidden during initial render)
+            img.style.display = 'inline-block';
+
+            // Remove events-attached flag to allow re-attachment after image loads
+            img.removeAttribute('data-events-attached');
+
+            // Check if image needs loading (still has placeholder or no real src)
+            const needsLoading = !img.src ||
+                                 img.src.includes('data:image/svg+xml') ||
+                                 img.classList.contains('lazy-load');
+
+            if (needsLoading) {
+              // Load immediately instead of waiting for intersection
+              this.loadImageWithRetry(img, processedUrl);
             }
-          } else {
-            // Fallback to immediate loading
-            this.applyImage(illusElement, imageUrl);
+            loadedCount++;
           }
-          loadedCount++;
         }
       });
 
@@ -18593,6 +18723,13 @@ select:focus {
       // Remove all temporary elements (notifications, etc.)
       const tempElements = clone.querySelectorAll('[data-temp], .temp-notification');
       tempElements.forEach(el => el.remove());
+
+      // Clean up active states from articles to prevent flash on reload
+      const articles = clone.querySelectorAll('article.active');
+      articles.forEach(article => {
+        article.classList.remove('active');
+        article.style.removeProperty('display');
+      });
 
       return clone.outerHTML;
     },
@@ -25735,6 +25872,11 @@ select:focus {
 
     autoLoadImages() {
       if (JdrApp.modules.images) {
+        // If data not loaded yet, wait and retry
+        if (!JdrApp.modules.images.dataLoaded) {
+          setTimeout(() => this.autoLoadImages(), 50);
+          return 0;
+        }
         return JdrApp.modules.images.autoLoadImages();
       }
       return 0;
@@ -30062,21 +30204,41 @@ select:focus {
     },
 
     setupImageHandlers() {
-      // Fonction pour attacher les événements aux images existantes
+      // Éviter double-attachement
+      if (this._imageHandlersAttached) return;
+      this._imageHandlersAttached = true;
+
+      // Utiliser la délégation d'événements pour les clics sur images
+      document.addEventListener('click', (e) => {
+        const img = e.target.closest('img');
+        // Ignorer les images dans le modal d'agrandissement
+        if (img && !img.closest('#image-enlargement-modal')) {
+          e.stopImmediatePropagation();
+          this.toggleImageEnlargement(img);
+        }
+      }, { capture: true });
+
+      // Support tactile pour mobile
+      document.addEventListener('touchend', (e) => {
+        const img = e.target.closest('img');
+        // Ignorer les images dans le modal d'agrandissement
+        if (img && !img.closest('#image-enlargement-modal')) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          this.toggleImageEnlargement(img);
+        }
+      }, { passive: false, capture: true });
+
+      // Attacher les handlers spécifiques (upload, suppression)
       this.attachImageEvents();
-      
-      // Observer pour attacher les événements aux nouvelles images créées dynamiquement
+
+      // Observer pour les nouveaux éléments .illus
       if (typeof MutationObserver !== 'undefined') {
         const observer = new MutationObserver(() => {
           this.attachImageEvents();
         });
         observer.observe(document.body, { childList: true, subtree: true });
       }
-      
-      // Force l'attachement après un délai pour s'assurer que les images lazy sont chargées
-      setTimeout(() => {
-        this.attachImageEvents();
-      }, 2000);
     },
 
     attachImageEvents() {
@@ -30096,37 +30258,18 @@ select:focus {
         }
       });
 
-      // Attacher aux images pour agrandissement - toutes les images, pas seulement celles dans .illus
-      const images = document.querySelectorAll('img');
-      
-      images.forEach(img => {
-        // Éviter les images dans les éditeurs ou les inputs
-        if (!img.closest('.editor-content') && !img.hasAttribute('data-events-attached')) {
-          
-          // Ajouter support tactile pour mobile
-          img.addEventListener('click', (e) => {
-            this.toggleImageEnlargement(e.target);
-          });
-          img.addEventListener('touchend', (e) => {
-            e.preventDefault();
-            this.toggleImageEnlargement(e.target);
-          });
-          
-          // Attendre que l'image lazy soit chargée pour définir le curseur
+      // Mettre le curseur zoom-in sur les images agrandissables
+      document.querySelectorAll('img').forEach(img => {
+        if (img.complete && img.naturalWidth > 0) {
+          if (this.isImageEnlargeable(img)) {
+            img.style.cursor = 'zoom-in';
+          }
+        } else {
           img.addEventListener('load', () => {
             if (this.isImageEnlargeable(img)) {
               img.style.cursor = 'zoom-in';
             }
-          });
-          
-          // Si l'image est déjà chargée
-          if (img.complete && img.naturalWidth > 0) {
-            if (this.isImageEnlargeable(img)) {
-              img.style.cursor = 'zoom-in';
-            }
-          }
-          
-          img.setAttribute('data-events-attached', 'true');
+          }, { once: true });
         }
       });
     },
@@ -30177,66 +30320,79 @@ select:focus {
     },
 
     toggleImageEnlargement(img) {
-      // Vérifier si l'image est valide pour l'agrandissement
-      if (!this.isImageEnlargeable(img)) {
+      // Si le modal existe déjà, le fermer
+      const existingModal = document.getElementById('image-enlargement-modal');
+      if (existingModal) {
+        this.closeEnlargedImage();
         return;
       }
-      
-      if (img.classList.contains('enlarged')) {
-        this.closeEnlargedImage();
-      } else {
-        this.showEnlargedImage(img);
+
+      const enlargeable = this.isImageEnlargeable(img);
+      if (!enlargeable) {
+        return;
       }
+
+      this.showEnlargedImage(img);
     },
 
     // Vérifier si une image peut être agrandie
     isImageEnlargeable(img) {
-      // Ne pas agrandir les placeholders SVG
-      if (img.src && img.src.startsWith('data:image/svg+xml')) {
-        return false;
-      }
-      
+      // Obtenir l'URL réelle (soit src, soit data-src pour lazy loading)
+      const realSrc = img.getAttribute('data-src') || img.src;
+      const dataSrc = img.getAttribute('data-src');
+
       // Ne pas agrandir si pas de source réelle
-      if (!img.src && !img.getAttribute('data-src')) {
+      if (!realSrc) {
         return false;
       }
-      
+
+      // Ne pas agrandir les placeholders SVG (sauf si data-src existe)
+      if (img.src && img.src.startsWith('data:image/svg+xml') && !dataSrc) {
+        return false;
+      }
+
       // Ne pas agrandir les images trop petites (probablement des icônes)
+      // Mais permettre si l'image a un data-src (lazy loading pas encore terminé)
       if (img.naturalWidth < 50 || img.naturalHeight < 50) {
-        return false;
+        // Si l'image a un data-src, c'est peut-être juste pas encore chargée
+        if (!dataSrc) {
+          return false;
+        }
       }
-      
+
       return true;
     },
 
     showEnlargedImage(img) {
-      // Fermer toute image déjà ouverte
-      this.closeEnlargedImage();
-      
       // Créer un conteneur modal complet
       const modal = document.createElement('div');
       modal.id = 'image-enlargement-modal';
-      modal.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: rgba(0,0,0,0.8);
-        z-index: 2147483647;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: zoom-out;
-      `;
+      // Utiliser setAttribute pour forcer les styles importants
+      modal.setAttribute('style', `
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        background: rgba(0,0,0,0.8) !important;
+        z-index: 2147483647 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        cursor: zoom-out !important;
+        isolation: isolate !important;
+      `);
       
       // Créer une copie de l'image
       const enlargedImg = img.cloneNode(true);
-      
+
       // Extraire l'URL originale pour le chargement haute résolution
-      let originalUrl = img.src;
-      if (img.hasAttribute('data-src') && !enlargedImg.src) {
-        originalUrl = img.getAttribute('data-src');
+      // Priorité au data-src (lazy loading) car src peut être un placeholder SVG
+      let originalUrl = img.getAttribute('data-src') || img.src;
+
+      // Ne pas utiliser les placeholders SVG
+      if (originalUrl && originalUrl.startsWith('data:image/svg+xml')) {
+        originalUrl = img.getAttribute('data-src') || '';
       }
       
       // Si l'image utilise le service weserv.nl, extraire l'URL originale haute résolution
@@ -30255,32 +30411,56 @@ select:focus {
       // Supprimer les classes de lazy loading qui pourraient interférer
       enlargedImg.classList.remove('lazy-load', 'lazy-loaded');
       
+      // Calculer les dimensions pour que l'image tienne dans 90% du viewport
+      const originalWidth = img.naturalWidth;
+      const originalHeight = img.naturalHeight;
+      const maxWidth = window.innerWidth * 0.9;
+      const maxHeight = window.innerHeight * 0.9;
+
+      let finalWidth = originalWidth;
+      let finalHeight = originalHeight;
+
+      // Réduire proportionnellement si nécessaire
+      if (originalWidth > maxWidth) {
+        finalWidth = maxWidth;
+        finalHeight = (originalHeight * maxWidth) / originalWidth;
+      }
+      if (finalHeight > maxHeight) {
+        finalHeight = maxHeight;
+        finalWidth = (originalWidth * maxHeight) / originalHeight;
+      }
+
+      // Forcer l'affichage de l'image avec des dimensions explicites
       enlargedImg.style.cssText = `
-        max-width: 90vw;
-        max-height: 90vh;
-        width: auto;
-        height: auto;
-        object-fit: contain;
-        border: 3px solid var(--gold);
-        border-radius: 8px;
-        background: white;
-        box-shadow: 0 20px 60px rgba(0,0,0,.8), 0 0 20px rgba(212,175,55,.3);
-        cursor: zoom-out;
-        opacity: 1;
-        transition: none;
+        display: block !important;
+        width: ${finalWidth}px !important;
+        height: ${finalHeight}px !important;
+        object-fit: contain !important;
+        border: 3px solid var(--gold) !important;
+        border-radius: 8px !important;
+        background: white !important;
+        box-shadow: 0 20px 60px rgba(0,0,0,.8), 0 0 20px rgba(212,175,55,.3) !important;
+        cursor: zoom-out !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        transition: none !important;
       `;
-      
+
       modal.appendChild(enlargedImg);
       document.body.appendChild(modal);
-      
+
       // Fermer au clic et au touch pour mobile
-      modal.onclick = () => this.closeEnlargedImage();
-      modal.addEventListener('touchend', (e) => {
-        if (e.target === modal) {
-          e.preventDefault();
-          this.closeEnlargedImage();
-        }
-      });
+      // Utiliser setTimeout pour éviter que le clic actuel ferme immédiatement le modal
+      setTimeout(() => {
+        modal.onclick = () => this.closeEnlargedImage();
+        modal.addEventListener('touchend', (e) => {
+          if (e.target === modal) {
+            e.preventDefault();
+            this.closeEnlargedImage();
+          }
+        });
+      }, 10);
       
       // Fermer avec Échap
       const escapeHandler = (e) => {

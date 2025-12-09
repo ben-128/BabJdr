@@ -50,6 +50,53 @@
   opacity: 1;
 }
 
+/* Loading state with spinner animation */
+.lazy-loading {
+  opacity: 0.5;
+}
+
+.illus {
+  position: relative;
+}
+
+.illus:has(.lazy-loading)::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  margin: -15px 0 0 -15px;
+  border: 3px solid rgba(139, 92, 23, 0.3);
+  border-top-color: var(--bronze, #8b5c17);
+  border-radius: 50%;
+  animation: spinner 0.8s linear infinite;
+  z-index: 10;
+}
+
+@keyframes spinner {
+  to { transform: rotate(360deg); }
+}
+
+/* Error state for failed images */
+.lazy-error {
+  opacity: 0.3;
+  filter: grayscale(100%);
+}
+
+.image-error-placeholder {
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
+}
+
+/* Retry button hover effect */
+.retry-image-btn:hover {
+  background: #dc2626 !important;
+  transform: scale(1.05);
+  transition: all 0.2s ease;
+}
+
 /* Improve image rendering performance */
 img {
   will-change: auto;

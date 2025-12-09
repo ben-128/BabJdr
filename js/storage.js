@@ -678,6 +678,13 @@
       const tempElements = clone.querySelectorAll('[data-temp], .temp-notification');
       tempElements.forEach(el => el.remove());
 
+      // Clean up active states from articles to prevent flash on reload
+      const articles = clone.querySelectorAll('article.active');
+      articles.forEach(article => {
+        article.classList.remove('active');
+        article.style.removeProperty('display');
+      });
+
       return clone.outerHTML;
     },
 

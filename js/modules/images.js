@@ -11,16 +11,32 @@
   JdrApp.modules.images = {
     // Store for preloaded images
     imageStore: {},
-    
+
+    // Flag to indicate data is loaded
+    dataLoaded: false,
+
     async init() {
       await this.loadImageData();
       this.initImageHandlers();
       this.initLazyLoading();
-      
+
+      // Auto-load images after data is ready and DOM is rendered
+      // Uses a small delay to ensure pages are rendered first
+      setTimeout(() => {
+        this.autoLoadImages();
+      }, 100);
+
       // Auto-sync monster images on startup to ensure consistency
       setTimeout(() => {
         this.ensureMonsterImageMappings();
       }, 1000);
+    },
+
+    // Configuration for image loading
+    imageLoadConfig: {
+      timeout: 15000,      // 15 seconds timeout
+      maxRetries: 2,       // Retry up to 2 times for temporary errors
+      retryDelay: 2000     // Wait 2 seconds between retries
     },
 
     // Initialize lazy loading with Intersection Observer
@@ -34,43 +50,7 @@
               const img = entry.target;
               const dataSrc = img.getAttribute('data-src');
               if (dataSrc) {
-                // Set src to start loading
-                img.src = dataSrc;
-                img.removeAttribute('data-src');
-                img.classList.remove('lazy-load');
-
-                // Add loading class for CSS animations
-                img.classList.add('lazy-loading');
-
-                // Une fois l'image chargée
-                img.addEventListener('load', () => {
-                  img.classList.remove('lazy-loading');
-                  img.classList.add('lazy-loaded');
-
-                  // S'assurer que les événements d'agrandissement sont attachés
-                  if (JdrApp.modules.editor && JdrApp.modules.editor.attachImageEvents) {
-                    JdrApp.modules.editor.attachImageEvents();
-                  }
-                }, { once: true });
-
-                // Gérer les erreurs de chargement avec fallback automatique
-                img.addEventListener('error', () => {
-                  img.classList.remove('lazy-loading');
-
-                  // Si l'image utilise weserv.nl et échoue, réessayer avec l'URL originale
-                  if (dataSrc.includes('images.weserv.nl')) {
-                    console.warn('weserv.nl proxy failed, trying original URL:', dataSrc);
-                    const originalUrl = this.extractOriginalUrl(dataSrc);
-                    if (originalUrl && originalUrl !== dataSrc) {
-                      img.src = originalUrl;
-                      console.log('Fallback to original URL:', originalUrl);
-                      return; // Don't add error class yet, give original URL a chance
-                    }
-                  }
-
-                  img.classList.add('lazy-error');
-                  console.warn('Failed to load image:', dataSrc);
-                }, { once: true });
+                this.loadImageWithRetry(img, dataSrc);
               }
               observer.unobserve(img);
             }
@@ -85,6 +65,125 @@
       }
     },
 
+    // Load image with timeout and retry mechanism
+    loadImageWithRetry(img, url, retryCount = 0) {
+      img.removeAttribute('data-src');
+      img.classList.remove('lazy-load');
+      img.classList.add('lazy-loading');
+
+      // Store original URL for retry
+      if (!img.dataset.originalSrc) {
+        img.dataset.originalSrc = url;
+      }
+
+      // Set up timeout
+      const timeoutId = setTimeout(() => {
+        if (img.classList.contains('lazy-loading')) {
+          console.warn(`Image timeout after ${this.imageLoadConfig.timeout}ms:`, url);
+          this.handleImageLoadFailure(img, url, retryCount, 'timeout');
+        }
+      }, this.imageLoadConfig.timeout);
+
+      // Success handler
+      const onLoad = () => {
+        clearTimeout(timeoutId);
+        img.classList.remove('lazy-loading');
+        img.classList.add('lazy-loaded');
+        delete img.dataset.retryCount;
+
+        // Remove flag to force re-attachment of click events now that image is loaded
+        img.removeAttribute('data-events-attached');
+
+        // S'assurer que les événements d'agrandissement sont attachés
+        if (JdrApp.modules.editor && JdrApp.modules.editor.attachImageEvents) {
+          JdrApp.modules.editor.attachImageEvents();
+        }
+      };
+
+      // Error handler
+      const onError = () => {
+        clearTimeout(timeoutId);
+        this.handleImageLoadFailure(img, url, retryCount, 'error');
+      };
+
+      img.addEventListener('load', onLoad, { once: true });
+      img.addEventListener('error', onError, { once: true });
+
+      // Start loading
+      img.src = url;
+    },
+
+    // Handle image load failure with retry logic
+    handleImageLoadFailure(img, url, retryCount, reason) {
+      img.classList.remove('lazy-loading');
+
+      // Si l'image utilise weserv.nl et échoue, réessayer avec l'URL originale
+      if (url.includes('images.weserv.nl')) {
+        console.warn('weserv.nl proxy failed, trying original URL:', url);
+        const originalUrl = this.extractOriginalUrl(url);
+        if (originalUrl && originalUrl !== url) {
+          this.loadImageWithRetry(img, originalUrl, 0);
+          return;
+        }
+      }
+
+      // Retry logic for temporary failures
+      if (retryCount < this.imageLoadConfig.maxRetries) {
+        const nextRetry = retryCount + 1;
+        console.log(`Retrying image load (${nextRetry}/${this.imageLoadConfig.maxRetries}):`, url);
+
+        setTimeout(() => {
+          img.classList.add('lazy-loading');
+          this.loadImageWithRetry(img, img.dataset.originalSrc || url, nextRetry);
+        }, this.imageLoadConfig.retryDelay);
+        return;
+      }
+
+      // Final failure - show error state
+      console.warn(`Failed to load image after ${this.imageLoadConfig.maxRetries} retries (${reason}):`, url);
+      img.classList.add('lazy-error');
+      this.showImageErrorPlaceholder(img);
+    },
+
+    // Show a visible error placeholder for failed images
+    showImageErrorPlaceholder(img) {
+      const container = img.closest('.illus');
+      if (!container) return;
+
+      // Check if placeholder already exists
+      if (container.querySelector('.image-error-placeholder')) return;
+
+      // Create error placeholder
+      const placeholder = document.createElement('div');
+      placeholder.className = 'image-error-placeholder';
+      placeholder.innerHTML = `
+        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;
+                    padding: 1rem; background: rgba(239, 68, 68, 0.1); border: 2px dashed #ef4444;
+                    border-radius: 8px; color: #ef4444; text-align: center; min-height: 100px;">
+          <span style="font-size: 2em; margin-bottom: 0.5rem;">🖼️❌</span>
+          <span style="font-size: 0.85em; font-weight: 500;">Image indisponible</span>
+          <button class="retry-image-btn" style="margin-top: 0.5rem; padding: 4px 12px;
+                  background: #ef4444; color: white; border: none; border-radius: 4px;
+                  cursor: pointer; font-size: 0.8em;">🔄 Réessayer</button>
+        </div>
+      `;
+
+      // Add retry button functionality
+      const retryBtn = placeholder.querySelector('.retry-image-btn');
+      retryBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        placeholder.remove();
+        img.classList.remove('lazy-error');
+        const originalUrl = img.dataset.originalSrc || img.src;
+        this.loadImageWithRetry(img, originalUrl, 0);
+      });
+
+      // Hide the broken image and show placeholder
+      img.style.display = 'none';
+      container.appendChild(placeholder);
+    },
+
     // Fallback lazy loading for older browsers
     initFallbackLazyLoading() {
       const lazyLoad = () => {
@@ -94,43 +193,17 @@
           if (rect.top < window.innerHeight + 50 && rect.bottom > -50) {
             const dataSrc = img.getAttribute('data-src');
             if (dataSrc) {
-              img.src = dataSrc;
-              img.removeAttribute('data-src');
-              img.classList.remove('lazy-load');
-              img.classList.add('lazy-loaded');
-
-              // Une fois l'image chargée, s'assurer que les événements d'agrandissement sont attachés
-              img.addEventListener('load', () => {
-                if (JdrApp.modules.editor && JdrApp.modules.editor.attachImageEvents) {
-                  JdrApp.modules.editor.attachImageEvents();
-                }
-              }, { once: true });
-
-              // Gérer les erreurs de chargement avec fallback automatique
-              img.addEventListener('error', () => {
-                // Si l'image utilise weserv.nl et échoue, réessayer avec l'URL originale
-                if (dataSrc.includes('images.weserv.nl')) {
-                  console.warn('weserv.nl proxy failed, trying original URL:', dataSrc);
-                  const originalUrl = this.extractOriginalUrl(dataSrc);
-                  if (originalUrl && originalUrl !== dataSrc) {
-                    img.src = originalUrl;
-                    console.log('Fallback to original URL:', originalUrl);
-                    return; // Don't add error class yet
-                  }
-                }
-
-                img.classList.add('lazy-error');
-                console.warn('Failed to load image:', dataSrc);
-              }, { once: true });
+              // Use the same retry mechanism as IntersectionObserver
+              this.loadImageWithRetry(img, dataSrc);
             }
           }
         });
       };
-      
+
       // Use throttled scroll events for better performance
       const throttledLazyLoad = JdrApp.utils.throttle(lazyLoad, 100);
       const debouncedLazyLoad = JdrApp.utils.debounce(lazyLoad, 250);
-      
+
       window.addEventListener('scroll', throttledLazyLoad, { passive: true });
       window.addEventListener('resize', debouncedLazyLoad, { passive: true });
       lazyLoad(); // Initial check
@@ -141,9 +214,10 @@
       try {
         if (window.IMAGES) {
           this.imageStore = window.IMAGES.images || window.IMAGES || {};
+          this.dataLoaded = true;
           return;
         }
-        
+
         const response = await fetch('./data/images.json');
         if (response.ok) {
           const data = await response.json();
@@ -154,6 +228,7 @@
       } catch (error) {
         this.imageStore = {};
       }
+      this.dataLoaded = true;
     },
 
     // Get image URL for a given key
@@ -259,21 +334,29 @@
       illusElements.forEach(illusElement => {
         const illusKey = illusElement.dataset.illusKey;
         const imageUrl = this.getImageUrl(illusKey);
-        
+
         if (imageUrl) {
           const img = illusElement.querySelector('img');
-          if (img && img.classList.contains('lazy-load')) {
-            // For lazy loading, set data-src and observe
+          if (img) {
             const processedUrl = this.processImageUrl(imageUrl);
-            img.setAttribute('data-src', processedUrl);
-            if (this.lazyImageObserver) {
-              this.lazyImageObserver.observe(img);
+
+            // Make image visible (it may have been hidden during initial render)
+            img.style.display = 'inline-block';
+
+            // Remove events-attached flag to allow re-attachment after image loads
+            img.removeAttribute('data-events-attached');
+
+            // Check if image needs loading (still has placeholder or no real src)
+            const needsLoading = !img.src ||
+                                 img.src.includes('data:image/svg+xml') ||
+                                 img.classList.contains('lazy-load');
+
+            if (needsLoading) {
+              // Load immediately instead of waiting for intersection
+              this.loadImageWithRetry(img, processedUrl);
             }
-          } else {
-            // Fallback to immediate loading
-            this.applyImage(illusElement, imageUrl);
+            loadedCount++;
           }
-          loadedCount++;
         }
       });
 

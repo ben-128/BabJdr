@@ -405,21 +405,41 @@
     },
 
     setupImageHandlers() {
-      // Fonction pour attacher les événements aux images existantes
+      // Éviter double-attachement
+      if (this._imageHandlersAttached) return;
+      this._imageHandlersAttached = true;
+
+      // Utiliser la délégation d'événements pour les clics sur images
+      document.addEventListener('click', (e) => {
+        const img = e.target.closest('img');
+        // Ignorer les images dans le modal d'agrandissement
+        if (img && !img.closest('#image-enlargement-modal')) {
+          e.stopImmediatePropagation();
+          this.toggleImageEnlargement(img);
+        }
+      }, { capture: true });
+
+      // Support tactile pour mobile
+      document.addEventListener('touchend', (e) => {
+        const img = e.target.closest('img');
+        // Ignorer les images dans le modal d'agrandissement
+        if (img && !img.closest('#image-enlargement-modal')) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          this.toggleImageEnlargement(img);
+        }
+      }, { passive: false, capture: true });
+
+      // Attacher les handlers spécifiques (upload, suppression)
       this.attachImageEvents();
-      
-      // Observer pour attacher les événements aux nouvelles images créées dynamiquement
+
+      // Observer pour les nouveaux éléments .illus
       if (typeof MutationObserver !== 'undefined') {
         const observer = new MutationObserver(() => {
           this.attachImageEvents();
         });
         observer.observe(document.body, { childList: true, subtree: true });
       }
-      
-      // Force l'attachement après un délai pour s'assurer que les images lazy sont chargées
-      setTimeout(() => {
-        this.attachImageEvents();
-      }, 2000);
     },
 
     attachImageEvents() {
@@ -439,37 +459,18 @@
         }
       });
 
-      // Attacher aux images pour agrandissement - toutes les images, pas seulement celles dans .illus
-      const images = document.querySelectorAll('img');
-      
-      images.forEach(img => {
-        // Éviter les images dans les éditeurs ou les inputs
-        if (!img.closest('.editor-content') && !img.hasAttribute('data-events-attached')) {
-          
-          // Ajouter support tactile pour mobile
-          img.addEventListener('click', (e) => {
-            this.toggleImageEnlargement(e.target);
-          });
-          img.addEventListener('touchend', (e) => {
-            e.preventDefault();
-            this.toggleImageEnlargement(e.target);
-          });
-          
-          // Attendre que l'image lazy soit chargée pour définir le curseur
+      // Mettre le curseur zoom-in sur les images agrandissables
+      document.querySelectorAll('img').forEach(img => {
+        if (img.complete && img.naturalWidth > 0) {
+          if (this.isImageEnlargeable(img)) {
+            img.style.cursor = 'zoom-in';
+          }
+        } else {
           img.addEventListener('load', () => {
             if (this.isImageEnlargeable(img)) {
               img.style.cursor = 'zoom-in';
             }
-          });
-          
-          // Si l'image est déjà chargée
-          if (img.complete && img.naturalWidth > 0) {
-            if (this.isImageEnlargeable(img)) {
-              img.style.cursor = 'zoom-in';
-            }
-          }
-          
-          img.setAttribute('data-events-attached', 'true');
+          }, { once: true });
         }
       });
     },
@@ -520,66 +521,79 @@
     },
 
     toggleImageEnlargement(img) {
-      // Vérifier si l'image est valide pour l'agrandissement
-      if (!this.isImageEnlargeable(img)) {
+      // Si le modal existe déjà, le fermer
+      const existingModal = document.getElementById('image-enlargement-modal');
+      if (existingModal) {
+        this.closeEnlargedImage();
         return;
       }
-      
-      if (img.classList.contains('enlarged')) {
-        this.closeEnlargedImage();
-      } else {
-        this.showEnlargedImage(img);
+
+      const enlargeable = this.isImageEnlargeable(img);
+      if (!enlargeable) {
+        return;
       }
+
+      this.showEnlargedImage(img);
     },
 
     // Vérifier si une image peut être agrandie
     isImageEnlargeable(img) {
-      // Ne pas agrandir les placeholders SVG
-      if (img.src && img.src.startsWith('data:image/svg+xml')) {
-        return false;
-      }
-      
+      // Obtenir l'URL réelle (soit src, soit data-src pour lazy loading)
+      const realSrc = img.getAttribute('data-src') || img.src;
+      const dataSrc = img.getAttribute('data-src');
+
       // Ne pas agrandir si pas de source réelle
-      if (!img.src && !img.getAttribute('data-src')) {
+      if (!realSrc) {
         return false;
       }
-      
+
+      // Ne pas agrandir les placeholders SVG (sauf si data-src existe)
+      if (img.src && img.src.startsWith('data:image/svg+xml') && !dataSrc) {
+        return false;
+      }
+
       // Ne pas agrandir les images trop petites (probablement des icônes)
+      // Mais permettre si l'image a un data-src (lazy loading pas encore terminé)
       if (img.naturalWidth < 50 || img.naturalHeight < 50) {
-        return false;
+        // Si l'image a un data-src, c'est peut-être juste pas encore chargée
+        if (!dataSrc) {
+          return false;
+        }
       }
-      
+
       return true;
     },
 
     showEnlargedImage(img) {
-      // Fermer toute image déjà ouverte
-      this.closeEnlargedImage();
-      
       // Créer un conteneur modal complet
       const modal = document.createElement('div');
       modal.id = 'image-enlargement-modal';
-      modal.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: rgba(0,0,0,0.8);
-        z-index: 2147483647;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: zoom-out;
-      `;
+      // Utiliser setAttribute pour forcer les styles importants
+      modal.setAttribute('style', `
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        background: rgba(0,0,0,0.8) !important;
+        z-index: 2147483647 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        cursor: zoom-out !important;
+        isolation: isolate !important;
+      `);
       
       // Créer une copie de l'image
       const enlargedImg = img.cloneNode(true);
-      
+
       // Extraire l'URL originale pour le chargement haute résolution
-      let originalUrl = img.src;
-      if (img.hasAttribute('data-src') && !enlargedImg.src) {
-        originalUrl = img.getAttribute('data-src');
+      // Priorité au data-src (lazy loading) car src peut être un placeholder SVG
+      let originalUrl = img.getAttribute('data-src') || img.src;
+
+      // Ne pas utiliser les placeholders SVG
+      if (originalUrl && originalUrl.startsWith('data:image/svg+xml')) {
+        originalUrl = img.getAttribute('data-src') || '';
       }
       
       // Si l'image utilise le service weserv.nl, extraire l'URL originale haute résolution
@@ -598,32 +612,56 @@
       // Supprimer les classes de lazy loading qui pourraient interférer
       enlargedImg.classList.remove('lazy-load', 'lazy-loaded');
       
+      // Calculer les dimensions pour que l'image tienne dans 90% du viewport
+      const originalWidth = img.naturalWidth;
+      const originalHeight = img.naturalHeight;
+      const maxWidth = window.innerWidth * 0.9;
+      const maxHeight = window.innerHeight * 0.9;
+
+      let finalWidth = originalWidth;
+      let finalHeight = originalHeight;
+
+      // Réduire proportionnellement si nécessaire
+      if (originalWidth > maxWidth) {
+        finalWidth = maxWidth;
+        finalHeight = (originalHeight * maxWidth) / originalWidth;
+      }
+      if (finalHeight > maxHeight) {
+        finalHeight = maxHeight;
+        finalWidth = (originalWidth * maxHeight) / originalHeight;
+      }
+
+      // Forcer l'affichage de l'image avec des dimensions explicites
       enlargedImg.style.cssText = `
-        max-width: 90vw;
-        max-height: 90vh;
-        width: auto;
-        height: auto;
-        object-fit: contain;
-        border: 3px solid var(--gold);
-        border-radius: 8px;
-        background: white;
-        box-shadow: 0 20px 60px rgba(0,0,0,.8), 0 0 20px rgba(212,175,55,.3);
-        cursor: zoom-out;
-        opacity: 1;
-        transition: none;
+        display: block !important;
+        width: ${finalWidth}px !important;
+        height: ${finalHeight}px !important;
+        object-fit: contain !important;
+        border: 3px solid var(--gold) !important;
+        border-radius: 8px !important;
+        background: white !important;
+        box-shadow: 0 20px 60px rgba(0,0,0,.8), 0 0 20px rgba(212,175,55,.3) !important;
+        cursor: zoom-out !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        transition: none !important;
       `;
-      
+
       modal.appendChild(enlargedImg);
       document.body.appendChild(modal);
-      
+
       // Fermer au clic et au touch pour mobile
-      modal.onclick = () => this.closeEnlargedImage();
-      modal.addEventListener('touchend', (e) => {
-        if (e.target === modal) {
-          e.preventDefault();
-          this.closeEnlargedImage();
-        }
-      });
+      // Utiliser setTimeout pour éviter que le clic actuel ferme immédiatement le modal
+      setTimeout(() => {
+        modal.onclick = () => this.closeEnlargedImage();
+        modal.addEventListener('touchend', (e) => {
+          if (e.target === modal) {
+            e.preventDefault();
+            this.closeEnlargedImage();
+          }
+        });
+      }, 10);
       
       // Fermer avec Échap
       const escapeHandler = (e) => {
