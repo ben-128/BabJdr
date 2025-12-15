@@ -105,8 +105,10 @@ echo.
 echo [INFO] Sauvegarde des fichiers actuels...
 :: Créer le dossier Backups s'il n'existe pas (dans le répertoire du projet)
 if not exist "%PROJECT_PATH%\Backups" mkdir "%PROJECT_PATH%\Backups"
-set "BACKUP_DIR=%PROJECT_PATH%\Backups\backup-%date:~-4,4%%date:~-10,2%%date:~-7,2%-%time:~0,2%%time:~3,2%%time:~6,2%"
-set "BACKUP_DIR=%BACKUP_DIR: =0%"
+
+:: Utiliser PowerShell pour obtenir un timestamp fiable
+for /f "delims=" %%a in ('powershell -Command "Get-Date -Format 'yyyyMMdd-HHmmss'"') do set "TIMESTAMP=%%a"
+set "BACKUP_DIR=%PROJECT_PATH%\Backups\backup-%TIMESTAMP%"
 
 :: Créer le dossier de sauvegarde avec permissions normales
 mkdir "%BACKUP_DIR%" 2>nul
@@ -114,7 +116,7 @@ mkdir "%BACKUP_DIR%" 2>nul
 :: Copier uniquement les fichiers data (plus rapide)
 echo [INFO] Sauvegarde du dossier data...
 if exist "data" (
-    xcopy "data" "%BACKUP_DIR%\data\" /E /I /Q /Y
+    xcopy "data" "%BACKUP_DIR%\data\" /E /I /Q /Y >nul 2>&1
     if errorlevel 1 (
         echo [ATTENTION] Erreur lors de la sauvegarde
     ) else (

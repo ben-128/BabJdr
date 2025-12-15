@@ -536,10 +536,11 @@
       console.log('Contains < character:', monsterCard.includes('<'));
       console.log('Contains &lt;:', monsterCard.includes('&lt;'));
 
-      // Add minimal styles for the preview tooltip
-      if (!document.getElementById('monster-preview-styles')) {
-        const styleElement = document.createElement('style');
-        styleElement.id = 'monster-preview-styles';
+      // Add minimal styles for the preview tooltip - always recreate to get latest styles
+      const existingStyle = document.getElementById('monster-preview-styles');
+      if (existingStyle) existingStyle.remove();
+      const styleElement = document.createElement('style');
+      styleElement.id = 'monster-preview-styles';
         styleElement.textContent = `
           .monster-preview-tooltip {
             background: var(--paper) !important;
@@ -629,9 +630,24 @@
             margin-top: 2rem !important;
             margin-bottom: 1.5rem !important;
           }
+          /* Reduce element icons size in monster preview */
+          .monster-preview-tooltip .element-icon {
+            width: 30px !important;
+            height: 30px !important;
+          }
+          /* Monster main element badge */
+          .monster-preview-tooltip .monster-element-display img,
+          .monster-preview-tooltip .element-badge img {
+            width: 30px !important;
+            height: 30px !important;
+          }
+          /* Armures élémentaires grid icons */
+          .monster-preview-tooltip .monster-elemental-grid img {
+            width: 30px !important;
+            height: 30px !important;
+          }
         `;
-        document.head.appendChild(styleElement);
-      }
+      document.head.appendChild(styleElement);
 
       // Create and show preview
       const preview = document.createElement('div');

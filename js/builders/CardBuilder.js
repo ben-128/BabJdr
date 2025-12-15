@@ -272,14 +272,14 @@
           <div style="margin: 1rem 0;">
             <strong>🌟 Armures Élémentaires:</strong>
             <div class="monster-elemental-grid" style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 0.25rem; font-size: 0.8em; margin-top: 0.5rem;">
-              <div>${this.buildEditableStatField(this.getElementIcon('Feu'), this.data.armureFeu, 'monster-armurefeu', 'Armure Feu')}</div>
-              <div>${this.buildEditableStatField(this.getElementIcon('Eau'), this.data.armureEau, 'monster-armureeau', 'Armure Eau')}</div>
-              <div>${this.buildEditableStatField(this.getElementIcon('Terre'), this.data.armureTerre, 'monster-armureterre', 'Armure Terre')}</div>
-              <div>${this.buildEditableStatField(this.getElementIcon('Air'), this.data.armureAir, 'monster-armureair', 'Armure Air')}</div>
-              <div>${this.buildEditableStatField(this.getElementIcon('Lumière'), this.data.armureLumiere, 'monster-armurelumiere', 'Armure Lumière')}</div>
-              <div>${this.buildEditableStatField(this.getElementIcon('Nuit'), this.data.armureObscurite, 'monster-armureobscurite', 'Armure Obscurité')}</div>
-              <div>${this.buildEditableStatField(this.getElementIcon('Divin'), this.data.armureDivin, 'monster-armuredivin', 'Armure Divin')}</div>
-              <div>${this.buildEditableStatField(this.getElementIcon('Maléfique'), this.data.armureMalefique, 'monster-armuremalefique', 'Armure Maléfique')}</div>
+              <div>${this.buildEditableStatField(this.getElementIcon('Feu'), this.data.armureFeu, 'monster-armurefeu', 'Armure Feu', { boldIfNonZero: true })}</div>
+              <div>${this.buildEditableStatField(this.getElementIcon('Eau'), this.data.armureEau, 'monster-armureeau', 'Armure Eau', { boldIfNonZero: true })}</div>
+              <div>${this.buildEditableStatField(this.getElementIcon('Terre'), this.data.armureTerre, 'monster-armureterre', 'Armure Terre', { boldIfNonZero: true })}</div>
+              <div>${this.buildEditableStatField(this.getElementIcon('Air'), this.data.armureAir, 'monster-armureair', 'Armure Air', { boldIfNonZero: true })}</div>
+              <div>${this.buildEditableStatField(this.getElementIcon('Lumière'), this.data.armureLumiere, 'monster-armurelumiere', 'Armure Lumière', { boldIfNonZero: true })}</div>
+              <div>${this.buildEditableStatField(this.getElementIcon('Nuit'), this.data.armureObscurite, 'monster-armureobscurite', 'Armure Obscurité', { boldIfNonZero: true })}</div>
+              <div>${this.buildEditableStatField(this.getElementIcon('Divin'), this.data.armureDivin, 'monster-armuredivin', 'Armure Divin', { boldIfNonZero: true })}</div>
+              <div>${this.buildEditableStatField(this.getElementIcon('Maléfique'), this.data.armureMalefique, 'monster-armuremalefique', 'Armure Maléfique', { boldIfNonZero: true })}</div>
             </div>
           </div>
 
@@ -374,24 +374,28 @@
     buildEditableStatField(title, value, editType, label, options = {}) {
       const style = options.style ? `style="${options.style}"` : '';
       const className = options.className || 'editable-stat';
-      
+      const isHighlighted = options.boldIfNonZero && value != 0;
+      const valueDisplay = isHighlighted ? `<strong>${value}</strong>` : value;
+      const sizeStyle = isHighlighted ? 'font-size: 2em;' : '';
+      const iconStyle = isHighlighted ? 'transform: scale(2);' : '';
+
       // In preview mode, just return the simple stat display
       if (this.isPreview) {
         return `
-          <div style="display: flex; align-items: center;">
-            <strong style="margin-right: 0.25rem;">${title}:</strong>
-            <div class="${className}" ${style}>${value}</div>
+          <div style="display: flex; align-items: center; ${sizeStyle}">
+            <span style="margin-right: 0.25rem; ${iconStyle}">${title}:</span>
+            <div class="${className}" ${style}>${valueDisplay}</div>
           </div>
         `;
       }
-      
+
       // Display the value only as editable, but show title + value visually
       return `
         <div class="editable-section" data-section-type="html">
-          <div style="display: flex; align-items: center;">
-            <strong style="margin-right: 0.25rem;">${title}:</strong>
+          <div style="display: flex; align-items: center; ${sizeStyle}">
+            <span style="margin-right: 0.25rem; ${iconStyle}">${title}:</span>
             <div class="editable ${className}" data-edit-type="generic" data-edit-section="${editType}" data-item-identifier="${this.data.nom}" ${style}>
-              ${value}
+              ${valueDisplay}
             </div>
           </div>
           ${this.buildEditButton('field')}
