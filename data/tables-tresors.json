@@ -784,6 +784,60 @@
           }
         }
       ]
+    },
+    {
+      "nom": "Plantes de la forêt",
+      "description": "Table de butin pour une situation spécifique.",
+      "tags": [
+        "Forêt"
+      ],
+      "fourchettes": [
+        {
+          "min": 1,
+          "max": 5,
+          "objet": {
+            "type": "reference",
+            "numero": 15,
+            "nom": "Feuilleclaire"
+          }
+        },
+        {
+          "min": 6,
+          "max": 10,
+          "objet": {
+            "type": "reference",
+            "numero": 16,
+            "nom": "Nocteline"
+          }
+        },
+        {
+          "min": 11,
+          "max": 15,
+          "objet": {
+            "type": "reference",
+            "numero": 35,
+            "nom": "Nébrelle d’Azur"
+          }
+        },
+        {
+          "min": 16,
+          "max": 20,
+          "objet": {
+            "type": "reference",
+            "numero": 34,
+            "nom": "Auréline des Roches"
+          }
+        },
+        {
+          "min": 21,
+          "max": 30,
+          "objet": {
+            "type": "reference",
+            "numero": 33,
+            "nom": "Clairgivre"
+          }
+        }
+      ]
     }
   ],
   "_metadata": {

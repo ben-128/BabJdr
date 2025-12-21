@@ -434,7 +434,7 @@
         "Plante",
         "Non identifié"
       ],
-      "effet": "<strong>Effet:</strong> Augmente la protection élémentaire de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> et d'<span style=\"color: #4682b4; font-weight: bold;\">Eau</span>  du héros ou d'une cible proche du niveau d'Intelligence du héros. <br><b>Critique :</b> le bonus d'armure est amélioré de 5.\n<br><strong>Durée:</strong> 5 tours.",
+      "effet": "<strong>Effet:</strong> Augmente la protection élémentaire de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> et d'<span style=\"color: #4682b4; font-weight: bold;\">Eau</span>  du héros ou d'une cible proche, d'une valeur égale au niveau d'Intelligence du héros. <br><b>Critique :</b> le bonus d'armure est amélioré de 5.\n<br><strong>Durée:</strong> 5 tours.",
       "prix": "🔷 <strong>Prix:</strong> 25",
       "poids": ""
     },
