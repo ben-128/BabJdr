@@ -15,7 +15,7 @@
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> Esquive.",
         "effetNormal": "<strong>Effet:</strong> Inflige (5 + Puiss. Sorts) dégâts de <span style=\"color: #e25822; font-weight: bold;\">Feu</span> à la cible.",
-        "effetCritique": "<strong>Coup Critique: </strong> La cible s'enflamme, infligeant 5 dégâts de feu au prochain tour du lanceur."
+        "effetCritique": "<strong>Coup Critique: </strong> La cible s'enflamme, infligeant (5 + Puiss. Sorts) dégâts de feu au prochain tour du lanceur."
       },
       {
         "nom": "Éclair",
