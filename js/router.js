@@ -23,6 +23,9 @@
       // Setup tag filter delegation for collections page (needed for static HTML)
       this.setupTagFilterDelegation();
 
+      // Initialize collections grid for static HTML pages
+      this.initCollectionsPageForStaticHTML();
+
       // Listen for dev mode changes to refresh objects page
       if (window.EventBus && window.Events) {
         EventBus.on(Events.EDITOR_TOGGLE, (payload) => {
@@ -1948,6 +1951,79 @@
       // Setup dev-specific controls only in dev mode
       if (isDevMode) {
         this.setupCollectionManagementControls();
+      }
+    },
+
+    /**
+     * Initialize collections page for static HTML (dev mode)
+     * This handles the case where the page is pre-rendered and not dynamically generated
+     */
+    initCollectionsPageForStaticHTML() {
+      const router = this;
+
+      // Wait for data to be available, then initialize
+      const initWhenReady = () => {
+        if (!window.COLLECTIONS || !window.COLLECTIONS.collections) {
+          setTimeout(initWhenReady, 100);
+          return;
+        }
+
+        const availableCollections = document.getElementById('available-collections');
+        const collectionResults = document.getElementById('collection-results');
+        const searchInput = document.getElementById('collection-search-input');
+
+        if (router.isDevModeActive()) {
+          // In dev mode: show collections grid, hide pre-loaded results
+          if (availableCollections) {
+            availableCollections.style.display = 'block';
+            router.generateCollectionsGrid();
+          }
+          if (collectionResults) {
+            collectionResults.style.display = 'none';
+          }
+          if (searchInput) {
+            searchInput.value = '';
+          }
+        }
+      };
+
+      // Run on DOM ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initWhenReady);
+      } else {
+        setTimeout(initWhenReady, 100);
+      }
+
+      // Listen for dev mode changes
+      if (window.EventBus && window.Events) {
+        EventBus.on(Events.EDITOR_TOGGLE, () => {
+          const availableCollections = document.getElementById('available-collections');
+          const collectionResults = document.getElementById('collection-results');
+          const searchInput = document.getElementById('collection-search-input');
+
+          if (router.isDevModeActive()) {
+            // Switching to dev mode: show grid, hide results
+            if (availableCollections) {
+              availableCollections.style.display = 'block';
+              router.generateCollectionsGrid();
+            }
+            if (collectionResults) {
+              collectionResults.style.display = 'none';
+            }
+            if (searchInput) {
+              searchInput.value = '';
+            }
+          } else {
+            // Switching to normal mode: hide grid, show default collection
+            if (availableCollections) {
+              availableCollections.style.display = 'none';
+            }
+            if (searchInput) {
+              searchInput.value = 'Départ';
+            }
+            router.displayCollection('Départ');
+          }
+        });
       }
     },
 
