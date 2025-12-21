@@ -59,10 +59,17 @@
       }
     },
 
+    // Flag to prevent double export
+    _isExporting: false,
+
     async saveAndExportZip() {
+      // Prevent double execution
+      if (this._isExporting) return;
+      this._isExporting = true;
+
       try {
         this.showNotification('📦 Création de l\'archive ZIP...', 'info');
-        
+
         // Force collect all pending edits
         JdrApp.modules.editor.forceCollectAllEdits();
         
@@ -124,12 +131,8 @@
           zip.file('data/npcs.json', JSON.stringify(window.NPCS, null, 2));
         }
 
-        // Add tables tresors data with current edits  
+        // Add tables tresors data with current edits
         if (window.TABLES_TRESORS) {
-          console.log('📦 Exporting TABLES_TRESORS:', {
-            hasMetadata: !!window.TABLES_TRESORS._metadata,
-            availableTags: window.TABLES_TRESORS._metadata?.availableTags
-          });
           zip.file('data/tables-tresors.json', JSON.stringify(window.TABLES_TRESORS, null, 2));
         }
         
@@ -214,6 +217,11 @@
       } catch (error) {
         console.error('❌ Failed to create ZIP:', error);
         this.showNotification('❌ Erreur lors de la création du ZIP', 'error');
+      } finally {
+        // Reset flag after a short delay to allow for UI updates
+        setTimeout(() => {
+          this._isExporting = false;
+        }, 1000);
       }
     },
 
@@ -772,8 +780,6 @@
           } else {
             window.STATIC_PAGES = staticPagesData;
           }
-          
-          console.log('Restored static pages data from localStorage:', Object.keys(staticPagesData));
         }
         
         // Ne plus charger jdr-bab-data - laisser les JSON être la source de vérité

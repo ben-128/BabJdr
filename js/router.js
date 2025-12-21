@@ -19,7 +19,10 @@
       // Set up route change listeners
       JdrApp.utils.events.onHashChange(() => this.parseRoute());
       JdrApp.utils.events.onDOMReady(() => this.parseRoute());
-      
+
+      // Setup tag filter delegation for collections page (needed for static HTML)
+      this.setupTagFilterDelegation();
+
       // Listen for dev mode changes to refresh objects page
       if (window.EventBus && window.Events) {
         EventBus.on(Events.EDITOR_TOGGLE, (payload) => {
@@ -1173,6 +1176,9 @@
       const filteredObjects = window.OBJETS.objets.filter(obj => {
         return collection.objets && collection.objets.includes(obj.numero);
       });
+
+      // Store for use by tag filter event delegation
+      this._currentCollectionObjects = filteredObjects;
       
       const resultsContainer = document.getElementById('collection-results');
       const headerContainer = document.getElementById('collection-header');
@@ -1257,24 +1263,64 @@
         }
       }
       
-      // Tag filter event listeners
-      document.querySelectorAll('.tag-filter-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          // Update active state
-          document.querySelectorAll('.tag-filter-btn').forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          
-          const selectedTag = btn.getAttribute('data-tag');
-          let itemsToShow = filteredObjects;
-          
-          if (selectedTag !== 'all') {
-            itemsToShow = filteredObjects.filter(obj => 
-              obj.tags && obj.tags.includes(selectedTag)
+      // Tag filter event listeners are now handled via event delegation in setupTagFilterDelegation
+      this.setupTagFilterDelegation();
+    },
+
+    /**
+     * Setup event delegation for tag filter buttons (called once)
+     */
+    setupTagFilterDelegation() {
+      // Avoid setting up multiple times
+      if (this._tagFilterDelegationSetup) return;
+      this._tagFilterDelegationSetup = true;
+
+      const router = this; // Capture reference for closure
+
+      document.addEventListener('click', (e) => {
+        const btn = e.target.closest('.tag-filter-btn');
+        if (!btn) return;
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        // Update active state
+        document.querySelectorAll('.tag-filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const selectedTag = btn.getAttribute('data-tag');
+
+        // Get filtered objects - either from stored state or from current collection
+        let filteredObjects = router._currentCollectionObjects;
+
+        // If no stored objects, try to get from current collection (static HTML case)
+        if (!filteredObjects || filteredObjects.length === 0) {
+          const collectionHeader = document.querySelector('#collection-header h2');
+          if (collectionHeader && window.COLLECTIONS && window.OBJETS) {
+            const collectionName = collectionHeader.textContent.replace(/^[^\s]+\s*/, '').trim(); // Remove icon
+            const collection = window.COLLECTIONS.collections.find(c =>
+              c.nom.toLowerCase() === collectionName.toLowerCase()
             );
+            if (collection && collection.objets) {
+              filteredObjects = window.OBJETS.objets.filter(obj =>
+                collection.objets.includes(obj.numero)
+              );
+              router._currentCollectionObjects = filteredObjects;
+            }
           }
-          
-          this.renderCollectionItems(itemsToShow);
-        });
+        }
+
+        if (!filteredObjects) filteredObjects = [];
+
+        let itemsToShow = filteredObjects;
+
+        if (selectedTag !== 'all') {
+          itemsToShow = filteredObjects.filter(obj =>
+            obj.tags && obj.tags.includes(selectedTag)
+          );
+        }
+
+        router.renderCollectionItems(itemsToShow);
       });
     },
 

@@ -294,9 +294,9 @@
         article.innerHTML = newArticle.innerHTML;
 
         // Note: Don't add .active here - let updateActiveStates handle it to avoid double animation
-        
-        // Plus simple et plus fiable
-        this.autoLoadImages();
+
+        // Load images after DOM is updated
+        setTimeout(() => this.autoLoadImages(), 50);
         
         // Attach image events for standalone compatibility
         if (JdrApp.modules.editor && JdrApp.modules.editor.attachImageEvents) {

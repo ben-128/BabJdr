@@ -236,84 +236,177 @@
   // IMAGE UTILITIES
   // ========================================
   
-  // Compress image function
-  JdrApp.utils.compressImage = function(file, maxWidth = 800, quality = 0.85) {
+  // Compress image function - compresses before upload to ImgBB
+  JdrApp.utils.compressImage = function(file, options = {}) {
+    const {
+      maxWidth = 1200,      // Max width (preserves aspect ratio)
+      maxHeight = 1200,     // Max height (preserves aspect ratio)
+      jpegQuality = 0.82,   // JPEG quality (0-1)
+      pngQuality = 0.85,    // PNG quality approximation via resize
+      maxSizeKB = 500       // Target max size in KB (will reduce quality if exceeded)
+    } = options;
+
     return new Promise((resolve, reject) => {
-      
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
       const img = new Image();
-      
+
       img.onload = function() {
-        // Calculate new dimensions
+        // Calculate new dimensions (fit within maxWidth x maxHeight)
         let { width, height } = img;
-        
-        if (width > maxWidth) {
-          height = (height * maxWidth) / width;
-          width = maxWidth;
+        const originalWidth = width;
+        const originalHeight = height;
+
+        // Scale down if exceeds max dimensions
+        if (width > maxWidth || height > maxHeight) {
+          const ratioW = maxWidth / width;
+          const ratioH = maxHeight / height;
+          const ratio = Math.min(ratioW, ratioH);
+          width = Math.round(width * ratio);
+          height = Math.round(height * ratio);
         }
-        
+
         // Set canvas size
         canvas.width = width;
         canvas.height = height;
-        
-        // Detect if image has transparency (PNG)
+
+        // Detect if image has transparency
         const isPNG = file.type === 'image/png' || file.name.toLowerCase().endsWith('.png');
-        
-        if (isPNG) {
-          // For PNG, don't compress at all to preserve quality
+        const isGIF = file.type === 'image/gif' || file.name.toLowerCase().endsWith('.gif');
+
+        // For GIF, don't process (could lose animation)
+        if (isGIF) {
           resolve(file);
+          return;
+        }
+
+        // Check for transparency in PNG
+        let hasTransparency = false;
+        if (isPNG) {
+          // Draw image to check for transparency
+          ctx.clearRect(0, 0, width, height);
+          ctx.drawImage(img, 0, 0, width, height);
+          try {
+            const imageData = ctx.getImageData(0, 0, width, height);
+            const data = imageData.data;
+            for (let i = 3; i < data.length; i += 4) {
+              if (data[i] < 255) {
+                hasTransparency = true;
+                break;
+              }
+            }
+          } catch (e) {
+            // Security error, assume no transparency
+          }
+        }
+
+        // Choose output format
+        let outputFormat, quality;
+        if (isPNG && hasTransparency) {
+          // Keep as PNG for transparency
+          outputFormat = 'image/png';
+          quality = undefined; // PNG doesn't use quality param
         } else {
-          // For JPEG/other formats, use white background
+          // Convert to JPEG for better compression
+          outputFormat = 'image/jpeg';
+          quality = jpegQuality;
+          // Fill with white background for JPEG
           ctx.fillStyle = '#FFFFFF';
           ctx.fillRect(0, 0, width, height);
           ctx.drawImage(img, 0, 0, width, height);
-          
-          canvas.toBlob((blob) => {
-            resolve(blob);
-          }, 'image/jpeg', quality);
         }
+
+        // If PNG without transparency, redraw for JPEG
+        if (!isPNG || !hasTransparency) {
+          ctx.fillStyle = '#FFFFFF';
+          ctx.fillRect(0, 0, width, height);
+          ctx.drawImage(img, 0, 0, width, height);
+        }
+
+        // Compress with quality adjustment if needed
+        const tryCompress = (currentQuality) => {
+          canvas.toBlob((blob) => {
+            if (!blob) {
+              resolve(file);
+              return;
+            }
+
+            const sizeKB = blob.size / 1024;
+
+            // If still too large and we can reduce quality, try again
+            if (sizeKB > maxSizeKB && outputFormat === 'image/jpeg' && currentQuality > 0.5) {
+              tryCompress(currentQuality - 0.1);
+            } else {
+              // Log compression results
+              const originalSizeKB = file.size / 1024;
+              const savings = ((1 - blob.size / file.size) * 100).toFixed(1);
+              console.log(`[Compression] ${file.name}: ${originalSizeKB.toFixed(0)}KB → ${sizeKB.toFixed(0)}KB (${savings}% saved)`);
+
+              // Return compressed blob with original filename
+              const compressedFile = new File([blob], file.name, { type: outputFormat });
+              resolve(compressedFile);
+            }
+          }, outputFormat, currentQuality);
+        };
+
+        tryCompress(quality);
       };
-      
+
       img.onerror = (error) => {
-        reject(error);
+        console.warn('[Compression] Failed to load image, using original:', error);
+        resolve(file);
       };
-      
+
       img.src = URL.createObjectURL(file);
     });
   };
 
-  // Upload to ImageBB function
-  JdrApp.utils.uploadToImageBB = function(file) {
-    return new Promise((resolve, reject) => {
-      // ImageBB API key
-      const API_KEY = '06a98f5c0c2dad952e6ab94b03040f36';
-      
+  // Upload to ImageBB function - automatically compresses before upload
+  JdrApp.utils.uploadToImageBB = async function(file, options = {}) {
+    const {
+      skipCompression = false,  // Set to true to skip compression
+      compressionOptions = {}   // Options for compressImage
+    } = options;
+
+    // ImageBB API key
+    const API_KEY = '06a98f5c0c2dad952e6ab94b03040f36';
+
+    try {
+      // Compress image before upload (unless skipped)
+      let fileToUpload = file;
+      if (!skipCompression) {
+        console.log(`[Upload] Compressing ${file.name} before upload...`);
+        fileToUpload = await JdrApp.utils.compressImage(file, compressionOptions);
+      }
+
+      // Create form data
       const formData = new FormData();
-      formData.append('image', file);
-      
-      fetch(`https://api.imgbb.com/1/upload?key=${API_KEY}`, {
+      formData.append('image', fileToUpload);
+
+      // Upload to ImgBB
+      const response = await fetch(`https://api.imgbb.com/1/upload?key=${API_KEY}`, {
         method: 'POST',
         body: formData
-      })
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
-        if (data.success) {
-          resolve(data.data.url);
-        } else {
-          throw new Error('Upload failed: ' + (data.error ? data.error.message : 'Unknown error'));
-        }
-      })
-      .catch(error => {
-        // Fallback to local storage
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        console.log(`[Upload] Success: ${data.data.url}`);
+        return data.data.url;
+      } else {
+        throw new Error('Upload failed: ' + (data.error ? data.error.message : 'Unknown error'));
+      }
+    } catch (error) {
+      console.warn('[Upload] ImgBB upload failed, falling back to local storage:', error.message);
+      // Fallback to local storage (base64)
+      return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.onload = (e) => resolve(e.target.result);
         reader.onerror = reject;
         reader.readAsDataURL(file);
       });
-    });
+    }
   };
 
   // ========================================

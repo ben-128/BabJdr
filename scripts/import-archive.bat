@@ -113,14 +113,19 @@ set "BACKUP_DIR=%PROJECT_PATH%\Backups\backup-%TIMESTAMP%"
 :: Créer le dossier de sauvegarde avec permissions normales
 mkdir "%BACKUP_DIR%" 2>nul
 
-:: Copier uniquement les fichiers data (plus rapide)
-echo [INFO] Sauvegarde du dossier data...
+:: Copier uniquement les fichiers JSON data (exclure images, musiques, PDF)
+echo [INFO] Sauvegarde des fichiers JSON du dossier data...
 if exist "data" (
-    xcopy "data" "%BACKUP_DIR%\data\" /E /I /Q /Y >nul 2>&1
+    mkdir "%BACKUP_DIR%\data" 2>nul
+    :: Copier uniquement les fichiers .json (pas les dossiers images/musiques ni les PDF)
+    for %%F in (data\*.json) do (
+        copy "%%F" "%BACKUP_DIR%\data\" /Y >nul 2>&1
+    )
     if errorlevel 1 (
         echo [ATTENTION] Erreur lors de la sauvegarde
     ) else (
-        echo [OK] Sauvegarde du dossier data terminée
+        echo [OK] Sauvegarde des fichiers JSON terminée
+        echo [INFO] Images, musiques et PDF exclus du backup
     )
 )
 

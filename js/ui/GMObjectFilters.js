@@ -28,10 +28,11 @@
     setupEventListeners() {
       // GM filter chips
       document.addEventListener('click', (e) => {
-        if (e.target.matches('.gm-filter-chip')) {
+        const chip = e.target.closest('.gm-filter-chip');
+        if (chip) {
           e.preventDefault();
           e.stopPropagation();
-          this.toggleGMObjectTag(e.target.dataset.tag);
+          this.toggleGMObjectTag(chip.dataset.tag);
         }
       });
     },
