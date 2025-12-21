@@ -15,11 +15,13 @@
      */
     showElementsModal() {
       let modal = JdrApp.utils.dom.$('#elementsModal');
-      if (!modal) {
+      // Check if modal exists AND has content (not just an empty shell from static HTML)
+      if (!modal || !modal.querySelector('.modal-content')) {
+        if (modal) modal.remove(); // Remove empty shell
         modal = this.createElementsModal();
         document.body.appendChild(modal);
       }
-      
+
       BaseModal.openModal('elementsModal');
     },
 
@@ -86,7 +88,9 @@
      */
     showStatsIconsModal() {
       let modal = JdrApp.utils.dom.$('#statsIconsModal');
-      if (!modal) {
+      // Check if modal exists AND has content (not just an empty shell from static HTML)
+      if (!modal || !modal.querySelector('.modal-content')) {
+        if (modal) modal.remove(); // Remove empty shell
         modal = this.createStatsIconsModal();
         document.body.appendChild(modal);
       }
@@ -215,7 +219,9 @@
      */
     showEtatsModal() {
       let modal = JdrApp.utils.dom.$('#etatsModal');
-      if (!modal) {
+      // Check if modal exists AND has content (not just an empty shell from static HTML)
+      if (!modal || !modal.querySelector('.modal-content')) {
+        if (modal) modal.remove(); // Remove empty shell
         modal = this.createEtatsModal();
         document.body.appendChild(modal);
       }
@@ -1157,11 +1163,13 @@
      */
     showSpellLinksModal() {
       let modal = JdrApp.utils.dom.$('#spellLinksModal');
-      if (!modal) {
+      // Check if modal exists AND has content (not just an empty shell from static HTML)
+      if (!modal || !modal.querySelector('.modal-content')) {
+        if (modal) modal.remove(); // Remove empty shell
         modal = this.createSpellLinksModal();
         document.body.appendChild(modal);
       }
-      
+
       BaseModal.openModal('spellLinksModal');
     },
 
@@ -1260,11 +1268,13 @@
      */
     showMonsterLinksModal() {
       let modal = JdrApp.utils.dom.$('#monsterLinksModal');
-      if (!modal) {
+      // Check if modal exists AND has content (not just an empty shell from static HTML)
+      if (!modal || !modal.querySelector('.modal-content')) {
+        if (modal) modal.remove(); // Remove empty shell
         modal = this.createMonsterLinksModal();
         document.body.appendChild(modal);
       }
-      
+
       BaseModal.openModal('monsterLinksModal');
     },
 
@@ -1355,11 +1365,13 @@
      */
     showPageLinksModal() {
       let modal = JdrApp.utils.dom.$('#pageLinksModal');
-      if (!modal) {
+      // Check if modal exists AND has content (not just an empty shell from static HTML)
+      if (!modal || !modal.querySelector('.modal-content')) {
+        if (modal) modal.remove(); // Remove empty shell
         modal = this.createPageLinksModal();
         document.body.appendChild(modal);
       }
-      
+
       BaseModal.openModal('pageLinksModal');
     },
 
@@ -1469,8 +1481,9 @@
       // Utiliser querySelector directement pour éviter les problèmes de NodeList
       let modal = document.querySelector('#cartesDestinModal');
 
-      // Vérifier que c'est un vrai élément DOM avec classList
-      if (!modal || !modal.classList) {
+      // Check if modal exists AND has content (not just an empty shell from static HTML)
+      if (!modal || !modal.classList || !modal.querySelector('.modal-content')) {
+        if (modal) modal.remove(); // Remove empty shell
         modal = this.createCartesDestinModal();
         if (!modal) {
           console.error('Impossible de créer le modal des cartes du destin');
