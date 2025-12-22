@@ -10,6 +10,7 @@ const http = require('http');
 
 const IMGBB_API_KEY = '06a98f5c0c2dad952e6ab94b03040f36';
 const IMAGES_JSON_PATH = path.join(__dirname, '..', 'data', 'images.json');
+const DELETE_URLS_PATH = path.join(__dirname, '..', 'data', 'imgbb-delete-urls.json');
 const LOCAL_IMAGES_DIR = path.join(__dirname, '..', 'data', 'images');
 
 // Rate limiting
@@ -99,7 +100,22 @@ function pathToImageKey(relativePath) {
   }
 }
 
-// Upload image to ImgBB
+// Load delete URLs file
+function loadDeleteUrls() {
+  try {
+    if (fs.existsSync(DELETE_URLS_PATH)) {
+      return JSON.parse(fs.readFileSync(DELETE_URLS_PATH, 'utf8'));
+    }
+  } catch (e) {}
+  return {};
+}
+
+// Save delete URLs file
+function saveDeleteUrls(deleteUrls) {
+  fs.writeFileSync(DELETE_URLS_PATH, JSON.stringify(deleteUrls, null, 2), 'utf8');
+}
+
+// Upload image to ImgBB - returns {url, deleteUrl}
 async function uploadToImgBB(filePath) {
   return new Promise((resolve, reject) => {
     const fileData = fs.readFileSync(filePath);
@@ -124,7 +140,10 @@ async function uploadToImgBB(filePath) {
         try {
           const result = JSON.parse(data);
           if (result.success) {
-            resolve(result.data.url);
+            resolve({
+              url: result.data.url,
+              deleteUrl: result.data.delete_url
+            });
           } else {
             reject(new Error(result.error?.message || 'Upload failed'));
           }
@@ -203,20 +222,25 @@ async function main() {
 
   console.log('\nStarting uploads...\n');
 
+  // Load existing delete URLs
+  const deleteUrls = loadDeleteUrls();
+
   let uploaded = 0;
   let failed = 0;
 
   for (const img of missing) {
     try {
       process.stdout.write(`Uploading ${img.key}... `);
-      const url = await uploadToImgBB(img.fullPath);
-      images[img.key] = url;
-      console.log(`OK (${url.substring(0, 50)}...)`);
+      const result = await uploadToImgBB(img.fullPath);
+      images[img.key] = result.url;
+      deleteUrls[img.key] = result.deleteUrl; // Save delete URL for future cleanup
+      console.log(`OK (${result.url.substring(0, 50)}...)`);
       uploaded++;
 
       // Save periodically
       if (uploaded % 5 === 0) {
         saveImagesJson(images);
+        saveDeleteUrls(deleteUrls);
       }
 
       await sleep(DELAY_BETWEEN_UPLOADS);
@@ -228,6 +252,8 @@ async function main() {
 
   // Final save
   saveImagesJson(images);
+  saveDeleteUrls(deleteUrls);
+  console.log(`\nDelete URLs saved to: ${DELETE_URLS_PATH}`);
 
   console.log(`\n=== Done ===`);
   console.log(`Uploaded: ${uploaded}`);
