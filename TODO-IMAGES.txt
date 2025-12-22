@@ -1,0 +1,66 @@
+============================================
+TÂCHES RESTANTES POUR LES IMAGES IMGBB
+============================================
+
+CONTEXTE:
+---------
+Le rate limit ImgBB a été atteint après ~270 uploads.
+67 images locales n'ont pas pu être uploadées sur ImgBB.
+3 images critiques (sorts) ont été temporairement intégrées en base64.
+
+QUAND LE RATE LIMIT EST RÉINITIALISÉ (généralement 24h):
+--------------------------------------------------------
+
+1. UPLOADER LES IMAGES MANQUANTES:
+
+   node scripts/upload-missing-images.js
+
+   Cela va:
+   - Scanner data/images/ pour trouver les 67 images manquantes
+   - Les uploader sur ImgBB
+   - Mettre à jour data/images.json avec les URLs
+   - Sauvegarder les delete URLs dans data/imgbb-delete-urls.json
+
+2. REMPLACER LES BASE64 PAR DES URLS:
+
+   Les 3 images suivantes sont actuellement en base64 (lourd):
+   - sort:PurifiPhysique (224KB base64)
+   - sort:ArmureElémentaire1 (471KB base64)
+   - sort:ArmureElémentaire2 (588KB base64)
+
+   Après l'upload, elles seront remplacées par des URLs ImgBB.
+
+3. RECONSTRUIRE LE STANDALONE:
+
+   node scripts/build-simple.js
+
+   Le fichier sera plus léger une fois les base64 remplacés.
+
+4. POUSSER SUR GITHUB:
+
+   git add -A && git commit -m "Upload remaining images to ImgBB" && git push
+
+
+SCRIPTS DISPONIBLES:
+--------------------
+- scripts/upload-missing-images.js  : Upload les images locales manquantes
+- scripts/add-aliases.js            : Ajoute les alias (noms différents data/fichiers)
+- scripts/verify-images.js          : Vérifie que tous les dons/sorts ont une image
+- scripts/cleanup-imgbb.js          : Supprime les images inutilisées sur ImgBB
+- scripts/build-simple.js           : Construit le standalone
+
+
+FICHIERS IMPORTANTS:
+--------------------
+- data/images.json                  : Mapping clé -> URL ImgBB (ou base64)
+- data/imgbb-delete-urls.json       : URLs de suppression (ne pas commiter!)
+- data/images/                      : Images locales sources
+
+
+ÉTAT ACTUEL:
+------------
+- Dons: 99/99 avec images ✓
+- Sorts: 40/40 avec images ✓
+- Total mappings: 481
+- Images en base64: 3 (temporaire)
+- Images à uploader: 67 (objets, sorts supplémentaires)
