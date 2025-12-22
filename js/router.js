@@ -787,7 +787,7 @@
             <a data-route="sorts" href="#/sorts">${item.icon} ${item.title}</a>
             <div class="toc-sub">
               ${dataSource.map(category =>
-                `<a data-route="sorts-${JdrApp.utils.data.sanitizeId(category.nom)}" href="#/sorts-${JdrApp.utils.data.sanitizeId(category.nom)}" class="">${this.getSortCategoryIcon(category.nom)} ${category.nom}</a>`
+                `<a data-route="sorts-${JdrApp.utils.data.sanitizeId(category.nom)}" href="#/sorts-${JdrApp.utils.data.sanitizeId(category.nom)}" class="${category.nom === 'Sorts de Monstres' ? 'mj-only' : ''}">${this.getSortCategoryIcon(category.nom)} ${category.nom}</a>`
               ).join('')}
             </div>
           </div>
