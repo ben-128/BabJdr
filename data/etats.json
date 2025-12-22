@@ -115,7 +115,7 @@
       "id": "section-1759073633821-nfyggh",
       "type": "card",
       "title": "Lévitation",
-      "content": "Ignore dégâts/ralentissements venant du sol.\n<br><br>Ignore l'état <span class=\"etat-link\" data-etat=\"à terre\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">à terre</span>.\n<br><br>Permet d'attaquer les adversaires volants au corps à corps sans sauter."
+      "content": "Ignore dégâts/ralentissements venant du sol.\n<br><br>Ignore l'état <span class=\"etat-link\" data-etat=\"À terre\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">À terre</span>.\n<br><br>Permet d'attaquer les adversaires volants au corps à corps sans sauter."
     },
     {
       "id": "section-1764703783186-rrprrx",

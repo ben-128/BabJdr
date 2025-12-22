@@ -233,13 +233,13 @@
       },
       {
         "nom": "Cri de guerre",
-        "description": "Une fois par combat, peut utiliser une action secondaire pour faire un cri de guerre, qui augmente les dégâts physiques infligés par tous les héros d'une valeur du niveau du héros, jusqu'à la fin du prochain tour.",
+        "description": "Une fois par combat, peut utiliser une action secondaire pour faire un cri de guerre, qui augmente les dégâts physiques infligés par tous les héros d'une valeur du niveau du héros, jusqu'au début du prochain tour.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
       {
         "nom": "Cri intimidant",
-        "description": "Le guerrier peut utiliser une action principale, pour effrayer toutes les cibles à moins de 12m, qui passeront dans l'état <span class=\"etat-link\" data-etat=\"Endormi/assommé/Effrayé\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">effrayé</span> pendant 1 tour.<br><br>Sans effet sur les cibles ayant une Résistance altération > à 5.<br> Ce chiffre peut être augmenté via un test de compétence éloquence, de 10 par point/effort.",
+        "description": "Le guerrier peut utiliser une action principale, pour effrayer toutes les cibles à moins de 12m, qui passeront dans l'état <span class=\"etat-link\" data-etat=\"Endormi/assommé/Effrayé\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">effrayé</span> pendant 1 tour.\n\n<br>\nLes cibles ne peuvent  être effrayés qu'une seule fois par combat.\n<br><br>Sans effet sur les cibles ayant une Résistance altération > à 5.<br> Ce chiffre peut être augmenté via un test de compétence éloquence, de 10 par point/effort.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -623,7 +623,7 @@
       },
       {
         "nom": "Renvoi de Sort",
-        "description": "Une fois par combat, lorsque le héros est ciblé par un sort d'altération magique, ou un sort pouvant être esquivé, il peut utiliser une action secondaire pour tenter de le renvoyer à l'expéditeur. <br><br>Intelligence contre Résistance altération de la cible. En cas de succès (strictement supérieur), le sort affecte l'expéditeur au lieu du héros.",
+        "description": "Une fois par combat, lorsque le héros est ciblé par un sort d'altération magique, ou un sort pouvant être esquivé, il peut utiliser une action secondaire pour tenter de le renvoyer à l'expéditeur. <br><br>Intelligence du héros contre Résistance altération de l'expéditeur. En cas de succès (strictement supérieur), le sort affecte l'expéditeur au lieu du héros.",
         "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Intelligence 10.",
         "cout": "1 point de don"
       }

@@ -148,7 +148,10 @@
           
           // Load stored edits AFTER setting up the data structure
           this.loadStoredEditsEarly();
-          
+
+          // Synchronize tags from metadata to ContentTypes (standalone mode)
+          this.syncTagsFromMetadata();
+
           // Note: initializeDefaultFilters removed - now handled by specialized filter modules
           return;
         }

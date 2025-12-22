@@ -69,7 +69,8 @@
       "WebFetch(domain:i.ibb.co)",
       "Bash(git -C \"D:\\projets\\BabJDR\\BabJDR\" pull)",
       "Bash(pip install:*)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(cd:*)"
     ],
     "deny": []
   }
