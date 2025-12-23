@@ -65,31 +65,14 @@
   overflow-y: auto;
   overflow-x: hidden;
   z-index: 100;
-  background: 
-    var(--parchment-texture),
-    linear-gradient(180deg, var(--paper), rgba(244,240,230,0.95)),
-    var(--aged-paper);
-  backdrop-filter: blur(8px);
-  border-right: 4px solid transparent;
-  border-image: var(--parchment-border) 1;
-  box-shadow: 
-    4px 0 20px rgba(0,0,0,0.08),
-    inset -1px 0 0 rgba(212,175,55,0.1);
+  background: linear-gradient(180deg, var(--ui-blue, #181830), var(--card, #141428));
+  border-right: 2px solid var(--ui-border, #a0a0b0);
+  box-shadow: 4px 0 16px rgba(0,0,0,0.3);
   transition: transform var(--transition-normal);
 }
 
 .sidebar::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 2px;
-  height: 100%;
-  background: linear-gradient(180deg, 
-    var(--gold) 0%, 
-    var(--bronze) 50%, 
-    var(--gold) 100%);
-  opacity: 0.6;
+  display: none;
 }
 
 /* Mobile and Tablet Sidebar with Collapsible Navigation */
@@ -100,22 +83,17 @@
     left: 0;
     width: 100%;
     height: 100vh;
-    height: 100dvh; /* Dynamic viewport height for better mobile support */
+    height: 100dvh;
     min-height: 100vh;
     min-height: 100dvh;
-    background: 
-      linear-gradient(135deg, var(--card), rgba(244,240,230,0.98)),
-      radial-gradient(circle at 50% 30%, rgba(212,175,55,0.05), transparent 70%);
+    background: linear-gradient(180deg, var(--ui-blue, #181830), var(--card, #141428));
     border-right: none;
-    border-bottom: 3px solid var(--rule);
-    backdrop-filter: blur(8px);
-    box-shadow: 
-      0 8px 32px rgba(0,0,0,0.15),
-      inset 0 -1px 0 rgba(212,175,55,0.1);
+    border-bottom: 2px solid var(--ui-border, #a0a0b0);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
     transform: translateY(-100%);
     transition: transform var(--transition-normal);
     z-index: 200;
-    overflow: hidden; /* Prevent sidebar itself from scrolling */
+    overflow: hidden;
   }
   
   .sidebar.mobile-open {
@@ -145,7 +123,7 @@
     top: 20px;
     left: 20px;
     z-index: 300;
-    background: linear-gradient(135deg, var(--gold), var(--bronze));
+    background: linear-gradient(135deg, var(--ui-blue, #282838), var(--paper, #1e1e2e));
     color: white;
     border: 2px solid var(--rule);
     border-radius: 12px;
@@ -197,7 +175,7 @@
 .panel {
   background: 
     linear-gradient(135deg, var(--card), rgba(250,246,238,0.9)),
-    radial-gradient(circle at 20% 30%, rgba(212,175,55,0.03), transparent 70%);
+    radial-gradient(circle at 20% 30%, rgba(160,160,176,0.03), transparent 70%);
   border: 2px solid var(--rule);
   border-radius: 18px;
   box-shadow: 
@@ -218,11 +196,11 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, 
-    transparent, 
-    var(--gold), 
-    var(--bronze), 
-    var(--gold), 
+  background: linear-gradient(90deg,
+    transparent,
+    var(--ui-border, #a0a0b0),
+    var(--ui-border-light, #c0c0d0),
+    var(--ui-border, #a0a0b0),
     transparent);
   opacity: .6;
 }
@@ -234,7 +212,7 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--bronze), transparent);
+  background: linear-gradient(90deg, transparent, var(--ui-border, #a0a0b0), transparent);
   opacity: .3;
 }
 
@@ -242,7 +220,7 @@
   transform: translateY(-1px);
   box-shadow: 
     0 8px 32px rgba(0,0,0,.12),
-    0 2px 8px rgba(139,69,19,.1),
+    0 2px 8px rgba(0,0,0,.1),
     inset 0 1px 0 rgba(255,255,255,.15);
 }
 
@@ -272,7 +250,7 @@
   overflow-y: auto !important;
   overflow-x: hidden !important;
   scrollbar-width: thin;
-  scrollbar-color: var(--bronze) transparent;
+  scrollbar-color: var(--ui-border, #a0a0b0) transparent;
   padding-right: 4px;
   min-height: 0 !important; /* Allow flex shrinking */
 }
@@ -314,24 +292,23 @@
 }
 
 .toc::-webkit-scrollbar-thumb {
-  background: var(--bronze);
+  background: var(--ui-border, #a0a0b0);
   border-radius: 3px;
 }
 
 .toc::-webkit-scrollbar-thumb:hover {
-  background: var(--gold);
+  background: var(--ui-border-light, #c0c0d0);
 }
 
 /* ─────────────────────────── Enhanced TOC Styling ─────────────────────────── */
 .toc h4 {
   margin: 8px 10px 12px;
-  color: var(--bronze);
+  color: var(--paper-ink, #e8e8e8);
   text-transform: uppercase;
   font-size: 13px;
   letter-spacing: 0.15em;
   font-weight: 700;
   font-family: 'Cinzel', serif;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
   position: relative;
   padding-bottom: 6px;
   text-align: center;
@@ -343,8 +320,8 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--bronze), transparent);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--ui-border, #a0a0b0), transparent);
   border-radius: 1px;
 }
 
@@ -353,10 +330,8 @@
   margin-bottom: 8px;
   border-radius: 8px;
   overflow: hidden;
-  border: 1px solid rgba(139,69,19,0.1);
-  background: linear-gradient(135deg, 
-    rgba(255,248,220,0.3) 0%, 
-    rgba(212,175,55,0.05) 100%);
+  border: 1px solid var(--rule, #404050);
+  background: rgba(30,30,46,.5);
 }
 
 .toc-section-header {
@@ -364,31 +339,26 @@
   align-items: center;
   justify-content: space-between;
   padding: 10px 12px;
-  background: linear-gradient(135deg, 
-    rgba(212,175,55,0.15) 0%, 
-    rgba(139,69,19,0.08) 100%);
+  background: rgba(160,160,200,.08);
   cursor: pointer;
   transition: all var(--transition-normal);
-  border-bottom: 1px solid rgba(139,69,19,0.1);
+  border-bottom: 1px solid var(--rule, #404050);
 }
 
 .toc-section-header:hover {
-  background: linear-gradient(135deg, 
-    rgba(212,175,55,0.25) 0%, 
-    rgba(139,69,19,0.15) 100%);
+  background: rgba(160,160,200,.15);
   transform: translateY(-1px);
 }
 
 .toc-section-title {
   font-weight: 600;
   font-family: 'Cinzel', serif;
-  color: var(--bronze);
+  color: var(--paper-ink, #e8e8e8);
   font-size: 14px;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
 }
 
 .toc-section-toggle {
-  color: var(--bronze);
+  color: var(--paper-muted, #9090a0);
   font-size: 12px;
   transition: transform var(--transition-normal);
   opacity: 0.7;
@@ -439,53 +409,31 @@ html.initial-load .toc-section-toggle {
   backdrop-filter: blur(1px);
 }
 .toc a::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, 
-    transparent, 
-    rgba(212,175,55,.2), 
-    rgba(139,69,19,.1), 
-    transparent);
-  transition: left 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  z-index: 0;
+  display: none;
 }
 .toc a:hover {
-  transform: translateX(6px) scale(1.02);
-  background: 
-    linear-gradient(135deg, rgba(212,175,55,.12), rgba(139,69,19,.08));
-  border-color: rgba(139,69,19,.4);
-  box-shadow: 
-    0 6px 20px rgba(139,69,19,.2),
-    inset 0 1px 3px rgba(212,175,55,.25),
-    inset 0 -1px 1px rgba(139,69,19,.1);
-  color: var(--accent-ink);
+  transform: translateX(4px);
+  background: rgba(160,160,200,.1);
+  border-color: var(--ui-border-light, #c0c0d0);
+  color: #f0f0f0;
 }
 
 .toc a:hover::before {
-  left: 100%;
+  display: none;
 }
 .toc a > *{position:relative; z-index:1}
 .toc a.active {
-  background: linear-gradient(135deg, 
-    rgba(212,175,55,.18), 
-    rgba(139,69,19,.12));
-  border-color: var(--gold);
-  box-shadow: 
-    inset 0 2px 6px rgba(212,175,55,.3),
-    inset 0 -1px 2px rgba(139,69,19,.2),
-    0 2px 8px rgba(139,69,19,.1);
-  transform: translateX(4px) scale(1.01);
-  color: var(--accent-ink);
+  background: rgba(160,160,200,.15);
+  border-color: var(--ui-border-light, #c0c0d0);
+  box-shadow: inset 0 1px 3px rgba(0,0,0,.2);
+  transform: translateX(3px);
+  color: #f0f0f0;
   font-weight: 600;
 }
 .toc-category{margin:0}
 .toc-category > a{position:relative; cursor:pointer}
-.toc-category > a::after{content:'▼'; position:absolute; right:8px; top:50%; transform:translateY(-50%); 
-                         font-size:10px; transition:transform .3s ease; color:var(--bronze)}
+.toc-category > a::after{content:'▼'; position:absolute; right:8px; top:50%; transform:translateY(-50%);
+                         font-size:10px; transition:transform .3s ease; color:var(--paper-muted, #9090a0)}
 .toc-category.collapsed > a::after{transform:translateY(-50%) rotate(-90deg)}
 .toc-sub{margin-left:24px;border-left:2px solid var(--rule);padding-left:8px; 
          overflow:hidden; transition:all .3s ease}

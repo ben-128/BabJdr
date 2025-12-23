@@ -6,7 +6,7 @@
 .spell-title {
   font-family: "Cinzel", serif !important;
   font-size: clamp(1.2rem, 2.5vw, 1.4rem) !important;
-  background: linear-gradient(135deg, var(--gold), var(--bronze), var(--gold)) !important;
+  background: linear-gradient(135deg, var(--ui-border-light, #c0c0d0), var(--ui-border, #a0a0b0), var(--ui-border-light, #c0c0d0)) !important;
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
   background-clip: text !important;
@@ -27,7 +27,7 @@
   transform: translateX(-50%);
   width: 60px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  background: linear-gradient(90deg, transparent, var(--ui-border-light, #606078), transparent);
   opacity: 0.7;
   transition: width var(--duration-normal) var(--ease-out-quart),
               opacity var(--duration-normal) ease;
@@ -42,7 +42,7 @@
 .lazy-load {
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
-  background: #f0f0f0;
+  background: var(--card);
   min-height: 100px;
 }
 
@@ -67,8 +67,8 @@
   width: 30px;
   height: 30px;
   margin: -15px 0 0 -15px;
-  border: 3px solid rgba(139, 92, 23, 0.3);
-  border-top-color: var(--bronze, #8b5c17);
+  border: 3px solid rgba(160, 160, 200, 0.3);
+  border-top-color: var(--ui-border-light, #e0e0f0);
   border-radius: 50%;
   animation: spinner 0.8s linear infinite;
   z-index: 10;
@@ -142,7 +142,7 @@ img {
 
 .loading-content {
   text-align: center;
-  color: var(--gold);
+  color: var(--accent-ink, var(--paper-ink));
   max-width: 300px;
   padding: 2rem;
 }
@@ -151,7 +151,7 @@ img {
   font-family: "Cinzel", serif;
   font-size: 2rem;
   margin: 1rem 0;
-  color: var(--gold);
+  color: var(--accent-ink, var(--paper-ink));
   text-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
@@ -164,7 +164,7 @@ img {
   width: 60px;
   height: 60px;
   border: 3px solid rgba(212, 175, 55, 0.3);
-  border-top: 3px solid var(--gold);
+  border-top: 3px solid var(--ui-border);
   border-radius: 50%;
   animation: spin 1s linear infinite;
   margin: 0 auto 1rem auto;
@@ -180,7 +180,7 @@ img {
 
 .loading-bar {
   height: 100%;
-  background: linear-gradient(90deg, var(--gold), var(--bronze), var(--gold));
+  background: linear-gradient(90deg, var(--ui-border), var(--ui-border-light, #606078), var(--ui-border));
   width: 0%;
   border-radius: 2px;
   transition: width 0.3s ease-out;
@@ -193,8 +193,8 @@ img {
 }
 
 @keyframes loading-pulse {
-  0%, 100% { background: linear-gradient(90deg, var(--gold), var(--bronze), var(--gold)); }
-  50% { background: linear-gradient(90deg, var(--bronze), var(--gold), var(--bronze)); }
+  0%, 100% { background: linear-gradient(90deg, var(--ui-border), var(--ui-border-light, #606078), var(--ui-border)); }
+  50% { background: linear-gradient(90deg, var(--ui-border-light, #606078), var(--ui-border), var(--ui-border-light, #606078)); }
 }
 
 /* ─────────────────────────── Page Header Components ─────────────────────────── */
@@ -206,7 +206,7 @@ img {
 }
 
 .page-header h1 {
-  color: var(--gold);
+  color: var(--accent-ink, var(--paper-ink));
   font-family: "Cinzel", serif;
   font-size: 2.5rem;
   margin-bottom: 1rem;
@@ -246,7 +246,7 @@ img {
 .search-input {
   padding: 12px 16px;
   font-size: 1.1rem;
-  border: 2px solid var(--bronze);
+  border: 2px solid var(--ui-border);
   border-radius: 8px;
   background: var(--card);
   color: var(--text);
@@ -256,13 +256,13 @@ img {
 
 .search-input:focus {
   outline: none;
-  border-color: var(--gold);
+  border-color: var(--ui-border-light, var(--accent));
   box-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
 }
 
 .search-button {
   padding: 12px 20px;
-  background: linear-gradient(135deg, var(--gold), var(--bronze));
+  background: linear-gradient(135deg, var(--ui-border-light, #606078), var(--ui-border, #505068));
   color: var(--dark-text);
   border: none;
   border-radius: 8px;
@@ -290,7 +290,7 @@ img {
 
 .collection-card {
   background: var(--card);
-  border: 2px solid var(--bronze);
+  border: 2px solid var(--ui-border);
   border-radius: 12px;
   padding: 1.5rem;
   text-align: center;
@@ -304,7 +304,7 @@ img {
 
 .collection-card:hover {
   transform: translateY(-2px);
-  border-color: var(--gold);
+  border-color: var(--ui-border-light, var(--accent));
   box-shadow: 0 8px 20px rgba(212, 175, 55, 0.2);
 }
 
@@ -314,7 +314,7 @@ img {
 }
 
 .collection-card h3 {
-  color: var(--gold);
+  color: var(--accent-ink, var(--paper-ink));
   font-family: "Cinzel", serif;
   margin: 0.5rem 0;
   font-size: 1.3rem;
@@ -360,7 +360,7 @@ img {
 .collection-dev-controls {
   margin-top: 1rem;
   padding-top: 1rem;
-  border-top: 1px solid var(--bronze);
+  border-top: 1px solid var(--ui-border);
   display: flex;
   gap: 0.5rem;
   justify-content: center;
@@ -372,7 +372,7 @@ img {
 }
 
 .edit-object-btn {
-  background: var(--gold);
+  background: var(--ui-border);
   color: var(--bg);
   border: none;
   padding: 0.4rem 0.8rem;
@@ -439,17 +439,17 @@ img {
 
 /* New collection card styling */
 .new-collection-card {
-  border: 2px dashed var(--bronze) !important;
+  border: 2px dashed var(--ui-border) !important;
   background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%) !important;
 }
 
 .new-collection-card:hover {
-  border-color: var(--gold) !important;
+  border-color: var(--ui-border-light, var(--accent)) !important;
   background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%) !important;
 }
 
 .create-collection-btn {
-  background: var(--gold);
+  background: var(--ui-border);
   color: var(--bg);
   border: none;
   padding: 0.5rem 1rem;
@@ -483,11 +483,11 @@ body.dev-off .new-collection-card {
   padding: 1.5rem;
   background: var(--accent-bg);
   border-radius: 12px;
-  border: 2px solid var(--gold);
+  border: 2px solid var(--ui-border);
 }
 
 .collection-header h2 {
-  color: var(--gold);
+  color: var(--accent-ink, var(--paper-ink));
   font-family: "Cinzel", serif;
   margin: 0 0 0.5rem 0;
   font-size: 1.8rem;
@@ -496,7 +496,7 @@ body.dev-off .new-collection-card {
 .back-button {
   background: var(--secondary-bg);
   color: var(--text);
-  border: 1px solid var(--bronze);
+  border: 1px solid var(--ui-border);
   padding: 8px 16px;
   border-radius: 6px;
   cursor: pointer;
@@ -506,7 +506,7 @@ body.dev-off .new-collection-card {
 }
 
 .back-button:hover {
-  background: var(--bronze);
+  background: var(--ui-border);
   color: white;
 }
 
@@ -533,7 +533,7 @@ body.dev-off .new-collection-card {
   padding: 8px 16px;
   background: var(--secondary-bg);
   color: var(--text);
-  border: 1px solid var(--bronze);
+  border: 1px solid var(--ui-border);
   border-radius: 20px;
   cursor: pointer;
   font-size: 0.9rem;
@@ -542,9 +542,9 @@ body.dev-off .new-collection-card {
 
 .tag-filter-btn:hover,
 .tag-filter-btn.active {
-  background: var(--gold);
+  background: var(--ui-border);
   color: var(--dark-text);
-  border-color: var(--gold);
+  border-color: var(--ui-border-light, var(--accent));
 }
 
 .collection-items {
@@ -632,18 +632,18 @@ body.dev-off .new-collection-card {
 /* ─────────────────────────── Card System Enhanced - Authentic Parchment ─────────────────────────── */
 .card,
 .card-base {
-  background: 
+  background:
     var(--parchment-texture),
     var(--aged-paper),
     var(--card);
   border: 3px solid transparent;
   border-image: var(--parchment-border) 1;
   border-radius: 16px;
-  box-shadow: 
-    0 8px 32px rgba(139,69,19,.2),
-    0 2px 8px rgba(139,69,19,.15),
-    inset 0 1px 0 rgba(255,255,255,.2),
-    inset 0 -1px 0 rgba(139,69,19,.08);
+  box-shadow:
+    0 8px 32px rgba(0,0,0,.25),
+    0 2px 8px rgba(0,0,0,.15),
+    inset 0 1px 0 rgba(255,255,255,.1),
+    inset 0 -1px 0 rgba(0,0,0,.08);
   padding: 20px;
   position: relative;
   overflow: hidden;
@@ -659,7 +659,7 @@ body.dev-off .new-collection-card {
   left: 2px;
   right: 2px;
   bottom: 2px;
-  border: 1px solid rgba(139,69,19,.15);
+  border: 1px solid rgba(160,160,176,.2);
   border-radius: 13px;
   pointer-events: none;
 }
@@ -672,20 +672,20 @@ body.dev-off .new-collection-card {
   left: 4px;
   right: 4px;
   height: 2px;
-  background: 
-    radial-gradient(ellipse at center, rgba(212,175,55,.3) 0%, transparent 60%),
-    linear-gradient(90deg, transparent, rgba(139,69,19,.2), transparent);
+  background:
+    radial-gradient(ellipse at center, rgba(160,160,176,.3) 0%, transparent 60%),
+    linear-gradient(90deg, transparent, rgba(128,128,144,.2), transparent);
   opacity: .6;
 }
 
 .card:hover,
 .card-base:hover {
   transform: translate3d(0, -3px, 0) scale(1.01); /* Use 3D transform for better mobile performance */
-  box-shadow: 
-    0 16px 48px rgba(139,69,19,.25),
-    0 6px 16px rgba(139,69,19,.18),
-    inset 0 1px 0 rgba(255,255,255,.3),
-    inset 0 -1px 0 rgba(139,69,19,.12);
+  box-shadow:
+    0 16px 48px rgba(0,0,0,.3),
+    0 6px 16px rgba(0,0,0,.2),
+    inset 0 1px 0 rgba(255,255,255,.15),
+    inset 0 -1px 0 rgba(0,0,0,.1);
 }
 
 /* Improve mobile performance with will-change on interactive elements */
@@ -708,7 +708,7 @@ body.dev-off .new-collection-card {
   min-height: 44px; /* Ensure minimum touch target size */
   box-shadow: 
     0 4px 16px rgba(0,0,0,.08),
-    0 2px 4px rgba(139,69,19,.1),
+    0 2px 4px rgba(0,0,0,.1),
     inset 0 1px 0 rgba(255,255,255,.2);
   cursor: pointer;
   transition: all var(--transition-fast);
@@ -726,7 +726,7 @@ body.dev-off .new-collection-card {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(212,175,55,.15), transparent);
+  background: linear-gradient(90deg, transparent, rgba(160,160,176,.15), transparent);
   transition: left var(--transition-normal);
 }
 
@@ -734,9 +734,9 @@ body.dev-off .new-collection-card {
   transform: translate3d(0, -2px, 0) scale(1.02); /* Use 3D transform for better mobile performance */
   box-shadow: 
     0 8px 32px rgba(0,0,0,.15),
-    0 4px 8px rgba(139,69,19,.12),
+    0 4px 8px rgba(0,0,0,.12),
     inset 0 1px 0 rgba(255,255,255,.3);
-  border-color: var(--bronze);
+  border-color: var(--ui-border);
 }
 
 .btn-base:hover::before {
@@ -767,13 +767,13 @@ body.dev-off .new-collection-card {
 }
 
 .card.don-card {
-  border-left: 4px solid var(--bronze);
-  background: linear-gradient(135deg, var(--card), rgba(205,127,50,0.02));
+  border-left: 4px solid var(--ui-border);
+  background: linear-gradient(135deg, var(--card), rgba(24,24,48,0.5));
 }
 
 .card.class-card {
-  border-left: 4px solid var(--gold);
-  background: linear-gradient(135deg, var(--card), rgba(212,175,55,0.02));
+  border-left: 4px solid var(--ui-border-light, #606078);
+  background: linear-gradient(135deg, var(--card), rgba(32,32,64,0.5));
 }
 
 @keyframes cardEntry {
@@ -791,10 +791,10 @@ body.dev-off .new-collection-card {
 .tag-filters {
   margin: 1.5rem 0;
   padding: 1.5rem;
-  background: 
-    linear-gradient(135deg, var(--card), rgba(244,240,230,0.9)),
-    radial-gradient(circle at 20% 50%, rgba(212,175,55,0.05), transparent),
-    radial-gradient(circle at 80% 50%, rgba(139,69,19,0.03), transparent);
+  background:
+    linear-gradient(135deg, var(--card), var(--ui-blue, #181830)),
+    radial-gradient(circle at 20% 50%, rgba(160,160,200,0.05), transparent),
+    radial-gradient(circle at 80% 50%, rgba(24,24,48,0.1), transparent);
   border: 2px solid var(--rule);
   border-radius: 16px;
   box-shadow: 
@@ -813,7 +813,7 @@ body.dev-off .new-collection-card {
   padding: 4px 12px;
   font-size: 0.85em;
   font-weight: 600;
-  color: var(--bronze);
+  color: var(--paper-muted);
   border: 2px solid var(--rule);
   border-top: none;
   border-radius: 0 0 8px 8px;
@@ -829,17 +829,17 @@ body.dev-off .new-collection-card {
 
 .filter-chip {
   padding: 8px 16px;
-  background: linear-gradient(135deg, var(--bronze), rgba(205,127,50,0.9));
-  color: white;
+  background: linear-gradient(135deg, var(--ui-blue, #282838), var(--paper, #1e1e2e));
+  color: var(--paper-ink, #e8e8e8);
   border-radius: 20px;
   font-size: 0.9em;
   font-weight: 500;
   cursor: pointer;
   transition: all var(--transition-fast);
-  border: 2px solid transparent;
-  box-shadow: 
-    0 2px 8px rgba(0,0,0,.1),
-    inset 0 1px 0 rgba(255,255,255,.2);
+  border: 2px solid var(--ui-border, #a0a0b0);
+  box-shadow:
+    0 2px 8px rgba(0,0,0,.15),
+    inset 0 1px 0 rgba(255,255,255,.1);
   position: relative;
   overflow: hidden;
 }
@@ -856,11 +856,12 @@ body.dev-off .new-collection-card {
 }
 
 .filter-chip:hover {
-  background: linear-gradient(135deg, var(--gold), rgba(212,175,55,0.9));
+  background: linear-gradient(135deg, var(--paper-light, #2a2a3a), var(--ui-blue, #282838));
+  border-color: var(--ui-border-light, #c0c0d0);
   transform: translateY(-2px) scale(1.05);
-  box-shadow: 
-    0 6px 20px rgba(0,0,0,.15),
-    inset 0 1px 0 rgba(255,255,255,.3);
+  box-shadow:
+    0 6px 20px rgba(0,0,0,.2),
+    inset 0 1px 0 rgba(255,255,255,.15);
 }
 
 .filter-chip:hover::before {
@@ -869,7 +870,7 @@ body.dev-off .new-collection-card {
 
 .filter-chip.active {
   background: linear-gradient(135deg, var(--accent-ink), rgba(74,44,23,0.9));
-  border-color: var(--gold);
+  border-color: var(--ui-border-light, var(--accent));
   transform: scale(1.02);
   box-shadow: 
     0 4px 16px rgba(0,0,0,.2),
@@ -879,7 +880,7 @@ body.dev-off .new-collection-card {
 .tag-chip {
   display: inline-block;
   padding: 2px 8px;
-  background: var(--bronze);
+  background: var(--ui-border);
   color: white;
   border-radius: 8px;
   font-size: 0.8em;
@@ -889,7 +890,7 @@ body.dev-off .new-collection-card {
 
 /* Gestionnaire de filtres */
 .filter-manager-btn {
-  background: var(--bronze) !important;
+  background: var(--ui-border) !important;
   color: white !important;
 }
 
@@ -907,15 +908,11 @@ body.dev-off .new-collection-card {
   border:2px solid var(--rule);
   border-radius:16px;
   padding:20px;
-  background:linear-gradient(145deg, #faf7f0, var(--card), #f8f4e8);
-  box-shadow:
-    0 8px 32px rgba(0,0,0,.12),
-    0 2px 8px rgba(139,69,19,.08),
-    inset 0 1px 0 rgba(255,255,255,.1);
+  background:var(--card);
+  box-shadow:var(--card-shadow);
   position:relative;
   overflow:hidden;
   transition: all var(--transition-normal);
-  backdrop-filter: blur(1px);
 }
 
 .card::before{
@@ -924,9 +921,9 @@ body.dev-off .new-collection-card {
   top:0;
   left:0;
   right:0;
-  height:3px;
-  background:linear-gradient(90deg, transparent, var(--gold), var(--bronze), var(--gold), transparent);
-  opacity:.8;
+  height:2px;
+  background:linear-gradient(90deg, transparent, var(--ui-border, var(--rule)), transparent);
+  opacity:.6;
 }
 
 .card::after{
@@ -936,29 +933,26 @@ body.dev-off .new-collection-card {
   left:0;
   right:0;
   height:1px;
-  background:linear-gradient(90deg, transparent, var(--bronze), transparent);
-  opacity:.5;
+  background:linear-gradient(90deg, transparent, var(--ui-border, var(--rule)), transparent);
+  opacity:.3;
 }
 
 .card:hover {
   transform: translateY(-2px);
-  box-shadow: 
-    0 12px 48px rgba(0,0,0,.15),
-    0 4px 12px rgba(139,69,19,.12),
-    inset 0 1px 0 rgba(255,255,255,.15);
-  border-color: var(--gold);
+  box-shadow: var(--card-shadow), 0 0 12px var(--ui-glow, rgba(0,0,0,.2));
+  border-color: var(--ui-border-light, var(--accent));
 }
 .card ul, ul{padding-left:35px !important;margin-left:0 !important}
 
 /* Buttons */
 .btn{display:inline-flex;gap:var(--space-md);align-items:center;background:var(--card);border:2px solid var(--rule);border-radius:12px;padding:var(--space-md) var(--space-lg);box-shadow:var(--card-shadow);cursor:pointer;
      transition:var(--transition-fast); font-weight:500}
-.btn:hover{transform:translateY(-1px); box-shadow:0 8px 25px rgba(0,0,0,.15); border-color:var(--bronze)}
+.btn:hover{transform:translateY(-1px); box-shadow:0 8px 25px rgba(0,0,0,.15); border-color:var(--ui-border-light, #c0c0d0)}
 .btn.small{padding:var(--space-sm) var(--space-md)}
 
 /* Search bar */
 .searchbar{display:flex;gap:var(--space-md);align-items:center}
-.searchbar input{flex:1 1 auto;max-width:100%;height:38px;font-size:15px;padding:var(--space-md) 10px;border-radius:10px;border:1px solid var(--rule);background:#fff6e8;color:inherit}
+.searchbar input{flex:1 1 auto;max-width:100%;height:38px;font-size:15px;padding:var(--space-md) 10px;border-radius:10px;border:1px solid var(--rule);background:var(--card);color:var(--paper-ink)}
 .searchbar button{height:38px}
 
 /* TOC Search bar - compact horizontal layout in table of contents */
@@ -968,7 +962,7 @@ body.dev-off .new-collection-card {
   align-items:center;
   margin-bottom:16px;
   padding:12px;
-  background:rgba(255,246,232,0.5);
+  background:rgba(30,30,46,0.5);
   border-radius:12px;
   border:1px solid var(--rule);
 }
@@ -979,7 +973,7 @@ body.dev-off .new-collection-card {
   padding:6px 12px;
   border-radius:8px;
   border:1px solid var(--rule);
-  background:#fff6e8;
+  background:var(--card);
   color:inherit;
 }
 .toc-search .btn-clear{
@@ -1013,10 +1007,10 @@ body.dev-off .new-collection-card {
   justify-content: space-between;
   align-items: center;
   padding: 8px 12px;
-  background: var(--gold);
+  background: var(--ui-border);
   color: #4a4a4a;
   font-weight: 500;
-  border-bottom: 1px solid var(--bronze);
+  border-bottom: 1px solid var(--ui-border);
 }
 
 .search-close {
@@ -1046,7 +1040,7 @@ body.dev-off .new-collection-card {
 }
 
 .search-result-item:hover {
-  background: #f8f4e8;
+  background: var(--card);
 }
 
 .search-result-item:last-child {
@@ -1087,18 +1081,18 @@ body.dev-off .new-collection-card {
 }
 
 .collection-card {
-  background: 
-    linear-gradient(135deg, var(--card), rgba(250,246,238,0.9)),
-    radial-gradient(circle at 20% 30%, rgba(212,175,55,0.03), transparent 70%);
-  border: 2px solid var(--bronze);
+  background:
+    linear-gradient(135deg, var(--card), var(--paper, #1e1e2e)),
+    radial-gradient(circle at 20% 30%, rgba(160,160,176,0.03), transparent 70%);
+  border: 2px solid var(--ui-border);
   border-radius: 16px;
   padding: 1.5rem;
   text-align: center;
   cursor: pointer;
   transition: all var(--transition-normal);
-  box-shadow: 
-    0 6px 20px rgba(0,0,0,.1),
-    0 2px 6px rgba(139,69,19,.08),
+  box-shadow:
+    0 6px 20px rgba(0,0,0,.15),
+    0 2px 6px rgba(0,0,0,.1),
     inset 0 1px 0 rgba(255,255,255,.1);
   width: 100%;
   margin: 0;
@@ -1114,22 +1108,22 @@ body.dev-off .new-collection-card {
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, 
-    transparent, 
-    var(--gold), 
-    var(--bronze), 
-    var(--gold), 
+  background: linear-gradient(90deg,
+    transparent,
+    var(--ui-border, #a0a0b0),
+    var(--ui-border-light, #c0c0d0),
+    var(--ui-border, #a0a0b0),
     transparent);
   opacity: 0.6;
 }
 
 .collection-card:hover {
   transform: translateY(-4px) scale(1.02);
-  box-shadow: 
-    0 12px 32px rgba(139,69,19,.2),
-    0 4px 12px rgba(139,69,19,.15),
-    inset 0 1px 0 rgba(255,255,255,.2);
-  border-color: var(--gold);
+  box-shadow:
+    0 12px 32px rgba(0,0,0,.25),
+    0 4px 12px rgba(0,0,0,.15),
+    inset 0 1px 0 rgba(255,255,255,.15);
+  border-color: var(--ui-border-light, var(--accent));
 }
 
 .collection-icon {
@@ -1139,7 +1133,7 @@ body.dev-off .new-collection-card {
 }
 
 .collection-card h3 {
-  color: var(--bronze);
+  color: var(--paper-muted);
   font-family: 'Cinzel', serif;
   font-size: 1.3rem;
   margin: 0.5rem 0 1rem 0;
@@ -1170,9 +1164,9 @@ body.dev-off .new-collection-card {
 }
 
 .new-collection-card {
-  border: 2px dashed var(--bronze);
-  background: 
-    linear-gradient(135deg, rgba(212,175,55,0.05), rgba(139,69,19,0.02)),
+  border: 2px dashed var(--ui-border);
+  background:
+    linear-gradient(135deg, rgba(160,160,176,0.05), rgba(30,30,46,0.02)),
     var(--card);
   opacity: 0.8;
 }
@@ -1198,7 +1192,7 @@ body.dev-off .new-collection-card {
 }
 
 .collection-header h2 {
-  color: var(--bronze);
+  color: var(--paper-muted);
   font-family: 'Cinzel', serif;
   margin: 0;
   display: flex;
@@ -1237,9 +1231,9 @@ body.dev-off .new-collection-card {
 }
 
 .search-button {
-  background: linear-gradient(135deg, var(--gold), var(--bronze));
+  background: linear-gradient(135deg, var(--ui-border-light, #606078), var(--ui-border, #505068));
   color: white;
-  border: 2px solid var(--bronze);
+  border: 2px solid var(--ui-border);
   border-radius: 12px;
   padding: 0.75rem 1.5rem;
   cursor: pointer;
@@ -1251,7 +1245,7 @@ body.dev-off .new-collection-card {
 
 .search-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(139,69,19,.3);
+  box-shadow: 0 6px 20px rgba(0,0,0,.3);
 }
 
 /* Tag filters */
@@ -1265,7 +1259,7 @@ body.dev-off .new-collection-card {
 
 .tag-filter-btn {
   background: var(--card);
-  border: 2px solid var(--bronze);
+  border: 2px solid var(--ui-border);
   border-radius: 20px;
   padding: 0.4rem 1rem;
   cursor: pointer;
@@ -1279,15 +1273,15 @@ body.dev-off .new-collection-card {
 }
 
 .tag-filter-btn:hover {
-  background: linear-gradient(135deg, var(--gold), rgba(212,175,55,0.8));
+  background: linear-gradient(135deg, var(--ui-border, #a0a0b0), var(--ui-border-light, #c0c0d0));
   color: white;
   transform: translateY(-1px);
 }
 
 .tag-filter-btn.active {
-  background: var(--bronze);
+  background: var(--ui-border);
   color: white;
-  border-color: var(--gold);
+  border-color: var(--ui-border-light, var(--accent));
 }
 
 /* Mobile Responsive Design for Collections */
@@ -1399,7 +1393,7 @@ body.dev-off .new-collection-card {
   margin: 4px 0;
   background: rgba(139, 92, 23, 0.1);
   border-radius: 6px;
-  border-left: 3px solid var(--bronze);
+  border-left: 3px solid var(--ui-border);
   transition: all var(--transition-fast);
 }
 
@@ -1410,7 +1404,7 @@ body.dev-off .new-collection-card {
 
 .fourchette-range {
   font-weight: bold;
-  color: var(--bronze);
+  color: var(--paper-muted);
   min-width: 80px;
   text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
 }
@@ -1428,7 +1422,7 @@ body.dev-off .new-collection-card {
 }
 
 .fourchette-objet a:hover {
-  color: var(--bronze);
+  color: var(--paper-muted);
   text-decoration: underline;
 }
 
@@ -1492,7 +1486,7 @@ body.dev-off .new-collection-card {
 }
 
 .search-page-header h1 {
-  color: var(--gold);
+  color: var(--accent-ink, var(--paper-ink));
   margin-bottom: var(--space-md);
   font-family: var(--font-title);
 }
@@ -1529,7 +1523,7 @@ body.dev-off .new-collection-card {
 .search-result-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-  border-color: var(--bronze);
+  border-color: var(--ui-border);
 }
 
 .search-result-header {
@@ -1541,13 +1535,13 @@ body.dev-off .new-collection-card {
 
 .search-result-header h3 {
   margin: 0;
-  color: var(--bronze);
+  color: var(--paper-muted);
   font-size: 1.2em;
   text-align: center;
 }
 
 .search-result-type {
-  background: var(--gold);
+  background: var(--ui-border);
   color: #4a4a4a;
   padding: 2px 8px;
   border-radius: 12px;
@@ -1565,7 +1559,7 @@ body.dev-off .new-collection-card {
   color: #333;
   font-size: 1.05em;
   padding: var(--space-sm);
-  background: linear-gradient(90deg, var(--gold), transparent);
+  background: linear-gradient(90deg, var(--ui-border, #a0a0b0), transparent);
   border-radius: 4px;
   opacity: 0.9;
 }
@@ -1577,10 +1571,10 @@ body.dev-off .new-collection-card {
 }
 
 .search-result-preview {
-  background: #f8f4e8;
+  background: var(--card);
   padding: var(--space-md);
   border-radius: 8px;
-  border-left: 3px solid var(--bronze);
+  border-left: 3px solid var(--ui-border);
 }
 
 .preview-field {
@@ -1589,7 +1583,7 @@ body.dev-off .new-collection-card {
   font-size: 0.9em;
   padding: var(--space-sm);
   background: rgba(0,0,0,0.02);
-  border-left: 3px solid var(--gold);
+  border-left: 3px solid var(--ui-border-light, #606078);
   border-radius: 0 4px 4px 0;
 }
 
@@ -1598,7 +1592,7 @@ body.dev-off .new-collection-card {
 }
 
 .preview-field strong {
-  color: var(--bronze);
+  color: var(--paper-muted);
   font-weight: 600;
 }
 
@@ -1609,9 +1603,9 @@ body.dev-off .new-collection-card {
 }
 
 .search-result-btn {
-  background: var(--bronze);
+  background: var(--ui-border);
   color: white;
-  border-color: var(--bronze);
+  border-color: var(--ui-border);
 }
 
 .search-result-btn:hover {
@@ -1627,7 +1621,7 @@ body.dev-off .new-collection-card {
   height: auto !important;
   min-height: 150px !important;
   background: var(--card) !important;
-  border: 2px solid var(--bronze) !important;
+  border: 2px solid var(--ui-border) !important;
   margin-bottom: var(--space-lg) !important;
 }
 
@@ -1892,7 +1886,7 @@ article[data-page="enchanteur"] .illus img:hover,
 /* Style spécial pour les sorts - cadre doré et taille augmentée */
 .illus-spell img,
 .card .illus img {
-  border: 3px solid var(--gold) !important;
+  border: 3px solid var(--ui-border) !important;
   box-shadow: var(--image-shadow), 0 0 10px rgba(212,175,55,.3) !important;
   max-width: 350px !important;
   max-height: 250px !important;
@@ -2132,7 +2126,7 @@ article[data-page="enchanteur"] .illus img:hover,
 }
 
 .section-option:hover {
-  border-color: var(--bronze);
+  border-color: var(--ui-border);
   background: linear-gradient(135deg, 
     rgba(212,175,55,0.1) 0%, 
     rgba(139,69,19,0.05) 100%);
@@ -2141,7 +2135,7 @@ article[data-page="enchanteur"] .illus img:hover,
 }
 
 .section-option.selected {
-  border-color: var(--gold);
+  border-color: var(--ui-border-light, var(--accent));
   background: linear-gradient(135deg, 
     rgba(212,175,55,0.2) 0%, 
     rgba(139,69,19,0.1) 100%);
@@ -2216,7 +2210,7 @@ article[data-page="enchanteur"] .illus img:hover,
 
 .form-group input:focus {
   outline: none;
-  border-color: var(--bronze);
+  border-color: var(--ui-border);
   box-shadow: 0 0 0 2px rgba(212,175,55,0.2);
 }
 
@@ -2228,14 +2222,14 @@ article[data-page="enchanteur"] .illus img:hover,
 }
 
 .btn-primary {
-  background: var(--bronze) !important;
+  background: var(--ui-border) !important;
   color: white !important;
-  border-color: var(--bronze) !important;
+  border-color: var(--ui-border) !important;
 }
 
 .btn-primary:hover {
-  background: var(--gold) !important;
-  border-color: var(--gold) !important;
+  background: var(--ui-border) !important;
+  border-color: var(--ui-border-light, var(--accent)) !important;
 }
 
 /* ─────────────────────────── Favoris Components ─────────────────────────── */
@@ -2341,7 +2335,7 @@ article[data-page="enchanteur"] .illus img:hover,
 
 .favoris-section h2 {
   color: var(--accent-ink);
-  border-bottom: 2px solid var(--gold);
+  border-bottom: 2px solid var(--ui-border);
   padding-bottom: 0.5rem;
   margin-bottom: 1rem;
 }
@@ -2503,9 +2497,9 @@ article[data-page="enchanteur"] .illus img:hover,
    ═══════════════════════════════════════════════════════════════════════════════════════ */
 
 .print-button {
-  background: var(--bronze) !important;
+  background: var(--ui-border) !important;
   color: white !important;
-  border: 2px solid var(--gold) !important;
+  border: 2px solid var(--ui-border) !important;
   border-radius: 8px;
   padding: 0.5rem 1rem;
   font-family: "Cinzel", serif;
@@ -2517,8 +2511,8 @@ article[data-page="enchanteur"] .illus img:hover,
 }
 
 .print-button:hover {
-  background: var(--gold) !important;
-  border-color: var(--bronze) !important;
+  background: var(--ui-border) !important;
+  border-color: var(--ui-border) !important;
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0,0,0,0.3);
 }
@@ -2637,7 +2631,7 @@ article[data-page="enchanteur"] .illus img:hover,
   right: 20px;
   z-index: 1000;
   background: var(--card);
-  border: 2px solid var(--bronze);
+  border: 2px solid var(--ui-border);
   border-radius: 12px;
   box-shadow: 0 8px 24px rgba(0,0,0,0.3);
   backdrop-filter: blur(10px);
@@ -2664,7 +2658,7 @@ article[data-page="enchanteur"] .illus img:hover,
 
 .audio-title {
   font-weight: 600;
-  color: var(--gold);
+  color: var(--accent-ink, var(--paper-ink));
   font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -2710,8 +2704,8 @@ article[data-page="enchanteur"] .illus img:hover,
 }
 
 .audio-btn {
-  background: var(--bronze);
-  border: 1px solid var(--gold);
+  background: var(--ui-border);
+  border: 1px solid var(--ui-border-light, #e0e0f0);
   border-radius: 6px;
   padding: 0.5rem;
   cursor: pointer;
@@ -2726,7 +2720,7 @@ article[data-page="enchanteur"] .illus img:hover,
 }
 
 .audio-btn:hover {
-  background: var(--gold);
+  background: var(--ui-border);
   transform: translateY(-1px);
 }
 
@@ -2762,18 +2756,18 @@ article[data-page="enchanteur"] .illus img:hover,
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: var(--bronze);
+  background: var(--ui-border);
   cursor: pointer;
-  border: 2px solid var(--gold);
+  border: 2px solid var(--ui-border);
 }
 
 .volume-slider::-moz-range-thumb {
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: var(--bronze);
+  background: var(--ui-border);
   cursor: pointer;
-  border: 2px solid var(--gold);
+  border: 2px solid var(--ui-border);
 }
 
 .volume-value {
@@ -2823,7 +2817,7 @@ article[data-page="enchanteur"] .illus img:hover,
    ═══════════════════════════════════════════════════════════════════════════════════════ */
 
 .audio-control-btn {
-  background: var(--bronze) !important;
+  background: var(--ui-border) !important;
   color: white !important;
   border: none !important;
   padding: 1rem 2rem !important;
@@ -2846,18 +2840,18 @@ article[data-page="enchanteur"] .illus img:hover,
 }
 
 .audio-control-btn:hover {
-  background: var(--gold) !important;
+  background: var(--ui-border) !important;
   transform: none !important;
   box-shadow: none !important;
 }
 
 .audio-control-btn:active {
-  background: var(--bronze) !important;
+  background: var(--ui-border) !important;
   transform: scale(0.98) !important;
 }
 
 .playlist-select-btn {
-  background: var(--bronze) !important;
+  background: var(--ui-border) !important;
   color: white !important;
   border: none !important;
   padding: 1rem 1.5rem !important;
@@ -2878,7 +2872,7 @@ article[data-page="enchanteur"] .illus img:hover,
 }
 
 .playlist-select-btn:hover {
-  background: var(--gold) !important;
+  background: var(--ui-border) !important;
   transform: none !important;
   box-shadow: none !important;
 }
@@ -2905,15 +2899,15 @@ article[data-page="enchanteur"] .illus img:hover,
   width: 20px !important;
   height: 20px !important;
   border-radius: 50% !important;
-  background: var(--bronze) !important;
+  background: var(--ui-border) !important;
   cursor: pointer !important;
-  border: 2px solid var(--gold) !important;
+  border: 2px solid var(--ui-border) !important;
   transition: none !important;
 }
 
 #master-volume::-webkit-slider-thumb:hover {
-  background: var(--gold) !important;
-  border-color: var(--bronze) !important;
+  background: var(--ui-border) !important;
+  border-color: var(--ui-border) !important;
 }
 
 /* ─────────────────────────── Notification Animations ─────────────────────────── */
@@ -2957,14 +2951,14 @@ article[data-page="enchanteur"] .illus img:hover,
   width: 20px !important;
   height: 20px !important;
   border-radius: 50% !important;
-  background: var(--bronze) !important;
+  background: var(--ui-border) !important;
   cursor: pointer !important;
-  border: 2px solid var(--gold) !important;
+  border: 2px solid var(--ui-border) !important;
   transition: none !important;
 }
 
 #master-volume::-moz-range-thumb:hover {
-  background: var(--gold) !important;
-  border-color: var(--bronze) !important;
+  background: var(--ui-border) !important;
+  border-color: var(--ui-border) !important;
 }
 

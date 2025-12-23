@@ -241,24 +241,13 @@ article {
   animation: slideInFromLeft var(--duration-slow) var(--ease-out-quart);
 }
 
-/* Navigation links with staggered animation */
+/* Navigation links - animations disabled to prevent stutter */
 .toc a {
-  opacity: 0;
-  animation: fadeInUp var(--duration-normal) var(--ease-out-quart) forwards;
   transition:
     transform var(--duration-fast) var(--ease-out-quart),
     background-color var(--duration-fast) ease,
     border-color var(--duration-fast) ease;
 }
-
-.toc a:nth-child(1) { animation-delay: calc(var(--stagger-1) * 1); }
-.toc a:nth-child(2) { animation-delay: calc(var(--stagger-1) * 2); }
-.toc a:nth-child(3) { animation-delay: calc(var(--stagger-1) * 3); }
-.toc a:nth-child(4) { animation-delay: calc(var(--stagger-1) * 4); }
-.toc a:nth-child(5) { animation-delay: calc(var(--stagger-1) * 5); }
-.toc a:nth-child(6) { animation-delay: calc(var(--stagger-1) * 6); }
-.toc a:nth-child(7) { animation-delay: calc(var(--stagger-1) * 7); }
-.toc a:nth-child(8) { animation-delay: calc(var(--stagger-1) * 8); }
 
 .toc a:hover {
   transform: translateX(12px) scale(1.05);
@@ -365,20 +354,8 @@ button:active, .btn:active {
 
 /* ======================= GRID & LIST ANIMATIONS =========================== */
 
-/* Staggered grid animations */
-@media (prefers-reduced-motion: no-preference) {
-  .grid .card:nth-child(1) { animation: fadeInUp var(--duration-normal) var(--ease-out-quart) calc(var(--stagger-2) * 1) both; }
-  .grid .card:nth-child(2) { animation: fadeInUp var(--duration-normal) var(--ease-out-quart) calc(var(--stagger-2) * 2) both; }
-  .grid .card:nth-child(3) { animation: fadeInUp var(--duration-normal) var(--ease-out-quart) calc(var(--stagger-2) * 3) both; }
-  .grid .card:nth-child(4) { animation: fadeInUp var(--duration-normal) var(--ease-out-quart) calc(var(--stagger-2) * 4) both; }
-  .grid .card:nth-child(5) { animation: fadeInUp var(--duration-normal) var(--ease-out-quart) calc(var(--stagger-2) * 5) both; }
-  .grid .card:nth-child(6) { animation: fadeInUp var(--duration-normal) var(--ease-out-quart) calc(var(--stagger-2) * 6) both; }
-
-  /* Continue pattern for more cards */
-  .grid .card:nth-child(n+7) {
-    animation: fadeInUp var(--duration-normal) var(--ease-out-quart) calc(var(--stagger-1) * 7) both;
-  }
-}
+/* Staggered grid animations - DISABLED to prevent double-appear stutter */
+/* Cards now appear instantly without fade animation */
 
 /* ======================= FORM & INPUT ANIMATIONS ========================== */
 
@@ -480,24 +457,7 @@ input:focus, textarea:focus, select:focus {
 }
 
 /* Tables des trésors container animations */
-#tables-tresors-container .card {
-  animation: treasureReveal var(--duration-slow) var(--ease-out-expo) forwards;
-  transform: translateY(40px) scale(0.9);
-  opacity: 0;
-}
-
-#tables-tresors-container .card:nth-child(1) { animation-delay: calc(var(--stagger-2) * 1); }
-#tables-tresors-container .card:nth-child(2) { animation-delay: calc(var(--stagger-2) * 2); }
-#tables-tresors-container .card:nth-child(3) { animation-delay: calc(var(--stagger-2) * 3); }
-#tables-tresors-container .card:nth-child(4) { animation-delay: calc(var(--stagger-2) * 4); }
-#tables-tresors-container .card:nth-child(5) { animation-delay: calc(var(--stagger-2) * 5); }
-
-@keyframes treasureReveal {
-  to {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-  }
-}
+/* Tables tresors animations - DISABLED to prevent stutter */
 
 /* Element selector animation */
 .spell-element-selector select, .monster-element-selector select {
@@ -508,7 +468,7 @@ input:focus, textarea:focus, select:focus {
 
 .spell-element-selector select:focus, .monster-element-selector select:focus {
   transform: scale(1.05);
-  border-color: var(--gold);
+  border-color: var(--ui-border-light, #e0e0f0);
 }
 
 /* Enhanced 3D Image Effects */
