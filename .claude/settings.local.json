@@ -70,7 +70,16 @@
       "Bash(git -C \"D:\\projets\\BabJDR\\BabJDR\" pull)",
       "Bash(pip install:*)",
       "Bash(npm install:*)",
-      "Bash(cd:*)"
+      "Bash(cd:*)",
+      "WebFetch(domain:en.wikipedia.org)",
+      "WebFetch(domain:gamefabrique.com)",
+      "WebFetch(domain:www.pushsquare.com)",
+      "WebFetch(domain:www.rpgfan.com)",
+      "WebFetch(domain:www.mobygames.com)",
+      "WebFetch(domain:archive.org)",
+      "WebFetch(domain:psxdatacenter.com)",
+      "Bash(git -C \"D:\\\\projets\\\\BabJDR\\\\BabJDR\" status)",
+      "Bash(git -C \"D:\\\\projets\\\\BabJDR\\\\BabJDR\" add css/theme.css css/theme-blazeblade-backup.css css/theme-parchment-backup.css css/animations.css css/components.css css/layout.css css/scroll-optimizations.css css/visual-enhancements.css)"
     ],
     "deny": []
   }

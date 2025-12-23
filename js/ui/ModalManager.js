@@ -60,8 +60,19 @@
           // Get element configuration
           const elementConfig = window.ElementColors[elementName];
           if (elementConfig) {
-            const styleString = `color: ${elementConfig.color}; font-weight: ${elementConfig.weight || 'bold'};`;
-            
+            let styleString = `color: ${elementConfig.color}; font-weight: ${elementConfig.weight || 'bold'};`;
+
+            // Add background styles if defined (for Nuit, Divin, etc.)
+            if (elementConfig.background) {
+              styleString += ` background: ${elementConfig.background};`;
+            }
+            if (elementConfig.padding) {
+              styleString += ` padding: ${elementConfig.padding};`;
+            }
+            if (elementConfig.borderRadius) {
+              styleString += ` border-radius: ${elementConfig.borderRadius};`;
+            }
+
             const html = `<span style="${styleString}">${elementName}</span>`;
             UIUtilities.copyToClipboard(html);
           } else {

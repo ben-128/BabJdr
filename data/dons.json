@@ -419,7 +419,7 @@
       },
       {
         "nom": "Résistance élémentaire 2",
-        "description": "Le héros gagne 5 d'armure élémentaire de <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span>, <span style=\"color: #0f172a; font-weight: bold;\">Nuit</span>, <span style=\"color: #d0d0d0; font-weight: bold; background: rgba(0, 0, 0, 0.4); padding: 2px 4px; border-radius: 3px;\">Divin</span>, <span style=\"color: #a855f7; font-weight: bold;\">Maléfique</span>.",
+        "description": "Le héros gagne 5 d'armure élémentaire de <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span>, <span style=\"color: #1a1a1a; font-weight: bold; background: rgba(180, 180, 200, 0.6); padding: 2px 4px; border-radius: 3px;\">Nuit</span>, <span style=\"color: #d0d0d0; font-weight: bold; background: rgba(0, 0, 0, 0.4); padding: 2px 4px; border-radius: 3px;\">Divin</span>, <span style=\"color: #a855f7; font-weight: bold;\">Maléfique</span>.",
         "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
@@ -503,7 +503,7 @@
       },
       {
         "nom": "La nuit tous les chats sont gris",
-        "description": "Les effets des sorts et passifs appliqués aux créatures <span style=\"color: #8b5cf6; font-weight: bold;\">Maléfique</span> s'appliquent aussi aux créatures de <span style=\"color: #1a1a1a; font-weight: bold;\">Nuit</span>.",
+        "description": "Les effets des sorts et passifs appliqués aux créatures <span style=\"color: #8b5cf6; font-weight: bold;\">Maléfique</span> s'appliquent aussi aux créatures de <span style=\"color: #1a1a1a; font-weight: bold; background: rgba(180, 180, 200, 0.6); padding: 2px 4px; border-radius: 3px;\">Nuit</span>.",
         "prerequis": "<strong> Prérequis :</strong>-",
         "cout": "1 point de don"
       },

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-12-23T14:48:30.527Z by JdrBab Build System -->
+<!-- Generated on 2025-12-23T14:57:28.050Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -5246,23 +5246,11 @@ input:focus, textarea:focus, select:focus {
     scroll-behavior: auto !important;
   }
 
-  /* Keep essential transforms but remove animations */
-  .card:hover {
-    transform: translateY(-2px);
-  }
-
-  button:hover, .btn:hover {
-    transform: translateY(-1px);
-  }
 }
 
 /* High contrast mode adaptations */
 @media (prefers-contrast: high) {
-  .card:hover {
-    box-shadow:
-      0 8px 16px rgba(0,0,0,0.5),
-      inset 0 0 0 2px rgba(212,175,55,0.8);
-  }
+  /* Hover effects removed to prevent darkening */
 }
 
 /* Mobile-specific optimizations */

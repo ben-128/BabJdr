@@ -80,7 +80,7 @@
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 12",
         "resistance": "<strong>Sans effet si:</strong> -",
-        "effetNormal": "<strong>Effet:</strong>  Inflige (13 + Puiss. Sorts) dégâts de <span style=\"color: #1a1a1a; font-weight: bold;\">Nuit</span> aux créatures dans un cone devant le lanceur (largeur 3m puis 6m puis 9m, distance 9m) et les repousse chacune de 3m.",
+        "effetNormal": "<strong>Effet:</strong>  Inflige (13 + Puiss. Sorts) dégâts de <span style=\"color: #1a1a1a; font-weight: bold; background: rgba(180, 180, 200, 0.6); padding: 2px 4px; border-radius: 3px;\">Nuit</span> aux créatures dans un cone devant le lanceur (largeur 3m puis 6m puis 9m, distance 9m) et les repousse chacune de 3m.",
         "effetCritique": "<strong>Coup Critique: </strong> Les dégâts passent à (20 + Puiss. Sorts) et les cibles sont repoussées de 6m."
       },
       {
@@ -93,7 +93,7 @@
         "coutMana": "🔵 <strong>Coût mana:</strong> 10",
         "resistance": "<strong>Sans effet si:</strong> Esquive.",
         "effetNormal": "<strong>Effet:</strong> Inflige (15 + Puiss. Sorts) dégâts physiques à la cible. Ces dégâts sont réduits par l'armure.",
-        "effetCritique": "<strong>Coup Critique: </strong> Les dégâts passent à (22 + Puiss. Sorts) et la cible (si elle est de taille Moyenne ou moins) subit l'état <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">A terre</span>."
+        "effetCritique": "<strong>Coup Critique: </strong> Les dégâts passent à (22 + Puiss. Sorts) et la cible (si elle est de taille Moyenne ou moins) subit l'état <span class=\"etat-link\" data-etat=\"À terre\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">À terre</span>."
       },
       {
         "nom": "Nuage toxique",
@@ -391,7 +391,7 @@
         "coutMana": "🔵 <strong>Coût mana:</strong> 8",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
-        "resistance": "<strong>Sans effet si:</strong> <br>- Résistance altérations &gt;= Intelligence du lanceur<br>- Element <span style=\"color: #0f172a; font-weight: bold;\">Nuit</span>",
+        "resistance": "<strong>Sans effet si:</strong> <br>- Résistance altérations &gt;= Intelligence du lanceur<br>- Element <span style=\"color: #1a1a1a; font-weight: bold; background: rgba(180, 180, 200, 0.6); padding: 2px 4px; border-radius: 3px;\">Nuit</span>",
         "effetNormal": "<strong>Effet:</strong> La cible passe dans l'état <span class=\"etat-link\" data-etat=\"Endormi/assommé/Effrayé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Endormi</span> pendant ses 2 prochains tours.",
         "effetCritique": "<strong>Coup Critique : </strong> L'effet dure 3 tours."
       },
@@ -416,7 +416,7 @@
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 14",
         "resistance": "<strong>Sans effet si:</strong> -",
-        "effetNormal": "<strong>Effet:</strong> Le lanceur choisi un élément au choix entre <span style=\"color: #ff6b35; font-weight: bold;\">Feu</span>, <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>, et <span style=\"color: #1a1a1a; font-weight: bold;\">Nuit</span>. \n<br>La cible voit son arme imprégnée de cet élément, qui infligera (4 + Puiss. Sorts) points de dégâts de cet élément à chaque coup. <br>Dure jusqu'à la fin du combat.<br> Non cumulable.",
+        "effetNormal": "<strong>Effet:</strong> Le lanceur choisi un élément au choix entre <span style=\"color: #ff6b35; font-weight: bold;\">Feu</span>, <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>, et <span style=\"color: #1a1a1a; font-weight: bold; background: rgba(180, 180, 200, 0.6); padding: 2px 4px; border-radius: 3px;\">Nuit</span>. \n<br>La cible voit son arme imprégnée de cet élément, qui infligera (4 + Puiss. Sorts) points de dégâts de cet élément à chaque coup. <br>Dure jusqu'à la fin du combat.<br> Non cumulable.",
         "effetCritique": "<strong>Coup Critique:&nbsp;</strong>&nbsp;Rend la moitié du coût en mana."
       },
       {
@@ -488,7 +488,7 @@
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 14",
         "resistance": "<strong>Sans effet si:</strong> -",
-        "effetNormal": "<strong>Effet:</strong> Le lanceur choisi un élément au choix entre <span style=\"color: #ff6b35; font-weight: bold;\">Feu</span>, <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>, et <span style=\"color: #1a1a1a; font-weight: bold;\">Nuit</span>. \n<br>La cible voit son armure de cet élément, augmentant l'armure élémentaire de cet élément de (5 + Puiss. Sorts). <br>Dure jusqu'à la fin du combat.<br> Non cumulable.",
+        "effetNormal": "<strong>Effet:</strong> Le lanceur choisi un élément au choix entre <span style=\"color: #ff6b35; font-weight: bold;\">Feu</span>, <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>, et <span style=\"color: #1a1a1a; font-weight: bold; background: rgba(180, 180, 200, 0.6); padding: 2px 4px; border-radius: 3px;\">Nuit</span>. \n<br>La cible voit son armure de cet élément, augmentant l'armure élémentaire de cet élément de (5 + Puiss. Sorts). <br>Dure jusqu'à la fin du combat.<br> Non cumulable.",
         "effetCritique": "<strong>Coup Critique:&nbsp;</strong>&nbsp;Rend la moitié du coût en mana."
       },
       {

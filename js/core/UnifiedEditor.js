@@ -2451,22 +2451,29 @@
 
       const displaySection = sectionContainer.querySelector('.monster-element-display, .spell-element-display');
       const badge = displaySection?.querySelector('.element-badge');
-      
+
       if (badge) {
-        // Get element icon and color
+        // Get element icon and full config
         const icon = window.ElementIcons?.[newValue] || '⚡';
-        const color = window.ElementColors?.[newValue]?.color || '#666';
-        
+        const config = window.ElementColors?.[newValue] || { color: '#666', weight: 'bold' };
+        const color = config.color;
+
+        // Build full style string for element text
+        let elementStyle = `color: ${color}; font-weight: ${config.weight || 'bold'};`;
+        if (config.background) elementStyle += ` background: ${config.background};`;
+        if (config.padding) elementStyle += ` padding: ${config.padding};`;
+        if (config.borderRadius) elementStyle += ` border-radius: ${config.borderRadius};`;
+
         // Update the badge content and style
         if (session.contentType === 'monster') {
           // For monsters, we need to update the complete badge styling
           const iconSpan = badge.querySelector('span:first-child');
           const textSpan = badge.querySelector('span:last-child');
           if (iconSpan && textSpan) {
-            iconSpan.textContent = icon;
+            iconSpan.innerHTML = icon;
             textSpan.textContent = newValue;
-            textSpan.style.color = color;
-            
+            textSpan.setAttribute('style', elementStyle);
+
             // Update the complete badge background and border
             const hexColor = color;
             const rgbMatch = hexColor.match(/^#([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i);
@@ -2479,8 +2486,18 @@
             }
           }
         } else if (session.contentType === 'spell') {
-          // Update spell badge
-          badge.innerHTML = `${icon} ${newValue}`;
+          // Update spell badge with full styling
+          badge.innerHTML = `${icon} <span style="${elementStyle}">${newValue}</span>`;
+
+          // Update badge background and border
+          const rgbMatch = color.match(/^#([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i);
+          if (rgbMatch) {
+            const r = parseInt(rgbMatch[1], 16);
+            const g = parseInt(rgbMatch[2], 16);
+            const b = parseInt(rgbMatch[3], 16);
+            badge.style.background = `rgba(${r}, ${g}, ${b}, 0.15)`;
+            badge.style.border = `1px solid ${color}`;
+          }
         }
       }
     }

@@ -213,15 +213,15 @@
       "poids": ""
     },
     {
-      "nom": "Baguette de d'accélération",
+      "nom": "Chitine de scarabée",
       "numero": 17,
       "image": "https://i.ibb.co/zT29mKBd/Baguette-Lumiere.png",
-      "description": "<i>Une fine tige de cristal rayonnant, dont l’éclat sacré nimbe son porteur d’une aura éclatante, lui conférant une vitesse surnaturelle et des réflexes fulgurants.</i>",
+      "description": "<i>Fragment d’une plaque sombre et nervurée, traversée d’un éclat mystique qui, lorsqu’on la tient en main, allège le corps au point de permettre une brève lévitation.</i>",
       "tags": [
         "Consommable",
         "Magie"
       ],
-      "effet": "<strong>Effet:</strong> Remplace votre prochaine action principale par le sort d'enchanteur <span class=\"spell-link\" data-spell=\"Accélération\" data-category=\"Sorts d'Enchanteur\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Accélération</span>. <br><i>Le mana et les statistiques du héros sont utilisés.</i>\n    <br><br><strong>Charges :</strong> 3",
+      "effet": "<strong>Effet:</strong> Remplace votre prochaine action principale par le sort d'enchanteur <span class=\"spell-link\" data-spell=\"Lévitation\" data-category=\"Sorts d'Enchanteur\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Lévitation</span>. <br><i>Le mana et les statistiques du héros sont utilisés.</i>\n    <br><br><strong>Charges :</strong> 3",
       "prix": "🔷 <strong>Prix:</strong> 30",
       "poids": ""
     },
@@ -670,7 +670,7 @@
         "Catalyseur",
         "Main secondaire"
       ],
-      "effet": "<strong>Effet:</strong> Après avoir effectué un coup critique avec un sort, régénère 2 points de vie.",
+      "effet": "<strong>Effet:</strong> Après avoir effectué un coup critique avec un sort, régénère 3 points de vie.",
       "prix": "🔷 <strong>Prix:</strong> 60",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },

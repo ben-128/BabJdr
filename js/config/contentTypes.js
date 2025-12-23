@@ -464,7 +464,7 @@
     'Terre': { color: '#8b4513', weight: 'bold' },
     'Air': { color: '#22c55e', weight: 'bold' },
     'Lumière': { color: '#ffd700', weight: 'bold' },
-    'Nuit': { color: '#a0a0b0', weight: 'bold', background: 'rgba(60, 60, 80, 0.5)', padding: '2px 4px', borderRadius: '3px' },
+    'Nuit': { color: '#1a1a1a', weight: 'bold', background: 'rgba(180, 180, 200, 0.6)', padding: '2px 4px', borderRadius: '3px' },
     'Divin': { color: '#f5f5f5', weight: 'bold', background: 'rgba(100, 100, 100, 0.3)', padding: '2px 4px', borderRadius: '3px' },
     'Maléfique': { color: '#8b5cf6', weight: 'bold' }
   };
