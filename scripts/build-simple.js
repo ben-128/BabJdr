@@ -375,8 +375,8 @@ const canUseServiceWorker = 'serviceWorker' in navigator &&
    window.location.hostname === '127.0.0.1');
 
 if (canUseServiceWorker) {
-  // Service Worker Registration - use external file only
-  const swUrl = '/sw.js';
+  // Service Worker Registration - use relative path for GitHub Pages compatibility
+  const swUrl = '../sw.js';
 
   // Progressive Web App - Service Worker Registration
   window.addEventListener('load', () => {
