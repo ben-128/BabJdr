@@ -39057,6 +39057,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Also auto-show after 2 seconds
 setTimeout(window.showPWADiag, 2000);
+
+// IMMEDIATE ALERT - cannot be hidden
+alert('PWA Debug v5\nHTTPS: ' + (location.protocol==='https:') + '\nSW support: ' + ('serviceWorker' in navigator) + '\nManifest: ' + !!document.querySelector('link[rel=manifest]'));
 </script>
 </body>
 </html>
