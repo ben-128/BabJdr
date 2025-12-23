@@ -250,7 +250,7 @@ select {
     inset 0 2px 4px rgba(0, 0, 0, 0.2),
     0 2px 8px rgba(0, 0, 0, 0.15);
   transition: all 0.3s ease;
-  font-family: "Source Serif Pro", serif;
+  font-family: "Exo 2", serif;
   color: var(--ink-dark);
 }
 

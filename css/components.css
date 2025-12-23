@@ -4,7 +4,7 @@
 
 /* ─────────────────────────── Typography Components ─────────────────────────── */
 .spell-title {
-  font-family: "Cinzel", serif !important;
+  font-family: "Oxanium", serif !important;
   font-size: clamp(1.2rem, 2.5vw, 1.4rem) !important;
   background: linear-gradient(135deg, var(--ui-border-light, #c0c0d0), var(--ui-border, #a0a0b0), var(--ui-border-light, #c0c0d0)) !important;
   -webkit-background-clip: text !important;
@@ -148,7 +148,7 @@ img {
 }
 
 .loading-content h2 {
-  font-family: "Cinzel", serif;
+  font-family: "Oxanium", serif;
   font-size: 2rem;
   margin: 1rem 0;
   color: var(--accent-ink, var(--paper-ink));
@@ -207,7 +207,7 @@ img {
 
 .page-header h1 {
   color: var(--accent-ink, var(--paper-ink));
-  font-family: "Cinzel", serif;
+  font-family: "Oxanium", serif;
   font-size: 2.5rem;
   margin-bottom: 1rem;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
@@ -315,7 +315,7 @@ img {
 
 .collection-card h3 {
   color: var(--accent-ink, var(--paper-ink));
-  font-family: "Cinzel", serif;
+  font-family: "Oxanium", serif;
   margin: 0.5rem 0;
   font-size: 1.3rem;
 }
@@ -339,7 +339,7 @@ img {
 
 .collection-error h2 {
   color: #dc2626;
-  font-family: "Cinzel", serif;
+  font-family: "Oxanium", serif;
   margin: 0 0 1rem 0;
   font-size: 1.5rem;
 }
@@ -488,7 +488,7 @@ body.dev-off .new-collection-card {
 
 .collection-header h2 {
   color: var(--accent-ink, var(--paper-ink));
-  font-family: "Cinzel", serif;
+  font-family: "Oxanium", serif;
   margin: 0 0 0.5rem 0;
   font-size: 1.8rem;
 }
@@ -517,7 +517,7 @@ body.dev-off .new-collection-card {
 
 .tag-filters h3 {
   color: var(--text);
-  font-family: "Cinzel", serif;
+  font-family: "Oxanium", serif;
   margin-bottom: 1rem;
   font-size: 1.2rem;
 }
@@ -809,7 +809,7 @@ body.dev-off .new-collection-card {
   border: 2px solid var(--rule);
   border-top: none;
   border-radius: 0 0 8px 8px;
-  font-family: "Cinzel", serif;
+  font-family: "Oxanium", serif;
 }
 
 .filter-chips {
@@ -1126,7 +1126,7 @@ body.dev-off .new-collection-card {
 
 .collection-card h3 {
   color: var(--paper-muted);
-  font-family: 'Cinzel', serif;
+  font-family: 'Oxanium', serif;
   font-size: 1.3rem;
   margin: 0.5rem 0 1rem 0;
   text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
@@ -1185,7 +1185,7 @@ body.dev-off .new-collection-card {
 
 .collection-header h2 {
   color: var(--paper-muted);
-  font-family: 'Cinzel', serif;
+  font-family: 'Oxanium', serif;
   margin: 0;
   display: flex;
   align-items: center;
@@ -1970,7 +1970,7 @@ article[data-page="enchanteur"] .illus img:hover,
   text-align: center !important;
   margin: 0 0 1.5rem 0 !important;
   color: var(--accent-ink) !important;
-  font-family: 'Cinzel', serif !important;
+  font-family: 'Oxanium', serif !important;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.2) !important;
   letter-spacing: 0.8px !important;
 }
@@ -2158,7 +2158,7 @@ article[data-page="enchanteur"] .illus img:hover,
   font-size: 1.1em;
   color: var(--accent-ink);
   margin-bottom: 0.25rem;
-  font-family: 'Cinzel', serif;
+  font-family: 'Oxanium', serif;
 }
 
 .section-description {
@@ -2494,7 +2494,7 @@ article[data-page="enchanteur"] .illus img:hover,
   border: 2px solid var(--ui-border) !important;
   border-radius: 8px;
   padding: 0.5rem 1rem;
-  font-family: "Cinzel", serif;
+  font-family: "Oxanium", serif;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -2628,7 +2628,7 @@ article[data-page="enchanteur"] .illus img:hover,
   box-shadow: 0 8px 24px rgba(0,0,0,0.3);
   backdrop-filter: blur(10px);
   min-width: 280px;
-  font-family: "Cinzel", serif;
+  font-family: "Oxanium", serif;
 }
 
 .audio-panel {
@@ -2815,7 +2815,7 @@ article[data-page="enchanteur"] .illus img:hover,
   padding: 1rem 2rem !important;
   border-radius: 8px !important;
   cursor: pointer !important;
-  font-family: "Cinzel", serif !important;
+  font-family: "Oxanium", serif !important;
   font-size: 1rem !important;
   font-weight: 600 !important;
   text-transform: uppercase !important;
@@ -2849,7 +2849,7 @@ article[data-page="enchanteur"] .illus img:hover,
   padding: 1rem 1.5rem !important;
   border-radius: 6px !important;
   cursor: pointer !important;
-  font-family: "Cinzel", serif !important;
+  font-family: "Oxanium", serif !important;
   font-size: 0.95rem !important;
   font-weight: 600 !important;
   transition: none !important;
