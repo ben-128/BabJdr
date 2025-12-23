@@ -60,16 +60,10 @@ article > .card:first-of-type {
   border-color: rgba(192, 192, 208, 0.4);
 }
 
-/* Enhanced hover state */
+/* Enhanced hover state - sans assombrissement */
 .card:hover,
 .card-base:hover,
 .panel:hover {
-  transform: translateY(-3px);
-  box-shadow:
-    0 15px 50px rgba(0, 0, 0, 0.55),
-    0 6px 18px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.12),
-    0 0 15px var(--accent-glow);
   border-color: var(--ui-border-light, #e0e0f0);
 }
 
@@ -421,6 +415,27 @@ h3::after {
   font-size: 12px;
   margin-top: 8px;
   opacity: 0.7;
+  letter-spacing: 1px;
+}
+
+/* Séparateur entre description et prérequis dans les dons */
+.don-prerequis {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--ui-border, #c0c0d0);
+  position: relative;
+}
+
+.don-prerequis::before {
+  content: '─────◇─────';
+  position: absolute;
+  top: -0.6em;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--ui-blue, #2a2a50);
+  padding: 0 0.5rem;
+  color: var(--ui-border, #c0c0d0);
+  font-size: 12px;
   letter-spacing: 1px;
 }
 

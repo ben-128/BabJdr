@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-12-23T14:34:16.169Z by JdrBab Build System -->
+<!-- Generated on 2025-12-23T14:38:16.601Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -7265,16 +7265,10 @@ article > .card:first-of-type {
   border-color: rgba(192, 192, 208, 0.4);
 }
 
-/* Enhanced hover state */
+/* Enhanced hover state - sans assombrissement */
 .card:hover,
 .card-base:hover,
 .panel:hover {
-  transform: translateY(-3px);
-  box-shadow:
-    0 15px 50px rgba(0, 0, 0, 0.55),
-    0 6px 18px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.12),
-    0 0 15px var(--accent-glow);
   border-color: var(--ui-border-light, #e0e0f0);
 }
 
@@ -7629,6 +7623,27 @@ h3::after {
   letter-spacing: 1px;
 }
 
+/* Séparateur entre description et prérequis dans les dons */
+.don-prerequis {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--ui-border, #c0c0d0);
+  position: relative;
+}
+
+.don-prerequis::before {
+  content: '─────◇─────';
+  position: absolute;
+  top: -0.6em;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--ui-blue, #2a2a50);
+  padding: 0 0.5rem;
+  color: var(--ui-border, #c0c0d0);
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
 /* Fix popup Cartes du Destin - texte blanc sur fond blanc */
 .destiny-card,
 .carte-destin,
@@ -7781,7 +7796,7 @@ h3::after {
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 12",
         "resistance": "<strong>Sans effet si:</strong> -",
-        "effetNormal": "<strong>Effet:</strong>  Inflige (13 + Puiss. Sorts) dégâts de <span style=\"color: #1a1a1a; font-weight: bold;\">Nuit</span> aux créatures dans un cone devant le lanceur (largeur 3m puis 6m puis 9m, distance 9m) et les repousse chacune de 3m.",
+        "effetNormal": "<strong>Effet:</strong>  Inflige (13 + Puiss. Sorts) dégâts de <span style=\"color: #1a1a1a; font-weight: bold; background: rgba(180, 180, 200, 0.6); padding: 2px 4px; border-radius: 3px;\">Nuit</span> aux créatures dans un cone devant le lanceur (largeur 3m puis 6m puis 9m, distance 9m) et les repousse chacune de 3m.",
         "effetCritique": "<strong>Coup Critique: </strong> Les dégâts passent à (20 + Puiss. Sorts) et les cibles sont repoussées de 6m."
       },
       {
@@ -8092,7 +8107,7 @@ h3::after {
         "coutMana": "🔵 <strong>Coût mana:</strong> 8",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
-        "resistance": "<strong>Sans effet si:</strong> <br>- Résistance altérations &gt;= Intelligence du lanceur<br>- Element <span style=\"color: #0f172a; font-weight: bold;\">Nuit</span>",
+        "resistance": "<strong>Sans effet si:</strong> <br>- Résistance altérations &gt;= Intelligence du lanceur<br>- Element <span style=\"color: #1a1a1a; font-weight: bold; background: rgba(180, 180, 200, 0.6); padding: 2px 4px; border-radius: 3px;\">Nuit</span>",
         "effetNormal": "<strong>Effet:</strong> La cible passe dans l'état <span class=\"etat-link\" data-etat=\"Endormi/assommé/Effrayé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Endormi</span> pendant ses 2 prochains tours.",
         "effetCritique": "<strong>Coup Critique : </strong> L'effet dure 3 tours."
       },
@@ -8117,7 +8132,7 @@ h3::after {
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 14",
         "resistance": "<strong>Sans effet si:</strong> -",
-        "effetNormal": "<strong>Effet:</strong> Le lanceur choisi un élément au choix entre <span style=\"color: #ff6b35; font-weight: bold;\">Feu</span>, <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>, et <span style=\"color: #1a1a1a; font-weight: bold;\">Nuit</span>. \n<br>La cible voit son arme imprégnée de cet élément, qui infligera (4 + Puiss. Sorts) points de dégâts de cet élément à chaque coup. <br>Dure jusqu'à la fin du combat.<br> Non cumulable.",
+        "effetNormal": "<strong>Effet:</strong> Le lanceur choisi un élément au choix entre <span style=\"color: #ff6b35; font-weight: bold;\">Feu</span>, <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>, et <span style=\"color: #1a1a1a; font-weight: bold; background: rgba(180, 180, 200, 0.6); padding: 2px 4px; border-radius: 3px;\">Nuit</span>. \n<br>La cible voit son arme imprégnée de cet élément, qui infligera (4 + Puiss. Sorts) points de dégâts de cet élément à chaque coup. <br>Dure jusqu'à la fin du combat.<br> Non cumulable.",
         "effetCritique": "<strong>Coup Critique:&nbsp;</strong>&nbsp;Rend la moitié du coût en mana."
       },
       {
@@ -8189,7 +8204,7 @@ h3::after {
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 14",
         "resistance": "<strong>Sans effet si:</strong> -",
-        "effetNormal": "<strong>Effet:</strong> Le lanceur choisi un élément au choix entre <span style=\"color: #ff6b35; font-weight: bold;\">Feu</span>, <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>, et <span style=\"color: #1a1a1a; font-weight: bold;\">Nuit</span>. \n<br>La cible voit son armure de cet élément, augmentant l'armure élémentaire de cet élément de (5 + Puiss. Sorts). <br>Dure jusqu'à la fin du combat.<br> Non cumulable.",
+        "effetNormal": "<strong>Effet:</strong> Le lanceur choisi un élément au choix entre <span style=\"color: #ff6b35; font-weight: bold;\">Feu</span>, <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>, et <span style=\"color: #1a1a1a; font-weight: bold; background: rgba(180, 180, 200, 0.6); padding: 2px 4px; border-radius: 3px;\">Nuit</span>. \n<br>La cible voit son armure de cet élément, augmentant l'armure élémentaire de cet élément de (5 + Puiss. Sorts). <br>Dure jusqu'à la fin du combat.<br> Non cumulable.",
         "effetCritique": "<strong>Coup Critique:&nbsp;</strong>&nbsp;Rend la moitié du coût en mana."
       },
       {
@@ -8235,7 +8250,7 @@ h3::after {
         "nom": "Nain des montagnes",
         "base": "<div class=\"chips\"><span class=\"chip\"><img src=\"https://i.ibb.co/23cGYFvZ/stat-Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\" data-events-attached=\"true\"> Force: <strong>5</strong></span><span class=\"chip\"><img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\" data-events-attached=\"true\"> Agilité: <strong>1</strong></span><span class=\"chip\"><img src=\"https://i.ibb.co/67ZW01Q7/stat-Endurance.png\" alt=\"Endurance\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\" data-events-attached=\"true\"> Endurance: <strong>10</strong></span><span class=\"chip\"><img src=\"https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\" data-events-attached=\"true\"> Intelligence: <strong>1</strong></span><span class=\"chip\"><img src=\"https://i.ibb.co/B2BCGP6T/stat-Volont.png\" alt=\"Volonté\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\" data-events-attached=\"true\"> Volonté: <strong>6</strong></span><span class=\"chip\"><img src=\"https://i.ibb.co/HfthhzSF/stat-Chance.png\" alt=\"Chance\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\" data-events-attached=\"true\"> Chance: <strong>1</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +2 Force <img src=\"https://i.ibb.co/23cGYFvZ/stat-Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\" data-events-attached=\"true\"> | +3 Endurance <img src=\"https://i.ibb.co/67ZW01Q7/stat-Endurance.png\" alt=\"Endurance\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\" data-events-attached=\"true\"> |   <strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Brise rocher : </em> Gagne 1 de compétence sur les tests de compétence Hardiesse pour une destruction d'objet.</li><li><em>Volonté inflexible :</em> Les nains possèdent une volonté inflexible qui les rendent résistants aux sortilèges (Statistique Volonté élevée).</li>\n<li><em>Protection de la montagne :</em> Gagne 5 d'armure élémentaire de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> et de <span style=\"color: #1a1a1a; font-weight: bold;\">Nuit</span>.</li></ul>",
+        "capacites": "<ul><li><em>Brise rocher : </em> Gagne 1 de compétence sur les tests de compétence Hardiesse pour une destruction d'objet.</li><li><em>Volonté inflexible :</em> Les nains possèdent une volonté inflexible qui les rendent résistants aux sortilèges (Statistique Volonté élevée).</li>\n<li><em>Protection de la montagne :</em> Gagne 5 d'armure élémentaire de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> et de <span style=\"color: #1a1a1a; font-weight: bold; background: rgba(180, 180, 200, 0.6); padding: 2px 4px; border-radius: 3px;\">Nuit</span>.</li></ul>",
         "description": "<i>Race robuste et inflexible, dotée d’une endurance exceptionnelle. Forgés par la roche et les sommets, ils résistent aux épreuves et possèdent une force colossale capable de briser murs, armures et créatures cuirassées.</i>"
       },
       {
@@ -8760,7 +8775,7 @@ h3::after {
       },
       {
         "nom": "Résistance élémentaire 2",
-        "description": "Le héros gagne 5 d'armure élémentaire de <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span>, <span style=\"color: #0f172a; font-weight: bold;\">Nuit</span>, <span style=\"color: #d0d0d0; font-weight: bold; background: rgba(0, 0, 0, 0.4); padding: 2px 4px; border-radius: 3px;\">Divin</span>, <span style=\"color: #a855f7; font-weight: bold;\">Maléfique</span>.",
+        "description": "Le héros gagne 5 d'armure élémentaire de <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span>, <span style=\"color: #1a1a1a; font-weight: bold; background: rgba(180, 180, 200, 0.6); padding: 2px 4px; border-radius: 3px;\">Nuit</span>, <span style=\"color: #d0d0d0; font-weight: bold; background: rgba(0, 0, 0, 0.4); padding: 2px 4px; border-radius: 3px;\">Divin</span>, <span style=\"color: #a855f7; font-weight: bold;\">Maléfique</span>.",
         "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
@@ -8844,7 +8859,7 @@ h3::after {
       },
       {
         "nom": "La nuit tous les chats sont gris",
-        "description": "Les effets des sorts et passifs appliqués aux créatures <span style=\"color: #8b5cf6; font-weight: bold;\">Maléfique</span> s'appliquent aussi aux créatures de <span style=\"color: #1a1a1a; font-weight: bold;\">Nuit</span>.",
+        "description": "Les effets des sorts et passifs appliqués aux créatures <span style=\"color: #8b5cf6; font-weight: bold;\">Maléfique</span> s'appliquent aussi aux créatures de <span style=\"color: #1a1a1a; font-weight: bold; background: rgba(180, 180, 200, 0.6); padding: 2px 4px; border-radius: 3px;\">Nuit</span>.",
         "prerequis": "<strong> Prérequis :</strong>-",
         "cout": "1 point de don"
       },
@@ -11819,7 +11834,7 @@ h3::after {
       "type": "card",
       "id": "element-pairs",
       "title": "Paires opposées",
-      "content": "<div class=\"element-pairs\"><div class=\"pair\"><img src=\"https://i.ibb.co/VWfKvNCL/element-Feu.png\" alt=\"Feu\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> <span style=\"color: #ff6b35; font-weight: bold;\">Feu</span> ⟷ <img src=\"https://i.ibb.co/bMVKwNQP/element-Eau.png\" alt=\"Eau\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> <span style=\"color: #4682b4; font-weight: bold;\">Eau</span></div><div class=\"pair\"><img src=\"https://i.ibb.co/gLxnsvfg/element-Terre.png\" alt=\"Terre\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> ⟷ <img src=\"https://i.ibb.co/W484kM90/element-Air.png\" alt=\"Air\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> <span style=\"color: #22c55e; font-weight: bold;\">Air</span></div><div class=\"pair\"><img src=\"https://i.ibb.co/pjmcYV72/element-Lumi-re.png\" alt=\"Lumière\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span> ⟷ <img src=\"https://i.ibb.co/b5qK7czM/element-Nuit.png\" alt=\"Nuit\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> <span style=\"color: #1a1a1a; font-weight: bold;\">Nuit</span></div><div class=\"pair\"><img src=\"https://i.ibb.co/rKYgZ4Yp/element-Divin.png\" alt=\"Divin\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> <span style=\"color: #f5f5f5; font-weight: bold; background: rgba(100, 100, 100, 0.3); padding: 2px 4px; border-radius: 3px;\">Divin</span> ⟷ <img src=\"https://i.ibb.co/SDD5KX34/element-Mal-fique.png\" alt=\"Maléfique\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> <span style=\"color: #8b5cf6; font-weight: bold;\">Maléfique</span></div></div>"
+      "content": "<div class=\"element-pairs\"><div class=\"pair\"><img src=\"https://i.ibb.co/VWfKvNCL/element-Feu.png\" alt=\"Feu\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> <span style=\"color: #ff6b35; font-weight: bold;\">Feu</span> ⟷ <img src=\"https://i.ibb.co/bMVKwNQP/element-Eau.png\" alt=\"Eau\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> <span style=\"color: #4682b4; font-weight: bold;\">Eau</span></div><div class=\"pair\"><img src=\"https://i.ibb.co/gLxnsvfg/element-Terre.png\" alt=\"Terre\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> ⟷ <img src=\"https://i.ibb.co/W484kM90/element-Air.png\" alt=\"Air\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> <span style=\"color: #22c55e; font-weight: bold;\">Air</span></div><div class=\"pair\"><img src=\"https://i.ibb.co/pjmcYV72/element-Lumi-re.png\" alt=\"Lumière\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span> ⟷ <img src=\"https://i.ibb.co/b5qK7czM/element-Nuit.png\" alt=\"Nuit\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> <span style=\"color: #1a1a1a; font-weight: bold; background: rgba(180, 180, 200, 0.6); padding: 2px 4px; border-radius: 3px;\">Nuit</span></div><div class=\"pair\"><img src=\"https://i.ibb.co/rKYgZ4Yp/element-Divin.png\" alt=\"Divin\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> <span style=\"color: #f5f5f5; font-weight: bold; background: rgba(100, 100, 100, 0.3); padding: 2px 4px; border-radius: 3px;\">Divin</span> ⟷ <img src=\"https://i.ibb.co/SDD5KX34/element-Mal-fique.png\" alt=\"Maléfique\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> <span style=\"color: #8b5cf6; font-weight: bold;\">Maléfique</span></div></div>"
     },
     {
       "type": "card",
@@ -13587,7 +13602,7 @@ h3::after {
     'Terre': { color: '#8b4513', weight: 'bold' },
     'Air': { color: '#22c55e', weight: 'bold' },
     'Lumière': { color: '#ffd700', weight: 'bold' },
-    'Nuit': { color: '#a0a0b0', weight: 'bold', background: 'rgba(60, 60, 80, 0.5)', padding: '2px 4px', borderRadius: '3px' },
+    'Nuit': { color: '#1a1a1a', weight: 'bold', background: 'rgba(180, 180, 200, 0.6)', padding: '2px 4px', borderRadius: '3px' },
     'Divin': { color: '#f5f5f5', weight: 'bold', background: 'rgba(100, 100, 100, 0.3)', padding: '2px 4px', borderRadius: '3px' },
     'Maléfique': { color: '#8b5cf6', weight: 'bold' }
   };
@@ -19510,7 +19525,7 @@ h3::after {
     'Terre': { color: '#8b4513', weight: 'bold' },
     'Air': { color: '#22c55e', weight: 'bold' },
     'Lumière': { color: '#ffd700', weight: 'bold' },
-    'Nuit': { color: '#a0a0b0', weight: 'bold', background: 'rgba(60, 60, 80, 0.5)', padding: '2px 4px', borderRadius: '3px' },
+    'Nuit': { color: '#1a1a1a', weight: 'bold', background: 'rgba(180, 180, 200, 0.6)', padding: '2px 4px', borderRadius: '3px' },
     'Divin': { color: '#f5f5f5', weight: 'bold', background: 'rgba(100, 100, 100, 0.3)', padding: '2px 4px', borderRadius: '3px' },
     'Maléfique': { color: '#8b5cf6', weight: 'bold' }
   };
@@ -34309,8 +34324,19 @@ h3::after {
           // Get element configuration
           const elementConfig = window.ElementColors[elementName];
           if (elementConfig) {
-            const styleString = `color: ${elementConfig.color}; font-weight: ${elementConfig.weight || 'bold'};`;
-            
+            let styleString = `color: ${elementConfig.color}; font-weight: ${elementConfig.weight || 'bold'};`;
+
+            // Add background styles if defined (for Nuit, Divin, etc.)
+            if (elementConfig.background) {
+              styleString += ` background: ${elementConfig.background};`;
+            }
+            if (elementConfig.padding) {
+              styleString += ` padding: ${elementConfig.padding};`;
+            }
+            if (elementConfig.borderRadius) {
+              styleString += ` border-radius: ${elementConfig.borderRadius};`;
+            }
+
             const html = `<span style="${styleString}">${elementName}</span>`;
             UIUtilities.copyToClipboard(html);
           } else {
