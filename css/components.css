@@ -647,8 +647,7 @@ body.dev-off .new-collection-card {
   padding: 20px;
   position: relative;
   overflow: hidden;
-  transition: all var(--transition-normal);
-  backdrop-filter: blur(1px);
+  transition: border-color 0.2s ease;
 }
 
 .card::before,
