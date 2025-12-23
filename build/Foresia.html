@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-12-23T14:38:16.601Z by JdrBab Build System -->
+<!-- Generated on 2025-12-23T14:41:31.243Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2230,12 +2230,7 @@ body.dev-off .new-collection-card {
 
 .card:hover,
 .card-base:hover {
-  transform: translate3d(0, -3px, 0) scale(1.01); /* Use 3D transform for better mobile performance */
-  box-shadow:
-    0 16px 48px rgba(0,0,0,.3),
-    0 6px 16px rgba(0,0,0,.2),
-    inset 0 1px 0 rgba(255,255,255,.15),
-    inset 0 -1px 0 rgba(0,0,0,.1);
+  border-color: var(--ui-border-light, #e0e0f0);
 }
 
 /* Improve mobile performance with will-change on interactive elements */
@@ -2480,8 +2475,6 @@ body.dev-off .new-collection-card {
 }
 
 .card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--card-shadow), 0 0 12px var(--ui-glow, rgba(0,0,0,.2));
   border-color: var(--ui-border-light, var(--accent));
 }
 .card ul, ul{padding-left:35px !important;margin-left:0 !important}
@@ -7628,20 +7621,6 @@ h3::after {
   margin-top: 1rem;
   padding-top: 1rem;
   border-top: 1px solid var(--ui-border, #c0c0d0);
-  position: relative;
-}
-
-.don-prerequis::before {
-  content: '─────◇─────';
-  position: absolute;
-  top: -0.6em;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--ui-blue, #2a2a50);
-  padding: 0 0.5rem;
-  color: var(--ui-border, #c0c0d0);
-  font-size: 12px;
-  letter-spacing: 1px;
 }
 
 /* Fix popup Cartes du Destin - texte blanc sur fond blanc */

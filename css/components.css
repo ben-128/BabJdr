@@ -680,12 +680,7 @@ body.dev-off .new-collection-card {
 
 .card:hover,
 .card-base:hover {
-  transform: translate3d(0, -3px, 0) scale(1.01); /* Use 3D transform for better mobile performance */
-  box-shadow:
-    0 16px 48px rgba(0,0,0,.3),
-    0 6px 16px rgba(0,0,0,.2),
-    inset 0 1px 0 rgba(255,255,255,.15),
-    inset 0 -1px 0 rgba(0,0,0,.1);
+  border-color: var(--ui-border-light, #e0e0f0);
 }
 
 /* Improve mobile performance with will-change on interactive elements */
@@ -930,8 +925,6 @@ body.dev-off .new-collection-card {
 }
 
 .card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--card-shadow), 0 0 12px var(--ui-glow, rgba(0,0,0,.2));
   border-color: var(--ui-border-light, var(--accent));
 }
 .card ul, ul{padding-left:35px !important;margin-left:0 !important}
@@ -2954,3 +2947,18 @@ article[data-page="enchanteur"] .illus img:hover,
   border-color: var(--ui-border) !important;
 }
 
+/* ─────────────────────────── Element Pairs Section ─────────────────────────── */
+.element-pairs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.element-pairs .pair {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 1.2rem;
+}
