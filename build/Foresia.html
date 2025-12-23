@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-12-23T13:22:12.874Z by JdrBab Build System -->
+<!-- Generated on 2025-12-23T13:23:51.886Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -4790,24 +4790,13 @@ article {
   animation: slideInFromLeft var(--duration-slow) var(--ease-out-quart);
 }
 
-/* Navigation links with staggered animation */
+/* Navigation links - animations disabled to prevent stutter */
 .toc a {
-  opacity: 0;
-  animation: fadeInUp var(--duration-normal) var(--ease-out-quart) forwards;
   transition:
     transform var(--duration-fast) var(--ease-out-quart),
     background-color var(--duration-fast) ease,
     border-color var(--duration-fast) ease;
 }
-
-.toc a:nth-child(1) { animation-delay: calc(var(--stagger-1) * 1); }
-.toc a:nth-child(2) { animation-delay: calc(var(--stagger-1) * 2); }
-.toc a:nth-child(3) { animation-delay: calc(var(--stagger-1) * 3); }
-.toc a:nth-child(4) { animation-delay: calc(var(--stagger-1) * 4); }
-.toc a:nth-child(5) { animation-delay: calc(var(--stagger-1) * 5); }
-.toc a:nth-child(6) { animation-delay: calc(var(--stagger-1) * 6); }
-.toc a:nth-child(7) { animation-delay: calc(var(--stagger-1) * 7); }
-.toc a:nth-child(8) { animation-delay: calc(var(--stagger-1) * 8); }
 
 .toc a:hover {
   transform: translateX(12px) scale(1.05);
@@ -4914,20 +4903,8 @@ button:active, .btn:active {
 
 /* ======================= GRID & LIST ANIMATIONS =========================== */
 
-/* Staggered grid animations */
-@media (prefers-reduced-motion: no-preference) {
-  .grid .card:nth-child(1) { animation: fadeInUp var(--duration-normal) var(--ease-out-quart) calc(var(--stagger-2) * 1) both; }
-  .grid .card:nth-child(2) { animation: fadeInUp var(--duration-normal) var(--ease-out-quart) calc(var(--stagger-2) * 2) both; }
-  .grid .card:nth-child(3) { animation: fadeInUp var(--duration-normal) var(--ease-out-quart) calc(var(--stagger-2) * 3) both; }
-  .grid .card:nth-child(4) { animation: fadeInUp var(--duration-normal) var(--ease-out-quart) calc(var(--stagger-2) * 4) both; }
-  .grid .card:nth-child(5) { animation: fadeInUp var(--duration-normal) var(--ease-out-quart) calc(var(--stagger-2) * 5) both; }
-  .grid .card:nth-child(6) { animation: fadeInUp var(--duration-normal) var(--ease-out-quart) calc(var(--stagger-2) * 6) both; }
-
-  /* Continue pattern for more cards */
-  .grid .card:nth-child(n+7) {
-    animation: fadeInUp var(--duration-normal) var(--ease-out-quart) calc(var(--stagger-1) * 7) both;
-  }
-}
+/* Staggered grid animations - DISABLED to prevent double-appear stutter */
+/* Cards now appear instantly without fade animation */
 
 /* ======================= FORM & INPUT ANIMATIONS ========================== */
 
@@ -5029,24 +5006,7 @@ input:focus, textarea:focus, select:focus {
 }
 
 /* Tables des trésors container animations */
-#tables-tresors-container .card {
-  animation: treasureReveal var(--duration-slow) var(--ease-out-expo) forwards;
-  transform: translateY(40px) scale(0.9);
-  opacity: 0;
-}
-
-#tables-tresors-container .card:nth-child(1) { animation-delay: calc(var(--stagger-2) * 1); }
-#tables-tresors-container .card:nth-child(2) { animation-delay: calc(var(--stagger-2) * 2); }
-#tables-tresors-container .card:nth-child(3) { animation-delay: calc(var(--stagger-2) * 3); }
-#tables-tresors-container .card:nth-child(4) { animation-delay: calc(var(--stagger-2) * 4); }
-#tables-tresors-container .card:nth-child(5) { animation-delay: calc(var(--stagger-2) * 5); }
-
-@keyframes treasureReveal {
-  to {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-  }
-}
+/* Tables tresors animations - DISABLED to prevent stutter */
 
 /* Element selector animation */
 .spell-element-selector select, .monster-element-selector select {
@@ -38898,43 +38858,50 @@ if (window.MANIFEST_DATA) {
       }
     ];
     
-    // Remove problematic elements for file://
+    // Remove problematic elements for file:// 
     manifest.shortcuts = [];
     delete manifest.screenshots;
-
-    // Inject blob manifest for file:// protocol
-    const manifestBlob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
-    const manifestUrl = URL.createObjectURL(manifestBlob);
-    const manifestLink = document.createElement('link');
-    manifestLink.rel = 'manifest';
-    manifestLink.href = manifestUrl;
-    document.head.appendChild(manifestLink);
-    console.log('📱 PWA manifest injected for file:// protocol');
+    console.log('📱 PWA manifest adapted for file:// protocol');
   } else {
-    // For HTTPS - check if static manifest link exists
-    const existingManifest = document.querySelector('link[rel="manifest"]');
-    if (existingManifest) {
-      console.log('📱 Using static manifest.json file for PWA');
-      // Don't inject blob manifest, use the static file
-    } else {
-      // Fallback: convert relative icon paths to absolute URLs for blob
-      const baseUrl = window.location.href.replace(/\/[^\/]*$/, '/');
-      manifest.icons = manifest.icons.map(icon => ({
-        ...icon,
-        src: new URL(icon.src, baseUrl).href
-      }));
-      manifest.start_url = window.location.href;
-      manifest.scope = baseUrl;
+    // For HTTPS - convert relative icon paths to absolute URLs
+    // Blob URLs have no base path, so relative paths don't resolve
+    const baseUrl = window.location.href.replace(//[^/]*$/, '/'); // Get directory URL
 
-      const manifestBlob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
-      const manifestUrl = URL.createObjectURL(manifestBlob);
-      const manifestLink = document.createElement('link');
-      manifestLink.rel = 'manifest';
-      manifestLink.href = manifestUrl;
-      document.head.appendChild(manifestLink);
-      console.log('📱 PWA manifest blob injected (fallback)');
+    // Convert icon paths to absolute URLs
+    manifest.icons = manifest.icons.map(icon => ({
+      ...icon,
+      src: new URL(icon.src, baseUrl).href
+    }));
+
+    // Also fix shortcuts icons if present
+    if (manifest.shortcuts) {
+      manifest.shortcuts = manifest.shortcuts.map(shortcut => ({
+        ...shortcut,
+        icons: shortcut.icons ? shortcut.icons.map(icon => ({
+          ...icon,
+          src: new URL(icon.src, baseUrl).href
+        })) : []
+      }));
     }
+
+    // Fix start_url and scope for GitHub Pages subpath
+    manifest.start_url = window.location.href;
+    manifest.scope = baseUrl;
+
+    console.log('📱 PWA manifest with absolute URLs for HTTPS:', manifest.icons[0]?.src);
   }
+
+  // Create manifest blob and URL
+  const manifestBlob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
+  const manifestUrl = URL.createObjectURL(manifestBlob);
+  
+  // Inject manifest link dynamically
+  const manifestLink = document.createElement('link');
+  manifestLink.rel = 'manifest';
+  manifestLink.href = manifestUrl;
+  document.head.appendChild(manifestLink);
+  
+  console.log('📱 PWA manifest injected');
 }
 
 // Service Worker only works on HTTPS or localhost
@@ -39010,6 +38977,80 @@ if (!canUseServiceWorker && window.MANIFEST_DATA) {
   console.log('💡 Limited PWA support without Service Worker');
   console.log('📱 Try: Add to Home Screen (mobile) or Install App (desktop)');
 }
+
+// ========== PWA DIAGNOSTIC (temporary) ==========
+window.PWA_DIAG = {
+  https: window.location.protocol === 'https:',
+  manifestLink: !!document.querySelector('link[rel="manifest"]'),
+  manifestUrl: document.querySelector('link[rel="manifest"]')?.href || 'none',
+  swSupported: 'serviceWorker' in navigator,
+  swRegistered: false,
+  swError: null,
+  installPromptFired: false,
+  iconsStatus: {}
+};
+
+// Check Service Worker
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.getRegistration().then(reg => {
+    window.PWA_DIAG.swRegistered = !!reg;
+    window.PWA_DIAG.swScope = reg?.scope || 'none';
+  });
+}
+
+// Check icons accessibility
+const iconUrls = [
+  '../assets/pwa/icon-192x192.png',
+  '../assets/pwa/icon-512x512.png'
+];
+iconUrls.forEach(url => {
+  const fullUrl = new URL(url, window.location.href).href;
+  fetch(fullUrl, { method: 'HEAD' })
+    .then(r => { window.PWA_DIAG.iconsStatus[url] = r.ok ? '✅ OK' : '❌ ' + r.status; })
+    .catch(e => { window.PWA_DIAG.iconsStatus[url] = '❌ ' + e.message; });
+});
+
+// Track install prompt
+window.addEventListener('beforeinstallprompt', () => {
+  window.PWA_DIAG.installPromptFired = true;
+});
+
+// Show diagnostic function
+window.showPWADiag = function() {
+  setTimeout(() => {
+    const d = window.PWA_DIAG;
+    const html = `
+      <div id="pwa-diag" style="position:fixed;top:10px;left:10px;right:10px;background:#1a1a1a;color:#fff;padding:15px;border-radius:10px;z-index:99999;font-family:monospace;font-size:12px;max-height:80vh;overflow:auto;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+          <b style="color:#d4af37;">🔍 PWA Diagnostic</b>
+          <button onclick="document.getElementById('pwa-diag').remove()" style="background:#e63946;color:#fff;border:none;padding:5px 10px;border-radius:5px;cursor:pointer;">✕</button>
+        </div>
+        <div style="line-height:1.8;">
+          <div>${d.https ? '✅' : '❌'} HTTPS: ${d.https}</div>
+          <div>${d.manifestLink ? '✅' : '❌'} Manifest Link: ${d.manifestLink}</div>
+          <div style="word-break:break-all;">📄 Manifest URL: ${d.manifestUrl}</div>
+          <div>${d.swSupported ? '✅' : '❌'} SW Supported: ${d.swSupported}</div>
+          <div>${d.swRegistered ? '✅' : '❌'} SW Registered: ${d.swRegistered}</div>
+          <div>📍 SW Scope: ${d.swScope || 'checking...'}</div>
+          <div>${d.installPromptFired ? '✅' : '❌'} Install Prompt Fired: ${d.installPromptFired}</div>
+          <hr style="border-color:#444;margin:10px 0;">
+          <div><b>Icons:</b></div>
+          ${Object.entries(d.iconsStatus).map(([k,v]) => '<div>' + v + ' ' + k + '</div>').join('')}
+          <hr style="border-color:#444;margin:10px 0;">
+          <div style="color:#aaa;">User Agent: ${navigator.userAgent.substring(0,100)}...</div>
+        </div>
+      </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', html);
+  }, 500);
+};
+
+// Auto-show after 3 seconds on mobile for debugging
+setTimeout(() => {
+  if (/Android|iPhone|iPad/i.test(navigator.userAgent)) {
+    window.showPWADiag();
+  }
+}, 3000);
 </script>
 </body>
 </html>
