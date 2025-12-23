@@ -133,7 +133,7 @@
       0 6px 20px rgba(0,0,0,.15),
       inset 0 1px 0 rgba(255,255,255,.2);
     transition: all var(--transition-fast);
-    font-family: 'Silkscreen', serif;
+    font-family: 'Oxanium', serif;
     font-weight: 600;
     font-size: 14px;
     display: flex;
@@ -308,7 +308,7 @@
   font-size: 13px;
   letter-spacing: 0.15em;
   font-weight: 700;
-  font-family: 'Silkscreen', serif;
+  font-family: 'Oxanium', serif;
   position: relative;
   padding-bottom: 6px;
   text-align: center;
@@ -352,7 +352,7 @@
 
 .toc-section-title {
   font-weight: 600;
-  font-family: 'Silkscreen', serif;
+  font-family: 'Oxanium', serif;
   color: var(--paper-ink, #e8e8e8);
   font-size: 14px;
 }

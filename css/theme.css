@@ -1,7 +1,7 @@
 /* —— Thème Blaze & Blade - Foresia Style —— */
 
-/* Polices style Blaze & Blade - pixel/rétro */
-@import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=VT323&display=swap');
+/* Polices style Blaze & Blade - simples et lisibles */
+@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;600;700&family=Exo+2:ital,wght@0,400;0,500;0,600;1,400&display=swap');
 
 :root{
   /* Blaze & Blade Color Palette - Wood background with dark blue UI boxes */
@@ -68,7 +68,7 @@ body{
     var(--bg-texture),
     linear-gradient(180deg, #5a4035 0%, #3a2518 40%, #2a1810 60%, #3a2518 100%);
   color:var(--paper-ink);
-  font: 18px/1.7 "VT323", monospace;
+  font: 17px/1.7 "Exo 2", sans-serif;
   -webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;
 }
@@ -165,7 +165,7 @@ em, i {
 
 /* Headings - Clean gray style */
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Silkscreen", Georgia, serif;
+  font-family: "Oxanium", Georgia, serif;
   color: var(--paper-ink);
   text-align: center;
   margin: 1.5rem auto 1rem;
@@ -309,7 +309,7 @@ h4, h5, h6 {
 }
 
 .card-header, .card-title {
-  font-family: "Silkscreen", serif;
+  font-family: "Oxanium", serif;
   font-size: 15px;
   color: #d0d0e0;
   letter-spacing: 0.03em;
@@ -319,7 +319,7 @@ h4, h5, h6 {
 }
 
 .card-body {
-  font-family: "VT323", serif;
+  font-family: "Exo 2", serif;
   font-size: 16px;
   line-height: 1.65;
   color: var(--paper-ink);
@@ -330,7 +330,7 @@ h4, h5, h6 {
    ═══════════════════════════════════════════════════════════════ */
 
 button, .btn, .btn-base {
-  font-family: "Silkscreen", serif;
+  font-family: "Oxanium", serif;
   font-size: 13px;
   background: linear-gradient(180deg, #2a2a3a 0%, #1a1a28 100%);
   color: var(--paper-ink);
@@ -362,7 +362,7 @@ button:active, .btn:active, .btn-base:active {
 }
 
 .sidebar a, .toc-link, nav a {
-  font-family: "VT323", serif;
+  font-family: "Exo 2", serif;
   font-size: 16px;
   color: var(--paper-ink);
   padding: 8px 16px;
@@ -382,7 +382,7 @@ button:active, .btn:active, .btn-base:active {
    ═══════════════════════════════════════════════════════════════ */
 
 input, select, textarea {
-  font-family: "VT323", serif;
+  font-family: "Exo 2", serif;
   font-size: 16px;
   background: var(--ui-blue);
   color: var(--paper-ink);
@@ -406,11 +406,11 @@ table {
   border-collapse: collapse;
   background: var(--ui-blue);
   border: 2px solid var(--ui-border);
-  font-family: "VT323", serif;
+  font-family: "Exo 2", serif;
 }
 
 th {
-  font-family: "Silkscreen", serif;
+  font-family: "Oxanium", serif;
   font-size: 13px;
   background: linear-gradient(180deg, #2a2a3a 0%, #1a1a28 100%);
   color: #d0d0e0;
@@ -471,7 +471,7 @@ img:not([src*="stat-"]):not([src*="element-"]):not(.stat-icon):not(.element-icon
    ═══════════════════════════════════════════════════════════════ */
 
 .tag, .badge, .label {
-  font-family: "Silkscreen", serif;
+  font-family: "Oxanium", serif;
   font-size: 11px;
   background: var(--ui-blue);
   color: var(--paper-ink);

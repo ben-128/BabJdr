@@ -224,9 +224,39 @@
         if (modal) modal.remove(); // Remove empty shell
         modal = this.createEtatsModal();
         document.body.appendChild(modal);
+      } else if (!modal.dataset.eventsAttached) {
+        // Modal exists from static HTML, attach event listeners
+        this.attachEtatsModalEvents(modal);
       }
 
       BaseModal.openModal('etatsModal');
+    },
+
+    /**
+     * Attach click events to etats modal
+     */
+    attachEtatsModalEvents(modal) {
+      modal.dataset.eventsAttached = 'true';
+      modal.addEventListener('click', (e) => {
+        const etatItem = e.target.closest('.etat-item');
+        if (etatItem) {
+          const etatName = etatItem.dataset.etatName;
+
+          // Create clickable link
+          const etatLink = `<span class="etat-link" data-etat="${etatName}" style="color: var(--accent); cursor: pointer; text-decoration: underline;">${etatName}</span>`;
+
+          // Toujours copier dans le presse-papiers
+          UIUtilities.copyToClipboard(etatLink);
+
+          etatItem.classList.add('copied');
+
+          // Fermer la modale après un court délai pour voir l'effet "Copié!"
+          setTimeout(() => {
+            BaseModal.closeModal(modal);
+            etatItem.classList.remove('copied');
+          }, 800);
+        }
+      });
     },
 
     /**
@@ -1114,7 +1144,7 @@
       // Extract states from static pages
       let etats = [];
       if (window.STATIC_PAGES?.etats?.sections) {
-        etats = window.STATIC_PAGES.etats.sections.filter(section => 
+        etats = window.STATIC_PAGES.etats.sections.filter(section =>
           section.type === 'card' && section.title
         );
       }
@@ -1133,27 +1163,8 @@
         </div>
       `);
 
-      // Add event listeners
-      modal.addEventListener('click', (e) => {
-        const etatItem = e.target.closest('.etat-item');
-        if (etatItem) {
-          const etatName = etatItem.dataset.etatName;
-          
-          // Create clickable link
-          const etatLink = `<span class="etat-link" data-etat="${etatName}" style="color: var(--accent); cursor: pointer; text-decoration: underline;">${etatName}</span>`;
-          
-          // Toujours copier dans le presse-papiers
-          UIUtilities.copyToClipboard(etatLink);
-          
-          etatItem.classList.add('copied');
-          
-          // Fermer la modale après un court délai pour voir l'effet "Copié!"
-          setTimeout(() => {
-            BaseModal.closeModal(modal);
-            etatItem.classList.remove('copied');
-          }, 800);
-        }
-      });
+      // Add event listeners using shared function
+      this.attachEtatsModalEvents(modal);
 
       return modal;
     },
@@ -1523,7 +1534,7 @@
               <img src="${imageUrl}" alt="Cartes du Destin" style="max-width: 350px; width: 100%; height: auto; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); border: 3px solid rgba(218, 165, 32, 0.3);" onerror="this.style.display='none'">
             </div>
             <p style="margin-bottom: 1.5rem; font-size: 1.15em; text-align: center; font-weight: 500; color: var(--ink); line-height: 1.6;">${creationData.introduction}</p>
-            <ol style="padding: 1.5rem 1.5rem 1.5rem 2.5rem; line-height: 2.2; font-size: 1.05em; background: rgba(248, 246, 240, 0.95); border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); border: 2px solid rgba(139, 69, 19, 0.2); list-style-position: outside;">
+            <ol style="padding: 1.5rem 1.5rem 1.5rem 2.5rem; line-height: 2.2; font-size: 1.05em; background: rgba(40, 40, 70, 0.95); color: #e8e8e8; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); border: 2px solid var(--ui-border, #c0c0d0); list-style-position: outside;">
               ${cartesListHTML}
             </ol>
           </div>
