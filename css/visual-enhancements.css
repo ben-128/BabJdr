@@ -9,15 +9,15 @@
   --gold-deep: #a0a0b0;
   --bronze-light: #d0d0e0;
   --bronze-deep: #808090;
-  --parchment-light: #202040;
+  --parchment-light: #303050;
   --ink-dark: #e8e8e8;
   --accent-glow: rgba(160, 160, 200, 0.3);
   --shadow-deep: rgba(0, 0, 0, 0.4);
 
-  /* Enhanced gradients - gray/white for Blaze & Blade theme */
+  /* Enhanced gradients - gray/white for Blaze & Blade theme - PLUS CLAIR */
   --gradient-gold: linear-gradient(135deg, #e0e0f0 0%, #c0c0d0 50%, #a0a0b0 100%);
   --gradient-bronze: linear-gradient(135deg, #c0c0d0 0%, #a0a0b0 50%, #808090 100%);
-  --gradient-parchment: linear-gradient(145deg, #181830 0%, #202040 50%, #181830 100%);
+  --gradient-parchment: linear-gradient(145deg, #2a2a50 0%, #323260 50%, #2a2a50 100%);
   --gradient-depth: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, transparent 50%, rgba(0,0,0,0.2) 100%);
 }
 
@@ -29,7 +29,7 @@
 .section-card,
 .editable-section > .card:first-child,
 article > .card:first-of-type {
-  background: linear-gradient(145deg, #3a3a68 0%, #2e2e58 50%, #252548 100%);
+  background: linear-gradient(145deg, #4a4a78 0%, #3e3e68 50%, #353558 100%);
   border: 2px solid var(--ui-border, #c0c0d0);
   box-shadow:
     0 10px 40px rgba(0, 0, 0, 0.4),
@@ -42,7 +42,7 @@ article > .card:first-of-type {
 /* Sous-cadres (items individuels) - légèrement plus sombres */
 .card,
 .card-base {
-  background: linear-gradient(145deg, #282850 0%, #202040 50%, #1a1a38 100%);
+  background: linear-gradient(145deg, #383860 0%, #303050 50%, #282848 100%);
   border: 2px solid var(--ui-border, #c0c0d0);
   box-shadow:
     0 6px 25px rgba(0, 0, 0, 0.5),
@@ -56,7 +56,7 @@ article > .card:first-of-type {
 .card .card,
 .panel .card,
 .card-section .card {
-  background: linear-gradient(145deg, #1e1e3a 0%, #181830 50%, #141428 100%);
+  background: linear-gradient(145deg, #2e2e4a 0%, #282840 50%, #242438 100%);
   border-color: rgba(192, 192, 208, 0.4);
 }
 
@@ -250,7 +250,7 @@ select {
     inset 0 2px 4px rgba(0, 0, 0, 0.2),
     0 2px 8px rgba(0, 0, 0, 0.15);
   transition: all 0.3s ease;
-  font-family: "Exo 2", serif;
+  font-family: "VT323", serif;
   color: var(--ink-dark);
 }
 

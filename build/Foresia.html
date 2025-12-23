@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-12-23T14:21:25.057Z by JdrBab Build System -->
+<!-- Generated on 2025-12-23T14:24:45.547Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -128,8 +128,8 @@ window.MANIFEST_DATA = {
 <style>
 /* —— Thème Blaze & Blade - Foresia Style —— */
 
-/* Polices style Blaze & Blade - simples et lisibles */
-@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;600;700&family=Exo+2:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+/* Polices style Blaze & Blade - pixel/rétro */
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=VT323&display=swap');
 
 :root{
   /* Blaze & Blade Color Palette - Wood background with dark blue UI boxes */
@@ -146,10 +146,10 @@ window.MANIFEST_DATA = {
   --gold:#c0c0d0;            /* remplacé par gris clair pour bordures */
   --bronze:#a0a0b0;          /* remplacé par gris pour bordures */
 
-  /* UI Colors - Faithful to game (white borders, dark blue boxes) */
-  --ui-blue:#181830;         /* fond des boîtes UI - bleu marine */
-  --ui-blue-light:#242448;   /* fond cadre parent - plus clair */
-  --ui-blue-dark:#101020;    /* fond sous-cadre - plus sombre */
+  /* UI Colors - Faithful to game (white borders, dark blue boxes) - PLUS CLAIR */
+  --ui-blue:#2a2a50;         /* fond des boîtes UI - bleu marine plus clair */
+  --ui-blue-light:#3a3a68;   /* fond cadre parent - plus clair */
+  --ui-blue-dark:#202040;    /* fond sous-cadre - plus sombre */
   --ui-border:#c0c0d0;       /* bordure gris clair/blanc */
   --ui-border-light:#e0e0f0; /* bordure blanche */
   --ui-glow:rgba(200,200,240,.2);
@@ -196,7 +196,7 @@ body{
     var(--bg-texture),
     linear-gradient(180deg, #5a4035 0%, #3a2518 40%, #2a1810 60%, #3a2518 100%);
   color:var(--paper-ink);
-  font: 17px/1.7 "Exo 2", Georgia, serif;
+  font: 18px/1.7 "VT323", monospace;
   -webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;
 }
@@ -293,7 +293,7 @@ em, i {
 
 /* Headings - Clean gray style */
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Oxanium", Georgia, serif;
+  font-family: "Silkscreen", Georgia, serif;
   color: var(--paper-ink);
   text-align: center;
   margin: 1.5rem auto 1rem;
@@ -437,7 +437,7 @@ h4, h5, h6 {
 }
 
 .card-header, .card-title {
-  font-family: "Oxanium", serif;
+  font-family: "Silkscreen", serif;
   font-size: 15px;
   color: #d0d0e0;
   letter-spacing: 0.03em;
@@ -447,7 +447,7 @@ h4, h5, h6 {
 }
 
 .card-body {
-  font-family: "Exo 2", serif;
+  font-family: "VT323", serif;
   font-size: 16px;
   line-height: 1.65;
   color: var(--paper-ink);
@@ -458,7 +458,7 @@ h4, h5, h6 {
    ═══════════════════════════════════════════════════════════════ */
 
 button, .btn, .btn-base {
-  font-family: "Oxanium", serif;
+  font-family: "Silkscreen", serif;
   font-size: 13px;
   background: linear-gradient(180deg, #2a2a3a 0%, #1a1a28 100%);
   color: var(--paper-ink);
@@ -490,7 +490,7 @@ button:active, .btn:active, .btn-base:active {
 }
 
 .sidebar a, .toc-link, nav a {
-  font-family: "Exo 2", serif;
+  font-family: "VT323", serif;
   font-size: 16px;
   color: var(--paper-ink);
   padding: 8px 16px;
@@ -510,7 +510,7 @@ button:active, .btn:active, .btn-base:active {
    ═══════════════════════════════════════════════════════════════ */
 
 input, select, textarea {
-  font-family: "Exo 2", serif;
+  font-family: "VT323", serif;
   font-size: 16px;
   background: var(--ui-blue);
   color: var(--paper-ink);
@@ -534,11 +534,11 @@ table {
   border-collapse: collapse;
   background: var(--ui-blue);
   border: 2px solid var(--ui-border);
-  font-family: "Exo 2", serif;
+  font-family: "VT323", serif;
 }
 
 th {
-  font-family: "Oxanium", serif;
+  font-family: "Silkscreen", serif;
   font-size: 13px;
   background: linear-gradient(180deg, #2a2a3a 0%, #1a1a28 100%);
   color: #d0d0e0;
@@ -599,7 +599,7 @@ img:not([src*="stat-"]):not([src*="element-"]):not(.stat-icon):not(.element-icon
    ═══════════════════════════════════════════════════════════════ */
 
 .tag, .badge, .label {
-  font-family: "Oxanium", serif;
+  font-family: "Silkscreen", serif;
   font-size: 11px;
   background: var(--ui-blue);
   color: var(--paper-ink);
@@ -860,7 +860,7 @@ img:not([src*="stat-"]):not([src*="element-"]):not(.stat-icon):not(.element-icon
       0 6px 20px rgba(0,0,0,.15),
       inset 0 1px 0 rgba(255,255,255,.2);
     transition: all var(--transition-fast);
-    font-family: 'Oxanium', serif;
+    font-family: 'Silkscreen', serif;
     font-weight: 600;
     font-size: 14px;
     display: flex;
@@ -1035,7 +1035,7 @@ img:not([src*="stat-"]):not([src*="element-"]):not(.stat-icon):not(.element-icon
   font-size: 13px;
   letter-spacing: 0.15em;
   font-weight: 700;
-  font-family: 'Oxanium', serif;
+  font-family: 'Silkscreen', serif;
   position: relative;
   padding-bottom: 6px;
   text-align: center;
@@ -1079,7 +1079,7 @@ img:not([src*="stat-"]):not([src*="element-"]):not(.stat-icon):not(.element-icon
 
 .toc-section-title {
   font-weight: 600;
-  font-family: 'Oxanium', serif;
+  font-family: 'Silkscreen', serif;
   color: var(--paper-ink, #e8e8e8);
   font-size: 14px;
 }
@@ -1554,7 +1554,7 @@ footer{padding:24px;text-align:center;color:var(--paper-muted)}
 
 /* ─────────────────────────── Typography Components ─────────────────────────── */
 .spell-title {
-  font-family: "Oxanium", serif !important;
+  font-family: "Silkscreen", serif !important;
   font-size: clamp(1.2rem, 2.5vw, 1.4rem) !important;
   background: linear-gradient(135deg, var(--ui-border-light, #c0c0d0), var(--ui-border, #a0a0b0), var(--ui-border-light, #c0c0d0)) !important;
   -webkit-background-clip: text !important;
@@ -1698,7 +1698,7 @@ img {
 }
 
 .loading-content h2 {
-  font-family: "Oxanium", serif;
+  font-family: "Silkscreen", serif;
   font-size: 2rem;
   margin: 1rem 0;
   color: var(--accent-ink, var(--paper-ink));
@@ -1757,7 +1757,7 @@ img {
 
 .page-header h1 {
   color: var(--accent-ink, var(--paper-ink));
-  font-family: "Oxanium", serif;
+  font-family: "Silkscreen", serif;
   font-size: 2.5rem;
   margin-bottom: 1rem;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
@@ -1865,7 +1865,7 @@ img {
 
 .collection-card h3 {
   color: var(--accent-ink, var(--paper-ink));
-  font-family: "Oxanium", serif;
+  font-family: "Silkscreen", serif;
   margin: 0.5rem 0;
   font-size: 1.3rem;
 }
@@ -1889,7 +1889,7 @@ img {
 
 .collection-error h2 {
   color: #dc2626;
-  font-family: "Oxanium", serif;
+  font-family: "Silkscreen", serif;
   margin: 0 0 1rem 0;
   font-size: 1.5rem;
 }
@@ -2038,7 +2038,7 @@ body.dev-off .new-collection-card {
 
 .collection-header h2 {
   color: var(--accent-ink, var(--paper-ink));
-  font-family: "Oxanium", serif;
+  font-family: "Silkscreen", serif;
   margin: 0 0 0.5rem 0;
   font-size: 1.8rem;
 }
@@ -2067,7 +2067,7 @@ body.dev-off .new-collection-card {
 
 .tag-filters h3 {
   color: var(--text);
-  font-family: "Oxanium", serif;
+  font-family: "Silkscreen", serif;
   margin-bottom: 1rem;
   font-size: 1.2rem;
 }
@@ -2359,7 +2359,7 @@ body.dev-off .new-collection-card {
   border: 2px solid var(--rule);
   border-top: none;
   border-radius: 0 0 8px 8px;
-  font-family: "Oxanium", serif;
+  font-family: "Silkscreen", serif;
 }
 
 .filter-chips {
@@ -2676,7 +2676,7 @@ body.dev-off .new-collection-card {
 
 .collection-card h3 {
   color: var(--paper-muted);
-  font-family: 'Oxanium', serif;
+  font-family: 'Silkscreen', serif;
   font-size: 1.3rem;
   margin: 0.5rem 0 1rem 0;
   text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
@@ -2735,7 +2735,7 @@ body.dev-off .new-collection-card {
 
 .collection-header h2 {
   color: var(--paper-muted);
-  font-family: 'Oxanium', serif;
+  font-family: 'Silkscreen', serif;
   margin: 0;
   display: flex;
   align-items: center;
@@ -3520,7 +3520,7 @@ article[data-page="enchanteur"] .illus img:hover,
   text-align: center !important;
   margin: 0 0 1.5rem 0 !important;
   color: var(--accent-ink) !important;
-  font-family: 'Oxanium', serif !important;
+  font-family: 'Silkscreen', serif !important;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.2) !important;
   letter-spacing: 0.8px !important;
 }
@@ -3708,7 +3708,7 @@ article[data-page="enchanteur"] .illus img:hover,
   font-size: 1.1em;
   color: var(--accent-ink);
   margin-bottom: 0.25rem;
-  font-family: 'Oxanium', serif;
+  font-family: 'Silkscreen', serif;
 }
 
 .section-description {
@@ -4044,7 +4044,7 @@ article[data-page="enchanteur"] .illus img:hover,
   border: 2px solid var(--ui-border) !important;
   border-radius: 8px;
   padding: 0.5rem 1rem;
-  font-family: "Oxanium", serif;
+  font-family: "Silkscreen", serif;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -4178,7 +4178,7 @@ article[data-page="enchanteur"] .illus img:hover,
   box-shadow: 0 8px 24px rgba(0,0,0,0.3);
   backdrop-filter: blur(10px);
   min-width: 280px;
-  font-family: "Oxanium", serif;
+  font-family: "Silkscreen", serif;
 }
 
 .audio-panel {
@@ -4365,7 +4365,7 @@ article[data-page="enchanteur"] .illus img:hover,
   padding: 1rem 2rem !important;
   border-radius: 8px !important;
   cursor: pointer !important;
-  font-family: "Oxanium", serif !important;
+  font-family: "Silkscreen", serif !important;
   font-size: 1rem !important;
   font-weight: 600 !important;
   text-transform: uppercase !important;
@@ -4399,7 +4399,7 @@ article[data-page="enchanteur"] .illus img:hover,
   padding: 1rem 1.5rem !important;
   border-radius: 6px !important;
   cursor: pointer !important;
-  font-family: "Oxanium", serif !important;
+  font-family: "Silkscreen", serif !important;
   font-size: 0.95rem !important;
   font-weight: 600 !important;
   transition: none !important;
@@ -6280,7 +6280,7 @@ span[title] {
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 4px;
-  font-family: 'Oxanium', serif;
+  font-family: 'Silkscreen', serif;
 }
 
 /* Règle générale pour spell-element dans les cartes */
@@ -7199,15 +7199,15 @@ article.active .grid {
   --gold-deep: #a0a0b0;
   --bronze-light: #d0d0e0;
   --bronze-deep: #808090;
-  --parchment-light: #202040;
+  --parchment-light: #303050;
   --ink-dark: #e8e8e8;
   --accent-glow: rgba(160, 160, 200, 0.3);
   --shadow-deep: rgba(0, 0, 0, 0.4);
 
-  /* Enhanced gradients - gray/white for Blaze & Blade theme */
+  /* Enhanced gradients - gray/white for Blaze & Blade theme - PLUS CLAIR */
   --gradient-gold: linear-gradient(135deg, #e0e0f0 0%, #c0c0d0 50%, #a0a0b0 100%);
   --gradient-bronze: linear-gradient(135deg, #c0c0d0 0%, #a0a0b0 50%, #808090 100%);
-  --gradient-parchment: linear-gradient(145deg, #181830 0%, #202040 50%, #181830 100%);
+  --gradient-parchment: linear-gradient(145deg, #2a2a50 0%, #323260 50%, #2a2a50 100%);
   --gradient-depth: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, transparent 50%, rgba(0,0,0,0.2) 100%);
 }
 
@@ -7219,7 +7219,7 @@ article.active .grid {
 .section-card,
 .editable-section > .card:first-child,
 article > .card:first-of-type {
-  background: linear-gradient(145deg, #3a3a68 0%, #2e2e58 50%, #252548 100%);
+  background: linear-gradient(145deg, #4a4a78 0%, #3e3e68 50%, #353558 100%);
   border: 2px solid var(--ui-border, #c0c0d0);
   box-shadow:
     0 10px 40px rgba(0, 0, 0, 0.4),
@@ -7232,7 +7232,7 @@ article > .card:first-of-type {
 /* Sous-cadres (items individuels) - légèrement plus sombres */
 .card,
 .card-base {
-  background: linear-gradient(145deg, #282850 0%, #202040 50%, #1a1a38 100%);
+  background: linear-gradient(145deg, #383860 0%, #303050 50%, #282848 100%);
   border: 2px solid var(--ui-border, #c0c0d0);
   box-shadow:
     0 6px 25px rgba(0, 0, 0, 0.5),
@@ -7246,7 +7246,7 @@ article > .card:first-of-type {
 .card .card,
 .panel .card,
 .card-section .card {
-  background: linear-gradient(145deg, #1e1e3a 0%, #181830 50%, #141428 100%);
+  background: linear-gradient(145deg, #2e2e4a 0%, #282840 50%, #242438 100%);
   border-color: rgba(192, 192, 208, 0.4);
 }
 
@@ -7440,7 +7440,7 @@ select {
     inset 0 2px 4px rgba(0, 0, 0, 0.2),
     0 2px 8px rgba(0, 0, 0, 0.15);
   transition: all 0.3s ease;
-  font-family: "Exo 2", serif;
+  font-family: "VT323", serif;
   color: var(--ink-dark);
 }
 
@@ -13474,7 +13474,7 @@ select:focus {
     'Terre': { color: '#8b4513', weight: 'bold' },
     'Air': { color: '#22c55e', weight: 'bold' },
     'Lumière': { color: '#ffd700', weight: 'bold' },
-    'Nuit': { color: '#6b21a8', weight: 'bold' },
+    'Nuit': { color: '#a0a0b0', weight: 'bold' },
     'Divin': { color: '#f5f5f5', weight: 'bold', background: 'rgba(100, 100, 100, 0.3)', padding: '2px 4px', borderRadius: '3px' },
     'Maléfique': { color: '#8b5cf6', weight: 'bold' }
   };
@@ -19397,7 +19397,7 @@ select:focus {
     'Terre': { color: '#8b4513', weight: 'bold' },
     'Air': { color: '#22c55e', weight: 'bold' },
     'Lumière': { color: '#ffd700', weight: 'bold' },
-    'Nuit': { color: '#6b21a8', weight: 'bold' },
+    'Nuit': { color: '#a0a0b0', weight: 'bold' },
     'Divin': { color: '#f5f5f5', weight: 'bold', background: 'rgba(100, 100, 100, 0.3)', padding: '2px 4px', borderRadius: '3px' },
     'Maléfique': { color: '#8b5cf6', weight: 'bold' }
   };
