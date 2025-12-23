@@ -641,14 +641,14 @@
   };
 
   window.ElementIcons = {
-    'Feu': '<img src="https://i.ibb.co/VWfKvNCL/element-Feu.png" alt="Feu" class="element-icon" style="width: 36px; height: 36px; vertical-align: middle;">',
-    'Eau': '<img src="https://i.ibb.co/bMVKwNQP/element-Eau.png" alt="Eau" class="element-icon" style="width: 36px; height: 36px; vertical-align: middle;">',
-    'Terre': '<img src="https://i.ibb.co/gLxnsvfg/element-Terre.png" alt="Terre" class="element-icon" style="width: 36px; height: 36px; vertical-align: middle;">',
-    'Air': '<img src="https://i.ibb.co/W484kM90/element-Air.png" alt="Air" class="element-icon" style="width: 36px; height: 36px; vertical-align: middle;">',
-    'Lumière': '<img src="https://i.ibb.co/pjmcYV72/element-Lumi-re.png" alt="Lumière" class="element-icon" style="width: 36px; height: 36px; vertical-align: middle;">',
-    'Nuit': '<img src="https://i.ibb.co/b5qK7czM/element-Nuit.png" alt="Nuit" class="element-icon" style="width: 36px; height: 36px; vertical-align: middle;">',
-    'Divin': '<img src="https://i.ibb.co/rKYgZ4Yp/element-Divin.png" alt="Divin" class="element-icon" style="width: 36px; height: 36px; vertical-align: middle;">',
-    'Maléfique': '<img src="https://i.ibb.co/SDD5KX34/element-Mal-fique.png" alt="Maléfique" class="element-icon" style="width: 36px; height: 36px; vertical-align: middle;">'
+    'Feu': '<img src="https://i.ibb.co/VWfKvNCL/element-Feu.png" alt="Feu" class="element-icon" style="width: 72px; height: 72px; vertical-align: middle;">',
+    'Eau': '<img src="https://i.ibb.co/bMVKwNQP/element-Eau.png" alt="Eau" class="element-icon" style="width: 72px; height: 72px; vertical-align: middle;">',
+    'Terre': '<img src="https://i.ibb.co/gLxnsvfg/element-Terre.png" alt="Terre" class="element-icon" style="width: 72px; height: 72px; vertical-align: middle;">',
+    'Air': '<img src="https://i.ibb.co/W484kM90/element-Air.png" alt="Air" class="element-icon" style="width: 72px; height: 72px; vertical-align: middle;">',
+    'Lumière': '<img src="https://i.ibb.co/pjmcYV72/element-Lumi-re.png" alt="Lumière" class="element-icon" style="width: 72px; height: 72px; vertical-align: middle;">',
+    'Nuit': '<img src="https://i.ibb.co/b5qK7czM/element-Nuit.png" alt="Nuit" class="element-icon" style="width: 72px; height: 72px; vertical-align: middle;">',
+    'Divin': '<img src="https://i.ibb.co/rKYgZ4Yp/element-Divin.png" alt="Divin" class="element-icon" style="width: 72px; height: 72px; vertical-align: middle;">',
+    'Maléfique': '<img src="https://i.ibb.co/SDD5KX34/element-Mal-fique.png" alt="Maléfique" class="element-icon" style="width: 72px; height: 72px; vertical-align: middle;">'
   };
 
 })();`;
@@ -679,21 +679,92 @@
     },
 
     async getMainHTML() {
-      // Clone the document to avoid modifying the live DOM
-      const clone = document.documentElement.cloneNode(true);
+      // Fetch the clean dev.html template instead of cloning the DOM
+      // This avoids exporting dynamically generated content that corrupts index.html
+      try {
+        const response = await fetch('dev.html');
+        if (response.ok) {
+          return await response.text();
+        }
+      } catch (error) {
+        console.warn('Could not fetch dev.html, using fallback');
+      }
 
-      // Remove all temporary elements (notifications, etc.)
-      const tempElements = clone.querySelectorAll('[data-temp], .temp-notification');
-      tempElements.forEach(el => el.remove());
-
-      // Clean up active states from articles to prevent flash on reload
-      const articles = clone.querySelectorAll('article.active');
-      articles.forEach(article => {
-        article.classList.remove('active');
-        article.style.removeProperty('display');
-      });
-
-      return clone.outerHTML;
+      // Fallback: return minimal clean HTML structure
+      return `<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1" name="viewport">
+<title>Foresia — Version Développement</title>
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/utilities.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/editor.css">
+<link rel="stylesheet" href="css/scroll-optimizations.css">
+<link rel="stylesheet" href="css/visual-enhancements.css">
+</head>
+<body class="dev-off">
+<div class="shell">
+  <button aria-controls="sidebar" aria-expanded="false" aria-label="Ouvrir le sommaire" class="menu-toggle" id="menuToggle" style="display:none">☰ Sommaire</button>
+  <div class="backdrop" hidden="" id="backdrop"></div>
+  <main class="page">
+    <aside class="sidebar" id="sidebar">
+      <div class="panel">
+        <div class="tools">
+          <button class="btn small" id="devToggle" title="Activer/désactiver le mode développeur">🛠 Dev Mode: OFF</button>
+        </div>
+        <div class="dev-toolbox" id="devToolbox" style="display: none;"></div>
+        <div class="toc" id="toc"></div>
+      </div>
+    </aside>
+    <div id="views"></div>
+  </main>
+  <footer></footer>
+</div>
+<script src="js/core.js"></script>
+<script src="js/config/constants.js"></script>
+<script src="js/config/contentTypes.js"></script>
+<script src="js/core/EventBus.js"></script>
+<script src="js/core/BaseEntity.js"></script>
+<script src="js/factories/ContentFactory.js"></script>
+<script src="js/builders/CardBuilder.js"></script>
+<script src="js/builders/PageBuilder.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/utils/device-detection.js"></script>
+<script src="js/modules/images.js"></script>
+<script src="js/modules/audio.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/features/SpellFilter.js"></script>
+<script src="js/features/TablesTresorsManager.js"></script>
+<script src="js/features/FavorisManager.js"></script>
+<script src="js/features/FavorisRenderer.js"></script>
+<script src="js/features/AnimationEnhancer.js"></script>
+<script src="js/features/ScrollOptimizer.js"></script>
+<script src="js/features/DynamicCentering.js"></script>
+<script src="js/router.js"></script>
+<script src="js/renderer.js"></script>
+<script src="js/core/UnifiedEditor.js"></script>
+<script src="js/editor.js"></script>
+<script src="js/ui/UIUtilities.js"></script>
+<script src="js/ui/BaseModal.js"></script>
+<script src="js/ui/UICore.js"></script>
+<script src="js/ui/EventHandlers.js"></script>
+<script src="js/ui/ContentManager.js"></script>
+<script src="js/ui/TagsManager.js"></script>
+<script src="js/ui/SearchManager.js"></script>
+<script src="js/ui/ModalManager.js"></script>
+<script src="js/ui/ResponsiveManager.js"></script>
+<script src="js/ui/PageManager.js"></script>
+<script src="js/ui/GMObjectFilters.js"></script>
+<script src="js/ui/MonsterFilters.js"></script>
+<script src="js/ui/TableTresorFilters.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/libs/jspdf-loader.js"></script>
+</body>
+</html>`;
     },
 
 
