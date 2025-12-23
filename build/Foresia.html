@@ -39045,12 +39045,18 @@ window.showPWADiag = function() {
   }, 500);
 };
 
-// Auto-show after 3 seconds on mobile for debugging
-setTimeout(() => {
-  if (/Android|iPhone|iPad/i.test(navigator.userAgent)) {
-    window.showPWADiag();
-  }
-}, 3000);
+// Create visible debug button immediately
+document.addEventListener('DOMContentLoaded', function() {
+  const btn = document.createElement('button');
+  btn.id = 'pwa-diag-btn';
+  btn.innerHTML = '🔍 PWA';
+  btn.style.cssText = 'position:fixed;bottom:80px;right:10px;z-index:99999;background:#e63946;color:#fff;border:none;padding:10px 15px;border-radius:20px;font-weight:bold;font-size:14px;box-shadow:0 4px 12px rgba(0,0,0,0.3);cursor:pointer;';
+  btn.onclick = window.showPWADiag;
+  document.body.appendChild(btn);
+});
+
+// Also auto-show after 2 seconds
+setTimeout(window.showPWADiag, 2000);
 </script>
 </body>
 </html>
