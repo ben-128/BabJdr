@@ -48,8 +48,8 @@ window.MANIFEST_DATA = ${fs.readFileSync(path.join(rootDir, 'config', 'manifest.
 <meta name="application-name" content="Foresia">
 <meta name="msapplication-TileColor" content="#8b4513">
 
-<!-- Favicon (embedded SVG) -->
-<link rel="icon" href="data:image/svg+xml;base64,${Buffer.from(fs.readFileSync(path.join(rootDir, 'assets', 'pwa', 'safari-pinned-tab.svg'), 'utf8')).toString('base64')}">
+<!-- Favicon (embedded PNG) -->
+<link rel="icon" type="image/png" href="data:image/png;base64,${fs.readFileSync(path.join(rootDir, 'favicon.png')).toString('base64')}">
 </head>
 <body class="dev-off">
 
