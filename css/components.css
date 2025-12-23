@@ -932,7 +932,7 @@ body.dev-off .new-collection-card {
 /* Buttons */
 .btn{display:inline-flex;gap:var(--space-md);align-items:center;background:var(--card);border:2px solid var(--rule);border-radius:12px;padding:var(--space-md) var(--space-lg);box-shadow:var(--card-shadow);cursor:pointer;
      transition:var(--transition-fast); font-weight:500}
-.btn:hover{transform:translateY(-1px); box-shadow:0 8px 25px rgba(0,0,0,.15); border-color:var(--ui-border-light, #c0c0d0)}
+.btn:hover{border-color:var(--ui-border-light, #c0c0d0)}
 .btn.small{padding:var(--space-sm) var(--space-md)}
 
 /* Search bar */

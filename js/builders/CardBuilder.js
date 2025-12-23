@@ -123,15 +123,15 @@
           ${this.buildSpellElement()}
           ${this.buildIllustration(`sort:${this.categoryName}:${this.data.nom}`, this.data.nom)}
           ${this.buildEditableField(this.data.description, 'spell-description', 'Description', { style: 'text-align: center; font-style: italic; margin: 1rem 0;' })}
-          <hr style="margin: 1rem 0; border: none; border-top: 2px solid var(--bronze); opacity: 0.6;">
+          <hr style="margin: 1rem 0; border: none; height: 1px; background: var(--ui-border, #c0c0d0); opacity: 0.5;">
           ${this.buildEditableField(this.data.prerequis, 'spell-prerequis', 'Prérequis')}
           ${this.buildEditableField(this.data.portee, 'spell-portee', 'Portée')}
           ${this.buildEditableField(this.data.coutMana, 'spell-mana', 'Coût mana')}
           ${this.buildEditableField(this.data.tempsIncantation, 'spell-temps-incantation', 'Temps d\'incantation')}
-          <hr style="margin: 0.5rem 0; border: none; border-top: 1px solid var(--rule);">
+          <hr style="margin: 0.5rem 0; border: none; height: 1px; background: var(--ui-border, #c0c0d0); opacity: 0.5;">
           ${this.buildEditableField(this.data.resistance, 'spell-resistance', 'Résistance')}
           ${this.buildEditableEffect(this.data.effetNormal, 'spell-effect-normal', 'Effet normal')}
-          <hr style="margin: 1rem 0; border: none; border-top: 1px solid var(--rule);">
+          <hr style="margin: 1rem 0; border: none; height: 1px; background: var(--ui-border, #c0c0d0); opacity: 0.5;">
           ${this.data.effetCritique ? this.buildEditableEffect(this.data.effetCritique, 'spell-effect-critical', 'Effet critique') : ''}
           ${this.buildDeleteButton('spell')}
         </div>
@@ -284,12 +284,12 @@
           </div>
 
           ${this.data.abilites ? `
-            <hr style="margin: 1rem 0; border: none; border-top: 1px solid var(--rule);">
+            <hr style="margin: 1rem 0; border: none; height: 1px; background: var(--ui-border, #c0c0d0); opacity: 0.5;">
             ${this.buildEditableField(this.data.abilites, 'monster-abilites', 'Capacités', { style: 'margin-top: 0.5rem;' })}
           ` : ''}
 
           ${this.data.butin ? `
-            <hr style="margin: 1rem 0; border: none; border-top: 1px solid var(--rule);">
+            <hr style="margin: 1rem 0; border: none; height: 1px; background: var(--ui-border, #c0c0d0); opacity: 0.5;">
             ${this.buildEditableField(this.data.butin, 'monster-butin', 'Butin', { style: 'margin-top: 0.5rem;' })}
           ` : ''}
 
@@ -309,12 +309,12 @@
           ${this.buildIllustration(`npc:${this.data.nom}`, this.data.nom, 'npc')}
 
           ${this.data.description ? `
-            <hr style="margin: 1rem 0; border: none; border-top: 1px solid var(--rule);">
+            <hr style="margin: 1rem 0; border: none; height: 1px; background: var(--ui-border, #c0c0d0); opacity: 0.5;">
             ${this.buildEditableField(this.data.description, 'npc-description', 'Description', { style: 'margin-top: 0.5rem;' })}
           ` : ''}
 
           ${this.data.interactions ? `
-            <hr style="margin: 1rem 0; border: none; border-top: 1px solid var(--rule);">
+            <hr style="margin: 1rem 0; border: none; height: 1px; background: var(--ui-border, #c0c0d0); opacity: 0.5;">
             <div style="margin-top: 0.5rem;">
               <strong>💬 Interactions possibles:</strong>
               ${this.buildEditableField(this.data.interactions, 'npc-interactions', 'Interactions', { style: 'margin-top: 0.5rem;' })}
@@ -583,11 +583,13 @@
     }
 
     buildSpellElement() {
+      const elementColor = this.getElementColor(this.data.element);
+      const elementStyle = this.getElementStyle(this.data.element);
       return `
         <div class="spell-element-section">
           <div class="spell-element-display" style="text-align: center; margin: 0.5rem 0;">
-            <span class="element-badge" style="display: inline-block; padding: 4px 12px; background: var(--accent); color: white; border-radius: 16px; font-size: 0.9em; font-weight: 600;">
-              ${this.getElementIcon(this.data.element)} ${this.data.element}
+            <span class="element-badge" style="display: inline-flex; align-items: center; padding: 4px 12px; background: rgba(${parseInt(elementColor.slice(1,3), 16)}, ${parseInt(elementColor.slice(3,5), 16)}, ${parseInt(elementColor.slice(5,7), 16)}, 0.15); border: 1px solid ${elementColor}; border-radius: 16px; font-size: 0.9em;">
+              ${this.getElementIcon(this.data.element)} <span style="${elementStyle}">${this.data.element}</span>
             </span>
           </div>
           <div class="spell-element-selector" style="text-align: center; margin: 0.5rem 0; display: none;">
@@ -609,22 +611,22 @@
 
     buildMonsterElement() {
       const elementColor = this.getElementColor(this.data.element);
-      
+      const elementStyle = this.getElementStyle(this.data.element);
+
       return `
         <div class="monster-element-section">
           <div class="monster-element-display">
             <span class="element-badge" style="
-              display: inline-flex; 
-              align-items: center; 
-              padding: 4px 8px; 
-              background: rgba(${parseInt(elementColor.slice(1,3), 16)}, ${parseInt(elementColor.slice(3,5), 16)}, ${parseInt(elementColor.slice(5,7), 16)}, 0.1); 
-              border-radius: 6px; 
+              display: inline-flex;
+              align-items: center;
+              padding: 4px 8px;
+              background: rgba(${parseInt(elementColor.slice(1,3), 16)}, ${parseInt(elementColor.slice(3,5), 16)}, ${parseInt(elementColor.slice(5,7), 16)}, 0.1);
+              border-radius: 6px;
               border: 1px solid ${elementColor};
               font-size: 0.8em;
-              font-weight: 600;
             ">
               <span style="margin-right: 4px;">${this.getElementIcon(this.data.element)}</span>
-              <span style="color: ${elementColor};">${this.data.element}</span>
+              <span style="${elementStyle}">${this.data.element}</span>
             </span>
           </div>
           <div class="monster-element-selector" style="margin-top: 0.5rem; display: none;">
@@ -649,6 +651,17 @@
 
     getElementColor(element) {
       return window.ElementColors?.[element]?.color || '#666';
+    }
+
+    getElementStyle(element) {
+      const config = window.ElementColors?.[element];
+      if (!config) return 'color: #666; font-weight: bold;';
+
+      let style = `color: ${config.color}; font-weight: ${config.weight || 'bold'};`;
+      if (config.background) style += ` background: ${config.background};`;
+      if (config.padding) style += ` padding: ${config.padding};`;
+      if (config.borderRadius) style += ` border-radius: ${config.borderRadius};`;
+      return style;
     }
 
     buildTableTresorCard() {

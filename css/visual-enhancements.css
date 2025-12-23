@@ -110,30 +110,8 @@ article > .card:first-of-type {
   transition: left 0.6s ease;
 }
 
-.btn-base:hover::before {
-  left: 150%;
-}
-
 .btn-base:hover {
-  background: linear-gradient(145deg, #202040 0%, #282850 50%, #202040 100%);
-
   border-color: var(--ui-border-light, #e0e0f0);
-
-  box-shadow:
-    0 8px 30px rgba(0, 0, 0, 0.4),
-    0 4px 12px rgba(0, 0, 0, 0.25),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15),
-    0 0 20px var(--accent-glow);
-
-  transform: translateY(-2px) scale(1.02);
-}
-
-.btn-base:active {
-  transform: translateY(0) scale(0.98);
-  box-shadow:
-    0 4px 12px rgba(0, 0, 0, 0.3),
-    0 2px 6px rgba(0, 0, 0, 0.2),
-    inset 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 /* ─────────────────────────── Enhanced Typography ─────────────────────────── */
@@ -309,28 +287,11 @@ select:focus {
 
 /* ─────────────────────────── Mobile Optimizations ─────────────────────────── */
 @media (max-width: 768px) {
-  /* Reduce animation intensity on mobile */
+  /* Pas de transform au hover sur mobile */
   .card:hover,
-  .card-base:hover {
-    transform: translateY(-3px) scale(1.01);
-  }
-
+  .card-base:hover,
   .btn-base:hover {
-    transform: translateY(-1px) scale(1.01);
-  }
-
-  /* Disable complex shadows on mobile for performance */
-  .card,
-  .card-base {
-    box-shadow:
-      0 6px 20px rgba(0, 0, 0, 0.3),
-      0 2px 6px rgba(0, 0, 0, 0.2);
-  }
-
-  .btn-base {
-    box-shadow:
-      0 4px 12px rgba(0, 0, 0, 0.25),
-      0 2px 4px rgba(0, 0, 0, 0.15);
+    border-color: var(--ui-border-light, #e0e0f0);
   }
 }
 
@@ -348,79 +309,27 @@ select:focus {
 }
 
 
-/* 3. Boutons style PS1 avec effet enfoncé prononcé */
-.btn-base,
-button,
-.btn {
-  border: 2px solid var(--ui-border-light, #e0e0f0) !important;
-  box-shadow:
-    inset 2px 2px 0 rgba(255, 255, 255, 0.2),
-    inset -2px -2px 0 rgba(0, 0, 0, 0.25),
-    0 3px 0 rgba(0, 0, 0, 0.4) !important;
-  transition: all 0.1s ease !important;
-  position: relative;
-}
-
+/* 3. Boutons style PS1 - sans effet hover */
 .btn-base:hover,
 button:hover,
 .btn:hover {
-  transform: translateY(-1px);
-  box-shadow:
-    inset 2px 2px 0 rgba(255, 255, 255, 0.25),
-    inset -2px -2px 0 rgba(0, 0, 0, 0.2),
-    0 4px 0 rgba(0, 0, 0, 0.4) !important;
-}
-
-.btn-base:active,
-button:active,
-.btn:active {
-  transform: translateY(2px) !important;
-  box-shadow:
-    inset -2px -2px 0 rgba(255, 255, 255, 0.1),
-    inset 2px 2px 0 rgba(0, 0, 0, 0.3),
-    0 1px 0 rgba(0, 0, 0, 0.4) !important;
+  border-color: var(--ui-border-light, #e0e0f0);
 }
 
 
-/* 5. Séparateurs pixel décoratifs */
+/* 5. Séparateurs simples */
 .ornamental-divider,
 hr,
 .divider {
   border: none;
-  height: 2px;
-  background: transparent;
-  position: relative;
-  margin: 1.5rem auto;
+  height: 1px;
+  background: var(--ui-border, #c0c0d0);
+  margin: 1rem 0;
+  opacity: 0.5;
 }
 
-.ornamental-divider::before,
-hr::before,
-.divider::before {
-  content: '◆────────────────◆';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  color: var(--ui-border, #c0c0d0);
-  font-size: 14px;
-  letter-spacing: 2px;
-  white-space: nowrap;
-}
-
-/* Séparateur sous les h3 */
-h3::after {
-  content: '─────◇─────';
-  display: block;
-  color: var(--ui-border, #c0c0d0);
-  font-size: 12px;
-  margin-top: 8px;
-  opacity: 0.7;
-  letter-spacing: 1px;
-}
-
-/* Séparateur entre effet et prérequis dans les dons et sorts */
-.don-prerequis,
-.spell-prerequis {
+/* Séparateur entre effet et prérequis dans les dons */
+.don-prerequis {
   margin-top: 1rem;
   padding-top: 1rem;
   border-top: 1px solid var(--ui-border, #c0c0d0);
