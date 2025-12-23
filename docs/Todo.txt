@@ -30,16 +30,6 @@ Vol
 Changement de taille
 un buff de stats
 
-dons : 
 
-guerrier : 
-- Increvable : une fois par jour, peut dépenser un effort pour rester à 1 points de vie s'il devait descendre en dessous.
-- Taunt zone : 12m all taunted res alt < 5. Peut test eloquence pour rajouter 10 par effort
-- Attaque surpuissante : Permet, en utilisant une action secondaire, de doubler les dégats dû à la force lors d'une attaque au corps à corps. Il est alors impossible d'attaquer au tour suivant.
-- Agilité du guerrier : Augmente l'agilité de 4.
-- Volonté d'acier : Augmente la volonté de 4.
-- Rage sanglante : Lorsque le guerrier a la moitié ou moins de ses points de vie, les chances de coup critique sont augmentées de 2.
-- Second souffle : Une fois par jour, permet d'utiliser une action secondaire pour regagner un nombre de points de vie égal à l'endurance du héros.
-- Lancer d'arme : Permet, avec une action principale et une action secondaire, de lancer une arme à une main (équipée ou de l'inventaire) jusqu'a 12m. Elle inflige les dégats normaux d'une attaque au corps à corps (même regles). L'arme n'est alors plus équipée. Elle peut être récupérée avec une action secondaire, à moins de 3m de la cible.
 
 

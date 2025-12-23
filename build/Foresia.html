@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-12-22T13:54:16.587Z by JdrBab Build System -->
+<!-- Generated on 2025-12-23T10:28:26.226Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11196,14 +11196,10 @@ select:focus {
     "class:InquisiteurF": "https://i.ibb.co/szR5NjB/Inquisiteur-F.png",
     "class:Lutin": "https://i.ibb.co/XfZPKJtC/Lutin.jpg",
     "class:LutinF": "https://i.ibb.co/bM7HBCkq/Lutin-F.jpg",
-    "class:Mage": "https://i.ibb.co/ZR1KY6GC/Mage.jpg",
-    "class:MageF": "https://i.ibb.co/KcWgzqvh/Mage-F.jpg",
-    "class:Maître d’armes": "https://i.ibb.co/8DsN1Zr5/Ma-tre-d-armes.jpg",
+    "class:Maître d'armes": "https://i.ibb.co/8DsN1Zr5/Ma-tre-d-armes.jpg",
     "class:Maître d’armesF": "https://i.ibb.co/SXpnbRdb/Ma-tre-d-armes-F.jpg",
     "class:Nain": "https://i.ibb.co/XZ8fhF1h/Nain.jpg",
     "class:NaineF": "https://i.ibb.co/qMXy5SvY/Naine-F.jpg",
-    "class:PretreF": "https://i.ibb.co/gLp91xTB/Pretre-F.jpg",
-    "class:Prêtre": "https://i.ibb.co/Hf8y0cLk/Pr-tre.jpg",
     "class:Voleur-min": "https://i.ibb.co/0p9dv1yS/Voleur-min.jpg",
     "class:VoleurF": "https://i.ibb.co/ycFGm0WV/Voleur-F.jpg",
     "don:Agilité": "https://i.ibb.co/V1sqcRQ/Agilit.jpg",
@@ -24209,7 +24205,20 @@ select:focus {
               JdrApp.modules.router._forceObjectsRefresh = true;
             }
             JdrApp.modules.router.navigate(route);
-            
+
+            // Scroll to top when manually navigating via TOC (with delay to ensure page is rendered)
+            setTimeout(() => {
+              // Scroll multiple possible containers to ensure it works
+              window.scrollTo(0, 0);
+              document.documentElement.scrollTop = 0;
+              document.body.scrollTop = 0;
+              // Also scroll the main content containers
+              const mainPage = document.querySelector('main.page');
+              if (mainPage) mainPage.scrollTop = 0;
+              const views = document.getElementById('views');
+              if (views) views.scrollTop = 0;
+            }, 50);
+
             // Auto-close sidebar on mobile/touch devices after navigation
             this.autoCloseMobileSidebar();
           }

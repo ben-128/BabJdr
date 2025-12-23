@@ -612,7 +612,20 @@
               JdrApp.modules.router._forceObjectsRefresh = true;
             }
             JdrApp.modules.router.navigate(route);
-            
+
+            // Scroll to top when manually navigating via TOC (with delay to ensure page is rendered)
+            setTimeout(() => {
+              // Scroll multiple possible containers to ensure it works
+              window.scrollTo(0, 0);
+              document.documentElement.scrollTop = 0;
+              document.body.scrollTop = 0;
+              // Also scroll the main content containers
+              const mainPage = document.querySelector('main.page');
+              if (mainPage) mainPage.scrollTop = 0;
+              const views = document.getElementById('views');
+              if (views) views.scrollTop = 0;
+            }, 50);
+
             // Auto-close sidebar on mobile/touch devices after navigation
             this.autoCloseMobileSidebar();
           }
