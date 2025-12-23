@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-12-23T14:29:21.707Z by JdrBab Build System -->
+<!-- Generated on 2025-12-23T14:32:40.733Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -4504,6 +4504,21 @@ article[data-page="enchanteur"] .illus img:hover,
   border-color: var(--ui-border) !important;
 }
 
+/* ─────────────────────────── Element Pairs Section ─────────────────────────── */
+.element-pairs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.element-pairs .pair {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 1.2rem;
+}
 
 /* ============================================================================ */
 /* JDR-BAB APPLICATION - COMPREHENSIVE ANIMATION SYSTEM                        */
@@ -7595,23 +7610,6 @@ button:active,
     0 1px 0 rgba(0, 0, 0, 0.4) !important;
 }
 
-/* 4. Icônes pixel-art style (curseur de sélection) */
-.card:hover::before,
-.btn-base:hover::before {
-  content: '▶';
-  position: absolute;
-  left: -20px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--ui-border-light, #e0e0f0);
-  font-size: 12px;
-  animation: blink-cursor 0.8s infinite;
-}
-
-@keyframes blink-cursor {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
-}
 
 /* 5. Séparateurs pixel décoratifs */
 .ornamental-divider,
@@ -11839,7 +11837,7 @@ h3::after {
       "type": "card",
       "id": "element-pairs",
       "title": "Paires opposées",
-      "content": "<div class=\"element-pairs\"><div class=\"pair\"><img src=\"https://i.ibb.co/VWfKvNCL/element-Feu.png\" alt=\"Feu\" style=\"width: 24px; height: 24px; vertical-align: middle;\"> <span style=\"color: #ff6b35; font-weight: bold;\">Feu</span> ⟷ <img src=\"https://i.ibb.co/bMVKwNQP/element-Eau.png\" alt=\"Eau\" style=\"width: 24px; height: 24px; vertical-align: middle;\"> <span style=\"color: #4682b4; font-weight: bold;\">Eau</span></div><div class=\"pair\"><img src=\"https://i.ibb.co/gLxnsvfg/element-Terre.png\" alt=\"Terre\" style=\"width: 24px; height: 24px; vertical-align: middle;\"> <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> ⟷ <img src=\"https://i.ibb.co/W484kM90/element-Air.png\" alt=\"Air\" style=\"width: 24px; height: 24px; vertical-align: middle;\"> <span style=\"color: #22c55e; font-weight: bold;\">Air</span></div><div class=\"pair\"><img src=\"https://i.ibb.co/pjmcYV72/element-Lumi-re.png\" alt=\"Lumière\" style=\"width: 24px; height: 24px; vertical-align: middle;\"> <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span> ⟷ <img src=\"https://i.ibb.co/b5qK7czM/element-Nuit.png\" alt=\"Nuit\" style=\"width: 24px; height: 24px; vertical-align: middle;\"> <span style=\"color: #1a1a1a; font-weight: bold;\">Nuit</span></div><div class=\"pair\"><img src=\"https://i.ibb.co/rKYgZ4Yp/element-Divin.png\" alt=\"Divin\" style=\"width: 24px; height: 24px; vertical-align: middle;\"> <span style=\"color: #f5f5f5; font-weight: bold; background: rgba(100, 100, 100, 0.3); padding: 2px 4px; border-radius: 3px;\">Divin</span> ⟷ <img src=\"https://i.ibb.co/SDD5KX34/element-Mal-fique.png\" alt=\"Maléfique\" style=\"width: 24px; height: 24px; vertical-align: middle;\"> <span style=\"color: #8b5cf6; font-weight: bold;\">Maléfique</span></div></div>"
+      "content": "<div class=\"element-pairs\"><div class=\"pair\"><img src=\"https://i.ibb.co/VWfKvNCL/element-Feu.png\" alt=\"Feu\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> <span style=\"color: #ff6b35; font-weight: bold;\">Feu</span> ⟷ <img src=\"https://i.ibb.co/bMVKwNQP/element-Eau.png\" alt=\"Eau\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> <span style=\"color: #4682b4; font-weight: bold;\">Eau</span></div><div class=\"pair\"><img src=\"https://i.ibb.co/gLxnsvfg/element-Terre.png\" alt=\"Terre\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> ⟷ <img src=\"https://i.ibb.co/W484kM90/element-Air.png\" alt=\"Air\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> <span style=\"color: #22c55e; font-weight: bold;\">Air</span></div><div class=\"pair\"><img src=\"https://i.ibb.co/pjmcYV72/element-Lumi-re.png\" alt=\"Lumière\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span> ⟷ <img src=\"https://i.ibb.co/b5qK7czM/element-Nuit.png\" alt=\"Nuit\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> <span style=\"color: #1a1a1a; font-weight: bold;\">Nuit</span></div><div class=\"pair\"><img src=\"https://i.ibb.co/rKYgZ4Yp/element-Divin.png\" alt=\"Divin\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> <span style=\"color: #f5f5f5; font-weight: bold; background: rgba(100, 100, 100, 0.3); padding: 2px 4px; border-radius: 3px;\">Divin</span> ⟷ <img src=\"https://i.ibb.co/SDD5KX34/element-Mal-fique.png\" alt=\"Maléfique\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> <span style=\"color: #8b5cf6; font-weight: bold;\">Maléfique</span></div></div>"
     },
     {
       "type": "card",

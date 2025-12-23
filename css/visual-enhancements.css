@@ -405,23 +405,6 @@ button:active,
     0 1px 0 rgba(0, 0, 0, 0.4) !important;
 }
 
-/* 4. Icônes pixel-art style (curseur de sélection) */
-.card:hover::before,
-.btn-base:hover::before {
-  content: '▶';
-  position: absolute;
-  left: -20px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--ui-border-light, #e0e0f0);
-  font-size: 12px;
-  animation: blink-cursor 0.8s infinite;
-}
-
-@keyframes blink-cursor {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
-}
 
 /* 5. Séparateurs pixel décoratifs */
 .ornamental-divider,
