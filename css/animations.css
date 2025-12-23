@@ -467,48 +467,7 @@ input:focus, textarea:focus, select:focus {
   /* No visual changes on hover */
 }
 
-/* When JavaScript is controlling the transform */
-.illus img.js-3d-active {
-  filter: brightness(1.15) contrast(1.15) saturate(1.2);
-  box-shadow:
-    0 20px 40px rgba(0,0,0,0.3),
-    0 10px 20px rgba(139,69,19,0.2),
-    0 0 30px rgba(212,175,55,0.4),
-    inset 0 2px 4px rgba(255,255,255,0.2);
-}
-
-/* Animation de glow en boucle */
-.illus img.image-glow-active {
-  animation: imageGlow 2s ease-in-out infinite;
-}
-
-/* Specialized 3D hover effects disabled */
-
-/* Card images still get 3D effect but cards themselves don't */
-
-/* Enhanced effects when JS is controlling */
-.illus-spell img.js-3d-active {
-  box-shadow:
-    0 25px 50px rgba(0,0,0,0.25),
-    0 0 40px rgba(212,175,55,0.6),
-    0 0 80px rgba(212,175,55,0.3);
-}
-
-/* Removed class image JS effects to prevent section rotation */
-
-.illus-don img.js-3d-active {
-  box-shadow:
-    0 15px 35px rgba(0,0,0,0.35),
-    0 0 25px rgba(212,175,55,0.5);
-}
-
-.card .illus img.js-3d-active {
-  box-shadow:
-    0 35px 70px rgba(0,0,0,0.3),
-    0 15px 30px rgba(139,69,19,0.25),
-    0 0 60px rgba(212,175,55,0.4),
-    inset 0 3px 6px rgba(255,255,255,0.25);
-}
+/* All JS-controlled hover effects disabled to prevent visual changes */
 
 /* 3D frame effect - creates depth illusion around images */
 .illus img::before {
