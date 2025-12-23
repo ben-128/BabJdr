@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-12-23T11:07:49.777Z by JdrBab Build System -->
+<!-- Generated on 2025-12-23T11:13:01.408Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24209,7 +24209,20 @@ select:focus {
               JdrApp.modules.router._forceObjectsRefresh = true;
             }
             JdrApp.modules.router.navigate(route);
-            
+
+            // Scroll to top when manually navigating via TOC (with delay to ensure page is rendered)
+            setTimeout(() => {
+              // Scroll multiple possible containers to ensure it works
+              window.scrollTo(0, 0);
+              document.documentElement.scrollTop = 0;
+              document.body.scrollTop = 0;
+              // Also scroll the main content containers
+              const mainPage = document.querySelector('main.page');
+              if (mainPage) mainPage.scrollTop = 0;
+              const views = document.getElementById('views');
+              if (views) views.scrollTop = 0;
+            }, 50);
+
             // Auto-close sidebar on mobile/touch devices after navigation
             this.autoCloseMobileSidebar();
           }
@@ -25926,7 +25939,7 @@ select:focus {
       this.show('favoris');
       this.updateActiveStates('favoris');
       
-      // Trigger favoris display update
+      // Trigger favoris display update with multiple attempts
       if (window.FavorisRenderer) {
         setTimeout(() => window.FavorisRenderer.updateFavorisDisplay(), 100);
       }
