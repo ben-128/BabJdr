@@ -22,39 +22,54 @@
 }
 
 /* ─────────────────────────── Enhanced Card System ─────────────────────────── */
-.card,
-.card-base {
-  /* Dark blue background like Blaze & Blade UI */
-  background: var(--gradient-parchment);
 
-  /* White/gray border */
+/* Cadres PARENTS (sections principales) - PLUS CLAIRS */
+.panel,
+.card-section,
+.section-card,
+.editable-section > .card:first-child,
+article > .card:first-of-type {
+  background: linear-gradient(145deg, #3a3a68 0%, #2e2e58 50%, #252548 100%);
   border: 2px solid var(--ui-border, #c0c0d0);
-
-  /* Dark shadows */
   box-shadow:
     0 10px 40px rgba(0, 0, 0, 0.4),
     0 4px 12px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-
-  /* Smooth transitions */
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-
-  /* Ornamental corners */
   position: relative;
 }
 
-/* Decorative corner ornaments - Removed per user request */
+/* Sous-cadres (items individuels) - légèrement plus sombres */
+.card,
+.card-base {
+  background: linear-gradient(145deg, #282850 0%, #202040 50%, #1a1a38 100%);
+  border: 2px solid var(--ui-border, #c0c0d0);
+  box-shadow:
+    0 6px 25px rgba(0, 0, 0, 0.5),
+    0 3px 10px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+}
+
+/* Cartes imbriquées - plus sombres */
+.card .card,
+.panel .card,
+.card-section .card {
+  background: linear-gradient(145deg, #1e1e3a 0%, #181830 50%, #141428 100%);
+  border-color: rgba(192, 192, 208, 0.4);
+}
 
 /* Enhanced hover state */
 .card:hover,
-.card-base:hover {
-  transform: translateY(-4px) scale(1.01);
+.card-base:hover,
+.panel:hover {
+  transform: translateY(-3px);
   box-shadow:
-    0 20px 60px rgba(0, 0, 0, 0.5),
-    0 8px 20px rgba(0, 0, 0, 0.35),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15),
-    0 0 20px var(--accent-glow);
-
+    0 15px 50px rgba(0, 0, 0, 0.55),
+    0 6px 18px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 0 15px var(--accent-glow);
   border-color: var(--ui-border-light, #e0e0f0);
 }
 

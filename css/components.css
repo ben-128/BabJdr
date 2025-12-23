@@ -761,19 +761,11 @@ body.dev-off .new-collection-card {
   animation: cardEntry 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.card.spell-card {
-  border-left: 4px solid var(--feu);
-  background: linear-gradient(135deg, var(--card), rgba(255,107,53,0.02));
-}
-
-.card.don-card {
-  border-left: 4px solid var(--ui-border);
-  background: linear-gradient(135deg, var(--card), rgba(24,24,48,0.5));
-}
-
+/* Cartes - pas de bordure colorée à gauche */
+.card.spell-card,
+.card.don-card,
 .card.class-card {
-  border-left: 4px solid var(--ui-border-light, #606078);
-  background: linear-gradient(135deg, var(--card), rgba(32,32,64,0.5));
+  border-left: none;
 }
 
 @keyframes cardEntry {

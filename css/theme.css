@@ -19,6 +19,8 @@
 
   /* UI Colors - Faithful to game (white borders, dark blue boxes) */
   --ui-blue:#181830;         /* fond des boîtes UI - bleu marine */
+  --ui-blue-light:#242448;   /* fond cadre parent - plus clair */
+  --ui-blue-dark:#101020;    /* fond sous-cadre - plus sombre */
   --ui-border:#c0c0d0;       /* bordure gris clair/blanc */
   --ui-border-light:#e0e0f0; /* bordure blanche */
   --ui-glow:rgba(200,200,240,.2);
@@ -34,10 +36,13 @@
   --image-border: 2px solid var(--ui-border);
   --image-shadow: 0 2px 8px rgba(0,0,0,.4);
 
-  /* Background - Wood texture */
+  /* Background - Enhanced Wood texture */
   --bg-texture:
-    radial-gradient(ellipse at 30% 30%, rgba(80,60,40,.2) 0%, transparent 50%),
-    radial-gradient(ellipse at 70% 70%, rgba(60,40,30,.15) 0%, transparent 50%);
+    repeating-linear-gradient(90deg, rgba(60,40,25,.08) 0px, transparent 2px, transparent 8px),
+    repeating-linear-gradient(0deg, rgba(40,25,15,.05) 0px, transparent 1px, transparent 20px),
+    radial-gradient(ellipse at 25% 25%, rgba(90,60,35,.25) 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 75%, rgba(70,45,25,.2) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(50,30,15,.15) 0%, transparent 60%);
 
   /* Element Colors - Muted */
   --feu:#c04030; --feu-bg:rgba(192,64,48,.15); --feu-border:rgba(192,64,48,.5);
@@ -60,7 +65,7 @@ body{
   margin:0;
   background:
     var(--bg-texture),
-    linear-gradient(180deg, #4a3025 0%, #3a2518 50%, #4a3025 100%);
+    linear-gradient(180deg, #5a4035 0%, #3a2518 40%, #2a1810 60%, #3a2518 100%);
   color:var(--paper-ink);
   font: 17px/1.7 "Crimson Text", Georgia, serif;
   -webkit-font-smoothing:antialiased;
@@ -198,6 +203,25 @@ h3 {
   color: #b0b0c0;
 }
 
+/* Séparation sous les h3 de sections (Capacités de classe, etc.) */
+article h3 {
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--ui-border, #c0c0d0);
+  position: relative;
+}
+
+article h3::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--ui-border-light, #e0e0f0), transparent);
+}
+
 h4, h5, h6 {
   font-size: clamp(15px, 2vw, 20px);
   font-weight: 400;
@@ -250,8 +274,9 @@ h4, h5, h6 {
    CARDS - Blaze & Blade UI Box Style (gray borders)
    ═══════════════════════════════════════════════════════════════ */
 
-.card, .card-base {
-  background: var(--ui-blue);
+/* Cadres parents (sections, catégories) - plus clairs */
+.panel, .card-section, .section-card, article > .card:first-of-type {
+  background: var(--ui-blue-light, #242448);
   border: 2px solid var(--ui-border);
   box-shadow: var(--card-shadow);
   border-radius: 4px;
@@ -260,7 +285,24 @@ h4, h5, h6 {
   transition: all var(--transition-fast);
 }
 
-.card:hover, .card-base:hover {
+/* Sous-cadres (items, détails) - plus sombres */
+.card, .card-base {
+  background: var(--ui-blue-dark, #101020);
+  border: 2px solid var(--ui-border);
+  box-shadow: var(--card-shadow);
+  border-radius: 4px;
+  padding: 16px;
+  margin: 12px 0;
+  transition: all var(--transition-fast);
+}
+
+/* Cartes imbriquées encore plus sombres */
+.card .card, .panel .card {
+  background: var(--ui-blue-dark, #101020);
+  border-color: rgba(192, 192, 208, 0.5);
+}
+
+.card:hover, .card-base:hover, .panel:hover {
   border-color: var(--ui-border-light);
   box-shadow: var(--card-shadow), 0 0 8px var(--ui-glow);
 }
@@ -438,6 +480,15 @@ img:not([src*="stat-"]):not([src*="element-"]):not(.stat-icon):not(.element-icon
   display: inline-block;
   margin: 2px;
   border-radius: 3px;
+}
+
+/* Badges d'éléments - pas de fond, pas de bordure */
+.element-badge {
+  background: none !important;
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  box-shadow: none !important;
 }
 
 .tag-feu, .badge-feu { border-color: var(--feu); color: var(--feu); }

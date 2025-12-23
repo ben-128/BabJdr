@@ -12,11 +12,11 @@
 .justify-center{justify-content:center} .justify-start{justify-content:flex-start} .justify-end{justify-content:flex-end}
 .gap-1{gap:var(--space-xs)} .gap-2{gap:var(--space-md)} .gap-3{gap:var(--space-lg)}
 
-/* Element color utilities */
+/* Element color utilities - texte coloré uniquement, pas de fond */
 .text-feu{color:var(--feu)} .text-air{color:var(--air)} .text-eau{color:var(--eau)} .text-terre{color:var(--terre)} .text-divin{color:var(--divin)} .text-malefique{color:var(--malefique)}
-.bg-feu{background:var(--feu-bg);border-color:var(--feu-border)} .bg-air{background:var(--air-bg);border-color:var(--air-border)}
-.bg-eau{background:var(--eau-bg);border-color:var(--eau-border)} .bg-terre{background:var(--terre-bg);border-color:var(--terre-border)}
-.bg-divin{background:var(--divin-bg);border-color:var(--divin-border)} .bg-malefique{background:var(--malefique-bg);border-color:var(--malefique-border)}
+.bg-feu{background:transparent;border-color:var(--feu)} .bg-air{background:transparent;border-color:var(--air)}
+.bg-eau{background:transparent;border-color:var(--eau)} .bg-terre{background:transparent;border-color:var(--terre)}
+.bg-divin{background:transparent;border-color:var(--divin)} .bg-malefique{background:transparent;border-color:var(--malefique)}
 
 /* Grid utilities */
 .grid{display:grid;gap:var(--space-lg)}
