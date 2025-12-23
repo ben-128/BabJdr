@@ -351,10 +351,34 @@ if (window.MANIFEST_DATA) {
     delete manifest.screenshots;
     console.log('📱 PWA manifest adapted for file:// protocol');
   } else {
-    // For HTTPS - use original manifest as-is
-    console.log('📱 PWA using original manifest for HTTPS');
+    // For HTTPS - convert relative icon paths to absolute URLs
+    // Blob URLs have no base path, so relative paths don't resolve
+    const baseUrl = window.location.href.replace(/\/[^\/]*$/, '/'); // Get directory URL
+
+    // Convert icon paths to absolute URLs
+    manifest.icons = manifest.icons.map(icon => ({
+      ...icon,
+      src: new URL(icon.src, baseUrl).href
+    }));
+
+    // Also fix shortcuts icons if present
+    if (manifest.shortcuts) {
+      manifest.shortcuts = manifest.shortcuts.map(shortcut => ({
+        ...shortcut,
+        icons: shortcut.icons ? shortcut.icons.map(icon => ({
+          ...icon,
+          src: new URL(icon.src, baseUrl).href
+        })) : []
+      }));
+    }
+
+    // Fix start_url and scope for GitHub Pages subpath
+    manifest.start_url = window.location.href;
+    manifest.scope = baseUrl;
+
+    console.log('📱 PWA manifest with absolute URLs for HTTPS:', manifest.icons[0]?.src);
   }
-  
+
   // Create manifest blob and URL
   const manifestBlob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
   const manifestUrl = URL.createObjectURL(manifestBlob);
