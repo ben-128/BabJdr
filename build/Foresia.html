@@ -38761,20 +38761,6 @@ const canUseServiceWorker = 'serviceWorker' in navigator &&
    window.location.hostname === '127.0.0.1');
 
 if (canUseServiceWorker) {
-  // TEMPORARY: Unregister old service workers and clear cache to fix loading issues
-  navigator.serviceWorker.getRegistrations().then(regs => {
-    regs.forEach(reg => {
-      console.log('🧹 Unregistering old SW:', reg.scope);
-      reg.unregister();
-    });
-  });
-  caches.keys().then(names => {
-    names.forEach(name => {
-      console.log('🧹 Deleting cache:', name);
-      caches.delete(name);
-    });
-  });
-
   // Service Worker Registration - use relative path for GitHub Pages compatibility
   const swUrl = '../sw.js';
 
@@ -38841,56 +38827,6 @@ if (!canUseServiceWorker && window.MANIFEST_DATA) {
   console.log('💡 Limited PWA support without Service Worker');
   console.log('📱 Try: Add to Home Screen (mobile) or Install App (desktop)');
 }
-
-// ========== PWA DIAGNOSTIC ==========
-window.PWA_DIAG = {
-  https: location.protocol === 'https:',
-  manifestLink: !!document.querySelector('link[rel="manifest"]'),
-  swSupported: 'serviceWorker' in navigator,
-  swRegistered: false,
-  installPromptFired: false,
-  iconsOK: null
-};
-
-// Check SW registration
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.getRegistration().then(r => {
-    window.PWA_DIAG.swRegistered = !!r;
-    window.PWA_DIAG.swScope = r?.scope || 'none';
-  });
-}
-
-// Check icon
-fetch(new URL('../assets/pwa/icon-192x192.png', location.href).href, {method:'HEAD'})
-  .then(r => window.PWA_DIAG.iconsOK = r.ok)
-  .catch(() => window.PWA_DIAG.iconsOK = false);
-
-window.addEventListener('beforeinstallprompt', () => window.PWA_DIAG.installPromptFired = true);
-
-// Show diagnostic
-window.showPWADiag = function() {
-  const d = window.PWA_DIAG;
-  const box = document.createElement('div');
-  box.innerHTML = '<div style="position:fixed;top:10px;left:10px;right:10px;background:#111;color:#fff;padding:15px;border-radius:10px;z-index:999999;font:12px monospace;"><b style="color:gold;">PWA Diagnostic v6</b><br><br>' +
-    (d.https?'✅':'❌') + ' HTTPS: ' + d.https + '<br>' +
-    (d.manifestLink?'✅':'❌') + ' Manifest link<br>' +
-    (d.swSupported?'✅':'❌') + ' SW supported<br>' +
-    (d.swRegistered?'✅':'❌') + ' SW registered (scope: '+(d.swScope||'?')+')<br>' +
-    (d.installPromptFired?'✅':'❌') + ' Install prompt fired<br>' +
-    (d.iconsOK?'✅':'❌') + ' Icons accessible<br><br>' +
-    '<button onclick="this.parentElement.remove()" style="background:#e63946;color:#fff;border:none;padding:8px 16px;border-radius:5px;">Fermer</button></div>';
-  document.body.appendChild(box);
-};
-
-// Auto-show + button
-document.addEventListener('DOMContentLoaded', function() {
-  const btn = document.createElement('button');
-  btn.innerHTML = '🔍';
-  btn.style.cssText = 'position:fixed;bottom:70px;right:10px;z-index:999999;background:#e63946;color:#fff;border:none;width:50px;height:50px;border-radius:50%;font-size:20px;box-shadow:0 4px 12px rgba(0,0,0,0.4);';
-  btn.onclick = window.showPWADiag;
-  document.body.appendChild(btn);
-  setTimeout(window.showPWADiag, 1500);
-});
 </script>
 </body>
 </html>
