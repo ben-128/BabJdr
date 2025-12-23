@@ -12,6 +12,7 @@
   class FavorisRenderer {
     constructor() {
       this.isInitialized = false;
+      this._lastUpdateTime = 0;
       this.initializeEventListeners();
     }
 
@@ -44,6 +45,13 @@
      * Met à jour l'affichage complet des favoris
      */
     updateFavorisDisplay() {
+      // Debounce: ignorer les appels trop rapprochés (moins de 200ms)
+      const now = Date.now();
+      if (now - this._lastUpdateTime < 200) {
+        return;
+      }
+      this._lastUpdateTime = now;
+
       if (!window.FavorisManager) {
         console.warn('FavorisManager not available');
         return;
@@ -53,12 +61,6 @@
       const favorisPage = document.querySelector('[data-page="favoris"]');
       if (!favorisPage) {
         return;
-      }
-      
-      // Vérifier si la page est visible
-      const isVisible = favorisPage.style.display !== 'none' && favorisPage.classList.contains('active');
-      if (!isVisible) {
-        // Essayer quand même de mettre à jour, peut-être que les styles CSS gèrent la visibilité
       }
 
       // Mettre à jour dans l'ordre : objets d'abord, puis sorts (même ordre que PageBuilder)
@@ -105,8 +107,9 @@
         setTimeout(() => JdrApp.modules.renderer.autoLoadImages(), 50);
       }
 
-      // S'assurer que la section n'est pas pliée si elle a du contenu
+      // S'assurer que la section est visible et n'est pas pliée si elle a du contenu
       if (section && favorisNames.length > 0) {
+        section.style.display = 'block';
         section.classList.remove('collapsed');
       }
     }
@@ -150,8 +153,9 @@
         setTimeout(() => JdrApp.modules.renderer.autoLoadImages(), 50);
       }
 
-      // S'assurer que la section n'est pas pliée si elle a du contenu
+      // S'assurer que la section est visible et n'est pas pliée si elle a du contenu
       if (section && favorisNames.length > 0) {
+        section.style.display = 'block';
         section.classList.remove('collapsed');
       }
     }

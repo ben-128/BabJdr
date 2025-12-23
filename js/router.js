@@ -2345,8 +2345,6 @@
       // Trigger favoris display update with multiple attempts
       if (window.FavorisRenderer) {
         setTimeout(() => window.FavorisRenderer.updateFavorisDisplay(), 100);
-        setTimeout(() => window.FavorisRenderer.updateFavorisDisplay(), 500);
-        setTimeout(() => window.FavorisRenderer.updateFavorisDisplay(), 1000);
       }
       
       return true;

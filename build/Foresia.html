@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-12-23T10:28:26.226Z by JdrBab Build System -->
+<!-- Generated on 2025-12-23T11:07:49.777Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22044,6 +22044,7 @@ select:focus {
   class FavorisRenderer {
     constructor() {
       this.isInitialized = false;
+      this._lastUpdateTime = 0;
       this.initializeEventListeners();
     }
 
@@ -22076,6 +22077,13 @@ select:focus {
      * Met à jour l'affichage complet des favoris
      */
     updateFavorisDisplay() {
+      // Debounce: ignorer les appels trop rapprochés (moins de 200ms)
+      const now = Date.now();
+      if (now - this._lastUpdateTime < 200) {
+        return;
+      }
+      this._lastUpdateTime = now;
+
       if (!window.FavorisManager) {
         console.warn('FavorisManager not available');
         return;
@@ -22085,12 +22093,6 @@ select:focus {
       const favorisPage = document.querySelector('[data-page="favoris"]');
       if (!favorisPage) {
         return;
-      }
-      
-      // Vérifier si la page est visible
-      const isVisible = favorisPage.style.display !== 'none' && favorisPage.classList.contains('active');
-      if (!isVisible) {
-        // Essayer quand même de mettre à jour, peut-être que les styles CSS gèrent la visibilité
       }
 
       // Mettre à jour dans l'ordre : objets d'abord, puis sorts (même ordre que PageBuilder)
@@ -22137,8 +22139,9 @@ select:focus {
         setTimeout(() => JdrApp.modules.renderer.autoLoadImages(), 50);
       }
 
-      // S'assurer que la section n'est pas pliée si elle a du contenu
+      // S'assurer que la section est visible et n'est pas pliée si elle a du contenu
       if (section && favorisNames.length > 0) {
+        section.style.display = 'block';
         section.classList.remove('collapsed');
       }
     }
@@ -22182,8 +22185,9 @@ select:focus {
         setTimeout(() => JdrApp.modules.renderer.autoLoadImages(), 50);
       }
 
-      // S'assurer que la section n'est pas pliée si elle a du contenu
+      // S'assurer que la section est visible et n'est pas pliée si elle a du contenu
       if (section && favorisNames.length > 0) {
+        section.style.display = 'block';
         section.classList.remove('collapsed');
       }
     }
@@ -24205,20 +24209,7 @@ select:focus {
               JdrApp.modules.router._forceObjectsRefresh = true;
             }
             JdrApp.modules.router.navigate(route);
-
-            // Scroll to top when manually navigating via TOC (with delay to ensure page is rendered)
-            setTimeout(() => {
-              // Scroll multiple possible containers to ensure it works
-              window.scrollTo(0, 0);
-              document.documentElement.scrollTop = 0;
-              document.body.scrollTop = 0;
-              // Also scroll the main content containers
-              const mainPage = document.querySelector('main.page');
-              if (mainPage) mainPage.scrollTop = 0;
-              const views = document.getElementById('views');
-              if (views) views.scrollTop = 0;
-            }, 50);
-
+            
             // Auto-close sidebar on mobile/touch devices after navigation
             this.autoCloseMobileSidebar();
           }
@@ -25935,11 +25926,9 @@ select:focus {
       this.show('favoris');
       this.updateActiveStates('favoris');
       
-      // Trigger favoris display update with multiple attempts
+      // Trigger favoris display update
       if (window.FavorisRenderer) {
         setTimeout(() => window.FavorisRenderer.updateFavorisDisplay(), 100);
-        setTimeout(() => window.FavorisRenderer.updateFavorisDisplay(), 500);
-        setTimeout(() => window.FavorisRenderer.updateFavorisDisplay(), 1000);
       }
       
       return true;
