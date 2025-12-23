@@ -470,14 +470,14 @@
   };
 
   window.ElementIcons = {
-    'Feu': '<img src="https://i.ibb.co/VWfKvNCL/element-Feu.png" alt="Feu" class="element-icon" style="width: 18px; height: 18px; vertical-align: middle;">',
-    'Eau': '<img src="https://i.ibb.co/bMVKwNQP/element-Eau.png" alt="Eau" class="element-icon" style="width: 18px; height: 18px; vertical-align: middle;">',
-    'Terre': '<img src="https://i.ibb.co/gLxnsvfg/element-Terre.png" alt="Terre" class="element-icon" style="width: 18px; height: 18px; vertical-align: middle;">',
-    'Air': '<img src="https://i.ibb.co/W484kM90/element-Air.png" alt="Air" class="element-icon" style="width: 18px; height: 18px; vertical-align: middle;">',
-    'Lumière': '<img src="https://i.ibb.co/pjmcYV72/element-Lumi-re.png" alt="Lumière" class="element-icon" style="width: 18px; height: 18px; vertical-align: middle;">',
-    'Nuit': '<img src="https://i.ibb.co/b5qK7czM/element-Nuit.png" alt="Nuit" class="element-icon" style="width: 18px; height: 18px; vertical-align: middle;">',
-    'Divin': '<img src="https://i.ibb.co/rKYgZ4Yp/element-Divin.png" alt="Divin" class="element-icon" style="width: 18px; height: 18px; vertical-align: middle;">',
-    'Maléfique': '<img src="https://i.ibb.co/SDD5KX34/element-Mal-fique.png" alt="Maléfique" class="element-icon" style="width: 18px; height: 18px; vertical-align: middle;">'
+    'Feu': '<img src="https://i.ibb.co/VWfKvNCL/element-Feu.png" alt="Feu" class="element-icon" style="width: 36px; height: 36px; vertical-align: middle;">',
+    'Eau': '<img src="https://i.ibb.co/bMVKwNQP/element-Eau.png" alt="Eau" class="element-icon" style="width: 36px; height: 36px; vertical-align: middle;">',
+    'Terre': '<img src="https://i.ibb.co/gLxnsvfg/element-Terre.png" alt="Terre" class="element-icon" style="width: 36px; height: 36px; vertical-align: middle;">',
+    'Air': '<img src="https://i.ibb.co/W484kM90/element-Air.png" alt="Air" class="element-icon" style="width: 36px; height: 36px; vertical-align: middle;">',
+    'Lumière': '<img src="https://i.ibb.co/pjmcYV72/element-Lumi-re.png" alt="Lumière" class="element-icon" style="width: 36px; height: 36px; vertical-align: middle;">',
+    'Nuit': '<img src="https://i.ibb.co/b5qK7czM/element-Nuit.png" alt="Nuit" class="element-icon" style="width: 36px; height: 36px; vertical-align: middle;">',
+    'Divin': '<img src="https://i.ibb.co/rKYgZ4Yp/element-Divin.png" alt="Divin" class="element-icon" style="width: 36px; height: 36px; vertical-align: middle;">',
+    'Maléfique': '<img src="https://i.ibb.co/SDD5KX34/element-Mal-fique.png" alt="Maléfique" class="element-icon" style="width: 36px; height: 36px; vertical-align: middle;">'
   };
 
 })();

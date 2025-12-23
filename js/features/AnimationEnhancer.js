@@ -218,25 +218,10 @@
     },
 
     /**
-     * Desktop mouse tracking (existing code)
+     * Desktop mouse tracking - DISABLED to prevent hover effects
      */
     setupDesktopMouseTracking() {
-      // Use mouseenter/mouseleave for clean zone-based triggers
-      document.addEventListener('mouseenter', (e) => {
-        if (e.target && e.target.tagName === 'IMG' && e.target.closest('.illus')) {
-          const img = e.target;
-          // Enter hover zone - start glow animation
-          img.classList.add('js-3d-active', 'image-glow-active');
-        }
-      }, true);
-
-      document.addEventListener('mouseleave', (e) => {
-        if (e.target && e.target.tagName === 'IMG' && e.target.closest('.illus')) {
-          const img = e.target;
-          // Exit hover zone - stop glow animation cleanly
-          img.classList.remove('js-3d-active', 'image-glow-active');
-        }
-      }, true);
+      // Hover effects disabled - no classes added on mouseenter/mouseleave
     },
 
     /**

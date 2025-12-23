@@ -1266,12 +1266,16 @@
           `;
         }
         
+        // Chercher le vrai objet dans OBJETS.objets basé sur le numéro (évite la duplication)
+        const realObjet = window.OBJETS?.objets?.find(o => o.numero === fourchette.objet.numero);
+        const objetNom = realObjet?.nom || fourchette.objet.nom || 'Objet inconnu';
+
         return `
           <tr>
             <td style="text-align: center; font-weight: bold; color: var(--accent);">${range}</td>
             <td>
               <span class="object-preview-link" data-object-numero="${fourchette.objet.numero}" style="color: var(--accent); cursor: pointer; text-decoration: underline;" title="Cliquer pour voir la preview de l'objet">
-                ${fourchette.objet.nom} (N°${fourchette.objet.numero})
+                ${objetNom} (N°${fourchette.objet.numero})
               </span>
             </td>
           </tr>

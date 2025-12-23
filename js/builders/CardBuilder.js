@@ -689,11 +689,14 @@
           // Mode Eclats
           rewardDisplay = `<span style="color: var(--accent); font-weight: bold;">💎 ${fourchette.eclats} Eclats</span>`;
         } else {
-          // Mode Objet (comportement existant)
+          // Mode Objet - utiliser le numero pour chercher les vraies données dans OBJETS
           const objet = fourchette.objet;
-          rewardDisplay = objet?.type === 'reference' 
-            ? `<a href="#" class="object-preview-link" data-object-numero="${objet.numero}" style="color: var(--accent); text-decoration: none;" title="Cliquer pour prévisualiser l'objet #${objet.numero}">📦 ${objet.nom} (N°${objet.numero})</a>`
-            : `📦 ${objet?.nom || 'Objet inconnu'}`;
+          // Chercher le vrai objet dans OBJETS.objets basé sur le numéro (évite la duplication)
+          const realObjet = window.OBJETS?.objets?.find(o => o.numero === objet?.numero);
+          const objetNom = realObjet?.nom || objet?.nom || 'Objet inconnu';
+          rewardDisplay = objet?.type === 'reference'
+            ? `<a href="#" class="object-preview-link" data-object-numero="${objet.numero}" style="color: var(--accent); text-decoration: none;" title="Cliquer pour prévisualiser l'objet #${objet.numero}">📦 ${objetNom} (N°${objet.numero})</a>`
+            : `📦 ${objetNom}`;
         }
         
         const editButtons = shouldShowFourchetteButtons ? `
