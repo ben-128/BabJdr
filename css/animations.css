@@ -191,37 +191,12 @@
       border-color var(--duration-fast) ease;
   }
 
-  .card:hover {
-    /* Only shadow, no transform to prevent section rotation */
-    box-shadow:
-      0 8px 16px rgba(0,0,0,0.12),
-      0 4px 8px rgba(139,69,19,0.08);
-  }
-
-  /* Spell, monster and object cards - shadow only, no transform */
-  .spell-card:hover {
-    box-shadow:
-      0 10px 20px rgba(0,0,0,0.15),
-      0 0 15px rgba(212,175,55,0.2);
-  }
-
-  .monster-card:hover {
-    box-shadow:
-      0 10px 20px rgba(0,0,0,0.18),
-      0 0 10px rgba(139,69,19,0.15);
-  }
-
+  .card:hover,
+  .spell-card:hover,
+  .monster-card:hover,
   .objet-card:hover {
-    box-shadow:
-      0 10px 20px rgba(0,0,0,0.12),
-      0 0 12px rgba(212,175,55,0.25);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .objet-card:hover::before {
-    /* Shimmer effect disabled to prevent overlap on adjacent cards */
-    display: none;
+    /* Pas d'assombrissement au hover */
+    border-color: var(--ui-border-light, #e0e0f0);
   }
 }
 
@@ -803,10 +778,7 @@ input:focus, textarea:focus, select:focus {
 
 @media (prefers-color-scheme: dark) {
   .card:hover {
-    box-shadow:
-      0 20px 40px rgba(0,0,0,0.4),
-      0 8px 20px rgba(212,175,55,0.2),
-      inset 0 1px 0 rgba(255,255,255,0.05);
+    border-color: var(--ui-border-light, #e0e0f0);
   }
 
   .objet-card:hover::before {

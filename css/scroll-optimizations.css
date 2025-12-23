@@ -184,7 +184,7 @@ article.active .spell-card:nth-child(-n+7) {
   }
   
   article.active .card:not(.scrolling *):hover {
-    transform: translateY(-1px) scale(1.005);
+    border-color: var(--ui-border-light, #e0e0f0);
   }
 }
 

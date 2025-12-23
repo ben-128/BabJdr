@@ -305,7 +305,6 @@ h4, h5, h6 {
 
 .card:hover, .card-base:hover, .panel:hover {
   border-color: var(--ui-border-light);
-  box-shadow: var(--card-shadow), 0 0 8px var(--ui-glow);
 }
 
 .card-header, .card-title {

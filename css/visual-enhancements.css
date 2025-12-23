@@ -418,8 +418,9 @@ h3::after {
   letter-spacing: 1px;
 }
 
-/* Séparateur entre description et prérequis dans les dons */
-.don-prerequis {
+/* Séparateur entre effet et prérequis dans les dons et sorts */
+.don-prerequis,
+.spell-prerequis {
   margin-top: 1rem;
   padding-top: 1rem;
   border-top: 1px solid var(--ui-border, #c0c0d0);
