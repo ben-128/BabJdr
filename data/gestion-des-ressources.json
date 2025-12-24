@@ -26,7 +26,7 @@
       "type": "card",
       "id": "gestion-des-ressources-new-4-1756401498518",
       "title": "Vie",
-      "content": "Les points de vie représentent la vitalité d’un héros ou d’un monstre, la mesure de son endurance face aux blessures. Tant qu’il lui reste des PV, le personnage peut continuer à se battre, à courir et à agir. Quand ses PV tombent à zéro, il s’effondre, mourant. Voir la page <a href=\"#/combat\" style=\"color: var(--accent); text-decoration: underline;\">Combat</a>.\nUn personnage qui effectue un repos régénère un nombre de points de vie égal à sa valeur d’Endurance.<br>",
+      "content": "Les points de vie représentent la vitalité d’un héros ou d’un monstre, la mesure de son endurance face aux blessures. Tant qu’il lui reste des PV, le personnage peut continuer à se battre, à courir et à agir. Quand ses PV tombent à zéro, il s’effondre, mourant. Voir la page <a href=\"#/combat\" style=\"color: var(--accent); text-decoration: underline;\">Combat</a>.\n.<br>",
       "deletable": true,
       "sectionName": "Nouvelle section"
     },
