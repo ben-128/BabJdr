@@ -281,16 +281,35 @@ window.MANIFEST_DATA = ${fs.readFileSync(path.join(rootDir, 'config', 'manifest.
     // Audio configuration
     window.AUDIO_CONFIG = ${JSON.stringify(dataObject.audio_config || null, null, 2)};
 
-    // Mark as standalone version for renderer
+    // Mark as standalone version for renderer with build timestamp
     window.STANDALONE_VERSION = true;
-    
+    window.BUILD_VERSION = '${new Date().toISOString()}';
+
+    // Version check - clear old data if version changed
+    (function() {
+      var storedVersion = localStorage.getItem('foresia-build-version');
+      if (storedVersion !== window.BUILD_VERSION) {
+        // New version detected - clear all cached data
+        var keysToRemove = [];
+        for (var i = 0; i < localStorage.length; i++) {
+          var key = localStorage.key(i);
+          if (key && (key.startsWith('jdr-bab') || key.startsWith('foresia'))) {
+            keysToRemove.push(key);
+          }
+        }
+        keysToRemove.forEach(function(key) { localStorage.removeItem(key); });
+        localStorage.setItem('foresia-build-version', window.BUILD_VERSION);
+        console.log('New version detected, cache cleared:', window.BUILD_VERSION);
+      }
+    })();
+
     // Initialize app when DOM is ready
     document.addEventListener('DOMContentLoaded', function() {
       // Ensure dev mode is off
       document.body.className = 'dev-off';
-      
+
       // Initialize in standalone mode with embedded data
-      
+
       // Wait a bit to ensure all modules are loaded
       setTimeout(function() {
         // Initialize JdrApp if it exists
