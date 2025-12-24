@@ -557,7 +557,7 @@
     "dons": [
       {
         "nom": "Réparateur de baguettes",
-        "description": "Permet de regagner une charge sur un consomable Magie, une fois par jour.",
+        "description": "Permet, une fois par jour, de passer 10 minutes pour regagner une charge sur un consomable Magie (qui possède encore au moins une charge).",
         "prerequis": "<strong> Prérequis :</strong>-",
         "cout": "1 point de don"
       },
