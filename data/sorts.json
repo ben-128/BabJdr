@@ -15,7 +15,7 @@
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> Esquive.",
         "effetNormal": "<strong>Effet:</strong> Inflige (5 + Puiss. Sorts) dégâts de <span style=\"color: #e25822; font-weight: bold;\">Feu</span> à la cible.",
-        "effetCritique": "<strong>Coup Critique: </strong> La cible s'enflamme, infligeant (5 + Puiss. Sorts) dégâts de feu au prochain tour du lanceur."
+        "effetCritique": "<strong>Coup Critique: </strong> La cible s'enflamme, infligeant (5 + Puiss. Sorts) dégâts de <span style=\"color: #ff6b35; font-weight: bold;\">Feu</span> au prochain tour du lanceur."
       },
       {
         "nom": "Éclair",
@@ -154,6 +154,18 @@
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Trois zones de 3mx3m à portée deviennent du sable mouvant.\n<br> Elles sont considérées comme terrain difficile, ralentissant le déplacement de ceux qui y passent de moitié.\n<br> De plus, ceux qui rentrent dans ces zones ou commencent leur tour dedans subissent (10 + Puiss. Sorts) points de dégâts de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>.\n\n<br>Dure 5 tour.",
         "effetCritique": "<strong>Coup Critique: </strong> Les dégâts passent à (15 + Puiss. Sorts) et les zones restent jusqu'à la fin du combat."
+      },
+      {
+        "nom": "Vague de flammes",
+        "element": "Feu",
+        "description": "Après une longue incantation, une muraille de flammes infernales jaillit des mains du mage, consumant tout sur son passage et ne laissant derrière elle que cendres et désolation.",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 7",
+        "portee": "🎯 <strong>Portée:</strong> 15m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> <b>2</b> tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 30",
+        "resistance": "<strong>Sans effet si:</strong> Volant.",
+        "effetNormal": "<strong>Effet:</strong> Inflige (30 + Puiss. Sorts) dégâts de <span style=\"color: #e25822; font-weight: bold;\">Feu</span> aux créatures devant le lanceur, sur une largeur de 9m et une distance de 15m.",
+        "effetCritique": "<strong>Coup Critique: </strong> La cible s'enflamme, infligeant (30 + Puiss. Sorts) dégâts de <span style=\"color: #ff6b35; font-weight: bold;\">Feu</span> au prochain tour du lanceur."
       }
     ]
   },

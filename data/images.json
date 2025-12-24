@@ -476,10 +476,11 @@
     "sort:PurifiPhysique": "https://i.ibb.co/ksnZMxGJ/Purifi-Physique.png",
     "sort:ArmureElémentaire1": "https://i.ibb.co/SH5jcyv/Armure-El-mentaire1.png",
     "sort:ArmureElémentaire2": "https://i.ibb.co/jP9RKzdq/Armure-El-mentaire2.png",
-    "objet:Chitine de scarabée": "https://i.ibb.co/R1YXYF8/Chitine.png"
+    "objet:Chitine de scarabée": "https://i.ibb.co/R1YXYF8/Chitine.png",
+    "sort:Sorts de Mage:Vague de flammes": "https://i.ibb.co/6cvTp3M9/Vague-De-Flammes.png"
   },
   "meta": {
-    "total_images": 477,
+    "total_images": 478,
     "exported_date": "2025-12-24",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
