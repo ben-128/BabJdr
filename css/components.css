@@ -700,12 +700,12 @@ body.dev-off .new-collection-card {
   border-radius: 12px;
   padding: var(--space-md) var(--space-lg);
   min-height: 44px; /* Ensure minimum touch target size */
-  box-shadow: 
+  box-shadow:
     0 4px 16px rgba(0,0,0,.08),
     0 2px 4px rgba(0,0,0,.1),
     inset 0 1px 0 rgba(255,255,255,.2);
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: border-color var(--transition-fast);
   font-weight: 500;
   font-family: "Source Serif Pro", serif;
   text-transform: capitalize;
@@ -725,12 +725,7 @@ body.dev-off .new-collection-card {
 }
 
 .btn-base:hover {
-  transform: translate3d(0, -2px, 0) scale(1.02); /* Use 3D transform for better mobile performance */
-  box-shadow: 
-    0 8px 32px rgba(0,0,0,.15),
-    0 4px 8px rgba(0,0,0,.12),
-    inset 0 1px 0 rgba(255,255,255,.3);
-  border-color: var(--ui-border);
+  border-color: var(--ui-border-light, #e0e0f0);
 }
 
 .btn-base:hover::before {
@@ -1847,6 +1842,7 @@ article[data-page="enchanteur"] .illus img,
   cursor:pointer !important;
 }
 
+/* Hover effects on images disabled to prevent visual changes */
 .illus-spell img:hover, .illus-class img:hover, .illus-subclass img:hover, .illus-don img:hover,
 article[data-page="guerrier"] .illus img:hover,
 article[data-page="mage"] .illus img:hover,
@@ -1859,8 +1855,7 @@ article[data-page="enchanteur"] .illus img:hover,
 .illus[data-illus-key^="sort:"] img:hover,
 .illus[data-illus-key^="spellcategory:"] img:hover,
 .illus[data-illus-key^="don:"] img:hover {
-  transform:scale(1.03) !important; 
-  box-shadow:var(--image-shadow), 0 8px 25px rgba(139,69,19,.25) !important;
+  /* No visual changes on hover */
 }
 
 /* Variantes de taille d'images */

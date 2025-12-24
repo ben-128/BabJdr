@@ -977,14 +977,30 @@ const CampaignSchemas = {
     }
   },
 
-  saveSchema() {
-    const dataURL = this.canvas.toDataURL('image/png');
-
+  async saveSchema() {
     // Utiliser l'ID existant si on édite un schéma, sinon générer un nouvel ID
     const schemaId = this.editingSchemaId || ('schema_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9));
     const isEditing = this.editingSchemaId !== null;
 
-    // Stocker l'image dans la structure de données campagne
+    // Convert canvas to blob and upload to imgbb (never store base64)
+    let imageUrl;
+    try {
+      const blob = await new Promise(resolve => this.canvas.toBlob(resolve, 'image/png'));
+      const file = new File([blob], `schema_${schemaId}.png`, { type: 'image/png' });
+
+      // Show uploading notification
+      if (JdrApp?.modules?.ui?.showNotification) {
+        JdrApp.modules.ui.showNotification('⏳ Upload du schéma...', 'info');
+      }
+
+      imageUrl = await JdrApp.utils.uploadToImageBB(file);
+    } catch (e) {
+      console.error('Erreur lors de l\'upload du schéma:', e);
+      alert('Erreur upload: ' + e.message);
+      return;
+    }
+
+    // Stocker l'URL (pas le base64) dans la structure de données campagne
     try {
       if (!window.STATIC_PAGES) {
         window.STATIC_PAGES = {};
@@ -996,7 +1012,7 @@ const CampaignSchemas = {
         window.STATIC_PAGES.campagne.schemas = {};
       }
 
-      window.STATIC_PAGES.campagne.schemas[schemaId] = dataURL;
+      window.STATIC_PAGES.campagne.schemas[schemaId] = imageUrl;
 
       // Sauvegarder dans le storage
       if (window.EventBus && window.Events) {
@@ -1004,9 +1020,12 @@ const CampaignSchemas = {
       }
     } catch (e) {
       console.error('Erreur lors de la sauvegarde du schéma:', e);
-      alert('Erreur: le schéma est trop volumineux pour être sauvegardé.');
+      alert('Erreur: impossible de sauvegarder le schéma.');
       return;
     }
+
+    // For legacy mode, use the uploaded URL
+    const dataURL = imageUrl;
 
     // Créer un marqueur court
     const schemaMarker = `[schema:${schemaId}]`;

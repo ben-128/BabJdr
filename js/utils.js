@@ -398,14 +398,9 @@
         throw new Error('Upload failed: ' + (data.error ? data.error.message : 'Unknown error'));
       }
     } catch (error) {
-      console.warn('[Upload] ImgBB upload failed, falling back to local storage:', error.message);
-      // Fallback to local storage (base64)
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = (e) => resolve(e.target.result);
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
-      });
+      console.error('[Upload] ImgBB upload failed:', error.message);
+      // NEVER fallback to base64 - it bloats the JSON files and causes performance issues
+      throw new Error('Image upload failed: ' + error.message + '. Please try again later.');
     }
   };
 

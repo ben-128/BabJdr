@@ -337,14 +337,12 @@ button, .btn, .btn-base {
   padding: 10px 20px;
   cursor: pointer;
   letter-spacing: 0.03em;
-  transition: all var(--transition-fast);
+  transition: border-color var(--transition-fast);
   border-radius: 4px;
 }
 
 button:hover, .btn:hover, .btn-base:hover {
-  background: linear-gradient(180deg, #3a3a4a 0%, #2a2a38 100%);
   border-color: var(--ui-border-light);
-  color: #f0f0f0;
 }
 
 button:active, .btn:active, .btn-base:active {

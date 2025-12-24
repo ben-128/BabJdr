@@ -1,35 +1,13 @@
-
-sort de lutin :
-
-4:
-silence
-
-5 :
-buff degats magiques
-
-6:
-buff dégats physiques
-
-7:
-confus
-
-8:
-buff armure élément 1
-buff armure élément 2
-
-8: petrification
-
-9 :
-buff de groupe speed, debuff de groupe speed
-10:
-sleep de zone
-11:
-invisible
-mini TP
-Vol
-Changement de taille
-un buff de stats
+corrige cette erreur (standelone) : Foresia.html:38716 Uncaught SyntaxError: missing ) after argument list
 
 
+corrige les erreurs de loading d'image base 64 : Foresia.html:17016 Image timeout after 15000ms: data:image/png;base64,/9j/2wBDAAUF …
+En fait il ne devrait pas y avoir d'image hardcodés comme ca, juste des images de imgbb
 
+temps très long au démarrage, reste longtemps en chargement (à cause des images base64?), genre 10-15 secondes.
 
+Les cadres des sous classes ne sont pas centrés. pareils pour les cadres des pages de bases style pas Elements ou statistiques
+
+les images que j'insère via l'outil d'édition ne sont pas bien affiché après un export et reload. exemple dans la page création de personnage qui affiche [img:img_1766506775615_jxzspa0fq] au lieu de l'image
+
+les icones d'éléments dans les résistances élémentaires des monstres sont beaucoup trop grosses. divise par 2. mais seulement la et pas aux autres endroits.

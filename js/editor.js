@@ -475,32 +475,42 @@
       });
     },
 
-    handleImageUpload(event) {
+    async handleImageUpload(event) {
       const file = event.target.files[0];
       if (!file) return;
 
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const illus = event.target.closest('.illus');
-        const img = illus.querySelector('img');
-        const rmButton = illus.querySelector('.rm');
-        const illusKey = illus.dataset.illusKey;
+      const illus = event.target.closest('.illus');
+      const img = illus.querySelector('img');
+      const rmButton = illus.querySelector('.rm');
+      const illusKey = illus.dataset.illusKey;
 
-        img.src = e.target.result;
-        img.style.display = 'block';
+      // Show loading state
+      img.style.display = 'block';
+      img.style.opacity = '0.5';
+      img.alt = 'Uploading...';
+
+      try {
+        // Upload to imgbb (never store base64)
+        const imageUrl = await JdrApp.utils.uploadToImageBB(file);
+
+        img.src = imageUrl;
+        img.style.opacity = '1';
         if (rmButton) rmButton.style.display = 'block';
 
         if (JdrApp.modules.images?.setImageUrl) {
-          JdrApp.modules.images.setImageUrl(illusKey, e.target.result);
+          JdrApp.modules.images.setImageUrl(illusKey, imageUrl);
         }
 
-        EventBus.emit(Events.IMAGE_UPLOAD, { 
-          illusKey, 
-          src: e.target.result 
+        EventBus.emit(Events.IMAGE_UPLOAD, {
+          illusKey,
+          src: imageUrl
         });
-      };
-      
-      reader.readAsDataURL(file);
+      } catch (error) {
+        console.error('[Editor] Image upload failed:', error);
+        img.style.display = 'none';
+        img.style.opacity = '1';
+        alert('Erreur upload image: ' + error.message);
+      }
     },
 
     handleImageRemoval(event) {

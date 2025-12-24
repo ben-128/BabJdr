@@ -157,8 +157,7 @@
     "armureDivin": 0,
     "armureMalefique": 0,
     "abilites": "<strong>Griffes dévastatrices:</strong> Inflige 7 dégâts physiques à une cible.<br><strong>Rugissement:</strong> Cible à 9m  <span class=\"etat-link\" data-etat=\"Affaibli\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Affaibli</span> , si  (résistance altérations &lt; 4)",
-    "butin": "<strong>Butin:</strong> <span class=\"treasure-table-link\" data-table-name=\"Ours des Bois\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Ours des Bois]</span>",
-    "monster-initiative": "1"
+    "butin": "<strong>Butin:</strong> <span class=\"treasure-table-link\" data-table-name=\"Ours des Bois\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Ours des Bois]</span>"
   },
   {
     "nom": "Pouple de la forêt",
@@ -183,8 +182,7 @@
     "armureDivin": 0,
     "armureMalefique": 0,
     "abilites": "<strong>Accroche:</strong> Inflige 4 dégâts physiques. S'attache à la cible, qui devient <span class=\"etat-link\" data-etat=\"Ralenti\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Ralenti</span>.",
-    "butin": "<strong>Butin:</strong> <span class=\"treasure-table-link\" data-table-name=\"Pouple de la forêt\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Pouple de la forêt]</span>",
-    "monster-initiative": "2"
+    "butin": "<strong>Butin:</strong> <span class=\"treasure-table-link\" data-table-name=\"Pouple de la forêt\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Pouple de la forêt]</span>"
   },
   {
     "nom": "Serpent de la forêt",
@@ -193,10 +191,10 @@
     ],
     "image": "data/images/Monstres/foret/Monstre_Forêt_Serpent.png",
     "element": "Terre",
-    "pointsDeVie": 20,
+    "pointsDeVie": 15,
     "armurePhysique": "0",
     "esquive": 5,
-    "initiative": 1,
+    "initiative": 5,
     "coupCritique": "2",
     "coupCritiqueSorts": "0",
     "resistanceAlterations": 3,
@@ -208,9 +206,8 @@
     "armureObscurite": 0,
     "armureDivin": 0,
     "armureMalefique": 0,
-    "abilites": "<strong>Morsure venimeuse:</strong> Inflige 5 dégâts Physiques. <br> Si (résistance altérations &lt; 4)  + <span title=\"Des dégâts sont appliqués à chaque début de tour du lanceur, réduits ni par l'armure physique ni par l'armure élémentaire.\">Empoisonné</span>2 pendant 5 tours.<br><br>",
-    "butin": "<strong>Butin:</strong> <span class=\"treasure-table-link\" data-table-name=\"Serpent Foret\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Serpent Foret]</span>",
-    "monster-initiative": "4"
+    "abilites": "<strong>Morsure venimeuse:</strong> Inflige 3 dégâts Physiques. <br> Si (résistance altérations &lt; 4)  + <span title=\"Des dégâts sont appliqués à chaque début de tour du lanceur, réduits ni par l'armure physique ni par l'armure élémentaire.\">Empoisonné</span>1 pendant 3 tours.<br><br>",
+    "butin": "<strong>Butin:</strong> <span class=\"treasure-table-link\" data-table-name=\"Serpent Foret\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Serpent Foret]</span>"
   },
   {
     "nom": "Scarabée géant",
@@ -234,9 +231,8 @@
     "armureObscurite": "5",
     "armureDivin": 0,
     "armureMalefique": 0,
-    "abilites": "<strong>Volant</strong>: Nécessite de sauter pour attaque au corps à corps.<br><strong>Morsure: </strong> inflige 5 physique.\n<br><strong>Vent aveuglant: </strong> Portée 6m, esquivable, inflige 5 <span style=\"color: #22c55e; font-weight: bold;\">Air</span>. Si (Res Alt &lt; 4) <span class=\"etat-link\" data-etat=\"Aveuglé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Aveuglé</span>",
-    "butin": "<strong>Butin:</strong> <span class=\"treasure-table-link\" data-table-name=\"Scarabée géant\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Scarabée géant]</span>",
-    "monster-initiative": "5"
+    "abilites": "<strong>Volant</strong>: Nécessite de sauter pour attaque au corps à corps.<br><strong>Morsure: </strong> inflige 4 physique.\n<br><strong>Vent aveuglant: </strong> Portée 6m, esquivable, inflige 4 <span style=\"color: #22c55e; font-weight: bold;\">Air</span>. Si (Res Alt &lt; 4) <span class=\"etat-link\" data-etat=\"Aveuglé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Aveuglé</span>",
+    "butin": "<strong>Butin:</strong> <span class=\"treasure-table-link\" data-table-name=\"Scarabée géant\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Scarabée géant]</span>"
   },
   {
     "nom": "AquaLezo",

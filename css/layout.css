@@ -23,20 +23,29 @@
     var(--paper);
 }
 
-/* Content Container - Dynamic Centering (handled by JavaScript) */
+/* Content Container - Centered on PC */
 #views {
   max-width: 1400px;
-  /* Fallback positioning - will be overridden by DynamicCentering.js */
-  margin-left: 0; /* Reset to 0 - will be handled by responsive design */
-  margin-right: 20px;
+  margin-left: auto;
+  margin-right: auto;
   padding: 0 var(--space-lg);
   animation: fadeInUp 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Desktop layout with sidebar */
+/* Desktop layout with sidebar - offset from sidebar */
 @media (min-width: 1025px) {
   #views {
-    margin-left: 370px; /* Only apply sidebar margin on large screens */
+    margin-left: 370px;
+    margin-right: 20px;
+  }
+}
+
+/* Large desktop - center content in available space */
+@media (min-width: 1850px) {
+  #views {
+    /* Center content in the space right of the sidebar */
+    margin-left: calc(350px + ((100vw - 350px - 1400px) / 2));
+    margin-right: calc((100vw - 350px - 1400px) / 2);
   }
 }
 
@@ -217,11 +226,7 @@
 }
 
 .panel:hover {
-  transform: translateY(-1px);
-  box-shadow: 
-    0 8px 32px rgba(0,0,0,.12),
-    0 2px 8px rgba(0,0,0,.1),
-    inset 0 1px 0 rgba(255,255,255,.15);
+  /* No visual changes on hover */
 }
 
 /* Table of Contents - Full height sidebar OVERRIDE */

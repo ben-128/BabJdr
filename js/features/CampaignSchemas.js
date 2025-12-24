@@ -198,13 +198,29 @@ const CampaignSchemas = {
     }
   },
 
-  saveSchema() {
-    const dataURL = this.canvas.toDataURL('image/png');
+  async saveSchema() {
+    // Convert canvas to blob and upload to imgbb (never store base64)
+    let imageUrl;
+    try {
+      const blob = await new Promise(resolve => this.canvas.toBlob(resolve, 'image/png'));
+      const file = new File([blob], `schema_${Date.now()}.png`, { type: 'image/png' });
 
-    // Create schema HTML
+      // Show uploading notification
+      if (JdrApp?.modules?.ui?.showNotification) {
+        JdrApp.modules.ui.showNotification('⏳ Upload du schéma...', 'info');
+      }
+
+      imageUrl = await JdrApp.utils.uploadToImageBB(file);
+    } catch (e) {
+      console.error('Erreur lors de l\'upload du schéma:', e);
+      alert('Erreur upload: ' + e.message);
+      return;
+    }
+
+    // Create schema HTML with imgbb URL
     const schemaHTML = `
 <div class="campaign-schema" style="margin: 1.5rem 0; text-align: center; background: white; padding: 1rem; border-radius: 8px; border: 2px solid var(--rule);">
-  <img src="${dataURL}" style="max-width: 100%; height: auto; border-radius: 4px;" alt="Schéma de campagne">
+  <img src="${imageUrl}" style="max-width: 100%; height: auto; border-radius: 4px;" alt="Schéma de campagne">
 </div>`;
 
     // Check if we're in the HTML editor modal (textarea mode)

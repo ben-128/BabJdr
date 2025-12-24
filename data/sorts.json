@@ -108,16 +108,16 @@
         "effetCritique": "<strong>Coup Critique: </strong> Les dégâts sont de (22 + Puiss. Sorts) et la cible est <span class=\"etat-link\" data-etat=\"Ralenti\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Ralenti</span> pendant 1 tour."
       },
       {
-        "nom": "Téléportation",
+        "nom": "Charge des Vents",
         "element": "Air",
-        "description": "Dans un souffle de lumière distordue, ton corps se dissout et réapparaît instantanément à l’endroit désiré.",
+        "description": "Dans un souffle de lumière distordue, forme un canal de vent entre le lanceur et une cible, qui lui permet de se déplacer à grande vitesse.",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 3",
         "portee": "🎯 <strong>Portée:</strong> 12m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 10",
         "resistance": "<strong>Sans effet si:</strong> -",
-        "effetNormal": "<strong>Effet:</strong> Téléporte le héros jusqu'à une zone à portée. La portée est augmentée d'un mètre par puissance des sorts du lanceur.",
-        "effetCritique": "<strong>Coup Critique: </strong> Augmente la portée de 6m."
+        "effetNormal": "<strong>Effet:</strong> Déplace le héros jusqu'à une cible à portée, alliée ou ennemie.<br> La portée est augmentée d'un mètre par puissance des sorts du lanceur.",
+        "effetCritique": "<strong>Coup Critique: </strong> Le héros peut choisir de déplacer la cible dans la direction d'où le héros est venu, jusqu'à un maximum de la moitié du chemin parcouru."
       },
       {
         "nom": "Absorption magique",

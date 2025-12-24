@@ -1708,12 +1708,12 @@
       const confirmBtn = modal.querySelector('#confirmImageInsert');
 
       let currentImageUrl = '';
-      let currentImageDataUrl = null; // Pour stocker le base64 si upload local
+      let isUploadedToImgbb = false; // Track if image was uploaded to imgbb
 
       // Show preview
-      const showPreview = (url, isDataUrl = false) => {
+      const showPreview = (url, wasUploaded = false) => {
         currentImageUrl = url;
-        currentImageDataUrl = isDataUrl ? url : null;
+        isUploadedToImgbb = wasUploaded;
         previewImg.src = url;
         previewContainer.style.display = 'block';
       };
@@ -1726,7 +1726,7 @@
         } else {
           previewContainer.style.display = 'none';
           currentImageUrl = '';
-          currentImageDataUrl = null;
+          isUploadedToImgbb = false;
         }
       });
 
@@ -1764,15 +1764,29 @@
         }
       });
 
-      // Handle file - convert to base64
+      // Handle file - upload to imgbb (never store base64)
       const handleFile = async (file) => {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          const base64 = e.target.result;
-          showPreview(base64, true);
+        // Show loading state
+        dropZone.innerHTML = '<p>⏳ Upload en cours...</p>';
+        dropZone.style.pointerEvents = 'none';
+
+        try {
+          // Upload to imgbb with compression (max 500KB)
+          const imageUrl = await JdrApp.utils.uploadToImageBB(file);
+          showPreview(imageUrl, true);
           urlInput.value = '';
-        };
-        reader.readAsDataURL(file);
+
+          if (JdrApp?.modules?.ui?.showNotification) {
+            JdrApp.modules.ui.showNotification('✓ Image uploadée sur imgbb', 'success');
+          }
+        } catch (error) {
+          console.error('[ModalManager] Image upload failed:', error);
+          alert('Erreur upload: ' + error.message);
+        } finally {
+          // Restore drop zone
+          dropZone.innerHTML = '<p>Glissez une image ici ou cliquez pour sélectionner</p>';
+          dropZone.style.pointerEvents = 'auto';
+        }
       };
 
       // Cancel button
@@ -1791,8 +1805,8 @@
         const height = heightInput.value;
         const style = styleSelect.value;
 
-        // Si c'est un fichier uploadé (base64), utiliser le système de marqueur
-        if (currentImageDataUrl) {
+        // Si c'est un fichier uploadé sur imgbb, utiliser le système de marqueur
+        if (isUploadedToImgbb) {
           // Générer un ID unique
           const imageId = 'img_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
 
@@ -1801,9 +1815,9 @@
           if (!window.STATIC_PAGES.campagne) window.STATIC_PAGES.campagne = {};
           if (!window.STATIC_PAGES.campagne.images) window.STATIC_PAGES.campagne.images = {};
 
-          // Stocker avec les métadonnées
+          // Stocker l'URL imgbb (jamais de base64!)
           window.STATIC_PAGES.campagne.images[imageId] = {
-            dataUrl: currentImageDataUrl,
+            url: currentImageUrl,  // URL imgbb, pas base64
             width: width || null,
             height: height || null,
             style: style
@@ -1881,7 +1895,9 @@
           return match; // Retourner le marqueur tel quel si image non trouvée
         }
 
-        let imgHtml = '<img src="' + imageData.dataUrl + '"';
+        // Support both 'url' (new imgbb URLs) and 'dataUrl' (legacy base64)
+        const imageSrc = imageData.url || imageData.dataUrl;
+        let imgHtml = '<img src="' + imageSrc + '"';
 
         if (imageData.width) imgHtml += ' width="' + imageData.width + '"';
         if (imageData.height) imgHtml += ' height="' + imageData.height + '"';
