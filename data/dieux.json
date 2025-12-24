@@ -9,34 +9,46 @@
     {
       "type": "card",
       "id": "dieux-new-2-1756899335313",
-      "title": "Dieu des Humains – Aedor, le Forgeron-Soleil",
-      "content": "Symbole : un marteau auréolé en forme de croix.<br>\nDomaine : courage, guerre juste, travail artisanal.<br>\nCroyances : les humains voient en lui celui qui éclaire leur chemin et leur donne la force de bâtir des cités.<br>\nParticularité : ses prêtres prônent la discipline et la reconstruction, mais certains royaumes l’utilisent aussi pour justifier leurs conquêtes.<br><br>",
+      "title": "Aedor, le Forgeron-Soleil",
+      "content": "<img src=\"https://i.ibb.co/ym9jv5xS/Dieu-Lumiere-Aedor.jpg\" style=\"display: block; margin: 1rem auto; max-width: 50%; min-width: 200px; cursor: zoom-in;\" alt=\"Image\" loading=\"lazy\" decoding=\"async\">\n<br><br>\nSymbole : Un marteau auréolé en forme de croix.<br>\nElements : Lumière.<br>\nDomaine : courage, travail artisanal.<br>\nCroyances : ses croyants voient en lui celui qui éclaire leur chemin et leur donne la force de bâtir des cités.<br>\nParticularité : ses prêtres prônent la discipline et la reconstruction, mais certains royaumes l’utilisent aussi pour justifier leurs conquêtes.<br><br>",
       "deletable": true,
       "sectionName": "Nouvelle section"
     },
     {
       "type": "card",
       "id": "dieux-para-3-1756899336921",
-      "title": "Dieu des Nains – Durnak, le Cœur-de-Pierre",
-      "content": "Symbole : une enclume fissurée d’où s’écoule une lueur rouge.<br>\nDomaine : terre, montagne, persévérance, serments.<br>\nCroyances : gardien des mines et des profondeurs, il protège les clans nains et punit sévèrement ceux qui trahissent leur parole.<br>\nParticularité : les nains affirment que ses battements résonnent dans les montagnes, guidant les mineurs vers les métaux rares.<br><br>",
+      "title": "Durnak, le Cœur-de-Pierre",
+      "content": "<img src=\"https://i.ibb.co/HL55fLGc/Dieu-terre-feu-Durnak.jpg\" style=\"display: block; margin: 1rem auto; max-width: 50%; min-width: 200px;\" alt=\"Image\">\n<br><br>\nSymbole : une pierre fissurée d’où s’écoule une lueur rouge.<br>\nElements : Terre, Feu. <br>\nDomaine : montagne, persévérance, serments.<br>\nCroyances : gardien de la nature et des profondeurs, il protège la forêt et la montagne, et punit sévèrement ceux qui trahissent leur parole.<br>",
       "deletable": true,
       "sectionName": "Nouveau paragraphe"
     },
     {
       "type": "card",
       "id": "dieux-new-4-1756899338873",
-      "title": "Déesse des Elfes – Liryel, la Dame des Brumes",
-      "content": "Symbole : une feuille argentée flottant sur l’eau.<br>\nDomaine : forêts, magie ancienne, mémoire.<br>\nCroyances : les elfes la vénèrent comme gardienne du cycle de la vie et de la magie pure.<br>\nParticularité : ses temples sont souvent des clairières protégées par des enchantements, où les brumes recouvrent les intrus.<br><br>",
+      "title": "Liryel, la Dame des Brumes",
+      "content": "<img src=\"https://i.ibb.co/4ZrLTj66/Dieu-Vent-Nuit-Liryel.jpg\" style=\"display: block; margin: 1rem auto; max-width: 50%; min-width: 200px;\" alt=\"Image\">\n<br><br>\nSymbole : une feuille argentée flottant sur de la brume.<br>\nElements : Vent, Nuit.<br>\nDomaine : magie ancienne, mémoire.<br>\nParticularité : ses temples sont souvent des clairières protégées par des enchantements, où les brumes recouvrent les intrus.<br><br>",
       "deletable": true,
       "sectionName": "Nouvelle section"
     },
     {
       "type": "card",
       "id": "dieux-new-5-1756899431837",
-      "title": "Dieu des Fées et des Lutins – Myrin, l’Éclat-Changeant",
-      "content": "Symbole : une luciole ou une étoile facétieuse à cinq branches.<br>\nDomaine : illusions, rêves, joie, malice.<br>\nCroyances : les fées et lutins croient qu’il danse entre les mondes, semant à la fois la protection et la farce.<br>\nParticularité : ses fidèles accordent beaucoup d’importance aux fêtes, à la musique et aux pactes imprévisibles.<br><br>",
+      "title": "Myrin, l’Éclat-Changeant",
+      "content": "<img src=\"https://i.ibb.co/99Yyp34v/Dieu-Mal-fique-Myrin.jpg\" style=\"display: block; margin: 1rem auto; max-width: 50%; min-width: 200px;\" alt=\"Image\">\n<br><br>\nSymbole : un masque brisé en deux, dont une moitié sourit et l’autre pleure.<br>\nElements : Maléfique.<br>\nDomaine : illusions, rêves, malice.<br>\nParticularité : ses fidèles accordent beaucoup d’importance aux fêtes, à la musique et aux pactes imprévisibles.<br><br>",
       "deletable": true,
       "sectionName": "Nouvelle section"
+    },
+    {
+      "id": "section-1766582921492-h17sn5",
+      "type": "card",
+      "title": "Nerhaël, la Mémoire des Profondeurs",
+      "content": "<img src=\"https://i.ibb.co/v6gPd8S3/Dieu-Eau-Nerha-l.jpg\" style=\"display: block; margin: 1rem auto; max-width: 50%; min-width: 200px;\" alt=\"Image\">\n<br><br>\nSymbole : une spirale d’eau entourant un œil fermé.<br>\nÉlément : Eau.<br>\nDomaine : courants, patience, secrets engloutis.<br>\nParticularité : ses fidèles croient que l’eau se souvient de tout ; ils pratiquent des rites silencieux, des offrandes immergées et jurent des serments murmurés aux rivières et aux mers."
+    },
+    {
+      "id": "section-1766582965263-ylpoud",
+      "type": "card",
+      "title": "Aurelion, le Serment Radieux",
+      "content": "<img src=\"https://i.ibb.co/6dJTPg5/Dieu-Divin-Aurelion.jpg\" style=\"display: block; margin: 1rem auto; max-width: 50%; min-width: 200px;\" alt=\"Image\">\n<br><br>\nSymbole : un halo de lumière fractale entourant une rune suspendu<br>\nÉlément : Divin<br>\nDomaine : justice, vérité, serments, protection<br>\nParticularité : ses fidèles accordent une valeur absolue à la parole donnée ; rompre un serment fait sous son regard est considéré comme un sacrilège majeur.<br>"
     }
   ]
 }
