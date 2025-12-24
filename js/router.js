@@ -757,10 +757,18 @@
       const sectionClass = 'toc-section collapsed';
       const toggleIcon = '▶';
 
+      // Utilise l'icône du Guerrier pour la section Héros
+      let sectionTitle = section.title;
+      if (section.id === 'heros') {
+        const heroIconUrl = this._getClassIconUrl('Guerrier');
+        const heroIcon = `<img src="${heroIconUrl}" alt="Héros" class="toc-class-icon" style="width: 24px; height: 24px; vertical-align: middle; margin-right: 4px; border-radius: 4px; object-fit: cover;">`;
+        sectionTitle = `${heroIcon} Héros`;
+      }
+
       return `
         <div class="${sectionClass}" data-section="${section.id}">
           <div class="toc-section-header">
-            <span class="toc-section-title">${section.title}</span>
+            <span class="toc-section-title">${sectionTitle}</span>
             <span class="toc-section-toggle">${toggleIcon}</span>
           </div>
           <div class="toc-section-content">
@@ -906,39 +914,75 @@
       }
     },
     
+    // URLs imgbb pour les icônes de classes
+    _classIconUrls: {
+      'Guerrier': 'https://i.ibb.co/VYWv5yW6/Guerrier.png',
+      'Mage': 'https://i.ibb.co/ZpGmbw9L/Mage.png',
+      'Pretre': 'https://i.ibb.co/Q7v372rX/Pretre.png',
+      'Rodeur': 'https://i.ibb.co/LDkJm2Fr/Rodeur.png',
+      'Enchanteur': 'https://i.ibb.co/ZpwTCLGC/Enchanteur.png'
+    },
+
+    _getClassIconUrl(fileName) {
+      return this._classIconUrls[fileName] || null;
+    },
+
     getClassIcon(className) {
-      const icons = {
-        'Guerrier': '🗡️',
-        'Mage': '🔮',
-        'Prêtre': '⛪',
-        'Rôdeur': '🏃',
-        'Enchanteur': '✨'
+      const classToFile = {
+        'Guerrier': 'Guerrier',
+        'Mage': 'Mage',
+        'Prêtre': 'Pretre',
+        'Rôdeur': 'Rodeur',
+        'Enchanteur': 'Enchanteur'
       };
-      return icons[className] || '⚔️';
+      const file = classToFile[className];
+      if (file) {
+        const url = this._getClassIconUrl(file);
+        if (url) {
+          return `<img src="${url}" alt="${className}" class="toc-class-icon" style="width: 24px; height: 24px; vertical-align: middle; margin-right: 4px; border-radius: 4px; object-fit: cover;">`;
+        }
+      }
+      return '⚔️';
     },
-    
+
     getSortCategoryIcon(categoryName) {
-      const icons = {
-        'Sorts de Mage': '🔮',
-        'Sorts de Prêtre': '⛪',
-        'Sorts d\'Enchanteur': '✨',
-        'Sorts de Monstres': '💀'
+      const categoryToFile = {
+        'Sorts de Mage': 'Mage',
+        'Sorts de Prêtre': 'Pretre',
+        'Sorts d\'Enchanteur': 'Enchanteur',
+        'Sorts de Monstres': null
       };
-      return icons[categoryName] || '🔮';
+      const file = categoryToFile[categoryName];
+      if (file) {
+        const url = this._getClassIconUrl(file);
+        if (url) {
+          return `<img src="${url}" alt="${categoryName}" class="toc-class-icon" style="width: 24px; height: 24px; vertical-align: middle; margin-right: 4px; border-radius: 4px; object-fit: cover;">`;
+        }
+      }
+      return '💀';
     },
-    
+
     getDonCategoryIcon(categoryName) {
-      const icons = {
-        'Guerrier': '🗡️',
-        'Mage': '🔮',
-        'Pretre': '⛪',  // Sans accent comme dans les données
-        'Prêtre': '⛪',  // Avec accent au cas où
-        'Rôdeur': '🏃',
-        'Enchanteur': '✨',
-        'Généraux': '🎖️',
-        'Generaux': '🎖️'  // Sans accent comme dans les données
+      // Dons Généraux gardent l'emoji
+      if (categoryName === 'Généraux' || categoryName === 'Generaux') {
+        return '🎖️';
+      }
+      const categoryToFile = {
+        'Guerrier': 'Guerrier',
+        'Mage': 'Mage',
+        'Pretre': 'Pretre',
+        'Prêtre': 'Pretre',
+        'Rôdeur': 'Rodeur',
+        'Enchanteur': 'Enchanteur'
       };
-      return icons[categoryName] || '🎖️';
+      const file = categoryToFile[categoryName];
+      if (file) {
+        const url = this._getClassIconUrl(file);
+        if (url) {
+          return `<img src="${url}" alt="${categoryName}" class="toc-class-icon" style="width: 24px; height: 24px; vertical-align: middle; margin-right: 4px; border-radius: 4px; object-fit: cover;">`;
+        }
+      }
+      return '🎖️';
     },
 
     getMonstreCategoryIcon(categoryName) {
