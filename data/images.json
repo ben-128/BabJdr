@@ -465,7 +465,7 @@
     "don:Exposer l'armure": "https://i.ibb.co/NdqtYbRB/Exposer-Armure.png",
     "don:Éventail de couteaux": "https://i.ibb.co/HTyfzR8t/Eventail-de-couteaux.png",
     "don:Mécréants": "https://i.ibb.co/fzTjZLfh/m-cr-ant.png",
-    "sort:Sorts de Mage:Téléportation": "https://i.ibb.co/HMkf2HB/teleportation.jpg",
+    "sort:Sorts de Mage:Charge des Vents": "https://i.ibb.co/99VYjMRj/Canal-Vent.png",
     "sort:Sorts de Prêtre:Châtiment": "https://i.ibb.co/DfhJhFnf/Chatiment-Sacr.jpg",
     "sort:Sorts de Prêtre:Refermer les blessures": "https://i.ibb.co/dJrHNhLS/Soin-Mineur.jpg",
     "sort:Sorts de Prêtre:Guérison physique": "https://i.ibb.co/ksnZMxGJ/Purifi-Physique.png",
@@ -479,8 +479,8 @@
     "objet:Chitine de scarabée": "https://i.ibb.co/R1YXYF8/Chitine.png"
   },
   "meta": {
-    "total_images": 478,
-    "exported_date": "2025-12-23",
+    "total_images": 477,
+    "exported_date": "2025-12-24",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
 }

@@ -4,7 +4,7 @@
   "sections": [
     {
       "type": "intro",
-      "content": "Voici la carte de la région de Mabresia, dans le Royaume de Foresia\n[img:img_1766506746737_zykhh980a]"
+      "content": "Voici la carte de la région de Mabresia, dans le Royaume de Foresia\n<br>\n<img src=\"https://i.ibb.co/XZXq6JSg/Map.jpg\" style=\"display: block; margin: 1rem auto; max-width: 100%; min-width: 200px;\" alt=\"Image\">"
     }
   ]
 }

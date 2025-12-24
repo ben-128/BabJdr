@@ -32,20 +32,11 @@
   animation: fadeInUp 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Desktop layout with sidebar - offset from sidebar */
+/* Desktop layout with sidebar - center content in available space */
 @media (min-width: 1025px) {
   #views {
     margin-left: 370px;
-    margin-right: 20px;
-  }
-}
-
-/* Large desktop - center content in available space */
-@media (min-width: 1850px) {
-  #views {
-    /* Center content in the space right of the sidebar */
-    margin-left: calc(350px + ((100vw - 350px - 1400px) / 2));
-    margin-right: calc((100vw - 350px - 1400px) / 2);
+    margin-right: auto;
   }
 }
 
@@ -486,7 +477,7 @@ article[data-page="gestion-objets"] .objet-card:not(#gestion-objets-container .o
   position: absolute !important;
   left: -9999px !important;
 }
-section{background:var(--card);border:1px solid var(--rule);border-radius:14px;box-shadow:var(--shadow);padding:18px;margin:0 0 14px}
+section{background:var(--card);border:1px solid var(--rule);border-radius:14px;box-shadow:var(--shadow);padding:18px;margin:0 auto 14px;max-width:1200px}
 
 /* Footer */
 footer{padding:24px;text-align:center;color:var(--paper-muted)}

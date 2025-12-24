@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2025-12-24T08:50:20.918Z by JdrBab Build System -->
+<!-- Generated on 2025-12-24T10:19:47.654Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -698,16 +698,33 @@ img:not([src*="stat-"]):not([src*="element-"]):not(.stat-icon):not(.element-icon
 .bg-eau{background:transparent;border-color:var(--eau)} .bg-terre{background:transparent;border-color:var(--terre)}
 .bg-divin{background:transparent;border-color:var(--divin)} .bg-malefique{background:transparent;border-color:var(--malefique)}
 
+/* Monster elemental resistances - smaller icons and no scaling on non-zero values */
+.monster-elemental-grid .element-icon,
+.monster-elemental-grid img.element-icon {
+  width: 36px !important;
+  height: 36px !important;
+}
+.monster-elemental-grid span {
+  transform: none !important;
+}
+.monster-elemental-grid > div > div {
+  font-size: inherit !important;
+}
+
 /* Grid utilities */
-.grid{display:grid;gap:var(--space-lg)}
-.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid{display:grid;gap:var(--space-lg);max-width:1200px;margin-left:auto;margin-right:auto}
+.cols-2{grid-template-columns:repeat(2,minmax(280px,1fr))}
+
+/* Grilles des pages statiques - plus étroites et centrées */
+article[data-static-page="true"] .grid{max-width:900px;margin-left:auto !important;margin-right:auto !important}
 .cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
 @media (min-width: 1400px){ .cols-2{grid-template-columns:repeat(3,minmax(0,1fr))} }
 @media (max-width: 900px){ .cols-3{grid-template-columns:1fr} }
 @media (max-width: 768px){ .cols-2{grid-template-columns:1fr !important} }
 
 /* Misc utilities */
-.subclass-stack{display:flex;flex-direction:column;gap:var(--space-lg)}
+.subclass-stack{display:flex;flex-direction:column;gap:var(--space-lg);align-items:center;max-width:1200px;margin-left:auto;margin-right:auto}
+.subclass-stack > .card{width:100%;max-width:900px}
 .chip{font-size:14px;border:2px solid var(--rule);border-radius:999px;padding:6px 12px;background:rgba(155,107,47,.12);font-weight:600;box-shadow:0 2px 6px rgba(0,0,0,.1)}
 .chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
 
@@ -756,20 +773,11 @@ img:not([src*="stat-"]):not([src*="element-"]):not(.stat-icon):not(.element-icon
   animation: fadeInUp 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Desktop layout with sidebar - offset from sidebar */
+/* Desktop layout with sidebar - center content in available space */
 @media (min-width: 1025px) {
   #views {
     margin-left: 370px;
-    margin-right: 20px;
-  }
-}
-
-/* Large desktop - center content in available space */
-@media (min-width: 1850px) {
-  #views {
-    /* Center content in the space right of the sidebar */
-    margin-left: calc(350px + ((100vw - 350px - 1400px) / 2));
-    margin-right: calc((100vw - 350px - 1400px) / 2);
+    margin-right: auto;
   }
 }
 
@@ -1210,7 +1218,7 @@ article[data-page="gestion-objets"] .objet-card:not(#gestion-objets-container .o
   position: absolute !important;
   left: -9999px !important;
 }
-section{background:var(--card);border:1px solid var(--rule);border-radius:14px;box-shadow:var(--shadow);padding:18px;margin:0 0 14px}
+section{background:var(--card);border:1px solid var(--rule);border-radius:14px;box-shadow:var(--shadow);padding:18px;margin:0 auto 14px;max-width:1200px}
 
 /* Footer */
 footer{padding:24px;text-align:center;color:var(--paper-muted)}
@@ -1775,6 +1783,14 @@ img {
 /* Fallback centering for collections and similar content without specific containers */
 .editable-section {
   max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Centrage des cartes des pages de base (hors grilles) */
+section > .card.editable-section,
+article > section > .card.editable-section {
+  max-width: 900px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -8695,7 +8711,7 @@ hr,
       },
       {
         "nom": "Magie aléatoire",
-        "description": "Peut dépenser une action principale et secondaire pour tenter de lancer un sort d'altération magique et un sort de soutien sur des cibles à portée, le même tour.\n<br><br> Lancez un d20.\n<br> Si le dé fait 10 ou plus, les deux sorts sont lancés sur leurs cibles respectives.\n<br> Si le dé fait 9 ou moins, les deux sorts sont lancés sur les cibles inverses (peu importe la portée).\n\n<br><br> Dans les deux cas, seul le mana du sort le plus cher est dépensé.",
+        "description": "Peut dépenser une action principale et secondaire pour tenter de lancer un sort d'altération magique et un sort de soutien sur des cibles à portée, le même tour.\n<br><br> Lancez un d20.\n<br> Si le dé fait 7 ou plus, les deux sorts sont lancés sur leurs cibles respectives.\n<br> Si le dé fait 6 ou moins, les deux sorts sont lancés sur les cibles inverses (peu importe la portée).\n\n<br><br> Dans les deux cas, seul le mana du sort le plus cher est dépensé.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -11257,7 +11273,7 @@ hr,
     "don:Exposer l'armure": "https://i.ibb.co/NdqtYbRB/Exposer-Armure.png",
     "don:Éventail de couteaux": "https://i.ibb.co/HTyfzR8t/Eventail-de-couteaux.png",
     "don:Mécréants": "https://i.ibb.co/fzTjZLfh/m-cr-ant.png",
-    "sort:Sorts de Mage:Téléportation": "https://i.ibb.co/HMkf2HB/teleportation.jpg",
+    "sort:Sorts de Mage:Charge des Vents": "https://i.ibb.co/99VYjMRj/Canal-Vent.png",
     "sort:Sorts de Prêtre:Châtiment": "https://i.ibb.co/DfhJhFnf/Chatiment-Sacr.jpg",
     "sort:Sorts de Prêtre:Refermer les blessures": "https://i.ibb.co/dJrHNhLS/Soin-Mineur.jpg",
     "sort:Sorts de Prêtre:Guérison physique": "https://i.ibb.co/ksnZMxGJ/Purifi-Physique.png",
@@ -11271,8 +11287,8 @@ hr,
     "objet:Chitine de scarabée": "https://i.ibb.co/R1YXYF8/Chitine.png"
   },
   "meta": {
-    "total_images": 478,
-    "exported_date": "2025-12-23",
+    "total_images": 477,
+    "exported_date": "2025-12-24",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
 };
@@ -11524,7 +11540,7 @@ hr,
     {
       "type": "card",
       "id": "etapes-creation",
-      "title": "[img:img_1766506775615_jxzspa0fq]",
+      "title": "<img src=\"https://i.ibb.co/DDqT7w1W/All-Heroes.png\" style=\"display: block; margin: 1rem auto; max-width: 100%; min-width: 200px;\" alt=\"Image\">",
       "content": "<ol><li>Choisir une <strong>classe</strong> puis une <strong>sous‑classe</strong> : <a href=\"#/guerrier\" style=\"color: var(--accent); text-decoration: underline;\">Guerrier</a>.\n</li><li>Tirer au sort (avec un d6) une carte du destin (<a href=\"#\" onclick=\"console.log('🎴 Click sur cartes du destin'); console.log('ModalManager existe?', typeof ModalManager); console.log('window.ModalManager existe?', typeof window.ModalManager); console.log('Méthode showCartesDestinModal?', typeof ModalManager?.showCartesDestinModal); event.preventDefault(); if (window.ModalManager && typeof window.ModalManager.showCartesDestinModal === 'function') { console.log('✅ Appel de showCartesDestinModal'); window.ModalManager.showCartesDestinModal(); } else { console.error('❌ ModalManager ou showCartesDestinModal non disponible'); } return false;\" style=\"color: var(--accent); text-decoration: underline; cursor: pointer;\">Lien ici</a>)\n</li><li>Choisir un <strong>élément</strong> d'affiliation : <a href=\"#/elements\" style=\"color: var(--accent); text-decoration: underline;\">Éléments</a>.\n</li><li>Choisir les <strong>dons</strong> (avec 2 points de dons, généraux et/ou spécifique à la classe) : <a href=\"#/dons-g-n-raux\" style=\"color: var(--accent); text-decoration: underline;\">Généraux (dons)</a>.\n</li><li>Choisir l'<strong>équipement</strong> de départ (avec 100 éclats) : <a href=\"#/collections-objets\" style=\"color: var(--accent); text-decoration: underline;\">Collections d'Objets</a>.\n</li><li>Définir le <strong>nom</strong>, l'<strong>histoire</strong> et l'<strong>apparence</strong>.</li><li>Remplir sa feuille de personnage (voir section ci-dessous).</li></ol>",
       "deletable": true,
       "sectionName": "Étapes de création"
@@ -11551,7 +11567,7 @@ hr,
     {
       "type": "card",
       "id": "elements-system",
-      "title": "Système d'éléments",
+      "title": "<img src=\"https://i.ibb.co/svdb8KG4/Elements.jpg\" style=\"display: block; margin: 1rem auto; max-width: 100%; min-width: 200px;\" alt=\"Image\">\n<br>Système d'éléments",
       "content": "<p>Il existe huit éléments, chacun ayant un opposé. Chaque Héros où monstre possède un élément d'affiliation.<br><br> Une créature affiliée à un élément :<br> - Reçoit <strong>deux fois moins </strong> (arrondi inférieur) de dégâts venant des sorts et attaques de cet élément, et ne peut pas recevoir d'effet critique d'une altération magique de cet élément.<br>- Recevra systématiquement des <strong>effets critiques</strong> venant des sorts et altérations de l'élément opposé. Les dégâts élémentaires rattachés à une attaque physique (venant d'un objet ou sort) voit ses dégâts doublés s'il est d'un élément opposé.</p>"
     },
     {
@@ -11612,7 +11628,7 @@ hr,
   "sections": [
     {
       "type": "intro",
-      "content": ""
+      "content": "<img src=\"https://i.ibb.co/p5GgdCM/Efforts.jpg\" style=\"display: block; margin: 1rem auto; max-width: 100%; min-width: 200px;\" alt=\"Image\">"
     },
     {
       "type": "grid",
@@ -11622,7 +11638,7 @@ hr,
           "type": "card",
           "id": "efforts",
           "title": "Efforts",
-          "content": "<ul><li>Chaque héros dispose de 5 Efforts maximum.</li><li>Les héros récupèrent des efforts lors de repos courts ou longs.</li><li>Les Efforts peuvent être dépensés pour améliorer un test de compétence.</li></ul>",
+          "content": "<ul><li>Chaque héros dispose de 5 Efforts maximum.</li><li>Les héros récupèrent des efforts lors de repos longs.</li><li>Les Efforts peuvent être dépensés pour améliorer un test de compétence.</li></ul>",
           "deletable": true,
           "sectionName": "Efforts"
         },
@@ -11630,9 +11646,17 @@ hr,
           "type": "card",
           "id": "competences-list",
           "title": "Compétences",
-          "content": "<ul><li><em>Hardiesse</em>: Pousser, casser, sauter…</li><li><em>Finesse</em>: Crocheter, fabriquer, être discret…</li><li><em>Coordination</em>: Percevoir, équilibre, piloter…</li><li><em>Réflexion</em>: Savoir, comprendre, deviner…</li><li><em>Éloquence</em>: Persuader, mentir, intimider…</li></ul>",
+          "content": "<ul><li><em>Hardiesse</em>: Pousser, escalader, résister…</li><li><em>Finesse</em>: Crocheter, fabriquer, être discret…</li><li><em>Coordination</em>: Percevoir, équilibre, piloter…</li><li><em>Réflexion</em>: Savoir, comprendre, deviner…</li><li><em>Éloquence</em>: Persuader, mentir, intimider…</li></ul>",
           "deletable": true,
           "sectionName": "Compétences"
+        },
+        {
+          "type": "card",
+          "id": "critique",
+          "title": "Echec ou réussite critique",
+          "content": "<p>Un test largement réussi ou largement raté, peuvent déclencher des effets supplémentaires.<br>Par exemple, un héros avec peu de hardiesse et sans efforts, pourrait casser son arme en tentant de casser un rocher solide.</p>",
+          "deletable": true,
+          "sectionName": "Nouvelle Section"
         }
       ]
     },
@@ -11640,7 +11664,7 @@ hr,
       "type": "card",
       "id": "tests",
       "title": "Tests de compétences",
-      "content": "<p>Quand un MJ annonce un test de compétence, un héros peut choisir de dépenser zero, un ou deux efforts pour booster sa compétence. La difficulté d'un test est seule connue du MJ, et est entre 0 et 5 (<strong>Simple</strong>, Exigeant, Complexe , Éprouvant, Prodigieux , <strong>Impossible</strong>).</p><p>Une fois le test résolu, le Maître de Jeu annonce le résultat. Si le joueur a dépensé plus d'Efforts que nécessaire, l'excédent est perdu.</p><br> À noter que certaines actions sont impossibles à réaliser et un héros peut alors s'épuiser pour rien, s'il n'a pas bien évalué la difficulté de la tâche. À l'inverse, les tâches simples ne demandent aucun niveau de compétence ou effort.",
+      "content": "<p>Quand un MJ annonce un test de compétence, un héros peut choisir de dépenser zero, un ou deux efforts pour booster sa compétence. La difficulté d'un test est seule connue du MJ, et est entre 0 et 5 (<strong>Simple</strong>, Exigeant, Complexe , Éprouvant, Prodigieux , <strong>Impossible</strong>).</p><p>Une fois le test résolu, le Maître de Jeu annonce le résultat. Si le joueur a dépensé plus d'Efforts que nécessaire, l'excédent est perdu.</p><br> À noter que certaines actions sont impossibles à réaliser et un héros peut alors s'épuiser pour rien, s'il n'a pas bien évalué la difficulté de la tâche. À l'inverse, les tâches simples ne demandent aucun niveau de compétence ou d'effort.",
       "deletable": true,
       "sectionName": "Tests de compétences"
     }
@@ -11985,7 +12009,7 @@ hr,
   "sections": [
     {
       "type": "intro",
-      "content": "Voici la carte de la région de Mabresia, dans le Royaume de Foresia\n[img:img_1766506746737_zykhh980a]"
+      "content": "Voici la carte de la région de Mabresia, dans le Royaume de Foresia\n<br>\n<img src=\"https://i.ibb.co/XZXq6JSg/Map.jpg\" style=\"display: block; margin: 1rem auto; max-width: 100%; min-width: 200px;\" alt=\"Image\">"
     }
   ]
 },

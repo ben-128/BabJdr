@@ -2,8 +2,7 @@
   "id": "campagne",
   "title": "Campagne",
   "icon": "📖",
-  "schemas": {
-  },
+  "schemas": {},
   "sections": [
     {
       "type": "intro",

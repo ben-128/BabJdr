@@ -82,7 +82,10 @@
       "Bash(git -C \"D:\\\\projets\\\\BabJDR\\\\BabJDR\" add css/theme.css css/theme-blazeblade-backup.css css/theme-parchment-backup.css css/animations.css css/components.css css/layout.css css/scroll-optimizations.css css/visual-enhancements.css)",
       "Bash(git check-ignore:*)",
       "Bash(git update-index:*)",
-      "Bash(git -C \"D:/projets/BabJDR/BabJDR\" restore data/images.json data/campagne.json)"
+      "Bash(git -C \"D:/projets/BabJDR/BabJDR\" restore data/images.json data/campagne.json)",
+      "Bash(where:*)",
+      "Bash(where convert:*)",
+      "Bash(pip show:*)"
     ],
     "deny": []
   }

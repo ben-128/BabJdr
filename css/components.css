@@ -227,6 +227,14 @@ img {
   margin-right: auto;
 }
 
+/* Centrage des cartes des pages de base (hors grilles) */
+section > .card.editable-section,
+article > section > .card.editable-section {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* ─────────────────────────── Collections Page Components ─────────────────────────── */
 .collections-search {
   margin: 2rem auto;
