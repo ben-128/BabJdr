@@ -486,10 +486,12 @@
     "objet:Cristal d'endurance": "https://i.ibb.co/DDCY7FZR/Cristal-Endu.png",
     "objet:Cristal d'intelligence": "https://i.ibb.co/cc7D32ZC/Cristal-Intel.png",
     "objet:Cristal de volonté": "https://i.ibb.co/d92x6Td/Cristal-Volont.png",
-    "objet:Cristal de chance": "https://i.ibb.co/S4KKr252/Cristal-Chance.png"
+    "objet:Cristal de chance": "https://i.ibb.co/S4KKr252/Cristal-Chance.png",
+    "sort:Sorts de Mage:Feu purificateur": "https://i.ibb.co/7xCJdkmr/purificatio.jpg",
+    "sort:Sorts de Mage:Aura de lumière": "https://i.ibb.co/HfT8xk5P/Aura-lumineuse.jpg"
   },
   "meta": {
-    "total_images": 487,
+    "total_images": 489,
     "exported_date": "2026-01-04",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
