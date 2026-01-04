@@ -54,13 +54,13 @@
       {
         "nom": "Maîtrise de la dague",
         "description": "Le héros est capable d'équiper et d'utiliser des Dagues.",
-        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Agilité 5.",
+        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\"> <br>Agilité 5<br>OU<br>Coordination rang 1.",
         "cout": "1 point de don"
       },
       {
         "nom": "Maîtrise de l'arc",
         "description": "Le héros est capable d'équiper et d'utiliser des Arcs.",
-        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Agilité 10.",
+        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\"> Agilité 10<br>OU<br>Coordination rang 2.",
         "cout": "1 point de don"
       },
       {
@@ -139,6 +139,12 @@
         "nom": "Main Chanceuse",
         "description": "Une fois par jour, peut déclarer \"Main Chanceuse\" avant n'importe quel jet de dé. Le résultat du dé est automatiquement considéré comme un 20 naturel.",
         "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/HfthhzSF/stat-Chance.png\" alt=\"Chance\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Chance 10.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Maîtrise du bouclier",
+        "description": "Le héros est capable d'équiper les boucliers.",
+        "prerequis": "<strong> Prérequis :</strong> <br><img src=\"https://i.ibb.co/23cGYFvZ/stat-Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\">Force 10<br>OU<br>Hardiesse rang 2.",
         "cout": "1 point de don"
       }
     ]

@@ -33,7 +33,7 @@
         },
         "Forêt": {
           "title": "Forêt",
-          "content": "Panneau qui avertit les joueurs du danger. suivent un cours d'eau large et pas traversable.\n<br>\nUne riviere qui traverse, de nombreux arbres touffus et sérrés qui empèchent de passer. Passage d'un petit pont.\n<br>\nChoix gauche(nord) ou droite (sud). <br>\n<br>\nDroite :  petits ilots de terre avec une statue qui donne les titres. Une voix dans la tête qui dit :<br> \n\"Je suis le dieu des légendes. Je vais vous honorer d'un titre qui témoigne le nombre de démons vaincus.\"\n<br>\n<br>\nGauche : Combat\n[img:img_1766329843139_aj4m79m48]\n\n             combat  <span class=\"monster-link\" data-monster=\"Serpent de la forêt\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Serpent de la forêt</span>  <span class=\"monster-link\" data-monster=\"Scarabée géant\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Scarabée géant</span>  \n\n<hr>\npierre a pousser pour révéler le TP (en encre magique, jet Réflexion : 2 pour savoir ce que ca fait, 3 sait que c'est prochedansla foret).\n<hr>",
+          "content": "<br>\n[img:img_1767543506362_ibl3s0wac]\n<br>\n\"Le chemin s’enfonce sous une voûte de grands arbres anciens, dont les troncs épais s’entrelacent comme les piliers d’un sanctuaire naturel. La lumière du jour y pénètre à peine, filtrée par un feuillage dense qui diffuse une clarté verte et calme.\nUn petit cours d’eau serpente paisiblement au centre de l’entrée de la forêt, son eau claire glissant entre les pierres moussues avant de disparaître plus loin sous les racines.\n\nLe sentier est étroit mais praticable, visiblement emprunté depuis longtemps. En revanche, de part et d’autre du chemin, la forêt se referme brutalement : d’énormes arbres aux racines noueuses barrent toute progression, et des ronces épaisses, mêlées de lianes et d’épines, forment un mur végétal infranchissable.\nQuitter le chemin semble impossible sans outils, sans force, ou sans risquer de se blesser gravement.\n\nLe murmure de l’eau accompagne le silence pesant des lieux, donnant à cette entrée de forêt une impression de sérénité…\"\n\n<br><br>\n\nPanneau qui avertit les joueurs du danger.<br><br>\n\"AVERTISSEMENT<br>\nLes créatures de la forêt sont devenues agressives.<br>\nL’accès au lieu de coupe et au poste de pêche est désormais dangereux.<br>\nPlusieurs attaques ont été signalées.<br>\nLes voyageurs sont priés de rebrousser chemin.\"<br>\n\n<br><br>\nUne riviere qui traverse, de nombreux arbres touffus et sérrés qui empèchent de passer. Passage d'un petit pont.\n<br>\nChoix gauche(nord) ou droite (sud). <br>\n<br>\nDroite :  petits ilots de terre avec une statue qui donne les titres. Une voix dans la tête qui dit :<br> \n\"Je suis le dieu des légendes. Je vais vous honorer d'un titre qui témoigne le nombre de démons vaincus.\"\n<br>\n<br>\nGauche : Combat\n[img:img_1766329843139_aj4m79m48]\n\n             combat  <span class=\"monster-link\" data-monster=\"Serpent de la forêt\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Serpent de la forêt</span>  <span class=\"monster-link\" data-monster=\"Scarabée géant\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Scarabée géant</span>  \n\n<hr>\npierre a pousser pour révéler le TP (en encre magique, jet Réflexion : 2 pour savoir ce que ca fait, 3 sait que c'est prochedansla foret).\n<hr>",
           "googleDocLink": "https://docs.google.com/document/d/1ib4D5CJdvgBZ-5VC2xAF-0nkow7X17gPKWwqKGP65AY/edit?usp=sharing"
         },
         "Forêt-2": {
@@ -43,12 +43,23 @@
         },
         "Forêt-3": {
           "title": "Forêt-3",
-          "content": "Continuer vers le nord. Les arbres se raréfient, et tout est de plus en plus humide et avec une mauvaise odeur. Marais.<br><br>\n\n Séparation en 2 chemin Est ou Ouest.  <br>\nPanneau qui dit \n\nSud → Poste de pêche de Elmar \n\n\nOuest → Lieu de coupe\n ⚠ Avertissement : Veuillez ne pas vous éloigner des ponts.\n Les fonds boueux du marais peuvent être mortels.\n\nEst → Lieu de coupe\nAccès par la Forêt des Pétales d’Aurore.\nPrésence de Groinks. Escorte conseillée.\n\n\n<br><br>\nA l’est tout devient de plus en plus boueux, inavancable. Successions de saut de ponts en ponts qui se détruisent. Combat avec serpents?<br><br>\n\nA l'ouest plus d’arbres, on peut y trouver des plantes: <span class=\"treasure-table-link\" data-table-name=\"Plantes de la forêt\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Plantes de la forêt]</span>.\n<br>\nEmbuscade : \n  <br> \n<span class=\"monster-link\" data-monster=\"Groink\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Groink</span>  <br>  <span class=\"monster-link\" data-monster=\"Groinka\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Groinka</span>  <br> + porte en metal (50 pv, 3 armure physique, recoit double du feu)",
+          "content": "Continuer vers le nord. Les arbres se raréfient, et tout est de plus en plus humide et avec une mauvaise odeur. Marais.<br><br>\n\n Séparation en 2 chemin Est ou Ouest.  <br>\nPanneau qui dit <br>\n\nSud → Poste de pêche de Elmar <br><br>\n\n\nOuest → Lieu de coupe<br>\n ⚠ Avertissement : Veuillez ne pas vous éloigner des ponts.<br>\n Les fonds boueux du marais peuvent être mortels.<br><br>\n\nEst → Lieu de coupe<br>\nAccès par la Forêt des Pétales d’Aurore.<br>\nPrésence de Groinks. Escorte conseillée.<br>\n\n<hr>\n<br><br>\n[img:img_1767542707341_ura062wg6]\nA l’est tout devient de plus en plus boueux, inavancable. Successions de saut de ponts en ponts qui se détruisent. Combat avec serpents?<br><br>\n<hr><br>\n\n\nA l'ouest plus d’arbres, on peut y trouver des plantes: <span class=\"treasure-table-link\" data-table-name=\"Plantes de la forêt\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Plantes de la forêt]</span>.\n<br>\nEmbuscade : \n[img:img_1767542718560_kz6pr40a9]\n  <br> \n<span class=\"monster-link\" data-monster=\"Groink\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Groink</span>  <br>  <span class=\"monster-link\" data-monster=\"Groinka\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Groinka</span>  <br> + porte en metal (50 pv, 3 armure physique, recoit double du feu)",
           "googleDocLink": "https://docs.google.com/document/d/1ib4D5CJdvgBZ-5VC2xAF-0nkow7X17gPKWwqKGP65AY/edit?tab=t.0"
         },
         "Forêt-4": {
           "title": "Forêt-4",
-          "content": "<p>Contenu de la nouvelle sous-page...</p>"
+          "content": "Les deux chemins finissent par se rejoindre pour ne former qu’un étroit sentier, longeant le flanc abrupt d’une falaise adossée à la montagne.<br>\nEn poursuivant la progression, le chemin entame une légère descente vers un plan d’eau calme, que l’on doit traverser par deux petits ponts de bois disposés côte à côte.<br><br>\n\nCombat avec <br>\n[img:img_1767549021365_vri9m6uza]<br>\n<span class=\"monster-link\" data-monster=\"Guêpe géante\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Guêpe géante</span><br>\n\n<span class=\"monster-link\" data-monster=\"AquaLezo\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">AquaLezo</span><br>\n\n<br><br>\n\narrivée dans une grande pleine. Un chasseur ou bon test perception fait decouvrir une cache entre des arbres avec comme loot : <span class=\"treasure-table-link\" data-table-name=\"Sac Provision Port Foret\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Sac Provision Port Foret]</span>",
+          "googleDocLink": "https://docs.google.com/document/d/1ib4D5CJdvgBZ-5VC2xAF-0nkow7X17gPKWwqKGP65AY/edit?tab=t.0"
+        },
+        "Forêt-5": {
+          "title": "Forêt-5",
+          "content": "Au sud, grillage avec portique en bois, ouvert.<br>\nCabane du bucheron.<br>\nDans le jardin se trouve un tonneau en bois avec des fentes et un mécanisme.<br>\n\nLE FAMEUX JEU DU TONNEAU <br><br>\n\nBraves aventuriers, courageux volontaires et amateurs de sensations fortes !<br>\n\nL’un d’entre vous prendra place dans le tonneau.<br>\nLe mécanisme s’éveillera, un grondement se fera entendre…<br>\net les fentes tourneront jusqu’à décider du sort du joueur.<br>\n\nQuand tout s’arrête, un compagnon devra glisser sa dague<br>\ndans l’une des quatre fentes.<br>\n\nMauvais choix ?<br>\nAïe… Le tonneau n’aime pas l’erreur.<br>\n\nBon choix ?<br>\nBravo ! La chance sourit aux audacieux :<br>\nle vainqueur sera porté par l’élan du jeu<br>\nvers des hauteurs que seuls les plus téméraires atteignent,<br>\nlà où attend une récompense bien méritée.<br>\n\nÀ jouer entre braves uniquement.<br>\nLes âmes prudentes sont invitées à regarder.<br>\n\n<br><br><br>\n\nDans la cabane, fermeture simple , une trappe vers le sous sol. la clé se trouve dans la maison (à fouiller). ya un lit, et des provisions.<br>\nAu sous sol, il y a 3 coffres.<br>\nun avec <span class=\"treasure-table-link\" data-table-name=\"Coffre bucheron\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Coffre bucheron]</span><br>\nUn fermé jeu du tonneau avec <span class=\"treasure-table-link\" data-table-name=\"Coffre jeu du tonneau\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Coffre jeu du tonneau]</span><br>\nun fermé avec la tablette aux cristaux.<br>\nIl y a également plusieurs doubles des clés du lieu de coupe.\n\n\nAu nord grillage avec porte en bois avec cadena, ouverte comme s'il on été venu à la hâte. panneau qui dit : <br>\n\"Lieu de coupe<br>\nDemander l'accès à Branor à la cabanne du bucheron, au sud\".<br><br>",
+          "googleDocLink": "https://docs.google.com/document/d/1ib4D5CJdvgBZ-5VC2xAF-0nkow7X17gPKWwqKGP65AY/edit?tab=t.0"
+        },
+        "Forêt-6": {
+          "title": "Forêt-6",
+          "content": "Lieu de coupe avec plein d'arbres coupé.<br>\n Au centre le même symbole de TP qu'il y avait au début. test réflexion pour savoir qu'il faut une poudre de téléportation.<br>\n\n<br>\nAux endroits avec plein d'arbres coupé ya une cache avec <span class=\"treasure-table-link\" data-table-name=\"Coffre bucheron\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Coffre bucheron]</span><br><br>\n\nGrand cri monstrueux au loin.<br>\n<span class=\"npc-link\" data-npc=\"Branor le Bucheron\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;\" title=\"Cliquer pour voir la fiche du NPC\">[NPC: Branor le Bucheron]</span> , addosé à un arbre, bléssé,  vous supplis d'arreter le monstre.\n\n\nCombat boss, falaise. <br>\n<span class=\"monster-link\" data-monster=\"Boss Forêt\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Boss Forêt</span>\n\n<br>\n[img:img_1767549060049_iu38s4gtb]\n<br>\n\nUne fois le boss mort, le bucheron a succombé a ses blassures. sur lui clé de cabane de bucheron, et clé du coffre tablette.",
+          "googleDocLink": "https://docs.google.com/document/d/1ib4D5CJdvgBZ-5VC2xAF-0nkow7X17gPKWwqKGP65AY/edit?tab=t.0"
         }
       }
     }
@@ -73,6 +84,66 @@
     },
     "img_1766336565188_jg8tur9c7": {
       "url": "https://i.ibb.co/zHsG6h87/0ed55a04fcad.jpg",
+      "width": null,
+      "height": null,
+      "style": "block"
+    },
+    "img_1767542707341_ura062wg6": {
+      "url": "https://i.ibb.co/5X9v4jVf/3.jpg",
+      "width": null,
+      "height": null,
+      "style": "block"
+    },
+    "img_1767542718560_kz6pr40a9": {
+      "url": "https://i.ibb.co/wh4jbVb7/3-2.jpg",
+      "width": null,
+      "height": null,
+      "style": "block"
+    },
+    "img_1767543182248_3nlscls8n": {
+      "url": "https://i.ibb.co/v4wjC1ZV/Combat2.jpg",
+      "width": null,
+      "height": null,
+      "style": "block"
+    },
+    "img_1767543214328_1lp9sf4je": {
+      "url": "https://i.ibb.co/gL6sYcn5/Combat3.jpg",
+      "width": null,
+      "height": null,
+      "style": "block"
+    },
+    "img_1767543334225_yuc1obr1o": {
+      "url": "https://i.ibb.co/Fq8xXHhd/Combat1.jpg",
+      "width": null,
+      "height": null,
+      "style": "block"
+    },
+    "img_1767543362427_7w2tss05j": {
+      "url": "https://i.ibb.co/Fq8xXHhd/Combat1.jpg",
+      "width": "500",
+      "height": "250",
+      "style": "block"
+    },
+    "img_1767543415822_jpw3x7699": {
+      "url": "https://i.ibb.co/Fq8xXHhd/Combat1.jpg",
+      "width": null,
+      "height": null,
+      "style": "block"
+    },
+    "img_1767543506362_ibl3s0wac": {
+      "url": "https://i.ibb.co/zTnvyZ05/Foret.jpg",
+      "width": null,
+      "height": null,
+      "style": "block"
+    },
+    "img_1767549021365_vri9m6uza": {
+      "url": "https://i.ibb.co/nNkJnS71/4.jpg",
+      "width": null,
+      "height": null,
+      "style": "block"
+    },
+    "img_1767549060049_iu38s4gtb": {
+      "url": "https://i.ibb.co/Pv6ZggRW/5-boss.jpg",
       "width": null,
       "height": null,
       "style": "block"

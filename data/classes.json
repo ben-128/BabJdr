@@ -30,7 +30,7 @@
   {
     "nom": "Mage",
     "resume": "Lanceur de sorts destructeurs spécialisé dans les magies élémentaires, capable de déchaîner des vagues dévastatrices et des volées de projectiles magiques ravageurs.",
-    "capacites": "<ul><li><em>Équipement de mage</em> : bâtons (une et deux mains), catalyseurs, robes.</li><li><em>Sorts de mage</em> : Apprend et lance des sorts de mage.</li></ul>",
+    "capacites": "<ul><li><em>Équipement de mage</em> : bâtons (une et deux mains), catalyseurs, robes.</li><li><em>Sorts de mage</em> : Apprend et lance des <a href=\"#/sorts-sorts-de-mage\" style=\"color: var(--accent); text-decoration: underline;\"> sorts de mage</a>.</li></ul>",
     "sousClasses": [
       {
         "nom": "Érudit",
@@ -51,7 +51,7 @@
   {
     "nom": "Prêtre",
     "resume": "Serviteur divin maniant la magie de soutien et de lumière, spécialiste des soins et de la protection de ses alliés, redoutable chasseur du mal grâce à ses sorts sacrés purificateurs.",
-    "capacites": "<ul>\n    <li><em>Équipement de prêtre</em> : bâtons (une et deux mains), catalyseurs, robes.</li>\n    <li><em>Sorts de prêtre</em> : Apprend et lance des sorts de Prêtre.</li>\n    <li><em>Éloquence</em> : Gagne la compétence Éloquence rang 1.</li>\n  </ul>",
+    "capacites": "<ul>\n    <li><em>Équipement de prêtre</em> : bâtons (une et deux mains), catalyseurs, robes.</li>\n    <li><em>Sorts de prêtre</em> : Apprend et lance des <a href=\"#/sorts-sorts-de-pr-tre\" style=\"color: var(--accent); text-decoration: underline;\"> sorts de Prêtre</a>.</li>\n    <li><em>Éloquence</em> : Gagne la compétence Éloquence rang 1.</li></ul>",
     "sousClasses": [
       {
         "nom": "Inquisiteur",
@@ -64,7 +64,7 @@
         "nom": "Clerc Divin",
         "base": "<div class=\"chips\"><span class=\"chip\"><img src=\"https://i.ibb.co/23cGYFvZ/stat-Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Force: <strong>1</strong></span><span class=\"chip\"><img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Agilité: <strong>1</strong></span><span class=\"chip\"><img src=\"https://i.ibb.co/67ZW01Q7/stat-Endurance.png\" alt=\"Endurance\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Endurance: <strong>5</strong></span><span class=\"chip\"><img src=\"https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Intelligence: <strong>5</strong></span><span class=\"chip\"><img src=\"https://i.ibb.co/B2BCGP6T/stat-Volont.png\" alt=\"Volonté\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Volonté: <strong>5</strong></span><span class=\"chip\"><img src=\"https://i.ibb.co/HfthhzSF/stat-Chance.png\" alt=\"Chance\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Chance: <strong>4</strong></span></div>",
         "progression": "<strong>📈 Progression par niveau:</strong> +2 Intelligence <img src=\"https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\" data-events-attached=\"true\">| +2 Volonté <img src=\"https://i.ibb.co/B2BCGP6T/stat-Volont.png\" alt=\"Volonté\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\" data-events-attached=\"true\">|\n +1 Chance <img src=\"https://i.ibb.co/HfthhzSF/stat-Chance.png\" alt=\"Chance\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\" data-events-attached=\"true\">|\n<strong> +2 Au choix</strong>",
-        "capacites": "<ul><li><em>Maître des soins</em> : Double l'effet de la puissance des sorts sur les sorts de soins.</li><li><em> Pieux </em>:  Gagne 1 de compétence sur les tests de compétence Réflexion sur un dieu ou une religion.</li><li><em> Prière </em>:  Peut utiliser une action principale pour donner à une cible à moins de 3m un d4 (non cumulable, passe à d8 après le niveau 10), qu'il pourra utiliser dans le combat au choix pour un bonus de dégâts physiques ou d'armure physique.</li></ul>",
+        "capacites": "<ul><li><em>Maître des soins</em> : Double l'effet de la puissance des sorts sur les sorts de soins.</li><li><em> Pieux </em>:  Gagne 1 de compétence sur les tests de compétence Réflexion sur un dieu ou une religion.</li><li><em> Prière </em>:  Peut utiliser une action secondaire pour donner à une cible à moins de 3m un d4 (non cumulable, passe à d8 après le niveau 10), qu'il pourra utiliser dans le combat au choix pour un bonus de dégâts physiques ou d'armure physique.</li></ul>",
         "description": "<i>Serviteur sacré, maître des arts de guérison. Sa puissante magie de soins protège ses alliés et les relève même aux portes de la mort.</i>"
       }
     ]
@@ -93,7 +93,7 @@
   {
     "nom": "Enchanteur",
     "resume": "Détenteur d'une magie singulière de soutien et d'altération, il affaiblit ses ennemis tout en amplifiant les capacités de ses alliés",
-    "capacites": "<ul><li><em>Équipement d'enchanteur</em> : bâtons (une et deux mains), catalyseurs, Robes.</li>\n<li><em>Sorts d'enchanteur</em> : Apprend et lance des sorts d'Enchanteur.</li>\n<li><em>Armes enchantés</em> : Les attaques au corps à corps ont une portée de 6m.</li></ul>",
+    "capacites": "<ul><li><em>Équipement d'enchanteur</em> : bâtons (une et deux mains), catalyseurs, Robes.</li>\n<li><em>Sorts d'enchanteur</em> : Apprend et lance des <a href=\"#/sorts-sorts-d-enchanteur\" style=\"color: var(--accent); text-decoration: underline;\"> sorts d'Enchanteur</a>.</li>\n<li><em>Armes enchantés</em> : Les attaques au corps à corps ont une portée de 6m.</li></ul>",
     "sousClasses": [
       {
         "nom": "Esprit de la grande Fée",

@@ -477,11 +477,20 @@
     "sort:ArmureElémentaire1": "https://i.ibb.co/SH5jcyv/Armure-El-mentaire1.png",
     "sort:ArmureElémentaire2": "https://i.ibb.co/jP9RKzdq/Armure-El-mentaire2.png",
     "objet:Chitine de scarabée": "https://i.ibb.co/R1YXYF8/Chitine.png",
-    "sort:Sorts de Mage:Vague de flammes": "https://i.ibb.co/6cvTp3M9/Vague-De-Flammes.png"
+    "sort:Sorts de Mage:Vague de flammes": "https://i.ibb.co/6cvTp3M9/Vague-De-Flammes.png",
+    "npc:Mirella la receptionniste": "https://i.ibb.co/BKLFHCwM/Mirella-Aubergiste.jpg",
+    "don:Maîtrise du bouclier": "https://i.ibb.co/1GCzYSj2/Maitrise-bouclier.jpg",
+    "objet:Cristal d'expérience": "https://i.ibb.co/Y7hmB29s/Cristal-XP.jpg",
+    "objet:Cristal de force": "https://i.ibb.co/Xxp4RQfC/Cristal-Force.png",
+    "objet:Cristal d'agilité": "https://i.ibb.co/n2XZJSG/Cristal-Agi.png",
+    "objet:Cristal d'endurance": "https://i.ibb.co/DDCY7FZR/Cristal-Endu.png",
+    "objet:Cristal d'intelligence": "https://i.ibb.co/cc7D32ZC/Cristal-Intel.png",
+    "objet:Cristal de volonté": "https://i.ibb.co/d92x6Td/Cristal-Volont.png",
+    "objet:Cristal de chance": "https://i.ibb.co/S4KKr252/Cristal-Chance.png"
   },
   "meta": {
-    "total_images": 478,
-    "exported_date": "2025-12-24",
+    "total_images": 487,
+    "exported_date": "2026-01-04",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
 }
