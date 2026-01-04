@@ -70,5 +70,11 @@
     "image": "",
     "description": "Peu loquace, fière, village décimé",
     "interactions": "- Demande de parler avec Lord Erathian Velorme pour requetes dans zone précises.<br>\n- Parle de son village décimé, et de ses besoins en resources pour retrouver ses soeurs et leur venir en aide."
+  },
+  {
+    "nom": "Elmar",
+    "image": "",
+    "description": "Pecheur. Aime être seul.",
+    "interactions": "- Donne les clés de chez lui quand on le sauve.<br>\n- A retrouver à l'auberge, propose passage vers les Étendues désertiques de Kharûn"
   }
 ]
