@@ -1383,6 +1383,262 @@
     },
 
     /**
+     * Show object links modal
+     */
+    showObjetLinksModal() {
+      let modal = JdrApp.utils.dom.$('#objetLinksModal');
+      // Check if modal exists AND has content (not just an empty shell from static HTML)
+      if (!modal || !modal.querySelector('.modal-content')) {
+        if (modal) modal.remove(); // Remove empty shell
+        modal = this.createObjetLinksModal();
+        document.body.appendChild(modal);
+      }
+
+      BaseModal.openModal('objetLinksModal');
+    },
+
+    /**
+     * Create object links modal
+     */
+    createObjetLinksModal() {
+      // Extract objects from data
+      let objets = [];
+      if (window.OBJETS && Array.isArray(window.OBJETS)) {
+        objets = window.OBJETS.map(objet => ({
+          name: objet.nom,
+          image: objet.image || '',
+          tags: objet.tags || [],
+          description: objet.description || '',
+          prix: objet.prix || ''
+        }));
+      }
+
+      const objetsHTML = objets.map(objet => `
+        <div class="objet-item" data-objet-name="${objet.name}">
+          <div class="objet-info">
+            <div class="objet-name" style="color: var(--accent); font-weight: bold;">${objet.name}</div>
+            <span data-objet-meta style="font-size: 12px; margin-bottom: 6px; display: block; color: var(--bronze);">${objet.tags.join(', ')}</span>
+            <div class="objet-description" style="font-size: 12px; color: var(--text);">${UIUtilities.stripHtml(objet.description).length > 60 ? UIUtilities.stripHtml(objet.description).substring(0, 60) + '...' : UIUtilities.stripHtml(objet.description)}</div>
+          </div>
+          <div class="copy-indicator">Copié!</div>
+        </div>
+      `).join('');
+
+      const modal = BaseModal.createModal('objetLinksModal', '🎒 Liens d\'Objets', `
+        <p>Cliquez sur un objet pour copier son lien HTML dans le presse-papiers :</p>
+        <div style="margin: 15px 0;">
+          <input type="text" id="objet-search-input" placeholder="🔍 Rechercher un objet..." style="width: 100%; padding: 8px 12px; border: 2px solid var(--rule); border-radius: 8px; font-size: 14px;">
+        </div>
+        <div class="objets-grid" id="objets-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; margin: 20px 0; max-height: 400px; overflow-y: auto;">
+          ${objetsHTML}
+        </div>
+      `);
+
+      // Add search functionality
+      const searchInput = modal.querySelector('#objet-search-input');
+      const objetsGrid = modal.querySelector('#objets-grid');
+      const allObjetItems = objetsGrid.querySelectorAll('.objet-item');
+
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          const searchTerm = e.target.value.toLowerCase();
+
+          allObjetItems.forEach(item => {
+            const objetName = item.dataset.objetName.toLowerCase();
+            const objetText = item.textContent.toLowerCase();
+
+            const matches = objetName.includes(searchTerm) ||
+                          objetText.includes(searchTerm);
+
+            item.style.display = matches ? '' : 'none';
+          });
+        });
+      }
+
+      // Add event listeners
+      modal.addEventListener('click', (e) => {
+        const objetItem = e.target.closest('.objet-item');
+        if (objetItem) {
+          const objetName = objetItem.dataset.objetName;
+
+          // Create clickable object link
+          const objetLink = `<span class="objet-link" data-objet="${objetName}" style="color: var(--accent); cursor: pointer; text-decoration: underline;">${objetName}</span>`;
+
+          UIUtilities.copyToClipboard(objetLink);
+
+          objetItem.classList.add('copied');
+
+          // Fermer la modale après un court délai pour voir l'effet "Copié!"
+          setTimeout(() => {
+            BaseModal.closeModal(modal);
+            objetItem.classList.remove('copied');
+          }, 800);
+        }
+      });
+
+      return modal;
+    },
+
+    /**
+     * Show object preview tooltip
+     */
+    showObjetPreview(objetName, triggerElement, event) {
+      if (!objetName) return;
+
+      // Only remove existing object previews, not other types
+      const existingPreview = document.querySelector('.objet-preview-tooltip');
+      if (existingPreview) {
+        existingPreview.remove();
+      }
+
+      // Find the object in the data
+      const objet = window.OBJETS?.find(o => o.nom === objetName);
+      if (!objet) {
+        console.warn('Object not found:', objetName);
+        return;
+      }
+
+      // Build object card HTML using CardBuilder if available
+      let objetCard;
+      if (window.CardBuilder) {
+        const tempBuilder = new CardBuilder(objet, 'objet', 0, '');
+        tempBuilder.isPreview = true;
+        objetCard = tempBuilder.build();
+      } else {
+        // Fallback simple card
+        objetCard = `
+          <div class="card" style="padding: 1rem;">
+            <h4 style="margin: 0 0 0.5rem 0; color: var(--accent);">${objet.nom}</h4>
+            ${objet.image ? `<img src="${objet.image}" alt="${objet.nom}" style="max-width: 150px; display: block; margin: 0.5rem auto;">` : ''}
+            <div style="font-style: italic; margin: 0.5rem 0;">${objet.description || ''}</div>
+            <div style="margin: 0.5rem 0;">${objet.effet || ''}</div>
+            <div style="display: flex; gap: 1rem; font-size: 0.9em;">
+              <span>${objet.prix || ''}</span>
+              <span>${objet.poids || ''}</span>
+            </div>
+          </div>
+        `;
+      }
+
+      // Add styles for the preview tooltip
+      const existingStyle = document.getElementById('objet-preview-styles');
+      if (existingStyle) existingStyle.remove();
+      const styleElement = document.createElement('style');
+      styleElement.id = 'objet-preview-styles';
+      styleElement.textContent = `
+        .objet-preview-tooltip {
+          background: var(--paper) !important;
+          position: fixed !important;
+          z-index: 2147483647 !important;
+          max-width: 400px !important;
+          max-height: 600px !important;
+          overflow-y: auto !important;
+          box-shadow: 0 8px 24px rgba(0,0,0,0.5) !important;
+          border-radius: 12px !important;
+          border: 2px solid var(--rule) !important;
+          padding: 1rem !important;
+        }
+        .objet-preview-tooltip .preview-close-btn {
+          position: absolute !important;
+          top: 5px !important;
+          right: 5px !important;
+          background: #dc2626 !important;
+          color: white !important;
+          border: 2px solid white !important;
+          border-radius: 50% !important;
+          width: 32px !important;
+          height: 32px !important;
+          font-size: 20px !important;
+          font-weight: bold !important;
+          cursor: pointer !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          z-index: 1 !important;
+          box-shadow: 0 4px 12px rgba(220, 38, 38, 0.6) !important;
+        }
+        .objet-preview-tooltip .preview-close-btn:hover {
+          background: #b91c1c !important;
+          transform: scale(1.1) !important;
+        }
+        .objet-preview-tooltip img {
+          max-width: 200px !important;
+          height: auto !important;
+          display: block !important;
+          margin: 0.5rem auto !important;
+        }
+      `;
+      document.head.appendChild(styleElement);
+
+      // Create and show preview
+      const preview = document.createElement('div');
+      preview.className = 'objet-preview-tooltip';
+
+      // Create close button
+      const closeBtn = document.createElement('button');
+      closeBtn.className = 'preview-close-btn';
+      closeBtn.innerHTML = '&times;';
+      closeBtn.onclick = (e) => {
+        e.stopPropagation();
+        removePreview();
+      };
+      preview.appendChild(closeBtn);
+
+      // Add the card content
+      const contentDiv = document.createElement('div');
+      contentDiv.innerHTML = objetCard;
+      preview.appendChild(contentDiv);
+
+      document.body.appendChild(preview);
+
+      // Position the preview
+      const rect = triggerElement.getBoundingClientRect();
+      const previewRect = preview.getBoundingClientRect();
+
+      let left = rect.right + 10;
+      let top = rect.top;
+
+      // Adjust if goes off screen
+      if (left + previewRect.width > window.innerWidth - 20) {
+        left = rect.left - previewRect.width - 10;
+      }
+      if (top + previewRect.height > window.innerHeight - 20) {
+        top = window.innerHeight - previewRect.height - 20;
+      }
+      if (top < 20) top = 20;
+      if (left < 20) left = 20;
+
+      preview.style.left = left + 'px';
+      preview.style.top = top + 'px';
+
+      // Cleanup function
+      const removePreview = () => {
+        preview.remove();
+        document.removeEventListener('click', clickOutsideHandler);
+        document.removeEventListener('keydown', escapeHandler);
+      };
+
+      // Close on click outside
+      const clickOutsideHandler = (e) => {
+        if (!preview.contains(e.target) && !triggerElement.contains(e.target)) {
+          removePreview();
+        }
+      };
+
+      // Close on Escape
+      const escapeHandler = (e) => {
+        if (e.key === 'Escape') {
+          removePreview();
+        }
+      };
+
+      setTimeout(() => {
+        document.addEventListener('click', clickOutsideHandler);
+        document.addEventListener('keydown', escapeHandler);
+      }, 100);
+    },
+
+    /**
      * Show page links modal
      */
     showPageLinksModal() {

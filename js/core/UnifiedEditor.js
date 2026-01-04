@@ -2100,6 +2100,7 @@
               <button id="editorPageLinksBtn" class="btn" style="background: #1d4ed8; color: white; font-size: 12px;">🔗 Liens Pages</button>
               <button id="editorMonsterLinksBtn" class="btn" style="background: #dc2626; color: white; font-size: 12px;">🐲 Liens Monstres</button>
               <button id="editorNPCLinksBtn" class="btn" style="background: #0891b2; color: white; font-size: 12px;">👥 Liens NPCs</button>
+              <button id="editorObjetLinksBtn" class="btn" style="background: #047857; color: white; font-size: 12px;">🎒 Liens Objets</button>
               <button id="editorTreasureTablesBtn" class="btn" style="background: #b45309; color: white; font-size: 12px;">🎲 Tables Trésors</button>
               <button id="editorSchemaBtn" class="btn" style="background: #8b5cf6; color: white; font-size: 12px;">🎨 Schéma</button>
               <button id="editorImageBtn" class="btn" style="background: #be185d; color: white; font-size: 12px;">📷 Image</button>
@@ -2131,6 +2132,7 @@
       const pageLinksBtn = modal.querySelector('#editorPageLinksBtn');
       const monsterLinksBtn = modal.querySelector('#editorMonsterLinksBtn');
       const npcLinksBtn = modal.querySelector('#editorNPCLinksBtn');
+      const objetLinksBtn = modal.querySelector('#editorObjetLinksBtn');
       const treasureTablesBtn = modal.querySelector('#editorTreasureTablesBtn');
       const schemaBtn = modal.querySelector('#editorSchemaBtn');
       const imageBtn = modal.querySelector('#editorImageBtn');
@@ -2217,6 +2219,14 @@
       if (npcLinksBtn) {
         npcLinksBtn.addEventListener('click', () => {
           this.showNPCLinksModal(insertTextAtCursor);
+        });
+      }
+
+      if (objetLinksBtn) {
+        objetLinksBtn.addEventListener('click', () => {
+          if (JdrApp.modules.ui?.showObjetLinksModal) {
+            JdrApp.modules.ui.showObjetLinksModal();
+          }
         });
       }
 

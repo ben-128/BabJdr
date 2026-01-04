@@ -511,6 +511,12 @@
       }
     },
 
+    showObjetLinksModal() {
+      if (window.ModalManager) {
+        return ModalManager.showObjetLinksModal();
+      }
+    },
+
     showNotification(message, type = 'info') {
       // Simple notification for now
       console.log(`[${type.toUpperCase()}] ${message}`);

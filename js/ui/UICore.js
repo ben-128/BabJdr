@@ -184,6 +184,14 @@
         this.showMonsterPreview(monsterName, e.target, e);
       });
 
+      // Gestionnaire pour les liens d'objets dans le contenu
+      JdrApp.utils.events.register('click', '.objet-link', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const objetName = e.target.dataset.objet;
+        this.showObjetPreview(objetName, e.target, e);
+      });
+
       // Gestionnaire pour les liens de NPCs dans le contenu
       JdrApp.utils.events.register('click', '.npc-link', (e) => {
         e.preventDefault();
@@ -324,6 +332,12 @@
     showMonsterPreview(monsterName, triggerElement, event) {
       if (window.ModalManager?.showMonsterPreview) {
         return ModalManager.showMonsterPreview(monsterName, triggerElement, event);
+      }
+    },
+
+    showObjetPreview(objetName, triggerElement, event) {
+      if (window.ModalManager?.showObjetPreview) {
+        return ModalManager.showObjetPreview(objetName, triggerElement, event);
       }
     },
 
