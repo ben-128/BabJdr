@@ -1403,8 +1403,8 @@
     createObjetLinksModal() {
       // Extract objects from data
       let objets = [];
-      if (window.OBJETS && Array.isArray(window.OBJETS)) {
-        objets = window.OBJETS.map(objet => ({
+      if (window.OBJETS?.objets && Array.isArray(window.OBJETS.objets)) {
+        objets = window.OBJETS.objets.map(objet => ({
           name: objet.nom,
           image: objet.image || '',
           tags: objet.tags || [],
@@ -1492,7 +1492,7 @@
       }
 
       // Find the object in the data
-      const objet = window.OBJETS?.find(o => o.nom === objetName);
+      const objet = window.OBJETS?.objets?.find(o => o.nom === objetName);
       if (!objet) {
         console.warn('Object not found:', objetName);
         return;
