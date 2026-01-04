@@ -469,11 +469,17 @@
 
     buildCardSection(cardData, sectionIndex) {
       let cardHTML = `<div class="card editable-section" data-section-type="card" data-section-index="${sectionIndex}">`;
+
+      // Expand image markers in title if present
+      let title = cardData.title || '';
+      if (window.ModalManager && typeof window.ModalManager.expandImageMarkers === 'function') {
+        title = window.ModalManager.expandImageMarkers(title);
+      }
       
       if (cardData.deletable && cardData.sectionType) {
         cardHTML += `
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-            <h3 class="editable editable-card-title" data-edit-type="generic" data-edit-section="${cardData.id}-title">${cardData.title}</h3>
+            <h3 class="editable editable-card-title" data-edit-type="generic" data-edit-section="${cardData.id}-title">${title}</h3>
             ${this.buildEditButton('title')}
             ${this.buildRemoveSectionButton(cardData.sectionType)}
           </div>
@@ -481,7 +487,7 @@
       } else {
         cardHTML += `
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-            <h3 class="editable editable-card-title" data-edit-type="generic" data-edit-section="${cardData.id}-title">${cardData.title}</h3>
+            <h3 class="editable editable-card-title" data-edit-type="generic" data-edit-section="${cardData.id}-title">${title}</h3>
             ${this.buildEditButton('title')}
           </div>
         `;
@@ -502,6 +508,11 @@
         }
       } else {
         htmlContent = cardData.content || '';
+      }
+
+      // Expand image markers in content
+      if (window.ModalManager && typeof window.ModalManager.expandImageMarkers === 'function') {
+        htmlContent = window.ModalManager.expandImageMarkers(htmlContent);
       }
       
       cardHTML += `
