@@ -548,7 +548,7 @@
                             Cliquez ou glissez votre image ici
                         </p>
                         <p style="color: #666; font-size: 0.9em;">
-                            PNG, JPG ou GIF - Max 32MB
+                            PNG, JPG ou GIF - Max 500KB
                         </p>
                     </div>
                     <div class="progress-bar" id="progressBar">
@@ -1538,6 +1538,18 @@
         function handleFileSelect(event) {
             const file = event.target.files[0];
             if (file) {
+                // Check file size (max 500KB)
+                const maxSize = 500 * 1024; // 500KB in bytes
+                if (file.size > maxSize) {
+                    const fileSizeKB = Math.round(file.size / 1024);
+                    alert(`⚠️ L'image est trop volumineuse (${fileSizeKB}KB).
+
+Taille maximale autorisée: 500KB
+
+Veuillez compresser l'image ou en choisir une plus légère.`);
+                    event.target.value = ''; // Reset the input
+                    return;
+                }
                 selectedFile = file;
                 previewFile(file);
             }
@@ -1571,6 +1583,17 @@
 
             const file = e.dataTransfer.files[0];
             if (file && file.type.startsWith('image/')) {
+                // Check file size (max 500KB)
+                const maxSize = 500 * 1024; // 500KB in bytes
+                if (file.size > maxSize) {
+                    const fileSizeKB = Math.round(file.size / 1024);
+                    alert(`⚠️ L'image est trop volumineuse (${fileSizeKB}KB).
+
+Taille maximale autorisée: 500KB
+
+Veuillez compresser l'image ou en choisir une plus légère.`);
+                    return;
+                }
                 selectedFile = file;
                 previewFile(file);
             }
