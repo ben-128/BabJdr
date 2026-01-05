@@ -497,10 +497,14 @@
     "sort:Sorts de Mage:Volée de glace": "https://i.ibb.co/SXRVQt8c/Vol-e-Glace.jpg",
     "sort:Sorts de Mage:Foudre": "https://i.ibb.co/213h9GxY/Foudre.jpg",
     "sort:Sorts de Mage:Sentinelle de Lumière": "https://i.ibb.co/RG5kGZXt/Sentinelle.jpg",
-    "sort:Sorts de Prêtre:Soin de groupe": "https://i.ibb.co/S7mnFKxH/Soin-Groupe.jpg"
+    "sort:Sorts de Prêtre:Soin de groupe": "https://i.ibb.co/S7mnFKxH/Soin-Groupe.jpg",
+    "sort:Sorts de Prêtre:Nouveau Sort 1": "https://i.ibb.co/zh7dPjj3/Bouclier-Elementaire.jpg",
+    "sort:Sorts de Prêtre:Bouclier élémentaire de zone": "https://i.ibb.co/zh7dPjj3/Bouclier-Elementaire.jpg",
+    "sort:Sorts de Prêtre:Voile de Vitalité": "https://i.ibb.co/nsNyRxmd/Soin-Mineur.jpg",
+    "sort:Sorts de Prêtre:Bénédiction de Résilience": "https://i.ibb.co/27cZ5HpY/Soin-Groupe.jpg"
   },
   "meta": {
-    "total_images": 495,
+    "total_images": 502,
     "exported_date": "2026-01-05",
     "note": "Ces images incluent les nouvelles images uploadées"
   }

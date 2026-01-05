@@ -248,18 +248,18 @@
         "effetCritique": "<strong>Coup Critique: </strong> Inflige (10 + Puiss. Sorts)  dégâts."
       },
       {
-        "nom": "Refermer les blessures",
+        "nom": "Voile de Vitalité",
         "element": "Divin",
-        "description": "Une magie divine soigne les blessures récentes du héros ou d'un allié proche.",
+        "description": "Une magie divine enveloppe la cible, formant un voile protecteur qui lui confère une réserve de vitalité temporaire.",
         "categorie": "Sorts de Prêtre",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 1",
         "portee": "🎯 <strong>Portée:</strong> 3m",
         "coutMana": "🔵 <strong>Coût mana:</strong> 5",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
-        "resistance": "<strong>Sans effet si:</strong>  \n<br>- Hors combat.",
-        "effetNormal": "<strong>Effet:</strong> Soigne la cible de (5 + Puiss. Sorts) points de vie.",
-        "effetCritique": "<strong>Coup Critique: </strong>Le soin passe à (10 + Puiss. Sorts)."
+        "resistance": "<strong>Sans effet si:</strong> -",
+        "effetNormal": "<strong>Effet:</strong> La cible obtient (5 + Puiss. Sorts) points de vie temporaires.",
+        "effetCritique": "<strong>Coup Critique: </strong> Passe à (8 + Puiss. Sorts) points de vie temporaires."
       },
       {
         "nom": "Protection",
@@ -338,14 +338,14 @@
       {
         "nom": "Toucher Lointain",
         "element": "Divin",
-        "description": "Projette une onde de guérison à distance qui restaure superficiellement les blessures d’un allié.",
+        "description": "Une onde d’énergie sacrée est projetée à distance, insufflant à l’allié une vigueur provisoire qui le maintient debout malgré ses blessures.",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 5",
         "portee": "🎯 <strong>Portée:</strong> 12m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 10",
-        "resistance": "<strong>Sans effet si:</strong>  \n<br>- Hors combat.",
-        "effetNormal": "<strong>Effet:</strong> Soigne la cible de (5 + Puiss. Sorts) points de vie.",
-        "effetCritique": "<strong>Coup Critique: </strong>Le soin passe à (10 + Puiss. Sorts)."
+        "resistance": "<strong>Sans effet si:</strong> -",
+        "effetNormal": "<strong>Effet:</strong> La cible obtient (5 + Puiss. Sorts) points de vie temporaires.",
+        "effetCritique": "<strong>Coup Critique: </strong> La cible obtient à la place (8 + Puiss. Sorts) points de vie temporaires."
       },
       {
         "nom": "Révélation majeure",
@@ -420,27 +420,27 @@
         "effetCritique": "<strong>Coup Critique: </strong> Les dégats passent à 15 + (Puiss. Sort)."
       },
       {
-        "nom": "Soin de groupe",
+        "nom": "Bénédiction de Résilience",
         "element": "Divin",
-        "description": "Après une longue incantation, une lumière céleste jaillit de la main du héros, apportant une onde de guérison divine qui soigne les blessures de ses compagnons d'armes.",
+        "description": "Après une longue incantation, une lumière céleste se diffuse parmi les alliés, leur accordant à tous une réserve de vie temporaire issue d’une bénédiction divine.",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 7",
         "portee": "🎯 <strong>Portée:</strong> 6m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 2 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 25",
         "resistance": "<strong>Sans effet si:</strong> &nbsp;\n<br>- Hors combat.",
-        "effetNormal": "<strong>Effet:</strong> Soigne le héros et ses alliées à moins de 6m de (10 + Puiss. Sorts) points de vie.",
-        "effetCritique": "<strong>Coup Critique: </strong> Le soin passe à (15 + Puiss Sorts)."
+        "effetNormal": "<strong>Effet:</strong> Le héros et ses alliées à moins de 6m gagnent (10 + Puiss. Sorts) points de vie temporaires.",
+        "effetCritique": "<strong>Coup Critique: </strong> Les points de vie temporaires passent à (15 + Puiss Sorts)."
       },
       {
         "nom": "Bouclier de zone physique",
-        "element": "Feu",
-        "description": "Lance une boule de Feu sur un adversaire.",
+        "element": "Divin",
+        "description": "Un mur de lumière divine se déploie autour du héros, un rempart impénétrable qui repousse les adversaires et sanctifie l'espace sacré.",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 8",
         "portee": "🎯 <strong>Portée:</strong> 9m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 2 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 30",
         "resistance": "<strong>Sans effet si:</strong> \n<br>-Resistance altération >= Intelligence du héros.\n<br>- Taille Grand ou plus",
-        "effetNormal": "<strong>Effet:</strong> Les adversaires dans la zone (9m autour du héros) sont repoussées autour de la zone, et ne peuvent plus y pénétrer.\n\n<br><br>Chaque début de tour, le lanceur peut continuer de <b>canaliser</b> le sort (ne pouvant plus esquiver ou faire d'actions ou se déplacer). S'il le fait, la zone reste alors inaccessible pour les adversaires, et le lanceur consomme 8 points de mana.",
+        "effetNormal": "<strong>Effet:</strong> Les adversaires dans la zone (9m autour du héros) sont repoussées autour de la zone, et ne peuvent plus y pénétrer.\n\n<br><br>Chaque début de tour, le lanceur peut continuer de <b>canaliser</b> le sort (ne pouvant plus esquiver ou faire d'actions ou se déplacer). S'il le fait, la zone reste alors inaccessible pour les adversaires, et le lanceur consomme 10 points de mana.",
         "effetCritique": "<strong>Coup Critique: </strong> Les cibles repoussées subissent (10 + Puiss. Sorts), dégats de <span style=\"color: #f5f5f5; font-weight: bold; background: rgba(100, 100, 100, 0.3); padding: 2px 4px; border-radius: 3px;\">Divin</span>."
       },
       {
@@ -453,14 +453,26 @@
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 2 tours",
         "coutMana": "🔵 <strong>Coût mana:</strong> 35",
         "resistance": "<strong>Sans effet si:</strong> -",
-        "effetNormal": "<strong>Effet:</strong> Les armes du lanceur et de tous les alliés à moins de 6m infligeront (2 + Puiss. Sorts) dégâts de <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span> supplémentaires à chaque coup, pendant 5 tours.",
-        "effetCritique": "<strong>Coup Critique: </strong> Les dégâts passent à (4 + Puiss. Sorts) et la durée passe à 7 tours."
+        "effetNormal": "<strong>Effet:</strong> Les armes du lanceur et de tous les alliés à moins de 6m infligeront (5 + Puiss. Sorts) dégâts de <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span> supplémentaires à chaque coup, jusqu'à la fin du combat.",
+        "effetCritique": "<strong>Coup Critique: </strong> Les dégâts passent à (10 + Puiss. Sorts)."
       },
       {
-        "nom": "Nouveau Sort 1",
-        "element": "Feu",
+        "nom": "Bouclier élémentaire de zone",
+        "element": "Divin",
+        "description": "Un éclat de lumière divine jaillit du héros, englobant ses alliés d'un bouclier de protection sacrée qui absorbe les assauts élémentaux extérieurs.",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 8",
+        "portee": "🎯 <strong>Portée:</strong> 9m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 2 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 30",
+        "resistance": "<strong>Sans effet si:</strong> -",
+        "effetNormal": "<strong>Effet:</strong> Les alliés dans la zone (9m autour du héros) voient les dégats élémentaires reçus de sorts ayant pour source l'exterieur de la zone réduits de (10 + Puiss. Sorts).\n\n<br><br>Chaque début de tour, le lanceur peut continuer de <b>canaliser</b> le sort (ne pouvant plus esquiver ou faire d'actions ou se déplacer). S'il le fait, la zone reste protégée, et le lanceur consomme 10 points de mana.",
+        "effetCritique": "<strong>Coup Critique: </strong> Les dégats élémentaires sont réduits de (15 + Puiss. Sorts)."
+      },
+      {
+        "nom": "Sacrifice rituel",
+        "element": "Maléfique",
         "description": "Lance une boule de Feu sur un adversaire.",
-        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 1",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 9",
         "portee": "🎯 <strong>Portée:</strong> 20m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 3",
