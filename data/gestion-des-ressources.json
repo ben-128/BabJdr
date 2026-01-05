@@ -42,7 +42,7 @@
       "type": "card",
       "id": "gestion-des-ressources-new-7-1756408519770",
       "title": "Sommeil et repas",
-      "content": "Chaque jour, un héros doit manger une ration et dormir au moins 8 heures sous peine d'être dans l'état <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.",
+      "content": "Chaque jour, un héros doit manger une ration et dormir au moins 8 heures sous peine d'être dans l'état <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.<br>\n[img:img_1767615242972_1eyixix9y]",
       "deletable": true,
       "sectionName": "Nouvelle section"
     },

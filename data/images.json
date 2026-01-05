@@ -488,13 +488,17 @@
     "objet:Cristal de volonté": "https://i.ibb.co/d92x6Td/Cristal-Volont.png",
     "objet:Cristal de chance": "https://i.ibb.co/S4KKr252/Cristal-Chance.png",
     "sort:Sorts de Mage:Feu purificateur": "https://i.ibb.co/7xCJdkmr/purificatio.jpg",
-    "sort:Sorts de Mage:Aura de lumière": "https://i.ibb.co/HfT8xk5P/Aura-lumineuse.jpg",
+    "sort:Sorts de Mage:Aura de lumière": "https://i.ibb.co/C5gMDwRw/Aura-lumineuse.jpg",
     "npc:Nouveau PNJ": "https://i.ibb.co/0jWGbCJZ/Elmar.jpg",
-    "npc:Elmar": "https://i.ibb.co/zhbJhjT7/Elmar.jpg"
+    "npc:Elmar": "https://i.ibb.co/zhbJhjT7/Elmar.jpg",
+    "sort:Sorts de Mage:Volée de glace": "https://i.ibb.co/SXRVQt8c/Vol-e-Glace.jpg",
+    "sort:Sorts de Mage:Foudre": "https://i.ibb.co/213h9GxY/Foudre.jpg",
+    "sort:Sorts de Mage:Sentinelle de Lumière": "https://i.ibb.co/RG5kGZXt/Sentinelle.jpg",
+    "sort:Sorts de Prêtre:Soin de groupe": "https://i.ibb.co/S7mnFKxH/Soin-Groupe.jpg"
   },
   "meta": {
-    "total_images": 491,
-    "exported_date": "2026-01-04",
+    "total_images": 495,
+    "exported_date": "2026-01-05",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
 }
