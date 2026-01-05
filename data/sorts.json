@@ -444,6 +444,19 @@
         "effetCritique": "<strong>Coup Critique: </strong> Les cibles repoussées subissent (10 + Puiss. Sorts), dégats de <span style=\"color: #f5f5f5; font-weight: bold; background: rgba(100, 100, 100, 0.3); padding: 2px 4px; border-radius: 3px;\">Divin</span>."
       },
       {
+        "nom": "Enchantement de lumière de groupe",
+        "element": "Lumière",
+        "description": "Une lumière divine se répand sur les armes des alliés proches, les imprégnant d'une puissance céleste.",
+        "categorie": "Sorts de Prêtre",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 9",
+        "portee": "🎯 <strong>Portée:</strong> 6m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 2 tours",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 35",
+        "resistance": "<strong>Sans effet si:</strong> -",
+        "effetNormal": "<strong>Effet:</strong> Les armes du lanceur et de tous les alliés à moins de 6m infligeront (2 + Puiss. Sorts) dégâts de <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span> supplémentaires à chaque coup, pendant 5 tours.",
+        "effetCritique": "<strong>Coup Critique: </strong> Les dégâts passent à (4 + Puiss. Sorts) et la durée passe à 7 tours."
+      },
+      {
         "nom": "Nouveau Sort 1",
         "element": "Feu",
         "description": "Lance une boule de Feu sur un adversaire.",
