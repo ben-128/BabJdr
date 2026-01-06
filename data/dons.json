@@ -114,7 +114,7 @@
       {
         "nom": "Marchand astucieux",
         "description": "Les prix des consommables et de la nourriture est réduit de moitié.",
-        "prerequis": "<strong> Prérequis :</strong> Éloquence niveau 1",
+        "prerequis": "<strong> Prérequis :</strong> Éloquence rang 1",
         "cout": "1 point de don"
       },
       {
@@ -167,7 +167,7 @@
       },
       {
         "nom": "Volonté de fer",
-        "description": "Une fois par jour, le héros peut utiliser une action secondaire pour se débarasser de toutes ses altérations magiques.",
+        "description": "Une fois par jour, le héros peut utiliser une action secondaire pour se débarrasser de toutes ses altérations magiques.",
         "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/B2BCGP6T/stat-Volont.png\" alt=\"Volonté\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Volonté 5",
         "cout": "1 point de don"
       },
@@ -202,7 +202,7 @@
         "cout": "1 point de don"
       },
       {
-        "nom": "Infatiguable",
+        "nom": "Infatigable",
         "description": "Augmente la <img src=\"https://i.ibb.co/B2BCGP6T/stat-Volont.png\" alt=\"Volonté\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> volonté de 4.",
         "prerequis": "<strong> Prérequis :</strong> Don Unique.",
         "cout": "1 point de don"
@@ -269,7 +269,7 @@
       },
       {
         "nom": "Porteur de charge lourde",
-        "description": "Augmente le poids maximum transportable de 5. \n<br>De plus, les armures lourdes augmente l'armure physique de 1 tous les 5 points de force du héros.",
+        "description": "Augmente le poids maximum transportable de 5. \n<br>De plus, les armures lourdes augmentent l'armure physique de 1 tous les 5 points de force du héros.",
         "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/23cGYFvZ/stat-Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Force 15",
         "cout": "1 point de don"
       },
@@ -283,7 +283,7 @@
   },
   {
     "nom": "Rôdeur",
-    "description": "Dons accessibles aux rodeurs.",
+    "description": "Dons accessibles aux rôdeurs.",
     "dons": [
       {
         "nom": "Croche-patte",
@@ -307,7 +307,7 @@
         "nom": "Attaque double",
         "description": "Permet d'utiliser une action secondaire lors d'une attaque au corps à corps pour attaquer avec les deux armes à la fois (un seul jet de dé), infligeant les dégâts des deux armes.",
         "prerequis": "<strong> Prérequis :</strong> Ambidextre",
-        "cout": "2 point de don"
+        "cout": "2 points de don"
       },
       {
         "nom": "Retrait",
@@ -373,7 +373,7 @@
         "nom": "Poison",
         "description": "Peut utiliser une action secondaire pour rajouter du poison à la prochaine attaque physique.\n<br><br> En cas d'attaque réussie, si la cible a une Résistance altération < 2 x N, alors la cible subira <span class=\"etat-link\" data-etat=\"Empoisonné\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Empoisonné</span> N pendant 3 tours, où N est le niveau du héros.",
         "prerequis": "<strong> Prérequis :</strong> -",
-        "cout": "2 point de don"
+        "cout": "2 points de don"
       },
       {
         "nom": "Main heureuse",
@@ -383,7 +383,7 @@
       },
       {
         "nom": "Frappe de l'Ombre",
-        "description": "Une fois par tour, si le rôdeur attaque une cible qui n'a pas encore agi dans ce combat, ou qui est dans un état\n  qui l'empêche de faire des actions, les dégâts sont forcement critiques.",
+        "description": "Une fois par tour, si le rôdeur attaque une cible qui n'a pas encore agi dans ce combat, ou qui est dans un état\n  qui l'empêche de faire des actions, les dégâts sont forcément critiques.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -563,7 +563,7 @@
     "dons": [
       {
         "nom": "Réparateur de baguettes",
-        "description": "Permet, une fois par jour, de passer 10 minutes pour regagner une charge sur un consomable Magie (qui possède encore au moins une charge).",
+        "description": "Permet, une fois par jour, de passer 10 minutes pour regagner une charge sur un consommable Magie (qui possède encore au moins une charge).",
         "prerequis": "<strong> Prérequis :</strong>-",
         "cout": "1 point de don"
       },
@@ -592,7 +592,7 @@
         "cout": "1 point de don"
       },
       {
-        "nom": "Enchantement de force permanante",
+        "nom": "Enchantement de force permanente",
         "description": "Augmente la <img src=\"https://i.ibb.co/23cGYFvZ/stat-Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Force de 4.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
@@ -604,7 +604,7 @@
         "cout": "1 point de don"
       },
       {
-        "nom": "Enchantement d'agilité permanante",
+        "nom": "Enchantement d'agilité permanente",
         "description": "Augmente <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> l'Agilité de 4.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"

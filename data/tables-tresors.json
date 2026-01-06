@@ -500,8 +500,8 @@
       ]
     },
     {
-      "nom": "Pouple de la forêt",
-      "description": "Table de trésors pour le Pouple de la forêt",
+      "nom": "Poulpe de la forêt",
+      "description": "Table de trésors pour le Poulpe de la forêt",
       "tags": [
         "Forêt",
         "Monstre"
@@ -771,7 +771,7 @@
           "objet": {
             "type": "reference",
             "numero": 59,
-            "nom": "Bâton de rodeur"
+            "nom": "Bâton de rôdeur"
           }
         },
         {

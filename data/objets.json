@@ -246,7 +246,7 @@
       "tags": [
         "Nourriture"
       ],
-      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Rend 6 points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.",
+      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Rend 6 points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'état <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.",
       "prix": "🔷 <strong>Prix:</strong> 5",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -258,7 +258,7 @@
       "tags": [
         "Nourriture"
       ],
-      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Rend 9 points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.\n<br><b>Charges :</b> 3",
+      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Rend 9 points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'état <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.\n<br><b>Charges :</b> 3",
       "prix": "🔷 <strong>Prix:</strong> 15",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -550,7 +550,7 @@
         "Deux mains",
         "Arc"
       ],
-      "effet": "<strong>Portée: </strong> 15m.<br>\n<strong>Dégâts: </strong> Inflige (Force) points de dégâts physiques.\n<br> En cas de coup critique, si une charge de consomable flèche avait été utilisée, elle est récupérée.",
+      "effet": "<strong>Portée: </strong> 15m.<br>\n<strong>Dégâts: </strong> Inflige (Force) points de dégâts physiques.\n<br> En cas de coup critique, si une charge de consommable flèche avait été utilisée, elle est récupérée.",
       "prix": "🔷 <strong>Prix:</strong> 100",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -723,7 +723,7 @@
       "tags": [
         "Nourriture"
       ],
-      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Rend 6 points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.\n          <br> <strong>Charges : </strong>2.",
+      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Rend 6 points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'état <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.\n          <br> <strong>Charges : </strong>2.",
       "prix": "🔷 <strong>Prix:</strong> 30",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -744,17 +744,17 @@
     {
       "nom": "Plat épicé",
       "numero": 58,
-      "image": "https://i.ibb.co/fV9FdbzF/Fouet-Foret.png",
+      "image": "https://i.ibb.co/7JZW2ZZT/Food2.png",
       "description": "<i>Ce ragoût rougeoyant, saturé d’épices brûlantes, exige une véritable hardiesse pour être avalé, mais récompense l’audacieux d’une saveur inoubliable</i>",
       "tags": [
         "Nourriture"
       ],
-      "effet": "Inutilisable en combat.\n<br><strong>Prérequis:</strong> Test de compétence Hardiesse 1.\n<br><strong>Effet:</strong> Rend 15 points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'etat <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.\n          <br> <strong>Charges : </strong>3.",
+      "effet": "Inutilisable en combat.\n<br><strong>Prérequis:</strong> Test de compétence Hardiesse 1.\n<br><strong>Effet:</strong> Rend 15 points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'état <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.\n          <br> <strong>Charges : </strong>3.",
       "prix": "🔷 <strong>Prix:</strong> 50",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
-      "nom": "Bâton de rodeur",
+      "nom": "Bâton de rôdeur",
       "numero": 59,
       "image": "https://i.ibb.co/6Kk6Svm/28225038a687.png",
       "description": "<i>Forgé dans le bois noueux des forêts anciennes, ce bâton semble murmurer la route à suivre à ceux qui marchent sans détourner le regard de l’horizon.</i>",
