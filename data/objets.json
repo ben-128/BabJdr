@@ -24,7 +24,7 @@
         "Épée",
         "Une main"
       ],
-      "effet": "<span style=\"font-weight: 700; font-family: \" source=\"\" serif=\"\" pro\",=\"\" serif;=\"\" color:=\"\" rgb(74,=\"\" 44,=\"\" 23);=\"\" text-shadow:=\"\" rgba(0,=\"\" 0,=\"\" 0.05)=\"\" 0px=\"\" 1px=\"\" 2px;\"=\"\">Dégâts: </span> Inflige (2  + Force) points de dégâts physiques.",
+      "effet": "<strong>Dégâts: </strong> Inflige (2  + Force) points de dégâts physiques.",
       "prix": "🔷 <strong>Prix:</strong> 20",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -337,7 +337,7 @@
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
-      "nom": "Dent de Grouink",
+      "nom": "Dent de Groink",
       "numero": 27,
       "image": "https://i.ibb.co/whc5dwnw/Dent-Grouik.png",
       "description": "<i>Portée en collier, cette énorme canine de bête sauvage insuffle à son porteur une force brute et indomptée.</i>",
@@ -349,7 +349,7 @@
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
-      "nom": "Echarpe de chaman Groink",
+      "nom": "Écharpe de chaman Groink",
       "numero": 28,
       "image": "https://i.ibb.co/W4tfpFcH/Echarpe-Chaman.png",
       "description": "<i>Tissée de symboles anciens et imprégnée de sagesse mystique.</i>",
@@ -484,7 +484,7 @@
       "tags": [
         "Accessoire"
       ],
-      "effet": "<strong>Effet:</strong> En cas de coup critique physique sur une attaque au corps à corps, l'adversaire sera mis dans l'état <span class=\"etat-link\" data-etat=\"A terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">À terre</span>.\n<br><strong>Sans effet si :</strong> <br>- Adversaire de taille Grand ou supérieur <br>- Adversaire volant ou lévitant.",
+      "effet": "<strong>Effet:</strong> En cas de coup critique physique sur une attaque au corps à corps, l'adversaire sera mis dans l'état <span class=\"etat-link\" data-etat=\"À terre\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">À terre</span>.\n<br><strong>Sans effet si :</strong> <br>- Adversaire de taille Grand ou supérieur <br>- Adversaire volant ou lévitant.",
       "prix": "🔷 <strong>Prix:</strong> ?",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },

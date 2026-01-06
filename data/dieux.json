@@ -10,9 +10,9 @@
       "type": "card",
       "id": "dieux-new-2-1756899335313",
       "title": "Aedor, le Forgeron-Soleil",
-      "content": "<img src=\"https://i.ibb.co/ym9jv5xS/Dieu-Lumiere-Aedor.jpg\" style=\"display: block; margin: 1rem auto; max-width: 50%; min-width: 200px; cursor: zoom-in;\" alt=\"Image\" loading=\"lazy\" decoding=\"async\">\n<br><br>\nSymbole : Un marteau auréolé en forme de croix.<br>\nElements : Lumière.<br>\nDomaine : courage, travail artisanal.<br>\nCroyances : ses croyants voient en lui celui qui éclaire leur chemin et leur donne la force de bâtir des cités.<br>\nParticularité : ses prêtres prônent la discipline et la reconstruction, mais certains royaumes l’utilisent aussi pour justifier leurs conquêtes.<br><br>",
+      "content": "<img src=\"https://i.ibb.co/ym9jv5xS/Dieu-Lumiere-Aedor.jpg\" style=\"display: block; margin: 1rem auto; max-width: 50%; min-width: 200px; cursor: zoom-in;\" alt=\"Image\" loading=\"lazy\" decoding=\"async\">\n<br><br>\nSymbole : Un marteau auréolé en forme de croix.<br>\nElements : Lumière.<br>\nDomaine : courage, travail artisanal.<br>\nCroyances : ses croyants voient en lui celui qui éclaire leur chemin et leur donne la force de bâtir des cités.<br>\nParticularité : ses prêtres prônent la discipline et la reconstruction, mais certains royaumes l'utilisent aussi pour justifier leurs conquêtes.<br><br>",
       "deletable": true,
-      "sectionName": "Nouvelle section"
+      "sectionName": "Aedor"
     },
     {
       "type": "card",
@@ -20,23 +20,23 @@
       "title": "Durnak, le Cœur-de-Pierre",
       "content": "<img src=\"https://i.ibb.co/HL55fLGc/Dieu-terre-feu-Durnak.jpg\" style=\"display: block; margin: 1rem auto; max-width: 50%; min-width: 200px;\" alt=\"Image\">\n<br><br>\nSymbole : une pierre fissurée d’où s’écoule une lueur rouge.<br>\nElements : Terre, Feu. <br>\nDomaine : montagne, persévérance, serments.<br>\nCroyances : gardien de la nature et des profondeurs, il protège la forêt et la montagne, et punit sévèrement ceux qui trahissent leur parole.<br>",
       "deletable": true,
-      "sectionName": "Nouveau paragraphe"
+      "sectionName": "Durnak"
     },
     {
       "type": "card",
       "id": "dieux-new-4-1756899338873",
       "title": "Liryel, la Dame des Brumes",
-      "content": "<img src=\"https://i.ibb.co/4ZrLTj66/Dieu-Vent-Nuit-Liryel.jpg\" style=\"display: block; margin: 1rem auto; max-width: 50%; min-width: 200px;\" alt=\"Image\">\n<br><br>\nSymbole : une feuille argentée flottant sur de la brume.<br>\nElements : Vent, Nuit.<br>\nDomaine : magie ancienne, mémoire.<br>\nParticularité : ses temples sont souvent des clairières protégées par des enchantements, où les brumes recouvrent les intrus.<br><br>",
+      "content": "<img src=\"https://i.ibb.co/4ZrLTj66/Dieu-Vent-Nuit-Liryel.jpg\" style=\"display: block; margin: 1rem auto; max-width: 50%; min-width: 200px;\" alt=\"Image\">\n<br><br>\nSymbole : une feuille argentée flottant sur de la brume.<br>\nElements : Air, Nuit.<br>\nDomaine : magie ancienne, mémoire.<br>\nParticularité : ses temples sont souvent des clairières protégées par des enchantements, où les brumes recouvrent les intrus.<br><br>",
       "deletable": true,
-      "sectionName": "Nouvelle section"
+      "sectionName": "Liryel"
     },
     {
       "type": "card",
       "id": "dieux-new-5-1756899431837",
-      "title": "Myrin, l’Éclat-Changeant",
+      "title": "Myrin, l'Éclat-Changeant",
       "content": "<img src=\"https://i.ibb.co/99Yyp34v/Dieu-Mal-fique-Myrin.jpg\" style=\"display: block; margin: 1rem auto; max-width: 50%; min-width: 200px;\" alt=\"Image\">\n<br><br>\nSymbole : un masque brisé en deux, dont une moitié sourit et l’autre pleure.<br>\nElements : Maléfique.<br>\nDomaine : illusions, rêves, malice.<br>\nParticularité : ses fidèles accordent beaucoup d’importance aux fêtes, à la musique et aux pactes imprévisibles.<br><br>",
       "deletable": true,
-      "sectionName": "Nouvelle section"
+      "sectionName": "Myrin"
     },
     {
       "id": "section-1766582921492-h17sn5",
@@ -48,7 +48,7 @@
       "id": "section-1766582965263-ylpoud",
       "type": "card",
       "title": "Aurelion, le Serment Radieux",
-      "content": "<img src=\"https://i.ibb.co/6dJTPg5/Dieu-Divin-Aurelion.jpg\" style=\"display: block; margin: 1rem auto; max-width: 50%; min-width: 200px;\" alt=\"Image\">\n<br><br>\nSymbole : un halo de lumière fractale entourant une rune suspendu<br>\nÉlément : Divin<br>\nDomaine : justice, vérité, serments, protection<br>\nParticularité : ses fidèles accordent une valeur absolue à la parole donnée ; rompre un serment fait sous son regard est considéré comme un sacrilège majeur.<br>"
+      "content": "<img src=\"https://i.ibb.co/6dJTPg5/Dieu-Divin-Aurelion.jpg\" style=\"display: block; margin: 1rem auto; max-width: 50%; min-width: 200px;\" alt=\"Image\">\n<br><br>\nSymbole : un halo de lumière fractale entourant une rune suspendue<br>\nÉlément : Divin<br>\nDomaine : justice, vérité, serments, protection<br>\nParticularité : ses fidèles accordent une valeur absolue à la parole donnée ; rompre un serment fait sous son regard est considéré comme un sacrilège majeur.<br>"
     }
   ]
 }

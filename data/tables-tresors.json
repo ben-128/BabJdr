@@ -1,8 +1,8 @@
 {
   "tables": [
     {
-      "nom": "Serpent Foret",
-      "description": "feffez",
+      "nom": "Serpent de la forêt",
+      "description": "Table de trésors pour le Serpent de la forêt",
       "tags": [
         "Forêt",
         "Monstre"
@@ -176,8 +176,8 @@
       ]
     },
     {
-      "nom": "Araignée Géante",
-      "description": "Table de trésors pour l'Araignée Géante",
+      "nom": "Araignée géante",
+      "description": "Table de trésors pour l'Araignée géante",
       "tags": [
         "Forêt",
         "Monstre"
@@ -332,7 +332,7 @@
           "objet": {
             "type": "reference",
             "numero": 27,
-            "nom": "Dent de Grouink"
+            "nom": "Dent de Groink"
           }
         }
       ]
@@ -392,14 +392,14 @@
           "objet": {
             "type": "reference",
             "numero": 28,
-            "nom": "Echarpe de chaman Groink"
+            "nom": "Écharpe de chaman Groink"
           }
         }
       ]
     },
     {
-      "nom": "Guêpe Géante",
-      "description": "Table de trésors pour la Guêpe Géante",
+      "nom": "Guêpe géante",
+      "description": "Table de trésors pour la Guêpe géante",
       "tags": [
         "Forêt",
         "Monstre"
@@ -552,7 +552,7 @@
     },
     {
       "nom": "Boss forêt",
-      "description": "BBB",
+      "description": "Table de trésors pour le Boss de la forêt",
       "tags": [
         "Forêt",
         "Boss"
@@ -735,7 +735,7 @@
       ]
     },
     {
-      "nom": "Aqua Lezo",
+      "nom": "AquaLezo",
       "description": "Table de butin pour une situation spécifique.",
       "tags": [
         "Forêt",

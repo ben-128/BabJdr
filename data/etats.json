@@ -1,6 +1,6 @@
 {
   "page": "etats",
-  "title": "Etats",
+  "title": "États",
   "static": true,
   "sections": [
     {
@@ -29,7 +29,7 @@
       "title": "Ralenti",
       "content": "Vitesse de déplacement réduite de 6m.<br> Impossible de sauter ou d'esquiver.",
       "deletable": true,
-      "sectionName": "Nouvelle section"
+      "sectionName": "Ralenti"
     },
     {
       "type": "card",
@@ -37,7 +37,7 @@
       "title": "Empoisonné",
       "content": "Des dégâts sont appliqués à chaque début de tour, réduits ni par l'armure physique ni par l'armure élémentaire.",
       "deletable": true,
-      "sectionName": "Nouvelle section"
+      "sectionName": "Empoisonné"
     },
     {
       "type": "card",
@@ -45,7 +45,7 @@
       "title": "Entravé/Entoilé/Embourbé",
       "content": "<p>Ne peut plus faire d'actions.</p><p>Ne peut plus esquiver.</p> Le héros ou un allié peut sortir le héros de l'état via un test de compétence hardiesse.",
       "deletable": true,
-      "sectionName": "Nouvelle section"
+      "sectionName": "Entravé"
     },
     {
       "type": "card",
@@ -53,7 +53,7 @@
       "title": "Affaibli",
       "content": "Les dégâts physiques effectués sont réduits de moitié. Les tests de hardiesse ont une difficulté de 2 plus élevée.",
       "deletable": true,
-      "sectionName": "Nouvelle section"
+      "sectionName": "Affaibli"
     },
     {
       "type": "card",
@@ -61,7 +61,7 @@
       "title": "Silence",
       "content": "Incapable de lancer des sorts.",
       "deletable": true,
-      "sectionName": "Nouveau paragraphe"
+      "sectionName": "Silence"
     },
     {
       "type": "card",
@@ -69,7 +69,7 @@
       "title": "Vulnérable",
       "content": "Plus aucune protection apportée par l'armure physique ou élémentaire.",
       "deletable": true,
-      "sectionName": "Nouvelle section"
+      "sectionName": "Vulnérable"
     },
     {
       "type": "card",
@@ -77,7 +77,7 @@
       "title": "Confus",
       "content": "À chaque début de tour, lancez un d20. Si le résultat est de 10 ou moins, passe son tour à se déplacer et attaquer au corps à corps la cible la plus proche.",
       "deletable": true,
-      "sectionName": "Nouvelle section"
+      "sectionName": "Confus"
     },
     {
       "type": "card",
@@ -85,7 +85,7 @@
       "title": "Maudit",
       "content": "Impossible d'effectuer des attaques physiques.",
       "deletable": true,
-      "sectionName": "Nouvelle section"
+      "sectionName": "Maudit"
     },
     {
       "type": "card",
@@ -93,7 +93,7 @@
       "title": "Débilité",
       "content": "La cible est incapable d'effectuer la moindre action ou d'esquiver. À chaque début de tour, elle perd des points de vie, réduits ni par l'armure physique ni par l'armure élémentaire.",
       "deletable": true,
-      "sectionName": "Nouvelle section"
+      "sectionName": "Débilité"
     },
     {
       "type": "card",
@@ -101,7 +101,7 @@
       "title": "Fatigué",
       "content": "Incapable d'utiliser des efforts. Coût en mana des sorts doublé. Dégâts physiques infligés réduits de moitié.",
       "deletable": true,
-      "sectionName": "Nouvelle section"
+      "sectionName": "Fatigué"
     },
     {
       "type": "card",
@@ -109,7 +109,7 @@
       "title": "Aveuglé",
       "content": "Toutes les attaques et sorts ont une portée maximum de 3m. Incapable d'esquiver.",
       "deletable": true,
-      "sectionName": "Nouvelle section"
+      "sectionName": "Aveuglé"
     },
     {
       "id": "section-1759073633821-nfyggh",

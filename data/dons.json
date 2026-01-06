@@ -113,7 +113,7 @@
       },
       {
         "nom": "Marchand astucieux",
-        "description": "Les prix des consommables et de la nourriture est réduit de moitié.",
+        "description": "Les prix des consommables et de la nourriture sont réduits de moitié.",
         "prerequis": "<strong> Prérequis :</strong> Éloquence rang 1",
         "cout": "1 point de don"
       },
