@@ -494,6 +494,18 @@
         "description": "Lorsque le héros lance un sort d'un élément, si il avait lancé un sort du même élément au tour précédent, alors les dégâts sont augmentés de la valeur du niveau du sort.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
+      },
+      {
+        "nom": "Incantation rapide",
+        "description": "Une fois par combat, le mage peut doubler le coût en mana d'un sort nécessitant plusieurs tours d'incantation pour le lancer en un seul tour.",
+        "prerequis": "<strong> Prérequis :</strong> Niveau 7.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Canalisation incrémentale",
+        "description": "Les dégâts des sorts canalisés sont augmentés de 2 pour chaque tour supplémentaire où le sort a été canalisé.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
       }
     ]
   },

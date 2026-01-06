@@ -513,10 +513,12 @@
     "don:Contre-attaque": "https://i.ibb.co/RT2FJtzM/Contre-Attaque.jpg",
     "don:Coup d'épaule": "https://i.ibb.co/SXQjSB17/Coup-Epaule.jpg",
     "don:Enchantement d'agilité permanente": "https://i.ibb.co/KcPnjWyr/Agilit.jpg",
-    "don:Enchantement de force permanente": "https://i.ibb.co/Y7nHXJMx/Enchantement-Force.jpg"
+    "don:Enchantement de force permanente": "https://i.ibb.co/Y7nHXJMx/Enchantement-Force.jpg",
+    "don:Canalisation incrémentale": "https://i.ibb.co/zW3jnxzc/Canal.jpg",
+    "don:Incantation rapide": "https://i.ibb.co/ZR1ZTM9Y/Incant-Rapide.jpg"
   },
   "meta": {
-    "total_images": 514,
+    "total_images": 516,
     "exported_date": "2026-01-06",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
