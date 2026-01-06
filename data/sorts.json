@@ -554,6 +554,19 @@
         "effetCritique": "<strong>Coup Critique: </strong> La cible a également sa vitesse de déplacement augmentée de 3m."
       },
       {
+        "nom": "Rage élémentaire",
+        "element": "Variable",
+        "description": "L'enchanteur libère une tempête d'énergie élémentaire autour de lui, frappant ses ennemis proches avec la fureur de son élément d'affiliation.",
+        "categorie": "Sorts d'Enchanteur",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 7",
+        "portee": "🎯 <strong>Portée:</strong> 9m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 2 tours",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 25",
+        "resistance": "<strong>Sans effet si:</strong> Esquive",
+        "effetNormal": "<strong>Effet:</strong> Inflige (15 + Puiss. Sorts) dégâts de l'élément d'affiliation du héros à jusqu'à 4 adversaires dans un rayon de 9m autour du lanceur.<br><br>Chaque début de tour, le lanceur peut continuer de <b>canaliser en déplacement</b> le sort (ne pouvant plus esquiver ou faire d'actions, mais peut se déplacer). S'il le fait, les dégâts sont infligés à nouveau à jusqu'à 4 adversaires à portée. Le lanceur consomme alors <b>10 points de mana</b>.",
+        "effetCritique": "<strong>Coup Critique :</strong> Les dégâts passent à (20 + Puiss. Sorts)."
+      },
+      {
         "nom": "Imprégnation élémentaire feu terre nuit",
         "element": "Feu",
         "description": "Imprègne une arme de la puissance d'un élément.",
