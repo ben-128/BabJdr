@@ -529,15 +529,28 @@
         "effetCritique": "<strong>Coup Critique : </strong> L'effet dure 3 tours."
       },
       {
-        "nom": "Lévitation",
-        "element": "Air",
-        "description": "Une bourrasque ascendante enveloppe la cible, lui permettant de s’élever légèrement dans les airs et d’échapper aux entraves du sol.",
+        "nom": "Missile élémentaire",
+        "element": "Variable",
+        "description": "Un projectile d'énergie pure fuse vers sa cible. Sa forme varie selon l'affinité du lanceur : flamme ardente, éclat de glace, roc acéré ou souffle de vent.",
+        "categorie": "Sorts d'Enchanteur",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 2",
-        "portee": "🎯 <strong>Portée:</strong> 3m",
+        "portee": "🎯 <strong>Portée:</strong> 12m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 6",
+        "resistance": "<strong>Sans effet si:</strong> Esquive",
+        "effetNormal": "<strong>Effet:</strong> Inflige (5 + Puiss. Sorts) dégâts de l'élément d'affiliation du héros.",
+        "effetCritique": "<strong>Coup Critique :</strong> Les dégâts passent à (8 + Puiss. Sorts)."
+      },
+      {
+        "nom": "Lévitation",
+        "element": "Air",
+        "description": "Une bourrasque ascendante enveloppe la cible, lui permettant de s'élever légèrement dans les airs et d'échapper aux entraves du sol.",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 7",
+        "portee": "🎯 <strong>Portée:</strong> 3m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 15",
         "resistance": "<strong>Sans effet si:</strong> -",
-        "effetNormal": "<strong>Effet:</strong> La cible obtient l'état <span class=\"etat-link\" data-etat=\"Lévitation\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Lévitation</span> pendant 5 tours.",
+        "effetNormal": "<strong>Effet:</strong> La cible obtient l'état <span class=\"etat-link\" data-etat=\"Lévitation\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Lévitation</span> jusqu'à la fin du combat.",
         "effetCritique": "<strong>Coup Critique: </strong> La cible a également sa vitesse de déplacement augmentée de 3m."
       },
       {
