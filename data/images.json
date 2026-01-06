@@ -503,11 +503,16 @@
     "sort:Sorts de Prêtre:Nouveau Sort 1": "https://i.ibb.co/zh7dPjj3/Bouclier-Elementaire.jpg",
     "sort:Sorts de Prêtre:Bouclier élémentaire de zone": "https://i.ibb.co/zh7dPjj3/Bouclier-Elementaire.jpg",
     "sort:Sorts de Prêtre:Voile de Vitalité": "https://i.ibb.co/nsNyRxmd/Soin-Mineur.jpg",
-    "sort:Sorts de Prêtre:Bénédiction de Résilience": "https://i.ibb.co/27cZ5HpY/Soin-Groupe.jpg"
+    "sort:Sorts de Prêtre:Bénédiction de Résilience": "https://i.ibb.co/27cZ5HpY/Soin-Groupe.jpg",
+    "sort:Sorts d'Enchanteur:Débilité": "https://i.ibb.co/DfcLNpdf/Debilit.jpg",
+    "sort:Sorts d'Enchanteur:Ardeur combative": "https://i.ibb.co/KjwyjxYD/Ardeur-Com.jpg",
+    "sort:Sorts d'Enchanteur:Chant enivrant": "https://i.ibb.co/V0fC2N8n/Chant.jpg",
+    "sort:Sorts d'Enchanteur:Accélération de groupe": "https://i.ibb.co/VpzxvSc6/Buff-Vitesse-Group.jpg",
+    "sort:Sorts de Prêtre:Bouclier physique de zone": "https://i.ibb.co/mrQt3LSC/Bouclier-Physique.jpg"
   },
   "meta": {
-    "total_images": 502,
-    "exported_date": "2026-01-05",
+    "total_images": 509,
+    "exported_date": "2026-01-06",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
 }

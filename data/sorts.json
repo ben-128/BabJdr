@@ -117,7 +117,7 @@
         "coutMana": "🔵 <strong>Coût mana:</strong> 10",
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Déplace le héros jusqu'à une cible à portée, alliée ou ennemie.<br> La portée est augmentée d'un mètre par puissance des sorts du lanceur.",
-        "effetCritique": "<strong>Coup Critique: </strong> Le héros peut choisir de déplacer la cible dans la direction d'où le héros est venu, jusqu'à un maximum de la moitié du chemin parcouru."
+        "effetCritique": "<strong>Coup Critique: </strong> Le héros peut choisir d'échanger sa place avec la cible. Ne fonctionne pas sur les cibles Grandes ou supérieur."
       },
       {
         "nom": "Absorption magique",
@@ -128,7 +128,7 @@
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 10",
         "resistance": "<strong>Sans effet si:</strong> -",
-        "effetNormal": "<strong>Effet:</strong> Pendant les 3 prochains tours, si le lanceur subit des dégâts élémentaires, ils seront réduits de (Puiss. Sorts). Pour chaque dommage absorbé, le lanceur regagne 1 point de mana.",
+        "effetNormal": "<strong>Effet:</strong> Jusqu’à la fin du combat, lorsque le lanceur subit des dégâts élémentaires, ceux-ci sont réduits de (Puiss. Sorts).<br>\nPour chaque point de dégâts ainsi absorbé, le lanceur récupère 1 point de mana.<br><br>\n\nLe sort prend fin après avoir absorbé 3 fois des dégats au total.",
         "effetCritique": "<strong>Coup Critique: </strong> Les dégâts sont réduits de 2 x (Puiss. Sorts)."
       },
       {
@@ -176,7 +176,7 @@
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 10",
         "resistance": "<strong>Sans effet si:</strong> -",
-        "effetNormal": "<strong>Effet:</strong> Le héros subit 3 points de dégats de <span style=\"color: #ff6b35; font-weight: bold;\">Feu</span>, et retire ses états <span class=\"etat-link\" data-etat=\"Empoisonné\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Empoisonné</span> ou \n<span class=\"etat-link\" data-etat=\"Ralenti\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ralenti</span> ou <span class=\"etat-link\" data-etat=\"Confus\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Confus</span> ou <span class=\"etat-link\" data-etat=\"Drainé\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Drainé</span>.",
+        "effetNormal": "<strong>Effet:</strong> Le héros subit 3 points de dégats de <span style=\"color: #ff6b35; font-weight: bold;\">Feu</span>, et retire ses états <span class=\"etat-link\" data-etat=\"Empoisonné\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Empoisonné</span> ou \n<span class=\"etat-link\" data-etat=\"Ralenti\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ralenti</span> ou <span class=\"etat-link\" data-etat=\"Confus\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Confus</span> ou <span class=\"etat-link\" data-etat=\"Drainé\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Drainé</span> ou <span class=\"etat-link\" data-etat=\"Maudit\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Maudit</span> ou <span class=\"etat-link\" data-etat=\"Aveuglé\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Aveuglé</span>.",
         "effetCritique": "<strong>Coup Critique: </strong> Double la vitesse du prochain déplacement du héros."
       },
       {
@@ -201,7 +201,7 @@
         "coutMana": "🔵 <strong>Coût mana:</strong> 30",
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Inflige (30 + Puiss. Sorts) dégats d'<span style=\"color: #22c55e; font-weight: bold;\">Air</span> à tous les adversaires devant le héros sur une distance de 30m.",
-        "effetCritique": "<strong>Coup Critique: </strong> les dégats passent à (50 + Puiss. Sorts) et les adversaires à moins de 3m d'une cible (qui n'ont pas déjà étés touchés) subissent égalements les dégats."
+        "effetCritique": "<strong>Coup Critique: </strong> les dégats passent à (45 + Puiss. Sorts) et les adversaires à moins de 3m d'une cible (qui n'ont pas déjà étés touchés) subissent égalements les dégats."
       },
       {
         "nom": "Volée de glace",
@@ -213,7 +213,7 @@
         "coutMana": "🔵 <strong>Coût mana:</strong> 30",
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Tous les adversaires autour du héros (à 9m) subissent (30 + Puiss.Sorts) dégats d'<span style=\"color: #4682b4; font-weight: bold;\">Eau</span>.",
-        "effetCritique": "<strong>Coup Critique: </strong> Les dégats passent à (50 + Puiss.Sorts) et les cibles dont la resistance altération < Intelligence du héros deviennent <span class=\"etat-link\" data-etat=\"Entravé/Entoilé/Embourbé\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">gelées</span> pendant 1 tour."
+        "effetCritique": "<strong>Coup Critique: </strong> Les dégats passent à (45 + Puiss.Sorts) et les cibles dont la resistance altération < Intelligence du héros deviennent <span class=\"etat-link\" data-etat=\"Entravé/Entoilé/Embourbé\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">gelées</span> pendant 1 tour."
       },
       {
         "nom": "Sentinelle de Lumière",
@@ -272,7 +272,7 @@
         "coutMana": "🔵 <strong>Coût mana:</strong> 5",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> -",
-        "effetNormal": "<strong>Effet:</strong> Augmente l'armure de (2 + Puiss. Sorts) pendant 5 tours.",
+        "effetNormal": "<strong>Effet:</strong> Augmente l'armure de (2 + Puiss. Sorts) jusqu'à la fin du combat.",
         "effetCritique": "<strong>Coup Critique: </strong> L'armure est augmentée de (4 + Puiss. Sorts)."
       },
       {
@@ -284,7 +284,7 @@
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 5",
         "resistance": "<strong>Sans effet si:</strong> -",
-        "effetNormal": "<strong>Effet:</strong> L'arme du prêtre infligera (2 + Puiss. Sorts) dégâts de <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span> à chaque coup, pendant 5 tours.",
+        "effetNormal": "<strong>Effet:</strong> L'arme du prêtre infligera (2 + Puiss. Sorts) dégâts de <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span> à chaque coup, jusqu'à la fin du combat.",
         "effetCritique": "<strong>Coup Critique: </strong> Les dégâts passent à (4 + Puiss. Sorts)."
       },
       {
@@ -308,7 +308,7 @@
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 8",
         "resistance": "<strong>Sans effet si:</strong> -",
-        "effetNormal": "<strong>Effet:</strong>  Augmente la Résistance altération de (3 + Puiss. Sorts) pendant 5 tours.<br>",
+        "effetNormal": "<strong>Effet:</strong>  Augmente la Résistance altération de (3 + Puiss. Sorts) jusqu'à la fin du combat.<br>",
         "effetCritique": "<strong>Coup Critique: </strong>  La Résistance altération est augmentée de (5 + Puiss. Sorts)."
       },
       {
@@ -393,7 +393,7 @@
         "coutMana": "🔵 <strong>Coût mana:</strong> 14",
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Enlève l'état <span class=\"etat-link\" data-etat=\"Maudit\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Maudit</span> ou  <span class=\"etat-link\" data-etat=\"Silence\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Silence</span> ou <span class=\"etat-link\" data-etat=\"Confus\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Confus</span> de la cible.",
-        "effetCritique": "<strong>Coup Critique:&nbsp;</strong>&nbsp;La cible est également soignée de 10 points de vie."
+        "effetCritique": "<strong>Coup Critique: </strong> La cible reçoit également 5 points de vie temporaires."
       },
       {
         "nom": "Guérison physique",
@@ -405,7 +405,7 @@
         "coutMana": "🔵 <strong>Coût mana:</strong> 16",
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Enlève l'état <span class=\"etat-link\" data-etat=\"Ralenti\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ralenti</span> ou <span class=\"etat-link\" data-etat=\"Vulnérable\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Vulnérable</span> ou <span class=\"etat-link\" data-etat=\"Débilité\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Débilité</span> ou <span class=\"etat-link\" data-etat=\"Affaibli\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Affaibli</span> de la cible.",
-        "effetCritique": "<strong>Coup Critique:&nbsp;</strong>&nbsp;La cible est également soignée de 10 points de vie."
+        "effetCritique": "<strong>Coup Critique:&nbsp;</strong>&nbsp;La cible reçoit également 5 points de vie temporaires."
       },
       {
         "nom": "Jugement",
@@ -432,7 +432,7 @@
         "effetCritique": "<strong>Coup Critique: </strong> Les points de vie temporaires passent à (15 + Puiss Sorts)."
       },
       {
-        "nom": "Bouclier de zone physique",
+        "nom": "Bouclier physique de zone",
         "element": "Divin",
         "description": "Un mur de lumière divine se déploie autour du héros, un rempart impénétrable qui repousse les adversaires et sanctifie l'espace sacré.",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 8",
@@ -467,18 +467,6 @@
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Les alliés dans la zone (9m autour du héros) voient les dégats élémentaires reçus de sorts ayant pour source l'exterieur de la zone réduits de (10 + Puiss. Sorts).\n\n<br><br>Chaque début de tour, le lanceur peut continuer de <b>canaliser</b> le sort (ne pouvant plus esquiver ou faire d'actions ou se déplacer). S'il le fait, la zone reste protégée, et le lanceur consomme 10 points de mana.",
         "effetCritique": "<strong>Coup Critique: </strong> Les dégats élémentaires sont réduits de (15 + Puiss. Sorts)."
-      },
-      {
-        "nom": "Sacrifice rituel",
-        "element": "Maléfique",
-        "description": "Lance une boule de Feu sur un adversaire.",
-        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 9",
-        "portee": "🎯 <strong>Portée:</strong> 20m",
-        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 3",
-        "resistance": "<strong>Sans effet si:</strong> Esquive.",
-        "effetNormal": "<strong>Effet:</strong> Inflige 5 dégâts de <span style='color: #e25822; font-weight: bold;'>Feu</span> à la cible.<br>&nbsp;Tous les 5 points d'intelligence, augmente les dégâts de 1.",
-        "effetCritique": "<strong>Coup Critique:&nbsp;</strong>&nbsp;Double les dégâts et enflamme la cible."
       }
     ]
   },
@@ -511,7 +499,7 @@
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> -",
-        "effetNormal": "<strong>Effet:</strong> &nbsp;La vitesse de déplacement de la cible est augmentée de 3m pendant 5 tours. Non Cumulable.",
+        "effetNormal": "<strong>Effet:</strong>  La vitesse de déplacement de la cible est augmentée de 3m jusqu'à la fin du combat. Non Cumulable.",
         "effetCritique": "<strong>Coup Critique :&nbsp;</strong> La vitesse est augmentée de 6m."
       },
       {
@@ -548,7 +536,7 @@
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 7",
         "portee": "🎯 <strong>Portée:</strong> 3m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 15",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 12",
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> La cible obtient l'état <span class=\"etat-link\" data-etat=\"Lévitation\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Lévitation</span> jusqu'à la fin du combat.",
         "effetCritique": "<strong>Coup Critique: </strong> La cible a également sa vitesse de déplacement augmentée de 3m."
@@ -562,9 +550,65 @@
         "portee": "🎯 <strong>Portée:</strong> 9m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 2 tours",
         "coutMana": "🔵 <strong>Coût mana:</strong> 25",
-        "resistance": "<strong>Sans effet si:</strong> Esquive",
+        "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Une aura élémentaire entoure le lanceur dans un rayon de 9m. Tout adversaire présent dans la zone ou y pénétrant subit (15 + Puiss. Sorts) dégâts de l'élément d'affiliation du héros (maximum 4 créatures par tour). Le lanceur peut se déplacer librement, mais ne peut plus esquiver ni effectuer d'autres actions.<br><br>Chaque début de tour, le lanceur peut continuer de <b>canaliser en déplacement</b> le sort. S'il le fait, l'aura persiste et inflige à nouveau les dégâts aux adversaires dans la zone ou y pénétrant. Le lanceur consomme alors <b>10 points de mana</b>.",
         "effetCritique": "<strong>Coup Critique :</strong> Les dégâts passent à (20 + Puiss. Sorts)."
+      },
+      {
+        "nom": "Débilité",
+        "element": "Terre",
+        "description": "Une malédiction tellurique s'abat sur la cible, drainant sa vigueur et affaiblissant son corps.",
+        "categorie": "Sorts d'Enchanteur",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 8",
+        "portee": "🎯 <strong>Portée:</strong> 3m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 25",
+        "duree": "⏳ <strong>Durée:</strong> 3 tours",
+        "resistance": "<strong>Sans effet si:</strong> <br>- Résistance altérations >= Intelligence du lanceur<br>- Element <span style=\"color: #8b4513; font-weight: bold; background: rgba(139, 69, 19, 0.2); padding: 2px 4px; border-radius: 3px;\">Terre</span>",
+        "effetNormal": "<strong>Effet:</strong> La cible passe dans l'état <span class=\"etat-link\" data-etat=\"Débilité\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Débilité</span> (Puiss. Sorts) pendant 3 tours.",
+        "effetCritique": "<strong>Coup Critique :</strong> La valeur de débilité est doublée (2 × Puiss. Sorts)."
+      },
+      {
+        "nom": "Ardeur combative",
+        "element": "Feu",
+        "description": "Une flamme intérieure s'éveille chez la cible, aiguisant ses sens et guidant chacun de ses coups vers les points vitaux.",
+        "categorie": "Sorts d'Enchanteur",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 8",
+        "portee": "🎯 <strong>Portée:</strong> 3m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 15",
+        "duree": "⏳ <strong>Durée:</strong> Jusqu'à la fin du combat",
+        "resistance": "<strong>Sans effet si:</strong> -",
+        "effetNormal": "<strong>Effet:</strong> Les chances de coup critique de la cible (physiques, sorts et objets) sont augmentées de 2 jusqu'à la fin du combat.",
+        "effetCritique": "<strong>Coup Critique :</strong> Les chances de coup critique sont augmentées de 3."
+      },
+      {
+        "nom": "Chant enivrant",
+        "element": "Nuit",
+        "description": "Une mélodie mystique s'élève, enveloppant les esprits d'un voile de torpeur irrésistible.",
+        "categorie": "Sorts d'Enchanteur",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 9",
+        "portee": "🎯 <strong>Portée:</strong> 12m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 2 tours",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 30",
+        "duree": "⏳ <strong>Durée:</strong> Instantané",
+        "resistance": "<strong>Sans effet si:</strong> <br>- Résistance altérations >= Intelligence du lanceur<br>- Element <span style=\"color: #1a1a1a; font-weight: bold; background: rgba(180, 180, 200, 0.6); padding: 2px 4px; border-radius: 3px;\">Nuit</span>",
+        "effetNormal": "<strong>Effet:</strong> Tous les adversaires à portée passent dans l'état <span class=\"etat-link\" data-etat=\"Endormi/assommé/Effrayé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Endormi</span> pendant 2 tours.",
+        "effetCritique": "<strong>Coup Critique :</strong> L'effet dure 3 tours."
+      },
+      {
+        "nom": "Accélération de groupe",
+        "element": "Air",
+        "description": "Un vent puissant se lève et enveloppe tous les alliés, leur conférant la vitesse fulgurante des bourrasques célestes.",
+        "categorie": "Sorts d'Enchanteur",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 10",
+        "portee": "🎯 <strong>Portée:</strong> 15m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 30",
+        "duree": "⏳ <strong>Durée:</strong> Instantané",
+        "resistance": "<strong>Sans effet si:</strong> -",
+        "effetNormal": "<strong>Effet:</strong> La vitesse de déplacement de tous les alliés à portée est augmentée de 3m pendant 5 tours. Non Cumulable.",
+        "effetCritique": "<strong>Coup Critique :</strong> La vitesse est augmentée de 6m."
       },
       {
         "nom": "Imprégnation élémentaire feu terre nuit",
