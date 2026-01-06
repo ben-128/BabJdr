@@ -258,8 +258,8 @@
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> -",
-        "effetNormal": "<strong>Effet:</strong> La cible obtient (5 + Puiss. Sorts) points de vie temporaires.",
-        "effetCritique": "<strong>Coup Critique: </strong> Passe à (8 + Puiss. Sorts) points de vie temporaires."
+        "effetNormal": "<strong>Effet:</strong> La cible obtient (3 + Puiss. Sorts) points de vie temporaires.",
+        "effetCritique": "<strong>Coup Critique: </strong> Passe à (5 + Puiss. Sorts) points de vie temporaires."
       },
       {
         "nom": "Protection",
