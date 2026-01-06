@@ -563,7 +563,7 @@
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 2 tours",
         "coutMana": "🔵 <strong>Coût mana:</strong> 25",
         "resistance": "<strong>Sans effet si:</strong> Esquive",
-        "effetNormal": "<strong>Effet:</strong> Inflige (15 + Puiss. Sorts) dégâts de l'élément d'affiliation du héros à jusqu'à 4 adversaires dans un rayon de 9m autour du lanceur.<br><br>Chaque début de tour, le lanceur peut continuer de <b>canaliser en déplacement</b> le sort (ne pouvant plus esquiver ou faire d'actions, mais peut se déplacer). S'il le fait, les dégâts sont infligés à nouveau à jusqu'à 4 adversaires à portée. Le lanceur consomme alors <b>10 points de mana</b>.",
+        "effetNormal": "<strong>Effet:</strong> Une aura élémentaire entoure le lanceur dans un rayon de 9m. Tout adversaire présent dans la zone ou y pénétrant subit (15 + Puiss. Sorts) dégâts de l'élément d'affiliation du héros (maximum 4 créatures par tour). Le lanceur peut se déplacer librement, mais ne peut plus esquiver ni effectuer d'autres actions.<br><br>Chaque début de tour, le lanceur peut continuer de <b>canaliser en déplacement</b> le sort. S'il le fait, l'aura persiste et inflige à nouveau les dégâts aux adversaires dans la zone ou y pénétrant. Le lanceur consomme alors <b>10 points de mana</b>.",
         "effetCritique": "<strong>Coup Critique :</strong> Les dégâts passent à (20 + Puiss. Sorts)."
       },
       {
