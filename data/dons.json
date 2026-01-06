@@ -84,7 +84,7 @@
       {
         "nom": "Rapide",
         "description": "Augmente votre vitesse de déplacement de 3m.",
-        "prerequis": "<strong> Prérequis :</strong> Hardiesse rang 1.  <br>Don unique.",
+        "prerequis": "<strong> Prérequis :</strong> Hardiesse rang 2.  <br>Don unique.",
         "cout": "1 point de don"
       },
       {
@@ -146,6 +146,12 @@
         "description": "Le héros est capable d'équiper les boucliers.",
         "prerequis": "<strong> Prérequis :</strong> <br><img src=\"https://i.ibb.co/23cGYFvZ/stat-Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\">Force 10<br>OU<br>Hardiesse rang 2.",
         "cout": "1 point de don"
+      },
+      {
+        "nom": "Accélération",
+        "description": "Le héros peut utiliser une action principale pour augmenter sa vitesse de déplacement de 6m ce tour-ci.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
       }
     ]
   },
@@ -186,7 +192,7 @@
       {
         "nom": "Increvable",
         "description": "Une fois par jour, peut dépenser un effort pour rester à 1 point de vie s'il devait descendre en dessous.",
-        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/67ZW01Q7/stat-Endurance.png\" alt=\"Endurance\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Endurance 10 , <img src=\"https://i.ibb.co/B2BCGP6T/stat-Volont.png\" alt=\"Volonté\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Volonté 5",
+        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/67ZW01Q7/stat-Endurance.png\" alt=\"Endurance\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\"> Endurance 15 , <img src=\"https://i.ibb.co/B2BCGP6T/stat-Volont.png\" alt=\"Volonté\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\">Volonté 10",
         "cout": "1 point de don"
       },
       {
@@ -277,6 +283,18 @@
         "nom": "Spécialiste des armures légères",
         "description": "Tant que le guerrier ne porte pas d'armure lourde, il gagne 6 <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Agilité.",
         "prerequis": "<strong> Prérequis :</strong> Don Unique.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Contre-attaque",
+        "description": "Après avoir esquivé une attaque au corps à corps, le guerrier peut utiliser une action secondaire (non utilisée durant son tour) pour effectuer immédiatement une attaque au corps à corps contre l'attaquant.",
+        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Agilité 10.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Coup d'épaule",
+        "description": "Après une attaque au corps à corps réussie, le guerrier peut utiliser une action secondaire pour repousser la cible de 3m. Si l'attaque était un coup critique, repousse de 6m à la place.<br><br><b>Sans effet si :</b><br>- Taille supérieure à Moyen.",
+        "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       }
     ]

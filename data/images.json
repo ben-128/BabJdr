@@ -508,10 +508,15 @@
     "sort:Sorts d'Enchanteur:Ardeur combative": "https://i.ibb.co/KjwyjxYD/Ardeur-Com.jpg",
     "sort:Sorts d'Enchanteur:Chant enivrant": "https://i.ibb.co/V0fC2N8n/Chant.jpg",
     "sort:Sorts d'Enchanteur:Accélération de groupe": "https://i.ibb.co/VpzxvSc6/Buff-Vitesse-Group.jpg",
-    "sort:Sorts de Prêtre:Bouclier physique de zone": "https://i.ibb.co/mrQt3LSC/Bouclier-Physique.jpg"
+    "sort:Sorts de Prêtre:Bouclier physique de zone": "https://i.ibb.co/mrQt3LSC/Bouclier-Physique.jpg",
+    "don:Accélération": "https://i.ibb.co/mVSfWV0V/Accelera.jpg",
+    "don:Contre-attaque": "https://i.ibb.co/RT2FJtzM/Contre-Attaque.jpg",
+    "don:Coup d'épaule": "https://i.ibb.co/SXQjSB17/Coup-Epaule.jpg",
+    "don:Enchantement d'agilité permanente": "https://i.ibb.co/KcPnjWyr/Agilit.jpg",
+    "don:Enchantement de force permanente": "https://i.ibb.co/Y7nHXJMx/Enchantement-Force.jpg"
   },
   "meta": {
-    "total_images": 509,
+    "total_images": 514,
     "exported_date": "2026-01-06",
     "note": "Ces images incluent les nouvelles images uploadées"
   }

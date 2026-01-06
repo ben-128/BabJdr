@@ -131,8 +131,8 @@
     ],
     "image": "data/images/Monstres/foret/Monstre_Forêt_Ours.png",
     "element": "Terre",
-    "pointsDeVie": 40,
-    "armurePhysique": 4,
+    "pointsDeVie": 30,
+    "armurePhysique": 3,
     "esquive": 0,
     "initiative": 1,
     "coupCritique": 1,
@@ -146,7 +146,7 @@
     "armureObscurite": 1,
     "armureDivin": 0,
     "armureMalefique": 0,
-    "abilites": "<strong>Griffes dévastatrices:</strong> Inflige 7 dégâts physiques à une cible.<br><strong>Rugissement:</strong> Cible à 9m  <span class=\"etat-link\" data-etat=\"Affaibli\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Affaibli</span> , si  (résistance altérations &lt; 4)",
+    "abilites": "<strong>Griffes dévastatrices:</strong> Inflige 6 dégâts physiques à une cible.<br><strong>Rugissement:</strong> Cible à 9m  <span class=\"etat-link\" data-etat=\"Affaibli\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Affaibli</span> , si  (résistance altérations &lt; 4)",
     "butin": "<strong>Butin:</strong> <span class=\"treasure-table-link\" data-table-name=\"Ours des Bois\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Ours des Bois]</span>"
   },
   {
@@ -257,7 +257,7 @@
     ],
     "image": "data/images/Monstres/foret/Monstre_Forêt_Boss.png",
     "element": "Terre",
-    "pointsDeVie": 120,
+    "pointsDeVie": 80,
     "armurePhysique": 3,
     "esquive": 0,
     "initiative": 3,
@@ -272,7 +272,7 @@
     "armureObscurite": 5,
     "armureDivin": 0,
     "armureMalefique": 5,
-    "abilites": "Double attaque.<br><strong>Attaque basique:</strong> Inflige 10 dégâts physiques. <br><strong>Hurlement:</strong> Tous les adversaires à 15m, avec Résistance altération < 6, sont <span class=\"etat-link\" data-etat=\"Affaibli\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Affaibli</span>.  \n<br><b>Repoussoir</b>: Repousse une cible à 9m. Inflige 5 dégâts.\n<br><b>Appel </b>: Hurle et fait venir 2 <span class=\"monster-link\" data-monster=\"Ours des Bois\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ours des Bois</span>.\n<br><b>Tremblement de terre </b>: Tous les adversaires à 15m, 7 dégâts <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> , critique 12.",
+    "abilites": "Double attaque.<br><strong>Attaque basique:</strong> Inflige 7 dégâts physiques. <br><strong>Hurlement:</strong> Tous les adversaires à 15m, avec Résistance altération < 6, sont <span class=\"etat-link\" data-etat=\"Affaibli\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Affaibli</span>.  \n<br><b>Repoussoir</b>: Repousse une cible à 9m. Inflige 5 dégâts.\n<br><b>Appel </b>: Hurle et fait venir 2 <span class=\"monster-link\" data-monster=\"Ours des Bois\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ours des Bois</span>.\n<br><b>Tremblement de terre </b>: Tous les adversaires à 15m, 7 dégâts <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> , critique 12.",
     "butin": "<strong>Butin:</strong> <span class=\"treasure-table-link\" data-table-name=\"Boss forêt\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Boss forêt]</span>"
   }
 ]
