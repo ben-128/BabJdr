@@ -539,7 +539,7 @@
       },
       {
         "nom": "Martyr",
-        "description": "Une fois par tour, après avoir reçu des dégâts, peut utiliser une action secondaire pour soigner une cible autre que le héros à moins de 6m, d'une valeur du niveau du héros.",
+        "description": "Une fois par tour, après avoir reçu des dégâts, peut utiliser une action secondaire pour conférer des points de vie temporaires à une cible autre que le héros à moins de 6m, d'une valeur du niveau du héros.",
         "prerequis": "<strong> Prérequis :</strong>-",
         "cout": "1 point de don"
       },
