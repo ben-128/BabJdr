@@ -377,7 +377,7 @@
       },
       {
         "nom": "Main heureuse",
-        "description": "Augmente la <img src=\"https://i.ibb.co/HfthhzSF/stat-Chance.png\" alt=\"Chance\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\" data-events-attached=\"true\"> Chance de 5.",
+        "description": "Augmente la <img src=\"https://i.ibb.co/HfthhzSF/stat-Chance.png\" alt=\"Chance\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\" data-events-attached=\"true\"> Chance de 4.",
         "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
