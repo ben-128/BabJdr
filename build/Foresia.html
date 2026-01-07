@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2026-01-06T16:38:24.406Z by JdrBab Build System -->
+<!-- Generated on 2026-01-07T00:15:31.398Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -8387,7 +8387,7 @@ hr,
       {
         "nom": "Rapide",
         "description": "Augmente votre vitesse de déplacement de 3m.",
-        "prerequis": "<strong> Prérequis :</strong> Hardiesse rang 1.  <br>Don unique.",
+        "prerequis": "<strong> Prérequis :</strong> Hardiesse rang 2.  <br>Don unique.",
         "cout": "1 point de don"
       },
       {
@@ -8449,6 +8449,12 @@ hr,
         "description": "Le héros est capable d'équiper les boucliers.",
         "prerequis": "<strong> Prérequis :</strong> <br><img src=\"https://i.ibb.co/23cGYFvZ/stat-Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\">Force 10<br>OU<br>Hardiesse rang 2.",
         "cout": "1 point de don"
+      },
+      {
+        "nom": "Accélération",
+        "description": "Le héros peut utiliser une action principale pour augmenter sa vitesse de déplacement de 6m ce tour-ci.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
       }
     ]
   },
@@ -8489,7 +8495,7 @@ hr,
       {
         "nom": "Increvable",
         "description": "Une fois par jour, peut dépenser un effort pour rester à 1 point de vie s'il devait descendre en dessous.",
-        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/67ZW01Q7/stat-Endurance.png\" alt=\"Endurance\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Endurance 10 , <img src=\"https://i.ibb.co/B2BCGP6T/stat-Volont.png\" alt=\"Volonté\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Volonté 5",
+        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/67ZW01Q7/stat-Endurance.png\" alt=\"Endurance\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\"> Endurance 15 , <img src=\"https://i.ibb.co/B2BCGP6T/stat-Volont.png\" alt=\"Volonté\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\">Volonté 10",
         "cout": "1 point de don"
       },
       {
@@ -8580,6 +8586,18 @@ hr,
         "nom": "Spécialiste des armures légères",
         "description": "Tant que le guerrier ne porte pas d'armure lourde, il gagne 6 <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Agilité.",
         "prerequis": "<strong> Prérequis :</strong> Don Unique.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Contre-attaque",
+        "description": "Après avoir esquivé une attaque au corps à corps, le guerrier peut utiliser une action secondaire (non utilisée durant son tour) pour effectuer immédiatement une attaque au corps à corps contre l'attaquant.",
+        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Agilité 10.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Coup d'épaule",
+        "description": "Après une attaque au corps à corps réussie, le guerrier peut utiliser une action secondaire pour repousser la cible de 3m. Si l'attaque était un coup critique, repousse de 6m à la place.<br><br><b>Sans effet si :</b><br>- Taille supérieure à Moyen.",
+        "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       }
     ]
@@ -8777,6 +8795,18 @@ hr,
       {
         "nom": "Résonance Élémentaire",
         "description": "Lorsque le héros lance un sort d'un élément, si il avait lancé un sort du même élément au tour précédent, alors les dégâts sont augmentés de la valeur du niveau du sort.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Incantation rapide",
+        "description": "Une fois par combat, le mage peut doubler le coût en mana d'un sort nécessitant plusieurs tours d'incantation pour le lancer en un seul tour.",
+        "prerequis": "<strong> Prérequis :</strong> Niveau 7.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Canalisation incrémentale",
+        "description": "Les dégâts des sorts canalisés sont augmentés de 2 pour chaque tour supplémentaire où le sort a été canalisé.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       }
@@ -9985,8 +10015,8 @@ hr,
     ],
     "image": "data/images/Monstres/foret/Monstre_Forêt_Ours.png",
     "element": "Terre",
-    "pointsDeVie": 40,
-    "armurePhysique": 4,
+    "pointsDeVie": 30,
+    "armurePhysique": 3,
     "esquive": 0,
     "initiative": 1,
     "coupCritique": 1,
@@ -10000,7 +10030,7 @@ hr,
     "armureObscurite": 1,
     "armureDivin": 0,
     "armureMalefique": 0,
-    "abilites": "<strong>Griffes dévastatrices:</strong> Inflige 7 dégâts physiques à une cible.<br><strong>Rugissement:</strong> Cible à 9m  <span class=\"etat-link\" data-etat=\"Affaibli\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Affaibli</span> , si  (résistance altérations &lt; 4)",
+    "abilites": "<strong>Griffes dévastatrices:</strong> Inflige 6 dégâts physiques à une cible.<br><strong>Rugissement:</strong> Cible à 9m  <span class=\"etat-link\" data-etat=\"Affaibli\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Affaibli</span> , si  (résistance altérations &lt; 4)",
     "butin": "<strong>Butin:</strong> <span class=\"treasure-table-link\" data-table-name=\"Ours des Bois\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Ours des Bois]</span>"
   },
   {
@@ -10111,7 +10141,7 @@ hr,
     ],
     "image": "data/images/Monstres/foret/Monstre_Forêt_Boss.png",
     "element": "Terre",
-    "pointsDeVie": 120,
+    "pointsDeVie": 80,
     "armurePhysique": 3,
     "esquive": 0,
     "initiative": 3,
@@ -10126,7 +10156,7 @@ hr,
     "armureObscurite": 5,
     "armureDivin": 0,
     "armureMalefique": 5,
-    "abilites": "Double attaque.<br><strong>Attaque basique:</strong> Inflige 10 dégâts physiques. <br><strong>Hurlement:</strong> Tous les adversaires à 15m, avec Résistance altération < 6, sont <span class=\"etat-link\" data-etat=\"Affaibli\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Affaibli</span>.  \n<br><b>Repoussoir</b>: Repousse une cible à 9m. Inflige 5 dégâts.\n<br><b>Appel </b>: Hurle et fait venir 2 <span class=\"monster-link\" data-monster=\"Ours des Bois\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ours des Bois</span>.\n<br><b>Tremblement de terre </b>: Tous les adversaires à 15m, 7 dégâts <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> , critique 12.",
+    "abilites": "Double attaque.<br><strong>Attaque basique:</strong> Inflige 7 dégâts physiques. <br><strong>Hurlement:</strong> Tous les adversaires à 15m, avec Résistance altération < 6, sont <span class=\"etat-link\" data-etat=\"Affaibli\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Affaibli</span>.  \n<br><b>Repoussoir</b>: Repousse une cible à 9m. Inflige 5 dégâts.\n<br><b>Appel </b>: Hurle et fait venir 2 <span class=\"monster-link\" data-monster=\"Ours des Bois\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ours des Bois</span>.\n<br><b>Tremblement de terre </b>: Tous les adversaires à 15m, 7 dégâts <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> , critique 12.",
     "butin": "<strong>Butin:</strong> <span class=\"treasure-table-link\" data-table-name=\"Boss forêt\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Boss forêt]</span>"
   }
 ];
@@ -11604,10 +11634,17 @@ hr,
     "sort:Sorts d'Enchanteur:Ardeur combative": "https://i.ibb.co/KjwyjxYD/Ardeur-Com.jpg",
     "sort:Sorts d'Enchanteur:Chant enivrant": "https://i.ibb.co/V0fC2N8n/Chant.jpg",
     "sort:Sorts d'Enchanteur:Accélération de groupe": "https://i.ibb.co/VpzxvSc6/Buff-Vitesse-Group.jpg",
-    "sort:Sorts de Prêtre:Bouclier physique de zone": "https://i.ibb.co/mrQt3LSC/Bouclier-Physique.jpg"
+    "sort:Sorts de Prêtre:Bouclier physique de zone": "https://i.ibb.co/mrQt3LSC/Bouclier-Physique.jpg",
+    "don:Accélération": "https://i.ibb.co/mVSfWV0V/Accelera.jpg",
+    "don:Contre-attaque": "https://i.ibb.co/RT2FJtzM/Contre-Attaque.jpg",
+    "don:Coup d'épaule": "https://i.ibb.co/SXQjSB17/Coup-Epaule.jpg",
+    "don:Enchantement d'agilité permanente": "https://i.ibb.co/KcPnjWyr/Agilit.jpg",
+    "don:Enchantement de force permanente": "https://i.ibb.co/Y7nHXJMx/Enchantement-Force.jpg",
+    "don:Canalisation incrémentale": "https://i.ibb.co/zW3jnxzc/Canal.jpg",
+    "don:Incantation rapide": "https://i.ibb.co/ZR1ZTM9Y/Incant-Rapide.jpg"
   },
   "meta": {
-    "total_images": 509,
+    "total_images": 516,
     "exported_date": "2026-01-06",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
@@ -12741,7 +12778,7 @@ hr,
 
     // Mark as standalone version for renderer with build timestamp
     window.STANDALONE_VERSION = true;
-    window.BUILD_VERSION = '2026-01-06T16:38:24.408Z';
+    window.BUILD_VERSION = '2026-01-07T00:15:31.400Z';
 
     // Version check - clear old data if version changed
     (function() {
