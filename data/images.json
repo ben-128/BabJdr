@@ -224,7 +224,7 @@
     "monster:Poulpe de la forêt": "https://i.ibb.co/qFNVtvzc/Monstre-For-t-Poulpe.jpg",
     "monster:Serpent de la forêt": "https://i.ibb.co/twGXwX6s/Monstre-For-t-Serpent.jpg",
     "monster:Scarabée géant": "https://i.ibb.co/kLVhZSh/Monstre-For-t-Scarabe-Geant.jpg",
-    "monster:Boss Forêt": "https://i.ibb.co/v4C2hyjN/Monstre-For-t-Boss.jpg",
+    "monster:Boss Forêt": "https://i.ibb.co/gMY5xjgs/Monstre-For-t-Boss.jpg",
     "npc:Exemple de PNJ": "https://i.ibb.co/mr3vx5CD/Mirella-Aubergiste.jpg",
     "npc:Tavin le Facteur": "https://i.ibb.co/qLVdn9NS/Tavin-Facteur.jpg",
     "npc:Branor le Bucheron": "https://i.ibb.co/hJFgDGwD/Branor-Bucheron.jpg",
@@ -516,11 +516,13 @@
     "don:Enchantement de force permanente": "https://i.ibb.co/Y7nHXJMx/Enchantement-Force.jpg",
     "don:Canalisation incrémentale": "https://i.ibb.co/zW3jnxzc/Canal.jpg",
     "don:Incantation rapide": "https://i.ibb.co/ZR1ZTM9Y/Incant-Rapide.jpg",
-    "don:Nouvelle affinité": "https://i.ibb.co/Wq0MHfq/Change-Element.jpg"
+    "don:Nouvelle affinité": "https://i.ibb.co/Wq0MHfq/Change-Element.jpg",
+    "npc:Tobin": "https://i.ibb.co/NdqKkkW9/Tobin.jpg",
+    "npc:Nara": "https://i.ibb.co/gZHbRFhV/Nara.jpg"
   },
   "meta": {
-    "total_images": 516,
-    "exported_date": "2026-01-06",
+    "total_images": 519,
+    "exported_date": "2026-01-09",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
 }

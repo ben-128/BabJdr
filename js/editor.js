@@ -47,11 +47,9 @@
     },
 
     toggleDevMode() {
-      console.log('toggleDevMode called, STANDALONE_VERSION:', window.STANDALONE_VERSION);
       if (window.STANDALONE_VERSION) return;
 
       this.isDevMode = !this.isDevMode;
-      console.log('Dev mode toggled to:', this.isDevMode);
       EventBus.emit(Events.EDITOR_TOGGLE, { enabled: this.isDevMode });
     },
 

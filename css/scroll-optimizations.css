@@ -288,9 +288,10 @@ article.active .grid {
   }
 }
 
-/* Focus management during scroll */
+/* Focus management during scroll - keep outline visible for accessibility */
 .scrolling :focus {
-  outline: none;
+  outline: 2px solid var(--ui-border-light, #e0e0f0);
+  outline-offset: 2px;
 }
 
 /* Intersection Observer loading states */

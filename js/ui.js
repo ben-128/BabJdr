@@ -284,8 +284,6 @@
     selectCampaign(campaignName) {
       if (!campaignName) return;
 
-      console.log('📄 selectCampaign called with:', campaignName);
-
       // Initialize state if needed
       if (!window.JdrApp) {
         window.JdrApp = {};
@@ -294,11 +292,8 @@
         window.JdrApp.state = {};
       }
 
-      console.log('📄 Current selectedCampaign:', window.JdrApp.state.selectedCampaign);
-
       // Check if we're already on this campaign
       if (window.JdrApp.state.selectedCampaign === campaignName) {
-        console.log('📄 Already on this campaign, skipping regeneration and state reset');
         return; // No need to regenerate or reset subpage
       }
 
@@ -308,7 +303,6 @@
       const campaignData = window.CAMPAGNE?.subPages?.[campaignName];
       if (campaignData?.subPages) {
         const subPageList = Object.keys(campaignData.subPages);
-        console.log('📄 Resetting selectedSubPage to first:', subPageList[0]);
         window.JdrApp.state.selectedSubPage = subPageList.length > 0 ? subPageList[0] : null;
       } else {
         window.JdrApp.state.selectedSubPage = null;

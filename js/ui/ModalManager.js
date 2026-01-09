@@ -577,12 +577,6 @@
       // Use CardBuilder to create a full monster card in preview mode
       const monsterCard = CardBuilder.create('monster', foundMonster, 'preview').build();
 
-      // Debug: Check what we're getting
-      console.log('Monster card type:', typeof monsterCard);
-      console.log('Monster card first 200 chars:', monsterCard.substring(0, 200));
-      console.log('Contains < character:', monsterCard.includes('<'));
-      console.log('Contains &lt;:', monsterCard.includes('&lt;'));
-
       // Add minimal styles for the preview tooltip - always recreate to get latest styles
       const existingStyle = document.getElementById('monster-preview-styles');
       if (existingStyle) existingStyle.remove();
@@ -716,14 +710,10 @@
 
       // Decode the monster card HTML
       const decodedCard = decodeHTML(monsterCard);
-      console.log('Decoded card first 200 chars:', decodedCard.substring(0, 200));
 
       // Add monster card - DIRECTLY set innerHTML with decoded HTML
       const cardContainer = document.createElement('div');
       cardContainer.innerHTML = decodedCard;
-
-      console.log('Card container children:', cardContainer.children.length);
-      console.log('Card container HTML preview:', cardContainer.innerHTML.substring(0, 100));
 
       // Move all children from card container to preview
       while (cardContainer.firstChild) {
@@ -732,11 +722,9 @@
 
       // Load lazy images BEFORE adding to document to avoid flicker
       const lazyImages = preview.querySelectorAll('img.lazy-load, img.thumb, img[data-src]');
-      console.log('🖼️ Found lazy images in monster preview:', lazyImages.length);
 
       lazyImages.forEach(img => {
         const optimizedSrc = img.getAttribute('data-src') || img.src;
-        console.log('  - Image optimized src:', optimizedSrc);
 
         if (optimizedSrc && optimizedSrc !== 'data:image/svg+xml' && !optimizedSrc.includes('svg+xml')) {
           img.src = optimizedSrc;
@@ -751,7 +739,6 @@
             const rawUrl = window.JdrApp.modules.images.getImageUrl(illusKey);
             if (rawUrl) {
               originalUrl = rawUrl;
-              console.log('  - Found original URL from illus-key:', originalUrl);
             }
           }
 
@@ -762,7 +749,6 @@
 
           // Use capture phase to intercept before any other handlers
           img.addEventListener('click', (e) => {
-            console.log('🖱️ Image clicked in preview, opening modal with original URL:', originalUrl);
             e.preventDefault();
             e.stopPropagation();
             e.stopImmediatePropagation();
@@ -936,7 +922,6 @@
 
       // Decode the NPC card HTML
       const decodedCard = decodeHTML(npcCard);
-      console.log('📋 Decoded NPC card HTML (first 500 chars):', decodedCard.substring(0, 500));
 
       // Add NPC card - DIRECTLY set innerHTML with decoded HTML
       const cardContainer = document.createElement('div');
@@ -948,23 +933,10 @@
       }
 
       // Load lazy images BEFORE adding to document to avoid flicker
-      const allImages = preview.querySelectorAll('img');
       const lazyImages = preview.querySelectorAll('img.lazy-load, img.thumb, img[data-src]');
-      console.log('🖼️ Total images in NPC preview:', allImages.length);
-      console.log('🖼️ Lazy-load images in NPC preview:', lazyImages.length);
-
-      allImages.forEach((img, idx) => {
-        console.log(`  Image ${idx}:`, {
-          classes: img.className,
-          src: img.src,
-          dataSrc: img.getAttribute('data-src'),
-          style: img.style.cssText
-        });
-      });
 
       lazyImages.forEach(img => {
         const optimizedSrc = img.getAttribute('data-src') || img.src;
-        console.log('  - Processing NPC Image optimized src:', optimizedSrc);
 
         if (optimizedSrc && optimizedSrc !== 'data:image/svg+xml' && !optimizedSrc.includes('svg+xml')) {
           img.src = optimizedSrc;
@@ -979,7 +951,6 @@
             const rawUrl = window.JdrApp.modules.images.getImageUrl(illusKey);
             if (rawUrl) {
               originalUrl = rawUrl;
-              console.log('  - Found original URL from illus-key:', originalUrl);
             }
           }
 
@@ -990,7 +961,6 @@
 
           // Use capture phase to intercept before any other handlers
           img.addEventListener('click', (e) => {
-            console.log('🖱️ NPC Image clicked in preview, opening modal with original URL:', originalUrl);
             e.preventDefault();
             e.stopPropagation();
             e.stopImmediatePropagation();
@@ -1053,12 +1023,9 @@
      * Show enlarged image modal
      */
     showImageModal(imageUrl) {
-      console.log('🖼️ showImageModal called with URL:', imageUrl);
-
       // Remove any existing image modal
       const existingModal = document.querySelector('.image-enlarge-modal');
       if (existingModal) {
-        console.log('  - Removing existing modal');
         existingModal.remove();
       }
 

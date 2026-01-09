@@ -86,7 +86,8 @@
       "Bash(where:*)",
       "Bash(where convert:*)",
       "Bash(pip show:*)",
-      "Bash(git -C:*)"
+      "Bash(git -C:*)",
+      "Bash(npm run:*)"
     ],
     "deny": []
   }

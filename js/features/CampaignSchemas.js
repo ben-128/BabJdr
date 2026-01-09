@@ -15,10 +15,8 @@ const CampaignSchemas = {
   currentState: null,
 
   init() {
-    console.log('CampaignSchemas.init() called');
     this.canvas = document.getElementById('schemaCanvas');
     if (!this.canvas) {
-      console.log('Canvas not found yet, will init on openSchemaEditor');
       return;
     }
 
@@ -51,20 +49,15 @@ const CampaignSchemas = {
 
     // Save initial state
     this.saveState();
-    console.log('CampaignSchemas initialized successfully');
   },
 
   openSchemaEditor() {
-    console.log('openSchemaEditor called');
     const modal = document.getElementById('schemaEditorModal');
-    console.log('Modal found:', !!modal);
 
     if (modal) {
       modal.style.display = 'block';
-      console.log('Modal display set to block');
 
       if (!this.canvas) {
-        console.log('Initializing canvas...');
         this.init();
       }
       // Clear canvas with white background
@@ -73,9 +66,6 @@ const CampaignSchemas = {
       this.history = [];
       this.saveState();
       this.setTool('pen');
-      console.log('Schema editor ready');
-    } else {
-      console.error('Schema editor modal not found in DOM!');
     }
   },
 
@@ -282,15 +272,11 @@ const CampaignSchemas = {
 
 // Make it globally accessible immediately
 window.CampaignSchemas = CampaignSchemas;
-console.log('CampaignSchemas module loaded and available globally');
-
 // Initialize when DOM is ready (for canvas setup)
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
-    console.log('Initializing CampaignSchemas on DOMContentLoaded');
     CampaignSchemas.init();
   });
 } else {
-  console.log('Initializing CampaignSchemas immediately');
   CampaignSchemas.init();
 }

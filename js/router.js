@@ -218,8 +218,6 @@
           
           
           // CRITICAL: Set up mutation observer to track and PREVENT style changes
-          const observerId = Math.random().toString(36).substr(2, 9);
-          console.log(`🔄 DOUBLE RENDER DEBUG: Creating mutation observer [${observerId}]`);
           const observer = new MutationObserver((mutations) => {
             mutations.forEach((mutation) => {
               if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
@@ -512,26 +510,19 @@
       this.updateMJBodyClass();
 
       const handleMJToggle = () => {
-        console.log('=== MJ Toggle clicked ===');
         if (window.JdrApp.state.isMJ) {
           // Déjà en mode MJ, désactiver
           window.JdrApp.state.isMJ = false;
           this.updateMJButtonVisual();
           this.updateMJBodyClass();
-          this.generateTOC(); // Régénérer le TOC pour cacher les sections MJ
-          
-          // Refresh objects display if currently on objects page - DISABLED
-          console.log('Page refresh disabled - using MutationObserver instead');
+          this.generateTOC();
         } else {
           // Demander confirmation avant d'activer le mode MJ
           this.showMJConfirmation(() => {
             window.JdrApp.state.isMJ = true;
             this.updateMJButtonVisual();
             this.updateMJBodyClass();
-            this.generateTOC(); // Régénérer le TOC pour afficher les sections MJ
-            
-            // Refresh objects display if currently on objects page - DISABLED
-            console.log('Page refresh disabled - using MutationObserver instead');
+            this.generateTOC();
           });
         }
       };
@@ -899,18 +890,11 @@
 
     // Helper method to refresh objects page if currently active
     refreshObjectsPageIfActive() {
-      console.log('=== INSIDE refreshObjectsPageIfActive ===');
       const currentHash = window.location.hash;
-      console.log('refreshObjectsPageIfActive: hash =', currentHash);
-      console.log('Hash matches objets?', currentHash === '#/objets', 'or', currentHash === '#objets');
       if (currentHash === '#/objets' || currentHash === '#objets' || currentHash === '#/gestion-objets') {
-        console.log('Forcing objects page refresh...');
         setTimeout(() => {
-          // Force full page regeneration to ensure objects filtered by MJ mode are now visible
-          // This calls renderObjectsPage() which will regenerate the entire page with current filters
-          console.log('Calling renderObjectsPage...');
           this.renderObjectsPage();
-        }, 150); // Slightly longer delay to ensure MJ state is updated
+        }, 150);
       }
     },
     
@@ -2337,10 +2321,9 @@
       
       // Also refresh objects page if we're on it (for filter visibility)
       if (currentHash === '#/objets') {
-        console.log('🔄 Refreshing objects page due to dev mode change');
         setTimeout(() => {
           this.renderObjectsPage();
-        }, 100); // Augmenter le délai pour être sûr que le dev mode est à jour
+        }, 100);
       }
     },
 
@@ -2452,24 +2435,14 @@
     },
 
     refreshObjectsPageIfActive() {
-      console.log('=== REAL refreshObjectsPageIfActive called ===');
       const currentHash = window.location.hash;
-      console.log('Current hash:', currentHash);
       if (currentHash === '#/objets' || currentHash === '#/gestion-objets') {
-        console.log('🔄 Refreshing objects page due to state change');
         setTimeout(() => {
           this._forceObjectsRefresh = true;
-          console.log('About to call renderObjectsPage...');
-          console.log('renderObjectsPage exists?', typeof this.renderObjectsPage);
           if (this.renderObjectsPage) {
             this.renderObjectsPage();
-            console.log('renderObjectsPage called successfully');
-          } else {
-            console.error('renderObjectsPage method not found!');
           }
         }, 50);
-      } else {
-        console.log('Not on objects page, hash is:', currentHash);
       }
     },
 

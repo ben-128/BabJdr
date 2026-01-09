@@ -1,11 +1,6 @@
-// Test minimal
-console.log('ObjectReferencesModal: TEST SIMPLE');
-alert('MODAL TEST - ça marche !');
-
+// ObjectReferencesModal - Shows references for objects
 window.ObjectReferencesModal = {
   show: function(objectNumero) {
-    alert(`Références pour objet ${objectNumero}`);
+    // TODO: Implement object references modal
   }
 };
-
-console.log('ObjectReferencesModal: créé', typeof window.ObjectReferencesModal);
