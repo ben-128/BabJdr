@@ -1501,7 +1501,7 @@
       // Build object card HTML using CardBuilder if available
       let objetCard;
       if (window.CardBuilder) {
-        const tempBuilder = new CardBuilder(objet, 'objet', 0, '');
+        const tempBuilder = new CardBuilder('objet', objet, 'preview', 0);
         tempBuilder.isPreview = true;
         objetCard = tempBuilder.build();
       } else {

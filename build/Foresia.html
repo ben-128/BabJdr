@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2026-01-09T11:49:51.573Z by JdrBab Build System -->
+<!-- Generated on 2026-01-09T11:55:32.051Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12797,7 +12797,7 @@ hr,
 
     // Mark as standalone version for renderer with build timestamp
     window.STANDALONE_VERSION = true;
-    window.BUILD_VERSION = '2026-01-09T11:49:51.575Z';
+    window.BUILD_VERSION = '2026-01-09T11:55:32.053Z';
 
     // Version check - clear old data if version changed
     (function() {
@@ -36147,7 +36147,7 @@ hr,
       // Build object card HTML using CardBuilder if available
       let objetCard;
       if (window.CardBuilder) {
-        const tempBuilder = new CardBuilder(objet, 'objet', 0, '');
+        const tempBuilder = new CardBuilder('objet', objet, 'preview', 0);
         tempBuilder.isPreview = true;
         objetCard = tempBuilder.build();
       } else {
