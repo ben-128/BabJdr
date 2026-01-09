@@ -195,8 +195,8 @@
         "Consommable",
         "Plante"
       ],
-      "effet": "<strong>Effet:</strong> Rend (10 (critique : 20) + Puiss. Sorts) points de vie au héros ou à une cible proche.",
-      "prix": "🔷 <strong>Prix:</strong> 10",
+      "effet": "<strong>Effet:</strong> Rend au héros ou à une cible proche une quantité de points de vie égale au niveau d'Intelligence du héros.<br><b>Critique :</b> Points de vie rendus doublés.",
+      "prix": "🔷 <strong>Prix:</strong> 15",
       "poids": ""
     },
     {
