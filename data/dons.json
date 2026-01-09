@@ -42,7 +42,7 @@
       {
         "nom": "Gros mangeur",
         "description": "Les points de vie rendus en mangeant de la nourriture sont doublés.",
-        "prerequis": "<strong> Prérequis :</strong> Don Unique.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
       {
@@ -90,7 +90,7 @@
       {
         "nom": "Statistiques",
         "description": "Gagne 2 points de statistiques au choix à répartir.",
-        "prerequis": "<strong> Prérequis :</strong> Don Unique.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
       {
@@ -216,13 +216,13 @@
       {
         "nom": "Infatigable",
         "description": "Augmente la <img src=\"https://i.ibb.co/B2BCGP6T/stat-Volont.png\" alt=\"Volonté\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> volonté de 4.",
-        "prerequis": "<strong> Prérequis :</strong> Don Unique.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
       {
         "nom": "Agilité du guerrier",
         "description": "Augmente <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> l'agilité de 4.",
-        "prerequis": "<strong> Prérequis :</strong> Don Unique.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
       {
@@ -246,7 +246,7 @@
       {
         "nom": "Imperturbable",
         "description": "Permet de retirer un trauma du héros.",
-        "prerequis": "<strong> Prérequis :</strong> Don Unique.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
       {
@@ -288,7 +288,7 @@
       {
         "nom": "Spécialiste des armures légères",
         "description": "Tant que le guerrier ne porte pas d'armure lourde, il gagne 6 <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Agilité.",
-        "prerequis": "<strong> Prérequis :</strong> Don Unique.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
       {
@@ -433,7 +433,7 @@
   },
   {
     "nom": "Mage",
-    "description": "Description de cette catégorie de dons.",
+    "description": "Dons accessibles aux mages.",
     "dons": [
       {
         "nom": "Gemme de mana",
@@ -497,7 +497,7 @@
       },
       {
         "nom": "Résonance Élémentaire",
-        "description": "Lorsque le héros lance un sort d'un élément, si il avait lancé un sort du même élément au tour précédent, alors les dégâts sont augmentés de la valeur du niveau du sort.",
+        "description": "Lorsque le héros lance un sort d'un élément, s'il avait lancé un sort du même élément au tour précédent, alors les dégâts sont augmentés de la valeur du niveau du sort.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -587,7 +587,7 @@
       },
       {
         "nom": "Purification sublimée",
-        "description": "Après avoir supprimé un état via un sort, le héros et la cible reçoivent un nombre de point de vie égal au niveau du prêtre.",
+        "description": "Après avoir supprimé un état via un sort, le héros et la cible reçoivent un nombre de points de vie égal au niveau du prêtre.",
         "prerequis": "<strong> Prérequis :</strong>-",
         "cout": "1 point de don"
       }

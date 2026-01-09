@@ -390,8 +390,15 @@ input, select, textarea {
 
 input:focus, select:focus, textarea:focus {
   border-color: var(--ui-border-light);
-  outline: none;
+  outline: 2px solid var(--ui-border-light);
+  outline-offset: 2px;
   box-shadow: 0 0 6px var(--ui-glow);
+}
+
+/* Focus visible pour accessibilité clavier (WCAG 2.1) */
+button:focus-visible, .btn:focus-visible, a:focus-visible {
+  outline: 2px solid var(--ui-border-light);
+  outline-offset: 2px;
 }
 
 /* ═══════════════════════════════════════════════════════════════

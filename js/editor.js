@@ -407,18 +407,17 @@
       if (this._imageHandlersAttached) return;
       this._imageHandlersAttached = true;
 
-      // Utiliser la délégation d'événements pour les clics sur images
-      document.addEventListener('click', (e) => {
+      // Stocker les références des handlers pour pouvoir les supprimer plus tard
+      this._imageClickHandler = (e) => {
         const img = e.target.closest('img');
         // Ignorer les images dans le modal d'agrandissement
         if (img && !img.closest('#image-enlargement-modal')) {
           e.stopImmediatePropagation();
           this.toggleImageEnlargement(img);
         }
-      }, { capture: true });
+      };
 
-      // Support tactile pour mobile
-      document.addEventListener('touchend', (e) => {
+      this._imageTouchHandler = (e) => {
         const img = e.target.closest('img');
         // Ignorer les images dans le modal d'agrandissement
         if (img && !img.closest('#image-enlargement-modal')) {
@@ -426,18 +425,45 @@
           e.stopImmediatePropagation();
           this.toggleImageEnlargement(img);
         }
-      }, { passive: false, capture: true });
+      };
+
+      // Utiliser la délégation d'événements pour les clics sur images
+      document.addEventListener('click', this._imageClickHandler, { capture: true });
+
+      // Support tactile pour mobile
+      document.addEventListener('touchend', this._imageTouchHandler, { passive: false, capture: true });
 
       // Attacher les handlers spécifiques (upload, suppression)
       this.attachImageEvents();
 
-      // Observer pour les nouveaux éléments .illus
+      // Observer pour les nouveaux éléments .illus avec throttling
       if (typeof MutationObserver !== 'undefined') {
-        const observer = new MutationObserver(() => {
-          this.attachImageEvents();
+        let timeoutId = null;
+        this._mutationObserver = new MutationObserver(() => {
+          // Throttle les appels pour éviter trop de traitement
+          if (timeoutId) return;
+          timeoutId = setTimeout(() => {
+            this.attachImageEvents();
+            timeoutId = null;
+          }, 100);
         });
-        observer.observe(document.body, { childList: true, subtree: true });
+        this._mutationObserver.observe(document.body, { childList: true, subtree: true });
       }
+    },
+
+    // Méthode pour nettoyer les event listeners (à appeler lors du cleanup)
+    cleanupImageHandlers() {
+      if (this._imageClickHandler) {
+        document.removeEventListener('click', this._imageClickHandler, { capture: true });
+      }
+      if (this._imageTouchHandler) {
+        document.removeEventListener('touchend', this._imageTouchHandler, { passive: false, capture: true });
+      }
+      if (this._mutationObserver) {
+        this._mutationObserver.disconnect();
+        this._mutationObserver = null;
+      }
+      this._imageHandlersAttached = false;
     },
 
     attachImageEvents() {
@@ -478,6 +504,10 @@
       if (!file) return;
 
       const illus = event.target.closest('.illus');
+      if (!illus) {
+        console.warn('[Editor] No .illus container found for image upload');
+        return;
+      }
       const img = illus.querySelector('img');
       const rmButton = illus.querySelector('.rm');
       const illusKey = illus.dataset.illusKey;

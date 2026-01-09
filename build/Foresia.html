@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2026-01-09T14:58:57.290Z by JdrBab Build System -->
+<!-- Generated on 2026-01-09T15:46:05.981Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -518,8 +518,15 @@ input, select, textarea {
 
 input:focus, select:focus, textarea:focus {
   border-color: var(--ui-border-light);
-  outline: none;
+  outline: 2px solid var(--ui-border-light);
+  outline-offset: 2px;
   box-shadow: 0 0 6px var(--ui-glow);
+}
+
+/* Focus visible pour accessibilité clavier (WCAG 2.1) */
+button:focus-visible, .btn:focus-visible, a:focus-visible {
+  outline: 2px solid var(--ui-border-light);
+  outline-offset: 2px;
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -5313,10 +5320,10 @@ body.dev-off .btn.small[data-don-index],
 /* ULTRA-SPECIFIC RULES FOR IMAGE UPLOAD BUTTONS */
 body.dev-off .illus label.up,
 body.dev-off .illus button.rm,
-body.dev-off label:contains("📷"),
-body.dev-off label:contains("Ajouter"),
-body.dev-off button:contains("🗑"),
-body.dev-off button:contains("Retirer"),
+body.dev-off label[title*="image"],
+body.dev-off label[title*="photo"],
+body.dev-off button[title*="supprimer"],
+body.dev-off button[title*="retirer"],
 body.dev-off .card .illus .up,
 body.dev-off .card .illus .rm,
 body.dev-off .card .illus label,
@@ -5379,17 +5386,10 @@ html body.dev-off button.manage-tags-btn,
 html body.dev-off button.tags-manager-btn,
 html body.dev-off .btn.manage-tags-btn,
 html body.dev-off .btn.tags-manager-btn,
-/* Text content matching */
-body.dev-off button:contains("🏷️ Gérer les tags"),
-body.dev-off button:contains("Gérer les tags") {
+/* Text content matching - using valid attribute selectors */
+body.dev-off button[title*="tags"],
+body.dev-off button[aria-label*="tags"] {
   display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  position: absolute !important;
-  left: -9999px !important;
-  width: 0 !important;
-  height: 0 !important;
-  overflow: hidden !important;
   pointer-events: none !important;
 }
 
@@ -5405,27 +5405,12 @@ body.dev-off button:contains("Gérer les tags") {
 body.dev-off .dev-buttons-container,
 body.dev-off div[data-dev-only] {
   display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
 }
 
-/* Element selectors for spells and monsters - Solution ultra-forcée */
+/* Element selectors for spells and monsters - hidden by default */
 .spell-element-selector,
-.spell-element-selector *,
-div.spell-element-selector,
-.card .spell-element-selector,
-.monster-element-selector,
-.monster-element-selector *,
-div.monster-element-selector,
-.card .monster-element-selector {
+.monster-element-selector {
   display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  position: absolute !important;
-  left: -9999px !important;
-  width: 0 !important;
-  height: 0 !important;
-  overflow: hidden !important;
 }
 
 /* Modal buttons should always be visible */
@@ -5433,33 +5418,13 @@ dialog .delete-monster-tag-btn,
 dialog .btn,
 dialog button {
   display: inline-flex !important;
-  visibility: visible !important;
-  opacity: 1 !important;
   pointer-events: auto !important;
-  position: static !important;
-  left: auto !important;
-  width: auto !important;
-  height: auto !important;
-  overflow: visible !important;
 }
 
 /* SEULEMENT visible en mode dev */
 body.dev-on .spell-element-selector,
-body.dev-on .spell-element-selector *,
-body.dev-on div.spell-element-selector,
-body.dev-on .card .spell-element-selector,
-body.dev-on .monster-element-selector,
-body.dev-on .monster-element-selector *,
-body.dev-on div.monster-element-selector,
-body.dev-on .card .monster-element-selector {
+body.dev-on .monster-element-selector {
   display: inline-block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  position: static !important;
-  left: auto !important;
-  width: auto !important;
-  height: auto !important;
-  overflow: visible !important;
 }
 
 body.dev-off .spell-element-display,
@@ -5516,10 +5481,7 @@ body.dev-on .manage-tags-btn,
 body.dev-on .add-monster-btn,
 body.dev-on .tags-manager-btn {
   display: inline-block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
   pointer-events: auto !important;
-  position: relative !important;
 }
 
 /* Limit objects to max 4 per row in dev mode */
@@ -5536,7 +5498,7 @@ body.dev-on #objets-container {
   }
 }
 
-/* ULTIMATE SOLUTION: Force dimensions to prevent 0x0 collapse */
+/* Dev mode edit buttons styling */
 html body.dev-on .edit-btn,
 html body.dev-on button[class*="edit"],
 html body.dev-on button[class*="add"],
@@ -5544,27 +5506,22 @@ html body.dev-on button[class*="delete"],
 html body.dev-on .section-delete,
 html body.dev-on .add-paragraph-btn {
   display: inline-block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  width: 28px !important;
-  height: 28px !important;
-  min-width: 28px !important;
-  min-height: 28px !important;
-  background: rgba(139,69,19,0.1) !important;
-  border: 1px solid var(--bronze) !important;
-  border-radius: 6px !important;
-  color: var(--bronze) !important;
-  font-size: 14px !important;
-  padding: 4px !important;
-  margin-left: 8px !important;
-  box-sizing: border-box !important;
-  line-height: 1 !important;
-  cursor: pointer !important;
-  position: relative !important;
-  top: 0 !important;
-  left: 0 !important;
-  transform: none !important;
-  z-index: 10 !important;
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  min-height: 28px;
+  background: rgba(139,69,19,0.1);
+  border: 1px solid var(--bronze);
+  border-radius: 6px;
+  color: var(--bronze);
+  font-size: 14px;
+  padding: 4px;
+  margin-left: 8px;
+  box-sizing: border-box;
+  line-height: 1;
+  cursor: pointer;
+  position: relative;
+  z-index: 10;
 }
 /* Target specific button classes from renderer */
 body.dev-off .spell-add,
@@ -5595,17 +5552,12 @@ body.dev-off button[class*="move"],
 body.dev-off button[class*="upload"],
 body.dev-off button[class*="edit"] {
   display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
 }
 
 /* Exception: les boutons favoris doivent TOUJOURS être visibles */
 body.dev-off button.favoris-star,
 body.dev-on button.favoris-star {
   display: flex !important;
-  visibility: visible !important;
-  opacity: 1 !important;
   pointer-events: auto !important;
 }
 
@@ -5624,9 +5576,6 @@ html body.dev-off .filter-manager-btn,
 html body.dev-off button.tags-manager-btn,
 html body.dev-off button.filter-manager-btn {
   display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
 }
 
 /* Ancien système d'agrandissement - désactivé */
@@ -7541,7 +7490,7 @@ hr,
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 11",
         "resistance": "<strong>Sans effet si:</strong> -",
-        "effetNormal": "<strong>Effet:</strong>  Inflige (13 + Puiss. Sorts) dégâts de <span style=\"color: #1a1a1a; font-weight: bold; background: rgba(180, 180, 200, 0.6); padding: 2px 4px; border-radius: 3px;\">Nuit</span> aux créatures dans un cone devant le lanceur (largeur 3m puis 6m puis 9m, distance 9m) et les repousse chacune de 3m.",
+        "effetNormal": "<strong>Effet:</strong>  Inflige (13 + Puiss. Sorts) dégâts de <span style=\"color: #1a1a1a; font-weight: bold; background: rgba(180, 180, 200, 0.6); padding: 2px 4px; border-radius: 3px;\">Nuit</span> aux créatures dans un cône devant le lanceur (largeur 3m puis 6m puis 9m, distance 9m) et les repousse chacune de 3m.",
         "effetCritique": "<strong>Coup Critique: </strong> Les dégâts passent à (20 + Puiss. Sorts) et les cibles sont repoussées de 6m."
       },
       {
@@ -7559,7 +7508,7 @@ hr,
       {
         "nom": "Nuage toxique",
         "element": "Terre",
-        "description": "Une brume opaque se déploie à l'endroit choisi, persistant plusieurs tours et infligeant son toxique insidieux.",
+        "description": "Une brume opaque se déploie à l'endroit choisi, persistant plusieurs tours et infligeant son poison insidieux.",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 6",
         "portee": "🎯 <strong>Portée:</strong> 18m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
@@ -7662,7 +7611,7 @@ hr,
         "coutMana": "🔵 <strong>Coût mana:</strong> 19",
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Inflige (30 + Puiss. Sorts) dégâts d'<span style=\"color: #22c55e; font-weight: bold;\">Air</span> à tous les adversaires devant le héros sur une distance de 30m.",
-        "effetCritique": "<strong>Coup Critique: </strong> les dégâts passent à (45 + Puiss. Sorts) et les adversaires à moins de 3m d'une cible (qui n'ont pas déjà étés touchés) subissent également les dégâts."
+        "effetCritique": "<strong>Coup Critique: </strong> les dégâts passent à (45 + Puiss. Sorts) et les adversaires à moins de 3m d'une cible (qui n'ont pas déjà été touchés) subissent également les dégâts."
       },
       {
         "nom": "Volée de glace",
@@ -7673,8 +7622,8 @@ hr,
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 2 tours",
         "coutMana": "🔵 <strong>Coût mana:</strong> 21",
         "resistance": "<strong>Sans effet si:</strong> -",
-        "effetNormal": "<strong>Effet:</strong> Tous les adversaires autour du héros (à 9m) subissent (30 + Puiss.Sorts) dégâts d'<span style=\"color: #4682b4; font-weight: bold;\">Eau</span>.",
-        "effetCritique": "<strong>Coup Critique: </strong> Les dégâts passent à (45 + Puiss.Sorts) et les cibles dont la Résistance altération < Intelligence du héros deviennent <span class=\"etat-link\" data-etat=\"Entravé/Entoilé/Embourbé\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">gelées</span> pendant 1 tour."
+        "effetNormal": "<strong>Effet:</strong> Tous les adversaires autour du héros (à 9m) subissent (30 + Puiss. Sorts) dégâts d'<span style=\"color: #4682b4; font-weight: bold;\">Eau</span>.",
+        "effetCritique": "<strong>Coup Critique: </strong> Les dégâts passent à (45 + Puiss. Sorts) et les cibles dont la Résistance altération < Intelligence du héros deviennent <span class=\"etat-link\" data-etat=\"Entravé/Entoilé/Embourbé\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">gelées</span> pendant 1 tour."
       },
       {
         "nom": "Sentinelle de Lumière",
@@ -8346,7 +8295,7 @@ hr,
       {
         "nom": "Gros mangeur",
         "description": "Les points de vie rendus en mangeant de la nourriture sont doublés.",
-        "prerequis": "<strong> Prérequis :</strong> Don Unique.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
       {
@@ -8394,7 +8343,7 @@ hr,
       {
         "nom": "Statistiques",
         "description": "Gagne 2 points de statistiques au choix à répartir.",
-        "prerequis": "<strong> Prérequis :</strong> Don Unique.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
       {
@@ -8520,13 +8469,13 @@ hr,
       {
         "nom": "Infatigable",
         "description": "Augmente la <img src=\"https://i.ibb.co/B2BCGP6T/stat-Volont.png\" alt=\"Volonté\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> volonté de 4.",
-        "prerequis": "<strong> Prérequis :</strong> Don Unique.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
       {
         "nom": "Agilité du guerrier",
         "description": "Augmente <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> l'agilité de 4.",
-        "prerequis": "<strong> Prérequis :</strong> Don Unique.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
       {
@@ -8550,7 +8499,7 @@ hr,
       {
         "nom": "Imperturbable",
         "description": "Permet de retirer un trauma du héros.",
-        "prerequis": "<strong> Prérequis :</strong> Don Unique.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
       {
@@ -8592,7 +8541,7 @@ hr,
       {
         "nom": "Spécialiste des armures légères",
         "description": "Tant que le guerrier ne porte pas d'armure lourde, il gagne 6 <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Agilité.",
-        "prerequis": "<strong> Prérequis :</strong> Don Unique.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
       {
@@ -8737,7 +8686,7 @@ hr,
   },
   {
     "nom": "Mage",
-    "description": "Description de cette catégorie de dons.",
+    "description": "Dons accessibles aux mages.",
     "dons": [
       {
         "nom": "Gemme de mana",
@@ -8801,7 +8750,7 @@ hr,
       },
       {
         "nom": "Résonance Élémentaire",
-        "description": "Lorsque le héros lance un sort d'un élément, si il avait lancé un sort du même élément au tour précédent, alors les dégâts sont augmentés de la valeur du niveau du sort.",
+        "description": "Lorsque le héros lance un sort d'un élément, s'il avait lancé un sort du même élément au tour précédent, alors les dégâts sont augmentés de la valeur du niveau du sort.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -8891,7 +8840,7 @@ hr,
       },
       {
         "nom": "Purification sublimée",
-        "description": "Après avoir supprimé un état via un sort, le héros et la cible reçoivent un nombre de point de vie égal au niveau du prêtre.",
+        "description": "Après avoir supprimé un état via un sort, le héros et la cible reçoivent un nombre de points de vie égal au niveau du prêtre.",
         "prerequis": "<strong> Prérequis :</strong>-",
         "cout": "1 point de don"
       }
@@ -12800,7 +12749,7 @@ hr,
 
     // Mark as standalone version for renderer with build timestamp
     window.STANDALONE_VERSION = true;
-    window.BUILD_VERSION = '2026-01-09T14:58:57.292Z';
+    window.BUILD_VERSION = '2026-01-09T15:46:05.982Z';
 
     // Version check - clear old data if version changed
     (function() {
@@ -31527,18 +31476,17 @@ hr,
       if (this._imageHandlersAttached) return;
       this._imageHandlersAttached = true;
 
-      // Utiliser la délégation d'événements pour les clics sur images
-      document.addEventListener('click', (e) => {
+      // Stocker les références des handlers pour pouvoir les supprimer plus tard
+      this._imageClickHandler = (e) => {
         const img = e.target.closest('img');
         // Ignorer les images dans le modal d'agrandissement
         if (img && !img.closest('#image-enlargement-modal')) {
           e.stopImmediatePropagation();
           this.toggleImageEnlargement(img);
         }
-      }, { capture: true });
+      };
 
-      // Support tactile pour mobile
-      document.addEventListener('touchend', (e) => {
+      this._imageTouchHandler = (e) => {
         const img = e.target.closest('img');
         // Ignorer les images dans le modal d'agrandissement
         if (img && !img.closest('#image-enlargement-modal')) {
@@ -31546,18 +31494,45 @@ hr,
           e.stopImmediatePropagation();
           this.toggleImageEnlargement(img);
         }
-      }, { passive: false, capture: true });
+      };
+
+      // Utiliser la délégation d'événements pour les clics sur images
+      document.addEventListener('click', this._imageClickHandler, { capture: true });
+
+      // Support tactile pour mobile
+      document.addEventListener('touchend', this._imageTouchHandler, { passive: false, capture: true });
 
       // Attacher les handlers spécifiques (upload, suppression)
       this.attachImageEvents();
 
-      // Observer pour les nouveaux éléments .illus
+      // Observer pour les nouveaux éléments .illus avec throttling
       if (typeof MutationObserver !== 'undefined') {
-        const observer = new MutationObserver(() => {
-          this.attachImageEvents();
+        let timeoutId = null;
+        this._mutationObserver = new MutationObserver(() => {
+          // Throttle les appels pour éviter trop de traitement
+          if (timeoutId) return;
+          timeoutId = setTimeout(() => {
+            this.attachImageEvents();
+            timeoutId = null;
+          }, 100);
         });
-        observer.observe(document.body, { childList: true, subtree: true });
+        this._mutationObserver.observe(document.body, { childList: true, subtree: true });
       }
+    },
+
+    // Méthode pour nettoyer les event listeners (à appeler lors du cleanup)
+    cleanupImageHandlers() {
+      if (this._imageClickHandler) {
+        document.removeEventListener('click', this._imageClickHandler, { capture: true });
+      }
+      if (this._imageTouchHandler) {
+        document.removeEventListener('touchend', this._imageTouchHandler, { passive: false, capture: true });
+      }
+      if (this._mutationObserver) {
+        this._mutationObserver.disconnect();
+        this._mutationObserver = null;
+      }
+      this._imageHandlersAttached = false;
     },
 
     attachImageEvents() {
@@ -31598,6 +31573,10 @@ hr,
       if (!file) return;
 
       const illus = event.target.closest('.illus');
+      if (!illus) {
+        console.warn('[Editor] No .illus container found for image upload');
+        return;
+      }
       const img = illus.querySelector('img');
       const rmButton = illus.querySelector('.rm');
       const illusKey = illus.dataset.illusKey;
