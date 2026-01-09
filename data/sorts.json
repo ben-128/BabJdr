@@ -290,11 +290,11 @@
       {
         "nom": "Révélation mineure",
         "element": "Lumière",
-        "description": "Un éclat de lumière se pose sur la cible, dévoilant son nom et son élément d’affiliation.",
+        "description": "Un éclat de lumière se pose sur la cible, dévoilant son nom et son élément d'affiliation.",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 2",
         "portee": "🎯 <strong>Portée:</strong> 18m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 5",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 2",
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Révèle le nom et l'élément d’affiliation d'une cible.",
         "effetCritique": "<strong>Coup Critique: </strong> Révèle également son armure physique et élémentaire."
@@ -318,7 +318,7 @@
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 4",
         "portee": "🎯 <strong>Portée:</strong> 3m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 10",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 7",
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Enlève l'état <span class=\"etat-link\" data-etat=\"Empoisonné\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Empoisonné</span> de la cible.",
         "effetCritique": "<strong>Coup Critique: </strong> La cible est également soignée de 5 points de vie."
@@ -354,7 +354,7 @@
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 5",
         "portee": "🎯 <strong>Portée:</strong> 18m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 10",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 5",
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong>  Révèle le nom et l'élément d’affiliation d'une cible, ainsi que son armure physique et élémentaire et ses points de vie.",
         "effetCritique": "<strong>Coup Critique: </strong> Révèle également son Esquive, et sa Résistance altération."
@@ -362,11 +362,11 @@
       {
         "nom": "Révélation ultime",
         "element": "Lumière",
-        "description": "Un faisceau éclatant dévoile toute l’essence de l’adversaire.",
+        "description": "Un faisceau éclatant dévoile toute l'essence de l'adversaire.",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 10",
         "portee": "🎯 <strong>Portée:</strong> 18m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 20",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 10",
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Révèle le nom et l'élément d’affiliation d'une cible, ainsi que son armure physique et élémentaire, et ses points de vie. Révèle également son Esquive, sa Résistance altération, ses chances de coup critiques physiques et magiques.",
         "effetCritique": "<strong>Coup Critique: </strong> Révèle une capacité de la cible."
@@ -390,7 +390,7 @@
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 5",
         "portee": "🎯 <strong>Portée:</strong> 3m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 14",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 10",
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Enlève l'état <span class=\"etat-link\" data-etat=\"Maudit\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Maudit</span> ou  <span class=\"etat-link\" data-etat=\"Silence\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Silence</span> ou <span class=\"etat-link\" data-etat=\"Confus\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Confus</span> de la cible.",
         "effetCritique": "<strong>Coup Critique: </strong> La cible reçoit également 5 points de vie temporaires."
@@ -402,7 +402,7 @@
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 6",
         "portee": "🎯 <strong>Portée:</strong> 3m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 16",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 12",
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Enlève l'état <span class=\"etat-link\" data-etat=\"Ralenti\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ralenti</span> ou <span class=\"etat-link\" data-etat=\"Vulnérable\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Vulnérable</span> ou <span class=\"etat-link\" data-etat=\"Débilité\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Débilité</span> ou <span class=\"etat-link\" data-etat=\"Affaibli\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Affaibli</span> de la cible.",
         "effetCritique": "<strong>Coup Critique:&nbsp;</strong>&nbsp;La cible reçoit également 5 points de vie temporaires."
