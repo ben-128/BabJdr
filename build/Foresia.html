@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2026-01-09T11:57:18.697Z by JdrBab Build System -->
+<!-- Generated on 2026-01-09T14:30:40.772Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -6998,9 +6998,10 @@ article.active .grid {
   }
 }
 
-/* Focus management during scroll */
+/* Focus management during scroll - keep outline visible for accessibility */
 .scrolling :focus {
-  outline: none;
+  outline: 2px solid var(--ui-border-light, #e0e0f0);
+  outline-offset: 2px;
 }
 
 /* Intersection Observer loading states */
@@ -7538,7 +7539,7 @@ hr,
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 4",
         "portee": "🎯 <strong>Portée:</strong> 9m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 12",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 11",
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong>  Inflige (13 + Puiss. Sorts) dégâts de <span style=\"color: #1a1a1a; font-weight: bold; background: rgba(180, 180, 200, 0.6); padding: 2px 4px; border-radius: 3px;\">Nuit</span> aux créatures dans un cone devant le lanceur (largeur 3m puis 6m puis 9m, distance 9m) et les repousse chacune de 3m.",
         "effetCritique": "<strong>Coup Critique: </strong> Les dégâts passent à (20 + Puiss. Sorts) et les cibles sont repoussées de 6m."
@@ -7558,11 +7559,11 @@ hr,
       {
         "nom": "Nuage toxique",
         "element": "Terre",
-        "description": "Une brume opaque se déploie à l’endroit choisi, persistant plusieurs tours et infligeant son toxique insidieux.",
+        "description": "Une brume opaque se déploie à l'endroit choisi, persistant plusieurs tours et infligeant son toxique insidieux.",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 6",
         "portee": "🎯 <strong>Portée:</strong> 18m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 20",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 13",
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Crée à la position d'une cible à portée, un nuage toxique qui inflige (15 + Puiss. Sorts) points de dégâts de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>.\n\n<br>Chaque début de tour, le lanceur peut choisir de dépenser une action principale et 5 points de mana pour que le nuage se déplace inflige ses dégâts à une cible à portée du lanceur. Sinon, le nuage disparait.",
         "effetCritique": "<strong>Coup Critique: </strong> Les dégâts sont de (22 + Puiss. Sorts) et la cible est <span class=\"etat-link\" data-etat=\"Ralenti\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Ralenti</span> pendant 1 tour."
@@ -7606,11 +7607,11 @@ hr,
       {
         "nom": "Sables mouvants",
         "element": "Terre",
-        "description": "Le sol se liquéfie en traîtres sables mouvants, engloutissant peu à peu les imprudents qui s’y engagent, les ralentissant tout en les meurtrissant.",
+        "description": "Le sol se liquéfie en traîtres sables mouvants, engloutissant peu à peu les imprudents qui s'y engagent, les ralentissant tout en les meurtrissant.",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 6",
         "portee": "🎯 <strong>Portée:</strong> 12m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 20",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 13",
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Trois zones de 3mx3m à portée deviennent du sable mouvant.\n<br> Elles sont considérées comme terrain difficile, ralentissant le déplacement de ceux qui y passent de moitié.\n<br> De plus, ceux qui rentrent dans ces zones ou commencent leur tour dedans subissent (10 + Puiss. Sorts) points de dégâts de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>.\n\n<br>Dure jusqu'à la fin du combat. Le mage peut utiliser une action bonus pour enlever les zones.",
         "effetCritique": "<strong>Coup Critique: </strong> Les dégâts passent à (15 + Puiss. Sorts)."
@@ -7622,7 +7623,7 @@ hr,
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 7",
         "portee": "🎯 <strong>Portée:</strong> 12m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong>  <b>2</b> tours",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 30",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 17",
         "resistance": "<strong>Sans effet si:</strong> Volant.",
         "effetNormal": "<strong>Effet:</strong> Inflige (30 + Puiss. Sorts) dégâts de <span style=\"color: #e25822; font-weight: bold;\">Feu</span> aux créatures devant le lanceur, sur une largeur de 9m et une distance de 12m.",
         "effetCritique": "<strong>Coup Critique: </strong> La cible s'enflamme, subissant (30 + Puiss. Sorts) dégâts de <span style=\"color: #ff6b35; font-weight: bold;\">Feu</span> au prochain tour du lanceur."
@@ -7646,7 +7647,7 @@ hr,
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 8",
         "portee": "🎯 <strong>Portée:</strong> -",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 20",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 15",
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Les ennemis  à moins de 6m du héros subissent (15 + Puiss. sorts) dégâts de <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span>. <br>\n<br> Chaque ennemi qui rentre dans la zone (en se déplacant, ou si le héros se déplace), subit les dégâts.\n<br> De plus, si la Résistance altération < Intelligence du héros , alors la cible est <span class=\"etat-link\" data-etat=\"Aveuglé\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Aveuglée</span> pendant 1 tour.<br><br>Dure Jusqu'à la fin du combat.",
         "effetCritique": "<strong>Coup Critique: </strong> Les dégâts passent à (22 + Puiss. Sorts)."
@@ -7658,7 +7659,7 @@ hr,
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 8",
         "portee": "🎯 <strong>Portée:</strong> 30m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 2 tours",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 30",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 19",
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Inflige (30 + Puiss. Sorts) dégâts d'<span style=\"color: #22c55e; font-weight: bold;\">Air</span> à tous les adversaires devant le héros sur une distance de 30m.",
         "effetCritique": "<strong>Coup Critique: </strong> les dégâts passent à (45 + Puiss. Sorts) et les adversaires à moins de 3m d'une cible (qui n'ont pas déjà étés touchés) subissent également les dégâts."
@@ -7670,7 +7671,7 @@ hr,
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 9",
         "portee": "🎯 <strong>Portée:</strong> 9m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 2 tours",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 30",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 21",
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Tous les adversaires autour du héros (à 9m) subissent (30 + Puiss.Sorts) dégâts d'<span style=\"color: #4682b4; font-weight: bold;\">Eau</span>.",
         "effetCritique": "<strong>Coup Critique: </strong> Les dégâts passent à (45 + Puiss.Sorts) et les cibles dont la Résistance altération < Intelligence du héros deviennent <span class=\"etat-link\" data-etat=\"Entravé/Entoilé/Embourbé\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">gelées</span> pendant 1 tour."
@@ -7678,13 +7679,13 @@ hr,
       {
         "nom": "Sentinelle de Lumière",
         "element": "Lumière",
-        "description": "Une sentinelle de lumière prend forme dans les airs, un orbe immobile et rayonnant qui, à chaque battement d’énergie, projette des traits lumineux sur toute créature hostile s’approchant trop près.",
+        "description": "Une sentinelle de lumière prend forme dans les airs, un orbe immobile et rayonnant qui, à chaque battement d'énergie, projette des traits lumineux sur toute créature hostile s'approchant trop près.",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 10",
         "portee": "🎯 <strong>Portée:</strong> 30m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 2 tours",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 35",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 25",
         "resistance": "<strong>Sans effet si:</strong> -",
-        "effetNormal": "<strong>Effet:</strong> Tous les adversaires à moins de 30m du héros subissent l'effet du sort <span class=\"spell-link\" data-spell=\"Missile magique\" data-category=\"Sorts de Mage\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Missile magique</span> (esquivable, peut être critique).<br><br>\n\nChaque début de tour, le lanceur peut continuer de <b>canaliser</b> le sort (ne pouvant plus esquiver ou faire d'actions ou se déplacer). S'il le fait, à chaque début de tour du héros, les missiles partent vers tous les adversaires proches, et le lanceur consomme 10 points de mana.",
+        "effetNormal": "<strong>Effet:</strong> Tous les adversaires à moins de 30m du héros subissent l'effet du sort <span class=\"spell-link\" data-spell=\"Missile magique\" data-category=\"Sorts de Mage\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Missile magique</span> (esquivable, peut être critique).<br><br>\n\nChaque début de tour, le lanceur peut continuer de <b>canaliser</b> le sort (ne pouvant plus esquiver ou faire d'actions ou se déplacer). S'il le fait, à chaque début de tour du héros, les missiles partent vers tous les adversaires proches, et le lanceur consomme 5 points de mana.",
         "effetCritique": "<strong>Coup Critique: </strong> Deux missiles par cibles partent de la sentinelle."
       }
     ]
@@ -7882,11 +7883,11 @@ hr,
       {
         "nom": "Bénédiction de Résilience",
         "element": "Divin",
-        "description": "Après une longue incantation, une lumière céleste se diffuse parmi les alliés, leur accordant à tous une réserve de vie temporaire issue d’une bénédiction divine.",
+        "description": "Après une longue incantation, une lumière céleste se diffuse parmi les alliés, leur accordant à tous une réserve de vie temporaire issue d'une bénédiction divine.",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 7",
         "portee": "🎯 <strong>Portée:</strong> 6m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 2 tours",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 25",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 20",
         "resistance": "<strong>Sans effet si:</strong> &nbsp;\n<br>- Hors combat.",
         "effetNormal": "<strong>Effet:</strong> Le héros et ses alliés à moins de 6m gagnent (10 + Puiss. Sorts) points de vie temporaires.",
         "effetCritique": "<strong>Coup Critique: </strong> Les points de vie temporaires passent à (15 + Puiss. Sorts)."
@@ -7898,9 +7899,9 @@ hr,
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 8",
         "portee": "🎯 <strong>Portée:</strong> 9m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 2 tours",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 30",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 22",
         "resistance": "<strong>Sans effet si:</strong> \n<br>-Résistance altération >= Intelligence du héros.\n<br>- Taille Grand ou plus",
-        "effetNormal": "<strong>Effet:</strong> Les adversaires dans la zone (9m autour du héros) sont repoussées autour de la zone, et ne peuvent plus y pénétrer.\n\n<br><br>Chaque début de tour, le lanceur peut continuer de <b>canaliser</b> le sort (ne pouvant plus esquiver ou faire d'actions ou se déplacer). S'il le fait, la zone reste alors inaccessible pour les adversaires, et le lanceur consomme 10 points de mana.",
+        "effetNormal": "<strong>Effet:</strong> Les adversaires dans la zone (9m autour du héros) sont repoussées autour de la zone, et ne peuvent plus y pénétrer.\n\n<br><br>Chaque début de tour, le lanceur peut continuer de <b>canaliser</b> le sort (ne pouvant plus esquiver ou faire d'actions ou se déplacer). S'il le fait, la zone reste alors inaccessible pour les adversaires, et le lanceur consomme 5 points de mana.",
         "effetCritique": "<strong>Coup Critique: </strong> Les cibles repoussées subissent (10 + Puiss. Sorts), dégâts de <span style=\"color: #f5f5f5; font-weight: bold; background: rgba(100, 100, 100, 0.3); padding: 2px 4px; border-radius: 3px;\">Divin</span>."
       },
       {
@@ -7911,7 +7912,7 @@ hr,
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 9",
         "portee": "🎯 <strong>Portée:</strong> 6m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 2 tours",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 35",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 26",
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Les armes du lanceur et de tous les alliés à moins de 6m infligeront (5 + Puiss. Sorts) dégâts de <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span> supplémentaires à chaque coup, jusqu'à la fin du combat.",
         "effetCritique": "<strong>Coup Critique: </strong> Les dégâts passent à (10 + Puiss. Sorts)."
@@ -7923,9 +7924,9 @@ hr,
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 8",
         "portee": "🎯 <strong>Portée:</strong> 9m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 2 tours",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 30",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 22",
         "resistance": "<strong>Sans effet si:</strong> -",
-        "effetNormal": "<strong>Effet:</strong> Les alliés dans la zone (9m autour du héros) voient les dégâts élémentaires reçus de sorts ayant pour source l'extérieur de la zone réduits de (10 + Puiss. Sorts).\n\n<br><br>Chaque début de tour, le lanceur peut continuer de <b>canaliser</b> le sort (ne pouvant plus esquiver ou faire d'actions ou se déplacer). S'il le fait, la zone reste protégée, et le lanceur consomme 10 points de mana.",
+        "effetNormal": "<strong>Effet:</strong> Les alliés dans la zone (9m autour du héros) voient les dégâts élémentaires reçus de sorts ayant pour source l'extérieur de la zone réduits de (10 + Puiss. Sorts).\n\n<br><br>Chaque début de tour, le lanceur peut continuer de <b>canaliser</b> le sort (ne pouvant plus esquiver ou faire d'actions ou se déplacer). S'il le fait, la zone reste protégée, et le lanceur consomme 5 points de mana.",
         "effetCritique": "<strong>Coup Critique: </strong> Les dégâts élémentaires sont réduits de (15 + Puiss. Sorts)."
       }
     ]
@@ -8009,9 +8010,9 @@ hr,
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 7",
         "portee": "🎯 <strong>Portée:</strong> 9m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 2 tours",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 25",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 14",
         "resistance": "<strong>Sans effet si:</strong> -",
-        "effetNormal": "<strong>Effet:</strong> Une aura élémentaire entoure le lanceur dans un rayon de 9m. Tout adversaire présent dans la zone ou y pénétrant subit (15 + Puiss. Sorts) dégâts de l'élément d'affiliation du héros (maximum 4 créatures par tour). Le lanceur peut se déplacer librement, mais ne peut plus esquiver ni effectuer d'autres actions.<br><br>Chaque début de tour, le lanceur peut continuer de <b>canaliser en déplacement</b> le sort. S'il le fait, l'aura persiste et inflige à nouveau les dégâts aux adversaires dans la zone ou y pénétrant. Le lanceur consomme alors <b>10 points de mana</b>.",
+        "effetNormal": "<strong>Effet:</strong> Une aura élémentaire entoure le lanceur dans un rayon de 9m. Tout adversaire présent dans la zone ou y pénétrant subit (15 + Puiss. Sorts) dégâts de l'élément d'affiliation du héros (maximum 4 créatures par tour). Le lanceur peut se déplacer librement, mais ne peut plus esquiver ni effectuer d'autres actions.<br><br>Chaque début de tour, le lanceur peut continuer de <b>canaliser en déplacement</b> le sort. S'il le fait, l'aura persiste et inflige à nouveau les dégâts aux adversaires dans la zone ou y pénétrant. Le lanceur consomme alors <b>5 points de mana</b>.",
         "effetCritique": "<strong>Coup Critique :</strong> Les dégâts passent à (20 + Puiss. Sorts)."
       },
       {
@@ -8022,7 +8023,7 @@ hr,
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 8",
         "portee": "🎯 <strong>Portée:</strong> 3m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 25",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 15",
         "duree": "⏳ <strong>Durée:</strong> 3 tours",
         "resistance": "<strong>Sans effet si:</strong> <br>- Résistance altérations >= Intelligence du lanceur<br>- Element <span style=\"color: #8b4513; font-weight: bold; background: rgba(139, 69, 19, 0.2); padding: 2px 4px; border-radius: 3px;\">Terre</span>",
         "effetNormal": "<strong>Effet:</strong> La cible passe dans l'état <span class=\"etat-link\" data-etat=\"Débilité\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Débilité</span> (Puiss. Sorts) pendant 3 tours.",
@@ -8050,7 +8051,7 @@ hr,
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 9",
         "portee": "🎯 <strong>Portée:</strong> 12m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 2 tours",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 30",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 16",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> <br>- Résistance altérations >= Intelligence du lanceur<br>- Element <span style=\"color: #1a1a1a; font-weight: bold; background: rgba(180, 180, 200, 0.6); padding: 2px 4px; border-radius: 3px;\">Nuit</span>",
         "effetNormal": "<strong>Effet:</strong> Tous les adversaires à portée passent dans l'état <span class=\"etat-link\" data-etat=\"Endormi/assommé/Effrayé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Endormi</span> pendant 2 tours.",
@@ -8064,7 +8065,7 @@ hr,
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 10",
         "portee": "🎯 <strong>Portée:</strong> 15m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 30",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 16",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> La vitesse de déplacement de tous les alliés à portée est augmentée de 3m pendant 5 tours. Non Cumulable.",
@@ -8077,7 +8078,7 @@ hr,
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 3",
         "portee": "🎯 <strong>Portée:</strong> 3m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 14",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 10",
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Le lanceur choisit un élément au choix entre <span style=\"color: #ff6b35; font-weight: bold;\">Feu</span>, <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>, et <span style=\"color: #1a1a1a; font-weight: bold; background: rgba(180, 180, 200, 0.6); padding: 2px 4px; border-radius: 3px;\">Nuit</span>. \n<br>La cible voit son arme imprégnée de cet élément, qui infligera (4 + Puiss. Sorts) points de dégâts de cet élément à chaque coup. <br>Dure jusqu'à la fin du combat.<br> Non cumulable.",
         "effetCritique": "<strong>Coup Critique:&nbsp;</strong>&nbsp;Rend la moitié du coût en mana."
@@ -8089,7 +8090,7 @@ hr,
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 3",
         "portee": "🎯 <strong>Portée:</strong> 3m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 14",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 10",
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Le lanceur choisit un élément au choix entre <span style=\"color: #4682b4; font-weight: bold;\">Eau</span>, <span style=\"color: #22c55e; font-weight: bold;\">Air</span>, et <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span>.\n<br>La cible voit son arme imprégnée de cet élément, qui infligera (4 + Puiss. Sorts) points de dégâts de cet élément à chaque coup. <br>Dure jusqu'à la fin du combat.<br> Non cumulable.",
         "effetCritique": "<strong>Coup Critique: </strong> Rend la moitié du coût en mana."
@@ -8109,11 +8110,11 @@ hr,
       {
         "nom": "Puissance magique",
         "element": "Feu",
-        "description": "Le corps de la cible s’illumine d’arcanes, décuplant la force de ses sorts.",
+        "description": "Le corps de la cible s'illumine d'arcanes, décuplant la force de ses sorts.",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 4",
         "portee": "🎯 <strong>Portée:</strong> 3m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 14",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 11",
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "Inutilisable Hors combat.           \n<br> <strong>Effet:</strong> Augmente la puissance des sorts de la cible de 3 . <br>Dure jusqu'au retour hors combat.",
         "effetCritique": "<strong>Coup Critique: </strong> La puissance est augmentée de 5."
@@ -8125,7 +8126,7 @@ hr,
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 5",
         "portee": "🎯 <strong>Portée:</strong> 3m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 14",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 12",
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "Inutilisable Hors combat.           \n<br> <strong>Effet:</strong> Augmente la force de la cible de (5 + Puiss. Sorts). <br>Dure jusqu'au retour hors combat.",
         "effetCritique": "<strong>Coup Critique: </strong> La force prodiguée passe à (8 + Puiss. Sorts)."
@@ -8133,11 +8134,11 @@ hr,
       {
         "nom": "Confusion",
         "element": "Maléfique",
-        "description": "Un voile d’illusions trouble l’esprit de la cible, la rendant incapable de distinguer alliés et ennemis.",
+        "description": "Un voile d'illusions trouble l'esprit de la cible, la rendant incapable de distinguer alliés et ennemis.",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 5",
         "portee": "🎯 <strong>Portée:</strong> 12m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 14",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 12",
         "resistance": "<strong>Sans effet si:</strong> <br>- Résistance altérations >= Intelligence du lanceur<br>- Element <span style=\"color: #8b5cf6; font-weight: bold;\">Maléfique</span>",
         "effetNormal": "<strong>Effet:</strong> La cible passe dans l'état <span class=\"etat-link\" data-etat=\"Confus\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Confus</span>, pendant 4 tours.",
         "effetCritique": "<strong>Coup Critique: </strong> L'effet dure 6 tours."
@@ -8145,11 +8146,11 @@ hr,
       {
         "nom": "Armure élémentaire Feu Terre Nuit",
         "element": "Feu",
-        "description": "Un voile protecteur d’énergie enveloppe la cible, renforçant son armure élémentaire.",
+        "description": "Un voile protecteur d'énergie enveloppe la cible, renforçant son armure élémentaire.",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 6",
         "portee": "🎯 <strong>Portée:</strong> 3m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 14",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 12",
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Le lanceur choisit un élément au choix entre <span style=\"color: #ff6b35; font-weight: bold;\">Feu</span>, <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>, et <span style=\"color: #1a1a1a; font-weight: bold; background: rgba(180, 180, 200, 0.6); padding: 2px 4px; border-radius: 3px;\">Nuit</span>. \n<br>La cible voit son armure de cet élément, augmentant l'armure élémentaire de cet élément de (5 + Puiss. Sorts). <br>Dure jusqu'à la fin du combat.<br> Non cumulable.",
         "effetCritique": "<strong>Coup Critique:&nbsp;</strong>&nbsp;Rend la moitié du coût en mana."
@@ -8157,11 +8158,11 @@ hr,
       {
         "nom": "Armure élémentaire Eau Air Lumière",
         "element": "Eau",
-        "description": "Un voile protecteur d’énergie enveloppe la cible, renforçant son armure élémentaire.",
+        "description": "Un voile protecteur d'énergie enveloppe la cible, renforçant son armure élémentaire.",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 6",
         "portee": "🎯 <strong>Portée:</strong> 3m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 14",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 12",
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Le lanceur choisit un élément au choix entre <span style=\"color: #4682b4; font-weight: bold;\">Eau</span>, <span style=\"color: #22c55e; font-weight: bold;\">Air</span>, et <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span>.\n<br>La cible voit son armure de cet élément, augmentant l'armure élémentaire de cet élément de (5 + Puiss. Sorts). <br>Dure jusqu'à la fin du combat.<br> Non cumulable.",
         "effetCritique": "<strong>Coup Critique:&nbsp;</strong>&nbsp;Rend la moitié du coût en mana."
@@ -10231,7 +10232,7 @@ hr,
     "nom": "Borag et Snik",
     "image": "",
     "description": "Un silencieux, grand et fort. L'autre hargneux, petit",
-    "interactions": "Ils sont bloqués à l'auberge a cause des monstres et normalement s'entrainent, mais n'arrivent pas a être assez fort. Ils ont entendu dire que des cristaux roses pouvait rendre beaucoup plus fort certaines personnes.<br><br>\n\n\n« On veut se battre, Borag et moi… mais on tape comme des mouettes enrhumées. On dit que certains deviennent monstrueusement puissants avec des cristaux roses… t’en as déjà vu, toi ? »\n<br>\n« Ouais ! Et puis l’entraînement dans une auberge, ça fait pas pousser les muscles»"
+    "interactions": "Ils sont bloqués à l'auberge à cause des monstres et normalement s'entraînent, mais n'arrivent pas à être assez forts. Ils ont entendu dire que des cristaux roses pouvaient rendre beaucoup plus fortes certaines personnes.<br><br>\n\n\n« On veut se battre, Borag et moi… mais on tape comme des mouettes enrhumées. On dit que certains deviennent monstrueusement puissants avec des cristaux roses… t’en as déjà vu, toi ? »\n<br>\n« Ouais ! Et puis l’entraînement dans une auberge, ça fait pas pousser les muscles»"
   },
   {
     "nom": "Isara Cœur-de-Roc",
@@ -11368,7 +11369,7 @@ hr,
     "monster:Poulpe de la forêt": "https://i.ibb.co/qFNVtvzc/Monstre-For-t-Poulpe.jpg",
     "monster:Serpent de la forêt": "https://i.ibb.co/twGXwX6s/Monstre-For-t-Serpent.jpg",
     "monster:Scarabée géant": "https://i.ibb.co/kLVhZSh/Monstre-For-t-Scarabe-Geant.jpg",
-    "monster:Boss Forêt": "https://i.ibb.co/v4C2hyjN/Monstre-For-t-Boss.jpg",
+    "monster:Boss Forêt": "https://i.ibb.co/gMY5xjgs/Monstre-For-t-Boss.jpg",
     "npc:Exemple de PNJ": "https://i.ibb.co/mr3vx5CD/Mirella-Aubergiste.jpg",
     "npc:Tavin le Facteur": "https://i.ibb.co/qLVdn9NS/Tavin-Facteur.jpg",
     "npc:Branor le Bucheron": "https://i.ibb.co/hJFgDGwD/Branor-Bucheron.jpg",
@@ -11660,10 +11661,12 @@ hr,
     "don:Enchantement de force permanente": "https://i.ibb.co/Y7nHXJMx/Enchantement-Force.jpg",
     "don:Canalisation incrémentale": "https://i.ibb.co/zW3jnxzc/Canal.jpg",
     "don:Incantation rapide": "https://i.ibb.co/ZR1ZTM9Y/Incant-Rapide.jpg",
-    "don:Nouvelle affinité": "https://i.ibb.co/Wq0MHfq/Change-Element.jpg"
+    "don:Nouvelle affinité": "https://i.ibb.co/Wq0MHfq/Change-Element.jpg",
+    "npc:Tobin": "https://i.ibb.co/NdqKkkW9/Tobin.jpg",
+    "npc:Nara": "https://i.ibb.co/gZHbRFhV/Nara.jpg"
   },
   "meta": {
-    "total_images": 517,
+    "total_images": 519,
     "exported_date": "2026-01-09",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
@@ -12451,7 +12454,7 @@ hr,
         },
         "Forêt-4": {
           "title": "Forêt-4",
-          "content": "Les deux chemins finissent par se rejoindre pour ne former qu'un étroit sentier, longeant le flanc abrupt d'une falaise adossée à la montagne.<br><br>\n\nLe sentier longe la falaise. Soudain, des pierres dévalent d'en haut !\nJet de Coordination (difficulté 2) — Échec : 3 dégâts + A terre<br><br>\n\nUne voix paniquée d'en haut :\n\"P-Partez ! On veut pas de vot' corruption ici !\"\nUn garçon (16-17 ans), maigre, tremblant, tient une fronde. Caché derrière un rocher, 8m au-dessus.<br><br>\n\n\nTobin<br>\nTerrifié par les \"corrompus\" (humains avec cristaux noirs). N'a jamais vraiment combattu, culpabilise facilement. Veut protéger sa mère et leur cachette.<br>\nCe qu'il demande comme preuve : Montrer qu'ils n'ont pas de cristaux noirs / sang rouge (pas noir) / jeter les armes.\n\n<hr>\n\nS'il est convaincu ou se sent coupable\n\nIl descend maladroitement, s'écorche, regarde les joueurs les yeux humides :\n\n\"J'suis désolé... J'croyais que... Y'a eu des attaques. Des gens avec des trucs noirs dans la peau.\"\n\nIl renifle.\n\n\"Y'a un endroit pas loin. Caché. Avec ma mère. Et une source... une source spéciale. L'eau, elle... elle guérit. J'peux vous y emmener. Pour me faire pardonner.\"\n\n<hr>\n\nLa Cachette\n\nTrajet : Passage dissimulé derrière des ronces (5 min).\n\nUne petite clairière encaissée dans la roche. Une maisonnette en bois brut, un potager minuscule, du linge qui sèche.\n\nAu centre : un bassin naturel d'eau claire qui brille légèrement d'une lueur bleutée. L'air y est étrangement pur.\n\nUne femme sort, méfiante, couteau en main. Elle voit Tobin :\n\"Tobin ? C'est qui eux ?\"\n\n<b>Nara</b> (la mère) - 40 ans, cheveux gris, pragmatique. Protège son fils et leur refuge. Pas hostile si Tobin explique.\n\n\"...D'accord. Vous pouvez vous reposer. Mais à l'aube, vous repartez. Et vous parlez de cet endroit à personne.\"\n\n<hr>\n\nLa Source Magique\n\nL'eau brille doucement. Une sensation de calme en s'approchant.\n\n<b>Effet :</b> Se baigner ou boire = Récupère tous les PV + retire les altérations\n\n<b>Limite :</b> Fonctionne une seule fois par personne (l'eau perd son éclat pour eux après).\n\nNara : \"C'est pour ça qu'on reste ici. Cette eau... c'est tout ce qui nous reste de l'ancien monde. Avant que les cristaux rendent tout fou.\"\n\n<hr>\n\nDépart\n\nLe lendemain, Tobin les accompagne jusqu'au sentier :\n\n\"Le chemin continue vers l'est. Après les deux ponts sur l'eau, y'a une grande plaine. Faites gaffe aux bestioles volantes.\"\n\nIl hésite, puis donne une <span class=\"objet-link\" data-objet=\"Nocteline\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Nocteline</span>.\n\"Ca soigne les poisons. Ma mère en fait pousser ici. Encore... encore désolé pour les pierres.\"\n\n<hr>\n\n<b>Quête d'Escorte : Le Médaillon du Père</b><br><br>\n\nLe lendemain matin, alors que les PJ s'apprêtent à partir, Tobin les intercepte à l'écart de sa mère :<br><br>\n\n\"Attendez... J'ai un service à vous demander. Mais faut pas que ma mère entende.\"<br><br>\n\nIl explique à voix basse :<br><br>\n\n\"Mon père... il travaillait avec Branor, au lieu de coupe. Avant de... avant qu'il se fasse tuer par les créatures, il m'a dit qu'il avait caché quelque chose pour moi. Un médaillon. Le médaillon de ma grand-mère. C'est tout ce qui me reste de lui.\"<br><br>\n\nIl serre les poings :<br><br>\n\n\"Ma mère veut pas que j'y aille. Elle dit que c'est trop dangereux. Mais avec vous... S'il vous plaît. C'est pas loin. La cabane du bûcheron, à Forêt-5.\"<br><br>\n\n<b>Confrontation avec Nara</b><br><br>\n\nSi les PJ acceptent (ou si Tobin insiste trop fort), Nara intervient :<br><br>\n\n\"Tobin ! Je t'ai dit non !\"<br><br>\n\nElle se tourne vers les PJ, le regard dur :<br><br>\n\n\"Vous n'allez pas l'emmener là-bas. Son père est mort sur ce chemin. Je refuse de perdre mon fils aussi.\"<br><br>\n\n<b>Tobin</b> (les larmes aux yeux) :<br>\n\"Mais maman ! C'est la seule chose qui me reste de papa ! Et il me l'a promis ! Il a dit que quand je serais assez grand...\"<br><br>\n\n<b>Nara</b> (voix qui tremble) :<br>\n\"Tu n'es PAS assez grand !\"<br><br>\n\n<b>Tobin</b> :<br>\n\"J'ai seize ans ! Et eux, ils sont forts ! Regarde-les ! Ils ont traversé toute la forêt !\"<br><br>\n\n<b>Si convaincue</b><br><br>\n\nNara soupire longuement, puis prend Tobin par les épaules :<br><br>\n\n\"Tu reviens AVANT la nuit. Tu fais TOUT ce qu'ils te disent. Et toi...\"<br><br>\n\nElle fixe le PJ qui semble le plus responsable :<br><br>\n\n\"S'il lui arrive quoi que ce soit... je vous retrouverai.\"<br><br>\n\nElle donne une <span class=\"objet-link\" data-objet=\"Feuilleclaire\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Feuilleclaire</span> et une <span class=\"objet-link\" data-objet=\"Auréline des Roches\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Auréline des Roches</span> aux PJ :<br>\n\"Au cas où. La jaune, c'est pour les éléments. L'autre, ça soigne.\"<br><br>\n\n<b>Le Trajet (Forêt-4 → Forêt-5)</b><br><br>\n\nComportement de Tobin pendant l'escorte :<br>\n- <b>Nerveux</b> : sursaute au moindre bruit, reste proche des PJ<br>\n- <b>Bavard</b> : pose des questions sur leurs aventures, leurs armes, d'où ils viennent<br>\n- <b>Nostalgique</b> : reconnaît certains endroits (\"Papa m'emmenait pêcher par là...\")<br>\n- <b>Utile</b> : connaît un passage plus sûr (évite un combat aléatoire OU donne avantage sur un jet de navigation)<br><br>\n\nDialogue possible en route :<br><br>\n\n\"Mon père, il était fort. Vraiment fort. Il portait des troncs entiers sur ses épaules. Branor disait que c'était le meilleur bûcheron qu'il avait jamais eu.\"<br><br>\n\nSilence.<br><br>\n\n\"Les créatures... elles l'ont eu par surprise. Il revenait de nuit. Maman dit qu'il aurait pas dû. Mais il voulait être là pour mon anniversaire.\"\n\n<hr>\n<hr>\n\n\nEn poursuivant la progression, le chemin entame une légère descente vers un plan d'eau calme, que l'on doit traverser par deux petits ponts de bois disposés côte à côte.<br><br>\n\nCombat avec <br>\n[img:img_1767549021365_vri9m6uza]<br>\n<span class=\"monster-link\" data-monster=\"Guêpe géante\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Guêpe géante</span><br>\n\n<span class=\"monster-link\" data-monster=\"AquaLezo\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">AquaLezo</span><br>\n\n<br><br>\n\narrivée dans une grande pleine. Un chasseur ou bon test perception fait decouvrir une cache entre des arbres avec comme loot : <span class=\"treasure-table-link\" data-table-name=\"Sac Provision Port Foret\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Sac Provision Port Foret]</span>",
+          "content": "Les deux chemins finissent par se rejoindre pour ne former qu'un étroit sentier, longeant le flanc abrupt d'une falaise adossée à la montagne.<br><br>\n\nLe sentier longe la falaise. Soudain, des pierres dévalent d'en haut !\nJet de Coordination (difficulté 2) — Échec : 3 dégâts + A terre<br><br>\n\nUne voix paniquée d'en haut :\n\"P-Partez ! On veut pas de vot' corruption ici !\"\nUn garçon (16-17 ans), maigre, tremblant, tient une fronde. Caché derrière un rocher, 8m au-dessus.<br><br>\n\n\nTobin  <span class=\"npc-link\" data-npc=\"Tobin\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;\" title=\"Cliquer pour voir la fiche du NPC\">[NPC: Tobin]</span><br>\nTerrifié par les \"corrompus\" (humains avec cristaux noirs). N'a jamais vraiment combattu, culpabilise facilement. Veut protéger sa mère et leur cachette.<br>\nCe qu'il demande comme preuve : Montrer qu'ils n'ont pas de cristaux noirs / sang rouge (pas noir) / jeter les armes.\n\n<hr>\n\nS'il est convaincu ou se sent coupable\n\nIl descend maladroitement, s'écorche, regarde les joueurs les yeux humides :\n\n\"J'suis désolé... J'croyais que... Y'a eu des attaques. Des gens avec des trucs noirs dans la peau.\"\n\nIl renifle.\n\n\"Y'a un endroit pas loin. Caché. Avec ma mère. Et une source... une source spéciale. L'eau, elle... elle guérit. J'peux vous y emmener. Pour me faire pardonner.\"\n\n<hr>\n\nLa Cachette\n\nTrajet : Passage dissimulé derrière des ronces (5 min).\n\nUne petite clairière encaissée dans la roche. Une maisonnette en bois brut, un potager minuscule, du linge qui sèche.\n\nAu centre : un bassin naturel d'eau claire qui brille légèrement d'une lueur bleutée. L'air y est étrangement pur.\n\nUne femme sort  <span class=\"npc-link\" data-npc=\"Nara\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline; font-weight: 600;\" title=\"Cliquer pour voir la fiche du NPC\">[NPC: Nara]</span>, méfiante, couteau en main. Elle voit Tobin :\n\"Tobin ? C'est qui eux ?\"\n\n<b>Nara</b> (la mère) - 40 ans, cheveux gris, pragmatique. Protège son fils et leur refuge. Pas hostile si Tobin explique.\n\n\"...D'accord. Vous pouvez vous reposer. Mais à l'aube, vous repartez. Et vous parlez de cet endroit à personne.\"\n\n<hr>\n\nLa Source Magique\n\nL'eau brille doucement. Une sensation de calme en s'approchant.\n\n<b>Effet :</b> Se baigner ou boire = Récupère tous les PV + retire les altérations\n\n<b>Limite :</b> Fonctionne une seule fois par personne (l'eau perd son éclat pour eux après).\n\nNara : \"C'est pour ça qu'on reste ici. Cette eau... c'est tout ce qui nous reste de l'ancien monde. Avant que les cristaux rendent tout fou.\"\n\n<hr>\n\nDépart\n\nLe lendemain, Tobin les accompagne jusqu'au sentier :\n\n\"Le chemin continue vers l'est. Après les deux ponts sur l'eau, y'a une grande plaine. Faites gaffe aux bestioles volantes.\"\n\nIl hésite, puis donne une <span class=\"objet-link\" data-objet=\"Nocteline\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Nocteline</span>.\n\"Ca soigne les poisons. Ma mère en fait pousser ici. Encore... encore désolé pour les pierres.\"\n\n<hr>\n\n<b>Quête d'Escorte : Le Médaillon du Père</b><br><br>\n\nLe lendemain matin, alors que les PJ s'apprêtent à partir, Tobin les intercepte à l'écart de sa mère :<br><br>\n\n\"Attendez... J'ai un service à vous demander. Mais faut pas que ma mère entende.\"<br><br>\n\nIl explique à voix basse :<br><br>\n\n\"Mon père... il travaillait avec Branor, au lieu de coupe. Avant de... avant qu'il se fasse tuer par les créatures, il m'a dit qu'il avait caché quelque chose pour moi. Un médaillon. Le médaillon de ma grand-mère. C'est tout ce qui me reste de lui.\"<br><br>\n\nIl serre les poings :<br><br>\n\n\"Ma mère veut pas que j'y aille. Elle dit que c'est trop dangereux. Mais avec vous... S'il vous plaît. C'est pas loin. La cabane du bûcheron, à Forêt-5.\"<br><br>\n\n<b>Confrontation avec Nara</b><br><br>\n\nSi les PJ acceptent (ou si Tobin insiste trop fort), Nara intervient :<br><br>\n\n\"Tobin ! Je t'ai dit non !\"<br><br>\n\nElle se tourne vers les PJ, le regard dur :<br><br>\n\n\"Vous n'allez pas l'emmener là-bas. Son père est mort sur ce chemin. Je refuse de perdre mon fils aussi.\"<br><br>\n\n<b>Tobin</b> (les larmes aux yeux) :<br>\n\"Mais maman ! C'est la seule chose qui me reste de papa ! Et il me l'a promis ! Il a dit que quand je serais assez grand...\"<br><br>\n\n<b>Nara</b> (voix qui tremble) :<br>\n\"Tu n'es PAS assez grand !\"<br><br>\n\n<b>Tobin</b> :<br>\n\"J'ai seize ans ! Et eux, ils sont forts ! Regarde-les ! Ils ont traversé toute la forêt !\"<br><br>\n\n<b>Si convaincue</b><br><br>\n\nNara soupire longuement, puis prend Tobin par les épaules :<br><br>\n\n\"Tu reviens AVANT la nuit. Tu fais TOUT ce qu'ils te disent. Et toi...\"<br><br>\n\nElle fixe le PJ qui semble le plus responsable :<br><br>\n\n\"S'il lui arrive quoi que ce soit... je vous retrouverai.\"<br><br>\n\nElle donne une <span class=\"objet-link\" data-objet=\"Feuilleclaire\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Feuilleclaire</span> et une <span class=\"objet-link\" data-objet=\"Auréline des Roches\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Auréline des Roches</span> aux PJ :<br>\n\"Au cas où. La jaune, c'est pour les éléments. L'autre, ça soigne.\"<br><br>\n\n<b>Le Trajet (Forêt-4 → Forêt-5)</b><br><br>\n\nComportement de Tobin pendant l'escorte :<br>\n- <b>Nerveux</b> : sursaute au moindre bruit, reste proche des PJ<br>\n- <b>Bavard</b> : pose des questions sur leurs aventures, leurs armes, d'où ils viennent<br>\n- <b>Nostalgique</b> : reconnaît certains endroits (\"Papa m'emmenait pêcher par là...\")<br>\n- <b>Utile</b> : connaît un passage plus sûr (évite un combat aléatoire OU donne avantage sur un jet de navigation)<br><br>\n\nDialogue possible en route :<br><br>\n\n\"Mon père, il était fort. Vraiment fort. Il portait des troncs entiers sur ses épaules. Branor disait que c'était le meilleur bûcheron qu'il avait jamais eu.\"<br><br>\n\nSilence.<br><br>\n\n\"Les créatures... elles l'ont eu par surprise. Il revenait de nuit. Maman dit qu'il aurait pas dû. Mais il voulait être là pour mon anniversaire.\"\n\n<hr>\n<hr>\n\n\nEn poursuivant la progression, le chemin entame une légère descente vers un plan d'eau calme, que l'on doit traverser par deux petits ponts de bois disposés côte à côte.<br><br>\n\nCombat avec <br>\n[img:img_1767549021365_vri9m6uza]<br>\n<span class=\"monster-link\" data-monster=\"Guêpe géante\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Guêpe géante</span><br>\n\n<span class=\"monster-link\" data-monster=\"AquaLezo\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">AquaLezo</span><br>\n\n<br><br>\n\narrivée dans une grande pleine. Un chasseur ou bon test perception fait decouvrir une cache entre des arbres avec comme loot : <span class=\"treasure-table-link\" data-table-name=\"Sac Provision Port Foret\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Sac Provision Port Foret]</span>",
           "googleDocLink": "https://docs.google.com/document/d/1ib4D5CJdvgBZ-5VC2xAF-0nkow7X17gPKWwqKGP65AY/edit?tab=t.0"
         },
         "Forêt-5": {
@@ -12797,7 +12800,7 @@ hr,
 
     // Mark as standalone version for renderer with build timestamp
     window.STANDALONE_VERSION = true;
-    window.BUILD_VERSION = '2026-01-09T11:57:18.699Z';
+    window.BUILD_VERSION = '2026-01-09T14:30:40.774Z';
 
     // Version check - clear old data if version changed
     (function() {
@@ -24244,8 +24247,6 @@ hr,
           
           
           // CRITICAL: Set up mutation observer to track and PREVENT style changes
-          const observerId = Math.random().toString(36).substr(2, 9);
-          console.log(`🔄 DOUBLE RENDER DEBUG: Creating mutation observer [${observerId}]`);
           const observer = new MutationObserver((mutations) => {
             mutations.forEach((mutation) => {
               if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
@@ -24538,26 +24539,19 @@ hr,
       this.updateMJBodyClass();
 
       const handleMJToggle = () => {
-        console.log('=== MJ Toggle clicked ===');
         if (window.JdrApp.state.isMJ) {
           // Déjà en mode MJ, désactiver
           window.JdrApp.state.isMJ = false;
           this.updateMJButtonVisual();
           this.updateMJBodyClass();
-          this.generateTOC(); // Régénérer le TOC pour cacher les sections MJ
-          
-          // Refresh objects display if currently on objects page - DISABLED
-          console.log('Page refresh disabled - using MutationObserver instead');
+          this.generateTOC();
         } else {
           // Demander confirmation avant d'activer le mode MJ
           this.showMJConfirmation(() => {
             window.JdrApp.state.isMJ = true;
             this.updateMJButtonVisual();
             this.updateMJBodyClass();
-            this.generateTOC(); // Régénérer le TOC pour afficher les sections MJ
-            
-            // Refresh objects display if currently on objects page - DISABLED
-            console.log('Page refresh disabled - using MutationObserver instead');
+            this.generateTOC();
           });
         }
       };
@@ -24925,18 +24919,11 @@ hr,
 
     // Helper method to refresh objects page if currently active
     refreshObjectsPageIfActive() {
-      console.log('=== INSIDE refreshObjectsPageIfActive ===');
       const currentHash = window.location.hash;
-      console.log('refreshObjectsPageIfActive: hash =', currentHash);
-      console.log('Hash matches objets?', currentHash === '#/objets', 'or', currentHash === '#objets');
       if (currentHash === '#/objets' || currentHash === '#objets' || currentHash === '#/gestion-objets') {
-        console.log('Forcing objects page refresh...');
         setTimeout(() => {
-          // Force full page regeneration to ensure objects filtered by MJ mode are now visible
-          // This calls renderObjectsPage() which will regenerate the entire page with current filters
-          console.log('Calling renderObjectsPage...');
           this.renderObjectsPage();
-        }, 150); // Slightly longer delay to ensure MJ state is updated
+        }, 150);
       }
     },
     
@@ -26363,10 +26350,9 @@ hr,
       
       // Also refresh objects page if we're on it (for filter visibility)
       if (currentHash === '#/objets') {
-        console.log('🔄 Refreshing objects page due to dev mode change');
         setTimeout(() => {
           this.renderObjectsPage();
-        }, 100); // Augmenter le délai pour être sûr que le dev mode est à jour
+        }, 100);
       }
     },
 
@@ -26478,24 +26464,14 @@ hr,
     },
 
     refreshObjectsPageIfActive() {
-      console.log('=== REAL refreshObjectsPageIfActive called ===');
       const currentHash = window.location.hash;
-      console.log('Current hash:', currentHash);
       if (currentHash === '#/objets' || currentHash === '#/gestion-objets') {
-        console.log('🔄 Refreshing objects page due to state change');
         setTimeout(() => {
           this._forceObjectsRefresh = true;
-          console.log('About to call renderObjectsPage...');
-          console.log('renderObjectsPage exists?', typeof this.renderObjectsPage);
           if (this.renderObjectsPage) {
             this.renderObjectsPage();
-            console.log('renderObjectsPage called successfully');
-          } else {
-            console.error('renderObjectsPage method not found!');
           }
         }, 50);
-      } else {
-        console.log('Not on objects page, hash is:', currentHash);
       }
     },
 
@@ -31191,11 +31167,9 @@ hr,
     },
 
     toggleDevMode() {
-      console.log('toggleDevMode called, STANDALONE_VERSION:', window.STANDALONE_VERSION);
       if (window.STANDALONE_VERSION) return;
 
       this.isDevMode = !this.isDevMode;
-      console.log('Dev mode toggled to:', this.isDevMode);
       EventBus.emit(Events.EDITOR_TOGGLE, { enabled: this.isDevMode });
     },
 
@@ -35223,12 +35197,6 @@ hr,
       // Use CardBuilder to create a full monster card in preview mode
       const monsterCard = CardBuilder.create('monster', foundMonster, 'preview').build();
 
-      // Debug: Check what we're getting
-      console.log('Monster card type:', typeof monsterCard);
-      console.log('Monster card first 200 chars:', monsterCard.substring(0, 200));
-      console.log('Contains < character:', monsterCard.includes('<'));
-      console.log('Contains &lt;:', monsterCard.includes('&lt;'));
-
       // Add minimal styles for the preview tooltip - always recreate to get latest styles
       const existingStyle = document.getElementById('monster-preview-styles');
       if (existingStyle) existingStyle.remove();
@@ -35362,14 +35330,10 @@ hr,
 
       // Decode the monster card HTML
       const decodedCard = decodeHTML(monsterCard);
-      console.log('Decoded card first 200 chars:', decodedCard.substring(0, 200));
 
       // Add monster card - DIRECTLY set innerHTML with decoded HTML
       const cardContainer = document.createElement('div');
       cardContainer.innerHTML = decodedCard;
-
-      console.log('Card container children:', cardContainer.children.length);
-      console.log('Card container HTML preview:', cardContainer.innerHTML.substring(0, 100));
 
       // Move all children from card container to preview
       while (cardContainer.firstChild) {
@@ -35378,11 +35342,9 @@ hr,
 
       // Load lazy images BEFORE adding to document to avoid flicker
       const lazyImages = preview.querySelectorAll('img.lazy-load, img.thumb, img[data-src]');
-      console.log('🖼️ Found lazy images in monster preview:', lazyImages.length);
 
       lazyImages.forEach(img => {
         const optimizedSrc = img.getAttribute('data-src') || img.src;
-        console.log('  - Image optimized src:', optimizedSrc);
 
         if (optimizedSrc && optimizedSrc !== 'data:image/svg+xml' && !optimizedSrc.includes('svg+xml')) {
           img.src = optimizedSrc;
@@ -35397,7 +35359,6 @@ hr,
             const rawUrl = window.JdrApp.modules.images.getImageUrl(illusKey);
             if (rawUrl) {
               originalUrl = rawUrl;
-              console.log('  - Found original URL from illus-key:', originalUrl);
             }
           }
 
@@ -35408,7 +35369,6 @@ hr,
 
           // Use capture phase to intercept before any other handlers
           img.addEventListener('click', (e) => {
-            console.log('🖱️ Image clicked in preview, opening modal with original URL:', originalUrl);
             e.preventDefault();
             e.stopPropagation();
             e.stopImmediatePropagation();
@@ -35582,7 +35542,6 @@ hr,
 
       // Decode the NPC card HTML
       const decodedCard = decodeHTML(npcCard);
-      console.log('📋 Decoded NPC card HTML (first 500 chars):', decodedCard.substring(0, 500));
 
       // Add NPC card - DIRECTLY set innerHTML with decoded HTML
       const cardContainer = document.createElement('div');
@@ -35594,23 +35553,10 @@ hr,
       }
 
       // Load lazy images BEFORE adding to document to avoid flicker
-      const allImages = preview.querySelectorAll('img');
       const lazyImages = preview.querySelectorAll('img.lazy-load, img.thumb, img[data-src]');
-      console.log('🖼️ Total images in NPC preview:', allImages.length);
-      console.log('🖼️ Lazy-load images in NPC preview:', lazyImages.length);
-
-      allImages.forEach((img, idx) => {
-        console.log(`  Image ${idx}:`, {
-          classes: img.className,
-          src: img.src,
-          dataSrc: img.getAttribute('data-src'),
-          style: img.style.cssText
-        });
-      });
 
       lazyImages.forEach(img => {
         const optimizedSrc = img.getAttribute('data-src') || img.src;
-        console.log('  - Processing NPC Image optimized src:', optimizedSrc);
 
         if (optimizedSrc && optimizedSrc !== 'data:image/svg+xml' && !optimizedSrc.includes('svg+xml')) {
           img.src = optimizedSrc;
@@ -35625,7 +35571,6 @@ hr,
             const rawUrl = window.JdrApp.modules.images.getImageUrl(illusKey);
             if (rawUrl) {
               originalUrl = rawUrl;
-              console.log('  - Found original URL from illus-key:', originalUrl);
             }
           }
 
@@ -35636,7 +35581,6 @@ hr,
 
           // Use capture phase to intercept before any other handlers
           img.addEventListener('click', (e) => {
-            console.log('🖱️ NPC Image clicked in preview, opening modal with original URL:', originalUrl);
             e.preventDefault();
             e.stopPropagation();
             e.stopImmediatePropagation();
@@ -35699,12 +35643,9 @@ hr,
      * Show enlarged image modal
      */
     showImageModal(imageUrl) {
-      console.log('🖼️ showImageModal called with URL:', imageUrl);
-
       // Remove any existing image modal
       const existingModal = document.querySelector('.image-enlarge-modal');
       if (existingModal) {
-        console.log('  - Removing existing modal');
         existingModal.remove();
       }
 
@@ -38634,8 +38575,6 @@ hr,
     selectCampaign(campaignName) {
       if (!campaignName) return;
 
-      console.log('📄 selectCampaign called with:', campaignName);
-
       // Initialize state if needed
       if (!window.JdrApp) {
         window.JdrApp = {};
@@ -38644,11 +38583,8 @@ hr,
         window.JdrApp.state = {};
       }
 
-      console.log('📄 Current selectedCampaign:', window.JdrApp.state.selectedCampaign);
-
       // Check if we're already on this campaign
       if (window.JdrApp.state.selectedCampaign === campaignName) {
-        console.log('📄 Already on this campaign, skipping regeneration and state reset');
         return; // No need to regenerate or reset subpage
       }
 
@@ -38658,7 +38594,6 @@ hr,
       const campaignData = window.CAMPAGNE?.subPages?.[campaignName];
       if (campaignData?.subPages) {
         const subPageList = Object.keys(campaignData.subPages);
-        console.log('📄 Resetting selectedSubPage to first:', subPageList[0]);
         window.JdrApp.state.selectedSubPage = subPageList.length > 0 ? subPageList[0] : null;
       } else {
         window.JdrApp.state.selectedSubPage = null;
