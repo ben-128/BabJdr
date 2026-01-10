@@ -120,7 +120,7 @@
       {
         "nom": "Méditation régénératrice",
         "description": "Une fois par jour, hors combat, permet de passer 30 minutes en méditation pour regagner tous ses points de vie.",
-        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Intelligence 5.",
+        "prerequis": "<strong> Prérequis :</strong> <br><img src=\"https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\"> Intelligence 5.\n<br>OU<br>\nRéflexion rang 1",
         "cout": "1 point de don"
       },
       {
@@ -138,7 +138,7 @@
       {
         "nom": "Premier soin",
         "description": "<b>En combat :</b>\n<br>Les soins provenant des consommables sont augmentés de X points de vie.\n\n<br><br><b>Hors combat :</b>\n<br>Le héros peut dépenser un effort, pour soigner une autre cible de X points de vie. \n\n<br><br>X correspond à 3, plus 1 point supplémentaire tous les 5 points d’Intelligence.",
-        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Intelligence 5.",
+        "prerequis": "<strong> Prérequis :</strong> <br><img src=\"https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\"> Intelligence 5.\n<br>OU<br>\nRéflexion rang 1",
         "cout": "1 point de don"
       },
       {
