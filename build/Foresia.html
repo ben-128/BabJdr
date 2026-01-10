@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2026-01-10T16:56:53.709Z by JdrBab Build System -->
+<!-- Generated on 2026-01-10T17:13:29.061Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -8355,8 +8355,8 @@ hr,
       {
         "nom": "Hyperactif",
         "description": "Le héros dispose maintenant de deux actions secondaires par tour.",
-        "prerequis": "<strong> Prérequis :</strong> Niveau 3.",
-        "cout": "2 points de don"
+        "prerequis": "<strong> Prérequis :</strong> Coordination Rang 2.",
+        "cout": "1 points de don"
       },
       {
         "nom": "Main Chanceuse",
@@ -8444,7 +8444,7 @@ hr,
       },
       {
         "nom": "Tacticien",
-        "description": "Permet d'échanger les initiatives des joueurs consentants du groupe.",
+        "description": "Permet, au début d'un combat, d'échanger les initiatives des joueurs consentants du groupe.",
         "prerequis": "<strong> Prérequis :</strong> Réflexion rang 1.",
         "cout": "1 point de don"
       },
@@ -11686,10 +11686,12 @@ hr,
     "don:Nouveau Don": "https://i.ibb.co/qLsbhkY3/Armure-l-gere.jpg",
     "don:Maîtrise des armures légères": "https://i.ibb.co/SWMnfQ2/Armure-l-gere.jpg",
     "sort:Sorts de Monstres:Bourrasque": "https://i.ibb.co/SXfyvRh4/Bourrasque.jpg",
-    "objet:Plume de tempête": "https://i.ibb.co/HDNx4fgG/Plume.jpg"
+    "objet:Plume de tempête": "https://i.ibb.co/HDNx4fgG/Plume.jpg",
+    "don:Tacticien": "https://i.ibb.co/kp0LJBQ/Tacticien.jpg",
+    "don:Doigts agiles": "https://i.ibb.co/W79yHm9/Doigts-Agiles.jpg"
   },
   "meta": {
-    "total_images": 526,
+    "total_images": 528,
     "exported_date": "2026-01-10",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
@@ -11925,7 +11927,7 @@ hr,
     "titre": "Cartes du destin",
     "introduction": "Tirez au sort une carte du destin avec un d6 :",
     "cartes": [
-      "Au choix, 5 Initiative ou 3 Fortune.",
+      "Au choix, (5 Initiative et 3 Fortune) ou (1 Esquive et 2 résistance altération).",
       "A répartir: 2 points de statistiques parmis celles qui n'ont pas la valeur la plus élevée.",
       "Au choix, 4 points de vie maximum ou 6 points de mana maximum.",
       "Une compétence rang 1 au choix.",
@@ -11943,7 +11945,7 @@ hr,
       "type": "card",
       "id": "etapes-creation",
       "title": "<img src=\"https://i.ibb.co/KjMVHR0b/All-Heroes.png\" style=\"display: block; margin: 1rem auto; max-width: 100%; min-width: 200px;\" alt=\"Image\">",
-      "content": "<ol><li>Choisir une <strong>classe</strong> puis une <strong>sous‑classe</strong> : <a href=\"#/guerrier\" style=\"color: var(--accent); text-decoration: underline;\">Guerrier</a>.\n</li><li>Tirer au sort (avec un d6) une carte du destin (<a href=\"#\" onclick=\"event.preventDefault(); if (window.ModalManager && typeof window.ModalManager.showCartesDestinModal === 'function') { window.ModalManager.showCartesDestinModal(); } return false;\" style=\"color: var(--accent); text-decoration: underline; cursor: pointer;\">Lien ici</a>)\n</li><li>Choisir un <strong>élément</strong> d'affiliation : <a href=\"#/elements\" style=\"color: var(--accent); text-decoration: underline;\">Éléments</a>.\n</li><li>Choisir les <strong>dons</strong> (avec 2 points de dons, généraux et/ou spécifique à la classe) : <a href=\"#/dons-g-n-raux\" style=\"color: var(--accent); text-decoration: underline;\">Généraux (dons)</a>.\n</li><li>Choisir l'<strong>équipement</strong> de départ (avec 120 éclats) : <a href=\"#/collections-objets\" style=\"color: var(--accent); text-decoration: underline;\">Collections d'Objets</a>.\n</li><li>Définir le <strong>nom</strong>, l'<strong>histoire</strong> et l'<strong>apparence</strong>.</li><li>Remplir sa feuille de personnage (voir section ci-dessous).</li></ol>",
+      "content": "<ol><li>Choisir une <strong>classe</strong> puis une <strong>sous‑classe</strong> : <a href=\"#/guerrier\" style=\"color: var(--accent); text-decoration: underline;\">Guerrier</a>.\n\n</li><li>Choisir un <strong>élément</strong> d'affiliation : <a href=\"#/elements\" style=\"color: var(--accent); text-decoration: underline;\">Éléments</a>.\n\n</li><li>Choisir les <strong>dons</strong> (avec 2 points de dons, généraux et/ou spécifique à la classe) : <a href=\"#/dons-g-n-raux\" style=\"color: var(--accent); text-decoration: underline;\">Généraux (dons)</a>.\n\n</li><li>Tirer au sort (avec un d6) une carte du destin (<a href=\"#\" onclick=\"event.preventDefault(); if (window.ModalManager && typeof window.ModalManager.showCartesDestinModal === 'function') { window.ModalManager.showCartesDestinModal(); } return false;\" style=\"color: var(--accent); text-decoration: underline; cursor: pointer;\">Lien ici</a>)\n\n</li><li>Choisir l'<strong>équipement</strong> de départ (avec 120 éclats) : <a href=\"#/collections-objets\" style=\"color: var(--accent); text-decoration: underline;\">Collections d'Objets</a>.\n\n</li><li>Définir le <strong>nom</strong>, l'<strong>histoire</strong> et l'<strong>apparence</strong>.</li><li>Remplir sa feuille de personnage (voir section ci-dessous).</li></ol>",
       "deletable": true,
       "sectionName": "Étapes de création"
     },
@@ -12823,7 +12825,7 @@ hr,
 
     // Mark as standalone version for renderer with build timestamp
     window.STANDALONE_VERSION = true;
-    window.BUILD_VERSION = '2026-01-10T16:56:53.711Z';
+    window.BUILD_VERSION = '2026-01-10T17:13:29.064Z';
 
     // Version check - clear old data if version changed
     (function() {
