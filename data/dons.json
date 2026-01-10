@@ -40,6 +40,12 @@
         "cout": "1 points de don"
       },
       {
+        "nom": "Doigts agiles",
+        "description": "Permet d'utiliser 2 consommables en utilisant une seule action secondaire.",
+        "prerequis": "<strong> Prérequis :</strong> Finesse rang 1.",
+        "cout": "1 point de don"
+      },
+      {
         "nom": "Dur à cuire",
         "description": "Augmente les points de vie maximum de 4 et la résistance altération de 2.",
         "prerequis": "<strong> Prérequis :</strong> Don unique.",
@@ -72,8 +78,8 @@
       {
         "nom": "Hyperactif",
         "description": "Le héros dispose maintenant de deux actions secondaires par tour.",
-        "prerequis": "<strong> Prérequis :</strong> Niveau 3.",
-        "cout": "2 points de don"
+        "prerequis": "<strong> Prérequis :</strong> Coordination Rang 2.",
+        "cout": "1 points de don"
       },
       {
         "nom": "Main Chanceuse",
@@ -157,6 +163,12 @@
         "nom": "Statistiques",
         "description": "Gagne 2 points de statistiques au choix à répartir.",
         "prerequis": "<strong> Prérequis :</strong> Don unique.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Tacticien",
+        "description": "Permet, au début d'un combat, d'échanger les initiatives des joueurs consentants du groupe.",
+        "prerequis": "<strong> Prérequis :</strong> Réflexion rang 1.",
         "cout": "1 point de don"
       },
       {

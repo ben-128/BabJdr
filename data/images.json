@@ -525,10 +525,12 @@
     "don:Nouveau Don": "https://i.ibb.co/qLsbhkY3/Armure-l-gere.jpg",
     "don:Maîtrise des armures légères": "https://i.ibb.co/SWMnfQ2/Armure-l-gere.jpg",
     "sort:Sorts de Monstres:Bourrasque": "https://i.ibb.co/SXfyvRh4/Bourrasque.jpg",
-    "objet:Plume de tempête": "https://i.ibb.co/HDNx4fgG/Plume.jpg"
+    "objet:Plume de tempête": "https://i.ibb.co/HDNx4fgG/Plume.jpg",
+    "don:Tacticien": "https://i.ibb.co/kp0LJBQ/Tacticien.jpg",
+    "don:Doigts agiles": "https://i.ibb.co/W79yHm9/Doigts-Agiles.jpg"
   },
   "meta": {
-    "total_images": 526,
+    "total_images": 528,
     "exported_date": "2026-01-10",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
