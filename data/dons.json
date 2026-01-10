@@ -512,6 +512,12 @@
         "description": "Les dégâts des sorts canalisés sont augmentés de 2 pour chaque tour supplémentaire où le sort a été canalisé.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
+      },
+      {
+        "nom": "Volonté sans faille",
+        "description": "Augmente la volonté de 4.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
+        "cout": "1 point de don"
       }
     ]
   },
@@ -589,6 +595,12 @@
         "nom": "Purification sublimée",
         "description": "Après avoir supprimé un état via un sort, le héros et la cible reçoivent un nombre de points de vie égal au niveau du prêtre.",
         "prerequis": "<strong> Prérequis :</strong>-",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Bénédiction rapide",
+        "description": "Une fois par jour, peut effectuer un sort en un seul tour, même s'il prend normalement plusieurs tours à incanter.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       }
     ]

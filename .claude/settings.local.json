@@ -87,7 +87,11 @@
       "Bash(where convert:*)",
       "Bash(pip show:*)",
       "Bash(git -C:*)",
-      "Bash(npm run:*)"
+      "Bash(git -C \"D:/projets/BabJDR/BabJDR\" add data/dons.json data/monstres.json data/images.json \"data/images/Dons/Generaux/Accelera.png\" \"data/images/Dons/guerrier/ContreAttaque.png\" \"data/images/Dons/guerrier/CoupEpaule.png\")",
+      "Bash(git -C \"D:/projets/BabJDR/BabJDR\" commit -m \"$\\(cat <<''EOF''\nAdd new feats and balance monsters\n\nNouveaux dons:\n- Contre-attaque \\(Guerrier\\): attaque après esquive CàC réussie\n- Coup d''épaule \\(Guerrier\\): repousse 3m après attaque réussie \\(6m si crit\\)\n- Accélération \\(Général\\): +6m déplacement avec action principale\n\nÉquilibrage monstres:\n- Ours des Bois: 40→30 PV, 4→3 armure, 7→6 dégâts\n- Boss Forêt: 120→80 PV, 10→7 dégâts/attaque\n\n🤖 Generated with [Claude Code]\\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git -C \"D:/projets/BabJDR/BabJDR\" diff --stat data/dons.json)",
+      "Bash(git -C \"D:/projets/BabJDR/BabJDR\" add data/dons.json data/images.json \"data/images/Dons/mage/Canal.png\" \"data/images/Dons/mage/IncantRapide.png\")",
+      "Bash(git -C \"D:/projets/BabJDR/BabJDR\" commit -m \"$\\(cat <<''EOF''\nAdd new Mage feats\n\n- Incantation rapide: double mana cost to cast multi-turn spell instantly \\(lvl 7\\)\n- Canalisation incrémentale: +2 damage per additional channeling turn\n\n🤖 Generated with [Claude Code]\\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
     ],
     "deny": []
   }

@@ -518,11 +518,14 @@
     "don:Incantation rapide": "https://i.ibb.co/ZR1ZTM9Y/Incant-Rapide.jpg",
     "don:Nouvelle affinité": "https://i.ibb.co/Wq0MHfq/Change-Element.jpg",
     "npc:Tobin": "https://i.ibb.co/NdqKkkW9/Tobin.jpg",
-    "npc:Nara": "https://i.ibb.co/gZHbRFhV/Nara.jpg"
+    "npc:Nara": "https://i.ibb.co/gZHbRFhV/Nara.jpg",
+    "don:Bénédiction rapide": "https://i.ibb.co/fGKSmN0N/Incantation-Rapide.jpg",
+    "sort:Sorts de Prêtre:Main des Cieux": "https://i.ibb.co/fdgKD3mt/Main-Des-Cieux.jpg",
+    "don:Volonté sans faille": "https://i.ibb.co/tTsPF2Pk/Volont.jpg"
   },
   "meta": {
-    "total_images": 519,
-    "exported_date": "2026-01-09",
+    "total_images": 522,
+    "exported_date": "2026-01-10",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
 }

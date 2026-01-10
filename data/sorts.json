@@ -245,7 +245,7 @@
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> Esquive.",
         "effetNormal": "<strong>Effet:</strong> Inflige (5 + Puiss. Sorts) dégâts <span style=\"color: #d0d0d0; font-weight: bold; background: rgba(0, 0, 0, 0.4); padding: 2px 4px; border-radius: 3px;\">Divin</span> à la cible.\n<br> Le sort ne peut pas être raté ou esquivé si la cible est d'élément <span style=\"color: #8b5cf6; font-weight: bold;\">Maléfique</span>.",
-        "effetCritique": "<strong>Coup Critique: </strong> Inflige (10 + Puiss. Sorts)  dégâts."
+        "effetCritique": "<strong>Coup Critique: </strong> Inflige (8 + Puiss. Sorts)  dégâts."
       },
       {
         "nom": "Voile de Vitalité",
@@ -272,7 +272,7 @@
         "coutMana": "🔵 <strong>Coût mana:</strong> 5",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> -",
-        "effetNormal": "<strong>Effet:</strong> Augmente l'armure de (2 + Puiss. Sorts) jusqu'à la fin du combat.",
+        "effetNormal": "<strong>Effet:</strong> Augmente l'armure physique de (2 + Puiss. Sorts) jusqu'à la fin du combat.",
         "effetCritique": "<strong>Coup Critique: </strong> L'armure est augmentée de (4 + Puiss. Sorts)."
       },
       {
@@ -321,7 +321,7 @@
         "coutMana": "🔵 <strong>Coût mana:</strong> 7",
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Enlève l'état <span class=\"etat-link\" data-etat=\"Empoisonné\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Empoisonné</span> de la cible.",
-        "effetCritique": "<strong>Coup Critique: </strong> La cible est également soignée de 5 points de vie."
+        "effetCritique": "<strong>Coup Critique: </strong> La cible reçoit également 3 points de vie temporaires."
       },
       {
         "nom": "Nova lumineuse",
@@ -412,7 +412,7 @@
         "element": "Divin",
         "description": "Une lumière céleste s’abat sur l’ennemi, brûlant sa chair impure et enchaînant les êtres du mal.",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 6",
-        "portee": "🎯 <strong>Portée:</strong> 12m",
+        "portee": "🎯 <strong>Portée:</strong> 9m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 12",
         "resistance": "<strong>Sans effet si:</strong> -",
@@ -427,7 +427,7 @@
         "portee": "🎯 <strong>Portée:</strong> 6m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 2 tours",
         "coutMana": "🔵 <strong>Coût mana:</strong> 17",
-        "resistance": "<strong>Sans effet si:</strong> &nbsp;\n<br>- Hors combat.",
+        "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Le héros et ses alliés à moins de 6m gagnent (10 + Puiss. Sorts) points de vie temporaires.",
         "effetCritique": "<strong>Coup Critique: </strong> Les points de vie temporaires passent à (15 + Puiss. Sorts)."
       },
@@ -467,6 +467,18 @@
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Les alliés dans la zone (9m autour du héros) voient les dégâts élémentaires reçus de sorts ayant pour source l'extérieur de la zone réduits de (10 + Puiss. Sorts).\n\n<br><br>Chaque début de tour, le lanceur peut continuer de <b>canaliser</b> le sort (ne pouvant plus esquiver ou faire d'actions ou se déplacer). S'il le fait, la zone reste protégée, et le lanceur consomme 5 points de mana.",
         "effetCritique": "<strong>Coup Critique: </strong> Les dégâts élémentaires sont réduits de (15 + Puiss. Sorts)."
+      },
+      {
+        "nom": "Main des Cieux",
+        "element": "Divin",
+        "description": "Une lueur angélique se tend et saisit l’allié consentant, le soustrayant à la distance et au danger pour le ramener, en un souffle de lumière, auprès du prêtre.",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 10",
+        "portee": "🎯 <strong>Portée:</strong> 21m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 10",
+        "resistance": "<strong>Sans effet si:</strong> -",
+        "effetNormal": "<strong>Effet:</strong> Une cible consentante à portée est ramenée à une place libre à moins de 3m du prêtre.",
+        "effetCritique": "<strong>Coup Critique: </strong> La cible reçoit également 7 points de vie temporaires."
       }
     ]
   },

@@ -574,9 +574,32 @@
         }
       });
 
-      // Update display to show all cards are visible
-      const totalCards = document.querySelectorAll('.card[data-spell-name]').length;
-      this.updateFilterDisplay(1, 20, totalCards, totalCards);
+      // Update display to show all cards are visible - count only current category
+      const currentHash = window.location.hash.replace('#/', '');
+      let currentCategoryName = currentHash.replace('sorts-', '');
+      if (currentCategoryName.startsWith('sorts-')) {
+        currentCategoryName = currentCategoryName.replace('sorts-', '');
+      }
+
+      const allCards = document.querySelectorAll('.card[data-spell-name]');
+      let categoryCount = 0;
+      const countedSpells = new Set();
+
+      allCards.forEach(card => {
+        const spellName = card.dataset.spellName;
+        const categoryName = card.dataset.categoryName;
+
+        if (this.categoryMatches(categoryName, currentCategoryName)) {
+          const spellLevel = this.getSpellLevel(spellName, categoryName);
+          const spellKey = `${categoryName}:${spellName}`;
+          if (spellLevel > 0 && !countedSpells.has(spellKey)) {
+            categoryCount++;
+            countedSpells.add(spellKey);
+          }
+        }
+      });
+
+      this.updateFilterDisplay(1, 20, categoryCount, categoryCount);
     }
   };
 
