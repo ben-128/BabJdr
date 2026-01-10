@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2026-01-10T15:24:19.481Z by JdrBab Build System -->
+<!-- Generated on 2026-01-10T16:30:42.577Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -7655,7 +7655,7 @@ hr,
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> Esquive.",
         "effetNormal": "<strong>Effet:</strong> Inflige (5 + Puiss. Sorts) dégâts <span style=\"color: #d0d0d0; font-weight: bold; background: rgba(0, 0, 0, 0.4); padding: 2px 4px; border-radius: 3px;\">Divin</span> à la cible.\n<br> Le sort ne peut pas être raté ou esquivé si la cible est d'élément <span style=\"color: #8b5cf6; font-weight: bold;\">Maléfique</span>.",
-        "effetCritique": "<strong>Coup Critique: </strong> Inflige (10 + Puiss. Sorts)  dégâts."
+        "effetCritique": "<strong>Coup Critique: </strong> Inflige (8 + Puiss. Sorts)  dégâts."
       },
       {
         "nom": "Voile de Vitalité",
@@ -7682,7 +7682,7 @@ hr,
         "coutMana": "🔵 <strong>Coût mana:</strong> 5",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> -",
-        "effetNormal": "<strong>Effet:</strong> Augmente l'armure de (2 + Puiss. Sorts) jusqu'à la fin du combat.",
+        "effetNormal": "<strong>Effet:</strong> Augmente l'armure physique de (2 + Puiss. Sorts) jusqu'à la fin du combat.",
         "effetCritique": "<strong>Coup Critique: </strong> L'armure est augmentée de (4 + Puiss. Sorts)."
       },
       {
@@ -7731,7 +7731,7 @@ hr,
         "coutMana": "🔵 <strong>Coût mana:</strong> 7",
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Enlève l'état <span class=\"etat-link\" data-etat=\"Empoisonné\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Empoisonné</span> de la cible.",
-        "effetCritique": "<strong>Coup Critique: </strong> La cible est également soignée de 5 points de vie."
+        "effetCritique": "<strong>Coup Critique: </strong> La cible reçoit également 3 points de vie temporaires."
       },
       {
         "nom": "Nova lumineuse",
@@ -7822,7 +7822,7 @@ hr,
         "element": "Divin",
         "description": "Une lumière céleste s’abat sur l’ennemi, brûlant sa chair impure et enchaînant les êtres du mal.",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 6",
-        "portee": "🎯 <strong>Portée:</strong> 12m",
+        "portee": "🎯 <strong>Portée:</strong> 9m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 12",
         "resistance": "<strong>Sans effet si:</strong> -",
@@ -7837,7 +7837,7 @@ hr,
         "portee": "🎯 <strong>Portée:</strong> 6m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 2 tours",
         "coutMana": "🔵 <strong>Coût mana:</strong> 17",
-        "resistance": "<strong>Sans effet si:</strong> &nbsp;\n<br>- Hors combat.",
+        "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Le héros et ses alliés à moins de 6m gagnent (10 + Puiss. Sorts) points de vie temporaires.",
         "effetCritique": "<strong>Coup Critique: </strong> Les points de vie temporaires passent à (15 + Puiss. Sorts)."
       },
@@ -7877,6 +7877,18 @@ hr,
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Les alliés dans la zone (9m autour du héros) voient les dégâts élémentaires reçus de sorts ayant pour source l'extérieur de la zone réduits de (10 + Puiss. Sorts).\n\n<br><br>Chaque début de tour, le lanceur peut continuer de <b>canaliser</b> le sort (ne pouvant plus esquiver ou faire d'actions ou se déplacer). S'il le fait, la zone reste protégée, et le lanceur consomme 5 points de mana.",
         "effetCritique": "<strong>Coup Critique: </strong> Les dégâts élémentaires sont réduits de (15 + Puiss. Sorts)."
+      },
+      {
+        "nom": "Main des Cieux",
+        "element": "Divin",
+        "description": "Une lueur angélique se tend et saisit l’allié consentant, le soustrayant à la distance et au danger pour le ramener, en un souffle de lumière, auprès du prêtre.",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 10",
+        "portee": "🎯 <strong>Portée:</strong> 21m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 10",
+        "resistance": "<strong>Sans effet si:</strong> -",
+        "effetNormal": "<strong>Effet:</strong> Une cible consentante à portée est ramenée à une place libre à moins de 3m du prêtre.",
+        "effetCritique": "<strong>Coup Critique: </strong> La cible reçoit également 7 points de vie temporaires."
       }
     ]
   },
@@ -8123,6 +8135,18 @@ hr,
     "description": "Sorts utilisés par les monstres et créatures.",
     "sorts": [
       {
+        "nom": "Bourrasque",
+        "element": "Air",
+        "description": "Une violente rafale de vent projette la cible en arrière.",
+        "prerequis": "📋 <strong>Prérequis:</strong> -",
+        "portee": "🎯 <strong>Portée:</strong> 3m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 5",
+        "resistance": "<strong>Sans effet si:</strong> Taille Grand ou plus.",
+        "effetNormal": "<strong>Effet:</strong> Inflige 4 + Puiss. Sorts dégâts d'<span style=\"color: #22c55e; font-weight: bold;\">Air</span>. Repousse la cible de 6m.",
+        "effetCritique": "<strong>Coup Critique:</strong> Inflige 6 + Puiss. Sorts dégâts. Repousse la cible de 9m."
+      },
+      {
         "nom": "Soin mineur",
         "element": "Lumière",
         "description": "Une lueur apaisante referme les blessures légères.",
@@ -8257,7 +8281,7 @@ hr,
     "description": "Dons accessibles à toutes les classes.",
     "dons": [
       {
-        "nom": "Doué",
+        "nom": "Compétence : Doué",
         "description": "Gagne une compétence rang 1.",
         "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
@@ -8269,16 +8293,16 @@ hr,
         "cout": "1 point de don"
       },
       {
-        "nom": "Brillant",
+        "nom": "Compétence : Brillant",
         "description": "Gagne une compétence rang 2.",
-        "prerequis": "<strong> Prérequis :</strong> La compétence rang 1.",
-        "cout": "2 points de don"
+        "prerequis": "<strong> Prérequis :</strong> <br>\n-La compétence rang 1.\n<br>-Niveau 5",
+        "cout": "1 points de don"
       },
       {
-        "nom": "Prodigieux",
+        "nom": "Compétence : Prodigieux",
         "description": "Gagne une compétence rang 3.",
-        "prerequis": "<strong> Prérequis :</strong> La compétence rang 2.",
-        "cout": "3 points de don"
+        "prerequis": "<strong> Prérequis :</strong> <br>-La compétence rang 2.<br>\n- Niveau 10",
+        "cout": "1 points de don"
       },
       {
         "nom": "Hyperactif",
@@ -8410,6 +8434,12 @@ hr,
         "nom": "Nouvelle affinité",
         "description": "Le héros change son élément d'affiliation pour un nouvel élément de son choix parmi : <span style=\"color: #e25822; font-weight: bold;\">Feu</span>, <span style=\"color: #2b6cb0; font-weight: bold;\">Eau</span>, <span style=\"color: #8b5e34; font-weight: bold;\">Terre</span>, <span style=\"color: #22c55e; font-weight: bold;\">Air</span>, <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span>, <span style=\"color: #1a1a1a; font-weight: bold; background: rgba(180, 180, 200, 0.6); padding: 2px 4px; border-radius: 3px;\">Nuit</span>, <span style=\"color: #d0d0d0; font-weight: bold; background: rgba(0, 0, 0, 0.4); padding: 2px 4px; border-radius: 3px;\">Divin</span>, <span style=\"color: #a855f7; font-weight: bold;\">Maléfique</span>.",
         "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Maîtrise des armures légères",
+        "description": "Permet de s'équiper d'armures légères.",
+        "prerequis": "<strong> Prérequis : </strong> <img src=\"https://i.ibb.co/23cGYFvZ/stat-Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Force 5 \n<br>ET<br>\n<img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Agilité 5.",
         "cout": "1 point de don"
       }
     ]
@@ -8726,7 +8756,7 @@ hr,
       },
       {
         "nom": "Spécialisation élémentaire 2",
-        "description": "Le héros peut choisir un élément et réduire le coût en mana des sorts de cet élément, d'un montant équivalent au niveau du sort.",
+        "description": "Le héros peut choisir un élément et réduire le coût en mana des sorts de cet élément, d'un montant équivalent au niveau du sort. (Ne peut pas dépasser 50% du coût du sort).",
         "prerequis": "<strong> Prérequis :</strong> Choisir un nouvel élément écrase l'ancien.",
         "cout": "1 point de don"
       },
@@ -8764,6 +8794,12 @@ hr,
         "nom": "Canalisation incrémentale",
         "description": "Les dégâts des sorts canalisés sont augmentés de 2 pour chaque tour supplémentaire où le sort a été canalisé.",
         "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Volonté sans faille",
+        "description": "Augmente la volonté de 4.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       }
     ]
@@ -8843,6 +8879,12 @@ hr,
         "description": "Après avoir supprimé un état via un sort, le héros et la cible reçoivent un nombre de points de vie égal au niveau du prêtre.",
         "prerequis": "<strong> Prérequis :</strong>-",
         "cout": "1 point de don"
+      },
+      {
+        "nom": "Bénédiction rapide",
+        "description": "Une fois par jour, peut effectuer un sort en un seul tour, même s'il prend normalement plusieurs tours à incanter.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
+        "cout": "1 point de don"
       }
     ]
   },
@@ -8876,7 +8918,7 @@ hr,
       },
       {
         "nom": "Spécialiste de l'étrange",
-        "description": "Permet d'équiper les armes exotiques à une main.",
+        "description": "Permet d'équiper les armes exotiques.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -9110,7 +9152,7 @@ hr,
         "Magie"
       ],
       "effet": "<strong>Effet:</strong> Remplace votre prochaine action principale par le sort de mage <span class=\"spell-link\" data-spell=\"Boule de Feu\" data-category=\"Sorts de Mage\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Boule de Feu</span>. <br><i>Le mana et les statistiques du héros sont utilisés.</i>\n    <br><br><strong>Charges :</strong> 3",
-      "prix": "🔷 <strong>Prix:</strong> 25",
+      "prix": "🔷 <strong>Prix:</strong> 20",
       "poids": ""
     },
     {
@@ -9793,6 +9835,19 @@ hr,
       "effet": "Inutilisable en combat.<br><strong>Effet:</strong> Donne 1 point de chance de manière permanente au héros.",
       "prix": "🔷 <strong>Prix:</strong> ?",
       "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Plume de tempête",
+      "numero": 68,
+      "image": "https://i.ibb.co/7JJT55Ck/Plume.jpg",
+      "description": "<i>Une plume irisée aux reflets verts, parcourue de courants invisibles. En la serrant dans sa paume, on peut déclencher une bourrasque soudaine.</i>",
+      "tags": [
+        "Consommable",
+        "Magie"
+      ],
+      "effet": "<strong>Effet:</strong> Remplace votre prochaine action principale par le sort de monstre <span class=\"spell-link\" data-spell=\"Bourrasque\" data-category=\"Sorts de Monstres\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Bourrasque</span>. <br><i>Le mana et les statistiques du héros sont utilisés.</i>\n    <br><br><strong>Charges :</strong> 4",
+      "prix": "🔷 <strong>Prix:</strong> 50",
+      "poids": ""
     }
   ],
   "filterSettings": {
@@ -11188,8 +11243,8 @@ hr,
     "don:Renvoi de Sort": "https://i.ibb.co/5hGR0j3R/Renvoi.jpg",
     "don:Téléportation amicale": "https://i.ibb.co/gkVhBNb/teleportation.png",
     "don:Endurant": "https://i.ibb.co/wF9Kd5Lp/Endurant.jpg",
-    "don:Brillant": "https://i.ibb.co/jZ8KcDxh/Brillant.jpg",
-    "don:Prodigieux": "https://i.ibb.co/xKrZQBnx/Prodigieux.jpg",
+    "don:Compétence : Brillant": "https://i.ibb.co/jZ8KcDxh/Brillant.jpg",
+    "don:Compétence : Prodigieux": "https://i.ibb.co/xKrZQBnx/Prodigieux.jpg",
     "don:Hyperactif": "https://i.ibb.co/MxTSzX4x/hper-Actif.jpg",
     "don:Équitation": "https://i.ibb.co/RThYfBz0/equitation.jpg",
     "don:Gros mangeur": "https://i.ibb.co/Y4yd1Lcv/Gros-Mangeur.jpg",
@@ -11391,7 +11446,7 @@ hr,
     "don:Chance": "https://i.ibb.co/YFHpxb4c/Chance.jpg",
     "don:Dague": "https://i.ibb.co/dwSwF0tp/Dague.png",
     "don:Dons": "https://i.ibb.co/VpzK786K/Dons.png",
-    "don:Doué": "https://i.ibb.co/hFXYph8Q/Dou.png",
+    "don:Compétence : Doué": "https://i.ibb.co/hFXYph8Q/Dou.png",
     "don:DureACuire": "https://i.ibb.co/gLgtk0P0/Dure-ACuire.jpg",
     "don:equitation": "https://i.ibb.co/LdQYmJnt/equitation.jpg",
     "don:GrandSac": "https://i.ibb.co/BHRXJ7Ss/Grand-Sac.jpg",
@@ -11612,11 +11667,18 @@ hr,
     "don:Incantation rapide": "https://i.ibb.co/ZR1ZTM9Y/Incant-Rapide.jpg",
     "don:Nouvelle affinité": "https://i.ibb.co/Wq0MHfq/Change-Element.jpg",
     "npc:Tobin": "https://i.ibb.co/NdqKkkW9/Tobin.jpg",
-    "npc:Nara": "https://i.ibb.co/gZHbRFhV/Nara.jpg"
+    "npc:Nara": "https://i.ibb.co/gZHbRFhV/Nara.jpg",
+    "don:Bénédiction rapide": "https://i.ibb.co/fGKSmN0N/Incantation-Rapide.jpg",
+    "sort:Sorts de Prêtre:Main des Cieux": "https://i.ibb.co/fdgKD3mt/Main-Des-Cieux.jpg",
+    "don:Volonté sans faille": "https://i.ibb.co/tTsPF2Pk/Volont.jpg",
+    "don:Nouveau Don": "https://i.ibb.co/qLsbhkY3/Armure-l-gere.jpg",
+    "don:Maîtrise des armures légères": "https://i.ibb.co/SWMnfQ2/Armure-l-gere.jpg",
+    "sort:Sorts de Monstres:Bourrasque": "https://i.ibb.co/SXfyvRh4/Bourrasque.jpg",
+    "objet:Plume de tempête": "https://i.ibb.co/HDNx4fgG/Plume.jpg"
   },
   "meta": {
-    "total_images": 519,
-    "exported_date": "2026-01-09",
+    "total_images": 526,
+    "exported_date": "2026-01-10",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
 };
@@ -12408,7 +12470,7 @@ hr,
         },
         "Forêt-5": {
           "title": "Forêt-5",
-          "content": "Au sud, grillage avec portique en bois, ouvert.<br>\nCabane du bucheron.<br><br>\n\n<b>Si Tobin est présent (Quête du Médaillon)</b><br><br>\n\nTobin s'arrête devant la cabane, le souffle court :<br><br>\n\n\"C'est là. Papa dormait ici quand il travaillait tard.\"<br><br>\n\nIl hésite à entrer.<br><br>\n\n\"Vous... vous pouvez venir avec moi ?\"<br><br>\n\n<b>Dans la cabane :</b><br>\nTobin fouille fébrilement. Il connaît l'endroit mais les choses ont été déplacées.<br><br>\n\n\"C'était sous le lit... non, c'est plus là. Papa a dit 'là où le soleil se couche à l'intérieur'... Qu'est-ce que ça veut dire ?\"<br><br>\n\n<b>Énigme :</b><br>\n- Le soleil couchant = l'ouest<br>\n- Une latte de plancher près de la fenêtre ouest est légèrement surélevée<br>\n- Jet de Perception 2 pour le remarquer, ou Réflexion 2 pour comprendre l'indice<br><br>\n\n<b>Sous la latte :</b><br>\nUn petit paquet enveloppé dans un tissu huilé. À l'intérieur :<br><br>\n\n<b>Médaillon du Père de Tobin</b><br>\n<i>Un médaillon en bronze terni, gravé d'un arbre stylisé. À l'intérieur, deux mèches de cheveux tressées - une brune (sa mère), une grise (sa grand-mère).</i><br><br>\n\nTobin le serre contre lui, silencieux. Une larme coule.<br><br>\n\n\"... Merci.\"<br><br>\n\n<b>Le Départ de Tobin</b><br><br>\n\nUne fois le médaillon récupéré, Tobin reprend contenance :<br><br>\n\n\"Je... je dois rentrer. Maman va s'inquiéter.\"<br><br>\n\nIl regarde les PJ :<br><br>\n\n\"Vous allez continuer vers le nord ? Faites attention. Branor... je sais pas ce qui lui est arrivé. Papa disait qu'il était têtu, qu'il partirait jamais d'ici même si les monstres envahissaient tout.\"<br><br>\n\nAvant de partir, il fouille sa poche et tend quelque chose :<br><br>\n\n\"Tenez. C'est pas grand-chose, mais... mon père m'avait appris. Ça peut servir.\"<br><br>\n\n<hr>\n\nDans le jardin se trouve un tonneau en bois avec des fentes et un mécanisme.<br>\n\nLE FAMEUX JEU DU TONNEAU <br><br>\n\nBraves aventuriers, courageux volontaires et amateurs de sensations fortes !<br>\n\nL’un d’entre vous prendra place dans le tonneau.<br>\nLe mécanisme s’éveillera, un grondement se fera entendre…<br>\net les fentes tourneront jusqu’à décider du sort du joueur.<br>\n\nQuand tout s’arrête, un compagnon devra glisser sa dague<br>\ndans l’une des quatre fentes.<br>\n\nMauvais choix ?<br>\nAïe… Le tonneau n’aime pas l’erreur.<br>\n\nBon choix ?<br>\nBravo ! La chance sourit aux audacieux :<br>\nle vainqueur sera porté par l’élan du jeu<br>\nvers des hauteurs que seuls les plus téméraires atteignent,<br>\nlà où attend une récompense bien méritée.<br>\n\nÀ jouer entre braves uniquement.<br>\nLes âmes prudentes sont invitées à regarder.<br>\n\n<br><br><br>\n\nDans la cabane, fermeture simple , une trappe vers le sous sol. la clé se trouve dans la maison (à fouiller). ya un lit, et des provisions.<br>\nAu sous sol, il y a 3 coffres.<br>\nun avec <span class=\"treasure-table-link\" data-table-name=\"Coffre bucheron\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Coffre bucheron]</span><br>\nUn fermé jeu du tonneau avec <span class=\"treasure-table-link\" data-table-name=\"Coffre jeu du tonneau\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Coffre jeu du tonneau]</span><br>\nun fermé avec la tablette aux cristaux.<br>\nIl y a également plusieurs doubles des clés du lieu de coupe.\n\n\nAu nord grillage avec porte en bois avec cadena, ouverte comme s'il on été venu à la hâte. panneau qui dit : <br>\n\"Lieu de coupe<br>\nDemander l'accès à Branor à la cabane du bûcheron, au sud\".<br><br>",
+          "content": "Arrivée dans une plaine, avec de nombreuses maisons abandonnés, à moitié détruites.<br>\nDedans : <br><br>\nUn bol ébréché couvert de poussière et de feuilles mortes<br>\nUne paire de bottes trop usées pour être portée<br>\nUn carnet aux pages gondolées, entièrement vierges<br>\nUne corde effilochée prête à rompre<br>\nUne pipe fendue imprégnée d’une odeur froide<br>\nUne cloche fendue qui ne produit qu’un son étouffé<br>\nUn filet de chasse troué et emmêlé<br>\nUne fiole vide scellée à la cire durcie<br>\nUn peigne cassé avec quelques cheveux coincés<br><br>\n\nSi bon jet de Finesse (fouille sans tout casse):<br>\n<span class=\"objet-link\" data-objet=\"Petite potion de mana\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Petite potion de mana</span><br>\n<span class=\"objet-link\" data-objet=\"Nébrelle d’Azur\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Nébrelle d’Azur</span><br>\n<span class=\"objet-link\" data-objet=\"Plume de tempête\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Plume de tempête</span><br>\n\ncoordination (perception) : <br>\n<span class=\"objet-link\" data-objet=\"Flèche de la terre\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Flèche de la terre</span><br>\n<span class=\"objet-link\" data-objet=\"Pierre à aiguiser\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Pierre à aiguiser</span><br>\n<span class=\"objet-link\" data-objet=\"Bandage d'urgence\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Bandage d'urgence</span>\n<hr>\n<b>Si Tobin est présent (Quête du Médaillon)</b><br><br>\n\nTobin s'arrête devant la cabane, le souffle court :<br><br>\n\n\"C'est là. Papa dormait ici quand il travaillait tard.\"<br><br>\n\nIl hésite à entrer.<br><br>\n\n\"Vous... vous pouvez venir avec moi ?\"<br><br>\n\n<b>Dans la cabane :</b><br>\nTobin fouille fébrilement. Il connaît l'endroit mais les choses ont été déplacées.<br><br>\n\n\"C'était sous le lit... non, c'est plus là. Papa a dit 'là où le soleil se couche à l'intérieur'... Qu'est-ce que ça veut dire ?\"<br><br>\n\n<b>Énigme :</b><br>\n- Le soleil couchant = l'ouest<br>\n- Une latte de plancher près de la fenêtre ouest est légèrement surélevée<br>\n- Jet de Perception 2 pour le remarquer, ou Réflexion 2 pour comprendre l'indice<br><br>\n\n<b>Sous la latte :</b><br>\nUn petit paquet enveloppé dans un tissu huilé. À l'intérieur :<br><br>\n\n<b>Médaillon du Père de Tobin</b><br>\n<i>Un médaillon en bronze terni, gravé d'un arbre stylisé. À l'intérieur, deux mèches de cheveux tressées - une brune (sa mère), une grise (sa grand-mère).</i><br><br>\n\nTobin le serre contre lui, silencieux. Une larme coule.<br><br>\n\n\"... Merci.\"<br><br>\n\n<b>Le Départ de Tobin</b><br><br>\n\nUne fois le médaillon récupéré, Tobin reprend contenance :<br><br>\n\n\"Je... je dois rentrer. Maman va s'inquiéter.\"<br><br>\n\nIl regarde les PJ :<br><br>\n\n\"Vous allez continuer vers le nord ? Faites attention. Branor... je sais pas ce qui lui est arrivé. Papa disait qu'il était têtu, qu'il partirait jamais d'ici même si les monstres envahissaient tout.\"<br><br>\n\nAvant de partir, il fouille sa poche et tend quelque chose :<br><br>\n\n\"Tenez. C'est pas grand-chose, mais... mon père m'avait appris. Ça peut servir.\"<br><br>\n\n<hr>\nAu sud, grillage avec portique en bois, ouvert.<br>\nCabane du bucheron.<br><br>\n\n\nDans le jardin se trouve un tonneau en bois avec des fentes et un mécanisme.<br>\n\nLE FAMEUX JEU DU TONNEAU <br><br>\n\nBraves aventuriers, courageux volontaires et amateurs de sensations fortes !<br>\n\nL’un d’entre vous prendra place dans le tonneau.<br>\nLe mécanisme s’éveillera, un grondement se fera entendre…<br>\net les fentes tourneront jusqu’à décider du sort du joueur.<br>\n\nQuand tout s’arrête, un compagnon devra glisser sa dague<br>\ndans l’une des quatre fentes.<br>\n\nMauvais choix ?<br>\nAïe… Le tonneau n’aime pas l’erreur.<br>\n\nBon choix ?<br>\nBravo ! La chance sourit aux audacieux :<br>\nle vainqueur sera porté par l’élan du jeu<br>\nvers des hauteurs que seuls les plus téméraires atteignent,<br>\nlà où attend une récompense bien méritée.<br>\n\nÀ jouer entre braves uniquement.<br>\nLes âmes prudentes sont invitées à regarder.<br>\n\n<br><br><br>\n\nDans la cabane, fermeture simple , une trappe vers le sous sol. la clé se trouve dans la maison (à fouiller). ya un lit, et des provisions.<br>\nAu sous sol, il y a 3 coffres.<br>\nun avec <span class=\"treasure-table-link\" data-table-name=\"Coffre bucheron\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Coffre bucheron]</span><br>\nUn fermé jeu du tonneau avec <span class=\"treasure-table-link\" data-table-name=\"Coffre jeu du tonneau\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Coffre jeu du tonneau]</span><br>\nun fermé avec la tablette aux cristaux.<br>\nIl y a également plusieurs doubles des clés du lieu de coupe.\n\n\nAu nord grillage avec porte en bois avec cadena, ouverte comme s'il on été venu à la hâte. panneau qui dit : <br>\n\"Lieu de coupe<br>\nDemander l'accès à Branor à la cabane du bûcheron, au sud\".<br><br>",
           "googleDocLink": "https://docs.google.com/document/d/1ib4D5CJdvgBZ-5VC2xAF-0nkow7X17gPKWwqKGP65AY/edit?tab=t.0"
         },
         "Forêt-6": {
@@ -12749,7 +12811,7 @@ hr,
 
     // Mark as standalone version for renderer with build timestamp
     window.STANDALONE_VERSION = true;
-    window.BUILD_VERSION = '2026-01-10T15:24:19.483Z';
+    window.BUILD_VERSION = '2026-01-10T16:30:42.579Z';
 
     // Version check - clear old data if version changed
     (function() {

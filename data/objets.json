@@ -183,7 +183,7 @@
         "Magie"
       ],
       "effet": "<strong>Effet:</strong> Remplace votre prochaine action principale par le sort de mage <span class=\"spell-link\" data-spell=\"Boule de Feu\" data-category=\"Sorts de Mage\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Boule de Feu</span>. <br><i>Le mana et les statistiques du héros sont utilisés.</i>\n    <br><br><strong>Charges :</strong> 3",
-      "prix": "🔷 <strong>Prix:</strong> 25",
+      "prix": "🔷 <strong>Prix:</strong> 20",
       "poids": ""
     },
     {
@@ -866,6 +866,19 @@
       "effet": "Inutilisable en combat.<br><strong>Effet:</strong> Donne 1 point de chance de manière permanente au héros.",
       "prix": "🔷 <strong>Prix:</strong> ?",
       "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Plume de tempête",
+      "numero": 68,
+      "image": "https://i.ibb.co/7JJT55Ck/Plume.jpg",
+      "description": "<i>Une plume irisée aux reflets verts, parcourue de courants invisibles. En la serrant dans sa paume, on peut déclencher une bourrasque soudaine.</i>",
+      "tags": [
+        "Consommable",
+        "Magie"
+      ],
+      "effet": "<strong>Effet:</strong> Remplace votre prochaine action principale par le sort de monstre <span class=\"spell-link\" data-spell=\"Bourrasque\" data-category=\"Sorts de Monstres\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Bourrasque</span>. <br><i>Le mana et les statistiques du héros sont utilisés.</i>\n    <br><br><strong>Charges :</strong> 4",
+      "prix": "🔷 <strong>Prix:</strong> 50",
+      "poids": ""
     }
   ],
   "filterSettings": {

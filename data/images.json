@@ -94,8 +94,8 @@
     "don:Renvoi de Sort": "https://i.ibb.co/5hGR0j3R/Renvoi.jpg",
     "don:Téléportation amicale": "https://i.ibb.co/gkVhBNb/teleportation.png",
     "don:Endurant": "https://i.ibb.co/wF9Kd5Lp/Endurant.jpg",
-    "don:Brillant": "https://i.ibb.co/jZ8KcDxh/Brillant.jpg",
-    "don:Prodigieux": "https://i.ibb.co/xKrZQBnx/Prodigieux.jpg",
+    "don:Compétence : Brillant": "https://i.ibb.co/jZ8KcDxh/Brillant.jpg",
+    "don:Compétence : Prodigieux": "https://i.ibb.co/xKrZQBnx/Prodigieux.jpg",
     "don:Hyperactif": "https://i.ibb.co/MxTSzX4x/hper-Actif.jpg",
     "don:Équitation": "https://i.ibb.co/RThYfBz0/equitation.jpg",
     "don:Gros mangeur": "https://i.ibb.co/Y4yd1Lcv/Gros-Mangeur.jpg",
@@ -297,7 +297,7 @@
     "don:Chance": "https://i.ibb.co/YFHpxb4c/Chance.jpg",
     "don:Dague": "https://i.ibb.co/dwSwF0tp/Dague.png",
     "don:Dons": "https://i.ibb.co/VpzK786K/Dons.png",
-    "don:Doué": "https://i.ibb.co/hFXYph8Q/Dou.png",
+    "don:Compétence : Doué": "https://i.ibb.co/hFXYph8Q/Dou.png",
     "don:DureACuire": "https://i.ibb.co/gLgtk0P0/Dure-ACuire.jpg",
     "don:equitation": "https://i.ibb.co/LdQYmJnt/equitation.jpg",
     "don:GrandSac": "https://i.ibb.co/BHRXJ7Ss/Grand-Sac.jpg",
@@ -521,10 +521,14 @@
     "npc:Nara": "https://i.ibb.co/gZHbRFhV/Nara.jpg",
     "don:Bénédiction rapide": "https://i.ibb.co/fGKSmN0N/Incantation-Rapide.jpg",
     "sort:Sorts de Prêtre:Main des Cieux": "https://i.ibb.co/fdgKD3mt/Main-Des-Cieux.jpg",
-    "don:Volonté sans faille": "https://i.ibb.co/tTsPF2Pk/Volont.jpg"
+    "don:Volonté sans faille": "https://i.ibb.co/tTsPF2Pk/Volont.jpg",
+    "don:Nouveau Don": "https://i.ibb.co/qLsbhkY3/Armure-l-gere.jpg",
+    "don:Maîtrise des armures légères": "https://i.ibb.co/SWMnfQ2/Armure-l-gere.jpg",
+    "sort:Sorts de Monstres:Bourrasque": "https://i.ibb.co/SXfyvRh4/Bourrasque.jpg",
+    "objet:Plume de tempête": "https://i.ibb.co/HDNx4fgG/Plume.jpg"
   },
   "meta": {
-    "total_images": 522,
+    "total_images": 526,
     "exported_date": "2026-01-10",
     "note": "Ces images incluent les nouvelles images uploadées"
   }

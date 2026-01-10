@@ -725,6 +725,18 @@
     "description": "Sorts utilisés par les monstres et créatures.",
     "sorts": [
       {
+        "nom": "Bourrasque",
+        "element": "Air",
+        "description": "Une violente rafale de vent projette la cible en arrière.",
+        "prerequis": "📋 <strong>Prérequis:</strong> -",
+        "portee": "🎯 <strong>Portée:</strong> 3m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 5",
+        "resistance": "<strong>Sans effet si:</strong> Taille Grand ou plus.",
+        "effetNormal": "<strong>Effet:</strong> Inflige 4 + Puiss. Sorts dégâts d'<span style=\"color: #22c55e; font-weight: bold;\">Air</span>. Repousse la cible de 6m.",
+        "effetCritique": "<strong>Coup Critique:</strong> Inflige 6 + Puiss. Sorts dégâts. Repousse la cible de 9m."
+      },
+      {
         "nom": "Soin mineur",
         "element": "Lumière",
         "description": "Une lueur apaisante referme les blessures légères.",

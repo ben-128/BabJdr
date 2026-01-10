@@ -4,7 +4,7 @@
     "description": "Dons accessibles à toutes les classes.",
     "dons": [
       {
-        "nom": "Doué",
+        "nom": "Compétence : Doué",
         "description": "Gagne une compétence rang 1.",
         "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
@@ -16,16 +16,16 @@
         "cout": "1 point de don"
       },
       {
-        "nom": "Brillant",
+        "nom": "Compétence : Brillant",
         "description": "Gagne une compétence rang 2.",
-        "prerequis": "<strong> Prérequis :</strong> La compétence rang 1.",
-        "cout": "2 points de don"
+        "prerequis": "<strong> Prérequis :</strong> <br>\n-La compétence rang 1.\n<br>-Niveau 5",
+        "cout": "1 points de don"
       },
       {
-        "nom": "Prodigieux",
+        "nom": "Compétence : Prodigieux",
         "description": "Gagne une compétence rang 3.",
-        "prerequis": "<strong> Prérequis :</strong> La compétence rang 2.",
-        "cout": "3 points de don"
+        "prerequis": "<strong> Prérequis :</strong> <br>-La compétence rang 2.<br>\n- Niveau 10",
+        "cout": "1 points de don"
       },
       {
         "nom": "Hyperactif",
@@ -157,6 +157,12 @@
         "nom": "Nouvelle affinité",
         "description": "Le héros change son élément d'affiliation pour un nouvel élément de son choix parmi : <span style=\"color: #e25822; font-weight: bold;\">Feu</span>, <span style=\"color: #2b6cb0; font-weight: bold;\">Eau</span>, <span style=\"color: #8b5e34; font-weight: bold;\">Terre</span>, <span style=\"color: #22c55e; font-weight: bold;\">Air</span>, <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span>, <span style=\"color: #1a1a1a; font-weight: bold; background: rgba(180, 180, 200, 0.6); padding: 2px 4px; border-radius: 3px;\">Nuit</span>, <span style=\"color: #d0d0d0; font-weight: bold; background: rgba(0, 0, 0, 0.4); padding: 2px 4px; border-radius: 3px;\">Divin</span>, <span style=\"color: #a855f7; font-weight: bold;\">Maléfique</span>.",
         "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Maîtrise des armures légères",
+        "description": "Permet de s'équiper d'armures légères.",
+        "prerequis": "<strong> Prérequis : </strong> <img src=\"https://i.ibb.co/23cGYFvZ/stat-Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Force 5 \n<br>ET<br>\n<img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Agilité 5.",
         "cout": "1 point de don"
       }
     ]
@@ -473,7 +479,7 @@
       },
       {
         "nom": "Spécialisation élémentaire 2",
-        "description": "Le héros peut choisir un élément et réduire le coût en mana des sorts de cet élément, d'un montant équivalent au niveau du sort.",
+        "description": "Le héros peut choisir un élément et réduire le coût en mana des sorts de cet élément, d'un montant équivalent au niveau du sort. (Ne peut pas dépasser 50% du coût du sort).",
         "prerequis": "<strong> Prérequis :</strong> Choisir un nouvel élément écrase l'ancien.",
         "cout": "1 point de don"
       },
@@ -635,7 +641,7 @@
       },
       {
         "nom": "Spécialiste de l'étrange",
-        "description": "Permet d'équiper les armes exotiques à une main.",
+        "description": "Permet d'équiper les armes exotiques.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
