@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2026-01-10T16:41:16.347Z by JdrBab Build System -->
+<!-- Generated on 2026-01-10T16:45:03.349Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12811,7 +12811,7 @@ hr,
 
     // Mark as standalone version for renderer with build timestamp
     window.STANDALONE_VERSION = true;
-    window.BUILD_VERSION = '2026-01-10T16:41:16.349Z';
+    window.BUILD_VERSION = '2026-01-10T16:45:03.351Z';
 
     // Version check - clear old data if version changed
     (function() {
@@ -16110,40 +16110,8 @@ hr,
     }
 
     sortDonsByPrerequisites(dons) {
-      return dons.sort((a, b) => {
-        const prereqA = a.prerequis || '';
-        const prereqB = b.prerequis || '';
-
-        // Fonction helper pour déterminer la catégorie de prérequis
-        const getPrereqCategory = (prereq) => {
-          // Nettoyer le prérequis du HTML
-          const cleanPrereq = prereq.replace(/<[^>]*>/g, '').trim();
-
-          // Catégorie 1 : Prérequis "-" (seul ou avec "Prérequis :" avant)
-          if (cleanPrereq === '-' || cleanPrereq === 'Prérequis : -' || cleanPrereq === 'Prérequis: -') {
-            return 1;
-          }
-
-          // Catégorie 2 : Prérequis contenant "Don unique" ou "Don Unique"
-          if (cleanPrereq.toLowerCase().includes('don unique')) {
-            return 2;
-          }
-
-          // Catégorie 3 : Tous les autres prérequis
-          return 3;
-        };
-
-        const catA = getPrereqCategory(prereqA);
-        const catB = getPrereqCategory(prereqB);
-
-        // Trier par catégorie d'abord
-        if (catA !== catB) {
-          return catA - catB;
-        }
-
-        // Si même catégorie, garder l'ordre alphabétique par nom
-        return (a.nom || '').localeCompare(b.nom || '');
-      });
+      // Tri alphabétique simple par nom
+      return dons.sort((a, b) => (a.nom || '').localeCompare(b.nom || '', 'fr'));
     }
 
     // Build spell level filter UI

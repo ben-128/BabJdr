@@ -776,40 +776,8 @@
     }
 
     sortDonsByPrerequisites(dons) {
-      return dons.sort((a, b) => {
-        const prereqA = a.prerequis || '';
-        const prereqB = b.prerequis || '';
-
-        // Fonction helper pour déterminer la catégorie de prérequis
-        const getPrereqCategory = (prereq) => {
-          // Nettoyer le prérequis du HTML
-          const cleanPrereq = prereq.replace(/<[^>]*>/g, '').trim();
-
-          // Catégorie 1 : Prérequis "-" (seul ou avec "Prérequis :" avant)
-          if (cleanPrereq === '-' || cleanPrereq === 'Prérequis : -' || cleanPrereq === 'Prérequis: -') {
-            return 1;
-          }
-
-          // Catégorie 2 : Prérequis contenant "Don unique" ou "Don Unique"
-          if (cleanPrereq.toLowerCase().includes('don unique')) {
-            return 2;
-          }
-
-          // Catégorie 3 : Tous les autres prérequis
-          return 3;
-        };
-
-        const catA = getPrereqCategory(prereqA);
-        const catB = getPrereqCategory(prereqB);
-
-        // Trier par catégorie d'abord
-        if (catA !== catB) {
-          return catA - catB;
-        }
-
-        // Si même catégorie, garder l'ordre alphabétique par nom
-        return (a.nom || '').localeCompare(b.nom || '');
-      });
+      // Tri alphabétique simple par nom
+      return dons.sort((a, b) => (a.nom || '').localeCompare(b.nom || '', 'fr'));
     }
 
     // Build spell level filter UI
