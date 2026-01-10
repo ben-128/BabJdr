@@ -4,8 +4,44 @@
     "description": "Dons accessibles à toutes les classes.",
     "dons": [
       {
+        "nom": "Accélération",
+        "description": "Le héros peut utiliser une action principale pour augmenter sa vitesse de déplacement de 6m ce tour-ci.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Attaque d'opportunité",
+        "description": "Lorsqu'un adversaire sort de votre portée d'attaque au corps à corps durant son déplacement, vous pouvez utiliser une action secondaire (non utilisée durant votre tour), pour effectuer une attaque au corps à corps sur l'adversaire.",
+        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Agilité 10.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Chanceux",
+        "description": "Lors d'un jet de fortune, le héros lance deux dés et prend le meilleur résultat.",
+        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/HfthhzSF/stat-Chance.png\" alt=\"Chance\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Chance 5.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Compétence : Brillant",
+        "description": "Gagne une compétence rang 2.",
+        "prerequis": "<strong> Prérequis :</strong> <br>\n-La compétence rang 1.\n<br>-Niveau 5",
+        "cout": "1 points de don"
+      },
+      {
         "nom": "Compétence : Doué",
         "description": "Gagne une compétence rang 1.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Compétence : Prodigieux",
+        "description": "Gagne une compétence rang 3.",
+        "prerequis": "<strong> Prérequis :</strong> <br>-La compétence rang 2.<br>\n- Niveau 10",
+        "cout": "1 points de don"
+      },
+      {
+        "nom": "Dur à cuire",
+        "description": "Augmente les points de vie maximum de 4 et la résistance altération de 2.",
         "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
@@ -16,33 +52,9 @@
         "cout": "1 point de don"
       },
       {
-        "nom": "Compétence : Brillant",
-        "description": "Gagne une compétence rang 2.",
-        "prerequis": "<strong> Prérequis :</strong> <br>\n-La compétence rang 1.\n<br>-Niveau 5",
-        "cout": "1 points de don"
-      },
-      {
-        "nom": "Compétence : Prodigieux",
-        "description": "Gagne une compétence rang 3.",
-        "prerequis": "<strong> Prérequis :</strong> <br>-La compétence rang 2.<br>\n- Niveau 10",
-        "cout": "1 points de don"
-      },
-      {
-        "nom": "Hyperactif",
-        "description": "Le héros dispose maintenant de deux actions secondaires par tour.",
-        "prerequis": "<strong> Prérequis :</strong> Niveau 3.",
-        "cout": "2 points de don"
-      },
-      {
         "nom": "Équitation",
         "description": "Permet de monter à cheval ou équivalent.",
         "prerequis": "<strong> Prérequis :</strong> Niveau 5.",
-        "cout": "1 point de don"
-      },
-      {
-        "nom": "Gros mangeur",
-        "description": "Les points de vie rendus en mangeant de la nourriture sont doublés.",
-        "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
       {
@@ -52,69 +64,21 @@
         "cout": "1 point de don"
       },
       {
-        "nom": "Maîtrise de la dague",
-        "description": "Le héros est capable d'équiper et d'utiliser des Dagues.",
-        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\"> <br>Agilité 5<br>OU<br>Coordination rang 1.",
-        "cout": "1 point de don"
-      },
-      {
-        "nom": "Maîtrise de l'arc",
-        "description": "Le héros est capable d'équiper et d'utiliser des Arcs.",
-        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\"> Agilité 10<br>OU<br>Coordination rang 2.",
-        "cout": "1 point de don"
-      },
-      {
-        "nom": "Sommeil léger",
-        "description": "Pendant qu'il dort, le héros est aussi alerte que s'il effectuait un tour de garde.\n<br>De plus, est soigné pendant son sommeil d'un nombre de points de vie d'une valeur égale à son endurance.",
-        "prerequis": "<strong> Prérequis :</strong> -",
-        "cout": "1 point de don"
-      },
-      {
-        "nom": "Chanceux",
-        "description": "Lors d'un jet de fortune, le héros lance deux dés et prend le meilleur résultat.",
-        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/HfthhzSF/stat-Chance.png\" alt=\"Chance\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Chance 5.",
-        "cout": "1 point de don"
-      },
-      {
-        "nom": "Attaque d'opportunité",
-        "description": "Lorsqu'un adversaire sort de votre portée d'attaque au corps à corps durant son déplacement, vous pouvez utiliser une action secondaire (non utilisée durant votre tour), pour effectuer une attaque au corps à corps sur l'adversaire.",
-        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Agilité 10.",
-        "cout": "1 point de don"
-      },
-      {
-        "nom": "Rapide",
-        "description": "Augmente votre vitesse de déplacement de 3m.",
-        "prerequis": "<strong> Prérequis :</strong> Hardiesse rang 2.  <br>Don unique.",
-        "cout": "1 point de don"
-      },
-      {
-        "nom": "Statistiques",
-        "description": "Gagne 2 points de statistiques au choix à répartir.",
+        "nom": "Gros mangeur",
+        "description": "Les points de vie rendus en mangeant de la nourriture sont doublés.",
         "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
       {
-        "nom": "Dur à cuire",
-        "description": "Augmente les points de vie maximum de 4 et la résistance altération de 2.",
-        "prerequis": "<strong> Prérequis :</strong> Don unique.",
-        "cout": "1 point de don"
+        "nom": "Hyperactif",
+        "description": "Le héros dispose maintenant de deux actions secondaires par tour.",
+        "prerequis": "<strong> Prérequis :</strong> Niveau 3.",
+        "cout": "2 points de don"
       },
       {
-        "nom": "Premier soin",
-        "description": "<b>En combat :</b>\n<br>Les soins provenant des consommables sont augmentés de X points de vie.\n\n<br><br><b>Hors combat :</b>\n<br>Le héros peut dépenser un effort, pour soigner une autre cible de X points de vie. \n\n<br><br>X correspond à 3, plus 1 point supplémentaire tous les 5 points d’Intelligence.",
-        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Intelligence 5.",
-        "cout": "1 point de don"
-      },
-      {
-        "nom": "Toujours prêt",
-        "description": "Augmente l'initiative de 10. Lors du premier tour de combat, la vitesse de déplacement est doublée.",
-        "prerequis": "<strong> Prérequis :</strong> Don unique.",
-        "cout": "1 point de don"
-      },
-      {
-        "nom": "Marchand astucieux",
-        "description": "Les prix des consommables et de la nourriture sont réduits de moitié.",
-        "prerequis": "<strong> Prérequis :</strong> Éloquence rang 1",
+        "nom": "Main Chanceuse",
+        "description": "Une fois par jour, peut déclarer \"Main Chanceuse\" avant n'importe quel jet de dé. Le résultat du dé est automatiquement considéré comme un 20 naturel.",
+        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/HfthhzSF/stat-Chance.png\" alt=\"Chance\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Chance 10.",
         "cout": "1 point de don"
       },
       {
@@ -124,21 +88,21 @@
         "cout": "1 point de don"
       },
       {
-        "nom": "Méditation régénératrice",
-        "description": "Une fois par jour, hors combat, permet de passer 30 minutes en méditation pour regagner tous ses points de vie.",
-        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Intelligence 5.",
+        "nom": "Maîtrise de l'arc",
+        "description": "Le héros est capable d'équiper et d'utiliser des Arcs.",
+        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\"> Agilité 10<br>OU<br>Coordination rang 2.",
         "cout": "1 point de don"
       },
       {
-        "nom": "Polyvalence ultime",
-        "description": "Gagne 1 <img src=\"https://i.ibb.co/23cGYFvZ/stat-Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Force, <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Agilité, <img src=\"https://i.ibb.co/67ZW01Q7/stat-Endurance.png\" alt=\"Endurance\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Endurance, <img src=\"https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Intelligence, <img src=\"https://i.ibb.co/B2BCGP6T/stat-Volont.png\" alt=\"Volonté\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Volonté, <img src=\"https://i.ibb.co/HfthhzSF/stat-Chance.png\" alt=\"Chance\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Chance.",
-        "prerequis": "<strong> Prérequis :</strong><br>- <img src=\"https://i.ibb.co/23cGYFvZ/stat-Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Force 5, <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Agilité 5, <img src=\"https://i.ibb.co/67ZW01Q7/stat-Endurance.png\" alt=\"Endurance\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Endurance 5, <img src=\"https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Intelligence 5, <img src=\"https://i.ibb.co/B2BCGP6T/stat-Volont.png\" alt=\"Volonté\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Volonté 5, <img src=\"https://i.ibb.co/HfthhzSF/stat-Chance.png\" alt=\"Chance\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Chance 5.\n<br>- Don unique.",
+        "nom": "Maîtrise de la dague",
+        "description": "Le héros est capable d'équiper et d'utiliser des Dagues.",
+        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\"> <br>Agilité 5<br>OU<br>Coordination rang 1.",
         "cout": "1 point de don"
       },
       {
-        "nom": "Main Chanceuse",
-        "description": "Une fois par jour, peut déclarer \"Main Chanceuse\" avant n'importe quel jet de dé. Le résultat du dé est automatiquement considéré comme un 20 naturel.",
-        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/HfthhzSF/stat-Chance.png\" alt=\"Chance\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Chance 10.",
+        "nom": "Maîtrise des armures légères",
+        "description": "Permet de s'équiper d'armures légères.",
+        "prerequis": "<strong> Prérequis : </strong> <img src=\"https://i.ibb.co/23cGYFvZ/stat-Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Force 5 \n<br>ET<br>\n<img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Agilité 5.",
         "cout": "1 point de don"
       },
       {
@@ -148,9 +112,15 @@
         "cout": "1 point de don"
       },
       {
-        "nom": "Accélération",
-        "description": "Le héros peut utiliser une action principale pour augmenter sa vitesse de déplacement de 6m ce tour-ci.",
-        "prerequis": "<strong> Prérequis :</strong> -",
+        "nom": "Marchand astucieux",
+        "description": "Les prix des consommables et de la nourriture sont réduits de moitié.",
+        "prerequis": "<strong> Prérequis :</strong> Éloquence rang 1",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Méditation régénératrice",
+        "description": "Une fois par jour, hors combat, permet de passer 30 minutes en méditation pour regagner tous ses points de vie.",
+        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Intelligence 5.",
         "cout": "1 point de don"
       },
       {
@@ -160,9 +130,39 @@
         "cout": "1 point de don"
       },
       {
-        "nom": "Maîtrise des armures légères",
-        "description": "Permet de s'équiper d'armures légères.",
-        "prerequis": "<strong> Prérequis : </strong> <img src=\"https://i.ibb.co/23cGYFvZ/stat-Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Force 5 \n<br>ET<br>\n<img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Agilité 5.",
+        "nom": "Polyvalence ultime",
+        "description": "Gagne 1 <img src=\"https://i.ibb.co/23cGYFvZ/stat-Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Force, <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Agilité, <img src=\"https://i.ibb.co/67ZW01Q7/stat-Endurance.png\" alt=\"Endurance\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Endurance, <img src=\"https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Intelligence, <img src=\"https://i.ibb.co/B2BCGP6T/stat-Volont.png\" alt=\"Volonté\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Volonté, <img src=\"https://i.ibb.co/HfthhzSF/stat-Chance.png\" alt=\"Chance\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Chance.",
+        "prerequis": "<strong> Prérequis :</strong><br>- <img src=\"https://i.ibb.co/23cGYFvZ/stat-Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Force 5, <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Agilité 5, <img src=\"https://i.ibb.co/67ZW01Q7/stat-Endurance.png\" alt=\"Endurance\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Endurance 5, <img src=\"https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Intelligence 5, <img src=\"https://i.ibb.co/B2BCGP6T/stat-Volont.png\" alt=\"Volonté\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Volonté 5, <img src=\"https://i.ibb.co/HfthhzSF/stat-Chance.png\" alt=\"Chance\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Chance 5.\n<br>- Don unique.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Premier soin",
+        "description": "<b>En combat :</b>\n<br>Les soins provenant des consommables sont augmentés de X points de vie.\n\n<br><br><b>Hors combat :</b>\n<br>Le héros peut dépenser un effort, pour soigner une autre cible de X points de vie. \n\n<br><br>X correspond à 3, plus 1 point supplémentaire tous les 5 points d’Intelligence.",
+        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Intelligence 5.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Rapide",
+        "description": "Augmente votre vitesse de déplacement de 3m.",
+        "prerequis": "<strong> Prérequis :</strong> Hardiesse rang 2.  <br>Don unique.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Sommeil léger",
+        "description": "Pendant qu'il dort, le héros est aussi alerte que s'il effectuait un tour de garde.\n<br>De plus, est soigné pendant son sommeil d'un nombre de points de vie d'une valeur égale à son endurance.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Statistiques",
+        "description": "Gagne 2 points de statistiques au choix à répartir.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Toujours prêt",
+        "description": "Augmente l'initiative de 10. Lors du premier tour de combat, la vitesse de déplacement est doublée.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       }
     ]
@@ -172,27 +172,9 @@
     "description": "Dons accessibles aux guerriers.",
     "dons": [
       {
-        "nom": "Expertise du bouclier",
-        "description": "Si le héros a un bouclier équipé, il peut utiliser une action secondaire pour doubler l'armure physique du bouclier jusqu'au prochain tour.",
-        "prerequis": "<strong> Prérequis :</strong> -",
-        "cout": "1 point de don"
-      },
-      {
-        "nom": "Charge",
-        "description": "Une fois par combat, peut utiliser une action secondaire pour tripler sa vitesse de déplacement.<br>Une fois le déplacement terminé, la prochaine cible ce tour-ci d'une attaque au corps à corps réussie, passe dans l'état <span class=\"etat-link\" data-etat=\"À terre\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">À terre</span>.\n\n<br><br><b>Sans effet si :</b> \n<br>- Volant/Lévitant\n<br>- Taille supérieure à Moyen.",
-        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Agilité 5",
-        "cout": "1 point de don"
-      },
-      {
-        "nom": "Volonté de fer",
-        "description": "Une fois par jour, le héros peut utiliser une action secondaire pour se débarrasser de toutes ses altérations magiques.",
-        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/B2BCGP6T/stat-Volont.png\" alt=\"Volonté\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Volonté 5",
-        "cout": "1 point de don"
-      },
-      {
-        "nom": "Coup de bouclier",
-        "description": "Si le héros a un bouclier équipé, lorsque le héros subit des dégâts au corps à corps, il peut choisir d'utiliser une action secondaire pour infliger à l'attaquant des dégâts équivalents à l'armure du bouclier.",
-        "prerequis": "<strong> Prérequis :</strong> -",
+        "nom": "Agilité du guerrier",
+        "description": "Augmente <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> l'agilité de 4.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
       {
@@ -202,57 +184,33 @@
         "cout": "1 point de don"
       },
       {
-        "nom": "Increvable",
-        "description": "Une fois par jour, peut dépenser un effort pour rester à 1 point de vie s'il devait descendre en dessous.",
-        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/67ZW01Q7/stat-Endurance.png\" alt=\"Endurance\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\"> Endurance 15 , <img src=\"https://i.ibb.co/B2BCGP6T/stat-Volont.png\" alt=\"Volonté\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\">Volonté 10",
-        "cout": "1 point de don"
-      },
-      {
         "nom": "Attaque surpuissante",
         "description": "En dépensant une action secondaire, le héros peut concentrer toute sa puissance pour une attaque au corps à corps ce tour-ci: les dégâts sont alors doublés. En contrepartie, il n'a pas d'action principale durant son prochain tour.",
         "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/23cGYFvZ/stat-Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Force 12",
         "cout": "1 point de don"
       },
       {
-        "nom": "Provocation",
-        "description": "Le guerrier peut utiliser une action principale, pour provoquer toutes les cibles à moins de 12m, qui le cibleront alors au prochain tour.<br><br>Sans effet sur les cibles ayant une Résistance altération &gt; à 5.<br> Ce chiffre peut être augmenté via un test de compétence éloquence, de 10 par point/effort.",
+        "nom": "Charge",
+        "description": "Une fois par combat, peut utiliser une action secondaire pour tripler sa vitesse de déplacement.<br>Une fois le déplacement terminé, la prochaine cible ce tour-ci d'une attaque au corps à corps réussie, passe dans l'état <span class=\"etat-link\" data-etat=\"À terre\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">À terre</span>.\n\n<br><br><b>Sans effet si :</b> \n<br>- Volant/Lévitant\n<br>- Taille supérieure à Moyen.",
+        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Agilité 5",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Contre-attaque",
+        "description": "Après avoir esquivé une attaque au corps à corps, le guerrier peut utiliser une action secondaire (non utilisée durant son tour) pour effectuer immédiatement une attaque au corps à corps contre l'attaquant.",
+        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Agilité 10.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Coup d'épaule",
+        "description": "Après une attaque au corps à corps réussie, le guerrier peut utiliser une action secondaire pour repousser la cible de 3m. Si l'attaque était un coup critique, repousse de 6m à la place.<br><br><b>Sans effet si :</b><br>- Taille supérieure à Moyen.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
       {
-        "nom": "Infatigable",
-        "description": "Augmente la <img src=\"https://i.ibb.co/B2BCGP6T/stat-Volont.png\" alt=\"Volonté\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> volonté de 4.",
-        "prerequis": "<strong> Prérequis :</strong> Don unique.",
-        "cout": "1 point de don"
-      },
-      {
-        "nom": "Agilité du guerrier",
-        "description": "Augmente <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> l'agilité de 4.",
-        "prerequis": "<strong> Prérequis :</strong> Don unique.",
-        "cout": "1 point de don"
-      },
-      {
-        "nom": "Rage sanglante",
-        "description": "Lorsque le guerrier a la moitié ou moins de ses points de vie, les chances de coup critique sont augmentées de 2.",
+        "nom": "Coup de bouclier",
+        "description": "Si le héros a un bouclier équipé, lorsque le héros subit des dégâts au corps à corps, il peut choisir d'utiliser une action secondaire pour infliger à l'attaquant des dégâts équivalents à l'armure du bouclier.",
         "prerequis": "<strong> Prérequis :</strong> -",
-        "cout": "1 point de don"
-      },
-      {
-        "nom": "Second souffle",
-        "description": "Une fois par jour, permet d'utiliser une action secondaire pour regagner un nombre de points de vie égal à l'endurance du héros.",
-        "prerequis": "<strong> Prérequis :</strong> -",
-        "cout": "1 point de don"
-      },
-      {
-        "nom": "Lancer d'arme",
-        "description": "Permet, avec une action principale et une action secondaire, de lancer une arme à une main (équipée ou de l'inventaire) jusqu'à 12m (touche également les cibles volantes). \n<br>Mêmes règles qu'une attaque au corps à corps (jet et dégâts). <br>L'arme n'est alors plus équipée. Elle peut être récupérée avec une action secondaire, à moins de 3m de la cible.",
-        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Agilité 5.",
-        "cout": "1 point de don"
-      },
-      {
-        "nom": "Imperturbable",
-        "description": "Permet de retirer un trauma du héros.",
-        "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
       {
@@ -280,6 +238,36 @@
         "cout": "1 point de don"
       },
       {
+        "nom": "Expertise du bouclier",
+        "description": "Si le héros a un bouclier équipé, il peut utiliser une action secondaire pour doubler l'armure physique du bouclier jusqu'au prochain tour.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Imperturbable",
+        "description": "Permet de retirer un trauma du héros.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Increvable",
+        "description": "Une fois par jour, peut dépenser un effort pour rester à 1 point de vie s'il devait descendre en dessous.",
+        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/67ZW01Q7/stat-Endurance.png\" alt=\"Endurance\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\"> Endurance 15 , <img src=\"https://i.ibb.co/B2BCGP6T/stat-Volont.png\" alt=\"Volonté\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\">Volonté 10",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Infatigable",
+        "description": "Augmente la <img src=\"https://i.ibb.co/B2BCGP6T/stat-Volont.png\" alt=\"Volonté\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> volonté de 4.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Lancer d'arme",
+        "description": "Permet, avec une action principale et une action secondaire, de lancer une arme à une main (équipée ou de l'inventaire) jusqu'à 12m (touche également les cibles volantes). \n<br>Mêmes règles qu'une attaque au corps à corps (jet et dégâts). <br>L'arme n'est alors plus équipée. Elle peut être récupérée avec une action secondaire, à moins de 3m de la cible.",
+        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Agilité 5.",
+        "cout": "1 point de don"
+      },
+      {
         "nom": "Maître d'arme",
         "description": "Changer d'arme ne coûte plus d'action secondaire.",
         "prerequis": "<strong> Prérequis :</strong> -",
@@ -292,21 +280,33 @@
         "cout": "1 point de don"
       },
       {
+        "nom": "Provocation",
+        "description": "Le guerrier peut utiliser une action principale, pour provoquer toutes les cibles à moins de 12m, qui le cibleront alors au prochain tour.<br><br>Sans effet sur les cibles ayant une Résistance altération &gt; à 5.<br> Ce chiffre peut être augmenté via un test de compétence éloquence, de 10 par point/effort.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Rage sanglante",
+        "description": "Lorsque le guerrier a la moitié ou moins de ses points de vie, les chances de coup critique sont augmentées de 2.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Second souffle",
+        "description": "Une fois par jour, permet d'utiliser une action secondaire pour regagner un nombre de points de vie égal à l'endurance du héros.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
         "nom": "Spécialiste des armures légères",
         "description": "Tant que le guerrier ne porte pas d'armure lourde, il gagne 6 <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Agilité.",
         "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
       {
-        "nom": "Contre-attaque",
-        "description": "Après avoir esquivé une attaque au corps à corps, le guerrier peut utiliser une action secondaire (non utilisée durant son tour) pour effectuer immédiatement une attaque au corps à corps contre l'attaquant.",
-        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Agilité 10.",
-        "cout": "1 point de don"
-      },
-      {
-        "nom": "Coup d'épaule",
-        "description": "Après une attaque au corps à corps réussie, le guerrier peut utiliser une action secondaire pour repousser la cible de 3m. Si l'attaque était un coup critique, repousse de 6m à la place.<br><br><b>Sans effet si :</b><br>- Taille supérieure à Moyen.",
-        "prerequis": "<strong> Prérequis :</strong> -",
+        "nom": "Volonté de fer",
+        "description": "Une fois par jour, le héros peut utiliser une action secondaire pour se débarrasser de toutes ses altérations magiques.",
+        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/B2BCGP6T/stat-Volont.png\" alt=\"Volonté\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Volonté 5",
         "cout": "1 point de don"
       }
     ]
@@ -316,14 +316,14 @@
     "description": "Dons accessibles aux rôdeurs.",
     "dons": [
       {
-        "nom": "Croche-patte",
-        "description": "Une fois par combat, peut utiliser une action secondaire pour effectuer un croche- patte à une cible au corps à corps (jet de dé) :\n\n\n<br><br><b>Sans effet si :</b> \n<br>- Esquive.\n<br>- Volant ou lévitant.\n<br>- Taille supérieure à Moyen.\n\n<br><br><b>Effet :</b> Met la cible dans l'état <span class=\"etat-link\" data-etat=\"À terre\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">À terre</span>.<br>\n\n<br><br><b>Coup Critique :</b>  La cible est <span class=\"etat-link\" data-etat=\"Endormi/assommé/Effrayé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Assommée</span> 1 tour.",
+        "nom": "Acrobate",
+        "description": "Le rôdeur peut traverser les ennemis. De plus, les terrains difficiles n'affectent plus sa vitesse de déplacement.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
       {
-        "nom": "Chasse et pêche",
-        "description": "Les héros dans votre groupe n'ont plus besoin de consommer une ration de nourriture quotidienne pour éviter l'état <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Fatigué</span>.",
+        "nom": "Adrénaline",
+        "description": "Après avoir subi des dégâts critiques (sort ou physique), le héros bénéficiera d'une action principale supplémentaire à son prochain tour (non cumulable).",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -340,44 +340,8 @@
         "cout": "2 points de don"
       },
       {
-        "nom": "Retrait",
-        "description": "Après avoir subi une attaque au corps à corps (esquivée ou non), le héros peut utiliser une action secondaire pour reculer de 6m par rapport à l'attaquant.",
-        "prerequis": "<strong> Prérequis :</strong> -",
-        "cout": "1 point de don"
-      },
-      {
-        "nom": "Point faible",
-        "description": "Si le héros a la connaissance d'un point faible sur un adversaire, il peut tenter de l'atteindre, pour augmenter les chances de coup critique de 3 et les chances d'esquive de la cible de 2.",
-        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Intelligence 5",
-        "cout": "1 point de don"
-      },
-      {
-        "nom": "Réflexes surhumains",
-        "description": "Une fois par combat, permet de forcer une esquive sur une attaque ou un sort esquivable.",
-        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Agilité 10",
-        "cout": "1 point de don"
-      },
-      {
-        "nom": "Exposer l'armure",
-        "description": "Une fois par combat, peut utiliser une action secondaire pour exposer l'armure d'une cible au corps à corps (jet de dé) :\n\n<br><br><b>Sans effet si :</b> \n<br>- Esquive.\n<br>- Volant.\n<br>- Taille supérieure à Moyen.\n\n<br><br>La cible devient <span class=\"etat-link\" data-etat=\"Vulnérable\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Vulnérable</span> pendant 2 tours.\n\n<br><br><b>Coup Critique :</b>  Dure 4 tours.",
-        "prerequis": "<strong> Prérequis :</strong> -",
-        "cout": "1 point de don"
-      },
-      {
-        "nom": "Éventail de couteaux",
-        "description": "Une fois par combat, peut utiliser une action secondaire pour améliorer sa prochaine attaque ce tour-ci. Elle attaquera tous les adversaires à moins de 3m.",
-        "prerequis": "<strong> Prérequis :</strong> -",
-        "cout": "1 point de don"
-      },
-      {
         "nom": "Avantage",
         "description": "Une fois par combat, lors d'une attaque esquivée ou en échec critique, permet de lancer une nouvelle fois le dé.",
-        "prerequis": "<strong> Prérequis :</strong> -",
-        "cout": "1 point de don"
-      },
-      {
-        "nom": "Adrénaline",
-        "description": "Après avoir subi des dégâts critiques (sort ou physique), le héros bénéficiera d'une action principale supplémentaire à son prochain tour (non cumulable).",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -388,8 +352,8 @@
         "cout": "1 point de don"
       },
       {
-        "nom": "Roi de l'esquive",
-        "description": "Une fois par jour, permet d'utiliser une action secondaire pour augmenter son esquive de 5 pendant 3 tours.",
+        "nom": "Chasse et pêche",
+        "description": "Les héros dans votre groupe n'ont plus besoin de consommer une ration de nourriture quotidienne pour éviter l'état <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Fatigué</span>.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -400,15 +364,21 @@
         "cout": "1 point de don"
       },
       {
-        "nom": "Poison",
-        "description": "Peut utiliser une action secondaire pour rajouter du poison à la prochaine attaque physique.\n<br><br> En cas d'attaque réussie, si la cible a une Résistance altération < 2 x N, alors la cible subira <span class=\"etat-link\" data-etat=\"Empoisonné\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Empoisonné</span> N pendant 3 tours, où N est le niveau du héros.",
+        "nom": "Croche-patte",
+        "description": "Une fois par combat, peut utiliser une action secondaire pour effectuer un croche- patte à une cible au corps à corps (jet de dé) :\n\n\n<br><br><b>Sans effet si :</b> \n<br>- Esquive.\n<br>- Volant ou lévitant.\n<br>- Taille supérieure à Moyen.\n\n<br><br><b>Effet :</b> Met la cible dans l'état <span class=\"etat-link\" data-etat=\"À terre\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">À terre</span>.<br>\n\n<br><br><b>Coup Critique :</b>  La cible est <span class=\"etat-link\" data-etat=\"Endormi/assommé/Effrayé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Assommée</span> 1 tour.",
         "prerequis": "<strong> Prérequis :</strong> -",
-        "cout": "2 points de don"
+        "cout": "1 point de don"
       },
       {
-        "nom": "Main heureuse",
-        "description": "Augmente la <img src=\"https://i.ibb.co/HfthhzSF/stat-Chance.png\" alt=\"Chance\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\" data-events-attached=\"true\"> Chance de 4.",
-        "prerequis": "<strong> Prérequis :</strong> Don unique.",
+        "nom": "Éventail de couteaux",
+        "description": "Une fois par combat, peut utiliser une action secondaire pour améliorer sa prochaine attaque ce tour-ci. Elle attaquera tous les adversaires à moins de 3m.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Exposer l'armure",
+        "description": "Une fois par combat, peut utiliser une action secondaire pour exposer l'armure d'une cible au corps à corps (jet de dé) :\n\n<br><br><b>Sans effet si :</b> \n<br>- Esquive.\n<br>- Volant.\n<br>- Taille supérieure à Moyen.\n\n<br><br>La cible devient <span class=\"etat-link\" data-etat=\"Vulnérable\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Vulnérable</span> pendant 2 tours.\n\n<br><br><b>Coup Critique :</b>  Dure 4 tours.",
+        "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
       {
@@ -418,21 +388,51 @@
         "cout": "1 point de don"
       },
       {
+        "nom": "Main heureuse",
+        "description": "Augmente la <img src=\"https://i.ibb.co/HfthhzSF/stat-Chance.png\" alt=\"Chance\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\" data-events-attached=\"true\"> Chance de 4.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
+        "cout": "1 point de don"
+      },
+      {
         "nom": "Piège Improvisé",
         "description": "Une fois par combat, le rôdeur peut créer et placer un piège sur une zone de 3mx3m, à moins de 3m du héros.\n  <br><br>Lorsqu'un ennemi entre dans la zone, il subit (Agilité du rôdeur) points de dégâts physiques.<br>Si sa résistance altération est inférieure à l'intelligence du héros, il subit l'état <span class=\"etat-link\" data-etat=\"Ralenti\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ralenti</span> pendant 5 tours.\n<br>Le piège est alors détruit.",
         "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Intelligence 5",
         "cout": "1 point de don"
       },
       {
-        "nom": "Tir rapide",
-        "description": "Une fois par combat, lorsque le rôdeur attaque avec un arc, il peut dépenser une action secondaire pour effectuer une\n   seconde attaque à l'arc immédiatement.",
-        "prerequis": "<strong> Prérequis :</strong> Capable de manier un arc.",
+        "nom": "Point faible",
+        "description": "Si le héros a la connaissance d'un point faible sur un adversaire, il peut tenter de l'atteindre, pour augmenter les chances de coup critique de 3 et les chances d'esquive de la cible de 2.",
+        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Intelligence 5",
         "cout": "1 point de don"
       },
       {
-        "nom": "Acrobate",
-        "description": "Le rôdeur peut traverser les ennemis. De plus, les terrains difficiles n'affectent plus sa vitesse de déplacement.",
+        "nom": "Poison",
+        "description": "Peut utiliser une action secondaire pour rajouter du poison à la prochaine attaque physique.\n<br><br> En cas d'attaque réussie, si la cible a une Résistance altération < 2 x N, alors la cible subira <span class=\"etat-link\" data-etat=\"Empoisonné\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Empoisonné</span> N pendant 3 tours, où N est le niveau du héros.",
         "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "2 points de don"
+      },
+      {
+        "nom": "Réflexes surhumains",
+        "description": "Une fois par combat, permet de forcer une esquive sur une attaque ou un sort esquivable.",
+        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Agilité 10",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Retrait",
+        "description": "Après avoir subi une attaque au corps à corps (esquivée ou non), le héros peut utiliser une action secondaire pour reculer de 6m par rapport à l'attaquant.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Roi de l'esquive",
+        "description": "Une fois par jour, permet d'utiliser une action secondaire pour augmenter son esquive de 5 pendant 3 tours.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Tir rapide",
+        "description": "Une fois par combat, lorsque le rôdeur attaque avec un arc, il peut dépenser une action secondaire pour effectuer une\n   seconde attaque à l'arc immédiatement.",
+        "prerequis": "<strong> Prérequis :</strong> Capable de manier un arc.",
         "cout": "1 point de don"
       }
     ]
@@ -442,8 +442,50 @@
     "description": "Dons accessibles aux mages.",
     "dons": [
       {
+        "nom": "Apprentissage par l'échec",
+        "description": "Le mage regagne le coût en mana des sorts ayant fait un échec critique ou ayant été esquivés.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Canalisation incrémentale",
+        "description": "Les dégâts des sorts canalisés sont augmentés de 2 pour chaque tour supplémentaire où le sort a été canalisé.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Extraction de mana",
+        "description": "Lorsque le héros touche avec une attaque au corps à corps un adversaire, le héros regagne du mana d'une valeur équivalente au niveau du héros.",
+        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/23cGYFvZ/stat-Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Force 5",
+        "cout": "1 point de don"
+      },
+      {
         "nom": "Gemme de mana",
         "description": "Une fois par jour, le héros peut récupérer l'intégralité de son Mana en utilisant une action secondaire.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Incantation rapide",
+        "description": "Une fois par combat, le mage peut doubler le coût en mana d'un sort nécessitant plusieurs tours d'incantation pour le lancer en un seul tour.",
+        "prerequis": "<strong> Prérequis :</strong> Niveau 7.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Infusion élémentaire",
+        "description": "Après avoir lancé un sort, le héros peut, en utilisant une action secondaire, imprégner son arme de l'élément du sort. Elle infligera à sa prochaine attaque physique des dégâts de cet élément équivalents au niveau du sort.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Polyglotte",
+        "description": "Peut lire et parler toutes les langues.",
+        "prerequis": "<strong> Prérequis :</strong> Réflexion rang 2.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Puissance monocible",
+        "description": "Les sorts pouvant être esquivés, voient leur dégâts infligés augmenter, d'un montant équivalent au niveau du sort.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -460,63 +502,21 @@
         "cout": "1 point de don"
       },
       {
-        "nom": "Spécialisation élémentaire 1",
-        "description": "Le héros peut choisir un élément et augmenter les dégâts infligés par les sorts de cet élément, d'un montant équivalent au niveau du sort.",
-        "prerequis": "<strong> Prérequis :</strong> Choisir un nouvel élément écrase l'ancien.",
-        "cout": "1 point de don"
-      },
-      {
-        "nom": "Infusion élémentaire",
-        "description": "Après avoir lancé un sort, le héros peut, en utilisant une action secondaire, imprégner son arme de l'élément du sort. Elle infligera à sa prochaine attaque physique des dégâts de cet élément équivalents au niveau du sort.",
-        "prerequis": "<strong> Prérequis :</strong> -",
-        "cout": "1 point de don"
-      },
-      {
-        "nom": "Polyglotte",
-        "description": "Peut lire et parler toutes les langues.",
-        "prerequis": "<strong> Prérequis :</strong> Réflexion rang 2.",
-        "cout": "1 point de don"
-      },
-      {
-        "nom": "Spécialisation élémentaire 2",
-        "description": "Le héros peut choisir un élément et réduire le coût en mana des sorts de cet élément, d'un montant équivalent au niveau du sort. (Ne peut pas dépasser 50% du coût du sort).",
-        "prerequis": "<strong> Prérequis :</strong> Choisir un nouvel élément écrase l'ancien.",
-        "cout": "1 point de don"
-      },
-      {
-        "nom": "Apprentissage par l'échec",
-        "description": "Le mage regagne le coût en mana des sorts ayant fait un échec critique ou ayant été esquivés.",
-        "prerequis": "<strong> Prérequis :</strong> -",
-        "cout": "1 point de don"
-      },
-      {
-        "nom": "Extraction de mana",
-        "description": "Lorsque le héros touche avec une attaque au corps à corps un adversaire, le héros regagne du mana d'une valeur équivalente au niveau du héros.",
-        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/23cGYFvZ/stat-Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Force 5",
-        "cout": "1 point de don"
-      },
-      {
-        "nom": "Puissance monocible",
-        "description": "Les sorts pouvant être esquivés, voient leur dégâts infligés augmenter, d'un montant équivalent au niveau du sort.",
-        "prerequis": "<strong> Prérequis :</strong> -",
-        "cout": "1 point de don"
-      },
-      {
         "nom": "Résonance Élémentaire",
         "description": "Lorsque le héros lance un sort d'un élément, s'il avait lancé un sort du même élément au tour précédent, alors les dégâts sont augmentés de la valeur du niveau du sort.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
       {
-        "nom": "Incantation rapide",
-        "description": "Une fois par combat, le mage peut doubler le coût en mana d'un sort nécessitant plusieurs tours d'incantation pour le lancer en un seul tour.",
-        "prerequis": "<strong> Prérequis :</strong> Niveau 7.",
+        "nom": "Spécialisation élémentaire 1",
+        "description": "Le héros peut choisir un élément et augmenter les dégâts infligés par les sorts de cet élément, d'un montant équivalent au niveau du sort.",
+        "prerequis": "<strong> Prérequis :</strong> Choisir un nouvel élément écrase l'ancien.",
         "cout": "1 point de don"
       },
       {
-        "nom": "Canalisation incrémentale",
-        "description": "Les dégâts des sorts canalisés sont augmentés de 2 pour chaque tour supplémentaire où le sort a été canalisé.",
-        "prerequis": "<strong> Prérequis :</strong> -",
+        "nom": "Spécialisation élémentaire 2",
+        "description": "Le héros peut choisir un élément et réduire le coût en mana des sorts de cet élément, d'un montant équivalent au niveau du sort. (Ne peut pas dépasser 50% du coût du sort).",
+        "prerequis": "<strong> Prérequis :</strong> Choisir un nouvel élément écrase l'ancien.",
         "cout": "1 point de don"
       },
       {
@@ -532,50 +532,26 @@
     "description": "Dons accessibles aux prêtres.",
     "dons": [
       {
-        "nom": "Mécréants",
-        "description": "Les dégâts physiques infligés aux créatures de l'élément  <span style=\"color: #a855f7; font-weight: bold;\">Maléfique</span> sont doublés (la multiplication est appliquée avant l'application de l'armure physique).",
-        "prerequis": "<strong> Prérequis :</strong>-",
-        "cout": "1 point de don"
-      },
-      {
         "nom": "Au milieu du combat",
         "description": "Permet de s'équiper d'armures lourdes.",
         "prerequis": "<strong> Prérequis :</strong><br>- <img src=\"https://i.ibb.co/23cGYFvZ/stat-Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Force 12 \n<br> - Capable d'équiper des armures légères",
         "cout": "1 point de don"
       },
       {
-        "nom": "Jugement éclair",
-        "description": "Si le Prêtre a effectué un sort de dégâts ce tour-ci, il peut effectuer une attaque au corps à corps avec une action secondaire.",
-        "prerequis": "<strong> Prérequis :</strong><img src=\"https://i.ibb.co/23cGYFvZ/stat-Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Force 5",
+        "nom": "Bénédiction rapide",
+        "description": "Une fois par jour, peut effectuer un sort en un seul tour, même s'il prend normalement plusieurs tours à incanter.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
       {
-        "nom": "Musique",
-        "description": "Permet d'apprendre un instrument de musique (ou de savoir chanter) au choix, gagnant 2 de compétences sur les tests de compétence éloquence le nécessitant.",
-        "prerequis": "<strong> Prérequis :</strong>-",
-        "cout": "1 point de don"
-      },
-      {
-        "nom": "La nuit tous les chats sont gris",
-        "description": "Les effets des sorts et passifs appliqués aux créatures <span style=\"color: #8b5cf6; font-weight: bold;\">Maléfique</span> s'appliquent aussi aux créatures de <span style=\"color: #1a1a1a; font-weight: bold; background: rgba(180, 180, 200, 0.6); padding: 2px 4px; border-radius: 3px;\">Nuit</span>.",
-        "prerequis": "<strong> Prérequis :</strong>-",
+        "nom": "Chair consacrée",
+        "description": "Augmente <img src=\"https://i.ibb.co/67ZW01Q7/stat-Endurance.png\" alt=\"Endurance\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> l'endurance de 4.",
+        "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
       {
         "nom": "Dernier recours",
         "description": "Utilisable une seule fois dans une campagne : Le prêtre fait appel à son dieu pour résoudre une situation complexe, le sauver ou écraser ses ennemis.",
-        "prerequis": "<strong> Prérequis :</strong>-",
-        "cout": "1 point de don"
-      },
-      {
-        "nom": "Tentation maléfique",
-        "description": "Permet de modifier les dégâts des sorts et effets infligés, d'élément <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span> ou <span style=\"color: #f5f5f5; font-weight: bold;\">Divin</span>, pour en faire des dégâts d'élément <span style=\"color: #8b5cf6; font-weight: bold;\">Maléfique</span>.",
-        "prerequis": "<strong> Prérequis :</strong>-",
-        "cout": "1 point de don"
-      },
-      {
-        "nom": "Méditation érudite",
-        "description": "Augmente <img src=\"https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> l'intelligence de 4.",
         "prerequis": "<strong> Prérequis :</strong>-",
         "cout": "1 point de don"
       },
@@ -586,15 +562,39 @@
         "cout": "1 point de don"
       },
       {
+        "nom": "Jugement éclair",
+        "description": "Si le Prêtre a effectué un sort de dégâts ce tour-ci, il peut effectuer une attaque au corps à corps avec une action secondaire.",
+        "prerequis": "<strong> Prérequis :</strong><img src=\"https://i.ibb.co/23cGYFvZ/stat-Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Force 5",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "La nuit tous les chats sont gris",
+        "description": "Les effets des sorts et passifs appliqués aux créatures <span style=\"color: #8b5cf6; font-weight: bold;\">Maléfique</span> s'appliquent aussi aux créatures de <span style=\"color: #1a1a1a; font-weight: bold; background: rgba(180, 180, 200, 0.6); padding: 2px 4px; border-radius: 3px;\">Nuit</span>.",
+        "prerequis": "<strong> Prérequis :</strong>-",
+        "cout": "1 point de don"
+      },
+      {
         "nom": "Martyr",
         "description": "Une fois par tour, après avoir reçu des dégâts, peut utiliser une action secondaire pour conférer des points de vie temporaires à une cible autre que le héros à moins de 6m, d'une valeur du niveau du héros.",
         "prerequis": "<strong> Prérequis :</strong>-",
         "cout": "1 point de don"
       },
       {
-        "nom": "Chair consacrée",
-        "description": "Augmente <img src=\"https://i.ibb.co/67ZW01Q7/stat-Endurance.png\" alt=\"Endurance\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> l'endurance de 4.",
-        "prerequis": "<strong> Prérequis :</strong> Don unique.",
+        "nom": "Mécréants",
+        "description": "Les dégâts physiques infligés aux créatures de l'élément  <span style=\"color: #a855f7; font-weight: bold;\">Maléfique</span> sont doublés (la multiplication est appliquée avant l'application de l'armure physique).",
+        "prerequis": "<strong> Prérequis :</strong>-",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Méditation érudite",
+        "description": "Augmente <img src=\"https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> l'intelligence de 4.",
+        "prerequis": "<strong> Prérequis :</strong>-",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Musique",
+        "description": "Permet d'apprendre un instrument de musique (ou de savoir chanter) au choix, gagnant 2 de compétences sur les tests de compétence éloquence le nécessitant.",
+        "prerequis": "<strong> Prérequis :</strong>-",
         "cout": "1 point de don"
       },
       {
@@ -604,9 +604,9 @@
         "cout": "1 point de don"
       },
       {
-        "nom": "Bénédiction rapide",
-        "description": "Une fois par jour, peut effectuer un sort en un seul tour, même s'il prend normalement plusieurs tours à incanter.",
-        "prerequis": "<strong> Prérequis :</strong> Don unique.",
+        "nom": "Tentation maléfique",
+        "description": "Permet de modifier les dégâts des sorts et effets infligés, d'élément <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span> ou <span style=\"color: #f5f5f5; font-weight: bold;\">Divin</span>, pour en faire des dégâts d'élément <span style=\"color: #8b5cf6; font-weight: bold;\">Maléfique</span>.",
+        "prerequis": "<strong> Prérequis :</strong>-",
         "cout": "1 point de don"
       }
     ]
@@ -616,44 +616,14 @@
     "description": "Dons accessibles aux enchanteurs.",
     "dons": [
       {
-        "nom": "Réparateur de baguettes",
-        "description": "Permet, une fois par jour, de passer 10 minutes pour regagner une charge sur un consommable Magie (qui possède encore au moins une charge).",
-        "prerequis": "<strong> Prérequis :</strong>-",
-        "cout": "1 point de don"
-      },
-      {
-        "nom": "Magie destructrice",
-        "description": "Permet de choisir et d'apprendre un sort de mage et de pouvoir le lancer à volonté. Le sort peut être changé par la suite en dépensant un nouveau point de don.",
-        "prerequis": "<strong> Prérequis :</strong> Choisir un nouveau sort écrase l'ancien.",
-        "cout": "1 point de don"
-      },
-      {
-        "nom": "Magie de soutien",
-        "description": "Permet de choisir et d'apprendre un sort de prêtre et de pouvoir le lancer à volonté. Le sort peut être changé par la suite en dépensant un nouveau point de don.",
-        "prerequis": "<strong> Prérequis :</strong> Choisir un nouveau sort écrase l'ancien.",
-        "cout": "1 point de don"
-      },
-      {
         "nom": "Altération risquée",
         "description": "Lorsque un sort d'altération magique est effectué alors que la cible est à 3m, ses chances de critiques sont doublées.",
         "prerequis": "<strong> Prérequis :</strong>-",
         "cout": "1 point de don"
       },
       {
-        "nom": "Spécialiste de l'étrange",
-        "description": "Permet d'équiper les armes exotiques.",
-        "prerequis": "<strong> Prérequis :</strong> -",
-        "cout": "1 point de don"
-      },
-      {
-        "nom": "Enchantement de force permanente",
-        "description": "Augmente la <img src=\"https://i.ibb.co/23cGYFvZ/stat-Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Force de 4.",
-        "prerequis": "<strong> Prérequis :</strong> -",
-        "cout": "1 point de don"
-      },
-      {
-        "nom": "Téléportation amicale",
-        "description": "Une fois par combat, peut utiliser une action secondaire pour se téléporter à 3m d'un allié consentant.",
+        "nom": "Duplicateur de nourriture",
+        "description": "Lors de la consommation de nourriture, un héros allié peut également profiter de ses effets.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -664,14 +634,8 @@
         "cout": "1 point de don"
       },
       {
-        "nom": "Duplicateur de nourriture",
-        "description": "Lors de la consommation de nourriture, un héros allié peut également profiter de ses effets.",
-        "prerequis": "<strong> Prérequis :</strong> -",
-        "cout": "1 point de don"
-      },
-      {
-        "nom": "Magie aléatoire",
-        "description": "Peut dépenser une action principale et secondaire pour tenter de lancer un sort d'altération magique et un sort de soutien sur des cibles à portée, le même tour.\n<br><br> Lancez un d20.\n<br> Si le dé fait 7 ou plus, les deux sorts sont lancés sur leurs cibles respectives.\n<br> Si le dé fait 6 ou moins, les deux sorts sont lancés sur les cibles inverses (peu importe la portée).\n\n<br><br> Dans les deux cas, seul le mana du sort le plus cher est dépensé.",
+        "nom": "Enchantement de force permanente",
+        "description": "Augmente la <img src=\"https://i.ibb.co/23cGYFvZ/stat-Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Force de 4.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -682,9 +646,45 @@
         "cout": "1 point de don"
       },
       {
+        "nom": "Magie aléatoire",
+        "description": "Peut dépenser une action principale et secondaire pour tenter de lancer un sort d'altération magique et un sort de soutien sur des cibles à portée, le même tour.\n<br><br> Lancez un d20.\n<br> Si le dé fait 7 ou plus, les deux sorts sont lancés sur leurs cibles respectives.\n<br> Si le dé fait 6 ou moins, les deux sorts sont lancés sur les cibles inverses (peu importe la portée).\n\n<br><br> Dans les deux cas, seul le mana du sort le plus cher est dépensé.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Magie de soutien",
+        "description": "Permet de choisir et d'apprendre un sort de prêtre et de pouvoir le lancer à volonté. Le sort peut être changé par la suite en dépensant un nouveau point de don.",
+        "prerequis": "<strong> Prérequis :</strong> Choisir un nouveau sort écrase l'ancien.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Magie destructrice",
+        "description": "Permet de choisir et d'apprendre un sort de mage et de pouvoir le lancer à volonté. Le sort peut être changé par la suite en dépensant un nouveau point de don.",
+        "prerequis": "<strong> Prérequis :</strong> Choisir un nouveau sort écrase l'ancien.",
+        "cout": "1 point de don"
+      },
+      {
         "nom": "Renvoi de Sort",
         "description": "Une fois par combat, lorsque le héros est ciblé par un sort d'altération magique, ou un sort pouvant être esquivé, il peut utiliser une action secondaire pour tenter de le renvoyer à l'expéditeur. <br><br>Intelligence du héros contre Résistance altération de l'expéditeur. En cas de succès (strictement supérieur), le sort affecte l'expéditeur au lieu du héros.",
         "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Intelligence 10.",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Réparateur de baguettes",
+        "description": "Permet, une fois par jour, de passer 10 minutes pour regagner une charge sur un consommable Magie (qui possède encore au moins une charge).",
+        "prerequis": "<strong> Prérequis :</strong>-",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Spécialiste de l'étrange",
+        "description": "Permet d'équiper les armes exotiques.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Téléportation amicale",
+        "description": "Une fois par combat, peut utiliser une action secondaire pour se téléporter à 3m d'un allié consentant.",
+        "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       }
     ]
