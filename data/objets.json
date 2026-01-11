@@ -320,7 +320,7 @@
       "tags": [
         "Consommable"
       ],
-      "effet": "Inutilisable hors combat.      \n<br><strong>Portée :</strong>   3m.\n<br><strong>Effet:</strong> Rend 5 (critique : 10) points de vie à la cible.\n<br><strong>Charges:</strong> 3.",
+      "effet": "<br><strong>Portée :</strong>   3m.\n<br><strong>Effet:</strong> Rend 5 (critique : 10) points de vie à la cible.\n<br><strong>Charges:</strong> 3.",
       "prix": "🔷 <strong>Prix:</strong> 10",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
