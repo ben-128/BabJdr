@@ -213,7 +213,7 @@
             this.currentAudio.currentTime = 0;
             this.currentAudio.play();
           } else {
-            this.isPlaying = false;
+            // Ne pas mettre isPlaying à false, playNext s'en charge
             this.playNext();
           }
         });
@@ -225,9 +225,13 @@
         });
 
         this.currentAudio.addEventListener('pause', () => {
-          this.isPlaying = false;
-          this.updateUI();
-          this.updateAudioPageUI();
+          // Ne pas mettre isPlaying à false si le morceau est terminé
+          // (l'événement ended s'en chargera via playNext)
+          if (!this.currentAudio.ended) {
+            this.isPlaying = false;
+            this.updateUI();
+            this.updateAudioPageUI();
+          }
         });
 
         this.currentAudio.addEventListener('error', (e) => {
@@ -376,30 +380,125 @@
       }
     },
 
-    playNext() {
+    async playNext() {
       if (!this.currentPlaylist) return;
 
       const playlist = this.config.playlists[this.currentPlaylist];
       if (!playlist || !playlist.tracks.length) return;
+
+      const wasPlaying = this.isPlaying;
+
+      // Fade out si en cours de lecture
+      if (wasPlaying && this.currentAudio) {
+        await this.fadeOut(500);
+      }
 
       // Toujours passer à la piste suivante en ordre séquentiel
       this.currentTrackIndex = (this.currentTrackIndex + 1) % playlist.tracks.length;
 
-      this.loadTrack(playlist.tracks[this.currentTrackIndex]);
+      await this.loadTrack(playlist.tracks[this.currentTrackIndex]);
       this.updateAudioPageUI(); // Mettre à jour l'affichage du titre
+
+      // Relancer la lecture avec fade in si était en cours
+      if (wasPlaying) {
+        await this.fadeIn(500);
+      }
     },
 
-    playPrevious() {
+    async playPrevious() {
       if (!this.currentPlaylist) return;
 
       const playlist = this.config.playlists[this.currentPlaylist];
       if (!playlist || !playlist.tracks.length) return;
 
+      const wasPlaying = this.isPlaying;
+
+      // Fade out si en cours de lecture
+      if (wasPlaying && this.currentAudio) {
+        await this.fadeOut(500);
+      }
+
       // Toujours passer à la piste précédente en ordre séquentiel
       this.currentTrackIndex = this.currentTrackIndex > 0 ? this.currentTrackIndex - 1 : playlist.tracks.length - 1;
 
-      this.loadTrack(playlist.tracks[this.currentTrackIndex]);
+      await this.loadTrack(playlist.tracks[this.currentTrackIndex]);
       this.updateAudioPageUI(); // Mettre à jour l'affichage du titre
+
+      // Relancer la lecture avec fade in si était en cours
+      if (wasPlaying) {
+        await this.fadeIn(500);
+      }
+    },
+
+    // Fade out progressif
+    fadeOut(duration = 500) {
+      return new Promise((resolve) => {
+        if (!this.currentAudio) {
+          resolve();
+          return;
+        }
+
+        const startVolume = this.currentAudio.volume;
+        const steps = 20;
+        const stepDuration = duration / steps;
+        const volumeStep = startVolume / steps;
+        let currentStep = 0;
+
+        const fadeInterval = setInterval(() => {
+          currentStep++;
+          const newVolume = Math.max(0, startVolume - (volumeStep * currentStep));
+          this.currentAudio.volume = newVolume;
+
+          if (currentStep >= steps) {
+            clearInterval(fadeInterval);
+            this.currentAudio.pause();
+            resolve();
+          }
+        }, stepDuration);
+      });
+    },
+
+    // Fade in progressif
+    fadeIn(duration = 500) {
+      return new Promise(async (resolve) => {
+        if (!this.currentAudio) {
+          resolve();
+          return;
+        }
+
+        // Commencer à volume 0
+        this.currentAudio.volume = 0;
+
+        try {
+          await this.currentAudio.play();
+          this.isPlaying = true;
+        } catch (error) {
+          console.error('Fade in play failed:', error);
+          this.currentAudio.volume = this.volume;
+          resolve();
+          return;
+        }
+
+        const targetVolume = this.volume;
+        const steps = 20;
+        const stepDuration = duration / steps;
+        const volumeStep = targetVolume / steps;
+        let currentStep = 0;
+
+        const fadeInterval = setInterval(() => {
+          currentStep++;
+          const newVolume = Math.min(targetVolume, volumeStep * currentStep);
+          this.currentAudio.volume = newVolume;
+
+          if (currentStep >= steps) {
+            clearInterval(fadeInterval);
+            this.currentAudio.volume = targetVolume;
+            this.updateUI();
+            this.updateAudioPageUI();
+            resolve();
+          }
+        }, stepDuration);
+      });
     },
 
     setVolume(newVolume) {

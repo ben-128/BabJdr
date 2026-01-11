@@ -23,7 +23,7 @@
         "description": "Le lanceur concentre une sphère crépitante d’énergie instable qui fuse vers sa cible et explose dans un éclair.",
         "categorie": "Mage",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 1",
-        "portee": "🎯 <strong>Portée:</strong> 12m",
+        "portee": "🎯 <strong>Portée:</strong> 15m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 4",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
@@ -68,7 +68,7 @@
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 8",
         "resistance": "<strong>Sans effet si:</strong> -",
-        "effetNormal": "<strong>Effet:</strong> Inflige (10 + Puiss. Sorts) points de dégâts de <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span>  aux créatures devant le lanceur (9m).\n<br><br>Chaque début de tour, le lanceur peut continuer de <b>canaliser</b> le sort (ne pouvant plus esquiver ou faire d'actions ou se déplacer). S'il le fait, n'importe quelle créature qui rentre dans la zone subit les dégâts, et toutes les creatures encore dans la zone au prochain tour du lanceur subiront les dégâts. A chaque début de tour, le lanceur consomme alors <b>la moitié du coût en mana</b> du sort.",
+        "effetNormal": "<strong>Effet:</strong> Inflige (10 + Puiss. Sorts) points de dégâts de <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span>  aux créatures devant le lanceur (9m). <br>\nn'importe quelle créature qui rentre dans la zone subit les dégâts\n\n\n<br><br>Chaque début de tour, le lanceur peut continuer de <b>canaliser</b> le sort (ne pouvant plus esquiver ou faire d'actions ou se déplacer). S'il le fait, toutes les creatures encore dans la zone au prochain tour du lanceur subiront les dégâts, et le lanceur consomme <b>4</b> points de mana.",
         "effetCritique": "<strong>Coup Critique:&nbsp;</strong>&nbsp;Les dégâts passent à (15 + Puiss. Sorts), et les créatures ayant une Résistance altération inférieure à l'Intelligence du lanceur sont <span class=\"etat-link\" data-etat=\"Aveuglé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Aveuglé</span> pendant 2 tours."
       },
       {
@@ -90,10 +90,10 @@
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 5",
         "portee": "🎯 <strong>Portée:</strong> 30m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 10",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 8",
         "resistance": "<strong>Sans effet si:</strong> Esquive.",
-        "effetNormal": "<strong>Effet:</strong> Inflige (15 + Puiss. Sorts) dégâts physiques à la cible. Ces dégâts sont réduits par l'armure.",
-        "effetCritique": "<strong>Coup Critique: </strong> Les dégâts passent à (22 + Puiss. Sorts) et la cible (si elle est de taille Moyenne ou moins) subit l'état <span class=\"etat-link\" data-etat=\"À terre\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">À terre</span>."
+        "effetNormal": "<strong>Effet:</strong> Inflige (15 + Puiss. Sorts) dégâts physiques à la cible. Ces dégâts sont réduits par l'armure physique.",
+        "effetCritique": "<strong>Coup Critique: </strong> Les dégâts traversent l'armure physique de la cible."
       },
       {
         "nom": "Nuage toxique",
@@ -224,7 +224,7 @@
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 2 tours",
         "coutMana": "🔵 <strong>Coût mana:</strong> 25",
         "resistance": "<strong>Sans effet si:</strong> -",
-        "effetNormal": "<strong>Effet:</strong> Tous les adversaires à moins de 30m du héros subissent l'effet du sort <span class=\"spell-link\" data-spell=\"Missile magique\" data-category=\"Sorts de Mage\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Missile magique</span> (esquivable, peut être critique).<br><br>\n\nChaque début de tour, le lanceur peut continuer de <b>canaliser</b> le sort (ne pouvant plus esquiver ou faire d'actions ou se déplacer). S'il le fait, à chaque début de tour du héros, les missiles partent vers tous les adversaires proches, et le lanceur consomme 5 points de mana.",
+        "effetNormal": "<strong>Effet:</strong> Tous les adversaires à moins de 30m du héros subissent l'effet du sort <span class=\"spell-link\" data-spell=\"Missile magique\" data-category=\"Sorts de Mage\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Missile magique</span> (esquivable, peut être critique).<br><br>\n\nChaque début de tour, le lanceur peut continuer de <b>canaliser</b> le sort (ne pouvant plus esquiver ou faire d'actions ou se déplacer). S'il le fait, à chaque début de tour du héros, les missiles partent vers tous les adversaires proches, et le lanceur consomme 10 points de mana.",
         "effetCritique": "<strong>Coup Critique: </strong> Deux missiles par cibles partent de la sentinelle."
       }
     ]
@@ -511,7 +511,7 @@
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> -",
-        "effetNormal": "<strong>Effet:</strong>  La vitesse de déplacement de la cible est augmentée de 3m jusqu'à la fin du combat. Non Cumulable.",
+        "effetNormal": "<strong>Effet:</strong> &nbsp;La vitesse de déplacement de la cible est augmentée de 3m jusqu'à la fin du combat. Non Cumulable.",
         "effetCritique": "<strong>Coup Critique :&nbsp;</strong> La vitesse est augmentée de 6m."
       },
       {
@@ -548,7 +548,7 @@
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 7",
         "portee": "🎯 <strong>Portée:</strong> 3m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 12",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 8",
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> La cible obtient l'état <span class=\"etat-link\" data-etat=\"Lévitation\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Lévitation</span> jusqu'à la fin du combat.",
         "effetCritique": "<strong>Coup Critique: </strong> La cible a également sa vitesse de déplacement augmentée de 3m."
@@ -561,10 +561,10 @@
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 7",
         "portee": "🎯 <strong>Portée:</strong> 9m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 2 tours",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 14",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 15",
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Une aura élémentaire entoure le lanceur dans un rayon de 9m. Tout adversaire présent dans la zone ou y pénétrant subit (15 + Puiss. Sorts) dégâts de l'élément d'affiliation du héros (maximum 4 créatures par tour). Le lanceur peut se déplacer librement, mais ne peut plus esquiver ni effectuer d'autres actions.<br><br>Chaque début de tour, le lanceur peut continuer de <b>canaliser en déplacement</b> le sort. S'il le fait, l'aura persiste et inflige à nouveau les dégâts aux adversaires dans la zone ou y pénétrant. Le lanceur consomme alors <b>5 points de mana</b>.",
-        "effetCritique": "<strong>Coup Critique :</strong> Les dégâts passent à (20 + Puiss. Sorts)."
+        "effetCritique": "<strong>Coup Critique :</strong> Les dégâts passent à (22 + Puiss. Sorts)."
       },
       {
         "nom": "Débilité",
@@ -574,7 +574,7 @@
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 8",
         "portee": "🎯 <strong>Portée:</strong> 3m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 15",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 12",
         "duree": "⏳ <strong>Durée:</strong> 3 tours",
         "resistance": "<strong>Sans effet si:</strong> <br>- Résistance altérations >= Intelligence du lanceur<br>- Element <span style=\"color: #8b4513; font-weight: bold; background: rgba(139, 69, 19, 0.2); padding: 2px 4px; border-radius: 3px;\">Terre</span>",
         "effetNormal": "<strong>Effet:</strong> La cible passe dans l'état <span class=\"etat-link\" data-etat=\"Débilité\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Débilité</span> (Puiss. Sorts) pendant 3 tours.",
@@ -588,7 +588,7 @@
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 8",
         "portee": "🎯 <strong>Portée:</strong> 3m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 15",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 10",
         "duree": "⏳ <strong>Durée:</strong> Jusqu'à la fin du combat",
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Les chances de coup critique de la cible (physiques, sorts et objets) sont augmentées de 2 jusqu'à la fin du combat.",
@@ -619,7 +619,7 @@
         "coutMana": "🔵 <strong>Coût mana:</strong> 16",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> -",
-        "effetNormal": "<strong>Effet:</strong> La vitesse de déplacement de tous les alliés à portée est augmentée de 3m pendant 5 tours. Non Cumulable.",
+        "effetNormal": "<strong>Effet:</strong> La vitesse de déplacement de tous les alliés à portée est augmentée de 3m jusqu'à la fin du combat. Non Cumulable.",
         "effetCritique": "<strong>Coup Critique :</strong> La vitesse est augmentée de 6m."
       },
       {
@@ -665,7 +665,7 @@
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 4",
         "portee": "🎯 <strong>Portée:</strong> 3m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 11",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 10",
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "Inutilisable Hors combat.           \n<br> <strong>Effet:</strong> Augmente la puissance des sorts de la cible de 3 . <br>Dure jusqu'au retour hors combat.",
         "effetCritique": "<strong>Coup Critique: </strong> La puissance est augmentée de 5."
@@ -677,7 +677,7 @@
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 5",
         "portee": "🎯 <strong>Portée:</strong> 3m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
-        "coutMana": "🔵 <strong>Coût mana:</strong> 12",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 10",
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "Inutilisable Hors combat.           \n<br> <strong>Effet:</strong> Augmente la force de la cible de (5 + Puiss. Sorts). <br>Dure jusqu'au retour hors combat.",
         "effetCritique": "<strong>Coup Critique: </strong> La force prodiguée passe à (8 + Puiss. Sorts)."
