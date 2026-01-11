@@ -497,7 +497,7 @@
         "Bouclier",
         "Main secondaire"
       ],
-      "effet": "<strong>Effet:</strong> Augmente l'armure physique de 4. Augmente l'armure élémentaire de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> de 5.",
+      "effet": "<strong>Effet:</strong> Augmente l'armure physique de 4. <br>Augmente l'armure élémentaire de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> de 3.",
       "prix": "🔷 <strong>Prix:</strong> ?",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -577,7 +577,7 @@
         "Armure",
         "Robe"
       ],
-      "effet": "<strong>Effet:</strong> Augmente la Chance de 3.\n<br> Permet de stocker 2 consommables supplémentaires dans le sac.",
+      "effet": "<strong>Effet:</strong> \n<br>Augmente la Chance de 3.\n<br> Permet de stocker 2 consommables supplémentaires dans le sac.",
       "prix": "🔷 <strong>Prix:</strong> 130",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -591,7 +591,7 @@
         "Robe",
         "Non identifié"
       ],
-      "effet": "<strong>Effet:</strong> Augmente les dégâts élémentaires de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> et d'<span style=\"color: #4682b4; font-weight: bold;\">Eau</span> infligés par les sorts de 5.",
+      "effet": "<strong>Effet:</strong> <br>Volonté augmenté de 3.\n<br><br>À la fin de chaque tour, si le porteur a incanté avec succès un sort d’élément <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>, <span style=\"color: #22c55e; font-weight: bold;\">Air</span> ou <span style=\"color: #4682b4; font-weight: bold;\">Eau</span>, il gagne 2 points de vie temporaires.",
       "prix": "🔷 <strong>Prix:</strong> ?",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -685,7 +685,7 @@
         "Baton",
         "Non identifié"
       ],
-      "effet": "<strong>Dégâts: </strong> Inflige (4  + Force) points de dégâts physiques.\n                      \n<br><br><strong>Effet:</strong> À la fin de chaque tour, si le porteur a incanté avec succès un sort d’élément <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>, <span style=\"color: #22c55e; font-weight: bold;\">Air</span> ou <span style=\"color: #4682b4; font-weight: bold;\">Eau</span>, il gagne 2 points de vie temporaires.",
+      "effet": "<strong>Dégâts: </strong> Inflige (4  + Force) points de dégâts physiques.\n                      \n<br><br><strong>Effet:</strong> La puissance des sorts d’élément <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>, <span style=\"color: #22c55e; font-weight: bold;\">Air</span> ou <span style=\"color: #4682b4; font-weight: bold;\">Eau</span>, ainsi que la resistance altération nécéssaire pour resister à un sort de cet élément est augmenté de 3.",
       "prix": "🔷 <strong>Prix:</strong> ?",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },

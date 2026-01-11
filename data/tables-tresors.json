@@ -24,16 +24,7 @@
         },
         {
           "min": 9,
-          "max": 11,
-          "objet": {
-            "type": "reference",
-            "numero": 31,
-            "nom": "Cristal d'effort"
-          }
-        },
-        {
-          "min": 12,
-          "max": 14,
+          "max": 12,
           "objet": {
             "type": "reference",
             "numero": 57,
@@ -41,8 +32,8 @@
           }
         },
         {
-          "min": 15,
-          "max": 18,
+          "min": 13,
+          "max": 16,
           "objet": {
             "type": "reference",
             "numero": 52,
@@ -50,7 +41,7 @@
           }
         },
         {
-          "min": 19,
+          "min": 17,
           "max": 30,
           "objet": {
             "type": "reference",
@@ -259,16 +250,7 @@
         },
         {
           "min": 11,
-          "max": 14,
-          "objet": {
-            "type": "reference",
-            "numero": 33,
-            "nom": "Clairgivre"
-          }
-        },
-        {
-          "min": 15,
-          "max": 18,
+          "max": 15,
           "objet": {
             "type": "reference",
             "numero": 39,
@@ -276,7 +258,7 @@
           }
         },
         {
-          "min": 19,
+          "min": 16,
           "max": 30,
           "objet": {
             "type": "reference",
@@ -361,16 +343,7 @@
         },
         {
           "min": 9,
-          "max": 11,
-          "objet": {
-            "type": "reference",
-            "numero": 25,
-            "nom": "Bandage d'urgence"
-          }
-        },
-        {
-          "min": 12,
-          "max": 14,
+          "max": 12,
           "objet": {
             "type": "reference",
             "numero": 46,
@@ -378,8 +351,8 @@
           }
         },
         {
-          "min": 15,
-          "max": 18,
+          "min": 13,
+          "max": 16,
           "objet": {
             "type": "reference",
             "numero": 53,
@@ -387,7 +360,7 @@
           }
         },
         {
-          "min": 19,
+          "min": 17,
           "max": 30,
           "objet": {
             "type": "reference",
@@ -606,7 +579,7 @@
       "fourchettes": [
         {
           "min": 1,
-          "max": 5,
+          "max": 7,
           "objet": {
             "type": "reference",
             "numero": 43,
@@ -614,8 +587,8 @@
           }
         },
         {
-          "min": 6,
-          "max": 10,
+          "min": 8,
+          "max": 12,
           "objet": {
             "type": "reference",
             "numero": 44,
@@ -623,8 +596,8 @@
           }
         },
         {
-          "min": 11,
-          "max": 16,
+          "min": 13,
+          "max": 18,
           "objet": {
             "type": "reference",
             "numero": 45,
@@ -632,7 +605,7 @@
           }
         },
         {
-          "min": 17,
+          "min": 19,
           "max": 30,
           "objet": {
             "type": "reference",
@@ -698,7 +671,7 @@
       "fourchettes": [
         {
           "min": 1,
-          "max": 5,
+          "max": 7,
           "objet": {
             "type": "reference",
             "numero": 46,
@@ -706,8 +679,8 @@
           }
         },
         {
-          "min": 6,
-          "max": 10,
+          "min": 8,
+          "max": 12,
           "objet": {
             "type": "reference",
             "numero": 57,
@@ -715,8 +688,8 @@
           }
         },
         {
-          "min": 11,
-          "max": 16,
+          "min": 13,
+          "max": 18,
           "objet": {
             "type": "reference",
             "numero": 40,
@@ -724,7 +697,7 @@
           }
         },
         {
-          "min": 17,
+          "min": 19,
           "max": 30,
           "objet": {
             "type": "reference",
