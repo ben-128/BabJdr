@@ -456,7 +456,7 @@
     "objet:FlecheAiguisée": "https://i.ibb.co/m5qhRSVm/Fleche-Aiguis-e.jpg",
     "objet:FlecheTerre": "https://i.ibb.co/DPz0Yd3B/Fleche-Terre.jpg",
     "don:Maîtrise de la dague": "https://i.ibb.co/dwSwF0tp/Dague.png",
-    "don:Maîtrise de l'arc": "https://i.ibb.co/jvMRnwz7/Arc.png",
+    "don:Maîtrise de l'arc": "https://i.ibb.co/gMpKJQRb/Arc.jpg",
     "don:Chanceux": "https://i.ibb.co/YFHpxb4c/Chance.jpg",
     "don:Statistiques": "https://i.ibb.co/VpzK786K/Dons.png",
     "don:Premier soin": "https://i.ibb.co/SXgx2ZPj/Premier-Soins.png",
@@ -527,10 +527,13 @@
     "sort:Sorts de Monstres:Bourrasque": "https://i.ibb.co/SXfyvRh4/Bourrasque.jpg",
     "objet:Plume de tempête": "https://i.ibb.co/HDNx4fgG/Plume.jpg",
     "don:Tacticien": "https://i.ibb.co/kp0LJBQ/Tacticien.jpg",
-    "don:Doigts agiles": "https://i.ibb.co/W79yHm9/Doigts-Agiles.jpg"
+    "don:Doigts agiles": "https://i.ibb.co/W79yHm9/Doigts-Agiles.jpg",
+    "don:Concentration sous pression": "https://i.ibb.co/ksBQBsmt/Pression.jpg",
+    "don:Osmose magique": "https://i.ibb.co/Jbn37FN/Osmose.jpg",
+    "don:Sacrifice pieux": "https://i.ibb.co/MkPD2XQz/Sacrifice.jpg"
   },
   "meta": {
-    "total_images": 528,
+    "total_images": 531,
     "exported_date": "2026-01-11",
     "note": "Ces images incluent les nouvelles images uploadées"
   }

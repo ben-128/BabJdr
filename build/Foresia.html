@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2026-01-11T14:03:51.858Z by JdrBab Build System -->
+<!-- Generated on 2026-01-11T14:40:47.534Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -8864,7 +8864,7 @@ hr,
       },
       {
         "nom": "Martyr",
-        "description": "Une fois par tour, après avoir reçu des dégâts, peut utiliser une action secondaire pour conférer des points de vie temporaires à une cible autre que le héros à moins de 6m, d'une valeur du niveau du héros.",
+        "description": "Une fois par tour, après avoir reçu des dégâts, peut utiliser une action secondaire pour conférer des points de vie temporaires à une cible autre que le héros à moins de 9m, d'une valeur du niveau du héros.",
         "prerequis": "<strong> Prérequis :</strong>-",
         "cout": "1 point de don"
       },
@@ -8888,7 +8888,13 @@ hr,
       },
       {
         "nom": "Purification sublimée",
-        "description": "Après avoir supprimé un état via un sort, le héros et la cible reçoivent un nombre de points de vie égal au niveau du prêtre.",
+        "description": "Après avoir supprimé un état via un sort, le héros ET la cible son soignés d'un nombre de points de vie égal au niveau du prêtre.",
+        "prerequis": "<strong> Prérequis :</strong>-",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Sacrifice pieux",
+        "description": "Le prêtre peut utiliser une action secondaire pour sacrifier des points de vie (d'une valeur maximum égale au double du niveau du prêtre) et regagner le double du montant sacrifié en mana.",
         "prerequis": "<strong> Prérequis :</strong>-",
         "cout": "1 point de don"
       },
@@ -8967,6 +8973,18 @@ hr,
       {
         "nom": "Spécialiste de l'étrange",
         "description": "Permet d'équiper les armes exotiques.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Concentration sous pression",
+        "description": "Au début de son tour, si l'enchanteur a subi des dégâts au tour précédent, il regagne du mana égal au niveau du héros.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
+      },
+      {
+        "nom": "Osmose magique",
+        "description": "Une fois par tour, lorsqu'un ennemi à moins de 12m lance un sort, l'enchanteur regagne du mana égal au niveau du héros.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -9430,7 +9448,7 @@ hr,
         "Non identifié"
       ],
       "effet": "<b>Effet:</b> Rend au héros ou à une cible proche une quantité de mana équivalent au niveau d'Intelligence du héros.\n<br><b>Critique :</b> Mana rendu augmenté de 5.",
-      "prix": "🔷 <strong>Prix:</strong> 25",
+      "prix": "🔷 <strong>Prix:</strong> 10",
       "poids": ""
     },
     {
@@ -11154,7 +11172,8 @@ hr,
         20,
         23,
         25,
-        51
+        51,
+        35
       ]
     }
   ]
@@ -11617,7 +11636,7 @@ hr,
     "objet:FlecheAiguisée": "https://i.ibb.co/m5qhRSVm/Fleche-Aiguis-e.jpg",
     "objet:FlecheTerre": "https://i.ibb.co/DPz0Yd3B/Fleche-Terre.jpg",
     "don:Maîtrise de la dague": "https://i.ibb.co/dwSwF0tp/Dague.png",
-    "don:Maîtrise de l'arc": "https://i.ibb.co/jvMRnwz7/Arc.png",
+    "don:Maîtrise de l'arc": "https://i.ibb.co/gMpKJQRb/Arc.jpg",
     "don:Chanceux": "https://i.ibb.co/YFHpxb4c/Chance.jpg",
     "don:Statistiques": "https://i.ibb.co/VpzK786K/Dons.png",
     "don:Premier soin": "https://i.ibb.co/SXgx2ZPj/Premier-Soins.png",
@@ -11688,10 +11707,13 @@ hr,
     "sort:Sorts de Monstres:Bourrasque": "https://i.ibb.co/SXfyvRh4/Bourrasque.jpg",
     "objet:Plume de tempête": "https://i.ibb.co/HDNx4fgG/Plume.jpg",
     "don:Tacticien": "https://i.ibb.co/kp0LJBQ/Tacticien.jpg",
-    "don:Doigts agiles": "https://i.ibb.co/W79yHm9/Doigts-Agiles.jpg"
+    "don:Doigts agiles": "https://i.ibb.co/W79yHm9/Doigts-Agiles.jpg",
+    "don:Concentration sous pression": "https://i.ibb.co/ksBQBsmt/Pression.jpg",
+    "don:Osmose magique": "https://i.ibb.co/Jbn37FN/Osmose.jpg",
+    "don:Sacrifice pieux": "https://i.ibb.co/MkPD2XQz/Sacrifice.jpg"
   },
   "meta": {
-    "total_images": 528,
+    "total_images": 531,
     "exported_date": "2026-01-11",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
@@ -12825,7 +12847,7 @@ hr,
 
     // Mark as standalone version for renderer with build timestamp
     window.STANDALONE_VERSION = true;
-    window.BUILD_VERSION = '2026-01-11T14:03:51.860Z';
+    window.BUILD_VERSION = '2026-01-11T14:40:47.536Z';
 
     // Version check - clear old data if version changed
     (function() {
