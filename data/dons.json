@@ -318,7 +318,7 @@
       {
         "nom": "Volonté de fer",
         "description": "Une fois par jour, le héros peut utiliser une action secondaire pour se débarrasser de toutes ses altérations magiques.",
-        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/B2BCGP6T/stat-Volont.png\" alt=\"Volonté\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Volonté 5",
+        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/B2BCGP6T/stat-Volont.png\" alt=\"Volonté\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\">Volonté 3",
         "cout": "1 point de don"
       }
     ]
