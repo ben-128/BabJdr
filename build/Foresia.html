@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2026-01-12T22:28:19.372Z by JdrBab Build System -->
+<!-- Generated on 2026-01-12T23:14:06.593Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12281,7 +12281,7 @@ hr,
       "type": "card",
       "id": "gestion-des-ressources-new-3-1756401493443",
       "title": "Mana",
-      "content": "Il s'agit de la ressource utilisée pour lancer des sorts. Hors combat, il revient automatiquement quand le héros passe hors combat (c'est à dire après 10 minutes sans être en combat). En combat, il est consommé après le lancement de chaque sort (le coût en mana étant indiqué dans la description de chaque sort). Si un sort devait faire passer le mana d'un héros en dessous de 0, alors le sort n'est pas effectué et le héros devient <span class=\"etat-link\" data-etat=\"Endormi/assommé/Effrayé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">paralysé</span> pendant 2 tours.",
+      "content": "Il s'agit de la ressource utilisée pour lancer des sorts. Hors combat, il revient automatiquement quand le héros passe hors combat (c'est à dire après 5 minutes sans être en combat). En combat, il est consommé après le lancement de chaque sort (le coût en mana étant indiqué dans la description de chaque sort). Si un sort devait faire passer le mana d'un héros en dessous de 0, alors le sort n'est pas effectué et le héros devient <span class=\"etat-link\" data-etat=\"Endormi/assommé/Effrayé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">paralysé</span> pendant 2 tours.",
       "deletable": true,
       "sectionName": "Nouvelle section"
     },
@@ -12819,7 +12819,7 @@ hr,
 
     // Mark as standalone version for renderer with build timestamp
     window.STANDALONE_VERSION = true;
-    window.BUILD_VERSION = '2026-01-12T22:28:19.373Z';
+    window.BUILD_VERSION = '2026-01-12T23:14:06.595Z';
 
     // Version check - clear old data if version changed
     (function() {
@@ -24470,6 +24470,29 @@ class CharacterCreator {
       });
     }
 
+    // Dons d'armure élémentaire
+    if (config.dons) {
+      config.dons.forEach(donName => {
+        const don = this.findDon(donName);
+        if (don) {
+          // Résistance élémentaire 1: +5 Feu, Eau, Terre, Air
+          if (don.nom === 'Résistance élémentaire 1') {
+            armure.Feu += 5;
+            armure.Eau += 5;
+            armure.Terre += 5;
+            armure.Air += 5;
+          }
+          // Résistance élémentaire 2: +5 Lumière, Nuit, Divin, Maléfique
+          if (don.nom === 'Résistance élémentaire 2') {
+            armure.Lumière += 5;
+            armure.Nuit += 5;
+            armure.Divin += 5;
+            armure.Maléfique += 5;
+          }
+        }
+      });
+    }
+
     return armure;
   }
 
@@ -24569,6 +24592,9 @@ class CharacterCreator {
     }
     if (nom === "Enchantement de force permanente") {
       stats.Force += 4;
+    }
+    if (nom === 'Volonté sans faille') {
+      stats.Volonté += 4;
     }
   }
 

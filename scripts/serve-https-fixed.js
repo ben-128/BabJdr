@@ -76,7 +76,7 @@ function handleRequest(req, res) {
       'Service-Worker-Allowed': '/',
       'Access-Control-Allow-Origin': '*'
     });
-    const sw = fs.readFileSync(path.join(rootDir, 'sw.js'));
+    const sw = fs.readFileSync(path.join(rootDir, 'config', 'sw.js'));
     res.end(sw);
     return;
   }

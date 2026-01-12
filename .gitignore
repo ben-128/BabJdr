@@ -15,6 +15,7 @@ node_modules/
 *.temp
 .DS_Store
 Thumbs.db
+tmpclaude-*
 
 # Logs
 *.log
