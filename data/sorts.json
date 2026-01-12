@@ -69,7 +69,7 @@
         "coutMana": "🔵 <strong>Coût mana:</strong> 8",
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Inflige (10 + Puiss. Sorts) points de dégâts de <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span>  aux créatures devant le lanceur (9m). <br>\nn'importe quelle créature qui rentre dans la zone subit les dégâts\n\n\n<br><br>Chaque début de tour, le lanceur peut continuer de <b>canaliser</b> le sort (ne pouvant plus esquiver ou faire d'actions ou se déplacer). S'il le fait, toutes les creatures encore dans la zone au prochain tour du lanceur subiront les dégâts, et le lanceur consomme <b>4</b> points de mana.",
-        "effetCritique": "<strong>Coup Critique:&nbsp;</strong>&nbsp;Les dégâts passent à (15 + Puiss. Sorts), et les créatures ayant une Résistance altération inférieure à l'Puiss. Sorts du lanceur sont <span class=\"etat-link\" data-etat=\"Aveuglé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Aveuglé</span> pendant 2 tours."
+        "effetCritique": "<strong>Coup Critique:&nbsp;</strong>&nbsp;Les dégâts passent à (15 + Puiss. Sorts), et les créatures ayant une Résistance altérations inférieure à la Puiss. Sorts du lanceur sont <span class=\"etat-link\" data-etat=\"Aveuglé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Aveuglé</span> pendant 2 tours."
       },
       {
         "nom": "Vague sombre",
@@ -188,7 +188,7 @@
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 15",
         "resistance": "<strong>Sans effet si:</strong> -",
-        "effetNormal": "<strong>Effet:</strong> Les ennemis  à moins de 6m du héros subissent (15 + Puiss. sorts) dégâts de <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span>. <br>\n<br> Chaque ennemi qui rentre dans la zone (en se déplacant, ou si le héros se déplace), subit les dégâts.\n<br> De plus, si la Résistance altération < Puiss. Sorts du héros , alors la cible est <span class=\"etat-link\" data-etat=\"Aveuglé\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Aveuglée</span> pendant 1 tour.<br><br>Dure Jusqu'à la fin du combat.",
+        "effetNormal": "<strong>Effet:</strong> Les ennemis  à moins de 6m du héros subissent (15 + Puiss. sorts) dégâts de <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span>. <br>\n<br> Chaque ennemi qui rentre dans la zone (en se déplacant, ou si le héros se déplace), subit les dégâts.\n<br> De plus, si la Résistance altérations < Puiss. Sorts du héros , alors la cible est <span class=\"etat-link\" data-etat=\"Aveuglé\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Aveuglée</span> pendant 1 tour.<br><br>Dure Jusqu'à la fin du combat.",
         "effetCritique": "<strong>Coup Critique: </strong> Les dégâts passent à (22 + Puiss. Sorts)."
       },
       {
@@ -213,7 +213,7 @@
         "coutMana": "🔵 <strong>Coût mana:</strong> 21",
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Tous les adversaires autour du héros (à 9m) subissent (30 + Puiss. Sorts) dégâts d'<span style=\"color: #4682b4; font-weight: bold;\">Eau</span>.",
-        "effetCritique": "<strong>Coup Critique: </strong> Les dégâts passent à (45 + Puiss. Sorts) et les cibles dont la Résistance altération < Puiss. Sorts du héros deviennent <span class=\"etat-link\" data-etat=\"Entravé/Entoilé/Embourbé\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">gelées</span> pendant 1 tour."
+        "effetCritique": "<strong>Coup Critique: </strong> Les dégâts passent à (45 + Puiss. Sorts) et les cibles dont la Résistance altérations < Puiss. Sorts du héros deviennent <span class=\"etat-link\" data-etat=\"Entravé/Entoilé/Embourbé\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">gelées</span> pendant 1 tour."
       },
       {
         "nom": "Sentinelle de Lumière",
@@ -308,8 +308,8 @@
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 8",
         "resistance": "<strong>Sans effet si:</strong> -",
-        "effetNormal": "<strong>Effet:</strong>  Augmente la Résistance altération de (1 + Puiss. Sorts) jusqu'à la fin du combat.<br>",
-        "effetCritique": "<strong>Coup Critique: </strong>  La Résistance altération est augmentée de (2 + Puiss. Sorts)."
+        "effetNormal": "<strong>Effet:</strong>  Augmente la Résistance altérations de (1 + Puiss. Sorts) jusqu'à la fin du combat.<br>",
+        "effetCritique": "<strong>Coup Critique: </strong>  La Résistance altérations est augmentée de (2 + Puiss. Sorts)."
       },
       {
         "nom": "Guérison du poison",
@@ -333,7 +333,7 @@
         "coutMana": "🔵 <strong>Coût mana:</strong> 10",
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Inflige (5 + Puiss. Sorts) dégâts de <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span> à toutes les créatures à moins de 6m du lanceur.",
-        "effetCritique": "<strong>Coup Critique: </strong> Les dégâts passent à (8 + Puiss. Sorts), et les créatures ayant une Résistance altération inférieure à l'Puiss. Sorts du lanceur sont <span class=\"etat-link\" data-etat=\"Aveuglé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Aveuglé</span> pendant 2 tours."
+        "effetCritique": "<strong>Coup Critique: </strong> Les dégâts passent à (8 + Puiss. Sorts), et les créatures ayant une Résistance altérations inférieure à la Puiss. Sorts du lanceur sont <span class=\"etat-link\" data-etat=\"Aveuglé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Aveuglé</span> pendant 2 tours."
       },
       {
         "nom": "Toucher Lointain",
@@ -357,7 +357,7 @@
         "coutMana": "🔵 <strong>Coût mana:</strong> 5",
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong>  Révèle le nom et l'élément d’affiliation d'une cible, ainsi que son armure physique et élémentaire et ses points de vie.",
-        "effetCritique": "<strong>Coup Critique: </strong> Révèle également son Esquive, et sa Résistance altération."
+        "effetCritique": "<strong>Coup Critique: </strong> Révèle également son Esquive, et sa Résistance altérations."
       },
       {
         "nom": "Révélation ultime",
@@ -368,7 +368,7 @@
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 10",
         "resistance": "<strong>Sans effet si:</strong> -",
-        "effetNormal": "<strong>Effet:</strong> Révèle le nom et l'élément d’affiliation d'une cible, ainsi que son armure physique et élémentaire, et ses points de vie. Révèle également son Esquive, sa Résistance altération, ses chances de coup critiques physiques et magiques.",
+        "effetNormal": "<strong>Effet:</strong> Révèle le nom et l'élément d'affiliation d'une cible, ainsi que son armure physique et élémentaire, et ses points de vie. Révèle également son Esquive, sa Résistance altérations, ses chances de coup critiques physiques et magiques.",
         "effetCritique": "<strong>Coup Critique: </strong> Révèle une capacité de la cible."
       },
       {
@@ -416,7 +416,7 @@
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 12",
         "resistance": "<strong>Sans effet si:</strong> -",
-        "effetNormal": "<strong>Effet:</strong> La cible subit 10 + (Puiss. Sorts) dégâts de <span style=\"color: #d0d0d0; font-weight: bold; background: rgba(0, 0, 0, 0.4); padding: 2px 4px; border-radius: 3px;\">Divin</span>.<br><br> Si la cible est d'élément <span style=\"color: #8b5cf6; font-weight: bold;\">Maléfique</span>, et que sa Résistance altération < Puiss. Sorts du lanceur, alors elle est alors <span class=\"etat-link\" data-etat=\"Entravé/Entoilé/Embourbé\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Entravé</span> pendant 2 tours.",
+        "effetNormal": "<strong>Effet:</strong> La cible subit 10 + (Puiss. Sorts) dégâts de <span style=\"color: #d0d0d0; font-weight: bold; background: rgba(0, 0, 0, 0.4); padding: 2px 4px; border-radius: 3px;\">Divin</span>.<br><br> Si la cible est d'élément <span style=\"color: #8b5cf6; font-weight: bold;\">Maléfique</span>, et que sa Résistance altérations < Puiss. Sorts du lanceur, alors elle est alors <span class=\"etat-link\" data-etat=\"Entravé/Entoilé/Embourbé\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Entravé</span> pendant 2 tours.",
         "effetCritique": "<strong>Coup Critique: </strong> Les dégâts passent à 15 + (Puiss. Sorts)."
       },
       {
@@ -439,7 +439,7 @@
         "portee": "🎯 <strong>Portée:</strong> 9m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 2 tours",
         "coutMana": "🔵 <strong>Coût mana:</strong> 18",
-        "resistance": "<strong>Sans effet si:</strong> \n<br>-Résistance altération >= Puiss. Sorts du héros.\n<br>- Taille Grand ou plus",
+        "resistance": "<strong>Sans effet si:</strong> \n<br>-Résistance altérations >= Puiss. Sorts du héros.\n<br>- Taille Grand ou plus",
         "effetNormal": "<strong>Effet:</strong> Les adversaires dans la zone (9m autour du héros) sont repoussées autour de la zone, et ne peuvent plus y pénétrer.\n\n<br><br>Chaque début de tour, le lanceur peut continuer de <b>canaliser</b> le sort (ne pouvant plus esquiver ou faire d'actions ou se déplacer). S'il le fait, la zone reste alors inaccessible pour les adversaires, et le lanceur consomme 5 points de mana.",
         "effetCritique": "<strong>Coup Critique: </strong> Les cibles repoussées subissent (10 + Puiss. Sorts), dégâts de <span style=\"color: #f5f5f5; font-weight: bold; background: rgba(100, 100, 100, 0.3); padding: 2px 4px; border-radius: 3px;\">Divin</span>."
       },
