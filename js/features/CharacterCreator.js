@@ -451,6 +451,29 @@ class CharacterCreator {
       });
     }
 
+    // Dons d'armure élémentaire
+    if (config.dons) {
+      config.dons.forEach(donName => {
+        const don = this.findDon(donName);
+        if (don) {
+          // Résistance élémentaire 1: +5 Feu, Eau, Terre, Air
+          if (don.nom === 'Résistance élémentaire 1') {
+            armure.Feu += 5;
+            armure.Eau += 5;
+            armure.Terre += 5;
+            armure.Air += 5;
+          }
+          // Résistance élémentaire 2: +5 Lumière, Nuit, Divin, Maléfique
+          if (don.nom === 'Résistance élémentaire 2') {
+            armure.Lumière += 5;
+            armure.Nuit += 5;
+            armure.Divin += 5;
+            armure.Maléfique += 5;
+          }
+        }
+      });
+    }
+
     return armure;
   }
 
@@ -550,6 +573,9 @@ class CharacterCreator {
     }
     if (nom === "Enchantement de force permanente") {
       stats.Force += 4;
+    }
+    if (nom === 'Volonté sans faille') {
+      stats.Volonté += 4;
     }
   }
 

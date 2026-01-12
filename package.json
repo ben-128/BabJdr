@@ -12,7 +12,8 @@
     "icons": "node scripts/generate-pwa-icons.js",
     "icons-png": "node scripts/generate-png-icons.js",
     "monster-icons": "node scripts/monster-icons/generate-icons.js",
-    "npc-icons": "node scripts/npc-icons/generate-icons.js"
+    "npc-icons": "node scripts/npc-icons/generate-icons.js",
+    "tobin-pdf": "node scripts/generate-tobin-icon.js"
   },
   "keywords": [
     "jdr",
