@@ -6,7 +6,7 @@
     "titre": "Cartes du destin",
     "introduction": "Tirez au sort une carte du destin avec un d6 :",
     "cartes": [
-      "Au choix, (5 Initiative et 3 Fortune) ou (1 Esquive et 2 résistance altération).",
+      "Au choix, (5 Initiative et 3 Fortune) ou (1 Esquive et 1 résistance altération).",
       "A répartir: 2 points de statistiques parmis celles qui n'ont pas la valeur la plus élevée.",
       "Au choix, 4 points de vie maximum ou 6 points de mana maximum.",
       "Une compétence rang 1 au choix.",

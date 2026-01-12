@@ -536,7 +536,7 @@
         "Une main",
         "Dague"
       ],
-      "effet": "<strong>Dégâts: </strong> Inflige (4  + Force) points de dégâts physiques.\n<br> Si la cible a une résistance altération inférieure à 5, elle subit l'état <span class=\"etat-link\" data-etat=\"Empoisonné\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Empoisonné</span> 2, pendant 5 tours.",
+      "effet": "<strong>Dégâts: </strong> Inflige (4  + Force) points de dégâts physiques.\n<br> Si la cible a une résistance altération inférieure à 2, elle subit l'état <span class=\"etat-link\" data-etat=\"Empoisonné\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Empoisonné</span> 2, pendant 5 tours.",
       "prix": "🔷 <strong>Prix:</strong> ?",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },

@@ -47,7 +47,7 @@
       },
       {
         "nom": "Dur à cuire",
-        "description": "Augmente les points de vie maximum de 4 et la résistance altération de 2.",
+        "description": "Augmente les points de vie maximum de 4 et la résistance altération de 1.",
         "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
@@ -233,7 +233,7 @@
       },
       {
         "nom": "Cri intimidant",
-        "description": "Le guerrier peut utiliser une action principale, pour effrayer toutes les cibles à moins de 12m, qui passeront dans l'état <span class=\"etat-link\" data-etat=\"Endormi/assommé/Effrayé\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">effrayé</span> pendant 1 tour.\n\n<br>\nLes cibles ne peuvent  être effrayés qu'une seule fois par combat.\n<br><br>Sans effet sur les cibles ayant une Résistance altération > à 5.<br> Ce chiffre peut être augmenté via un test de compétence éloquence, de 10 par point/effort.",
+        "description": "Le guerrier peut utiliser une action principale, pour effrayer toutes les cibles à moins de 12m, qui passeront dans l'état <span class=\"etat-link\" data-etat=\"Endormi/assommé/Effrayé\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">effrayé</span> pendant 1 tour.\n\n<br>\nLes cibles ne peuvent  être effrayés qu'une seule fois par combat.\n<br><br>Sans effet sur les cibles ayant une Résistance altération > à 2.<br> Ce chiffre peut être augmenté via un test de compétence éloquence, de 3 par point/effort.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -293,7 +293,7 @@
       },
       {
         "nom": "Provocation",
-        "description": "Le guerrier peut utiliser une action principale, pour provoquer toutes les cibles à moins de 12m, qui le cibleront alors au prochain tour.<br><br>Sans effet sur les cibles ayant une Résistance altération &gt; à 5.<br> Ce chiffre peut être augmenté via un test de compétence éloquence, de 10 par point/effort.",
+        "description": "Le guerrier peut utiliser une action principale, pour provoquer toutes les cibles à moins de 12m, qui le cibleront alors au prochain tour.<br><br>Sans effet sur les cibles ayant une Résistance altération &gt; à 2.<br> Ce chiffre peut être augmenté via un test de compétence éloquence, de 3 par point/effort.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -407,7 +407,7 @@
       },
       {
         "nom": "Piège Improvisé",
-        "description": "Une fois par combat, le rôdeur peut créer et placer un piège sur une zone de 3mx3m, à moins de 3m du héros.\n  <br><br>Lorsqu'un ennemi entre dans la zone, il subit (Agilité du rôdeur) points de dégâts physiques.<br>Si sa résistance altération est inférieure à l'intelligence du héros, il subit l'état <span class=\"etat-link\" data-etat=\"Ralenti\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ralenti</span> pendant 5 tours.\n<br>Le piège est alors détruit.",
+        "description": "Une fois par combat, le rôdeur peut créer et placer un piège sur une zone de 3mx3m, à moins de 3m du héros.\n  <br><br>Lorsqu'un ennemi entre dans la zone, il subit (Agilité du rôdeur) points de dégâts physiques.<br>Si sa résistance altération est inférieure à la Puiss. Sorts du héros, il subit l'état <span class=\"etat-link\" data-etat=\"Ralenti\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ralenti</span> pendant 5 tours.\n<br>Le piège est alors détruit.",
         "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Intelligence 5",
         "cout": "1 point de don"
       },
@@ -419,7 +419,7 @@
       },
       {
         "nom": "Poison",
-        "description": "Peut utiliser une action secondaire pour rajouter du poison à la prochaine attaque physique.\n<br><br> En cas d'attaque réussie, si la cible a une Résistance altération < 2 x N, alors la cible subira <span class=\"etat-link\" data-etat=\"Empoisonné\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Empoisonné</span> N pendant 3 tours, où N est le niveau du héros.",
+        "description": "Peut utiliser une action secondaire pour rajouter du poison à la prochaine attaque physique.\n<br><br> En cas d'attaque réussie, si la cible a une Résistance altération < N, alors la cible subira <span class=\"etat-link\" data-etat=\"Empoisonné\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Empoisonné</span> N pendant 3 tours, où N est le niveau du héros.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "2 points de don"
       },
@@ -683,7 +683,7 @@
       },
       {
         "nom": "Renvoi de Sort",
-        "description": "Une fois par combat, lorsque le héros est ciblé par un sort d'altération magique, ou un sort pouvant être esquivé, il peut utiliser une action secondaire pour tenter de le renvoyer à l'expéditeur. <br><br>Intelligence du héros contre Résistance altération de l'expéditeur. En cas de succès (strictement supérieur), le sort affecte l'expéditeur au lieu du héros.",
+        "description": "Une fois par combat, lorsque le héros est ciblé par un sort d'altération magique, ou un sort pouvant être esquivé, il peut utiliser une action secondaire pour tenter de le renvoyer à l'expéditeur. <br><br>Puiss. Sorts du héros contre Résistance altération de l'expéditeur. En cas de succès (strictement supérieur), le sort affecte l'expéditeur au lieu du héros.",
         "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Intelligence 10.",
         "cout": "1 point de don"
       },
