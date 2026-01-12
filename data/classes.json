@@ -93,7 +93,7 @@
   {
     "nom": "Enchanteur",
     "resume": "Détenteur d'une magie singulière de soutien et d'altération, il affaiblit ses ennemis tout en amplifiant les capacités de ses alliés",
-    "capacites": "<ul><li><em>Équipement d'enchanteur</em> : bâtons (une et deux mains), catalyseurs, Robes.</li>\n<li><em>Sorts d'enchanteur</em> : Apprend et lance des <a href=\"#/sorts-sorts-d-enchanteur\" style=\"color: var(--accent); text-decoration: underline;\"> sorts d'Enchanteur</a>.</li>\n<li><em>Armes enchantées</em> : Les attaques avec des armes physiques infligent des dégâts élémentaires de l'élément d'affiliation du héros.</li>\n<li><em>Rituel d'affinité élémentaire</em> : Par un rituel de 10 minutes, peut copier l'élément d'affiliation d'une cible (créature ou joueur, vivante ou morte) pour l'appliquer à lui-même.</li></ul>",
+    "capacites": "<ul><li><em>Équipement d'enchanteur</em> : bâtons (une et deux mains), catalyseurs, Robes.</li>\n<li><em>Sorts d'enchanteur</em> : Apprend et lance des <a href=\"#/sorts-sorts-d-enchanteur\" style=\"color: var(--accent); text-decoration: underline;\"> sorts d'Enchanteur</a>.</li>\n<li><em>Armes enchantées</em> : Les attaques physiques infligent des dégâts élémentaires supplémentaires de l'élément d'affiliation du héros, d'une valeur égale au niveau du héros.</li>\n<li><em>Rituel d'affinité élémentaire</em> : Par un rituel de 10 minutes, peut copier l'élément d'affiliation d'une cible (créature ou joueur, vivante ou morte) pour l'appliquer à lui-même.</li></ul>",
     "sousClasses": [
       {
         "nom": "Esprit de la grande Fée",
