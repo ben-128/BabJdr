@@ -1401,10 +1401,21 @@ class CharacterCreatorUI {
         const prerequisCheck = this.checkDonPrerequisites(don);
         const isSelected = this.currentConfig.dons.includes(don.nom);
 
-        donBtn.textContent = don.nom;
+        // Description nettoyée pour le tooltip et l'aperçu
+        const cleanDesc = don.description.replace(/<[^>]*>/g, '').trim();
+        const shortDesc = cleanDesc.substring(0, 20) + (cleanDesc.length > 20 ? '...' : '');
 
-        // Description nettoyée pour le tooltip
-        const cleanDesc = don.description.replace(/<[^>]*>/g, '');
+        // Créer le contenu du bouton avec nom et aperçu
+        const nameSpan = document.createElement('span');
+        nameSpan.className = 'don-btn-name';
+        nameSpan.textContent = don.nom;
+
+        const descSpan = document.createElement('span');
+        descSpan.className = 'don-btn-desc';
+        descSpan.textContent = shortDesc;
+
+        donBtn.appendChild(nameSpan);
+        donBtn.appendChild(descSpan);
 
         if (!prerequisCheck.valid && !isSelected) {
           donBtn.disabled = true;

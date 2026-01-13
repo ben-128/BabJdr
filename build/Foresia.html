@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2026-01-13T14:29:11.686Z by JdrBab Build System -->
+<!-- Generated on 2026-01-13T14:30:22.192Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -4857,6 +4857,23 @@ article[data-page="enchanteur"] .illus img:hover,
   transition: all 0.2s ease;
   font-size: 0.9rem;
   -webkit-tap-highlight-color: transparent;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.character-creator-form .don-btn-name {
+  font-weight: 500;
+}
+
+.character-creator-form .don-btn-desc {
+  font-size: 0.75rem;
+  color: #888;
+  font-weight: normal;
+}
+
+.character-creator-form .don-btn.selected .don-btn-desc {
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .character-creator-form .don-btn:hover:not(:disabled),
@@ -13353,7 +13370,7 @@ hr,
 
     // Mark as standalone version for renderer with build timestamp
     window.STANDALONE_VERSION = true;
-    window.BUILD_VERSION = '2026-01-13T14:29:11.688Z';
+    window.BUILD_VERSION = '2026-01-13T14:30:22.194Z';
 
     // Version check - clear old data if version changed
     (function() {
@@ -26748,10 +26765,21 @@ class CharacterCreatorUI {
         const prerequisCheck = this.checkDonPrerequisites(don);
         const isSelected = this.currentConfig.dons.includes(don.nom);
 
-        donBtn.textContent = don.nom;
+        // Description nettoyée pour le tooltip et l'aperçu
+        const cleanDesc = don.description.replace(/<[^>]*>/g, '').trim();
+        const shortDesc = cleanDesc.substring(0, 20) + (cleanDesc.length > 20 ? '...' : '');
 
-        // Description nettoyée pour le tooltip
-        const cleanDesc = don.description.replace(/<[^>]*>/g, '');
+        // Créer le contenu du bouton avec nom et aperçu
+        const nameSpan = document.createElement('span');
+        nameSpan.className = 'don-btn-name';
+        nameSpan.textContent = don.nom;
+
+        const descSpan = document.createElement('span');
+        descSpan.className = 'don-btn-desc';
+        descSpan.textContent = shortDesc;
+
+        donBtn.appendChild(nameSpan);
+        donBtn.appendChild(descSpan);
 
         if (!prerequisCheck.valid && !isSelected) {
           donBtn.disabled = true;

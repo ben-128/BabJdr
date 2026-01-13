@@ -3273,6 +3273,23 @@ article[data-page="enchanteur"] .illus img:hover,
   transition: all 0.2s ease;
   font-size: 0.9rem;
   -webkit-tap-highlight-color: transparent;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.character-creator-form .don-btn-name {
+  font-weight: 500;
+}
+
+.character-creator-form .don-btn-desc {
+  font-size: 0.75rem;
+  color: #888;
+  font-weight: normal;
+}
+
+.character-creator-form .don-btn.selected .don-btn-desc {
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .character-creator-form .don-btn:hover:not(:disabled),
