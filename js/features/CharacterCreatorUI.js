@@ -42,7 +42,10 @@ class CharacterCreatorUI {
   generateFormHTML() {
     return `
       <div class="character-creator-form">
-        <h3>Créer votre personnage</h3>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <h3 style="margin: 0;">Créer votre personnage</h3>
+          <button id="btn-reset" class="btn-base" style="background: #ef4444; color: white; padding: 0.5rem 1rem;">🔄 Reset</button>
+        </div>
 
         <!-- Niveau -->
         <div class="form-section">
@@ -507,6 +510,78 @@ class CharacterCreatorUI {
     // Bouton calculer
     const btnCalculate = document.getElementById('btn-calculate');
     btnCalculate?.addEventListener('click', () => this.calculateAndPreview());
+
+    // Bouton reset
+    const btnReset = document.getElementById('btn-reset');
+    btnReset?.addEventListener('click', () => this.resetForm());
+  }
+
+  /**
+   * Réinitialiser le formulaire
+   */
+  resetForm() {
+    // Réinitialiser la configuration
+    this.currentConfig = {
+      level: 1,
+      className: null,
+      subClassName: null,
+      element: null,
+      dons: [],
+      carteDestin: null,
+      carteDestinChoices: {},
+      donBonuses: {},
+      equipement: [],
+      budgetEclats: 120
+    };
+
+    // Réinitialiser le personnage calculé
+    this.calculatedCharacter = null;
+
+    // Réinitialiser les champs du formulaire
+    document.getElementById('char-level').value = 1;
+    document.getElementById('char-class').value = '';
+    document.getElementById('char-subclass').value = '';
+
+    // Cacher les sections
+    document.getElementById('subclass-section').style.display = 'none';
+    document.getElementById('element-section').style.display = 'none';
+    document.getElementById('carte-destin-section').style.display = 'none';
+    document.getElementById('dons-section').style.display = 'none';
+    document.getElementById('equipement-section').style.display = 'none';
+    document.getElementById('stats-preview').style.display = 'none';
+
+    // Réinitialiser la carte du destin
+    document.getElementById('carte-destin-result').style.display = 'none';
+    document.getElementById('carte-destin-manual').style.display = 'none';
+    document.getElementById('carte-destin-select').value = '';
+
+    // Réinitialiser l'élément sélectionné
+    document.getElementById('element-selected').textContent = 'Aucun élément sélectionné';
+    document.getElementById('element-selected').style.color = '';
+    document.querySelectorAll('.element-btn').forEach(btn => btn.classList.remove('selected'));
+
+    // Réinitialiser les dons
+    document.getElementById('dons-count').textContent = '0';
+    document.getElementById('dons-list').textContent = 'Aucun';
+    document.getElementById('don-statistiques-controls').style.display = 'none';
+
+    // Réinitialiser l'équipement
+    document.getElementById('budget-restant').textContent = '120';
+    document.getElementById('equipement-selected').textContent = 'Aucun équipement sélectionné';
+    document.querySelectorAll('.equipment-card').forEach(card => {
+      card.classList.remove('selected');
+      const btn = card.querySelector('.btn-add-equipment');
+      if (btn) {
+        btn.textContent = '+';
+        btn.style.background = '#22c55e';
+      }
+    });
+    document.querySelectorAll('.consumable-quantity').forEach(span => {
+      span.textContent = '0';
+    });
+
+    // Scroller vers le haut
+    document.querySelector('.character-creator-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   /**
