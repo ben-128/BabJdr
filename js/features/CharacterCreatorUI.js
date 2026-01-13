@@ -44,8 +44,13 @@ class CharacterCreatorUI {
       <div class="character-creator-form">
         <div class="form-header">
           <h3>Créer votre personnage</h3>
-          <button id="btn-reset" class="btn-base btn-reset">🔄 Reset</button>
+          <div class="form-header-buttons">
+            <button id="btn-fullscreen" class="btn-base btn-fullscreen" title="Mode plein écran">⛶</button>
+            <button id="btn-reset" class="btn-base btn-reset">🔄 Reset</button>
+          </div>
         </div>
+        <!-- Bouton fermer plein écran (visible uniquement en fullscreen) -->
+        <button id="btn-exit-fullscreen" class="btn-exit-fullscreen" style="display: none;">✕ Fermer</button>
 
         <!-- Niveau -->
         <div class="form-section">
@@ -514,6 +519,96 @@ class CharacterCreatorUI {
     // Bouton reset
     const btnReset = document.getElementById('btn-reset');
     btnReset?.addEventListener('click', () => this.resetForm());
+
+    // Bouton plein écran (mobile uniquement)
+    const btnFullscreen = document.getElementById('btn-fullscreen');
+    btnFullscreen?.addEventListener('click', () => this.enterFullscreen());
+
+    // Bouton quitter plein écran
+    const btnExitFullscreen = document.getElementById('btn-exit-fullscreen');
+    btnExitFullscreen?.addEventListener('click', () => this.exitFullscreen());
+
+    // Gérer la sortie du plein écran via la touche Escape ou le bouton retour
+    document.addEventListener('fullscreenchange', () => this.onFullscreenChange());
+    document.addEventListener('webkitfullscreenchange', () => this.onFullscreenChange());
+  }
+
+  /**
+   * Entrer en mode plein écran avec orientation paysage
+   */
+  async enterFullscreen() {
+    const form = document.querySelector('.character-creator-form');
+    if (!form) return;
+
+    try {
+      // Entrer en plein écran
+      if (form.requestFullscreen) {
+        await form.requestFullscreen();
+      } else if (form.webkitRequestFullscreen) {
+        await form.webkitRequestFullscreen();
+      }
+
+      // Forcer l'orientation paysage si supporté
+      if (screen.orientation && screen.orientation.lock) {
+        try {
+          await screen.orientation.lock('landscape');
+        } catch (e) {
+          console.log('Orientation lock not supported:', e);
+        }
+      }
+
+      // Afficher le bouton de fermeture
+      const btnExit = document.getElementById('btn-exit-fullscreen');
+      if (btnExit) btnExit.style.display = 'block';
+
+      // Ajouter la classe fullscreen
+      form.classList.add('fullscreen-mode');
+
+    } catch (error) {
+      console.error('Fullscreen error:', error);
+    }
+  }
+
+  /**
+   * Quitter le mode plein écran
+   */
+  async exitFullscreen() {
+    try {
+      if (document.exitFullscreen) {
+        await document.exitFullscreen();
+      } else if (document.webkitExitFullscreen) {
+        await document.webkitExitFullscreen();
+      }
+
+      // Déverrouiller l'orientation
+      if (screen.orientation && screen.orientation.unlock) {
+        screen.orientation.unlock();
+      }
+    } catch (error) {
+      console.error('Exit fullscreen error:', error);
+    }
+  }
+
+  /**
+   * Gérer le changement d'état plein écran
+   */
+  onFullscreenChange() {
+    const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
+    const form = document.querySelector('.character-creator-form');
+    const btnExit = document.getElementById('btn-exit-fullscreen');
+
+    if (!isFullscreen) {
+      // On est sorti du plein écran
+      if (form) form.classList.remove('fullscreen-mode');
+      if (btnExit) btnExit.style.display = 'none';
+
+      // Déverrouiller l'orientation
+      if (screen.orientation && screen.orientation.unlock) {
+        try {
+          screen.orientation.unlock();
+        } catch (e) {}
+      }
+    }
   }
 
   /**

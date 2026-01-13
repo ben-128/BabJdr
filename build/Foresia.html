@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2026-01-13T13:01:07.860Z by JdrBab Build System -->
+<!-- Generated on 2026-01-13T13:19:14.809Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -4576,12 +4576,71 @@ article[data-page="enchanteur"] .illus img:hover,
   min-width: 150px;
 }
 
+.character-creator-form .form-header-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
 .character-creator-form .btn-reset {
   background: #ef4444;
   color: white;
   padding: 0.5rem 1rem;
   white-space: nowrap;
-  flex-shrink: 0;
+}
+
+.character-creator-form .btn-fullscreen {
+  background: #3b82f6;
+  color: white;
+  padding: 0.5rem 0.75rem;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+/* Hide fullscreen button on desktop */
+@media (min-width: 769px) {
+  .character-creator-form .btn-fullscreen {
+    display: none;
+  }
+}
+
+/* Exit fullscreen button */
+.character-creator-form .btn-exit-fullscreen {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 10001;
+  background: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+/* Fullscreen mode styles */
+.character-creator-form.fullscreen-mode {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  max-width: none !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 1rem !important;
+  padding-top: 60px !important;
+  z-index: 10000 !important;
+  background: var(--ui-blue, #1a1a2e) !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+
+.character-creator-form.fullscreen-mode .btn-fullscreen {
+  display: none;
 }
 
 .character-creator-form h3 {
@@ -13205,7 +13264,7 @@ hr,
 
     // Mark as standalone version for renderer with build timestamp
     window.STANDALONE_VERSION = true;
-    window.BUILD_VERSION = '2026-01-13T13:01:07.862Z';
+    window.BUILD_VERSION = '2026-01-13T13:19:14.811Z';
 
     // Version check - clear old data if version changed
     (function() {
@@ -25243,8 +25302,13 @@ class CharacterCreatorUI {
       <div class="character-creator-form">
         <div class="form-header">
           <h3>Créer votre personnage</h3>
-          <button id="btn-reset" class="btn-base btn-reset">🔄 Reset</button>
+          <div class="form-header-buttons">
+            <button id="btn-fullscreen" class="btn-base btn-fullscreen" title="Mode plein écran">⛶</button>
+            <button id="btn-reset" class="btn-base btn-reset">🔄 Reset</button>
+          </div>
         </div>
+        <!-- Bouton fermer plein écran (visible uniquement en fullscreen) -->
+        <button id="btn-exit-fullscreen" class="btn-exit-fullscreen" style="display: none;">✕ Fermer</button>
 
         <!-- Niveau -->
         <div class="form-section">
@@ -25713,6 +25777,96 @@ class CharacterCreatorUI {
     // Bouton reset
     const btnReset = document.getElementById('btn-reset');
     btnReset?.addEventListener('click', () => this.resetForm());
+
+    // Bouton plein écran (mobile uniquement)
+    const btnFullscreen = document.getElementById('btn-fullscreen');
+    btnFullscreen?.addEventListener('click', () => this.enterFullscreen());
+
+    // Bouton quitter plein écran
+    const btnExitFullscreen = document.getElementById('btn-exit-fullscreen');
+    btnExitFullscreen?.addEventListener('click', () => this.exitFullscreen());
+
+    // Gérer la sortie du plein écran via la touche Escape ou le bouton retour
+    document.addEventListener('fullscreenchange', () => this.onFullscreenChange());
+    document.addEventListener('webkitfullscreenchange', () => this.onFullscreenChange());
+  }
+
+  /**
+   * Entrer en mode plein écran avec orientation paysage
+   */
+  async enterFullscreen() {
+    const form = document.querySelector('.character-creator-form');
+    if (!form) return;
+
+    try {
+      // Entrer en plein écran
+      if (form.requestFullscreen) {
+        await form.requestFullscreen();
+      } else if (form.webkitRequestFullscreen) {
+        await form.webkitRequestFullscreen();
+      }
+
+      // Forcer l'orientation paysage si supporté
+      if (screen.orientation && screen.orientation.lock) {
+        try {
+          await screen.orientation.lock('landscape');
+        } catch (e) {
+          console.log('Orientation lock not supported:', e);
+        }
+      }
+
+      // Afficher le bouton de fermeture
+      const btnExit = document.getElementById('btn-exit-fullscreen');
+      if (btnExit) btnExit.style.display = 'block';
+
+      // Ajouter la classe fullscreen
+      form.classList.add('fullscreen-mode');
+
+    } catch (error) {
+      console.error('Fullscreen error:', error);
+    }
+  }
+
+  /**
+   * Quitter le mode plein écran
+   */
+  async exitFullscreen() {
+    try {
+      if (document.exitFullscreen) {
+        await document.exitFullscreen();
+      } else if (document.webkitExitFullscreen) {
+        await document.webkitExitFullscreen();
+      }
+
+      // Déverrouiller l'orientation
+      if (screen.orientation && screen.orientation.unlock) {
+        screen.orientation.unlock();
+      }
+    } catch (error) {
+      console.error('Exit fullscreen error:', error);
+    }
+  }
+
+  /**
+   * Gérer le changement d'état plein écran
+   */
+  onFullscreenChange() {
+    const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
+    const form = document.querySelector('.character-creator-form');
+    const btnExit = document.getElementById('btn-exit-fullscreen');
+
+    if (!isFullscreen) {
+      // On est sorti du plein écran
+      if (form) form.classList.remove('fullscreen-mode');
+      if (btnExit) btnExit.style.display = 'none';
+
+      // Déverrouiller l'orientation
+      if (screen.orientation && screen.orientation.unlock) {
+        try {
+          screen.orientation.unlock();
+        } catch (e) {}
+      }
+    }
   }
 
   /**
