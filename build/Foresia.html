@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2026-01-13T12:04:45.261Z by JdrBab Build System -->
+<!-- Generated on 2026-01-13T12:22:32.556Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13142,7 +13142,7 @@ hr,
 
     // Mark as standalone version for renderer with build timestamp
     window.STANDALONE_VERSION = true;
-    window.BUILD_VERSION = '2026-01-13T12:04:45.263Z';
+    window.BUILD_VERSION = '2026-01-13T12:22:32.558Z';
 
     // Version check - clear old data if version changed
     (function() {
@@ -24367,6 +24367,24 @@ class CharacterCreator {
 
   async loadData() {
     try {
+      // En mode standalone, utiliser les variables globales
+      if (window.STANDALONE_VERSION) {
+        this.classesData = window.CLASSES || [];
+        this.donsData = window.DONS || [];
+        this.sortsData = window.SORTS || {};
+        this.objetsData = window.OBJETS?.objets || [];
+
+        const collectionsData = window.COLLECTIONS || { collections: [] };
+        const collectionDepart = collectionsData.collections.find(c => c.id === 'd-part');
+        this.objetsDepart = collectionDepart ? collectionDepart.objets.map(num =>
+          this.objetsData.find(obj => obj.numero === num)
+        ).filter(obj => obj !== undefined) : [];
+
+        console.log('CharacterCreator: Données chargées depuis variables globales');
+        return;
+      }
+
+      // En mode dev, charger depuis les fichiers JSON
       const [classesRes, donsRes, objetsRes, collectionsRes, sortsRes] = await Promise.all([
         fetch('data/classes.json'),
         fetch('data/dons.json'),

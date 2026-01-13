@@ -25,6 +25,24 @@ class CharacterCreator {
 
   async loadData() {
     try {
+      // En mode standalone, utiliser les variables globales
+      if (window.STANDALONE_VERSION) {
+        this.classesData = window.CLASSES || [];
+        this.donsData = window.DONS || [];
+        this.sortsData = window.SORTS || {};
+        this.objetsData = window.OBJETS?.objets || [];
+
+        const collectionsData = window.COLLECTIONS || { collections: [] };
+        const collectionDepart = collectionsData.collections.find(c => c.id === 'd-part');
+        this.objetsDepart = collectionDepart ? collectionDepart.objets.map(num =>
+          this.objetsData.find(obj => obj.numero === num)
+        ).filter(obj => obj !== undefined) : [];
+
+        console.log('CharacterCreator: Données chargées depuis variables globales');
+        return;
+      }
+
+      // En mode dev, charger depuis les fichiers JSON
       const [classesRes, donsRes, objetsRes, collectionsRes, sortsRes] = await Promise.all([
         fetch('data/classes.json'),
         fetch('data/dons.json'),
