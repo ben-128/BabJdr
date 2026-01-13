@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2026-01-13T14:30:22.192Z by JdrBab Build System -->
+<!-- Generated on 2026-01-13T14:50:01.679Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13370,7 +13370,7 @@ hr,
 
     // Mark as standalone version for renderer with build timestamp
     window.STANDALONE_VERSION = true;
-    window.BUILD_VERSION = '2026-01-13T14:30:22.194Z';
+    window.BUILD_VERSION = '2026-01-13T14:50:01.682Z';
 
     // Version check - clear old data if version changed
     (function() {
@@ -26767,7 +26767,7 @@ class CharacterCreatorUI {
 
         // Description nettoyée pour le tooltip et l'aperçu
         const cleanDesc = don.description.replace(/<[^>]*>/g, '').trim();
-        const shortDesc = cleanDesc.substring(0, 20) + (cleanDesc.length > 20 ? '...' : '');
+        const shortDesc = cleanDesc.substring(0, 45) + (cleanDesc.length > 45 ? '...' : '');
 
         // Créer le contenu du bouton avec nom et aperçu
         const nameSpan = document.createElement('span');
