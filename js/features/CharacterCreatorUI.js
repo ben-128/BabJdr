@@ -42,9 +42,9 @@ class CharacterCreatorUI {
   generateFormHTML() {
     return `
       <div class="character-creator-form">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-          <h3 style="margin: 0;">Créer votre personnage</h3>
-          <button id="btn-reset" class="btn-base" style="background: #ef4444; color: white; padding: 0.5rem 1rem;">🔄 Reset</button>
+        <div class="form-header">
+          <h3>Créer votre personnage</h3>
+          <button id="btn-reset" class="btn-base btn-reset">🔄 Reset</button>
         </div>
 
         <!-- Niveau -->

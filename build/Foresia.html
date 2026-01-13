@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2026-01-13T12:00:50.969Z by JdrBab Build System -->
+<!-- Generated on 2026-01-13T12:04:45.261Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -4540,6 +4540,29 @@ article[data-page="enchanteur"] .illus img:hover,
   padding: 1rem;
 }
 
+.character-creator-form .form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.character-creator-form .form-header h3 {
+  margin: 0;
+  flex: 1;
+  min-width: 150px;
+}
+
+.character-creator-form .btn-reset {
+  background: #ef4444;
+  color: white;
+  padding: 0.5rem 1rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
 .character-creator-form h3 {
   color: var(--accent);
   margin-bottom: 1rem;
@@ -4554,21 +4577,15 @@ article[data-page="enchanteur"] .illus img:hover,
   margin-bottom: 1.5rem;
 }
 
-/* Select elements - Mobile First (native appearance) */
+/* Select elements - Completely native on mobile */
 .character-creator-form select {
   width: 100%;
   padding: 0.75rem;
-  border: 2px solid #666;
-  border-radius: 8px;
+  border: 1px solid #999;
+  border-radius: 4px;
   font-size: 16px; /* Prevents iOS zoom on focus */
   font-family: inherit;
   cursor: pointer;
-  /* Mobile: keep native appearance */
-  -webkit-appearance: menulist;
-  -moz-appearance: menulist;
-  appearance: menulist;
-  background: #2a2a50;
-  color: #e8e8e8;
 }
 
 .character-creator-form input[type="number"] {
@@ -4582,13 +4599,16 @@ article[data-page="enchanteur"] .illus img:hover,
   color: #e8e8e8;
 }
 
-/* Desktop only: custom dropdown arrow */
+/* Desktop only: custom styled dropdown */
 @media (min-width: 769px) {
   .character-creator-form select {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     background: #2a2a50 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23c0c0d0' d='M6 8L1 3h10z'/%3E%3C/svg%3E") no-repeat right 12px center;
+    color: #e8e8e8;
+    border: 2px solid #666;
+    border-radius: 8px;
     padding-right: 36px;
   }
 
@@ -4798,31 +4818,39 @@ article[data-page="enchanteur"] .illus img:hover,
 
 /* iOS/Mobile specific - Force completely native picker */
 @media (max-width: 768px) {
-  .character-creator-form select {
-    /* Reset everything to native */
+  /* Override global theme.css styles */
+  .character-creator-form select,
+  .character-creator-form select:focus,
+  .character-creator-form select:active {
     -webkit-appearance: menulist !important;
     -moz-appearance: menulist !important;
     appearance: menulist !important;
-    background: white !important;
-    color: black !important;
-    border: 1px solid #ccc !important;
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border: 1px solid #888 !important;
     background-image: none !important;
+    outline: none !important;
+    box-shadow: none !important;
   }
 
   .character-creator-form select option {
-    background: white !important;
-    color: black !important;
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    color: #000000 !important;
   }
 }
 
 /* iOS-specific fixes - Completely native */
 @supports (-webkit-touch-callout: none) {
-  .character-creator-form select {
+  .character-creator-form select,
+  .character-creator-form select:focus {
     -webkit-appearance: menulist !important;
     appearance: menulist !important;
     font-size: 16px !important;
-    background: white !important;
-    color: black !important;
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    color: #000000 !important;
     background-image: none !important;
   }
 }
@@ -13114,7 +13142,7 @@ hr,
 
     // Mark as standalone version for renderer with build timestamp
     window.STANDALONE_VERSION = true;
-    window.BUILD_VERSION = '2026-01-13T12:00:50.971Z';
+    window.BUILD_VERSION = '2026-01-13T12:04:45.263Z';
 
     // Version check - clear old data if version changed
     (function() {
@@ -25132,9 +25160,9 @@ class CharacterCreatorUI {
   generateFormHTML() {
     return `
       <div class="character-creator-form">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-          <h3 style="margin: 0;">Créer votre personnage</h3>
-          <button id="btn-reset" class="btn-base" style="background: #ef4444; color: white; padding: 0.5rem 1rem;">🔄 Reset</button>
+        <div class="form-header">
+          <h3>Créer votre personnage</h3>
+          <button id="btn-reset" class="btn-base btn-reset">🔄 Reset</button>
         </div>
 
         <!-- Niveau -->
