@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2026-01-13T15:11:56.836Z by JdrBab Build System -->
+<!-- Generated on 2026-01-13T15:54:29.153Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13370,7 +13370,7 @@ hr,
 
     // Mark as standalone version for renderer with build timestamp
     window.STANDALONE_VERSION = true;
-    window.BUILD_VERSION = '2026-01-13T15:11:56.838Z';
+    window.BUILD_VERSION = '2026-01-13T15:54:29.156Z';
 
     // Version check - clear old data if version changed
     (function() {
@@ -27243,66 +27243,210 @@ class CharacterCreatorUI {
         return `${base}`;
       };
 
+      // Styles pour les sections
+      const sectionStyle = `
+        background: linear-gradient(135deg, rgba(30, 30, 60, 0.9), rgba(20, 20, 40, 0.95));
+        border: 2px solid var(--ui-border, #4a4a6a);
+        border-radius: 12px;
+        padding: 1rem 1.25rem;
+        margin-bottom: 1rem;
+      `;
+      const headerStyle = `
+        color: var(--gold, #d4af37);
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin: 0 0 0.75rem 0;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--ui-border, #4a4a6a);
+      `;
+      const statBoxStyle = `
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 8px;
+        padding: 0.5rem 0.75rem;
+        text-align: center;
+      `;
+      const statLabelStyle = `color: var(--text-muted, #888); font-size: 0.75rem; display: block;`;
+      const statValueStyle = `color: var(--paper-ink, #e8e8e8); font-size: 1.1rem; font-weight: bold;`;
+
       let html = `
-        <div style="line-height: 1.6;">
-          <p><strong>${this.calculatedCharacter.classe}</strong> - Niveau ${this.calculatedCharacter.niveau}</p>
-          <p>Élément: ${this.calculatedCharacter.element}</p>
-          <br>
-          <hr style="border: none; border-top: 2px solid var(--gold); margin: 1.5rem 0;">
-          <p><strong>CARTE DU DESTIN</strong></p>
-          <p style="margin: 0.5rem 0;">${this.getCarteDestinText()}</p>
-          <hr style="border: none; border-top: 2px solid var(--gold); margin: 1.5rem 0;">
-          <br>
-          <p><strong>STATISTIQUES</strong> <span style="color: var(--text-muted); font-size: 0.85rem;">(avec équipement)</span></p>
-          <p>Force: ${formatStat('Force')} | Endurance: ${formatStat('Endurance')}</p>
-          <p>Agilité: ${formatStat('Agilité')} | Intelligence: ${formatStat('Intelligence')}</p>
-          <p>Volonté: ${formatStat('Volonté')} | Chance: ${formatStat('Chance')}</p>
-          <br>
-          <p><strong>RESSOURCES</strong></p>
-          <p>Vie: ${this.calculatedCharacter.vieActuelle} / ${this.calculatedCharacter.equipementVieBonus > 0
-            ? `${this.calculatedCharacter.vieMaxBase} <span style="color: #22c55e;">(${this.calculatedCharacter.vieMax})</span>`
-            : this.calculatedCharacter.vieMax}</p>
-          <p>Mana: ${this.calculatedCharacter.manaActuelle} / ${this.calculatedCharacter.equipementManaBonus > 0
-            ? `${this.calculatedCharacter.manaMaxBase} <span style="color: #22c55e;">(${this.calculatedCharacter.manaMax})</span>`
-            : this.calculatedCharacter.manaMax}</p>
-          <p>Efforts: ${this.calculatedCharacter.effortsActuels} / ${this.calculatedCharacter.effortsMax}</p>
-          <br>
-          <p><strong>COMBAT</strong></p>
-          <p>Initiative: ${this.calculatedCharacter.initiative.total} | Fortune: ${this.calculatedCharacter.fortune.total}</p>
-          <p>Esquive: ${this.calculatedCharacter.esquive.total} | Résist. Altér.: ${this.calculatedCharacter.resistanceAlterations.total}</p>
-          <p>Bonus Crit Physique: ${this.calculatedCharacter.coupCritiquePhysique.total} | Bonus Crit Sorts: ${this.calculatedCharacter.coupCritiqueSorts.total}</p>
-          <p>Puiss. Sorts: ${this.calculatedCharacter.puissanceSorts.total}</p>
-          <br>
-          <p><strong>ARMURE PHYSIQUE</strong></p>
-          <p>🛡️ Armure: ${armureDetails}</p>
-          <br>
-          <p><strong>ARMURES ÉLÉMENTAIRES</strong></p>
-          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.25rem 1rem;">
-            <p><span style="color: ${elemColors.Feu};">🔥 Feu:</span> ${armElem.Feu}</p>
-            <p><span style="color: ${elemColors.Eau};">💧 Eau:</span> ${armElem.Eau}</p>
-            <p><span style="color: ${elemColors.Terre};">🪨 Terre:</span> ${armElem.Terre}</p>
-            <p><span style="color: ${elemColors.Air};">💨 Air:</span> ${armElem.Air}</p>
-            <p><span style="color: ${elemColors.Lumière};">✨ Lumière:</span> ${armElem.Lumière}</p>
-            <p><span style="color: ${elemColors.Nuit};">🌙 Nuit:</span> ${armElem.Nuit}</p>
-            <p><span style="color: ${elemColors.Divin};">☀️ Divin:</span> ${armElem.Divin}</p>
-            <p><span style="color: ${elemColors.Maléfique};">👿 Maléfique:</span> ${armElem.Maléfique}</p>
+        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+
+          <!-- En-tête du personnage -->
+          <div style="${sectionStyle} background: linear-gradient(135deg, rgba(50, 40, 20, 0.9), rgba(30, 25, 15, 0.95)); border-color: var(--gold, #d4af37);">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+              <div>
+                <h3 style="margin: 0; color: var(--gold, #d4af37); font-size: 1.3rem;">${this.calculatedCharacter.classe}</h3>
+                <p style="margin: 0.25rem 0 0 0; color: var(--text-muted, #aaa);">Niveau ${this.calculatedCharacter.niveau}</p>
+              </div>
+              <div style="text-align: right;">
+                <img src="${this.elementIcons[this.calculatedCharacter.element]}" alt="${this.calculatedCharacter.element}" style="width: 40px; height: 40px; vertical-align: middle;">
+                <span style="color: var(--paper-ink, #e8e8e8); font-weight: bold; margin-left: 0.5rem;">${this.calculatedCharacter.element}</span>
+              </div>
+            </div>
           </div>
-          <br>
-          <p><strong>COMPÉTENCES</strong></p>
-          <p>Hardiesse: ${this.calculatedCharacter.competences.Hardiesse} | Finesse: ${this.calculatedCharacter.competences.Finesse}</p>
-          <p>Coordination: ${this.calculatedCharacter.competences.Coordination} | Réflexion: ${this.calculatedCharacter.competences.Réflexion}</p>
-          <p>Eloquence: ${this.calculatedCharacter.competences.Eloquence}</p>
-          <br>
-          <p><strong>DONS</strong></p>
-          ${this.getDonsListHTML()}
-          <br>
-          <p><strong>CAPACITÉS DE CLASSE</strong></p>
-          ${this.getCapacitesHTML()}
-          ${this.getSortsHTML()}
-          <br>
-          <p><strong>ÉQUIPEMENT</strong></p>
-          ${this.getEquipmentListHTML()}
-          <p style="margin-top: 0.5rem;"><strong>Budget restant:</strong> ${this.currentConfig.budgetEclats} éclats</p>
+
+          <!-- Carte du Destin -->
+          <div style="${sectionStyle} border-color: var(--gold, #d4af37); border-style: dashed;">
+            <h4 style="${headerStyle}">🎴 Carte du Destin</h4>
+            <p style="margin: 0; color: var(--paper-ink, #e8e8e8); font-style: italic;">${this.getCarteDestinText()}</p>
+          </div>
+
+          <!-- Statistiques -->
+          <div style="${sectionStyle}">
+            <h4 style="${headerStyle}">📊 Statistiques</h4>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem;">
+              <div style="${statBoxStyle}">
+                <span style="${statLabelStyle}">Force</span>
+                <span style="${statValueStyle}">${formatStat('Force')}</span>
+              </div>
+              <div style="${statBoxStyle}">
+                <span style="${statLabelStyle}">Agilité</span>
+                <span style="${statValueStyle}">${formatStat('Agilité')}</span>
+              </div>
+              <div style="${statBoxStyle}">
+                <span style="${statLabelStyle}">Endurance</span>
+                <span style="${statValueStyle}">${formatStat('Endurance')}</span>
+              </div>
+              <div style="${statBoxStyle}">
+                <span style="${statLabelStyle}">Intelligence</span>
+                <span style="${statValueStyle}">${formatStat('Intelligence')}</span>
+              </div>
+              <div style="${statBoxStyle}">
+                <span style="${statLabelStyle}">Volonté</span>
+                <span style="${statValueStyle}">${formatStat('Volonté')}</span>
+              </div>
+              <div style="${statBoxStyle}">
+                <span style="${statLabelStyle}">Chance</span>
+                <span style="${statValueStyle}">${formatStat('Chance')}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ressources -->
+          <div style="${sectionStyle}">
+            <h4 style="${headerStyle}">❤️ Ressources</h4>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem;">
+              <div style="${statBoxStyle} background: linear-gradient(135deg, rgba(220, 50, 50, 0.2), rgba(150, 30, 30, 0.3));">
+                <span style="${statLabelStyle}">Vie</span>
+                <span style="${statValueStyle} color: #ef4444;">${this.calculatedCharacter.vieActuelle} / ${this.calculatedCharacter.equipementVieBonus > 0 ? `<span style="color: #22c55e;">${this.calculatedCharacter.vieMax}</span>` : this.calculatedCharacter.vieMax}</span>
+              </div>
+              <div style="${statBoxStyle} background: linear-gradient(135deg, rgba(50, 100, 220, 0.2), rgba(30, 60, 150, 0.3));">
+                <span style="${statLabelStyle}">Mana</span>
+                <span style="${statValueStyle} color: #3b82f6;">${this.calculatedCharacter.manaActuelle} / ${this.calculatedCharacter.equipementManaBonus > 0 ? `<span style="color: #22c55e;">${this.calculatedCharacter.manaMax}</span>` : this.calculatedCharacter.manaMax}</span>
+              </div>
+              <div style="${statBoxStyle} background: linear-gradient(135deg, rgba(220, 180, 50, 0.2), rgba(150, 120, 30, 0.3));">
+                <span style="${statLabelStyle}">Efforts</span>
+                <span style="${statValueStyle} color: #f59e0b;">${this.calculatedCharacter.effortsActuels} / ${this.calculatedCharacter.effortsMax}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Combat -->
+          <div style="${sectionStyle}">
+            <h4 style="${headerStyle}">⚔️ Combat</h4>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem;">
+              <div style="${statBoxStyle}">
+                <span style="${statLabelStyle}">Initiative</span>
+                <span style="${statValueStyle}">${this.calculatedCharacter.initiative.total}</span>
+              </div>
+              <div style="${statBoxStyle}">
+                <span style="${statLabelStyle}">Fortune</span>
+                <span style="${statValueStyle}">${this.calculatedCharacter.fortune.total}</span>
+              </div>
+              <div style="${statBoxStyle}">
+                <span style="${statLabelStyle}">Esquive</span>
+                <span style="${statValueStyle}">${this.calculatedCharacter.esquive.total}</span>
+              </div>
+              <div style="${statBoxStyle}">
+                <span style="${statLabelStyle}">Résist. Altérations</span>
+                <span style="${statValueStyle}">${this.calculatedCharacter.resistanceAlterations.total}</span>
+              </div>
+              <div style="${statBoxStyle}">
+                <span style="${statLabelStyle}">Crit Physique</span>
+                <span style="${statValueStyle}">${this.calculatedCharacter.coupCritiquePhysique.total}</span>
+              </div>
+              <div style="${statBoxStyle}">
+                <span style="${statLabelStyle}">Crit Sorts</span>
+                <span style="${statValueStyle}">${this.calculatedCharacter.coupCritiqueSorts.total}</span>
+              </div>
+            </div>
+            <div style="${statBoxStyle} margin-top: 0.5rem;">
+              <span style="${statLabelStyle}">Puissance des Sorts</span>
+              <span style="${statValueStyle}">${this.calculatedCharacter.puissanceSorts.total}</span>
+            </div>
+          </div>
+
+          <!-- Armures -->
+          <div style="${sectionStyle}">
+            <h4 style="${headerStyle}">🛡️ Armures</h4>
+            <div style="${statBoxStyle} margin-bottom: 0.75rem; background: linear-gradient(135deg, rgba(100, 100, 100, 0.3), rgba(60, 60, 60, 0.4));">
+              <span style="${statLabelStyle}">Armure Physique</span>
+              <span style="${statValueStyle} font-size: 1.3rem;">${armureDetails}</span>
+            </div>
+            <p style="color: var(--text-muted, #888); font-size: 0.8rem; margin: 0 0 0.5rem 0; text-align: center;">Armures Élémentaires</p>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.4rem;">
+              <div style="${statBoxStyle} padding: 0.4rem;"><span style="color: ${elemColors.Feu};">🔥</span> <span style="font-weight: bold;">${armElem.Feu}</span></div>
+              <div style="${statBoxStyle} padding: 0.4rem;"><span style="color: ${elemColors.Eau};">💧</span> <span style="font-weight: bold;">${armElem.Eau}</span></div>
+              <div style="${statBoxStyle} padding: 0.4rem;"><span style="color: ${elemColors.Terre};">🪨</span> <span style="font-weight: bold;">${armElem.Terre}</span></div>
+              <div style="${statBoxStyle} padding: 0.4rem;"><span style="color: ${elemColors.Air};">💨</span> <span style="font-weight: bold;">${armElem.Air}</span></div>
+              <div style="${statBoxStyle} padding: 0.4rem;"><span style="color: ${elemColors.Lumière};">✨</span> <span style="font-weight: bold;">${armElem.Lumière}</span></div>
+              <div style="${statBoxStyle} padding: 0.4rem;"><span style="color: ${elemColors.Nuit};">🌙</span> <span style="font-weight: bold;">${armElem.Nuit}</span></div>
+              <div style="${statBoxStyle} padding: 0.4rem;"><span style="color: ${elemColors.Divin};">☀️</span> <span style="font-weight: bold;">${armElem.Divin}</span></div>
+              <div style="${statBoxStyle} padding: 0.4rem;"><span style="color: ${elemColors.Maléfique};">👿</span> <span style="font-weight: bold;">${armElem.Maléfique}</span></div>
+            </div>
+          </div>
+
+          <!-- Compétences -->
+          <div style="${sectionStyle}">
+            <h4 style="${headerStyle}">📚 Compétences</h4>
+            <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.4rem;">
+              <div style="${statBoxStyle} padding: 0.4rem;">
+                <span style="${statLabelStyle} font-size: 0.65rem;">Hardiesse</span>
+                <span style="${statValueStyle}">${this.calculatedCharacter.competences.Hardiesse}</span>
+              </div>
+              <div style="${statBoxStyle} padding: 0.4rem;">
+                <span style="${statLabelStyle} font-size: 0.65rem;">Finesse</span>
+                <span style="${statValueStyle}">${this.calculatedCharacter.competences.Finesse}</span>
+              </div>
+              <div style="${statBoxStyle} padding: 0.4rem;">
+                <span style="${statLabelStyle} font-size: 0.65rem;">Coordination</span>
+                <span style="${statValueStyle}">${this.calculatedCharacter.competences.Coordination}</span>
+              </div>
+              <div style="${statBoxStyle} padding: 0.4rem;">
+                <span style="${statLabelStyle} font-size: 0.65rem;">Réflexion</span>
+                <span style="${statValueStyle}">${this.calculatedCharacter.competences.Réflexion}</span>
+              </div>
+              <div style="${statBoxStyle} padding: 0.4rem;">
+                <span style="${statLabelStyle} font-size: 0.65rem;">Eloquence</span>
+                <span style="${statValueStyle}">${this.calculatedCharacter.competences.Eloquence}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dons -->
+          <div style="${sectionStyle}">
+            <h4 style="${headerStyle}">⭐ Dons</h4>
+            <div style="color: var(--paper-ink, #e8e8e8);">${this.getDonsListHTML()}</div>
+          </div>
+
+          <!-- Capacités de classe -->
+          <div style="${sectionStyle}">
+            <h4 style="${headerStyle}">🎭 Capacités de Classe</h4>
+            <div style="color: var(--paper-ink, #e8e8e8);">${this.getCapacitesHTML()}</div>
+            ${this.getSortsHTML()}
+          </div>
+
+          <!-- Équipement -->
+          <div style="${sectionStyle}">
+            <h4 style="${headerStyle}">🎒 Équipement</h4>
+            <div style="color: var(--paper-ink, #e8e8e8);">${this.getEquipmentListHTML()}</div>
+            <div style="margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--ui-border, #4a4a6a); text-align: center;">
+              <span style="color: var(--text-muted, #888);">Budget restant:</span>
+              <span style="color: var(--gold, #d4af37); font-weight: bold; margin-left: 0.5rem;">💎 ${this.currentConfig.budgetEclats} éclats</span>
+            </div>
+          </div>
+
         </div>
       `;
 
