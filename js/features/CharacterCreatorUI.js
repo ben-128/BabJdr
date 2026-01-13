@@ -1689,6 +1689,16 @@ class CharacterCreatorUI {
         'Maléfique': '#a855f7'
       };
 
+      // Helper pour afficher une stat avec bonus équipement
+      const formatStat = (statName) => {
+        const base = this.calculatedCharacter.stats[statName];
+        const bonus = this.calculatedCharacter.equipementStatBonuses[statName] || 0;
+        if (bonus > 0) {
+          return `${base} <span style="color: #22c55e;">(${base + bonus})</span>`;
+        }
+        return `${base}`;
+      };
+
       let html = `
         <div style="line-height: 1.6;">
           <p><strong>${this.calculatedCharacter.classe}</strong> - Niveau ${this.calculatedCharacter.niveau}</p>
@@ -1699,10 +1709,10 @@ class CharacterCreatorUI {
           <p style="margin: 0.5rem 0;">${this.getCarteDestinText()}</p>
           <hr style="border: none; border-top: 2px solid var(--gold); margin: 1.5rem 0;">
           <br>
-          <p><strong>STATISTIQUES</strong></p>
-          <p>Force: ${this.calculatedCharacter.stats.Force} | Endurance: ${this.calculatedCharacter.stats.Endurance}</p>
-          <p>Agilité: ${this.calculatedCharacter.stats.Agilité} | Intelligence: ${this.calculatedCharacter.stats.Intelligence}</p>
-          <p>Volonté: ${this.calculatedCharacter.stats.Volonté} | Chance: ${this.calculatedCharacter.stats.Chance}</p>
+          <p><strong>STATISTIQUES</strong> <span style="color: var(--text-muted); font-size: 0.85rem;">(avec équipement)</span></p>
+          <p>Force: ${formatStat('Force')} | Endurance: ${formatStat('Endurance')}</p>
+          <p>Agilité: ${formatStat('Agilité')} | Intelligence: ${formatStat('Intelligence')}</p>
+          <p>Volonté: ${formatStat('Volonté')} | Chance: ${formatStat('Chance')}</p>
           <br>
           <p><strong>RESSOURCES</strong></p>
           <p>Vie: ${this.calculatedCharacter.vieActuelle} / ${this.calculatedCharacter.vieMax}</p>

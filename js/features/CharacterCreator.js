@@ -85,6 +85,68 @@ class CharacterCreator {
   }
 
   /**
+   * Extraire les bonus de statistiques d'un équipement
+   */
+  extractStatBonuses(objet) {
+    const bonuses = {
+      Force: 0,
+      Agilité: 0,
+      Endurance: 0,
+      Intelligence: 0,
+      Volonté: 0,
+      Chance: 0
+    };
+
+    if (!objet || !objet.effet) return bonuses;
+
+    const effet = objet.effet;
+
+    // Patterns pour chaque stat
+    const patterns = [
+      { regex: /Augmente\s+(?:la\s+)?Force\s+(?:du\s+porteur\s+)?de\s+(\d+)/i, stat: 'Force' },
+      { regex: /Augmente\s+(?:l')?Agilit[ée]\s+(?:du\s+porteur\s+)?de\s+(\d+)/i, stat: 'Agilité' },
+      { regex: /Augmente\s+(?:l')?Endurance\s+(?:du\s+porteur\s+)?de\s+(\d+)/i, stat: 'Endurance' },
+      { regex: /Augmente\s+(?:l')?Intelligence\s+(?:du\s+porteur\s+)?de\s+(\d+)/i, stat: 'Intelligence' },
+      { regex: /Augmente\s+(?:la\s+)?Volont[ée]\s+(?:du\s+porteur\s+)?de\s+(\d+)/i, stat: 'Volonté' },
+      { regex: /Augmente\s+(?:la\s+)?Chance\s+(?:du\s+porteur\s+)?de\s+(\d+)/i, stat: 'Chance' }
+    ];
+
+    for (const { regex, stat } of patterns) {
+      const match = effet.match(regex);
+      if (match) {
+        bonuses[stat] = parseInt(match[1]);
+      }
+    }
+
+    return bonuses;
+  }
+
+  /**
+   * Calculer les bonus de stats totaux depuis l'équipement
+   */
+  calculateStatBonusesFromEquipment(equipement) {
+    const totalBonuses = {
+      Force: 0,
+      Agilité: 0,
+      Endurance: 0,
+      Intelligence: 0,
+      Volonté: 0,
+      Chance: 0
+    };
+
+    if (!equipement || equipement.length === 0) return totalBonuses;
+
+    equipement.forEach(objet => {
+      const bonuses = this.extractStatBonuses(objet);
+      for (const stat in bonuses) {
+        totalBonuses[stat] += bonuses[stat];
+      }
+    });
+
+    return totalBonuses;
+  }
+
+  /**
    * Parse les stats de base depuis le HTML d'une sous-classe
    */
   parseBaseStats(baseHTML) {
@@ -253,6 +315,19 @@ class CharacterCreator {
     // Capacités et dons (texte)
     const capacitesEtDons = this.getCapacitesEtDons(classe, sousClasse, dons);
 
+    // Bonus de stats depuis l'équipement
+    const equipementStatBonuses = this.calculateStatBonusesFromEquipment(equipement);
+
+    // Calculer les stats totales avec équipement
+    const statsAvecEquipement = {
+      Force: stats.Force + equipementStatBonuses.Force,
+      Agilité: stats.Agilité + equipementStatBonuses.Agilité,
+      Endurance: stats.Endurance + equipementStatBonuses.Endurance,
+      Intelligence: stats.Intelligence + equipementStatBonuses.Intelligence,
+      Volonté: stats.Volonté + equipementStatBonuses.Volonté,
+      Chance: stats.Chance + equipementStatBonuses.Chance
+    };
+
     return {
       nomJoueur,
       nomPersonnage,
@@ -261,6 +336,8 @@ class CharacterCreator {
       classe: `${className} - ${subClassName}`,
       element,
       stats,
+      statsAvecEquipement,
+      equipementStatBonuses,
       ...derivedStats,
       competences,
       armureElementaire,
