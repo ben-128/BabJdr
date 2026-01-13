@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2026-01-13T11:54:05.271Z by JdrBab Build System -->
+<!-- Generated on 2026-01-13T11:55:32.937Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13114,7 +13114,7 @@ hr,
 
     // Mark as standalone version for renderer with build timestamp
     window.STANDALONE_VERSION = true;
-    window.BUILD_VERSION = '2026-01-13T11:54:05.273Z';
+    window.BUILD_VERSION = '2026-01-13T11:55:32.939Z';
 
     // Version check - clear old data if version changed
     (function() {
@@ -24599,8 +24599,21 @@ class CharacterCreator {
       this.applyCarteDestin(stats, carteDestin, config.carteDestinChoices, config);
     }
 
-    // Calculer les stats dérivées
-    const derivedStats = this.calculateDerivedStats(stats, classe, sousClasse, level, config);
+    // Bonus de stats depuis l'équipement (calculé AVANT les stats dérivées)
+    const equipementStatBonuses = this.calculateStatBonusesFromEquipment(equipement);
+
+    // Calculer les stats totales avec équipement
+    const statsAvecEquipement = {
+      Force: stats.Force + equipementStatBonuses.Force,
+      Agilité: stats.Agilité + equipementStatBonuses.Agilité,
+      Endurance: stats.Endurance + equipementStatBonuses.Endurance,
+      Intelligence: stats.Intelligence + equipementStatBonuses.Intelligence,
+      Volonté: stats.Volonté + equipementStatBonuses.Volonté,
+      Chance: stats.Chance + equipementStatBonuses.Chance
+    };
+
+    // Calculer les stats dérivées AVEC les bonus d'équipement
+    const derivedStats = this.calculateDerivedStats(statsAvecEquipement, classe, sousClasse, level, config);
 
     // Calculer l'armure physique depuis l'équipement
     const armureEquipement = this.calculatePhysicalArmorFromEquipment(equipement);
@@ -24611,7 +24624,7 @@ class CharacterCreator {
     if (dons.includes('Porteur de charge lourde')) {
       const hasHeavyArmor = equipement.some(e => e.tags && e.tags.includes('Armure lourde'));
       if (hasHeavyArmor) {
-        const bonusArmure = Math.floor(stats.Force / 5);
+        const bonusArmure = Math.floor(statsAvecEquipement.Force / 5);
         derivedStats.armure.donBonus = bonusArmure;
         derivedStats.armure.total += bonusArmure;
       }
@@ -24628,19 +24641,6 @@ class CharacterCreator {
 
     // Capacités et dons (texte)
     const capacitesEtDons = this.getCapacitesEtDons(classe, sousClasse, dons);
-
-    // Bonus de stats depuis l'équipement
-    const equipementStatBonuses = this.calculateStatBonusesFromEquipment(equipement);
-
-    // Calculer les stats totales avec équipement
-    const statsAvecEquipement = {
-      Force: stats.Force + equipementStatBonuses.Force,
-      Agilité: stats.Agilité + equipementStatBonuses.Agilité,
-      Endurance: stats.Endurance + equipementStatBonuses.Endurance,
-      Intelligence: stats.Intelligence + equipementStatBonuses.Intelligence,
-      Volonté: stats.Volonté + equipementStatBonuses.Volonté,
-      Chance: stats.Chance + equipementStatBonuses.Chance
-    };
 
     return {
       nomJoueur,

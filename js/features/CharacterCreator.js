@@ -285,8 +285,21 @@ class CharacterCreator {
       this.applyCarteDestin(stats, carteDestin, config.carteDestinChoices, config);
     }
 
-    // Calculer les stats dérivées
-    const derivedStats = this.calculateDerivedStats(stats, classe, sousClasse, level, config);
+    // Bonus de stats depuis l'équipement (calculé AVANT les stats dérivées)
+    const equipementStatBonuses = this.calculateStatBonusesFromEquipment(equipement);
+
+    // Calculer les stats totales avec équipement
+    const statsAvecEquipement = {
+      Force: stats.Force + equipementStatBonuses.Force,
+      Agilité: stats.Agilité + equipementStatBonuses.Agilité,
+      Endurance: stats.Endurance + equipementStatBonuses.Endurance,
+      Intelligence: stats.Intelligence + equipementStatBonuses.Intelligence,
+      Volonté: stats.Volonté + equipementStatBonuses.Volonté,
+      Chance: stats.Chance + equipementStatBonuses.Chance
+    };
+
+    // Calculer les stats dérivées AVEC les bonus d'équipement
+    const derivedStats = this.calculateDerivedStats(statsAvecEquipement, classe, sousClasse, level, config);
 
     // Calculer l'armure physique depuis l'équipement
     const armureEquipement = this.calculatePhysicalArmorFromEquipment(equipement);
@@ -297,7 +310,7 @@ class CharacterCreator {
     if (dons.includes('Porteur de charge lourde')) {
       const hasHeavyArmor = equipement.some(e => e.tags && e.tags.includes('Armure lourde'));
       if (hasHeavyArmor) {
-        const bonusArmure = Math.floor(stats.Force / 5);
+        const bonusArmure = Math.floor(statsAvecEquipement.Force / 5);
         derivedStats.armure.donBonus = bonusArmure;
         derivedStats.armure.total += bonusArmure;
       }
@@ -314,19 +327,6 @@ class CharacterCreator {
 
     // Capacités et dons (texte)
     const capacitesEtDons = this.getCapacitesEtDons(classe, sousClasse, dons);
-
-    // Bonus de stats depuis l'équipement
-    const equipementStatBonuses = this.calculateStatBonusesFromEquipment(equipement);
-
-    // Calculer les stats totales avec équipement
-    const statsAvecEquipement = {
-      Force: stats.Force + equipementStatBonuses.Force,
-      Agilité: stats.Agilité + equipementStatBonuses.Agilité,
-      Endurance: stats.Endurance + equipementStatBonuses.Endurance,
-      Intelligence: stats.Intelligence + equipementStatBonuses.Intelligence,
-      Volonté: stats.Volonté + equipementStatBonuses.Volonté,
-      Chance: stats.Chance + equipementStatBonuses.Chance
-    };
 
     return {
       nomJoueur,
