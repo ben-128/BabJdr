@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2026-01-13T12:33:31.222Z by JdrBab Build System -->
+<!-- Generated on 2026-01-13T12:45:15.557Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -4828,9 +4828,33 @@ article[data-page="enchanteur"] .illus img:hover,
   #element-grid {
     grid-template-columns: repeat(2, 1fr) !important;
   }
+}
+
+/* Mobile portrait - smaller equipment cards */
+@media (max-width: 768px) {
+  #equipement-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.5rem !important;
+  }
+
+  .character-creator-form .equipment-card {
+    padding: 0.5rem;
+  }
 
   .character-creator-form .equipment-card img {
-    height: 80px;
+    height: 60px;
+    margin-bottom: 0.25rem;
+  }
+
+  .character-creator-form .equipment-card h6 {
+    font-size: 0.75rem;
+    margin-bottom: 0.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .character-creator-form .equipment-card img {
+    height: 50px;
   }
 }
 
@@ -13160,7 +13184,7 @@ hr,
 
     // Mark as standalone version for renderer with build timestamp
     window.STANDALONE_VERSION = true;
-    window.BUILD_VERSION = '2026-01-13T12:33:31.224Z';
+    window.BUILD_VERSION = '2026-01-13T12:45:15.558Z';
 
     // Version check - clear old data if version changed
     (function() {

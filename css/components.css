@@ -3261,9 +3261,33 @@ article[data-page="enchanteur"] .illus img:hover,
   #element-grid {
     grid-template-columns: repeat(2, 1fr) !important;
   }
+}
+
+/* Mobile portrait - smaller equipment cards */
+@media (max-width: 768px) {
+  #equipement-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.5rem !important;
+  }
+
+  .character-creator-form .equipment-card {
+    padding: 0.5rem;
+  }
 
   .character-creator-form .equipment-card img {
-    height: 80px;
+    height: 60px;
+    margin-bottom: 0.25rem;
+  }
+
+  .character-creator-form .equipment-card h6 {
+    font-size: 0.75rem;
+    margin-bottom: 0.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .character-creator-form .equipment-card img {
+    height: 50px;
   }
 }
 
