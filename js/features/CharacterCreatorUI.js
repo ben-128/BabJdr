@@ -41,16 +41,30 @@ class CharacterCreatorUI {
    */
   generateFormHTML() {
     return `
+      <!-- Bouton d'entrée pour mobile (visible uniquement sur mobile hors fullscreen) -->
+      <div id="mobile-form-entry" class="mobile-form-entry">
+        <h3>📝 Créateur de personnage</h3>
+        <p>Créez votre fiche de personnage avec calcul automatique des statistiques.</p>
+        <button id="btn-enter-form" class="btn-base btn-enter-form">▶ Ouvrir le formulaire</button>
+      </div>
+
       <div class="character-creator-form">
         <div class="form-header">
           <h3>Créer votre personnage</h3>
           <div class="form-header-buttons">
-            <button id="btn-fullscreen" class="btn-base btn-fullscreen" title="Mode plein écran">⛶</button>
             <button id="btn-reset" class="btn-base btn-reset">🔄 Reset</button>
           </div>
         </div>
         <!-- Bouton fermer plein écran (visible uniquement en fullscreen) -->
-        <button id="btn-exit-fullscreen" class="btn-exit-fullscreen" style="display: none;">✕ Fermer</button>
+        <button id="btn-exit-fullscreen" class="btn-exit-fullscreen">✕ Fermer</button>
+
+        <!-- Modal personnalisée pour les alertes -->
+        <div id="form-modal" class="form-modal" style="display: none;">
+          <div class="form-modal-content">
+            <p id="form-modal-message"></p>
+            <button id="form-modal-close" class="btn-base" style="background: var(--accent); color: white;">OK</button>
+          </div>
+        </div>
 
         <!-- Niveau -->
         <div class="form-section">
@@ -360,7 +374,7 @@ class CharacterCreatorUI {
     // Vérifier le budget
     const costDelta = (newQty - currentQty) * prix;
     if (costDelta > this.currentConfig.budgetEclats) {
-      alert(`Budget insuffisant! Il vous reste ${this.currentConfig.budgetEclats} éclats.`);
+      this.showModal(`Budget insuffisant! Il vous reste ${this.currentConfig.budgetEclats} éclats.`);
       return;
     }
 
@@ -395,7 +409,7 @@ class CharacterCreatorUI {
     } else {
       // Vérifier le budget
       if (prix > this.currentConfig.budgetEclats) {
-        alert(`Budget insuffisant! Il vous reste ${this.currentConfig.budgetEclats} éclats.`);
+        this.showModal(`Budget insuffisant! Il vous reste ${this.currentConfig.budgetEclats} éclats.`);
         return;
       }
       // Ajouter l'objet
@@ -520,13 +534,17 @@ class CharacterCreatorUI {
     const btnReset = document.getElementById('btn-reset');
     btnReset?.addEventListener('click', () => this.resetForm());
 
-    // Bouton plein écran (mobile uniquement)
-    const btnFullscreen = document.getElementById('btn-fullscreen');
-    btnFullscreen?.addEventListener('click', () => this.enterFullscreen());
+    // Bouton d'entrée mobile (ouvre le formulaire en fullscreen)
+    const btnEnterForm = document.getElementById('btn-enter-form');
+    btnEnterForm?.addEventListener('click', () => this.enterFullscreen());
 
     // Bouton quitter plein écran
     const btnExitFullscreen = document.getElementById('btn-exit-fullscreen');
     btnExitFullscreen?.addEventListener('click', () => this.exitFullscreen());
+
+    // Bouton fermer la modal
+    const btnModalClose = document.getElementById('form-modal-close');
+    btnModalClose?.addEventListener('click', () => this.hideModal());
 
     // Gérer la sortie du plein écran via la touche Escape ou le bouton retour
     document.addEventListener('fullscreenchange', () => this.onFullscreenChange());
@@ -534,13 +552,42 @@ class CharacterCreatorUI {
   }
 
   /**
+   * Afficher une modal au lieu d'alert (ne sort pas du fullscreen)
+   */
+  showModal(message) {
+    const modal = document.getElementById('form-modal');
+    const messageEl = document.getElementById('form-modal-message');
+    if (modal && messageEl) {
+      messageEl.textContent = message;
+      modal.style.display = 'flex';
+    }
+  }
+
+  /**
+   * Cacher la modal
+   */
+  hideModal() {
+    const modal = document.getElementById('form-modal');
+    if (modal) {
+      modal.style.display = 'none';
+    }
+  }
+
+  /**
    * Entrer en mode plein écran avec orientation paysage
    */
   async enterFullscreen() {
     const form = document.querySelector('.character-creator-form');
+    const mobileEntry = document.getElementById('mobile-form-entry');
     if (!form) return;
 
     try {
+      // Cacher l'entrée mobile
+      if (mobileEntry) mobileEntry.style.display = 'none';
+
+      // Afficher le formulaire
+      form.style.display = 'block';
+
       // Entrer en plein écran
       if (form.requestFullscreen) {
         await form.requestFullscreen();
@@ -566,6 +613,8 @@ class CharacterCreatorUI {
 
     } catch (error) {
       console.error('Fullscreen error:', error);
+      // En cas d'erreur, réafficher l'entrée mobile
+      if (mobileEntry) mobileEntry.style.display = 'block';
     }
   }
 
@@ -596,11 +645,19 @@ class CharacterCreatorUI {
     const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
     const form = document.querySelector('.character-creator-form');
     const btnExit = document.getElementById('btn-exit-fullscreen');
+    const mobileEntry = document.getElementById('mobile-form-entry');
+    const isMobile = window.innerWidth <= 768;
 
     if (!isFullscreen) {
       // On est sorti du plein écran
       if (form) form.classList.remove('fullscreen-mode');
       if (btnExit) btnExit.style.display = 'none';
+
+      // Sur mobile, cacher le formulaire et afficher l'entrée
+      if (isMobile) {
+        if (form) form.style.display = 'none';
+        if (mobileEntry) mobileEntry.style.display = 'block';
+      }
 
       // Déverrouiller l'orientation
       if (screen.orientation && screen.orientation.unlock) {
@@ -1379,7 +1436,7 @@ class CharacterCreatorUI {
     } else {
       // Ajouter
       if (this.currentConfig.dons.length >= maxDons) {
-        alert(`Vous ne pouvez sélectionner que ${maxDons} dons maximum.`);
+        this.showModal(`Vous ne pouvez sélectionner que ${maxDons} dons maximum.`);
         return;
       }
       this.currentConfig.dons.push(donName);
@@ -1483,7 +1540,7 @@ class CharacterCreatorUI {
     const pointsRestants = 2 - totalAllocated;
 
     if (delta > 0 && pointsRestants <= 0) {
-      alert('Vous avez déjà réparti tous vos points de statistiques!');
+      this.showModal('Vous avez déjà réparti tous vos points de statistiques!');
       return;
     }
 
@@ -1705,17 +1762,17 @@ class CharacterCreatorUI {
     try {
       // Validation
       if (!this.currentConfig.className || !this.currentConfig.subClassName) {
-        alert('Veuillez sélectionner une classe et une sous-classe.');
+        this.showModal('Veuillez sélectionner une classe et une sous-classe.');
         return;
       }
 
       if (!this.currentConfig.element) {
-        alert('Veuillez sélectionner un élément d\'affiliation.');
+        this.showModal('Veuillez sélectionner un élément d\'affiliation.');
         return;
       }
 
       if (this.currentConfig.carteDestin === null) {
-        alert('Veuillez tirer ou choisir une carte du destin avant de calculer les stats.');
+        this.showModal('Veuillez tirer ou choisir une carte du destin avant de calculer les stats.');
         // Scroller vers la section carte du destin
         const carteDestinSection = document.getElementById('carte-destin-section');
         if (carteDestinSection) {
@@ -1728,7 +1785,7 @@ class CharacterCreatorUI {
       const maxDons = parseInt(document.getElementById('dons-max').textContent);
       const currentDons = this.currentConfig.dons.length;
       if (currentDons < maxDons) {
-        alert(`Veuillez sélectionner tous vos dons (${currentDons}/${maxDons} sélectionnés).`);
+        this.showModal(`Veuillez sélectionner tous vos dons (${currentDons}/${maxDons} sélectionnés).`);
         // Scroller vers la section dons
         const donsSection = document.getElementById('dons-section');
         if (donsSection) {
@@ -1743,7 +1800,7 @@ class CharacterCreatorUI {
         if (statsAllocation) {
           const totalAllocated = Object.values(statsAllocation).reduce((sum, val) => sum + val, 0);
           if (totalAllocated < 2) {
-            alert('Veuillez répartir tous les points de statistiques du don "Statistiques" (2 points à répartir).');
+            this.showModal('Veuillez répartir tous les points de statistiques du don "Statistiques" (2 points à répartir).');
             // Scroller vers la section dons
             const donsSection = document.getElementById('dons-section');
             if (donsSection) {
@@ -1867,7 +1924,7 @@ class CharacterCreatorUI {
 
     } catch (error) {
       console.error('Erreur lors du calcul:', error);
-      alert('Erreur lors du calcul du personnage: ' + error.message);
+      this.showModal('Erreur lors du calcul du personnage: ' + error.message);
     }
   }
 
