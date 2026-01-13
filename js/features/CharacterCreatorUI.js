@@ -1403,7 +1403,7 @@ class CharacterCreatorUI {
 
         // Description nettoyée pour le tooltip et l'aperçu
         const cleanDesc = don.description.replace(/<[^>]*>/g, '').trim();
-        const shortDesc = cleanDesc.substring(0, 45) + (cleanDesc.length > 45 ? '...' : '');
+        const shortDesc = cleanDesc.substring(0, 100) + (cleanDesc.length > 100 ? '...' : '');
 
         // Créer le contenu du bouton avec nom et aperçu
         const nameSpan = document.createElement('span');
