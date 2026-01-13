@@ -2964,3 +2964,261 @@ article[data-page="enchanteur"] .illus img:hover,
   gap: 0.5rem;
   font-size: 1.2rem;
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════════════════
+   CHARACTER CREATOR FORM - Mobile-friendly styles
+   ═══════════════════════════════════════════════════════════════════════════════════════ */
+
+.character-creator-form {
+  padding: 1rem;
+}
+
+.character-creator-form h3 {
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.character-creator-form h4 {
+  color: var(--text, #e8e8e8);
+  margin-bottom: 0.5rem;
+}
+
+.character-creator-form .form-section {
+  margin-bottom: 1.5rem;
+}
+
+/* Select elements - Mobile optimized */
+.character-creator-form select,
+.character-creator-form input[type="number"] {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid var(--ui-border, #c0c0d0);
+  border-radius: 8px;
+  background-color: var(--ui-blue, #2a2a50);
+  color: var(--paper-ink, #e8e8e8);
+  font-size: 16px; /* Prevents iOS zoom on focus */
+  font-family: inherit;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  /* Custom dropdown arrow */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23c0c0d0' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+}
+
+/* Important: Ensure options are visible on mobile */
+.character-creator-form select option {
+  background-color: var(--ui-blue, #2a2a50);
+  color: var(--paper-ink, #e8e8e8);
+  padding: 0.75rem;
+  font-size: 16px;
+}
+
+/* Focus states */
+.character-creator-form select:focus,
+.character-creator-form input[type="number"]:focus {
+  outline: none;
+  border-color: var(--ui-border-light, #e0e0f0);
+  box-shadow: 0 0 0 3px rgba(192, 192, 208, 0.2);
+}
+
+/* Hover state */
+.character-creator-form select:hover,
+.character-creator-form input[type="number"]:hover {
+  border-color: var(--ui-border-light, #e0e0f0);
+}
+
+/* Disabled state */
+.character-creator-form select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Element buttons */
+.character-creator-form .element-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.75rem;
+  border: 2px solid var(--ui-border, #c0c0d0);
+  border-radius: 8px;
+  background: var(--ui-blue, #2a2a50);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.character-creator-form .element-btn:hover,
+.character-creator-form .element-btn:focus {
+  border-color: var(--ui-border-light, #e0e0f0);
+  transform: translateY(-2px);
+}
+
+.character-creator-form .element-btn.selected {
+  border-color: #22c55e;
+  background: rgba(34, 197, 94, 0.15);
+}
+
+.character-creator-form .element-btn img {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 0.5rem;
+}
+
+.character-creator-form .element-btn span {
+  color: var(--paper-ink, #e8e8e8);
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+/* Don buttons */
+.character-creator-form .don-btn {
+  padding: 0.75rem;
+  border: 2px solid var(--ui-border, #c0c0d0);
+  border-radius: 8px;
+  background: var(--ui-blue, #2a2a50);
+  color: var(--paper-ink, #e8e8e8);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.character-creator-form .don-btn:hover:not(:disabled),
+.character-creator-form .don-btn:focus:not(:disabled) {
+  border-color: var(--ui-border-light, #e0e0f0);
+}
+
+.character-creator-form .don-btn.selected {
+  background: #22c55e;
+  border-color: #22c55e;
+  color: white;
+  font-weight: bold;
+}
+
+.character-creator-form .don-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: var(--ui-blue-dark, #101020);
+  border-color: #666;
+  color: #888;
+}
+
+.character-creator-form .don-btn:disabled:hover {
+  border-color: #666;
+  transform: none;
+}
+
+/* Equipment cards */
+.character-creator-form .equipment-card {
+  border: 2px solid var(--ui-border, #c0c0d0);
+  border-radius: 8px;
+  padding: 0.75rem;
+  background: var(--ui-blue, #2a2a50);
+  transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.character-creator-form .equipment-card.selected {
+  border-color: #22c55e;
+  background: rgba(34, 197, 94, 0.15);
+}
+
+.character-creator-form .equipment-card img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
+}
+
+.character-creator-form .equipment-card h6 {
+  color: var(--paper-ink, #e8e8e8);
+  margin: 0 0 0.5rem 0;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+/* Action buttons */
+.character-creator-form .btn-base {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Stats preview */
+.character-creator-form #stats-preview {
+  padding: 1rem;
+  border: 2px solid var(--accent);
+  border-radius: 8px;
+  background: var(--ui-blue, #2a2a50);
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 768px) {
+  .character-creator-form {
+    padding: 0.75rem;
+  }
+
+  .character-creator-form select,
+  .character-creator-form input[type="number"] {
+    padding: 1rem 2.5rem 1rem 1rem;
+    font-size: 16px; /* Critical for iOS - prevents zoom */
+    min-height: 48px; /* Touch-friendly size */
+  }
+
+  .character-creator-form .element-btn {
+    padding: 0.5rem;
+    min-height: 80px;
+  }
+
+  .character-creator-form .element-btn img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .character-creator-form .don-btn {
+    padding: 1rem;
+    font-size: 1rem;
+    min-height: 48px;
+  }
+
+  .character-creator-form .btn-base {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+  }
+
+  #element-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 0.5rem !important;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 480px) {
+  #element-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .character-creator-form .equipment-card img {
+    height: 80px;
+  }
+}
+
+/* iOS-specific fixes */
+@supports (-webkit-touch-callout: none) {
+  .character-creator-form select {
+    /* Ensure native iOS picker works */
+    font-size: 16px !important;
+    background-color: var(--ui-blue, #2a2a50) !important;
+  }
+}

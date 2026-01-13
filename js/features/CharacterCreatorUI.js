@@ -41,50 +41,50 @@ class CharacterCreatorUI {
    */
   generateFormHTML() {
     return `
-      <div class="character-creator-form" style="padding: 1rem;">
-        <h3 style="color: var(--accent); margin-bottom: 1rem;">Créer votre personnage</h3>
+      <div class="character-creator-form">
+        <h3>Créer votre personnage</h3>
 
         <!-- Niveau -->
-        <div class="form-section" style="margin-bottom: 1.5rem;">
-          <h4 style="color: var(--text); margin-bottom: 0.5rem;">Niveau</h4>
-          <input type="number" id="char-level" value="1" min="1" max="20" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; background: white; color: #333;" />
+        <div class="form-section">
+          <h4>Niveau</h4>
+          <input type="number" id="char-level" value="1" min="1" max="20" />
         </div>
 
         <!-- Classe -->
-        <div class="form-section" style="margin-bottom: 1.5rem;">
-          <h4 style="color: var(--text); margin-bottom: 0.5rem;">Classe</h4>
-          <select id="char-class" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; background: white; color: #333;">
+        <div class="form-section">
+          <h4>Classe</h4>
+          <select id="char-class">
             <option value="">Sélectionnez une classe...</option>
           </select>
         </div>
 
         <!-- Sous-classe -->
-        <div id="subclass-section" class="form-section" style="margin-bottom: 1.5rem; display: none;">
-          <h4 style="color: var(--text); margin-bottom: 0.5rem;">Sous-classe</h4>
-          <select id="char-subclass" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; background: white; color: #333;">
+        <div id="subclass-section" class="form-section" style="display: none;">
+          <h4>Sous-classe</h4>
+          <select id="char-subclass">
             <option value="">Sélectionnez une sous-classe...</option>
           </select>
         </div>
 
         <!-- Élément -->
-        <div id="element-section" class="form-section" style="margin-bottom: 1.5rem; display: none;">
-          <h4 style="color: var(--text); margin-bottom: 0.5rem;">Élément d'affiliation</h4>
-          <p id="element-selected" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.75rem;">Aucun élément sélectionné</p>
+        <div id="element-section" class="form-section" style="display: none;">
+          <h4>Élément d'affiliation</h4>
+          <p id="element-selected" class="text-muted" style="font-size: 0.9rem; margin-bottom: 0.75rem;">Aucun élément sélectionné</p>
           <div id="element-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 0.75rem;">
             <!-- Elements will be inserted here -->
           </div>
         </div>
 
         <!-- Carte du destin -->
-        <div id="carte-destin-section" class="form-section" style="margin-bottom: 1.5rem; display: none;">
-          <h4 style="color: var(--text); margin-bottom: 0.5rem;">Carte du destin</h4>
-          <div style="display: flex; gap: 0.5rem; margin-bottom: 0.75rem; justify-content: center;">
-            <button id="btn-tirer-carte" class="btn-base" style="background: var(--gold); color: white; padding: 0.5rem 1rem; border: none; border-radius: 4px; cursor: pointer;">🎲 Tirer aléatoirement (d6)</button>
-            <button id="btn-choisir-carte" class="btn-base" style="background: var(--bronze); color: white; padding: 0.5rem 1rem; border: none; border-radius: 4px; cursor: pointer;">📋 Choisir manuellement</button>
+        <div id="carte-destin-section" class="form-section" style="display: none;">
+          <h4>Carte du destin</h4>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem; justify-content: center;">
+            <button id="btn-tirer-carte" class="btn-base" style="background: var(--gold); color: white;">🎲 Tirer aléatoirement (d6)</button>
+            <button id="btn-choisir-carte" class="btn-base" style="background: var(--bronze); color: white;">📋 Choisir manuellement</button>
           </div>
           <div id="carte-destin-manual" style="display: none; margin-bottom: 0.75rem;">
             <label style="display: block; color: var(--text-muted); margin-bottom: 0.25rem;">Sélectionnez une carte :</label>
-            <select id="carte-destin-select" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; background: white; color: #333;">
+            <select id="carte-destin-select">
               <option value="">Choisissez une carte...</option>
               <option value="0">Carte 1: Initiative/Fortune ou Esquive/Résistance</option>
               <option value="1">Carte 2: 2 points de statistiques</option>
@@ -101,38 +101,39 @@ class CharacterCreatorUI {
         </div>
 
         <!-- Dons -->
-        <div id="dons-section" class="form-section" style="margin-bottom: 1.5rem; display: none;">
-          <h4 style="color: var(--text); margin-bottom: 0.5rem;">Dons (<span id="dons-count">0</span> / <span id="dons-max">2</span>)</h4>
+        <div id="dons-section" class="form-section" style="display: none;">
+          <h4>Dons (<span id="dons-count">0</span> / <span id="dons-max">2</span>)</h4>
+          <p id="dons-info" style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0.5rem;">Les dons grisés ne respectent pas les prérequis de votre personnage.</p>
           <div id="dons-available" style="display: grid; gap: 0.5rem; margin-bottom: 0.75rem;"></div>
-          <div id="dons-selected" style="padding: 0.75rem; border: 1px solid var(--border); border-radius: 4px; background: var(--bg); min-height: 60px;">
+          <div id="dons-selected" style="padding: 0.75rem; border: 2px solid var(--ui-border); border-radius: 8px; background: var(--ui-blue-dark); min-height: 60px;">
             <p style="color: var(--text-muted); font-size: 0.9rem;">Dons sélectionnés : <span id="dons-list">Aucun</span></p>
           </div>
           <div id="don-statistiques-controls" style="display: none; margin-top: 1rem; padding: 1rem; border: 2px solid var(--gold); border-radius: 8px; background: var(--card);"></div>
         </div>
 
         <!-- Équipement -->
-        <div id="equipement-section" class="form-section" style="margin-bottom: 1.5rem; display: none;">
-          <h4 style="color: #333; margin-bottom: 0.5rem;">Équipement de départ (120 éclats)</h4>
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding: 0.75rem; background: #f9f9f9; border-radius: 8px;">
-            <span style="color: #333; font-weight: bold;">💎 Budget restant:</span>
+        <div id="equipement-section" class="form-section" style="display: none;">
+          <h4>Équipement de départ (120 éclats)</h4>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding: 0.75rem; background: var(--ui-blue-dark); border-radius: 8px; border: 2px solid var(--ui-border);">
+            <span style="color: var(--paper-ink); font-weight: bold;">💎 Budget restant:</span>
             <span id="budget-restant" style="color: #22c55e; font-size: 1.2rem; font-weight: bold;">120</span>
           </div>
           <div id="equipement-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
             <!-- Equipment items will be inserted here -->
           </div>
-          <div style="padding: 1rem; border: 1px solid #ccc; border-radius: 8px; background: #f9f9f9;">
-            <h5 style="color: #333; margin-bottom: 0.5rem;">Équipement sélectionné:</h5>
-            <div id="equipement-selected" style="color: #666; min-height: 40px;">Aucun équipement sélectionné</div>
+          <div style="padding: 1rem; border: 2px solid var(--ui-border); border-radius: 8px; background: var(--ui-blue-dark);">
+            <h5 style="color: var(--paper-ink); margin-bottom: 0.5rem;">Équipement sélectionné:</h5>
+            <div id="equipement-selected" style="color: var(--text-muted); min-height: 40px;">Aucun équipement sélectionné</div>
           </div>
         </div>
 
         <!-- Actions -->
         <div style="display: flex; gap: 0.75rem; justify-content: center; margin-bottom: 1.5rem;">
-          <button id="btn-calculate" class="btn-base" style="background: var(--accent); color: white; padding: 0.75rem 1.5rem; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">📊 Calculer les stats</button>
+          <button id="btn-calculate" class="btn-base" style="background: var(--accent); color: white;">📊 Calculer les stats</button>
         </div>
 
         <!-- Statistiques -->
-        <div id="stats-preview" style="margin-bottom: 1.5rem; padding: 1rem; border: 2px solid var(--accent); border-radius: 8px; background: var(--card); display: none;">
+        <div id="stats-preview" style="display: none;">
           <h4 style="color: var(--accent); margin-bottom: 0.75rem;">📊 Aperçu des statistiques</h4>
           <div id="stats-content" style="font-family: monospace; font-size: 0.9rem; color: var(--text);"></div>
         </div>
@@ -191,26 +192,13 @@ class CharacterCreatorUI {
       btn.type = 'button';
       btn.className = 'element-btn';
       btn.dataset.element = element;
-      btn.style.cssText = `
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 0.75rem;
-        border: 2px solid #ccc;
-        border-radius: 8px;
-        background: white;
-        cursor: pointer;
-        transition: all 0.2s;
-      `;
 
       const img = document.createElement('img');
       img.src = this.elementIcons[element];
       img.alt = element;
-      img.style.cssText = 'width: 48px; height: 48px; margin-bottom: 0.5rem;';
 
       const text = document.createElement('span');
       text.textContent = element;
-      text.style.cssText = 'color: #333; font-size: 0.85rem; font-weight: bold;';
 
       btn.appendChild(img);
       btn.appendChild(text);
@@ -231,18 +219,16 @@ class CharacterCreatorUI {
     const selectedText = document.getElementById('element-selected');
     if (selectedText) {
       selectedText.textContent = `Élément sélectionné: ${element}`;
-      selectedText.style.color = 'var(--emerald)';
+      selectedText.style.color = '#22c55e';
     }
 
-    // Mettre à jour le style des boutons
+    // Mettre à jour le style des boutons avec la classe CSS
     const buttons = document.querySelectorAll('.element-btn');
     buttons.forEach(btn => {
       if (btn.dataset.element === element) {
-        btn.style.borderColor = 'var(--emerald)';
-        btn.style.backgroundColor = 'rgba(34, 197, 94, 0.1)';
+        btn.classList.add('selected');
       } else {
-        btn.style.borderColor = '#ccc';
-        btn.style.backgroundColor = 'white';
+        btn.classList.remove('selected');
       }
     });
 
@@ -265,24 +251,15 @@ class CharacterCreatorUI {
       const card = document.createElement('div');
       card.className = 'equipment-card';
       card.dataset.numero = objet.numero;
-      card.style.cssText = `
-        border: 2px solid #ccc;
-        border-radius: 8px;
-        padding: 0.75rem;
-        background: white;
-        transition: all 0.2s;
-      `;
 
       // Créer l'image
       const img = document.createElement('img');
       img.src = objet.image;
       img.alt = objet.nom;
-      img.style.cssText = 'width: 100%; height: 120px; object-fit: contain; margin-bottom: 0.5rem;';
 
       // Créer le nom
       const title = document.createElement('h6');
       title.textContent = objet.nom;
-      title.style.cssText = 'color: #333; margin: 0 0 0.5rem 0; font-size: 0.9rem; font-weight: bold;';
 
       // Créer le conteneur du bas
       const bottomDiv = document.createElement('div');
@@ -291,7 +268,7 @@ class CharacterCreatorUI {
       // Créer le prix
       const priceSpan = document.createElement('span');
       priceSpan.textContent = `💎 ${prix} éclats`;
-      priceSpan.style.cssText = 'color: #666; font-size: 0.85rem;';
+      priceSpan.style.cssText = 'color: var(--text-muted); font-size: 0.85rem;';
 
       if (isConsommable) {
         // Pour les consommables : afficher des boutons +/- et la quantité
@@ -299,9 +276,9 @@ class CharacterCreatorUI {
         controlsDiv.style.cssText = 'display: flex; align-items: center; gap: 0.5rem;';
 
         const btnMinus = document.createElement('button');
-        btnMinus.className = 'btn-minus-consumable';
+        btnMinus.className = 'btn-minus-consumable btn-base';
         btnMinus.textContent = '−';
-        btnMinus.style.cssText = 'padding: 0.25rem 0.5rem; border: 1px solid #ef4444; border-radius: 4px; background: #ef4444; color: white; cursor: pointer; font-size: 0.85rem;';
+        btnMinus.style.cssText = 'padding: 0.25rem 0.5rem; background: #ef4444; color: white; min-width: 32px;';
         btnMinus.addEventListener('click', (e) => {
           e.preventDefault();
           e.stopPropagation();
@@ -312,12 +289,12 @@ class CharacterCreatorUI {
         quantitySpan.className = 'consumable-quantity';
         quantitySpan.dataset.numero = objet.numero;
         quantitySpan.textContent = '0';
-        quantitySpan.style.cssText = 'min-width: 1.5rem; text-align: center; font-weight: bold; color: #333;';
+        quantitySpan.style.cssText = 'min-width: 1.5rem; text-align: center; font-weight: bold; color: var(--paper-ink);';
 
         const btnPlus = document.createElement('button');
-        btnPlus.className = 'btn-plus-consumable';
+        btnPlus.className = 'btn-plus-consumable btn-base';
         btnPlus.textContent = '+';
-        btnPlus.style.cssText = 'padding: 0.25rem 0.5rem; border: 1px solid #22c55e; border-radius: 4px; background: #22c55e; color: white; cursor: pointer; font-size: 0.85rem;';
+        btnPlus.style.cssText = 'padding: 0.25rem 0.5rem; background: #22c55e; color: white; min-width: 32px;';
         btnPlus.addEventListener('click', (e) => {
           e.preventDefault();
           e.stopPropagation();
@@ -332,10 +309,10 @@ class CharacterCreatorUI {
       } else {
         // Pour l'équipement normal : bouton simple
         const btn = document.createElement('button');
-        btn.className = 'btn-add-equipment';
+        btn.className = 'btn-add-equipment btn-base';
         btn.dataset.numero = objet.numero;
         btn.textContent = '+';
-        btn.style.cssText = 'padding: 0.25rem 0.75rem; border: 1px solid #22c55e; border-radius: 4px; background: #22c55e; color: white; cursor: pointer; font-size: 0.85rem;';
+        btn.style.cssText = 'padding: 0.25rem 0.75rem; background: #22c55e; color: white; min-width: 40px;';
 
         btn.addEventListener('click', (e) => {
           e.preventDefault();
@@ -465,28 +442,24 @@ class CharacterCreatorUI {
       }
     }
 
-    // Mettre à jour le style des cartes
+    // Mettre à jour le style des cartes avec classes CSS
     document.querySelectorAll('.equipment-card').forEach(card => {
       const numero = parseInt(card.dataset.numero);
       const isSelected = this.currentConfig.equipement.some(eq => eq.numero === numero);
 
       if (isSelected) {
-        card.style.borderColor = '#22c55e';
-        card.style.backgroundColor = 'rgba(34, 197, 94, 0.1)';
+        card.classList.add('selected');
         const btn = card.querySelector('.btn-add-equipment');
         if (btn) {
           btn.textContent = '−';
           btn.style.background = '#f59e0b';
-          btn.style.borderColor = '#f59e0b';
         }
       } else {
-        card.style.borderColor = '#ccc';
-        card.style.backgroundColor = 'white';
+        card.classList.remove('selected');
         const btn = card.querySelector('.btn-add-equipment');
         if (btn) {
           btn.textContent = '+';
           btn.style.background = '#22c55e';
-          btn.style.borderColor = '#22c55e';
         }
       }
     });
@@ -509,6 +482,10 @@ class CharacterCreatorUI {
     levelInput?.addEventListener('change', (e) => {
       this.currentConfig.level = parseInt(e.target.value);
       this.updateUI();
+      // Rafraîchir les dons car certains ont des prérequis de niveau
+      if (this.currentConfig.subClassName) {
+        this.updateDonsAvailable();
+      }
     });
 
     // Tirage carte du destin
@@ -634,7 +611,7 @@ class CharacterCreatorUI {
       choicesDiv.innerHTML = `
         <div style="margin-top: 0.5rem;">
           <label style="display: block; color: var(--text-muted); margin-bottom: 0.25rem;">Choisissez votre bonus :</label>
-          <select id="carte-choice-0" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; background: white; color: #333;">
+          <select id="carte-choice-0">
             <option value="initiative">+5 Initiative et +3 Fortune</option>
             <option value="esquive">+1 Esquive et +1 Résistance altérations</option>
           </select>
@@ -697,7 +674,7 @@ class CharacterCreatorUI {
       choicesDiv.innerHTML = `
         <div style="margin-top: 0.5rem;">
           <label style="display: block; color: var(--text-muted); margin-bottom: 0.25rem;">Choisissez votre bonus :</label>
-          <select id="carte-choice-2" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; background: white; color: #333;">
+          <select id="carte-choice-2">
             <option value="vie">+4 Points de vie maximum</option>
             <option value="mana">+6 Points de mana maximum</option>
           </select>
@@ -715,7 +692,7 @@ class CharacterCreatorUI {
       choicesDiv.innerHTML = `
         <div style="margin-top: 0.5rem;">
           <label style="display: block; color: var(--text-muted); margin-bottom: 0.25rem;">Choisissez une compétence :</label>
-          <select id="carte-choice-3" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; background: white; color: #333;">
+          <select id="carte-choice-3">
             <option value="Hardiesse">Hardiesse</option>
             <option value="Finesse">Finesse</option>
             <option value="Coordination">Coordination</option>
@@ -865,6 +842,261 @@ class CharacterCreatorUI {
   }
 
   /**
+   * Calculer les stats actuelles du personnage pour la validation des prérequis
+   */
+  getCurrentStats() {
+    if (!this.currentConfig.className || !this.currentConfig.subClassName) {
+      return null;
+    }
+
+    const classe = this.creator.classesData.find(c => c.nom === this.currentConfig.className);
+    if (!classe) return null;
+
+    const sousClasse = classe.sousClasses.find(sc => sc.nom === this.currentConfig.subClassName);
+    if (!sousClasse) return null;
+
+    // Stats de base
+    const baseStats = this.creator.parseBaseStats(sousClasse.base);
+    const progression = this.creator.parseProgression(sousClasse.progression);
+    const level = this.currentConfig.level;
+
+    // Calculer les stats au niveau donné
+    const stats = { ...baseStats };
+
+    if (level > 1) {
+      const levelsGained = level - 1;
+      for (const [stat, gain] of Object.entries(progression)) {
+        if (stat !== 'auChoix' && stats[stat] !== undefined) {
+          stats[stat] += gain * levelsGained;
+        }
+      }
+    }
+
+    // Ajouter les bonus de la carte du destin (carte 1 = stats)
+    if (this.currentConfig.carteDestin === 1 && this.currentConfig.carteDestinChoices?.stats) {
+      for (const [stat, points] of Object.entries(this.currentConfig.carteDestinChoices.stats)) {
+        stats[stat] += points;
+      }
+    }
+
+    // Ajouter les bonus du don Statistiques
+    if (this.currentConfig.donBonuses?.['Statistiques']) {
+      for (const [stat, points] of Object.entries(this.currentConfig.donBonuses['Statistiques'])) {
+        stats[stat] += points;
+      }
+    }
+
+    return stats;
+  }
+
+  /**
+   * Obtenir les compétences actuelles du personnage
+   */
+  getCurrentCompetences() {
+    if (!this.currentConfig.className || !this.currentConfig.subClassName) {
+      return {};
+    }
+
+    const classe = this.creator.classesData.find(c => c.nom === this.currentConfig.className);
+    if (!classe) return {};
+
+    const sousClasse = classe.sousClasses.find(sc => sc.nom === this.currentConfig.subClassName);
+    if (!sousClasse) return {};
+
+    const competences = this.creator.getBaseCompetences(classe, sousClasse);
+
+    // Carte destin 3 donne une compétence rang 1
+    if (this.currentConfig.carteDestin === 3 && this.currentConfig.carteDestinChoices?.competence) {
+      const comp = this.currentConfig.carteDestinChoices.competence;
+      if (competences[comp] !== undefined) {
+        competences[comp] = Math.max(competences[comp], 1);
+      }
+    }
+
+    // Vérifier si le don "Compétence : Doué" est sélectionné (donne rang 1)
+    if (this.currentConfig.dons.includes('Compétence : Doué')) {
+      // On considère qu'au moins une compétence est au rang 1
+      // (l'utilisateur choisira laquelle)
+    }
+
+    return competences;
+  }
+
+  /**
+   * Vérifier si un don respecte les prérequis
+   */
+  checkDonPrerequisites(don) {
+    const prerequis = don.prerequis || '';
+    const level = this.currentConfig.level;
+    const stats = this.getCurrentStats();
+    const competences = this.getCurrentCompetences();
+
+    if (!stats) return { valid: false, reason: 'Sélectionnez d\'abord une classe et sous-classe' };
+
+    // Pas de prérequis
+    if (prerequis.includes('-') && !prerequis.includes('Niveau') && !prerequis.match(/\d+/)) {
+      return { valid: true };
+    }
+
+    // Vérifier les prérequis "Don unique"
+    if (prerequis.includes('Don unique')) {
+      if (this.currentConfig.dons.includes(don.nom)) {
+        // Déjà sélectionné, c'est OK
+      } else {
+        // Vérifier si un don unique de ce nom est déjà pris
+        // Pour l'instant on suppose que "Don unique" signifie qu'on ne peut le prendre qu'une fois
+      }
+    }
+
+    // Vérifier le niveau requis
+    const levelMatch = prerequis.match(/Niveau\s*(\d+)/i);
+    if (levelMatch) {
+      const requiredLevel = parseInt(levelMatch[1]);
+      if (level < requiredLevel) {
+        return { valid: false, reason: `Niveau ${requiredLevel} requis (actuel: ${level})` };
+      }
+    }
+
+    // Vérifier les stats requises
+    const statPatterns = [
+      { regex: /Force\s*(\d+)/i, stat: 'Force' },
+      { regex: /Agilit[ée]\s*(\d+)/i, stat: 'Agilité' },
+      { regex: /Endurance\s*(\d+)/i, stat: 'Endurance' },
+      { regex: /Intelligence\s*(\d+)/i, stat: 'Intelligence' },
+      { regex: /Volont[ée]\s*(\d+)/i, stat: 'Volonté' },
+      { regex: /Chance\s*(\d+)/i, stat: 'Chance' }
+    ];
+
+    // Vérifier si c'est un prérequis avec "OU" ou "ET"
+    const hasOr = /\bOU\b/i.test(prerequis);
+    const hasAnd = /\bET\b/i.test(prerequis);
+
+    if (hasOr) {
+      // Au moins une condition doit être respectée
+      let anyValid = false;
+      let allReasons = [];
+
+      for (const { regex, stat } of statPatterns) {
+        const match = prerequis.match(regex);
+        if (match) {
+          const required = parseInt(match[1]);
+          if (stats[stat] >= required) {
+            anyValid = true;
+            break;
+          } else {
+            allReasons.push(`${stat} ${required}`);
+          }
+        }
+      }
+
+      // Vérifier aussi les compétences en mode OU
+      const compPatterns = [
+        { regex: /Hardiesse\s*(?:rang\s*)?(\d+)/i, comp: 'Hardiesse' },
+        { regex: /Finesse\s*(?:rang\s*)?(\d+)/i, comp: 'Finesse' },
+        { regex: /Coordination\s*(?:rang\s*)?(\d+)/i, comp: 'Coordination' },
+        { regex: /R[ée]flexion\s*(?:rang\s*)?(\d+)/i, comp: 'Réflexion' },
+        { regex: /[ÉE]loquence\s*(?:rang\s*)?(\d+)/i, comp: 'Eloquence' }
+      ];
+
+      for (const { regex, comp } of compPatterns) {
+        const match = prerequis.match(regex);
+        if (match) {
+          const required = parseInt(match[1]);
+          if ((competences[comp] || 0) >= required) {
+            anyValid = true;
+            break;
+          } else {
+            allReasons.push(`${comp} rang ${required}`);
+          }
+        }
+      }
+
+      if (!anyValid && allReasons.length > 0) {
+        return { valid: false, reason: `Requis: ${allReasons.join(' OU ')}` };
+      }
+
+      return { valid: true };
+    }
+
+    // Mode ET ou conditions simples
+    for (const { regex, stat } of statPatterns) {
+      const match = prerequis.match(regex);
+      if (match) {
+        const required = parseInt(match[1]);
+        if (stats[stat] < required) {
+          return { valid: false, reason: `${stat} ${required} requis (actuel: ${stats[stat]})` };
+        }
+      }
+    }
+
+    // Vérifier les compétences requises
+    const compPatterns = [
+      { regex: /Hardiesse\s*(?:rang\s*)?(\d+)/i, comp: 'Hardiesse' },
+      { regex: /Finesse\s*(?:rang\s*)?(\d+)/i, comp: 'Finesse' },
+      { regex: /Coordination\s*(?:rang\s*)?(\d+)/i, comp: 'Coordination' },
+      { regex: /R[ée]flexion\s*(?:rang\s*)?(\d+)/i, comp: 'Réflexion' },
+      { regex: /[ÉE]loquence\s*(?:rang\s*)?(\d+)/i, comp: 'Eloquence' }
+    ];
+
+    for (const { regex, comp } of compPatterns) {
+      const match = prerequis.match(regex);
+      if (match) {
+        const required = parseInt(match[1]);
+        const current = competences[comp] || 0;
+        if (current < required) {
+          return { valid: false, reason: `${comp} rang ${required} requis (actuel: ${current})` };
+        }
+      }
+    }
+
+    // Vérifier les prérequis spécifiques
+    if (prerequis.includes('Ambidextre')) {
+      if (!this.currentConfig.dons.includes('Ambidextre')) {
+        return { valid: false, reason: 'Don Ambidextre requis' };
+      }
+    }
+
+    if (prerequis.includes('Capable de manier un arc') || prerequis.includes('manier un arc')) {
+      if (!this.currentConfig.dons.includes('Maîtrise de l\'arc')) {
+        return { valid: false, reason: 'Maîtrise de l\'arc requise' };
+      }
+    }
+
+    if (prerequis.includes('Capable d\'équiper des armures légères') || prerequis.includes('armures légères')) {
+      if (!this.currentConfig.dons.includes('Maîtrise des armures légères')) {
+        // Certaines classes ont peut-être cette maîtrise de base
+        // Pour l'instant on vérifie juste le don
+      }
+    }
+
+    // Vérifier si c'est un don de compétence rang 2 ou 3
+    if (don.nom === 'Compétence : Brillant') {
+      // Requiert rang 1 et niveau 5
+      if (level < 5) {
+        return { valid: false, reason: 'Niveau 5 requis' };
+      }
+      // Vérifier si au moins une compétence est au rang 1
+      const hasRang1 = Object.values(competences).some(v => v >= 1);
+      if (!hasRang1 && !this.currentConfig.dons.includes('Compétence : Doué')) {
+        return { valid: false, reason: 'Une compétence rang 1 requise' };
+      }
+    }
+
+    if (don.nom === 'Compétence : Prodigieux') {
+      if (level < 10) {
+        return { valid: false, reason: 'Niveau 10 requis' };
+      }
+      // Vérifier si au moins une compétence est au rang 2
+      const hasRang2 = Object.values(competences).some(v => v >= 2);
+      if (!hasRang2 && !this.currentConfig.dons.includes('Compétence : Brillant')) {
+        return { valid: false, reason: 'Une compétence rang 2 requise' };
+      }
+    }
+
+    return { valid: true };
+  }
+
+  /**
    * Mettre à jour les dons disponibles
    */
   updateDonsAvailable() {
@@ -894,7 +1126,7 @@ class CharacterCreatorUI {
     document.getElementById('dons-max').textContent = pointsDons;
 
     // Afficher les catégories de dons
-    donsSection.innerHTML = '<p style="color: var(--text-muted); margin-bottom: 0.5rem;">Sélectionnez vos dons (cliquez pour ajouter/retirer) :</p>';
+    donsSection.innerHTML = '';
 
     const categories = this.creator.donsData;
     categories.forEach(category => {
@@ -918,13 +1150,36 @@ class CharacterCreatorUI {
 
       category.dons.forEach(don => {
         const donBtn = document.createElement('button');
-        donBtn.textContent = don.nom;
         donBtn.className = 'don-btn';
         donBtn.dataset.donName = don.nom;
-        donBtn.style.cssText = 'padding: 0.5rem; border: 2px solid #ccc; border-radius: 4px; background: white; color: #333; cursor: pointer; text-align: left; transition: all 0.2s;';
-        donBtn.title = don.description.replace(/<[^>]*>/g, '');
 
-        donBtn.addEventListener('click', () => this.toggleDon(don.nom, donBtn));
+        // Vérifier les prérequis
+        const prerequisCheck = this.checkDonPrerequisites(don);
+        const isSelected = this.currentConfig.dons.includes(don.nom);
+
+        donBtn.textContent = don.nom;
+
+        // Description nettoyée pour le tooltip
+        const cleanDesc = don.description.replace(/<[^>]*>/g, '');
+
+        if (!prerequisCheck.valid && !isSelected) {
+          donBtn.disabled = true;
+          donBtn.title = `⚠️ ${prerequisCheck.reason}\n\n${cleanDesc}`;
+        } else {
+          donBtn.disabled = false;
+          donBtn.title = cleanDesc;
+        }
+
+        // Appliquer le style si sélectionné
+        if (isSelected) {
+          donBtn.classList.add('selected');
+        }
+
+        donBtn.addEventListener('click', () => {
+          if (!donBtn.disabled) {
+            this.toggleDon(don.nom, donBtn);
+          }
+        });
 
         donsGrid.appendChild(donBtn);
       });
@@ -944,10 +1199,7 @@ class CharacterCreatorUI {
     if (index > -1) {
       // Retirer
       this.currentConfig.dons.splice(index, 1);
-      btnElement.style.background = 'white';
-      btnElement.style.borderColor = '#ccc';
-      btnElement.style.color = '#333';
-      btnElement.style.fontWeight = 'normal';
+      btnElement.classList.remove('selected');
 
       // Si c'est le don Statistiques, cacher l'interface de choix
       if (donName === 'Statistiques') {
@@ -961,10 +1213,7 @@ class CharacterCreatorUI {
         return;
       }
       this.currentConfig.dons.push(donName);
-      btnElement.style.background = '#22c55e';
-      btnElement.style.borderColor = '#22c55e';
-      btnElement.style.color = 'white';
-      btnElement.style.fontWeight = 'bold';
+      btnElement.classList.add('selected');
 
       // Si c'est le don Statistiques, afficher l'interface de choix
       if (donName === 'Statistiques') {
@@ -974,6 +1223,10 @@ class CharacterCreatorUI {
 
     document.getElementById('dons-count').textContent = this.currentConfig.dons.length;
     document.getElementById('dons-list').textContent = this.currentConfig.dons.join(', ') || 'Aucun';
+
+    // Rafraîchir la liste des dons pour mettre à jour les prérequis
+    // (certains dons dépendent d'autres dons)
+    this.updateDonsAvailable();
   }
 
   /**
