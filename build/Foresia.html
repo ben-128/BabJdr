@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2026-01-13T11:34:14.445Z by JdrBab Build System -->
+<!-- Generated on 2026-01-13T11:45:00.167Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13077,7 +13077,7 @@ hr,
 
     // Mark as standalone version for renderer with build timestamp
     window.STANDALONE_VERSION = true;
-    window.BUILD_VERSION = '2026-01-13T11:34:14.446Z';
+    window.BUILD_VERSION = '2026-01-13T11:45:00.169Z';
 
     // Version check - clear old data if version changed
     (function() {
@@ -24338,6 +24338,30 @@ class CharacterCreator {
   }
 
   /**
+   * Extraire l'armure physique d'un objet depuis son effet
+   */
+  extractArmor(objet) {
+    if (!objet || !objet.effet) return 0;
+    // Recherche "Augmente l'armure physique de X" ou "armure physique de X"
+    const match = objet.effet.match(/armure physique de (\d+)/i);
+    return match ? parseInt(match[1]) : 0;
+  }
+
+  /**
+   * Calculer l'armure physique totale depuis l'équipement
+   */
+  calculatePhysicalArmorFromEquipment(equipement) {
+    if (!equipement || equipement.length === 0) return 0;
+
+    let totalArmor = 0;
+    equipement.forEach(objet => {
+      totalArmor += this.extractArmor(objet);
+    });
+
+    return totalArmor;
+  }
+
+  /**
    * Parse les stats de base depuis le HTML d'une sous-classe
    */
   parseBaseStats(baseHTML) {
@@ -24427,7 +24451,8 @@ class CharacterCreator {
       experience = 0,
       histoire = '',
       personnalite = '',
-      traumas = []
+      traumas = [],
+      equipement = []
     } = config;
 
     // Trouver la classe et sous-classe
@@ -24477,6 +24502,21 @@ class CharacterCreator {
 
     // Calculer les stats dérivées
     const derivedStats = this.calculateDerivedStats(stats, classe, sousClasse, level, config);
+
+    // Calculer l'armure physique depuis l'équipement
+    const armureEquipement = this.calculatePhysicalArmorFromEquipment(equipement);
+    derivedStats.armure.equipement = armureEquipement;
+    derivedStats.armure.total += armureEquipement;
+
+    // Bonus d'armure du don "Porteur de charge lourde" pour armures lourdes
+    if (dons.includes('Porteur de charge lourde')) {
+      const hasHeavyArmor = equipement.some(e => e.tags && e.tags.includes('Armure lourde'));
+      if (hasHeavyArmor) {
+        const bonusArmure = Math.floor(stats.Force / 5);
+        derivedStats.armure.donBonus = bonusArmure;
+        derivedStats.armure.total += bonusArmure;
+      }
+    }
 
     // Compétences de base
     const competences = this.getBaseCompetences(classe, sousClasse);
@@ -26465,6 +26505,29 @@ class CharacterCreatorUI {
       const statsPreview = document.getElementById('stats-preview');
       const statsContent = document.getElementById('stats-content');
 
+      // Préparer l'affichage de l'armure physique
+      const armure = this.calculatedCharacter.armure;
+      let armureDetails = `${armure.total}`;
+      if (armure.equipement > 0 || armure.donBonus > 0) {
+        const parts = [];
+        if (armure.equipement > 0) parts.push(`équipement: +${armure.equipement}`);
+        if (armure.donBonus > 0) parts.push(`don: +${armure.donBonus}`);
+        armureDetails += ` (${parts.join(', ')})`;
+      }
+
+      // Préparer l'affichage des armures élémentaires
+      const armElem = this.calculatedCharacter.armureElementaire;
+      const elemColors = {
+        'Feu': '#e25822',
+        'Eau': '#2b6cb0',
+        'Terre': '#8b5e34',
+        'Air': '#22c55e',
+        'Lumière': '#ffd700',
+        'Nuit': '#6b7280',
+        'Divin': '#a0a0b0',
+        'Maléfique': '#a855f7'
+      };
+
       let html = `
         <div style="line-height: 1.6;">
           <p><strong>${this.calculatedCharacter.classe}</strong> - Niveau ${this.calculatedCharacter.niveau}</p>
@@ -26487,10 +26550,24 @@ class CharacterCreatorUI {
           <br>
           <p><strong>COMBAT</strong></p>
           <p>Initiative: ${this.calculatedCharacter.initiative.total} | Fortune: ${this.calculatedCharacter.fortune.total}</p>
-          <p>Esquive: ${this.calculatedCharacter.esquive.total} | Armure: ${this.calculatedCharacter.armure.total}</p>
-          <p>Résist. Altér.: ${this.calculatedCharacter.resistanceAlterations.total}</p>
+          <p>Esquive: ${this.calculatedCharacter.esquive.total} | Résist. Altér.: ${this.calculatedCharacter.resistanceAlterations.total}</p>
           <p>Bonus Crit Physique: ${this.calculatedCharacter.coupCritiquePhysique.total} | Bonus Crit Sorts: ${this.calculatedCharacter.coupCritiqueSorts.total}</p>
           <p>Puiss. Sorts: ${this.calculatedCharacter.puissanceSorts.total}</p>
+          <br>
+          <p><strong>ARMURE PHYSIQUE</strong></p>
+          <p>🛡️ Armure: ${armureDetails}</p>
+          <br>
+          <p><strong>ARMURES ÉLÉMENTAIRES</strong></p>
+          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.25rem 1rem;">
+            <p><span style="color: ${elemColors.Feu};">🔥 Feu:</span> ${armElem.Feu}</p>
+            <p><span style="color: ${elemColors.Eau};">💧 Eau:</span> ${armElem.Eau}</p>
+            <p><span style="color: ${elemColors.Terre};">🪨 Terre:</span> ${armElem.Terre}</p>
+            <p><span style="color: ${elemColors.Air};">💨 Air:</span> ${armElem.Air}</p>
+            <p><span style="color: ${elemColors.Lumière};">✨ Lumière:</span> ${armElem.Lumière}</p>
+            <p><span style="color: ${elemColors.Nuit};">🌙 Nuit:</span> ${armElem.Nuit}</p>
+            <p><span style="color: ${elemColors.Divin};">☀️ Divin:</span> ${armElem.Divin}</p>
+            <p><span style="color: ${elemColors.Maléfique};">👿 Maléfique:</span> ${armElem.Maléfique}</p>
+          </div>
           <br>
           <p><strong>COMPÉTENCES</strong></p>
           <p>Hardiesse: ${this.calculatedCharacter.competences.Hardiesse} | Finesse: ${this.calculatedCharacter.competences.Finesse}</p>

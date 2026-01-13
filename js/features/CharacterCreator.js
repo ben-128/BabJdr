@@ -61,6 +61,30 @@ class CharacterCreator {
   }
 
   /**
+   * Extraire l'armure physique d'un objet depuis son effet
+   */
+  extractArmor(objet) {
+    if (!objet || !objet.effet) return 0;
+    // Recherche "Augmente l'armure physique de X" ou "armure physique de X"
+    const match = objet.effet.match(/armure physique de (\d+)/i);
+    return match ? parseInt(match[1]) : 0;
+  }
+
+  /**
+   * Calculer l'armure physique totale depuis l'équipement
+   */
+  calculatePhysicalArmorFromEquipment(equipement) {
+    if (!equipement || equipement.length === 0) return 0;
+
+    let totalArmor = 0;
+    equipement.forEach(objet => {
+      totalArmor += this.extractArmor(objet);
+    });
+
+    return totalArmor;
+  }
+
+  /**
    * Parse les stats de base depuis le HTML d'une sous-classe
    */
   parseBaseStats(baseHTML) {
@@ -150,7 +174,8 @@ class CharacterCreator {
       experience = 0,
       histoire = '',
       personnalite = '',
-      traumas = []
+      traumas = [],
+      equipement = []
     } = config;
 
     // Trouver la classe et sous-classe
@@ -200,6 +225,21 @@ class CharacterCreator {
 
     // Calculer les stats dérivées
     const derivedStats = this.calculateDerivedStats(stats, classe, sousClasse, level, config);
+
+    // Calculer l'armure physique depuis l'équipement
+    const armureEquipement = this.calculatePhysicalArmorFromEquipment(equipement);
+    derivedStats.armure.equipement = armureEquipement;
+    derivedStats.armure.total += armureEquipement;
+
+    // Bonus d'armure du don "Porteur de charge lourde" pour armures lourdes
+    if (dons.includes('Porteur de charge lourde')) {
+      const hasHeavyArmor = equipement.some(e => e.tags && e.tags.includes('Armure lourde'));
+      if (hasHeavyArmor) {
+        const bonusArmure = Math.floor(stats.Force / 5);
+        derivedStats.armure.donBonus = bonusArmure;
+        derivedStats.armure.total += bonusArmure;
+      }
+    }
 
     // Compétences de base
     const competences = this.getBaseCompetences(classe, sousClasse);

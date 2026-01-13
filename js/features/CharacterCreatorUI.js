@@ -1591,6 +1591,29 @@ class CharacterCreatorUI {
       const statsPreview = document.getElementById('stats-preview');
       const statsContent = document.getElementById('stats-content');
 
+      // Préparer l'affichage de l'armure physique
+      const armure = this.calculatedCharacter.armure;
+      let armureDetails = `${armure.total}`;
+      if (armure.equipement > 0 || armure.donBonus > 0) {
+        const parts = [];
+        if (armure.equipement > 0) parts.push(`équipement: +${armure.equipement}`);
+        if (armure.donBonus > 0) parts.push(`don: +${armure.donBonus}`);
+        armureDetails += ` (${parts.join(', ')})`;
+      }
+
+      // Préparer l'affichage des armures élémentaires
+      const armElem = this.calculatedCharacter.armureElementaire;
+      const elemColors = {
+        'Feu': '#e25822',
+        'Eau': '#2b6cb0',
+        'Terre': '#8b5e34',
+        'Air': '#22c55e',
+        'Lumière': '#ffd700',
+        'Nuit': '#6b7280',
+        'Divin': '#a0a0b0',
+        'Maléfique': '#a855f7'
+      };
+
       let html = `
         <div style="line-height: 1.6;">
           <p><strong>${this.calculatedCharacter.classe}</strong> - Niveau ${this.calculatedCharacter.niveau}</p>
@@ -1613,10 +1636,24 @@ class CharacterCreatorUI {
           <br>
           <p><strong>COMBAT</strong></p>
           <p>Initiative: ${this.calculatedCharacter.initiative.total} | Fortune: ${this.calculatedCharacter.fortune.total}</p>
-          <p>Esquive: ${this.calculatedCharacter.esquive.total} | Armure: ${this.calculatedCharacter.armure.total}</p>
-          <p>Résist. Altér.: ${this.calculatedCharacter.resistanceAlterations.total}</p>
+          <p>Esquive: ${this.calculatedCharacter.esquive.total} | Résist. Altér.: ${this.calculatedCharacter.resistanceAlterations.total}</p>
           <p>Bonus Crit Physique: ${this.calculatedCharacter.coupCritiquePhysique.total} | Bonus Crit Sorts: ${this.calculatedCharacter.coupCritiqueSorts.total}</p>
           <p>Puiss. Sorts: ${this.calculatedCharacter.puissanceSorts.total}</p>
+          <br>
+          <p><strong>ARMURE PHYSIQUE</strong></p>
+          <p>🛡️ Armure: ${armureDetails}</p>
+          <br>
+          <p><strong>ARMURES ÉLÉMENTAIRES</strong></p>
+          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.25rem 1rem;">
+            <p><span style="color: ${elemColors.Feu};">🔥 Feu:</span> ${armElem.Feu}</p>
+            <p><span style="color: ${elemColors.Eau};">💧 Eau:</span> ${armElem.Eau}</p>
+            <p><span style="color: ${elemColors.Terre};">🪨 Terre:</span> ${armElem.Terre}</p>
+            <p><span style="color: ${elemColors.Air};">💨 Air:</span> ${armElem.Air}</p>
+            <p><span style="color: ${elemColors.Lumière};">✨ Lumière:</span> ${armElem.Lumière}</p>
+            <p><span style="color: ${elemColors.Nuit};">🌙 Nuit:</span> ${armElem.Nuit}</p>
+            <p><span style="color: ${elemColors.Divin};">☀️ Divin:</span> ${armElem.Divin}</p>
+            <p><span style="color: ${elemColors.Maléfique};">👿 Maléfique:</span> ${armElem.Maléfique}</p>
+          </div>
           <br>
           <p><strong>COMPÉTENCES</strong></p>
           <p>Hardiesse: ${this.calculatedCharacter.competences.Hardiesse} | Finesse: ${this.calculatedCharacter.competences.Finesse}</p>
