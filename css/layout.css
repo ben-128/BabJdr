@@ -41,17 +41,34 @@
 }
 
 /* Mobile Responsiveness */
-@media (max-width: 980px) { 
+@media (max-width: 980px) {
   .page {
     padding: 12px;
     background: var(--paper);
   }
-  
+
   #views {
     margin-left: 0; /* Reset sidebar margin on mobile */
     margin-right: 0;
     padding: 0 var(--space-md);
     max-width: 100%;
+  }
+}
+
+/* Creation page - minimal padding on mobile */
+@media (max-width: 768px) {
+  .page:has(article[data-page="creation"]) {
+    padding: 4px;
+  }
+
+  .page:has(article[data-page="creation"]) #views {
+    padding: 0 4px;
+  }
+
+  article[data-page="creation"] section {
+    margin: 0;
+    padding: 8px;
+    border-radius: 8px;
   }
 }
 
