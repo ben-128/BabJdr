@@ -3084,6 +3084,30 @@ article[data-page="enchanteur"] .illus img:hover,
   font-weight: bold;
 }
 
+/* Mobile: réduire la taille du bouton d'entrée */
+@media (max-width: 480px) {
+  .form-entry {
+    padding: 1rem;
+    margin: 0.5rem 0;
+  }
+
+  .form-entry h3 {
+    font-size: 1rem;
+  }
+
+  .form-entry p {
+    font-size: 0.8rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .form-entry .btn-enter-form {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.95rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
 /* Close form button */
 .character-creator-form .btn-close-form {
   background: #6b7280;
