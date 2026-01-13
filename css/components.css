@@ -3055,13 +3055,8 @@ article[data-page="enchanteur"] .illus img:hover,
   overflow-x: hidden !important;
 }
 
-.character-creator-form.fullscreen-mode .btn-fullscreen {
-  display: none;
-}
-
-/* Mobile form entry button */
-.mobile-form-entry {
-  display: none; /* Hidden by default (shown only on mobile) */
+/* Form entry button (visible when form is closed) */
+.form-entry {
   text-align: center;
   padding: 2rem;
   background: var(--ui-blue, #1a1a2e);
@@ -3070,18 +3065,18 @@ article[data-page="enchanteur"] .illus img:hover,
   margin: 1rem 0;
 }
 
-.mobile-form-entry h3 {
+.form-entry h3 {
   color: var(--accent);
   margin-bottom: 0.5rem;
 }
 
-.mobile-form-entry p {
+.form-entry p {
   color: var(--text-muted);
   margin-bottom: 1rem;
   font-size: 0.9rem;
 }
 
-.mobile-form-entry .btn-enter-form {
+.form-entry .btn-enter-form {
   background: #22c55e;
   color: white;
   padding: 1rem 2rem;
@@ -3089,15 +3084,12 @@ article[data-page="enchanteur"] .illus img:hover,
   font-weight: bold;
 }
 
-/* Mobile: show entry, hide form by default */
-@media (max-width: 768px) {
-  .mobile-form-entry {
-    display: block;
-  }
-
-  .character-creator-form {
-    display: none; /* Hidden until fullscreen */
-  }
+/* Close form button */
+.character-creator-form .btn-close-form {
+  background: #6b7280;
+  color: white;
+  padding: 0.5rem 1rem;
+  white-space: nowrap;
 }
 
 /* Form modal (for alerts without exiting fullscreen) */

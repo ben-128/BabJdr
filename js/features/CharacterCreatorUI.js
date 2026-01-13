@@ -34,6 +34,8 @@ class CharacterCreatorUI {
       "Divin": "https://i.ibb.co/rKYgZ4Yp/element-Divin.png",
       "Maléfique": "https://i.ibb.co/SDD5KX34/element-Mal-fique.png"
     };
+    // Track si le formulaire a été ouvert en mode mobile (fullscreen)
+    this.openedInMobileMode = false;
   }
 
   /**
@@ -41,22 +43,21 @@ class CharacterCreatorUI {
    */
   generateFormHTML() {
     return `
-      <!-- Bouton d'entrée pour mobile (visible uniquement sur mobile hors fullscreen) -->
-      <div id="mobile-form-entry" class="mobile-form-entry">
+      <!-- Bouton d'entrée (visible sur tous les appareils quand formulaire fermé) -->
+      <div id="form-entry" class="form-entry">
         <h3>📝 Créateur de personnage</h3>
         <p>Créez votre fiche de personnage avec calcul automatique des statistiques.</p>
         <button id="btn-enter-form" class="btn-base btn-enter-form">▶ Ouvrir le formulaire</button>
       </div>
 
-      <div class="character-creator-form">
+      <div class="character-creator-form" style="display: none;">
         <div class="form-header">
           <h3>Créer votre personnage</h3>
           <div class="form-header-buttons">
+            <button id="btn-close-form" class="btn-base btn-close-form">✕ Fermer</button>
             <button id="btn-reset" class="btn-base btn-reset">🔄 Reset</button>
           </div>
         </div>
-        <!-- Bouton fermer plein écran (visible uniquement en fullscreen) -->
-        <button id="btn-exit-fullscreen" class="btn-exit-fullscreen">✕ Fermer</button>
 
         <!-- Modal personnalisée pour les alertes -->
         <div id="form-modal" class="form-modal" style="display: none;">
@@ -534,19 +535,19 @@ class CharacterCreatorUI {
     const btnReset = document.getElementById('btn-reset');
     btnReset?.addEventListener('click', () => this.resetForm());
 
-    // Bouton d'entrée mobile (ouvre le formulaire en fullscreen)
+    // Bouton d'entrée (ouvre le formulaire)
     const btnEnterForm = document.getElementById('btn-enter-form');
-    btnEnterForm?.addEventListener('click', () => this.enterFullscreen());
+    btnEnterForm?.addEventListener('click', () => this.openForm());
 
-    // Bouton quitter plein écran
-    const btnExitFullscreen = document.getElementById('btn-exit-fullscreen');
-    btnExitFullscreen?.addEventListener('click', () => this.exitFullscreen());
+    // Bouton fermer le formulaire
+    const btnCloseForm = document.getElementById('btn-close-form');
+    btnCloseForm?.addEventListener('click', () => this.closeForm());
 
     // Bouton fermer la modal
     const btnModalClose = document.getElementById('form-modal-close');
     btnModalClose?.addEventListener('click', () => this.hideModal());
 
-    // Gérer la sortie du plein écran via la touche Escape ou le bouton retour
+    // Gérer la sortie du plein écran (mobile)
     document.addEventListener('fullscreenchange', () => this.onFullscreenChange());
     document.addEventListener('webkitfullscreenchange', () => this.onFullscreenChange());
   }
@@ -574,90 +575,103 @@ class CharacterCreatorUI {
   }
 
   /**
-   * Entrer en mode plein écran avec orientation paysage
+   * Ouvrir le formulaire (fullscreen sur mobile, normal sur PC)
    */
-  async enterFullscreen() {
+  async openForm() {
     const form = document.querySelector('.character-creator-form');
-    const mobileEntry = document.getElementById('mobile-form-entry');
+    const formEntry = document.getElementById('form-entry');
     if (!form) return;
 
-    try {
-      // Cacher l'entrée mobile
-      if (mobileEntry) mobileEntry.style.display = 'none';
+    // Détecter le mobile par l'écran (pas par la fenêtre qui change en paysage)
+    const isMobile = window.innerWidth <= 768 ||
+                     (window.screen && window.screen.width <= 768) ||
+                     ('ontouchstart' in window && window.innerWidth < 1024);
 
-      // Afficher le formulaire
-      form.style.display = 'block';
+    // Cacher le bouton d'entrée
+    if (formEntry) formEntry.style.display = 'none';
 
-      // Entrer en plein écran
-      if (form.requestFullscreen) {
-        await form.requestFullscreen();
-      } else if (form.webkitRequestFullscreen) {
-        await form.webkitRequestFullscreen();
-      }
+    // Afficher le formulaire
+    form.style.display = 'block';
 
-      // Forcer l'orientation paysage si supporté
-      if (screen.orientation && screen.orientation.lock) {
-        try {
-          await screen.orientation.lock('landscape');
-        } catch (e) {
-          console.log('Orientation lock not supported:', e);
+    // Sur mobile, entrer en plein écran
+    if (isMobile) {
+      this.openedInMobileMode = true; // Tracker qu'on a ouvert en mode mobile
+      try {
+        if (form.requestFullscreen) {
+          await form.requestFullscreen();
+        } else if (form.webkitRequestFullscreen) {
+          await form.webkitRequestFullscreen();
         }
+
+        // Forcer l'orientation paysage
+        if (screen.orientation && screen.orientation.lock) {
+          try {
+            await screen.orientation.lock('landscape');
+          } catch (e) {
+            console.log('Orientation lock not supported:', e);
+          }
+        }
+
+        form.classList.add('fullscreen-mode');
+      } catch (error) {
+        console.error('Fullscreen error:', error);
       }
-
-      // Afficher le bouton de fermeture
-      const btnExit = document.getElementById('btn-exit-fullscreen');
-      if (btnExit) btnExit.style.display = 'block';
-
-      // Ajouter la classe fullscreen
-      form.classList.add('fullscreen-mode');
-
-    } catch (error) {
-      console.error('Fullscreen error:', error);
-      // En cas d'erreur, réafficher l'entrée mobile
-      if (mobileEntry) mobileEntry.style.display = 'block';
+    } else {
+      this.openedInMobileMode = false;
     }
   }
 
   /**
-   * Quitter le mode plein écran
+   * Fermer le formulaire
    */
-  async exitFullscreen() {
-    try {
-      if (document.exitFullscreen) {
-        await document.exitFullscreen();
-      } else if (document.webkitExitFullscreen) {
-        await document.webkitExitFullscreen();
-      }
+  async closeForm() {
+    const form = document.querySelector('.character-creator-form');
+    const formEntry = document.getElementById('form-entry');
 
-      // Déverrouiller l'orientation
-      if (screen.orientation && screen.orientation.unlock) {
-        screen.orientation.unlock();
+    // Si ouvert en mode mobile, sortir du fullscreen
+    if (this.openedInMobileMode && (document.fullscreenElement || document.webkitFullscreenElement)) {
+      try {
+        if (document.exitFullscreen) {
+          await document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+          await document.webkitExitFullscreen();
+        }
+
+        if (screen.orientation && screen.orientation.unlock) {
+          screen.orientation.unlock();
+        }
+      } catch (error) {
+        console.error('Exit fullscreen error:', error);
       }
-    } catch (error) {
-      console.error('Exit fullscreen error:', error);
     }
+
+    // Cacher le formulaire et afficher l'entrée
+    if (form) {
+      form.style.display = 'none';
+      form.classList.remove('fullscreen-mode');
+    }
+    if (formEntry) formEntry.style.display = 'block';
+
+    // Reset le flag
+    this.openedInMobileMode = false;
   }
 
   /**
-   * Gérer le changement d'état plein écran
+   * Gérer le changement d'état plein écran (quand l'utilisateur sort via geste/bouton système)
    */
   onFullscreenChange() {
     const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
     const form = document.querySelector('.character-creator-form');
-    const btnExit = document.getElementById('btn-exit-fullscreen');
-    const mobileEntry = document.getElementById('mobile-form-entry');
-    const isMobile = window.innerWidth <= 768;
+    const formEntry = document.getElementById('form-entry');
 
-    if (!isFullscreen) {
-      // On est sorti du plein écran
-      if (form) form.classList.remove('fullscreen-mode');
-      if (btnExit) btnExit.style.display = 'none';
-
-      // Sur mobile, cacher le formulaire et afficher l'entrée
-      if (isMobile) {
-        if (form) form.style.display = 'none';
-        if (mobileEntry) mobileEntry.style.display = 'block';
+    // Utiliser le flag au lieu de vérifier la largeur (qui change en mode paysage)
+    if (!isFullscreen && this.openedInMobileMode) {
+      // On est sorti du plein écran sur mobile (via geste ou bouton système)
+      if (form) {
+        form.classList.remove('fullscreen-mode');
+        form.style.display = 'none';
       }
+      if (formEntry) formEntry.style.display = 'block';
 
       // Déverrouiller l'orientation
       if (screen.orientation && screen.orientation.unlock) {
@@ -665,6 +679,9 @@ class CharacterCreatorUI {
           screen.orientation.unlock();
         } catch (e) {}
       }
+
+      // Reset le flag
+      this.openedInMobileMode = false;
     }
   }
 
