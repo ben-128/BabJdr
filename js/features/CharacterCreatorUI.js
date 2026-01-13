@@ -691,15 +691,20 @@ class CharacterCreatorUI {
   resetForm() {
     // Réinitialiser la configuration
     this.currentConfig = {
-      level: 1,
+      nomJoueur: 'Joueur',
+      nomPersonnage: 'Personnage',
+      experience: 0,
       className: null,
       subClassName: null,
+      level: 1,
       element: null,
       dons: [],
       carteDestin: null,
       carteDestinChoices: {},
+      statChoices: {},
       donBonuses: {},
       equipement: [],
+      consommables: {},
       budgetEclats: 120
     };
 
@@ -1965,15 +1970,15 @@ class CharacterCreatorUI {
             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem;">
               <div style="${statBoxStyle} background: linear-gradient(135deg, rgba(220, 50, 50, 0.2), rgba(150, 30, 30, 0.3));">
                 <span style="${statLabelStyle}">Vie</span>
-                <span style="${statValueStyle} color: #ef4444;">${this.calculatedCharacter.vieActuelle} / ${this.calculatedCharacter.equipementVieBonus > 0 ? `<span style="color: #22c55e;">${this.calculatedCharacter.vieMax}</span>` : this.calculatedCharacter.vieMax}</span>
+                <span style="${statValueStyle} color: #ef4444;">${this.calculatedCharacter.equipementVieBonus > 0 ? `${this.calculatedCharacter.vieMaxBase} (<span style="color: #22c55e;">${this.calculatedCharacter.vieMax}</span>)` : this.calculatedCharacter.vieMax}</span>
               </div>
               <div style="${statBoxStyle} background: linear-gradient(135deg, rgba(50, 100, 220, 0.2), rgba(30, 60, 150, 0.3));">
                 <span style="${statLabelStyle}">Mana</span>
-                <span style="${statValueStyle} color: #3b82f6;">${this.calculatedCharacter.manaActuelle} / ${this.calculatedCharacter.equipementManaBonus > 0 ? `<span style="color: #22c55e;">${this.calculatedCharacter.manaMax}</span>` : this.calculatedCharacter.manaMax}</span>
+                <span style="${statValueStyle} color: #3b82f6;">${this.calculatedCharacter.equipementManaBonus > 0 ? `${this.calculatedCharacter.manaMaxBase} (<span style="color: #22c55e;">${this.calculatedCharacter.manaMax}</span>)` : this.calculatedCharacter.manaMax}</span>
               </div>
               <div style="${statBoxStyle} background: linear-gradient(135deg, rgba(220, 180, 50, 0.2), rgba(150, 120, 30, 0.3));">
                 <span style="${statLabelStyle}">Efforts</span>
-                <span style="${statValueStyle} color: #f59e0b;">${this.calculatedCharacter.effortsActuels} / ${this.calculatedCharacter.effortsMax}</span>
+                <span style="${statValueStyle} color: #f59e0b;">${this.calculatedCharacter.effortsMax}</span>
               </div>
             </div>
           </div>
@@ -2000,7 +2005,7 @@ class CharacterCreatorUI {
               </div>
               <div style="${statBoxStyle}">
                 <span style="${statLabelStyle}">Crit Physique</span>
-                <span style="${statValueStyle}">${this.calculatedCharacter.coupCritiquePhysique.total}</span>
+                <span style="${statValueStyle}">${this.calculatedCharacter.coupCritiquePhysique.equipementBonus > 0 ? `${this.calculatedCharacter.coupCritiquePhysique.base} (<span style="color: #22c55e;">${this.calculatedCharacter.coupCritiquePhysique.total}</span>)` : this.calculatedCharacter.coupCritiquePhysique.total}</span>
               </div>
               <div style="${statBoxStyle}">
                 <span style="${statLabelStyle}">Crit Sorts</span>

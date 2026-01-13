@@ -364,8 +364,31 @@ class CharacterCreator {
       Chance: stats.Chance + equipementStatBonuses.Chance
     };
 
+    // Bonus Spécialiste des armures légères : +6 Agilité si pas d'armure lourde
+    if (config.dons && config.dons.includes('Spécialiste des armures légères')) {
+      const hasArmureLourde = equipement.some(objet =>
+        objet.tags && objet.tags.includes('Armure lourde')
+      );
+      if (!hasArmureLourde) {
+        statsAvecEquipement.Agilité += 6;
+        equipementStatBonuses.Agilité += 6;
+      }
+    }
+
     // Calculer les stats dérivées AVEC les bonus d'équipement
     const derivedStats = this.calculateDerivedStats(statsAvecEquipement, classe, sousClasse, level, config);
+
+    // Capacité Risque sauvage (Berserker) : +1 coup critique physique si pas de bouclier
+    derivedStats.coupCritiquePhysique.equipementBonus = 0;
+    if (sousClasse.nom === 'Berserker') {
+      const hasBouclier = equipement.some(objet =>
+        objet.tags && objet.tags.includes('Bouclier')
+      );
+      if (!hasBouclier) {
+        derivedStats.coupCritiquePhysique.total += 1;
+        derivedStats.coupCritiquePhysique.equipementBonus = 1;
+      }
+    }
 
     // Calculer les bonus de mana/vie depuis l'équipement
     const equipementResourceBonuses = this.calculateResourceBonusesFromEquipment(equipement);
