@@ -147,6 +147,54 @@ class CharacterCreator {
   }
 
   /**
+   * Extraire les bonus de mana/vie maximum d'un équipement
+   */
+  extractResourceBonuses(objet) {
+    const bonuses = {
+      manaMax: 0,
+      vieMax: 0
+    };
+
+    if (!objet || !objet.effet) return bonuses;
+
+    const effet = objet.effet;
+
+    // Mana maximum
+    const manaMatch = effet.match(/(?:Augmente\s+)?(?:le\s+)?mana\s+maximum\s+de\s+(\d+)/i);
+    if (manaMatch) {
+      bonuses.manaMax = parseInt(manaMatch[1]);
+    }
+
+    // Vie maximum / Points de vie maximum
+    const vieMatch = effet.match(/(?:Augmente\s+)?(?:les?\s+)?(?:points?\s+de\s+)?vie\s+maximum\s+de\s+(\d+)/i);
+    if (vieMatch) {
+      bonuses.vieMax = parseInt(vieMatch[1]);
+    }
+
+    return bonuses;
+  }
+
+  /**
+   * Calculer les bonus de mana/vie totaux depuis l'équipement
+   */
+  calculateResourceBonusesFromEquipment(equipement) {
+    const totalBonuses = {
+      manaMax: 0,
+      vieMax: 0
+    };
+
+    if (!equipement || equipement.length === 0) return totalBonuses;
+
+    equipement.forEach(objet => {
+      const bonuses = this.extractResourceBonuses(objet);
+      totalBonuses.manaMax += bonuses.manaMax;
+      totalBonuses.vieMax += bonuses.vieMax;
+    });
+
+    return totalBonuses;
+  }
+
+  /**
    * Parse les stats de base depuis le HTML d'une sous-classe
    */
   parseBaseStats(baseHTML) {
@@ -300,6 +348,20 @@ class CharacterCreator {
 
     // Calculer les stats dérivées AVEC les bonus d'équipement
     const derivedStats = this.calculateDerivedStats(statsAvecEquipement, classe, sousClasse, level, config);
+
+    // Calculer les bonus de mana/vie depuis l'équipement
+    const equipementResourceBonuses = this.calculateResourceBonusesFromEquipment(equipement);
+
+    // Appliquer les bonus de mana/vie de l'équipement
+    derivedStats.manaMaxBase = derivedStats.manaMax;
+    derivedStats.manaMax += equipementResourceBonuses.manaMax;
+    derivedStats.manaActuelle = derivedStats.manaMax;
+    derivedStats.equipementManaBonus = equipementResourceBonuses.manaMax;
+
+    derivedStats.vieMaxBase = derivedStats.vieMax;
+    derivedStats.vieMax += equipementResourceBonuses.vieMax;
+    derivedStats.vieActuelle = derivedStats.vieMax;
+    derivedStats.equipementVieBonus = equipementResourceBonuses.vieMax;
 
     // Calculer l'armure physique depuis l'équipement
     const armureEquipement = this.calculatePhysicalArmorFromEquipment(equipement);

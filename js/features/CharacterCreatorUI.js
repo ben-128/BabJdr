@@ -1715,8 +1715,12 @@ class CharacterCreatorUI {
           <p>Volonté: ${formatStat('Volonté')} | Chance: ${formatStat('Chance')}</p>
           <br>
           <p><strong>RESSOURCES</strong></p>
-          <p>Vie: ${this.calculatedCharacter.vieActuelle} / ${this.calculatedCharacter.vieMax}</p>
-          <p>Mana: ${this.calculatedCharacter.manaActuelle} / ${this.calculatedCharacter.manaMax}</p>
+          <p>Vie: ${this.calculatedCharacter.vieActuelle} / ${this.calculatedCharacter.equipementVieBonus > 0
+            ? `${this.calculatedCharacter.vieMaxBase} <span style="color: #22c55e;">(${this.calculatedCharacter.vieMax})</span>`
+            : this.calculatedCharacter.vieMax}</p>
+          <p>Mana: ${this.calculatedCharacter.manaActuelle} / ${this.calculatedCharacter.equipementManaBonus > 0
+            ? `${this.calculatedCharacter.manaMaxBase} <span style="color: #22c55e;">(${this.calculatedCharacter.manaMax})</span>`
+            : this.calculatedCharacter.manaMax}</p>
           <p>Efforts: ${this.calculatedCharacter.effortsActuels} / ${this.calculatedCharacter.effortsMax}</p>
           <br>
           <p><strong>COMBAT</strong></p>

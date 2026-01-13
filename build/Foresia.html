@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2026-01-13T11:55:32.937Z by JdrBab Build System -->
+<!-- Generated on 2026-01-13T12:00:50.969Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13114,7 +13114,7 @@ hr,
 
     // Mark as standalone version for renderer with build timestamp
     window.STANDALONE_VERSION = true;
-    window.BUILD_VERSION = '2026-01-13T11:55:32.939Z';
+    window.BUILD_VERSION = '2026-01-13T12:00:50.971Z';
 
     // Version check - clear old data if version changed
     (function() {
@@ -24461,6 +24461,54 @@ class CharacterCreator {
   }
 
   /**
+   * Extraire les bonus de mana/vie maximum d'un équipement
+   */
+  extractResourceBonuses(objet) {
+    const bonuses = {
+      manaMax: 0,
+      vieMax: 0
+    };
+
+    if (!objet || !objet.effet) return bonuses;
+
+    const effet = objet.effet;
+
+    // Mana maximum
+    const manaMatch = effet.match(/(?:Augmente\s+)?(?:le\s+)?mana\s+maximum\s+de\s+(\d+)/i);
+    if (manaMatch) {
+      bonuses.manaMax = parseInt(manaMatch[1]);
+    }
+
+    // Vie maximum / Points de vie maximum
+    const vieMatch = effet.match(/(?:Augmente\s+)?(?:les?\s+)?(?:points?\s+de\s+)?vie\s+maximum\s+de\s+(\d+)/i);
+    if (vieMatch) {
+      bonuses.vieMax = parseInt(vieMatch[1]);
+    }
+
+    return bonuses;
+  }
+
+  /**
+   * Calculer les bonus de mana/vie totaux depuis l'équipement
+   */
+  calculateResourceBonusesFromEquipment(equipement) {
+    const totalBonuses = {
+      manaMax: 0,
+      vieMax: 0
+    };
+
+    if (!equipement || equipement.length === 0) return totalBonuses;
+
+    equipement.forEach(objet => {
+      const bonuses = this.extractResourceBonuses(objet);
+      totalBonuses.manaMax += bonuses.manaMax;
+      totalBonuses.vieMax += bonuses.vieMax;
+    });
+
+    return totalBonuses;
+  }
+
+  /**
    * Parse les stats de base depuis le HTML d'une sous-classe
    */
   parseBaseStats(baseHTML) {
@@ -24614,6 +24662,20 @@ class CharacterCreator {
 
     // Calculer les stats dérivées AVEC les bonus d'équipement
     const derivedStats = this.calculateDerivedStats(statsAvecEquipement, classe, sousClasse, level, config);
+
+    // Calculer les bonus de mana/vie depuis l'équipement
+    const equipementResourceBonuses = this.calculateResourceBonusesFromEquipment(equipement);
+
+    // Appliquer les bonus de mana/vie de l'équipement
+    derivedStats.manaMaxBase = derivedStats.manaMax;
+    derivedStats.manaMax += equipementResourceBonuses.manaMax;
+    derivedStats.manaActuelle = derivedStats.manaMax;
+    derivedStats.equipementManaBonus = equipementResourceBonuses.manaMax;
+
+    derivedStats.vieMaxBase = derivedStats.vieMax;
+    derivedStats.vieMax += equipementResourceBonuses.vieMax;
+    derivedStats.vieActuelle = derivedStats.vieMax;
+    derivedStats.equipementVieBonus = equipementResourceBonuses.vieMax;
 
     // Calculer l'armure physique depuis l'équipement
     const armureEquipement = this.calculatePhysicalArmorFromEquipment(equipement);
@@ -26743,8 +26805,12 @@ class CharacterCreatorUI {
           <p>Volonté: ${formatStat('Volonté')} | Chance: ${formatStat('Chance')}</p>
           <br>
           <p><strong>RESSOURCES</strong></p>
-          <p>Vie: ${this.calculatedCharacter.vieActuelle} / ${this.calculatedCharacter.vieMax}</p>
-          <p>Mana: ${this.calculatedCharacter.manaActuelle} / ${this.calculatedCharacter.manaMax}</p>
+          <p>Vie: ${this.calculatedCharacter.vieActuelle} / ${this.calculatedCharacter.equipementVieBonus > 0
+            ? `${this.calculatedCharacter.vieMaxBase} <span style="color: #22c55e;">(${this.calculatedCharacter.vieMax})</span>`
+            : this.calculatedCharacter.vieMax}</p>
+          <p>Mana: ${this.calculatedCharacter.manaActuelle} / ${this.calculatedCharacter.equipementManaBonus > 0
+            ? `${this.calculatedCharacter.manaMaxBase} <span style="color: #22c55e;">(${this.calculatedCharacter.manaMax})</span>`
+            : this.calculatedCharacter.manaMax}</p>
           <p>Efforts: ${this.calculatedCharacter.effortsActuels} / ${this.calculatedCharacter.effortsMax}</p>
           <br>
           <p><strong>COMBAT</strong></p>
