@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2026-01-13T11:45:00.167Z by JdrBab Build System -->
+<!-- Generated on 2026-01-13T11:47:14.509Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -4554,7 +4554,7 @@ article[data-page="enchanteur"] .illus img:hover,
   margin-bottom: 1.5rem;
 }
 
-/* Select elements - Mobile optimized */
+/* Select elements - Base styles */
 .character-creator-form select,
 .character-creator-form input[type="number"] {
   width: 100%;
@@ -4565,23 +4565,30 @@ article[data-page="enchanteur"] .illus img:hover,
   color: var(--paper-ink, #e8e8e8);
   font-size: 16px; /* Prevents iOS zoom on focus */
   font-family: inherit;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
   cursor: pointer;
-  /* Custom dropdown arrow */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23c0c0d0' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-  padding-right: 36px;
 }
 
-/* Important: Ensure options are visible on mobile */
-.character-creator-form select option {
-  background-color: var(--ui-blue, #2a2a50);
-  color: var(--paper-ink, #e8e8e8);
-  padding: 0.75rem;
-  font-size: 16px;
+/* Desktop only: custom dropdown arrow (remove native appearance) */
+@media (min-width: 769px) {
+  .character-creator-form select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23c0c0d0' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 36px;
+  }
+}
+
+/* Desktop: style options */
+@media (min-width: 769px) {
+  .character-creator-form select option {
+    background-color: var(--ui-blue, #2a2a50);
+    color: var(--paper-ink, #e8e8e8);
+    padding: 0.75rem;
+    font-size: 16px;
+  }
 }
 
 /* Focus states */
@@ -4781,12 +4788,15 @@ article[data-page="enchanteur"] .illus img:hover,
   }
 }
 
-/* iOS-specific fixes */
+/* iOS-specific fixes - Keep native appearance for proper picker */
 @supports (-webkit-touch-callout: none) {
   .character-creator-form select {
     /* Ensure native iOS picker works */
+    -webkit-appearance: menulist !important;
+    appearance: menulist !important;
     font-size: 16px !important;
     background-color: var(--ui-blue, #2a2a50) !important;
+    background-image: none !important;
   }
 }
 
@@ -13077,7 +13087,7 @@ hr,
 
     // Mark as standalone version for renderer with build timestamp
     window.STANDALONE_VERSION = true;
-    window.BUILD_VERSION = '2026-01-13T11:45:00.169Z';
+    window.BUILD_VERSION = '2026-01-13T11:47:14.511Z';
 
     // Version check - clear old data if version changed
     (function() {
