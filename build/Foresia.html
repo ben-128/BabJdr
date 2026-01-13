@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2026-01-13T12:45:15.557Z by JdrBab Build System -->
+<!-- Generated on 2026-01-13T12:53:34.426Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -4538,6 +4538,38 @@ article[data-page="enchanteur"] .illus img:hover,
 
 .character-creator-form {
   padding: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Mobile: full width form */
+@media (max-width: 768px) {
+  .character-creator-form {
+    width: 100vw;
+    margin-left: calc(-1 * var(--space-md, 12px));
+    margin-right: calc(-1 * var(--space-md, 12px));
+    padding: 0.5rem;
+    box-sizing: border-box;
+  }
+
+  /* Also expand the section containing the form */
+  #creation-form-container {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin-left: calc(-1 * var(--space-md, 12px)) !important;
+    padding: 0 !important;
+  }
+
+  section:has(#creation-form-container) {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin-left: -12px !important;
+    margin-right: -12px !important;
+    padding: 0.5rem !important;
+    border-radius: 0 !important;
+    border-left: none !important;
+    border-right: none !important;
+  }
 }
 
 .character-creator-form .form-header {
@@ -13184,7 +13216,7 @@ hr,
 
     // Mark as standalone version for renderer with build timestamp
     window.STANDALONE_VERSION = true;
-    window.BUILD_VERSION = '2026-01-13T12:45:15.558Z';
+    window.BUILD_VERSION = '2026-01-13T12:53:34.428Z';
 
     // Version check - clear old data if version changed
     (function() {
