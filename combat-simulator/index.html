@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulateur de Combat - Foresia</title>
+  <link rel="stylesheet" href="css/combat-simulator.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Simulateur de Combat Foresia</h1>
+    </header>
+
+    <!-- Configuration Panel -->
+    <section id="config-panel" class="panel">
+      <h2>Configuration du Combat</h2>
+
+      <div class="config-row">
+        <div class="config-group">
+          <label>Taille de la grille:</label>
+          <input type="number" id="grid-size" value="20" min="10" max="50">
+          <span class="hint">cases (3m par case)</span>
+        </div>
+      </div>
+
+      <div class="teams-config">
+        <!-- Team 1 -->
+        <div class="team-config" id="team1-config">
+          <h3>Equipe 1 (Bleu)</h3>
+          <div class="config-group">
+            <label>Type:</label>
+            <select id="team1-type">
+              <option value="heroes">Heros</option>
+              <option value="monsters">Monstres</option>
+            </select>
+          </div>
+          <div class="config-group" id="team1-class-config">
+            <label>Nombre de heros:</label>
+            <input type="number" id="team1-size" value="3" min="1" max="10">
+          </div>
+          <div class="config-group" id="team1-class-select">
+            <label>Classes:</label>
+            <select id="team1-class" multiple size="5">
+              <!-- Populated dynamically -->
+            </select>
+          </div>
+          <div class="config-group" id="team1-monster-config" style="display:none;">
+            <label>Monstres (quantite par type):</label>
+            <div id="team1-monster-list" class="monster-quantity-list">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+          <div class="config-group" id="team1-level-config">
+            <label>Niveau:</label>
+            <input type="number" id="team1-level" value="5" min="1" max="20">
+          </div>
+        </div>
+
+        <!-- Team 2 -->
+        <div class="team-config" id="team2-config">
+          <h3>Equipe 2 (Rouge)</h3>
+          <div class="config-group">
+            <label>Type:</label>
+            <select id="team2-type">
+              <option value="monsters">Monstres</option>
+              <option value="heroes">Heros</option>
+            </select>
+          </div>
+          <div class="config-group" id="team2-class-config" style="display:none;">
+            <label>Nombre de heros:</label>
+            <input type="number" id="team2-size" value="3" min="1" max="10">
+          </div>
+          <div class="config-group" id="team2-class-select" style="display:none;">
+            <label>Classes:</label>
+            <select id="team2-class" multiple size="5">
+              <!-- Populated dynamically -->
+            </select>
+          </div>
+          <div class="config-group" id="team2-monster-config">
+            <label>Monstres (quantite par type):</label>
+            <div id="team2-monster-list" class="monster-quantity-list">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+          <div class="config-group" id="team2-level-config" style="display:none;">
+            <label>Niveau:</label>
+            <input type="number" id="team2-level" value="5" min="1" max="20">
+          </div>
+        </div>
+      </div>
+
+      <div class="buttons">
+        <button id="start-combat" class="btn-primary">Lancer le Combat</button>
+        <button id="reset-combat" class="btn-secondary">Reinitialiser</button>
+      </div>
+    </section>
+
+    <!-- Combat Arena -->
+    <section id="combat-arena" class="panel" style="display:none;">
+      <div class="combat-header">
+        <div class="turn-info">
+          <span id="current-round">Tour: 1</span>
+          <span id="current-entity">En attente...</span>
+        </div>
+        <div class="combat-controls">
+          <button id="next-turn" class="btn-primary">Tour Suivant</button>
+          <button id="auto-combat" class="btn-secondary">Combat Auto</button>
+          <button id="pause-combat" class="btn-secondary" style="display:none;">Pause</button>
+          <button id="back-to-config" class="btn-secondary">Retour Config</button>
+        </div>
+      </div>
+
+      <div class="combat-main">
+        <div class="grid-container">
+          <canvas id="combat-grid"></canvas>
+        </div>
+
+        <div class="side-panel">
+          <!-- Team 1 Status -->
+          <div class="team-status" id="team1-status">
+            <h3>Equipe 1</h3>
+            <div class="entities-list" id="team1-entities"></div>
+          </div>
+
+          <!-- Team 2 Status -->
+          <div class="team-status" id="team2-status">
+            <h3>Equipe 2</h3>
+            <div class="entities-list" id="team2-entities"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Combat Log -->
+      <div class="combat-log-container">
+        <h3>Journal de Combat</h3>
+        <div id="combat-log" class="combat-log"></div>
+      </div>
+    </section>
+
+    <!-- Results Panel -->
+    <section id="results-panel" class="panel" style="display:none;">
+      <h2>Resultats du Combat</h2>
+      <div id="winner-display"></div>
+      <div id="combat-stats"></div>
+      <div class="buttons">
+        <button id="new-combat" class="btn-primary">Nouveau Combat</button>
+        <button id="replay-combat" class="btn-secondary">Relancer (meme config)</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../js/features/CharacterCreator.js"></script>
+  <script src="js/DataLoader.js"></script>
+  <script src="js/CombatGrid.js"></script>
+  <script src="js/CombatEntity.js"></script>
+  <script src="js/HeroGenerator.js"></script>
+  <script src="js/SpellParser.js"></script>
+  <script src="js/IconManager.js"></script>
+  <script src="js/CombatAI.js"></script>
+  <script src="js/CombatEngine.js"></script>
+  <script src="js/CombatUI.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
