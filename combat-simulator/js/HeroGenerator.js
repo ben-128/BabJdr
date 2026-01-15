@@ -10,6 +10,7 @@ class HeroGenerator {
     this.donsData = null;
     this.sortsData = null;
     this.objetsData = null;
+    this.spellParser = null;
     this.loaded = false;
   }
 
@@ -26,6 +27,9 @@ class HeroGenerator {
     this.characterCreator.donsData = this.donsData;
     this.characterCreator.sortsData = this.sortsData;
     this.characterCreator.objetsData = this.objetsData;
+
+    // Initialiser SpellParser
+    this.spellParser = new SpellParser();
 
     this.loaded = true;
     console.log('HeroGenerator initialise');
@@ -84,18 +88,24 @@ class HeroGenerator {
 
     console.log(`Sorts trouves pour ${className}: ${category.sorts.length} sorts dans ${category.nom}`);
 
-    // Filtrer par niveau et ajouter la categorie
-    return category.sorts
-      .filter(spell => {
-        const prereq = spell.prerequis || '';
-        const levelMatch = prereq.match(/Niveau\s*(\d+)/i);
-        const requiredLevel = levelMatch ? parseInt(levelMatch[1]) : 1;
-        return requiredLevel <= level;
-      })
-      .map(spell => ({
-        ...spell,
-        category: category.nom // Ajouter la categorie pour les icones
-      }));
+    // Filtrer par niveau et parser les sorts
+    const filteredSpells = category.sorts.filter(spell => {
+      const prereq = spell.prerequis || '';
+      const levelMatch = prereq.match(/Niveau\s*(\d+)/i);
+      const requiredLevel = levelMatch ? parseInt(levelMatch[1]) : 1;
+      return requiredLevel <= level;
+    });
+
+    // Parser chaque sort avec SpellParser
+    return filteredSpells.map(spell => {
+      // Ajouter la categorie avant de parser
+      const spellWithCategory = { ...spell, category: category.nom };
+      // Parser le sort pour obtenir le format utilisable
+      if (this.spellParser) {
+        return this.spellParser.parseSpell(spellWithCategory);
+      }
+      return spellWithCategory;
+    });
   }
 
   // Obtenir l'equipement de depart recommande pour une classe
@@ -108,13 +118,13 @@ class HeroGenerator {
     // Normaliser le nom de classe
     const normalizedClass = className.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 
-    // Armes par classe
+    // Armes par classe (sans bouclier/catalyseur - main gauche vide par defaut)
     const classWeapons = {
-      'guerrier': ['Espadon', 'Simple epee', 'Bouclier en bois'],
-      'mage': ['Baton en bois', 'Petite orbe de mana'],
-      'pretre': ['Baton en bois', 'Bouclier en bois'],
+      'guerrier': ['Espadon', 'Simple epee'],
+      'mage': ['Baton en bois'],
+      'pretre': ['Baton en bois'],
       'rodeur': ['Dague en fer', 'Arc simple'],
-      'enchanteur': ['Baton en bois', 'Petite orbe de mana']
+      'enchanteur': ['Baton en bois']
     };
 
     const armors = {
@@ -164,6 +174,66 @@ class HeroGenerator {
     return match ? parseInt(match[1]) : 0;
   }
 
+  // Obtenir les consommables de depart pour un heros
+  getStartingConsumables(className, budget = 30) {
+    if (!this.objetsData) return [];
+
+    const consumables = [];
+    let remaining = budget;
+
+    // Consommables prioritaires par classe
+    const normalizedClass = className.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+
+    const classConsumables = {
+      'guerrier': ['Petite potion de vie', 'Bandage d\'urgence', 'Pierre à aiguiser'],
+      'mage': ['Petite potion de mana', 'Petite potion de vie'],
+      'pretre': ['Petite potion de vie', 'Petite potion de mana'],
+      'rodeur': ['Petite potion de vie', 'Flèche aiguisée', 'Ration de nourriture'],
+      'enchanteur': ['Petite potion de mana', 'Petite potion de vie']
+    };
+
+    const defaultConsumables = ['Petite potion de vie', 'Petite potion de mana'];
+    const priorityList = classConsumables[normalizedClass] || defaultConsumables;
+
+    // Chercher les consommables
+    for (const itemName of priorityList) {
+      const item = this.objetsData.find(o =>
+        o.nom.toLowerCase() === itemName.toLowerCase() ||
+        o.nom.toLowerCase().includes(itemName.toLowerCase())
+      );
+
+      if (item) {
+        const price = this.extractPrice(item.prix);
+        if (price <= remaining) {
+          // Extraire le nombre de charges depuis l'effet
+          const charges = this.extractCharges(item.effet);
+          consumables.push({
+            item: item,
+            charges: charges
+          });
+          remaining -= price;
+        }
+      }
+    }
+
+    return consumables;
+  }
+
+  // Extraire le nombre de charges d'un effet
+  extractCharges(effet) {
+    if (!effet) return 1;
+    const match = effet.match(/Charges?\s*:?\s*(\d+)/i);
+    return match ? parseInt(match[1]) : 1;
+  }
+
+  // Extraire la valeur d'armure physique d'un effet d'armure
+  extractArmorValue(effet) {
+    if (!effet) return 0;
+    // Pattern: "Augmente l'armure physique de X" (format JSON)
+    const match = effet.match(/armure physique de (\d+)/i);
+    return match ? parseInt(match[1]) : 0;
+  }
+
   // Generer des dons appropries pour une classe
   getRecommendedDons(className, sousClassName, level) {
     if (!this.donsData) return [];
@@ -171,30 +241,53 @@ class HeroGenerator {
     const normalizedClass = className.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 
     const dons = [];
-    const availablePoints = 2 + (['guerrier', 'rodeur'].includes(normalizedClass) ? level - 1 : 0);
+    // Minimum 2 points de don
+    const availablePoints = Math.max(2, 2 + (['guerrier', 'rodeur'].includes(normalizedClass) ? Math.floor((level - 1) / 2) : 0));
 
-    // Dons generaux utiles
-    const generalDons = ['Dur a cuire', 'Endurant', 'Toujours pret'];
+    // Dons generaux utiles (noms exacts du JSON)
+    const generalDons = ['Dur à cuire', 'Endurant', 'Hyperactif', 'Chanceux', 'Accélération'];
 
-    // Dons de classe
+    // Dons de classe (noms exacts du JSON)
     const classDons = {
-      'guerrier': ['Agilite du guerrier', 'Spécialiste des armures lourdes'],
-      'mage': ['Meditation erudite', 'Infatigable'],
-      'pretre': ['Chair consacree', 'Infatigable'],
-      'rodeur': ['Main heureuse', 'Hyperactif'],
-      'enchanteur': ['Enchantement d\'agilite permanente', 'Infatigable']
+      'guerrier': ['Porteur de charge lourde', 'Attaque d\'opportunité'],
+      'mage': ['Méditation érudite', 'Infatigable'],
+      'pretre': ['Chair consacrée', 'Infatigable'],
+      'rodeur': ['Attaque d\'opportunité', 'Hyperactif'],
+      'enchanteur': ['Infatigable', 'Chanceux']
     };
 
-    // Trouver les dons disponibles
+    // Collecter tous les dons disponibles du JSON
+    const allDons = [];
     for (const category of this.donsData) {
       for (const don of category.dons) {
-        const classSpecificDons = classDons[normalizedClass] || [];
-        if (generalDons.includes(don.nom) || classSpecificDons.includes(don.nom)) {
-          dons.push(don.nom);
-          if (dons.length >= availablePoints) break;
-        }
+        allDons.push(don.nom);
       }
+    }
+
+    // D'abord ajouter les dons de classe si ils existent
+    const classSpecificDons = classDons[normalizedClass] || [];
+    for (const donName of classSpecificDons) {
+      if (allDons.includes(donName) && !dons.includes(donName)) {
+        dons.push(donName);
+        if (dons.length >= availablePoints) break;
+      }
+    }
+
+    // Ensuite completer avec les dons generaux
+    for (const donName of generalDons) {
       if (dons.length >= availablePoints) break;
+      if (allDons.includes(donName) && !dons.includes(donName)) {
+        dons.push(donName);
+      }
+    }
+
+    // Si toujours pas assez, prendre des dons au hasard
+    if (dons.length < availablePoints) {
+      const remainingDons = allDons.filter(d => !dons.includes(d));
+      while (dons.length < availablePoints && remainingDons.length > 0) {
+        const randomIndex = Math.floor(Math.random() * remainingDons.length);
+        dons.push(remainingDons.splice(randomIndex, 1)[0]);
+      }
     }
 
     return dons.slice(0, availablePoints);
@@ -320,6 +413,9 @@ class HeroGenerator {
       // Obtenir les sorts disponibles
       const availableSpells = this.getSpellsForClass(className, level);
 
+      // Obtenir les consommables de depart
+      const startingConsumables = this.getStartingConsumables(className);
+
       // Creer l'entite de combat
       const hero = new CombatEntity({
         name: name || this.generateHeroName(className),
@@ -372,9 +468,16 @@ class HeroGenerator {
         // Equipement
         weapon: equipement.find(e => e.tags && e.tags.includes('Arme')),
         armor: equipement.find(e => e.tags && e.tags.includes('Armure')),
-        accessories: equipement.filter(e => e.tags && (e.tags.includes('Accessoire') || e.tags.includes('Bouclier'))),
+        offHand: null, // Main gauche vide par defaut
+        accessories: equipement.filter(e => e.tags && e.tags.includes('Accessoire')),
 
-        dons
+        // Consommables
+        consumables: startingConsumables,
+
+        // Dons et carte du destin
+        dons,
+        carteDestin,
+        carteDestinChoices
       });
 
       return hero;

@@ -8,8 +8,19 @@ class SpellParser {
     this.spellCache = new Map();
   }
 
+  // Vider le cache des sorts (utile apres mise a jour du parser)
+  clearCache() {
+    this.spellCache.clear();
+    console.log('SpellParser: Cache vide');
+  }
+
   // Parser un sort depuis les donnees JSON
   parseSpell(spellData) {
+    // Si le sort est deja parse (a 'name' au lieu de 'nom'), le retourner tel quel
+    if (spellData.name && spellData.effect !== undefined) {
+      return spellData;
+    }
+
     if (this.spellCache.has(spellData.nom)) {
       return this.spellCache.get(spellData.nom);
     }
@@ -255,8 +266,8 @@ class SpellParser {
       };
     }
 
-    // Vitesse
-    const speedMatch = cleanEffect.match(/vitesse\s*(?:de\s*d[ée]placement)?\s*(?:est\s*)?augment[ée]e?\s*de\s*(\d+)\s*m/i);
+    // Vitesse (ex: "La vitesse de déplacement de la cible est augmentée de 3m")
+    const speedMatch = cleanEffect.match(/vitesse\s*(?:de\s*d[ée]placement)?(?:\s*de\s*(?:la\s*)?(?:cible|tous\s*les\s*alli[ée]s))?\s*(?:est\s*)?augment[ée]e?\s*de\s*(\d+)\s*m/i);
     if (speedMatch) {
       result.buff = {
         type: 'acceleration',
@@ -277,7 +288,7 @@ class SpellParser {
 
     // Enchantement d'arme (Arme de lumière, etc.)
     // "L'arme du X infligera (Y + Puiss. Sorts) dégâts de Element"
-    const weaponEnchantMatch = cleanEffect.match(/l'arme\s+(?:du|de)\s+\w+\s+infligera\s*\((\d+)\s*\+\s*Puiss\.?\s*Sorts?\)\s*d[ée]g[âa]ts\s*(?:de\s*)?(\w+)?/i);
+    const weaponEnchantMatch = cleanEffect.match(/l'arme\s+(?:du|de)\s+\w+\s+infligera\s*\((\d+)\s*\+\s*Puiss\.?\s*Sorts?\)\s*d[ée]g[âa]ts\s*(?:de\s*)?([\wÀ-ÿ]+)?/i);
     if (weaponEnchantMatch) {
       result.buff = {
         type: 'weaponEnchant',
@@ -285,6 +296,7 @@ class SpellParser {
         scaling: 'puissanceSorts',
         element: weaponEnchantMatch[2] ? this.normalizeElement(weaponEnchantMatch[2]) : 'Physique'
       };
+      console.log(`  Parsed weaponEnchant: base=${weaponEnchantMatch[1]}, element=${weaponEnchantMatch[2]}`);
     }
 
     // Force
@@ -348,36 +360,76 @@ class SpellParser {
       };
     }
 
+    // Parser le mouvement du lanceur vers la cible (Charge des Vents, etc.)
+    // "Déplace le héros jusqu'à une cible à portée"
+    // Note: L'apostrophe peut être ' (U+0027), ' (U+2019), ` ou autre
+    const chargeMatch = cleanEffect.match(/d[ée]place\s+le\s+h[ée]ros\s+jusqu.{0,2}[àa]\s+(?:une\s+)?(?:la\s+)?cible/i);
+    if (chargeMatch) {
+      result.casterMovement = {
+        type: 'charge',
+        toTarget: true
+      };
+      console.log('SpellParser: Detected charge spell effect:', cleanEffect.substring(0, 60));
+    }
+
     return result;
   }
 
   determineSpellType(spellData) {
-    const effet = (spellData.effetNormal || '').toLowerCase();
+    // Nettoyer le HTML et les entites
+    const rawEffet = (spellData.effetNormal || '');
+    const effet = rawEffet.replace(/<[^>]*>/g, ' ').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').toLowerCase().trim();
     const nom = (spellData.nom || '').toLowerCase();
+
+    // Debug log
+    console.log(`determineSpellType: "${spellData.nom}" effet: "${effet.substring(0, 100)}..."`);
+
+    // Buff detection based on spell name first
+    // Common buff spell name patterns
+    if (/impr[ée]gnation|b[ée]n[ée]diction|acc[ée]l[ée]ration|protection|renforcement|enchantement|armure\s+de|bouclier|aura|blessing|haste/i.test(nom)) {
+      console.log(`  -> buff (name match)`);
+      return 'buff';
+    }
 
     // Buffs - sorts qui ameliorent les allies (verifier en premier)
     // "L'arme du X infligera" = buff d'arme, pas degats directs
     if (/l'arme\s+(du|de)\s+\w+\s+infligera/i.test(effet)) {
+      console.log(`  -> buff (weapon enchant)`);
       return 'buff';
     }
 
     // Points de vie temporaires = buff/healing
     if (/vie\s*temporaires?/i.test(effet)) {
+      console.log(`  -> buff (temp HP)`);
+      return 'buff';
+    }
+
+    // Elemental impregnation / buff effects
+    if (/impr[èe]gne|imbu[ée]|conf[èe]re|octroie|accorde|prot[èe]ge|renforce/i.test(effet)) {
+      console.log(`  -> buff (impregnation/conferral)`);
       return 'buff';
     }
 
     // Soins et guerisons
     if (/soins?|gu[ée]rison|rend.*vie|enl[èe]ve\s+l'[ée]tat/i.test(effet)) {
+      console.log(`  -> healing`);
       return 'healing';
     }
 
     // Buffs - augmente armure, resistance, vitesse, etc. sur allie
-    if (/augmente\s+(l'armure|la\s+r[ée]sistance|l'initiative|la\s+vitesse|l'esquive)/i.test(effet)) {
+    // Patterns: "augmente la vitesse", "la vitesse est augmentée", "vitesse augmentée"
+    if (/(?:augmente|est\s+augment[ée]e?|augment[ée]e?\s+de)\s*.*(armure|r[ée]sistance|initiative|vitesse|esquive|force|puissance)/i.test(effet)) {
+      console.log(`  -> buff (augmente stats)`);
+      return 'buff';
+    }
+    if (/(armure|r[ée]sistance|initiative|vitesse|esquive|force|puissance).*(?:augmente|est\s+augment[ée]e?|augment[ée]e?\s+de)/i.test(effet)) {
+      console.log(`  -> buff (stats augmente)`);
       return 'buff';
     }
 
     // Debuffs - alterations negatives sur ennemis
     if (/contracte\s+l'[ée]tat|ralenti|endormi|paralys|silence|confus|maudit|entrav|affaibli|aveugl/i.test(effet)) {
+      console.log(`  -> debuff`);
       return 'debuff';
     }
 
@@ -385,25 +437,30 @@ class SpellParser {
     if (/inflige\s*\([^)]+\)\s*(?:points?\s*de\s*)?d[ée]g[âa]ts/i.test(effet)) {
       // Mais pas si c'est "l'arme infligera" (buff)
       if (!/l'arme.*infligera/i.test(effet)) {
+        console.log(`  -> damage (inflige)`);
         return 'damage';
       }
     }
 
     // Degats de zone
     if (/d[ée]g[âa]ts.*(?:aux|a\s+tous|autour|devant|zone)/i.test(effet)) {
+      console.log(`  -> damage (zone)`);
       return 'damage';
     }
 
     // Deplacement/utilitaire
     if (/d[ée]place|repousse|t[ée]l[ée]porte|ramen[ée]/i.test(effet)) {
+      console.log(`  -> utility`);
       return 'utility';
     }
 
-    // Buff generique
-    if (/augmente|am[ée]liore|gagne/i.test(effet)) {
+    // Buff generique - inclut les formes conjuguees
+    if (/augment[ée]?e?|am[ée]lior[ée]?e?|gagne|bonus|prot[ée]g[ée]|b[ée]n[ée]ficie/i.test(effet)) {
+      console.log(`  -> buff (generic)`);
       return 'buff';
     }
 
+    console.log(`  -> other`);
     return 'other';
   }
 

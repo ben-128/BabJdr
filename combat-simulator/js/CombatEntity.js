@@ -67,11 +67,19 @@ class CombatEntity {
 
     // Equipement (pour les heros)
     this.weapon = config.weapon || null;
+    this.offHand = config.offHand || null; // Bouclier ou Catalyseur
     this.armor = config.armor || null;
     this.accessories = config.accessories || [];
 
     // Dons
     this.dons = config.dons || [];
+
+    // Carte du destin
+    this.carteDestin = config.carteDestin !== undefined ? config.carteDestin : null;
+    this.carteDestinChoices = config.carteDestinChoices || [];
+
+    // Consommables [{item: objetData, charges: number}]
+    this.consumables = config.consumables || [];
 
     // Position sur la grille
     this.position = null;
@@ -80,8 +88,9 @@ class CombatEntity {
     this.alterations = []; // {name, duration, value, type}
     this.activeBuffs = {}; // Buffs actifs (non-cumulables sauf vie temp)
     this.channeling = null; // Sort en cours de canalisation
-    this.hasActed = false;
-    this.hasMoved = false;
+    this.hasActed = false;      // Action principale (attaque/sort)
+    this.hasMoved = false;      // Deplacement
+    this.hasUsedSecondary = false; // Action secondaire (objet)
 
     // Statistiques de combat
     this.stats = {
@@ -92,6 +101,16 @@ class CombatEntity {
       criticals: 0,
       kills: 0
     };
+
+    // Don tracking
+    this.isFirstCombatTurn = true; // Pour "Toujours prêt"
+    this.hasExtraActionFromKill = false; // Pour "Enchaînement Brutal"
+    this.hasExtraSecondaryFromCrit = false; // Pour "Combo"
+    this.hasExtraActionNextTurn = false; // Pour "Adrénaline"
+    this.tookDamageLastTurn = false; // Pour "Concentration sous pression"
+    this.hasUsedDonAbility = {}; // Track once-per-combat don abilities
+    this.castSupportSpellThisTurn = false; // Pour "Élan béni"
+    this.lastSpellElement = null; // Pour "Résonance Élémentaire"
   }
 
   // Verifier si l'entite est morte
@@ -102,6 +121,16 @@ class CombatEntity {
   // Obtenir le mouvement total
   getMovement() {
     let movement = this.baseMovement + this.movementBonus;
+
+    // Bonus du don "Rapide" (+3m)
+    if (this.hasDon('Rapide')) {
+      movement += 3;
+    }
+
+    // Bonus du don "Toujours prêt" (premier tour: vitesse double)
+    if (this.hasDon('Toujours prêt') && this.isFirstCombatTurn) {
+      movement *= 2;
+    }
 
     // Bonus d'acceleration
     if (this.activeBuffs.acceleration) {
@@ -114,6 +143,23 @@ class CombatEntity {
     }
 
     return movement;
+  }
+
+  // Verifier si l'entite a un don
+  hasDon(donName) {
+    return this.dons && this.dons.includes(donName);
+  }
+
+  // Obtenir le coup critique effectif (avec bonus conditionnels)
+  getEffectiveCoupCritiquePhysique() {
+    let crit = this.coupCritiquePhysique;
+
+    // Bonus du don "Rage sanglante" (+2 crit si PV <= 50%)
+    if (this.hasDon('Rage sanglante') && this.currentHp <= this.maxHp / 2) {
+      crit += 2;
+    }
+
+    return crit;
   }
 
   // Obtenir la portee d'attaque
@@ -156,7 +202,7 @@ class CombatEntity {
   }
 
   // Appliquer des degats
-  takeDamage(amount, element = 'Physique', source = null) {
+  takeDamage(amount, element = 'Physique', source = null, isCritical = false) {
     // Minimum 1 degat
     amount = Math.max(1, amount);
     const originalAmount = amount;
@@ -179,6 +225,12 @@ class CombatEntity {
     if (amount > 0) {
       this.currentHp -= amount;
       this.stats.damageTaken += amount;
+      this.tookDamageLastTurn = true; // Pour "Concentration sous pression"
+
+      // Don "Adrénaline": action supplémentaire prochain tour si subit critique
+      if (isCritical && this.hasDon && this.hasDon('Adrénaline')) {
+        this.hasExtraActionNextTurn = true;
+      }
 
       if (source) {
         source.stats.damageDealt += amount;
@@ -285,6 +337,10 @@ class CombatEntity {
         this.coupCritiquePhysique += value;
         this.coupCritiqueSorts += value;
         break;
+      case 'weaponEnchant':
+        // Gere dans CombatEngine après applyBuff (stocke element et damage)
+        break;
+        break;
       case 'resistanceAlterations':
         this.resistanceAlterations += value;
         break;
@@ -317,6 +373,51 @@ class CombatEntity {
     return true;
   }
 
+  // Verifier si peut utiliser un objet
+  canUseItem() {
+    if (!this.canAct()) return false;
+    if (!this.hasSecondaryAction()) return false;
+    return this.consumables.some(c => c.charges > 0);
+  }
+
+  // Verifier si une action secondaire est disponible
+  hasSecondaryAction() {
+    // Support pour "Hyperactif" avec plusieurs actions secondaires
+    if (this.secondaryActionsRemaining !== undefined) {
+      return this.secondaryActionsRemaining > 0;
+    }
+    return !this.hasUsedSecondary;
+  }
+
+  // Utiliser une action secondaire
+  useSecondaryAction() {
+    if (this.secondaryActionsRemaining !== undefined) {
+      this.secondaryActionsRemaining--;
+      this.hasUsedSecondary = this.secondaryActionsRemaining <= 0;
+    } else {
+      this.hasUsedSecondary = true;
+    }
+  }
+
+  // Utiliser un consommable (reduit les charges)
+  useConsumable(consumable) {
+    const found = this.consumables.find(c => c.item.numero === consumable.item.numero);
+    if (found && found.charges > 0) {
+      found.charges--;
+      // Retirer si plus de charges
+      if (found.charges <= 0) {
+        this.consumables = this.consumables.filter(c => c.item.numero !== consumable.item.numero);
+      }
+      return true;
+    }
+    return false;
+  }
+
+  // Obtenir les consommables utilisables
+  getUsableConsumables() {
+    return this.consumables.filter(c => c.charges > 0);
+  }
+
   // Obtenir l'esquive effective
   getEffectiveEsquive() {
     let esquive = this.esquive;
@@ -330,6 +431,58 @@ class CombatEntity {
   resetTurn() {
     this.hasActed = false;
     this.hasMoved = false;
+    this.hasUsedSecondary = false;
+    this.isFirstCombatTurn = false; // Plus jamais le premier tour
+    this.hasExtraActionFromKill = false;
+    this.hasExtraSecondaryFromCrit = false;
+    this.castSupportSpellThisTurn = false;
+    this.lastAttackTarget = null;
+    this.lastAttackHit = false;
+    this.lastAttackWasCrit = false;
+
+    // "Attaque surpuissante" - skip action ce tour
+    if (this.skipNextTurnAction) {
+      this.hasActed = true;
+      this.skipNextTurnAction = false;
+    }
+
+    // "Adrénaline" - action supplémentaire si a subi des critiques
+    if (this.hasExtraActionNextTurn) {
+      this.hasExtraActionFromKill = true;
+      this.hasExtraActionNextTurn = false;
+    }
+
+    // "Hyperactif" - deux actions secondaires
+    if (this.hasDon('Hyperactif')) {
+      this.secondaryActionsRemaining = 2;
+    } else {
+      this.secondaryActionsRemaining = 1;
+    }
+
+    // Réduire durées des effets de dons
+    if (this.criIntimidantDuration) {
+      this.criIntimidantDuration--;
+      if (this.criIntimidantDuration <= 0) {
+        this.criIntimidantMalus = 0;
+      }
+    }
+
+    if (this.roiEsquiveDuration) {
+      this.roiEsquiveDuration--;
+      if (this.roiEsquiveDuration <= 0) {
+        this.esquive -= 5;
+        this.roiEsquiveDuration = 0;
+      }
+    }
+
+    // Reset des bonus temporaires de tour
+    if (this.expertiseBouclierBonus) {
+      this.armurePhysique -= this.expertiseBouclierBonus;
+      this.expertiseBouclierBonus = 0;
+    }
+
+    // Cri de guerre dure jusqu'au début du prochain tour du crieur
+    // (géré dans CombatEngine)
   }
 
   // Obtenir un resume de l'etat
@@ -351,7 +504,12 @@ class CombatEntity {
       id: Math.random().toString(36).substr(2, 9),
       alterations: [...this.alterations],
       activeBuffs: { ...this.activeBuffs },
-      stats: { ...this.stats }
+      stats: { ...this.stats },
+      consumables: this.consumables.map(c => ({ item: c.item, charges: c.charges })),
+      spells: [...this.spells],
+      attacks: [...this.attacks],
+      dons: [...this.dons],
+      accessories: [...(this.accessories || [])]
     });
   }
 }

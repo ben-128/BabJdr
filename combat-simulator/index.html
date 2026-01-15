@@ -35,25 +35,17 @@
               <option value="monsters">Monstres</option>
             </select>
           </div>
-          <div class="config-group" id="team1-class-config">
-            <label>Nombre de heros:</label>
-            <input type="number" id="team1-size" value="3" min="1" max="10">
-          </div>
-          <div class="config-group" id="team1-class-select">
-            <label>Classes:</label>
-            <select id="team1-class" multiple size="5">
-              <!-- Populated dynamically -->
-            </select>
+          <div class="config-group" id="team1-heroes-config">
+            <div class="heroes-list" id="team1-heroes-list">
+              <!-- Hero cards will be added here -->
+            </div>
+            <button class="btn-add-hero" id="team1-add-hero">+ Ajouter un heros</button>
           </div>
           <div class="config-group" id="team1-monster-config" style="display:none;">
             <label>Monstres (quantite par type):</label>
             <div id="team1-monster-list" class="monster-quantity-list">
               <!-- Populated dynamically -->
             </div>
-          </div>
-          <div class="config-group" id="team1-level-config">
-            <label>Niveau:</label>
-            <input type="number" id="team1-level" value="5" min="1" max="20">
           </div>
         </div>
 
@@ -67,15 +59,11 @@
               <option value="heroes">Heros</option>
             </select>
           </div>
-          <div class="config-group" id="team2-class-config" style="display:none;">
-            <label>Nombre de heros:</label>
-            <input type="number" id="team2-size" value="3" min="1" max="10">
-          </div>
-          <div class="config-group" id="team2-class-select" style="display:none;">
-            <label>Classes:</label>
-            <select id="team2-class" multiple size="5">
-              <!-- Populated dynamically -->
-            </select>
+          <div class="config-group" id="team2-heroes-config" style="display:none;">
+            <div class="heroes-list" id="team2-heroes-list">
+              <!-- Hero cards will be added here -->
+            </div>
+            <button class="btn-add-hero" id="team2-add-hero">+ Ajouter un heros</button>
           </div>
           <div class="config-group" id="team2-monster-config">
             <label>Monstres (quantite par type):</label>
@@ -83,9 +71,132 @@
               <!-- Populated dynamically -->
             </div>
           </div>
-          <div class="config-group" id="team2-level-config" style="display:none;">
-            <label>Niveau:</label>
-            <input type="number" id="team2-level" value="5" min="1" max="20">
+        </div>
+      </div>
+
+      <!-- Hero Creation Popup -->
+      <div id="hero-create-popup" class="popup-overlay" style="display:none;">
+        <div class="popup-content hero-popup">
+          <h3>Creer un heros</h3>
+          <div class="hero-form">
+            <div class="form-group">
+              <label>Classe:</label>
+              <select id="hero-class-select">
+                <!-- Populated dynamically -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Sous-classe:</label>
+              <select id="hero-subclass-select">
+                <!-- Populated dynamically -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Niveau:</label>
+              <input type="number" id="hero-level-input" value="5" min="1" max="20">
+            </div>
+          </div>
+          <div class="popup-buttons">
+            <button id="hero-create-confirm" class="btn-primary">Creer</button>
+            <button id="hero-create-cancel" class="btn-secondary">Annuler</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Edit Popup -->
+      <div id="hero-edit-popup" class="popup-overlay" style="display:none;">
+        <div class="popup-content hero-popup hero-edit-popup">
+          <h3 id="hero-edit-title">Modifier le heros</h3>
+          <div class="hero-edit-content">
+            <div class="hero-edit-section">
+              <h4>Statistiques</h4>
+              <div class="hero-edit-info" id="hero-edit-info"></div>
+            </div>
+            <div class="hero-edit-section">
+              <h4>Arme <button class="btn-edit-inline" id="btn-edit-weapon">Changer</button></h4>
+              <div class="hero-edit-equipment" id="hero-edit-weapon"></div>
+            </div>
+            <div class="hero-edit-section">
+              <h4>Armure <button class="btn-edit-inline" id="btn-edit-armor">Changer</button></h4>
+              <div class="hero-edit-equipment" id="hero-edit-armor"></div>
+            </div>
+            <div class="hero-edit-section">
+              <h4>Main gauche <button class="btn-edit-inline" id="btn-edit-offhand">Changer</button></h4>
+              <div class="hero-edit-equipment" id="hero-edit-offhand"></div>
+            </div>
+            <div class="hero-edit-section">
+              <h4>Consommables <button class="btn-edit-inline" id="btn-add-consumable">+ Ajouter</button></h4>
+              <div class="hero-edit-consumables" id="hero-edit-consumables"></div>
+            </div>
+            <div class="hero-edit-section">
+              <h4>Dons <button class="btn-edit-inline" id="btn-add-don">+ Ajouter</button></h4>
+              <div class="hero-edit-dons" id="hero-edit-dons"></div>
+            </div>
+            <div class="hero-edit-section">
+              <h4>Carte du Destin <button class="btn-edit-inline" id="btn-change-carte">Changer</button></h4>
+              <div class="hero-edit-carte-destin" id="hero-edit-carte-destin"></div>
+            </div>
+            <div class="hero-edit-section">
+              <h4>Sorts</h4>
+              <div class="hero-edit-spells" id="hero-edit-spells"></div>
+            </div>
+          </div>
+          <div class="popup-buttons">
+            <button id="hero-edit-close" class="btn-primary">Fermer</button>
+            <button id="hero-edit-regenerate" class="btn-secondary">Regenerer</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Equipment Selection Popup -->
+      <div id="equipment-select-popup" class="popup-overlay" style="display:none;">
+        <div class="popup-content equipment-popup">
+          <h3 id="equipment-select-title">Choisir un equipement</h3>
+          <div class="equipment-filter">
+            <input type="text" id="equipment-search" placeholder="Rechercher...">
+          </div>
+          <div class="equipment-list" id="equipment-list"></div>
+          <div class="popup-buttons">
+            <button id="equipment-select-cancel" class="btn-secondary">Annuler</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Consumable Selection Popup -->
+      <div id="consumable-select-popup" class="popup-overlay" style="display:none;">
+        <div class="popup-content equipment-popup">
+          <h3>Ajouter un consommable</h3>
+          <div class="equipment-filter">
+            <input type="text" id="consumable-search" placeholder="Rechercher...">
+          </div>
+          <div class="equipment-list" id="consumable-list"></div>
+          <div class="popup-buttons">
+            <button id="consumable-select-cancel" class="btn-secondary">Annuler</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Don Selection Popup -->
+      <div id="don-select-popup" class="popup-overlay" style="display:none;">
+        <div class="popup-content equipment-popup">
+          <h3>Ajouter un don</h3>
+          <div class="equipment-filter">
+            <input type="text" id="don-search" placeholder="Rechercher...">
+          </div>
+          <div class="equipment-list" id="don-list"></div>
+          <div class="popup-buttons">
+            <button id="don-select-cancel" class="btn-secondary">Annuler</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Carte du Destin Selection Popup -->
+      <div id="carte-destin-popup" class="popup-overlay" style="display:none;">
+        <div class="popup-content">
+          <h3>Choisir une Carte du Destin</h3>
+          <div class="carte-destin-options" id="carte-destin-options"></div>
+          <div class="popup-buttons">
+            <button id="carte-destin-cancel" class="btn-secondary">Annuler</button>
           </div>
         </div>
       </div>
@@ -104,11 +215,92 @@
           <span id="current-entity">En attente...</span>
         </div>
         <div class="combat-controls">
-          <button id="next-turn" class="btn-primary">Tour Suivant</button>
           <button id="auto-combat" class="btn-secondary">Combat Auto</button>
           <button id="pause-combat" class="btn-secondary" style="display:none;">Pause</button>
           <button id="back-to-config" class="btn-secondary">Retour Config</button>
         </div>
+      </div>
+
+      <!-- Action Panel for Manual Combat -->
+      <div id="action-panel" class="action-panel" style="display:none;">
+        <div id="current-entity-info" class="current-entity-info"></div>
+        <div class="action-buttons">
+          <button id="action-move" class="action-btn" data-action="move">
+            <span class="action-icon">🚶</span>
+            <span class="action-label">Deplacement</span>
+          </button>
+          <button id="action-attack" class="action-btn" data-action="attack">
+            <span class="action-icon">⚔️</span>
+            <span class="action-label">Attaque</span>
+          </button>
+          <button id="action-spell" class="action-btn" data-action="spell">
+            <span class="action-icon">✨</span>
+            <span class="action-label">Sort</span>
+          </button>
+          <button id="action-item" class="action-btn" data-action="item">
+            <span class="action-icon">🧪</span>
+            <span class="action-label">Objet</span>
+          </button>
+          <button id="action-end-turn" class="action-btn action-end" data-action="end">
+            <span class="action-icon">✓</span>
+            <span class="action-label">Fin de tour</span>
+          </button>
+          <button id="action-auto-turn" class="action-btn action-auto" data-action="auto">
+            <span class="action-icon">🤖</span>
+            <span class="action-label">Auto ce tour</span>
+          </button>
+        </div>
+        <div class="action-status">
+          <span id="move-status" class="status-badge">Deplacement: disponible</span>
+          <span id="action-status" class="status-badge">Action: disponible</span>
+          <span id="secondary-status" class="status-badge">Objet: disponible</span>
+        </div>
+        <div id="don-abilities" class="don-abilities" style="display:none;">
+          <!-- Don abilities buttons will be added here dynamically -->
+        </div>
+        <div id="action-hint" class="action-hint"></div>
+      </div>
+
+      <!-- Spell Selection Popup -->
+      <div id="spell-popup" class="popup-overlay" style="display:none;">
+        <div class="popup-content">
+          <h3>Choisir un sort</h3>
+          <div id="spell-list" class="spell-list"></div>
+          <button id="cancel-spell" class="btn-secondary">Annuler</button>
+        </div>
+      </div>
+
+      <!-- Item Selection Popup -->
+      <div id="item-popup" class="popup-overlay" style="display:none;">
+        <div class="popup-content">
+          <h3>Utiliser un objet</h3>
+          <div id="item-list" class="item-list"></div>
+          <button id="cancel-item" class="btn-secondary">Annuler</button>
+        </div>
+      </div>
+
+      <!-- Target Info Popup -->
+      <div id="target-info" class="target-info" style="display:none;">
+        <div class="target-name"></div>
+        <div class="target-hp"></div>
+      </div>
+
+      <!-- Action Animation Popup -->
+      <div id="action-animation" class="action-animation-overlay" style="display:none;">
+        <div class="action-animation-content">
+          <div class="action-actor actor-left">
+            <img class="actor-icon" src="" alt="">
+            <div class="actor-name"></div>
+          </div>
+          <div class="action-projectile-container">
+            <img class="action-projectile" src="" alt="">
+          </div>
+          <div class="action-actor actor-right">
+            <img class="actor-icon" src="" alt="">
+            <div class="actor-name"></div>
+          </div>
+        </div>
+        <div class="action-result"></div>
       </div>
 
       <div class="combat-main">
@@ -155,8 +347,8 @@
   <script src="js/DataLoader.js"></script>
   <script src="js/CombatGrid.js"></script>
   <script src="js/CombatEntity.js"></script>
-  <script src="js/HeroGenerator.js"></script>
   <script src="js/SpellParser.js"></script>
+  <script src="js/HeroGenerator.js"></script>
   <script src="js/IconManager.js"></script>
   <script src="js/CombatAI.js"></script>
   <script src="js/CombatEngine.js"></script>

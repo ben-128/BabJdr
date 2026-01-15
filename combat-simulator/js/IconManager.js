@@ -104,7 +104,7 @@ class IconManager {
 
   // Obtenir l'icone d'un sort
   getSpellIcon(spellName, category = null) {
-    if (!this.imagesData) return null;
+    if (!this.imagesData || !spellName) return null;
 
     // Chercher avec la categorie
     if (category) {

@@ -270,7 +270,7 @@ class CombatGrid {
   }
 
   // Dessiner la grille
-  render(activeEntity = null, highlightCells = []) {
+  render(activeEntity = null, highlightCells = [], highlightType = 'move') {
     if (!this.ctx) return;
 
     const ctx = this.ctx;
@@ -304,12 +304,34 @@ class CombatGrid {
       }
     }
 
-    // Highlighter les cases accessibles
+    // Highlighter les cases accessibles ou cibles
     for (const cell of highlightCells) {
       const px = cell.x * cellSize;
       const py = cell.y * cellSize;
-      ctx.fillStyle = 'rgba(74, 144, 217, 0.3)';
-      ctx.fillRect(px, py, cellSize, cellSize);
+
+      // Different colors for different action types
+      if (highlightType === 'target') {
+        // Red highlight for enemy targets
+        ctx.fillStyle = 'rgba(220, 53, 69, 0.4)';
+        ctx.fillRect(px, py, cellSize, cellSize);
+        ctx.strokeStyle = 'rgba(220, 53, 69, 0.8)';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(px + 1, py + 1, cellSize - 2, cellSize - 2);
+      } else if (highlightType === 'ally') {
+        // Green highlight for ally targets (buff/heal)
+        ctx.fillStyle = 'rgba(40, 167, 69, 0.4)';
+        ctx.fillRect(px, py, cellSize, cellSize);
+        ctx.strokeStyle = 'rgba(40, 167, 69, 0.8)';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(px + 1, py + 1, cellSize - 2, cellSize - 2);
+      } else {
+        // Blue highlight for movement
+        ctx.fillStyle = 'rgba(74, 144, 217, 0.3)';
+        ctx.fillRect(px, py, cellSize, cellSize);
+        ctx.strokeStyle = 'rgba(74, 144, 217, 0.6)';
+        ctx.lineWidth = 1;
+        ctx.strokeRect(px, py, cellSize, cellSize);
+      }
     }
 
     // Dessiner les entites
