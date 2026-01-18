@@ -305,40 +305,6 @@ window.MANIFEST_DATA = ${fs.readFileSync(path.join(rootDir, 'config', 'manifest.
       }
     })();
 
-    // Character Creator initialization
-    window.characterCreatorInitialized = false;
-    window.characterCreatorInstance = null;
-    window.characterCreatorUI = null;
-
-    window.initCharacterCreator = async function() {
-      if (window.characterCreatorInitialized) return;
-
-      try {
-        const container = document.getElementById('creation-form-container');
-        if (!container) {
-          console.error('Container not found');
-          return;
-        }
-
-        // Create instances
-        window.characterCreatorInstance = new CharacterCreator();
-        window.characterCreatorUI = new CharacterCreatorUI(window.characterCreatorInstance);
-
-        // Initialize
-        await window.characterCreatorInstance.init();
-        await window.characterCreatorUI.init('creation-form-container');
-
-        window.characterCreatorInitialized = true;
-        console.log('✅ Character Creator initialized');
-      } catch (error) {
-        console.error('❌ Error initializing Character Creator:', error);
-        const container = document.getElementById('creation-form-container');
-        if (container) {
-          container.innerHTML = '<p style="color: red; text-align: center;">Erreur lors du chargement du formulaire. Veuillez rafraîchir la page.</p>';
-        }
-      }
-    };
-
     // Initialize app when DOM is ready
     document.addEventListener('DOMContentLoaded', function() {
       // Ensure dev mode is off

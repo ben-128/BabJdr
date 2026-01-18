@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2026-01-18T17:25:05.096Z by JdrBab Build System -->
+<!-- Generated on 2026-01-18T17:27:30.074Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13391,7 +13391,7 @@ hr,
 
     // Mark as standalone version for renderer with build timestamp
     window.STANDALONE_VERSION = true;
-    window.BUILD_VERSION = '2026-01-18T17:25:05.099Z';
+    window.BUILD_VERSION = '2026-01-18T17:27:30.077Z';
 
     // Version check - clear old data if version changed
     (function() {
@@ -13410,40 +13410,6 @@ hr,
         console.log('New version detected, cache cleared:', window.BUILD_VERSION);
       }
     })();
-
-    // Character Creator initialization
-    window.characterCreatorInitialized = false;
-    window.characterCreatorInstance = null;
-    window.characterCreatorUI = null;
-
-    window.initCharacterCreator = async function() {
-      if (window.characterCreatorInitialized) return;
-
-      try {
-        const container = document.getElementById('creation-form-container');
-        if (!container) {
-          console.error('Container not found');
-          return;
-        }
-
-        // Create instances
-        window.characterCreatorInstance = new CharacterCreator();
-        window.characterCreatorUI = new CharacterCreatorUI(window.characterCreatorInstance);
-
-        // Initialize
-        await window.characterCreatorInstance.init();
-        await window.characterCreatorUI.init('creation-form-container');
-
-        window.characterCreatorInitialized = true;
-        console.log('✅ Character Creator initialized');
-      } catch (error) {
-        console.error('❌ Error initializing Character Creator:', error);
-        const container = document.getElementById('creation-form-container');
-        if (container) {
-          container.innerHTML = '<p style="color: red; text-align: center;">Erreur lors du chargement du formulaire. Veuillez rafraîchir la page.</p>';
-        }
-      }
-    };
 
     // Initialize app when DOM is ready
     document.addEventListener('DOMContentLoaded', function() {
@@ -27538,6 +27504,40 @@ class CharacterCreatorUI {
 
 // Exporter en tant que module global
 window.CharacterCreatorUI = CharacterCreatorUI;
+
+// Character Creator initialization function (for dev mode compatibility)
+window.characterCreatorInitialized = false;
+window.characterCreatorInstance = null;
+window.characterCreatorUI = null;
+
+window.initCharacterCreator = async function() {
+  if (window.characterCreatorInitialized) return;
+
+  try {
+    const container = document.getElementById('creation-form-container');
+    if (!container) {
+      console.error('Container not found');
+      return;
+    }
+
+    // Create instances
+    window.characterCreatorInstance = new CharacterCreator();
+    window.characterCreatorUI = new CharacterCreatorUI(window.characterCreatorInstance);
+
+    // Initialize
+    await window.characterCreatorInstance.init();
+    await window.characterCreatorUI.init('creation-form-container');
+
+    window.characterCreatorInitialized = true;
+    console.log('✅ Character Creator initialized');
+  } catch (error) {
+    console.error('❌ Error initializing Character Creator:', error);
+    const container = document.getElementById('creation-form-container');
+    if (container) {
+      container.innerHTML = '<p style="color: red; text-align: center;">Erreur lors du chargement du formulaire. Veuillez rafraîchir la page.</p>';
+    }
+  }
+};
 
 // ============================================================================
 // DYNAMIC CENTERING SYSTEM
