@@ -348,7 +348,7 @@
       },
       {
         "nom": "Adrénaline",
-        "description": "Après avoir subi des dégâts critiques (sort ou physique), le héros bénéficiera d'une action principale supplémentaire à son prochain tour (non cumulable).",
+        "description": "Après avoir subi des dégâts critiques (élémentaires ou physiques), le héros bénéficiera d'une action principale supplémentaire à son prochain tour (non cumulable).",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
