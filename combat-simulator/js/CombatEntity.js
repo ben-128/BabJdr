@@ -421,10 +421,26 @@ class CombatEntity {
   // Obtenir l'esquive effective
   getEffectiveEsquive() {
     let esquive = this.esquive;
-    if (this.hasAlteration('Ralenti') || this.hasAlteration('A terre') || this.hasAlteration('Endormi')) {
+    if (this.hasAlteration('Ralenti') || this.hasAlteration('A terre') || this.hasAlteration('Endormi') || this.hasAlteration('Berserker')) {
       return 0;
     }
     return Math.min(9, esquive); // Max 9
+  }
+
+  // Obtenir l'armure physique effective (0 si Berserker)
+  getEffectiveArmurePhysique() {
+    if (this.hasAlteration('Berserker')) {
+      return 0;
+    }
+    return this.armurePhysique;
+  }
+
+  // Obtenir l'armure élémentaire effective (0 si Berserker)
+  getEffectiveArmureElementaire(element) {
+    if (this.hasAlteration('Berserker')) {
+      return 0;
+    }
+    return this.armureElementaire[element] || 0;
   }
 
   // Reinitialiser pour un nouveau tour

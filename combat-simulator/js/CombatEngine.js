@@ -885,10 +885,17 @@ class CombatEngine {
     const effectiveCrit = entity.getEffectiveCoupCritiquePhysique ?
       entity.getEffectiveCoupCritiquePhysique() : entity.coupCritiquePhysique;
     const critThreshold = 20 - effectiveCrit;
-    const isCritical = roll >= critThreshold;
+
+    // Berserker: toute attaque physique non esquivée est critique
+    const isBerserker = entity.hasAlteration && entity.hasAlteration('Berserker');
+    const isCritical = isBerserker || roll >= critThreshold;
 
     if (isCritical) {
-      this.log(`  COUP CRITIQUE! (${roll} >= ${critThreshold})`, 'critical');
+      if (isBerserker) {
+        this.log(`  COUP CRITIQUE! (Berserker)`, 'critical');
+      } else {
+        this.log(`  COUP CRITIQUE! (${roll} >= ${critThreshold})`, 'critical');
+      }
       entity.stats.criticals++;
     }
 
@@ -930,8 +937,8 @@ class CombatEngine {
       this.log(`  x2 (critique) = ${rawPhysicalDamage}`, 'critical');
     }
 
-    // Appliquer l'armure physique
-    const armorReduction = target.armurePhysique;
+    // Appliquer l'armure physique (0 si cible en Berserker)
+    const armorReduction = target.getEffectiveArmurePhysique();
     const finalPhysicalDamage = Math.max(1, rawPhysicalDamage - armorReduction);
 
     if (armorReduction > 0) {
@@ -973,8 +980,8 @@ class CombatEngine {
         this.log(`    /2 (meme element) = ${enchantDamage}`, 'movement');
       }
 
-      // Appliquer l'armure elementaire
-      const elementArmor = target.armureElementaire[element] || 0;
+      // Appliquer l'armure elementaire (0 si cible en Berserker)
+      const elementArmor = target.getEffectiveArmureElementaire(element);
       const finalEnchantDamage = Math.max(0, enchantDamage - elementArmor);
 
       if (elementArmor > 0) {
@@ -1395,8 +1402,8 @@ class CombatEngine {
         this.log(`  x2 (element oppose) = ${rawDamage}`, 'critical');
       }
 
-      // Appliquer l'armure elementaire
-      const armor = target.armureElementaire[element] || 0;
+      // Appliquer l'armure elementaire (0 si cible en Berserker)
+      const armor = target.getEffectiveArmureElementaire(element);
       const finalDamage = Math.max(1, rawDamage - armor);
 
       if (armor > 0) {

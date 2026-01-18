@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2026-01-16T20:13:47.517Z by JdrBab Build System -->
+<!-- Generated on 2026-01-18T16:46:06.649Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -9155,6 +9155,12 @@ hr,
         "description": "Une fois par combat et par arme, le guerrier peut utiliser une action secondaire pour déclencher un effet spécial sur sa prochaine attaque, selon le type d'arme utilisé :<br><br><b>Arc :</b> L'attaque est impossible à esquiver, ne peut pas faire d'échec critique, et les chances de coup critique sont augmentées de 2.<br><br><b>Arme exotique :</b> Ajoute la <img src=\"https://i.ibb.co/HfthhzSF/stat-Chance.png\" alt=\"Chance\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Chance aux dégâts.<br><br><b>Autre arme à deux mains :</b> L'attaque inflige ses dégâts à toutes les cibles à moins de 3m.<br><br><b>Autre arme à une main :</b> La cible passe dans l'état <span class=\"etat-link\" data-etat=\"Empoisonné\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ensanglanté</span> (Force/3, arrondi à l'inférieur) pendant 3 tours.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
+      },
+      {
+        "nom": "Rage du berserker",
+        "description": "Une fois par combat, le guerrier peut utiliser une action secondaire pour entrer dans l'état <span class=\"etat-link\" data-etat=\"Berserker\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Berserker</span>.<br><br>L'état dure jusqu'à la fin du combat ou jusqu'à ce que le guerrier utilise une nouvelle action secondaire en sortir.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
       }
     ]
   },
@@ -12241,11 +12247,12 @@ hr,
     "don:Concentration sous pression": "https://i.ibb.co/ksBQBsmt/Pression.jpg",
     "don:Osmose magique": "https://i.ibb.co/Jbn37FN/Osmose.jpg",
     "don:Sacrifice pieux": "https://i.ibb.co/MkPD2XQz/Sacrifice.jpg",
-    "don:Coup de maître": "https://i.ibb.co/9HHTVR7S/Coup-Maitre.jpg"
+    "don:Coup de maître": "https://i.ibb.co/9HHTVR7S/Coup-Maitre.jpg",
+    "don:Rage du berserker": "https://i.ibb.co/sM6x2Gj/Rageberserker.jpg"
   },
   "meta": {
-    "total_images": 532,
-    "exported_date": "2026-01-16",
+    "total_images": 533,
+    "exported_date": "2026-01-18",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
 };
@@ -12751,6 +12758,12 @@ hr,
       "type": "card",
       "title": "Drainé",
       "content": "La force, la puissance des sorts, et les chances de coups critiques (physiques et magiques) sont à 0."
+    },
+    {
+      "id": "section-berserker",
+      "type": "card",
+      "title": "Berserker",
+      "content": "Les chances de coup critiques physiques sont augmentés de 5.<br><br>Incapable d'esquiver ou d'utiliser des sorts/objets.<br><br>L'armure physique et les armures élémentaires sont à 0."
     }
   ]
 },
@@ -13378,7 +13391,7 @@ hr,
 
     // Mark as standalone version for renderer with build timestamp
     window.STANDALONE_VERSION = true;
-    window.BUILD_VERSION = '2026-01-16T20:13:47.520Z';
+    window.BUILD_VERSION = '2026-01-18T16:46:06.652Z';
 
     // Version check - clear old data if version changed
     (function() {
@@ -18976,7 +18989,7 @@ hr,
         'Auberge': ['Auberge1.mp3', 'Auberge2.mp3', 'Auberge3.mp3', 'Auberge4.mp3'],
         'Autre': ['BOS01_01.mp3', 'BOS05_01.mp3', 'BOS06_01.mp3', 'BOS07_01.mp3', 'BOS09_01.mp3', 'BOS10_01.mp3', 'BOS99_01.mp3', 'MEL02_01.mp3', 'MEL04_01.mp3', 'MEL05_02.mp3', 'MEL05_03.mp3', 'MEL06_01.mp3', 'MEL07_01.mp3', 'MEL07_02.mp3', 'MEL08_01.mp3', 'MEL10_02.mp3'],
         'Creation': ['Creation1.mp3', 'Creation2.mp3', 'Creation3.mp3'],
-        'Foret': ['Foret.mp3', 'Foret2.mp3', 'Foret3.mp3'],
+        'Foret': ['CombatForet/Combat forest classic 1.mp3', 'CombatForet/Combat forest classic 2.mp3', 'CombatForet/Combat foret metal 1.mp3', 'CombatForet/Combat foret metal 2.mp3', 'CombatForet/Combat foret metal 3.mp3', 'Foret.mp3', 'Foret2.mp3', 'Foret3.mp3'],
         'ForetBoss': ['BossForet/BossForet1.mp3', 'BossForet/BossForet2.mp3'],
         'Mine': ['Mine1.mp3', 'Mine2.mp3', 'Mine3.mp3'],
         'MineBoss': ['BossMine/BossMine1.mp3', 'BossMine/BossMine2.mp3'],

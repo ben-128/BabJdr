@@ -336,7 +336,8 @@ class SpellParser {
       { pattern: /affaibli/i, name: 'Affaibli' },
       { pattern: /vuln[ée]rable/i, name: 'Vulnerable' },
       { pattern: /d[ée]bilit[ée]/i, name: 'Debilite' },
-      { pattern: /drain[ée]/i, name: 'Draine' }
+      { pattern: /drain[ée]/i, name: 'Draine' },
+      { pattern: /berserker/i, name: 'Berserker' }
     ];
 
     for (const alt of alterations) {

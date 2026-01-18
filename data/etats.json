@@ -122,6 +122,12 @@
       "type": "card",
       "title": "Drainé",
       "content": "La force, la puissance des sorts, et les chances de coups critiques (physiques et magiques) sont à 0."
+    },
+    {
+      "id": "section-berserker",
+      "type": "card",
+      "title": "Berserker",
+      "content": "Les chances de coup critiques physiques sont augmentés de 5.<br><br>Incapable d'esquiver ou d'utiliser des sorts/objets.<br><br>L'armure physique et les armures élémentaires sont à 0."
     }
   ]
 }

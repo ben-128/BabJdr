@@ -327,6 +327,12 @@
         "description": "Une fois par combat et par arme, le guerrier peut utiliser une action secondaire pour déclencher un effet spécial sur sa prochaine attaque, selon le type d'arme utilisé :<br><br><b>Arc :</b> L'attaque est impossible à esquiver, ne peut pas faire d'échec critique, et les chances de coup critique sont augmentées de 2.<br><br><b>Arme exotique :</b> Ajoute la <img src=\"https://i.ibb.co/HfthhzSF/stat-Chance.png\" alt=\"Chance\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Chance aux dégâts.<br><br><b>Autre arme à deux mains :</b> L'attaque inflige ses dégâts à toutes les cibles à moins de 3m.<br><br><b>Autre arme à une main :</b> La cible passe dans l'état <span class=\"etat-link\" data-etat=\"Empoisonné\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ensanglanté</span> (Force/3, arrondi à l'inférieur) pendant 3 tours.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
+      },
+      {
+        "nom": "Rage du berserker",
+        "description": "Une fois par combat, le guerrier peut utiliser une action secondaire pour entrer dans l'état <span class=\"etat-link\" data-etat=\"Berserker\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Berserker</span>.<br><br>L'état dure jusqu'à la fin du combat ou jusqu'à ce que le guerrier utilise une nouvelle action secondaire en sortir.",
+        "prerequis": "<strong> Prérequis :</strong> -",
+        "cout": "1 point de don"
       }
     ]
   },
