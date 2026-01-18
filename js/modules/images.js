@@ -204,6 +204,7 @@
         e.stopPropagation();
         placeholder.remove();
         img.classList.remove('lazy-error');
+        img.style.display = ''; // Reset display so image becomes visible when loaded
         const originalUrl = img.dataset.originalSrc || img.src;
         this.loadImageWithRetry(img, originalUrl, 0);
       });
