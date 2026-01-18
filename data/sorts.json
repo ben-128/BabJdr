@@ -471,7 +471,7 @@
       {
         "nom": "Main des Cieux",
         "element": "Divin",
-        "description": "Une lueur angélique se tend et saisit l’allié consentant, le soustrayant à la distance et au danger pour le ramener, en un souffle de lumière, auprès du prêtre.",
+        "description": "Une lueur angélique se tend et saisit l’allié, le soustrayant au danger pour le ramener, en un souffle de lumière, auprès du prêtre.",
         "prerequis": "📋 <strong>Prérequis:</strong> Niveau 10",
         "portee": "🎯 <strong>Portée:</strong> 21m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
