@@ -63,8 +63,9 @@
         'Auberge': ['Auberge1.mp3', 'Auberge2.mp3', 'Auberge3.mp3', 'Auberge4.mp3'],
         'Autre': ['BOS01_01.mp3', 'BOS05_01.mp3', 'BOS06_01.mp3', 'BOS07_01.mp3', 'BOS09_01.mp3', 'BOS10_01.mp3', 'BOS99_01.mp3', 'MEL02_01.mp3', 'MEL04_01.mp3', 'MEL05_02.mp3', 'MEL05_03.mp3', 'MEL06_01.mp3', 'MEL07_01.mp3', 'MEL07_02.mp3', 'MEL08_01.mp3', 'MEL10_02.mp3'],
         'Creation': ['Creation1.mp3', 'Creation2.mp3', 'Creation3.mp3'],
-        'Foret': ['CombatForet/Combat forest classic 1.mp3', 'CombatForet/Combat forest classic 2.mp3', 'CombatForet/Combat foret metal 1.mp3', 'CombatForet/Combat foret metal 2.mp3', 'CombatForet/Combat foret metal 3.mp3', 'Foret.mp3', 'Foret2.mp3', 'Foret3.mp3'],
+        'Foret': ['Foret.mp3', 'Foret2.mp3', 'Foret3.mp3'],
         'ForetBoss': ['BossForet/BossForet1.mp3', 'BossForet/BossForet2.mp3'],
+        'ForetCombat': ['CombatForet/Combat forest classic 1.mp3', 'CombatForet/Combat forest classic 2.mp3', 'CombatForet/Combat foret metal 1.mp3', 'CombatForet/Combat foret metal 2.mp3', 'CombatForet/Combat foret metal 3.mp3'],
         'Mine': ['Mine1.mp3', 'Mine2.mp3', 'Mine3.mp3'],
         'MineBoss': ['BossMine/BossMine1.mp3', 'BossMine/BossMine2.mp3'],
         'Voyage': ['Voyage1.mp3', 'Voyage2.mp3']

@@ -10,7 +10,11 @@ const FOLDER_ICONS = {
   'Auberge': '🍺',
   'Creation': '🎭',
   'Foret': '🌲',
+  'ForetCombat': '⚔️',
+  'ForetBoss': '👹',
   'Mine': '⛏️',
+  'MineCombat': '⚔️',
+  'MineBoss': '👹',
   'Voyage': '🚶',
   'Autre': '🎼'
 };
@@ -50,17 +54,25 @@ function scanMusicFolder(musicPath) {
       
       if (files.length > 0) {
         folderStructure[folder] = files.sort();
-        
-        // Créer des playlists séparées pour les sous-dossiers Boss
-        const bossFiles = files.filter(f => f.includes('Boss'));
-        const regularFiles = files.filter(f => !f.includes('Boss'));
-        
-        if (bossFiles.length > 0 && regularFiles.length > 0) {
-          // Playlist principale sans les boss
+
+        // Créer des playlists séparées pour les sous-dossiers spéciaux (Boss, Combat)
+        const bossFiles = files.filter(f => f.toLowerCase().includes('boss/') || f.toLowerCase().startsWith('boss'));
+        const combatFiles = files.filter(f => f.toLowerCase().includes('combat') && !f.toLowerCase().includes('boss'));
+        const regularFiles = files.filter(f => !f.toLowerCase().includes('boss') && !f.toLowerCase().includes('combat'));
+
+        // Reconstruire les playlists séparées
+        if (regularFiles.length > 0) {
           folderStructure[folder] = regularFiles;
-          
-          // Playlist séparée pour les boss
+        } else {
+          delete folderStructure[folder];
+        }
+
+        if (bossFiles.length > 0) {
           folderStructure[`${folder}Boss`] = bossFiles;
+        }
+
+        if (combatFiles.length > 0) {
+          folderStructure[`${folder}Combat`] = combatFiles;
         }
       }
     });
@@ -141,8 +153,13 @@ const structure = scanMusicFolder(musicPath);
 console.log('🎵 PLAYLISTS DÉTECTÉES:');
 console.log('=======================');
 Object.entries(structure).forEach(([folder, files]) => {
-  const icon = FOLDER_ICONS[folder.replace('Boss', '')] || '🎵';
-  const name = folder.endsWith('Boss') ? `Boss ${folder.replace('Boss', '')}` : folder;
+  const icon = FOLDER_ICONS[folder] || FOLDER_ICONS[folder.replace('Boss', '').replace('Combat', '')] || '🎵';
+  let name = folder;
+  if (folder.endsWith('Boss')) {
+    name = `Boss ${folder.replace('Boss', '')}`;
+  } else if (folder.endsWith('Combat')) {
+    name = `Combat ${folder.replace('Combat', '')}`;
+  }
   console.log(`${icon} ${name}: ${files.length} fichier(s)`);
 });
 
