@@ -18,6 +18,7 @@
     config: null,
     isEnabled: false,
     isPopulating: false, // Flag pour éviter les appels multiples de populateAudioPage
+    consecutiveErrors: 0, // Compteur d'erreurs consécutives pour éviter les boucles infinies
     
     async init() {
       try {
@@ -73,16 +74,18 @@
 
         Object.entries(folderStructure).forEach(([folder, files]) => {
           const playlistId = folder.toLowerCase();
-          const folderName = folder === 'ForetBoss' ? 'Boss Forêt' : 
-                            folder === 'MineBoss' ? 'Boss Mine' : folder;
+          const folderName = folder === 'ForetBoss' ? 'Boss Forêt' :
+                            folder === 'MineBoss' ? 'Boss Mine' :
+                            folder === 'ForetCombat' ? 'Combat Forêt' :
+                            folder === 'MineCombat' ? 'Combat Mine' : folder;
           
           this.config.playlists[playlistId] = {
             name: folderName,
             icon: this.getIconForFolder(folder),
             tracks: files.map(file => {
-              if (folder === 'ForetBoss') {
+              if (folder === 'ForetBoss' || folder === 'ForetCombat') {
                 return `Foret/${file}`;
-              } else if (folder === 'MineBoss') {
+              } else if (folder === 'MineBoss' || folder === 'MineCombat') {
                 return `Mine/${file}`;
               } else {
                 return `${folder}/${file}`;
@@ -101,10 +104,12 @@
       const iconMap = {
         'Auberge': '🍺',
         'Creation': '🎭',
-        'Foret': '🌲', 
+        'Foret': '🌲',
         'ForetBoss': '🐲',
+        'ForetCombat': '⚔️',
         'Mine': '⛏️',
         'MineBoss': '💎',
+        'MineCombat': '⚔️',
         'Voyage': '🚶',
         'Autre': '🎼'
       };
@@ -221,6 +226,7 @@
 
         this.currentAudio.addEventListener('play', () => {
           this.isPlaying = true;
+          this.consecutiveErrors = 0; // Réinitialiser le compteur d'erreurs quand une piste se lance
           this.updateUI();
           this.updateAudioPageUI();
         });
@@ -238,6 +244,19 @@
         this.currentAudio.addEventListener('error', (e) => {
           console.error('Audio loading failed:', fullUrl, e);
           this.isPlaying = false;
+          this.consecutiveErrors++;
+
+          // Éviter les boucles infinies: arrêter si on a eu des erreurs sur toutes les pistes
+          const playlist = this.currentPlaylist ? this.config.playlists[this.currentPlaylist] : null;
+          const maxErrors = playlist ? playlist.tracks.length : 5;
+
+          if (this.consecutiveErrors >= maxErrors) {
+            console.error('Too many consecutive audio errors, stopping playback');
+            this.consecutiveErrors = 0;
+            this.stop();
+            return;
+          }
+
           this.playNext();
         });
 
