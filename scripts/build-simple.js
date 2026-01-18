@@ -409,7 +409,7 @@ if (window.MANIFEST_DATA) {
   } else {
     // For HTTPS - convert relative icon paths to absolute URLs
     // Blob URLs have no base path, so relative paths don't resolve
-    const baseUrl = window.location.href.replace(/\/[^\/]*$/, '/'); // Get directory URL
+    const baseUrl = window.location.href.replace(/\\/[^\\/]*$/, '/'); // Get directory URL
 
     // Convert icon paths to absolute URLs
     manifest.icons = manifest.icons.map(icon => ({
