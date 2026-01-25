@@ -532,11 +532,14 @@
     "don:Osmose magique": "https://i.ibb.co/Jbn37FN/Osmose.jpg",
     "don:Sacrifice pieux": "https://i.ibb.co/MkPD2XQz/Sacrifice.jpg",
     "don:Coup de maître": "https://i.ibb.co/9HHTVR7S/Coup-Maitre.jpg",
-    "don:Rage du berserker": "https://i.ibb.co/sM6x2Gj/Rageberserker.jpg"
+    "don:Rage du berserker": "https://i.ibb.co/sM6x2Gj/Rageberserker.jpg",
+    "objet:Grillade du Chasseur": "https://i.ibb.co/B58DCC1x/Grillade-du-Chasseur.jpg",
+    "objet:Bouillon Purifiant": "https://i.ibb.co/wFMc6ThK/Bouillin.jpg",
+    "objet:Patch de Renfort": "https://i.ibb.co/C5Sbs9MM/Renfort.jpg"
   },
   "meta": {
-    "total_images": 533,
-    "exported_date": "2026-01-18",
+    "total_images": 536,
+    "exported_date": "2026-01-25",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
 }
