@@ -106,6 +106,13 @@
       "active": true,
       "order": 14,
       "requiresMJ": true
+    },
+    {
+      "id": "metiers",
+      "title": "Métiers",
+      "file": "metiers.json",
+      "active": true,
+      "order": 15
     }
   ],
   "template": {

@@ -62,6 +62,12 @@
           "id": "collections-objets",
           "title": "Collections d'Objets",
           "icon": "📚"
+        },
+        {
+          "type": "page",
+          "id": "metiers",
+          "title": "Métiers",
+          "icon": "🔨"
         }
       ]
     },

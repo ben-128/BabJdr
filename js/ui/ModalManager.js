@@ -2105,6 +2105,41 @@
     },
 
     /**
+     * Expand metier markers [METIER:id] to actual HTML foldout sections
+     */
+    expandMetierMarkers(html, pageData) {
+      if (!html || typeof html !== 'string') return html;
+      if (!pageData || !pageData.metiers) return html;
+
+      return html.replace(/\[METIER:([^\]]+)\]/g, (match, metierId) => {
+        const metier = pageData.metiers[metierId];
+        if (!metier) {
+          console.warn('Metier not found:', metierId);
+          return match;
+        }
+
+        let prerequisHtml = '';
+        if (metier.prerequis) {
+          prerequisHtml = `<p class="metier-warning"><strong>Prérequis :</strong> ${metier.prerequis}</p>`;
+        }
+
+        return `<details class="metier-foldout">
+          <summary class="metier-summary">
+            <span class="metier-icon">${metier.icon || ''}</span>
+            <span class="metier-name">${metier.nom}</span>
+            <span class="metier-subtitle">${metier.soustitre || ''}</span>
+          </summary>
+          <div class="metier-content">
+            <p class="metier-description">${metier.description}</p>
+            <p class="metier-craft"><strong>Créations :</strong> ${metier.creations}</p>
+            ${prerequisHtml}
+            <p class="metier-note"><em>${metier.note}</em></p>
+          </div>
+        </details>`;
+      });
+    },
+
+    /**
      * Expand image markers [img:id] to actual HTML
      */
     expandImageMarkers(html) {

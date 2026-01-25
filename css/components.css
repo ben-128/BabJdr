@@ -3509,3 +3509,140 @@ img.eclats-icon {
     background-image: none !important;
   }
 }
+
+/* ─────────────────────────── Métiers Foldout Sections ─────────────────────────── */
+.metier-foldout {
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  background: var(--surface-subtle);
+  margin-bottom: 1rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.metier-foldout[open] {
+  background: var(--card);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.metier-summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--surface-color) 0%, var(--surface-subtle) 100%);
+  border-bottom: 1px solid transparent;
+  transition: all 0.3s ease;
+  list-style: none;
+}
+
+.metier-summary::-webkit-details-marker {
+  display: none;
+}
+
+.metier-summary::before {
+  content: '▶';
+  font-size: 0.8em;
+  color: var(--accent);
+  transition: transform 0.3s ease;
+  margin-right: 0.5rem;
+}
+
+.metier-foldout[open] .metier-summary::before {
+  transform: rotate(90deg);
+}
+
+.metier-foldout[open] .metier-summary {
+  border-bottom: 1px solid var(--rule);
+  background: linear-gradient(135deg, var(--accent-faint) 0%, var(--surface-subtle) 100%);
+}
+
+.metier-summary:hover {
+  background: linear-gradient(135deg, var(--accent-faint) 0%, var(--surface-color) 100%);
+}
+
+.metier-icon {
+  font-size: 1.5em;
+  line-height: 1;
+}
+
+.metier-name {
+  font-family: "Oxanium", serif;
+  font-size: 1.3em;
+  font-weight: 600;
+  color: var(--accent-ink);
+  letter-spacing: 0.5px;
+}
+
+.metier-subtitle {
+  font-size: 0.9em;
+  color: var(--text-secondary);
+  font-style: italic;
+  margin-left: auto;
+}
+
+.metier-content {
+  padding: 1.5rem;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.metier-description {
+  color: var(--text);
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+.metier-craft {
+  background: var(--surface-subtle);
+  border-left: 3px solid var(--accent);
+  padding: 1rem;
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+
+.metier-warning {
+  background: rgba(234, 115, 50, 0.1);
+  border-left: 3px solid var(--orange, #ea7332);
+  padding: 1rem;
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+
+.metier-note {
+  color: var(--text-secondary);
+  font-size: 0.95em;
+  padding: 0.75rem;
+  background: var(--bg);
+  border-radius: 8px;
+  border: 1px dashed var(--rule);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .metier-summary {
+    padding: 0.875rem 1rem;
+  }
+
+  .metier-subtitle {
+    width: 100%;
+    margin-left: 2rem;
+    margin-top: 0.25rem;
+  }
+
+  .metier-content {
+    padding: 1rem;
+  }
+
+  .metier-name {
+    font-size: 1.1em;
+  }
+}

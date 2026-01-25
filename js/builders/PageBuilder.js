@@ -514,6 +514,14 @@
       if (window.ModalManager && typeof window.ModalManager.expandImageMarkers === 'function') {
         htmlContent = window.ModalManager.expandImageMarkers(htmlContent);
       }
+
+      // Expand metier markers [METIER:id] to HTML foldout sections
+      if (window.ModalManager && typeof window.ModalManager.expandMetierMarkers === 'function') {
+        const metiersPageData = window.STATIC_PAGES?.metiers;
+        if (metiersPageData) {
+          htmlContent = window.ModalManager.expandMetierMarkers(htmlContent, metiersPageData);
+        }
+      }
       
       cardHTML += `
         <div style="position:relative;">

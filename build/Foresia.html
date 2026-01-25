@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2026-01-25T14:13:10.590Z by JdrBab Build System -->
+<!-- Generated on 2026-01-25T14:56:47.479Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -5091,6 +5091,143 @@ img.eclats-icon {
     background-color: #ffffff !important;
     color: #000000 !important;
     background-image: none !important;
+  }
+}
+
+/* ─────────────────────────── Métiers Foldout Sections ─────────────────────────── */
+.metier-foldout {
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  background: var(--surface-subtle);
+  margin-bottom: 1rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.metier-foldout[open] {
+  background: var(--card);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.metier-summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--surface-color) 0%, var(--surface-subtle) 100%);
+  border-bottom: 1px solid transparent;
+  transition: all 0.3s ease;
+  list-style: none;
+}
+
+.metier-summary::-webkit-details-marker {
+  display: none;
+}
+
+.metier-summary::before {
+  content: '▶';
+  font-size: 0.8em;
+  color: var(--accent);
+  transition: transform 0.3s ease;
+  margin-right: 0.5rem;
+}
+
+.metier-foldout[open] .metier-summary::before {
+  transform: rotate(90deg);
+}
+
+.metier-foldout[open] .metier-summary {
+  border-bottom: 1px solid var(--rule);
+  background: linear-gradient(135deg, var(--accent-faint) 0%, var(--surface-subtle) 100%);
+}
+
+.metier-summary:hover {
+  background: linear-gradient(135deg, var(--accent-faint) 0%, var(--surface-color) 100%);
+}
+
+.metier-icon {
+  font-size: 1.5em;
+  line-height: 1;
+}
+
+.metier-name {
+  font-family: "Oxanium", serif;
+  font-size: 1.3em;
+  font-weight: 600;
+  color: var(--accent-ink);
+  letter-spacing: 0.5px;
+}
+
+.metier-subtitle {
+  font-size: 0.9em;
+  color: var(--text-secondary);
+  font-style: italic;
+  margin-left: auto;
+}
+
+.metier-content {
+  padding: 1.5rem;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.metier-description {
+  color: var(--text);
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+.metier-craft {
+  background: var(--surface-subtle);
+  border-left: 3px solid var(--accent);
+  padding: 1rem;
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+
+.metier-warning {
+  background: rgba(234, 115, 50, 0.1);
+  border-left: 3px solid var(--orange, #ea7332);
+  padding: 1rem;
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+
+.metier-note {
+  color: var(--text-secondary);
+  font-size: 0.95em;
+  padding: 0.75rem;
+  background: var(--bg);
+  border-radius: 8px;
+  border: 1px dashed var(--rule);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .metier-summary {
+    padding: 0.875rem 1rem;
+  }
+
+  .metier-subtitle {
+    width: 100%;
+    margin-left: 2rem;
+    margin-top: 0.25rem;
+  }
+
+  .metier-content {
+    padding: 1rem;
+  }
+
+  .metier-name {
+    font-size: 1.1em;
   }
 }
 
@@ -12346,6 +12483,12 @@ hr,
           "id": "collections-objets",
           "title": "Collections d'Objets",
           "icon": "📚"
+        },
+        {
+          "type": "page",
+          "id": "metiers",
+          "title": "Métiers",
+          "icon": "🔨"
         }
       ]
     },
@@ -13368,6 +13511,13 @@ hr,
       "active": true,
       "order": 14,
       "requiresMJ": true
+    },
+    {
+      "id": "metiers",
+      "title": "Métiers",
+      "file": "metiers.json",
+      "active": true,
+      "order": 15
     }
   ],
   "template": {
@@ -13402,7 +13552,7 @@ hr,
 
     // Mark as standalone version for renderer with build timestamp
     window.STANDALONE_VERSION = true;
-    window.BUILD_VERSION = '2026-01-25T14:13:10.591Z';
+    window.BUILD_VERSION = '2026-01-25T14:56:47.482Z';
 
     // Version check - clear old data if version changed
     (function() {
@@ -16438,6 +16588,14 @@ hr,
       // Expand image markers in content
       if (window.ModalManager && typeof window.ModalManager.expandImageMarkers === 'function') {
         htmlContent = window.ModalManager.expandImageMarkers(htmlContent);
+      }
+
+      // Expand metier markers [METIER:id] to HTML foldout sections
+      if (window.ModalManager && typeof window.ModalManager.expandMetierMarkers === 'function') {
+        const metiersPageData = window.STATIC_PAGES?.metiers;
+        if (metiersPageData) {
+          htmlContent = window.ModalManager.expandMetierMarkers(htmlContent, metiersPageData);
+        }
       }
       
       cardHTML += `
@@ -40446,6 +40604,41 @@ window.initCharacterCreator = async function() {
       });
 
       return modal;
+    },
+
+    /**
+     * Expand metier markers [METIER:id] to actual HTML foldout sections
+     */
+    expandMetierMarkers(html, pageData) {
+      if (!html || typeof html !== 'string') return html;
+      if (!pageData || !pageData.metiers) return html;
+
+      return html.replace(/\[METIER:([^\]]+)\]/g, (match, metierId) => {
+        const metier = pageData.metiers[metierId];
+        if (!metier) {
+          console.warn('Metier not found:', metierId);
+          return match;
+        }
+
+        let prerequisHtml = '';
+        if (metier.prerequis) {
+          prerequisHtml = `<p class="metier-warning"><strong>Prérequis :</strong> ${metier.prerequis}</p>`;
+        }
+
+        return `<details class="metier-foldout">
+          <summary class="metier-summary">
+            <span class="metier-icon">${metier.icon || ''}</span>
+            <span class="metier-name">${metier.nom}</span>
+            <span class="metier-subtitle">${metier.soustitre || ''}</span>
+          </summary>
+          <div class="metier-content">
+            <p class="metier-description">${metier.description}</p>
+            <p class="metier-craft"><strong>Créations :</strong> ${metier.creations}</p>
+            ${prerequisHtml}
+            <p class="metier-note"><em>${metier.note}</em></p>
+          </div>
+        </details>`;
+      });
     },
 
     /**

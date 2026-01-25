@@ -1,0 +1,70 @@
+{
+  "page": "metiers",
+  "title": "Métiers",
+  "static": true,
+  "sections": [
+    {
+      "type": "intro",
+      "content": ""
+    },
+    {
+      "type": "card",
+      "id": "metiers-intro",
+      "title": "Les Arts des Maîtres Artisans",
+      "content": "<p style=\"font-style: italic; color: var(--text-secondary); margin-bottom: 1.5rem;\">Au fil de leurs périples, les héros peuvent être amenés à découvrir les secrets ancestraux des guildes artisanales. Qu'il s'agisse de forger des lames enchantées, de concocter des élixirs aux propriétés miraculeuses ou de tisser la magie dans la matière, ces savoirs sont jalousement gardés par leurs maîtres.</p><p style=\"margin-bottom: 1rem;\">Un héros ne peut maîtriser qu'<strong>un seul métier</strong> au cours de son existence. Ce choix, une fois fait, définit une part de son identité et ouvre des possibilités uniques pour lui et ses compagnons.</p><p style=\"color: var(--accent); font-weight: 500;\">L'apprentissage d'un métier requiert de trouver un maître disposé à transmettre son savoir, ainsi que le temps et les ressources nécessaires pour parfaire son art.</p>",
+      "deletable": true,
+      "sectionName": "Introduction"
+    },
+    {
+      "type": "card",
+      "id": "metiers-liste",
+      "title": "Les Cinq Métiers",
+      "content": "[METIER:alchimie][METIER:cuisine][METIER:arcaniste][METIER:artisan][METIER:enchanteur]",
+      "deletable": true,
+      "sectionName": "Liste des métiers"
+    }
+  ],
+  "metiers": {
+    "alchimie": {
+      "icon": "⚗",
+      "nom": "Alchimie",
+      "soustitre": "L’Art des Potions",
+      "description": "Dans les vapeurs d'un atelier où bouillonnent des cornues remplies de substances aux couleurs impossibles, l'alchimiste perce les mystères de la matière. Héritier d'un savoir antique transmis depuis l'âge des Anciens, il transforme les herbes sauvages, les essences de créatures et les minéraux rares en <strong>consommables aux effets temporaires</strong>.",
+      "creations": "Potions de soin ou de mana, élixirs de rapidité, baumes de résistance élémentaire, et antidotes salvateurs.",
+      "note": "Les effets des préparations alchimiques sont puissants mais éphémères, s'estompant après quelques minutes ou une rencontre."
+    },
+    "cuisine": {
+      "icon": "🍴",
+      "nom": "Cuisine",
+      "soustitre": "L'Art du Festin",
+      "description": "Plus qu'un simple artisan des saveurs, le cuisinier aventurier maîtrise les recettes oubliées des grandes tables royales et des camps de guerre légendaires. Ses plats ne nourrissent pas seulement le corps, ils <strong>fortifient l'âme et aiguisent l'esprit</strong> de ceux qui les consomment.",
+      "creations": "Ragoûts revigorants qui renforcent l'endurance, grillades fumées qui durcissent la peau comme le cuir, soupes mystiques qui éclaircissent l'esprit.",
+      "note": "Les bienfaits d'un repas préparé par un maître cuisinier persistent toute la journée, accompagnant les héros dans leurs épreuves."
+    },
+    "arcaniste": {
+      "icon": "🔮",
+      "nom": "Arcaniste",
+      "soustitre": "L'Art des Cristaux",
+      "description": "Dans les profondeurs des tours de sorcellerie et des ateliers secrets, les arcanistes façonnent la magie brute en objets tangibles. Maîtres des énergies arcanes, ils <strong>cristallisent le pouvoir mystique</strong> dans des gemmes, des orbes et des catalyseurs capables de canaliser ou déchaîner les forces surnaturelles.",
+      "creations": "Cristaux d'efforts ou de statistiques, catalyseurs amplifiant les sorts, gemmes libérant des sortilèges.",
+      "note": "Les créations arcaniques sont des merveilles de magie appliquée, permettant même aux non-mages de manipuler les forces mystiques."
+    },
+    "artisan": {
+      "icon": "🔨",
+      "nom": "Artisan",
+      "soustitre": "L’Art des Armures",
+      "description": "Le marteau frappe, l’aiguille coud, et le cuir se tend dans une même maîtrise du geste, donnant naissance à partir de matières brutes à des <strong>armures et protections</strong> adaptées à tous les combattants. Qu’il travaille le métal, le cuir ou le tissu, l’artisan façonne, renforce et ajuste les équipements existants ou en crée de nouveaux, alliant solidité, fonctionnalité et savoir-faire.",
+      "creations": "Patchs de renforcement pour armures, armures en peau de bête, robes et armures lourdes.",
+      "note": "Un artisan accompli peut créer, réparer et améliorer les protections de tout un groupe, transformant des armures ordinaires en remparts contre les coups les plus violents."
+    },
+    "enchanteur": {
+      "icon": "✨",
+      "nom": "Enchanteur",
+      "soustitre": "L'Art des Liens Mystiques",
+      "description": "Là où l'arcaniste crée des objets magiques, l'enchanteur <strong>insuffle la magie dans l'existant</strong>. Par des rituels complexes et des incantations anciennes, il tisse des enchantements permanents dans les armes, armures et accessoires, leur conférant des propriétés surnaturelles.",
+      "creations": "Armes enflammées, boucliers absorbant les sortilèges, accessoires renforçant l'agilité de son porteur...",
+      "prerequis": "L'enchantement nécessite des <em>essences magiques</em> extraites d'objets magiques existants. L'enchanteur doit donc <strong>détruire des objets magiques</strong> pour en récupérer les composants nécessaires à ses rituels.",
+      "note": "Les enchantements sont permanents et se lient à l'objet jusqu'à sa destruction. Un même objet ne peut recevoir qu'un seul enchantement."
+    }
+  }
+}
