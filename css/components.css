@@ -1880,6 +1880,17 @@ article[data-page="enchanteur"] .illus img:hover,
   object-fit: contain !important;
 }
 
+/* Icône éclats - pas de bordure ni d'ombre */
+.eclats-icon,
+img.eclats-icon {
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  background: none !important;
+  max-width: none !important;
+  max-height: none !important;
+}
+
 /* Style spécial pour les sous-classes - 2 images centrées et collées */
 .subclass-images {
   display: flex;

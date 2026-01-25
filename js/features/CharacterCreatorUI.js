@@ -138,7 +138,7 @@ class CharacterCreatorUI {
         <div id="equipement-section" class="form-section" style="display: none;">
           <h4>Équipement de départ (120 éclats)</h4>
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding: 0.75rem; background: var(--ui-blue-dark); border-radius: 8px; border: 2px solid var(--ui-border);">
-            <span style="color: var(--paper-ink); font-weight: bold;">💎 Budget restant:</span>
+            <span style="color: var(--paper-ink); font-weight: bold;"><img src="https://i.ibb.co/HpgHnJFD/4a7af38b09c7.png" alt="éclats" class="eclats-icon" style="width: 16px; height: 16px; vertical-align: middle;"> Budget restant:</span>
             <span id="budget-restant" style="color: #22c55e; font-size: 1.2rem; font-weight: bold;">120</span>
           </div>
           <div id="equipement-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
@@ -290,7 +290,7 @@ class CharacterCreatorUI {
 
       // Créer le prix
       const priceSpan = document.createElement('span');
-      priceSpan.textContent = `💎 ${prix} éclats`;
+      priceSpan.innerHTML = `${window.EclatsIcon?.small || '💎'} ${prix} éclats`;
       priceSpan.style.cssText = 'color: var(--text-muted); font-size: 0.85rem;';
 
       if (isConsommable) {
@@ -442,7 +442,7 @@ class CharacterCreatorUI {
         const prix = this.creator.extractPrice(eq.prix);
         items.push(`<div style="display: flex; justify-content: space-between; padding: 0.5rem; border-bottom: 1px solid #ccc;">
           <span style="color: #333;">${eq.nom}</span>
-          <span style="color: #666;">${prix} éclats</span>
+          <span style="color: #666;">${window.EclatsIcon?.small || '💎'} ${prix}</span>
         </div>`);
       });
 
@@ -453,7 +453,7 @@ class CharacterCreatorUI {
           const prix = this.creator.extractPrice(objet.prix);
           items.push(`<div style="display: flex; justify-content: space-between; padding: 0.5rem; border-bottom: 1px solid #ccc;">
             <span style="color: #333;">${objet.nom} x${qty}</span>
-            <span style="color: #666;">${prix * qty} éclats</span>
+            <span style="color: #666;">${window.EclatsIcon?.small || '💎'} ${prix * qty}</span>
           </div>`);
         }
       });
@@ -2084,7 +2084,7 @@ class CharacterCreatorUI {
             <div style="color: var(--paper-ink, #e8e8e8);">${this.getEquipmentListHTML()}</div>
             <div style="margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--ui-border, #4a4a6a); text-align: center;">
               <span style="color: var(--text-muted, #888);">Budget restant:</span>
-              <span style="color: var(--gold, #d4af37); font-weight: bold; margin-left: 0.5rem;">💎 ${this.currentConfig.budgetEclats} éclats</span>
+              <span style="color: var(--gold, #d4af37); font-weight: bold; margin-left: 0.5rem;">${window.EclatsIcon?.small || '💎'} ${this.currentConfig.budgetEclats} éclats</span>
             </div>
           </div>
 

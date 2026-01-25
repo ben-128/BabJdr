@@ -1441,8 +1441,8 @@
             <hr>
             <p>${item.effet}</p>
             <div style="display: flex; justify-content: space-between;">
-              <span>${item.prix}</span>
-              <span>${item.poids}</span>
+              <span>${item.prix ? item.prix.replace(/🔷/g, '<img src="https://i.ibb.co/HpgHnJFD/4a7af38b09c7.png" alt="éclats" class="eclats-icon" style="width: 14px; height: 14px; vertical-align: middle;">') : ''}</span>
+              <span>${item.poids || ''}</span>
             </div>
             ${isDevMode ? `
               <div class="dev-controls" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #ccc;">

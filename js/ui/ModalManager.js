@@ -1480,7 +1480,7 @@
             <div style="font-style: italic; margin: 0.5rem 0;">${objet.description || ''}</div>
             <div style="margin: 0.5rem 0;">${objet.effet || ''}</div>
             <div style="display: flex; gap: 1rem; font-size: 0.9em;">
-              <span>${objet.prix || ''}</span>
+              <span>${objet.prix ? objet.prix.replace(/🔷/g, '<img src="https://i.ibb.co/HpgHnJFD/4a7af38b09c7.png" alt="éclats" class="eclats-icon" style="width: 14px; height: 14px; vertical-align: middle;">') : ''}</span>
               <span>${objet.poids || ''}</span>
             </div>
           </div>

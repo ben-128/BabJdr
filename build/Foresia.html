@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2026-01-18T17:27:30.074Z by JdrBab Build System -->
+<!-- Generated on 2026-01-25T14:13:10.590Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -3462,6 +3462,17 @@ article[data-page="enchanteur"] .illus img:hover,
   max-width: 350px !important;
   max-height: 250px !important;
   object-fit: contain !important;
+}
+
+/* Icône éclats - pas de bordure ni d'ombre */
+.eclats-icon,
+img.eclats-icon {
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  background: none !important;
+  max-width: none !important;
+  max-height: none !important;
 }
 
 /* Style spécial pour les sous-classes - 2 images centrées et collées */
@@ -10830,7 +10841,7 @@ hr,
     "nom": "Borag et Snik",
     "image": "",
     "description": "Un silencieux, grand et fort. L'autre hargneux, petit",
-    "interactions": "Ils sont bloqués à l'auberge à cause des monstres et normalement s'entraînent, mais n'arrivent pas à être assez forts. Ils ont entendu dire que des cristaux roses pouvaient rendre beaucoup plus fortes certaines personnes.<br><br>\n\n\n« On veut se battre, Borag et moi… mais on tape comme des mouettes enrhumées. On dit que certains deviennent monstrueusement puissants avec des cristaux roses… t’en as déjà vu, toi ? »\n<br>\n« Ouais ! Et puis l’entraînement dans une auberge, ça fait pas pousser les muscles»"
+    "interactions": "Ils sont bloqués à l'auberge à cause des monstres et normalement s'entraînent, mais n'arrivent pas à être assez forts. Ils ont entendu dire que des cristaux roses pouvaient rendre beaucoup plus fortes certaines personnes.<br><br>\n\n\n« On veut se battre, Borag et moi… mais on tape comme des mouettes enrhumées. On dit que certains deviennent monstrueusement puissants avec des cristaux roses… t’en as déjà vu, toi ? Des rumeurs disent que des monstres dans la forêt en possèdent. Si tu nous en ramnène un, on pourra reprendre l'entrainement et dérouiller ces foutus monstres. On paie bien aussi... »\n<br>\n« Ouais ! Et puis l’entraînement dans une auberge, ça fait pas pousser les muscles»"
   },
   {
     "nom": "Isara Cœur-de-Roc",
@@ -12252,7 +12263,7 @@ hr,
   },
   "meta": {
     "total_images": 533,
-    "exported_date": "2026-01-18",
+    "exported_date": "2026-01-25",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
 };
@@ -12505,7 +12516,7 @@ hr,
       "type": "card",
       "id": "etapes-creation",
       "title": "<img src=\"https://i.ibb.co/KjMVHR0b/All-Heroes.png\" style=\"display: block; margin: 1rem auto; max-width: 100%; min-width: 200px;\" alt=\"Image\">",
-      "content": "<ol><li>Choisir une <strong>classe</strong> puis une <strong>sous‑classe</strong> : <a href=\"#/guerrier\" style=\"color: var(--accent); text-decoration: underline;\">Guerrier</a>.\n\n</li><li>Choisir un <strong>élément</strong> d'affiliation : <a href=\"#/elements\" style=\"color: var(--accent); text-decoration: underline;\">Éléments</a>.\n\n</li><li>Choisir les <strong>dons</strong> (avec 2 points de dons, généraux et/ou spécifique à la classe) : <a href=\"#/dons-g-n-raux\" style=\"color: var(--accent); text-decoration: underline;\">Généraux (dons)</a>.\n\n</li><li>Tirer au sort (avec un d6) une carte du destin (<a href=\"#\" onclick=\"event.preventDefault(); if (window.ModalManager && typeof window.ModalManager.showCartesDestinModal === 'function') { window.ModalManager.showCartesDestinModal(); } return false;\" style=\"color: var(--accent); text-decoration: underline; cursor: pointer;\">Lien ici</a>)\n\n</li><li>Choisir l'<strong>équipement</strong> de départ (avec 120 éclats) : <a href=\"#/collections-objets\" style=\"color: var(--accent); text-decoration: underline;\">Collections d'Objets</a>.\n\n</li><li>Définir le <strong>nom</strong>, l'<strong>histoire</strong> et l'<strong>apparence</strong>.</li><li>Remplir sa feuille de personnage (voir section ci-dessous).</li></ol>",
+      "content": "<ol><li>Choisir une <strong>classe</strong> puis une <strong>sous‑classe</strong> : <a href=\"#/guerrier\" style=\"color: var(--accent); text-decoration: underline;\">Guerrier</a>.\n\n</li><li>Choisir un <strong>élément</strong> d'affiliation : <a href=\"#/elements\" style=\"color: var(--accent); text-decoration: underline;\">Éléments</a>.\n\n</li><li>Choisir les <strong>dons</strong> (avec 2 points de dons, généraux et/ou spécifique à la classe) : <a href=\"#/dons-g-n-raux\" style=\"color: var(--accent); text-decoration: underline;\">Généraux (dons)</a>.\n\n</li><li>Tirer au sort (avec un d6) une carte du destin (<a href=\"#\" onclick=\"event.preventDefault(); if (window.ModalManager && typeof window.ModalManager.showCartesDestinModal === 'function') { window.ModalManager.showCartesDestinModal(); } return false;\" style=\"color: var(--accent); text-decoration: underline; cursor: pointer;\">Lien ici</a>)\n\n</li><li>Choisir l'<strong>équipement</strong> de départ (avec 120 éclats <img src=\"https://i.ibb.co/KjGHFGqz/ee17068cdcd5.png\" alt=\"éclats\" class=\"eclats-icon\" style=\"width: 16px; height: 16px; vertical-align: middle;\">) : <a href=\"#/collections-objets\" style=\"color: var(--accent); text-decoration: underline;\">Collections d'Objets</a>.\n\n</li><li>Définir le <strong>nom</strong>, l'<strong>histoire</strong> et l'<strong>apparence</strong>.</li><li>Remplir sa feuille de personnage (voir section ci-dessous).</li></ol>",
       "deletable": true,
       "sectionName": "Étapes de création"
     },
@@ -13050,7 +13061,7 @@ hr,
         },
         "Forêt-5": {
           "title": "Forêt-5",
-          "content": "Arrivée dans une plaine, avec de nombreuses maisons abandonnés, à moitié détruites.<br>\nDedans : <br><br>\nUn bol ébréché couvert de poussière et de feuilles mortes<br>\nUne paire de bottes trop usées pour être portée<br>\nUn carnet aux pages gondolées, entièrement vierges<br>\nUne corde effilochée prête à rompre<br>\nUne pipe fendue imprégnée d’une odeur froide<br>\nUne cloche fendue qui ne produit qu’un son étouffé<br>\nUn filet de chasse troué et emmêlé<br>\nUne fiole vide scellée à la cire durcie<br>\nUn peigne cassé avec quelques cheveux coincés<br><br>\n\nSi bon jet de Finesse (fouille sans tout casse):<br>\n<span class=\"objet-link\" data-objet=\"Petite potion de mana\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Petite potion de mana</span><br>\n<span class=\"objet-link\" data-objet=\"Nébrelle d’Azur\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Nébrelle d’Azur</span><br>\n<span class=\"objet-link\" data-objet=\"Plume de tempête\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Plume de tempête</span><br>\n\ncoordination (perception) : <br>\n<span class=\"objet-link\" data-objet=\"Flèche de la terre\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Flèche de la terre</span><br>\n<span class=\"objet-link\" data-objet=\"Pierre à aiguiser\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Pierre à aiguiser</span><br>\n<span class=\"objet-link\" data-objet=\"Bandage d'urgence\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Bandage d'urgence</span>\n<hr>\n<b>Si Tobin est présent (Quête du Médaillon)</b><br><br>\n\nTobin s'arrête devant la cabane, le souffle court :<br><br>\n\n\"C'est là. Papa dormait ici quand il travaillait tard.\"<br><br>\n\nIl hésite à entrer.<br><br>\n\n\"Vous... vous pouvez venir avec moi ?\"<br><br>\n\n<b>Dans la cabane :</b><br>\nTobin fouille fébrilement. Il connaît l'endroit mais les choses ont été déplacées.<br><br>\n\n\"C'était sous le lit... non, c'est plus là. Papa a dit 'là où le soleil se couche à l'intérieur'... Qu'est-ce que ça veut dire ?\"<br><br>\n\n<b>Énigme :</b><br>\n- Le soleil couchant = l'ouest<br>\n- Une latte de plancher près de la fenêtre ouest est légèrement surélevée<br>\n- Jet de Perception 2 pour le remarquer, ou Réflexion 2 pour comprendre l'indice<br><br>\n\n<b>Sous la latte :</b><br>\nUn petit paquet enveloppé dans un tissu huilé. À l'intérieur :<br><br>\n\n<b>Médaillon du Père de Tobin</b><br>\n<i>Un médaillon en bronze terni, gravé d'un arbre stylisé. À l'intérieur, deux mèches de cheveux tressées - une brune (sa mère), une grise (sa grand-mère).</i><br><br>\n\nTobin le serre contre lui, silencieux. Une larme coule.<br><br>\n\n\"... Merci.\"<br><br>\n\n<b>Le Départ de Tobin</b><br><br>\n\nUne fois le médaillon récupéré, Tobin reprend contenance :<br><br>\n\n\"Je... je dois rentrer. Maman va s'inquiéter.\"<br><br>\n\nIl regarde les PJ :<br><br>\n\n\"Vous allez continuer vers le nord ? Faites attention. Branor... je sais pas ce qui lui est arrivé. Papa disait qu'il était têtu, qu'il partirait jamais d'ici même si les monstres envahissaient tout.\"<br><br>\n\nAvant de partir, il fouille sa poche et tend quelque chose :<br><br>\n\n\"Tenez. C'est pas grand-chose, mais... mon père m'avait appris. Ça peut servir.\"<br><br>\n\n<hr>\nAu sud, grillage avec portique en bois, ouvert.<br>\nCabane du bucheron.<br><br>\n\n\nDans le jardin se trouve un tonneau en bois avec des fentes et un mécanisme.<br>\n\nLE FAMEUX JEU DU TONNEAU <br><br>\n\nBraves aventuriers, courageux volontaires et amateurs de sensations fortes !<br>\n\nL’un d’entre vous prendra place dans le tonneau.<br>\nLe mécanisme s’éveillera, un grondement se fera entendre…<br>\net les fentes tourneront jusqu’à décider du sort du joueur.<br>\n\nQuand tout s’arrête, un compagnon devra glisser sa dague<br>\ndans l’une des quatre fentes.<br>\n\nMauvais choix ?<br>\nAïe… Le tonneau n’aime pas l’erreur.<br>\n\nBon choix ?<br>\nBravo ! La chance sourit aux audacieux :<br>\nle vainqueur sera porté par l’élan du jeu<br>\nvers des hauteurs que seuls les plus téméraires atteignent,<br>\nlà où attend une récompense bien méritée.<br>\n\nÀ jouer entre braves uniquement.<br>\nLes âmes prudentes sont invitées à regarder.<br>\n\n<br><br><br>\n\nDans la cabane, fermeture simple , une trappe vers le sous sol. la clé se trouve dans la maison (à fouiller). ya un lit, et des provisions.<br>\nAu sous sol, il y a 3 coffres.<br>\nun avec <span class=\"treasure-table-link\" data-table-name=\"Coffre bucheron\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Coffre bucheron]</span><br>\nUn fermé jeu du tonneau avec <span class=\"treasure-table-link\" data-table-name=\"Coffre jeu du tonneau\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Coffre jeu du tonneau]</span><br>\nun fermé avec la tablette aux cristaux.<br>\nIl y a également plusieurs doubles des clés du lieu de coupe.\n\n\nAu nord grillage avec porte en bois avec cadena, ouverte comme s'il on été venu à la hâte. panneau qui dit : <br>\n\"Lieu de coupe<br>\nDemander l'accès à Branor à la cabane du bûcheron, au sud\".<br><br>",
+          "content": "Arrivée dans une plaine, avec de nombreuses maisons abandonnés, à moitié détruites.<br>\nDedans : <br><br>\nUn bol ébréché couvert de poussière et de feuilles mortes<br>\nUne paire de bottes trop usées pour être portée<br>\nUn carnet aux pages gondolées, entièrement vierges<br>\nUne corde effilochée prête à rompre<br>\nUne pipe fendue imprégnée d’une odeur froide<br>\nUne cloche fendue qui ne produit qu’un son étouffé<br>\nUn filet de chasse troué et emmêlé<br>\nUne fiole vide scellée à la cire durcie<br>\nUn peigne cassé avec quelques cheveux coincés<br><br>\n\nSi bon jet de Finesse (fouille sans tout casse):<br>\n<span class=\"objet-link\" data-objet=\"Petite potion de mana\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Petite potion de mana</span><br>\n<span class=\"objet-link\" data-objet=\"Nébrelle d’Azur\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Nébrelle d’Azur</span><br>\n<span class=\"objet-link\" data-objet=\"Plume de tempête\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Plume de tempête</span><br>\n\ncoordination (perception) : <br>\n<span class=\"objet-link\" data-objet=\"Flèche de la terre\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Flèche de la terre</span><br>\n<span class=\"objet-link\" data-objet=\"Pierre à aiguiser\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Pierre à aiguiser</span><br>\n<span class=\"objet-link\" data-objet=\"Bandage d'urgence\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Bandage d'urgence</span>\n<hr>\n<b>Si Tobin est présent (Quête du Médaillon)</b><br><br>\n\nTobin s'arrête devant la cabane, le souffle court :<br><br>\n\n\"C'est là. Papa dormait ici quand il travaillait tard.\"<br><br>\n\nIl hésite à entrer.<br><br>\n\n\"Vous... vous pouvez venir avec moi ?\"<br><br>\n\n<b>Dans la cabane :</b><br>\nTobin fouille fébrilement. Il connaît l'endroit mais les choses ont été déplacées.<br><br>\n\n\"C'était sous le lit... non, c'est plus là. Papa a dit 'là où le soleil se couche à l'intérieur'... Qu'est-ce que ça veut dire ?\"<br><br>\n\n<b>Énigme :</b><br>\n- Le soleil couchant = l'ouest<br>\n- Une latte de plancher près de la fenêtre ouest est légèrement surélevée<br>\n- Jet de Perception 2 pour le remarquer, ou Réflexion 2 pour comprendre l'indice<br><br>\n\n<b>Sous la latte :</b><br>\nUn petit paquet enveloppé dans un tissu huilé. À l'intérieur :<br><br>\n\n<b>Médaillon du Père de Tobin</b><br>\n<i>Un médaillon en bronze terni, gravé d'un arbre stylisé. À l'intérieur, deux mèches de cheveux tressées - une brune (sa mère), une grise (sa grand-mère).</i><br><br>\n\nTobin le serre contre lui, silencieux. Une larme coule.<br><br>\n\n\"... Merci.\"<br><br>\n\n<b>Le Départ de Tobin</b><br><br>\n\nUne fois le médaillon récupéré, Tobin reprend contenance :<br><br>\n\n\"Je... je dois rentrer. Maman va s'inquiéter.\"<br><br>\n\nIl regarde les PJ :<br><br>\n\n\"Vous allez continuer vers le nord ? Faites attention. Branor... je sais pas ce qui lui est arrivé. Papa disait qu'il était têtu, qu'il partirait jamais d'ici même si les monstres envahissaient tout.\"<br><br>\n\nAvant de partir, il fouille sa poche et tend quelque chose :<br><br>\n\n\"Tenez. C'est pas grand-chose, mais... mon père m'avait appris que ça peut servir pour des combattants.\"<br><br>\n<span class=\"objet-link\" data-objet=\"Cristal d'endurance\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Cristal d'endurance</span>\n<hr>\nAu sud, grillage avec portique en bois, ouvert.<br>\nCabane du bucheron.<br><br>\n\n\nDans le jardin se trouve un tonneau en bois avec des fentes et un mécanisme.<br>\n\nLE FAMEUX JEU DU TONNEAU <br><br>\n\nBraves aventuriers, courageux volontaires et amateurs de sensations fortes !<br>\n\nL’un d’entre vous prendra place dans le tonneau.<br>\nLe mécanisme s’éveillera, un grondement se fera entendre…<br>\net les fentes tourneront jusqu’à décider du sort du joueur.<br>\n\nQuand tout s’arrête, un compagnon devra glisser sa dague<br>\ndans l’une des quatre fentes.<br>\n\nMauvais choix ?<br>\nAïe… Le tonneau n’aime pas l’erreur.<br>\n\nBon choix ?<br>\nBravo ! La chance sourit aux audacieux :<br>\nle vainqueur sera porté par l’élan du jeu<br>\nvers des hauteurs que seuls les plus téméraires atteignent,<br>\nlà où attend une récompense bien méritée.<br>\n\nÀ jouer entre braves uniquement.<br>\nLes âmes prudentes sont invitées à regarder.<br>\nSigné : Ordre des Ingénieurs Arcaniques\n<br><br><br>\n\nDans la cabane, fermeture simple , une trappe vers le sous sol. la clé se trouve dans la maison (à fouiller). ya un lit, et des provisions.<br>\nAu sous sol, il y a 3 coffres.<br>\nun avec <span class=\"treasure-table-link\" data-table-name=\"Coffre bucheron\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Coffre bucheron]</span><br>\nUn fermé jeu du tonneau avec <span class=\"treasure-table-link\" data-table-name=\"Coffre jeu du tonneau\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Coffre jeu du tonneau]</span><br>\nun fermé avec la tablette aux cristaux.<br>\nIl y a également plusieurs doubles des clés du lieu de coupe.\n\n\nAu nord grillage avec porte en bois avec cadena, ouverte comme s'il on été venu à la hâte. panneau qui dit : <br>\n\"Lieu de coupe<br>\nDemander l'accès à Branor à la cabane du bûcheron, au sud\".<br><br>",
           "googleDocLink": "https://docs.google.com/document/d/1ib4D5CJdvgBZ-5VC2xAF-0nkow7X17gPKWwqKGP65AY/edit?tab=t.0"
         },
         "Forêt-6": {
@@ -13391,7 +13402,7 @@ hr,
 
     // Mark as standalone version for renderer with build timestamp
     window.STANDALONE_VERSION = true;
-    window.BUILD_VERSION = '2026-01-18T17:27:30.077Z';
+    window.BUILD_VERSION = '2026-01-25T14:13:10.591Z';
 
     // Version check - clear old data if version changed
     (function() {
@@ -15290,7 +15301,7 @@ hr,
           ${this.buildEditableField(this.data.effet, 'objet-effet', 'Effet', { style: 'margin: 1rem 0;' })}
           
           <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; font-size: 0.9em;">
-            ${this.data.prix ? `<div>${this.buildEditableField(this.data.prix, 'objet-prix', 'Prix')}</div>` : ''}
+            ${this.data.prix ? `<div>${this.buildEditableField(this.data.prix.replace(/🔷/g, '<img src="https://i.ibb.co/HpgHnJFD/4a7af38b09c7.png" alt="éclats" class="eclats-icon" style="width: 16px; height: 16px; vertical-align: middle;">'), 'objet-prix', 'Prix')}</div>` : ''}
             ${this.data.poids ? `<div>${this.buildEditableField(this.data.poids, 'objet-poids', 'Poids')}</div>` : ''}
           </div>
           
@@ -15761,7 +15772,7 @@ hr,
         let rewardDisplay;
         if (fourchette.eclats !== undefined) {
           // Mode Eclats
-          rewardDisplay = `<span style="color: var(--accent); font-weight: bold;">💎 ${fourchette.eclats} Eclats</span>`;
+          rewardDisplay = `<span style="color: var(--accent); font-weight: bold;">${window.EclatsIcon?.small || '💎'} ${fourchette.eclats} Éclats</span>`;
         } else {
           // Mode Objet - utiliser le numero pour chercher les vraies données dans OBJETS
           const objet = fourchette.objet;
@@ -20467,6 +20478,14 @@ hr,
     'Chance': '<img src="https://i.ibb.co/HfthhzSF/stat-Chance.png" alt="Chance" class="stat-icon" style="width: 48px; height: 48px; vertical-align: middle;">'
   };
 
+  // Icône Éclats (monnaie)
+  window.EclatsIcon = {
+    url: 'https://i.ibb.co/HpgHnJFD/4a7af38b09c7.png',
+    small: '<img src="https://i.ibb.co/HpgHnJFD/4a7af38b09c7.png" alt="éclats" class="eclats-icon" style="width: 16px; height: 16px; vertical-align: middle;">',
+    medium: '<img src="https://i.ibb.co/HpgHnJFD/4a7af38b09c7.png" alt="éclats" class="eclats-icon" style="width: 24px; height: 24px; vertical-align: middle;">',
+    large: '<img src="https://i.ibb.co/HpgHnJFD/4a7af38b09c7.png" alt="éclats" class="eclats-icon" style="width: 32px; height: 32px; vertical-align: middle;">'
+  };
+
   window.ElementColors = {
     'Feu': { color: '#ff6b35', weight: 'bold' },
     'Eau': { color: '#4682b4', weight: 'bold' },
@@ -22306,7 +22325,7 @@ hr,
           </div>
           <div style="font-size: 0.9em; color: var(--paper-muted); margin-bottom: 0.5rem;">${obj.description || 'Aucune description'}</div>
           ${obj.tags ? `<div style="margin-bottom: 0.5rem;">${obj.tags.map(tag => `<span style="background: var(--bronze); color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.7em; margin-right: 4px;">${tag}</span>`).join('')}</div>` : ''}
-          <div style="font-size: 0.8em; color: var(--paper-muted);">Prix: ${obj.prix || 'N/A'} | Poids: ${obj.poids || 'N/A'}</div>
+          <div style="font-size: 0.8em; color: var(--paper-muted);">${(obj.prix || 'N/A').replace(/🔷/g, '<img src="https://i.ibb.co/HpgHnJFD/4a7af38b09c7.png" alt="éclats" class="eclats-icon" style="width: 12px; height: 12px; vertical-align: middle;">')} | Poids: ${obj.poids || 'N/A'}</div>
         </div>
       `).join('');
 
@@ -22694,7 +22713,7 @@ hr,
               <td style="text-align: center; font-weight: bold; color: var(--accent);">${range}</td>
               <td>
                 <span style="color: var(--gold); font-weight: bold;">
-                  💎 ${fourchette.eclats} éclats
+                  ${window.EclatsIcon?.small || '💎'} ${fourchette.eclats} éclats
                 </span>
               </td>
             </tr>
@@ -25533,7 +25552,7 @@ class CharacterCreatorUI {
         <div id="equipement-section" class="form-section" style="display: none;">
           <h4>Équipement de départ (120 éclats)</h4>
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding: 0.75rem; background: var(--ui-blue-dark); border-radius: 8px; border: 2px solid var(--ui-border);">
-            <span style="color: var(--paper-ink); font-weight: bold;">💎 Budget restant:</span>
+            <span style="color: var(--paper-ink); font-weight: bold;"><img src="https://i.ibb.co/HpgHnJFD/4a7af38b09c7.png" alt="éclats" class="eclats-icon" style="width: 16px; height: 16px; vertical-align: middle;"> Budget restant:</span>
             <span id="budget-restant" style="color: #22c55e; font-size: 1.2rem; font-weight: bold;">120</span>
           </div>
           <div id="equipement-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
@@ -25685,7 +25704,7 @@ class CharacterCreatorUI {
 
       // Créer le prix
       const priceSpan = document.createElement('span');
-      priceSpan.textContent = `💎 ${prix} éclats`;
+      priceSpan.innerHTML = `${window.EclatsIcon?.small || '💎'} ${prix} éclats`;
       priceSpan.style.cssText = 'color: var(--text-muted); font-size: 0.85rem;';
 
       if (isConsommable) {
@@ -25837,7 +25856,7 @@ class CharacterCreatorUI {
         const prix = this.creator.extractPrice(eq.prix);
         items.push(`<div style="display: flex; justify-content: space-between; padding: 0.5rem; border-bottom: 1px solid #ccc;">
           <span style="color: #333;">${eq.nom}</span>
-          <span style="color: #666;">${prix} éclats</span>
+          <span style="color: #666;">${window.EclatsIcon?.small || '💎'} ${prix}</span>
         </div>`);
       });
 
@@ -25848,7 +25867,7 @@ class CharacterCreatorUI {
           const prix = this.creator.extractPrice(objet.prix);
           items.push(`<div style="display: flex; justify-content: space-between; padding: 0.5rem; border-bottom: 1px solid #ccc;">
             <span style="color: #333;">${objet.nom} x${qty}</span>
-            <span style="color: #666;">${prix * qty} éclats</span>
+            <span style="color: #666;">${window.EclatsIcon?.small || '💎'} ${prix * qty}</span>
           </div>`);
         }
       });
@@ -27479,7 +27498,7 @@ class CharacterCreatorUI {
             <div style="color: var(--paper-ink, #e8e8e8);">${this.getEquipmentListHTML()}</div>
             <div style="margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--ui-border, #4a4a6a); text-align: center;">
               <span style="color: var(--text-muted, #888);">Budget restant:</span>
-              <span style="color: var(--gold, #d4af37); font-weight: bold; margin-left: 0.5rem;">💎 ${this.currentConfig.budgetEclats} éclats</span>
+              <span style="color: var(--gold, #d4af37); font-weight: bold; margin-left: 0.5rem;">${window.EclatsIcon?.small || '💎'} ${this.currentConfig.budgetEclats} éclats</span>
             </div>
           </div>
 
@@ -29135,8 +29154,8 @@ window.initCharacterCreator = async function() {
             <hr>
             <p>${item.effet}</p>
             <div style="display: flex; justify-content: space-between;">
-              <span>${item.prix}</span>
-              <span>${item.poids}</span>
+              <span>${item.prix ? item.prix.replace(/🔷/g, '<img src="https://i.ibb.co/HpgHnJFD/4a7af38b09c7.png" alt="éclats" class="eclats-icon" style="width: 14px; height: 14px; vertical-align: middle;">') : ''}</span>
+              <span>${item.poids || ''}</span>
             </div>
             ${isDevMode ? `
               <div class="dev-controls" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #ccc;">
@@ -33356,6 +33375,7 @@ window.initCharacterCreator = async function() {
               <button id="editorTreasureTablesBtn" class="btn" style="background: #b45309; color: white; font-size: 12px;">🎲 Tables Trésors</button>
               <button id="editorSchemaBtn" class="btn" style="background: #8b5cf6; color: white; font-size: 12px;">🎨 Schéma</button>
               <button id="editorImageBtn" class="btn" style="background: #be185d; color: white; font-size: 12px;">📷 Image</button>
+              <button id="editorEclatsBtn" class="btn" style="background: #0ea5e9; color: white; font-size: 12px;"><img src="https://i.ibb.co/HpgHnJFD/4a7af38b09c7.png" class="eclats-icon" style="width: 14px; height: 14px; vertical-align: middle;"> Éclats</button>
             </div>
             <div style="font-size: 12px; color: var(--paper-muted); line-height: 1.4;">
               💡 <strong>Astuce:</strong> Utilisez ces boutons pour insérer rapidement des éléments, états, liens, tables de trésors et schémas dans votre contenu HTML.
@@ -33388,6 +33408,7 @@ window.initCharacterCreator = async function() {
       const treasureTablesBtn = modal.querySelector('#editorTreasureTablesBtn');
       const schemaBtn = modal.querySelector('#editorSchemaBtn');
       const imageBtn = modal.querySelector('#editorImageBtn');
+      const eclatsBtn = modal.querySelector('#editorEclatsBtn');
 
       // Helper function to insert text at cursor position in textarea
       const insertTextAtCursor = (text) => {
@@ -33509,6 +33530,14 @@ window.initCharacterCreator = async function() {
           } else if (ModalManager?.showImageInsertModal) {
             ModalManager.showImageInsertModal(insertTextAtCursor);
           }
+        });
+      }
+
+      if (eclatsBtn) {
+        eclatsBtn.addEventListener('click', () => {
+          // Insérer l'icône éclats
+          const eclatsHtml = window.EclatsIcon?.small || '<img src="https://i.ibb.co/HpgHnJFD/4a7af38b09c7.png" alt="éclats" class="eclats-icon" style="width: 16px; height: 16px; vertical-align: middle;">';
+          insertTextAtCursor(eclatsHtml);
         });
       }
 
@@ -39795,7 +39824,7 @@ window.initCharacterCreator = async function() {
             <div style="font-style: italic; margin: 0.5rem 0;">${objet.description || ''}</div>
             <div style="margin: 0.5rem 0;">${objet.effet || ''}</div>
             <div style="display: flex; gap: 1rem; font-size: 0.9em;">
-              <span>${objet.prix || ''}</span>
+              <span>${objet.prix ? objet.prix.replace(/🔷/g, '<img src="https://i.ibb.co/HpgHnJFD/4a7af38b09c7.png" alt="éclats" class="eclats-icon" style="width: 14px; height: 14px; vertical-align: middle;">') : ''}</span>
               <span>${objet.poids || ''}</span>
             </div>
           </div>

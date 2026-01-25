@@ -629,6 +629,14 @@
     'Chance': '<img src="https://i.ibb.co/HfthhzSF/stat-Chance.png" alt="Chance" class="stat-icon" style="width: 48px; height: 48px; vertical-align: middle;">'
   };
 
+  // Icône Éclats (monnaie)
+  window.EclatsIcon = {
+    url: 'https://i.ibb.co/HpgHnJFD/4a7af38b09c7.png',
+    small: '<img src="https://i.ibb.co/HpgHnJFD/4a7af38b09c7.png" alt="éclats" class="eclats-icon" style="width: 16px; height: 16px; vertical-align: middle;">',
+    medium: '<img src="https://i.ibb.co/HpgHnJFD/4a7af38b09c7.png" alt="éclats" class="eclats-icon" style="width: 24px; height: 24px; vertical-align: middle;">',
+    large: '<img src="https://i.ibb.co/HpgHnJFD/4a7af38b09c7.png" alt="éclats" class="eclats-icon" style="width: 32px; height: 32px; vertical-align: middle;">'
+  };
+
   window.ElementColors = {
     'Feu': { color: '#ff6b35', weight: 'bold' },
     'Eau': { color: '#4682b4', weight: 'bold' },
