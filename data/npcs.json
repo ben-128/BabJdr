@@ -39,13 +39,13 @@
     "nom": "Lyrielle Vent-d’Aurore",
     "image": "",
     "description": "Calme, gentille",
-    "interactions": "Propose de changer la musique. <br>Prend les pourboires."
+    "interactions": "Propose de changer la musique. <br>Prend les pourboires.\n          \n\n--- \nplus tard débloque un niveau"
   },
   {
     "nom": "Kael Fenraven",
     "image": "",
     "description": "Mystérieux, silencieux",
-    "interactions": "Donne des conseils de combat : \n\n<br><br>\n- Un ennemi volant esquive souvent vos attaques. Mais certaines magies ou compétences permettent d'éviter cela.\n\n<br><br>\n\n-« Si tu ne connais pas l’élément de ton adversaire… frappe prudemment. Si tu le connais… frappe intelligemment. »\n\n<br><br>\n\n- « Si tu caches du pain, de l’eau et un couteau… tu vivras toujours un jour de plus que celui qui a caché un trésor. »\n\n<br><br>\n\n-« La potion que tu ne bois jamais est celle qui restera dans ton sac quand tu mourras. »"
+    "interactions": "Donne des conseils de combat : \n\n<br><br>\n- Un ennemi volant esquive souvent vos attaques. Mais certaines magies ou compétences permettent d'éviter cela.\n\n<br><br>\n\n-« Si tu ne connais pas l’élément de ton adversaire… frappe prudemment. Si tu le connais… frappe intelligemment. »\n\n<br><br>\n\n- « Si tu caches du pain, de l’eau et un couteau… tu vivras toujours un jour de plus que celui qui a caché un trésor. »\n\n<br><br>\n\n-« La potion que tu ne bois jamais est celle qui restera dans ton sac quand tu mourras. »\n\n---\n\nplus tard débloque dragon rouge"
   },
   {
     "nom": "Bramousse Tournicorne",
@@ -63,7 +63,7 @@
     "nom": "Borag et Snik",
     "image": "",
     "description": "Un silencieux, grand et fort. L'autre hargneux, petit",
-    "interactions": "Ils sont bloqués à l'auberge à cause des monstres et normalement s'entraînent, mais n'arrivent pas à être assez forts. Ils ont entendu dire que des cristaux roses pouvaient rendre beaucoup plus fortes certaines personnes.<br><br>\n\n\n« On veut se battre, Borag et moi… mais on tape comme des mouettes enrhumées. On dit que certains deviennent monstrueusement puissants avec des cristaux roses… t’en as déjà vu, toi ? »\n<br>\n« Ouais ! Et puis l’entraînement dans une auberge, ça fait pas pousser les muscles»"
+    "interactions": "« On veut aller chasser, Borag et moi… mais on tape comme des mouettes enrhumées. On dit que certains deviennent monstrueusement puissants avec des cristaux roses… t’en as déjà vu, toi ? Des rumeurs disent que des monstres dans la forêt en possèdent. Si tu nous en ramnène un, on pourra reprendre l'entrainement et dérouiller ces foutus monstres. On en a absolument besoin pour reprendre l'artisanat...»\n<br>\n« Ouais ! Et puis l’entraînement dans une auberge, ça fait pas pousser les muscles»<br><br>\n\n-Récompense ramener cristal : enseigne Artisanat à un héros avec 2 recettes : <br><br>\n\n<span class=\"objet-link\" data-objet=\"Armure en cuir d'ours\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Armure en cuir d'ours</span> Avec fourrure d'ours + nécéssaire de travail du cuir 50 éclat à l'aubergiste.<br><br>\n\n<span class=\"objet-link\" data-objet=\"Patch de Renfort\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Patch de Renfort</span><br>\n  Ingrédients :\n  - 1x Viande de monstre (pour le cuir tanné de la bête)\n  - 1x Rivets de fer (aubergiste - 15 éclats)"
   },
   {
     "nom": "Isara Cœur-de-Roc",
@@ -75,7 +75,7 @@
     "nom": "Elmar",
     "image": "",
     "description": "Pêcheur. Aime être seul.",
-    "interactions": "- Donne les clés de chez lui quand on le sauve.<br>\n- A retrouver à l'auberge, propose passage vers les Étendues désertiques de Kharûn"
+    "interactions": "- Donne les clés de chez lui quand on le sauve.<br>\n- A retrouver à l'auberge, propose passage vers les Étendues désertiques de Kharûn<br>\n- Peut enseigner la cuisine à un héros, lui donnant 3 recettes :\n<br><br>\n<span class=\"objet-link\" data-objet=\"Plat épicé\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Plat épicé</span><br>\n<span class=\"objet-link\" data-objet=\"Bouillon Purifiant\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Bouillon Purifiant</span><br>\n<span class=\"objet-link\" data-objet=\"Grillade du Chasseur\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Grillade du Chasseur</span>"
   },
   {
     "nom": "Tobin",
