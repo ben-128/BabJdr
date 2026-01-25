@@ -719,7 +719,7 @@
       "nom": "Viande de monstre",
       "numero": 56,
       "image": "https://i.ibb.co/YBYZ7KKz/Viande-Monstre.png",
-      "description": "<i>Morceau sombre et fibreux, la chair encore tiède dégage une odeur âcre et sauvage, à mi-chemin entre le gibier et le fer.</i>",
+      "description": "<i>Morceau sombre et fibreux, la chair encore tiède dégage une odeur âcre et sauvage. Crue, elle nourrit à peine, mais entre les mains d'un cuisinier ou d'un artisan, elle révèle tout son potentiel.</i>",
       "tags": [
         "Nourriture",
         "Composant"
@@ -751,7 +751,7 @@
         "Nourriture"
       ],
       "effet": "Inutilisable en combat.\n<br><strong>Prérequis:</strong> Test de compétence Hardiesse 1.\n<br><strong>Effet:</strong> Rend 25 points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'état <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.\n          <br> <strong>Charges : </strong>3.<br><br>\n\n\n          <strong>Recette :</strong> <span class=\"objet-link\" data-objet=\"Ration copieuse de nourriture\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ration copieuse de nourriture</span> + Piment séché (aubergiste - 10 éclats)",
-      "prix": "🔷 <strong>Prix:</strong> 50",
+      "prix": "🔷 <strong>Prix:</strong> 40",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
     {
