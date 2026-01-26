@@ -21,7 +21,7 @@
     "nom": "Grufin l'aubergiste",
     "image": "",
     "description": "Connaît bien ses clients, partage des histoires.",
-    "interactions": "- Indique la position des autres NPC\n<br><br>\n\n- Vend aux PJs (forêt finis) un coffre pour 100 eclats pour mettre n'importe quel objet, sécurisé.\n<br><br>\n\n-Après la forêt, parle de vieille tour ou mine comme prochain lieu, les joueurs décident"
+    "interactions": "- Indique la position des autres NPC\n<br><br>\n- Offre une tournée de <span class=\"objet-link\" data-objet=\"Chope de bière\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Chope de bière</span> aux joueurs.\n<br><br>\n - Vend des <span class=\"objet-link\" data-objet=\"Ration de nourriture\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ration de nourriture</span>, <span class=\"objet-link\" data-objet=\"Ration copieuse de nourriture\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ration copieuse de nourriture</span> et outils d'artisanat.\n<br><br>\n(forêt finis) <br>\n- Vend aux PJs (forêt finis) un coffre pour 100 eclats pour mettre n'importe quel objet, sécurisé.\n<br><br>\n-Après la forêt, parle de vieille tour ou mine comme prochain lieu, les joueurs décident"
   },
   {
     "nom": "Grolban Pisse-Tonneau",
