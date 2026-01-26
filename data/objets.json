@@ -916,6 +916,18 @@
       "effet": "<strong>Effet :</strong> Renforce une armure légère ou lourde de <strong>+1 Armure physique</strong> (permanent).\n<br><strong>Limite :</strong> Une armure ne peut recevoir qu'un seul patch de renfort.\n<br><br>\n<strong>Recette :</strong> <span class=\"objet-link\" data-objet=\"Viande de monstre\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Viande de monstre</span> + Rivets de fer <i>(aubergiste, 15 éclats)</i>.",
       "prix": "🔷 <strong>Prix:</strong> 50",
       "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Chope de bière",
+      "numero": 72,
+      "image": "https://i.ibb.co/7JZW2ZZT/Food2.png",
+      "description": "<i>Une chope débordante de mousse dorée, dont le contenu réchauffe le corps mais embrume l'esprit.</i>",
+      "tags": [
+        "Consommable"
+      ],
+      "effet": "<strong>Effet:</strong> Rend 3 points de vie.<br>Applique l'état <span class=\"etat-link\" data-etat=\"Soûl\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Soûl</span> jusqu'à la fin du combat.",
+      "prix": "🔷 <strong>Prix:</strong> 5",
+      "poids": ""
     }
   ],
   "filterSettings": {

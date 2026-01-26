@@ -128,6 +128,12 @@
       "type": "card",
       "title": "Berserker",
       "content": "Les chances de coup critiques physiques sont augmentés de 5.<br><br>Incapable d'esquiver ou d'utiliser des sorts/objets.<br><br>L'armure physique et les armures élémentaires sont à 0."
+    },
+    {
+      "id": "section-soul",
+      "type": "card",
+      "title": "Soûl",
+      "content": "Esquive augmentée de 5.<br><br>Chances d'échec critique augmentées de 5.<br><br>-2 à tous les tests de compétences."
     }
   ]
 }
