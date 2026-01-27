@@ -204,6 +204,12 @@
           "id": "geographie",
           "title": "Geographie",
           "icon": "📜"
+        },
+        {
+          "type": "page",
+          "id": "peuple",
+          "title": "Peuples",
+          "icon": "👥"
         }
       ]
     }

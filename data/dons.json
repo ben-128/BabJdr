@@ -119,7 +119,7 @@
       },
       {
         "nom": "Marchand astucieux",
-        "description": "Les prix des consommables et de la nourriture sont réduits de moitié.",
+        "description": "Les prix des consommables, de la nourriture et des outils d'artisanat sont réduits de moitié.",
         "prerequis": "<strong> Prérequis :</strong> Éloquence rang 1",
         "cout": "1 point de don"
       },
@@ -420,7 +420,7 @@
       },
       {
         "nom": "Piège Improvisé",
-        "description": "Une fois par combat, le rôdeur peut créer et placer un piège sur une zone de 3mx3m, à moins de 3m du héros.\n  <br><br>Lorsqu'un ennemi entre dans la zone, il subit (Agilité du rôdeur) points de dégâts physiques.<br>Si sa Résistance altérations est inférieure à la Puiss. Sorts du héros, il subit l'état <span class=\"etat-link\" data-etat=\"Ralenti\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ralenti</span> pendant 5 tours.\n<br>Le piège est alors détruit.",
+        "description": "Une fois par combat, le rôdeur peut utiliser une action secondaire pour placer un piège sur une zone de 3mx3m, à moins de 3m du héros.\n  <br><br>Lorsqu'un ennemi entre dans la zone, il subit (Agilité du rôdeur) points de dégâts physiques.<br>Si sa Résistance altérations est inférieure niveau du héros, il subit l'état <span class=\"etat-link\" data-etat=\"Ralenti\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ralenti</span> pendant 5 tours.\n<br>Le piège est alors détruit.",
         "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Intelligence 5",
         "cout": "1 point de don"
       },

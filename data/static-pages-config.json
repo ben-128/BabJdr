@@ -113,6 +113,13 @@
       "file": "metiers.json",
       "active": true,
       "order": 15
+    },
+    {
+      "id": "peuple",
+      "title": "Peuples",
+      "file": "peuple.json",
+      "active": true,
+      "order": 16
     }
   ],
   "template": {
