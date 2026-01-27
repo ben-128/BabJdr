@@ -25,7 +25,8 @@
     
     // Application state
     state: {
-      isMJ: false // Boolean pour contrôler l'accès MJ
+      isMJ: false, // Boolean pour contrôler l'accès MJ
+      initialized: false // Flag pour éviter double initialisation
     },
     
     // Core modules
@@ -46,29 +47,29 @@
 
     // Initialization
     async init() {
+      // Éviter la double initialisation
+      if (this.state.initialized) return;
+      this.state.initialized = true;
+
       try {
         this.updateLoadingProgress(10);
         await this.loadData();
-        
+
         this.updateLoadingProgress(40);
         await this.loadContent();
-        
+
         this.updateLoadingProgress(70);
-        this.initializeModules();
-        
+        await this.initializeModules();
+
         this.updateLoadingProgress(90);
-        
-        // Execute data validation after all modules are loaded
-        setTimeout(() => {
-          this.validateDataIntegrity();
-          this.updateLoadingProgress(100);
-          this.hideLoadingScreen();
-        }, 500);
-        
-        // Auto-enable MJ mode with additional delay to ensure router is ready
-        setTimeout(() => {
-          this.autoEnableMJModeInDevelopment();
-        }, 800);
+
+        // Validation et affichage immédiat (le rendu est terminé)
+        this.validateDataIntegrity();
+        this.updateLoadingProgress(100);
+        this.hideLoadingScreen();
+
+        // Auto-enable MJ mode (router est déjà prêt)
+        this.autoEnableMJModeInDevelopment();
       } catch (error) {
         this.hideLoadingScreen();
         // Silent error handling for initialization
@@ -171,47 +172,35 @@
           fetch('data/audio-config.json').then(r => r.json()).catch(() => null)
         ]);
 
-        // Load page descriptions (optional, with fallbacks)
-        try {
-          window.MONSTRES_PAGE_DESC = await fetch('data/monstres-page-desc.json').then(r => r.json());
-        } catch (error) {
-          // Fallback if file doesn't exist
-          window.MONSTRES_PAGE_DESC = {
+        // Charger toutes les descriptions et pages statiques en parallèle
+        const activePages = staticPagesConfig.pages.filter(page => page.active);
+
+        const [monstresDesc, tablesTresorsDesc, customDescriptions, ...pageResults] = await Promise.all([
+          // Descriptions de pages (avec fallbacks)
+          fetch('data/monstres-page-desc.json').then(r => r.json()).catch(() => ({
             description: "Créatures, ennemis et adversaires que peuvent affronter les héros dans leurs aventures."
-          };
-        }
-
-        try {
-          window.TABLES_TRESORS_PAGE_DESC = await fetch('data/tables-tresors-page-desc.json').then(r => r.json());
-        } catch (error) {
-          // Fallback if file doesn't exist
-          window.TABLES_TRESORS_PAGE_DESC = {
+          })),
+          fetch('data/tables-tresors-page-desc.json').then(r => r.json()).catch(() => ({
             description: "Tables de butin permettant de générer aléatoirement des récompenses selon les fourchettes définies. Lancez un dé 20 et consultez la table correspondante pour déterminer l'objet obtenu."
-          };
-        }
+          })),
+          fetch('data/custom-page-descriptions.json').then(r => r.json()).catch(() => ({})),
+          // Pages statiques
+          ...activePages.map(pageConfig =>
+            fetch(`data/${pageConfig.file}`).then(r => r.json())
+              .then(data => ({ id: pageConfig.id, data }))
+              .catch(() => null)
+          )
+        ]);
 
-        // Load custom page descriptions (collections, etc.)
-        try {
-          const customDescriptions = await fetch('data/custom-page-descriptions.json').then(r => r.json());
-          this.data.customPageDescriptions = { ...this.data.customPageDescriptions, ...customDescriptions };
-          // Make it available globally for ContentFactory (keep in sync)
-          window.CUSTOM_PAGE_DESCRIPTIONS = { ...this.data.customPageDescriptions };
-        } catch (error) {
-          // Keep default values if file doesn't exist
-          window.CUSTOM_PAGE_DESCRIPTIONS = { ...this.data.customPageDescriptions };
-        }
+        window.MONSTRES_PAGE_DESC = monstresDesc;
+        window.TABLES_TRESORS_PAGE_DESC = tablesTresorsDesc;
+        this.data.customPageDescriptions = { ...this.data.customPageDescriptions, ...customDescriptions };
+        window.CUSTOM_PAGE_DESCRIPTIONS = { ...this.data.customPageDescriptions };
 
         const staticPagesData = {};
-        const activePages = staticPagesConfig.pages.filter(page => page.active);
-        
-        for (const pageConfig of activePages) {
-          try {
-            const pageData = await fetch(`data/${pageConfig.file}`).then(r => r.json());
-            staticPagesData[pageConfig.id] = pageData;
-          } catch (error) {
-            // Silent handling for missing static pages
-          }
-        }
+        pageResults.forEach(result => {
+          if (result) staticPagesData[result.id] = result.data;
+        });
 
         this.data.SORTS = sorts;
         this.data.CLASSES = classes;
@@ -325,22 +314,27 @@
       }
     },
 
-    initializeModules() {
+    async initializeModules() {
       if (this.utils.events && this.utils.events.init) this.utils.events.init();
       if (this.utils.dom && this.utils.dom.init) this.utils.dom.init();
       if (this.modules.images && this.modules.images.init) this.modules.images.init();
       if (this.modules.audio && this.modules.audio.init) this.modules.audio.init();
-      if (this.modules.renderer && this.modules.renderer.init) this.modules.renderer.init();
+
+      // Attendre que le renderer ait fini de générer le contenu
+      if (this.modules.renderer && this.modules.renderer.init) {
+        await this.modules.renderer.init();
+      }
+
       if (this.modules.router && this.modules.router.init) this.modules.router.init();
       if (this.modules.editor && this.modules.editor.init) this.modules.editor.init();
       if (this.modules.storage && this.modules.storage.init) this.modules.storage.init();
       if (this.modules.ui && this.modules.ui.init) this.modules.ui.init();
-      
+
       // Initialize performance optimizations after all modules are loaded
       if (window.ScrollOptimizer && window.ScrollOptimizer.init) {
         window.ScrollOptimizer.init();
       }
-      
+
       // Filter event handlers are now handled by specialized modules
     },
 

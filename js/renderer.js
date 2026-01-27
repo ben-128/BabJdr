@@ -11,20 +11,17 @@
   JdrApp.modules.renderer = {
     currentSearch: '',
     
-    init() {
-      // Delay content generation to ensure all configurations are loaded
-      // Increased delay to ensure data loading is complete
-      setTimeout(() => {
-        // Verify data is loaded before generating content
-        if (this.isDataReady()) {
-          this.generateContent();
-          this.autoLoadImages();
-        } else {
-          // If data not ready, retry with longer delays
-          this.waitForDataAndGenerate();
-        }
-      }, 100);
+    async init() {
       this.setupEventListeners();
+
+      // Vérifier si les données sont prêtes
+      if (this.isDataReady()) {
+        await this.generateContent();
+        this.autoLoadImages();
+      } else {
+        // Si pas prêtes, attendre avec retry
+        await this.waitForDataAndGenerate();
+      }
     },
 
     isDataReady() {
@@ -34,24 +31,28 @@
     },
 
     waitForDataAndGenerate() {
-      let attempts = 0;
-      const maxAttempts = 20; // Max 10 seconds
-      
-      const checkData = () => {
-        attempts++;
-        if (this.isDataReady()) {
-          this.generateContent();
-          this.autoLoadImages();
-        } else if (attempts < maxAttempts) {
-          setTimeout(checkData, 500); // Check every 500ms
-        } else {
-          // Data loading timeout - generating with available data
-          this.generateContent();
-          this.autoLoadImages();
-        }
-      };
-      
-      checkData();
+      return new Promise((resolve) => {
+        let attempts = 0;
+        const maxAttempts = 20; // Max 10 seconds
+
+        const checkData = async () => {
+          attempts++;
+          if (this.isDataReady()) {
+            await this.generateContent();
+            this.autoLoadImages();
+            resolve();
+          } else if (attempts < maxAttempts) {
+            setTimeout(checkData, 500); // Check every 500ms
+          } else {
+            // Data loading timeout - generating with available data
+            await this.generateContent();
+            this.autoLoadImages();
+            resolve();
+          }
+        };
+
+        checkData();
+      });
     },
 
     setupEventListeners() {
@@ -66,7 +67,7 @@
       });
     },
 
-    generateContent() {
+    async generateContent() {
       // Skip TOC regeneration if it already exists (loaded from static HTML)
       const tocContainer = document.querySelector('.toc');
       const existingTocSections = tocContainer ? tocContainer.querySelectorAll('.toc-section') : [];
@@ -74,21 +75,19 @@
         JdrApp.modules.router.generateTOC.call(JdrApp.modules.router);
       }
 
-      this.generateArticles();
+      await this.generateArticles();
       this.generateDevToolbox();
-      
+
       if (JdrApp.modules.editor) {
-        setTimeout(() => {
-          if (JdrApp.modules.editor.isDevMode) {
-            JdrApp.modules.editor.forceShowAllEditButtons();
-          } else {
-            JdrApp.modules.editor.forceHideAllEditButtons();
-          }
-        }, 100);
+        if (JdrApp.modules.editor.isDevMode) {
+          JdrApp.modules.editor.forceShowAllEditButtons();
+        } else {
+          JdrApp.modules.editor.forceHideAllEditButtons();
+        }
       }
     },
 
-    generateArticles() {
+    async generateArticles() {
       const viewsContainer = document.querySelector('#views');
       if (!viewsContainer) return;
 
@@ -101,7 +100,7 @@
       }
 
       // Use progressive rendering to avoid blocking the main thread
-      this.progressiveRender([
+      await this.progressiveRender([
         { fn: () => this.generateStaticPages(), name: 'static' },
         { fn: () => this.generateClassPages(), name: 'classes' },
         { fn: () => this.generateCategoryPages(), name: 'categories' },
