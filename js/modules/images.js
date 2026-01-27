@@ -51,10 +51,11 @@
         this.ensureMonsterImageMappings();
       }, 1000);
 
-      // Start background preloading after initial page load (faster start)
-      setTimeout(() => {
-        this.startBackgroundPreloading();
-      }, 500);
+      // Background preloading disabled - only load images for current page
+      // Images are loaded on-demand via lazy loading and autoLoadImages()
+      // setTimeout(() => {
+      //   this.startBackgroundPreloading();
+      // }, 500);
     },
 
     // Configuration for image loading
@@ -658,17 +659,10 @@
 
     // Called when user navigates to reprioritize
     onNavigationChange() {
-      const bp = this.backgroundPreloader;
-
-      // Small delay to let the DOM update
+      // Small delay to let the DOM update, then load images for the new page
       setTimeout(() => {
-        this.prioritizeVisibleImages();
-
-        // If preloader is paused or stopped, restart processing
-        if (bp.isRunning && (bp.queue.length > 0 || bp.priorityQueue.length > 0)) {
-          this.processPreloadQueue();
-        }
-      }, 100);
+        this.autoLoadImages();
+      }, 50);
     },
 
     // Process the preload queue
