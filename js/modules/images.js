@@ -113,9 +113,19 @@
       // Success handler
       const onLoad = () => {
         clearTimeout(timeoutId);
-        img.classList.remove('lazy-loading');
+        img.classList.remove('lazy-loading', 'lazy-error');
         img.classList.add('lazy-loaded');
+        img.style.display = ''; // Ensure image is visible
         delete img.dataset.retryCount;
+
+        // Remove any existing error placeholder
+        const container = img.closest('.illus');
+        if (container) {
+          const placeholder = container.querySelector('.image-error-placeholder');
+          if (placeholder) {
+            placeholder.remove();
+          }
+        }
 
         // Mark as loaded in background preloader to avoid duplicate work
         if (this.backgroundPreloader) {
