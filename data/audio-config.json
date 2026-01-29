@@ -1,6 +1,6 @@
 {
   "baseUrl": "data/Musiques",
-  "baseUrlGitHub": "https://raw.githubusercontent.com/ben-128/BabJdr/master/data/Musiques",
+  "baseUrlGitHub": "https://ben-128.github.io/BabJdr/data/Musiques",
   "folderIcons": {
     "Auberge": "🍺",
     "Creation": "🎭", 
