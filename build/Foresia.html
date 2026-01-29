@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2026-01-29T16:18:11.211Z by JdrBab Build System -->
+<!-- Generated on 2026-01-29T16:50:13.916Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13717,7 +13717,7 @@ hr,
 
     // Mark as standalone version for renderer with build timestamp
     window.STANDALONE_VERSION = true;
-    window.BUILD_VERSION = '2026-01-29T16:18:11.215Z';
+    window.BUILD_VERSION = '2026-01-29T16:50:13.918Z';
 
     // Version check - clear old data if version changed
     (function() {
@@ -19243,8 +19243,11 @@ hr,
     config: null,
     isEnabled: false,
     isBuffering: false, // Indicateur de buffering (streaming en cours)
+    bufferProgress: 0, // Progression du buffering (0-100)
     isPopulating: false, // Flag pour éviter les appels multiples de populateAudioPage
     consecutiveErrors: 0, // Compteur d'erreurs consécutives pour éviter les boucles infinies
+    preloadedAudio: null, // Audio préchargé pour la piste suivante
+    preloadedTrackIndex: -1, // Index de la piste préchargée
     
     async init() {
       try {
@@ -19421,8 +19424,25 @@ hr,
       }
     },
 
-    async loadTrack(trackPath) {
+    async loadTrack(trackPath, usePreloaded = false) {
       try {
+        // Vérifier si on peut utiliser la piste préchargée
+        if (usePreloaded && this.preloadedAudio && this.preloadedTrackIndex === this.currentTrackIndex) {
+          if (this.currentAudio) {
+            this.currentAudio.pause();
+            this.currentAudio = null;
+          }
+          this.currentAudio = this.preloadedAudio;
+          this.preloadedAudio = null;
+          this.preloadedTrackIndex = -1;
+          this.currentAudio.volume = this.volume;
+          this.setupAudioEventListeners();
+
+          // Précharger la prochaine piste
+          this.preloadNextTrack();
+          return;
+        }
+
         if (this.currentAudio) {
           this.currentAudio.pause();
           this.currentAudio = null;
@@ -19431,73 +19451,14 @@ hr,
         // Utiliser les URLs locales en mode dev, GitHub en mode standalone
         const baseUrl = window.STANDALONE_VERSION ? this.config.baseUrlGitHub : this.config.baseUrl;
         const fullUrl = `${baseUrl}/${trackPath}`;
-        
+
         this.currentAudio = new Audio();
         this.currentAudio.volume = this.volume;
         this.currentAudio.preload = 'auto';
         this.currentAudio.crossOrigin = 'anonymous';
         this.currentAudio.loop = false; // S'assurer que l'audio ne boucle pas
 
-        // Gestion des événements audio
-        this.currentAudio.addEventListener('ended', () => {
-          if (this.isLooping) {
-            // Rejouer la même piste
-            this.currentAudio.currentTime = 0;
-            this.currentAudio.play();
-          } else {
-            // Ne pas mettre isPlaying à false, playNext s'en charge
-            this.playNext();
-          }
-        });
-
-        this.currentAudio.addEventListener('play', () => {
-          this.isPlaying = true;
-          this.isBuffering = false;
-          this.consecutiveErrors = 0; // Réinitialiser le compteur d'erreurs quand une piste se lance
-          this.updateUI();
-          this.updateAudioPageUI();
-        });
-
-        // Indicateur de buffering (streaming en cours)
-        this.currentAudio.addEventListener('waiting', () => {
-          this.isBuffering = true;
-          this.updateAudioPageUI();
-        });
-
-        this.currentAudio.addEventListener('playing', () => {
-          this.isBuffering = false;
-          this.updateAudioPageUI();
-        });
-
-        this.currentAudio.addEventListener('pause', () => {
-          // Ne pas mettre isPlaying à false si le morceau est terminé
-          // (l'événement ended s'en chargera via playNext)
-          if (!this.currentAudio.ended) {
-            this.isPlaying = false;
-            this.updateUI();
-            this.updateAudioPageUI();
-          }
-        });
-
-        this.currentAudio.addEventListener('error', (e) => {
-          console.error('Audio loading failed:', fullUrl, e);
-          this.isPlaying = false;
-          this.consecutiveErrors++;
-
-          // Éviter les boucles infinies: arrêter si on a eu des erreurs sur toutes les pistes
-          const playlist = this.currentPlaylist ? this.config.playlists[this.currentPlaylist] : null;
-          const maxErrors = playlist ? playlist.tracks.length : 5;
-
-          if (this.consecutiveErrors >= maxErrors) {
-            console.error('Too many consecutive audio errors, stopping playback');
-            this.consecutiveErrors = 0;
-            this.stop();
-            return;
-          }
-
-          this.playNext();
-        });
-
+        this.setupAudioEventListeners();
 
         // Définir la source APRÈS avoir configuré les event listeners
         this.currentAudio.src = fullUrl;
@@ -19506,10 +19467,125 @@ hr,
         if (this.isPlaying) {
           await this.play();
         }
-        
+
+        // Précharger la prochaine piste après un court délai
+        setTimeout(() => this.preloadNextTrack(), 1000);
+
       } catch (error) {
-        console.error('🚫 Failed to load track:', trackPath, error);
+        console.error('Failed to load track:', trackPath, error);
       }
+    },
+
+    setupAudioEventListeners() {
+      if (!this.currentAudio) return;
+
+      // Gestion des événements audio
+      this.currentAudio.addEventListener('ended', () => {
+        if (this.isLooping) {
+          // Rejouer la même piste
+          this.currentAudio.currentTime = 0;
+          this.currentAudio.play();
+        } else {
+          // Ne pas mettre isPlaying à false, playNext s'en charge
+          this.playNext();
+        }
+      });
+
+      this.currentAudio.addEventListener('play', () => {
+        this.isPlaying = true;
+        this.isBuffering = false;
+        this.consecutiveErrors = 0; // Réinitialiser le compteur d'erreurs quand une piste se lance
+        this.updateUI();
+        this.updateAudioPageUI();
+      });
+
+      // Suivi de la progression du buffering
+      this.currentAudio.addEventListener('progress', () => {
+        this.updateBufferProgress();
+      });
+
+      // Indicateur de buffering (streaming en cours)
+      this.currentAudio.addEventListener('waiting', () => {
+        this.isBuffering = true;
+        this.updateAudioPageUI();
+      });
+
+      this.currentAudio.addEventListener('playing', () => {
+        this.isBuffering = false;
+        this.updateAudioPageUI();
+      });
+
+      this.currentAudio.addEventListener('pause', () => {
+        // Ne pas mettre isPlaying à false si le morceau est terminé
+        // (l'événement ended s'en chargera via playNext)
+        if (!this.currentAudio.ended) {
+          this.isPlaying = false;
+          this.updateUI();
+          this.updateAudioPageUI();
+        }
+      });
+
+      this.currentAudio.addEventListener('error', (e) => {
+        console.error('Audio loading failed:', this.currentAudio?.src, e);
+        this.isPlaying = false;
+        this.consecutiveErrors++;
+
+        // Éviter les boucles infinies: arrêter si on a eu des erreurs sur toutes les pistes
+        const playlist = this.currentPlaylist ? this.config.playlists[this.currentPlaylist] : null;
+        const maxErrors = playlist ? playlist.tracks.length : 5;
+
+        if (this.consecutiveErrors >= maxErrors) {
+          console.error('Too many consecutive audio errors, stopping playback');
+          this.consecutiveErrors = 0;
+          this.stop();
+          return;
+        }
+
+        this.playNext();
+      });
+    },
+
+    updateBufferProgress() {
+      if (!this.currentAudio || !this.currentAudio.buffered.length) {
+        this.bufferProgress = 0;
+        return;
+      }
+
+      const duration = this.currentAudio.duration;
+      if (duration > 0) {
+        const bufferedEnd = this.currentAudio.buffered.end(this.currentAudio.buffered.length - 1);
+        this.bufferProgress = Math.round((bufferedEnd / duration) * 100);
+        this.updateAudioPageUI();
+      }
+    },
+
+    // Précharger la prochaine piste pour une transition fluide
+    preloadNextTrack() {
+      if (!this.currentPlaylist || this.isLooping) return;
+
+      const playlist = this.config.playlists[this.currentPlaylist];
+      if (!playlist || !playlist.tracks.length) return;
+
+      const nextIndex = (this.currentTrackIndex + 1) % playlist.tracks.length;
+
+      // Ne pas précharger si déjà fait
+      if (this.preloadedTrackIndex === nextIndex) return;
+
+      const baseUrl = window.STANDALONE_VERSION ? this.config.baseUrlGitHub : this.config.baseUrl;
+      const nextTrackPath = playlist.tracks[nextIndex];
+      const fullUrl = `${baseUrl}/${nextTrackPath}`;
+
+      // Nettoyer l'ancien préchargement
+      if (this.preloadedAudio) {
+        this.preloadedAudio.src = '';
+        this.preloadedAudio = null;
+      }
+
+      this.preloadedAudio = new Audio();
+      this.preloadedAudio.preload = 'auto';
+      this.preloadedAudio.crossOrigin = 'anonymous';
+      this.preloadedAudio.src = fullUrl;
+      this.preloadedTrackIndex = nextIndex;
     },
 
     async play() {
@@ -19659,18 +19735,20 @@ hr,
 
       // Fade out si en cours de lecture
       if (wasPlaying && this.currentAudio) {
-        await this.fadeOut(500);
+        await this.fadeOut(300); // Réduit de 500 à 300ms pour plus de réactivité
       }
 
       // Toujours passer à la piste suivante en ordre séquentiel
       this.currentTrackIndex = (this.currentTrackIndex + 1) % playlist.tracks.length;
 
-      await this.loadTrack(playlist.tracks[this.currentTrackIndex]);
+      // Utiliser la piste préchargée si disponible
+      const usePreloaded = this.preloadedTrackIndex === this.currentTrackIndex && this.preloadedAudio;
+      await this.loadTrack(playlist.tracks[this.currentTrackIndex], usePreloaded);
       this.updateAudioPageUI(); // Mettre à jour l'affichage du titre
 
       // Relancer la lecture avec fade in si était en cours
       if (wasPlaying) {
-        await this.fadeIn(500);
+        await this.fadeIn(300); // Réduit de 500 à 300ms
       }
     },
 
@@ -19992,6 +20070,14 @@ hr,
               <p id="current-track" style="margin: 0.5rem 0 0 0; font-style: italic; color: var(--paper-muted); font-size: 0.9rem;">
                 ${this.getCurrentTrackName()}
               </p>
+              <div id="buffer-progress-container" style="margin-top: 0.8rem; display: ${this.isBuffering ? 'block' : 'none'};">
+                <div style="font-size: 0.8rem; color: var(--paper-muted); margin-bottom: 0.3rem;">
+                  Chargement: <span id="buffer-percent">${this.bufferProgress}%</span>
+                </div>
+                <div style="width: 100%; height: 6px; background: var(--paper); border-radius: 3px; overflow: hidden;">
+                  <div id="buffer-bar" style="width: ${this.bufferProgress}%; height: 100%; background: var(--gold); transition: width 0.3s ease;"></div>
+                </div>
+              </div>
             </div>
           </div>
         `;
@@ -20172,6 +20258,21 @@ hr,
       const currentTrackEl = document.getElementById('current-track');
       if (currentTrackEl) {
         currentTrackEl.textContent = this.getCurrentTrackName();
+      }
+
+      // Mettre à jour la barre de progression du buffering
+      const bufferContainer = document.getElementById('buffer-progress-container');
+      const bufferBar = document.getElementById('buffer-bar');
+      const bufferPercent = document.getElementById('buffer-percent');
+
+      if (bufferContainer) {
+        bufferContainer.style.display = this.isBuffering ? 'block' : 'none';
+      }
+      if (bufferBar) {
+        bufferBar.style.width = `${this.bufferProgress}%`;
+      }
+      if (bufferPercent) {
+        bufferPercent.textContent = `${this.bufferProgress}%`;
       }
     },
 

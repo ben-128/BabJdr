@@ -511,6 +511,14 @@ if (!canUseServiceWorker && window.MANIFEST_DATA) {
     fs.copyFileSync(landingPath, githubIndexPath);
     console.log('📄 GitHub Pages landing page copied to github-index.html');
   }
+
+  // Copy Service Worker to root for standalone PWA support
+  const swSourcePath = path.join(rootDir, 'config', 'sw.js');
+  const swDestPath = path.join(rootDir, 'sw.js');
+  if (fs.existsSync(swSourcePath)) {
+    fs.copyFileSync(swSourcePath, swDestPath);
+    console.log('🔧 Service Worker copied to root for PWA support');
+  }
   
   const sizeKB = (fs.statSync(outputPath).size / 1024).toFixed(1);
   
