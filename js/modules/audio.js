@@ -17,6 +17,7 @@
     volume: 0.3,
     config: null,
     isEnabled: false,
+    isBuffering: false, // Indicateur de buffering (streaming en cours)
     isPopulating: false, // Flag pour éviter les appels multiples de populateAudioPage
     consecutiveErrors: 0, // Compteur d'erreurs consécutives pour éviter les boucles infinies
     
@@ -226,8 +227,20 @@
 
         this.currentAudio.addEventListener('play', () => {
           this.isPlaying = true;
+          this.isBuffering = false;
           this.consecutiveErrors = 0; // Réinitialiser le compteur d'erreurs quand une piste se lance
           this.updateUI();
+          this.updateAudioPageUI();
+        });
+
+        // Indicateur de buffering (streaming en cours)
+        this.currentAudio.addEventListener('waiting', () => {
+          this.isBuffering = true;
+          this.updateAudioPageUI();
+        });
+
+        this.currentAudio.addEventListener('playing', () => {
+          this.isBuffering = false;
           this.updateAudioPageUI();
         });
 
@@ -275,21 +288,30 @@
     },
 
     async play() {
-      
+
       if (!this.currentAudio || !this.isEnabled) {
         return;
       }
-      
+
       try {
-        // Vérifier que l'audio est chargé
-        if (this.currentAudio.readyState === 0) {
+        // Attendre qu'il y ait assez de données pour commencer à jouer (streaming)
+        // readyState: 0 = HAVE_NOTHING, 1 = HAVE_METADATA, 2 = HAVE_CURRENT_DATA, 3 = HAVE_FUTURE_DATA, 4 = HAVE_ENOUGH_DATA
+        if (this.currentAudio.readyState < 3) {
+          // Afficher l'état de buffering pendant le chargement initial
+          this.isBuffering = true;
+          this.updateAudioPageUI();
+
           await new Promise((resolve, reject) => {
-            this.currentAudio.addEventListener('loadeddata', resolve, { once: true });
+            // canplay = assez de données bufferisées pour commencer (streaming)
+            // canplaythrough = peut jouer jusqu'à la fin sans interruption (chargement complet)
+            this.currentAudio.addEventListener('canplay', resolve, { once: true });
             this.currentAudio.addEventListener('error', reject, { once: true });
-            setTimeout(() => reject(new Error('Load timeout')), 10000);
+            // Pas de timeout - on laisse le streaming se faire
           });
+
+          this.isBuffering = false;
         }
-        
+
         const playPromise = this.currentAudio.play();
         
         if (playPromise !== undefined) {
@@ -303,10 +325,12 @@
         console.error('❌ Error name:', error.name);
         console.error('❌ Audio state:', this.currentAudio.readyState);
         console.error('❌ Audio src:', this.currentAudio.src);
-        
+
         this.isPlaying = false;
+        this.isBuffering = false;
         this.updateUI();
-        
+        this.updateAudioPageUI();
+
         // Afficher un message d'erreur détaillé
         this.showAudioError(error);
       }
@@ -889,7 +913,13 @@
       // Mettre à jour le bouton play/pause
       const playPauseBtn = document.getElementById('play-pause-btn');
       if (playPauseBtn) {
-        playPauseBtn.textContent = this.isPlaying ? '⏸️ PAUSE' : '▶️ LECTURE';
+        if (this.isBuffering) {
+          playPauseBtn.textContent = '⏳ CHARGEMENT...';
+          playPauseBtn.style.background = '#f59e0b'; // Orange pour buffering
+        } else {
+          playPauseBtn.textContent = this.isPlaying ? '⏸️ PAUSE' : '▶️ LECTURE';
+          playPauseBtn.style.background = 'var(--gold)';
+        }
       }
 
       // Mettre à jour le bouton loop
