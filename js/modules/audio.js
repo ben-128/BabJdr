@@ -23,6 +23,8 @@
     consecutiveErrors: 0, // Compteur d'erreurs consécutives pour éviter les boucles infinies
     preloadedAudio: null, // Audio préchargé pour la piste suivante
     preloadedTrackIndex: -1, // Index de la piste préchargée
+    isShuffleMode: true, // Mode aléatoire activé par défaut
+    playedTracksInCategory: [], // Pistes déjà jouées dans la catégorie actuelle
     
     async init() {
       try {
@@ -67,8 +69,8 @@
         const folderStructure = {
         'Auberge': ['Auberge1.mp3', 'Auberge10.mp3', 'Auberge11.mp3', 'Auberge2.mp3', 'Auberge3.mp3', 'Auberge4.mp3', 'Auberge5.mp3', 'Auberge6.mp3', 'Auberge7.mp3', 'Auberge8.mp3', 'Auberge9.mp3'],
         'Autre': ['BOS01_01.mp3', 'BOS05_01.mp3', 'BOS06_01.mp3', 'BOS07_01.mp3', 'BOS09_01.mp3', 'BOS10_01.mp3', 'BOS99_01.mp3', 'MEL02_01.mp3', 'MEL04_01.mp3', 'MEL05_02.mp3', 'MEL05_03.mp3', 'MEL06_01.mp3', 'MEL07_01.mp3', 'MEL07_02.mp3', 'MEL08_01.mp3', 'MEL10_02.mp3'],
-        'Creation': ['Creation1.mp3', 'Creation2.mp3', 'Creation3.mp3', 'creation4.mp3', 'creation5.mp3'],
-        'Foret': ['Foret.mp3', 'Foret2.mp3', 'Foret3.mp3', 'Foret4.mp3', 'Foret5.mp3', 'Foret6.mp3', 'Forêt7.mp3'],
+        'Creation': ['Creation1.mp3', 'Creation2.mp3', 'Creation3.mp3', 'Creation6.mp3', 'Creation7.mp3', 'creation4.mp3', 'creation5.mp3'],
+        'Foret': ['Forest8.mp3', 'Forest9.mp3', 'Foret.mp3', 'Foret2.mp3', 'Foret3.mp3', 'Foret4.mp3', 'Foret5.mp3', 'Foret6.mp3', 'Forêt7.mp3'],
         'ForetBoss': ['BossForet/BossF1.mp3', 'BossForet/BossForet2.mp3', 'BossForet/BossForet3.mp3'],
         'ForetCombat': ['CombatForet/Combat forest classic 1.mp3', 'CombatForet/Combat forest classic 2.mp3', 'CombatForet/Combat foret metal 1.mp3', 'CombatForet/Combat foret metal 2.mp3', 'CombatForet/Combat foret metal 3.mp3'],
         'Mine': ['Mine1.mp3', 'Mine2.mp3', 'Mine3.mp3'],
@@ -188,14 +190,25 @@
 
       this.stop();
       this.currentPlaylist = playlistId;
-      this.currentTrackIndex = 0;
+      this.playedTracksInCategory = []; // Reset des pistes jouées
 
       const playlist = this.config.playlists[playlistId];
 
       if (playlist && this.isEnabled) {
-        await this.loadTrack(playlist.tracks[0]);
+        // Choisir la première piste ou une piste aléatoire selon le mode
+        if (this.isShuffleMode) {
+          this.currentTrackIndex = Math.floor(Math.random() * playlist.tracks.length);
+        } else {
+          this.currentTrackIndex = 0;
+        }
+
+        this.playedTracksInCategory.push(this.currentTrackIndex);
+        await this.loadTrack(playlist.tracks[this.currentTrackIndex]);
         this.updateUI();
-        this.updateAudioPageUI(); // Mettre à jour l'affichage
+        this.updateAudioPageUI();
+
+        // Auto-play quand on sélectionne une catégorie
+        await this.play();
       }
     },
 
@@ -510,20 +523,49 @@
 
       // Fade out si en cours de lecture
       if (wasPlaying && this.currentAudio) {
-        await this.fadeOut(300); // Réduit de 500 à 300ms pour plus de réactivité
+        await this.fadeOut(300);
       }
 
-      // Toujours passer à la piste suivante en ordre séquentiel
-      this.currentTrackIndex = (this.currentTrackIndex + 1) % playlist.tracks.length;
+      if (this.isShuffleMode) {
+        // Mode aléatoire : choisir une piste non jouée
+        const unplayedIndexes = [];
+        for (let i = 0; i < playlist.tracks.length; i++) {
+          if (!this.playedTracksInCategory.includes(i)) {
+            unplayedIndexes.push(i);
+          }
+        }
 
-      // Utiliser la piste préchargée si disponible
-      const usePreloaded = this.preloadedTrackIndex === this.currentTrackIndex && this.preloadedAudio;
+        // Si toutes les pistes ont été jouées, reset et recommencer
+        if (unplayedIndexes.length === 0) {
+          this.playedTracksInCategory = [];
+          for (let i = 0; i < playlist.tracks.length; i++) {
+            if (i !== this.currentTrackIndex) {
+              unplayedIndexes.push(i);
+            }
+          }
+        }
+
+        // Choisir une piste aléatoire parmi les non jouées
+        if (unplayedIndexes.length > 0) {
+          this.currentTrackIndex = unplayedIndexes[Math.floor(Math.random() * unplayedIndexes.length)];
+        } else {
+          this.currentTrackIndex = 0;
+        }
+
+        this.playedTracksInCategory.push(this.currentTrackIndex);
+      } else {
+        // Mode séquentiel
+        this.currentTrackIndex = (this.currentTrackIndex + 1) % playlist.tracks.length;
+      }
+
+      // Utiliser la piste préchargée si disponible (seulement en mode séquentiel)
+      const usePreloaded = !this.isShuffleMode && this.preloadedTrackIndex === this.currentTrackIndex && this.preloadedAudio;
       await this.loadTrack(playlist.tracks[this.currentTrackIndex], usePreloaded);
-      this.updateAudioPageUI(); // Mettre à jour l'affichage du titre
+      this.updateAudioPageUI();
 
       // Relancer la lecture avec fade in si était en cours
       if (wasPlaying) {
-        await this.fadeIn(300); // Réduit de 500 à 300ms
+        await this.fadeIn(300);
       }
     },
 
@@ -804,6 +846,15 @@
         this.updateAudioPageUI();
       };
 
+      window.audioToggleShuffle = () => {
+        this.isShuffleMode = !this.isShuffleMode;
+        this.playedTracksInCategory = []; // Reset quand on change de mode
+        if (this.currentTrackIndex >= 0) {
+          this.playedTracksInCategory.push(this.currentTrackIndex);
+        }
+        this.updateAudioPageUI();
+      };
+
       // Contrôles audio principaux
       const audioControlsContainer = document.getElementById('audio-controls-page');
       if (audioControlsContainer) {
@@ -824,6 +875,11 @@
             <button id="next-btn"
                     style="display: block; width: 100%; padding: 1.5rem; margin-bottom: 1rem; background: var(--bronze); color: white; border: none; border-radius: 8px; font-size: 1.3rem; cursor: pointer; font-weight: bold;">
               ⏭️ MUSIQUE SUIVANTE
+            </button>
+
+            <button id="shuffle-btn"
+                    style="display: block; width: 100%; padding: 1.5rem; margin-bottom: 1rem; background: ${this.isShuffleMode ? '#8b5cf6' : '#6b7280'}; color: white; border: none; border-radius: 8px; font-size: 1.3rem; cursor: pointer; font-weight: bold;">
+              ${this.isShuffleMode ? '🔀 ALÉATOIRE ACTIVÉ' : '🔀 ALÉATOIRE DÉSACTIVÉ'}
             </button>
 
             <button id="loop-btn"
@@ -890,6 +946,16 @@
             newNextBtn.addEventListener('click', (e) => {
               e.preventDefault();
               window.audioNext();
+            });
+          }
+
+          const shuffleBtn = document.getElementById('shuffle-btn');
+          if (shuffleBtn) {
+            const newShuffleBtn = shuffleBtn.cloneNode(true);
+            shuffleBtn.parentNode.replaceChild(newShuffleBtn, shuffleBtn);
+            newShuffleBtn.addEventListener('click', (e) => {
+              e.preventDefault();
+              window.audioToggleShuffle();
             });
           }
 
@@ -1006,6 +1072,13 @@
           playPauseBtn.textContent = this.isPlaying ? '⏸️ PAUSE' : '▶️ LECTURE';
           playPauseBtn.style.background = 'var(--gold)';
         }
+      }
+
+      // Mettre à jour le bouton shuffle
+      const shuffleBtn = document.getElementById('shuffle-btn');
+      if (shuffleBtn) {
+        shuffleBtn.style.background = this.isShuffleMode ? '#8b5cf6' : '#6b7280';
+        shuffleBtn.textContent = this.isShuffleMode ? '🔀 ALÉATOIRE ACTIVÉ' : '🔀 ALÉATOIRE DÉSACTIVÉ';
       }
 
       // Mettre à jour le bouton loop
