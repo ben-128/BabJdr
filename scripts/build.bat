@@ -24,7 +24,13 @@ echo [INFO] Génération de la version standalone...
 echo.
 
 :: Lancer le build (suppression du bruit npm)
-call npm run build >nul 2>&1
+:: Transmettre les paramètres au script
+if "%1" == "--no-version-bump" (
+    echo [INFO] Mode sans incrémentation de version activé
+    call node scripts\build-simple.js --no-version-bump
+) else (
+    call npm run build
+)
 
 if errorlevel 1 (
     echo.

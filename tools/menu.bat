@@ -37,10 +37,37 @@ pause
 goto :menu
 
 :build
+cls
 echo.
-echo [INFO] Lancement du build standalone...
+echo ========================================
+echo   BUILD STANDALONE
+echo ========================================
+echo.
+echo [1] Build avec incrémentation de version (normal)
+echo [2] Build sans incrémentation (pour tests)
+echo [3] Retour au menu principal
+echo.
+echo ========================================
+echo.
+choice /c 123 /n /m "Choisissez une option [1-3] "
+echo.
+
+if errorlevel 3 goto :menu
+if errorlevel 2 goto :build_no_version
+if errorlevel 1 goto :build_with_version
+
+:build_with_version
+echo [INFO] Lancement du build avec incrémentation de version...
 pushd "%~dp0\.."
 call scripts\build.bat
+popd
+pause
+goto :menu
+
+:build_no_version
+echo [INFO] Lancement du build sans incrémentation de version...
+pushd "%~dp0\.."
+call scripts\build.bat --no-version-bump
 popd
 pause
 goto :menu

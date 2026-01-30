@@ -4,13 +4,104 @@
 
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
+
+/**
+ * Increments version in Service Worker
+ */
+function incrementServiceWorkerVersion() {
+  // Increment version in config/sw.js (which will be copied to root later)
+  const swPath = path.resolve(__dirname, '..', 'config', 'sw.js');
+  if (!fs.existsSync(swPath)) {
+    console.warn('⚠️  Service Worker not found at', swPath);
+    return;
+  }
+
+  let swContent = fs.readFileSync(swPath, 'utf-8');
+
+  // Extract current version number from CACHE_NAME
+  const cacheNameMatch = swContent.match(/const CACHE_NAME = 'jdr-bab-v(\d+)\.(\d+)\.(\d+)'/);
+
+  if (!cacheNameMatch) {
+    console.warn('⚠️  Could not find version in Service Worker');
+    return;
+  }
+
+  const major = parseInt(cacheNameMatch[1]);
+  const minor = parseInt(cacheNameMatch[2]);
+  const patch = parseInt(cacheNameMatch[3]);
+  const newPatch = patch + 1;
+
+  // Replace all three version strings
+  swContent = swContent.replace(
+    /const CACHE_NAME = 'jdr-bab-v\d+\.\d+\.\d+'/,
+    `const CACHE_NAME = 'jdr-bab-v${major}.${minor}.${newPatch}'`
+  );
+  swContent = swContent.replace(
+    /const STATIC_CACHE_NAME = 'jdr-bab-static-v\d+\.\d+\.\d+'/,
+    `const STATIC_CACHE_NAME = 'jdr-bab-static-v${major}.${minor}.${newPatch}'`
+  );
+  swContent = swContent.replace(
+    /const RUNTIME_CACHE_NAME = 'jdr-bab-runtime-v\d+\.\d+\.\d+'/,
+    `const RUNTIME_CACHE_NAME = 'jdr-bab-runtime-v${major}.${minor}.${newPatch}'`
+  );
+
+  fs.writeFileSync(swPath, swContent, 'utf-8');
+  console.log(`✅ Service Worker version incremented: v${major}.${minor}.${patch} → v${major}.${minor}.${newPatch}`);
+}
+
+/**
+ * Generates a hash for cache busting
+ */
+function generateCacheBustHash() {
+  return Date.now().toString(36);
+}
+
+/**
+ * Updates index.html with cache busting parameters
+ */
+function updateIndexCacheBusting() {
+  const indexPath = path.resolve(__dirname, '..', 'index.html');
+
+  if (!fs.existsSync(indexPath)) {
+    console.warn('⚠️  index.html not found');
+    return;
+  }
+
+  let html = fs.readFileSync(indexPath, 'utf-8');
+  const hash = generateCacheBustHash();
+
+  // Update CSS links - remove old hash and add new one
+  html = html.replace(
+    /href="(css\/[^"]+\.css)(\?v=[^"]+)?"/g,
+    `href="$1?v=${hash}"`
+  );
+
+  // Update JS script src - remove old hash and add new one
+  html = html.replace(
+    /src="(js\/[^"]+\.js)(\?v=[^"]+)?"/g,
+    `src="$1?v=${hash}"`
+  );
+
+  fs.writeFileSync(indexPath, html, 'utf-8');
+  console.log(`✅ Cache busting hash updated: v=${hash}`);
+}
 
 /**
  * Builds a standalone version from modular files
  * Combines CSS, JS, and JSON into a single HTML file
  */
-function buildStandalone() {
+function buildStandalone(options = {}) {
   console.log('🔨 Building standalone version from modular files...');
+
+  // Increment Service Worker version first (unless disabled)
+  if (options.noVersionBump !== true) {
+    incrementServiceWorkerVersion();
+    // Update cache busting in index.html
+    updateIndexCacheBusting();
+  } else {
+    console.log('⚠️  Version increment skipped (--no-version-bump)');
+  }
   
   const rootDir = path.resolve(__dirname, '..');
   const outputDir = path.join(rootDir, 'build');
@@ -530,7 +621,12 @@ if (!canUseServiceWorker && window.MANIFEST_DATA) {
 
 // Run build
 if (require.main === module) {
-  buildStandalone();
+  // Check for command line arguments
+  const args = process.argv.slice(2);
+  const options = {
+    noVersionBump: args.includes('--no-version-bump')
+  };
+  buildStandalone(options);
 }
 
 module.exports = buildStandalone;
