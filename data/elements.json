@@ -23,7 +23,7 @@
       "type": "card",
       "id": "element-defense",
       "title": "Défense",
-      "content": "<p>Certaines armures/objets/bonus peuvent procurer une armure spécifique à un élément. Il faudra alors déduire au résultat final. Le calcul de dégâts se fait dans cet ordre :</p><div><strong>Dégâts → critique → ×0.5 si affiliation élément → réduction de l'armure</strong></div>",
+      "content": "<p>Certaines armures/objets/bonus peuvent procurer une armure spécifique à un élément. Il faudra alors déduire au résultat final. Le calcul de dégâts se fait dans cet ordre :</p><div><strong>Dégâts → critique / ×0.5 si affiliation élément → réduction de l'armure</strong></div>",
       "deletable": true,
       "sectionName": "Défense"
     },
