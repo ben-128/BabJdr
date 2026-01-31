@@ -420,7 +420,7 @@
       },
       {
         "nom": "Piège Improvisé",
-        "description": "Une fois par combat, le rôdeur peut utiliser une action secondaire pour placer un piège sur une zone de 3mx3m, à moins de 3m du héros.\n  <br><br>Lorsqu'un ennemi entre dans la zone, il subit (Agilité du rôdeur) points de dégâts physiques.<br>Si sa Résistance altérations est inférieure niveau du héros, il subit l'état <span class=\"etat-link\" data-etat=\"Ralenti\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ralenti</span> pendant 5 tours.\n<br>Le piège est alors détruit.",
+        "description": "Une fois par combat, le rôdeur peut utiliser une action secondaire pour placer un piège sur une zone de 3mx3m, à moins de 3m du héros.\n\n  <br><br>Lorsqu'un ennemi entre dans la zone, il subit (Agilité+Intelligence) points de dégâts physiques.<br>Si sa Résistance altérations est inférieure niveau du héros, il subit l'état <span class=\"etat-link\" data-etat=\"Ralenti\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ralenti</span> pendant 5 tours.\n<br>Le piège est alors détruit.\n\n<br><br> Pour avoir plus d'un piège actif à la fois, le héros doit faire un test de coordination de plus en plus compliqué pour chaque piège supplémentaire.",
         "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Intelligence 5",
         "cout": "1 point de don"
       },
