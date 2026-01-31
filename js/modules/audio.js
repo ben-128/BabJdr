@@ -70,11 +70,12 @@
         'Auberge': ['Auberge1.mp3', 'Auberge10.mp3', 'Auberge11.mp3', 'Auberge2.mp3', 'Auberge3.mp3', 'Auberge4.mp3', 'Auberge5.mp3', 'Auberge6.mp3', 'Auberge7.mp3', 'Auberge8.mp3', 'Auberge9.mp3'],
         'Autre': ['BOS01_01.mp3', 'BOS05_01.mp3', 'BOS06_01.mp3', 'BOS07_01.mp3', 'BOS09_01.mp3', 'BOS10_01.mp3', 'BOS99_01.mp3', 'MEL02_01.mp3', 'MEL04_01.mp3', 'MEL05_02.mp3', 'MEL05_03.mp3', 'MEL06_01.mp3', 'MEL07_01.mp3', 'MEL07_02.mp3', 'MEL08_01.mp3', 'MEL10_02.mp3'],
         'Creation': ['Creation1.mp3', 'Creation2.mp3', 'Creation3.mp3', 'Creation6.mp3', 'Creation7.mp3', 'creation4.mp3', 'creation5.mp3'],
-        'Foret': ['Forest8.mp3', 'Forest9.mp3', 'Foret.mp3', 'Foret2.mp3', 'Foret3.mp3', 'Foret4.mp3', 'Foret5.mp3', 'Foret6.mp3', 'Forêt7.mp3'],
+        'Foret': ['Forest8.mp3', 'Forest9.mp3', 'Foret.mp3', 'Foret10.mp3', 'Foret2.mp3', 'Foret3.mp3', 'Foret4.mp3', 'Foret5.mp3', 'Foret6.mp3', 'Forêt7.mp3'],
         'ForetBoss': ['BossForet/BossF1.mp3', 'BossForet/BossForet2.mp3', 'BossForet/BossForet3.mp3'],
-        'ForetCombat': ['CombatForet/Combat forest classic 1.mp3', 'CombatForet/Combat forest classic 2.mp3', 'CombatForet/Combat foret metal 1.mp3', 'CombatForet/Combat foret metal 2.mp3', 'CombatForet/Combat foret metal 3.mp3'],
+        'ForetCombat': ['CombatForet/Combat forest classic 1.mp3', 'CombatForet/Combat forest classic 2.mp3', 'CombatForet/Combat foret classic 3.mp3', 'CombatForet/Combat foret metal 1.mp3', 'CombatForet/Combat foret metal 3.mp3', 'CombatForet/CombatForet6.mp3', 'CombatForet/CombatForet7.mp3'],
         'Mine': ['Mine1.mp3', 'Mine2.mp3', 'Mine3.mp3', 'Mine4.mp3', 'Mine5.mp3'],
         'MineBoss': ['BossMine/BossMine1.mp3', 'BossMine/BossMine2.mp3'],
+        'MineCombat': ['CombatMine/Combat mine metal 1.mp3'],
         'Voyage': ['Voyage1.mp3', 'Voyage2.mp3', 'Voyage3.mp3', 'Voyage4.mp3']
         };
 
