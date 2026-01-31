@@ -270,7 +270,7 @@ window.MANIFEST_DATA = ${fs.readFileSync(path.join(rootDir, 'config', 'manifest.
     'creation.json', 'dons.json', 'objets.json', 'elements.json', 'etats.json',
     'images.json', 'static-pages-config.json', 'stats.json', 'toc-structure.json',
     'monstres.json', 'npcs.json', 'tables-tresors.json', 'collections.json', 'monstres-page-desc.json', 'tables-tresors-page-desc.json', 'custom-page-descriptions.json',
-    'combat.json', 'gestion-des-ressources.json', 'histoire.json', 'dieux.json', 'geographie.json', 'campagne.json', 'favoris.json', 'voyage.json', 'traumas.json', 'audio.json', 'audio-config.json', 'metiers.json'
+    'combat.json', 'gestion-des-ressources.json', 'histoire.json', 'dieux.json', 'geographie.json', 'campagne.json', 'favoris.json', 'voyage.json', 'traumas.json', 'audio.json', 'audio-config.json', 'metiers.json', 'peuple.json'
   ];
   
   let dataObject = {};
@@ -366,7 +366,8 @@ window.MANIFEST_DATA = ${fs.readFileSync(path.join(rootDir, 'config', 'manifest.
       'voyage': ${JSON.stringify(dataObject.voyage || {}, null, 2)},
       'traumas': ${JSON.stringify(dataObject.traumas || {}, null, 2)},
       'audio': ${JSON.stringify(dataObject.audio || {}, null, 2)},
-      'metiers': ${JSON.stringify(dataObject.metiers || {}, null, 2)}
+      'metiers': ${JSON.stringify(dataObject.metiers || {}, null, 2)},
+      'peuple': ${JSON.stringify(dataObject.peuple || {}, null, 2)}
     };
     
     // Static pages configuration
