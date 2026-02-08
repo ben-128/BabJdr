@@ -4,15 +4,13 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2026-01-31T15:17:06.779Z by JdrBab Build System -->
+<!-- Generated on 2026-02-08T17:04:51.744Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&amp;family=Source+Serif+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600&amp;display=swap" rel="stylesheet">
-<link rel="manifest" href="manifest.json">
-
-<!-- PWA Configuration - Manifest embedded as JSON -->
+<!-- PWA Configuration - Manifest embedded as JSON and injected dynamically -->
 <script>
 // Embed manifest for PWA functionality
 window.MANIFEST_DATA = {
@@ -4117,13 +4115,14 @@ img.eclats-icon {
   
   .printable-states {
     display: block !important;
-    padding: 15mm !important;
+    padding: 10mm !important;
     margin: 0 !important;
     background: white !important;
     color: black !important;
     font-size: 10pt !important;
     line-height: 1.2 !important;
     width: 100% !important;
+    box-sizing: border-box !important;
     height: auto !important;
     position: relative !important;
     top: 0 !important;
@@ -4175,8 +4174,9 @@ img.eclats-icon {
     font-size: 9pt !important;
   }
   
-  /* Masquer les éléments de l'interface lors de l'impression */
-  #sidebar, #views, .print-button, nav, header, footer, .edit-btn, .btn {
+  /* Masquer tous les éléments de l'interface lors de l'impression */
+  .shell, #sidebar, #views, .print-button, nav, header, footer, .edit-btn, .btn,
+  .menu-toggle, .backdrop, .audio-controls {
     display: none !important;
   }
   
@@ -9395,7 +9395,7 @@ hr,
       },
       {
         "nom": "Piège Improvisé",
-        "description": "Une fois par combat, le rôdeur peut utiliser une action secondaire pour placer un piège sur une zone de 3mx3m, à moins de 3m du héros.\n  <br><br>Lorsqu'un ennemi entre dans la zone, il subit (Agilité du rôdeur) points de dégâts physiques.<br>Si sa Résistance altérations est inférieure niveau du héros, il subit l'état <span class=\"etat-link\" data-etat=\"Ralenti\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ralenti</span> pendant 5 tours.\n<br>Le piège est alors détruit.",
+        "description": "Une fois par combat, le rôdeur peut utiliser une action secondaire pour placer un piège sur une zone de 3mx3m, à moins de 3m du héros.\n\n  <br><br>Lorsqu'un ennemi entre dans la zone, il subit (Agilité+Intelligence) points de dégâts physiques.<br>Si sa Résistance altérations est inférieure niveau du héros, il subit l'état <span class=\"etat-link\" data-etat=\"Ralenti\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ralenti</span> pendant 5 tours.\n<br>Le piège est alors détruit.\n\n<br><br> Pour avoir plus d'un piège actif à la fois, le héros doit faire un test de coordination de plus en plus compliqué pour chaque piège supplémentaire.",
         "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Intelligence 5",
         "cout": "1 point de don"
       },
@@ -13759,7 +13759,7 @@ hr,
 
     // Mark as standalone version for renderer with build timestamp
     window.STANDALONE_VERSION = true;
-    window.BUILD_VERSION = '2026-01-31T15:17:06.780Z';
+    window.BUILD_VERSION = '2026-02-08T17:04:51.746Z';
 
     // Version check - clear old data if version changed
     (function() {
@@ -37267,8 +37267,32 @@ window.initCharacterCreator = async function() {
       });
 
       // Print button for states page
-      JdrApp.utils.events.register('click', '#print-states', () => {
+      JdrApp.utils.events.register('click', '#print-etats-btn', () => {
+        // Build printable content from the état cards currently visible
+        const activeArticle = document.querySelector('#views article[data-page="etats"]');
+        if (!activeArticle) return;
+
+        const cards = activeArticle.querySelectorAll('.card.editable-section');
+        let cardsHtml = '';
+        cards.forEach(card => {
+          const title = card.querySelector('h3.editable-card-title');
+          const content = card.querySelector('div[data-edit-type="generic"]:not(.editable-card-title)');
+          if (title) {
+            cardsHtml += `<div class="printable-state-item">
+              <h3>${title.textContent}</h3>
+              <p>${content ? content.innerHTML : ''}</p>
+            </div>`;
+          }
+        });
+
+        const printDiv = document.createElement('div');
+        printDiv.className = 'printable-states';
+        printDiv.innerHTML = `<h1>États</h1><div class="printable-states-grid">${cardsHtml}</div>`;
+        document.body.appendChild(printDiv);
+
         window.print();
+
+        printDiv.remove();
       });
 
       // Zero references toggle button

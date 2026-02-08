@@ -1,6 +1,7 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const url = require('url');
 const https = require('https');
 const { exec } = require('child_process');
 
@@ -256,9 +257,10 @@ const server = http.createServer(async (req, res) => {
             status: 'running',
             apiConfigured: true
         }));
-    } else if (req.method === 'GET' && req.url.startsWith('/data/') && req.url.endsWith('.json')) {
+    } else if (req.method === 'GET' && url.parse(req.url).pathname.startsWith('/data/') && url.parse(req.url).pathname.endsWith('.json')) {
         // Servir les fichiers JSON du dossier data (uniquement .json)
-        const fileName = req.url.replace('/data/', '');
+        const pathname = url.parse(req.url).pathname;
+        const fileName = pathname.replace('/data/', '');
         const filePath = path.join(__dirname, '..', '..', 'data', fileName);
 
         fs.readFile(filePath, 'utf8', (err, data) => {
@@ -273,7 +275,8 @@ const server = http.createServer(async (req, res) => {
         });
     } else if (req.method === 'GET') {
         // Servir les fichiers statiques (HTML, CSS, JS, images, etc.)
-        let filePath = '.' + req.url;
+        const parsedUrl = url.parse(req.url);
+        let filePath = '.' + parsedUrl.pathname;
         if (filePath === './') filePath = './index.html';
 
         const extname = path.extname(filePath);

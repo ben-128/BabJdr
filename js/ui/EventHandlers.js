@@ -166,8 +166,32 @@
       });
 
       // Print button for states page
-      JdrApp.utils.events.register('click', '#print-states', () => {
+      JdrApp.utils.events.register('click', '#print-etats-btn', () => {
+        // Build printable content from the état cards currently visible
+        const activeArticle = document.querySelector('#views article[data-page="etats"]');
+        if (!activeArticle) return;
+
+        const cards = activeArticle.querySelectorAll('.card.editable-section');
+        let cardsHtml = '';
+        cards.forEach(card => {
+          const title = card.querySelector('h3.editable-card-title');
+          const content = card.querySelector('div[data-edit-type="generic"]:not(.editable-card-title)');
+          if (title) {
+            cardsHtml += `<div class="printable-state-item">
+              <h3>${title.textContent}</h3>
+              <p>${content ? content.innerHTML : ''}</p>
+            </div>`;
+          }
+        });
+
+        const printDiv = document.createElement('div');
+        printDiv.className = 'printable-states';
+        printDiv.innerHTML = `<h1>États</h1><div class="printable-states-grid">${cardsHtml}</div>`;
+        document.body.appendChild(printDiv);
+
         window.print();
+
+        printDiv.remove();
       });
 
       // Zero references toggle button

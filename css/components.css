@@ -2534,13 +2534,14 @@ img.eclats-icon {
   
   .printable-states {
     display: block !important;
-    padding: 15mm !important;
+    padding: 10mm !important;
     margin: 0 !important;
     background: white !important;
     color: black !important;
     font-size: 10pt !important;
     line-height: 1.2 !important;
     width: 100% !important;
+    box-sizing: border-box !important;
     height: auto !important;
     position: relative !important;
     top: 0 !important;
@@ -2592,8 +2593,9 @@ img.eclats-icon {
     font-size: 9pt !important;
   }
   
-  /* Masquer les éléments de l'interface lors de l'impression */
-  #sidebar, #views, .print-button, nav, header, footer, .edit-btn, .btn {
+  /* Masquer tous les éléments de l'interface lors de l'impression */
+  .shell, #sidebar, #views, .print-button, nav, header, footer, .edit-btn, .btn,
+  .menu-toggle, .backdrop, .audio-controls {
     display: none !important;
   }
   
