@@ -594,7 +594,7 @@
       },
       {
         "nom": "La nuit tous les chats sont gris",
-        "description": "Les effets des sorts et passifs appliqués aux créatures <span style=\"color: #8b5cf6; font-weight: bold;\">Maléfique</span> s'appliquent aussi aux créatures de <span style=\"color: #1a1a1a; font-weight: bold; background: rgba(180, 180, 200, 0.6); padding: 2px 4px; border-radius: 3px;\">Nuit</span>.",
+        "description": "Les effets des sorts et passifs appliqués aux créatures <span style=\"color: #dc2626; font-weight: bold;\">Maléfique</span> s'appliquent aussi aux créatures de <span style=\"color: #1a1a1a; font-weight: bold; background: rgba(180, 180, 200, 0.6); padding: 2px 4px; border-radius: 3px;\">Nuit</span>.",
         "prerequis": "<strong> Prérequis :</strong>-",
         "cout": "1 point de don"
       },
@@ -636,7 +636,7 @@
       },
       {
         "nom": "Tentation maléfique",
-        "description": "Permet de modifier les dégâts des sorts et effets infligés, d'élément <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span> ou <span style=\"color: #f5f5f5; font-weight: bold;\">Divin</span>, pour en faire des dégâts d'élément <span style=\"color: #8b5cf6; font-weight: bold;\">Maléfique</span>.",
+        "description": "Permet de modifier les dégâts des sorts et effets infligés, d'élément <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span> ou <span style=\"color: #f5f5f5; font-weight: bold;\">Divin</span>, pour en faire des dégâts d'élément <span style=\"color: #dc2626; font-weight: bold;\">Maléfique</span>.",
         "prerequis": "<strong> Prérequis :</strong>-",
         "cout": "1 point de don"
       }
@@ -778,7 +778,7 @@
         "dons": [
           {
             "nom": "Porté par les vents",
-            "description": "Une fois par jour, permet d'effectuer un deuxième tour immédiatement à la fin du tour du héros.",
+            "description": "Une fois par jour, permet d'effectuer un deuxième action principale pendant son tour.",
             "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Air.<br>Don unique.",
             "cout": "1 point de don"
           },
@@ -850,7 +850,7 @@
         "dons": [
           {
             "nom": "Onde de Survie",
-            "description": "Lorsque les points de vie du héros passent sous la barre des 0, tous les héros alliés à moins de 30m voient leur points de vie temporaires passer au niveau de leur points de vie maximum.",
+            "description": "Lorsque les points de vie du héros passent sous la barre des 0, tous les héros alliés à moins de 30m voient leurs points de vie temporaires passer au niveau de leurs points de vie maximum.",
             "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Divin.<br>Don unique.",
             "cout": "1 point de don"
           },

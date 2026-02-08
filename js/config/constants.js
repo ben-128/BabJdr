@@ -45,7 +45,7 @@
     TERRE: { color: '#8b4513', weight: 'bold' },
     AIR: { color: '#87ceeb', weight: 'bold' },
     DIVIN: { color: '#ffd700', weight: 'bold' },
-    MALEFIQUE: { color: '#8b008b', weight: 'bold' },
+    MALEFIQUE: { color: '#dc2626', weight: 'bold' },
     NEUTRE: { color: '#696969', weight: 'normal' }
   };
 

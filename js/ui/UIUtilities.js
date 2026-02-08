@@ -31,7 +31,7 @@
         'Lumière': '#d97706',    // Orange doré (au lieu du jaune pâle)
         'Nuit': '#6b21a8',       // Violet foncé (au lieu du noir)
         'Divin': '#7c2d12',      // Marron doré (au lieu du blanc)
-        'Maléfique': '#7c3aed'   // Violet intense
+        'Maléfique': '#dc2626'   // Rouge écarlate
       };
       
       return colorMap[element] || '#666666';

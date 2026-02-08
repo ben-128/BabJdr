@@ -244,7 +244,7 @@
         "coutMana": "🔵 <strong>Coût mana:</strong> 6",
         "duree": "⏳ <strong>Durée:</strong> Instantané",
         "resistance": "<strong>Sans effet si:</strong> Esquive.",
-        "effetNormal": "<strong>Effet:</strong> Inflige (5 + Puiss. Sorts) dégâts <span style=\"color: #d0d0d0; font-weight: bold; background: rgba(0, 0, 0, 0.4); padding: 2px 4px; border-radius: 3px;\">Divin</span> à la cible.\n<br> Le sort ne peut pas être raté ou esquivé si la cible est d'élément <span style=\"color: #8b5cf6; font-weight: bold;\">Maléfique</span>.",
+        "effetNormal": "<strong>Effet:</strong> Inflige (5 + Puiss. Sorts) dégâts <span style=\"color: #d0d0d0; font-weight: bold; background: rgba(0, 0, 0, 0.4); padding: 2px 4px; border-radius: 3px;\">Divin</span> à la cible.\n<br> Le sort ne peut pas être raté ou esquivé si la cible est d'élément <span style=\"color: #dc2626; font-weight: bold;\">Maléfique</span>.",
         "effetCritique": "<strong>Coup Critique: </strong> Inflige (8 + Puiss. Sorts)  dégâts."
       },
       {
@@ -379,8 +379,8 @@
         "portee": "🎯 <strong>Portée:</strong> 6m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 12",
-        "resistance": "<strong>Sans effet si:</strong> <br>- Esquive.\n<br>- Element <span style=\"color: #8b5cf6; font-weight: bold;\">Maléfique</span>.",
-        "effetNormal": "<strong>Effet:</strong> Inflige (10 + Puiss. Sorts) dégâts de <span style=\"color: #8b5cf6; font-weight: bold;\">Maléfique</span>.\n<br> Si Résistance altérations < Puiss. Sorts du lanceur, alors la cible est <span class=\"etat-link\" data-etat=\"Maudit\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Maudite</span> pendant 1 tour.",
+        "resistance": "<strong>Sans effet si:</strong> <br>- Esquive.\n<br>- Element <span style=\"color: #dc2626; font-weight: bold;\">Maléfique</span>.",
+        "effetNormal": "<strong>Effet:</strong> Inflige (10 + Puiss. Sorts) dégâts de <span style=\"color: #dc2626; font-weight: bold;\">Maléfique</span>.\n<br> Si Résistance altérations < Puiss. Sorts du lanceur, alors la cible est <span class=\"etat-link\" data-etat=\"Maudit\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Maudite</span> pendant 1 tour.",
         "effetCritique": "<strong>Coup Critique:&nbsp;</strong>&nbsp;Les dégâts passent à (15 + Puiss. Sorts), et l'altération dure 2 tours."
       },
       {
@@ -416,7 +416,7 @@
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 12",
         "resistance": "<strong>Sans effet si:</strong> -",
-        "effetNormal": "<strong>Effet:</strong> La cible subit 10 + (Puiss. Sorts) dégâts de <span style=\"color: #d0d0d0; font-weight: bold; background: rgba(0, 0, 0, 0.4); padding: 2px 4px; border-radius: 3px;\">Divin</span>.<br><br> Si la cible est d'élément <span style=\"color: #8b5cf6; font-weight: bold;\">Maléfique</span>, et que sa Résistance altérations < Puiss. Sorts du lanceur, alors elle est alors <span class=\"etat-link\" data-etat=\"Entravé/Entoilé/Embourbé\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Entravé</span> pendant 2 tours.",
+        "effetNormal": "<strong>Effet:</strong> La cible subit 10 + (Puiss. Sorts) dégâts de <span style=\"color: #d0d0d0; font-weight: bold; background: rgba(0, 0, 0, 0.4); padding: 2px 4px; border-radius: 3px;\">Divin</span>.<br><br> Si la cible est d'élément <span style=\"color: #dc2626; font-weight: bold;\">Maléfique</span>, et que sa Résistance altérations < Puiss. Sorts du lanceur, alors elle est alors <span class=\"etat-link\" data-etat=\"Entravé/Entoilé/Embourbé\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Entravé</span> pendant 2 tours.",
         "effetCritique": "<strong>Coup Critique: </strong> Les dégâts passent à 15 + (Puiss. Sorts)."
       },
       {
@@ -703,7 +703,7 @@
         "portee": "🎯 <strong>Portée:</strong> 12m",
         "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
         "coutMana": "🔵 <strong>Coût mana:</strong> 12",
-        "resistance": "<strong>Sans effet si:</strong> <br>- Résistance altérations >= Puiss. Sorts du lanceur<br>- Element <span style=\"color: #8b5cf6; font-weight: bold;\">Maléfique</span>",
+        "resistance": "<strong>Sans effet si:</strong> <br>- Résistance altérations >= Puiss. Sorts du lanceur<br>- Element <span style=\"color: #dc2626; font-weight: bold;\">Maléfique</span>",
         "effetNormal": "<strong>Effet:</strong> La cible passe dans l'état <span class=\"etat-link\" data-etat=\"Confus\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Confus</span>, pendant 4 tours.",
         "effetCritique": "<strong>Coup Critique: </strong> L'effet dure 6 tours."
       },

@@ -645,7 +645,7 @@
     'Lumière': { color: '#ffd700', weight: 'bold' },
     'Nuit': { color: '#1a1a1a', weight: 'bold', background: 'rgba(180, 180, 200, 0.6)', padding: '2px 4px', borderRadius: '3px' },
     'Divin': { color: '#f5f5f5', weight: 'bold', background: 'rgba(100, 100, 100, 0.3)', padding: '2px 4px', borderRadius: '3px' },
-    'Maléfique': { color: '#8b5cf6', weight: 'bold' }
+    'Maléfique': { color: '#dc2626', weight: 'bold' }
   };
 
   window.ElementIcons = {

@@ -1871,7 +1871,7 @@ class CharacterCreatorUI {
         'Lumière': '#ffd700',
         'Nuit': '#6b7280',
         'Divin': '#a0a0b0',
-        'Maléfique': '#a855f7'
+        'Maléfique': '#dc2626'
       };
 
       // Helper pour afficher une stat avec bonus équipement
