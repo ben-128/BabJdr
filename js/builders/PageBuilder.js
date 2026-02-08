@@ -35,6 +35,11 @@
         return this.buildSingleTableTresorPage(category);
       }
 
+      // Gestion spéciale pour les catégories avec sous-groupes (ex: Éléments)
+      if (category.subgroups) {
+        return this.buildSubgroupCategoryPage(type, category);
+      }
+
       const pageId = `${config.container}-${this.sanitizeId(category.nom || 'unknown')}`;
       const itemsProperty = this.getItemsProperty(type);
 
@@ -56,10 +61,44 @@
               ${this.buildDeleteCategoryButton(type, category.nom)}
             </div>
             <div class="grid cols-2" id="${config.container}-container-${this.sanitizeId(category.nom)}">
-              ${items.map((item, index) => 
+              ${items.map((item, index) =>
                 CardBuilder.create(type, item, category.nom, index).build()
               ).join('')}
             </div>
+            ${this.buildGeneralDonsSection(type, category.nom)}
+          </section>
+        </article>
+      `;
+    }
+
+    buildSubgroupCategoryPage(type, category) {
+      const config = window.ContentTypes[type];
+      const pageId = `${config.container}-${this.sanitizeId(category.nom || 'unknown')}`;
+
+      const foldoutsHtml = category.subgroups.map(subgroup => {
+        const items = subgroup.dons || [];
+        const cardsHtml = items.map((item, index) =>
+          CardBuilder.create(type, item, category.nom, index).build()
+        ).join('');
+
+        return `<details class="metier-foldout">
+          <summary class="metier-summary">
+            <span class="metier-icon">${subgroup.icon || ''}</span>
+            <span class="metier-name">${subgroup.nom}</span>
+          </summary>
+          <div class="metier-content">
+            <div class="grid cols-2">
+              ${cardsHtml}
+            </div>
+          </div>
+        </details>`;
+      }).join('');
+
+      return `
+        <article class="" data-page="${pageId}">
+          <section>
+            ${this.buildCategoryHeader(category, type)}
+            ${foldoutsHtml}
             ${this.buildGeneralDonsSection(type, category.nom)}
           </section>
         </article>
@@ -1067,8 +1106,8 @@
     }
 
     buildGeneralDonsSection(type, categoryName) {
-      // Only add General Dons section for 'don' type pages, and not for the 'Generaux' category itself
-      if (type !== 'don' || categoryName === 'Generaux') {
+      // Only add General Dons section for 'don' type pages, not for Generaux or Éléments
+      if (type !== 'don' || categoryName === 'Generaux' || categoryName === 'Éléments') {
         return '';
       }
 

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2026-02-08T17:04:51.744Z by JdrBab Build System -->
+<!-- Generated on 2026-02-08T18:36:53.963Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -8755,6 +8755,19 @@ hr,
         "effetCritique": "<strong>Coup Critique: </strong> Rend la moitié du coût en mana."
       },
       {
+        "nom": "Transfert de mana",
+        "element": "Eau",
+        "description": "L'enchanteur tisse un lien aqueux entre deux êtres, permettant à l'énergie magique de couler de l'un vers l'autre comme une rivière entre deux lacs.",
+        "categorie": "Sorts d'Enchanteur",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 3",
+        "portee": "🎯 <strong>Portée:</strong> 12m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 0",
+        "resistance": "<strong>Sans effet si:</strong> Esquive.",
+        "effetNormal": "<strong>Effet:</strong> Au choix :<br>- <strong>Drain :</strong> Draine d'une cible à portée (5 + Puiss. Sorts) points de mana et les transfère à l'enchanteur.<br>- <strong>Don :</strong> L'enchanteur donne à une cible alliée à portée jusqu'à (5 + Puiss. Sorts) points de mana, pris dans sa propre réserve.",
+        "effetCritique": "<strong>Coup Critique :</strong> La quantité de mana transférée passe à (10 + Puiss. Sorts)."
+      },
+      {
         "nom": "Silence",
         "element": "Nuit",
         "description": "Une aura muette se referme sur la cible, étouffant toute incantation.",
@@ -8825,6 +8838,19 @@ hr,
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Le lanceur choisit un élément au choix entre <span style=\"color: #4682b4; font-weight: bold;\">Eau</span>, <span style=\"color: #22c55e; font-weight: bold;\">Air</span>, et <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span>.\n<br>La cible voit son armure de cet élément, augmentant l'armure élémentaire de cet élément de (5 + Puiss. Sorts). <br>Dure jusqu'à la fin du combat.<br> Non cumulable.",
         "effetCritique": "<strong>Coup Critique:&nbsp;</strong>&nbsp;Rend la moitié du coût en mana."
+      },
+      {
+        "nom": "Copie magique",
+        "element": "Variable",
+        "description": "L'enchanteur puise dans le sillage arcanique d'un allié pour reproduire le sort qu'il vient de lancer, tissant une réplique parfaite de son incantation.",
+        "categorie": "Sorts d'Enchanteur",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 6",
+        "portee": "🎯 <strong>Portée:</strong> 12m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> variable (celui du sort copié)",
+        "coutMana": "🔵 <strong>Coût mana:</strong> coût du sort copié + 5",
+        "resistance": "<strong>Sans effet si:</strong> -",
+        "effetNormal": "<strong>Effet:</strong> L'enchanteur lance une copie du dernier sort effectué par un allié à portée.<br>L'incantation repart de 0 si c'est un sort à plusieurs tours.<br>La Puiss. Sorts et les passifs utilisés sont ceux de l'enchanteur.",
+        "effetCritique": "<strong>Coup Critique :</strong> Le sort copié est lui-même critique."
       }
     ]
   },
@@ -9239,7 +9265,7 @@ hr,
       {
         "nom": "Increvable",
         "description": "Une fois par jour, peut dépenser un effort pour rester à 1 point de vie s'il devait descendre en dessous.",
-        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/67ZW01Q7/stat-Endurance.png\" alt=\"Endurance\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\"> Endurance 15 , <img src=\"https://i.ibb.co/B2BCGP6T/stat-Volont.png\" alt=\"Volonté\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\">Volonté 10",
+        "prerequis": "<strong> Prérequis :<br></strong> <img src=\"https://i.ibb.co/67ZW01Q7/stat-Endurance.png\" alt=\"Endurance\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\"> Endurance 15 ,<br> Résistance altération 3.",
         "cout": "1 point de don"
       },
       {
@@ -9704,6 +9730,156 @@ hr,
         "description": "Une fois par combat, peut utiliser une action secondaire pour se téléporter à 3m d'un allié consentant.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
+      }
+    ]
+  },
+  {
+    "nom": "Éléments",
+    "description": "Dons liés aux éléments.",
+    "subgroups": [
+      {
+        "nom": "Feu",
+        "icon": "<img src=\"https://i.ibb.co/VWfKvNCL/element-Feu.png\" alt=\"Feu\" style=\"width: 28px; height: 28px; vertical-align: middle;\">",
+        "dons": [
+          {
+            "nom": "Immolation",
+            "description": "Peut utiliser une action principale pour s'immoler. Jusqu'à la fin du combat, les attaquants en mêlée reçevront x dégats de feu, où x est le niveau du héros.",
+            "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Feu.<br>Don unique.",
+            "cout": "1 point de don"
+          },
+          {
+            "nom": "Maîtrise des sorts de feu",
+            "description": "Choisir un sort de feu de n'importe quelle classe (qui respecte les prérequis de niveau). Il devient lancable à volonté.",
+            "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Feu.<br>",
+            "cout": "1 point de don"
+          }
+        ]
+      },
+      {
+        "nom": "Eau",
+        "icon": "<img src=\"https://i.ibb.co/bMVKwNQP/element-Eau.png\" alt=\"Eau\" style=\"width: 28px; height: 28px; vertical-align: middle;\">",
+        "dons": [
+          {
+            "nom": "Source Intérieure",
+            "description": "Une fois par combat, permet d'utiliser une action principale et une secondaire pour méditer, et regagner un montant de mana équivalent à la volonté du héros.",
+            "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Eau.<br>Don unique.",
+            "cout": "1 point de don"
+          },
+          {
+            "nom": "Maîtrise des sorts d'eau",
+            "description": "Choisir un sort d'eau de n'importe quelle classe (qui respecte les prérequis de niveau). Il devient lancable à volonté.",
+            "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Eau.<br>",
+            "cout": "1 point de don"
+          }
+        ]
+      },
+      {
+        "nom": "Air",
+        "icon": "<img src=\"https://i.ibb.co/W484kM90/element-Air.png\" alt=\"Air\" style=\"width: 28px; height: 28px; vertical-align: middle;\">",
+        "dons": [
+          {
+            "nom": "Porté par les vents",
+            "description": "Une fois par jour, permet d'effectuer un deuxième tour immédiatement à la fin du tour du héros.",
+            "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Air.<br>Don unique.",
+            "cout": "1 point de don"
+          },
+          {
+            "nom": "Maîtrise des sorts d'air",
+            "description": "Choisir un sort d'air de n'importe quelle classe (qui respecte les prérequis de niveau). Il devient lancable à volonté.",
+            "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Air.<br>",
+            "cout": "1 point de don"
+          }
+        ]
+      },
+      {
+        "nom": "Terre",
+        "icon": "<img src=\"https://i.ibb.co/gLxnsvfg/element-Terre.png\" alt=\"Terre\" style=\"width: 28px; height: 28px; vertical-align: middle;\">",
+        "dons": [
+          {
+            "nom": "Armure de peau",
+            "description": "Réduit tous les dégats subis de 1.",
+            "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Terre.<br>Don unique.",
+            "cout": "1 point de don"
+          },
+          {
+            "nom": "Maîtrise des sorts de terre",
+            "description": "Choisir un sort de terre de n'importe quelle classe (qui respecte les prérequis de niveau). Il devient lancable à volonté.",
+            "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Terre.",
+            "cout": "1 point de don"
+          }
+        ]
+      },
+      {
+        "nom": "Nuit",
+        "icon": "<img src=\"https://i.ibb.co/b5qK7czM/element-Nuit.png\" alt=\"Nuit\" style=\"width: 28px; height: 28px; vertical-align: middle;\">",
+        "dons": [
+          {
+            "nom": "Faveur des Ombres",
+            "description": "Tant que c'est la nuit ou que le héros se trouve dans une zone sans lumière, il lui est impossible de faire un echec critique sur un sort ou une attaque.",
+            "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Nuit.<br>Don unique.",
+            "cout": "1 point de don"
+          },
+          {
+            "nom": "Maîtrise des sorts de nuit",
+            "description": "Choisir un sort de nuit de n'importe quelle classe (qui respecte les prérequis de niveau). Il devient lancable à volonté.",
+            "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Nuit.",
+            "cout": "1 point de don"
+          }
+        ]
+      },
+      {
+        "nom": "Lumière",
+        "icon": "<img src=\"https://i.ibb.co/pjmcYV72/element-Lumi-re.png\" alt=\"Lumière\" style=\"width: 28px; height: 28px; vertical-align: middle;\">",
+        "dons": [
+          {
+            "nom": "Vision de Lumière",
+            "description": "Immunisé à l'état <span class=\"etat-link\" data-etat=\"Aveuglé\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Aveuglé</span>. <br>\nDe plus, dans l'obscurité totale, permet de voir à 6m.",
+            "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Lumière.<br>Don unique.",
+            "cout": "1 point de don"
+          },
+          {
+            "nom": "Maîtrise des sorts lumière",
+            "description": "Choisir un sort de lumière de n'importe quelle classe (qui respecte les prérequis de niveau). Il devient lancable à volonté.",
+            "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Lumière.",
+            "cout": "1 point de don"
+          }
+        ]
+      },
+      {
+        "nom": "Divin",
+        "icon": "<img src=\"https://i.ibb.co/rKYgZ4Yp/element-Divin.png\" alt=\"Divin\" style=\"width: 28px; height: 28px; vertical-align: middle;\">",
+        "dons": [
+          {
+            "nom": "Onde de Survie",
+            "description": "Lorsque les points de vie du héros passent sous la barre des 0, tous les héros alliés à moins de 30m voient leur points de vie temporaires passer au niveau de leur points de vie maximum.",
+            "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Divin.<br>Don unique.",
+            "cout": "1 point de don"
+          },
+          {
+            "nom": "Maîtrise des sorts de divin",
+            "description": "Choisir un sort de divin de n'importe quelle classe (qui respecte les prérequis de niveau). Il devient lancable à volonté.",
+            "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Divin.",
+            "cout": "1 point de don"
+          }
+        ]
+      },
+      {
+        "nom": "Maléfique",
+        "icon": "<img src=\"https://i.ibb.co/SDD5KX34/element-Mal-fique.png\" alt=\"Maléfique\" style=\"width: 28px; height: 28px; vertical-align: middle;\">",
+        "dons": [
+          {
+            "nom": "Siphon de l’Âme",
+            "description": "Après avoir achevé une créature, le héros gagne un montant de mana et points de vie temporaires égal au niveau du héros.",
+            "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Maléfique.<br>Don unique.",
+            "cout": "1 point de don"
+          },
+          {
+            "nom": "Maîtrise des sorts de maléfique",
+            "description": "Choisir un sort de maléfique de n'importe quelle classe (qui respecte les prérequis de niveau). Il devient lancable à volonté.",
+            "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Maléfique.<br>",
+            "cout": "1 point de don"
+          }
+        ]
       }
     ]
   }
@@ -12389,7 +12565,7 @@ hr,
     "sort:Sorts d'Enchanteur:Armure élémentaire Feu Terre Nuit": "https://i.ibb.co/SH5jcyv/Armure-El-mentaire1.png",
     "sort:Sorts d'Enchanteur:Armure élémentaire Eau Air Lumière": "https://i.ibb.co/jP9RKzdq/Armure-El-mentaire2.png",
     "sort:Sorts de Monstres:Soin mineur": "https://i.ibb.co/dJrHNhLS/Soin-Mineur.jpg",
-    "sort:Sorts de Prêtre:Putréfaction de l’âme": "https://i.ibb.co/KxB00bhN/Malediction.png",
+    "sort:Sorts de Prêtre:Putréfaction de l’âme": "https://i.ibb.co/ynj3C5nj/Malediction-2.jpg",
     "sort:PurifiPhysique": "https://i.ibb.co/ksnZMxGJ/Purifi-Physique.png",
     "sort:ArmureElémentaire1": "https://i.ibb.co/SH5jcyv/Armure-El-mentaire1.png",
     "sort:ArmureElémentaire2": "https://i.ibb.co/jP9RKzdq/Armure-El-mentaire2.png",
@@ -12448,11 +12624,32 @@ hr,
     "objet:Grillade du Chasseur": "https://i.ibb.co/B58DCC1x/Grillade-du-Chasseur.jpg",
     "objet:Bouillon Purifiant": "https://i.ibb.co/wFMc6ThK/Bouillin.jpg",
     "objet:Patch de Renfort": "https://i.ibb.co/C5Sbs9MM/Renfort.jpg",
-    "objet:Chope de bière": "https://i.ibb.co/8nC0F5ys/Choppe.jpg"
+    "objet:Chope de bière": "https://i.ibb.co/8nC0F5ys/Choppe.jpg",
+    "sort:Sorts d'Enchanteur:Transfert de mana": "https://i.ibb.co/ycW29ywZ/Transfert-Mana.jpg",
+    "sort:Sorts d'Enchanteur:Copie magique": "https://i.ibb.co/cSwRFN4t/Copie-Magique.jpg",
+    "don:Don Feu 2": "https://i.ibb.co/XRPTJJp/Ardeur-Com.jpg",
+    "don:Immolation": "https://i.ibb.co/k6qJDxZc/Immolation.jpg",
+    "don:Maîtrise des sorts de feu": "https://i.ibb.co/XZ6Q0RNj/Ardeur-Com.jpg",
+    "don:Don Eau 2": "https://i.ibb.co/ycW29ywZ/Transfert-Mana.jpg",
+    "don:Don Eau 1": "https://i.ibb.co/rRRcvR8S/Source-Int.jpg",
+    "don:Maîtrise des sorts d'eau": "https://i.ibb.co/ycW29ywZ/Transfert-Mana.jpg",
+    "don:Maîtrise des sorts d'air": "https://i.ibb.co/XfHrXp3x/Canal-Vent.jpg",
+    "don:Maîtrise des sorts de terre": "https://i.ibb.co/YTZgZNt3/Puissance-Physique.jpg",
+    "don:Maîtrise des sorts de nuit": "https://i.ibb.co/My0QcWDL/Absorption.jpg",
+    "don:Maîtrise des sorts lumière": "https://i.ibb.co/kstkfhFP/Nova-Lumineuse.jpg",
+    "don:Maîtrise des sorts de divin": "https://i.ibb.co/Q7yCj1Y2/Soin-Groupe.jpg",
+    "don:Maîtrise des sorts de maléfique": "https://i.ibb.co/dsCNR25V/Malediction-2.jpg",
+    "don:Source Intérieure": "https://i.ibb.co/B5sttzCK/Source-Int.jpg",
+    "don:Porté par les vents": "https://i.ibb.co/JwFzZq33/Port-e-Vent.jpg",
+    "don:Armure de peau": "https://i.ibb.co/S7Pywxgb/Peau.jpg",
+    "don:Faveur des Ombres": "https://i.ibb.co/SDP8vHFh/Faveur.jpg",
+    "don:Vision de Lumière": "https://i.ibb.co/wFfNB9wm/Vision.jpg",
+    "don:Onde de Survie": "https://i.ibb.co/CpcXW3J6/Onde.jpg",
+    "don:Siphon de l’Âme": "https://i.ibb.co/RTQpbcxn/siphon.jpg"
   },
   "meta": {
-    "total_images": 537,
-    "exported_date": "2026-01-30",
+    "total_images": 558,
+    "exported_date": "2026-02-08",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
 };
@@ -13759,7 +13956,7 @@ hr,
 
     // Mark as standalone version for renderer with build timestamp
     window.STANDALONE_VERSION = true;
-    window.BUILD_VERSION = '2026-02-08T17:04:51.746Z';
+    window.BUILD_VERSION = '2026-02-08T18:36:53.965Z';
 
     // Version check - clear old data if version changed
     (function() {
@@ -16311,6 +16508,11 @@ hr,
         return this.buildSingleTableTresorPage(category);
       }
 
+      // Gestion spéciale pour les catégories avec sous-groupes (ex: Éléments)
+      if (category.subgroups) {
+        return this.buildSubgroupCategoryPage(type, category);
+      }
+
       const pageId = `${config.container}-${this.sanitizeId(category.nom || 'unknown')}`;
       const itemsProperty = this.getItemsProperty(type);
 
@@ -16332,10 +16534,44 @@ hr,
               ${this.buildDeleteCategoryButton(type, category.nom)}
             </div>
             <div class="grid cols-2" id="${config.container}-container-${this.sanitizeId(category.nom)}">
-              ${items.map((item, index) => 
+              ${items.map((item, index) =>
                 CardBuilder.create(type, item, category.nom, index).build()
               ).join('')}
             </div>
+            ${this.buildGeneralDonsSection(type, category.nom)}
+          </section>
+        </article>
+      `;
+    }
+
+    buildSubgroupCategoryPage(type, category) {
+      const config = window.ContentTypes[type];
+      const pageId = `${config.container}-${this.sanitizeId(category.nom || 'unknown')}`;
+
+      const foldoutsHtml = category.subgroups.map(subgroup => {
+        const items = subgroup.dons || [];
+        const cardsHtml = items.map((item, index) =>
+          CardBuilder.create(type, item, category.nom, index).build()
+        ).join('');
+
+        return `<details class="metier-foldout">
+          <summary class="metier-summary">
+            <span class="metier-icon">${subgroup.icon || ''}</span>
+            <span class="metier-name">${subgroup.nom}</span>
+          </summary>
+          <div class="metier-content">
+            <div class="grid cols-2">
+              ${cardsHtml}
+            </div>
+          </div>
+        </details>`;
+      }).join('');
+
+      return `
+        <article class="" data-page="${pageId}">
+          <section>
+            ${this.buildCategoryHeader(category, type)}
+            ${foldoutsHtml}
             ${this.buildGeneralDonsSection(type, category.nom)}
           </section>
         </article>
@@ -17343,8 +17579,8 @@ hr,
     }
 
     buildGeneralDonsSection(type, categoryName) {
-      // Only add General Dons section for 'don' type pages, and not for the 'Generaux' category itself
-      if (type !== 'don' || categoryName === 'Generaux') {
+      // Only add General Dons section for 'don' type pages, not for Generaux or Éléments
+      if (type !== 'don' || categoryName === 'Generaux' || categoryName === 'Éléments') {
         return '';
       }
 
@@ -18023,8 +18259,16 @@ hr,
       if (!window.DONS) return null;
       
       for (const category of window.DONS) {
-        const don = category.dons.find(d => d.nom === name);
-        if (don) return { don, category: category.nom };
+        if (category.dons) {
+          const don = category.dons.find(d => d.nom === name);
+          if (don) return { don, category: category.nom };
+        }
+        if (category.subgroups) {
+          for (const sg of category.subgroups) {
+            const don = sg.dons?.find(d => d.nom === name);
+            if (don) return { don, category: category.nom };
+          }
+        }
       }
       return null;
     },
@@ -29232,6 +29476,9 @@ window.initCharacterCreator = async function() {
       if (categoryName === 'Généraux' || categoryName === 'Generaux') {
         return '🎖️';
       }
+      if (categoryName === 'Éléments') {
+        return '🌟';
+      }
       const categoryToFile = {
         'Guerrier': 'Guerrier',
         'Mage': 'Mage',
@@ -32895,7 +33142,14 @@ window.initCharacterCreator = async function() {
       const category = window.DONS?.find(cat => cat.nom === session.categoryName);
       if (!category) return false;
       
-      const don = category.dons?.find(d => d.nom === session.itemIdentifier);
+      let don = category.dons?.find(d => d.nom === session.itemIdentifier);
+      // Also search in subgroups (e.g. Éléments category)
+      if (!don && category.subgroups) {
+        for (const sg of category.subgroups) {
+          don = sg.dons?.find(d => d.nom === session.itemIdentifier);
+          if (don) break;
+        }
+      }
       if (!don) return false;
       
       // Use editMapping if available, otherwise use editSection directly
@@ -38625,8 +38879,9 @@ window.initCharacterCreator = async function() {
       // Search in dons
       if (window.DONS && Array.isArray(window.DONS)) {
         window.DONS.forEach(category => {
-          if (category.dons && Array.isArray(category.dons)) {
-            category.dons.forEach(don => {
+          const searchDons = (dons) => {
+            if (!dons || !Array.isArray(dons)) return;
+            dons.forEach(don => {
               if (this.matchesSearch(don, normalizedQuery)) {
                 results.push({
                   type: 'don',
@@ -38636,6 +38891,10 @@ window.initCharacterCreator = async function() {
                 });
               }
             });
+          };
+          searchDons(category.dons);
+          if (category.subgroups) {
+            category.subgroups.forEach(sg => searchDons(sg.dons));
           }
         });
       }

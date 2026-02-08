@@ -44,8 +44,9 @@
       // Search in dons
       if (window.DONS && Array.isArray(window.DONS)) {
         window.DONS.forEach(category => {
-          if (category.dons && Array.isArray(category.dons)) {
-            category.dons.forEach(don => {
+          const searchDons = (dons) => {
+            if (!dons || !Array.isArray(dons)) return;
+            dons.forEach(don => {
               if (this.matchesSearch(don, normalizedQuery)) {
                 results.push({
                   type: 'don',
@@ -55,6 +56,10 @@
                 });
               }
             });
+          };
+          searchDons(category.dons);
+          if (category.subgroups) {
+            category.subgroups.forEach(sg => searchDons(sg.dons));
           }
         });
       }

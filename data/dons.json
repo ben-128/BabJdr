@@ -264,7 +264,7 @@
       {
         "nom": "Increvable",
         "description": "Une fois par jour, peut dépenser un effort pour rester à 1 point de vie s'il devait descendre en dessous.",
-        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/67ZW01Q7/stat-Endurance.png\" alt=\"Endurance\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\"> Endurance 15 , <img src=\"https://i.ibb.co/B2BCGP6T/stat-Volont.png\" alt=\"Volonté\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\">Volonté 10",
+        "prerequis": "<strong> Prérequis :<br></strong> <img src=\"https://i.ibb.co/67ZW01Q7/stat-Endurance.png\" alt=\"Endurance\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\"> Endurance 15 ,<br> Résistance altération 3.",
         "cout": "1 point de don"
       },
       {
@@ -729,6 +729,156 @@
         "description": "Une fois par combat, peut utiliser une action secondaire pour se téléporter à 3m d'un allié consentant.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
+      }
+    ]
+  },
+  {
+    "nom": "Éléments",
+    "description": "Dons liés aux éléments.",
+    "subgroups": [
+      {
+        "nom": "Feu",
+        "icon": "<img src=\"https://i.ibb.co/VWfKvNCL/element-Feu.png\" alt=\"Feu\" style=\"width: 28px; height: 28px; vertical-align: middle;\">",
+        "dons": [
+          {
+            "nom": "Immolation",
+            "description": "Peut utiliser une action principale pour s'immoler. Jusqu'à la fin du combat, les attaquants en mêlée reçevront x dégats de feu, où x est le niveau du héros.",
+            "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Feu.<br>Don unique.",
+            "cout": "1 point de don"
+          },
+          {
+            "nom": "Maîtrise des sorts de feu",
+            "description": "Choisir un sort de feu de n'importe quelle classe (qui respecte les prérequis de niveau). Il devient lancable à volonté.",
+            "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Feu.<br>",
+            "cout": "1 point de don"
+          }
+        ]
+      },
+      {
+        "nom": "Eau",
+        "icon": "<img src=\"https://i.ibb.co/bMVKwNQP/element-Eau.png\" alt=\"Eau\" style=\"width: 28px; height: 28px; vertical-align: middle;\">",
+        "dons": [
+          {
+            "nom": "Source Intérieure",
+            "description": "Une fois par combat, permet d'utiliser une action principale et une secondaire pour méditer, et regagner un montant de mana équivalent à la volonté du héros.",
+            "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Eau.<br>Don unique.",
+            "cout": "1 point de don"
+          },
+          {
+            "nom": "Maîtrise des sorts d'eau",
+            "description": "Choisir un sort d'eau de n'importe quelle classe (qui respecte les prérequis de niveau). Il devient lancable à volonté.",
+            "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Eau.<br>",
+            "cout": "1 point de don"
+          }
+        ]
+      },
+      {
+        "nom": "Air",
+        "icon": "<img src=\"https://i.ibb.co/W484kM90/element-Air.png\" alt=\"Air\" style=\"width: 28px; height: 28px; vertical-align: middle;\">",
+        "dons": [
+          {
+            "nom": "Porté par les vents",
+            "description": "Une fois par jour, permet d'effectuer un deuxième tour immédiatement à la fin du tour du héros.",
+            "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Air.<br>Don unique.",
+            "cout": "1 point de don"
+          },
+          {
+            "nom": "Maîtrise des sorts d'air",
+            "description": "Choisir un sort d'air de n'importe quelle classe (qui respecte les prérequis de niveau). Il devient lancable à volonté.",
+            "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Air.<br>",
+            "cout": "1 point de don"
+          }
+        ]
+      },
+      {
+        "nom": "Terre",
+        "icon": "<img src=\"https://i.ibb.co/gLxnsvfg/element-Terre.png\" alt=\"Terre\" style=\"width: 28px; height: 28px; vertical-align: middle;\">",
+        "dons": [
+          {
+            "nom": "Armure de peau",
+            "description": "Réduit tous les dégats subis de 1.",
+            "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Terre.<br>Don unique.",
+            "cout": "1 point de don"
+          },
+          {
+            "nom": "Maîtrise des sorts de terre",
+            "description": "Choisir un sort de terre de n'importe quelle classe (qui respecte les prérequis de niveau). Il devient lancable à volonté.",
+            "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Terre.",
+            "cout": "1 point de don"
+          }
+        ]
+      },
+      {
+        "nom": "Nuit",
+        "icon": "<img src=\"https://i.ibb.co/b5qK7czM/element-Nuit.png\" alt=\"Nuit\" style=\"width: 28px; height: 28px; vertical-align: middle;\">",
+        "dons": [
+          {
+            "nom": "Faveur des Ombres",
+            "description": "Tant que c'est la nuit ou que le héros se trouve dans une zone sans lumière, il lui est impossible de faire un echec critique sur un sort ou une attaque.",
+            "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Nuit.<br>Don unique.",
+            "cout": "1 point de don"
+          },
+          {
+            "nom": "Maîtrise des sorts de nuit",
+            "description": "Choisir un sort de nuit de n'importe quelle classe (qui respecte les prérequis de niveau). Il devient lancable à volonté.",
+            "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Nuit.",
+            "cout": "1 point de don"
+          }
+        ]
+      },
+      {
+        "nom": "Lumière",
+        "icon": "<img src=\"https://i.ibb.co/pjmcYV72/element-Lumi-re.png\" alt=\"Lumière\" style=\"width: 28px; height: 28px; vertical-align: middle;\">",
+        "dons": [
+          {
+            "nom": "Vision de Lumière",
+            "description": "Immunisé à l'état <span class=\"etat-link\" data-etat=\"Aveuglé\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Aveuglé</span>. <br>\nDe plus, dans l'obscurité totale, permet de voir à 6m.",
+            "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Lumière.<br>Don unique.",
+            "cout": "1 point de don"
+          },
+          {
+            "nom": "Maîtrise des sorts lumière",
+            "description": "Choisir un sort de lumière de n'importe quelle classe (qui respecte les prérequis de niveau). Il devient lancable à volonté.",
+            "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Lumière.",
+            "cout": "1 point de don"
+          }
+        ]
+      },
+      {
+        "nom": "Divin",
+        "icon": "<img src=\"https://i.ibb.co/rKYgZ4Yp/element-Divin.png\" alt=\"Divin\" style=\"width: 28px; height: 28px; vertical-align: middle;\">",
+        "dons": [
+          {
+            "nom": "Onde de Survie",
+            "description": "Lorsque les points de vie du héros passent sous la barre des 0, tous les héros alliés à moins de 30m voient leur points de vie temporaires passer au niveau de leur points de vie maximum.",
+            "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Divin.<br>Don unique.",
+            "cout": "1 point de don"
+          },
+          {
+            "nom": "Maîtrise des sorts de divin",
+            "description": "Choisir un sort de divin de n'importe quelle classe (qui respecte les prérequis de niveau). Il devient lancable à volonté.",
+            "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Divin.",
+            "cout": "1 point de don"
+          }
+        ]
+      },
+      {
+        "nom": "Maléfique",
+        "icon": "<img src=\"https://i.ibb.co/SDD5KX34/element-Mal-fique.png\" alt=\"Maléfique\" style=\"width: 28px; height: 28px; vertical-align: middle;\">",
+        "dons": [
+          {
+            "nom": "Siphon de l’Âme",
+            "description": "Après avoir achevé une créature, le héros gagne un montant de mana et points de vie temporaires égal au niveau du héros.",
+            "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Maléfique.<br>Don unique.",
+            "cout": "1 point de don"
+          },
+          {
+            "nom": "Maîtrise des sorts de maléfique",
+            "description": "Choisir un sort de maléfique de n'importe quelle classe (qui respecte les prérequis de niveau). Il devient lancable à volonté.",
+            "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Maléfique.<br>",
+            "cout": "1 point de don"
+          }
+        ]
       }
     ]
   }

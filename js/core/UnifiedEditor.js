@@ -1057,7 +1057,14 @@
       const category = window.DONS?.find(cat => cat.nom === session.categoryName);
       if (!category) return false;
       
-      const don = category.dons?.find(d => d.nom === session.itemIdentifier);
+      let don = category.dons?.find(d => d.nom === session.itemIdentifier);
+      // Also search in subgroups (e.g. Éléments category)
+      if (!don && category.subgroups) {
+        for (const sg of category.subgroups) {
+          don = sg.dons?.find(d => d.nom === session.itemIdentifier);
+          if (don) break;
+        }
+      }
       if (!don) return false;
       
       // Use editMapping if available, otherwise use editSection directly

@@ -647,6 +647,19 @@
         "effetCritique": "<strong>Coup Critique: </strong> Rend la moitié du coût en mana."
       },
       {
+        "nom": "Transfert de mana",
+        "element": "Eau",
+        "description": "L'enchanteur tisse un lien aqueux entre deux êtres, permettant à l'énergie magique de couler de l'un vers l'autre comme une rivière entre deux lacs.",
+        "categorie": "Sorts d'Enchanteur",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 3",
+        "portee": "🎯 <strong>Portée:</strong> 12m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> 1 tour",
+        "coutMana": "🔵 <strong>Coût mana:</strong> 0",
+        "resistance": "<strong>Sans effet si:</strong> Esquive.",
+        "effetNormal": "<strong>Effet:</strong> Au choix :<br>- <strong>Drain :</strong> Draine d'une cible à portée (5 + Puiss. Sorts) points de mana et les transfère à l'enchanteur.<br>- <strong>Don :</strong> L'enchanteur donne à une cible alliée à portée jusqu'à (5 + Puiss. Sorts) points de mana, pris dans sa propre réserve.",
+        "effetCritique": "<strong>Coup Critique :</strong> La quantité de mana transférée passe à (10 + Puiss. Sorts)."
+      },
+      {
         "nom": "Silence",
         "element": "Nuit",
         "description": "Une aura muette se referme sur la cible, étouffant toute incantation.",
@@ -717,6 +730,19 @@
         "resistance": "<strong>Sans effet si:</strong> -",
         "effetNormal": "<strong>Effet:</strong> Le lanceur choisit un élément au choix entre <span style=\"color: #4682b4; font-weight: bold;\">Eau</span>, <span style=\"color: #22c55e; font-weight: bold;\">Air</span>, et <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span>.\n<br>La cible voit son armure de cet élément, augmentant l'armure élémentaire de cet élément de (5 + Puiss. Sorts). <br>Dure jusqu'à la fin du combat.<br> Non cumulable.",
         "effetCritique": "<strong>Coup Critique:&nbsp;</strong>&nbsp;Rend la moitié du coût en mana."
+      },
+      {
+        "nom": "Copie magique",
+        "element": "Variable",
+        "description": "L'enchanteur puise dans le sillage arcanique d'un allié pour reproduire le sort qu'il vient de lancer, tissant une réplique parfaite de son incantation.",
+        "categorie": "Sorts d'Enchanteur",
+        "prerequis": "📋 <strong>Prérequis:</strong> Niveau 6",
+        "portee": "🎯 <strong>Portée:</strong> 12m",
+        "tempsIncantation": "⏰ <strong>Temps d'incantation:</strong> variable (celui du sort copié)",
+        "coutMana": "🔵 <strong>Coût mana:</strong> coût du sort copié + 5",
+        "resistance": "<strong>Sans effet si:</strong> -",
+        "effetNormal": "<strong>Effet:</strong> L'enchanteur lance une copie du dernier sort effectué par un allié à portée.<br>L'incantation repart de 0 si c'est un sort à plusieurs tours.<br>La Puiss. Sorts et les passifs utilisés sont ceux de l'enchanteur.",
+        "effetCritique": "<strong>Coup Critique :</strong> Le sort copié est lui-même critique."
       }
     ]
   },

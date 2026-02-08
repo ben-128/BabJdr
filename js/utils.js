@@ -191,8 +191,16 @@
       if (!window.DONS) return null;
       
       for (const category of window.DONS) {
-        const don = category.dons.find(d => d.nom === name);
-        if (don) return { don, category: category.nom };
+        if (category.dons) {
+          const don = category.dons.find(d => d.nom === name);
+          if (don) return { don, category: category.nom };
+        }
+        if (category.subgroups) {
+          for (const sg of category.subgroups) {
+            const don = sg.dons?.find(d => d.nom === name);
+            if (don) return { don, category: category.nom };
+          }
+        }
       }
       return null;
     },

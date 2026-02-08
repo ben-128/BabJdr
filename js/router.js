@@ -951,6 +951,9 @@
       if (categoryName === 'Généraux' || categoryName === 'Generaux') {
         return '🎖️';
       }
+      if (categoryName === 'Éléments') {
+        return '🌟';
+      }
       const categoryToFile = {
         'Guerrier': 'Guerrier',
         'Mage': 'Mage',
