@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta name="referrer" content="no-referrer-when-downgrade">
-<!-- Generated on 2026-03-07T15:18:06.037Z by JdrBab Build System -->
+<!-- Generated on 2026-03-07T15:21:44.274Z by JdrBab Build System -->
 <title>Foresia — Livret de règles</title>
 <meta content="Livret web multipages des règles Foresia, thème parchemin, illustrations par catégorie/classe/sous‑classe, export HTML autonome." name="description">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13907,7 +13907,7 @@ hr,
 
     // Mark as standalone version for renderer with build timestamp
     window.STANDALONE_VERSION = true;
-    window.BUILD_VERSION = '2026-03-07T15:18:06.039Z';
+    window.BUILD_VERSION = '2026-03-07T15:21:44.276Z';
 
     // Version check - clear old data if version changed
     (function() {
@@ -15723,9 +15723,11 @@ hr,
     buildDonCard() {
       const index = this.index !== null ? this.index : (this.categoryName ? this.getCategoryData().dons?.indexOf(this.data) || 0 : 0);
       const totalItems = this.categoryName ? this.getCategoryData().dons?.length || 1 : 1;
+      const favorisButtonHTML = this.buildFavorisButton('dons', this.data.nom);
 
       return `
         <div class="card editable-section" data-section-type="don" data-don-name="${this.data.nom}" data-don-index="${this.index}" data-category-name="${this.categoryName}">
+          ${favorisButtonHTML}
           ${this.buildEditableTitle(this.data.nom, 'don-name')}
           ${this.buildIllustration(`don:${this.data.nom}`, this.data.nom)}
           ${this.buildEditableField(this.data.description, 'don-description', 'Description')}
@@ -18000,6 +18002,22 @@ hr,
                 <div id="favoris-sorts-empty" class="favoris-empty" style="display: none;">
                   <p>Aucun sort en favoris</p>
                   <p style="font-size: 0.9em;">Cliquez sur l'étoile ⭐ à côté d'un sort pour l'ajouter à vos favoris</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="favoris-section favoris-collapsible" id="favoris-dons-section">
+              <div class="favoris-header" onclick="this.parentElement.classList.toggle('collapsed')">
+                <h2>🎖️ Dons favoris</h2>
+                <span class="favoris-toggle">▼</span>
+              </div>
+              <div class="favoris-content">
+                <div id="favoris-dons-container" class="favoris-grid collection-items">
+                  <!-- Les dons favoris seront affichés ici dynamiquement -->
+                </div>
+                <div id="favoris-dons-empty" class="favoris-empty" style="display: none;">
+                  <p>Aucun don en favoris</p>
+                  <p style="font-size: 0.9em;">Cliquez sur l'étoile ⭐ à côté d'un don pour l'ajouter à vos favoris</p>
                 </div>
               </div>
             </div>
@@ -22466,15 +22484,15 @@ hr,
     loadFavoris() {
       try {
         const saved = localStorage.getItem(window.STORAGE_KEYS.FAVORIS);
-        return saved ? JSON.parse(saved) : {
-          sorts: [],
-          objets: []
-        };
+        const data = saved ? JSON.parse(saved) : { sorts: [], objets: [], dons: [] };
+        if (!data.dons) data.dons = [];
+        return data;
       } catch (error) {
         console.warn('Erreur lors du chargement des favoris:', error);
         return {
           sorts: [],
-          objets: []
+          objets: [],
+          dons: []
         };
       }
     }
@@ -22872,9 +22890,10 @@ hr,
         return;
       }
 
-      // Mettre à jour dans l'ordre : objets d'abord, puis sorts (même ordre que PageBuilder)
+      // Mettre à jour dans l'ordre : objets, sorts, dons (même ordre que PageBuilder)
       this.updateObjetsDisplay();
       this.updateSortsDisplay();
+      this.updateDonsDisplay();
     }
 
     /**
@@ -22994,6 +23013,69 @@ hr,
       });
 
       return sortsData;
+    }
+
+    /**
+     * Met à jour l'affichage des dons favoris
+     */
+    updateDonsDisplay() {
+      const container = document.getElementById('favoris-dons-container');
+      const emptyState = document.getElementById('favoris-dons-empty');
+      const section = document.getElementById('favoris-dons-section');
+
+      if (!container || !emptyState) return;
+
+      const favorisNames = window.FavorisManager.getFavoris('dons');
+
+      if (favorisNames.length === 0) {
+        container.style.display = 'none';
+        emptyState.style.display = 'block';
+        return;
+      }
+
+      container.style.display = 'block';
+      emptyState.style.display = 'none';
+
+      const favorisData = this.getDonsData(favorisNames);
+
+      const cardsHtml = favorisData.map(({ don, category }) => {
+        return CardBuilder.create('don', don, category).build();
+      }).join('');
+
+      container.innerHTML = cardsHtml;
+      this.ensureResponsiveGrid(container);
+
+      if (JdrApp.modules.renderer?.autoLoadImages) {
+        setTimeout(() => JdrApp.modules.renderer.autoLoadImages(), 50);
+      }
+
+      if (section && favorisNames.length > 0) {
+        section.style.display = 'block';
+        section.classList.remove('collapsed');
+      }
+    }
+
+    /**
+     * Récupère les données des dons favoris
+     * @param {Array} favorisNames - Noms des dons favoris
+     * @returns {Array} Données des dons avec leurs catégories
+     */
+    getDonsData(favorisNames) {
+      const donsData = [];
+
+      if (!window.DONS) return donsData;
+
+      window.DONS.forEach(category => {
+        if (category.dons) {
+          category.dons.forEach(don => {
+            if (favorisNames.includes(don.nom)) {
+              donsData.push({ don, category: category.nom });
+            }
+          });
+        }
+      });
+
+      return donsData;
     }
 
     /**

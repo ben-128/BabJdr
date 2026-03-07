@@ -1583,6 +1583,22 @@
                 </div>
               </div>
             </div>
+
+            <div class="favoris-section favoris-collapsible" id="favoris-dons-section">
+              <div class="favoris-header" onclick="this.parentElement.classList.toggle('collapsed')">
+                <h2>🎖️ Dons favoris</h2>
+                <span class="favoris-toggle">▼</span>
+              </div>
+              <div class="favoris-content">
+                <div id="favoris-dons-container" class="favoris-grid collection-items">
+                  <!-- Les dons favoris seront affichés ici dynamiquement -->
+                </div>
+                <div id="favoris-dons-empty" class="favoris-empty" style="display: none;">
+                  <p>Aucun don en favoris</p>
+                  <p style="font-size: 0.9em;">Cliquez sur l'étoile ⭐ à côté d'un don pour l'ajouter à vos favoris</p>
+                </div>
+              </div>
+            </div>
           </section>
         </article>
       `;

@@ -63,9 +63,10 @@
         return;
       }
 
-      // Mettre à jour dans l'ordre : objets d'abord, puis sorts (même ordre que PageBuilder)
+      // Mettre à jour dans l'ordre : objets, sorts, dons (même ordre que PageBuilder)
       this.updateObjetsDisplay();
       this.updateSortsDisplay();
+      this.updateDonsDisplay();
     }
 
     /**
@@ -185,6 +186,69 @@
       });
 
       return sortsData;
+    }
+
+    /**
+     * Met à jour l'affichage des dons favoris
+     */
+    updateDonsDisplay() {
+      const container = document.getElementById('favoris-dons-container');
+      const emptyState = document.getElementById('favoris-dons-empty');
+      const section = document.getElementById('favoris-dons-section');
+
+      if (!container || !emptyState) return;
+
+      const favorisNames = window.FavorisManager.getFavoris('dons');
+
+      if (favorisNames.length === 0) {
+        container.style.display = 'none';
+        emptyState.style.display = 'block';
+        return;
+      }
+
+      container.style.display = 'block';
+      emptyState.style.display = 'none';
+
+      const favorisData = this.getDonsData(favorisNames);
+
+      const cardsHtml = favorisData.map(({ don, category }) => {
+        return CardBuilder.create('don', don, category).build();
+      }).join('');
+
+      container.innerHTML = cardsHtml;
+      this.ensureResponsiveGrid(container);
+
+      if (JdrApp.modules.renderer?.autoLoadImages) {
+        setTimeout(() => JdrApp.modules.renderer.autoLoadImages(), 50);
+      }
+
+      if (section && favorisNames.length > 0) {
+        section.style.display = 'block';
+        section.classList.remove('collapsed');
+      }
+    }
+
+    /**
+     * Récupère les données des dons favoris
+     * @param {Array} favorisNames - Noms des dons favoris
+     * @returns {Array} Données des dons avec leurs catégories
+     */
+    getDonsData(favorisNames) {
+      const donsData = [];
+
+      if (!window.DONS) return donsData;
+
+      window.DONS.forEach(category => {
+        if (category.dons) {
+          category.dons.forEach(don => {
+            if (favorisNames.includes(don.nom)) {
+              donsData.push({ don, category: category.nom });
+            }
+          });
+        }
+      });
+
+      return donsData;
     }
 
     /**

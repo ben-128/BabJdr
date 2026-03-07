@@ -143,9 +143,11 @@
     buildDonCard() {
       const index = this.index !== null ? this.index : (this.categoryName ? this.getCategoryData().dons?.indexOf(this.data) || 0 : 0);
       const totalItems = this.categoryName ? this.getCategoryData().dons?.length || 1 : 1;
+      const favorisButtonHTML = this.buildFavorisButton('dons', this.data.nom);
 
       return `
         <div class="card editable-section" data-section-type="don" data-don-name="${this.data.nom}" data-don-index="${this.index}" data-category-name="${this.categoryName}">
+          ${favorisButtonHTML}
           ${this.buildEditableTitle(this.data.nom, 'don-name')}
           ${this.buildIllustration(`don:${this.data.nom}`, this.data.nom)}
           ${this.buildEditableField(this.data.description, 'don-description', 'Description')}

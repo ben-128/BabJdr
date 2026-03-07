@@ -21,15 +21,15 @@
     loadFavoris() {
       try {
         const saved = localStorage.getItem(window.STORAGE_KEYS.FAVORIS);
-        return saved ? JSON.parse(saved) : {
-          sorts: [],
-          objets: []
-        };
+        const data = saved ? JSON.parse(saved) : { sorts: [], objets: [], dons: [] };
+        if (!data.dons) data.dons = [];
+        return data;
       } catch (error) {
         console.warn('Erreur lors du chargement des favoris:', error);
         return {
           sorts: [],
-          objets: []
+          objets: [],
+          dons: []
         };
       }
     }
