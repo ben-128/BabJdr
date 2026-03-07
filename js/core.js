@@ -158,7 +158,7 @@
         }
         
         // Development mode - fetch files
-        const [sorts, classes, dons, objets, monstres, npcs, tablesTresors, collections, staticPagesConfig, tocStructure, audioConfig] = await Promise.all([
+        const [sorts, classes, dons, objets, monstres, npcs, tablesTresors, collections, staticPagesConfig, tocStructure] = await Promise.all([
           fetch('data/sorts.json').then(r => r.json()),
           fetch('data/classes.json').then(r => r.json()),
           fetch('data/dons.json').then(r => r.json()),
@@ -168,8 +168,7 @@
           fetch('data/tables-tresors.json').then(r => r.json()),
           fetch('data/collections.json').then(r => r.json()),
           fetch('data/static-pages-config.json').then(r => r.json()),
-          fetch('data/toc-structure.json').then(r => r.json()),
-          fetch('data/audio-config.json').then(r => r.json()).catch(() => null)
+          fetch('data/toc-structure.json').then(r => r.json())
         ]);
 
         // Charger toutes les descriptions et pages statiques en parallèle
@@ -212,7 +211,6 @@
         this.data.COLLECTIONS = collections;
         this.data.STATIC_PAGES = staticPagesData;
         this.data.STATIC_PAGES_CONFIG = staticPagesConfig;
-        this.data.AUDIO_CONFIG = audioConfig;
         this.data.TOC_STRUCTURE = tocStructure;
 
         window.SORTS = sorts;
@@ -226,7 +224,6 @@
         window.STATIC_PAGES = this.data.STATIC_PAGES;
         window.STATIC_PAGES_CONFIG = this.data.STATIC_PAGES_CONFIG;
         window.TOC_STRUCTURE = this.data.TOC_STRUCTURE;
-        window.AUDIO_CONFIG = audioConfig;
         
         // Load stored edits in development mode (after data is loaded)
         this.loadStoredEditsEarly();
@@ -318,7 +315,6 @@
       if (this.utils.events && this.utils.events.init) this.utils.events.init();
       if (this.utils.dom && this.utils.dom.init) this.utils.dom.init();
       if (this.modules.images && this.modules.images.init) this.modules.images.init();
-      if (this.modules.audio && this.modules.audio.init) this.modules.audio.init();
 
       // Attendre que le renderer ait fini de générer le contenu
       if (this.modules.renderer && this.modules.renderer.init) {

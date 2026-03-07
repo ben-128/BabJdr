@@ -144,12 +144,6 @@
         },
         {
           "type": "page",
-          "id": "audio",
-          "title": "Musiques d'ambiance",
-          "icon": "🎵"
-        },
-        {
-          "type": "page",
           "id": "voyage",
           "title": "Voyage",
           "icon": "🗺️"

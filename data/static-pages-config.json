@@ -78,13 +78,6 @@
       "order": 10
     },
     {
-      "id": "audio",
-      "title": "Musiques d'ambiance",
-      "file": "audio.json",
-      "active": true,
-      "order": 11
-    },
-    {
       "id": "voyage",
       "title": "Voyage",
       "file": "voyage.json",
