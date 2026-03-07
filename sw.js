@@ -2,9 +2,9 @@
 // JDR-BAB PWA SERVICE WORKER
 // ============================================================================
 
-const CACHE_NAME = 'jdr-bab-v1.0.15';
-const STATIC_CACHE_NAME = 'jdr-bab-static-v1.0.15';
-const RUNTIME_CACHE_NAME = 'jdr-bab-runtime-v1.0.15';
+const CACHE_NAME = 'jdr-bab-v1.0.16';
+const STATIC_CACHE_NAME = 'jdr-bab-static-v1.0.16';
+const RUNTIME_CACHE_NAME = 'jdr-bab-runtime-v1.0.16';
 
 // Files to cache immediately (critical resources)
 const STATIC_ASSETS = [
@@ -145,6 +145,11 @@ self.addEventListener('activate', (event) => {
     ])
     .then(() => {
       console.log('✅ Service Worker: Activated and ready');
+      // Force reload all open clients so they get the new version
+      return self.clients.matchAll({ type: 'window', includeUncontrolled: true });
+    })
+    .then((clients) => {
+      clients.forEach(client => client.navigate(client.url));
     })
   );
 });
