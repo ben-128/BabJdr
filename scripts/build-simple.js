@@ -517,7 +517,7 @@ if (canUseServiceWorker) {
 
   // Progressive Web App - Service Worker Registration
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register(swUrl)
+    navigator.serviceWorker.register(swUrl, { updateViaCache: 'none' })
       .then((registration) => {
         console.log('✅ Service Worker registered successfully:', registration);
         
@@ -539,6 +539,11 @@ if (canUseServiceWorker) {
       .catch((error) => {
         console.log('❌ Service Worker registration failed:', error);
       });
+
+    // Auto-reload when the new SW takes control (after skipWaiting)
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      window.location.reload();
+    });
   });
 
   // Listen for app install prompt
