@@ -3663,7 +3663,7 @@ img.eclats-icon {
 
 .app-version-label {
   font-size: 0.72rem;
-  color: var(--text-muted, #888);
+  color: var(--bronze, #8b4513);
   font-family: 'Cinzel', serif;
   letter-spacing: 0.03em;
   white-space: nowrap;
