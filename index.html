@@ -6,14 +6,14 @@
 <title>Foresia — Version Développement</title>
 
 <!-- CSS Modulaire -->
-<link rel="stylesheet" href="css/theme.css?v=mmi12fn8">
-<link rel="stylesheet" href="css/utilities.css?v=mmi12fn8">
-<link rel="stylesheet" href="css/components.css?v=mmi12fn8">
-<link rel="stylesheet" href="css/layout.css?v=mmi12fn8">
-<link rel="stylesheet" href="css/animations.css?v=mmi12fn8">
-<link rel="stylesheet" href="css/editor.css?v=mmi12fn8">
-<link rel="stylesheet" href="css/scroll-optimizations.css?v=mmi12fn8">
-<link rel="stylesheet" href="css/visual-enhancements.css?v=mmi12fn8">
+<link rel="stylesheet" href="css/theme.css?v=mmi16mc8">
+<link rel="stylesheet" href="css/utilities.css?v=mmi16mc8">
+<link rel="stylesheet" href="css/components.css?v=mmi16mc8">
+<link rel="stylesheet" href="css/layout.css?v=mmi16mc8">
+<link rel="stylesheet" href="css/animations.css?v=mmi16mc8">
+<link rel="stylesheet" href="css/editor.css?v=mmi16mc8">
+<link rel="stylesheet" href="css/scroll-optimizations.css?v=mmi16mc8">
+<link rel="stylesheet" href="css/visual-enhancements.css?v=mmi16mc8">
 
 <!-- Debug styles removed -->
 </head>
@@ -82,10 +82,6 @@ observer.observe(document.body, { attributes: true });
           </div>
           <!-- Table of contents will be injected here -->
         </div>
-        <div class="sidebar-version-footer">
-          <span class="app-version-label" id="app-version-label">Foresia Dev</span>
-          <button class="btn-force-update" id="forceUpdateBtn" title="Vider le cache et recharger la dernière version">↻ Mettre à jour</button>
-        </div>
       </div>
     </aside>
     <div id="views">
@@ -111,60 +107,61 @@ observer.observe(document.body, { attributes: true });
 
 <!-- JavaScript Modulaire avec debug -->
 <!-- Configuration et classes de base -->
-<script src="js/config/constants.js?v=mmi12fn8"></script>
-<script src="js/config/contentTypes.js?v=mmi12fn8"></script>
-<script src="js/core/EventBus.js?v=mmi12fn8"></script>
+<script src="js/config/constants.js?v=mmi16mc8"></script>
+<script src="js/config/contentTypes.js?v=mmi16mc8"></script>
+<script src="js/core/EventBus.js?v=mmi16mc8"></script>
 
-<script src="js/core/BaseEntity.js?v=mmi12fn8"></script>
-<script src="js/core/UnifiedEditor.js?v=mmi12fn8"></script>
-<script src="js/factories/ContentFactory.js?v=mmi12fn8"></script>
+<script src="js/core/BaseEntity.js?v=mmi16mc8"></script>
+<script src="js/core/UnifiedEditor.js?v=mmi16mc8"></script>
+<script src="js/factories/ContentFactory.js?v=mmi16mc8"></script>
 
 <!-- Builders et templates -->
-<script src="js/builders/CardBuilder.js?v=mmi12fn8"></script>
-<script src="js/builders/PageBuilder.js?v=mmi12fn8"></script>
+<script src="js/builders/CardBuilder.js?v=mmi16mc8"></script>
+<script src="js/builders/PageBuilder.js?v=mmi16mc8"></script>
 
 <!-- Modules principaux -->
-<script src="js/core.js?v=mmi12fn8"></script>
-<script src="js/utils.js?v=mmi12fn8"></script>
-<script src="js/utils/device-detection.js?v=mmi12fn8"></script>
-<script src="js/modules/images.js?v=mmi12fn8"></script>
+<script src="js/core.js?v=mmi16mc8"></script>
+<script src="js/utils.js?v=mmi16mc8"></script>
+<script src="js/utils/device-detection.js?v=mmi16mc8"></script>
+<script src="js/modules/images.js?v=mmi16mc8"></script>
+<script src="js/modules/audio.js?v=mmi16mc8"></script>
 
 <!-- Features modules -->
-<script src="js/features/SpellFilter.js?v=mmi12fn8"></script>
-<script src="js/features/TablesTresorsManager.js?v=mmi12fn8"></script>
-<script src="js/features/FavorisManager.js?v=mmi12fn8"></script>
-<script src="js/features/FavorisRenderer.js?v=mmi12fn8"></script>
-<script src="js/features/AnimationEnhancer.js?v=mmi12fn8"></script>
-<script src="js/features/ScrollOptimizer.js?v=mmi12fn8"></script>
+<script src="js/features/SpellFilter.js?v=mmi16mc8"></script>
+<script src="js/features/TablesTresorsManager.js?v=mmi16mc8"></script>
+<script src="js/features/FavorisManager.js?v=mmi16mc8"></script>
+<script src="js/features/FavorisRenderer.js?v=mmi16mc8"></script>
+<script src="js/features/AnimationEnhancer.js?v=mmi16mc8"></script>
+<script src="js/features/ScrollOptimizer.js?v=mmi16mc8"></script>
 
 <!-- 3D effects handled by AnimationEnhancer.js -->
 
 <!-- Modules qui dépendent des features -->
-<script src="js/router.js?v=mmi12fn8"></script>
-<script src="js/renderer.js?v=mmi12fn8"></script>
-<script src="js/editor.js?v=mmi12fn8"></script>
-<script src="js/storage.js?v=mmi12fn8"></script>
+<script src="js/router.js?v=mmi16mc8"></script>
+<script src="js/renderer.js?v=mmi16mc8"></script>
+<script src="js/editor.js?v=mmi16mc8"></script>
+<script src="js/storage.js?v=mmi16mc8"></script>
 
 <!-- UI modules -->
-<script src="js/ui/UIUtilities.js?v=mmi12fn8"></script>
-<script src="js/ui/BaseModal.js?v=mmi12fn8"></script>
-<script src="js/ui/EventHandlers.js?v=mmi12fn8"></script>
-<script src="js/ui/ContentManager.js?v=mmi12fn8"></script>
-<script src="js/ui/SearchManager.js?v=mmi12fn8"></script>
-<script src="js/ui/ModalManager.js?v=mmi12fn8"></script>
-<script src="js/ui/ResponsiveManager.js?v=mmi12fn8"></script>
-<script src="js/ui/PageManager.js?v=mmi12fn8"></script>
-<script src="js/ui/TagsManager.js?v=mmi12fn8"></script>
-<script src="js/ui/GMObjectFilters.js?v=mmi12fn8"></script>
-<script src="js/ui/MonsterFilters.js?v=mmi12fn8"></script>
-<script src="js/ui/TableTresorFilters.js?v=mmi12fn8"></script>
-<script src="js/ui/UICore.js?v=mmi12fn8"></script>
+<script src="js/ui/UIUtilities.js?v=mmi16mc8"></script>
+<script src="js/ui/BaseModal.js?v=mmi16mc8"></script>
+<script src="js/ui/EventHandlers.js?v=mmi16mc8"></script>
+<script src="js/ui/ContentManager.js?v=mmi16mc8"></script>
+<script src="js/ui/SearchManager.js?v=mmi16mc8"></script>
+<script src="js/ui/ModalManager.js?v=mmi16mc8"></script>
+<script src="js/ui/ResponsiveManager.js?v=mmi16mc8"></script>
+<script src="js/ui/PageManager.js?v=mmi16mc8"></script>
+<script src="js/ui/TagsManager.js?v=mmi16mc8"></script>
+<script src="js/ui/GMObjectFilters.js?v=mmi16mc8"></script>
+<script src="js/ui/MonsterFilters.js?v=mmi16mc8"></script>
+<script src="js/ui/TableTresorFilters.js?v=mmi16mc8"></script>
+<script src="js/ui/UICore.js?v=mmi16mc8"></script>
 
 <!-- UI module principal -->
-<script src="js/ui.js?v=mmi12fn8"></script>
+<script src="js/ui.js?v=mmi16mc8"></script>
 
 <!-- PDF support -->
-<script src="js/libs/jspdf-loader.js?v=mmi12fn8"></script>
+<script src="js/libs/jspdf-loader.js?v=mmi16mc8"></script>
 
 <!-- External Libraries -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -187,21 +184,6 @@ document.addEventListener('DOMContentLoaded', function() {
   } else {
     console.error('❌ JdrApp not found!', window.JdrApp);
   }
-});
-
-// Force update button
-document.getElementById('forceUpdateBtn')?.addEventListener('click', async () => {
-  const btn = document.getElementById('forceUpdateBtn');
-  if (btn) { btn.textContent = '⏳ Mise à jour...'; btn.disabled = true; }
-  try {
-    const keys = await caches.keys();
-    await Promise.all(keys.map(k => caches.delete(k)));
-    if ('serviceWorker' in navigator) {
-      const regs = await navigator.serviceWorker.getRegistrations();
-      await Promise.all(regs.map(r => r.unregister()));
-    }
-  } catch(e) { console.warn('Force update error:', e); }
-  window.location.reload(true);
 });
 </script>
 
