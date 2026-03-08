@@ -3648,3 +3648,45 @@ img.eclats-icon {
     font-size: 1.1em;
   }
 }
+
+/* ─────────────────────────── Sidebar Version Footer ─────────────────────────── */
+.sidebar-version-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 0.8rem;
+  border-top: 1px solid rgba(139, 69, 19, 0.2);
+  background: rgba(244, 240, 230, 0.6);
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.app-version-label {
+  font-size: 0.72rem;
+  color: var(--text-muted, #888);
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+.btn-force-update {
+  font-size: 0.72rem;
+  padding: 0.25rem 0.6rem;
+  background: transparent;
+  border: 1px solid rgba(139, 69, 19, 0.35);
+  border-radius: 4px;
+  color: var(--bronze, #8b4513);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn-force-update:hover {
+  background: var(--bronze, #8b4513);
+  color: #fff;
+}
+
+.btn-force-update:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
