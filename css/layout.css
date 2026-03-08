@@ -258,6 +258,11 @@
   margin: 0 0 16px 0 !important;
 }
 
+.sidebar .panel .sidebar-version-footer {
+  flex-shrink: 0 !important;
+  margin-top: 8px !important;
+}
+
 .toc {
   flex: 1 !important; /* Take all remaining space - FORCE */
   overflow-y: auto !important;
