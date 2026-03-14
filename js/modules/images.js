@@ -210,19 +210,36 @@
 
       // Add retry button functionality
       const retryBtn = placeholder.querySelector('.retry-image-btn');
-      retryBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
+      const doRetry = () => {
         placeholder.remove();
         img.classList.remove('lazy-error');
         img.style.display = ''; // Reset display so image becomes visible when loaded
         const originalUrl = img.dataset.originalSrc || img.src;
         this.loadImageWithRetry(img, originalUrl, 0);
+      };
+      retryBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        doRetry();
       });
 
       // Hide the broken image and show placeholder
       img.style.display = 'none';
       container.appendChild(placeholder);
+
+      // Auto-retry when the button becomes visible in the viewport
+      // (must be observed AFTER appendChild so the element is in the DOM)
+      if ('IntersectionObserver' in window) {
+        const autoRetryObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              observer.disconnect();
+              doRetry();
+            }
+          });
+        }, { threshold: 0.1 });
+        autoRetryObserver.observe(retryBtn);
+      }
     },
 
     // Fallback lazy loading for older browsers
