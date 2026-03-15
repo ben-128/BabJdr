@@ -217,9 +217,8 @@
 
     hideAllObjects() {
       document.querySelectorAll('#objets-container .card, #gestion-objets-container .card').forEach(card => {
-        if (!card.hasAttribute('data-search-result')) {
-          card.style.display = 'none';
-        }
+        card.style.display = 'none';
+        card.removeAttribute('data-search-result');
       });
     },
 

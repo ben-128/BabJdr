@@ -727,10 +727,8 @@
           resultDiv.innerHTML = `<span style="color: #dc2626;">❌ Aucun objet trouvé avec l'ID #${searchId}</span>`;
         }
         
-        // Show all objects if nothing found
-        allObjectCards.forEach(card => {
-          card.style.display = 'block';
-        });
+        // Keep all objects hidden if nothing found
+        window.activeIdSearch = false;
       }
     },
 
