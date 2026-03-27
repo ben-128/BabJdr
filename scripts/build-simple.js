@@ -617,6 +617,22 @@ document.getElementById('forceUpdateBtn')?.addEventListener('click', async () =>
   
   console.log('🔒 Dev mode disabled in standalone version');
   
+  // Replace all local image paths with GitHub raw URLs for standalone mode
+  const GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/ben-128/BabJdr/master/';
+  // Match data/images/... paths up to a quote, escaped quote, or whitespace
+  // [^\\"'`\\s] excludes backslash so we don't capture the \ in escaped quotes like \"
+  htmlContent = htmlContent.replace(
+    /data\/images\/[^"'`\s\\]+/g,
+    (match) => {
+      // Encode each path segment after data/images/ to handle accents, spaces, apostrophes
+      const segments = match.split('/');
+      // First two segments are 'data' and 'images' - don't encode those
+      const encoded = segments.map((s, i) => i < 2 ? s : encodeURIComponent(s)).join('/');
+      return GITHUB_RAW_BASE + encoded;
+    }
+  );
+  console.log('🌐 Local image paths converted to GitHub raw URLs for standalone');
+
   // Write to output
   const outputPath = path.join(outputDir, 'Foresia.html');
   fs.writeFileSync(outputPath, htmlContent, 'utf-8');
