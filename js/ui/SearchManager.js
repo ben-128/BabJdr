@@ -92,27 +92,34 @@
         });
       }
 
-      // Search in objects
-      if (window.OBJETS && window.OBJETS.objets && Array.isArray(window.OBJETS.objets)) {
-        window.OBJETS.objets.forEach(objet => {
-          if (this.matchesSearch(objet, normalizedQuery)) {
-            results.push({
-              type: 'objet',
-              category: 'Objets',
-              data: objet,
-              summary: this.generateObjetSummary(objet)
-            });
-          }
-        });
+      // Search in états (individual condition cards)
+      if (window.STATIC_PAGES) {
+        const etatsPage = window.STATIC_PAGES['etats'];
+        if (etatsPage && etatsPage.sections) {
+          etatsPage.sections.forEach(section => {
+            if (section.type === 'card' && section.title) {
+              const etatItem = { nom: section.title, description: section.content || '' };
+              if (this.matchesSearch(etatItem, normalizedQuery)) {
+                results.push({
+                  type: 'etat',
+                  category: 'États',
+                  data: section,
+                  summary: this.generateEtatSummary(section)
+                });
+              }
+            }
+          });
+        }
       }
 
-      // Search in static pages
+      // Search in static pages (règles, etc.)
       if (window.STATIC_PAGES) {
         Object.entries(window.STATIC_PAGES).forEach(([pageId, pageData]) => {
+          if (pageId === 'etats') return; // Already searched individually above
           if (pageData && this.matchesSearch(pageData, normalizedQuery)) {
             results.push({
               type: 'static-page',
-              category: 'Pages',
+              category: 'Règles',
               data: pageData,
               pageId: pageId,
               summary: this.generateStaticPageSummary(pageData)
@@ -121,12 +128,78 @@
         });
       }
 
+      // GM-mode only searches: objets, monstres, NPCs, tables de loot
+      const isMJ = window.JdrApp && window.JdrApp.state && window.JdrApp.state.isMJ;
+
+      if (isMJ) {
+        // Search in objects
+        if (window.OBJETS && window.OBJETS.objets && Array.isArray(window.OBJETS.objets)) {
+          window.OBJETS.objets.forEach(objet => {
+            if (this.matchesSearch(objet, normalizedQuery)) {
+              results.push({
+                type: 'objet',
+                category: 'Objets',
+                data: objet,
+                summary: this.generateObjetSummary(objet)
+              });
+            }
+          });
+        }
+
+        // Search in monstres
+        if (window.MONSTRES && Array.isArray(window.MONSTRES)) {
+          window.MONSTRES.forEach(monstre => {
+            if (this.matchesSearch(monstre, normalizedQuery)) {
+              results.push({
+                type: 'monstre',
+                category: 'Monstres',
+                data: monstre,
+                summary: this.generateMonstreSummary(monstre)
+              });
+            }
+          });
+        }
+
+        // Search in NPCs
+        if (window.NPCS && Array.isArray(window.NPCS)) {
+          window.NPCS.forEach(npc => {
+            if (this.matchesSearch(npc, normalizedQuery)) {
+              results.push({
+                type: 'npc',
+                category: 'NPCs',
+                data: npc,
+                summary: this.generateNPCSummary(npc)
+              });
+            }
+          });
+        }
+
+        // Search in tables de loot
+        if (window.TABLES_TRESORS && window.TABLES_TRESORS.tables && Array.isArray(window.TABLES_TRESORS.tables)) {
+          window.TABLES_TRESORS.tables.forEach(table => {
+            if (this.matchesSearch(table, normalizedQuery)) {
+              results.push({
+                type: 'table-loot',
+                category: 'Tables de loot',
+                data: table,
+                summary: this.generateTableLootSummary(table)
+              });
+            }
+          });
+        }
+      }
+
       this.displaySearchResults(results, query);
     },
 
     /**
      * Check if item matches search query
      */
+    // Remove accents for search matching (é→e, à→a, etc.)
+    normalizeAccents(text) {
+      return text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    },
+
     matchesSearch(item, query) {
       // Fonction pour nettoyer le HTML et extraire le texte
       const stripHtml = (text) => {
@@ -157,9 +230,16 @@
         item.caracteristiques, item.competencesPrincipales,
         item.progression, item.equipementDeBase,
         
-        // Champs des objets et monstres  
+        // Champs des objets et monstres
         item.type, item.tags, item.element, item.numero,
         item.pointsDeVie, item.armure, item.dommages,
+        item.abilites, item.butin,
+
+        // Champs des NPCs
+        item.interactions,
+
+        // Champs des tables de loot
+        item.fourchettes ? item.fourchettes.map(f => f.objet ? f.objet.nom : '').join(' ') : null,
         
         // Champs des sections de pages statiques
         processArray(item.sections),
@@ -171,15 +251,17 @@
         item.author, item.source, item.version
       ];
 
-      // Joindre tous les champs en un seul texte de recherche
-      const searchText = searchFields
-        .filter(field => field !== null && field !== undefined)
-        .map(field => stripHtml(field))
-        .join(' ')
-        .toLowerCase();
-      
-      // Chercher chaque mot de la requête
-      const queryWords = query.toLowerCase().split(/\s+/).filter(word => word.length > 0);
+      // Joindre tous les champs en un seul texte de recherche (sans accents)
+      const searchText = this.normalizeAccents(
+        searchFields
+          .filter(field => field !== null && field !== undefined)
+          .map(field => stripHtml(field))
+          .join(' ')
+          .toLowerCase()
+      );
+
+      // Chercher chaque mot de la requête (sans accents)
+      const queryWords = this.normalizeAccents(query.toLowerCase()).split(/\s+/).filter(word => word.length > 0);
       return queryWords.every(word => searchText.includes(word));
     },
 
@@ -235,10 +317,24 @@
 
       resultsHTML += `</div>`;
       
-      // Replace main content with search results
-      const main = document.querySelector('main .content');
-      if (main) {
-        main.innerHTML = resultsHTML;
+      // Hide all current articles and show search results in #views
+      const views = document.getElementById('views');
+      if (views) {
+        // Hide all articles (remove active class AND reset inline display)
+        views.querySelectorAll('article').forEach(a => {
+          a.classList.remove('active');
+          a.style.display = 'none';
+        });
+        // Remove any previous search results
+        const oldResults = views.querySelector('#search-results-page');
+        if (oldResults) oldResults.remove();
+        // Create search results article
+        const article = document.createElement('article');
+        article.id = 'search-results-page';
+        article.classList.add('active');
+        article.style.display = 'block';
+        article.innerHTML = resultsHTML;
+        views.appendChild(article);
       }
     },
 
@@ -256,9 +352,20 @@
         </div>
       `;
       
-      const main = document.querySelector('main .content');
-      if (main) {
-        main.innerHTML = noResultsHTML;
+      const views = document.getElementById('views');
+      if (views) {
+        views.querySelectorAll('article').forEach(a => {
+          a.classList.remove('active');
+          a.style.display = 'none';
+        });
+        const oldResults = views.querySelector('#search-results-page');
+        if (oldResults) oldResults.remove();
+        const article = document.createElement('article');
+        article.id = 'search-results-page';
+        article.classList.add('active');
+        article.style.display = 'block';
+        article.innerHTML = noResultsHTML;
+        views.appendChild(article);
       }
     },
 
@@ -266,17 +373,19 @@
      * Clear search results and return to normal view
      */
     clearMainSearchResults() {
+      // Remove search results article
+      const oldResults = document.querySelector('#search-results-page');
+      if (oldResults) oldResults.remove();
+
       // Reload the current page or go back to homepage
       if (window.location.hash && window.location.hash !== '#/') {
-        // Reload current page
         if (JdrApp.modules.router && JdrApp.modules.router.handleRoute) {
           JdrApp.modules.router.handleRoute();
         }
       } else {
-        // Go to homepage
         window.location.hash = '#/creation';
       }
-      
+
       // Clear search input
       const searchInput = document.querySelector('#search');
       if (searchInput) {
@@ -308,7 +417,28 @@
     },
 
     generateStaticPageSummary(pageData) {
-      return `📄 ${UIUtilities.stripHtml(pageData.title)} - ${UIUtilities.stripHtml(pageData.description || 'Page d\'information du jeu')}`;
+      return `📜 ${UIUtilities.stripHtml(pageData.title)} - ${UIUtilities.stripHtml(pageData.description || 'Page de règles')}`;
+    },
+
+    generateEtatSummary(section) {
+      const desc = section.content ? UIUtilities.stripHtml(section.content).substring(0, 80) : '';
+      return `🩹 ${UIUtilities.stripHtml(section.title)}${desc ? ' - ' + desc + '…' : ''}`;
+    },
+
+    generateMonstreSummary(monstre) {
+      const tags = monstre.tags && Array.isArray(monstre.tags) ? monstre.tags.join(', ') : '';
+      const pv = monstre.pointsDeVie ? `${monstre.pointsDeVie} PV` : '';
+      return `👹 ${UIUtilities.stripHtml(monstre.nom)}${tags ? ' - ' + tags : ''}${pv ? ' | ' + pv : ''}`;
+    },
+
+    generateNPCSummary(npc) {
+      const desc = npc.description ? UIUtilities.stripHtml(npc.description).substring(0, 80) : '';
+      return `🧑 ${UIUtilities.stripHtml(npc.nom)}${desc ? ' - ' + desc : ''}`;
+    },
+
+    generateTableLootSummary(table) {
+      const tags = table.tags && Array.isArray(table.tags) ? table.tags.join(', ') : '';
+      return `🎲 ${UIUtilities.stripHtml(table.nom)}${tags ? ' - ' + tags : ''}`;
     },
 
     getTypeLabel(type) {
@@ -317,8 +447,12 @@
         'don': '🏆 Dons',
         'class': '⚔️ Classes',
         'subclass': '⚡ Sous-classes',
-        'objet': '⚔️ Objets',
-        'static-page': '📄 Pages'
+        'etat': '🩹 États',
+        'static-page': '📜 Règles',
+        'objet': '🗡️ Objets',
+        'monstre': '👹 Monstres',
+        'npc': '🧑 NPCs',
+        'table-loot': '🎲 Tables de loot'
       };
       return typeLabels[type] || type;
     },
@@ -346,8 +480,16 @@
           return `#/${UIUtilities.slugify(result.data.nom)}`;
         case 'subclass':
           return `#/${UIUtilities.slugify(result.category)}`;
+        case 'etat':
+          return `#/etats`;
         case 'objet':
           return `#/objets`;
+        case 'monstre':
+          return `#/monstres`;
+        case 'npc':
+          return `#/npcs`;
+        case 'table-loot':
+          return `#/tables-tresors`;
         case 'static-page':
           return `#/${result.pageId}`;
         default:

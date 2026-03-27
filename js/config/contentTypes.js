@@ -452,8 +452,8 @@
   window.StatIcons = {
     'Force': '<img src="https://i.ibb.co/23cGYFvZ/stat-Force.png" alt="Force" class="stat-icon" style="width: 48px; height: 48px; vertical-align: middle;">',
     'Agilité': '<img src="https://i.ibb.co/Ng9TzjZL/stat-Agilit.png" alt="Agilité" class="stat-icon" style="width: 48px; height: 48px; vertical-align: middle;">',
-    'Endurance': '<img src="https://i.ibb.co/67ZW01Q7/stat-Endurance.png" alt="Endurance" class="stat-icon" style="width: 48px; height: 48px; vertical-align: middle;">',
-    'Intelligence': '<img src="https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png" alt="Intelligence" class="stat-icon" style="width: 48px; height: 48px; vertical-align: middle;">',
+    'Endurance': '<img src="data/images/Autre/stats/Endurance.png" alt="Endurance" class="stat-icon" style="width: 48px; height: 48px; vertical-align: middle;">',
+    'Intelligence': '<img src="data/images/Autre/stats/Intelligence.png" alt="Intelligence" class="stat-icon" style="width: 48px; height: 48px; vertical-align: middle;">',
     'Volonté': '<img src="https://i.ibb.co/B2BCGP6T/stat-Volont.png" alt="Volonté" class="stat-icon" style="width: 48px; height: 48px; vertical-align: middle;">',
     'Chance': '<img src="https://i.ibb.co/HfthhzSF/stat-Chance.png" alt="Chance" class="stat-icon" style="width: 48px; height: 48px; vertical-align: middle;">'
   };
@@ -469,15 +469,18 @@
     'Maléfique': { color: '#dc2626', weight: 'bold' }
   };
 
+  // Element icons - use weserv.nl proxy for optimized 72px WebP thumbnails
+  const _elIconProxy = (url) => `https://images.weserv.nl/?url=${encodeURIComponent(url)}&we&output=webp&q=85&w=72&h=72&fit=inside`;
+  const _elIcon = (url, alt) => `<img src="${_elIconProxy(url)}" alt="${alt}" class="element-icon" style="width: 72px; height: 72px; vertical-align: middle;" loading="lazy">`;
   window.ElementIcons = {
-    'Feu': '<img src="https://i.ibb.co/VWfKvNCL/element-Feu.png" alt="Feu" class="element-icon" style="width: 72px; height: 72px; vertical-align: middle;">',
-    'Eau': '<img src="https://i.ibb.co/bMVKwNQP/element-Eau.png" alt="Eau" class="element-icon" style="width: 72px; height: 72px; vertical-align: middle;">',
-    'Terre': '<img src="https://i.ibb.co/gLxnsvfg/element-Terre.png" alt="Terre" class="element-icon" style="width: 72px; height: 72px; vertical-align: middle;">',
-    'Air': '<img src="https://i.ibb.co/W484kM90/element-Air.png" alt="Air" class="element-icon" style="width: 72px; height: 72px; vertical-align: middle;">',
-    'Lumière': '<img src="https://i.ibb.co/pjmcYV72/element-Lumi-re.png" alt="Lumière" class="element-icon" style="width: 72px; height: 72px; vertical-align: middle;">',
-    'Nuit': '<img src="https://i.ibb.co/b5qK7czM/element-Nuit.png" alt="Nuit" class="element-icon" style="width: 72px; height: 72px; vertical-align: middle;">',
-    'Divin': '<img src="https://i.ibb.co/rKYgZ4Yp/element-Divin.png" alt="Divin" class="element-icon" style="width: 72px; height: 72px; vertical-align: middle;">',
-    'Maléfique': '<img src="https://i.ibb.co/SDD5KX34/element-Mal-fique.png" alt="Maléfique" class="element-icon" style="width: 72px; height: 72px; vertical-align: middle;">'
+    'Feu': _elIcon('https://i.ibb.co/VWfKvNCL/element-Feu.png', 'Feu'),
+    'Eau': _elIcon('https://i.ibb.co/bMVKwNQP/element-Eau.png', 'Eau'),
+    'Terre': _elIcon('https://i.ibb.co/gLxnsvfg/element-Terre.png', 'Terre'),
+    'Air': _elIcon('data/images/Sorts/Enchanteur/RageElementaire.png', 'Air'),
+    'Lumière': _elIcon('https://i.ibb.co/pjmcYV72/element-Lumi-re.png', 'Lumière'),
+    'Nuit': _elIcon('https://i.ibb.co/b5qK7czM/element-Nuit.png', 'Nuit'),
+    'Divin': _elIcon('https://i.ibb.co/rKYgZ4Yp/element-Divin.png', 'Divin'),
+    'Maléfique': _elIcon('https://i.ibb.co/SDD5KX34/element-Mal-fique.png', 'Maléfique')
   };
 
 })();

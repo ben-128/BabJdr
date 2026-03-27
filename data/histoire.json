@@ -4,7 +4,7 @@
   "sections": [
     {
       "type": "intro",
-      "content": "<img src=\"https://i.ibb.co/DHqh4MVJ/Histoire.jpg\" style=\"display: block; margin: 1rem auto; max-width: 100%; min-width: 200px;\" alt=\"Image\">"
+      "content": "<img src=\"data/images/Autre/Illustrations/Histoire.jpg\" style=\"display: block; margin: 1rem auto; max-width: 100%; min-width: 200px;\" alt=\"Image\">"
     },
     {
       "type": "card",

@@ -71,13 +71,13 @@
   },
   "images": {
     "img_1765151129650_0cl8mli0b": {
-      "url": "https://i.ibb.co/60kgKrgd/auberge1.jpg",
+      "url": "data/images/Campagne/Auberge/auberge1.jpg",
       "width": null,
       "height": null,
       "style": "block"
     },
     "img_1766329843139_aj4m79m48": {
-      "url": "https://i.ibb.co/8LD4q0TX/1.jpg",
+      "url": "data/images/Campagne/Foret/1.jpg",
       "width": null,
       "height": null,
       "style": "block"
@@ -89,109 +89,109 @@
       "style": "block"
     },
     "img_1767542707341_ura062wg6": {
-      "url": "https://i.ibb.co/5X9v4jVf/3.jpg",
+      "url": "data/images/Campagne/Foret/3.jpg",
       "width": null,
       "height": null,
       "style": "block"
     },
     "img_1767542718560_kz6pr40a9": {
-      "url": "https://i.ibb.co/wh4jbVb7/3-2.jpg",
+      "url": "data/images/Campagne/Foret/3-2.jpg",
       "width": null,
       "height": null,
       "style": "block"
     },
     "img_1767543182248_3nlscls8n": {
-      "url": "https://i.ibb.co/v4wjC1ZV/Combat2.jpg",
+      "url": "data/images/Autre/Illustrations/Combat2.png",
       "width": null,
       "height": null,
       "style": "block"
     },
     "img_1767543214328_1lp9sf4je": {
-      "url": "https://i.ibb.co/gL6sYcn5/Combat3.jpg",
+      "url": "data/images/Autre/Illustrations/Combat3.png",
       "width": null,
       "height": null,
       "style": "block"
     },
     "img_1767543334225_yuc1obr1o": {
-      "url": "https://i.ibb.co/Fq8xXHhd/Combat1.jpg",
+      "url": "data/images/Autre/Illustrations/Combat1.png",
       "width": null,
       "height": null,
       "style": "block"
     },
     "img_1767543362427_7w2tss05j": {
-      "url": "https://i.ibb.co/Fq8xXHhd/Combat1.jpg",
+      "url": "data/images/Autre/Illustrations/Combat1.png",
       "width": "500",
       "height": "250",
       "style": "block"
     },
     "img_1767543415822_jpw3x7699": {
-      "url": "https://i.ibb.co/Fq8xXHhd/Combat1.jpg",
+      "url": "data/images/Autre/Illustrations/Combat1.png",
       "width": null,
       "height": null,
       "style": "block"
     },
     "img_1767543506362_ibl3s0wac": {
-      "url": "https://i.ibb.co/zTnvyZ05/Foret.jpg",
+      "url": "data/images/Campagne/Foret/Foret.png",
       "width": null,
       "height": null,
       "style": "block"
     },
     "img_1767549021365_vri9m6uza": {
-      "url": "https://i.ibb.co/nNkJnS71/4.jpg",
+      "url": "data/images/Campagne/Foret/4.jpg",
       "width": null,
       "height": null,
       "style": "block"
     },
     "img_1767549060049_iu38s4gtb": {
-      "url": "https://i.ibb.co/Pv6ZggRW/5-boss.jpg",
+      "url": "data/images/Campagne/Foret/5-boss.jpg",
       "width": null,
       "height": null,
       "style": "block"
     },
     "img_1767550960418_14464sepz": {
-      "url": "https://i.ibb.co/Fq8xXHhd/Combat1.jpg",
+      "url": "data/images/Autre/Illustrations/Combat1.png",
       "width": null,
       "height": null,
       "style": "block"
     },
     "img_1767550978577_j67revib8": {
-      "url": "https://i.ibb.co/gL6sYcn5/Combat3.jpg",
+      "url": "data/images/Autre/Illustrations/Combat3.png",
       "width": null,
       "height": null,
       "style": "block"
     },
     "img_1767615242972_1eyixix9y": {
-      "url": "https://i.ibb.co/Rpt6CMnG/Repos.jpg",
+      "url": "data/images/Autre/Illustrations/Repos2.png",
       "width": null,
       "height": null,
       "style": "block"
     },
     "img_1767619521674_u4e480r5n": {
-      "url": "https://i.ibb.co/nqLPQvYw/Repos2.jpg",
+      "url": "data/images/Autre/Illustrations/Repos2.png",
       "width": null,
       "height": null,
       "style": "block"
     },
     "img_1769545066583_annwgs4hi": {
-      "url": "https://i.ibb.co/rRfgQm2s/humains.jpg",
+      "url": "data/images/Autre/Illustrations/humains.png",
       "width": null,
       "height": null,
       "style": "block"
     },
     "img_1769545093929_u2vizervr": {
-      "url": "https://i.ibb.co/0yPHtq5b/Elfes.jpg",
+      "url": "data/images/Autre/Illustrations/Elfes.png",
       "width": null,
       "height": null,
       "style": "block"
     },
     "img_1769545112790_zfaal2wrc": {
-      "url": "https://i.ibb.co/SXhpkyWy/Nains.jpg",
+      "url": "data/images/Autre/Illustrations/Nains.png",
       "width": null,
       "height": null,
       "style": "block"
     },
     "img_1769545129000_35xqk39at": {
-      "url": "https://i.ibb.co/35wpnRqT/Magiques.jpg",
+      "url": "data/images/Autre/Illustrations/Magiques.png",
       "width": null,
       "height": null,
       "style": "block"

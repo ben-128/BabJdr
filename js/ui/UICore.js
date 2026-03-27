@@ -77,36 +77,53 @@
      * Setup search functionality
      */
     setupSearch() {
-      const searchInput = JdrApp.utils.dom.$('#search');
-      const clearButton = JdrApp.utils.dom.$('#clear');
-      
-      if (searchInput) {
-        // Only search on Enter key press
-        JdrApp.utils.events.register('keydown', '#search', (e) => {
-          if (e.key === 'Enter') {
-            e.preventDefault();
-            const query = e.target.value.trim();
-            if (query.length > 0) {
-              this.performSearch(query);
-            } else {
-              this.clearMainSearchResults();
-            }
-          } else if (e.key === 'Escape') {
+      // Prevent duplicate registration (event delegation survives DOM recreation)
+      if (this._searchSetup) return;
+      this._searchSetup = true;
+
+      let searchDebounceTimer = null;
+
+      // Live search on input (works on mobile without Enter key)
+      JdrApp.utils.events.register('input', '#search', (e) => {
+        const query = e.target.value.trim();
+        clearTimeout(searchDebounceTimer);
+        if (query.length >= 2) {
+          searchDebounceTimer = setTimeout(() => {
+            this.performSearch(query);
+          }, 300);
+        } else if (query.length === 0) {
+          this.clearMainSearchResults();
+        }
+      });
+
+      // Keep Enter for immediate search & Escape to clear
+      JdrApp.utils.events.register('keydown', '#search', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          clearTimeout(searchDebounceTimer);
+          const query = e.target.value.trim();
+          if (query.length > 0) {
+            this.performSearch(query);
+          } else {
             this.clearMainSearchResults();
-            e.target.value = '';
-            e.target.blur();
           }
-        });
-      }
-      
-      if (clearButton) {
-        JdrApp.utils.events.register('click', '#clear', () => {
-          if (searchInput) {
-            searchInput.value = '';
-            this.clearMainSearchResults();
-          }
-        });
-      }
+        } else if (e.key === 'Escape') {
+          clearTimeout(searchDebounceTimer);
+          this.clearMainSearchResults();
+          e.target.value = '';
+          e.target.blur();
+        }
+      });
+
+      // Clear button
+      JdrApp.utils.events.register('click', '#clear', () => {
+        clearTimeout(searchDebounceTimer);
+        const searchInput = document.querySelector('#search');
+        if (searchInput) {
+          searchInput.value = '';
+        }
+        this.clearMainSearchResults();
+      });
     },
 
     /**

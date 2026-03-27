@@ -126,7 +126,7 @@
       {
         "nom": "Méditation régénératrice",
         "description": "Une fois par jour, hors combat, permet de passer 30 minutes en méditation pour regagner tous ses points de vie.",
-        "prerequis": "<strong> Prérequis :</strong> <br><img src=\"https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\"> Intelligence 5.\n<br>OU<br>\nRéflexion rang 1",
+        "prerequis": "<strong> Prérequis :</strong> <br><img src=\"data/images/Autre/stats/Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\"> Intelligence 5.\n<br>OU<br>\nRéflexion rang 1",
         "cout": "1 point de don"
       },
       {
@@ -137,14 +137,14 @@
       },
       {
         "nom": "Polyvalence ultime",
-        "description": "Gagne 1 <img src=\"https://i.ibb.co/23cGYFvZ/stat-Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Force, <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Agilité, <img src=\"https://i.ibb.co/67ZW01Q7/stat-Endurance.png\" alt=\"Endurance\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Endurance, <img src=\"https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Intelligence, <img src=\"https://i.ibb.co/B2BCGP6T/stat-Volont.png\" alt=\"Volonté\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Volonté, <img src=\"https://i.ibb.co/HfthhzSF/stat-Chance.png\" alt=\"Chance\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Chance.",
-        "prerequis": "<strong> Prérequis :</strong><br>- <img src=\"https://i.ibb.co/23cGYFvZ/stat-Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Force 5, <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Agilité 5, <img src=\"https://i.ibb.co/67ZW01Q7/stat-Endurance.png\" alt=\"Endurance\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Endurance 5, <img src=\"https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Intelligence 5, <img src=\"https://i.ibb.co/B2BCGP6T/stat-Volont.png\" alt=\"Volonté\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Volonté 5, <img src=\"https://i.ibb.co/HfthhzSF/stat-Chance.png\" alt=\"Chance\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Chance 5.\n<br>- Don unique.",
+        "description": "Gagne 1 <img src=\"https://i.ibb.co/23cGYFvZ/stat-Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Force, <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Agilité, <img src=\"data/images/Autre/stats/Endurance.png\" alt=\"Endurance\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Endurance, <img src=\"data/images/Autre/stats/Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Intelligence, <img src=\"https://i.ibb.co/B2BCGP6T/stat-Volont.png\" alt=\"Volonté\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Volonté, <img src=\"https://i.ibb.co/HfthhzSF/stat-Chance.png\" alt=\"Chance\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Chance.",
+        "prerequis": "<strong> Prérequis :</strong><br>- <img src=\"https://i.ibb.co/23cGYFvZ/stat-Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Force 5, <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Agilité 5, <img src=\"data/images/Autre/stats/Endurance.png\" alt=\"Endurance\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Endurance 5, <img src=\"data/images/Autre/stats/Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Intelligence 5, <img src=\"https://i.ibb.co/B2BCGP6T/stat-Volont.png\" alt=\"Volonté\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Volonté 5, <img src=\"https://i.ibb.co/HfthhzSF/stat-Chance.png\" alt=\"Chance\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Chance 5.\n<br>- Don unique.",
         "cout": "1 point de don"
       },
       {
         "nom": "Premier soin",
         "description": "<b>En combat :</b>\n<br>Les soins provenant des consommables sont augmentés de X points de vie.\n\n<br><br><b>Hors combat :</b>\n<br>Le héros peut dépenser un effort, pour soigner une autre cible de X points de vie. \n\n<br><br>X correspond à 3, plus 1 point supplémentaire tous les 5 points d’Intelligence.",
-        "prerequis": "<strong> Prérequis :</strong> <br><img src=\"https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\"> Intelligence 5.\n<br>OU<br>\nRéflexion rang 1",
+        "prerequis": "<strong> Prérequis :</strong> <br><img src=\"data/images/Autre/stats/Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\"> Intelligence 5.\n<br>OU<br>\nRéflexion rang 1",
         "cout": "1 point de don"
       },
       {
@@ -264,7 +264,7 @@
       {
         "nom": "Increvable",
         "description": "Une fois par jour, peut dépenser un effort pour rester à 1 point de vie s'il devait descendre en dessous.",
-        "prerequis": "<strong> Prérequis :<br></strong> <img src=\"https://i.ibb.co/67ZW01Q7/stat-Endurance.png\" alt=\"Endurance\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\"> Endurance 15 ,<br> Résistance altération 3.",
+        "prerequis": "<strong> Prérequis :<br></strong> <img src=\"data/images/Autre/stats/Endurance.png\" alt=\"Endurance\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\"> Endurance 15 ,<br> Résistance altération 3.",
         "cout": "1 point de don"
       },
       {
@@ -323,7 +323,7 @@
       },
       {
         "nom": "Coup de maître",
-        "image": "https://i.ibb.co/6RbVDHLV/Coup-Maitre-small.png",
+        "image": "data/images/Dons/guerrier/CoupMaitre.png",
         "description": "Une fois par combat et par arme, le guerrier peut utiliser une action secondaire pour déclencher un effet spécial sur sa prochaine attaque, selon le type d'arme utilisé :<br><br><b>Arc :</b> L'attaque est impossible à esquiver, ne peut pas faire d'échec critique, et les chances de coup critique sont augmentées de 2.<br><br><b>Arme exotique :</b> Ajoute la <img src=\"https://i.ibb.co/HfthhzSF/stat-Chance.png\" alt=\"Chance\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Chance aux dégâts.<br><br><b>Autre arme à deux mains :</b> L'attaque inflige ses dégâts à toutes les cibles à moins de 3m.<br><br><b>Autre arme à une main :</b> La cible passe dans l'état <span class=\"etat-link\" data-etat=\"Ensanglanté\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ensanglanté</span> (Force/3, arrondi à l'inférieur) pendant 3 tours.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
@@ -421,13 +421,13 @@
       {
         "nom": "Piège Improvisé",
         "description": "Une fois par combat, le rôdeur peut utiliser une action secondaire pour placer un piège sur une zone de 3mx3m, à moins de 3m du héros.\n\n  <br><br>Lorsqu'un ennemi entre dans la zone, il subit (Agilité+Intelligence) points de dégâts physiques.<br>Si sa Résistance altérations est inférieure niveau du héros, il subit l'état <span class=\"etat-link\" data-etat=\"Ralenti\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ralenti</span> pendant 5 tours.\n<br>Le piège est alors détruit.\n\n<br><br> Pour avoir plus d'un piège actif à la fois, le héros doit faire un test de coordination de plus en plus compliqué pour chaque piège supplémentaire.",
-        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Intelligence 5",
+        "prerequis": "<strong> Prérequis :</strong> <img src=\"data/images/Autre/stats/Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Intelligence 5",
         "cout": "1 point de don"
       },
       {
         "nom": "Point faible",
         "description": "Si le héros a la connaissance d'un point faible sur un adversaire, il peut tenter de l'atteindre, pour augmenter les chances de coup critique de 3 et les chances d'esquive de la cible de 2.",
-        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Intelligence 5",
+        "prerequis": "<strong> Prérequis :</strong> <img src=\"data/images/Autre/stats/Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Intelligence 5",
         "cout": "1 point de don"
       },
       {
@@ -570,7 +570,7 @@
       },
       {
         "nom": "Chair consacrée",
-        "description": "Augmente <img src=\"https://i.ibb.co/67ZW01Q7/stat-Endurance.png\" alt=\"Endurance\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> l'endurance de 4.",
+        "description": "Augmente <img src=\"data/images/Autre/stats/Endurance.png\" alt=\"Endurance\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> l'endurance de 4.",
         "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
@@ -612,7 +612,7 @@
       },
       {
         "nom": "Méditation érudite",
-        "description": "Augmente <img src=\"https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> l'intelligence de 4.",
+        "description": "Augmente <img src=\"data/images/Autre/stats/Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> l'intelligence de 4.",
         "prerequis": "<strong> Prérequis :</strong>-",
         "cout": "1 point de don"
       },
@@ -697,7 +697,7 @@
       {
         "nom": "Renvoi de Sort",
         "description": "Une fois par combat, lorsque le héros est ciblé par un sort d'altération magique, ou un sort pouvant être esquivé, il peut utiliser une action secondaire pour tenter de le renvoyer à l'expéditeur. <br><br>Puiss. Sorts du héros contre Résistance altérations de l'expéditeur. En cas de succès (strictement supérieur), le sort affecte l'expéditeur au lieu du héros.",
-        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Intelligence 10.",
+        "prerequis": "<strong> Prérequis :</strong> <img src=\"data/images/Autre/stats/Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Intelligence 10.",
         "cout": "1 point de don"
       },
       {
@@ -774,7 +774,7 @@
       },
       {
         "nom": "Air",
-        "icon": "<img src=\"https://i.ibb.co/W484kM90/element-Air.png\" alt=\"Air\" style=\"width: 28px; height: 28px; vertical-align: middle;\">",
+        "icon": "<img src=\"data/images/Sorts/Enchanteur/RageElementaire.png\" alt=\"Air\" style=\"width: 28px; height: 28px; vertical-align: middle;\">",
         "dons": [
           {
             "nom": "Porté par les vents",

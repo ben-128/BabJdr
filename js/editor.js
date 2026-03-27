@@ -643,37 +643,18 @@
         }
       }
       
-      // Charger l'image haute résolution SEULEMENT maintenant
-      enlargedImg.src = originalUrl;
       enlargedImg.removeAttribute('data-src');
-      
+
       // Supprimer les classes de lazy loading qui pourraient interférer
       enlargedImg.classList.remove('lazy-load', 'lazy-loaded');
-      
-      // Calculer les dimensions pour que l'image tienne dans 90% du viewport
-      const originalWidth = img.naturalWidth;
-      const originalHeight = img.naturalHeight;
-      const maxWidth = window.innerWidth * 0.9;
-      const maxHeight = window.innerHeight * 0.9;
 
-      let finalWidth = originalWidth;
-      let finalHeight = originalHeight;
-
-      // Réduire proportionnellement si nécessaire
-      if (originalWidth > maxWidth) {
-        finalWidth = maxWidth;
-        finalHeight = (originalHeight * maxWidth) / originalWidth;
-      }
-      if (finalHeight > maxHeight) {
-        finalHeight = maxHeight;
-        finalWidth = (originalWidth * maxHeight) / originalHeight;
-      }
-
-      // Forcer l'affichage de l'image avec des dimensions explicites
-      enlargedImg.style.cssText = `
+      // Style de base responsive - l'image s'adapte au viewport automatiquement
+      const baseStyle = `
         display: block !important;
-        width: ${finalWidth}px !important;
-        height: ${finalHeight}px !important;
+        max-width: 90vw !important;
+        max-height: 90vh !important;
+        width: auto !important;
+        height: auto !important;
         object-fit: contain !important;
         border: 3px solid var(--gold) !important;
         border-radius: 8px !important;
@@ -685,6 +666,10 @@
         transform: none !important;
         transition: none !important;
       `;
+      enlargedImg.style.cssText = baseStyle;
+
+      // Charger l'image haute résolution - recalcule automatiquement grâce à max-width/max-height
+      enlargedImg.src = originalUrl;
 
       modal.appendChild(enlargedImg);
       document.body.appendChild(modal);

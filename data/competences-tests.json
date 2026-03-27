@@ -5,7 +5,7 @@
   "sections": [
     {
       "type": "intro",
-      "content": "<img src=\"https://i.ibb.co/p5GgdCM/Efforts.jpg\" style=\"display: block; margin: 1rem auto; max-width: 100%; min-width: 200px;\" alt=\"Image\">"
+      "content": "<img src=\"data/images/Autre/Illustrations/Efforts.jpg\" style=\"display: block; margin: 1rem auto; max-width: 100%; min-width: 200px;\" alt=\"Image\">"
     },
     {
       "type": "grid",

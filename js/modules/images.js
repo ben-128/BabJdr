@@ -60,9 +60,16 @@
 
     // Configuration for image loading
     imageLoadConfig: {
-      timeout: 15000,      // 15 seconds timeout
+      timeout: 8000,       // 8 seconds timeout (was 15s - faster failure detection)
       maxRetries: 2,       // Retry up to 2 times for temporary errors
-      retryDelay: 2000     // Wait 2 seconds between retries
+      retryDelay: 1000     // Wait 1 second between retries (was 2s)
+    },
+
+    // Concurrency limiter for image loading
+    loadQueue: {
+      pending: [],          // URLs waiting to be loaded
+      activeCount: 0,
+      maxConcurrent: 6      // Max simultaneous image loads
     },
 
     // Initialize lazy loading with Intersection Observer
@@ -76,7 +83,7 @@
               const img = entry.target;
               const dataSrc = img.getAttribute('data-src');
               if (dataSrc) {
-                this.loadImageWithRetry(img, dataSrc);
+                this.enqueueImageLoad(img, dataSrc, true); // priority: visible in viewport
               }
               observer.unobserve(img);
             }
@@ -101,6 +108,19 @@
       if (!img.dataset.originalSrc) {
         img.dataset.originalSrc = url;
       }
+
+      // Try cache first (async, falls back to network)
+      this.getCachedImage(url).then(cachedBlobUrl => {
+        if (cachedBlobUrl && img.classList.contains('lazy-loading')) {
+          img.src = cachedBlobUrl;
+          // The onLoad handler below will fire from this cached blob
+          return;
+        }
+        // No cache hit - load from network (img.src is set at the end of this method)
+        img.src = url;
+      }).catch(() => {
+        img.src = url;
+      });
 
       // Set up timeout
       const timeoutId = setTimeout(() => {
@@ -139,6 +159,12 @@
         if (JdrApp.modules.editor && JdrApp.modules.editor.attachImageEvents) {
           JdrApp.modules.editor.attachImageEvents();
         }
+
+        // Cache the loaded image for future visits
+        this.cacheImage(url);
+
+        // Dequeue next image in the concurrency queue
+        this.dequeueNextImage();
       };
 
       // Error handler
@@ -150,8 +176,7 @@
       img.addEventListener('load', onLoad, { once: true });
       img.addEventListener('error', onError, { once: true });
 
-      // Start loading
-      img.src = url;
+      // img.src is set by the cache-first block above (async)
     },
 
     // Handle image load failure with retry logic
@@ -183,6 +208,9 @@
       console.warn(`Failed to load image after ${this.imageLoadConfig.maxRetries} retries (${reason}):`, url);
       img.classList.add('lazy-error');
       this.showImageErrorPlaceholder(img);
+
+      // Dequeue next image in the concurrency queue
+      this.dequeueNextImage();
     },
 
     // Show a visible error placeholder for failed images
@@ -315,15 +343,15 @@
 
     },
 
-    // Process image URL to handle proxying for mobile compatibility
+    // Process image URL to handle proxying via weserv.nl
+    // weserv.nl acts as a CDN proxy that converts to WebP and resizes thumbnails.
+    // If weserv.nl fails, handleImageLoadFailure falls back to the original ibb.co URL.
     processImageUrl(originalUrl) {
-      // Disabled weserv.nl proxy for faster loading - load directly from i.ibb.co
-      // The proxy was adding latency. ImgBB is fast enough on its own.
-      // if (originalUrl.includes('i.ibb.co') && !originalUrl.includes('images.weserv.nl')) {
-      //   const format = this.supportsWebP() ? 'webp' : 'jpeg';
-      //   const quality = this.getOptimalQuality();
-      //   return `https://images.weserv.nl/?url=${encodeURIComponent(originalUrl)}&we&output=${format}&q=${quality}&w=400&h=300&fit=inside`;
-      // }
+      if (originalUrl.includes('i.ibb.co') && !originalUrl.includes('images.weserv.nl')) {
+        const format = this.supportsWebP() ? 'webp' : 'jpeg';
+        const quality = this.getOptimalQuality();
+        return `https://images.weserv.nl/?url=${encodeURIComponent(originalUrl)}&we&output=${format}&q=${quality}&w=400&h=300&fit=inside`;
+      }
 
       // For local monster paths, encode only the filename to handle French characters properly
       if (originalUrl.startsWith('data/images/Monstres/')) {
@@ -385,11 +413,46 @@
       return 80; // Default quality
     },
 
+    // Enqueue an image load respecting concurrency limits
+    // priority: true = insert at front of queue (for images entering viewport)
+    enqueueImageLoad(img, url, priority = false) {
+      const q = this.loadQueue;
+
+      // If under limit, load immediately
+      if (q.activeCount < q.maxConcurrent) {
+        q.activeCount++;
+        this.loadImageWithRetry(img, url);
+      } else {
+        // Queue for later - priority images go to front
+        if (priority) {
+          q.pending.unshift({ img, url });
+        } else {
+          q.pending.push({ img, url });
+        }
+      }
+    },
+
+    // Called when an image finishes loading (success or final failure) to dequeue next
+    dequeueNextImage() {
+      const q = this.loadQueue;
+      q.activeCount = Math.max(0, q.activeCount - 1);
+
+      while (q.pending.length > 0 && q.activeCount < q.maxConcurrent) {
+        const next = q.pending.shift();
+        // Skip if image was already loaded or removed from DOM
+        if (next.img.classList.contains('lazy-loaded') || !next.img.isConnected) {
+          continue;
+        }
+        q.activeCount++;
+        this.loadImageWithRetry(next.img, next.url);
+        break;
+      }
+    },
+
     autoLoadImages() {
       let loadedCount = 0;
-      const bp = this.backgroundPreloader;
 
-      // 1. Handle elements with data-illus-key
+      // 1. Handle elements with data-illus-key - prepare them for lazy loading
       const illusElements = document.querySelectorAll('[data-illus-key]');
       illusElements.forEach(illusElement => {
         const illusKey = illusElement.dataset.illusKey;
@@ -402,36 +465,43 @@
 
             // Make image visible (it may have been hidden during initial render)
             img.style.display = 'inline-block';
-
-            // Remove events-attached flag to allow re-attachment after image loads
             img.removeAttribute('data-events-attached');
 
-            // Check if image needs loading (still has placeholder or no real src)
             const needsLoading = !img.src ||
                                  img.src.includes('data:image/svg+xml') ||
                                  img.classList.contains('lazy-load');
 
             if (needsLoading) {
-              // Load immediately instead of waiting for intersection
-              this.loadImageWithRetry(img, processedUrl);
+              // Set data-src and register with IntersectionObserver for true lazy loading
+              img.setAttribute('data-src', processedUrl);
+              img.classList.add('lazy-load');
+              if (this.lazyImageObserver) {
+                this.lazyImageObserver.observe(img);
+              } else {
+                // Fallback: enqueue with concurrency limit
+                this.enqueueImageLoad(img, processedUrl);
+              }
             }
             loadedCount++;
           }
         }
       });
 
-      // 2. Handle lazy-load images with data-src on visible page - load all immediately
+      // 2. Handle lazy-load images with data-src on visible page
+      //    Register with IntersectionObserver instead of loading all at once
       const visibleArticle = document.querySelector('article.active, article[style*="display: block"]');
       if (visibleArticle) {
         const lazyImages = visibleArticle.querySelectorAll('img.lazy-load[data-src]');
         lazyImages.forEach(img => {
-          const dataSrc = img.getAttribute('data-src');
-          if (dataSrc) {
-            const processedUrl = this.processImageUrl(dataSrc);
-            // Load immediately - browser cache will handle preloaded images
-            this.loadImageWithRetry(img, processedUrl);
-            loadedCount++;
+          if (this.lazyImageObserver) {
+            this.lazyImageObserver.observe(img);
+          } else {
+            const dataSrc = img.getAttribute('data-src');
+            if (dataSrc) {
+              this.enqueueImageLoad(img, this.processImageUrl(dataSrc));
+            }
           }
+          loadedCount++;
         });
       }
 
@@ -881,6 +951,49 @@
       }
       
       return syncCount;
+    },
+
+    // ========================================
+    // IMAGE CACHE (Cache API)
+    // ========================================
+    // Cache images locally so they don't need to be re-fetched from ibb.co.
+    // Cache key = the image URL itself, so if an image changes (new URL), old cache is irrelevant.
+    // Works in both dev mode and standalone (Cache API is available in any secure/localhost context).
+
+    imageCacheName: 'foresia-images-v1',
+
+    async cacheImage(url) {
+      try {
+        if (!('caches' in window) || !url || !url.startsWith('http')) return;
+        const cache = await caches.open(this.imageCacheName);
+        // Only cache if not already cached
+        const existing = await cache.match(url);
+        if (existing) return;
+        // ibb.co supports CORS, so we can fetch and cache the response
+        const response = await fetch(url, { mode: 'cors', credentials: 'omit' });
+        if (response.ok) {
+          await cache.put(url, response);
+        }
+      } catch (e) {
+        // Silently ignore cache errors - cross-origin or network issues
+      }
+    },
+
+    async getCachedImage(url) {
+      try {
+        if (!('caches' in window) || !url || !url.startsWith('http')) return null;
+        const cache = await caches.open(this.imageCacheName);
+        const response = await cache.match(url);
+        if (response && response.ok) {
+          const blob = await response.blob();
+          if (blob.size > 0) {
+            return URL.createObjectURL(blob);
+          }
+        }
+      } catch (e) {
+        // Silently ignore
+      }
+      return null;
     },
 
     // Ensure all objects have image mappings in images.json structure

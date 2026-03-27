@@ -455,9 +455,13 @@
       }
 
       const tocHTML = `
+        <div class="toc-search">
+          <input autocomplete="off" id="search" placeholder="Rechercher un sort, don, classe, état…">
+          <button class="btn-clear" id="clear" title="Effacer">✖</button>
+        </div>
         <h4>Sommaire</h4>
-        ${window.TOC_STRUCTURE.directPages ? 
-          window.TOC_STRUCTURE.directPages.map(page => this.generateTOCItem(page)).join('') : 
+        ${window.TOC_STRUCTURE.directPages ?
+          window.TOC_STRUCTURE.directPages.map(page => this.generateTOCItem(page)).join('') :
           ''}
         ${window.TOC_STRUCTURE.sections
           .filter(section => !section.requiresMJ || window.JdrApp.state.isMJ)
@@ -480,6 +484,11 @@
 
       // Ajouter l'event listener pour le bouton MJ
       this.setupMJToggle();
+
+      // Ré-attacher les événements de recherche après recréation du DOM
+      if (window.UICore && UICore.setupSearch) {
+        UICore.setupSearch();
+      }
 
       // Appliquer les états actifs après génération de la TOC
       const currentHash = window.location.hash.replace('#/', '');
