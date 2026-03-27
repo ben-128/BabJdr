@@ -46,7 +46,7 @@
     "armureObscurite": 0,
     "armureDivin": 0,
     "armureMalefique": 0,
-    "abilites": "Attaque deux fois<br>  <strong>Pinces acérées:</strong> Inflige 5 dégâts",
+    "abilites": "Attaque deux fois<br>  <strong>Pinces acérées:</strong> Inflige 5 dégâts physiques",
     "butin": "<strong>Butin:</strong> <span class=\"treasure-table-link\" data-table-name=\"Crabe des Bois\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Crabe des Bois]</span>"
   },
   {
@@ -96,7 +96,7 @@
     "armureObscurite": 2,
     "armureDivin": 0,
     "armureMalefique": 0,
-    "abilites": "Attaque : <span class=\"spell-link\" data-spell=\"Volée de pierres\" data-category=\"Sorts de Mage\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Volée de pierres</span> (5 dégâts)  <br>Soin : <span class=\"spell-link\" data-spell=\"Soin mineur\" data-category=\"Sorts de Monstres\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Soin mineur</span> <br> Alteration: \n<span class=\"spell-link\" data-spell=\"Accroche terrestre\" data-category=\"Sorts d'Enchanteur\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Accroche terrestre</span>",
+    "abilites": "Attaque : <span class=\"spell-link\" data-spell=\"Volée de pierres\" data-category=\"Sorts de Mage\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Volée de pierres</span> (5 dégâts)  <br>Soin : <span class=\"spell-link\" data-spell=\"Soin mineur\" data-category=\"Sorts de Monstres\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Soin mineur</span> <br> Altération : <span class=\"spell-link\" data-spell=\"Accroche terrestre\" data-category=\"Sorts d'Enchanteur\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Accroche terrestre</span>",
     "butin": "<strong>Butin:</strong> <span class=\"treasure-table-link\" data-table-name=\"Groinka\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Groinka]</span>"
   },
   {
@@ -121,7 +121,7 @@
     "armureObscurite": 0,
     "armureDivin": 0,
     "armureMalefique": 0,
-    "abilites": "<strong>Volant</strong>: Nécessite de sauter pour attaque au corps à corps.<br><strong>Dard: </strong> Inflige 5 dégâts physiques + 3 <span style=\"color: #22c55e; font-weight: bold;\">Air</span>. Critique : <span class=\"etat-link\" data-etat=\"Empoisonné\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Empoisonné</span> 1 , 5 tours",
+    "abilites": "<strong>Volant</strong>: Nécessite de sauter pour attaque au corps à corps.<br><strong>Dard :</strong> Inflige 5 dégâts physiques + 3 <span style=\"color: #22c55e; font-weight: bold;\">Air</span>. Critique : <span class=\"etat-link\" data-etat=\"Empoisonné\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Empoisonné</span> 1 , 5 tours",
     "butin": "<strong>Butin:</strong> <span class=\"treasure-table-link\" data-table-name=\"Guêpe géante\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Guêpe géante]</span>"
   },
   {
@@ -196,7 +196,7 @@
     "armureObscurite": 0,
     "armureDivin": 0,
     "armureMalefique": 0,
-    "abilites": "<strong>Morsure venimeuse:</strong> Inflige 3 dégâts Physiques. <br> Si (Résistance altérations &lt; 2)  + <span title=\"Des dégâts sont appliqués à chaque début de tour du lanceur, réduits ni par l'armure physique ni par l'armure élémentaire.\">Empoisonné</span>1 pendant 3 tours.<br><br>",
+    "abilites": "<strong>Morsure venimeuse:</strong> Inflige 3 dégâts Physiques. <br> Si (Résistance altérations &lt; 2)  + <span class=\"etat-link\" data-etat=\"Empoisonné\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Empoisonné</span> 1 pendant 3 tours.",
     "butin": "<strong>Butin:</strong> <span class=\"treasure-table-link\" data-table-name=\"Serpent de la forêt\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Serpent de la forêt]</span>"
   },
   {
@@ -221,7 +221,7 @@
     "armureObscurite": 5,
     "armureDivin": 0,
     "armureMalefique": 0,
-    "abilites": "<strong>Volant</strong>: Nécessite de sauter pour attaque au corps à corps.<br><strong>Morsure: </strong> inflige 4 physique.\n<br><strong>Vent aveuglant: </strong> Portée 6m, esquivable, inflige 4 <span style=\"color: #22c55e; font-weight: bold;\">Air</span>. Si (Résistance altérations &lt; 2) <span class=\"etat-link\" data-etat=\"Aveuglé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Aveuglé</span>",
+    "abilites": "<strong>Volant</strong>: Nécessite de sauter pour attaque au corps à corps.<br><strong>Morsure :</strong> Inflige 4 physique.\n<br><strong>Vent aveuglant :</strong> Portée 6m, esquivable, inflige 4 <span style=\"color: #22c55e; font-weight: bold;\">Air</span>. Si (Résistance altérations &lt; 2) <span class=\"etat-link\" data-etat=\"Aveuglé\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Aveuglé</span>",
     "butin": "<strong>Butin:</strong> <span class=\"treasure-table-link\" data-table-name=\"Scarabée géant\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Scarabée géant]</span>"
   },
   {
@@ -272,7 +272,7 @@
     "armureObscurite": 5,
     "armureDivin": 0,
     "armureMalefique": 5,
-    "abilites": "Double attaque.<br><strong>Attaque basique:</strong> Inflige 7 dégâts physiques. <br><strong>Hurlement:</strong> Tous les adversaires à 15m, avec Résistance altérations < 4, sont <span class=\"etat-link\" data-etat=\"Affaibli\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Affaibli</span>.  \n<br><b>Repoussoir</b>: Repousse une cible à 9m. Inflige 5 dégâts.\n<br><b>Appel </b>: Hurle et fait venir 2 <span class=\"monster-link\" data-monster=\"Ours des Bois\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ours des Bois</span>.\n<br><b>Tremblement de terre </b>: Tous les adversaires à 15m, 7 dégâts <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> , critique 12.",
-    "butin": "<strong>Butin:</strong> <span class=\"treasure-table-link\" data-table-name=\"Boss forêt\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Boss forêt]</span>"
+    "abilites": "Double attaque.<br><strong>Attaque basique:</strong> Inflige 7 dégâts physiques. <br><strong>Hurlement:</strong> Tous les adversaires à 15m, avec Résistance altérations < 4, sont <span class=\"etat-link\" data-etat=\"Affaibli\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Affaibli</span>.  \n<br><strong>Repoussoir</strong> : Repousse une cible à 9m. Inflige 5 dégâts.\n<br><strong>Appel</strong> : Hurle et fait venir 2 <span class=\"monster-link\" data-monster=\"Ours des Bois\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ours des Bois</span>.\n<br><strong>Tremblement de terre</strong> : Tous les adversaires à 15m, 7 dégâts <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>, critique 12.",
+    "butin": "<strong>Butin:</strong> <span class=\"treasure-table-link\" data-table-name=\"Boss Forêt\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Boss Forêt]</span>"
   }
 ]

@@ -5,7 +5,7 @@
   "sections": [
     {
       "type": "intro",
-      "content": "Lorsque un joueur subit un état, vous pouvez prendre une carte ou note pour avoir un rappel de l'effet. De plus, si c'est un état à durée limitée, vous pouvez prendre un dé et le placer face au nombre de tour restant (en n'oubliant pas de changer sa valeur chaque début de tour).<br> Quand vous infligez des effets/altérations à un monstre, vous pouvez également utiliser un dé pour rappel (potentiellement d'une autre couleur, pour aider).\n<br>"
+      "content": "Lorsqu'un joueur subit un état, vous pouvez prendre une carte ou note pour avoir un rappel de l'effet. De plus, si c'est un état à durée limitée, vous pouvez prendre un dé et le placer face au nombre de tour restant (en n'oubliant pas de changer sa valeur chaque début de tour).<br> Quand vous infligez des effets/altérations à un monstre, vous pouvez également utiliser un dé pour rappel (potentiellement d'une autre couleur, pour aider).\n<br>"
     },
     {
       "type": "card",
@@ -127,7 +127,7 @@
       "id": "section-berserker",
       "type": "card",
       "title": "Berserker",
-      "content": "Les chances de coup critiques physiques sont augmentés de 5.<br><br>Incapable d'esquiver ou d'utiliser des sorts/objets.<br><br>L'armure physique et les armures élémentaires sont à 0."
+      "content": "Les chances de coups critiques physiques sont augmentées de 5.<br><br>Incapable d'esquiver ou d'utiliser des sorts/objets.<br><br>L'armure physique et les armures élémentaires sont à 0."
     },
     {
       "id": "section-soul",

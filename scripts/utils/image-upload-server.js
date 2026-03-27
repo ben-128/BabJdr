@@ -293,7 +293,6 @@ const server = http.createServer(async (req, res) => {
             case '.svg': contentType = 'image/svg+xml'; break;
             case '.ico': contentType = 'image/x-icon'; break;
             case '.pdf': contentType = 'application/pdf'; break;
-            case '.mp3': contentType = 'audio/mpeg'; break;
             case '.html': contentType = 'text/html'; break;
         }
 

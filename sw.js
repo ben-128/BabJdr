@@ -85,12 +85,10 @@ const STATIC_ASSETS = [
   '/data/tables-tresors-page-desc.json'
 ];
 
-// Assets that can be cached on demand (images, audio, etc.)
+// Assets that can be cached on demand (images, etc.)
 const RUNTIME_CACHE_PATTERNS = [
   /\/data\/images\/.*/,
-  /\/data\/Musiques\/.*/,
   /\.(?:png|jpg|jpeg|gif|svg|webp|ico)$/,
-  /\.(?:mp3|wav|ogg|m4a)$/,
   /https:\/\/fonts\.googleapis\.com/,
   /https:\/\/fonts\.gstatic\.com/,
   /https:\/\/i\.ibb\.co/
@@ -170,9 +168,6 @@ self.addEventListener('fetch', (event) => {
   if (isStaticAsset(request.url)) {
     // Static assets: Cache First strategy
     event.respondWith(cacheFirstStrategy(request));
-  } else if (isAudioAsset(request.url)) {
-    // Audio files: Cache First for instant playback of previously played tracks
-    event.respondWith(audioCacheFirstStrategy(request));
   } else if (isRuntimeCacheable(request.url)) {
     // Runtime assets (images, fonts): Network First with cache fallback
     event.respondWith(networkFirstStrategy(request));
@@ -207,81 +202,6 @@ async function cacheFirstStrategy(request) {
     console.log('⚠️ Cache First failed for:', request.url);
     throw error;
   }
-}
-
-// Audio Cache First - optimized for audio streaming with Range Request support
-async function audioCacheFirstStrategy(request) {
-  const cache = await caches.open(RUNTIME_CACHE_NAME);
-
-  // Check if we have a cached full response (not a Range response)
-  const cachedResponse = await cache.match(request, { ignoreSearch: true });
-
-  if (cachedResponse) {
-    // If the request is a Range request, we need to handle it specially
-    const rangeHeader = request.headers.get('Range');
-    if (rangeHeader && cachedResponse.status === 200) {
-      // Serve partial content from cached full response
-      return handleRangeRequest(cachedResponse, rangeHeader);
-    }
-    return cachedResponse;
-  }
-
-  // Not in cache, fetch from network
-  try {
-    // Always fetch the full file for caching (not Range request)
-    const fullRequest = new Request(request.url, {
-      method: request.method,
-      headers: new Headers(request.headers),
-      mode: request.mode,
-      credentials: request.credentials,
-      redirect: request.redirect
-    });
-    // Remove Range header to get full file for caching
-    fullRequest.headers.delete('Range');
-
-    const networkResponse = await fetch(request); // Use original request for now
-
-    // Cache the response if it's a full 200 response
-    if (networkResponse.status === 200) {
-      cache.put(request.url, networkResponse.clone());
-    }
-
-    return networkResponse;
-  } catch (error) {
-    console.log('Audio fetch failed:', request.url);
-    throw error;
-  }
-}
-
-// Handle Range requests from cached full audio files
-async function handleRangeRequest(response, rangeHeader) {
-  const arrayBuffer = await response.arrayBuffer();
-  const bytes = new Uint8Array(arrayBuffer);
-  const total = bytes.length;
-
-  // Parse Range header (e.g., "bytes=0-" or "bytes=100-200")
-  const rangeMatch = rangeHeader.match(/bytes=(\d*)-(\d*)/);
-  if (!rangeMatch) {
-    return new Response(bytes, {
-      status: 200,
-      headers: response.headers
-    });
-  }
-
-  const start = rangeMatch[1] ? parseInt(rangeMatch[1], 10) : 0;
-  const end = rangeMatch[2] ? parseInt(rangeMatch[2], 10) : total - 1;
-
-  const slicedBytes = bytes.slice(start, end + 1);
-
-  return new Response(slicedBytes, {
-    status: 206,
-    headers: {
-      'Content-Type': response.headers.get('Content-Type') || 'audio/mpeg',
-      'Content-Range': `bytes ${start}-${end}/${total}`,
-      'Content-Length': slicedBytes.length,
-      'Accept-Ranges': 'bytes'
-    }
-  });
 }
 
 // Network First - for dynamic content with cache fallback
@@ -339,10 +259,6 @@ async function htmlNetworkFirstStrategy(request) {
 
 function isStaticAsset(url) {
   return STATIC_ASSETS.some(asset => url.endsWith(asset) || url.includes(asset));
-}
-
-function isAudioAsset(url) {
-  return /\.(?:mp3|wav|ogg|m4a)$/i.test(url) || /\/data\/Musiques\//i.test(url);
 }
 
 function isRuntimeCacheable(url) {

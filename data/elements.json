@@ -31,7 +31,7 @@
       "type": "card",
       "id": "element-attack",
       "title": "Attaque",
-      "content": "<p>Une attaque ne peut avoir qu'<strong>un seul élément</strong> (en plus d'éventuels dégâts physiques). Si plusieurs sorts/équipements/bonus donnent un élément à l'attaque, le héros devra choisir quel est l'élément utilisé.</p> Plusieurs bonus d'un même élément peuvent se cumuler.\n<br><br> Si l'élément rattaché à une attaque physiques est opposé à l'élément d'affiliation de la cible, alors les dégâts élémentaires sont doublés.",
+      "content": "<p>Une attaque ne peut avoir qu'<strong>un seul élément</strong> (en plus d'éventuels dégâts physiques). Si plusieurs sorts/équipements/bonus donnent un élément à l'attaque, le héros devra choisir quel est l'élément utilisé.</p> Plusieurs bonus d'un même élément peuvent se cumuler.\n<br><br> Si l'élément rattaché à une attaque physique est opposé à l'élément d'affiliation de la cible, alors les dégâts élémentaires sont doublés.",
       "deletable": true,
       "sectionName": "Attaque"
     }

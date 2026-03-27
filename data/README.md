@@ -41,11 +41,7 @@ This directory contains all JSON data files and multimedia assets for the JDR-BA
 - **`campagne.json`** - Campaign management tools
 - **`gestion-des-ressources.json`** - Resource management rules
 
-### 🎵 Audio & Multimedia
-- **`audio.json`** - Music system configuration
-- **`audio-config.json`** - Audio system settings
-- **`Musiques/`** - Audio assets directory (42+ MP3 files)
-  - Categories: Auberge, Creation, Foret, Mine, Voyage, Autre
+
 
 ### ⚙️ Configuration & Navigation
 - **`static-pages-config.json`** - Static page definitions (13 pages)
@@ -127,19 +123,6 @@ FOREST CREATURES (matching monstres.json entries):
 └── Monstre_Forêt_Boss.png            # Boss Forêt (elite encounter)
 ```
 
-### Audio Assets (`/Musiques/`) - 42+ MP3 Files
-```
-Ambient Music by Category:
-├── Auberge/        # Tavern atmosphere (4 tracks)
-├── Creation/       # Character creation (3 tracks)
-├── Foret/          # Forest exploration (3 tracks)
-├── Mine/           # Underground/dungeon (3 tracks)
-├── Voyage/         # Travel music (2 tracks)
-└── Autre/          # Miscellaneous/boss themes (27+ tracks)
-    ├── BOS*.mp3    # Boss encounter themes
-    └── MEL*.mp3    # Melodic ambient tracks
-```
-
 ## 🔧 Content Type System
 
 All content types are defined in `/js/config/contentTypes.js` with:
@@ -201,7 +184,6 @@ Subclasses can have multiple images:
 - **Monsters**: 10 creatures with full RPG stat blocks
 - **Treasure Tables**: Advanced fourchette system for loot generation
 - **Images**: 105+ multimedia assets (characters, spells, equipment, monsters)
-- **Audio**: 42+ ambient music tracks organized by scenario
 - **Total Content Items**: 200+ individual pieces of game content
 
 ### File Sizes (Approximate)
@@ -210,9 +192,7 @@ Subclasses can have multiple images:
 - `classes.json`: ~15-20KB (class/subclass data)
 - `monstres.json`: ~12-18KB (monster stat blocks)
 - `objets.json`: ~15-25KB (equipment with tags)
-- `audio.json`: ~8-15KB (music configuration)
 - Image assets: ~5-8MB total (105+ images)
-- Audio assets: ~50-100MB total (42+ MP3 files)
 
 ## 🔍 Development Guidelines
 
@@ -228,7 +208,6 @@ Subclasses can have multiple images:
 
 ### Advanced Features
 - **Treasure Table System**: HTML link generation for GM tools
-- **Audio Integration**: Ambient music system with playlist management
 - **Campaign Tools**: Multi-level content organization
 - **Tag-Based Filtering**: AND/OR logic for equipment and spell filtering
 - **Dual-Image Support**: Multiple images per subclass

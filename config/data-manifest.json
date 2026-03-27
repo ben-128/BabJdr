@@ -13,7 +13,6 @@
     { "type": "json", "file": "custom-page-descriptions.json", "global": "CUSTOM_PAGE_DESCRIPTIONS", "dataKey": "customPageDescriptions" },
     { "type": "json", "file": "monstres-page-desc.json", "global": "MONSTRES_PAGE_DESC" },
     { "type": "json", "file": "tables-tresors-page-desc.json", "global": "TABLES_TRESORS_PAGE_DESC" },
-    { "type": "images", "file": "images.json" },
-    { "type": "json", "file": "audio-config.json", "global": "AUDIO_CONFIG" }
+    { "type": "images", "file": "images.json" }
   ]
 }

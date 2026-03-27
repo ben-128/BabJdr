@@ -33,7 +33,6 @@ This directory contains the modular JavaScript architecture of the JDR-BAB appli
 
 ### Feature Modules (`/modules/`, `/features/`)
 - **`images.js`** - Asset management and dual-mode image handling
-- **`audio.js`** - Audio system with ambient music playlists
 - **`SpellFilter.js`** - Advanced filtering system with AND/OR logic
 - **`TablesTresorsManager.js`** - **TREASURE TABLE SYSTEM** with HTML link generation
 - **`DynamicCentering.js`** - UI centering and layout features
@@ -64,8 +63,7 @@ This directory contains the modular JavaScript architecture of the JDR-BAB appli
 9. js/core.js                   // JdrApp namespace and initialization
 10. js/utils.js                 // DOM and utility functions
 11. js/modules/images.js        // Asset management
-12. js/modules/audio.js         // Audio system
-13. js/storage.js               // Persistence layer
+12. js/storage.js               // Persistence layer
 14. js/router.js                // Navigation system
 15. js/renderer.js              // Content rendering 
 16. js/editor.js                // Editor UI and interactions

@@ -133,7 +133,6 @@
 - **Configuration Files**:
   - `static-pages-config.json` - Static page definitions
   - `toc-structure.json` - Table of contents and navigation structure
-  - `audio-config.json` - Audio system configuration
   - `images.json` - Image metadata and categories
   - `favoris.json` - User favorites storage structure
 
@@ -152,7 +151,6 @@
   - `scroll-optimizations.css` - Performance optimizations
 
 ### 🔧 **Advanced Modules & Utilities**
-- **Audio System**: `js/modules/audio.js` - Background music with playlist management
 - **Image Management**: `js/modules/images.js` - Image loading, optimization and display
 - **PDF Generation**: `js/libs/jspdf-loader.js` - Character sheet PDF generation
 - **Content Factory**: `js/factories/ContentFactory.js` - Dynamic content creation
@@ -227,12 +225,7 @@ RELATED: data/ (add new JSON file)
 - **Base Entity**: `js/core/BaseEntity.js` provides CRUD operations
 - **Backup System**: `Backups/` directory for data safety
 
-## 🎵 **Audio System**
-- **Audio Manager**: `js/modules/audio.js` - Complete audio player with playlist support
-- **Music Files**: `data/Musiques/` directory organized by themes
-- **Configuration**: `data/audio-config.json` - Volume, autoplay, folder icons
-- **Categories**: Auberge, Creation, Foret, Mine, Voyage, Autre
-- **Playlist Generator**: `data/Musiques/update-playlists.js`
+
 
 ## 🖼️ **Image System**
 - **Image Manager**: `js/modules/images.js` - Image loading and optimization
@@ -258,7 +251,6 @@ RELATED: data/ (add new JSON file)
 | Edit content | `UnifiedEditor.js` | `CardBuilder.js`, `BaseEntity.js` |
 | Add new page | `router.js` | `PageManager.js`, `toc-structure.json` |
 | Style changes | `css/components.css` | `css/theme.css` |
-| Add audio | `audio.js` | `audio-config.json`, `data/Musiques/` |
 | Performance fix | `ScrollOptimizer.js` | `DynamicCentering.js`, `utils.js` |
 | Treasure tables | `TablesTresorsManager.js` | `TableTresorFilters.js` |
 | Device detection | `device-detection.js` | `ResponsiveManager.js` |

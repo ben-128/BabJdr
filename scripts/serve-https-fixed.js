@@ -22,9 +22,7 @@ const mimeTypes = {
   '.svg': 'image/svg+xml',
   '.jpg': 'image/jpeg',
   '.jpeg': 'image/jpeg',
-  '.gif': 'image/gif',
-  '.mp3': 'audio/mpeg',
-  '.wav': 'audio/wav'
+  '.gif': 'image/gif'
 };
 
 function serveFile(filePath, res) {

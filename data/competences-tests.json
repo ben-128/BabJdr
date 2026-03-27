@@ -30,7 +30,7 @@
         {
           "type": "card",
           "id": "critique",
-          "title": "Echec ou réussite critique",
+          "title": "Échec ou réussite critique",
           "content": "<p>Un test largement réussi ou largement raté, peuvent déclencher des effets supplémentaires.<br>Par exemple, un héros avec peu de hardiesse et sans efforts, pourrait casser son arme en tentant de casser un rocher solide.</p>",
           "deletable": true,
           "sectionName": "Nouvelle Section"

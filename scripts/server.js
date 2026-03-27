@@ -46,7 +46,6 @@ const server = http.createServer((req, res) => {
     case '.svg': contentType = 'image/svg+xml'; break;
     case '.ico': contentType = 'image/x-icon'; break;
     case '.pdf': contentType = 'application/pdf'; break;
-    case '.mp3': contentType = 'audio/mpeg'; break;
   }
 
   fs.readFile(filePath, (err, content) => {

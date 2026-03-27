@@ -25,7 +25,7 @@
         "nom": "Compétence : Brillant",
         "description": "Gagne une compétence rang 2.",
         "prerequis": "<strong> Prérequis :</strong> <br>\n-La compétence rang 1.\n<br>-Niveau 5",
-        "cout": "1 points de don"
+        "cout": "1 point de don"
       },
       {
         "nom": "Compétence : Doué",
@@ -37,7 +37,7 @@
         "nom": "Compétence : Prodigieux",
         "description": "Gagne une compétence rang 3.",
         "prerequis": "<strong> Prérequis :</strong> <br>-La compétence rang 2.<br>\n- Niveau 10",
-        "cout": "1 points de don"
+        "cout": "1 point de don"
       },
       {
         "nom": "Doigts agiles",
@@ -79,7 +79,7 @@
         "nom": "Hyperactif",
         "description": "Le héros dispose maintenant de deux actions secondaires par tour.",
         "prerequis": "<strong> Prérequis :</strong> Coordination Rang 2.",
-        "cout": "1 points de don"
+        "cout": "1 point de don"
       },
       {
         "nom": "Main Chanceuse",
@@ -131,7 +131,7 @@
       },
       {
         "nom": "Nouvelle affinité",
-        "description": "Le héros change son élément d'affiliation pour un nouvel élément de son choix parmi : <span style=\"color: #e25822; font-weight: bold;\">Feu</span>, <span style=\"color: #2b6cb0; font-weight: bold;\">Eau</span>, <span style=\"color: #8b5e34; font-weight: bold;\">Terre</span>, <span style=\"color: #22c55e; font-weight: bold;\">Air</span>, <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span>, <span style=\"color: #1a1a1a; font-weight: bold; background: rgba(180, 180, 200, 0.6); padding: 2px 4px; border-radius: 3px;\">Nuit</span>, <span style=\"color: #d0d0d0; font-weight: bold; background: rgba(0, 0, 0, 0.4); padding: 2px 4px; border-radius: 3px;\">Divin</span>, <span style=\"color: #a855f7; font-weight: bold;\">Maléfique</span>.",
+        "description": "Le héros change son élément d'affiliation pour un nouvel élément de son choix parmi : <span style=\"color: #e25822; font-weight: bold;\">Feu</span>, <span style=\"color: #2b6cb0; font-weight: bold;\">Eau</span>, <span style=\"color: #8b5e34; font-weight: bold;\">Terre</span>, <span style=\"color: #22c55e; font-weight: bold;\">Air</span>, <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span>, <span style=\"color: #1a1a1a; font-weight: bold; background: rgba(180, 180, 200, 0.6); padding: 2px 4px; border-radius: 3px;\">Nuit</span>, <span style=\"color: #d0d0d0; font-weight: bold; background: rgba(0, 0, 0, 0.4); padding: 2px 4px; border-radius: 3px;\">Divin</span>, <span style=\"color: #dc2626; font-weight: bold;\">Maléfique</span>.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -233,7 +233,7 @@
       },
       {
         "nom": "Cri intimidant",
-        "description": "Le guerrier peut utiliser une action principale, pour effrayer toutes les cibles à moins de 12m, qui passeront dans l'état <span class=\"etat-link\" data-etat=\"Endormi/assommé/Effrayé\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">effrayé</span> pendant 1 tour.\n\n<br>\nLes cibles ne peuvent  être effrayés qu'une seule fois par combat.\n<br><br>Sans effet sur les cibles ayant une Résistance altérations > 2.<br> Ce chiffre peut être augmenté via un test de compétence éloquence, de 3 par point/effort.",
+        "description": "Le guerrier peut utiliser une action principale, pour effrayer toutes les cibles à moins de 12m, qui passeront dans l'état <span class=\"etat-link\" data-etat=\"Endormi/assommé/Effrayé\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">effrayé</span> pendant 1 tour.\n\n<br>\nLes cibles ne peuvent être effrayées qu'une seule fois par combat.\n<br><br>Sans effet sur les cibles ayant une Résistance altérations > 2.<br> Ce chiffre peut être augmenté via un test de compétence éloquence, de 3 par point/effort.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -324,13 +324,13 @@
       {
         "nom": "Coup de maître",
         "image": "https://i.ibb.co/6RbVDHLV/Coup-Maitre-small.png",
-        "description": "Une fois par combat et par arme, le guerrier peut utiliser une action secondaire pour déclencher un effet spécial sur sa prochaine attaque, selon le type d'arme utilisé :<br><br><b>Arc :</b> L'attaque est impossible à esquiver, ne peut pas faire d'échec critique, et les chances de coup critique sont augmentées de 2.<br><br><b>Arme exotique :</b> Ajoute la <img src=\"https://i.ibb.co/HfthhzSF/stat-Chance.png\" alt=\"Chance\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Chance aux dégâts.<br><br><b>Autre arme à deux mains :</b> L'attaque inflige ses dégâts à toutes les cibles à moins de 3m.<br><br><b>Autre arme à une main :</b> La cible passe dans l'état <span class=\"etat-link\" data-etat=\"Empoisonné\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ensanglanté</span> (Force/3, arrondi à l'inférieur) pendant 3 tours.",
+        "description": "Une fois par combat et par arme, le guerrier peut utiliser une action secondaire pour déclencher un effet spécial sur sa prochaine attaque, selon le type d'arme utilisé :<br><br><b>Arc :</b> L'attaque est impossible à esquiver, ne peut pas faire d'échec critique, et les chances de coup critique sont augmentées de 2.<br><br><b>Arme exotique :</b> Ajoute la <img src=\"https://i.ibb.co/HfthhzSF/stat-Chance.png\" alt=\"Chance\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Chance aux dégâts.<br><br><b>Autre arme à deux mains :</b> L'attaque inflige ses dégâts à toutes les cibles à moins de 3m.<br><br><b>Autre arme à une main :</b> La cible passe dans l'état <span class=\"etat-link\" data-etat=\"Ensanglanté\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ensanglanté</span> (Force/3, arrondi à l'inférieur) pendant 3 tours.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
       {
         "nom": "Rage du berserker",
-        "description": "Une fois par combat, le guerrier peut utiliser une action secondaire pour entrer dans l'état <span class=\"etat-link\" data-etat=\"Berserker\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Berserker</span>.<br><br>L'état dure jusqu'à la fin du combat ou jusqu'à ce que le guerrier utilise une nouvelle action secondaire en sortir.",
+        "description": "Une fois par combat, le guerrier peut utiliser une action secondaire pour entrer dans l'état <span class=\"etat-link\" data-etat=\"Berserker\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Berserker</span>.<br><br>L'état dure jusqu'à la fin du combat ou jusqu'à ce que le guerrier utilise une nouvelle action secondaire pour en sortir.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       }
@@ -522,7 +522,7 @@
       },
       {
         "nom": "Résistance élémentaire 2",
-        "description": "Le héros gagne 5 d'armure élémentaire de <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span>, <span style=\"color: #1a1a1a; font-weight: bold; background: rgba(180, 180, 200, 0.6); padding: 2px 4px; border-radius: 3px;\">Nuit</span>, <span style=\"color: #d0d0d0; font-weight: bold; background: rgba(0, 0, 0, 0.4); padding: 2px 4px; border-radius: 3px;\">Divin</span>, <span style=\"color: #a855f7; font-weight: bold;\">Maléfique</span>.",
+        "description": "Le héros gagne 5 d'armure élémentaire de <span style=\"color: #ffd700; font-weight: bold;\">Lumière</span>, <span style=\"color: #1a1a1a; font-weight: bold; background: rgba(180, 180, 200, 0.6); padding: 2px 4px; border-radius: 3px;\">Nuit</span>, <span style=\"color: #d0d0d0; font-weight: bold; background: rgba(0, 0, 0, 0.4); padding: 2px 4px; border-radius: 3px;\">Divin</span>, <span style=\"color: #dc2626; font-weight: bold;\">Maléfique</span>.",
         "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
@@ -606,7 +606,7 @@
       },
       {
         "nom": "Mécréants",
-        "description": "Les dégâts physiques infligés aux créatures de l'élément  <span style=\"color: #a855f7; font-weight: bold;\">Maléfique</span> sont doublés (la multiplication est appliquée avant l'application de l'armure physique).",
+        "description": "Les dégâts physiques infligés aux créatures de l'élément  <span style=\"color: #dc2626; font-weight: bold;\">Maléfique</span> sont doublés (la multiplication est appliquée avant l'application de l'armure physique).",
         "prerequis": "<strong> Prérequis :</strong>-",
         "cout": "1 point de don"
       },
@@ -648,7 +648,7 @@
     "dons": [
       {
         "nom": "Altération risquée",
-        "description": "Lorsque un sort d'altération magique est effectué alors que la cible est à 3m, ses chances de critiques sont doublées.",
+        "description": "Lorsqu'un sort d'altération magique est effectué alors que la cible est à 3m, ses chances de critiques sont doublées.",
         "prerequis": "<strong> Prérequis :</strong>-",
         "cout": "1 point de don"
       },
@@ -748,7 +748,7 @@
           },
           {
             "nom": "Maîtrise des sorts de feu",
-            "description": "Choisir un sort de feu de n'importe quelle classe (qui respecte les prérequis de niveau). Il devient lancable à volonté.",
+            "description": "Choisir un sort de feu de n'importe quelle classe (qui respecte les prérequis de niveau). Il devient lançable à volonté.",
             "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Feu.<br>",
             "cout": "1 point de don"
           }
@@ -766,7 +766,7 @@
           },
           {
             "nom": "Maîtrise des sorts d'eau",
-            "description": "Choisir un sort d'eau de n'importe quelle classe (qui respecte les prérequis de niveau). Il devient lancable à volonté.",
+            "description": "Choisir un sort d'eau de n'importe quelle classe (qui respecte les prérequis de niveau). Il devient lançable à volonté.",
             "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Eau.<br>",
             "cout": "1 point de don"
           }
@@ -778,13 +778,13 @@
         "dons": [
           {
             "nom": "Porté par les vents",
-            "description": "Une fois par jour, permet d'effectuer un deuxième action principale pendant son tour.",
+            "description": "Une fois par jour, permet d'effectuer une deuxième action principale pendant son tour.",
             "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Air.<br>Don unique.",
             "cout": "1 point de don"
           },
           {
             "nom": "Maîtrise des sorts d'air",
-            "description": "Choisir un sort d'air de n'importe quelle classe (qui respecte les prérequis de niveau). Il devient lancable à volonté.",
+            "description": "Choisir un sort d'air de n'importe quelle classe (qui respecte les prérequis de niveau). Il devient lançable à volonté.",
             "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Air.<br>",
             "cout": "1 point de don"
           }
@@ -802,7 +802,7 @@
           },
           {
             "nom": "Maîtrise des sorts de terre",
-            "description": "Choisir un sort de terre de n'importe quelle classe (qui respecte les prérequis de niveau). Il devient lancable à volonté.",
+            "description": "Choisir un sort de terre de n'importe quelle classe (qui respecte les prérequis de niveau). Il devient lançable à volonté.",
             "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Terre.",
             "cout": "1 point de don"
           }
@@ -814,13 +814,13 @@
         "dons": [
           {
             "nom": "Faveur des Ombres",
-            "description": "Tant que c'est la nuit ou que le héros se trouve dans une zone sans lumière, il lui est impossible de faire un echec critique sur un sort ou une attaque.",
+            "description": "Tant que c'est la nuit ou que le héros se trouve dans une zone sans lumière, il lui est impossible de faire un échec critique sur un sort ou une attaque.",
             "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Nuit.<br>Don unique.",
             "cout": "1 point de don"
           },
           {
             "nom": "Maîtrise des sorts de nuit",
-            "description": "Choisir un sort de nuit de n'importe quelle classe (qui respecte les prérequis de niveau). Il devient lancable à volonté.",
+            "description": "Choisir un sort de nuit de n'importe quelle classe (qui respecte les prérequis de niveau). Il devient lançable à volonté.",
             "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Nuit.",
             "cout": "1 point de don"
           }
@@ -837,8 +837,8 @@
             "cout": "1 point de don"
           },
           {
-            "nom": "Maîtrise des sorts lumière",
-            "description": "Choisir un sort de lumière de n'importe quelle classe (qui respecte les prérequis de niveau). Il devient lancable à volonté.",
+            "nom": "Maîtrise des sorts de lumière",
+            "description": "Choisir un sort de lumière de n'importe quelle classe (qui respecte les prérequis de niveau). Il devient lançable à volonté.",
             "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Lumière.",
             "cout": "1 point de don"
           }
@@ -855,8 +855,8 @@
             "cout": "1 point de don"
           },
           {
-            "nom": "Maîtrise des sorts de divin",
-            "description": "Choisir un sort de divin de n'importe quelle classe (qui respecte les prérequis de niveau). Il devient lancable à volonté.",
+            "nom": "Maîtrise des sorts divins",
+            "description": "Choisir un sort de divin de n'importe quelle classe (qui respecte les prérequis de niveau). Il devient lançable à volonté.",
             "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Divin.",
             "cout": "1 point de don"
           }
@@ -874,7 +874,7 @@
           },
           {
             "nom": "Maîtrise des sorts de maléfique",
-            "description": "Choisir un sort de maléfique de n'importe quelle classe (qui respecte les prérequis de niveau). Il devient lancable à volonté.",
+            "description": "Choisir un sort de maléfique de n'importe quelle classe (qui respecte les prérequis de niveau). Il devient lançable à volonté.",
             "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Maléfique.<br>",
             "cout": "1 point de don"
           }

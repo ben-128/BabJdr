@@ -199,7 +199,6 @@ data/
 ├── monstres.json          # Creature bestiary (10 monsters with full stats)
 ├── tables-tresors.json    # Treasure table system with fourchettes
 ├── images.json            # Asset management (105+ images)
-├── audio.json, audio-config.json # Music and ambient audio system
 ├── static-pages-config.json # Static page definitions (13 pages)
 ├── toc-structure.json     # Navigation structure (5 main sections)
 ├── elements.json          # Elemental system (8 elements, 4 opposing pairs)
@@ -212,8 +211,7 @@ data/
 ├── traumas.json           # Trauma system
 ├── campagne.json          # Campaign management tools
 ├── custom-page-descriptions.json # Custom page content
-├── monstres-page-desc.json, tables-tresors-page-desc.json # Page descriptions
-└── Musiques/ (42+ audio files) # Ambient music by category
+└── monstres-page-desc.json, tables-tresors-page-desc.json # Page descriptions
 ```
 
 **Content Type System**: All content types are defined in `js/config/contentTypes.js` with:
@@ -242,10 +240,8 @@ data/images/
 │       ├── Herbs/        # Herbal remedies (8 images)
 │       ├── Pots/         # Potions (2 images)
 │       └── SpellCasting/ # Magical wands (8+ elemental variants)
-├── Monstres/             # Monster imagery (10+ images)
-│   └── foret/            # Forest creatures with boss variants
-└── Musiques/             # Audio assets (42+ MP3 files)
-    ├── Auberge/, Creation/, Foret/, Mine/, Voyage/, Autre/
+└── Monstres/             # Monster imagery (10+ images)
+    └── foret/            # Forest creatures with boss variants
 ```
 
 **Image Management System**:
@@ -379,8 +375,7 @@ Modules must be loaded in exact dependency order:
 9. js/core.js                   // JdrApp namespace and initialization
 10. js/utils.js                 // DOM and utility functions
 11. js/modules/images.js        // Asset management
-12. js/modules/audio.js         // Audio system
-13. js/storage.js               // Persistence layer
+12. js/storage.js               // Persistence layer
 14. js/router.js                // Navigation system
 15. js/renderer.js              // Content rendering 
 16. js/editor.js                // Editor UI and interactions
@@ -480,7 +475,6 @@ console.log(html);
    - **27 JSON data files** with complete RPG system (200+ content items)
    - **105+ multimedia assets** with dual-mode URL system
    - **Advanced treasure table system** with fourchettes management
-   - **Complete audio system** with ambient music playlists
    - **Campaign management tools** with hierarchical content structure
 
 3. **Production Features**:
@@ -599,7 +593,7 @@ The codebase includes detailed README files in key directories to help analyze s
 **Read**: [`data/README.md`](data/README.md)  
 - **When**: Working with JSON data, adding content types, understanding content format
 - **Contains**: All 27 data files explained, 105+ images, content type schemas
-- **Key Info**: Complete RPG system (11 spells, 5 classes, 24+ feats, 41+ items, 10 monsters), treasure tables, audio system
+- **Key Info**: Complete RPG system (11 spells, 5 classes, 24+ feats, 41+ items, 10 monsters), treasure tables
 
 #### **Styling & Visual Design**
 **Read**: [`css/README.md`](css/README.md)
@@ -645,9 +639,9 @@ The codebase includes detailed README files in key directories to help analyze s
 2. **Secondary**: [`scripts/README.md`](scripts/README.md) → "Mobile-first standalone build"
 3. **Critical**: Mobile users ONLY access build/JdrBab.html (not dev mode)
 
-#### **"I want to add treasure tables, audio, or campaign features"**
+#### **"I want to add treasure tables or campaign features"**
 1. **Start with**: [`data/README.md`](data/README.md) → "Advanced Features" section
-2. **Reference**: TablesTresorsManager.js, audio system, campaign tools
+2. **Reference**: TablesTresorsManager.js, campaign tools
 3. **Integration**: Dev toolbox provides HTML link generation for treasure tables
 
 ### 📋 Quick Reference Cheat Sheet

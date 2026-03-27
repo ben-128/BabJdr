@@ -47,7 +47,7 @@
       "soustitre": "L'Art des Cristaux",
       "description": "Dans les profondeurs des tours de sorcellerie et des ateliers secrets, les arcanistes façonnent la magie brute en objets tangibles. Maîtres des énergies arcanes, ils <strong>cristallisent le pouvoir mystique</strong> dans des gemmes, des orbes et des catalyseurs capables de canaliser ou déchaîner les forces surnaturelles.",
       "creations": "Cristaux de statistiques, Orbes amplifiant les sorts, gemmes libérant des sortilèges.",
-      "note": "Les arcanistes façonnent des cristaux conférant des bonus permanents, consommables permettant de canaliser la magie même sans être mage, ainsi que des catalyseurs destinés à renforcer les sorts des lanceurs de magie.."
+      "note": "Les arcanistes façonnent des cristaux conférant des bonus permanents, consommables permettant de canaliser la magie même sans être mage, ainsi que des catalyseurs destinés à renforcer les sorts des lanceurs de magie."
     },
     "artisan": {
       "icon": "🔨",
@@ -60,7 +60,7 @@
     "enchanteur": {
       "icon": "✨",
       "nom": "Enchanteur",
-      "soustitre": "L'Art des enchantements",
+      "soustitre": "L'Art des Enchantements",
       "description": "Là où l'arcaniste crée des objets magiques, l'enchanteur <strong>insuffle la magie dans l'existant</strong>. Par des rituels complexes et des incantations anciennes, il tisse des enchantements permanents dans les armes, armures et accessoires, leur conférant des propriétés surnaturelles.",
       "creations": "Armes enflammées, boucliers absorbant les sortilèges, accessoires renforçant l'agilité de son porteur...",
       "prerequis": "L'enchantement nécessite des <em>essences magiques</em> extraites d'objets magiques existants. L'enchanteur doit donc <strong>détruire des objets magiques</strong> pour en récupérer les composants nécessaires à ses rituels.",

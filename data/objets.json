@@ -10,7 +10,7 @@
         "Épée",
         "Deux mains"
       ],
-      "effet": "<strong>Dégâts: </strong> Inflige (4  + Force) points de dégâts physiques.",
+      "effet": "<strong>Dégâts: </strong> Inflige (4 + Force) points de dégâts physiques.",
       "prix": "🔷 <strong>Prix:</strong> 35",
       "poids": "⚖️ <strong>Poids:</strong> 2"
     },
@@ -24,7 +24,7 @@
         "Épée",
         "Une main"
       ],
-      "effet": "<strong>Dégâts: </strong> Inflige (2  + Force) points de dégâts physiques.",
+      "effet": "<strong>Dégâts: </strong> Inflige (2 + Force) points de dégâts physiques.",
       "prix": "🔷 <strong>Prix:</strong> 20",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -38,7 +38,7 @@
         "Une main",
         "Dague"
       ],
-      "effet": "<strong>Dégâts: </strong> Inflige (1  + Force) points de dégâts physiques.",
+      "effet": "<strong>Dégâts: </strong> Inflige (1 + Force) points de dégâts physiques.",
       "prix": "🔷 <strong>Prix:</strong> 10",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -50,9 +50,9 @@
       "tags": [
         "Arme",
         "Deux mains",
-        "Baton"
+        "Bâton"
       ],
-      "effet": "<strong>Dégâts: </strong> Inflige (2  + Force) points de dégâts physiques.\n<br> <strong>Effet: </strong> Si le bâton a été porté toute la journée (sans changement), permet de récupérer 5 points de vie lors d'un repos long.",
+      "effet": "<strong>Dégâts: </strong> Inflige (2 + Force) points de dégâts physiques.\n<br> <strong>Effet: </strong> Si le bâton a été porté toute la journée (sans changement), permet de récupérer 5 points de vie lors d'un repos long.",
       "prix": "🔷 <strong>Prix:</strong> 5",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -64,7 +64,7 @@
       "tags": [
         "Arme",
         "Une main",
-        "Baton"
+        "Bâton"
       ],
       "effet": "<strong>Dégâts: </strong> Inflige (Force) points de dégâts physiques.",
       "prix": "🔷 <strong>Prix:</strong> 10",
@@ -182,7 +182,7 @@
         "Consommable",
         "Magie"
       ],
-      "effet": "<strong>Effet:</strong> Remplace votre prochaine action principale par le sort de mage <span class=\"spell-link\" data-spell=\"Boule de Feu\" data-category=\"Sorts de Mage\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Boule de Feu</span>. <br><i>Le mana et les statistiques du héros sont utilisés.</i>\n    <br><br><strong>Charges :</strong> 3",
+      "effet": "<strong>Effet:</strong> Remplace votre prochaine action principale par le sort de mage <span class=\"spell-link\" data-spell=\"Boule de Feu\" data-category=\"Sorts de Mage\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Boule de Feu</span>. <br><i>Le mana et les statistiques du héros sont utilisés.</i>\n <br><br><strong>Charges :</strong> 3",
       "prix": "🔷 <strong>Prix:</strong> 20",
       "poids": ""
     },
@@ -195,7 +195,7 @@
         "Consommable",
         "Plante"
       ],
-      "effet": "<strong>Effet:</strong> Rend au héros ou à une cible proche une quantité de points de vie égale au niveau d'Intelligence du héros.<br><b>Critique :</b> Points de vie rendus doublés.",
+      "effet": "<strong>Effet:</strong> Rend au héros ou à une cible proche une quantité de points de vie égale au niveau d'Intelligence du héros.<br><strong>Critique :</strong> Points de vie rendus doublés.",
       "prix": "🔷 <strong>Prix:</strong> 15",
       "poids": ""
     },
@@ -203,12 +203,12 @@
       "nom": "Nocteline",
       "numero": 16,
       "image": "https://i.ibb.co/7JpQ7Kr7/Herb2.png",
-      "description": "<i>une plante sombre aux fleurs violettes dont l’essence neutralise les venins et purifie le sang.</i>",
+      "description": "<i>Une plante sombre aux fleurs violettes dont l’essence neutralise les venins et purifie le sang.</i>",
       "tags": [
         "Consommable",
         "Plante"
       ],
-      "effet": "<strong>Prérequis:</strong> Intelligence 5.<br>\n<strong>Effet:</strong> Soigne le héros ou une cible proche du poison. \n<br><b>Critique</b> : Rend également 5 points de vie.",
+      "effet": "<strong>Prérequis:</strong> Intelligence 5.<br>\n<strong>Effet:</strong> Soigne le héros ou une cible proche du poison. \n<br><strong>Critique</strong> : Rend également 5 points de vie.",
       "prix": "🔷 <strong>Prix:</strong> 10",
       "poids": ""
     },
@@ -221,7 +221,7 @@
         "Consommable",
         "Magie"
       ],
-      "effet": "<strong>Effet:</strong> Remplace votre prochaine action principale par le sort d'enchanteur <span class=\"spell-link\" data-spell=\"Lévitation\" data-category=\"Sorts d'Enchanteur\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Lévitation</span>. <br><i>Le mana et les statistiques du héros sont utilisés.</i>\n    <br><br><strong>Charges :</strong> 3",
+      "effet": "<strong>Effet:</strong> Remplace votre prochaine action principale par le sort d'enchanteur <span class=\"spell-link\" data-spell=\"Lévitation\" data-category=\"Sorts d'Enchanteur\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Lévitation</span>. <br><i>Le mana et les statistiques du héros sont utilisés.</i>\n <br><br><strong>Charges :</strong> 3",
       "prix": "🔷 <strong>Prix:</strong> 30",
       "poids": ""
     },
@@ -234,7 +234,7 @@
         "Consommable",
         "Magie"
       ],
-      "effet": "<strong>Effet:</strong> Remplace votre prochaine action principale par le sort d'enchanteur <span class=\"spell-link\" data-spell=\"Sommeil\" data-category=\"Sorts d'Enchanteur\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Sommeil</span>. <br><i>Le mana et les statistiques du héros sont utilisés.</i>\n    <br><br><strong>Charges :</strong> 3",
+      "effet": "<strong>Effet:</strong> Remplace votre prochaine action principale par le sort d'enchanteur <span class=\"spell-link\" data-spell=\"Sommeil\" data-category=\"Sorts d'Enchanteur\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Sommeil</span>. <br><i>Le mana et les statistiques du héros sont utilisés.</i>\n <br><br><strong>Charges :</strong> 3",
       "prix": "🔷 <strong>Prix:</strong> 30",
       "poids": ""
     },
@@ -258,7 +258,7 @@
       "tags": [
         "Nourriture"
       ],
-      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Rend 15 points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'état <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.\n<br><b>Charges :</b> 3",
+      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Rend 15 points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'état <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.\n<br><strong>Charges :</strong> 3",
       "prix": "🔷 <strong>Prix:</strong> 15",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -270,7 +270,7 @@
       "tags": [
         "Nourriture"
       ],
-      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Rend 10 points de vie. <br>Couplé à un sommeil, permet d'éviter l'état <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>. <br>De plus, lorsque consommé, le mangeur ne nécessite plus que 4 heures de sommeil ce jour-ci.\n<br><br><b>Charges :</b> 4",
+      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Rend 10 points de vie. <br>Couplé à un sommeil, permet d'éviter l'état <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>. <br>De plus, lorsque consommé, le mangeur ne nécessite plus que 4 heures de sommeil ce jour-ci.\n<br><br><strong>Charges :</strong> 4",
       "prix": "🔷 <strong>Prix:</strong> 25",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -295,7 +295,7 @@
         "Consommable",
         "Flèche"
       ],
-      "effet": "<b>Effet :</b> Renforce la prochaine attaque à l'arc et lui rajoute +3 (critique : +5) points de dégâts physiques en cas de réussite de l'attaque.\n\n<br><br><b>Charges :</b> 3",
+      "effet": "<strong>Effet :</strong> Renforce la prochaine attaque à l'arc et lui rajoute +3 (critique : +5) points de dégâts physiques en cas de réussite de l'attaque.\n\n<br><br><strong>Charges :</strong> 3",
       "prix": "🔷 <strong>Prix:</strong> 10",
       "poids": ""
     },
@@ -308,7 +308,7 @@
         "Consommable",
         "Flèche"
       ],
-      "effet": "<b>Effet :</b> Renforce la prochaine attaque à l'arc et lui rajoute +5 (critique : +10) points de dégâts élémentaire de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> en cas de réussite de l'attaque.\n\n<br><br><b>Charges :</b> 3",
+      "effet": "<strong>Effet :</strong> Renforce la prochaine attaque à l'arc et lui rajoute +5 (critique : +10) points de dégâts élémentaires de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> en cas de réussite de l'attaque.\n\n<br><br><strong>Charges :</strong> 3",
       "prix": "🔷 <strong>Prix:</strong> 20",
       "poids": ""
     },
@@ -320,7 +320,7 @@
       "tags": [
         "Consommable"
       ],
-      "effet": "<br><strong>Portée :</strong>   3m.\n<br><strong>Effet:</strong> Rend 5 (critique : 10) points de vie à la cible.\n<br><strong>Charges:</strong> 3.",
+      "effet": "<br><strong>Portée :</strong> 3m.\n<br><strong>Effet:</strong> Rend 5 (critique : 10) points de vie à la cible.\n<br><strong>Charges:</strong> 3.",
       "prix": "🔷 <strong>Prix:</strong> 10",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -380,7 +380,7 @@
       "tags": [
         "Consommable"
       ],
-      "effet": "<strong>Effet:</strong> Augmente les dégâts de la prochaine attaque physique de 3.\n  <br><strong>Charges:</strong> 3.",
+      "effet": "<strong>Effet:</strong> Augmente les dégâts de la prochaine attaque physique de 3.\n <br><strong>Charges:</strong> 3.",
       "prix": "🔷 <strong>Prix:</strong> 20",
       "poids": ""
     },
@@ -404,9 +404,9 @@
       "tags": [
         "Arme",
         "Une main",
-        "Baton"
+        "Bâton"
       ],
-      "effet": "<strong>Dégâts: </strong> Inflige (3  + Force) points de dégâts physiques.\n<br> L'arme est imprégnée de 5 points de dégâts d'élément <span style=\"color: #4682b4; font-weight: bold;\">Eau</span>.",
+      "effet": "<strong>Dégâts: </strong> Inflige (3 + Force) points de dégâts physiques.\n<br> L'arme est imprégnée de 5 points de dégâts d'élément <span style=\"color: #4682b4; font-weight: bold;\">Eau</span>.",
       "prix": "🔷 <strong>Prix:</strong> ?",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -420,7 +420,7 @@
         "Plante",
         "Non identifié"
       ],
-      "effet": "<strong>Prérequis:</strong> Intelligence 10.     \n<br><strong>Effet:</strong> Le héros ou la cible proche dispose de deux actions principales au lieu d'une (non cumulable). \n<br><strong>Durée:</strong> 2 tours (Critique : 3).",
+      "effet": "<strong>Prérequis:</strong> Intelligence 10. \n<br><strong>Effet:</strong> Le héros ou la cible proche dispose de deux actions principales au lieu d'une (non cumulable). \n<br><strong>Durée:</strong> 2 tours (Critique : 3).",
       "prix": "🔷 <strong>Prix:</strong> 65",
       "poids": ""
     },
@@ -428,13 +428,13 @@
       "nom": "Auréline des Roches",
       "numero": 34,
       "image": "https://i.ibb.co/My3mcc60/Herb3.png",
-      "description": "<i>une fleur jaune éclatante aux pétales veinés de brun, poussant sur les falaises et près des rivières.</i>",
+      "description": "<i>Une fleur jaune éclatante aux pétales veinés de brun, poussant sur les falaises et près des rivières.</i>",
       "tags": [
         "Consommable",
         "Plante",
         "Non identifié"
       ],
-      "effet": "<strong>Effet:</strong> Augmente la protection élémentaire de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> et d'<span style=\"color: #4682b4; font-weight: bold;\">Eau</span>  du héros ou d'une cible proche, d'une valeur égale au niveau d'Intelligence du héros. <br><b>Critique :</b> le bonus d'armure est amélioré de 5.\n<br><strong>Durée:</strong> 5 tours.",
+      "effet": "<strong>Effet:</strong> Augmente la protection élémentaire de <span style=\"color: #8b4513; font-weight: bold;\">Terre</span> et d'<span style=\"color: #4682b4; font-weight: bold;\">Eau</span> du héros ou d'une cible proche, d'une valeur égale au niveau d'Intelligence du héros. <br><strong>Critique :</strong> le bonus d'armure est amélioré de 5.\n<br><strong>Durée:</strong> 5 tours.",
       "prix": "🔷 <strong>Prix:</strong> 25",
       "poids": ""
     },
@@ -448,7 +448,7 @@
         "Plante",
         "Non identifié"
       ],
-      "effet": "<b>Effet:</b> Rend au héros ou à une cible proche une quantité de mana équivalent au niveau d'Intelligence du héros.\n<br><b>Critique :</b> Mana rendu augmenté de 5.",
+      "effet": "<strong>Effet:</strong> Rend au héros ou à une cible proche une quantité de mana équivalent au niveau d'Intelligence du héros.\n<br><strong>Critique :</strong> Mana rendu augmenté de 5.",
       "prix": "🔷 <strong>Prix:</strong> 10",
       "poids": ""
     },
@@ -536,7 +536,7 @@
         "Une main",
         "Dague"
       ],
-      "effet": "<strong>Dégâts: </strong> Inflige (4  + Force) points de dégâts physiques.\n<br> Si la cible a une Résistance altérations inférieure à 3, elle subit l'état <span class=\"etat-link\" data-etat=\"Empoisonné\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Empoisonné</span> 2, pendant 5 tours.",
+      "effet": "<strong>Dégâts: </strong> Inflige (4 + Force) points de dégâts physiques.\n<br> Si la cible a une Résistance altérations inférieure à 3, elle subit l'état <span class=\"etat-link\" data-etat=\"Empoisonné\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Empoisonné</span> 2, pendant 5 tours.",
       "prix": "🔷 <strong>Prix:</strong> ?",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -564,7 +564,7 @@
         "Arme exotique",
         "Deux mains"
       ],
-      "effet": "<strong>Dégâts: </strong> Inflige (7  + Force) points de dégâts physiques.",
+      "effet": "<strong>Dégâts: </strong> Inflige (7 + Force) points de dégâts physiques.",
       "prix": "🔷 <strong>Prix:</strong> 100",
       "poids": "⚖️ <strong>Poids:</strong> 2"
     },
@@ -591,7 +591,7 @@
         "Robe",
         "Non identifié"
       ],
-      "effet": "<strong>Effet:</strong> <br>Volonté augmenté de 3.\n<br><br>À la fin de chaque tour, si le porteur a incanté avec succès un sort d’élément <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>, <span style=\"color: #22c55e; font-weight: bold;\">Air</span> ou <span style=\"color: #4682b4; font-weight: bold;\">Eau</span>, il gagne 2 points de vie temporaires.",
+      "effet": "<strong>Effet:</strong> <br>Volonté augmentée de 3.\n<br><br>À la fin de chaque tour, si le porteur a incanté avec succès un sort d’élément <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>, <span style=\"color: #22c55e; font-weight: bold;\">Air</span> ou <span style=\"color: #4682b4; font-weight: bold;\">Eau</span>, il gagne 2 points de vie temporaires.",
       "prix": "🔷 <strong>Prix:</strong> ?",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -644,7 +644,7 @@
       "tags": [
         "Nourriture"
       ],
-      "effet": "<strong>Effet:</strong> Double les soins prodigués par une nourriture.\n\n<br>          <strong>Charges:</strong> 10.",
+      "effet": "<strong>Effet:</strong> Double les soins prodigués par une nourriture.\n\n<br> <strong>Charges:</strong> 10.",
       "prix": "🔷 <strong>Prix:</strong> 50",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -682,10 +682,10 @@
       "tags": [
         "Arme",
         "Deux mains",
-        "Baton",
+        "Bâton",
         "Non identifié"
       ],
-      "effet": "<strong>Dégâts: </strong> Inflige (4  + Force) points de dégâts physiques.\n                      \n<br><br><strong>Effet:</strong> Augmente de 3 la Puiss. Sorts des éléments <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>, <span style=\"color: #22c55e; font-weight: bold;\">Air</span> ou <span style=\"color: #4682b4; font-weight: bold;\">Eau</span>.",
+      "effet": "<strong>Dégâts: </strong> Inflige (4 + Force) points de dégâts physiques.\n \n<br><br><strong>Effet:</strong> Augmente de 3 la Puiss. Sorts des éléments <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>, <span style=\"color: #22c55e; font-weight: bold;\">Air</span> ou <span style=\"color: #4682b4; font-weight: bold;\">Eau</span>.",
       "prix": "🔷 <strong>Prix:</strong> ?",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -697,9 +697,9 @@
       "tags": [
         "Arme",
         "Une main",
-        "Baton"
+        "Bâton"
       ],
-      "effet": "<strong>Dégâts: </strong> Inflige (2 + Force) points de dégâts physiques.\n<br>   <strong>Effet:</strong> Si le porteur ne lance aucun sort pendant son tour, alors le prochain sort qu’il lance coûte 2 mana de moins (non cumulable).",
+      "effet": "<strong>Dégâts: </strong> Inflige (2 + Force) points de dégâts physiques.\n<br> <strong>Effet:</strong> Si le porteur ne lance aucun sort pendant son tour, alors le prochain sort qu’il lance coûte 2 mana de moins (non cumulable).",
       "prix": "🔷 <strong>Prix:</strong> 100",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -724,7 +724,7 @@
         "Nourriture",
         "Composant"
       ],
-      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Rend 10 points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'état <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.\n          <br> <strong>Charges : </strong>3.",
+      "effet": "Inutilisable en combat.\n<br><strong>Effet:</strong> Rend 10 points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'état <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.\n <br> <strong>Charges : </strong>3.",
       "prix": "🔷 <strong>Prix:</strong> 30",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -738,7 +738,7 @@
         "Arme exotique",
         "Une main"
       ],
-      "effet": "<strong>Dégâts: </strong> Inflige (3  + Force) points de dégâts physiques.\n<br>  <strong>Effet:</strong> Augmente la portée d'attaque au corps à corps  de 3m.",
+      "effet": "<strong>Dégâts: </strong> Inflige (3 + Force) points de dégâts physiques.\n<br> <strong>Effet:</strong> Augmente la portée d'attaque au corps à corps de 3m.",
       "prix": "🔷 <strong>Prix:</strong> ?",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -750,7 +750,7 @@
       "tags": [
         "Nourriture"
       ],
-      "effet": "Inutilisable en combat.\n<br><strong>Prérequis:</strong> Test de compétence Hardiesse 1.\n<br><strong>Effet:</strong> Rend 25 points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'état <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.\n          <br> <strong>Charges : </strong>3.<br><br>\n\n\n          <strong>Recette :</strong> <span class=\"objet-link\" data-objet=\"Ration copieuse de nourriture\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ration copieuse de nourriture</span> + Piment séché (aubergiste - 10 éclats)",
+      "effet": "Inutilisable en combat.\n<br><strong>Prérequis:</strong> Test de compétence Hardiesse 1.\n<br><strong>Effet:</strong> Rend 25 points de vie. <br>Couplé à un sommeil de 8h, permet d'éviter l'état <span class=\"etat-link\" data-etat=\"Fatigué\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Fatigué</span>.\n <br> <strong>Charges : </strong>3.<br><br>\n\n\n <strong>Recette :</strong> <span class=\"objet-link\" data-objet=\"Ration copieuse de nourriture\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ration copieuse de nourriture</span> + Piment séché (aubergiste - 10 éclats)",
       "prix": "🔷 <strong>Prix:</strong> 40",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -762,9 +762,9 @@
       "tags": [
         "Arme",
         "Deux mains",
-        "Baton"
+        "Bâton"
       ],
-      "effet": "<strong>Dégâts: </strong> Inflige (5  + Force) points de dégâts physiques.\n<br> <strong>Effet: </strong> Permet de traverser les terrains difficiles sans pénalité de vitesse.",
+      "effet": "<strong>Dégâts: </strong> Inflige (5 + Force) points de dégâts physiques.\n<br> <strong>Effet: </strong> Permet de traverser les terrains difficiles sans pénalité de vitesse.",
       "prix": "🔷 <strong>Prix:</strong> 90",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -776,11 +776,11 @@
       "tags": [
         "Arme",
         "Une main",
-        "Baton",
+        "Bâton",
         "Non identifié",
         "Légendaire"
       ],
-      "effet": "<strong>Dégâts: </strong> Inflige (5  + Force) points de dégâts physiques. <br>\nL'arme est imprégnée de 5 points de dégâts d'élément <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>.\n<br><br>\n <strong>Effet: </strong> Chaque coup effectué avec l'arme confère 2 points de vie temporaires et restaure 3 points de mana.",
+      "effet": "<strong>Dégâts: </strong> Inflige (5 + Force) points de dégâts physiques. <br>\nL'arme est imprégnée de 5 points de dégâts d'élément <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>.\n<br><br>\n <strong>Effet: </strong> Chaque coup effectué avec l'arme confère 2 points de vie temporaires et restaure 3 points de mana.",
       "prix": "🔷 <strong>Prix:</strong> ?",
       "poids": "⚖️ <strong>Poids:</strong> 1"
     },
@@ -877,7 +877,7 @@
         "Consommable",
         "Magie"
       ],
-      "effet": "<strong>Effet:</strong> Remplace votre prochaine action principale par le sort de monstre <span class=\"spell-link\" data-spell=\"Bourrasque\" data-category=\"Sorts de Monstres\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Bourrasque</span>. <br><i>Le mana et les statistiques du héros sont utilisés.</i>\n    <br><br><strong>Charges :</strong> 4",
+      "effet": "<strong>Effet:</strong> Remplace votre prochaine action principale par le sort de monstre <span class=\"spell-link\" data-spell=\"Bourrasque\" data-category=\"Sorts de Monstres\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Bourrasque</span>. <br><i>Le mana et les statistiques du héros sont utilisés.</i>\n <br><br><strong>Charges :</strong> 4",
       "prix": "🔷 <strong>Prix:</strong> 50",
       "poids": ""
     },
@@ -953,7 +953,7 @@
       "Arme exotique",
       "Une main",
       "Deux mains",
-      "Baton",
+      "Bâton",
       "Dague",
       "Arc",
       "Armure lourde",

@@ -743,7 +743,6 @@
 <script src="js/utils.js"></script>
 <script src="js/utils/device-detection.js"></script>
 <script src="js/modules/images.js"></script>
-<script src="js/modules/audio.js"></script>
 <script src="js/storage.js"></script>
 <script src="js/features/SpellFilter.js"></script>
 <script src="js/features/TablesTresorsManager.js"></script>
