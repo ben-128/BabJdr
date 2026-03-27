@@ -92,7 +92,10 @@
       "Bash(git -C \"D:/projets/BabJDR/BabJDR\" diff --stat data/dons.json)",
       "Bash(git -C \"D:/projets/BabJDR/BabJDR\" add data/dons.json data/images.json \"data/images/Dons/mage/Canal.png\" \"data/images/Dons/mage/IncantRapide.png\")",
       "Bash(git -C \"D:/projets/BabJDR/BabJDR\" commit -m \"$\\(cat <<''EOF''\nAdd new Mage feats\n\n- Incantation rapide: double mana cost to cast multi-turn spell instantly \\(lvl 7\\)\n- Canalisation incrémentale: +2 damage per additional channeling turn\n\n🤖 Generated with [Claude Code]\\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
-      "Bash(wc:*)"
+      "Bash(wc:*)",
+      "Bash(cmd /c \"type D:\\\\projets\\\\BabJDR\\\\BabJDR\\\\package.json\")",
+      "Bash(cmd /c \"if exist D:\\\\projets\\\\BabJDR\\\\BabJDR\\\\package.json echo EXISTS\")",
+      "Bash(python3:*)"
     ],
     "deny": []
   }
