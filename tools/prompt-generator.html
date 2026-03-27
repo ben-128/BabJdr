@@ -890,27 +890,32 @@
 
         // Variable globale pour stocker le port du serveur
         let serverPort = null;
+        // true si on est servi via http (pas file://)
+        const isServedViaHttp = location.protocol.startsWith('http');
 
-        // Vérifier le statut du serveur (essaie les ports 3000 et 3001)
+        // Si on est servi via http, on déduit le port directement
+        if (isServedViaHttp) {
+            serverPort = parseInt(location.port) || (location.protocol === 'https:' ? 443 : 80);
+        }
+
+        // Vérifier le statut du serveur
         async function checkServerStatus() {
-            const ports = [3000, 3001];
-
-            for (const port of ports) {
+            // Si on est servi via le serveur, utiliser notre propre origin
+            if (isServedViaHttp) {
                 try {
-                    const response = await fetch(`http://localhost:${port}/status`);
+                    const response = await fetch(`/status`);
                     const data = await response.json();
 
                     if (data.status === 'running') {
                         serverOnline = true;
-                        serverPort = port;
 
                         const statusEl = document.getElementById('serverStatus');
                         const warningEl = document.getElementById('serverWarning');
 
                         statusEl.className = 'server-status online';
                         statusEl.textContent = data.apiConfigured ?
-                            `🟢 Serveur en ligne (port ${port})` :
-                            `🟡 Serveur en ligne (port ${port}, API non configurée)`;
+                            `🟢 Serveur en ligne (port ${serverPort})` :
+                            `🟡 Serveur en ligne (port ${serverPort}, API non configurée)`;
                         warningEl.style.display = data.apiConfigured ? 'none' : 'block';
                         if (!data.apiConfigured) {
                             warningEl.innerHTML = `
@@ -919,20 +924,54 @@
                                 et ajoutez votre clé API gratuite depuis <a href="https://api.imgbb.com/" target="_blank">api.imgbb.com</a>
                             `;
                         }
-                        return; // Serveur trouvé, on sort
+                        return;
                     }
                 } catch (error) {
-                    // Ce port ne fonctionne pas, on essaie le suivant
-                    continue;
+                    // Serveur down
+                }
+            } else {
+                // Mode file:// — essayer de contacter le serveur sur les ports connus
+                const ports = [3000, 3001];
+                for (const port of ports) {
+                    try {
+                        const response = await fetch(`http://localhost:${port}/status`);
+                        const data = await response.json();
+
+                        if (data.status === 'running') {
+                            serverOnline = true;
+                            serverPort = port;
+
+                            const statusEl = document.getElementById('serverStatus');
+                            const warningEl = document.getElementById('serverWarning');
+
+                            statusEl.className = 'server-status online';
+                            statusEl.textContent = data.apiConfigured ?
+                                `🟢 Serveur en ligne (port ${port})` :
+                                `🟡 Serveur en ligne (port ${port}, API non configurée)`;
+                            warningEl.style.display = data.apiConfigured ? 'none' : 'block';
+                            if (!data.apiConfigured) {
+                                warningEl.innerHTML = `
+                                    <strong>⚠️ Configuration requise</strong><br>
+                                    Clé API ImgBB manquante. Éditez <code>scripts/utils/image-upload-server.js</code>
+                                    et ajoutez votre clé API gratuite depuis <a href="https://api.imgbb.com/" target="_blank">api.imgbb.com</a>
+                                `;
+                            }
+                            return;
+                        }
+                    } catch (error) {
+                        continue;
+                    }
                 }
             }
 
             // Aucun serveur trouvé
             serverOnline = false;
-            serverPort = null;
+            if (!isServedViaHttp) serverPort = null;
             document.getElementById('serverStatus').className = 'server-status offline';
-            document.getElementById('serverStatus').textContent = '🔴 Serveur déconnecté';
-            document.getElementById('serverWarning').style.display = 'block';
+            document.getElementById('serverStatus').textContent = isServedViaHttp ?
+                '🟡 Mode local (données en lecture seule)' :
+                '🔴 Serveur déconnecté';
+            document.getElementById('serverWarning').style.display = !isServedViaHttp ? 'block' : 'none';
         }
 
         // Vérifier toutes les 5 secondes
@@ -944,14 +983,22 @@
             return reversedKey.split('').reverse().join('');
         }
 
+        // Helper: construire l'URL du serveur pour les endpoints (API keys, upload, etc.)
+        function serverUrl(path) {
+            if (isServedViaHttp) return path; // chemin relatif sur même origin
+            if (serverPort) return `http://localhost:${serverPort}${path}`;
+            return null;
+        }
+
         // Charger les API keys depuis les fichiers
         async function loadApiKeys() {
             try {
-                const port = serverPort || 3000;
+                const baseUrl = serverUrl('/docs/groq-api-key.txt');
+                if (!baseUrl) return; // pas de serveur, pas de clés
 
                 // Charger la clé Groq
                 try {
-                    const groqResponse = await fetch(`http://localhost:${port}/docs/groq-api-key.txt`);
+                    const groqResponse = await fetch(serverUrl('/docs/groq-api-key.txt'));
                     if (groqResponse.ok) {
                         const groqKey = await groqResponse.text();
                         const trimmedGroqKey = groqKey.trim();
@@ -970,7 +1017,7 @@
 
                 // Charger la clé Hugging Face
                 try {
-                    const hfResponse = await fetch(`http://localhost:${port}/docs/huggingface-api-key.txt`);
+                    const hfResponse = await fetch(serverUrl('/docs/huggingface-api-key.txt'));
                     if (hfResponse.ok) {
                         const hfKey = await hfResponse.text();
                         const trimmedHfKey = hfKey.trim();
@@ -991,12 +1038,24 @@
         // Charger les API keys au démarrage et après détection du serveur
         setTimeout(loadApiKeys, 1000);
 
+        // Helper: fetch un fichier JSON via le serveur ou en chemin relatif
+        async function fetchDataJson(filename) {
+            if (isServedViaHttp) {
+                // Servi via http — chemin absolu depuis la racine du serveur
+                return await fetch(`/data/${filename}`).then(r => r.json());
+            }
+            if (serverPort) {
+                // Mode file:// mais serveur détecté
+                return await fetch(`http://localhost:${serverPort}/data/${filename}`).then(r => r.json());
+            }
+            // Fallback: chemin relatif depuis tools/
+            return await fetch(`../data/${filename}`).then(r => r.json());
+        }
+
         // Charger images.json
         async function loadImages() {
             try {
-                const port = serverPort || 3000;
-                const response = await fetch(`http://localhost:${port}/data/images.json`);
-                const data = await response.json();
+                const data = await fetchDataJson('images.json');
                 imagesData = data.images || {};
             } catch (error) {
                 console.warn('Impossible de charger images.json:', error);
@@ -1007,9 +1066,7 @@
         // Charger les données
         async function loadSorts() {
             try {
-                const port = serverPort || 3000;
-                const response = await fetch(`http://localhost:${port}/data/sorts.json`);
-                sortsData = await response.json();
+                sortsData = await fetchDataJson('sorts.json');
                 await loadImages();
                 displaySorts();
             } catch (error) {
@@ -1019,9 +1076,7 @@
 
         async function loadDons() {
             try {
-                const port = serverPort || 3000;
-                const response = await fetch(`http://localhost:${port}/data/dons.json`);
-                donsData = await response.json();
+                donsData = await fetchDataJson('dons.json');
                 await loadImages();
                 displayDons();
             } catch (error) {
@@ -1031,9 +1086,7 @@
 
         async function loadObjets() {
             try {
-                const port = serverPort || 3000;
-                const response = await fetch(`http://localhost:${port}/data/objets.json`);
-                const data = await response.json();
+                const data = await fetchDataJson('objets.json');
                 objetsData = data.objets;
                 await loadImages();
                 displayObjets();
@@ -1636,8 +1689,7 @@ Veuillez compresser l'image ou en choisir une plus légère.`);
                 progressFill.textContent = '50%';
 
                 // Envoyer au serveur
-                const port = serverPort || 3000;
-                const response = await fetch(`http://localhost:${port}/upload`, {
+                const response = await fetch(serverUrl('/upload'), {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -1722,8 +1774,7 @@ Veuillez compresser l'image ou en choisir une plus légère.`);
             }
 
             try {
-                const port = serverPort || 3000;
-                const response = await fetch(`http://localhost:${port}/update-lore`, {
+                const response = await fetch(serverUrl('/update-lore'), {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
