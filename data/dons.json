@@ -12,13 +12,13 @@
       {
         "nom": "Attaque d'opportunité",
         "description": "Lorsqu'un adversaire sort de votre portée d'attaque au corps à corps durant son déplacement, vous pouvez utiliser une action secondaire (non utilisée durant votre tour), pour effectuer une attaque au corps à corps sur l'adversaire.",
-        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Agilité 10.",
+        "prerequis": "<strong> Prérequis :</strong> <img src=\"data/images/Autre/stats/Agilité.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Agilité 10.",
         "cout": "1 point de don"
       },
       {
         "nom": "Chanceux",
         "description": "Lors d'un jet de fortune, le héros lance deux dés et prend le meilleur résultat.",
-        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/HfthhzSF/stat-Chance.png\" alt=\"Chance\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Chance 5.",
+        "prerequis": "<strong> Prérequis :</strong> <img src=\"data/images/Autre/stats/Chance.png\" alt=\"Chance\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Chance 5.",
         "cout": "1 point de don"
       },
       {
@@ -84,37 +84,37 @@
       {
         "nom": "Main Chanceuse",
         "description": "Une fois par jour, peut déclarer \"Main Chanceuse\" avant n'importe quel jet de dé. Le résultat du dé est automatiquement considéré comme un 20 naturel.",
-        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/HfthhzSF/stat-Chance.png\" alt=\"Chance\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Chance 10.",
+        "prerequis": "<strong> Prérequis :</strong> <img src=\"data/images/Autre/stats/Chance.png\" alt=\"Chance\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Chance 10.",
         "cout": "1 point de don"
       },
       {
         "nom": "Maître des consommables",
         "description": "Lors de l'utilisation d'un consommable (hors cristal), si le dé fait 15 ou plus, sa charge n'est pas consommée.",
-        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/HfthhzSF/stat-Chance.png\" alt=\"Chance\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Chance 5.",
+        "prerequis": "<strong> Prérequis :</strong> <img src=\"data/images/Autre/stats/Chance.png\" alt=\"Chance\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Chance 5.",
         "cout": "1 point de don"
       },
       {
         "nom": "Maîtrise de l'arc",
         "description": "Le héros est capable d'équiper et d'utiliser des Arcs.",
-        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\"> Agilité 10<br>OU<br>Coordination rang 2.",
+        "prerequis": "<strong> Prérequis :</strong> <img src=\"data/images/Autre/stats/Agilité.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\"> Agilité 10<br>OU<br>Coordination rang 2.",
         "cout": "1 point de don"
       },
       {
         "nom": "Maîtrise de la dague",
         "description": "Le héros est capable d'équiper et d'utiliser des Dagues.",
-        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\"> <br>Agilité 5<br>OU<br>Coordination rang 1.",
+        "prerequis": "<strong> Prérequis :</strong> <img src=\"data/images/Autre/stats/Agilité.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\"> <br>Agilité 5<br>OU<br>Coordination rang 1.",
         "cout": "1 point de don"
       },
       {
         "nom": "Maîtrise des armures légères",
         "description": "Permet de s'équiper d'armures légères.",
-        "prerequis": "<strong> Prérequis : </strong> <img src=\"https://i.ibb.co/23cGYFvZ/stat-Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Force 5 \n<br>ET<br>\n<img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Agilité 5.",
+        "prerequis": "<strong> Prérequis : </strong> <img src=\"data/images/Autre/stats/Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Force 5 \n<br>ET<br>\n<img src=\"data/images/Autre/stats/Agilité.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Agilité 5.",
         "cout": "1 point de don"
       },
       {
         "nom": "Maîtrise du bouclier",
         "description": "Le héros est capable d'équiper les boucliers.",
-        "prerequis": "<strong> Prérequis :</strong> <br><img src=\"https://i.ibb.co/23cGYFvZ/stat-Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\">Force 10<br>OU<br>Hardiesse rang 2.",
+        "prerequis": "<strong> Prérequis :</strong> <br><img src=\"data/images/Autre/stats/Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\">Force 10<br>OU<br>Hardiesse rang 2.",
         "cout": "1 point de don"
       },
       {
@@ -137,8 +137,8 @@
       },
       {
         "nom": "Polyvalence ultime",
-        "description": "Gagne 1 <img src=\"https://i.ibb.co/23cGYFvZ/stat-Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Force, <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Agilité, <img src=\"data/images/Autre/stats/Endurance.png\" alt=\"Endurance\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Endurance, <img src=\"data/images/Autre/stats/Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Intelligence, <img src=\"https://i.ibb.co/B2BCGP6T/stat-Volont.png\" alt=\"Volonté\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Volonté, <img src=\"https://i.ibb.co/HfthhzSF/stat-Chance.png\" alt=\"Chance\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Chance.",
-        "prerequis": "<strong> Prérequis :</strong><br>- <img src=\"https://i.ibb.co/23cGYFvZ/stat-Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Force 5, <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Agilité 5, <img src=\"data/images/Autre/stats/Endurance.png\" alt=\"Endurance\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Endurance 5, <img src=\"data/images/Autre/stats/Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Intelligence 5, <img src=\"https://i.ibb.co/B2BCGP6T/stat-Volont.png\" alt=\"Volonté\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Volonté 5, <img src=\"https://i.ibb.co/HfthhzSF/stat-Chance.png\" alt=\"Chance\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Chance 5.\n<br>- Don unique.",
+        "description": "Gagne 1 <img src=\"data/images/Autre/stats/Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Force, <img src=\"data/images/Autre/stats/Agilité.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Agilité, <img src=\"data/images/Autre/stats/Endurance.png\" alt=\"Endurance\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Endurance, <img src=\"data/images/Autre/stats/Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Intelligence, <img src=\"data/images/Autre/stats/Volonté.png\" alt=\"Volonté\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Volonté, <img src=\"data/images/Autre/stats/Chance.png\" alt=\"Chance\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Chance.",
+        "prerequis": "<strong> Prérequis :</strong><br>- <img src=\"data/images/Autre/stats/Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Force 5, <img src=\"data/images/Autre/stats/Agilité.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Agilité 5, <img src=\"data/images/Autre/stats/Endurance.png\" alt=\"Endurance\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Endurance 5, <img src=\"data/images/Autre/stats/Intelligence.png\" alt=\"Intelligence\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Intelligence 5, <img src=\"data/images/Autre/stats/Volonté.png\" alt=\"Volonté\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Volonté 5, <img src=\"data/images/Autre/stats/Chance.png\" alt=\"Chance\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Chance 5.\n<br>- Don unique.",
         "cout": "1 point de don"
       },
       {
@@ -185,7 +185,7 @@
     "dons": [
       {
         "nom": "Agilité du guerrier",
-        "description": "Augmente <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> l'agilité de 4.",
+        "description": "Augmente <img src=\"data/images/Autre/stats/Agilité.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> l'agilité de 4.",
         "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
@@ -198,19 +198,19 @@
       {
         "nom": "Attaque surpuissante",
         "description": "En dépensant une action secondaire, le héros peut concentrer toute sa puissance pour une attaque au corps à corps ce tour-ci: les dégâts sont alors doublés. En contrepartie, il n'a pas d'action principale durant son prochain tour.",
-        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/23cGYFvZ/stat-Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Force 12",
+        "prerequis": "<strong> Prérequis :</strong> <img src=\"data/images/Autre/stats/Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Force 12",
         "cout": "1 point de don"
       },
       {
         "nom": "Charge",
         "description": "Une fois par combat, peut utiliser une action secondaire pour tripler sa vitesse de déplacement.<br>Une fois le déplacement terminé, la prochaine cible ce tour-ci d'une attaque au corps à corps réussie, passe dans l'état <span class=\"etat-link\" data-etat=\"À terre\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">À terre</span>.\n\n<br><br><b>Sans effet si :</b> \n<br>- Volant/Lévitant\n<br>- Taille supérieure à Moyen.",
-        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Agilité 5",
+        "prerequis": "<strong> Prérequis :</strong> <img src=\"data/images/Autre/stats/Agilité.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Agilité 5",
         "cout": "1 point de don"
       },
       {
         "nom": "Contre-attaque",
         "description": "Après avoir esquivé une attaque au corps à corps, le guerrier peut utiliser une action secondaire (non utilisée durant son tour) pour effectuer immédiatement une attaque au corps à corps contre l'attaquant.",
-        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Agilité 10.",
+        "prerequis": "<strong> Prérequis :</strong> <img src=\"data/images/Autre/stats/Agilité.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Agilité 10.",
         "cout": "1 point de don"
       },
       {
@@ -269,14 +269,14 @@
       },
       {
         "nom": "Infatigable",
-        "description": "Augmente la <img src=\"https://i.ibb.co/B2BCGP6T/stat-Volont.png\" alt=\"Volonté\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> volonté de 4.",
+        "description": "Augmente la <img src=\"data/images/Autre/stats/Volonté.png\" alt=\"Volonté\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> volonté de 4.",
         "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
       {
         "nom": "Lancer d'arme",
         "description": "Permet, avec une action principale et une action secondaire, de lancer une arme à une main (équipée ou de l'inventaire) jusqu'à 12m (touche également les cibles volantes). \n<br>Mêmes règles qu'une attaque au corps à corps (jet et dégâts). <br>L'arme n'est alors plus équipée. Elle peut être récupérée avec une action secondaire, à moins de 3m de la cible.",
-        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Agilité 5.",
+        "prerequis": "<strong> Prérequis :</strong> <img src=\"data/images/Autre/stats/Agilité.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Agilité 5.",
         "cout": "1 point de don"
       },
       {
@@ -288,7 +288,7 @@
       {
         "nom": "Porteur de charge lourde",
         "description": "Augmente le poids maximum transportable de 5. \n<br>De plus, les armures lourdes augmentent l'armure physique de 1 tous les 5 points de force du héros.",
-        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/23cGYFvZ/stat-Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Force 15",
+        "prerequis": "<strong> Prérequis :</strong> <img src=\"data/images/Autre/stats/Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Force 15",
         "cout": "1 point de don"
       },
       {
@@ -311,20 +311,20 @@
       },
       {
         "nom": "Spécialiste des armures légères",
-        "description": "Tant que le guerrier ne porte pas d'armure lourde, il gagne 6 <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Agilité.",
+        "description": "Tant que le guerrier ne porte pas d'armure lourde, il gagne 6 <img src=\"data/images/Autre/stats/Agilité.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Agilité.",
         "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
       {
         "nom": "Volonté de fer",
         "description": "Une fois par jour, le héros peut utiliser une action secondaire pour se débarrasser de toutes ses altérations magiques.",
-        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/B2BCGP6T/stat-Volont.png\" alt=\"Volonté\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\">Volonté 3",
+        "prerequis": "<strong> Prérequis :</strong> <img src=\"data/images/Autre/stats/Volonté.png\" alt=\"Volonté\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\">Volonté 3",
         "cout": "1 point de don"
       },
       {
         "nom": "Coup de maître",
         "image": "data/images/Dons/guerrier/CoupMaitre.png",
-        "description": "Une fois par combat et par arme, le guerrier peut utiliser une action secondaire pour déclencher un effet spécial sur sa prochaine attaque, selon le type d'arme utilisé :<br><br><b>Arc :</b> L'attaque est impossible à esquiver, ne peut pas faire d'échec critique, et les chances de coup critique sont augmentées de 2.<br><br><b>Arme exotique :</b> Ajoute la <img src=\"https://i.ibb.co/HfthhzSF/stat-Chance.png\" alt=\"Chance\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Chance aux dégâts.<br><br><b>Autre arme à deux mains :</b> L'attaque inflige ses dégâts à toutes les cibles à moins de 3m.<br><br><b>Autre arme à une main :</b> La cible passe dans l'état <span class=\"etat-link\" data-etat=\"Ensanglanté\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ensanglanté</span> (Force/3, arrondi à l'inférieur) pendant 3 tours.",
+        "description": "Une fois par combat et par arme, le guerrier peut utiliser une action secondaire pour déclencher un effet spécial sur sa prochaine attaque, selon le type d'arme utilisé :<br><br><b>Arc :</b> L'attaque est impossible à esquiver, ne peut pas faire d'échec critique, et les chances de coup critique sont augmentées de 2.<br><br><b>Arme exotique :</b> Ajoute la <img src=\"data/images/Autre/stats/Chance.png\" alt=\"Chance\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Chance aux dégâts.<br><br><b>Autre arme à deux mains :</b> L'attaque inflige ses dégâts à toutes les cibles à moins de 3m.<br><br><b>Autre arme à une main :</b> La cible passe dans l'état <span class=\"etat-link\" data-etat=\"Ensanglanté\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ensanglanté</span> (Force/3, arrondi à l'inférieur) pendant 3 tours.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -355,7 +355,7 @@
       {
         "nom": "Ambidextre",
         "description": "Permet d'équiper en main secondaire une dague (gagnant ses effets passifs). <br> Lors d'une attaque, le héros peut choisir d'attaquer au choix avec sa main principale ou sa main secondaire.",
-        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Agilité 15",
+        "prerequis": "<strong> Prérequis :</strong> <img src=\"data/images/Autre/stats/Agilité.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Agilité 15",
         "cout": "1 point de don"
       },
       {
@@ -414,7 +414,7 @@
       },
       {
         "nom": "Main heureuse",
-        "description": "Augmente la <img src=\"https://i.ibb.co/HfthhzSF/stat-Chance.png\" alt=\"Chance\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\" data-events-attached=\"true\"> Chance de 4.",
+        "description": "Augmente la <img src=\"data/images/Autre/stats/Chance.png\" alt=\"Chance\" style=\"width: 48px; height: 48px; vertical-align: middle; cursor: zoom-in;\" data-events-attached=\"true\"> Chance de 4.",
         "prerequis": "<strong> Prérequis :</strong> Don unique.",
         "cout": "1 point de don"
       },
@@ -439,7 +439,7 @@
       {
         "nom": "Réflexes surhumains",
         "description": "Une fois par combat, permet de forcer une esquive sur une attaque ou un sort esquivable.",
-        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Agilité 10",
+        "prerequis": "<strong> Prérequis :</strong> <img src=\"data/images/Autre/stats/Agilité.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Agilité 10",
         "cout": "1 point de don"
       },
       {
@@ -481,7 +481,7 @@
       {
         "nom": "Extraction de mana",
         "description": "Lorsque le héros touche avec une attaque au corps à corps un adversaire, le héros regagne du mana d'une valeur équivalente au niveau du héros.",
-        "prerequis": "<strong> Prérequis :</strong> <img src=\"https://i.ibb.co/23cGYFvZ/stat-Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Force 5",
+        "prerequis": "<strong> Prérequis :</strong> <img src=\"data/images/Autre/stats/Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Force 5",
         "cout": "1 point de don"
       },
       {
@@ -559,7 +559,7 @@
       {
         "nom": "Au milieu du combat",
         "description": "Permet de s'équiper d'armures lourdes.",
-        "prerequis": "<strong> Prérequis :</strong><br>- <img src=\"https://i.ibb.co/23cGYFvZ/stat-Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Force 12 \n<br> - Capable d'équiper des armures légères",
+        "prerequis": "<strong> Prérequis :</strong><br>- <img src=\"data/images/Autre/stats/Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Force 12 \n<br> - Capable d'équiper des armures légères",
         "cout": "1 point de don"
       },
       {
@@ -589,7 +589,7 @@
       {
         "nom": "Jugement éclair",
         "description": "Si le Prêtre a effectué un sort de dégâts ce tour-ci, il peut effectuer une attaque au corps à corps avec une action secondaire.",
-        "prerequis": "<strong> Prérequis :</strong><img src=\"https://i.ibb.co/23cGYFvZ/stat-Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Force 5",
+        "prerequis": "<strong> Prérequis :</strong><img src=\"data/images/Autre/stats/Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\">Force 5",
         "cout": "1 point de don"
       },
       {
@@ -660,13 +660,13 @@
       },
       {
         "nom": "Enchantement d'agilité permanente",
-        "description": "Augmente <img src=\"https://i.ibb.co/Ng9TzjZL/stat-Agilit.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> l'Agilité de 4.",
+        "description": "Augmente <img src=\"data/images/Autre/stats/Agilité.png\" alt=\"Agilité\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> l'Agilité de 4.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
       {
         "nom": "Enchantement de force permanente",
-        "description": "Augmente la <img src=\"https://i.ibb.co/23cGYFvZ/stat-Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Force de 4.",
+        "description": "Augmente la <img src=\"data/images/Autre/stats/Force.png\" alt=\"Force\" style=\"width: 48px; height: 48px; vertical-align: middle;\"> Force de 4.",
         "prerequis": "<strong> Prérequis :</strong> -",
         "cout": "1 point de don"
       },
@@ -738,7 +738,7 @@
     "subgroups": [
       {
         "nom": "Feu",
-        "icon": "<img src=\"https://i.ibb.co/VWfKvNCL/element-Feu.png\" alt=\"Feu\" style=\"width: 28px; height: 28px; vertical-align: middle;\">",
+        "icon": "<img src=\"data/images/Elements/Feu.png\" alt=\"Feu\" style=\"width: 28px; height: 28px; vertical-align: middle;\">",
         "dons": [
           {
             "nom": "Immolation",
@@ -756,7 +756,7 @@
       },
       {
         "nom": "Eau",
-        "icon": "<img src=\"https://i.ibb.co/bMVKwNQP/element-Eau.png\" alt=\"Eau\" style=\"width: 28px; height: 28px; vertical-align: middle;\">",
+        "icon": "<img src=\"data/images/Elements/Eau.png\" alt=\"Eau\" style=\"width: 28px; height: 28px; vertical-align: middle;\">",
         "dons": [
           {
             "nom": "Source Intérieure",
@@ -774,7 +774,7 @@
       },
       {
         "nom": "Air",
-        "icon": "<img src=\"data/images/Sorts/Enchanteur/RageElementaire.png\" alt=\"Air\" style=\"width: 28px; height: 28px; vertical-align: middle;\">",
+        "icon": "<img src=\"data/images/Elements/Air.png\" alt=\"Air\" style=\"width: 28px; height: 28px; vertical-align: middle;\">",
         "dons": [
           {
             "nom": "Porté par les vents",
@@ -792,7 +792,7 @@
       },
       {
         "nom": "Terre",
-        "icon": "<img src=\"https://i.ibb.co/gLxnsvfg/element-Terre.png\" alt=\"Terre\" style=\"width: 28px; height: 28px; vertical-align: middle;\">",
+        "icon": "<img src=\"data/images/Elements/Terre.png\" alt=\"Terre\" style=\"width: 28px; height: 28px; vertical-align: middle;\">",
         "dons": [
           {
             "nom": "Armure de peau",
@@ -810,7 +810,7 @@
       },
       {
         "nom": "Nuit",
-        "icon": "<img src=\"https://i.ibb.co/b5qK7czM/element-Nuit.png\" alt=\"Nuit\" style=\"width: 28px; height: 28px; vertical-align: middle;\">",
+        "icon": "<img src=\"data/images/Elements/Nuit.png\" alt=\"Nuit\" style=\"width: 28px; height: 28px; vertical-align: middle;\">",
         "dons": [
           {
             "nom": "Faveur des Ombres",
@@ -828,7 +828,7 @@
       },
       {
         "nom": "Lumière",
-        "icon": "<img src=\"https://i.ibb.co/pjmcYV72/element-Lumi-re.png\" alt=\"Lumière\" style=\"width: 28px; height: 28px; vertical-align: middle;\">",
+        "icon": "<img src=\"data/images/Elements/Lumière.png\" alt=\"Lumière\" style=\"width: 28px; height: 28px; vertical-align: middle;\">",
         "dons": [
           {
             "nom": "Vision de Lumière",
@@ -846,7 +846,7 @@
       },
       {
         "nom": "Divin",
-        "icon": "<img src=\"https://i.ibb.co/rKYgZ4Yp/element-Divin.png\" alt=\"Divin\" style=\"width: 28px; height: 28px; vertical-align: middle;\">",
+        "icon": "<img src=\"data/images/Elements/Divin.png\" alt=\"Divin\" style=\"width: 28px; height: 28px; vertical-align: middle;\">",
         "dons": [
           {
             "nom": "Onde de Survie",
@@ -864,7 +864,7 @@
       },
       {
         "nom": "Maléfique",
-        "icon": "<img src=\"https://i.ibb.co/SDD5KX34/element-Mal-fique.png\" alt=\"Maléfique\" style=\"width: 28px; height: 28px; vertical-align: middle;\">",
+        "icon": "<img src=\"data/images/Elements/Maléfique.png\" alt=\"Maléfique\" style=\"width: 28px; height: 28px; vertical-align: middle;\">",
         "dons": [
           {
             "nom": "Siphon de l’Âme",

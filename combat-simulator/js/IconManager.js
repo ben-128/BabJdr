@@ -19,16 +19,16 @@ class IconManager {
 
     // URLs des elements (toujours disponibles)
     this.elementUrls = {
-      'Feu': 'https://i.ibb.co/VWfKvNCL/element-Feu.png',
-      'Eau': 'https://i.ibb.co/bMVKwNQP/element-Eau.png',
-      'Terre': 'https://i.ibb.co/gLxnsvfg/element-Terre.png',
-      'Air': 'https://i.ibb.co/W484kM90/element-Air.png',
-      'Lumiere': 'https://i.ibb.co/pjmcYV72/element-Lumi-re.png',
-      'Lumière': 'https://i.ibb.co/pjmcYV72/element-Lumi-re.png',
-      'Nuit': 'https://i.ibb.co/b5qK7czM/element-Nuit.png',
-      'Divin': 'https://i.ibb.co/rKYgZ4Yp/element-Divin.png',
-      'Malefique': 'https://i.ibb.co/SDD5KX34/element-Mal-fique.png',
-      'Maléfique': 'https://i.ibb.co/SDD5KX34/element-Mal-fique.png'
+      'Feu': '../data/images/Elements/Feu.png',
+      'Eau': '../data/images/Elements/Eau.png',
+      'Terre': '../data/images/Elements/Terre.png',
+      'Air': '../data/images/Elements/Air.png',
+      'Lumiere': '../data/images/Elements/Lumière.png',
+      'Lumière': '../data/images/Elements/Lumière.png',
+      'Nuit': '../data/images/Elements/Nuit.png',
+      'Divin': '../data/images/Elements/Divin.png',
+      'Malefique': '../data/images/Elements/Maléfique.png',
+      'Maléfique': '../data/images/Elements/Maléfique.png'
     };
 
     try {
@@ -49,13 +49,13 @@ class IconManager {
   getSubclassIcon(className, subClassName) {
     // Icone par defaut selon la classe
     const defaultIcons = {
-      'Guerrier': 'https://i.ibb.co/7t0MHxPQ/Aventurier.jpg',
-      'Mage': 'https://i.ibb.co/Gf3ktvnj/Mage.jpg',
-      'Pretre': 'https://i.ibb.co/7dmDH3x6/Pr-tre.jpg',
-      'Prêtre': 'https://i.ibb.co/7dmDH3x6/Pr-tre.jpg',
-      'Rodeur': 'https://i.ibb.co/mryMgd5w/Voleur-min.jpg',
-      'Rôdeur': 'https://i.ibb.co/mryMgd5w/Voleur-min.jpg',
-      'Enchanteur': 'https://i.ibb.co/35ybjhcC/Lutin.jpg'
+      'Guerrier': '../data/images/Classes/Aventurier.png',
+      'Mage': '../data/images/Classes/Mage.png',
+      'Pretre': '../data/images/Classes/Prêtre.png',
+      'Prêtre': '../data/images/Classes/Prêtre.png',
+      'Rodeur': '../data/images/Classes/Voleur-min.png',
+      'Rôdeur': '../data/images/Classes/Voleur-min.png',
+      'Enchanteur': '../data/images/Classes/Lutin.png'
     };
 
     if (!this.imagesData) {

@@ -114,12 +114,12 @@
      */
     createStatsIconsModal() {
       const statsIcons = [
-        { name: 'Force', icon: '<img src="https://i.ibb.co/23cGYFvZ/stat-Force.png" alt="Force" style="width: 48px; height: 48px; vertical-align: middle;">', description: 'Améliore les dégâts physiques' },
-        { name: 'Endurance', icon: '<img src="https://i.ibb.co/67ZW01Q7/stat-Endurance.png" alt="Endurance" style="width: 48px; height: 48px; vertical-align: middle;">', description: 'Détermine les points de vie maximum' },
-        { name: 'Agilité', icon: '<img src="https://i.ibb.co/Ng9TzjZL/stat-Agilit.png" alt="Agilité" style="width: 48px; height: 48px; vertical-align: middle;">', description: 'Améliore esquive, critique et initiative' },
-        { name: 'Intelligence', icon: '<img src="https://i.ibb.co/9mcP0Y0Y/stat-Intelligence.png" alt="Intelligence" style="width: 48px; height: 48px; vertical-align: middle;">', description: 'Augmente la puissance des sorts' },
-        { name: 'Volonté', icon: '<img src="https://i.ibb.co/B2BCGP6T/stat-Volont.png" alt="Volonté" style="width: 48px; height: 48px; vertical-align: middle;">', description: 'Détermine le mana maximum' },
-        { name: 'Chance', icon: '<img src="https://i.ibb.co/HfthhzSF/stat-Chance.png" alt="Chance" style="width: 48px; height: 48px; vertical-align: middle;">', description: 'Améliore la fortune et les critiques' },
+        { name: 'Force', icon: '<img src="data/images/Autre/stats/Force.png" alt="Force" style="width: 48px; height: 48px; vertical-align: middle;">', description: 'Améliore les dégâts physiques' },
+        { name: 'Endurance', icon: '<img src="data/images/Autre/stats/Endurance.png" alt="Endurance" style="width: 48px; height: 48px; vertical-align: middle;">', description: 'Détermine les points de vie maximum' },
+        { name: 'Agilité', icon: '<img src="data/images/Autre/stats/Agilité.png" alt="Agilité" style="width: 48px; height: 48px; vertical-align: middle;">', description: 'Améliore esquive, critique et initiative' },
+        { name: 'Intelligence', icon: '<img src="data/images/Autre/stats/Intelligence.png" alt="Intelligence" style="width: 48px; height: 48px; vertical-align: middle;">', description: 'Augmente la puissance des sorts' },
+        { name: 'Volonté', icon: '<img src="data/images/Autre/stats/Volonté.png" alt="Volonté" style="width: 48px; height: 48px; vertical-align: middle;">', description: 'Détermine le mana maximum' },
+        { name: 'Chance', icon: '<img src="data/images/Autre/stats/Chance.png" alt="Chance" style="width: 48px; height: 48px; vertical-align: middle;">', description: 'Améliore la fortune et les critiques' },
         { name: 'Initiative', icon: '⚡', description: 'Ordre des tours de combat' },
         { name: 'Fortune', icon: '🍀', description: 'Améliore les événements de chance' },
         { name: 'Vie', icon: '❤️', description: 'Points de vie actuels' },
@@ -1480,7 +1480,7 @@
             <div style="font-style: italic; margin: 0.5rem 0;">${objet.description || ''}</div>
             <div style="margin: 0.5rem 0;">${objet.effet || ''}</div>
             <div style="display: flex; gap: 1rem; font-size: 0.9em;">
-              <span>${objet.prix ? objet.prix.replace(/🔷/g, '<img src="https://i.ibb.co/HpgHnJFD/4a7af38b09c7.png" alt="éclats" class="eclats-icon" style="width: 14px; height: 14px; vertical-align: middle;">') : ''}</span>
+              <span>${objet.prix ? objet.prix.replace(/🔷/g, '<img src="data/images/Autre/stats/éclats.png" alt="éclats" class="eclats-icon" style="width: 14px; height: 14px; vertical-align: middle;">') : ''}</span>
               <span>${objet.poids || ''}</span>
             </div>
           </div>

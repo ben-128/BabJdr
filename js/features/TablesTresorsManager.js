@@ -859,7 +859,7 @@
           </div>
           <div style="font-size: 0.9em; color: var(--paper-muted); margin-bottom: 0.5rem;">${obj.description || 'Aucune description'}</div>
           ${obj.tags ? `<div style="margin-bottom: 0.5rem;">${obj.tags.map(tag => `<span style="background: var(--bronze); color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.7em; margin-right: 4px;">${tag}</span>`).join('')}</div>` : ''}
-          <div style="font-size: 0.8em; color: var(--paper-muted);">${(obj.prix || 'N/A').replace(/🔷/g, '<img src="https://i.ibb.co/HpgHnJFD/4a7af38b09c7.png" alt="éclats" class="eclats-icon" style="width: 12px; height: 12px; vertical-align: middle;">')} | Poids: ${obj.poids || 'N/A'}</div>
+          <div style="font-size: 0.8em; color: var(--paper-muted);">${(obj.prix || 'N/A').replace(/🔷/g, '<img src="data/images/Autre/stats/éclats.png" alt="éclats" class="eclats-icon" style="width: 12px; height: 12px; vertical-align: middle;">')} | Poids: ${obj.poids || 'N/A'}</div>
         </div>
       `).join('');
 

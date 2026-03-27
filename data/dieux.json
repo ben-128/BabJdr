@@ -34,7 +34,7 @@
       "type": "card",
       "id": "dieux-new-5-1756899431837",
       "title": "Myrin, l'Éclat-Changeant",
-      "content": "<img src=\"https://i.ibb.co/99Yyp34v/Dieu-Mal-fique-Myrin.jpg\" style=\"display: block; margin: 1rem auto; max-width: 50%; min-width: 200px;\" alt=\"Image\">\n<br><br>\nSymbole : un masque brisé en deux, dont une moitié sourit et l’autre pleure.<br>\nElements : Maléfique.<br>\nDomaine : illusions, rêves, malice.<br>\nParticularité : ses fidèles accordent beaucoup d’importance aux fêtes, à la musique et aux pactes imprévisibles.<br><br>",
+      "content": "<img src=\"data/images/Autre/Dieux/Dieu-Maléfique-Myrin.jpg\" style=\"display: block; margin: 1rem auto; max-width: 50%; min-width: 200px;\" alt=\"Image\">\n<br><br>\nSymbole : un masque brisé en deux, dont une moitié sourit et l’autre pleure.<br>\nElements : Maléfique.<br>\nDomaine : illusions, rêves, malice.<br>\nParticularité : ses fidèles accordent beaucoup d’importance aux fêtes, à la musique et aux pactes imprévisibles.<br><br>",
       "deletable": true,
       "sectionName": "Myrin"
     },
@@ -42,7 +42,7 @@
       "id": "section-1766582921492-h17sn5",
       "type": "card",
       "title": "Nerhaël, la Mémoire des Profondeurs",
-      "content": "<img src=\"https://i.ibb.co/v6gPd8S3/Dieu-Eau-Nerha-l.jpg\" style=\"display: block; margin: 1rem auto; max-width: 50%; min-width: 200px;\" alt=\"Image\">\n<br><br>\nSymbole : une spirale d’eau entourant un œil fermé.<br>\nÉlément : Eau.<br>\nDomaine : courants, patience, secrets engloutis.<br>\nParticularité : ses fidèles croient que l’eau se souvient de tout ; ils pratiquent des rites silencieux, des offrandes immergées et jurent des serments murmurés aux rivières et aux mers."
+      "content": "<img src=\"data/images/Autre/Dieux/Dieu-Eau-Nerhaël.jpg\" style=\"display: block; margin: 1rem auto; max-width: 50%; min-width: 200px;\" alt=\"Image\">\n<br><br>\nSymbole : une spirale d’eau entourant un œil fermé.<br>\nÉlément : Eau.<br>\nDomaine : courants, patience, secrets engloutis.<br>\nParticularité : ses fidèles croient que l’eau se souvient de tout ; ils pratiquent des rites silencieux, des offrandes immergées et jurent des serments murmurés aux rivières et aux mers."
     },
     {
       "id": "section-1766582965263-ylpoud",

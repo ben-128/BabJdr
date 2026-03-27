@@ -1,10 +1,10 @@
 {
-  "Feu": "https://i.ibb.co/VWfKvNCL/element-Feu.png",
-  "Eau": "https://i.ibb.co/bMVKwNQP/element-Eau.png",
-  "Terre": "https://i.ibb.co/gLxnsvfg/element-Terre.png",
-  "Air": "data/images/Sorts/Enchanteur/RageElementaire.png",
-  "Lumière": "https://i.ibb.co/pjmcYV72/element-Lumi-re.png",
-  "Nuit": "https://i.ibb.co/b5qK7czM/element-Nuit.png",
-  "Divin": "https://i.ibb.co/rKYgZ4Yp/element-Divin.png",
-  "Maléfique": "https://i.ibb.co/SDD5KX34/element-Mal-fique.png"
+  "Feu": "data/images/Elements/Feu.png",
+  "Eau": "data/images/Elements/Eau.png",
+  "Terre": "data/images/Elements/Terre.png",
+  "Air": "data/images/Elements/Air.png",
+  "Lumière": "data/images/Elements/Lumière.png",
+  "Nuit": "data/images/Elements/Nuit.png",
+  "Divin": "data/images/Elements/Divin.png",
+  "Maléfique": "data/images/Elements/Maléfique.png"
 }

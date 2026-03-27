@@ -2111,7 +2111,7 @@
               <button id="editorTreasureTablesBtn" class="btn" style="background: #b45309; color: white; font-size: 12px;">🎲 Tables Trésors</button>
               <button id="editorSchemaBtn" class="btn" style="background: #8b5cf6; color: white; font-size: 12px;">🎨 Schéma</button>
               <button id="editorImageBtn" class="btn" style="background: #be185d; color: white; font-size: 12px;">📷 Image</button>
-              <button id="editorEclatsBtn" class="btn" style="background: #0ea5e9; color: white; font-size: 12px;"><img src="https://i.ibb.co/HpgHnJFD/4a7af38b09c7.png" class="eclats-icon" style="width: 14px; height: 14px; vertical-align: middle;"> Éclats</button>
+              <button id="editorEclatsBtn" class="btn" style="background: #0ea5e9; color: white; font-size: 12px;"><img src="data/images/Autre/stats/éclats.png" class="eclats-icon" style="width: 14px; height: 14px; vertical-align: middle;"> Éclats</button>
             </div>
             <div style="font-size: 12px; color: var(--paper-muted); line-height: 1.4;">
               💡 <strong>Astuce:</strong> Utilisez ces boutons pour insérer rapidement des éléments, états, liens, tables de trésors et schémas dans votre contenu HTML.
@@ -2272,7 +2272,7 @@
       if (eclatsBtn) {
         eclatsBtn.addEventListener('click', () => {
           // Insérer l'icône éclats
-          const eclatsHtml = window.EclatsIcon?.small || '<img src="https://i.ibb.co/HpgHnJFD/4a7af38b09c7.png" alt="éclats" class="eclats-icon" style="width: 16px; height: 16px; vertical-align: middle;">';
+          const eclatsHtml = window.EclatsIcon?.small || '<img src="data/images/Autre/stats/éclats.png" alt="éclats" class="eclats-icon" style="width: 16px; height: 16px; vertical-align: middle;">';
           insertTextAtCursor(eclatsHtml);
         });
       }

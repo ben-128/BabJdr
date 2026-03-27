@@ -909,11 +909,11 @@
     
     // URLs imgbb pour les icônes de classes
     _classIconUrls: {
-      'Guerrier': 'https://i.ibb.co/VYWv5yW6/Guerrier.png',
-      'Mage': 'https://i.ibb.co/ZpGmbw9L/Mage.png',
-      'Pretre': 'https://i.ibb.co/Q7v372rX/Pretre.png',
-      'Rodeur': 'https://i.ibb.co/LDkJm2Fr/Rodeur.png',
-      'Enchanteur': 'https://i.ibb.co/ZpwTCLGC/Enchanteur.png'
+      'Guerrier': 'data/images/Autre/Iconeheros/Guerrier.png',
+      'Mage': 'data/images/Autre/Iconeheros/Mage.png',
+      'Pretre': 'data/images/Autre/Iconeheros/Pretre.png',
+      'Rodeur': 'data/images/Autre/Iconeheros/Rodeur.png',
+      'Enchanteur': 'data/images/Autre/Iconeheros/Enchanteur.png'
     },
 
     _getClassIconUrl(fileName) {
@@ -1453,7 +1453,7 @@
             <hr>
             <p>${item.effet}</p>
             <div style="display: flex; justify-content: space-between;">
-              <span>${item.prix ? item.prix.replace(/🔷/g, '<img src="https://i.ibb.co/HpgHnJFD/4a7af38b09c7.png" alt="éclats" class="eclats-icon" style="width: 14px; height: 14px; vertical-align: middle;">') : ''}</span>
+              <span>${item.prix ? item.prix.replace(/🔷/g, '<img src="data/images/Autre/stats/éclats.png" alt="éclats" class="eclats-icon" style="width: 14px; height: 14px; vertical-align: middle;">') : ''}</span>
               <span>${item.poids || ''}</span>
             </div>
             ${isDevMode ? `

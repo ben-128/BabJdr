@@ -25,14 +25,14 @@ class CharacterCreatorUI {
     };
     this.calculatedCharacter = null;
     this.elementIcons = {
-      "Feu": "https://i.ibb.co/VWfKvNCL/element-Feu.png",
-      "Eau": "https://i.ibb.co/bMVKwNQP/element-Eau.png",
-      "Terre": "https://i.ibb.co/gLxnsvfg/element-Terre.png",
-      "Air": "https://i.ibb.co/W484kM90/element-Air.png",
-      "Lumière": "https://i.ibb.co/pjmcYV72/element-Lumi-re.png",
-      "Nuit": "https://i.ibb.co/b5qK7czM/element-Nuit.png",
-      "Divin": "https://i.ibb.co/rKYgZ4Yp/element-Divin.png",
-      "Maléfique": "https://i.ibb.co/SDD5KX34/element-Mal-fique.png"
+      "Feu": "data/images/Elements/Feu.png",
+      "Eau": "data/images/Elements/Eau.png",
+      "Terre": "data/images/Elements/Terre.png",
+      "Air": "data/images/Elements/Air.png",
+      "Lumière": "data/images/Elements/Lumière.png",
+      "Nuit": "data/images/Elements/Nuit.png",
+      "Divin": "data/images/Elements/Divin.png",
+      "Maléfique": "data/images/Elements/Maléfique.png"
     };
     // Track si le formulaire a été ouvert en mode mobile (fullscreen)
     this.openedInMobileMode = false;
@@ -138,7 +138,7 @@ class CharacterCreatorUI {
         <div id="equipement-section" class="form-section" style="display: none;">
           <h4>Équipement de départ (120 éclats)</h4>
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding: 0.75rem; background: var(--ui-blue-dark); border-radius: 8px; border: 2px solid var(--ui-border);">
-            <span style="color: var(--paper-ink); font-weight: bold;"><img src="https://i.ibb.co/HpgHnJFD/4a7af38b09c7.png" alt="éclats" class="eclats-icon" style="width: 16px; height: 16px; vertical-align: middle;"> Budget restant:</span>
+            <span style="color: var(--paper-ink); font-weight: bold;"><img src="data/images/Autre/stats/éclats.png" alt="éclats" class="eclats-icon" style="width: 16px; height: 16px; vertical-align: middle;"> Budget restant:</span>
             <span id="budget-restant" style="color: #22c55e; font-size: 1.2rem; font-weight: bold;">120</span>
           </div>
           <div id="equipement-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1rem;">

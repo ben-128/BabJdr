@@ -449,13 +449,20 @@
     }
   };
 
+  // Helper: resolve local image path (encode special chars, add GitHub raw base in standalone)
+  const _ghRawBase = 'https://raw.githubusercontent.com/ben-128/BabJdr/master/';
+  const _resolveImg = (path) => {
+    const encoded = path.split('/').map((p, i) => i < 2 ? p : encodeURIComponent(p)).join('/');
+    return window.STANDALONE_VERSION === true ? _ghRawBase + encoded : encoded;
+  };
+  const _statIcon = (path, alt) => `<img src="${_resolveImg(path)}" alt="${alt}" class="stat-icon" style="width: 48px; height: 48px; vertical-align: middle;">`;
   window.StatIcons = {
-    'Force': '<img src="https://i.ibb.co/23cGYFvZ/stat-Force.png" alt="Force" class="stat-icon" style="width: 48px; height: 48px; vertical-align: middle;">',
-    'Agilité': '<img src="https://i.ibb.co/Ng9TzjZL/stat-Agilit.png" alt="Agilité" class="stat-icon" style="width: 48px; height: 48px; vertical-align: middle;">',
-    'Endurance': '<img src="data/images/Autre/stats/Endurance.png" alt="Endurance" class="stat-icon" style="width: 48px; height: 48px; vertical-align: middle;">',
-    'Intelligence': '<img src="data/images/Autre/stats/Intelligence.png" alt="Intelligence" class="stat-icon" style="width: 48px; height: 48px; vertical-align: middle;">',
-    'Volonté': '<img src="https://i.ibb.co/B2BCGP6T/stat-Volont.png" alt="Volonté" class="stat-icon" style="width: 48px; height: 48px; vertical-align: middle;">',
-    'Chance': '<img src="https://i.ibb.co/HfthhzSF/stat-Chance.png" alt="Chance" class="stat-icon" style="width: 48px; height: 48px; vertical-align: middle;">'
+    'Force': _statIcon('data/images/Autre/stats/Force.png', 'Force'),
+    'Agilité': _statIcon('data/images/Autre/stats/Agilité.png', 'Agilité'),
+    'Endurance': _statIcon('data/images/Autre/stats/Endurance.png', 'Endurance'),
+    'Intelligence': _statIcon('data/images/Autre/stats/Intelligence.png', 'Intelligence'),
+    'Volonté': _statIcon('data/images/Autre/stats/Volonté.png', 'Volonté'),
+    'Chance': _statIcon('data/images/Autre/stats/Chance.png', 'Chance')
   };
 
   window.ElementColors = {
@@ -469,18 +476,17 @@
     'Maléfique': { color: '#dc2626', weight: 'bold' }
   };
 
-  // Element icons - use weserv.nl proxy for optimized 72px WebP thumbnails
-  const _elIconProxy = (url) => `https://images.weserv.nl/?url=${encodeURIComponent(url)}&we&output=webp&q=85&w=72&h=72&fit=inside`;
-  const _elIcon = (url, alt) => `<img src="${_elIconProxy(url)}" alt="${alt}" class="element-icon" style="width: 72px; height: 72px; vertical-align: middle;" loading="lazy">`;
+  // Element icons - local images with GitHub raw fallback for standalone
+  const _elIcon = (path, alt) => `<img src="${_resolveImg(path)}" alt="${alt}" class="element-icon" style="width: 72px; height: 72px; vertical-align: middle;" loading="lazy">`;
   window.ElementIcons = {
-    'Feu': _elIcon('https://i.ibb.co/VWfKvNCL/element-Feu.png', 'Feu'),
-    'Eau': _elIcon('https://i.ibb.co/bMVKwNQP/element-Eau.png', 'Eau'),
-    'Terre': _elIcon('https://i.ibb.co/gLxnsvfg/element-Terre.png', 'Terre'),
-    'Air': _elIcon('data/images/Sorts/Enchanteur/RageElementaire.png', 'Air'),
-    'Lumière': _elIcon('https://i.ibb.co/pjmcYV72/element-Lumi-re.png', 'Lumière'),
-    'Nuit': _elIcon('https://i.ibb.co/b5qK7czM/element-Nuit.png', 'Nuit'),
-    'Divin': _elIcon('https://i.ibb.co/rKYgZ4Yp/element-Divin.png', 'Divin'),
-    'Maléfique': _elIcon('https://i.ibb.co/SDD5KX34/element-Mal-fique.png', 'Maléfique')
+    'Feu': _elIcon('data/images/Elements/Feu.png', 'Feu'),
+    'Eau': _elIcon('data/images/Elements/Eau.png', 'Eau'),
+    'Terre': _elIcon('data/images/Elements/Terre.png', 'Terre'),
+    'Air': _elIcon('data/images/Elements/Air.png', 'Air'),
+    'Lumière': _elIcon('data/images/Elements/Lumière.png', 'Lumière'),
+    'Nuit': _elIcon('data/images/Elements/Nuit.png', 'Nuit'),
+    'Divin': _elIcon('data/images/Elements/Divin.png', 'Divin'),
+    'Maléfique': _elIcon('data/images/Elements/Maléfique.png', 'Maléfique')
   };
 
 })();

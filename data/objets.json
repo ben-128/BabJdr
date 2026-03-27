@@ -611,7 +611,7 @@
     {
       "nom": "Rapière elfique",
       "numero": 48,
-      "image": "https://i.ibb.co/Z1FnQ4TH/Rapi-re-Elfique.png",
+      "image": "data/images/Objets/Armes/RapièreElfique.png",
       "description": "<i>Fine et élégante, gravée de runes lumineuses, elle canalise l’énergie des anciens bois pour renforcer la magie de son porteur.</i>",
       "tags": [
         "Arme",
@@ -757,7 +757,7 @@
     {
       "nom": "Bâton de rôdeur",
       "numero": 59,
-      "image": "https://i.ibb.co/6Kk6Svm/28225038a687.png",
+      "image": "data/images/Objets/Armes/BatonRodeur.png",
       "description": "<i>Forgé dans le bois noueux des forêts anciennes, ce bâton semble murmurer la route à suivre à ceux qui marchent sans détourner le regard de l’horizon.</i>",
       "tags": [
         "Arme",
@@ -771,7 +771,7 @@
     {
       "nom": "Sceptre de Durnak, dieu de la terre",
       "numero": 60,
-      "image": "https://i.ibb.co/XfVYGy2T/Sceptre-de-Durnak-dieu-de-la-terre.png",
+      "image": "data/images/Objets/Armes/Sceptre de Durnak, dieu de la terre.png",
       "description": "<i>Ce sceptre battant au rythme du cœur de Durnak pulse d’une puissance tellurique capable de nourrir la chair, d’éveiller l’esprit et d’ébranler la terre elle-même.</i>",
       "tags": [
         "Arme",

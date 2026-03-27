@@ -218,7 +218,7 @@
           ${this.buildEditableField(this.data.effet, 'objet-effet', 'Effet', { style: 'margin: 1rem 0;' })}
           
           <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; font-size: 0.9em;">
-            ${this.data.prix ? `<div>${this.buildEditableField(this.data.prix.replace(/🔷/g, '<img src="https://i.ibb.co/HpgHnJFD/4a7af38b09c7.png" alt="éclats" class="eclats-icon" style="width: 16px; height: 16px; vertical-align: middle;">'), 'objet-prix', 'Prix')}</div>` : ''}
+            ${this.data.prix ? `<div>${this.buildEditableField(this.data.prix.replace(/🔷/g, '<img src="data/images/Autre/stats/éclats.png" alt="éclats" class="eclats-icon" style="width: 16px; height: 16px; vertical-align: middle;">'), 'objet-prix', 'Prix')}</div>` : ''}
             ${this.data.poids ? `<div>${this.buildEditableField(this.data.poids, 'objet-poids', 'Poids')}</div>` : ''}
           </div>
           

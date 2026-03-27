@@ -79,13 +79,13 @@
   },
   {
     "nom": "Tobin",
-    "image": "https://i.ibb.co/0RNQqzm6/Tobin-compressed.jpg",
+    "image": "data/images/NPC/Tobin.png",
     "description": "Adolescent de 16-17 ans, maigre et nerveux. Vit caché avec sa mère Nara près d'une source magique. Son père, ancien bûcheron, a été tué par les créatures corrompues.",
     "interactions": "- Lance des pierres sur les PJ par peur (les prend pour des corrompus)<br><br>\n- Emmène les PJ à la cachette avec la source magique pour se faire pardonner<br><br>\n- Demande aux PJ de l'escorter à la cabane du bûcheron (Forêt-5) pour récupérer le médaillon de son père<br><br>\n- Donne une <span class=\"objet-link\" data-objet=\"Nocteline\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Nocteline</span> en remerciement"
   },
   {
     "nom": "Nara",
-    "image": "https://i.ibb.co/Fb6g1jHs/Nara-compressed.jpg",
+    "image": "data/images/NPC/Nara.png",
     "description": "Mère de Tobin, 40 ans, cheveux gris prématurés. Pragmatique et protectrice. Vit cachée près d'une source magique depuis la mort de son mari.",
     "interactions": "- Méfiante envers les étrangers, accepte de les héberger une nuit si Tobin explique<br><br>\n- Refuse que Tobin aille à la cabane du bûcheron (trop dangereux)<br><br>\n- Si convaincue, donne une <span class=\"objet-link\" data-objet=\"Feuilleclaire\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Feuilleclaire</span> et une <span class=\"objet-link\" data-objet=\"Auréline des Roches\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Auréline des Roches</span>, et menace les PJ s'il arrive malheur à son fils"
   }

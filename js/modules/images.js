@@ -343,22 +343,32 @@
 
     },
 
-    // Process image URL to handle proxying via weserv.nl
-    // weserv.nl acts as a CDN proxy that converts to WebP and resizes thumbnails.
-    // If weserv.nl fails, handleImageLoadFailure falls back to the original ibb.co URL.
+    // GitHub raw base URL for standalone mode
+    GITHUB_RAW_BASE: 'https://raw.githubusercontent.com/ben-128/BabJdr/master/',
+
+    // Process image URL: convert local paths to absolute URLs in standalone mode,
+    // and encode special characters in filenames for proper loading.
     processImageUrl(originalUrl) {
+      if (!originalUrl) return originalUrl;
+
+      // Legacy ibb.co URLs: proxy through weserv.nl as fallback
       if (originalUrl.includes('i.ibb.co') && !originalUrl.includes('images.weserv.nl')) {
         const format = this.supportsWebP() ? 'webp' : 'jpeg';
         const quality = this.getOptimalQuality();
         return `https://images.weserv.nl/?url=${encodeURIComponent(originalUrl)}&we&output=${format}&q=${quality}&w=400&h=300&fit=inside`;
       }
 
-      // For local monster paths, encode only the filename to handle French characters properly
-      if (originalUrl.startsWith('data/images/Monstres/')) {
-        const pathParts = originalUrl.split('/');
-        const filename = pathParts[pathParts.length - 1];
-        const pathWithoutFilename = pathParts.slice(0, -1).join('/');
-        return `${pathWithoutFilename}/${encodeURIComponent(filename)}`;
+      // Local image paths (data/images/...)
+      if (originalUrl.startsWith('data/images/')) {
+        // Encode each path segment to handle French characters (accents, spaces, apostrophes)
+        const parts = originalUrl.split('/');
+        const encoded = parts.map((part, i) => i < 2 ? part : encodeURIComponent(part)).join('/');
+
+        // In standalone mode, prepend GitHub raw URL
+        if (window.STANDALONE_VERSION === true) {
+          return this.GITHUB_RAW_BASE + encoded;
+        }
+        return encoded;
       }
 
       return originalUrl;
