@@ -1,5 +1,5 @@
 ---
-description: "Opérations Git pour le projet Foresia/BabJDR - commits, branches, push, PR, workflow"
+description: "Opérations Git pour le projet Foresia/BabJDR - commits, branches, push, merge direct dans master"
 ---
 
 # Skill Git - Projet Foresia (BabJDR)
@@ -60,16 +60,12 @@ git commit -m "Build vX.Y.Z: description des changements"
 ```
 5. Push : `git push origin master`
 
-### Pull Request
+### Merge dans master (pas de PR)
+Ce projet n'utilise pas de Pull Requests. On merge directement dans master :
 ```bash
-# Créer une branche feature
-git checkout -b feature/nom-feature
-
-# ... faire les commits ...
-
-# Push et créer la PR
-git push -u origin feature/nom-feature
-gh pr create --title "Titre" --body "Description"
+git checkout master
+git merge [branche-feature]
+git push origin master
 ```
 
 ## Fichiers à ne PAS committer
@@ -96,7 +92,7 @@ Selon `.gitignore` :
 - Préférer `git add` de fichiers spécifiques plutôt que `git add -A`
 - Ne jamais committer de fichiers secrets ou de clés API
 - Si le worktree est actif, les opérations git se font dans le contexte du worktree
-- Pour les PR, suivre le format standard avec Summary et Test plan
+- Pas de PR : toujours merger directement dans master et push
 - Après un commit incluant un build, mentionner la version dans le message
 
 $ARGUMENTS
