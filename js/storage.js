@@ -623,6 +623,7 @@
   // Helper: resolve local image path (encode special chars, add GitHub raw base in standalone)
   const _ghRawBase = 'https://raw.githubusercontent.com/ben-128/BabJdr/master/';
   const _resolveImg = (path) => {
+    if (path.startsWith('http://') || path.startsWith('https://')) return path;
     const encoded = path.split('/').map((p, i) => i < 2 ? p : encodeURIComponent(p)).join('/');
     return window.STANDALONE_VERSION === true ? _ghRawBase + encoded : encoded;
   };
