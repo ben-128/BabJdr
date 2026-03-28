@@ -360,6 +360,7 @@
     },
 
     clearMainSearchResults() {
+      // Remove search results page
       const oldResults = document.querySelector('#search-results-page');
       if (oldResults) oldResults.remove();
 
@@ -379,9 +380,9 @@
         window.location.hash = '#/creation';
       }
 
-      // Force router to re-render the page
-      if (JdrApp.modules.router && JdrApp.modules.router.handleRoute) {
-        JdrApp.modules.router.handleRoute();
+      // Force router to re-render (parseRoute, not handleRoute which doesn't exist)
+      if (JdrApp.modules.router && JdrApp.modules.router.parseRoute) {
+        JdrApp.modules.router.parseRoute();
       }
 
       const searchInput = document.querySelector('#search');
