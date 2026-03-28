@@ -363,19 +363,25 @@
       const oldResults = document.querySelector('#search-results-page');
       if (oldResults) oldResults.remove();
 
-      // Navigate back to the last visited page, not just sommaire
+      // Restore inline display on all articles (we set display:none in _injectSearchPage)
+      const views = document.getElementById('views');
+      if (views) {
+        views.querySelectorAll('article').forEach(a => {
+          a.style.display = '';
+        });
+      }
+
+      // Navigate back to the last visited page
       const lastHash = this._lastPageHash;
       if (lastHash && lastHash !== '#/') {
         window.location.hash = lastHash;
-        if (JdrApp.modules.router && JdrApp.modules.router.handleRoute) {
-          JdrApp.modules.router.handleRoute();
-        }
-      } else if (window.location.hash && window.location.hash !== '#/') {
-        if (JdrApp.modules.router && JdrApp.modules.router.handleRoute) {
-          JdrApp.modules.router.handleRoute();
-        }
-      } else {
+      } else if (!window.location.hash || window.location.hash === '#/') {
         window.location.hash = '#/creation';
+      }
+
+      // Force router to re-render the page
+      if (JdrApp.modules.router && JdrApp.modules.router.handleRoute) {
+        JdrApp.modules.router.handleRoute();
       }
 
       const searchInput = document.querySelector('#search');
