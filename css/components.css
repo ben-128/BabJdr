@@ -1830,6 +1830,17 @@ img[src*="stats/Chance"] {
   border-radius: 0 !important;
 }
 
+/* Icônes d'éléments - pas de cadre */
+.element-icon,
+img.element-icon,
+img[src*="Elements/"] {
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  background: none !important;
+  border-radius: 0 !important;
+}
+
 /* Style spécial pour les sous-classes - 2 images centrées et collées */
 .subclass-images {
   display: flex;
