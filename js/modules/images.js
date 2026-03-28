@@ -51,11 +51,10 @@
         this.ensureMonsterImageMappings();
       }, 1000);
 
-      // Background preloading disabled - only load images for current page
-      // Images are loaded on-demand via lazy loading and autoLoadImages()
-      // setTimeout(() => {
-      //   this.startBackgroundPreloading();
-      // }, 500);
+      // Idle image loader: loads 1 image at a time when nothing else is loading
+      setTimeout(() => {
+        this.startIdleImageLoader();
+      }, 2000);
     },
 
     // Configuration for image loading
@@ -459,6 +458,49 @@
       }
     },
 
+    // ========================================
+    // IDLE IMAGE LOADER
+    // Loads 1 image at a time when no other image is loading.
+    // Priority: current page first, then other pages.
+    // ========================================
+    startIdleImageLoader() {
+      this._idleLoaderInterval = setInterval(() => {
+        // Only load when nothing else is loading
+        if (this.loadQueue.activeCount > 0 || this.loadQueue.pending.length > 0) return;
+        // Don't load when page is hidden
+        if (document.hidden) return;
+
+        this.idleLoadOneImage();
+      }, 300);
+    },
+
+    idleLoadOneImage() {
+      // 1. Try current page first
+      const visibleArticle = document.querySelector('article.active, article[style*="display: block"]');
+      if (visibleArticle) {
+        const img = visibleArticle.querySelector('img.lazy-load[data-src]');
+        if (img) {
+          const url = img.getAttribute('data-src');
+          if (this.lazyImageObserver) this.lazyImageObserver.unobserve(img);
+          this.enqueueImageLoad(img, url);
+          return;
+        }
+      }
+
+      // 2. Current page fully loaded — find an image on any other page
+      const allLazy = document.querySelectorAll('img.lazy-load[data-src]');
+      for (const img of allLazy) {
+        // Skip images already loading or loaded
+        if (img.classList.contains('lazy-loading') || img.classList.contains('lazy-loaded')) continue;
+        const url = img.getAttribute('data-src');
+        if (url) {
+          if (this.lazyImageObserver) this.lazyImageObserver.unobserve(img);
+          this.enqueueImageLoad(img, url);
+          return;
+        }
+      }
+    },
+
     autoLoadImages() {
       let loadedCount = 0;
 
@@ -769,7 +811,32 @@
       // Small delay to let the DOM update, then load images for the new page
       setTimeout(() => {
         this.autoLoadImages();
+        // Reprioritize pending queue: move current page images to front
+        this.reprioritizeQueue();
       }, 50);
+    },
+
+    // Move images from the current page to the front of the load queue
+    reprioritizeQueue() {
+      const q = this.loadQueue;
+      if (q.pending.length === 0) return;
+
+      const visibleArticle = document.querySelector('article.active, article[style*="display: block"]');
+      if (!visibleArticle) return;
+
+      const currentPage = [];
+      const otherPages = [];
+      for (const item of q.pending) {
+        if (visibleArticle.contains(item.img)) {
+          currentPage.push(item);
+        } else {
+          otherPages.push(item);
+        }
+      }
+
+      if (currentPage.length > 0) {
+        q.pending = [...currentPage, ...otherPages];
+      }
     },
 
     // Process the preload queue
