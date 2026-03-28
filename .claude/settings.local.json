@@ -95,7 +95,14 @@
       "Bash(wc:*)",
       "Bash(cmd /c \"type D:\\\\projets\\\\BabJDR\\\\BabJDR\\\\package.json\")",
       "Bash(cmd /c \"if exist D:\\\\projets\\\\BabJDR\\\\BabJDR\\\\package.json echo EXISTS\")",
-      "Bash(python3:*)"
+      "Bash(python3:*)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(find /d/projets/BabJDR/BabJDR -type f \\\\\\(-name *.json -o -name *.html \\\\\\) ! -path */Backups/* ! -path */.claude/*)",
+      "Bash(while read:*)",
+      "Bash(do grep:*)",
+      "Bash(/dev/null done:*)",
+      "Bash(do if:*)",
+      "Bash(then basename:*)"
     ],
     "deny": []
   }

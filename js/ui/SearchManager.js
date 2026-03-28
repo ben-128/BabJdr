@@ -269,116 +269,108 @@
      * Display search results
      */
     displaySearchResults(results, query) {
+      // Save current hash before showing search results
+      const currentHash = window.location.hash;
+      if (currentHash && currentHash !== '#/' && currentHash !== '#/search') {
+        this._lastPageHash = currentHash;
+      }
+
       if (results.length === 0) {
         this.showNoResults(query);
         return;
       }
 
-      // Group results by type for better organization
+      // Group results by type
       const groupedResults = {};
       results.forEach(result => {
-        const type = result.type;
-        if (!groupedResults[type]) {
-          groupedResults[type] = [];
-        }
-        groupedResults[type].push(result);
+        if (!groupedResults[result.type]) groupedResults[result.type] = [];
+        groupedResults[result.type].push(result);
       });
 
-      // Generate HTML for results
       let resultsHTML = `
-        <div class="search-results-header">
-          <h2>🔍 Résultats de recherche pour "${query}"</h2>
-          <p>${results.length} résultat${results.length > 1 ? 's' : ''} trouvé${results.length > 1 ? 's' : ''}</p>
-          <button class="btn small" onclick="JdrApp.modules.ui.clearMainSearchResults()">
-            ← Retour au sommaire
-          </button>
-        </div>
-        <div class="search-results-content">
+        <div class="search-page">
+          <div class="search-page-header">
+            <div class="search-page-title">
+              <span class="search-page-icon">🔍</span>
+              <span>Résultats pour "<strong>${query}</strong>"</span>
+            </div>
+            <div class="search-page-meta">
+              <span class="search-page-count">${results.length} résultat${results.length > 1 ? 's' : ''}</span>
+              <button class="btn small search-back-btn" onclick="JdrApp.modules.ui.clearMainSearchResults()">← Retour</button>
+            </div>
+          </div>
       `;
 
-      // Add results by type
       Object.entries(groupedResults).forEach(([type, typeResults]) => {
         const typeLabel = this.getTypeLabel(type);
         resultsHTML += `
-          <div class="search-results-section">
-            <h3>${typeLabel} (${typeResults.length})</h3>
+          <div class="search-page-section">
+            <h3 class="search-section-title">${typeLabel} <span class="search-section-count">(${typeResults.length})</span></h3>
             <div class="search-results-grid">
         `;
-        
         typeResults.forEach(result => {
           resultsHTML += this.generateResultCard(result);
         });
-        
-        resultsHTML += `
-            </div>
-          </div>
-        `;
+        resultsHTML += `</div></div>`;
       });
 
       resultsHTML += `</div>`;
-      
-      // Hide all current articles and show search results in #views
-      const views = document.getElementById('views');
-      if (views) {
-        // Hide all articles (remove active class AND reset inline display)
-        views.querySelectorAll('article').forEach(a => {
-          a.classList.remove('active');
-          a.style.display = 'none';
-        });
-        // Remove any previous search results
-        const oldResults = views.querySelector('#search-results-page');
-        if (oldResults) oldResults.remove();
-        // Create search results article
-        const article = document.createElement('article');
-        article.id = 'search-results-page';
-        article.classList.add('active');
-        article.style.display = 'block';
-        article.innerHTML = resultsHTML;
-        views.appendChild(article);
-      }
+      this._injectSearchPage(resultsHTML);
     },
 
-    /**
-     * Show no results message
-     */
     showNoResults(query) {
-      const noResultsHTML = `
-        <div class="search-results-header">
-          <h2>🔍 Aucun résultat pour "${query}"</h2>
-          <p>Essayez avec d'autres mots-clés ou vérifiez l'orthographe.</p>
-          <button class="btn small" onclick="JdrApp.modules.ui.clearMainSearchResults()">
-            ← Retour au sommaire
-          </button>
+      // Save current hash
+      const currentHash = window.location.hash;
+      if (currentHash && currentHash !== '#/' && currentHash !== '#/search') {
+        this._lastPageHash = currentHash;
+      }
+
+      const html = `
+        <div class="search-page">
+          <div class="search-page-header">
+            <div class="search-page-title">
+              <span class="search-page-icon">🔍</span>
+              <span>Aucun résultat pour "<strong>${query}</strong>"</span>
+            </div>
+            <div class="search-page-meta">
+              <span class="search-page-hint">Essayez d'autres mots-clés ou vérifiez l'orthographe.</span>
+              <button class="btn small search-back-btn" onclick="JdrApp.modules.ui.clearMainSearchResults()">← Retour</button>
+            </div>
+          </div>
         </div>
       `;
-      
-      const views = document.getElementById('views');
-      if (views) {
-        views.querySelectorAll('article').forEach(a => {
-          a.classList.remove('active');
-          a.style.display = 'none';
-        });
-        const oldResults = views.querySelector('#search-results-page');
-        if (oldResults) oldResults.remove();
-        const article = document.createElement('article');
-        article.id = 'search-results-page';
-        article.classList.add('active');
-        article.style.display = 'block';
-        article.innerHTML = noResultsHTML;
-        views.appendChild(article);
-      }
+      this._injectSearchPage(html);
     },
 
-    /**
-     * Clear search results and return to normal view
-     */
+    _injectSearchPage(html) {
+      const views = document.getElementById('views');
+      if (!views) return;
+      views.querySelectorAll('article').forEach(a => {
+        a.classList.remove('active');
+        a.style.display = 'none';
+      });
+      const oldResults = views.querySelector('#search-results-page');
+      if (oldResults) oldResults.remove();
+      const article = document.createElement('article');
+      article.id = 'search-results-page';
+      article.classList.add('active');
+      article.style.display = 'block';
+      article.innerHTML = html;
+      views.appendChild(article);
+    },
+
     clearMainSearchResults() {
-      // Remove search results article
       const oldResults = document.querySelector('#search-results-page');
       if (oldResults) oldResults.remove();
 
-      // Reload the current page or go back to homepage
-      if (window.location.hash && window.location.hash !== '#/') {
+      // Navigate back to the last visited page, not just sommaire
+      const lastHash = this._lastPageHash;
+      if (lastHash && lastHash !== '#/') {
+        window.location.hash = lastHash;
+        if (JdrApp.modules.router && JdrApp.modules.router.handleRoute) {
+          JdrApp.modules.router.handleRoute();
+        }
+      } else if (window.location.hash && window.location.hash !== '#/') {
         if (JdrApp.modules.router && JdrApp.modules.router.handleRoute) {
           JdrApp.modules.router.handleRoute();
         }
@@ -386,11 +378,8 @@
         window.location.hash = '#/creation';
       }
 
-      // Clear search input
       const searchInput = document.querySelector('#search');
-      if (searchInput) {
-        searchInput.value = '';
-      }
+      if (searchInput) searchInput.value = '';
     },
 
     // Summary generators

@@ -100,6 +100,41 @@ Importe un `JdrBab-*.zip` depuis Downloads, avec backup automatique.
 cd "D:/projets/BabJDR/BabJDR" && scripts/clean-backups.bat
 ```
 
+### Ship : build + commit + push en une commande
+
+Raccourci : **`/ship`**
+
+Quand l'utilisateur lance `/ship` (ou demande "ship", "build commit push", "publie") :
+
+1. **Build** avec incrémentation de version :
+   ```bash
+   cd "D:/projets/BabJDR/BabJDR" && npm run build
+   ```
+2. **Vérifier** que le build a réussi (exit code 0, fichier `build/Foresia.html` existe)
+3. **Récupérer la nouvelle version** depuis la sortie du build ou depuis `config/sw.js`
+4. **Git add** des fichiers modifiés + fichiers de build :
+   ```bash
+   git add -A
+   ```
+5. **Commit** avec un message au format `Build vX.Y.Z: <description>` :
+   - Si `$ARGUMENTS` contient une description, l'utiliser
+   - Sinon, analyser le `git diff --cached` pour générer une description concise des changements
+   ```bash
+   git commit -m "$(cat <<'EOF'
+   Build vX.Y.Z: description des changements
+
+   Co-Authored-By: Claude Opus 4.6 (1M context) <noreply@anthropic.com>
+   EOF
+   )"
+   ```
+6. **Push** vers origin master :
+   ```bash
+   git push origin master
+   ```
+7. **Résumer** : version, taille du build, nombre de fichiers commités
+
+Si une étape échoue, s'arrêter et reporter l'erreur sans continuer les étapes suivantes.
+
 ## Instructions
 
 - Quand l'utilisateur demande un "build" ou "standalone", faire un build avec incrémentation par défaut
