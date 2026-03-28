@@ -829,13 +829,5 @@ footer{padding:24px;text-align:center;color:var(--paper-muted)}
     font-size: 16px; /* Prevents zoom on iOS */
   }
   
-  .search-results-grid {
-    grid-template-columns: 1fr;
-    gap: var(--space-md);
-  }
-  
-  .search-result-card {
-    min-height: 120px;
-    padding: var(--space-md);
-  }
+  /* Search results responsive handled in components.css */
 }
