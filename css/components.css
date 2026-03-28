@@ -945,23 +945,28 @@ body.dev-off .new-collection-card {
 /* TOC Search bar - compact horizontal layout in table of contents */
 .toc-search{
   display:flex;
-  gap:8px;
+  gap:6px;
   align-items:center;
   margin-bottom:16px;
-  padding:12px;
+  padding:8px;
   background:rgba(30,30,46,0.5);
   border-radius:12px;
   border:1px solid var(--rule);
+  box-sizing:border-box;
+  max-width:100%;
+  overflow:hidden;
 }
 .toc-search input{
   flex:1 1 auto;
+  min-width:0;
   height:32px;
   font-size:14px;
-  padding:6px 12px;
+  padding:6px 10px;
   border-radius:8px;
   border:1px solid var(--rule);
   background:var(--card);
   color:inherit;
+  box-sizing:border-box;
 }
 .toc-search .btn-clear{
   display:flex;
@@ -1889,6 +1894,16 @@ img.eclats-icon {
   background: none !important;
   max-width: none !important;
   max-height: none !important;
+}
+
+/* Icônes de statistiques - pas de cadre */
+.stat-icon,
+img.stat-icon {
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  background: none !important;
+  border-radius: 0 !important;
 }
 
 /* Style spécial pour les sous-classes - 2 images centrées et collées */

@@ -276,7 +276,7 @@
                 </div>
                 <div class="toc" id="toc">
                   <div class="toc-search">
-                    <input autocomplete="off" id="search" placeholder="Rechercher un sort, don, classe, état…">
+                    <input type="search" enterkeyhint="search" autocomplete="off" id="search" placeholder="Rechercher…">
                     <button class="btn-clear" id="clear" title="Effacer">✖</button>
                   </div>
                   <!-- Table of contents will be injected here -->

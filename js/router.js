@@ -456,7 +456,7 @@
 
       const tocHTML = `
         <div class="toc-search">
-          <input autocomplete="off" id="search" placeholder="Rechercher un sort, don, classe, état…">
+          <input type="search" enterkeyhint="search" autocomplete="off" id="search" placeholder="Rechercher…">
           <button class="btn-clear" id="clear" title="Effacer">✖</button>
         </div>
         <h4>Sommaire</h4>

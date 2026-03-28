@@ -81,43 +81,35 @@
       if (this._searchSetup) return;
       this._searchSetup = true;
 
-      let searchDebounceTimer = null;
-
-      // Live search on input (works on mobile without Enter key)
-      JdrApp.utils.events.register('input', '#search', (e) => {
-        const query = e.target.value.trim();
-        clearTimeout(searchDebounceTimer);
-        if (query.length >= 2) {
-          searchDebounceTimer = setTimeout(() => {
-            this.performSearch(query);
-          }, 300);
-        } else if (query.length === 0) {
+      const doSearch = (input) => {
+        const query = input.value.trim();
+        if (query.length > 0) {
+          this.performSearch(query);
+        } else {
           this.clearMainSearchResults();
         }
-      });
+      };
 
-      // Keep Enter for immediate search & Escape to clear
+      // Search on Enter key (desktop + mobile virtual keyboard "Go/Search" button)
       JdrApp.utils.events.register('keydown', '#search', (e) => {
         if (e.key === 'Enter') {
           e.preventDefault();
-          clearTimeout(searchDebounceTimer);
-          const query = e.target.value.trim();
-          if (query.length > 0) {
-            this.performSearch(query);
-          } else {
-            this.clearMainSearchResults();
-          }
+          doSearch(e.target);
         } else if (e.key === 'Escape') {
-          clearTimeout(searchDebounceTimer);
           this.clearMainSearchResults();
           e.target.value = '';
           e.target.blur();
         }
       });
 
+      // 'search' event fires on mobile when tapping the virtual keyboard search button
+      // (for input type="search" with enterkeyhint="search")
+      JdrApp.utils.events.register('search', '#search', (e) => {
+        doSearch(e.target);
+      });
+
       // Clear button
       JdrApp.utils.events.register('click', '#clear', () => {
-        clearTimeout(searchDebounceTimer);
         const searchInput = document.querySelector('#search');
         if (searchInput) {
           searchInput.value = '';

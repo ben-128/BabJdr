@@ -177,7 +177,12 @@
       const isTouchDevice = this.isTouchDevice();
       const isMobileSize = width <= window.UI_CONSTANTS.BREAKPOINTS.MOBILE;
       const isTabletSize = width > window.UI_CONSTANTS.BREAKPOINTS.MOBILE && width <= window.UI_CONSTANTS.BREAKPOINTS.TABLET_LANDSCAPE;
-      
+
+      // Detect if this is a virtual keyboard resize (only height changed, not width)
+      const prevWidth = this._lastWidth || 0;
+      const widthChanged = prevWidth !== 0 && prevWidth !== width;
+      this._lastWidth = width;
+
       // Show menu toggle on touch devices OR mobile size screens
       const shouldShowToggle = isTouchDevice || isMobileSize;
 
@@ -186,12 +191,18 @@
         if (menuToggle) menuToggle.style.display = 'block';
         if (sidebar) {
           sidebar.classList.remove('desktop-open');
-          // Close mobile nav on resize to mobile
-          sidebar.classList.remove('mobile-open');
-          if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
+          // Only close mobile nav if width actually changed (not virtual keyboard)
+          if (widthChanged || !prevWidth) {
+            sidebar.classList.remove('mobile-open');
+            if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
+          }
         }
-        if (backdrop) backdrop.style.display = 'none';
-        document.body.style.overflow = '';
+        if (!widthChanged && prevWidth) {
+          // Virtual keyboard open/close - don't touch backdrop/overflow
+        } else {
+          if (backdrop) backdrop.style.display = 'none';
+          document.body.style.overflow = '';
+        }
       } else {
         // Desktop mode (non-touch, large screen)
         if (menuToggle) menuToggle.style.display = 'none';
