@@ -387,11 +387,12 @@ window.MANIFEST_DATA = ${fs.readFileSync(path.join(rootDir, 'config', 'manifest.
     (function() {
       var storedVersion = localStorage.getItem('foresia-build-version');
       if (storedVersion !== window.BUILD_VERSION) {
-        // New version detected - clear all cached data
+        // New version detected - clear cached data but preserve user preferences
+        var keysToPreserve = ['jdr-bab-favoris', 'jdr-bab-filter-settings'];
         var keysToRemove = [];
         for (var i = 0; i < localStorage.length; i++) {
           var key = localStorage.key(i);
-          if (key && (key.startsWith('jdr-bab') || key.startsWith('foresia'))) {
+          if (key && (key.startsWith('jdr-bab') || key.startsWith('foresia')) && keysToPreserve.indexOf(key) === -1) {
             keysToRemove.push(key);
           }
         }

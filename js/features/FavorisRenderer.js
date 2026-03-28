@@ -246,6 +246,17 @@
             }
           });
         }
+        if (category.subgroups) {
+          category.subgroups.forEach(subgroup => {
+            if (subgroup.dons) {
+              subgroup.dons.forEach(don => {
+                if (favorisNames.includes(don.nom)) {
+                  donsData.push({ don, category: category.nom });
+                }
+              });
+            }
+          });
+        }
       });
 
       return donsData;

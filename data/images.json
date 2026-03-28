@@ -49,7 +49,7 @@
     "subclass:Guerrier:Berserker:2": "data/images/Classes/BersekerF.png",
     "subclass:Guerrier:Aventurier:1": "data/images/Classes/Aventurier.png",
     "subclass:Guerrier:Aventurier:2": "data/images/Classes/AventurierF.png",
-    "subclass:Mage:Érudit:1": "data/images/Autre/Iconeheros/Mage.png",
+    "subclass:Mage:Érudit:1": "data/images/Classes/Mage.png",
     "subclass:Mage:Érudit:2": "data/images/Classes/MageF.png",
     "subclass:Mage:Elfe:1": "data/images/Classes/Elfe.png",
     "subclass:Mage:Elfe:2": "data/images/Classes/ElfeF.png",
