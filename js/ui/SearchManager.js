@@ -516,13 +516,10 @@
             }
           }
         } else if (type === 'table-loot') {
-          // Enable ALL table-loot tags
-          const allTags = window.TABLES_TRESORS?._metadata?.availableTags || [];
-          if (allTags.length > 0 && window.TABLES_TRESORS_FILTER_STATE) {
-            window.TABLES_TRESORS_FILTER_STATE.visibleTags = [...allTags];
-            if (window.TableTresorFilters?.regenerateTablesTresorPage) {
-              window.TableTresorFilters.regenerateTablesTresorPage();
-            }
+          // Clear ALL table-loot tags (empty = show all tables)
+          window.TABLES_TRESORS_FILTER_STATE = { visibleTags: [] };
+          if (window.TableTresorFilters?.regenerateTablesTresorPage) {
+            window.TableTresorFilters.regenerateTablesTresorPage();
           }
         }
 
@@ -568,15 +565,16 @@
     },
 
     generateLinkHash(result) {
+      const sid = (s) => JdrApp.utils.data.sanitizeId(s);
       switch (result.type) {
         case 'spell':
-          return `#/sorts-${UIUtilities.slugify(result.category)}`;
+          return `#/sorts-${sid(result.category)}`;
         case 'don':
-          return `#/dons-${UIUtilities.slugify(result.category)}`;
+          return `#/dons-${sid(result.category)}`;
         case 'class':
-          return `#/${UIUtilities.slugify(result.data.nom)}`;
+          return `#/${sid(result.data.nom)}`;
         case 'subclass':
-          return `#/${UIUtilities.slugify(result.category)}`;
+          return `#/${sid(result.category)}`;
         case 'etat':
           return `#/etats`;
         case 'objet':
