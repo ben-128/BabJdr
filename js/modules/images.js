@@ -192,6 +192,13 @@
         }
       }
 
+      // Background (idle) loads: no retries, silent failure — just move on
+      if (img.dataset.idleLoad) {
+        delete img.dataset.idleLoad;
+        this.dequeueNextImage();
+        return;
+      }
+
       // Retry logic for temporary failures
       if (retryCount < this.imageLoadConfig.maxRetries) {
         const nextRetry = retryCount + 1;
@@ -475,30 +482,23 @@
     },
 
     idleLoadOneImage() {
-      // 1. Try current page first
+      // Find next image to load: current page first, then other pages
+      let img = null;
       const visibleArticle = document.querySelector('article.active, article[style*="display: block"]');
       if (visibleArticle) {
-        const img = visibleArticle.querySelector('img.lazy-load[data-src]');
-        if (img) {
-          const url = img.getAttribute('data-src');
-          if (this.lazyImageObserver) this.lazyImageObserver.unobserve(img);
-          this.enqueueImageLoad(img, url);
-          return;
-        }
+        img = visibleArticle.querySelector('img.lazy-load[data-src]:not(.lazy-loading):not(.lazy-loaded)');
       }
+      if (!img) {
+        img = document.querySelector('img.lazy-load[data-src]:not(.lazy-loading):not(.lazy-loaded)');
+      }
+      if (!img) return;
 
-      // 2. Current page fully loaded — find an image on any other page
-      const allLazy = document.querySelectorAll('img.lazy-load[data-src]');
-      for (const img of allLazy) {
-        // Skip images already loading or loaded
-        if (img.classList.contains('lazy-loading') || img.classList.contains('lazy-loaded')) continue;
-        const url = img.getAttribute('data-src');
-        if (url) {
-          if (this.lazyImageObserver) this.lazyImageObserver.unobserve(img);
-          this.enqueueImageLoad(img, url);
-          return;
-        }
-      }
+      const url = img.getAttribute('data-src');
+      if (this.lazyImageObserver) this.lazyImageObserver.unobserve(img);
+
+      // Mark as background load: no retries, silent failure
+      img.dataset.idleLoad = '1';
+      this.enqueueImageLoad(img, url);
     },
 
     autoLoadImages() {

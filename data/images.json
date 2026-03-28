@@ -457,7 +457,7 @@
     "objet:FlecheTerre": "data/images/Objets/Consumables/Fleches/FlecheTerre.png",
     "don:Maîtrise de la dague": "data/images/Dons/Generaux/Dague.png",
     "don:Maîtrise de l'arc": "data/images/Dons/Generaux/Arc.png",
-    "don:Chanceux": "data/images/Autre/stats/Chance.png",
+    "don:Chanceux": "https://i.ibb.co/7x27pqV8/Chance.jpg",
     "don:Statistiques": "data/images/Dons/Generaux/Dons.png",
     "don:Premier soin": "data/images/Dons/Generaux/PremierSoins.png",
     "don:Attaque délayée": "data/images/Dons/guerrier/AttaqueDelay.png",
@@ -512,7 +512,7 @@
     "don:Accélération": "data/images/Dons/Generaux/Accelera.png",
     "don:Contre-attaque": "data/images/Dons/guerrier/ContreAttaque.png",
     "don:Coup d'épaule": "data/images/Dons/guerrier/CoupEpaule.png",
-    "don:Enchantement d'agilité permanente": "data/images/Autre/stats/Agilité.png",
+    "don:Enchantement d'agilité permanente": "https://i.ibb.co/21b1FKMM/Agilit.jpg",
     "don:Enchantement de force permanente": "data/images/Dons/Enchanteur/EnchantementForce.png",
     "don:Canalisation incrémentale": "data/images/Dons/mage/Canal.png",
     "don:Incantation rapide": "data/images/Dons/mage/IncantRapide.png",
@@ -521,7 +521,7 @@
     "npc:Nara": "data/images/NPC/Nara.png",
     "don:Bénédiction rapide": "data/images/Dons/pretre/IncantationRapide.png",
     "sort:Sorts de Prêtre:Main des Cieux": "data/images/Sorts/Pretre/MainDesCieux.png",
-    "don:Volonté sans faille": "data/images/Autre/stats/Volonté.png",
+    "don:Volonté sans faille": "https://i.ibb.co/m5rLfhGL/Volont.jpg",
     "don:Nouveau Don": "data/images/Dons/Generaux/Armure légere.png",
     "don:Maîtrise des armures légères": "data/images/Dons/Generaux/Armure légere.png",
     "sort:Sorts de Monstres:Bourrasque": "data/images/Sorts/Monstre/Bourrasque.png",
@@ -550,18 +550,20 @@
     "don:Maîtrise des sorts de nuit": "data/images/Sorts/Mage/Absorption.png",
     "don:Maîtrise des sorts lumière": "data/images/Sorts/Pretre/NovaLumineuse.png",
     "don:Maîtrise des sorts de divin": "data/images/Sorts/Pretre/SoinGroupe.png",
-    "don:Maîtrise des sorts de maléfique": "data/images/Sorts/Pretre/Malediction (2).png",
+    "don:Maîtrise des sorts de maléfique": "https://i.ibb.co/Y9CZF3Q/Malediction-2.jpg",
     "don:Source Intérieure": "data/images/Dons/Elements/SourceInt.png",
     "don:Porté par les vents": "data/images/Dons/Elements/PortéeVent.png",
     "don:Armure de peau": "data/images/Dons/Elements/Peau.png",
     "don:Faveur des Ombres": "data/images/Dons/Elements/Faveur.png",
     "don:Vision de Lumière": "data/images/Dons/Elements/Vision.png",
     "don:Onde de Survie": "data/images/Dons/Elements/Onde.png",
-    "don:Siphon de l’Âme": "data/images/Dons/Elements/siphon.png"
+    "don:Siphon de l’Âme": "data/images/Dons/Elements/siphon.png",
+    "don:Maîtrise des sorts de lumière": "https://i.ibb.co/LX0WJNGM/Aura-lumineuse.jpg",
+    "don:Maîtrise des sorts divins": "https://i.ibb.co/yn2KZfhd/Nova-Lumineuse.jpg"
   },
   "meta": {
-    "total_images": 558,
-    "exported_date": "2026-03-08",
+    "total_images": 560,
+    "exported_date": "2026-03-28",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
 }
