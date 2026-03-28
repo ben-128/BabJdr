@@ -1815,7 +1815,14 @@ img.eclats-icon {
 
 /* Icônes de statistiques - pas de cadre */
 .stat-icon,
-img.stat-icon {
+img.stat-icon,
+.stat-card h4 img,
+img[src*="stats/Force"],
+img[src*="stats/Agilit"],
+img[src*="stats/Endurance"],
+img[src*="stats/Intelligence"],
+img[src*="stats/Volont"],
+img[src*="stats/Chance"] {
   border: none !important;
   box-shadow: none !important;
   padding: 0 !important;

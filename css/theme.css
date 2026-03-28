@@ -436,7 +436,7 @@ tr:hover td {
    IMAGES
    ═══════════════════════════════════════════════════════════════ */
 
-img:not([src*="stat-"]):not([src*="element-"]):not(.stat-icon):not(.element-icon) {
+img:not([src*="stat-"]):not([src*="stats/"]):not([src*="element-"]):not(.stat-icon):not(.element-icon) {
   border: var(--image-border);
   box-shadow: var(--image-shadow);
   border-radius: 4px;
