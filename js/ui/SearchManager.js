@@ -448,15 +448,78 @@
 
     generateResultCard(result) {
       const linkHash = this.generateLinkHash(result);
-      
+      const itemName = (result.data.nom || result.data.title || result.data.name || '').replace(/'/g, "\\'");
+      const itemNumero = result.data.numero || '';
+      const resultType = result.type;
+
       return `
-        <div class="search-result-card" onclick="window.location.hash='${linkHash}'">
+        <div class="search-result-card" onclick="SearchManager.navigateToResult('${linkHash}', '${resultType}', '${itemName}', '${itemNumero}')">
           <div class="search-result-content">
             <div class="search-result-summary">${result.summary}</div>
             <div class="search-result-category">${result.category}</div>
           </div>
         </div>
       `;
+    },
+
+    // Navigate to page then scroll to the specific card
+    navigateToResult(hash, type, itemName, itemNumero) {
+      // Remove search results first
+      const oldResults = document.querySelector('#search-results-page');
+      if (oldResults) oldResults.remove();
+
+      // Navigate
+      window.location.hash = hash;
+
+      // For objects, show only the targeted object by numero
+      if (type === 'objet' && itemNumero) {
+        const tryShowObject = (attempts) => {
+          if (attempts <= 0) return;
+          const container = document.querySelector('#objets-container');
+          if (container && JdrApp.modules.ui?.showOnlyObjectById) {
+            JdrApp.modules.ui.showOnlyObjectById(itemNumero);
+          } else {
+            setTimeout(() => tryShowObject(attempts - 1), 200);
+          }
+        };
+        setTimeout(() => tryShowObject(15), 300);
+        return;
+      }
+
+      // For other types, scroll to the matching card
+      const dataAttr = this.getDataAttrSelector(type);
+      if (!dataAttr || !itemName) return;
+
+      const tryScroll = (attempts) => {
+        if (attempts <= 0) return;
+        const el = document.querySelector(`[${dataAttr}="${itemName}"]`);
+        if (el) {
+          setTimeout(() => {
+            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            el.style.outline = '2px solid var(--accent, #c8a050)';
+            el.style.outlineOffset = '4px';
+            setTimeout(() => {
+              el.style.outline = '';
+              el.style.outlineOffset = '';
+            }, 2000);
+          }, 100);
+        } else {
+          setTimeout(() => tryScroll(attempts - 1), 200);
+        }
+      };
+      setTimeout(() => tryScroll(15), 300);
+    },
+
+    getDataAttrSelector(type) {
+      switch (type) {
+        case 'spell': return 'data-spell-name';
+        case 'don': return 'data-don-name';
+        case 'subclass': return 'data-subclass-name';
+        case 'monstre': return 'data-monster-name';
+        case 'npc': return 'data-npc-name';
+        case 'table-loot': return 'data-table-tresor-name';
+        default: return '';
+      }
     },
 
     generateLinkHash(result) {
