@@ -486,10 +486,55 @@
         return;
       }
 
+      // For monsters/tables-loot: show ALL tags so every card is visible, then scroll
+      if (type === 'monstre' || type === 'table-loot') {
+        this._showAllFiltersAndScroll(type, itemName);
+        return;
+      }
+
       // For other types, scroll to the matching card
       const dataAttr = this.getDataAttrSelector(type);
       if (!dataAttr || !itemName) return;
+      this._scrollToElement(dataAttr, itemName);
+    },
 
+    _showAllFiltersAndScroll(type, itemName) {
+      const dataAttr = type === 'monstre' ? 'data-monster-name' : 'data-table-tresor-name';
+
+      const tryActivate = (attempts) => {
+        if (attempts <= 0) return;
+
+        if (type === 'monstre') {
+          // Enable ALL monster tags so every monster card is visible
+          const config = window.ContentTypes?.monster;
+          const allTags = config?.filterConfig?.availableTags ||
+                          window.MONSTRES?._metadata?.availableTags || [];
+          if (allTags.length > 0) {
+            window.MONSTRES_FILTER_STATE = { visibleTags: [...allTags] };
+            if (window.MonsterFilters?.regenerateMonstersPage) {
+              window.MonsterFilters.regenerateMonstersPage();
+            }
+          }
+        } else if (type === 'table-loot') {
+          // Enable ALL table-loot tags
+          const allTags = window.TABLES_TRESORS?._metadata?.availableTags || [];
+          if (allTags.length > 0 && window.TABLES_TRESORS_FILTER_STATE) {
+            window.TABLES_TRESORS_FILTER_STATE.visibleTags = [...allTags];
+            if (window.TableTresorFilters?.regenerateTablesTresorPage) {
+              window.TableTresorFilters.regenerateTablesTresorPage();
+            }
+          }
+        }
+
+        // Now scroll to the element
+        setTimeout(() => this._scrollToElement(dataAttr, itemName), 300);
+      };
+
+      // Wait for page to render first
+      setTimeout(() => tryActivate(5), 500);
+    },
+
+    _scrollToElement(dataAttr, itemName) {
       const tryScroll = (attempts) => {
         if (attempts <= 0) return;
         const el = document.querySelector(`[${dataAttr}="${itemName}"]`);
@@ -507,7 +552,7 @@
           setTimeout(() => tryScroll(attempts - 1), 200);
         }
       };
-      setTimeout(() => tryScroll(15), 300);
+      tryScroll(15);
     },
 
     getDataAttrSelector(type) {
