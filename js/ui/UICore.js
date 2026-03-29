@@ -113,14 +113,6 @@
         doSearch(e.target);
       });
 
-      // Clear button
-      JdrApp.utils.events.register('click', '#clear', () => {
-        const searchInput = document.querySelector('#search');
-        if (searchInput) {
-          searchInput.value = '';
-        }
-        this.clearMainSearchResults();
-      });
     },
 
     /**

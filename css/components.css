@@ -968,25 +968,6 @@ body.dev-off .new-collection-card {
   color:inherit;
   box-sizing:border-box;
 }
-.toc-search .btn-clear{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  width:32px;
-  height:32px;
-  background:#dc2626;
-  color:white;
-  border:none;
-  border-radius:8px;
-  cursor:pointer;
-  font-size:14px;
-  transition:var(--transition-fast);
-  flex-shrink:0;
-}
-.toc-search .btn-clear:hover{
-  background:#b91c1c;
-  transform:scale(1.05);
-}
 
 /* Search results page */
 .search-page {

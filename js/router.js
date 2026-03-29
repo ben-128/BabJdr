@@ -457,7 +457,6 @@
       const tocHTML = `
         <div class="toc-search">
           <input type="search" enterkeyhint="search" autocomplete="off" id="search" placeholder="Rechercher…">
-          <button class="btn-clear" id="clear" title="Effacer">✖</button>
         </div>
         <h4>Sommaire</h4>
         ${window.TOC_STRUCTURE.directPages ?
