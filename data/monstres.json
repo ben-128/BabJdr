@@ -4,6 +4,7 @@
     "tags": [
       "Forêt"
     ],
+    "niveau": 1,
     "image": "data/images/Monstres/foret/Monstre_Forêt_Araignée.png",
     "element": "Nuit",
     "pointsDeVie": 15,
@@ -29,6 +30,7 @@
     "tags": [
       "Forêt"
     ],
+    "niveau": 2,
     "image": "data/images/Monstres/foret/Monstre_Forêt_Crab.png",
     "element": "Eau",
     "pointsDeVie": 30,
@@ -54,6 +56,7 @@
     "tags": [
       "Forêt"
     ],
+    "niveau": 1,
     "image": "data/images/Monstres/foret/Monstre_Forêt_Groink.png",
     "element": "Terre",
     "pointsDeVie": 15,
@@ -79,6 +82,7 @@
     "tags": [
       "Forêt"
     ],
+    "niveau": 1,
     "image": "data/images/Monstres/foret/Monstre_Forêt_Groink_Chaman.png",
     "element": "Terre",
     "pointsDeVie": 15,
@@ -104,6 +108,7 @@
     "tags": [
       "Forêt"
     ],
+    "niveau": 2,
     "image": "data/images/Monstres/foret/Monstre_Forêt_GuepeGeante.png",
     "element": "Air",
     "pointsDeVie": 15,
@@ -129,6 +134,7 @@
     "tags": [
       "Forêt"
     ],
+    "niveau": 2,
     "image": "data/images/Monstres/foret/Monstre_Forêt_Ours.png",
     "element": "Terre",
     "pointsDeVie": 30,
@@ -154,6 +160,7 @@
     "tags": [
       "Forêt"
     ],
+    "niveau": 1,
     "image": "data/images/Monstres/foret/Monstre_Forêt_Poulpe.png",
     "element": "Eau",
     "pointsDeVie": 10,
@@ -179,6 +186,7 @@
     "tags": [
       "Forêt"
     ],
+    "niveau": 1,
     "image": "data/images/Monstres/foret/Monstre_Forêt_Serpent.png",
     "element": "Terre",
     "pointsDeVie": 15,
@@ -204,6 +212,7 @@
     "tags": [
       "Forêt"
     ],
+    "niveau": 2,
     "image": "data/images/Monstres/foret/Monstre_Forêt_ScarabeGeant.png",
     "element": "Air",
     "pointsDeVie": 20,
@@ -229,6 +238,7 @@
     "tags": [
       "Forêt"
     ],
+    "niveau": 2,
     "image": "data/images/Monstres/foret/AquaLezo.png",
     "element": "Eau",
     "pointsDeVie": 25,
@@ -255,6 +265,7 @@
       "Forêt",
       "Boss"
     ],
+    "niveau": 3,
     "image": "data/images/Monstres/foret/Monstre_Forêt_Boss.png",
     "element": "Terre",
     "pointsDeVie": 80,
@@ -274,5 +285,29 @@
     "armureMalefique": 5,
     "abilites": "Double attaque.<br><strong>Attaque basique:</strong> Inflige 7 dégâts physiques. <br><strong>Hurlement:</strong> Tous les adversaires à 15m, avec Résistance altérations < 4, sont <span class=\"etat-link\" data-etat=\"Affaibli\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Affaibli</span>.  \n<br><strong>Repoussoir</strong> : Repousse une cible à 9m. Inflige 5 dégâts.\n<br><strong>Appel</strong> : Hurle et fait venir 2 <span class=\"monster-link\" data-monster=\"Ours des Bois\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Ours des Bois</span>.\n<br><strong>Tremblement de terre</strong> : Tous les adversaires à 15m, 7 dégâts <span style=\"color: #8b4513; font-weight: bold;\">Terre</span>, critique 12.",
     "butin": "<strong>Butin:</strong> <span class=\"treasure-table-link\" data-table-name=\"Boss Forêt\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Boss Forêt]</span>"
+  },
+  {
+    "nom": "Gobelin Mineur",
+    "tags": ["Grotte"],
+    "niveau": 3,
+    "image": "data/images/Monstres/grotte/Monstre_Grotte_GoblinMineur.png",
+    "element": "Terre",
+    "pointsDeVie": 30,
+    "armurePhysique": 2,
+    "esquive": 2,
+    "initiative": 11,
+    "coupCritique": 2,
+    "coupCritiqueSorts": 0,
+    "resistanceAlterations": 1,
+    "armureFeu": 0,
+    "armureEau": 0,
+    "armureTerre": 5,
+    "armureAir": 0,
+    "armureLumiere": 0,
+    "armureObscurite": 4,
+    "armureDivin": 0,
+    "armureMalefique": 0,
+    "abilites": "<strong>Coup de pioche:</strong> Inflige 5 dégâts physiques.<br><strong>Tunnel:</strong> 1x/combat — disparaît dans une paroi et réapparaît à un autre point de la salle. Peut être utilisé pour fuir ou se repositionner derrière les joueurs.<br><strong>Cri d'alarme:</strong> Si un autre <span class=\"monster-link\" data-monster=\"Gobelin Mineur\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Gobelin Mineur</span> est présent dans la salle, en appelle un supplémentaire.",
+    "butin": "<strong>Butin:</strong> <span class=\"treasure-table-link\" data-table-name=\"Gobelin Mineur\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\" title=\"Cliquer pour voir la table des trésors\">[Table: Gobelin Mineur]</span>"
   }
 ]

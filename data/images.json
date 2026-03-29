@@ -537,6 +537,8 @@
     "objet:Bouillon Purifiant": "data/images/Objets/Other/food/Bouillin.png",
     "objet:Patch de Renfort": "data/images/Objets/Other/Compo/Renfort.png",
     "objet:Chope de bière": "data/images/Objets/Consumables/Pots/Choppe.png",
+    "objet:Ceinture de mineur clouté": "data/images/Objets/Accessoires/CeintureMineur.png",
+    "objet:Pioche de combat": "data/images/Objets/Armes/PiocheCombat.png",
     "sort:Sorts d'Enchanteur:Transfert de mana": "data/images/Sorts/Enchanteur/TransfertMana.png",
     "sort:Sorts d'Enchanteur:Copie magique": "data/images/Sorts/Enchanteur/CopieMagique.png",
     "don:Don Feu 2": "data/images/Sorts/Enchanteur/ArdeurCom.png",

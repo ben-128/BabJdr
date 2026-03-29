@@ -102,7 +102,12 @@
       "Bash(do grep:*)",
       "Bash(/dev/null done:*)",
       "Bash(do if:*)",
-      "Bash(then basename:*)"
+      "Bash(then basename:*)",
+      "Bash(mv build.md bab-build.md)",
+      "Bash(mv don.md bab-don.md)",
+      "Bash(mv genimage.md bab-genimage.md)",
+      "Bash(mv git.md bab-git.md)",
+      "Bash(mv idee-don.md bab-idee-don.md)"
     ],
     "deny": []
   }

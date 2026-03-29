@@ -928,6 +928,26 @@
       "effet": "<strong>Effet:</strong> Rend 3 points de vie.<br>Applique l'état <span class=\"etat-link\" data-etat=\"Soûl\" style=\"color: #ea7332; cursor: pointer; text-decoration: underline;\">Soûl</span> jusqu'à la fin du combat.",
       "prix": "🔷 <strong>Prix:</strong> 5",
       "poids": ""
+    },
+    {
+      "nom": "Ceinture de mineur clouté",
+      "numero": 73,
+      "image": "data/images/Objets/Accessoires/CeintureMineur.png",
+      "description": "<i>Ceinture de cuir épais renforcée d'agrafes métalliques récupérées dans les profondeurs. Portée par les mineurs goblins, elle témoigne d'une vie entière à creuser la roche.</i>",
+      "tags": ["Accessoire"],
+      "effet": "<strong>Effet:</strong> Augmente la Force de 2.<br>Augmente la capacité de poids de 2.",
+      "prix": "🔷 <strong>Prix:</strong> 35",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
+    },
+    {
+      "nom": "Pioche de combat",
+      "numero": 74,
+      "image": "data/images/Objets/Armes/PiocheCombat.png",
+      "description": "<i>Pioche de mineur reconvertie en arme de guerre par des mains goblins expertes. Son pic de métal brut, aiguisé contre la roche pendant des années, brise aussi bien l'armure que la pierre.</i>",
+      "tags": ["Arme", "Une main", "Arme exotique"],
+      "effet": "<strong>Dégâts:</strong> Inflige (5 + Force) dégâts physiques.<br>Coup critique : ignore 3 points d'armure physique de la cible.",
+      "prix": "🔷 <strong>Prix:</strong> 55",
+      "poids": "⚖️ <strong>Poids:</strong> 1"
     }
   ],
   "filterSettings": {
