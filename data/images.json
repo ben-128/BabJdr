@@ -541,6 +541,7 @@
     "sort:Sorts d'Enchanteur:Copie magique": "data/images/Sorts/Enchanteur/CopieMagique.png",
     "don:Don Feu 2": "data/images/Sorts/Enchanteur/ArdeurCom.png",
     "don:Immolation": "data/images/Dons/Elements/Immolation.png",
+    "don:Brûlure de vitesse": "data/images/Dons/Elements/BrulureVitesse.png",
     "don:Maîtrise des sorts de feu": "data/images/Sorts/Enchanteur/ArdeurCom.png",
     "don:Don Eau 2": "data/images/Sorts/Enchanteur/TransfertMana.png",
     "don:Don Eau 1": "data/images/Dons/Elements/SourceInt.png",

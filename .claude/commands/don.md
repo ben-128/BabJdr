@@ -150,11 +150,26 @@ Une fois validé par l'utilisateur :
 3. Ajoute le don **à la fin** du tableau `dons` de cette catégorie
 4. Écris le fichier modifié en respectant le formatage JSON existant (indentation 2 espaces)
 
-### Étape 5 : Image
+### Étape 5 : Assigner l'image dans images.json (OBLIGATOIRE)
 
-Si l'utilisateur a indiqué une image :
-- Vérifie que le fichier existe dans `data/images/Dons/{sous-catégorie}/`
-- Si l'image doit être référencée dans la description du don, intègre-la avec la balise `<img>` appropriée
+Les images des dons ne sont PAS stockées dans le don lui-même. Elles sont mappées dans `data/images.json` avec la clé `"don:Nom du Don"`.
+
+**C'est obligatoire** pour que l'image s'affiche sur la carte du don dans l'app.
+
+1. Lis `data/images.json`
+2. Ajoute une entrée au format :
+   ```json
+   "don:Nom du Don": "data/images/Dons/{sous-catégorie}/{NomImage}.png"
+   ```
+   Place-la près des autres dons de la même catégorie pour garder le fichier organisé.
+3. Vérifie que le fichier image existe bien dans le dossier indiqué.
+
+**Exemples existants :**
+```json
+"don:Immolation": "data/images/Dons/Elements/Immolation.png",
+"don:Charge": "data/images/Dons/guerrier/Charge.png",
+"don:Source Intérieure": "data/images/Dons/Elements/SourceInt.png"
+```
 
 ## Notes importantes
 
