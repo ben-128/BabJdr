@@ -85,6 +85,11 @@
         const query = input.value.trim();
         if (query.length > 0) {
           this.performSearch(query);
+          input.blur();
+          // Close mobile sidebar after search
+          if (JdrApp.modules.router?.autoCloseMobileSidebar) {
+            JdrApp.modules.router.autoCloseMobileSidebar();
+          }
         } else {
           this.clearMainSearchResults();
         }
