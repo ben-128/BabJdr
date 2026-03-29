@@ -2,9 +2,9 @@
 // JDR-BAB PWA SERVICE WORKER
 // ============================================================================
 
-const CACHE_NAME = 'jdr-bab-v1.0.63';
-const STATIC_CACHE_NAME = 'jdr-bab-static-v1.0.63';
-const RUNTIME_CACHE_NAME = 'jdr-bab-runtime-v1.0.63';
+const CACHE_NAME = 'jdr-bab-v1.0.64';
+const STATIC_CACHE_NAME = 'jdr-bab-static-v1.0.64';
+const RUNTIME_CACHE_NAME = 'jdr-bab-runtime-v1.0.64';
 
 // Files to cache immediately (critical resources)
 const STATIC_ASSETS = [

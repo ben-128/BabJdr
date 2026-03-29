@@ -823,6 +823,12 @@
             "description": "Choisir un sort de terre de n'importe quelle classe (qui respecte les prérequis de niveau). Il devient lançable à volonté.",
             "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Terre.",
             "cout": "1 point de don"
+          },
+          {
+            "nom": "Sens tellurique",
+            "description": "Le héros peut sentir les vibrations du sol. Il détecte la présence de créatures ou de passages souterrains dans un rayon de 15m, même à travers les murs et le sol.",
+            "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Terre.<br>Don unique.",
+            "cout": "1 point de don"
           }
         ]
       },
@@ -840,6 +846,12 @@
             "nom": "Maîtrise des sorts de nuit",
             "description": "Choisir un sort de nuit de n'importe quelle classe (qui respecte les prérequis de niveau). Il devient lançable à volonté.",
             "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Nuit.",
+            "cout": "1 point de don"
+          },
+          {
+            "nom": "Voile d'ombre",
+            "description": "Hors combat, le héros peut se fondre dans l'ombre et devenir pratiquement invisible tant qu'il reste immobile dans une zone d'obscurité. Les créatures doivent réussir un test de Coordination pour le détecter.",
+            "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Nuit.<br>Don unique.",
             "cout": "1 point de don"
           }
         ]
@@ -859,6 +871,12 @@
             "description": "Choisir un sort de lumière de n'importe quelle classe (qui respecte les prérequis de niveau). Il devient lançable à volonté.",
             "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Lumière.",
             "cout": "1 point de don"
+          },
+          {
+            "nom": "Jugement radieux",
+            "description": "Une fois par combat, le héros peut utiliser une action secondaire pour marquer une cible à moins de 15m. Jusqu'à la fin du combat, la cible est révélée (ne peut pas devenir <span class=\"etat-link\" data-etat=\"Invisible\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Invisible</span>) et les attaques de tous les héros contre elle ont +2 chances de critique.",
+            "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Lumière.<br>Don unique.",
+            "cout": "1 point de don"
           }
         ]
       },
@@ -877,6 +895,12 @@
             "description": "Choisir un sort de divin de n'importe quelle classe (qui respecte les prérequis de niveau). Il devient lançable à volonté.",
             "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Divin.",
             "cout": "1 point de don"
+          },
+          {
+            "nom": "Voix des ancêtres",
+            "description": "Une fois par jour, le héros peut méditer pendant 10 minutes pour poser une question à un esprit divin. Le MJ répond par \"oui\", \"non\" ou \"incertain\".",
+            "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Divin.<br>Don unique.",
+            "cout": "1 point de don"
           }
         ]
       },
@@ -894,6 +918,12 @@
             "nom": "Maîtrise des sorts de maléfique",
             "description": "Choisir un sort de maléfique de n'importe quelle classe (qui respecte les prérequis de niveau). Il devient lançable à volonté.",
             "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Maléfique.<br>",
+            "cout": "1 point de don"
+          },
+          {
+            "nom": "Sang corrompu",
+            "description": "Le héros est immunisé à l'état <span class=\"etat-link\" data-etat=\"Empoisonné\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Empoisonné</span>. De plus, les créatures qui le mordent ou boivent son sang subissent des dégâts <span style=\"color: #dc2626; font-weight: bold;\">Maléfique</span> égaux au niveau du héros.",
+            "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Maléfique.<br>Don unique.",
             "cout": "1 point de don"
           }
         ]
