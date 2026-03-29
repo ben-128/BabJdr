@@ -751,6 +751,12 @@
             "description": "Choisir un sort de feu de n'importe quelle classe (qui respecte les prérequis de niveau). Il devient lançable à volonté.",
             "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Feu.<br>",
             "cout": "1 point de don"
+          },
+          {
+            "nom": "Brûlure de vitesse",
+            "description": "Une fois par tour, sans dépenser d'action, le héros peut sacrifier 2 points de vie pour augmenter sa distance de déplacement de 6m ce tour-ci.",
+            "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Feu.<br>Don unique.",
+            "cout": "1 point de don"
           }
         ]
       },
