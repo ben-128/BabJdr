@@ -775,6 +775,12 @@
             "description": "Choisir un sort d'eau de n'importe quelle classe (qui respecte les prérequis de niveau). Il devient lançable à volonté.",
             "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Eau.<br>",
             "cout": "1 point de don"
+          },
+          {
+            "nom": "Respiration aquatique",
+            "description": "Le héros peut respirer sous l'eau et n'est pas affecté par les courants.",
+            "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Eau.<br>Don unique.",
+            "cout": "1 point de don"
           }
         ]
       },
@@ -792,6 +798,12 @@
             "nom": "Maîtrise des sorts d'air",
             "description": "Choisir un sort d'air de n'importe quelle classe (qui respecte les prérequis de niveau). Il devient lançable à volonté.",
             "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Air.<br>",
+            "cout": "1 point de don"
+          },
+          {
+            "nom": "Messager des vents",
+            "description": "Le héros peut confier un court message (une phrase) au vent. Le message est porté jusqu'à une cible connue du héros, dans un rayon de 1km, et arrive en quelques secondes.<br><br>Utilisable une fois par heure.",
+            "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Air.<br>Don unique.",
             "cout": "1 point de don"
           }
         ]
