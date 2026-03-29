@@ -543,6 +543,11 @@
         if (attempts <= 0) return;
         const el = document.querySelector(`[${dataAttr}="${itemName}"]`);
         if (el) {
+          // Open any parent <details> that is closed
+          let parent = el.closest('details:not([open])');
+          if (parent) {
+            parent.setAttribute('open', '');
+          }
           setTimeout(() => {
             el.scrollIntoView({ behavior: 'smooth', block: 'center' });
             el.style.outline = '2px solid var(--accent, #c8a050)';
