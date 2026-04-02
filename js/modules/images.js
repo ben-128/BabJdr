@@ -182,16 +182,6 @@
     handleImageLoadFailure(img, url, retryCount, reason) {
       img.classList.remove('lazy-loading');
 
-      // Si l'image utilise weserv.nl et échoue, réessayer avec l'URL originale
-      if (url.includes('images.weserv.nl')) {
-        console.warn('weserv.nl proxy failed, trying original URL:', url);
-        const originalUrl = this.extractOriginalUrl(url);
-        if (originalUrl && originalUrl !== url) {
-          this.loadImageWithRetry(img, originalUrl, 0);
-          return;
-        }
-      }
-
       // Background (idle) loads: no retries, silent failure — just move on
       if (img.dataset.idleLoad) {
         delete img.dataset.idleLoad;
@@ -357,13 +347,6 @@
     processImageUrl(originalUrl) {
       if (!originalUrl) return originalUrl;
 
-      // Legacy ibb.co URLs: proxy through weserv.nl as fallback
-      if (originalUrl.includes('i.ibb.co') && !originalUrl.includes('images.weserv.nl')) {
-        const format = this.supportsWebP() ? 'webp' : 'jpeg';
-        const quality = this.getOptimalQuality();
-        return `https://images.weserv.nl/?url=${encodeURIComponent(originalUrl)}&we&output=${format}&q=${quality}&w=400&h=300&fit=inside`;
-      }
-
       // Local image paths (data/images/...)
       if (originalUrl.startsWith('data/images/')) {
         // Encode each path segment to handle French characters (accents, spaces, apostrophes)
@@ -378,55 +361,6 @@
       }
 
       return originalUrl;
-    },
-
-    // Extract original URL from weserv.nl proxy URL
-    extractOriginalUrl(weservUrl) {
-      try {
-        if (!weservUrl.includes('images.weserv.nl')) {
-          return weservUrl;
-        }
-
-        // Parse the URL to extract the 'url' parameter
-        const urlObj = new URL(weservUrl);
-        const originalUrl = urlObj.searchParams.get('url');
-
-        if (originalUrl) {
-          return decodeURIComponent(originalUrl);
-        }
-
-        return null;
-      } catch (error) {
-        console.error('Error extracting original URL from weserv:', error);
-        return null;
-      }
-    },
-
-    // Detect WebP support
-    supportsWebP() {
-      if (this._webpSupport !== undefined) return this._webpSupport;
-      
-      try {
-        this._webpSupport = document.createElement('canvas')
-          .toDataURL('image/webp', 0.5)
-          .indexOf('data:image/webp') === 0;
-      } catch (err) {
-        this._webpSupport = false;
-      }
-      
-      return this._webpSupport;
-    },
-
-    // Get optimal quality based on connection speed
-    getOptimalQuality() {
-      if ('connection' in navigator) {
-        const connection = navigator.connection;
-        if (connection.effectiveType === '4g') return 85;
-        if (connection.effectiveType === '3g') return 75;
-        if (connection.effectiveType === '2g') return 65;
-        return 60; // slow-2g
-      }
-      return 80; // Default quality
     },
 
     // Enqueue an image load respecting concurrency limits
@@ -1033,7 +967,7 @@
     // ========================================
     // IMAGE CACHE (Cache API)
     // ========================================
-    // Cache images locally so they don't need to be re-fetched from ibb.co.
+    // Cache images locally for offline/faster loading.
     // Cache key = the image URL itself, so if an image changes (new URL), old cache is irrelevant.
     // Works in both dev mode and standalone (Cache API is available in any secure/localhost context).
 
@@ -1046,7 +980,7 @@
         // Only cache if not already cached
         const existing = await cache.match(url);
         if (existing) return;
-        // ibb.co supports CORS, so we can fetch and cache the response
+        // Fetch and cache the response
         const response = await fetch(url, { mode: 'cors', credentials: 'omit' });
         if (response.ok) {
           await cache.put(url, response);

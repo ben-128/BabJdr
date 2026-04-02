@@ -634,15 +634,6 @@
         originalUrl = img.getAttribute('data-src') || '';
       }
       
-      // Si l'image utilise le service weserv.nl, extraire l'URL originale haute résolution
-      if (originalUrl.includes('images.weserv.nl')) {
-        const urlParams = new URLSearchParams(originalUrl.split('?')[1]);
-        const encodedOriginal = urlParams.get('url');
-        if (encodedOriginal) {
-          originalUrl = decodeURIComponent(encodedOriginal);
-        }
-      }
-      
       enlargedImg.removeAttribute('data-src');
 
       // Supprimer les classes de lazy loading qui pourraient interférer
