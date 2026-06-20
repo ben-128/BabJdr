@@ -9,7 +9,7 @@
     "nom": "Tavin le Facteur",
     "image": "",
     "description": "Sympa, toujours l'air pressé, connaît beaucoup de choses",
-    "interactions": "- Indique aux joueurs que les livraisons dans le camp de la forêt ne sont plus possibles, des monstres sont apparus. Il donne une lettre apparemment urgente à livrer pour Branor le bucheron."
+    "interactions": "- Indique aux joueurs que les livraisons dans le camp de la forêt ne sont plus possibles, des monstres sont apparus. Il donne une lettre apparemment urgente à livrer pour Branor le bûcheron."
   },
   {
     "nom": "Branor le Bucheron",
@@ -32,7 +32,7 @@
   {
     "nom": "Lord Erathian Velorme",
     "image": "",
-    "description": "Une coupe de vin à la main, l'air hautin, riche",
+    "description": "Une coupe de vin à la main, l'air hautain, riche",
     "interactions": "- Vend les objets de base / rachète les objets<br><br>\n\n- Une fois la forêt terminée, permet de faire des commandes auprès de l'amazone, son employée."
   },
   {
@@ -63,7 +63,7 @@
     "nom": "Borag et Snik",
     "image": "",
     "description": "Un silencieux, grand et fort. L'autre hargneux, petit",
-    "interactions": "« On veut aller chasser, Borag et moi… mais on tape comme des mouettes enrhumées. On dit que certains deviennent monstrueusement puissants avec des cristaux roses… t’en as déjà vu, toi ? Des rumeurs disent que des monstres dans la forêt en possèdent. Si tu nous en ramène un, on pourra reprendre l'entrainement et dérouiller ces foutus monstres. On en a absolument besoin pour reprendre l'artisanat...»\n<br>\n« Ouais ! Et puis l’entraînement dans une auberge, ça fait pas pousser les muscles»<br><br>\n\n-Récompense ramener cristal : enseigne Artisanat à un héros avec 2 recettes : <br><br>\n\n<span class=\"objet-link\" data-objet=\"Armure en cuir d'ours\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Armure en cuir d'ours</span> Avec fourrure d'ours + nécessaire de travail du cuir 50 éclats à l'aubergiste.<br><br>\n\n<span class=\"objet-link\" data-objet=\"Patch de Renfort\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Patch de Renfort</span><br>\n  Ingrédients :\n  - 1x Viande de monstre (pour le cuir tanné de la bête)\n  - 1x Rivets de fer (aubergiste - 15 éclats)"
+    "interactions": "« On veut aller chasser, Borag et moi… mais on tape comme des mouettes enrhumées. On dit que certains deviennent monstrueusement puissants avec des cristaux roses… t’en as déjà vu, toi ? Des rumeurs disent que des monstres dans la forêt en possèdent. Si tu nous en ramènes un, on pourra reprendre l'entrainement et dérouiller ces foutus monstres. On en a absolument besoin pour reprendre l'artisanat...»\n<br>\n« Ouais ! Et puis l’entraînement dans une auberge, ça fait pas pousser les muscles»<br><br>\n\n-Récompense ramener cristal : enseigne Artisanat à un héros avec 2 recettes : <br><br>\n\n<span class=\"objet-link\" data-objet=\"Armure en cuir d'ours\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Armure en cuir d'ours</span> Avec fourrure d'ours + nécessaire de travail du cuir 50 éclats à l'aubergiste.<br><br>\n\n<span class=\"objet-link\" data-objet=\"Patch de Renfort\" style=\"color: var(--accent); cursor: pointer; text-decoration: underline;\">Patch de Renfort</span><br>\n  Ingrédients :\n  - 1x Viande de monstre (pour le cuir tanné de la bête)\n  - 1x Rivets de fer (aubergiste - 15 éclats)"
   },
   {
     "nom": "Isara Cœur-de-Roc",

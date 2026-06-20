@@ -742,7 +742,7 @@
         "dons": [
           {
             "nom": "Immolation",
-            "description": "Peut utiliser une action principale pour s'immoler. Jusqu'à la fin du combat, les attaquants en mêlée reçevront x dégats de feu, où x est le niveau du héros.",
+            "description": "Peut utiliser une action principale pour s'immoler. Jusqu'à la fin du combat, les attaquants en mêlée recevront x dégâts de feu, où x est le niveau du héros.",
             "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Feu.<br>Don unique.",
             "cout": "1 point de don"
           },
@@ -814,7 +814,7 @@
         "dons": [
           {
             "nom": "Armure de peau",
-            "description": "Réduit tous les dégats subis de 1.",
+            "description": "Réduit tous les dégâts subis de 1.",
             "prerequis": "<strong> Prérequis :</strong> Élément d'affiliation Terre.<br>Don unique.",
             "cout": "1 point de don"
           },

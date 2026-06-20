@@ -448,7 +448,7 @@
         "Plante",
         "Non identifié"
       ],
-      "effet": "<strong>Effet:</strong> Rend au héros ou à une cible proche une quantité de mana équivalent au niveau d'Intelligence du héros.\n<br><strong>Critique :</strong> Mana rendu augmenté de 5.",
+      "effet": "<strong>Effet:</strong> Rend au héros ou à une cible proche une quantité de mana équivalente au niveau d'Intelligence du héros.\n<br><strong>Critique :</strong> Mana rendu augmenté de 5.",
       "prix": "🔷 <strong>Prix:</strong> 10",
       "poids": ""
     },
@@ -480,7 +480,7 @@
       "nom": "Gants patte d'ours",
       "numero": 38,
       "image": "data/images/Objets/Accessoires/GantsPatteOurs.png",
-      "description": "<i>De véritables pattes d’ours, évidées et enfilées comme des gants. Bruts et redoutables, elles permettent d’abattre des coups capables de faire chuter un adversaire.</i>",
+      "description": "<i>De véritables pattes d’ours, évidées et enfilées comme des gants. Bruts et redoutables, ils permettent d’abattre des coups capables de faire chuter un adversaire.</i>",
       "tags": [
         "Accessoire"
       ],
