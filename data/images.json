@@ -521,7 +521,7 @@
     "npc:Nara": "data/images/NPC/Nara.png",
     "don:Bénédiction rapide": "data/images/Dons/pretre/IncantationRapide.png",
     "sort:Sorts de Prêtre:Main des Cieux": "data/images/Sorts/Pretre/MainDesCieux.png",
-    "don:Volonté sans faille": "data/images/Dons/guerrier/VolontéFer.png",
+    "don:Volonté sans faille": "data/images/Dons/mage/Volonté.png",
     "don:Nouveau Don": "data/images/Dons/Generaux/Armure légere.png",
     "don:Maîtrise des armures légères": "data/images/Dons/Generaux/Armure légere.png",
     "sort:Sorts de Monstres:Bourrasque": "data/images/Sorts/Monstre/Bourrasque.png",
