@@ -811,18 +811,56 @@
           }
         }
       ]
-    }
-  ,
+    },
     {
       "nom": "Gobelin Mineur",
       "description": "Table de trésors pour le Gobelin Mineur des mines abandonnées",
-      "tags": ["Grotte", "Monstre"],
+      "tags": [
+        "Grotte",
+        "Monstre"
+      ],
       "fourchettes": [
-        { "min": 1,  "max": 5,  "objet": { "type": "reference", "numero": 56, "nom": "Viande de monstre" } },
-        { "min": 6,  "max": 8,  "eclats": 35 },
-        { "min": 9,  "max": 11, "objet": { "type": "reference", "numero": 30, "nom": "Pierre à aiguiser" } },
-        { "min": 12, "max": 17, "objet": { "type": "reference", "numero": 73, "nom": "Ceinture de mineur clouté" } },
-        { "min": 18, "max": 30, "objet": { "type": "reference", "numero": 74, "nom": "Pioche de combat" } }
+        {
+          "min": 1,
+          "max": 5,
+          "objet": {
+            "type": "reference",
+            "numero": 56,
+            "nom": "Viande de monstre"
+          }
+        },
+        {
+          "min": 6,
+          "max": 8,
+          "eclats": 35
+        },
+        {
+          "min": 9,
+          "max": 11,
+          "objet": {
+            "type": "reference",
+            "numero": 30,
+            "nom": "Pierre à aiguiser"
+          }
+        },
+        {
+          "min": 12,
+          "max": 17,
+          "objet": {
+            "type": "reference",
+            "numero": 73,
+            "nom": "Ceinture de mineur clouté"
+          }
+        },
+        {
+          "min": 18,
+          "max": 30,
+          "objet": {
+            "type": "reference",
+            "numero": 74,
+            "nom": "Pioche de combat"
+          }
+        }
       ]
     }
   ],

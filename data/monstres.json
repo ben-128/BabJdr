@@ -288,7 +288,9 @@
   },
   {
     "nom": "Gobelin Mineur",
-    "tags": ["Grotte"],
+    "tags": [
+      "Grotte"
+    ],
     "niveau": 3,
     "image": "data/images/Monstres/grotte/Monstre_Grotte_GoblinMineur.png",
     "element": "Terre",

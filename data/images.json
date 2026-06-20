@@ -569,11 +569,14 @@
     "don:Onde de Survie": "data/images/Dons/Elements/Onde.png",
     "don:Siphon de l’Âme": "data/images/Dons/Elements/siphon.png",
     "don:Maîtrise des sorts de lumière": "data/images/Sorts/Mage/Aura lumineuse.png",
-    "don:Maîtrise des sorts divins": "data/images/Sorts/Pretre/NovaLumineuse.png"
+    "don:Maîtrise des sorts divins": "data/images/Sorts/Pretre/NovaLumineuse.png",
+    "monster:Gobelin Mineur": "data/images/Monstres/grotte/Monstre_Grotte_GoblinMineur.png",
+    "subclass:Mage:Drakônide:1": "data/images/Classes/Drakonide.png",
+    "subclass:Mage:Drakônide:2": "data/images/Classes/DrakonideFemelle.png"
   },
   "meta": {
-    "total_images": 560,
-    "exported_date": "2026-03-28",
+    "total_images": 573,
+    "exported_date": "2026-06-20",
     "note": "Ces images incluent les nouvelles images uploadées"
   }
 }
